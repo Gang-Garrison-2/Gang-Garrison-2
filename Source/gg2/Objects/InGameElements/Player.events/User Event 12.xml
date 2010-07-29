@@ -19,6 +19,22 @@
         writeshort(kills, global.serializeBuffer);
         writeshort(deaths, global.serializeBuffer);
         writeshort(caps, global.serializeBuffer); 
+        //Syncing!
+        writebyte(ds_list_size(domPlayers), global.serializeBuffer);
+        
+        if (ds_list_size(domPlayers) &gt; 0)
+        {
+        for(k=0;k&lt;ds_list_size(domPlayers);k+=1)
+        {
+            writebyte(ds_list_find_index(global.players,ds_list_find_value(domPlayers,k)), global.serializeBuffer); 
+        }
+        writebyte(ds_list_size(dominations), global.serializeBuffer); 
+        for(j=0;j&lt;ds_list_size(dominations);j+=1)
+        {
+             writebyte(ds_list_find_index(dominations,j), global.serializeBuffer); 
+        }
+        }
+        
     } 
     
     subobjects=0;

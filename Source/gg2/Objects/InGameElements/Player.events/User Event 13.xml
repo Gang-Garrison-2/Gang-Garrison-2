@@ -17,7 +17,25 @@
         receiveCompleteMessage(global.serverSocket,6,global.deserializeBuffer);
         kills = readshort(global.deserializeBuffer);
         deaths = readshort(global.deserializeBuffer);
-        caps = readshort(global.deserializeBuffer);    
+        caps = readshort(global.deserializeBuffer);
+        receiveCompleteMessage(global.serverSocket,1,global.deserializeBuffer);
+        lim = readbyte(global.deserializeBuffer);
+        receiveCompleteMessage(global.serverSocket,lim,global.deserializeBuffer);
+        if (lim &gt; 0)
+        {
+        for(k=0;k&lt;lim;k+=1)
+        {
+            ds_list_add(domPlayers,ds_list_find_value(global.players,readbyte(global.deserializeBuffer)));
+        }
+        receiveCompleteMessage(global.serverSocket,1,global.deserializeBuffer);
+        lim = readbyte(global.deserializeBuffer);
+        receiveCompleteMessage(global.serverSocket,lim,global.deserializeBuffer);
+        for(j=0;j&lt;lim;j+=1)
+        {
+            ds_list_add(dominations,readbyte(global.deserializeBuffer));
+        }
+        }
+        event_user(14);
     }
  
     var charObj, subobjects;
@@ -57,7 +75,8 @@
     } else {
         if sentry != -1 with sentry instance_destroy();
         sentry = -1;
-    }</argument>
+    }
+</argument>
       </arguments>
     </action>
   </actions>
