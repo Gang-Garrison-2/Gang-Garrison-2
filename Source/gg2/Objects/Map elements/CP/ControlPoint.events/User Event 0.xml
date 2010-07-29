@@ -14,42 +14,29 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">alpha=0;
-fade=0;
+fade=0.05;
 
-if instance_exists(ControlPointSetupGate) mode=1;
-else if !instance_exists(ControlPointSetupGate) mode=0;
+if(instance_exists(ArenaControlPoint)) {
+    mode=2;     // Arena
+    locked=true;
+} else if(instance_exists(ControlPointSetupGate)) {
+    mode=1;     // A/D
+    locked=false;
+} else {
+    mode=0;     // Symmetrical CP
+    locked=false;
+}
     
-if object_index == ControlPoint1 {
-    global.cp[1] = id;
-    cp=1;
-}
-else if object_index == ControlPoint2 {
-    global.cp[2] = id;
-    cp=2;
-}
-else if object_index == ControlPoint3 {
-    global.cp[3] = id;
-    cp=3;
-}
-else if object_index == ControlPoint4 {
-    global.cp[4] = id;
-    cp=4;
-}
-else if object_index == ControlPoint5 {
-    global.cp[5] = id;
-    cp=5;
-}
+global.cp[cp] = id;
 
-locked=0;
 team=-1;
-redCappers=0;
-blueCappers=0;
-defended=0;
+redPresence=0;
+bluePresence=0;
 capping=0;
 cappers=0;
-capTeam=-1;
 cappingTeam=-1;
-capTime=180;</argument>
+capTime=300;
+</argument>
       </arguments>
     </action>
   </actions>

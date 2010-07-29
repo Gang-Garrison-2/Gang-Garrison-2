@@ -13,39 +13,10 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if instance_exists(ArenaControlPoint) cp = ArenaControlPoint;
-
-else{
-    distance=distance_to_object(ControlPoint1);
-    cp=ControlPoint1;
-
-    if instance_exists(ControlPoint5){
-        if distance_to_object(ControlPoint5) &lt; distance {
-            distance=distance_to_object(ControlPoint5);
-            cp=ControlPoint5;
-        }
-    }
-
-    if instance_exists(ControlPoint4){
-        if distance_to_object(ControlPoint4) &lt; distance {
-            distance=distance_to_object(ControlPoint4);
-            cp=ControlPoint4;
-        }
-    }
-    
-    if instance_exists(ControlPoint3){
-        if distance_to_object(ControlPoint3) &lt; distance {
-            distance=distance_to_object(ControlPoint3);
-            cp=ControlPoint3;
-        }
-    }
-    
-    if instance_exists(ControlPoint2){
-        if distance_to_object(ControlPoint2) &lt; distance {
-            distance=distance_to_object(ControlPoint2);
-            cp=ControlPoint2;
-        }
-    }
+        <argument kind="STRING">if(instance_exists(ArenaControlPoint)) {
+    cp = ArenaControlPoint.id;
+} else {
+    cp = instance_nearest(x,y,ControlPoint);
 }
 </argument>
       </arguments>

@@ -13,9 +13,8 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">receiveCompleteMessage(global.serverSocket,5,global.deserializeBuffer);
+        <argument kind="STRING">receiveCompleteMessage(global.serverSocket,4,global.deserializeBuffer);
 temp = readsbyte(global.deserializeBuffer);
-capTeam = readsbyte(global.deserializeBuffer);
 cappingTeam = readsbyte(global.deserializeBuffer);
 capping = readushort(global.deserializeBuffer);
 if team != temp {

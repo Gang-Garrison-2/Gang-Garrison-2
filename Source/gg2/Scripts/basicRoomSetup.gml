@@ -26,16 +26,14 @@ offloadSpawnPoints();
 with Player canSpawn = 1;
 
 if instance_exists(IntelligenceBaseBlue) || instance_exists(IntelligenceBaseRed) || instance_exists(IntelligenceRed) || instance_exists(IntelligenceBlue) instance_create(0,0,ScorePanel);
-else if instance_exists(ControlPoint) {
-    with ControlPoint event_user(0);
-    instance_create(0,0,ControlPointHUD);
-}
 else if instance_exists(GeneratorBlue) || instance_exists(GeneratorRed) {
     instance_create(0,0,GeneratorHUD);
-}
-else if instance_exists(ArenaControlPoint) {
+} else if instance_exists(ArenaControlPoint) {
     instance_create(0,0,ArenaHUD);
     if ArenaHUD.roundStart == 0 with Player canSpawn = 0;
+} else if instance_exists(ControlPoint) {
+    with ControlPoint event_user(0);
+    instance_create(0,0,ControlPointHUD);
 }
 
 instance_create(0,0,TeamSelectController);

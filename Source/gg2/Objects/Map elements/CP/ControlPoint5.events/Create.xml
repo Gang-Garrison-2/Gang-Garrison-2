@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<event category="DRAW" id="0">
+<event category="CREATE" id="0">
   <actions>
     <action id="603" library="1">
       <!--action name: Code-->
@@ -13,21 +13,22 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if(global.myself.team == TEAM_BLUE) {
-    image_index = global.myself.class + 10;
-} else {
-    image_index = global.myself.class;
-}
-
-if(global.myself.object == -1) {
-    instance_destroy();
-    exit; 
-}
-
-drawHealth(45, 547, global.myself.object.hp, global.myself.object.maxHp);
-draw_sprite_ext(sprite_index, image_index, view_xview[0]+5, view_yview[0]+525, 2, 2, 0, c_white, 1);
+        <argument kind="STRING">cp=5;
 </argument>
       </arguments>
+    </action>
+    <action id="604" library="1">
+      <!--action name: Inherited-->
+      <kind>NORMAL</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>false</canApplyTo>
+      <actionType>FUNCTION</actionType>
+      <functionName>action_inherited</functionName>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments/>
     </action>
   </actions>
 </event>
