@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="CREATE" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{
+    cursor_sprite = CrosshairS;
+    global.levelchoice = 1
+    virtualitem = -1;
+    xbegin = 40;
+    ybegin = 300;
+    spacing = 30;
+    width = 200; 
+    items = 4;
+    canEsc = false;
+    alarm[0] = 15;
+    
+    item[0] = "Options";
+    item[1] = "Return to Game";
+    item[2] = "Disconnect";
+    item[3] = "Quit Game";
+    
+}</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

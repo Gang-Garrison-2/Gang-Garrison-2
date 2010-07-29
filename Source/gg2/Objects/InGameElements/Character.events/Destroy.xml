@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="DESTROY" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{
+    loopsoundstop(UberIdleSnd);
+    
+    var newIntel, map;
+    with(currentWeapon) {
+        instance_destroy();
+    }
+    
+    if(intel) {
+        if(team == TEAM_RED) {
+            newIntel = instance_create(x,y,IntelligenceBlue);
+            recordEventInLog(5, TEAM_RED, player.name);
+        } else {
+            newIntel = instance_create(x,y,IntelligenceRed);
+            recordEventInLog(5, TEAM_BLUE, player.name);
+        }
+        newIntel.alarm[0] = 900;
+        sound_play(IntelDropSnd);
+    }
+    
+    with(bubble) {
+        instance_destroy();
+    }
+    
+    player.object=-1;
+    if (player.quickspawn==0) player.alarm[5] = global.Server_Respawntime;
+    else player.alarm[5] = 1;
+
+    //CP - remove self from zone
+    if inZone == 1 &amp;&amp; instance_exists(CaptureZone){       
+        zone = instance_nearest(x,y,CaptureZone);
+        if player.team==TEAM_RED zone.cp.redCappers-=capStrength;
+        else if player.team==TEAM_BLUE zone.cp.blueCappers-=capStrength;
+        inZone=0;     
+    }
+    
+    //part type destroy
+    if(variable_local_exists("jumpFlameParticleType")) {
+            part_type_destroy(jumpFlameParticleType);
+    }
+        
+    //if (not (instance_exists(RespawnTimer)))
+    //{
+    //    instance_create(x,y,RespawnTimer);
+    //}
+
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

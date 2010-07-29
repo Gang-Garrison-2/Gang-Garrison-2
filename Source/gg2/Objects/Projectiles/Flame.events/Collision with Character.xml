@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="COLLISION" with="Character">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">    if(sticksTo == -1 and other.id != ownerPlayer.object and other.team != team &amp;&amp; other.ubered == 0  &amp;&amp; other.hp &gt; 0) {
+        other.hp -= hitDamage;
+        other.lastDamageDealer = ownerPlayer;
+        other.lastDamageSource = weapon;
+        if(object_is_ancestor(other.object_index, Pyro) or (other.flamecount&gt;7) or other.ubered == 1) {
+            instance_destroy();
+        } else if other.ubered == 0 {
+            /*if blasted == true {
+                sprite_index = FlameS;
+                hspeed = 0;
+                repeat(2){
+                    landedBlast = instance_copy(true);
+                    landedBlast.x+= -3 + random(6);
+                    landedBlast.y+= -3 + random(6);
+                }
+            }*/
+            sticksTo = other.id;
+            stickRelativeX = x-other.x;
+            stickRelativeY = y-other.y;
+            speed=0;
+            alarm[0]=150;
+            other.flamecount += 1;
+        }
+    }</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

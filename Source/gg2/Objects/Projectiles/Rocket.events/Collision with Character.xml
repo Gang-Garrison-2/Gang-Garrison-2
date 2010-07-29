@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="COLLISION" with="Character">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if other.team != team {
+    characterHit=other;
+    other.cloakAlpha = min(other.cloakAlpha + 0.1, 1);
+    event_user(5);
+}
+else {
+    hitDamage -= 3;
+    explosionDamage -= 1;
+    knockback -= 1;
+    if hitDamage &lt;= 0 hitDamage = 0;
+    if explosionDamage &lt;= 0 explosionDamage = 0;
+    if knockback &lt;= 0 knockback = 0;
+}</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

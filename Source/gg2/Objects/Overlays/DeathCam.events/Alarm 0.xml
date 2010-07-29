@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="ALARM" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if lastDamageSource == WEAPON_SENTRYTURRET {
+    if killedby.sentry != -1{
+        view_xview=killedby.sentry.x-400;
+        view_yview=killedby.sentry.y-300;
+        hp=killedby.sentry.hp;
+        maxHp=killedby.sentry.maxHp;
+    }
+    else if killedby.object != -1{
+        view_xview=killedby.object.x-400;
+        view_yview=killedby.object.y-300;
+        hp=killedby.object.hp;
+        maxHp=killedby.object.maxHp;
+    }
+}
+
+else if killedby.object != -1 {
+    view_xview=killedby.object.x-400;
+    view_yview=killedby.object.y-300;
+    hp=killedby.object.hp;
+    maxHp=killedby.object.maxHp
+}
+
+else if killedby.object == -1 {
+    view_xview=killedby.lastKnownx-400;
+    view_yview=killedby.lastKnowny-300;
+    hp=0;
+    maxHp=0;
+}
+
+if instance_exists(WinBanner) instance_destroy();
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

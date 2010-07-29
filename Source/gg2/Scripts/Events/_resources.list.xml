@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="doEventGrabIntel" type="RESOURCE"/>
+  <resource name="sendEventGrabIntel" type="RESOURCE"/>
+  <resource name="doEventScoreIntel" type="RESOURCE"/>
+  <resource name="sendEventScoreIntel" type="RESOURCE"/>
+  <resource name="doEventGeneratorDestroy" type="RESOURCE"/>
+  <resource name="sendEventGeneratorDestroy" type="RESOURCE"/>
+  <resource name="doEventPlayerDeath" type="RESOURCE"/>
+  <resource name="sendEventPlayerDeath" type="RESOURCE"/>
+  <resource name="doEventSpawn" type="RESOURCE"/>
+  <resource name="sendEventSpawn" type="RESOURCE"/>
+  <resource name="doEventUberReady" type="RESOURCE"/>
+  <resource name="sendEventUberReady" type="RESOURCE"/>
+  <resource name="doEventUber" type="RESOURCE"/>
+  <resource name="sendEventUber" type="RESOURCE"/>
+  <resource name="sendEventArenaUnlockCP" type="RESOURCE"/>
+  <resource name="doEventArenaUnlockCP" type="RESOURCE"/>
+  <resource name="doEventArenaEndRound" type="RESOURCE"/>
+</resources>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="OTHER" id="11">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{
+    if(readyToShoot == true) {
+        playsound(x,y,SniperSnd);
+        shot=true;
+        justShot=true;        
+        readyToShoot = false;
+        alarm[0] = reloadTime + 20*owner.zoomed;
+        
+        var hit;
+        var x1,y1,xm,ym, len;
+        var hitline;
+        len=2000;
+        x1=x;
+        y1=y;
+        x2=x+lengthdir_x(len,owner.aimDirection);
+        y2=y+lengthdir_y(len,owner.aimDirection);
+        
+        while(len&gt;1) {
+            xm=(x1+x2)/2;
+            ym=(y1+y2)/2;
+            
+            hitline = false;
+            with(owner) {
+                if (collision_line(x1,y1,xm,ym,Generator,true,true)&gt;=0) {
+                    hitline = true;
+                    if instance_nearest(x1,y1,Generator).team == team hitline = false;
+                }
+                if(collision_line(x1,y1,xm,ym,Obstacle,true,true)&gt;=0) {
+                    hitline = true;
+                } else if (collision_line(x1,y1,xm,ym,Character,true,true)&gt;=0) {
+                    hitline = true;
+                } else if (collision_line(x1,y1,xm,ym,Sentry,true,false)&gt;=0) {
+                    hitline = true;
+                } else if (collision_line(x1,y1,xm,ym,TeamGate,true,true)&gt;=0) {
+                    hitline = true;
+                } else if (collision_line(x1,y1,xm,ym,IntelGate,true,true)&gt;=0) {
+                    hitline = true;
+                } else if (collision_line(x1,y1,xm,ym,ControlPointSetupGate,true,true)&gt;=0) {
+                    if ControlPointSetupGate.solid == true hitline = true;
+                } else if (collision_line(x1,y1,xm,ym,BulletWall,true,true)&gt;=0) {
+                    hitline = true;
+                } 
+            }
+            
+            if(hitline) {
+                x2=xm;
+                y2=ym;
+            } else {
+                x1=xm;
+                y1=ym;
+            }
+            len/=2;
+        }
+        
+        with(Player) {
+            if(id != other.ownerPlayer and team != other.owner.team and object != -1) {
+                if(collision_line(other.x,other.y,other.x2,other.y2,object,true,false)&gt;=0) &amp;&amp; object.ubered == 0 {
+                    object.hp -= other.hitDamage;
+                    object.lastDamageDealer = other.ownerPlayer;
+                    object.cloakAlpha = min(object.cloakAlpha + 0.3, 1);
+                    object.lastDamageSource = WEAPON_RIFLE;
+                    exit;
+                }
+            }
+        }
+        
+        with(Sentry) {
+            if(team != other.owner.team) {
+                if(collision_line(other.x,other.y,other.x2,other.y2,id,false,false)&gt;=0) {
+                    hp -= other.hitDamage;
+                    lastDamageDealer = other.ownerPlayer;
+                    lastDamageSource = WEAPON_RIFLE;
+                    exit;
+                }
+            }
+        }
+        
+        with(Generator) {
+            if(team != other.owner.team) {
+                if(collision_line(other.x,other.y,other.x2,other.y2,id,true,false)&gt;=0) {
+                    hp -= other.hitDamage;
+                    exit;
+                }
+            }
+        }
+    }
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

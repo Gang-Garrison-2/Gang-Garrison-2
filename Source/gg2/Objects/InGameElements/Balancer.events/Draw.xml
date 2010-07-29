@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="DRAW" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{
+    var xoffset, yoffset, xsize, ysize, i, player, redteam, blueteam;
+    
+    xoffset = view_xview[0];
+    yoffset = view_yview[0];
+    xsize = view_wview[0];
+    ysize = view_hview[0];
+    
+    draw_set_alpha(alpha);
+      
+    draw_rectangle_color(xoffset, (yoffset+ysize)-110, (xoffset+xsize), (yoffset+ysize)-92, c_black,c_black,c_black,c_black,0);
+     
+    draw_sprite_ext(GameNoticeS, 0, xoffset+25, yoffset+ysize-100, 2, 2, 0, c_white, alpha);
+    
+    draw_set_color(c_white);
+    draw_set_valign(fa_center);
+    draw_set_halign(fa_left);
+    
+    if notice == 0 draw_text_ext_color(xoffset+50, (yoffset+ysize)-100,"Teams will be auto balanced in 10 seconds",-1,-1,c_white,c_white,c_white,c_white,alpha);
+    if notice == 1 draw_text_ext_color(xoffset+50, (yoffset+ysize)-100,name+" has been team switched for balance",-1,-1,c_white,c_white,c_white,c_white,alpha);    
+
+}</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="STEP" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if(not done) {
+    if(alpha&lt;0.99) alpha = power(alpha,0.7);
+    else alpha = 0.99;
+    if x &lt; 31 x+=15;
+    if x &gt; 31 x=31;
+}
+else {
+    if(alpha&gt;0.01) alpha = power(alpha,1/0.7);
+    x-=15;
+    if x &lt;=-62 instance_destroy();
+}</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="CREATE" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if global.winners == TEAM_BLUE {
+    teamoffset=1;
+    if global.myself.team == TEAM_RED {
+        sound=FailureSnd;
+        global.myself.humiliated = 1;
+        }
+    else sound = VictorySnd;
+    }
+else if global.winners == TEAM_RED {
+    teamoffset = 0;
+    if global.myself.team == TEAM_BLUE {
+        sound=FailureSnd;
+        global.myself.humiliated = 1;
+        }
+    else sound = VictorySnd;
+    }
+else if global.winners == TEAM_SPECTATOR{
+    teamoffset = 2;
+    sound=FailureSnd;
+    global.myself.humiliated = 1;
+    }
+if !instance_exists(ArenaHUD) AudioControlPlaySong(sound, false);
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

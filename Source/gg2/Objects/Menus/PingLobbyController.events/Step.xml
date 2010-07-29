@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="STEP" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{
+    var size, namelength, server;
+    if(numServers == -1 and lobbysocket != -1) {
+        size = receivemessage(lobbysocket, 1, 0);
+        if(size &gt; 0) {
+            numServers = readbyte(0);
+            if(numServers == 0) {
+                closesocket(lobbysocket);
+                lobbysocket = -1;
+            }
+        } else if(size==0) {
+            closesocket(lobbysocket);
+            lobbysocket = -1;
+        }
+    }
+    
+    if(numServers&gt;=0 and lobbysocket != -1 and serversRead &lt; numServers) {
+        size = peekmessage(lobbysocket, 1, 0);
+        if(size &gt; 0) {
+            namelength = readbyte(0);
+            size = peekmessage(lobbysocket, namelength+7, 0);
+            if(size == namelength+7) {
+                server = instance_create(0,0,Server);
+                server.name = receivestring(lobbysocket, 1);
+                if string_pos("!private!", server.name) == 1 {
+                    server.name = string_copy(server.name, 10, string_length(server.name)-9);
+                    server.private = true;
+                }
+                else server.private = false;
+                receivemessage(lobbysocket, 6, 0);
+                server.ip = string(readbyte(0))+"."+string(readbyte(0))+"."+string(readbyte(0))+"."+string(readbyte(0));
+                server.port = readshort(0);
+                /* Start Ping Functions */
+                if (!ping_init()) {
+                    show_message("Error:#System file ICMP.DLL not found!##Exiting");
+                    game_end();
+                    exit;
+                }
+                if (!ping_ping(server.ip)) {
+                    server.ping = -1;
+                } else {
+                    server.ping = ping_rtt();
+                }
+                ping_clear();
+                ds_list_add(servers, server);
+                serversRead += 1;
+                if(serversRead == numServers) {
+                    closesocket(lobbysocket);
+                    lobbysocket = -1;
+                }
+            } else if(size==0) {
+                closesocket(lobbysocket);
+                lobbysocket = -1;
+            }
+        } else if(size==0) {
+            closesocket(lobbysocket);
+            lobbysocket = -1;
+        }
+    }
+
+    if(mouse_x &gt; xbegin and mouse_x &lt; xbegin+width) {
+        virtualitem = round((mouse_y-ybegin)/spacing-0.5);
+        if(virtualitem&lt;0 or virtualitem&gt;items) {
+            virtualitem = -1;
+        } else {
+            virtualitem += offset;
+        }
+        if(mouse_check_button_pressed(mb_left) and virtualitem&lt;ds_list_size(servers) and virtualitem&gt;=0){
+            global.isHost = false;
+            /*
+            global.serverIP = get_string("Please enter the IP adress of the server you want to join", "127.0.0.1");
+            global.serverPort = get_integer("Please enter the port of the server you want to join", 8190);
+            */
+            server = ds_list_find_value(servers, virtualitem);
+            global.serverIP = server.ip;
+            global.serverPort = server.port;
+            if instance_exists(Client) with(Client)instance_destroy();
+            global.client = instance_create(0,0,Client);
+            
+            if(not instance_exists(global.client)) {
+                room_goto_fix(Lobby);
+            }
+        }
+    } else {
+        virtualitem = -1;
+    }
+}</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

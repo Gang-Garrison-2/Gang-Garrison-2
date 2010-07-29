@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="STEP" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">healed = false;
+healing = "";
+target = -1;
+//global.HudCheck = false;
+
+if global.myself.object != -1 &amp;&amp; global.myself.class == CLASS_MEDIC {
+    if instance_exists(global.myself.object.currentWeapon) {
+        if(global.myself.object.currentWeapon.healTarget != -1 &amp;&amp; instance_exists(global.myself.object.currentWeapon.healTarget)){
+            target = global.myself.object.currentWeapon.healTarget;
+            healed = true;
+            healing = target.name;
+            //global.HudCheck = true;
+        }
+    }
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

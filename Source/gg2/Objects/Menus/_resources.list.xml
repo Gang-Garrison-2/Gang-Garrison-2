@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="LobbySideController" type="RESOURCE"/>
+  <resource name="OptionsController" type="RESOURCE"/>
+  <resource name="HostOptionsController" type="RESOURCE"/>
+  <resource name="ControlsController" type="RESOURCE"/>
+  <resource name="SplashController" type="RESOURCE"/>
+  <resource name="LobbyController" type="RESOURCE"/>
+  <resource name="PingLobbyController" type="RESOURCE"/>
+  <resource name="MainMenuController" type="RESOURCE"/>
+  <resource name="InGameMenuController" type="RESOURCE"/>
+  <resource name="CreditsController" type="RESOURCE"/>
+</resources>

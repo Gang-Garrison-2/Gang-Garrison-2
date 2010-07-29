@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="DRAW" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">var xoffset, yoffset, xsize, ysize;    
+    xoffset = view_xview[0];
+    yoffset = view_yview[0];
+    xsize = view_wview[0];
+    ysize = view_hview[0];
+if global.myself.team == TEAM_BLUE offset=1;
+else offset = 0;
+if global.myself.object == -1 || global.myself.class!=CLASS_ENGINEER exit;
+
+draw_set_valign(fa_center);
+draw_set_halign(fa_right);
+draw_set_alpha(1);
+draw_set_color(c_white);
+
+draw_sprite_ext(sprite_index,offset,xoffset+730,yoffset+515,2,2,0,c_white,1);
+draw_text_transformed_color(xoffset+734,yoffset+519,string(floor(global.myself.object.nutsNBolts)),1.5,1.5,0,c_white,c_white,c_white,c_white,1);
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

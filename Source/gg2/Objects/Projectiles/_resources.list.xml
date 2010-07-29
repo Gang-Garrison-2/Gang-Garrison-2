@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="Rocket" type="RESOURCE"/>
+  <resource name="QRocket" type="RESOURCE"/>
+  <resource name="Shot" type="RESOURCE"/>
+  <resource name="StabMask" type="RESOURCE"/>
+  <resource name="StabAnim" type="RESOURCE"/>
+  <resource name="Bubble" type="RESOURCE"/>
+  <resource name="Pop" type="RESOURCE"/>
+  <resource name="BladeB" type="RESOURCE"/>
+  <resource name="Flame" type="RESOURCE"/>
+  <resource name="Mine" type="RESOURCE"/>
+  <resource name="Needle" type="RESOURCE"/>
+  <resource name="AirBlastO" type="RESOURCE"/>
+</resources>

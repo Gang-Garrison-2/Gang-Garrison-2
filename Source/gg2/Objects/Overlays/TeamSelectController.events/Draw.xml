@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="DRAW" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if instance_exists(DeathCam) exit;
+if global.myself != -1 {
+    if global.myself.team == TEAM_RED image_index=0;
+    else image_index=1;
+}
+
+var xoffset, yoffset, xsize, ysize;
+    
+xoffset = view_xview[0];
+yoffset = view_yview[0];
+xsize = view_wview[0];
+ysize = view_hview[0];
+    
+draw_set_alpha(1);
+draw_set_valign(fa_center);
+draw_set_halign(fa_left);
+    
+if alpha &lt; 0.8 draw_set_alpha(alpha);
+else draw_set_alpha(0.8);
+draw_rectangle_color(xoffset,yoffset,xoffset+xsize,yoffset+ysize,c_black,c_black,c_black,c_black,0);
+
+draw_sprite_ext(sprite_index, image_index, xoffset+400, yoffset+y, 1, 1, 0, c_white, alpha);
+
+if newteam != -1 &amp;&amp; y==120 {
+    if door != -1 &amp;&amp; door != 3 &amp;&amp; door != 4{
+        draw_sprite_ext(TeamDoorS,door,xoffset+drawx,yoffset+48,1,1,0,c_white, 1);
+        draw_sprite_ext(DoorTopLightUpS,door,xoffset+drawx+16,yoffset,1,1,0,c_white, 1);
+    }
+    if newteam == 1 draw_sprite_ext(TVLightUpS,0,xoffset+drawx,yoffset+118,1,1,0,c_white, 1);
+        draw_set_color(c_white);
+        draw_text(xoffset+495,yoffset+80,text[0]);
+        draw_text(xoffset+495,yoffset+100,text[1]);
+        draw_text(xoffset+495,yoffset+120,text[2]);
+        draw_text(xoffset+495,yoffset+130,text[3]);
+        draw_text(xoffset+495,yoffset+140,text[4]);
+}
+else { 
+    draw_set_color(c_white);
+    draw_set_halign(fa_center);
+    draw_text(xoffset+625,yoffset+y,global.currentMap);
+}
+draw_set_color(c_black);
+draw_set_halign(fa_left);
+draw_text(xoffset+284,yoffset+y-94,redteam);
+draw_text(xoffset+396,yoffset+y-94,blueteam);
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

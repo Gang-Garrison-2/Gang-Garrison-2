@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="DRAW" id="0">
+  <actions>
+    <action id="604" library="1">
+      <!--action name: Inherited-->
+      <kind>NORMAL</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>false</canApplyTo>
+      <actionType>FUNCTION</actionType>
+      <functionName>action_inherited</functionName>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments/>
+    </action>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if(nearestTarget != -1 &amp;&amp; shooting == true) {
+    xshootoffset=4*image_xscale;
+    draw_set_alpha(0.6);
+    draw_line_width_color(x+lengthdir_x(10,direction)-xshootoffset,y+lengthdir_y(10,direction)-2,nearestTarget.x+random(25)-12,nearestTarget.y+random(25)-12,2,c_yellow,c_black);
+    shooting=false;
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

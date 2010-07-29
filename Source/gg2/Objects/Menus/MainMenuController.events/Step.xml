@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="STEP" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{
+    if(mouse_x &gt; xbegin and mouse_x &lt; xbegin+width) {
+        virtualitem = round((mouse_y-ybegin)/spacing);
+        if(mouse_check_button_pressed(mb_left)){
+            if(virtualitem &gt;= 0 and virtualitem &lt; items) {
+                event_user(virtualitem);
+            }
+        }
+    } else {
+        virtualitem = -1;
+    }
+}</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

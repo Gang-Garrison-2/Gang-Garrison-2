@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="CREATE" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{
+    xoffset = view_xview[0];
+    yoffset = view_yview[0];
+    xsize = view_wview[0];
+    ysize = view_hview[0];
+    
+    virtualitem = -1;
+    xbegin = 40;
+    ybegin = 100;
+    spacing = 30;
+    width = 300; 
+    items = 16;
+    valueoffset = 200;
+    editing = -1;
+    canClick = false;
+    alarm[0] = 15;
+    
+    item[0] = "Jump/up:";
+    item[1] = "Down:";
+    item[2] = "Left:";
+    item[3] = "Right:";
+    item[4] = "Primary:";
+    item[5] = "Secondary:";
+    item[6] = "Taunt:";
+    item[7] = "Chat 1:";
+    item[8] = "Chat 2:";
+    item[9] = "Chat 3:";
+    item[10] = "Call for Healer:";
+    item[11] = "Drop Case:";
+    item[12] = "Change Team:";
+    item[13] = "Change Class:";
+    item[14] = "Show Scores:";
+    item[15] = "Back";
+    
+    val[0] = global.jump;
+    val[1] = global.down;
+    val[2] = global.left;
+    val[3] = global.right;
+    val[4] = global.attack;
+    val[5] = global.special;
+    val[6] = global.taunt;
+    val[7] = global.chat1;
+    val[8] = global.chat2;
+    val[9] = global.chat3;
+    val[10] = global.medic;
+    val[11] = global.drop;
+    val[12] = global.changeTeam;
+    val[13] = global.changeClass;
+    val[14] = global.showScores;
+    
+    editText[0] = "Please press a key";
+    editText[1] = "Please press a key";
+    editText[2] = "Please press a key";
+    editText[3] = "Please press a key";
+    editText[4] = "Please press a key or mouse button";
+    editText[5] = "Please press a key or mouse button";
+    editText[6] = "Please press a key";
+    editText[7] = "Please press a key";
+    editText[8] = "Please press a key";
+    editText[9] = "Please press a key";
+    editText[10] = "Please press a key";
+    editText[11] = "Please press a key";
+    editText[12] = "Please press a key";
+    editText[13] = "Please press a key";
+    editText[14] = "Please press a key";
+    
+    for ( i=0; i&lt;=14; i+=1) {
+        if val[i] == vk_alt value[i] = "Alt";
+        else if val[i] == vk_control value[i] = "Control";
+        else if val[i] == vk_down value[i] = "Down";
+        else if val[i] == vk_up value[i] = "Up";
+        else if val[i] == vk_left value[i] = "Left";
+        else if val[i] == vk_right value[i] = "Right";
+        else if val[i] == vk_enter value[i] = "Enter";
+        else if val[i] == vk_tab value[i] = "Tab";
+        else if val[i] == vk_space value[i] = "Space Bar";
+        else if val[i] == vk_shift value[i] = "Shift";
+        else if val[i] == MOUSE_LEFT value[i] = "Left Mouse Button";
+        else if val[i] == MOUSE_RIGHT value[i] = "Right Mouse Button";
+        else value[i] = chr(val[i]);
+    }
+    
+    value[15] = "";
+}</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

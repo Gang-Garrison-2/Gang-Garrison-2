@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="Gib" type="RESOURCE"/>
+  <resource name="Feet" type="RESOURCE"/>
+  <resource name="RedClump" type="RESOURCE"/>
+  <resource name="BlueClump" type="RESOURCE"/>
+  <resource name="Hand" type="RESOURCE"/>
+  <resource name="Accesory" type="RESOURCE"/>
+  <resource name="Headgib" type="RESOURCE"/>
+  <resource name="BloodDrop" type="RESOURCE"/>
+  <resource name="Blood" type="RESOURCE"/>
+</resources>

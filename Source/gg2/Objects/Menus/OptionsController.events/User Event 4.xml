@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="OTHER" id="14">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">switch (global.gibLevel){
+    case(0): 
+        global.gibLevel = 1;
+        value[4] = "1, Blood only"; 
+        break;
+    case(1): 
+        global.gibLevel = 2;
+        value[4] = "2, Blood and medium gibs";
+        break;
+    case(2): 
+        global.gibLevel = 3;
+        value[4] = string(global.gibLevel) + ", Full blood and gibs";
+        break;
+    default: 
+        global.gibLevel = 0;
+        value[4] = "0, No blood or gibs";
+        break;
+        }
+
+ini_open("gg2.ini");
+ini_write_real("Settings", "Gib Level", global.gibLevel);
+ini_close();
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

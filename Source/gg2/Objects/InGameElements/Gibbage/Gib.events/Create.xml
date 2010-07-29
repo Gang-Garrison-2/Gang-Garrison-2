@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="CREATE" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">image_speed = 0;
+image_index = choose(0,1,2,3,4,5,6);
+image_xscale=2;
+image_yscale=2;
+bloodchance=1.8;
+snd=true;
+hfric=0.4;
+rotfric=0.6;
+direction = 270;
+alarm[0]=210;
+rotspeed=1;
+fadeout = false;</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

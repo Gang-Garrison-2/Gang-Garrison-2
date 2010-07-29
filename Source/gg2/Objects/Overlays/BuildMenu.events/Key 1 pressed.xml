@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="KEYPRESS" id="49">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">done=true;
+if(global.myself.object == -1) exit;
+
+if global.myself.sentry != -1 {
+    if instance_exists(NoticeO) with NoticeO instance_destroy();
+    instance_create(0,0,NoticeO);
+    with NoticeO notice = NOTICE_AUTOGUNEXISTS;
+}
+else if global.myself.object.nutsNBolts &lt; 100 {
+    if instance_exists(NoticeO) with NoticeO instance_destroy();
+    instance_create(0,0,NoticeO);
+    with NoticeO notice = NOTICE_NUTSNBOLTS;
+}
+else if collision_circle(global.myself.object.x,global.myself.object.y,50,Sentry,false,true)&gt;=0 {
+    if instance_exists(NoticeO) with NoticeO instance_destroy();
+    instance_create(0,0,NoticeO);
+    with NoticeO notice = NOTICE_TOOCLOSE;
+}
+else if (global.myself.quickspawn != 1 &amp;&amp; global.myself.object.nutsNBolts == 100 &amp;&amp; collision_circle(global.myself.object.x,global.myself.object.y,50,Sentry,false,true)&lt;0)
+{
+    clearbuffer(global.sendBuffer);
+    writebyte(BUILD_SENTRY,global.sendBuffer);
+    sendmessage(global.serverSocket, 0, 0, global.sendBuffer);
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

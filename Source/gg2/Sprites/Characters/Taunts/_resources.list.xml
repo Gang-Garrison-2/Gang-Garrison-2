@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="ScoutTauntS" type="RESOURCE"/>
+  <resource name="PyroTauntS" type="RESOURCE"/>
+  <resource name="SoldierTauntS" type="RESOURCE"/>
+  <resource name="HeavyTauntS" type="RESOURCE"/>
+  <resource name="DemoTauntS" type="RESOURCE"/>
+  <resource name="MedicTauntS" type="RESOURCE"/>
+  <resource name="EngiTauntS" type="RESOURCE"/>
+  <resource name="SpyTauntS" type="RESOURCE"/>
+  <resource name="SniperTauntS" type="RESOURCE"/>
+  <resource name="QuoteTauntS" type="RESOURCE"/>
+</resources>

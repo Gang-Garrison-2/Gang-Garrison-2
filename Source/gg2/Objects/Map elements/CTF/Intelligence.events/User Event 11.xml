@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="OTHER" id="21">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{
+    receiveCompleteMessage(global.serverSocket, 6, global.deserializeBuffer);
+    x = readushort(global.deserializeBuffer)/5;
+    y = readushort(global.deserializeBuffer)/5;
+    alarm[0] = readshort(global.deserializeBuffer);    
+}</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="CREATE" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">ini_open("gg2.ini");
+global.timeLimitMins = ini_read_real("Server", "Time Limit", 15);
+global.caplimit = ini_read_real("Server", "CapLimit", 5);
+global.Server_RespawntimeSec = ini_read_real("Server", "Respawn Time", 5);
+ini_close();
+
+//Server respawn time calculator. Converts each second to a frame. (read: multiply by 30 :hehe:)
+if (global.Server_RespawntimeSec == 0)
+{
+    global.Server_Respawntime = 1;
+}    
+else
+{
+    global.Server_Respawntime = global.Server_RespawntimeSec * 30;    
+} 
+
+virtualitem = -1;
+xbegin = 40;
+ybegin = 200;
+spacing = 30;
+width = 300; 
+items = 11;
+valueoffset = 200;
+editing = -1;
+canClick = false;
+alarm[0] = 15;
+    
+item[0] = "Server Name:";
+item[1] = "Password:";
+item[2] = "Hosting Port:";
+item[3] = "Player Limit:";
+item[4] = "Time Limit (mins):";
+item[5] = "Capture Limit:";
+item[6] = "Respawn Time (secs):";
+item[7] = "Auto Balance:";
+item[8] = "Announce to Lobby:";
+item[9] = "Start Game";
+item[10] = "Back";
+    
+global.serverName = global.defaultServerName;
+value[0] = global.serverName;
+value[1] = global.serverPassword;
+value[2] = global.hostingPort;
+value[3] = global.playerLimit;
+value[4] = global.timeLimitMins;
+value[5] = global.caplimit;
+value[6] = global.Server_RespawntimeSec;
+    
+if(global.autobalance) {
+    value[7] = "On";
+} else {
+    value[7] = "Off";
+}
+    
+if(global.useLobbyServer) {
+    value[8] = "On";
+} else {
+    value[8] = "Off";
+}
+    
+value[9] = "";
+value[10] = "";
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

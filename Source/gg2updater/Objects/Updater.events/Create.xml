@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="CREATE" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">// Downloading code. 
+
+var downloadHandle;
+timeLeft = 0;
+counter = 0;
+
+if file_exists("gg2update.exe") file_delete("gg2update.exe");
+downloadHandle = DM_CreateDownload("http://www.ganggarrison.com/gg2update.exe", "gg2update.exe");
+DM_StartDownload(downloadHandle);
+
+while(DM_DownloadStatus(downloadHandle) != 3) 
+{ // while download isn't finished
+      sleep(floor(1000/30)); // sleep for the equivalent of one frame
+      io_handle(); // this prevents GameMaker from appearing locked-up
+
+      // check if the user cancelled the download with the esc key
+      if(keyboard_check(vk_escape)) 
+      {
+        game_end();
+        exit;
+      }
+     
+      if counter == 0 || counter mod 60 == 0 timer = random(359)+1;
+      draw_sprite(BackgroundS,0,0,0);
+      draw_set_color(c_white);
+      draw_set_halign(fa_left);
+      draw_set_valign(fa_center);
+      minutes=floor(timer/60);
+      seconds=floor(timer-minutes*60);
+      draw_set_font(gg2fnt);
+      draw_text(x,y-20,string(minutes) + " minutes " + string(seconds) + " seconds Remaining...");
+      counter+=1;
+      progressBar = floor(DM_GetCompleted(downloadHandle)/5);
+      offset = 3;
+      for(i=0;i&lt;progressBar;i+=1){
+      draw_sprite(ProgressS,0,x+offset,y);
+      offset+=12;
+      }
+      
+      // drawing the progress bar.
+      /*draw_healthbar(view_wport[0] / 2 - 200,view_hport[0] / 2 - 30, view_wport[0] / 2 + 200, view_hport[0] / 2 + 30, floor(DM_GetCompleted(downloadHandle)),c_blue,c_green,c_green,0,true,true);
+      draw_set_halign(fa_center);
+      draw_set_color(c_black);
+      draw_text(view_wport[0] / 2, view_hport[0] / 2 - 10, "Completed: "+string(DM_GetCompleted(downloadHandle))+"% at "+string(floor(DM_GetSpeed(downloadHandle))/1024)+" KBps");
+      */
+      screen_refresh();
+}
+DM_StopDownload(downloadHandle);
+DM_CloseDownload(downloadHandle);
+
+// let's extract the downloaded file now.
+if file_exists("gg2update.exe") {
+    execute_program("gg2update.exe","",true);
+    file_delete("gg2update.exe");
+}
+if file_exists("Gang Garrison 2.exe") execute_shell("Gang Garrison 2.exe","");
+game_end();
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

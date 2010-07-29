@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="KEYPRESS" id="109">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{
+    if tracking == false {
+       tracking = true;
+       if !instance_exists(NoticeO) instance_create(0,0,NoticeO);
+        with NoticeO notice = NOTICE_PLAYERTRACKENABLE;
+    }
+    track_id -= 1
+    if track_id &lt; 0 {
+       track_id = ds_list_size(global.players) - 1;
+    }
+    player = ds_list_find_value(global.players, track_id);
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

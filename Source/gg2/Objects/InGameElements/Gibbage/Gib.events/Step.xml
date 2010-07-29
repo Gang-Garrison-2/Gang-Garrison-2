@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="STEP" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{
+if(fadeout) {
+    image_alpha -= (2/10);
+}
+if global.gibLevel &gt; 0{
+if(abs(speed/bloodchance)&gt;random(16/global.gibLevel)) {
+    var blood;
+    blood = instance_create(x,y-1,BloodDrop);
+    blood.ogib=self;
+    blood.odir=point_direction(x,y,x+hspeed,y+vspeed);
+     with(blood) {
+     motion_add(odir, ogib.speed*0.9);
+     hspeed+=random(3)-1;
+     vspeed+=random(3)-1;
+        }
+    }
+    }
+if(abs(vspeed)&lt;0.2) {
+        vspeed=0;
+        }
+if(abs(rotspeed) &lt; 0.2) {
+        rotspeed=0
+    }
+image_angle += rotspeed;
+if(place_free(x,y+1)) {
+      vspeed += 0.7
+}
+        if(vspeed&gt;11) {
+            vspeed=11;
+    }
+if point_distance(x,y,view_xview[0],view_yview[0])&gt;2000 {
+instance_destroy();
+        }
+    }
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

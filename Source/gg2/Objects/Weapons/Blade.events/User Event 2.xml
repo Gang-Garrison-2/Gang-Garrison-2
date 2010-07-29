@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="OTHER" id="12">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{
+    if(readyToShoot == true and BladesOut&lt;MaxBlades)  {
+        playsound(x,y,BladeSnd);
+        bladePower -= 15;
+        if bladePower &lt;0 bladePower = 0;
+        var shot;
+        randomize();
+            shot = instance_create(x+lengthdir_x(5,owner.aimDirection),y+lengthdir_y(5,owner.aimDirection),BladeB);
+            shot.direction=owner.aimDirection;
+            shot.speed=12;
+            shot.owner=owner;
+            shot.ownerPlayer=ownerPlayer;
+            shot.team=owner.team;
+            bladeAddDamage = floor((bladeMaxAddDamage/100)*bladePower+bladeBaseDamage);
+            shot.hitDamage = bladeBaseDamage + bladeAddDamage;
+            BladesOut += 1;
+            shot.weapon=WEAPON_BLADE;
+            with(shot) {
+                hspeed+=owner.hspeed;
+            }
+        justShot=true;
+        readyToShoot=false;
+        alarm[0]=reloadTime;
+    }
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="IntelligenceBase" type="RESOURCE"/>
+  <resource name="Intelligence" type="RESOURCE"/>
+  <resource name="IntelligenceBaseBlue" type="RESOURCE"/>
+  <resource name="IntelligenceBaseRed" type="RESOURCE"/>
+  <resource name="IntelligenceRed" type="RESOURCE"/>
+  <resource name="IntelligenceBlue" type="RESOURCE"/>
+</resources>

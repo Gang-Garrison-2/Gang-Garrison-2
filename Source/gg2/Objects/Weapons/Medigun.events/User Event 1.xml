@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="OTHER" id="11">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{
+    if(healTarget != -1 and instance_exists(healTarget)) {
+        if(healTarget.object != -1) {
+            if(point_distance(x,y,healTarget.object.x, healTarget.object.y)&lt;=maxHealDistance) {
+                if(collision_line(x,y, healTarget.object.x, healTarget.object.y, Obstacle, true, true)&lt;0) {
+                    with Flame {
+                        if sticksTo = other.healTarget.object extinguish -= 0.005;
+                    } 
+                    if(healTarget.object.hp &lt; healTarget.object.maxHp/2) {
+                        healTarget.object.hp+=healAmmount;
+                        hphealed+=healAmmount;
+                        ownerPlayer.roundHealed+=healAmmount;
+                    } else if(healTarget.object.hp &lt; healTarget.object.maxHp){
+                        healTarget.object.hp+=healAmmount/2;
+                        hphealed+=healAmmount/2;
+                        ownerPlayer.roundHealed+=healAmmount/2;
+                    }
+                    
+                    if(ubering == false &amp;&amp; uberCharge&lt;2000){
+                        uberCharge+=1;
+                        if(healTarget.object.hp &lt; healTarget.object.maxHp) uberCharge += 0.5;
+                        if(healTarget.object.hp &lt; healTarget.object.maxHp/2) uberCharge += 1;
+                        if(uberCharge &gt;= 2000) {
+                            uberCharge = 2000;
+                            if(global.isHost) {
+                                sendEventUberReady(ownerPlayer);
+                                doEventUberReady(ownerPlayer);
+                            }
+                        }
+                    } else if(ubering == true){
+                        if healTarget.object.ubered == 0 playsound(x,y,UberStartSnd);
+                        healTarget.object.ubered = 1;
+                        healTarget.object.alarm[2] = 3; 
+                    }
+                                                               
+                    if hphealed &gt;= 200 {
+                        ownerPlayer.healpoints += 1;
+                        ownerPlayer.roundHealPoints += 1;
+                        hphealed = 0;
+                    }
+                    healing=true;
+                    if(alarm[3]&lt;=0) {
+                        loopsoundstart(x,y,MedigunSnd);
+                    } else {
+                        loopsoundmaintain(x,y,MedigunSnd);
+                    }
+                    alarm[3]=2;
+                } else {
+                    healTarget = -1;
+                    healing = false;
+                }
+            } else {
+                healTarget = -1;
+                healing = false;
+            }
+        } else {
+            healTarget = -1;
+            healing = false;
+        }
+    } else {
+            if(readyToShoot) {
+                var bestTarget, bestTargetDist;
+                bestTarget=-1;
+                bestTargetDist=maxHealDistance;
+        
+                with(Player) {
+                    if(id != other.ownerPlayer and team == other.owner.team and object != -1) {
+                        if(collision_line(other.x, other.y, other.x+lengthdir_x(other.maxHealDistance, other.owner.aimDirection), other.y+lengthdir_y(other.maxHealDistance, other.owner.aimDirection), object, true, true)) {
+                            if(point_distance(object.x,object.y,other.x,other.y)&lt;=bestTargetDist) {
+                                bestTargetDist = point_distance(object.x,object.y,other.x,other.y);
+                                bestTarget = id;
+                            }
+                        } 
+                    }
+                }
+        
+                if(bestTarget != -1) {
+                    healTarget = bestTarget;
+                } else {
+                    healing = false;
+                }
+                readyToShoot=false;
+                alarm[0]=1;
+            }
+    }
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

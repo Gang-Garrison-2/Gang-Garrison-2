@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="KEYPRESS" id="50">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">done=true;
+if global.myself.sentry == -1 exit;
+clearbuffer(global.sendBuffer);
+writebyte(DESTROY_SENTRY,global.sendBuffer);
+sendmessage(global.serverSocket, 0, 0, global.sendBuffer);</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

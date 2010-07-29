@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="ControlPointSetupGate" type="RESOURCE"/>
+  <resource name="CaptureZone" type="RESOURCE"/>
+  <resource name="ControlPoint" type="RESOURCE"/>
+  <resource name="ControlPoint1" type="RESOURCE"/>
+  <resource name="ControlPoint2" type="RESOURCE"/>
+  <resource name="ControlPoint3" type="RESOURCE"/>
+  <resource name="ControlPoint4" type="RESOURCE"/>
+  <resource name="ControlPoint5" type="RESOURCE"/>
+</resources>

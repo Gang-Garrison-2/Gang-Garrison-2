@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="Gang Garrison 2" type="RESOURCE"/>
+  <resource name="Menu" type="RESOURCE"/>
+  <resource name="Credits" type="RESOURCE"/>
+  <resource name="Options" type="RESOURCE"/>
+  <resource name="Lobby" type="RESOURCE"/>
+  <resource name="Maps" type="GROUP"/>
+</resources>

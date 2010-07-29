@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="STEP" id="2">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if(global.isHost) &amp;&amp; (hp&lt;=0) {
+    instance_destroy();
+}         
+if(hp&gt;maxHp) hp=maxHp;
+
+if (built == 1)
+{   
+    /*   This code was for creating "spacey" sounds if the Sentry was in a "room", but it doesn't work so well (co-ords off?)
+    if (idleTimer == true &amp;&amp; collision_rectangle(x-150,y-100,x+150,y-20,Obstacle,false,true)&gt;=0)
+    {
+        playsound(x,y,SentryIdleInRoom);      &lt;---- the spacey sound
+        alarm[5] = 60;    
+    }
+    else if (idleTimer == true &amp;&amp; collision_rectangle(x-150,y-100,x+150,y-20,Obstacle,false,true)&lt;0)
+    {
+        playsound(x,y,SentryIdle);           &lt;----- original sound
+        alarm[5] = 60;
+    }
+    */
+    
+    if (idleTimer == true)
+    {
+        playsound(x,y,SentryIdle);
+        alarm[5] = 90;    
+    }    
+    idleTimer = false;
+    
+    /*
+    if (global.mapchanging != 1)
+    {
+        noticedTarget = SentryTurret.noticedTarget;
+    }
+    */
+}</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

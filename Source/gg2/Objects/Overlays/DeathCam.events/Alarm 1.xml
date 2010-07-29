@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="ALARM" id="1">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if lastDamageSource == WEAPON_SENTRYTURRET {
+    if killedby.sentry != -1 killmessage = "You were killed by the autogun of";
+    else killmessage = "You were killed by";
+}
+else if killedby.object!=-1 killmessage = "You were killed by";
+else if killedby.object==-1 killmessage = "You were killed by the late";
+if !file_exists("deathcam.png") screen_save_part("deathcam.png",0,0,800,600);
+DeathCamS=sprite_add("deathcam.png",1,0,0,400,300);
+file_delete("deathcam.png");
+zooming=true;
+playsound(view_xview[0]+400,view_yview[0]+300,DeathCamSnd);
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

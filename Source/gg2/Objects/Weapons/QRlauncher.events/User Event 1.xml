@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="OTHER" id="11">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{
+    if(readyToShoot == true) {
+        playsound(x,y,RocketSnd);
+        var oid, newx, newy;
+        
+        oid = instance_create(x+lengthdir_x(20,owner.aimDirection),y+lengthdir_y(20,owner.aimDirection), QRocket);
+        
+        oid.direction=owner.aimDirection;
+        oid.speed=4;
+        oid.ownerPlayer=ownerPlayer;
+        oid.team=owner.team;
+        oid.weapon=WEAPON_QROCKETLAUNCHER;
+        
+        readyToShoot = false;
+        alarm[0] = reloadTime;
+    }
+}</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

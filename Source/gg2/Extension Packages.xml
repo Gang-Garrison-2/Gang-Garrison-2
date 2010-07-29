@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<extensionPackages>
+  <package>39 DLL Extension</package>
+  <package>GG2DLL</package>
+  <package>GM Printing</package>
+  <package>GM Windows Dialogs</package>
+  <package>Hobbel Ping DLL</package>
+  <package>Hobbl Download Manager Ext Wrapper</package>
+</extensionPackages>

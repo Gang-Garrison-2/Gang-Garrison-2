@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="DRAW" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if(global.medicRadar != 1) exit;
+
+var xOffset,yOffset,width,height;
+
+xOffset = view_xview[0];
+yOffset = view_yview[0];
+width = view_wview[0];
+height = view_hview[0];
+
+if(global.myself.team==TEAM_RED) {
+    draw_set_color(c_red);
+} else {
+    draw_set_color(c_blue);
+}
+
+with(Character) {
+    var bubbleImage, bubbleAlpha, theta, unknown, cornerDegree;
+    bubbleImage = bubble.image_index;
+    bubbleAlpha = bubble.image_alpha;
+    cornerDegree = arcsin(.6);
+    if(     player.team == global.myself.team &amp;&amp;
+            bubble.visible &amp;&amp;
+            (bubbleImage == 45 || bubbleImage == 49) &amp;&amp;
+            (x &gt; xOffset + width || x &lt; xOffset || y &gt; yOffset+height || y &lt; yOffset)) {
+        draw_set_alpha(bubbleAlpha);
+        theta = point_direction(global.myself.object.x, global.myself.object.y, x, y)*pi/180;
+        if(theta &lt;= cornerDegree || theta &gt; 2*pi - cornerDegree){
+            unknown = (width/2 - 38*cos(theta))*tan(theta);
+            draw_sprite_ext(MedRadarArrow, floor(hp/maxHp * 19), xOffset + width - cos(theta)*38, yOffset+ height/2 -unknown, 1,1,theta*180/pi, c_white, bubbleAlpha);
+            if(mouse_x &gt; xOffset + width - cos(theta)*38 -15 &amp;&amp; mouse_y &gt; yOffset+ height/2 -unknown -15&amp;&amp; mouse_y &lt; yOffset+ height/2 -unknown + 15){
+                draw_sprite_ext(MedAlert, (player.team * 10) + player.class + 2, xOffset + width - cos(theta)*38, yOffset+ height/2 -unknown, 1, 1, 0, c_white, bubbleAlpha);
+                draw_set_halign(fa_right);
+                if(theta&lt; pi) {
+                    draw_text(xOffset + width, yOffset+ height/2 -unknown + 20, player.name);
+                } else {
+                    draw_text(xOffset + width, yOffset+ height/2 -unknown - 20, player.name);
+                }
+            } else {
+                draw_sprite_ext(MedAlert, bubbleImage == 49, xOffset + width - cos(theta)*38, yOffset+ height/2 -unknown, 1, 1, 0, c_white, bubbleAlpha);
+            }
+        } else if(theta &gt; cornerDegree &amp;&amp; theta &lt;= pi - cornerDegree){
+            unknown = (height/2 - 38*sin(theta))*(1/tan(theta));
+            draw_sprite_ext(MedRadarArrow, floor(hp/maxHp * 19), xOffset + unknown+width/2, yOffset+38*sin(theta), 1,1,theta*180/pi, c_white, bubbleAlpha);
+            if(mouse_x &gt; xOffset + unknown+width/2 -15&amp;&amp; mouse_x &lt; xOffset + unknown+width/2 + 15 &amp;&amp; mouse_y &lt; yOffset+38*sin(theta) + 15){
+                draw_sprite_ext(MedAlert, (player.team * 10) + player.class + 2, xOffset + unknown+width/2, yOffset+38*sin(theta), 1,1,0, c_white, bubbleAlpha);
+                draw_text(xOffset + unknown+width/2, yOffset+38*sin(theta) + 20, player.name);
+            } else {
+                draw_sprite_ext(MedAlert, bubbleImage == 49, xOffset + unknown+width/2, yOffset+38*sin(theta), 1,1,0, c_white, bubbleAlpha);
+            }
+        } else if(theta &gt; pi - cornerDegree &amp;&amp; theta &lt;= pi + cornerDegree){
+            unknown = (width/2 +38*cos(theta))*tan(theta);
+            draw_sprite_ext(MedRadarArrow, floor(hp/maxHp * 19), xOffset -38*cos(theta), yOffset + unknown +height/2, 1,1,theta*180/pi, c_white, bubbleAlpha);
+            if(mouse_x &lt; xOffset - 38*cos(theta) +15 &amp;&amp; mouse_y &gt; yOffset + unknown +height/2 -15 &amp;&amp; mouse_y &lt; yOffset + unknown +height/2 + 15){
+                draw_sprite_ext(MedAlert, (player.team * 10) + player.class + 2, xOffset - 38*cos(theta), yOffset + unknown +height/2, 1,1,0, c_white, bubbleAlpha);
+                draw_set_halign(fa_left);
+                if(theta &lt; pi) {
+                    draw_text(xOffset, yOffset + unknown +height/2 +20, player.name);
+                } else {
+                    draw_text(xOffset, yOffset + unknown +height/2 -20, player.name);
+                }
+            } else {
+                draw_sprite_ext(MedAlert, bubbleImage == 49, xOffset - 38*cos(theta), yOffset + unknown +height/2, 1,1,0, c_white, bubbleAlpha);
+            }
+        } else {
+            unknown = (height/2+ 38*sin(theta))*(1/tan(theta));
+            draw_sprite_ext(MedRadarArrow, floor(hp/maxHp * 19), xOffset +width/2 - unknown, yOffset + height+38*sin(theta), 1,1,theta*180/pi, c_white, bubbleAlpha);
+            if(mouse_x &gt; xOffset +width/2 - unknown - 13 &amp;&amp; mouse_x &lt; xOffset +width/2 - unknown + 13 &amp;&amp; mouse_y &gt; yOffset + height+38*sin(theta) - 13){
+                draw_sprite_ext(MedAlert, (player.team * 10) + player.class + 2, xOffset +width/2 - unknown, yOffset + height+38*sin(theta), 1,1,0, c_white, bubbleAlpha);
+                draw_text(xOffset +width/2 - unknown, yOffset + height+38*sin(theta) - 20, player.name);
+            } else {
+                draw_sprite_ext(MedAlert, bubbleImage == 49, xOffset +width/2 - unknown, yOffset + height+38*sin(theta), 1,1,0, c_white, bubbleAlpha);
+            }
+        }
+    }
+}
+
+draw_set_alpha(1);</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

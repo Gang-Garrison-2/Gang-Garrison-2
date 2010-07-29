@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="CREATE" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">cursor_sprite = -1;
+alarm[0]=60;
+alarm[1]=61;
+if(global.Server_Respawntime &gt; 0) {
+    if(global.Server_Respawntime &lt;= 150) {
+        alarm[2]=global.Server_Respawntime;
+    } else {
+        alarm[2]=150;
+    }
+} else {
+    alarm[2]=1;
+}
+zoom=1;
+zooming=false;
+killmessage = "";
+DeathCamS=-1
+hp=0;
+maxHp=0;
+if instance_exists(NoticeO) with NoticeO instance_destroy();
+if instance_exists(Balancer) with Balancer instance_destroy();
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

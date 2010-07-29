@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="STEP" id="2">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">var targetQueue, testDist, playercheck, targetAngle, obscured, rotateoffset;
+
+if ownerPlayer.sentry != -1 {
+    if x != ownerPlayer.sentry.x x = ownerPlayer.sentry.x;
+    if y != ownerPlayer.sentry.y y = ownerPlayer.sentry.y;
+}
+else if ownerPlayer.sentry == -1 instance_destroy();
+
+if(((direction+270) mod 360)&gt;180) {
+    image_xscale=1;
+    image_angle = direction;
+} else {
+    image_xscale=-1;
+    image_angle = direction+180;
+}
+
+nearestTarget = -1;
+targetQueue = ds_priority_create();
+
+// Build a queue of potential targets
+with(Character) {
+    testDist = distance_to_object(other);
+    if(!cloak &amp;&amp; testDist&lt;=375) {
+        ds_priority_add(targetQueue, id, testDist);
+    }
+}
+
+with(Sentry) {
+    testDist = distance_to_object(other);
+    if(testDist&lt;=375) {
+        ds_priority_add(targetQueue, id, testDist);
+    }
+}
+
+with(Generator) {
+    testDist = distance_to_object(other);
+    if(testDist&lt;=375) {
+        ds_priority_add(targetQueue, id, testDist);
+    }
+}
+
+while(nearestTarget == -1 &amp;&amp; !ds_priority_empty(targetQueue)) {
+    playercheck = ds_priority_delete_min(targetQueue);
+    targetAngle = point_direction(x,y,playercheck.x,playercheck.y);
+    if((targetAngle &lt;= 45 || targetAngle &gt;= 315 || (targetAngle &gt;= 135 &amp;&amp; targetAngle &lt;= 225) || place_meeting(x,y,playercheck)) 
+            &amp;&amp; playercheck.team != team 
+            &amp;&amp; playercheck.hp &gt; 0
+            &amp;&amp; collision_line(x,y,playercheck.x,playercheck.y,Obstacle,true,true)&lt;0
+            &amp;&amp; collision_line(x,y,playercheck.x,playercheck.y,TeamGate,true,true)&lt;0
+            &amp;&amp; collision_line(x,y,playercheck.x,playercheck.y,ControlPointSetupGate,true,true)&lt;0
+            &amp;&amp; collision_line(x,y,playercheck.x,playercheck.y,IntelGate,true,true)&lt;0
+            &amp;&amp; collision_line(x,y,playercheck.x,playercheck.y,BulletWall,true,true)&lt;0) {
+        // Target looks valid, but it might be obscured by a sentry.
+        // That has to be tested individually because we have to exclude both this sentry and the target
+        // from the collision check
+        obscured = false;
+        with(Sentry) {
+            if(!obscured &amp;&amp; id != other.ownerPlayer.sentry &amp;&amp; id != playercheck &amp;&amp; collision_line(other.x,other.y,playercheck.x,playercheck.y,id,false,false)&gt;=0) {
+                obscured = true;
+            }
+        }
+        if(!obscured) {
+            nearestTarget = playercheck;
+        }
+    }
+}
+
+ds_priority_destroy(targetQueue);
+
+if(nearestTarget == -1) {
+    noticedTarget = true;
+    if image_xscale != startDirection {
+        rotating=true;
+    }
+} else {
+    // set cloaked spy as target if they're in the way
+    with(Spy) {
+        if(team != other.team &amp;&amp; collision_line(other.x,other.y,other.nearestTarget.x,other.nearestTarget.y,id,true,false)&gt;=0) {
+            other.nearestTarget = id;
+        }
+    }
+    
+    if(nearestTarget.x &lt; x &amp;&amp; image_xscale == 1) {
+        rotating=true;
+    } else if(nearestTarget.x &gt; x &amp;&amp; image_xscale == -1) {
+        rotating=true;
+    }    
+        
+    if (noticedTarget == true) {
+        playsound(x,y,SentryAlert);
+        readyToShoot = false;
+        alarm[0] = reloadTime*2;
+    }    
+    
+    noticedTarget = false;
+    
+    if((readyToShoot) &amp;&amp; rotating == false) {
+        direction = point_direction(x,y,nearestTarget.x,nearestTarget.y);
+        
+        // Prevent the turret from turning too high even if it is shooting in that direction.
+        // This hides the exception to the angle restriction that occurs when a player is standing
+        // directly on the sentry gun. 
+        if(direction&gt;45 and direction&lt;90) direction=45;
+        else if(direction&lt;135 and direction&gt;90) direction=135;
+        else if(direction&gt;225 and direction&lt;270) direction=225;
+        else if(direction&lt;315 and direction&gt;270) direction=315;
+        
+        playsound(x,y,ShotgunSnd);
+        ownerPlayer.sentry.idleTimer = false;
+        ownerPlayer.sentry.alarm[5] = 30;
+        
+        if(nearestTarget.ubered == 0) {
+            nearestTarget.hp -= hitDamage;
+            nearestTarget.lastDamageDealer = ownerPlayer;
+            nearestTarget.lastDamageSource = WEAPON_SENTRYTURRET;
+            if(global.gibLevel = 0 &amp;&amp; object_is_ancestor(nearestTarget, Character)){
+                blood = instance_create(nearestTarget.x,nearestTarget.y,Blood);
+                blood.direction = direction-180;
+            }
+        }
+        shooting=true;
+        justShot=true;  
+        readyToShoot=false;
+        alarm[0]=reloadTime;
+    }
+}
+
+if(team == TEAM_RED) {
+    rotateoffset=0;
+} else {
+    rotateoffset=5;
+}
+        
+if(image_xscale &gt; 0) {
+    rotatestart = rotateoffset;
+    rotateend = rotateoffset+4;
+} else {
+    rotatestart = rotateoffset+4;
+    rotateend = rotateoffset;
+}       
+
+if(rotating == false) {
+    rotateindex = rotatestart;
+} else {
+    rotateindex += 0.3*sign(image_xscale);
+    if((rotateindex &gt;= rotateend &amp;&amp; rotatestart &lt; rotateend) || (rotateindex &lt;= rotateend &amp;&amp; rotatestart &gt; rotateend)) {
+        image_xscale = -image_xscale;
+        direction += 180;
+        rotating = false;
+    }
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

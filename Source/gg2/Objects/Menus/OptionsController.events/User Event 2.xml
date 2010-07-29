@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="OTHER" id="12">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{
+    global.ingameMusic = not global.ingameMusic;
+
+    ini_open("gg2.ini");
+    ini_write_real("Settings", "IngameMusic", global.ingameMusic);
+    ini_close();
+    
+    if(global.ingameMusic) {
+        value[2] = "On";
+        if room != Options AudioControlPlaySong(global.IngameMusic, true);
+    } else {
+        value[2] = "Off";
+        if room != Options AudioControlPlaySong(-1, false);
+    }
+}</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

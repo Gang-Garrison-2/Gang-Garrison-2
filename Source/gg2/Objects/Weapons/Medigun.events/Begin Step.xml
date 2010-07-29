@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="STEP" id="1">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if(uberReady){
+    if(alarm[4]&lt;=0) {
+        loopsoundstart(x,y,UberIdleSnd);
+    } else {
+        loopsoundmaintain(x,y,UberIdleSnd);
+    }
+    alarm[4]=2;
+}
+
+if(ubering) {
+    owner.ubered = 1;
+    owner.alarm[2]=3;
+    uberCharge -= 10;
+    if(uberCharge&lt;=0) {
+        uberCharge = 0;
+        ubering = false;
+    }
+}</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

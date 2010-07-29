@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="inputDrop" type="RESOURCE"/>
+  <resource name="inputSpecial" type="RESOURCE"/>
+  <resource name="inputChat2" type="RESOURCE"/>
+  <resource name="inputChat1" type="RESOURCE"/>
+  <resource name="inputChat3" type="RESOURCE"/>
+  <resource name="inputTaunt" type="RESOURCE"/>
+  <resource name="inputChangeClass" type="RESOURCE"/>
+  <resource name="inputChangeTeam" type="RESOURCE"/>
+  <resource name="inputShowScores" type="RESOURCE"/>
+  <resource name="inputCloseScores" type="RESOURCE"/>
+</resources>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="Server" type="RESOURCE"/>
+  <resource name="Update" type="RESOURCE"/>
+  <resource name="ScrollUpO" type="RESOURCE"/>
+  <resource name="ScrollDownO" type="RESOURCE"/>
+  <resource name="AudioControl" type="RESOURCE"/>
+</resources>

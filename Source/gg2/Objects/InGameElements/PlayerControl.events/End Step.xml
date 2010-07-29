@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="STEP" id="2">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if(global.myself.object == -1) exit;
+
+if object_is_ancestor(global.myself.object.object_index, Sniper) &amp;&amp; global.myself.object.zoomed == 1 {
+    var relxmouse, relymouse;
+    relxmouse = min(max(window_views_mouse_get_x()-view_xview[0], 0), view_wview);
+    relymouse = min(max(window_views_mouse_get_y()-view_yview[0], 0), view_hview);
+        
+    view_xview[0] = global.myself.object.x+relxmouse-view_wview[0];
+    view_yview[0] = global.myself.object.y+relymouse-view_hview[0];
+} else {
+    view_xview[0] = global.myself.object.x-view_wview[0]/2;
+    view_yview[0] = global.myself.object.y-view_hview[0]/2;
+}
+    
+//AFK Check
+afktimer-=1;
+if(afktimer&lt;=0) &amp;&amp; global.myself.object.afk == false{
+    global.myself.object.afk = true;
+    if !instance_exists(TeamSelectController) instance_create(0,0,TeamSelectController);
+    with(TeamSelectController) afk=true;
+}
+   
+if global.myself.class == CLASS_ENGINEER {
+    // Sentry HUD
+    if (global.myself.sentry != -1) &amp;&amp; !instance_exists(SentryHealthHud) instance_create(0,0,SentryHealthHud);
+    // Metal HUD
+    if global.myself.class == CLASS_ENGINEER &amp;&amp; !instance_exists(NutsNBoltsHud) instance_create(0,0,NutsNBoltsHud);
+}
+
+// Sticky HUD. Because real men let computers count for them.
+else if (global.myself.class == CLASS_DEMOMAN) &amp;&amp; !instance_exists(StickyCounter) instance_create(0,0,StickyCounter);
+  
+else if global.myself.class == CLASS_MEDIC {
+    //Uber HUD
+    if !instance_exists(UberHud) instance_create(0,0,UberHud);
+    //Healing Hud
+    if !instance_exists(HealingHud) &amp;&amp; global.showHealing = 1 instance_create(0,0,HealingHud);
+    //Medic Radar
+    if global.medicRadar == 1 &amp;&amp; !instance_exists(MedicRadar) instance_create(0,0,MedicRadar);
+}
+        
+// Health HUD
+if  !instance_exists(HealthHud) instance_create(0,0,HealthHud);
+
+// Healed HUD
+if !instance_exists(HealedHud) &amp;&amp; global.showHealer = 1 instance_create(0,0,HealedHud);
+    
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

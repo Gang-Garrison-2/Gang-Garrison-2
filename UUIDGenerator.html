@@ -1,0 +1,27 @@
+<html><head><title>Javascript Random-UUID-Generator</title></head><body>
+<p>GG2 now uses a UUID for version identification. Just copy-paste the UUID created below to the PROTOCOL_UUID constant in the game constants to create a new version.</p>
+<pre id="uuid"></pre>
+<script type="text/javascript">
+	function addRandomHexDigits(num) {
+		var builtstring="";
+		for(var x=0; x<num; x++) {
+			var numstr = Math.floor(Math.random()*16).toString(16);
+			builtstring = builtstring.concat(numstr);
+		}
+		return builtstring;
+	}
+	
+	function createRandomUuid() {
+		var myuuid="";
+		myuuid = myuuid.concat(addRandomHexDigits(8)).concat("-");
+		myuuid = myuuid.concat("4").concat(addRandomHexDigits(3)).concat("-");
+		myuuid = myuuid.concat(Math.floor(Math.random()*4+8).toString(16)).concat(addRandomHexDigits(3)).concat("-");
+		myuuid = myuuid.concat(addRandomHexDigits(4)).concat("-");
+		myuuid = myuuid.concat(addRandomHexDigits(12));
+		document.getElementById("uuid").innerHTML=myuuid;
+	}
+	
+	createRandomUuid();
+</script>
+<input type="button" onClick="createRandomUuid();" value="Create another one" />
+</body></html>

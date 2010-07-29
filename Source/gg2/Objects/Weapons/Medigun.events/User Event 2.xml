@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="OTHER" id="12">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">    if readyToShoot &amp;&amp; !healing &amp;&amp; ubering == false &amp;&amp; needleCount &gt; 0{
+        needleCount -= 1;
+        playsound(x,y,MedichaingunSnd);
+                var shot;
+                
+        shot = instance_create(x,y + yoffset + 1,Needle);
+        shot.direction=owner.aimDirection;
+        shot.speed=7+random(3);
+        shot.owner=owner;
+        shot.ownerPlayer=ownerPlayer;
+        shot.team=owner.team;
+        shot.hitDamage = 4;
+        shot.weapon=WEAPON_NEEDLEGUN;
+        justShot=true;
+        with(shot) {
+            hspeed+=owner.hspeed;
+            //motion_add(owner.direction, owner.speed);
+        }
+        readyToShoot=false;
+        alarm[0]=reloadTime;
+        alarm[5] = 0;
+    } else if (uberReady &amp;&amp; (owner.keyState &amp; $10)) {
+        if(global.isHost) {
+            sendEventUber(ownerPlayer);
+            doEventUber(ownerPlayer);
+        }
+    }
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

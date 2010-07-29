@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="OTHER" id="11">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{
+    global.fullscreen = not global.fullscreen;
+
+    ini_open("gg2.ini");
+    ini_write_real("Settings", "Fullscreen", global.fullscreen);
+    ini_close();
+    
+    if(global.fullscreen) {
+        value[1] = "On";
+    } else {
+        value[1] = "Off";
+    }
+    
+    window_set_fullscreen(global.fullscreen);
+}</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

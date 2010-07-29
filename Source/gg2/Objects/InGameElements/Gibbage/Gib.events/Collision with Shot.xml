@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="COLLISION" with="Shot">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if random(20)&lt;2 {
+hspeed += 1.7*other.hspeed;
+vspeed -= 1.2*other.vspeed;
+rotspeed = other.hspeed*-0.6*random(71);
+}</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

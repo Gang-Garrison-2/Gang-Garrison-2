@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="STEP" id="1">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if y&lt;= -1125 done=true;
+if done==false y-=2;
+else {
+    if(alpha&gt;0.01) alpha -=0.01 //power(alpha,1/0.7);
+    if alpha&lt;=0.01 
+    {
+    instance_destroy();
+    room_goto_fix(Menu);
+    }
+    }</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

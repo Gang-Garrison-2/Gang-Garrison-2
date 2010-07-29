@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="OTHER" id="20">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{
+    if global.monitorSync == 1 global.monitorSync = 0;
+    else global.monitorSync = 1;
+
+    ini_open("gg2.ini");
+    ini_write_real("Settings", "Monitor Sync", global.monitorSync);
+    ini_close();
+    
+    if(global.monitorSync == 0) {
+        set_synchronization(false);
+        value[10] = "Disabled";
+    } else {
+        set_synchronization(true);
+        value[10] = "Enabled";
+    }
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

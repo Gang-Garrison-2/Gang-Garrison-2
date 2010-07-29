@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="DRAW" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{    
+    var i, server;
+    draw_set_color(c_black);
+    draw_set_alpha(0.8);
+    
+    draw_rectangle(xbegin-10, ybegin-10, xbegin+width+10, 550, false);
+
+    draw_set_alpha(1);
+    draw_set_color(c_white);
+    
+    draw_set_valign(fa_top);
+
+    /* Let the user know the servers are loading */
+    if (serversRead &lt; numServers or numServers == -1) {
+        isloading = "Loading...";
+    } else {
+        isloading = "";
+    }
+    
+    draw_text(xbegin, ybegin-2*spacing, "Servers ("+string(serversRead)+"/"+string(numServers)+") "+string(isloading));
+
+    for(i=offset; i&lt;ds_list_size(servers) and i&lt;offset+items; i+=1) {
+        if(i==virtualitem) {
+            draw_set_color(c_red);
+        } else {
+            draw_set_color(c_white);
+        }
+        server = ds_list_find_value(servers, i);
+        if server.private == true draw_sprite(ControlPointLockS,0,xbegin-5,ybegin+spacing*(i-offset)+4);
+        draw_text(xbegin, ybegin+spacing*(i-offset),server.name);
+        draw_text(xbegin+230, ybegin+spacing*(i-offset),"#"+server.ip);
+        //+":"+string(server.port));
+
+    }
+}</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

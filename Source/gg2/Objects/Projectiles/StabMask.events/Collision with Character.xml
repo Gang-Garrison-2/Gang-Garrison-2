@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="COLLISION" with="Character">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">    if(other.id != ownerPlayer.object and other.team != team  &amp;&amp; other.hp &gt; 0 &amp;&amp; other.ubered == 0) {
+            other.hp -= hitDamage;
+            other.lastDamageDealer = ownerPlayer;
+            other.lastDamageSource = weapon;
+            var blood;
+            if(global.gibLevel &gt; 0){
+                repeat(70){
+                blood = instance_create(x,y,Blood);
+                blood.direction = direction-180;
+                }
+            }
+        instance_destroy();
+        }
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

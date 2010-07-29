@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="OTHER" id="17">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">global.autobalance = not global.autobalance;
+
+ini_open("gg2.ini");
+ini_write_real("Server", "AutoBalance", global.autobalance);
+ini_close();
+    
+if(global.autobalance) {
+    value[7] = "On";
+} else {
+    value[7] = "Off";
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

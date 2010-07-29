@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="CREATE" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{
+    virtualitem = -1;
+    xbegin = 150;
+    ybegin = 150;
+    spacing = 26;
+    width = 400; 
+    items = 15;
+    offset = 0;
+
+    servers = ds_list_create();
+    numServers = -1;
+    serversRead = 0;
+    lobbysocket = tcpconnect(LOBBY_SERVER_HOST, LOBBY_SERVER_PORT, 1);
+    setformat(lobbysocket, 2, 0);
+    
+    if(lobbysocket == -1) {
+        show_message("Unable to connect to Lobby Server - might be down.");
+        exit;
+    } else {
+        clearbuffer(0);
+        // Indicate that we use UUID for version identification
+        writebyte(128, 0);
+        
+        // Send version UUID (big endian)
+        for(i=0; i&lt;16; i+=1) {
+            writebyte(global.protocolUuid[i], 0);
+        }
+        
+        sendmessage(lobbysocket, 0, 0, 0);
+    }
+}</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

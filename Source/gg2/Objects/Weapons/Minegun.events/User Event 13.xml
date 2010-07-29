@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="OTHER" id="23">
+  <actions>
+    <action id="604" library="1">
+      <!--action name: Inherited-->
+      <kind>NORMAL</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>false</canApplyTo>
+      <actionType>FUNCTION</actionType>
+      <functionName>action_inherited</functionName>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments/>
+    </action>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{
+    var i, mine;
+    receiveCompleteMessage(global.serverSocket, 2, global.deserializeBuffer);
+    lobbed  = readbyte(global.deserializeBuffer);
+    alarm[5] = readbyte(global.deserializeBuffer);
+    
+    with(Mine) {
+        if(ownerPlayer == other.ownerPlayer) {
+            instance_destroy();
+        }
+    }
+    
+    for(i=0; i&lt;lobbed; i+=1) {
+        mine = instance_create(0,0,Mine);
+        mine.owner = owner;
+        mine.ownerPlayer = ownerPlayer;
+        mine.team = owner.team;
+        mine.weapon = WEAPON_MINEGUN;
+        with(mine) {
+            event_user(13);
+        }
+    }
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

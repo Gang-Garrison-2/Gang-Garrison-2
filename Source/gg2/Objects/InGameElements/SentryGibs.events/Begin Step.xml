@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="STEP" id="1">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{
+    hspeed/=1.1;
+    if(abs(hspeed)&lt;0.2) {
+        hspeed=0;
+    }    
+    
+    if(place_free(x,y+1)) {
+        vspeed += 0.6;
+        if(vspeed&gt;10) {
+            vspeed=10;
+        }
+    }
+}</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

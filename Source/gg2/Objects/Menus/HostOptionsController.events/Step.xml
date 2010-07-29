@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="STEP" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if editing != -1 {
+    if editing == 0 global.serverName = keyboard_string;
+    else if editing == 1 global.serverPassword = keyboard_string;
+    else if editing == 2 global.hostingPort = real(keyboard_string);
+    else if editing == 3 global.playerLimit = real(keyboard_string);
+    else if editing == 4 global.timeLimitMins = real(keyboard_string);
+    else if editing == 5 global.caplimit = real(keyboard_string);
+    else if editing == 6 global.Server_RespawntimeSec = real(keyboard_string);
+    if editing &lt; 7 value[editing] = keyboard_string;
+}
+else if canClick == true &amp;&amp; editing == -1 &amp;&amp; mouse_x &gt; xbegin and mouse_x &lt; xbegin+width {
+    virtualitem = round((mouse_y-ybegin)/spacing);
+    if(mouse_check_button_pressed(mb_left)){
+        if(virtualitem &gt;= 0 and virtualitem &lt; items) {
+            keyboard_string="";
+            event_user(virtualitem);
+        }
+    }
+} else {
+    virtualitem = -1;
+}
+
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

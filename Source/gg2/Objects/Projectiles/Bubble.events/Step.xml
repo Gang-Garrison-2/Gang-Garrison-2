@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="STEP" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">direction+=random(24)-12;
+speed += 2.2;
+speed *= 0.6;
+motion_add(point_direction(owner.x,owner.y,owner.x+owner.hspeed,owner.y+owner.vspeed)+random(6)-3,owner.speed*0.2)
+motion_add(owner.aimDirection+random(8)-4,0.3)
+if(point_distance(x,y,owner.x,owner.y)&lt;110-random(41)) {
+    motion_add(point_direction(x,y,owner.x,owner.y)+random(8)-4,-1.5)
+    }
+else {
+    motion_add(point_direction(x,y,owner.x,owner.y)+random(8)-4,1.2)
+    }</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

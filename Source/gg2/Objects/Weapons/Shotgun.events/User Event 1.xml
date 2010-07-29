@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="OTHER" id="11">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if(readyToShoot &amp;&amp; shellCount &gt;0) {
+    shellCount-=1;
+    playsound(x,y,ShotgunSnd);
+    var shot;
+    randomize();
+    repeat(4) {
+        shot = instance_create(x,y,Shot);
+        shot.direction=owner.aimDirection+(random(11)-5);
+        shot.speed=11+random(4);
+        shot.owner=owner;
+        shot.ownerPlayer=ownerPlayer;
+        shot.team=owner.team;
+        shot.weapon=WEAPON_SHOTGUN;
+        with(shot) {
+            hspeed+=owner.hspeed;
+            //motion_add(owner.direction, owner.speed);
+        }
+    }
+    justShot=true;
+    readyToShoot=false;
+    alarm[0]=reloadTime;
+    alarm[5] = 0;
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

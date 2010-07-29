@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="STEP" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">//start game if there are 2 or more players and
+//check for last player on a team then restart arena
+
+redteam = 0;
+blueteam = 0;
+redteamCharacters = 0;
+blueteamCharacters = 0;
+
+for(i=0; i&lt;ds_list_size(global.players); i+=1) {
+    player = ds_list_find_value(global.players, i);
+    if(player.team == TEAM_RED) {
+        redteam+=1;
+        if player.object != -1 || alarm[5] != -1 redteamCharacters+=1;
+    } else if (player.team == TEAM_BLUE) {
+        blueteam+=1;
+        if player.object != -1 || alarm[5] != -1 blueteamCharacters+=1;    
+    }
+}
+
+if global.isHost {
+    if ArenaControlPoint.team != -1 winners = ArenaControlPoint.team;
+    if cpUnlock == 0 {
+        sendEventArenaUnlockCP();
+        doEventArenaUnlockCP();
+    }
+    else if cpUnlock == 150 {
+        GameServer.syncTimer = 1;
+    }
+    if (blueteamCharacters == 0 || redteamCharacters == 0) &amp;&amp; roundStart == 0{
+        if (redteam &gt;= 1 || blueteam &gt;=1) &amp;&amp; winners == TEAM_SPECTATOR {
+            if blueteamCharacters == 0 &amp;&amp; gameStarted == 1 {
+                winners = TEAM_RED;
+            }
+            else if redteamCharacters == 0 &amp;&amp; gameStarted == 1 {
+                winners = TEAM_BLUE;
+            }
+            else {
+                winners = TEAM_SPECTATOR;
+                if redteam &gt;= 1 &amp;&amp; blueteam &gt;=1 &amp;&amp; gameStarted == 0 {
+                    serverArenaRestart();
+                    gameStarted = 1;
+                }
+            }
+        }
+    }
+    if winners != TEAM_SPECTATOR {
+        endCount += 1;
+        if endCount == 300 &amp;&amp; overtime == 0 &amp;&amp; timer != 0{
+            endCount = 0;
+            if redteam == 0 || blueteam == 0 {
+                gameStarted = 0;
+                winners = TEAM_SPECTATOR;
+                with Player {
+                    if object != -1 {
+                        if id = global.myself &amp;&amp; !instance_exists(Spectator) {
+                            instance_create(object.x,object.y,Spectator);
+                            with object instance_destroy();
+                        }
+                    }
+                }
+                with Sentry instance_destroy();
+                with SentryGibs instance_destroy();
+            }
+            else serverArenaRestart();
+        }
+        else if endCount == 1 {
+            serverArenaEndRound();
+        }
+    }
+}
+//else if client, increase endcount once server sends the EndRound message
+else {
+    if endCount &gt;0 endCount +=1;
+    if endCount == 300 endCount = 0;
+    //also check number of red/blue players to set winners as spec
+    if winners != TEAM_SPECTATOR 
+    &amp;&amp; endCount == 0 &amp;&amp; (redteam == 0 || blueteam == 0) {
+        winners = TEAM_SPECTATOR;
+    }
+    
+}
+
+if roundStart == 0 cpUnlock -= 1;
+
+//when roundStart reaches 0 players can no longer change team/class
+//and respawn
+else if roundStart &gt;0 roundStart -=1;
+if roundStart == 1 {
+    gameStarted = 1;
+    if global.isHost {
+        GameServer.syncTimer = 1;
+        with Player {
+            if team != TEAM_SPECTATOR {
+                if object != -1 with object instance_destroy();
+                alarm[5]=1;
+            }
+            alarm[0]=2;
+            roundHealPoints = 0;
+            roundHealed = 0;
+            roundKills = 0;
+            roundStabKills = 0; 
+        }
+        with Sentry instance_destroy();
+        with SentryGibs instance_destroy();
+    }
+    if instance_exists(TeamSelectController) with TeamSelectController instance_destroy();
+    if instance_exists(ClassSelectController) with ClassSelectController instance_destroy();
+}
+    
+//timer
+if timer &gt; 0 timer -=1;
+
+if timer == 0{
+    if redteamCharacters &gt;0 &amp;&amp; blueteamCharacters &gt;0 &amp;&amp; redteam &gt;0 &amp;&amp; blueteam &gt;0 &amp;&amp; winners == TEAM_SPECTATOR { 
+        overtime = 1;
+    }
+    else if endCount == 300 || gameStarted == 0 {
+        global.winners = TEAM_SPECTATOR;
+    }
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

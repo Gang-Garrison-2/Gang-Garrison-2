@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<gameInformation>
+  <windowPosition>
+    <left>-1</left>
+    <top>-1</top>
+    <width>600</width>
+    <height>400</height>
+  </windowPosition>
+  <allowResize>true</allowResize>
+  <backgroundColor>FFFFFF</backgroundColor>
+  <formCaption>Game Information</formCaption>
+  <mimicGameWindow>false</mimicGameWindow>
+  <pauseGame>true</pauseGame>
+  <showBorder>true</showBorder>
+  <stayOnTop>false</stayOnTop>
+</gameInformation>

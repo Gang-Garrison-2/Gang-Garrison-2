@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="DRAW" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">var xoffset, yoffset, xsize, ysize;
+xoffset = view_xview[0];
+yoffset = view_yview[0];
+xsize = view_wview[0];
+ysize = view_hview[0];
+barcolor=make_color_rgb(217,217,183);
+draw_set_alpha(1);
+
+draw_sprite_ext(GeneratorHUDS,0,xoffset+xsize/2,yoffset+550,2,2,0,c_white,1);
+if instance_exists(GeneratorRed) {
+    //draw_sprite_ext(ControlPointStatusS,60,xoffset+xsize/2-100,yoffset+560,3,3,0,c_white,1);
+    draw_sprite_ext(GeneratorRedS,GeneratorRed.image_index,xoffset+xsize/2-50,yoffset+550,1,1,0,c_white,1);
+    draw_healthbar(xoffset+xsize/2-77, yoffset+530, xoffset+xsize/2-25, yoffset+537,GeneratorRed.hp*100/GeneratorRed.maxHP,c_black,barcolor,barcolor,0,true,true);
+}
+if instance_exists(GeneratorBlue) {
+    //draw_sprite_ext(ControlPointStatusS,90,xoffset+xsize/2+100,yoffset+560,3,3,0,c_white,1);
+    draw_sprite_ext(GeneratorBlueS,GeneratorBlue.image_index,xoffset+xsize/2+50,yoffset+550,1,1,0,c_white,1);
+    draw_healthbar(xoffset+xsize/2+23, yoffset+530, xoffset+xsize/2+75, yoffset+537,GeneratorBlue.hp*100/GeneratorBlue.maxHP,c_black,barcolor,barcolor,0,true,true);
+}
+
+//timer
+draw_set_color(c_white);
+if global.myself != -1 {
+    if global.myself.team == TEAM_RED teamoffset=0;
+    else if global.myself.team == TEAM_BLUE teamoffset=1;
+}
+
+if instance_exists(WinBanner) exit;
+
+draw_set_color(c_white);
+draw_set_valign(fa_center);
+draw_set_halign(fa_right);
+draw_sprite_ext(TimerHudS,teamoffset,xoffset+xsize/2,yoffset+30,3,3,0,c_white,1);
+draw_sprite_ext(TimerS,floor(timer/timeLimit*12),xoffset+xsize/2+39,yoffset+30,3,3,0,c_white,1);
+minutes=floor(timer/1800);
+secondcounter=timer-minutes*1800;
+seconds=floor(secondcounter/30);    
+draw_text_transformed(xoffset+xsize/2-10,yoffset+32,string(minutes),1.5,1.5,0);
+draw_text_transformed(xoffset+xsize/2,yoffset+32,":",1.5,1.5,0);
+if seconds &gt;= 10 draw_text_transformed(xoffset+xsize/2+20,yoffset+32,string(seconds),1.5,1.5,0);
+else if seconds &lt; 10 draw_text_transformed(xoffset+xsize/2+20,yoffset+32,"0"+string(seconds),1.5,1.5,0);
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

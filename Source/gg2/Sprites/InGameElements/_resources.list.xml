@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="Gibs" type="GROUP"/>
+  <resource name="CrosshairS" type="RESOURCE"/>
+  <resource name="ImpactS" type="RESOURCE"/>
+  <resource name="DeadS" type="RESOURCE"/>
+  <resource name="SentryRed" type="RESOURCE"/>
+  <resource name="SentryBlue" type="RESOURCE"/>
+  <resource name="SentryMaskS" type="RESOURCE"/>
+  <resource name="SentryTurretS" type="RESOURCE"/>
+  <resource name="SentryGibsS" type="RESOURCE"/>
+  <resource name="TurretRotateS" type="RESOURCE"/>
+  <resource name="ExplosionS" type="RESOURCE"/>
+  <resource name="IntelTimerS" type="RESOURCE"/>
+  <resource name="SheetFalling1" type="RESOURCE"/>
+  <resource name="SheetFalling2" type="RESOURCE"/>
+  <resource name="SheetFalling3" type="RESOURCE"/>
+  <resource name="SheetBurning" type="RESOURCE"/>
+  <resource name="SentryTurretLogS" type="RESOURCE"/>
+  <resource name="DeathCamHealthBarS" type="RESOURCE"/>
+  <resource name="BubblesS" type="RESOURCE"/>
+  <resource name="BubbleFaceS" type="RESOURCE"/>
+</resources>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="KEYPRESS" id="49">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if balance == TEAM_RED team = TEAM_BLUE;
+else if balance == TEAM_BLUE team = TEAM_RED;
+else if balance == -1 team = choose(TEAM_RED,TEAM_BLUE);
+event_user(1);
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

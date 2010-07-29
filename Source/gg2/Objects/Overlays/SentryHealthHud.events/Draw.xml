@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="DRAW" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">var xoffset, yoffset, xsize, ysize;    
+    xoffset = view_xview[0];
+    yoffset = view_yview[0];
+    xsize = view_wview[0];
+    ysize = view_hview[0];
+if global.myself.team == TEAM_BLUE offset=1;
+else offset = 0;
+if global.myself.object == -1 || global.myself.class!=CLASS_ENGINEER exit;
+if global.myself.sentry != -1{
+maxHp = global.myself.sentry.maxHp;
+hp = global.myself.sentry.hp; 
+draw_healthbar(xoffset+45, yoffset+477, xoffset+87, yoffset+515,hp*100/maxHp,c_black,c_red,c_green,3,true,false);
+draw_set_valign(fa_center);
+draw_set_halign(fa_center);
+
+if (hp &gt; (maxHp/3.5))
+    {
+        if (hp &lt; 99)
+        {
+            draw_text_color(xoffset+69,yoffset+495,string(round(hp)),c_white,c_white,c_white,c_white,255);
+            draw_sprite_ext(SentryHUD,offset,xoffset+5, yoffset+455,2,2,0,c_white,1);
+            exit;
+        }
+    draw_text_color(xoffset+69,yoffset+495,string(round(hp)),c_white,c_white,c_white,c_white,255);
+    }
+    
+else if (hp &lt; (maxHp/3.5))
+{
+    if (hp &lt; 99 &amp;&amp; hp &gt;= 10)
+    {
+        draw_text_color(xoffset+69,yoffset+495,string(round(hp)),c_red,c_red,c_red,c_red,1);
+    }
+    else if (hp &lt; 9 || hp == 0)
+    {
+        if (round(hp) == 0)
+        {
+            draw_text_color(xoffset+69,yoffset+495,1,c_red,c_red,c_red,c_red,1);
+        }
+        else
+        {
+            draw_text_color(xoffset+69,yoffset+495,string(round(hp)),c_red,c_red,c_red,c_red,1);
+        }
+    }
+    else if (hp &lt; 0)
+    {
+        draw_text_color(xoffset+69,yoffset+495,0,c_red,c_red,c_red,c_red,255);
+    }
+}
+
+draw_sprite_ext(SentryHUD,offset,xoffset+5, yoffset+455,2,2,0,c_white,1);
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<settings>
+  <graphics>
+    <scalingPercent>-1</scalingPercent>
+    <displayCursor>true</displayCursor>
+    <useVsync>false</useVsync>
+    <interpolateColors>false</interpolateColors>
+    <colorOutsideRoom>000000</colorOutsideRoom>
+  </graphics>
+  <windowing>
+    <startFullscreen>false</startFullscreen>
+    <dontDrawBorder>true</dontDrawBorder>
+    <allowWindowResize>false</allowWindowResize>
+    <alwaysOnTop>false</alwaysOnTop>
+    <dontShowButtons>false</dontShowButtons>
+    <switchVideoMode>false</switchVideoMode>
+  </windowing>
+  <splashImage>
+    <showCustom>true</showCustom>
+    <partiallyTransparent>false</partiallyTransparent>
+    <alphaTransparency>255</alphaTransparency>
+  </splashImage>
+  <progressBar>
+    <mode>LOADBAR_NONE</mode>
+    <scaleImage>false</scaleImage>
+  </progressBar>
+  <keys>
+    <letF1ShowGameInfo>false</letF1ShowGameInfo>
+    <letF4SwitchFullscreen>false</letF4SwitchFullscreen>
+    <letF5SaveF6Load>false</letF5SaveF6Load>
+    <letF9Screenshot>false</letF9Screenshot>
+    <letEscEndGame>true</letEscEndGame>
+    <treatCloseAsEscape>true</treatCloseAsEscape>
+  </keys>
+  <errors>
+    <displayErrors>true</displayErrors>
+    <writeToLog>false</writeToLog>
+    <abortOnError>false</abortOnError>
+    <treatUninitializedAsZero>false</treatUninitializedAsZero>
+  </errors>
+  <gameInfo>
+    <gameId>961328</gameId>
+    <author/>
+    <version>100</version>
+    <information/>
+    <versionMajor>1</versionMajor>
+    <versionMinor>0</versionMinor>
+    <versionRelease>0</versionRelease>
+    <versionBuild>0</versionBuild>
+    <company>Faucet Software</company>
+    <product>Gang Garrison 2 Updater</product>
+    <copyright/>
+    <description/>
+  </gameInfo>
+  <system>
+    <processPriority>PRIORITY_NORMAL</processPriority>
+    <disableScreensavers>true</disableScreensavers>
+    <freezeOnLoseFocus>false</freezeOnLoseFocus>
+  </system>
+  <includes>
+    <overwriteExisting>false</overwriteExisting>
+    <removeAtGameEnd>false</removeAtGameEnd>
+    <useTempFolder>false</useTempFolder>
+  </includes>
+</settings>

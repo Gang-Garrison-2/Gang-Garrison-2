@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="DRAW" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{
+    var i; 
+    draw_set_color(c_white);
+
+    draw_set_valign(fa_middle);
+    draw_set_halign(fa_left);
+    draw_set_alpha(1);
+    
+    for(i=0; i&lt;items; i+=1) {
+        if editing == i {
+            draw_set_color(c_orange);
+        }
+        else if(i == virtualitem) {
+            draw_set_color(c_red);    
+        } else {
+            draw_set_color(c_white);    
+        }
+
+        draw_text(xbegin,ybegin+i*spacing,item[i]);
+        draw_text(xbegin+valueoffset,ybegin+i*spacing,value[i]);
+    }
+}</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="CREATE" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if instance_exists(ArenaControlPoint) cp = ArenaControlPoint;
+
+else{
+    distance=distance_to_object(ControlPoint1);
+    cp=ControlPoint1;
+
+    if instance_exists(ControlPoint5){
+        if distance_to_object(ControlPoint5) &lt; distance {
+            distance=distance_to_object(ControlPoint5);
+            cp=ControlPoint5;
+        }
+    }
+
+    if instance_exists(ControlPoint4){
+        if distance_to_object(ControlPoint4) &lt; distance {
+            distance=distance_to_object(ControlPoint4);
+            cp=ControlPoint4;
+        }
+    }
+    
+    if instance_exists(ControlPoint3){
+        if distance_to_object(ControlPoint3) &lt; distance {
+            distance=distance_to_object(ControlPoint3);
+            cp=ControlPoint3;
+        }
+    }
+    
+    if instance_exists(ControlPoint2){
+        if distance_to_object(ControlPoint2) &lt; distance {
+            distance=distance_to_object(ControlPoint2);
+            cp=ControlPoint2;
+        }
+    }
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

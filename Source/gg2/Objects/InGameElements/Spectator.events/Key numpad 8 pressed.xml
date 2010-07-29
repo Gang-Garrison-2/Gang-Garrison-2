@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="KEYPRESS" id="104">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if savex_view[8] == -1 {
+   savex_view[8] = x
+   savey_view[8] = y
+   if !instance_exists(NoticeO) instance_create(0,0,NoticeO);
+   with NoticeO notice = NOTICE_SETCHECKPOINT;
+} else if x != savex_view[8] || y != savey_view[8] {
+   x = savex_view[8]
+   y = savey_view[8]
+} else if x == savex_view[8] &amp;&amp; y == savey_view[8] {
+   savex_view[8] = -1
+   savey_view[8] = -1
+   if !instance_exists(NoticeO) instance_create(0,0,NoticeO);
+   with NoticeO notice = NOTICE_DESTROYCHECKPOINT;
+}
+
+tracking=false</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

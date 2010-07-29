@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="OTHER" id="23">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{
+    receiveCompleteMessage(global.serverSocket,3,global.deserializeBuffer);
+    keyState = readbyte(global.deserializeBuffer);
+    aimDirection = readshort(global.deserializeBuffer)*360/65536;
+    
+    var temp, newIntel;
+    if(global.updateType == QUICK_UPDATE or global.updateType == FULL_UPDATE) {
+        receiveCompleteMessage(global.serverSocket,8,global.deserializeBuffer);
+        x = readushort(global.deserializeBuffer)/5;
+        y = readushort(global.deserializeBuffer)/5;
+        hspeed = readsbyte(global.deserializeBuffer)/5;
+        vspeed = readsbyte(global.deserializeBuffer)/5;
+        xprevious = x;
+        yprevious = y;
+        
+        hp = readbyte(global.deserializeBuffer);
+        
+        temp = readbyte(global.deserializeBuffer);
+        cloak = (temp &amp; $01 != 0);
+        newIntel = (temp &amp; $02 != 0);
+        
+        // Drop the intel if intel changes from true to false, destroy the intel when if changes from false to true
+        // This is more of a workaround to keep 2.1.2 compatible with 2.1.1, it should be solved later by
+        // fully syncing intel drop.
+        if(newIntel and !intel) {
+            if(team == TEAM_RED) {
+                with(IntelligenceBlue) {
+                    instance_destroy();
+                }
+            } else if(team == TEAM_BLUE) {
+                with(IntelligenceRed) {
+                    instance_destroy();
+                }
+            }
+        } else if(!newIntel &amp;&amp; intel) {
+            event_user(5);
+        }
+        intel = newIntel;
+    }
+    
+    if(global.updateType == FULL_UPDATE) {
+        receiveCompleteMessage(global.serverSocket,4,global.deserializeBuffer);
+        animationOffset = readbyte(global.deserializeBuffer);
+        cloakAlpha = readbyte(global.deserializeBuffer)/255;
+        alarm[1]=readshort(global.deserializeBuffer); 
+        if alarm[1] != 0 canGrabIntel = false;
+        with(currentWeapon) {
+            event_user(13);
+        }
+        
+
+    }
+    
+    event_user(1);
+}</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

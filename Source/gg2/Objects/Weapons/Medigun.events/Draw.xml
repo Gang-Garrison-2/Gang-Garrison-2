@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="DRAW" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{
+    if owner.taunting==true exit;
+    var offset;
+    if(healing) {
+        if(healTarget!=-1 and instance_exists(healTarget)) {
+            if(healTarget.object != -1) {
+                draw_set_alpha(0.3);
+                if(healTarget.team == TEAM_RED) {
+                    draw_line_width_color(x+lengthdir_x(25,owner.aimDirection),y+lengthdir_y(24,owner.aimDirection),healTarget.object.x, healTarget.object.y, 5, c_red, c_red);
+                } else {
+                    draw_line_width_color(x+lengthdir_x(25,owner.aimDirection),y+lengthdir_y(24,owner.aimDirection),healTarget.object.x, healTarget.object.y, 5, c_blue, c_blue);
+                    }
+                draw_sprite_ext(sprite_index,owner.team+2,round(x+xoffset*image_xscale),round(y+yoffset),image_xscale,image_yscale,image_angle,c_white,1);
+            }
+        } else {
+            draw_sprite_ext(sprite_index,owner.team,round(x+xoffset*image_xscale),round(y+yoffset),image_xscale,image_yscale,image_angle,c_white,1);
+        }
+    } else {
+        draw_sprite_ext(sprite_index,owner.team,round(x+xoffset*image_xscale),round(y+yoffset),image_xscale,image_yscale,image_angle,c_white,1);
+    }
+}</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="STEP" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if timer &gt; 0 {
+    timer -=1;
+    if global.redCaps == 1 global.winners = TEAM_RED;
+    else if global.blueCaps == 1 global.winners = TEAM_BLUE;
+}
+
+else if timer == 0{
+    /*if global.redCaps &gt; global.blueCaps global.winners = TEAM_RED;
+    else if global.blueCaps &gt; global.redCaps global.winners = TEAM_BLUE;
+    else*/ global.winners = TEAM_SPECTATOR;
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

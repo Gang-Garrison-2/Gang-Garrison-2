@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="MinigunS" type="RESOURCE"/>
+  <resource name="MinegunS" type="RESOURCE"/>
+  <resource name="WrenchS" type="RESOURCE"/>
+  <resource name="MedigunS" type="RESOURCE"/>
+  <resource name="FlamethrowerS" type="RESOURCE"/>
+  <resource name="ScattergunS" type="RESOURCE"/>
+  <resource name="ShotgunS" type="RESOURCE"/>
+  <resource name="RocketlauncherS" type="RESOURCE"/>
+  <resource name="RifleS" type="RESOURCE"/>
+  <resource name="RevolverS" type="RESOURCE"/>
+  <resource name="Revolver2S" type="RESOURCE"/>
+  <resource name="QRlauncherS" type="RESOURCE"/>
+  <resource name="BladeS" type="RESOURCE"/>
+  <resource name="KnifeS" type="RESOURCE"/>
+  <resource name="BackstabRedS" type="RESOURCE"/>
+  <resource name="BackstabBlueS" type="RESOURCE"/>
+</resources>

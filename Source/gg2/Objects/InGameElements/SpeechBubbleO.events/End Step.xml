@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="STEP" id="2">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if(visible) {
+    if(fadeout) {
+        bubbleAlpha -= 0.05;
+        if(bubbleAlpha &lt;= 0) {
+            bubbleAlpha = 0;
+            visible = false;
+            fadeout = false;
+        }
+    }
+    x = round(owner.x)+10;
+    y = round(owner.y)-18;
+    image_alpha = owner.image_alpha*bubbleAlpha;
+}</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

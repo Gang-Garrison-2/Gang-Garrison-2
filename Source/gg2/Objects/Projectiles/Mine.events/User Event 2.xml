@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="OTHER" id="12">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{
+    if(exploded == true) {
+        exit;
+    } else {
+        exploded = true;
+    }
+    instance_create(x,y,Explosion);
+    //effect_create_below(ef_explosion,x,y,0,c_orange);
+    playsound(x,y,ExplosionSnd);
+    
+    with (Character) {
+        if (distance_to_object(other) &lt; other.blastRadius){
+            motion_add(point_direction(other.x,other.y,x,y),10-10*(distance_to_object(other)/other.blastRadius));
+            if(other.team != team or id==other.ownerPlayer.object) &amp;&amp; ubered == 0 &amp;&amp; hp &gt; 0 {
+                hp -= other.explosionDamage*(1-(distance_to_object(other)/other.blastRadius));
+                lastDamageDealer = other.ownerPlayer;
+                lastDamageSource = other.weapon;
+                if(global.gibLevel &gt; 0){
+                repeat(3) {
+                    var blood;
+                    blood = instance_create(x,y,Blood);
+                    blood.direction = point_direction(other.x,other.y,x,y)-180;}
+                }
+                if id==other.ownerPlayer.object and other.team == team {
+                    moveStatus = 1;
+                    vspeed*=0.8;
+                }
+            }
+            cloakAlpha = min(cloakAlpha + 0.2, 1);
+        }
+    }
+
+    
+    with (Sentry){
+        if (distance_to_object(other) &lt; other.blastRadius) &amp;&amp; (team != other.team) { 
+        hp -= other.explosionDamage*(1-(distance_to_object(other)/other.blastRadius));
+        }   
+    }    
+     
+     with (Generator){
+        if (distance_to_object(other) &lt; other.blastRadius) &amp;&amp; (team != other.team) { 
+        hp -= other.explosionDamage*(1-(distance_to_object(other)/other.blastRadius));
+        }   
+    }
+       
+    with (Rocket) {
+        if (distance_to_object(other) &lt; other.blastRadius/4){
+            if(distance_to_object(other) &lt; other.blastRadius/7 and (other.team != team or other.ownerPlayer == ownerPlayer)) {
+                characterHit=-1;
+                event_user(5);
+            } else {
+                motion_add(point_direction(other.x,other.y,x,y),10-10*(distance_to_object(other)/(other.blastRadius*5)));
+            }
+        }
+    }
+    
+    with (DeadGuy) {
+        if (distance_to_object(other) &lt; other.blastRadius){
+            motion_add(point_direction(other.x,other.y,x,y),10-10*(distance_to_object(other)/other.blastRadius));
+        }
+    }
+    
+    with(Mine) {
+        if (distance_to_object(other) &lt; other.blastRadius*0.66 and (other.team != team or other.ownerPlayer == ownerPlayer)){
+            event_user(2);
+        }
+    }
+    with (Gib) {
+        if (distance_to_object(other) &lt; other.blastRadius){
+            motion_add(point_direction(other.x,other.y,x,y),15-15*(distance_to_object(other)/other.blastRadius));
+            rotspeed=random(151)-75;
+        }
+    }
+    
+    with(LooseSheet) {
+        if (distance_to_object(other) &lt; other.blastRadius){
+            motion_add(point_direction(other.x,other.y,x,y),10-10*(distance_to_object(other)/other.blastRadius));
+        }
+    }
+    with(Bubble) {
+        if (distance_to_object(other) &lt; other.blastRadius*0.66){
+        alarm[0]-=200;
+        }    
+    }
+
+    instance_destroy();
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

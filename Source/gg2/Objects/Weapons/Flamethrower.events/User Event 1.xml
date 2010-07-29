@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="OTHER" id="11">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{
+    if (readyToShoot &amp;&amp; gas &gt;= 2) {
+        if(alarm[3]&lt;=0) {
+            loopsoundstart(x,y,FlamethrowerSnd);
+        } else {
+            loopsoundmaintain(x,y,FlamethrowerSnd);
+        }
+        alarm[3]=2;
+        
+        var shot;
+        randomize();
+        if !collision_line(x,y,x+lengthdir_x(28,owner.aimDirection),y+lengthdir_y(28,owner.aimDirection),Obstacle,1,0) and !place_meeting(x+lengthdir_x(25,owner.aimDirection),y+lengthdir_y(25,owner.aimDirection),TeamGate) {
+            shot = instance_create(x+lengthdir_x(25,owner.aimDirection),y+lengthdir_y(25,owner.aimDirection),Flame);
+            shot.direction=owner.aimDirection+(random(10)-5);
+            shot.speed=5+random(5);
+            shot.owner=owner;
+            shot.ownerPlayer=ownerPlayer;
+            shot.team=owner.team;
+            shot.weapon=WEAPON_FLAMETHROWER;
+            with(shot) {
+                motion_add(owner.direction, owner.speed);
+            }
+            justShot=true;
+            readyToShoot=false;
+            gas-=2;
+            if gas &gt; 0 alarm[0]=reloadTime;
+            else alarm[0]=50;
+        }
+    }
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

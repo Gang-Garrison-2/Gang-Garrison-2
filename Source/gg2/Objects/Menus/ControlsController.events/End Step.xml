@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="STEP" id="2">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">xoffset = view_xview[0];
+yoffset = view_yview[0];
+xsize = view_wview[0];
+ysize = view_hview[0];
+
+if editing != -1 {
+    button = 0;
+    /*I originally allowed mouse buttons for use for any keys, but I can't see anyone using
+    them for movement/taunts/etc so I commented it out to make it a little easier to code
+    - Bacon */
+    if mouse_check_button(mb_left) &amp;&amp; (editing == 4 || editing == 5) {
+        button = MOUSE_LEFT;
+        buttonVal = "Left Mouse Button"
+    }
+    else if mouse_check_button(mb_right) &amp;&amp; (editing == 4 || editing == 5) {
+        button = MOUSE_RIGHT;
+        buttonVal = "Right Mouse Button"
+    }
+    if keyboard_check_direct(vk_tab) keyboard_lastkey = vk_tab;
+    if keyboard_lastkey != 0 {
+        button = keyboard_lastkey;
+        if button == vk_alt buttonVal = "Alt";
+        else if button == vk_control buttonVal = "Control";
+        else if button == vk_down buttonVal = "Down";
+        else if button == vk_up buttonVal = "Up";
+        else if button == vk_left buttonVal = "Left";
+        else if button == vk_right buttonVal = "Right";
+        else if button == vk_enter buttonVal = "Enter";
+        else if button == vk_tab buttonVal = "Tab";
+        else if button == vk_space buttonVal = "Space Bar";
+        else if button == vk_shift buttonVal = "Shift";
+        else buttonVal = chr(button);
+    }
+    if button != 0 {
+        if editing == 0 global.jump = button;
+        else if editing == 1 global.down = button;
+        else if editing == 2 global.left = button;
+        else if editing == 3 global.right = button;
+        else if editing == 4 global.attack = button;
+        else if editing == 5 global.special = button;
+        else if editing == 6 global.taunt = button;
+        else if editing == 7 global.chat1 = button;
+        else if editing == 8 global.chat2 = button;
+        else if editing == 9 global.chat3 = button;
+        else if editing == 10 global.medic = button;
+        else if editing == 11 global.drop = button;
+        else if editing == 12 global.changeTeam = button;
+        else if editing == 13 global.changeClass = button;
+        else if editing == 14 global.showScores = button;
+        value[editing] = buttonVal;
+        editing = -1;
+    }
+}
+else if canClick &amp;&amp; editing == -1 &amp;&amp; mouse_x &gt; xoffset+xbegin and mouse_x &lt; xoffset+xbegin+width {
+    virtualitem = round((mouse_y-ybegin-yoffset)/spacing);
+    if(mouse_check_button_pressed(mb_left)){
+        if(virtualitem &gt;= 0 and virtualitem &lt; items) {
+            io_clear();
+            event_user(virtualitem);
+        }
+    }
+} else {
+    virtualitem = -1;
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

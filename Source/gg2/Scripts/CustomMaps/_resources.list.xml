@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="CustomMapDecompressWalkmaskToSurface" type="RESOURCE"/>
+  <resource name="CustomMapProcessLevelData" type="RESOURCE"/>
+  <resource name="CustomMapCreateEntitiesFromEntityData" type="RESOURCE"/>
+  <resource name="CustomMapInit" type="RESOURCE"/>
+  <resource name="CustomMapGetMapURL" type="RESOURCE"/>
+  <resource name="CustomMapGetMapMD5" type="RESOURCE"/>
+  <resource name="map_width" type="RESOURCE"/>
+  <resource name="map_height" type="RESOURCE"/>
+  <resource name="CustomMapDownload" type="RESOURCE"/>
+</resources>

@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="OTHER" id="12">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{
+    if (readyToBlast &amp;&amp; gas &gt;= 66) {
+        playsound(x,y,CompressionBlastSnd);
+        poof = instance_create(x+lengthdir_x(25,owner.aimDirection),y+lengthdir_y(25,owner.aimDirection),AirBlastO);
+        if image_xscale == 1 {
+            poof.image_xscale = 1;
+            poof.image_angle = owner.aimDirection;
+        }
+        else {
+            poof.image_xscale = -1;
+            poof.image_angle = owner.aimDirection+180;
+        }
+        poof.owner=owner;
+        with(poof) {
+            motion_add(owner.direction, owner.speed);
+        }
+        
+        /*if owner.keyState &amp; $10 &amp;&amp; !collision_line(x,y,x+lengthdir_x(28,owner.aimDirection),y+lengthdir_y(28,owner.aimDirection),Obstacle,1,0) and !place_meeting(x+lengthdir_x(25,owner.aimDirection),y+lengthdir_y(25,owner.aimDirection),TeamGate){
+            readyToBlast=false;
+            readyToShoot=false;
+            alarm[1]=blastReloadTime;
+            alarm[0]=blastReloadTime;
+            flameBlasted=true;
+            shot = instance_create(x+lengthdir_x(25,owner.aimDirection),y+lengthdir_y(25,owner.aimDirection),Flame);
+            shot.direction=owner.aimDirection+(random(10)-5);
+            shot.speed=15;
+            shot.owner=owner;
+            shot.ownerPlayer=ownerPlayer;
+            shot.team=owner.team;
+            shot.weapon=WEAPON_FLAMETHROWER;
+            with(shot) {
+                //motion_add(owner.direction, owner.speed);
+                hitDamage = 9;
+                alarm[0] = 60;
+                burnDamage = 0.06;
+                blasted = true;
+                sprite_index = BlastedFlameS;
+            }
+        }*/
+            
+        with Flame { 
+            dir = point_direction(other.x, other.y, x, y);
+            dist = point_distance(other.x, other.y, x, y);
+            angle = abs((dir-other.owner.aimDirection)+720) mod 360;
+            /*if(angle&gt;180) {
+                angle=360-angle;
+            }*/
+            //if(angle&lt;(other.blastAngle/2) and dist&lt;other.blastDistance) {
+            if collision_circle(x,y,25,other.poof,false,true) {
+                if sticksTo != -1 {
+                    if instance_exists(sticksTo) {
+                        if other.owner.team == sticksTo.team instance_destroy();
+                    }
+                } 
+            }
+       
+        } 
+        
+        with(Rocket) {
+            if(ownerPlayer.team != other.owner.team) {
+                dir = point_direction(other.x, other.y, x, y);
+                dist = point_distance(other.x, other.y, x, y);
+                angle = abs((dir-other.owner.aimDirection)+720) mod 360;
+                //if(angle&lt;=other.blastAngle/2) and dist&lt;=other.blastDistance {
+                if collision_circle(x,y,25,other.poof,false,true) {
+                    ownerPlayer = other.ownerPlayer;
+                    team = other.owner.team;
+                    weapon = WEAPON_REFLECTED_ROCKET;
+                    hitDamage = 25;
+                    explosionDamage = 30;
+                    knockback = 8;
+                    alarm[0] = 200;
+                    alarm[1] = 40;
+                    alarm[2] = 80;
+                    /*if(angle&gt;180) {
+                        angle=360-angle;
+                    }*/
+                   // motion_add(other.owner.aimDirection, other.blastStrength*(1-dist/other.blastDistance) );
+                    motion_set(other.owner.aimDirection, speed);
+                }
+            }
+        }
+        
+        with(Mine) {
+            if(ownerPlayer.team != other.owner.team) {
+                dir = point_direction(other.x, other.y, x, y);
+                dist = point_distance(other.x, other.y, x, y);
+                angle = abs((dir-other.owner.aimDirection)+720) mod 360;
+                weapon = WEAPON_REFLECTED_STICKY;
+                /*if(angle&gt;180) {
+                    angle=360-angle;
+                }*/
+                //if(angle&lt;(other.blastAngle/2) and dist&lt;other.blastDistance) {
+                if collision_circle(x,y,25,other.poof,false,true) {
+                    motion_add(other.owner.aimDirection, other.blastStrength*(1-dist/other.blastDistance) );
+                    stickied = false;
+                }
+                if(position_meeting(x+hspeed,y+vspeed,Obstacle)) { 
+                    motion_add(point_direction(x,y,x-hspeed,y-vspeed),speed*1.4) 
+                    stickied = false;
+                }  
+            }
+        }
+        
+        
+        with(Character) {
+                dir = point_direction(other.x, other.y, x, y);
+                dist = point_distance(other.x, other.y, x, y);
+                angle = abs((dir-other.owner.aimDirection)+720) mod 360;
+                /*if(angle&gt;180) {
+                    angle=360-angle;
+                }*/
+                //if(angle&lt;(other.blastAngle/2) and dist&lt;other.blastDistance) {
+                if collision_circle(x,y,25,other.poof,false,true) {
+                    if(team != other.owner.team) {
+                        motion_add(other.owner.aimDirection, other.characterBlastStrength*(1-dist/other.blastDistance) );
+                        vspeed -= 2;
+                        moveStatus = 3;
+                    }
+            }
+        }
+        
+        with(LooseSheet) {
+            dir = point_direction(other.x, other.y, x, y);
+            dist = point_distance(other.x, other.y, x, y);
+                angle = abs((dir-other.owner.aimDirection)+720) mod 360;
+                /*if(angle&gt;180) {
+                    angle=360-angle;
+                }*/
+            //if(angle&lt;(other.blastAngle/2) and dist&lt;other.blastDistance) {
+            if collision_circle(x,y,25,other.poof,false,true) {
+                motion_add(other.owner.aimDirection, other.blastStrength*(1-dist/other.blastDistance) );
+            }
+        }
+        
+        with(Gib) {
+            dir = point_direction(other.x, other.y, x, y);
+            dist = point_distance(other.x, other.y, x, y);
+                angle = abs((dir-other.owner.aimDirection)+720) mod 360;
+                /*if(angle&gt;180) {
+                    angle=360-angle;
+                }*/
+            //if(angle&lt;(other.blastAngle/2) and dist&lt;other.blastDistance) {
+            if collision_circle(x,y,25,other.poof,false,true) {
+                motion_add(other.owner.aimDirection, other.blastStrength*(1-dist/other.blastDistance) );
+            }
+        }
+        
+        //if flameBlasted == false {        
+            readyToBlast=false;
+            readyToShoot=false;
+            alarm[1]=blastReloadTime;
+            alarm[0]=blastNoFlameTime;
+            gas -= 66;
+        //}
+        //flameBlasted = false;
+    }
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

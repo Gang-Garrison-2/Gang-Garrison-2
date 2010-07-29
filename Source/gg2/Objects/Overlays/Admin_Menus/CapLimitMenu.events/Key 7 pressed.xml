@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="KEYPRESS" id="55">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">// SauceMod cap limit modifier.
+// In order to prevent so-called "Admin-abuse", an admin may change the cap limit twice per round, unless they're using small increments,
+// like -1, -2, +1, or +2. In that case, you're given a limit of four.
+
+// This one adds 5 caps.
+
+if (global.mapchanging == 0)
+{
+if (global.isHost == false)
+{
+    done = true;
+}
+
+else if (global.myself.timesChangedCapLimit &lt; 2 &amp;&amp; global.isHost == true)
+{
+    global.caplimit += 5;
+    event_user(1);
+    done = true;
+}
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

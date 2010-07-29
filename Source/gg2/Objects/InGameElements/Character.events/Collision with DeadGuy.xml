@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="COLLISION" with="DeadGuy">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">/*if player.class == CLASS_ENGINEER &amp;&amp; (other.sprite_index == QuoteRedS || other.sprite_index == QuoteBlueS){
+    with other instance_destroy();
+    nutsNBolts += 50;
+    playsound(x,y,PickupSnd);
+}
+*/</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

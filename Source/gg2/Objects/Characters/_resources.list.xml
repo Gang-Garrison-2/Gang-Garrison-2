@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="Red Team" type="GROUP"/>
+  <resource name="Blue Team" type="GROUP"/>
+  <resource name="Soldier" type="RESOURCE"/>
+  <resource name="Pyro" type="RESOURCE"/>
+  <resource name="Scout" type="RESOURCE"/>
+  <resource name="Quote" type="RESOURCE"/>
+  <resource name="Sniper" type="RESOURCE"/>
+  <resource name="Spy" type="RESOURCE"/>
+  <resource name="Engineer" type="RESOURCE"/>
+  <resource name="Medic" type="RESOURCE"/>
+  <resource name="Demoman" type="RESOURCE"/>
+  <resource name="Heavy" type="RESOURCE"/>
+</resources>

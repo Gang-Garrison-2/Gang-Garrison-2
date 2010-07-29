@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="DRAW" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if team == TEAM_RED ubercolour = c_red;
+if team == TEAM_BLUE ubercolour = c_blue;
+draw_sprite_ext(sprite_index,image_index,owner.x,owner.y,image_xscale,image_yscale,0,c_white,alpha);
+if owner.ubered == 1 draw_sprite_ext(sprite_index,image_index,owner.x,owner.y,image_xscale,image_yscale,image_angle,ubercolour,0.7);
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="DRAW" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">var xoffset, yoffset, xsize, ysize;
+xoffset = view_xview[0];
+yoffset = view_yview[0];
+xsize = view_wview[0];
+ysize = view_hview[0];
+draw_set_alpha(1);
+
+if global.myself.object != -1 {
+    if instance_exists(global.myself.object.currentWeapon) {
+        barcolor=make_color_rgb(217,217,183);
+        draw_set_color(barcolor);
+    
+        //set team offset here - but rocketmans is different because
+        //of the little rockets that are drawn
+        if global.myself.team == TEAM_BLUE toffset = 1;
+        else toffset = 0;
+        
+        if global.myself.class==CLASS_SOLDIER {
+            if global.myself.team == TEAM_BLUE toffset = 5;
+            else toffset = 0;
+            reloadscalar = 100-global.myself.object.currentWeapon.alarm[5]/global.myself.object.currentWeapon.newRocketTime*100;
+            draw_sprite_ext(Rocketclip,global.myself.object.currentWeapon.rocketcount+toffset,xoffset+728,yoffset+ysize/1.26+86,2.4,2.4,0,c_white,100);
+            draw_healthbar(xoffset+689,yoffset+ysize/1.26+90,xoffset+723,yoffset+ysize/1.26+98,reloadscalar,c_black,barcolor,barcolor,0,true,false);
+        }
+        else if global.myself.class==CLASS_DEMOMAN{        
+            reloadscalar = 100-global.myself.object.currentWeapon.alarm[5]/global.myself.object.currentWeapon.newMineTime*100;
+            draw_sprite_ext(MinegunAmmoS,toffset,xoffset+728,yoffset+ysize/1.26+86,2.4,2.4,0,c_white,100);
+            draw_text(xoffset+765,yoffset+ysize/1.26+95,global.myself.object.currentWeapon.mineCount);
+            draw_healthbar(xoffset+700,yoffset+ysize/1.26+90,xoffset+750,yoffset+ysize/1.26+98,reloadscalar,c_black,barcolor,barcolor,0,true,false);
+        }
+        else if global.myself.class==CLASS_SCOUT {
+            reloadscalar = 100-global.myself.object.currentWeapon.alarm[5]/global.myself.object.currentWeapon.newShellTime*100;
+            draw_sprite_ext(ScattergunAmmoS,toffset,xoffset+728,yoffset+ysize/1.26+86,2.4,2.4,0,c_white,100);
+            draw_text(xoffset+765,yoffset+ysize/1.26+95,global.myself.object.currentWeapon.shellCount);
+            draw_healthbar(xoffset+700,yoffset+ysize/1.26+90,xoffset+750,yoffset+ysize/1.26+98,reloadscalar,c_black,barcolor,barcolor,0,true,false);
+        }
+        else if global.myself.class==CLASS_ENGINEER {
+            reloadscalar = 100-global.myself.object.currentWeapon.alarm[5]/global.myself.object.currentWeapon.newShellTime*100;
+            draw_sprite_ext(ShotgunAmmoS,toffset,xoffset+728,yoffset+ysize/1.26+86,2.4,2.4,0,c_white,100);
+            draw_text(xoffset+765,yoffset+ysize/1.26+95,global.myself.object.currentWeapon.shellCount);
+            draw_healthbar(xoffset+700,yoffset+ysize/1.26+90,xoffset+750,yoffset+ysize/1.26+98,reloadscalar,c_black,barcolor,barcolor,0,true,false);
+        }
+        else if global.myself.class == CLASS_SPY {
+            reloadscalar = 100-global.myself.object.currentWeapon.alarm[5]/global.myself.object.currentWeapon.newBulletTime*100;
+            draw_sprite_ext(RevolverAmmoS,toffset,xoffset+728,yoffset+ysize/1.26+86,2.4,2.4,0,c_white,100);
+            draw_text(xoffset+765,yoffset+ysize/1.26+95,global.myself.object.currentWeapon.bulletCount);
+            draw_healthbar(xoffset+700,yoffset+ysize/1.26+90,xoffset+750,yoffset+ysize/1.26+98,reloadscalar,c_black,barcolor,barcolor,0,true,false);
+        }
+        else if global.myself.class == CLASS_MEDIC {
+            reloadscalar = 100-global.myself.object.currentWeapon.alarm[5]/global.myself.object.currentWeapon.newNeedleTime*100;
+            draw_sprite_ext(NeedleAmmoS,toffset,xoffset+728,yoffset+ysize/1.26+86,2.4,2.4,0,c_white,100);
+            draw_text(xoffset+765,yoffset+ysize/1.26+95,global.myself.object.currentWeapon.needleCount);
+            draw_healthbar(xoffset+700,yoffset+ysize/1.26+90,xoffset+750,yoffset+ysize/1.26+98,reloadscalar,c_black,barcolor,barcolor,0,true,false);
+        }
+        else if global.myself.class == CLASS_PYRO {      
+            draw_sprite_ext(GasAmmoS,toffset,xoffset+728,yoffset+ysize/1.26+86,2.4,2.4,0,c_white,100);
+            draw_healthbar(xoffset+689,yoffset+ysize/1.26+90,xoffset+723,yoffset+ysize/1.26+98,global.myself.object.currentWeapon.gas/2,c_black,barcolor,barcolor,0,true,false);
+        }
+        else if global.myself.class == CLASS_HEAVY {       
+            draw_sprite_ext(MinigunAmmoS,toffset,xoffset+728,yoffset+ysize/1.26+86,2.4,2.4,0,c_white,100);
+            draw_healthbar(xoffset+689,yoffset+ysize/1.26+90,xoffset+723,yoffset+ysize/1.26+98,global.myself.object.currentWeapon.bullets/2,c_black,barcolor,barcolor,0,true,false);
+        }
+        else if global.myself.class == CLASS_QUOTE {       
+            draw_sprite_ext(BladeAmmoS,toffset,xoffset+728,yoffset+ysize/1.26+86,2.4,2.4,0,c_white,100);
+            draw_healthbar(xoffset+689,yoffset+ysize/1.26+90,xoffset+723,yoffset+ysize/1.26+98,global.myself.object.currentWeapon.bladePower,c_black,barcolor,barcolor,0,true,false);
+        }
+    }
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

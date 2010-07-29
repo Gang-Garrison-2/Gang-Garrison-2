@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="COLLISION" with="IntelligenceBlue">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">// Intelligence grabbing is synced now, so it's only tested on the server
+if(global.isHost) {
+    if(team == TEAM_RED and not place_meeting(x,y,TeamGate) &amp;&amp; canGrabIntel == 1 &amp;&amp; ubered == 0) {
+        sendEventGrabIntel(player);
+        doEventGrabIntel(player);
+    }
+}</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

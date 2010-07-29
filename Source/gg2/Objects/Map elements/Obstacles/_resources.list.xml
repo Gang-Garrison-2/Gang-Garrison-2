@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="Obstacle" type="RESOURCE"/>
+  <resource name="WideObstacle" type="RESOURCE"/>
+  <resource name="HighObstacle" type="RESOURCE"/>
+  <resource name="Box" type="RESOURCE"/>
+  <resource name="ObstacleSml" type="RESOURCE"/>
+  <resource name="WideObstacleSml" type="RESOURCE"/>
+  <resource name="HighObstacleSml" type="RESOURCE"/>
+</resources>

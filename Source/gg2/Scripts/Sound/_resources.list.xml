@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="playsound" type="RESOURCE"/>
+  <resource name="loopsoundstart" type="RESOURCE"/>
+  <resource name="loopsoundmaintain" type="RESOURCE"/>
+  <resource name="loopsoundstop" type="RESOURCE"/>
+  <resource name="calculateVolume" type="RESOURCE"/>
+  <resource name="calculatePan" type="RESOURCE"/>
+</resources>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<settings>
+  <graphics>
+    <scalingPercent>-1</scalingPercent>
+    <displayCursor>false</displayCursor>
+    <useVsync>false</useVsync>
+    <interpolateColors>false</interpolateColors>
+    <colorOutsideRoom>000000</colorOutsideRoom>
+  </graphics>
+  <windowing>
+    <startFullscreen>false</startFullscreen>
+    <dontDrawBorder>false</dontDrawBorder>
+    <allowWindowResize>true</allowWindowResize>
+    <alwaysOnTop>false</alwaysOnTop>
+    <dontShowButtons>false</dontShowButtons>
+    <switchVideoMode>false</switchVideoMode>
+  </windowing>
+  <splashImage>
+    <showCustom>true</showCustom>
+    <partiallyTransparent>false</partiallyTransparent>
+    <alphaTransparency>255</alphaTransparency>
+  </splashImage>
+  <progressBar>
+    <mode>LOADBAR_NONE</mode>
+    <scaleImage>true</scaleImage>
+  </progressBar>
+  <keys>
+    <letF1ShowGameInfo>true</letF1ShowGameInfo>
+    <letF4SwitchFullscreen>false</letF4SwitchFullscreen>
+    <letF5SaveF6Load>false</letF5SaveF6Load>
+    <letF9Screenshot>true</letF9Screenshot>
+    <letEscEndGame>false</letEscEndGame>
+    <treatCloseAsEscape>false</treatCloseAsEscape>
+  </keys>
+  <errors>
+    <displayErrors>true</displayErrors>
+    <writeToLog>true</writeToLog>
+    <abortOnError>false</abortOnError>
+    <treatUninitializedAsZero>false</treatUninitializedAsZero>
+  </errors>
+  <gameInfo>
+    <gameId>907152</gameId>
+    <author>Faucet Software</author>
+    <version>2.0</version>
+    <information/>
+    <versionMajor>2</versionMajor>
+    <versionMinor>1</versionMinor>
+    <versionRelease>3</versionRelease>
+    <versionBuild>0</versionBuild>
+    <company>Faucet Software</company>
+    <product/>
+    <copyright/>
+    <description/>
+  </gameInfo>
+  <system>
+    <processPriority>PRIORITY_NORMAL</processPriority>
+    <disableScreensavers>true</disableScreensavers>
+    <freezeOnLoseFocus>false</freezeOnLoseFocus>
+  </system>
+  <includes>
+    <overwriteExisting>false</overwriteExisting>
+    <removeAtGameEnd>false</removeAtGameEnd>
+    <useTempFolder>false</useTempFolder>
+  </includes>
+</settings>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="DRAW" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING"> var xoffset, yoffset, xsize, ysize;    
+    xoffset = view_xview[0];
+    yoffset = view_yview[0];
+    xsize = view_wview[0];
+    ysize = view_hview[0];
+if global.myself.team == TEAM_BLUE offset=10;
+else offset = 0;
+if(global.myself.object == -1) exit; 
+
+/* Code for overheal
+
+if ((global.myself.object.hp &gt; global.myself.object.maxHp) &amp;&amp; (global.myself.object.beingBuffed == true) || ((global.myself.object.hp == global.myself.object.maxBuffHp) &amp;&amp; (global.myself.object.beingBuffed == true)))
+{
+    draw_healthbar(xoffset+45, yoffset+544, xoffset+85, yoffset+585,(global.myself.object.hp-global.myself.object.maxHp)*100/global.myself.object.maxHp*2,c_green,c_olive,c_lime,3,true,true);
+}
+else
+{
+*/
+    draw_set_valign(fa_center);
+    draw_set_halign(fa_center);
+    draw_set_alpha(1);
+    draw_healthbar(xoffset+45, yoffset+547, xoffset+87, yoffset+585,global.myself.object.hp*100/global.myself.object.maxHp,c_black,c_red,c_green,3,true,false);
+// }
+
+// the code for drawing the HP checks if your HP is greater than your max HP divided by 3.5. If it is higher, it draws it as white. Else, it draws it as red.
+var hpText,hpColor;
+hpText = string(ceil(max(global.myself.object.hp,0)));
+if (global.myself.object.hp &gt; (global.myself.object.maxHp/3.5)) {
+    hpColor = c_white;
+} else  {
+    hpColor = c_red;
+}
+
+draw_text_color(xoffset+69,yoffset+565,hpText,hpColor,hpColor,hpColor,hpColor,1);
+draw_sprite_ext(CharacterHUD,global.myself.class+offset,xoffset+5, yoffset+525,2,2,0,c_white,1);</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="DRAW" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">var xoffset, yoffset, xsize, ysize;
+    
+    xoffset = view_xview[0];
+    yoffset = view_yview[0];
+    xsize = view_wview[0];
+    ysize = view_hview[0];
+    
+if (global.myself.object != -1)
+    {    
+    draw_sprite_ext(sprite_index, 0, xoffset+x, yoffset+ysize/2.25, 1, 1, 0, c_white, alpha);
+}
+
+for (i=0; i&lt;ds_list_size(global.map_rotation); i+=1)
+{
+    draw_text(xoffset+x-30,((yoffset+ysize/3.25) + (25 * (i+1))),text[0]);
+    draw_text(xoffset+x-30,((yoffset+ysize/3.25) + (25 * (i+1))),text[1]);
+    draw_text(xoffset+x-30,((yoffset+ysize/3.25) + (25 * (i+1))),text[2]);
+    draw_text(xoffset+x-30,((yoffset+ysize/3.25) + (25 * (i+1))),text[3]);
+    draw_text(xoffset+x-30,((yoffset+ysize/3.25) + (25 * (i+1))),text[4]);     
+    draw_text(xoffset+x-30,((yoffset+ysize/3.25) + (25 * (i+1))),text[5]);
+    draw_text(xoffset+x-30,((yoffset+ysize/3.25) + (25 * (i+1))),text[6]);
+    draw_text(xoffset+x-30,((yoffset+ysize/3.25) + (25 * (i+1))),text[7]);
+    draw_text(xoffset+x-30,((yoffset+ysize/3.25) + (25 * (i+1))),text[8]);
+    draw_text(xoffset+x-30,((yoffset+ysize/3.25) + (25 * (i+1))),text[9]);       
+}</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

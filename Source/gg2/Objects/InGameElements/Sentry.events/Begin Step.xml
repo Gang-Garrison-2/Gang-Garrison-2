@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="STEP" id="1">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if ownerPlayer.class != CLASS_ENGINEER || team != ownerPlayer.team || collision_circle(x,y+10,25,Sentry,false,true)&gt;=0 instance_destroy();
+if built == 0 &amp;&amp; vspeed == 0 {
+    if hp &lt; maxHp hp+=1;
+    else if hp == maxHp built = 1;
+    image_index = floor(hp/maxHp*10);
+    if landed == 0 {
+        landed = 1;
+        playsound(x,y,SentryFloorSnd);
+        playsound(x,y,SentryBuildSnd);
+    }  
+}
+if (built == 1 &amp;&amp; currentWeapon == -1){
+    image_index=11;
+    image_speed=0;
+    hp=maxHp;
+    currentWeapon = instance_create(x,y,weapons[0]);
+    currentWeapon.ownerPlayer=ownerPlayer;
+    currentWeapon.team=team;
+    currentWeapon.startDirection=startDirection;
+    if startDirection == 1 currentWeapon.direction=0;
+    else if startDirection == -1 currentWeapon.direction=180;
+}
+
+    
+if(place_free(x,y+1)) {
+    vspeed += 0.6;
+}
+
+if(vspeed&gt;10) {
+    vspeed=10;
+}</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

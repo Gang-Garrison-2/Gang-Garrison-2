@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="QuoteBlue" type="RESOURCE"/>
+  <resource name="SniperBlue" type="RESOURCE"/>
+  <resource name="SpyBlue" type="RESOURCE"/>
+  <resource name="EngineerBlue" type="RESOURCE"/>
+  <resource name="MedicBlue" type="RESOURCE"/>
+  <resource name="DemomanBlue" type="RESOURCE"/>
+  <resource name="HeavyBlue" type="RESOURCE"/>
+  <resource name="SoldierBlue" type="RESOURCE"/>
+  <resource name="PyroBlue" type="RESOURCE"/>
+  <resource name="ScoutBlue" type="RESOURCE"/>
+</resources>

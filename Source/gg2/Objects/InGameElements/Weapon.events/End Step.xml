@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="STEP" id="2">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">// Ammo HUD. Because real men let computers count for them.
+if !instance_exists(AmmoCounter) &amp;&amp; (object_index == Rocketlauncher || object_index == Flamethrower ||
+object_index == Minigun || object_index == Scattergun || object_index == Shotgun ||
+object_index == Revolver || object_index == Medigun || object_index == Minegun ||
+object_index == Blade)
+instance_create(0,0,AmmoCounter);
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

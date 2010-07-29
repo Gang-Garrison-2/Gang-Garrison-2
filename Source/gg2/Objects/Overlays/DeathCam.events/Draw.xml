@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="DRAW" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">    xoffset = view_xview[0];
+    yoffset = view_yview[0];
+    xsize = view_wview[0];
+    ysize = view_hview[0];
+    
+if DeathCamS==-1 exit;
+
+if zooming==true{
+    if zoom &lt; 2 zoom += 0.1;
+}
+draw_sprite_ext(DeathCamS,0,view_xview+400,view_yview+300,zoom,zoom,0,c_white,1);
+draw_rectangle_color(view_xview,view_yview,view_xview+800,view_yview+100,c_black,c_black,c_black,c_black,0);
+draw_rectangle_color(view_xview,view_yview+500,view_xview+800,view_yview+600,c_black,c_black,c_black,c_black,0);
+draw_set_halign(fa_center);
+draw_set_valign(fa_center);
+if team == TEAM_RED draw_set_color(c_blue);
+else draw_set_color(c_red);
+
+
+draw_text_transformed(view_xview+400,view_yview+30, killmessage,2,2,0);
+draw_text_transformed(view_xview+400,view_yview+60, name,2,2,0);
+if maxHp != 0 {
+    if killedby.object!=-1  {
+        draw_healthbar(xoffset+400-18, yoffset+550-18, xoffset+400+18, yoffset+550+18, hp*100/maxHp,c_black,c_red,c_green,3,true,false);
+        draw_sprite_ext(DeathCamHealthBarS,0,xoffset+400, yoffset+550,2,2,0,c_white,1);
+    }
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

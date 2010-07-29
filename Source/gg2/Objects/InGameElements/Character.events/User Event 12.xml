@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="OTHER" id="22">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{
+    var temp;
+    writebyte(keyState, global.serializeBuffer);
+    writeshort(netAimDirection, global.serializeBuffer);
+
+    if(global.updateType == QUICK_UPDATE or global.updateType == FULL_UPDATE) {
+        writeushort(round(x*5), global.serializeBuffer);
+        writeushort(round(y*5), global.serializeBuffer);
+        writebyte(round(hspeed*5), global.serializeBuffer);
+        writebyte(round(vspeed*5), global.serializeBuffer);
+        writebyte(ceil(hp), global.serializeBuffer);
+        
+        temp = 0;
+        if(cloak) temp |= $01;
+        if(intel) temp |= $02;
+        writebyte(temp, global.serializeBuffer);               
+    }
+        
+    if(global.updateType == FULL_UPDATE) {
+        writebyte(animationOffset, global.serializeBuffer);
+        writebyte(round(cloakAlpha*255), global.serializeBuffer);
+        writeshort(alarm[1], global.serializeBuffer);
+        with(currentWeapon) {
+            event_user(12);
+        }
+        
+    }
+}</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

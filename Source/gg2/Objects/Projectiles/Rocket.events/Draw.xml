@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="DRAW" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{
+    draw_set_alpha(1);
+    draw_sprite_ext(sprite_index,team,x,y,image_xscale,image_yscale,image_angle,c_white,1);
+    //draw_text(x,y-10,string(hitDamage));
+}</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

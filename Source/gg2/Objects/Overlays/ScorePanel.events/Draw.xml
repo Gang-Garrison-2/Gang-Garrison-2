@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="DRAW" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">
+    var xoffset, yoffset, xsize, ysize;
+    
+    xoffset = view_xview[0];
+    yoffset = view_yview[0];
+    xsize = view_wview[0];
+    ysize = view_hview[0];
+    
+    draw_set_alpha(1);
+    
+    draw_sprite_ext(sprite_index, 0, (xoffset+xsize)-150, (yoffset+ysize) +100, 3, 3, 0, c_white, 1);
+
+    draw_set_color(c_black);
+    draw_set_valign(fa_middle);
+    draw_set_halign(fa_center);
+
+    //showing the amount of caps, and the amount of caps to win
+    draw_text_transformed(xoffset+xsize/2-135, yoffset+ysize-30, string(global.redCaps),2,2,0);
+    draw_text_transformed(xoffset+xsize/2+130, yoffset+ysize-30, string(global.blueCaps),2,2,0);
+    // this next piece of code helps to resize the value of the numbers depending on the limit as not to overflow
+    if (global.caplimit &lt;= 9)
+    {
+        draw_text_transformed(xoffset+xsize/2-2, yoffset+ysize-15, string(global.caplimit),2,2,0);
+    }
+    else
+    {
+        if (global.caplimit &gt; 999)
+        {
+            draw_sprite_ext(infinity,0,xoffset+xsize/2-3, yoffset+ysize-17, 2, 2, 0, c_white, 1);
+        }
+        else
+        {
+            draw_text(xoffset+xsize/2-2, yoffset+ysize-15, string(global.caplimit));   
+        }
+    }
+    
+    //Drawing intel status and arrows:
+    
+    redx=(xoffset+xsize)-465;
+    redy=(yoffset+ysize)-50;
+    bluex=(xoffset+xsize)-340;
+    bluey=(yoffset+ysize)-50;
+
+    if global.myself == -1 exit;
+    if global.myself.object==-1{
+        redsourcex=redx;    
+        redsourcey=redy;
+        bluesourcex=bluex;
+        bluesourcey=bluey;
+    }
+    else{
+        redsourcex=global.myself.object.x;
+        redsourcey=global.myself.object.y;
+        bluesourcex=redsourcex;
+        bluesourcey=redsourcey;
+    } 
+      
+    
+    if instance_exists(IntelligenceRed)
+    {
+        reddir = point_direction(redsourcex,redsourcey,IntelligenceRed.x,IntelligenceRed.y);
+        if IntelligenceRed.x==IntelligenceBaseRed.x &amp;&amp; IntelligenceRed.y==IntelligenceBaseRed.y{
+            redintelstatus=2;
+        }
+        else redintelstatus=0;
+    }
+    else {
+        for(i=0; i&lt;ds_list_size(global.players); i+=1) {
+            player = ds_list_find_value(global.players, i);
+            if(player.team == TEAM_BLUE) &amp;&amp; player.object!= -1 {
+                if player.object.intel == true {
+                    reddir = point_direction(redsourcex,redsourcey,player.object.x,player.object.y);
+                }
+            }
+        }
+        redintelstatus=1;
+    }
+     
+    if instance_exists(IntelligenceBlue)
+    {
+        bluedir = point_direction(bluesourcex,bluesourcey,IntelligenceBlue.x,IntelligenceBlue.y);
+        if IntelligenceBlue.x==IntelligenceBaseBlue.x &amp;&amp; IntelligenceBlue.y==IntelligenceBaseBlue.y{
+            blueintelstatus=2;
+        }
+        else blueintelstatus=0;
+    }
+    else {
+        for(i=0; i&lt;ds_list_size(global.players); i+=1) {
+            player = ds_list_find_value(global.players, i);
+            if(player.team == TEAM_RED) &amp;&amp; player.object!=-1{
+                if player.object.intel == true {
+                    bluedir = point_direction(bluesourcex,bluesourcey,player.object.x,player.object.y);
+                }
+            }
+        }
+        blueintelstatus=1;
+    }
+
+    drawred=true;
+    drawblue=true;
+    if global.myself.object!=-1{
+        if global.myself.team==TEAM_RED &amp;&amp; global.myself.object.intel==true drawblue=false;
+        if global.myself.team==TEAM_BLUE &amp;&amp; global.myself.object.intel==true drawred=false;
+    }
+    if drawred==true draw_sprite_ext(IntelArrowS, 0, redx, redy, 3, 3, reddir, c_white, 1);
+    if drawblue==true draw_sprite_ext(IntelArrowS, 1, bluex, bluey, 3, 3, bluedir, c_white, 1);
+    
+    draw_sprite_ext(IntelStatusS, redintelstatus, redx, redy, 2, 2, 0, c_white, 1);
+    draw_sprite_ext(IntelStatusS, blueintelstatus, bluex, bluey, 2, 2, 0, c_white, 1);
+    
+    /*
+    if (global.myself.canRespawn == false)
+    {
+        draw_sprite_ext(RespawnTimerS, 0, (xoffset+xsize)-150, (yoffset+ysize) +300, 1, 1, 0, c_white, 1);
+    
+        if (RespawnTimer.wait != -1)
+        {
+            draw_text((xoffset+xsize)-150, (yoffset+ysize) +400, "Respawning in: Next round");
+        }
+        else
+        {
+            draw_text((xoffset+xsize)-150, (yoffset+ysize) +400, "Respawning in: "+string(Player.alarm[5]));
+        }
+    }
+    else
+    {
+        draw_sprite_ext(RespawnTimerS, 1, (xoffset+xsize)-150, (yoffset+ysize) +300, 1, 1, 0, c_white, 1);
+    }
+    */
+
+
+//timer
+if instance_exists(WinBanner) exit;
+draw_set_color(c_white);
+draw_set_halign(fa_center);
+draw_set_valign(fa_center);
+
+if global.myself != -1 {
+    if global.myself.team == TEAM_RED teamoffset=0;
+    else if global.myself.team == TEAM_BLUE teamoffset=1;
+}
+if overtime == 1 {
+    draw_set_halign(fa_center);
+    draw_sprite_ext(TimerHudS,2+teamoffset,xoffset+xsize/2,yoffset+30,3,3,0,c_white,1);
+    draw_text(xoffset+xsize/2,yoffset+30,"OVERTIME");
+}
+else{
+    draw_set_halign(fa_right);
+    draw_sprite_ext(TimerHudS,teamoffset,xoffset+xsize/2,yoffset+30,3,3,0,c_white,1);
+    draw_sprite_ext(TimerS,floor(timer/timeLimit*12),xoffset+xsize/2+39,yoffset+30,3,3,0,c_white,1);
+    minutes=floor(timer/1800);
+    secondcounter=timer-minutes*1800;
+    seconds=floor(secondcounter/30);    
+    draw_text_transformed(xoffset+xsize/2-10,yoffset+32,string(minutes),1.5,1.5,0);
+    draw_text_transformed(xoffset+xsize/2,yoffset+32,":",1.5,1.5,0);
+    if seconds &gt;= 10 draw_text_transformed(xoffset+xsize/2+20,yoffset+32,string(seconds),1.5,1.5,0);
+    else if seconds &lt; 10 draw_text_transformed(xoffset+xsize/2+20,yoffset+32,"0"+string(seconds),1.5,1.5,0);
+}
+    
+    /*
+    if (global.myself.canRespawn == false)
+    {
+        draw_sprite_ext(RespawnTimerS, 0, (xoffset+xsize)-150, (yoffset+ysize) +300, 1, 1, 0, c_white, 1);
+    
+        if (RespawnTimer.wait != -1)
+        {
+            draw_text((xoffset+xsize)-150, (yoffset+ysize) +400, "Respawning in: Next round");
+        }
+        else
+        {
+            draw_text((xoffset+xsize)-150, (yoffset+ysize) +400, "Respawning in: "+string(Player.alarm[5]));
+        }
+    }
+    else
+    {
+        draw_sprite_ext(RespawnTimerS, 1, (xoffset+xsize)-150, (yoffset+ysize) +300, 1, 1, 0, c_white, 1);
+    }
+    */
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

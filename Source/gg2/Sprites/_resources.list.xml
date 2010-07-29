@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="Characters" type="GROUP"/>
+  <resource name="Obstacles" type="GROUP"/>
+  <resource name="Weapons" type="GROUP"/>
+  <resource name="Projectiles" type="GROUP"/>
+  <resource name="Collision Maps" type="GROUP"/>
+  <resource name="HUDs" type="GROUP"/>
+  <resource name="MapElements" type="GROUP"/>
+  <resource name="InGameElements" type="GROUP"/>
+  <resource name="GameElements" type="GROUP"/>
+</resources>

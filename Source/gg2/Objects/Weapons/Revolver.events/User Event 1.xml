@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="OTHER" id="11">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{
+    if(readyToShoot &amp;&amp; !owner.cloak &amp;&amp; bulletCount &gt; 0) {
+        bulletCount-=1;
+        playsound(x,y,RevolverSnd);
+        var shot;
+        randomize();
+        
+        shot = instance_create(x,y + yoffset + 1,Shot);
+        shot.direction=owner.aimDirection+ random(3)-1;
+        shot.speed=20;
+        shot.owner=owner;
+        shot.ownerPlayer=ownerPlayer;
+        shot.team=owner.team;
+        shot.damage = 25;
+        shot.weapon=WEAPON_REVOLVER;
+        with(shot) {
+            hspeed+=owner.hspeed;
+            //motion_add(owner.direction, owner.speed);
+        }
+        justShot=true;
+        readyToShoot=false;
+        alarm[0]=reloadTime;
+        alarm[5] = 0;
+    } else {
+        /*with(owner) { // we can't let the user backstab unless the spy is standing on the ground
+            other.__backstab_standing_on_the_ground_detection = place_meeting(x, y+1, Obstacle);
+        }*/
+        if(readyToStab &amp;&amp; owner.cloak /*&amp;&amp; owner.vspeed = 0 &amp;&amp; __backstab_standing_on_the_ground_detection*/) {
+        
+            //owner.hspeed=0;
+            //owner.speed = 0;
+            owner.runPower = 0;
+            owner.jumpStrength = 0;
+            owner.canCloak = 0
+            
+            stabdirection = owner.aimDirection;
+            stab = instance_create(x,y,StabAnim);
+            stab.direction=owner.aimDirection;
+            stab.speed=0;
+            stab.owner=owner;
+            stab.ownerPlayer=ownerPlayer;
+            stab.team=owner.team;
+            stab.hitDamage = 0;
+            stab.weapon=WEAPON_KNIFE;
+            readyToStab=false;
+            alarm[1]=StabreloadTime;
+        }
+    }
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

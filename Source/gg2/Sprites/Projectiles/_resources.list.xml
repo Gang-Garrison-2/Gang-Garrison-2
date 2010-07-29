@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="RocketS" type="RESOURCE"/>
+  <resource name="RedRocketS" type="RESOURCE"/>
+  <resource name="BlueRocketS" type="RESOURCE"/>
+  <resource name="ShotS" type="RESOURCE"/>
+  <resource name="BubbleS" type="RESOURCE"/>
+  <resource name="FlameS" type="RESOURCE"/>
+  <resource name="BlastedFlameS" type="RESOURCE"/>
+  <resource name="MineS" type="RESOURCE"/>
+  <resource name="QRocketS" type="RESOURCE"/>
+  <resource name="NeedleS" type="RESOURCE"/>
+  <resource name="BladeProjectileS" type="RESOURCE"/>
+  <resource name="sprite451" type="RESOURCE"/>
+  <resource name="BladeMask" type="RESOURCE"/>
+  <resource name="PopS" type="RESOURCE"/>
+  <resource name="StabMaskS" type="RESOURCE"/>
+  <resource name="AirBlastS" type="RESOURCE"/>
+  <resource name="AirBlastMaskS" type="RESOURCE"/>
+</resources>

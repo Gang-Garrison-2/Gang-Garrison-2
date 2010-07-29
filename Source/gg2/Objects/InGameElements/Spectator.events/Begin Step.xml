@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="STEP" id="1">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if global.myself.object != -1 instance_destroy();
+
+view_xview=x-400;
+view_yview=y-300;
+
+//moving view - mapped keys
+if keyboard_check(global.left) {
+    if x &gt; 400 x-=20;
+    afktimer=afktimeout;
+    if tracking == true {
+       tracking = false;
+       if !instance_exists(NoticeO) instance_create(0,0,NoticeO);
+       with NoticeO notice = NOTICE_PLAYERTRACKDISABLE;
+    }
+}
+else if keyboard_check(global.right) {
+    if x &lt; map_width()-400 x+=20;
+    afktimer=afktimeout;
+    if tracking == true {
+       tracking = false;
+       if !instance_exists(NoticeO) instance_create(0,0,NoticeO);
+       with NoticeO notice = NOTICE_PLAYERTRACKDISABLE;
+    }
+}
+if keyboard_check(global.jump) {
+    if y &gt; 300 y-=20;
+    afktimer=afktimeout;
+    if tracking == true {
+       tracking = false;
+       if !instance_exists(NoticeO) instance_create(0,0,NoticeO);
+       with NoticeO notice = NOTICE_PLAYERTRACKDISABLE;
+    }
+}
+else if keyboard_check(global.down) {
+    if y &lt; map_height()-300 y+=20;
+    afktimer=afktimeout;
+    if tracking == true {
+       tracking = false;
+       if !instance_exists(NoticeO) instance_create(0,0,NoticeO);
+       with NoticeO notice = NOTICE_PLAYERTRACKDISABLE;
+    }
+}
+
+if tracking == true {
+    if instance_exists(player) {
+        if player.team != TEAM_SPECTATOR {
+            x = player.object.x;
+            y = player.object.y;
+        }
+        else {
+            tracking = false;
+            if !instance_exists(NoticeO) instance_create(0,0,NoticeO);
+            with NoticeO notice = NOTICE_PLAYERTRACKDISABLE;
+        }
+    }
+    else {
+        tracking = false;
+        if !instance_exists(NoticeO) instance_create(0,0,NoticeO);
+        with NoticeO notice = NOTICE_PLAYERTRACKDISABLE;
+    }
+}
+   
+afktimer-=1;
+
+if (afktimer&lt;=0) &amp;&amp; global.isHost==false{
+    with(all){ 
+        if (id != AudioControl.id){ 
+            instance_destroy();
+        }
+    }
+    room_goto_fix(Menu);
+    show_message("You have been disconnected from the server. Reason: AFK");
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

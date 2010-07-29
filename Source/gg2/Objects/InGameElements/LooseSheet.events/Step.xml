@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="STEP" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if(place_free(x,y+1)) {    
+    hspeed /= (4/3);
+    hspeed += random(vspeed*4)-vspeed*2;
+
+    vspeed += random(0.2);
+    vspeed /= (4/3);
+}
+
+if(!burning) {
+    image_speed = vspeed;
+} else {
+    vspeed -= 0.2;
+}
+
+if(fadeout) {
+    image_alpha -= (1/30);
+}</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

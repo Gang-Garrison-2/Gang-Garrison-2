@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="STEP" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if(not done) {
+    if(alpha&lt;0.99) alpha = power(alpha,0.7);
+    else alpha = 0.99;
+    if y&lt;120 y+=15;
+    if y&gt;120 y=120;
+}
+else {
+    if(alpha&gt;0.01) alpha = power(alpha,1/0.7);
+    y-=15;
+    if y &lt; -120 instance_destroy();
+}
+
+balance = calculateTeamBalance();
+    
+xoffset = view_xview[0];
+yoffset = view_yview[0];
+
+    
+if mouse_x&gt;xoffset+40 &amp;&amp; mouse_x &lt;xoffset+127 &amp;&amp; mouse_y&gt;yoffset+48 &amp;&amp; mouse_y&lt;yoffset+223{
+    newteam=0;
+    drawx=40;
+    door=2;
+    text[0]="Auto Select";
+    text[1]="";
+    text[2]="Let us place you on the team";
+    text[3]="that needs you the most!";
+    text[4]="";
+}
+
+else if mouse_x&gt;xoffset+156 &amp;&amp; mouse_x &lt;xoffset+193 &amp;&amp; mouse_y&gt;yoffset+118 &amp;&amp; mouse_y&lt;yoffset+151{
+    if (newteam!=1)
+    {
+        newteam=1;
+        door=-1;
+    }
+    else
+    {
+        newteam=1;
+    }
+    drawx=156;
+    text[0]="Spectate";
+    text[1]="";
+    text[2]="Get a glimpse of the action";
+    text[3]="from a safe distance!";
+    text[4]="";
+}
+
+else if mouse_x&gt;xoffset+228 &amp;&amp; mouse_x &lt;xoffset+315 &amp;&amp; mouse_y&gt;yoffset+48 &amp;&amp; mouse_y&lt;yoffset+223{
+    newteam=2;
+    drawx=228;
+    if balance == TEAM_RED door=3;
+    else door=0;    
+    text[0]="RED";
+    text[1]="Respectable Elucidation Division";
+    text[2]="A private company dedicated to";
+    text[3]="illicit information acquisition";
+    text[4]="and other shady activities.";
+}
+
+else if mouse_x&gt;xoffset+340 &amp;&amp; mouse_x &lt;xoffset+427 &amp;&amp; mouse_y&gt;yoffset+48 &amp;&amp; mouse_y&lt;yoffset+223{
+    newteam=3;
+    drawx=340;
+    if balance == TEAM_BLUE door=4;
+    else door=1;
+    text[0]="BLU";
+    text[1]="Bolstered Locks Unlimited";
+    text[2]="The leading name in freelance";
+    text[3]="security and use of brute force";
+    text[4]="in property protection.";
+}
+else {
+    newteam=-1;
+    door=-1;
+}
+
+if mouse_check_button(mb_left) &amp;&amp; newteam !=-1 {
+    if newteam==1 team = TEAM_SPECTATOR;
+    else if newteam==2 &amp;&amp; balance != TEAM_RED team = TEAM_RED;
+    else if newteam==3 &amp;&amp; balance != TEAM_BLUE team = TEAM_BLUE;
+    else if newteam==0 { 
+        if balance == TEAM_RED team = TEAM_BLUE;
+        else if balance == TEAM_BLUE team = TEAM_RED;
+        else if balance == -1 team = choose(TEAM_RED,TEAM_BLUE);
+    }
+    if (newteam==2 &amp;&amp; balance == TEAM_RED) || (newteam==3 &amp;&amp; balance == TEAM_BLUE) exit;
+    event_user(1);
+}
+
+if(afk == true){
+    team = TEAM_SPECTATOR;
+    event_user(1);
+}</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

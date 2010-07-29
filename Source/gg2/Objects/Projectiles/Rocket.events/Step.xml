@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="STEP" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">    speed += 1;
+    speed *= 0.92;
+    //if speed &gt;25 speed = 25;
+    image_angle = direction;
+
+if(global.particles = PARTICLES_NORMAL) {
+    effect_create_below(ef_smoke,x-hspeed*1.3,y-vspeed*1.3,0,c_gray);
+} else if(global.particles == PARTICLES_ALTERNATIVE) {
+    if(not variable_local_exists("rocketblurParticleType")) {
+        rocketblurParticleType = part_type_create();
+        if team == TEAM_RED rocketParticleSprite = RedRocketS;
+        else rocketParticleSprite = BlueRocketS;
+        part_type_sprite(rocketblurParticleType,rocketParticleSprite,false,true,false);
+        part_type_alpha2(rocketblurParticleType,0.7,0.1);
+        part_type_life(rocketblurParticleType,5,5);
+    }
+    
+    if(not variable_global_exists("rocketblurParticleSystem")) {
+        global.rocketblurParticleSystem = part_system_create();
+        part_system_depth(global.rocketblurParticleSystem, 10);
+    }
+    
+    part_type_orientation(rocketblurParticleType,direction,direction,0,0,0);
+    
+    part_particles_create(global.rocketblurParticleSystem, x, y, rocketblurParticleType, 1);
+}</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

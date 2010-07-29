@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="KEYPRESS" id="49">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if (global.mapchanging == 0)
+{
+if (global.isHost == false)
+{
+    done = true;
+}
+
+else
+{
+
+/* 
+
+this code makes the server AND the clients pause, so instead the code after this block of commented code merely 
+checks the *.ini file and the setting for the custom map rotation file. If it was changed, it looks for that
+file and reloads the map rotation.
+
+var append, rawAppend, mapRotation;
+
+mapRotation = "mapRotation.txt";
+
+rawAppend = get_integer("Would you like to add existing maps to the rotation or create and entirely new one? #Enter 1 for yes or 2 for no.", 1)
+
+*/
+// I'm using this method because I don't want to mess up with loops. I'll move it over later, when the code is clean
+/*
+if (rawAppend == 1)
+{
+    append = 1;
+}
+else if (rawAppend == 2)
+{
+    append = 0;
+}
+else
+{
+    show_message("You didn't enter a valid value.")
+    done = true;
+    exit;
+}
+
+amountMaps = get_integer("How many maps would you like to add?", 0)
+
+if (amountMaps == 0)
+{
+    show_message("You didn't enter a valid value.")
+    done = true;
+    exit;   
+}
+
+amountMaps2 = amountMaps;
+
+
+if (append == 1)
+{
+    while (amountMaps != 0)
+    {
+        map_Input = get_string("Enter the FULL name of the map, as found in your Maps directory, or enter quit to exit.", " ");
+        if (map_Input != "quit")
+        {
+            if (global.mapRotationFile != "") // is the map rotation file specified?
+            {
+                fileOpen = file_text_open_append(global.mapRotationFile);
+                file_text_writeln(fileOpen);
+                file_text_write_string(fileOpen, map_Input);
+            }
+            else
+            {
+                fileOpen = file_text_open_append(mapRotation);
+                global.mapRotationFile = mapRotation;
+                file_text_writeln(fileOpen);
+                file_text_write_string(fileOpen, map_Input);
+            }
+            amountMaps -= 1;
+        }
+        else if (map_Input == "quit")
+        {
+            if (amountMaps != amountMaps2)
+            {
+                var confirmSave;
+                confirmSave = get_integer("Would you like to save your changes? #Enter 1 for yes or 2 for no.", 1)
+                if (confirmSave = 1)
+                {
+                    file_text_close(fileOpen);
+                    exit;
+                }
+                else if (confirmSave = 2)
+                {
+                    if (file_exists(global.mapRotationFile) || file_exists(mapRotation))
+                    {
+                        if (file_exists(global.mapRotationFile))
+                        {
+                            file_delete(global.mapRotationFile);
+                        }
+                        else if (file_exists(mapRotation))
+                        {
+                            file_delete(mapRotation);
+                        }
+                    }
+                }
+                else
+                {
+                    show_message("You didn't enter a valid value.")
+                    done = true;
+                    file_text_close(fileOpen);
+                    exit;
+                }
+            }
+            else
+            {
+                file_text_close(fileOpen);
+                exit;
+            }
+        }
+        else
+        {
+            show_message("You didn't enter a valid value.")
+            done = true;
+            file_text_close(fileOpen);
+            exit;        
+        }
+	}
+	
+}    
+else if (append == 0)
+{
+    while (amountMaps != 0)
+    {
+        map_Input = get_string("Enter the FULL name of the map, as found in your Maps directory, or enter quit to exit.", " ");
+        if (map_Input != "quit")
+        {
+            if (global.mapRotationFile != "") // is the map rotation file specified?
+            {
+                fileOpen = file_text_open_append(global.mapRotationFile);
+                file_text_writeln(fileOpen);
+                file_text_write_string(fileOpen, map_Input);
+            }
+            else
+            {
+                fileOpen = file_text_open_append(mapRotation);
+                global.mapRotationFile = mapRotation;
+                file_text_writeln(fileOpen);
+                file_text_write_string(fileOpen, map_Input);
+            }
+            amountMaps -= 1;
+        }
+        else if (map_Input == "quit")
+        {
+            if (amountMaps != amountMaps2)
+            {
+                var confirmSave;
+                confirmSave = get_integer("Would you like to save your changes? #Enter 1 for yes or 2 for no.", 1)
+                if (confirmSave = 1)
+                {
+                    file_text_close(fileOpen);
+                    exit;
+                }
+                else if (confirmSave = 2)
+                {
+                    if (file_exists(global.mapRotationFile) || file_exists(mapRotation))
+                    {
+                        if (file_exists(global.mapRotationFile))
+                        {
+                            file_delete(global.mapRotationFile);
+                        }
+                        else if (file_exists(mapRotation))
+                        {
+                            file_delete(mapRotation);
+                        }
+                    }
+                }
+                else
+                {
+                    show_message("You didn't enter a valid value.")
+                    done = true;
+                    file_text_close(fileOpen);
+                    exit;
+                }
+            }
+            else
+            {
+                done = true;
+                file_text_close(fileOpen);
+                exit;
+            }
+        }
+        else
+        {
+            show_message("You didn't enter a valid value.")
+            done = true;
+            file_text_close(fileOpen);
+            exit;        
+        }
+	}
+}    
+
+*/
+
+// cspotcode I &lt;3 for the custom map handle code
+// thank you
+
+/*
+
+        var fileHandle, i, mapname;
+        for(i = 1; !file_text_eof(fileOpen); i += 1) {
+            mapname = file_text_read_string(fileOpen);
+            // remove leading whitespace from the string
+            while(string_char_at(mapname, 0) == " " || string_char_at(mapname, 0) == chr(9)) { // while it starts with a space or tab
+              mapname = string_delete(mapname, 0, 1); // delete that space or tab
+            }
+            if(mapname != "" &amp;&amp; string_char_at(mapname, 0) != "#") { // if it's not blank and it's not a comment (starting with #)
+                ds_list_add(global.map_rotation, mapname);
+            }
+            file_text_readln(fileOpen);
+        }
+file_text_close(fileOpen);
+done = true;    
+*/
+
+// new code starts here.
+
+ini_open("gg2.ini");
+
+ds_list_clear(global.map_rotation);
+
+customMapRotationFile = ini_read_string("Server", "MapRotation", "");
+if (customMapRotationFile != "stock.maps") // did the user want stock maps? If not...
+{
+// the user defined a valid map rotation file. Load from there
+
+    global.customMapdesginated = 1;
+
+    if(customMapRotationFile != "" &amp;&amp; file_exists(customMapRotationFile)) {
+        var fileHandle, i, mapname;
+        fileHandle = file_text_open_read(customMapRotationFile);
+        for(i = 1; !file_text_eof(fileHandle); i += 1) {
+            mapname = file_text_read_string(fileHandle);
+            // remove leading whitespace from the string
+            while(string_char_at(mapname, 0) == " " || string_char_at(mapname, 0) == chr(9)) { // while it starts with a space or tab
+              mapname = string_delete(mapname, 0, 1); // delete that space or tab
+            }
+            if(mapname != "" &amp;&amp; string_char_at(mapname, 0) != "#") { // if it's not blank and it's not a comment (starting with #)
+                ds_list_add(global.map_rotation, mapname);
+            }
+            file_text_readln(fileHandle);
+        }
+        file_text_close(fileHandle);
+    }    
+}
+else if (customMapRotationFile == "stock.maps") // if I execute this loop, the *.ini had the setting stock.maps for the file. I'll load stock maps.
+{  
+    global.customMapdesginated = 0;
+    
+    maps[1] = ini_read_real("Maps", "ctf_truefort", 1);
+    maps[2] = ini_read_real("Maps", "ctf_2dfort", 2);
+    maps[3] = ini_read_real("Maps", "ctf_conflict", 3);
+    maps[4] = ini_read_real("Maps", "ctf_classicwell", 4);
+    maps[5] = ini_read_real("Maps", "ctf_waterway", 5);
+    maps[6] = ini_read_real("Maps", "ctf_orange", 6);
+
+    var i, sort_list;
+        sort_list = ds_list_create();
+        for(i=1; i &lt;= 6; i += 1) {
+            if(maps[i] != 0) ds_list_add(sort_list, ((100*maps[i])+i));
+        }
+        ds_list_sort(sort_list, 1);
+        
+        // translate the numbers back into the names they represent
+        for(i=0; i &lt; ds_list_size(sort_list); i += 1) {
+            switch(ds_list_find_value(sort_list, i) mod 100) {
+                case 1:
+                    ds_list_add(global.map_rotation, "ctf_truefort");
+                break;
+                case 2:
+                    ds_list_add(global.map_rotation, "ctf_2dfort");
+                break;
+                case 3:
+                    ds_list_add(global.map_rotation, "ctf_conflict");
+                break;
+                case 4:
+                    ds_list_add(global.map_rotation, "ctf_classicwell");
+                break;
+                case 5:
+                    ds_list_add(global.map_rotation, "ctf_waterway");
+                break;
+                case 6:
+                    ds_list_add(global.map_rotation, "ctf_orange");
+                break;
+            }
+        }
+        ds_list_destroy(sort_list);
+    }
+}
+//    ini_write_string("Server", "MapRotation", customMapRotationFile);
+    ini_close(); // I'll have to do this no matter what path I took before.
+    done = true;
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

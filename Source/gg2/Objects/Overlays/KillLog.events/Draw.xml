@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="DRAW" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">var i, map, n1, t1, w1, n2, t2;
+
+draw_set_halign(fa_left);
+draw_set_valign(fa_center);
+
+for (i = 0; i &lt; ds_list_size(kills); i += 1) {
+    map = ds_list_find_value(kills, i);
+    n1 = ds_map_find_value(map, 0); // Name of the Player who killed
+    t1 = ds_map_find_value(map, 1); // Their team
+    w1 = ds_map_find_value(map, 2); // Their weapon sprite
+    n2 = ds_map_find_value(map, 3); // Name of the Player who died
+    t2 = ds_map_find_value(map, 4); // Their team
+    
+    draw_set_alpha(1);
+    if (t1 == TEAM_RED) {
+        draw_set_color(make_color_rgb(171, 78, 70));
+        spriteoffset=0;
+    } else {
+        draw_set_color(make_color_rgb(100, 116, 132));
+        spriteoffset=1;
+    }
+    draw_text(view_xview[0] + view_wview[0] - string_width(n1 + n2) - 8 - sprite_get_width(w1), view_yview[0] + i * 16 + 16, n1);
+    
+    draw_set_halign(fa_center);
+    if w1 != -1 draw_sprite(w1, spriteoffset, floor(view_xview[0] + view_wview[0] - string_width(n2) - 8 - sprite_get_width(w1)/2 - sprite_get_xoffset(w1)), floor(view_yview[0] + i * 16 + 16));
+    draw_set_halign(fa_left);
+    
+    if (t2 == TEAM_RED) {
+        draw_set_color(make_color_rgb(171, 78, 70));
+    } else {
+        draw_set_color(make_color_rgb(100, 116, 132));
+    }
+    draw_text(view_xview[0] + view_wview[0] - string_width(n2) - 8, view_yview[0] + i * 16 + 16, n2);
+}</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

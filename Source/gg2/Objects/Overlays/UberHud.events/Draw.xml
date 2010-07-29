@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="DRAW" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">    if global.myself.object = -1 || global.myself.class!=CLASS_MEDIC exit;
+    
+    xoffset = view_xview[0];
+    yoffset = view_yview[0];
+    if global.myself.team == TEAM_BLUE uberoffset=1;
+    else uberoffset=0;
+    
+    draw_set_valign(fa_center);
+    draw_set_halign(fa_center);
+    draw_set_alpha(1);
+
+    var myMedigun;
+    myMedigun=-1;
+    with(Medigun) {
+        if(ownerPlayer == global.myself) myMedigun=id;
+    }
+    if(myMedigun != -1) {
+        draw_healthbar(xoffset+665, yoffset+500, xoffset+785, yoffset+532,myMedigun.uberCharge*100/2000,c_black,c_white,c_white,0,true,true);
+        draw_sprite_ext(UberHudS,uberoffset,xoffset+720,yoffset+515,2,2,0,c_white,1);
+        draw_text_color(xoffset+730,yoffset+510,"SUPERBURST",c_white,c_white,c_white,c_white,1);
+    }
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

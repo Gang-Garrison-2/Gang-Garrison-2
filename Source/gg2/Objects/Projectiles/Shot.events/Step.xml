@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="STEP" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">    vspeed+=0.15;
+    image_alpha*=0.95;
+    image_angle=direction;
+    
+/*
+FALL OFF
+    if ownerPlayer.object != -1 &amp;&amp; weapon != WEAPON_SENTRYTURRET{
+        originx=ownerPlayer.object.x;
+        originy=ownerPlayer.object.y;
+        }
+    if (distance_to_point(originx,originy)&gt;maxdist) instance_destroy();
+*/</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

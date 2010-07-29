@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="AccesoryS" type="RESOURCE"/>
+  <resource name="RedClumpS" type="RESOURCE"/>
+  <resource name="BlueClumpS" type="RESOURCE"/>
+  <resource name="HandS" type="RESOURCE"/>
+  <resource name="HeadS" type="RESOURCE"/>
+  <resource name="GibS" type="RESOURCE"/>
+  <resource name="FeetS" type="RESOURCE"/>
+  <resource name="BloodS" type="RESOURCE"/>
+  <resource name="BloodDropS" type="RESOURCE"/>
+</resources>

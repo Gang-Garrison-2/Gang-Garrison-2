@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="CREATE" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{
+    receiveBuffer = createbuffer();
+    sendBuffer = createbuffer();
+    object = -1;
+    team = TEAM_SPECTATOR;
+    class = CLASS_SCOUT;
+    socket = -1;
+    name = "";
+    
+    kills = 0;
+        
+    deaths = 0;
+    caps = 0;
+    healpoints = 0;
+    
+    //arena healed (per round)
+    roundHealed = 0;
+    roundHealPoints = 0;
+    //arena kills (per round)
+    roundKills = 0;
+    //arena stabKills (per round)
+    roundStabKills = 0;
+    
+    quickspawn = 0;
+    timesChangedCapLimit = 0;
+    
+    lastKnownx=0;
+    lastKnowny=0;
+    
+    humiliated=0;
+    
+    //Arena mode - used by server to check if the player can spawn
+    canSpawn = 1;
+    if instance_exists(ArenaHUD) {
+        if ArenaHUD.roundStart == 0 canSpawn = 0;
+    }
+    
+    //Sentries for Engies
+    //sentryBuilt = 0;
+    sentry=-1;
+    
+    //authorization for servers with passwords
+    //clients who change the source to get around passwords will be sent
+    //garbage which will disconnect them in gameserverbeginstep
+    if global.isHost {
+        if global.serverPassword == "" authorized = true;
+        else {
+            authorized = false;
+            //counter to limit players to 30 seconds to send a password before they
+            //get das boot
+            passwordCount = 0;
+        }
+    }
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

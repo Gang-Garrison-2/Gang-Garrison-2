@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<sound>
+  <filename>a31466.wav</filename>
+  <filetype>.wav</filetype>
+  <kind>NORMAL</kind>
+  <pan>0.0</pan>
+  <volume>1.0</volume>
+  <preload>true</preload>
+  <effects>
+    <chorus>false</chorus>
+    <echo>false</echo>
+    <flanger>false</flanger>
+    <gargle>false</gargle>
+    <reverb>false</reverb>
+  </effects>
+</sound>

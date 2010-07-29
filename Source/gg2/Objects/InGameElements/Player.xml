@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<object id="60">
+  <sprite/>
+  <solid>false</solid>
+  <visible>false</visible>
+  <depth>1</depth>
+  <persistent>true</persistent>
+  <parent/>
+  <mask/>
+</object>

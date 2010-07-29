@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="DRAW" id="0">
+  <actions>
+    <action id="604" library="1">
+      <!--action name: Inherited-->
+      <kind>NORMAL</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>false</canApplyTo>
+      <actionType>FUNCTION</actionType>
+      <functionName>action_inherited</functionName>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments/>
+    </action>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{
+    if(shot) {
+        shot=false;
+        draw_set_alpha(0.8);
+        if(owner.team==TEAM_RED) {
+            draw_line_width_color(x,y,x2,y2,2,c_red,c_red);
+        } else {
+            draw_line_width_color(x,y,x2,y2,2,c_blue,c_blue);
+        }
+    }
+    //draw_text(x, y - 35, hitDamage);
+    if (owner.zoomed &amp;&amp; owner == global.myself.object) {
+        if (hitDamage &lt; 85) {
+            draw_set_alpha(0.25);
+            draw_sprite_ext(ChargeS, 0, mouse_x + 15*-image_xscale, mouse_y - 10, -image_xscale, 1, 0, c_white, image_alpha);
+            draw_set_alpha(0.8);
+        } else {
+            draw_sprite_ext(FullChargeS, 0, mouse_x + 65*-image_xscale, mouse_y, 1, 1, 0, c_white, image_alpha);
+        }
+        draw_sprite_part_ext(ChargeS, 1, 0, 0, ceil((hitDamage)*40/85), 20, mouse_x + 15*-image_xscale, mouse_y - 10, -image_xscale, 1, c_white, image_alpha);
+    }
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

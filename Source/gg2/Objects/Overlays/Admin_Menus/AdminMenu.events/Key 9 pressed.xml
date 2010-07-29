@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="KEYPRESS" id="57">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">// Refreshes the *.ini, allowing the cap limit, autobalance and the respawn time to be changed. amount of changes to be made.
+    ini_open("gg2.ini");
+    global.caplimit = ini_read_real("Server", "CapLimit", 5);
+    if (global.myself.timesChangedCapLimit &lt; 4)
+    {
+        global.myself.timesChangedCapLimit = 4;
+    }  
+    global.caplimitBkup = global.caplimit;
+    global.autobalance = ini_read_real("Server", "AutoBalance",1);
+    global.Server_RespawntimeSec = ini_read_real("Server Mods", "Respawn Time", 5);
+    ini_close(); // I'll have to do this no matter what path I took before.
+    done = true;</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>
