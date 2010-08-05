@@ -25,8 +25,10 @@
     hp = maxHp;
     flamecount = 0;
     intel = false;
+//kill assist/finish off addition
     lastDamageDealer = -1;
     lastDamageSource = -1;
+    secondToLastDamageDealer = -1;
     invisible = false;
     
     bubble = instance_create(0,0,SpeechBubbleO);
@@ -39,6 +41,9 @@
     // Cloak for Spies
     cloak = false;
     cloakAlpha = 1;
+    
+    //healer
+    healer = -1;
        
     animationOffset = CHARACTER_ANIMATION_NORMAL;
     animationImage = 0;

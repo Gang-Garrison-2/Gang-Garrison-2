@@ -14,6 +14,11 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">loopsoundstop(MedigunSnd);
+if(healTarget != -1 and instance_exists(healTarget)) {
+    if(healTarget.object != -1) {
+        healTarget.object.healer = -1;
+    }
+}
 </argument>
       </arguments>
     </action>

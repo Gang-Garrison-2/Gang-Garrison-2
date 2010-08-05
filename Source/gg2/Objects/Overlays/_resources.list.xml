@@ -8,6 +8,7 @@
   <resource name="ControlPointHUD" type="RESOURCE"/>
   <resource name="ArenaHUD" type="RESOURCE"/>
   <resource name="GeneratorHUD" type="RESOURCE"/>
+  <resource name="KillLog_Original" type="RESOURCE"/>
   <resource name="KillLog" type="RESOURCE"/>
   <resource name="BubbleMenuZ" type="RESOURCE"/>
   <resource name="RespawnTimer" type="RESOURCE"/>

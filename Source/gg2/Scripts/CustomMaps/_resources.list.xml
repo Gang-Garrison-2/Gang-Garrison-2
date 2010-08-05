@@ -8,5 +8,6 @@
   <resource name="CustomMapGetMapMD5" type="RESOURCE"/>
   <resource name="map_width" type="RESOURCE"/>
   <resource name="map_height" type="RESOURCE"/>
+  <resource name="CustomMapDownload_O" type="RESOURCE"/>
   <resource name="CustomMapDownload" type="RESOURCE"/>
 </resources>

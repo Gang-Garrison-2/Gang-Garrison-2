@@ -42,11 +42,38 @@ while(string_pos(DIVIDER, argument0) != 0) { // continue until there are no more
     case "spawnroom":
       instance_create(entityX, entityY, SpawnRoom);
     break;
+/*REMINDER: Get Leiche or Cspot to add 8 new spawn entities to Garrison Builder or 
+ *get Garrison Builder source to try out for self. In GB, aesthetics are as follows:
+ * 0=Runner, 1=Firebug, 2=Rocketman, 3=Overweight, 4=Detonator*/
     case "redspawn":
       instance_create(entityX, entityY, SpawnPointRed);
     break;
+    case "redspawn1":
+      instance_create(entityX, entityY, SpawnPointRed1);
+    break;
+    case "redspawn2":
+      instance_create(entityX, entityY, SpawnPointRed2);
+    break;
+    case "redspawn3":
+      instance_create(entityX, entityY, SpawnPointRed3);
+    break;
+    case "redspawn4":
+      instance_create(entityX, entityY, SpawnPointRed4);
+    break;
     case "bluespawn":
-      instance_create(entityX, entityY, SpawnPointBlue);    
+      instance_create(entityX, entityY, SpawnPointBlue);
+    break;
+    case "bluespawn1":
+      instance_create(entityX, entityY, SpawnPointBlue1);
+    break;
+    case "bluespawn2":
+      instance_create(entityX, entityY, SpawnPointBlue2);
+    break;
+    case "bluespawn3":
+      instance_create(entityX, entityY, SpawnPointBlue3);
+    break;
+    case "bluespawn4":
+      instance_create(entityX, entityY, SpawnPointBlue4);
     break;
     case "redintel":
       instance_create(entityX, entityY, IntelligenceBaseRed);

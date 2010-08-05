@@ -4,19 +4,21 @@
  *
  * argument0: The player who spawned
  * argument1: The spawnpoint ID
+ * argument2: The spawn group
  */
 
-var spawner, spawnpointId;
+var spawner, spawnpointId, spawnGroup;
 spawner = argument0;
 spawnpointId = argument1;
+spawnGroup = argument2;
 
 var spawnX, spawnY, character;
 if(spawner.team == TEAM_RED) {
-    spawnX = ds_list_find_value(global.spawnPointsRedX, spawnpointId);
-    spawnY = ds_list_find_value(global.spawnPointsRedY, spawnpointId);
+    spawnX = ds_list_find_value(global.spawnPointsRed[0,spawnGroup], spawnpointId);
+    spawnY = ds_list_find_value(global.spawnPointsRed[1,spawnGroup], spawnpointId);
 } else {
-    spawnX = ds_list_find_value(global.spawnPointsBlueX, spawnpointId);
-    spawnY = ds_list_find_value(global.spawnPointsBlueY, spawnpointId);
+    spawnX = ds_list_find_value(global.spawnPointsBlue[0,spawnGroup], spawnpointId);
+    spawnY = ds_list_find_value(global.spawnPointsBlue[1,spawnGroup], spawnpointId);
 }
 
 character = getCharacterObject(spawner.team, spawner.class);

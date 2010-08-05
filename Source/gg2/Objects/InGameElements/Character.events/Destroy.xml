@@ -20,16 +20,31 @@
     with(currentWeapon) {
         instance_destroy();
     }
-    
     if(intel) {
+        var isMe;
+        isMe = (global.myself == player);
         if(team == TEAM_RED) {
             newIntel = instance_create(x,y,IntelligenceBlue);
-            recordEventInLog(5, TEAM_RED, player.name);
-        } else {
+            recordEventInLog(5, TEAM_RED, player.name, isMe);
+        } else if (team == TEAM_BLUE) {
             newIntel = instance_create(x,y,IntelligenceRed);
-            recordEventInLog(5, TEAM_BLUE, player.name);
+            recordEventInLog(5, TEAM_BLUE, player.name, isMe);
         }
         newIntel.alarm[0] = 900;
+        //new
+        if (lastDamageSource == KILL_BOX || lastDamageSource == FRAG_BOX) {
+            if (team == TEAM_RED) {
+                newIntel.x = IntelligenceBaseBlue.x;
+                newIntel.y = IntelligenceBaseBlue.y;
+                newIntel.alarm[0] = -1;
+            }
+            else if (team == TEAM_BLUE) {
+                newIntel.x = IntelligenceBaseRed.x;
+                newIntel.y = IntelligenceBaseRed.y;
+                newIntel.alarm[0] = -1;
+            }
+        }
+        //end new
         sound_play(IntelDropSnd);
     }
     

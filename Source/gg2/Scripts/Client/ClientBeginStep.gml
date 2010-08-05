@@ -92,19 +92,25 @@ do {
             }
             break;
                                    
-        case PLAYER_DEATH:
+        case PLAYER_DEATH:            
             var causeOfDeath;
-            receiveCompleteMessage(global.serverSocket,3,0);
+            receiveCompleteMessage(global.serverSocket,4,0);
             playerID = readbyte(0);
             otherPlayerID = readbyte(0);
+            assistantPlayerID = readbyte(0);
                   causeOfDeath = readbyte(0);
                   
             player = ds_list_find_value(global.players, playerID);
                   if(otherPlayerID == 255) {
-                      doEventPlayerDeath(player, -1, causeOfDeath);
+                      doEventPlayerDeath(player, -1, -1, causeOfDeath);
                   } else {
                       otherPlayer = ds_list_find_value(global.players, otherPlayerID);
-                      doEventPlayerDeath(player, otherPlayer, causeOfDeath);
+                      if (assistantPlayerID == 255) {
+                         doEventPlayerDeath(player, otherPlayer, -1, causeOfDeath);
+                      } else {
+                         assistantPlayer = ds_list_find_value(global.players, assistantPlayerID);
+                         doEventPlayerDeath(player, otherPlayer, assistantPlayer, causeOfDeath);
+                      }
                   }                  
             break;
              
@@ -164,10 +170,15 @@ do {
             player.name = receivestring(global.serverSocket, 1);
             break;
                  
-        case PLAYER_SPAWN:
+        /*case PLAYER_SPAWN:
             receiveCompleteMessage(global.serverSocket,2,0);
             player = ds_list_find_value(global.players, readbyte(0));
             doEventSpawn(player, readbyte(0));
+            break;*/
+        case PLAYER_SPAWN:
+            receiveCompleteMessage(global.serverSocket,3,0);
+            player = ds_list_find_value(global.players, readbyte(0));
+            doEventSpawn(player, readbyte(0), readbyte(0));
             break;
               
               case CHAT_BUBBLE:
@@ -186,9 +197,30 @@ do {
                   break;
               
               case DESTROY_SENTRY:
-                  receiveCompleteMessage(global.serverSocket,1,0);
-                  player = ds_list_find_value(global.players, readbyte(0));
-                  if player.sentry != -1 with player.sentry instance_destroy();
+                  //receiveCompleteMessage(global.serverSocket,1,0);
+                  //player = ds_list_find_value(global.players, readbyte(0));
+                  //new
+                  receiveCompleteMessage(global.serverSocket,4,0);
+                  playerID = readbyte(0);
+                  otherPlayerID = readbyte(0);
+                  assistantPlayerID = readbyte(0);
+                  causeOfDeath = readbyte(0);
+                  
+                  player = ds_list_find_value(global.players, playerID);
+                  if(otherPlayerID == 255) {
+                      doEventDestruction(player, -1, -1, causeOfDeath);
+                  } else {
+                      otherPlayer = ds_list_find_value(global.players, otherPlayerID);
+                      if (assistantPlayerID == 255) {
+                         doEventDestruction(player, otherPlayer, -1, causeOfDeath);
+                      } else {
+                         assistantPlayer = ds_list_find_value(global.players, assistantPlayerID);
+                         doEventDestruction(player, otherPlayer, assistantPlayer, causeOfDeath);
+                      }
+                  }  
+                  
+                  //end new
+                  //if player.sentry != -1 with player.sentry instance_destroy();
                   break;
                       
               case GRAB_INTEL:
@@ -351,9 +383,35 @@ do {
                     for(i=0; i<ds_list_size(global.players); i+=1) {
                     player = ds_list_find_value(global.players, i);
                         if global.currentMapArea == 1 { 
-                        player.kills=0;
-                        player.caps=0;
-                        player.healpoints=0;
+                        //player.kills=0;
+                        //player.caps=0;
+                        //player.healpoints=0;
+                        player.stats[KILLS] = 0;
+                        player.stats[DEATHS] = 0;
+                        player.stats[CAPS] = 0;
+                        player.stats[ASSISTS] = 0;
+                        player.stats[DESTRUCTION] = 0;
+                        player.stats[STABS] = 0;
+                        player.stats[HEALING] = 0;
+                        player.stats[DEFENSES] = 0;
+                        player.stats[INVULNS] = 0;
+                        player.stats[BONUS] = 0;
+                        player.stats[DOMINATIONS] = 0;
+                        player.stats[REVENGE] = 0;
+                        player.stats[POINTS] = 0;
+                        player.roundStats[KILLS] = 0;
+                        player.roundStats[DEATHS] = 0;
+                        player.roundStats[CAPS] = 0;
+                        player.roundStats[ASSISTS] = 0;
+                        player.roundStats[DESTRUCTION] = 0;
+                        player.roundStats[STABS] = 0;
+                        player.roundStats[HEALING] = 0;
+                        player.roundStats[DEFENSES] = 0;
+                        player.roundStats[INVULNS] = 0;
+                        player.roundStats[BONUS] = 0;
+                        player.roundStats[DOMINATIONS] = 0;
+                        player.roundStats[REVENGE] = 0;
+                        player.roundStats[POINTS] = 0;
                         player.team = TEAM_SPECTATOR;
                      }
                     }

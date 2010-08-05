@@ -158,10 +158,28 @@ for(i=0; i<ds_list_size(global.players); i+=1) {
                             player.class = temp
                             if(player.object != -1) {
                                 with(player.object) {
+                                //new
+                                    if (player.quickspawn == 0){
+                                        if (lastDamageDealer == -1 || lastDamageDealer == player) {
+                                            sendEventPlayerDeath(player, player, -1, BID_FAREWELL);
+                                            doEventPlayerDeath(player, player, -1, BID_FAREWELL);
+                                        } else {
+                                            var assistant;
+                                            assistant = -1;
+                                            if (lastDamageDealer.object.healer != -1)
+                                                assistant = lastDamageDealer.object.healer;
+                                            else
+                                                assistant = secondToLastDamageDealer;
+                                            sendEventPlayerDeath(player, lastDamageDealer, assistant, FINISHED_OFF);
+                                            doEventPlayerDeath(player, lastDamageDealer, assistant, FINISHED_OFF);
+                                        }
+                                    }
+                                    else
+                                //end new
                                     instance_destroy();
                                 }
                                 player.object = -1;
-                                if (player.quickspawn=0){
+                                if (player.quickspawn==0){
                                     player.alarm[5] = global.Server_Respawntime;
                                 } else {
                                     player.alarm[5] = 1;
@@ -184,7 +202,22 @@ for(i=0; i<ds_list_size(global.players); i+=1) {
                         if(getCharacterObject(temp, player.class) != -1 or temp==TEAM_SPECTATOR) {  
                             if(player.object != -1) {
                                 with(player.object) {
-                                    instance_destroy();
+                                //new
+                                    if (lastDamageDealer == -1 || lastDamageDealer == player) {
+                                        sendEventPlayerDeath(player, player, -1, BID_FAREWELL);
+                                        doEventPlayerDeath(player, player, -1, BID_FAREWELL);
+                                    } else {
+                                        var assistant;
+                                        assistant = -1;
+                                        if (lastDamageDealer.object.healer != -1)
+                                            assistant = lastDamageDealer.object.healer;
+                                        else
+                                            assistant = secondToLastDamageDealer;
+                                        sendEventPlayerDeath(player, lastDamageDealer, assistant, FINISHED_OFF);
+                                        doEventPlayerDeath(player, lastDamageDealer, assistant, FINISHED_OFF);
+                                    }
+                                //end new
+                                    //instance_destroy();
                                 }
                                 player.object = -1;
                                 player.alarm[5] = global.Server_Respawntime;
@@ -238,10 +271,14 @@ for(i=0; i<ds_list_size(global.players); i+=1) {
                 case DESTROY_SENTRY:
                     if(player.sentry != -1) {
                         with(player.sentry) {
-                            instance_destroy();
+                        //new
+                            sendEventDestruction(ownerPlayer, ownerPlayer, -1, -1);
+                            doEventDestruction(ownerPlayer, ownerPlayer, -1, -1);
+                        //end new
+                            //instance_destroy();
                         }
                     }
-                    player.sentry = -1;                        
+                    //player.sentry = -1;                        
                     processedUntil = getpos(1, receiveBuffer);
                     break;                     
                 
@@ -473,9 +510,35 @@ if(impendingMapChange == 0) {
     for(i=0; i<ds_list_size(global.players); i+=1) {
         player = ds_list_find_value(global.players, i);
         if(global.currentMapArea == 1){
-            player.kills=0;
-            player.caps=0;
-            player.healpoints=0;
+            //player.kills=0;
+            //player.caps=0;
+            //player.healpoints=0;
+            player.stats[KILLS] = 0;
+            player.stats[DEATHS] = 0;
+            player.stats[CAPS] = 0;
+            player.stats[ASSISTS] = 0;
+            player.stats[DESTRUCTION] = 0;
+            player.stats[STABS] = 0;
+            player.stats[HEALING] = 0;
+            player.stats[DEFENSES] = 0;
+            player.stats[INVULNS] = 0;
+            player.stats[BONUS] = 0;
+            player.stats[DOMINATIONS] = 0;
+            player.stats[REVENGE] = 0;
+            player.stats[POINTS] = 0;
+            player.roundStats[KILLS] = 0;
+            player.roundStats[DEATHS] = 0;
+            player.roundStats[CAPS] = 0;
+            player.roundStats[ASSISTS] = 0;
+            player.roundStats[DESTRUCTION] = 0;
+            player.roundStats[STABS] = 0;
+            player.roundStats[HEALING] = 0;
+            player.roundStats[DEFENSES] = 0;
+            player.roundStats[INVULNS] = 0;
+            player.roundStats[BONUS] = 0;
+            player.roundStats[DOMINATIONS] = 0;
+            player.roundStats[REVENGE] = 0;
+            player.roundStats[POINTS] = 0;
             player.team = TEAM_SPECTATOR;
         }
         player.timesChangedCapLimit = 0;

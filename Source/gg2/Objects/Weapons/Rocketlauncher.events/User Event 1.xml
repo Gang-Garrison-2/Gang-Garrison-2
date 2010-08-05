@@ -18,7 +18,7 @@
     playsound(x,y,RocketSnd);
     var oid, newx, newy;
     oid = instance_create(x+lengthdir_x(20,owner.aimDirection),y+lengthdir_y(20,owner.aimDirection), Rocket);
-        
+       
     oid.direction=owner.aimDirection
     oid.speed=13;
     oid.ownerPlayer=ownerPlayer;
@@ -26,6 +26,11 @@
     oid.owner=owner;
     oid.gun=id;
     oid.weapon=WEAPON_ROCKETLAUNCHER;
+    if (collision_line(x,y,x+lengthdir_x(28,owner.aimDirection),y+lengthdir_y(28,owner.aimDirection),Obstacle,1,0) || place_meeting(x+lengthdir_x(25,owner.aimDirection),y+lengthdir_y(25,owner.aimDirection),TeamGate)) {
+        oid.characterHit = -1;
+        with (oid)
+            event_user(5);
+    } 
         
     justShot=true;
     readyToShoot = false;

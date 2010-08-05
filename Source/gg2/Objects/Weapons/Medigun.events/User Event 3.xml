@@ -14,9 +14,16 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">{
+    //new
+    if(healTarget != -1 and instance_exists(healTarget)) {
+        if(healTarget.object != -1) {
+            healTarget.object.healer = -1;
+        }
+    }
     healTarget = -1;
     healing = false;
-}</argument>
+}
+</argument>
       </arguments>
     </action>
   </actions>

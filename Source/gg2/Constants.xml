@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <constants>
   <constant name="VERSION" value="22000"/>
-  <constant name="PROTOCOL_UUID" value="&quot;71eb5496-492b-b186-4770-06ccb30d3f8f&quot;"/>
+  <constant name="PROTOCOL_UUID" value="&quot;60069b60-458c-945d-b0e3-b76bc565b18a&quot;"/>
   <constant name="HELLO" value="0"/>
   <constant name="PLAYER_JOIN" value="1"/>
   <constant name="PLAYER_LEAVE" value="2"/>
@@ -74,6 +74,19 @@
   <constant name="WSAEHOSTUNREACH" value="-10065"/>
   <constant name="MAX_PLAYERNAME_LENGTH" value="20"/>
   <constant name="STATE_UPDATE" value="8"/>
+  <constant name="KILLS" value="0"/>
+  <constant name="DEATHS" value="1"/>
+  <constant name="CAPS" value="2"/>
+  <constant name="ASSISTS" value="3"/>
+  <constant name="DESTRUCTION" value="4"/>
+  <constant name="STABS" value="5"/>
+  <constant name="HEALING" value="6"/>
+  <constant name="DEFENSES" value="7"/>
+  <constant name="INVULNS" value="8"/>
+  <constant name="BONUS" value="9"/>
+  <constant name="DOMINATIONS" value="10"/>
+  <constant name="REVENGE" value="11"/>
+  <constant name="POINTS" value="12"/>
   <constant name="WEAPON_SCATTERGUN" value="1"/>
   <constant name="WEAPON_ROCKETLAUNCHER" value="2"/>
   <constant name="WEAPON_SHOTGUN" value="3"/>
@@ -90,6 +103,15 @@
   <constant name="WEAPON_REFLECTED_ROCKET" value="14"/>
   <constant name="WEAPON_REFLECTED_STICKY" value="15"/>
   <constant name="FRAG_BOX" value="16"/>
+  <constant name="KILL_BOX" value="17"/>
+  <constant name="FINISHED_OFF" value="18"/>
+  <constant name="FINISHED_OFF_GIB" value="19"/>
+  <constant name="BID_FAREWELL" value="20"/>
+  <constant name="WEAPON_BUBBLE" value="21"/>
+  <constant name="GENERATOR_EXPLOSION" value="22"/>
+  <constant name="WEAPON_RIFLE_CHARGED" value="23"/>
+  <constant name="WEAPON_BACKSTAB" value="24"/>
+  <constant name="ASSIST_TIME" value="120"/>
   <constant name="NOTICE_NUTSNBOLTS" value="0"/>
   <constant name="NOTICE_TOOCLOSE" value="1"/>
   <constant name="NOTICE_AUTOGUNSCRAPPED" value="2"/>
@@ -104,4 +126,5 @@
   <constant name="PARTICLES_ALTERNATIVE" value="2"/>
   <constant name="MOUSE_LEFT" value="9001"/>
   <constant name="MOUSE_RIGHT" value="9002"/>
+  <constant name="HP_PER_POINT" value="600"/>
 </constants>

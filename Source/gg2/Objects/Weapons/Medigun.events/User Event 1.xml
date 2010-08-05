@@ -18,17 +18,24 @@
         if(healTarget.object != -1) {
             if(point_distance(x,y,healTarget.object.x, healTarget.object.y)&lt;=maxHealDistance) {
                 if(collision_line(x,y, healTarget.object.x, healTarget.object.y, Obstacle, true, true)&lt;0) {
+                    //new
+                    if (healTarget.object.healer == -1)
+                        healTarget.object.healer = ownerPlayer;
                     with Flame {
                         if sticksTo = other.healTarget.object extinguish -= 0.005;
                     } 
                     if(healTarget.object.hp &lt; healTarget.object.maxHp/2) {
                         healTarget.object.hp+=healAmmount;
                         hphealed+=healAmmount;
-                        ownerPlayer.roundHealed+=healAmmount;
+                        ownerPlayer.stats[HEALING] += healAmmount;
+                        //ownerPlayer.roundHealed+=healAmmount;
+                        ownerPlayer.roundStats[HEALING] += healAmmount;
                     } else if(healTarget.object.hp &lt; healTarget.object.maxHp){
                         healTarget.object.hp+=healAmmount/2;
                         hphealed+=healAmmount/2;
-                        ownerPlayer.roundHealed+=healAmmount/2;
+                        ownerPlayer.stats[HEALING] += healAmmount/2;
+                        //ownerPlayer.roundHealed+=healAmmount/2;
+                        ownerPlayer.roundStats[HEALING] += healAmmount/2;
                     }
                     
                     if(ubering == false &amp;&amp; uberCharge&lt;2000){
@@ -48,10 +55,13 @@
                         healTarget.object.alarm[2] = 3; 
                     }
                                                                
-                    if hphealed &gt;= 200 {
-                        ownerPlayer.healpoints += 1;
-                        ownerPlayer.roundHealPoints += 1;
-                        hphealed = 0;
+                    if hphealed &gt;= HP_PER_POINT {
+                        //ownerPlayer.healpoints += 1;
+                        //ownerPlayer.roundHealPoints += 1;
+                        ownerPlayer.stats[POINTS] += 1;
+                        ownerPlayer.roundStats[POINTS] += 1;
+                        //hphealed = 0;
+                        hphealed -= HP_PER_POINT;
                     }
                     healing=true;
                     if(alarm[3]&lt;=0) {
@@ -61,14 +71,17 @@
                     }
                     alarm[3]=2;
                 } else {
+                    healTarget.object.healer = -1;
                     healTarget = -1;
                     healing = false;
                 }
             } else {
+                healTarget.object.healer = -1;
                 healTarget = -1;
                 healing = false;
             }
         } else {
+            healTarget.object.healer = -1;
             healTarget = -1;
             healing = false;
         }

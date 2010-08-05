@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
+  <resource name="OldFortS" type="RESOURCE"/>
   <resource name="TwodFortTwoS" type="RESOURCE"/>
   <resource name="TruefortS" type="RESOURCE"/>
   <resource name="ConflictS" type="RESOURCE"/>

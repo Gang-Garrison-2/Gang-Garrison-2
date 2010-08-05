@@ -1,15 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
   <resource name="Icon" type="RESOURCE"/>
-  <resource name="Rocketclip" type="RESOURCE"/>
-  <resource name="GasAmmoS" type="RESOURCE"/>
-  <resource name="MinigunAmmoS" type="RESOURCE"/>
-  <resource name="ShotgunAmmoS" type="RESOURCE"/>
-  <resource name="RevolverAmmoS" type="RESOURCE"/>
-  <resource name="BladeAmmoS" type="RESOURCE"/>
-  <resource name="NeedleAmmoS" type="RESOURCE"/>
-  <resource name="ScattergunAmmoS" type="RESOURCE"/>
-  <resource name="MinegunAmmoS" type="RESOURCE"/>
+  <resource name="Ammo" type="GROUP"/>
+  <resource name="Kill Icons" type="GROUP"/>
   <resource name="ScorePanelS" type="RESOURCE"/>
   <resource name="GeneratorHUDS" type="RESOURCE"/>
   <resource name="SentryHUD" type="RESOURCE"/>
@@ -47,6 +40,7 @@
   <resource name="MVPBannerS" type="RESOURCE"/>
   <resource name="ChargeS" type="RESOURCE"/>
   <resource name="FullChargeS" type="RESOURCE"/>
+  <resource name="ControlPointStatusS2" type="RESOURCE"/>
   <resource name="ControlPointStatusS" type="RESOURCE"/>
   <resource name="ControlPointCappersS" type="RESOURCE"/>
   <resource name="NutsNBoltsHudS" type="RESOURCE"/>

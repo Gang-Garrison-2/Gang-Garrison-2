@@ -36,6 +36,10 @@
         case "gen_destroy":
             room_goto_fix(Destroy);
             break;
+        case "ctf_2dfort1":
+        case "ctf_oldfort":
+            room_goto_fix(Oldfort);
+            break;
         default:
             return -1;
             exit;

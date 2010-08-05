@@ -190,15 +190,22 @@ if collision_point(x,y,CaptureZone,0,0) &amp;&amp; cloak!=1 &amp;&amp; ubered==0
     if player.team != zone.cp.team &amp;&amp; zone.cp.locked==0 &amp;&amp; (zone.cp.redCappers == 0 &amp;&amp; zone.cp.blueCappers == 0) playsound(x,y,CPBeginCapSnd);
     if player.team == TEAM_RED {
         if zone.cp.blueCappers &gt; 0 &amp;&amp; zone.cp.locked == 0 &amp;&amp; zone.cp.redCappers == 0 &amp;&amp; zone.cp.team == TEAM_RED{
+            var isMe;
+            isMe = (global.myself == player);
             playsound(x,y,CPDefendedSnd);
-            recordEventInLog(2,player.team,player.name);
+            //recordEventInLog(2,player.team,player.name);
+            recordEventInLog(2, player.team, player.name, isMe);
+            
         }
         zone.cp.redCappers+=capStrength;
     }
     else if player.team == TEAM_BLUE {
         if zone.cp.redCappers &gt; 0 &amp;&amp; zone.cp.locked == 0 &amp;&amp; zone.cp.blueCappers == 0 &amp;&amp; zone.cp.team == TEAM_BLUE{
+            var isMe;
+            isMe = (global.myself == player);
             playsound(x,y,CPDefendedSnd);
-            recordEventInLog(2,player.team,player.name);
+            //recordEventInLog(2,player.team,player.name);
+            recordEventInLog(2, player.team, player.name, isMe);
         }
         zone.cp.blueCappers+=capStrength;
     }

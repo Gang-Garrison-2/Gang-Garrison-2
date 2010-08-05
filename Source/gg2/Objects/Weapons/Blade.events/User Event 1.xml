@@ -24,7 +24,7 @@
             shot.ownerPlayer=ownerPlayer;
             shot.team=owner.team;
             shot.gun = id;
-            shot.weapon=WEAPON_BLADE;
+            shot.weapon=WEAPON_BUBBLE;
             with(shot) {
                 motion_add(owner.direction, owner.speed);
             }

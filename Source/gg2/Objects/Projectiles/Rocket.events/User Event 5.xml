@@ -23,6 +23,15 @@
         if(characterHit != -1) {
             if(characterHit.team != team || characterHit.id == ownerPlayer.object  &amp;&amp; characterHit.ubered == 0 ) {
                 characterHit.hp -= hitDamage;
+//new stuff     
+                if object_is_ancestor(characterHit.object_index, Character) {
+                    if (characterHit.lastDamageDealer != ownerPlayer &amp;&amp; characterHit.lastDamageDealer != characterHit.player){
+                        characterHit.secondToLastDamageDealer = characterHit.lastDamageDealer;
+                        characterHit.alarm[4] = characterHit.alarm[3]
+                    }
+                    characterHit.alarm[3] = ASSIST_TIME;
+                }
+//end new stuff
                 characterHit.lastDamageDealer = ownerPlayer;
                 characterHit.lastDamageSource = weapon;
             }
@@ -37,8 +46,24 @@
                 //}
                 if(other.team != team or id==other.ownerPlayer.object) &amp;&amp; ubered == 0 &amp;&amp; hp &gt; 0{
                     hp -= other.explosionDamage*(1-(distance_to_object(other)/other.blastRadius));
-                    lastDamageDealer = other.ownerPlayer;
-                    lastDamageSource = other.weapon;
+//new stuff
+                    if id==other.ownerPlayer.object &amp;&amp; lastDamageDealer != -1 &amp;&amp; lastDamageDealer != other.ownerPlayer{
+                        lastDamageSource = FINISHED_OFF_GIB;
+                    }
+                    else 
+                    {
+                        if (lastDamageDealer != other.ownerPlayer &amp;&amp; lastDamageDealer != player){
+                            secondToLastDamageDealer = lastDamageDealer;
+                            alarm[4] = alarm[3]
+                        }
+                        if (other.ownerPlayer != id)
+                            alarm[3] = ASSIST_TIME;
+                        lastDamageDealer = other.ownerPlayer;
+                        lastDamageSource = other.weapon;
+                    }
+//end new stuff
+                    //lastDamageDealer = other.ownerPlayer;
+                    //lastDamageSource = other.weapon;
                     if id==other.ownerPlayer.object and other.team == team {
                         moveStatus = 1;
                         speed*=1.06;

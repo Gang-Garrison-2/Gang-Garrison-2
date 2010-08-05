@@ -12,4 +12,5 @@
   <resource name="Lumberyard" type="RESOURCE"/>
   <resource name="Destroy" type="RESOURCE"/>
   <resource name="CustomMapRoom" type="RESOURCE"/>
+  <resource name="Oldfort" type="RESOURCE"/>
 </resources>

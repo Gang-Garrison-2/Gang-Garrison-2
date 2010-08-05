@@ -3,8 +3,8 @@
   <resource name="MinigunS" type="RESOURCE"/>
   <resource name="MinegunS" type="RESOURCE"/>
   <resource name="WrenchS" type="RESOURCE"/>
-  <resource name="MedigunS" type="RESOURCE"/>
   <resource name="FlamethrowerS" type="RESOURCE"/>
+  <resource name="MedigunS" type="RESOURCE"/>
   <resource name="ScattergunS" type="RESOURCE"/>
   <resource name="ShotgunS" type="RESOURCE"/>
   <resource name="RocketlauncherS" type="RESOURCE"/>

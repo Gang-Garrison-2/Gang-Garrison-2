@@ -36,7 +36,8 @@ playsound(x,y,ExplosionSnd);
 sentrygibs=instance_create(x,y,SentryGibs);
 sentrygibs.image_speed=0;
 if team == TEAM_RED sentrygibs.image_index=0;
-else sentrygibs.image_index=1;</argument>
+else sentrygibs.image_index=1;
+</argument>
       </arguments>
     </action>
   </actions>

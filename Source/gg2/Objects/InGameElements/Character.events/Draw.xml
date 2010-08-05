@@ -23,7 +23,16 @@ if distance_to_point(xoffset+xsize/2,yoffset+ysize/2) &gt; 800 exit;
 var xr, yr;
 xr = round(x);
 yr = round(y);
-        
+
+//debug
+
+/*draw_text(xr, yr-45,string(lastDamageDealer) + " " + string(alarm[3]));
+draw_text(xr, yr-35, string(secondToLastDamageDealer) + " " + string(alarm[4]));
+draw_text(xr, yr-55, string(healer));
+*
+draw_text(xr, yr-bject_is_ancestor(self.object_index, Character)));
+draw_text(xr, yr-35, string(object_is_ancestor(Character, self.object_index)));*/
+
 if global.myself == -1 &amp;&amp; cloakAlpha==1{
     image_alpha = 1;
 } else if((global.myself.object == id &amp;&amp; cloakAlpha==1) || (global.myself.object == -1)) {

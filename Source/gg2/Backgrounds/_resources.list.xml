@@ -2,6 +2,7 @@
 <resources>
   <resource name="background0" type="RESOURCE"/>
   <resource name="twodfort_oldB" type="RESOURCE"/>
+  <resource name="OldfortB" type="RESOURCE"/>
   <resource name="TruefortB" type="RESOURCE"/>
   <resource name="ConflictB" type="RESOURCE"/>
   <resource name="WaterwayB" type="RESOURCE"/>

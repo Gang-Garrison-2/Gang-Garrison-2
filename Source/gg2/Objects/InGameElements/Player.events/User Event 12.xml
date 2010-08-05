@@ -16,9 +16,17 @@
         <argument kind="STRING">var subobjects;
 
     if(global.updateType == FULL_UPDATE) {
-        writeshort(kills, global.serializeBuffer);
-        writeshort(deaths, global.serializeBuffer);
-        writeshort(caps, global.serializeBuffer); 
+        writebyte(stats[KILLS], global.serializeBuffer);
+        writebyte(stats[DEATHS], global.serializeBuffer);
+        writebyte(stats[CAPS], global.serializeBuffer);
+        writebyte(stats[ASSISTS], global.serializeBuffer);
+        writebyte(stats[DESTRUCTION], global.serializeBuffer);
+        writebyte(stats[STABS], global.serializeBuffer);
+        writeushort(stats[HEALING], global.serializeBuffer);
+        writebyte(stats[DEFENSES], global.serializeBuffer);
+        writebyte(stats[INVULNS], global.serializeBuffer);
+        writebyte(stats[BONUS], global.serializeBuffer);
+        writebyte(stats[POINTS], global.serializeBuffer); 
     } 
     
     subobjects=0;

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="RocketReflectKL" type="RESOURCE"/>
+  <resource name="MineReflectKL" type="RESOURCE"/>
+  <resource name="ShotgunKL" type="RESOURCE"/>
+  <resource name="RifleKL" type="RESOURCE"/>
+  <resource name="RifleChargedKL" type="RESOURCE"/>
+  <resource name="RifleChargedKL2" type="RESOURCE"/>
+  <resource name="MineKL" type="RESOURCE"/>
+  <resource name="MinigunKL" type="RESOURCE"/>
+  <resource name="RevolverKL" type="RESOURCE"/>
+  <resource name="NeedleKL" type="RESOURCE"/>
+  <resource name="BladeKL" type="RESOURCE"/>
+  <resource name="BubbleKL" type="RESOURCE"/>
+  <resource name="TurretKL" type="RESOURCE"/>
+  <resource name="KnifeKL" type="RESOURCE"/>
+  <resource name="ExplodeKL" type="RESOURCE"/>
+  <resource name="RedDefenseS" type="RESOURCE"/>
+  <resource name="BlueDefenseS" type="RESOURCE"/>
+  <resource name="RedCaptureS" type="RESOURCE"/>
+  <resource name="BlueCaptureS" type="RESOURCE"/>
+  <resource name="ScatterKL" type="RESOURCE"/>
+  <resource name="RocketKL" type="RESOURCE"/>
+  <resource name="FlameKL" type="RESOURCE"/>
+  <resource name="BackstabKL" type="RESOURCE"/>
+  <resource name="DeadKL" type="RESOURCE"/>
+</resources>

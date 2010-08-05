@@ -19,15 +19,18 @@
     canGrabIntel=false;
     alarm[1]=300;
     animationOffset=CHARACTER_ANIMATION_NORMAL;
-    recordEventInLog(5, player.team, player.name); 
+    var isMe;
+    isMe = (global.myself == player);
+    recordEventInLog(5, player.team, player.name, isMe); 
         
     if(team == TEAM_RED) {
         newIntel = instance_create(x,y,IntelligenceBlue);
-    } else {
+    } else if (team == TEAM_BLUE){
         newIntel = instance_create(x,y,IntelligenceRed);
     }
     newIntel.alarm[0] = 900;     
-}</argument>
+}
+</argument>
       </arguments>
     </action>
   </actions>

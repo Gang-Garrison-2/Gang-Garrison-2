@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="ALARM" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if (ds_list_size(kills)) {
+    ds_map_destroy(ds_list_find_value(kills, 0));
+    ds_list_delete(kills, 0);
+    
+    alarm[0] = 30*5;
+}</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

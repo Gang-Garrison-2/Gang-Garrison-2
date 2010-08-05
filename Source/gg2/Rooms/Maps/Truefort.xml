@@ -830,6 +830,18 @@ instance_create(0,0,TruefortO);</creationCode>
       <creationCode/>
       <locked>false</locked>
     </instance>
+    <instance>
+      <object>FragBox</object>
+      <position x="3066" y="906"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>KillBox</object>
+      <position x="4440" y="204"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
   </instances>
   <tiles/>
   <editorSettings remember="false"/>

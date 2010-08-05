@@ -13,6 +13,10 @@ if(uberer.object != -1) {
         if(ownerPlayer == uberer) {
             ubering = true;
             uberReady = false;
+            uberer.stats[INVULNS] += 1;
+            uberer.roundStats[INVULNS] += 1;
+            uberer.stats[POINTS] += 1;
+            uberer.roundStats[POINTS] += 1;
         }
     }
 } else {
