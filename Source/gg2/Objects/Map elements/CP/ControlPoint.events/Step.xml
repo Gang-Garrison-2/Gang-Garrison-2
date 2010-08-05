@@ -24,7 +24,7 @@ var arenaRoundEnd;
 arenaRoundEnd = false;
 if(mode == 2) {
     if(ArenaHUD.endCount!=0) arenaRoundEnd=true;
-} else {
+} else if (mode != 3){
     // Locking is done externally in Arena mode
     if(team == TEAM_BLUE) {
         if(cp &gt; 1) {

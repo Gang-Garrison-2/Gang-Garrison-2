@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="STEP" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">//both teams' countdown timers
+if !KothControlPoint.locked {
+    if KothControlPoint.team == TEAM_RED &amp;&amp; redTimer &gt;0 redTimer-=1;
+    if KothControlPoint.team == TEAM_BLUE &amp;&amp; blueTimer &gt;0 blueTimer-=1;
+}
+//endgame logic
+//if redTimer == 0 &amp;&amp; KothControlPoint.team == TEAM_RED &amp;&amp; KothControlPoint.capping ==0 &amp;&amp; KothControlPoint.defended = 0 global.winners = TEAM_RED;
+if redTimer == 0 &amp;&amp; KothControlPoint.team == TEAM_RED &amp;&amp; KothControlPoint.capping ==0 &amp;&amp; KothControlPoint.bluePresence = 0 global.winners = TEAM_RED;
+//if blueTimer == 0 &amp;&amp; KothControlPoint.team == TEAM_BLUE &amp;&amp; KothControlPoint.capping ==0 &amp;&amp; KothControlPoint.defended = 0 global.winners = TEAM_BLUE;
+if blueTimer == 0 &amp;&amp; KothControlPoint.team == TEAM_BLUE &amp;&amp; KothControlPoint.capping ==0 &amp;&amp; KothControlPoint.redPresence = 0 global.winners = TEAM_BLUE;
+if global.isHost {
+    if cpUnlock == 0 {
+        sendEventKothUnlockCP();
+        doEventKothUnlockCP();
+    }
+    else if cpUnlock == 150 {
+        GameServer.syncTimer = 1;
+    }
+}
+if cpUnlock &gt; 0 cpUnlock -= 1;
+
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

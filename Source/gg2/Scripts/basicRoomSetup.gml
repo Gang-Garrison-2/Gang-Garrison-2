@@ -31,6 +31,8 @@ else if instance_exists(GeneratorBlue) || instance_exists(GeneratorRed) {
 } else if instance_exists(ArenaControlPoint) {
     instance_create(0,0,ArenaHUD);
     if ArenaHUD.roundStart == 0 with Player canSpawn = 0;
+}else if instance_exists(KothControlPoint) {
+    instance_create(0,0,KothHUD);
 } else if instance_exists(ControlPoint) {
     with ControlPoint event_user(0);
     instance_create(0,0,ControlPointHUD);

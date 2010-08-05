@@ -19,7 +19,10 @@ fade=0.05;
 if(instance_exists(ArenaControlPoint)) {
     mode=2;     // Arena
     locked=true;
-} else if(instance_exists(ControlPointSetupGate)) {
+} else if(instance_exists(KothControlPoint)) {
+    mode=3;     // King of the Hill
+    locked=true;
+}else if(instance_exists(ControlPointSetupGate)) {
     mode=1;     // A/D
     locked=false;
 } else {

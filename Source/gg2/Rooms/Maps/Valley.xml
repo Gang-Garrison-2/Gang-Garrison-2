@@ -1,0 +1,627 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<room>
+  <caption/>
+  <size height="1020" width="4824"/>
+  <grid>
+    <isometric>false</isometric>
+    <snap x="6" y="6"/>
+  </grid>
+  <speed>30</speed>
+  <persistent>false</persistent>
+  <creationCode>basicRoomSetup();
+instance_create(0,0,ValleyO);
+</creationCode>
+  <backgroundColor>000000</backgroundColor>
+  <drawBackgroundColor>true</drawBackgroundColor>
+  <backgrounds>
+    <backgroundDef>
+      <visibleOnRoomStart>true</visibleOnRoomStart>
+      <isForeground>false</isForeground>
+      <backgroundImage>ValleyB</backgroundImage>
+      <offset x="0" y="0"/>
+      <speed x="0" y="0"/>
+      <tileHorizontally>false</tileHorizontally>
+      <tileVertically>false</tileVertically>
+      <stretch>true</stretch>
+    </backgroundDef>
+    <backgroundDef>
+      <visibleOnRoomStart>false</visibleOnRoomStart>
+      <isForeground>false</isForeground>
+      <backgroundImage/>
+      <offset x="0" y="0"/>
+      <speed x="0" y="0"/>
+      <tileHorizontally>true</tileHorizontally>
+      <tileVertically>true</tileVertically>
+      <stretch>false</stretch>
+    </backgroundDef>
+    <backgroundDef>
+      <visibleOnRoomStart>false</visibleOnRoomStart>
+      <isForeground>false</isForeground>
+      <backgroundImage/>
+      <offset x="0" y="0"/>
+      <speed x="0" y="0"/>
+      <tileHorizontally>true</tileHorizontally>
+      <tileVertically>true</tileVertically>
+      <stretch>false</stretch>
+    </backgroundDef>
+    <backgroundDef>
+      <visibleOnRoomStart>false</visibleOnRoomStart>
+      <isForeground>false</isForeground>
+      <backgroundImage/>
+      <offset x="0" y="0"/>
+      <speed x="0" y="0"/>
+      <tileHorizontally>true</tileHorizontally>
+      <tileVertically>true</tileVertically>
+      <stretch>false</stretch>
+    </backgroundDef>
+    <backgroundDef>
+      <visibleOnRoomStart>false</visibleOnRoomStart>
+      <isForeground>false</isForeground>
+      <backgroundImage/>
+      <offset x="0" y="0"/>
+      <speed x="0" y="0"/>
+      <tileHorizontally>true</tileHorizontally>
+      <tileVertically>true</tileVertically>
+      <stretch>false</stretch>
+    </backgroundDef>
+    <backgroundDef>
+      <visibleOnRoomStart>false</visibleOnRoomStart>
+      <isForeground>false</isForeground>
+      <backgroundImage/>
+      <offset x="0" y="0"/>
+      <speed x="0" y="0"/>
+      <tileHorizontally>true</tileHorizontally>
+      <tileVertically>true</tileVertically>
+      <stretch>false</stretch>
+    </backgroundDef>
+    <backgroundDef>
+      <visibleOnRoomStart>false</visibleOnRoomStart>
+      <isForeground>false</isForeground>
+      <backgroundImage/>
+      <offset x="0" y="0"/>
+      <speed x="0" y="0"/>
+      <tileHorizontally>true</tileHorizontally>
+      <tileVertically>true</tileVertically>
+      <stretch>false</stretch>
+    </backgroundDef>
+    <backgroundDef>
+      <visibleOnRoomStart>false</visibleOnRoomStart>
+      <isForeground>false</isForeground>
+      <backgroundImage/>
+      <offset x="0" y="0"/>
+      <speed x="0" y="0"/>
+      <tileHorizontally>true</tileHorizontally>
+      <tileVertically>true</tileVertically>
+      <stretch>false</stretch>
+    </backgroundDef>
+  </backgrounds>
+  <enableViews>true</enableViews>
+  <views>
+    <view>
+      <visibleOnRoomStart>true</visibleOnRoomStart>
+      <viewInRoom height="600" width="800" x="0" y="0"/>
+      <portOnScreen height="600" width="800" x="0" y="0"/>
+      <objectFollowing hBorder="32" hSpeed="-1" vBorder="32" vSpeed="-1"/>
+    </view>
+    <view>
+      <visibleOnRoomStart>false</visibleOnRoomStart>
+      <viewInRoom height="480" width="640" x="0" y="0"/>
+      <portOnScreen height="480" width="640" x="0" y="0"/>
+      <objectFollowing hBorder="32" hSpeed="-1" vBorder="32" vSpeed="-1"/>
+    </view>
+    <view>
+      <visibleOnRoomStart>false</visibleOnRoomStart>
+      <viewInRoom height="480" width="640" x="0" y="0"/>
+      <portOnScreen height="480" width="640" x="0" y="0"/>
+      <objectFollowing hBorder="32" hSpeed="-1" vBorder="32" vSpeed="-1"/>
+    </view>
+    <view>
+      <visibleOnRoomStart>false</visibleOnRoomStart>
+      <viewInRoom height="480" width="640" x="0" y="0"/>
+      <portOnScreen height="480" width="640" x="0" y="0"/>
+      <objectFollowing hBorder="32" hSpeed="-1" vBorder="32" vSpeed="-1"/>
+    </view>
+    <view>
+      <visibleOnRoomStart>false</visibleOnRoomStart>
+      <viewInRoom height="480" width="640" x="0" y="0"/>
+      <portOnScreen height="480" width="640" x="0" y="0"/>
+      <objectFollowing hBorder="32" hSpeed="-1" vBorder="32" vSpeed="-1"/>
+    </view>
+    <view>
+      <visibleOnRoomStart>false</visibleOnRoomStart>
+      <viewInRoom height="480" width="640" x="0" y="0"/>
+      <portOnScreen height="480" width="640" x="0" y="0"/>
+      <objectFollowing hBorder="32" hSpeed="-1" vBorder="32" vSpeed="-1"/>
+    </view>
+    <view>
+      <visibleOnRoomStart>false</visibleOnRoomStart>
+      <viewInRoom height="480" width="640" x="0" y="0"/>
+      <portOnScreen height="480" width="640" x="0" y="0"/>
+      <objectFollowing hBorder="32" hSpeed="-1" vBorder="32" vSpeed="-1"/>
+    </view>
+    <view>
+      <visibleOnRoomStart>false</visibleOnRoomStart>
+      <viewInRoom height="480" width="640" x="0" y="0"/>
+      <portOnScreen height="480" width="640" x="0" y="0"/>
+      <objectFollowing hBorder="32" hSpeed="-1" vBorder="32" vSpeed="-1"/>
+    </view>
+  </views>
+  <instances>
+    <instance>
+      <object>HealingCabinet</object>
+      <position x="378" y="582"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>HealingCabinet</object>
+      <position x="342" y="582"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>HealingCabinet</object>
+      <position x="4296" y="582"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>HealingCabinet</object>
+      <position x="4260" y="582"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>PlayerWall</object>
+      <position x="4122" y="0"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>PlayerWall</object>
+      <position x="4122" y="60"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>PlayerWall</object>
+      <position x="4122" y="120"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>PlayerWall</object>
+      <position x="4122" y="180"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>PlayerWall</object>
+      <position x="4122" y="240"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>PlayerWall</object>
+      <position x="4122" y="300"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>PlayerWall</object>
+      <position x="4122" y="360"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>PlayerWall</object>
+      <position x="4122" y="420"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>PlayerWall</object>
+      <position x="4128" y="0"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>PlayerWall</object>
+      <position x="4128" y="60"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>PlayerWall</object>
+      <position x="4128" y="120"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>PlayerWall</object>
+      <position x="4128" y="180"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>PlayerWall</object>
+      <position x="4128" y="240"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>PlayerWall</object>
+      <position x="4128" y="300"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>PlayerWall</object>
+      <position x="4128" y="360"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>PlayerWall</object>
+      <position x="4128" y="420"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>PlayerWall</object>
+      <position x="540" y="0"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>PlayerWall</object>
+      <position x="534" y="0"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>PlayerWall</object>
+      <position x="534" y="60"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>PlayerWall</object>
+      <position x="534" y="120"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>PlayerWall</object>
+      <position x="534" y="180"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>PlayerWall</object>
+      <position x="534" y="240"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>PlayerWall</object>
+      <position x="534" y="300"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>PlayerWall</object>
+      <position x="534" y="360"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>PlayerWall</object>
+      <position x="534" y="420"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>PlayerWall</object>
+      <position x="540" y="60"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>PlayerWall</object>
+      <position x="540" y="120"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>PlayerWall</object>
+      <position x="540" y="180"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>PlayerWall</object>
+      <position x="540" y="240"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>PlayerWall</object>
+      <position x="540" y="300"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>PlayerWall</object>
+      <position x="540" y="360"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>PlayerWall</object>
+      <position x="540" y="420"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>CaptureZone</object>
+      <position x="2268" y="588"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>CaptureZone</object>
+      <position x="2352" y="588"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>CaptureZone</object>
+      <position x="2310" y="546"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>CaptureZone</object>
+      <position x="2310" y="588"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>CaptureZone</object>
+      <position x="2268" y="546"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>CaptureZone</object>
+      <position x="2352" y="546"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>KothControlPoint</object>
+      <position x="2331" y="546"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>BlueTeamGate</object>
+      <position x="4128" y="576"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>BlueTeamGate</object>
+      <position x="4134" y="576"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>BlueTeamGate</object>
+      <position x="4140" y="576"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>BlueTeamGate</object>
+      <position x="4128" y="522"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>BlueTeamGate</object>
+      <position x="4134" y="522"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>BlueTeamGate</object>
+      <position x="4140" y="522"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>RedTeamGate</object>
+      <position x="522" y="522"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>RedTeamGate</object>
+      <position x="528" y="522"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>RedTeamGate</object>
+      <position x="534" y="522"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>RedTeamGate</object>
+      <position x="522" y="576"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>RedTeamGate</object>
+      <position x="528" y="576"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>RedTeamGate</object>
+      <position x="534" y="576"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>SpawnPointRed</object>
+      <position x="408" y="576"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>SpawnPointRed</object>
+      <position x="432" y="576"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>SpawnPointRed</object>
+      <position x="456" y="576"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>SpawnPointRed</object>
+      <position x="474" y="576"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>SpawnPointBlue</object>
+      <position x="4236" y="570"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>SpawnPointBlue</object>
+      <position x="4212" y="570"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>SpawnPointBlue</object>
+      <position x="4182" y="570"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>SpawnPointBlue</object>
+      <position x="4164" y="570"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>SpawnRoom</object>
+      <position x="4146" y="588"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>SpawnRoom</object>
+      <position x="4188" y="588"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>SpawnRoom</object>
+      <position x="4230" y="588"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>SpawnRoom</object>
+      <position x="4272" y="588"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>SpawnRoom</object>
+      <position x="4146" y="546"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>SpawnRoom</object>
+      <position x="4188" y="546"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>SpawnRoom</object>
+      <position x="4230" y="546"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>SpawnRoom</object>
+      <position x="4272" y="546"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>SpawnRoom</object>
+      <position x="480" y="588"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>SpawnRoom</object>
+      <position x="480" y="546"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>SpawnRoom</object>
+      <position x="438" y="588"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>SpawnRoom</object>
+      <position x="396" y="588"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>SpawnRoom</object>
+      <position x="354" y="588"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>SpawnRoom</object>
+      <position x="354" y="546"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>SpawnRoom</object>
+      <position x="396" y="546"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+    <instance>
+      <object>SpawnRoom</object>
+      <position x="438" y="546"/>
+      <creationCode/>
+      <locked>true</locked>
+    </instance>
+  </instances>
+  <tiles/>
+  <editorSettings remember="false"/>
+</room>

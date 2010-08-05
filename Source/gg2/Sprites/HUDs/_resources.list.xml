@@ -59,4 +59,5 @@
   <resource name="Domination" type="RESOURCE"/>
   <resource name="Nemesis" type="RESOURCE"/>
   <resource name="ScoreIcons" type="RESOURCE"/>
+  <resource name="TimerOutlineS" type="RESOURCE"/>
 </resources>

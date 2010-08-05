@@ -41,6 +41,9 @@ global.blueCaps = readbyte(0);
         else if instance_exists(ArenaHUD) {
             with ArenaHUD event_user(13);
         }
+        else if instance_exists(KothHUD) {
+            with KothHUD event_user(13);
+        }
 }
 
 if(argument0 == CAPS_UPDATE) {
@@ -60,5 +63,8 @@ if(argument0 == CAPS_UPDATE) {
     }
     else if instance_exists(ArenaHUD) {
             with ArenaHUD event_user(13);
+    }
+    else if instance_exists(KothHUD) {
+            with KothHUD event_user(13);
     }
 }

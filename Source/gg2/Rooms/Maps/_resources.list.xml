@@ -11,5 +11,9 @@
   <resource name="Montane" type="RESOURCE"/>
   <resource name="Lumberyard" type="RESOURCE"/>
   <resource name="Destroy" type="RESOURCE"/>
+  <resource name="Valley" type="RESOURCE"/>
+  <resource name="Corinth" type="RESOURCE"/>
+  <resource name="Harvest" type="RESOURCE"/>
   <resource name="CustomMapRoom" type="RESOURCE"/>
+  <resource name="Oldfort" type="RESOURCE"/>
 </resources>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
+  <resource name="CollisionMapO" type="RESOURCE"/>
   <resource name="TwodFortTwoO" type="RESOURCE"/>
   <resource name="TruefortO" type="RESOURCE"/>
   <resource name="ConflictO" type="RESOURCE"/>
@@ -11,5 +12,9 @@
   <resource name="MontaneO" type="RESOURCE"/>
   <resource name="LumberyardO" type="RESOURCE"/>
   <resource name="DestroyO" type="RESOURCE"/>
+  <resource name="ValleyO" type="RESOURCE"/>
+  <resource name="CorinthO" type="RESOURCE"/>
+  <resource name="HarvestO" type="RESOURCE"/>
+  <resource name="OldfortO" type="RESOURCE"/>
   <resource name="CustomMapO" type="RESOURCE"/>
 </resources>

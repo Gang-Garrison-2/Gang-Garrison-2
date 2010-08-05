@@ -36,6 +36,19 @@
         case "gen_destroy":
             room_goto_fix(Destroy);
             break;
+        case "koth_harvest":
+            room_goto_fix(Harvest);
+            break;
+        case "koth_valley":
+            room_goto_fix(Valley);
+            break;
+        case "koth_corinth":
+            room_goto_fix(Corinth);
+            break;
+        case "ctf_2dfort1":
+        case "ctf_oldfort":
+            room_goto_fix(Oldfort);
+            break;
         default:
             return -1;
             exit;

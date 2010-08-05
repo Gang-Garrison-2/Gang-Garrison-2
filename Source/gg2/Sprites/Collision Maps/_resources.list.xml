@@ -11,4 +11,8 @@
   <resource name="MontaneS" type="RESOURCE"/>
   <resource name="LumberyardS" type="RESOURCE"/>
   <resource name="DestroyS" type="RESOURCE"/>
+  <resource name="ValleyS" type="RESOURCE"/>
+  <resource name="CorinthS" type="RESOURCE"/>
+  <resource name="HarvestS" type="RESOURCE"/>
+  <resource name="OldfortS" type="RESOURCE"/>
 </resources>

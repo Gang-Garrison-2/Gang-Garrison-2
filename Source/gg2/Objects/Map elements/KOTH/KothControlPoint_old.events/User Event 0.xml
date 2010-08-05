@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="OTHER" id="10">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">alpha=0;
+fade=0;
+
+global.cp[1] = id;
+cp=1;
+
+locked=1;
+team=-1;
+redCappers=0;
+blueCappers=0;
+defended=0;
+capping=0;
+cappers=0;
+capTeam=-1;
+cappingTeam=-1;
+capTime=300;
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

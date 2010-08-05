@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="DRAW" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if team == -1 sprite_index = ControlPointNeutralS;
+else if team == TEAM_RED sprite_index = ControlPointRedS;
+else if team == TEAM_BLUE sprite_index = ControlPointBlueS;
+draw_sprite(sprite_index,0,x,y);
+draw_sprite_ext(sprite_index,1,x,y,1,1,0,c_white,alpha);</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

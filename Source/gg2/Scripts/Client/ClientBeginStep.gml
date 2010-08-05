@@ -322,6 +322,9 @@ do {
               case ARENA_UNLOCKCP:
                   doEventArenaUnlockCP();
                   break;
+              case KOTH_UNLOCKCP:
+                  doEventKothUnlockCP();
+                  break; 
                          
               case MAP_END:
                   global.nextMap=receivestring(global.serverSocket, 1);

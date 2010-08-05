@@ -5,6 +5,7 @@
   <resource name="Arena" type="GROUP"/>
   <resource name="Generator" type="GROUP"/>
   <resource name="CP" type="GROUP"/>
+  <resource name="KOTH" type="GROUP"/>
   <resource name="SpawnPointRed" type="RESOURCE"/>
   <resource name="SpawnRoom" type="RESOURCE"/>
   <resource name="Desensitizer" type="RESOURCE"/>

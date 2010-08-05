@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
-  <resource name="background0" type="RESOURCE"/>
   <resource name="twodfort_oldB" type="RESOURCE"/>
   <resource name="TruefortB" type="RESOURCE"/>
   <resource name="ConflictB" type="RESOURCE"/>
@@ -15,6 +14,10 @@
   <resource name="MontaneB" type="RESOURCE"/>
   <resource name="LumberyardB" type="RESOURCE"/>
   <resource name="DestroyS" type="RESOURCE"/>
+  <resource name="ValleyB" type="RESOURCE"/>
+  <resource name="CorinthB" type="RESOURCE"/>
+  <resource name="HarvestB" type="RESOURCE"/>
   <resource name="CustomMapB" type="RESOURCE"/>
   <resource name="popupBackgroundB" type="RESOURCE"/>
+  <resource name="OldfortB" type="RESOURCE"/>
 </resources>

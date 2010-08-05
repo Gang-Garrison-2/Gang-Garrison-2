@@ -141,7 +141,10 @@ while(string_pos(DIVIDER, argument0) != 0) { // continue until there are no more
     case "GeneratorBlue":
       instance_create(entityX, entityY, GeneratorBlue);
     break;     
-
+    case "KothControlPoint":
+      instance_create(entityX, entityY, KothControlPoint);
+    break;
+    
     /* 
     
     Code from this point on is for experimental objects that aren't added yet, like teleports and map logics
