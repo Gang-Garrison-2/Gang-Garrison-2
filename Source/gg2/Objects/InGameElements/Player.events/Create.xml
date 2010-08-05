@@ -32,12 +32,6 @@
     bonus = 0;
     destruction = 0;
     
-    domPlayers = ds_list_create(); //Players(id) of those who this player has kills on
-    dominations = ds_list_create(); //Number of kills, per player index...
-    dominated = false;
-    dominating = false;
-    domcount = 0;
-    
     //arena healed (per round)
     roundHealed = 0;
     roundHealPoints = 0;
@@ -52,6 +46,12 @@
     //arena destruction (per round)
     roundDestruction = 0;
     */
+
+    domPlayers = ds_list_create(); //Players(id) of those who this player has kills on
+    dominations = ds_list_create(); //Number of kills, per player index...
+    dominated = false;
+    dominating = false;
+    domcount = 0;
     
     //fuck your shit I'm making statistic arrays
     stats[KILLS] = 0;
