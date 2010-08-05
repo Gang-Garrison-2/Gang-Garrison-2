@@ -40,6 +40,29 @@ if(killer != -1 /*and killer != victim*/) {
         killer.roundStats[KILLS] += 1;
         killer.stats[POINTS] += 1;
         killer.roundStats[POINTS] += 1;
+        //Clear the killer from the victim's domination lists, while adding/incrementing the killer's
+        if (ds_list_find_index(victim.domPlayers,killer) != -1)
+        {
+            ind = ds_list_find_index(victim.domPlayers,killer);
+            ds_list_delete(victim.domPlayers,ind);
+            ds_list_delete(victim.dominations,ind);
+        }
+        if (ds_list_find_index(killer.domPlayers,victim) != -1)
+        {
+            ind = ds_list_find_index(killer.domPlayers,victim);
+            if (ds_list_find_value(killer.dominations,ind) < 5) ds_list_replace(killer.dominations,ind,ds_list_find_value(killer.dominations,ind) + 1);
+            //  ^ can be used to denote a domination kill
+        }
+        else
+        {
+            //Initialize!
+            ds_list_add(killer.domPlayers,victim);
+            ds_list_add(killer.dominations,1);
+        }
+        //Tell the player objects to refresh the domination statuses
+        with(killer) event_user(14);
+        with(victim) event_user(14);
+        //End    
     }
     if (assistant != -1) {
         assistant.stats[ASSISTS] +=1;

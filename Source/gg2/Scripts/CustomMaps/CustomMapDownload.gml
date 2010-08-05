@@ -89,14 +89,14 @@
     file_text_write_string(locatorFile, global.currentMapURL);
     file_text_close(locatorFile);
   }
- //now we have the map check if its the same as the servers map
+  //now we have the map check if its the same as the servers map
   if(CustomMapGetMapMD5(global.currentMap) == global.currentMapMD5) {
-  room_goto_fix(CustomMapRoom);
-  exit;
-  }else{
-  // our map isn't the same, locator points to diffrent map
-  show_message("The server's locator for " +global.currentMap+ " points to a different map");
-game_end();
-exit;
-}
+    room_goto_fix(CustomMapRoom);
+    exit;
+  } else {
+    // our map isn't the same, locator points to diffrent map
+    show_message("The server's locator for " +global.currentMap+ " points to a different map");
+    game_end();
+    exit;
+  }
 }

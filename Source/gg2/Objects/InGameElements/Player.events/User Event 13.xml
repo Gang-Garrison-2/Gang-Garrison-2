@@ -30,7 +30,25 @@
         stats[INVULNS] = readbyte(global.deserializeBuffer);
         stats[BONUS] = readbyte(global.deserializeBuffer);
         stats[POINTS] = readbyte(global.deserializeBuffer); 
-           
+
+        receiveCompleteMessage(global.serverSocket,1,global.deserializeBuffer);
+        lim = readbyte(global.deserializeBuffer);
+        receiveCompleteMessage(global.serverSocket,lim,global.deserializeBuffer);
+        if (lim &gt; 0)
+        {
+        for(k=0;k&lt;lim;k+=1)
+        {
+            ds_list_add(domPlayers,ds_list_find_value(global.players,readbyte(global.deserializeBuffer)));
+        }
+        receiveCompleteMessage(global.serverSocket,1,global.deserializeBuffer);
+        lim = readbyte(global.deserializeBuffer);
+        receiveCompleteMessage(global.serverSocket,lim,global.deserializeBuffer);
+        for(j=0;j&lt;lim;j+=1)
+        {
+            ds_list_add(dominations,readbyte(global.deserializeBuffer));
+        }
+        }
+        event_user(14);
     }
  
     var charObj, subobjects;

@@ -66,7 +66,12 @@ if(distance_to_point(mouse_x, mouse_y)&lt;25) {
     }
 draw_text(xr, yr-35, player.name);
 }  
-
+else
+{
+    //Display Domination
+    consKills = ds_list_find_value(player.dominations,ds_list_find_index(player.domPlayers,global.myself));
+    if (consKills &gt;= 4) draw_sprite_ext(Domination,player.team,x,y-35,0.5,0.5,0,c_white,cloakAlpha);
+}
 draw_set_alpha(1);
 if team == TEAM_RED ubercolour = c_red;
 if team == TEAM_BLUE ubercolour = c_blue;
