@@ -292,13 +292,14 @@ for(i=0; i<ds_list_size(global.players); i+=1) {
                     break;     
                       
                 case OMNOMNOMNOM:
-                    if player.object != -1 {
-                        if player.humiliated == 0 
-                        && player.object.taunting==false && player.object.omnomnomnom==false
-                        && player.class==CLASS_HEAVY {                            
-                            writebyte(OMNOMNOMNOM,global.sendBuffer);
+                    if(player.object != -1) {
+                        if(player.humiliated == 0
+                                && player.object.taunting==false
+                                && player.object.omnomnomnom==false
+                                && player.class==CLASS_HEAVY) {                            
+                            writebyte(OMNOMNOMNOM, global.sendBuffer);
                             writebyte(i, global.sendBuffer);
-                            with player.object {
+                            with(player.object) {
                                 omnomnomnom=true;
                                 if player.team == TEAM_RED {
                                     omnomnomnomindex=0;

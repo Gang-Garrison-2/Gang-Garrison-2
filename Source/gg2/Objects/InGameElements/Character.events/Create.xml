@@ -14,50 +14,59 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">{
-    image_speed = 0;
+    // Default properties of Characters (those where defaults make sense)
+    canDoublejump = 0;
+    canCloak = 0;
+    canBuild = 0;
+    jumpStrength = 8;
+    capStrength = 1;
+    
+    // 
+    flamecount = 0;
+    invisible = false;
+    intel = false;
+    taunting = false;
     doublejumpUsed = 0;
+    ubered=0;
+    
+    // controls
+    keyState = 0;
     lastKeyState = 0;
     pressedKeys = 0;
     releasedKeys = 0;
-    keyState = 0;
     aimDirection = 0;
     netAimDirection = 0;
-    hp = maxHp;
-    flamecount = 0;
-    intel = false;
-//kill assist/finish off addition
+
+    image_speed = 0;
+    tauntspeed = 3;
+    
+    animationOffset = CHARACTER_ANIMATION_NORMAL;
+    animationImage = 0;
+    
+    //kill assist/finish off addition
     lastDamageDealer = -1;
     lastDamageSource = -1;
     secondToLastDamageDealer = -1;
-    invisible = false;
     
     bubble = instance_create(0,0,SpeechBubbleO);
     bubble.owner = id;
-    
-    taunting = false;
-    
+
     afk=false;
     
     // Cloak for Spies
     cloak = false;
     cloakAlpha = 1;
-    
+
     //healer
     healer = -1;
-       
-    animationOffset = CHARACTER_ANIMATION_NORMAL;
-    animationImage = 0;
         
     //canGrabIntel- used for droppan intel
     canGrabIntel = true;
     alarm[1]=0;
     
     //CP
-    inZone=0;
+    cappingPoint = noone;
 
-    //uber
-    ubered=0;
-    
     //sandvich
     omnomnomnom=false;
     

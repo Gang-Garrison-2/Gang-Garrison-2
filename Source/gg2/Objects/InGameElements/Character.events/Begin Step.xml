@@ -17,11 +17,11 @@
     if taunting==false &amp;&amp; !invisible &amp;&amp; cloakAlpha == 1 taunting=true;
     if team==TEAM_RED {
         tauntindex=0;
-        tauntend=tauntlength;
+        tauntend=tauntlength-1;
     }
     else if team==TEAM_BLUE {
-        tauntindex=tauntlength+1;
-        tauntend=tauntlength*2+1;
+        tauntindex=tauntlength;
+        tauntend=tauntlength*2-1;
     }
     image_speed=tauntspeed;
 } 
@@ -181,52 +181,6 @@ animationImage = (animationImage+abs(hspeed)/20) mod CHARACTER_ANIMATION_LEN;
 
 if collision_point(x,y,SpawnRoom,0,0) player.quickspawn = 1;
 else player.quickspawn=0;
-
-//CP Collision    
-if collision_point(x,y,CaptureZone,0,0) &amp;&amp; cloak!=1 &amp;&amp; ubered==0 &amp;&amp; inZone==0 {
-    if player.class==CLASS_SCOUT capStrength = 2;
-    else capStrength = 1;
-    zone = instance_nearest(x,y,CaptureZone);
-    if player.team != zone.cp.team &amp;&amp; zone.cp.locked==0 &amp;&amp; (zone.cp.redCappers == 0 &amp;&amp; zone.cp.blueCappers == 0) playsound(x,y,CPBeginCapSnd);
-    if player.team == TEAM_RED {
-        if zone.cp.blueCappers &gt; 0 &amp;&amp; zone.cp.locked == 0 &amp;&amp; zone.cp.redCappers == 0 &amp;&amp; zone.cp.team == TEAM_RED{
-            var isMe;
-            isMe = (global.myself == player);
-            playsound(x,y,CPDefendedSnd);
-            //recordEventInLog(2,player.team,player.name);
-            recordEventInLog(2, player.team, player.name, isMe);
-            
-        }
-        zone.cp.redCappers+=capStrength;
-    }
-    else if player.team == TEAM_BLUE {
-        if zone.cp.redCappers &gt; 0 &amp;&amp; zone.cp.locked == 0 &amp;&amp; zone.cp.blueCappers == 0 &amp;&amp; zone.cp.team == TEAM_BLUE{
-            var isMe;
-            isMe = (global.myself == player);
-            playsound(x,y,CPDefendedSnd);
-            //recordEventInLog(2,player.team,player.name);
-            recordEventInLog(2, player.team, player.name, isMe);
-        }
-        zone.cp.blueCappers+=capStrength;
-    }
-    inZone =1; 
-}
-else if collision_point(x,y,CaptureZone,0,0) &amp;&amp; (cloak == 1 || ubered == 1 )&amp;&amp; inZone == 1 {
-    if player.class==CLASS_SCOUT capStrength = 2;
-    else capStrength =1;
-    zone = instance_nearest(x,y,CaptureZone);
-    if player.team==TEAM_RED zone.cp.redCappers-=capStrength;
-    else if player.team==TEAM_BLUE zone.cp.blueCappers-=capStrength;
-    inZone = 0; 
-}
-else if !collision_point(x,y,CaptureZone,0,0) &amp;&amp; inZone == 1{       
-    if player.class==CLASS_SCOUT capStrength = 2;
-    else capStrength =1;
-    zone = instance_nearest(x,y,CaptureZone);
-    if player.team==TEAM_RED zone.cp.redCappers-=capStrength;
-    else if player.team==TEAM_BLUE zone.cp.blueCappers-=capStrength;
-    inZone=0;     
-}
     
 // drop intel if ubered
 if(intel) &amp;&amp; ubered == 1 {
@@ -274,6 +228,16 @@ if ubered == 1 {
             currentWeapon.alarm[5] = -1;
         }
     }
+}
+
+// Determine if the character is capturing a CP, and which
+var zone;
+zone = collision_point(x,y,CaptureZone,0,0);
+
+if(zone&gt;=0 &amp;&amp; !cloak) {
+    cappingPoint = zone.cp;
+} else {
+    cappingPoint = noone;
 }
 </argument>
       </arguments>

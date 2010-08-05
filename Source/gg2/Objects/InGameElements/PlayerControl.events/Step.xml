@@ -37,18 +37,20 @@ else if keyboard_check_released(global.showScores) inputCloseScores();
 
 //character object exists
 if global.myself.object != -1 {
-    if keyboard_check(global.left) &amp;&amp;  menuOpen == false keybyte |= $40;
-    if keyboard_check(global.right) &amp;&amp;  menuOpen == false keybyte |= $20;
-    if keyboard_check(global.jump) &amp;&amp;  menuOpen == false keybyte |= $80;
-    if keyboard_check(global.attack) &amp;&amp;  menuOpen == false &amp;&amp; global.myself.humiliated == 0 keybyte |= $10;
-    if keyboard_check(global.special) &amp;&amp;  menuOpen == false &amp;&amp; global.myself.humiliated == 0 keybyte |= $08;
-    if keyboard_check_pressed(global.medic) &amp;&amp;  menuOpen == false keybyte |= $04;
-    if keyboard_check_pressed(global.taunt) &amp;&amp;  menuOpen == false inputTaunt();
-    if keyboard_check_pressed(global.special) &amp;&amp;  menuOpen == false &amp;&amp; global.myself.humiliated == 0 inputSpecial();
-    if keyboard_check_pressed(global.chat1) &amp;&amp;  menuOpen == false inputChat1();
-    if keyboard_check_pressed(global.chat2) &amp;&amp;  menuOpen == false inputChat2();
-    if keyboard_check_pressed(global.chat3) &amp;&amp;  menuOpen == false inputChat3();
-    if keyboard_check_pressed(global.drop) &amp;&amp;  menuOpen == false inputDrop();
+    if(menuOpen == false) {
+        if keyboard_check(global.left) keybyte |= $40;
+        if keyboard_check(global.right) keybyte |= $20;
+        if keyboard_check(global.jump) keybyte |= $80;
+        if keyboard_check(global.attack) &amp;&amp; global.myself.humiliated == 0 keybyte |= $10;
+        if keyboard_check(global.special) &amp;&amp; global.myself.humiliated == 0 keybyte |= $08;
+        if keyboard_check_pressed(global.medic) keybyte |= $04;
+        if keyboard_check_pressed(global.taunt) inputTaunt();
+        if keyboard_check_pressed(global.special) &amp;&amp; global.myself.humiliated == 0 inputSpecial();
+        if keyboard_check_pressed(global.chat1) inputChat1();
+        if keyboard_check_pressed(global.chat2) inputChat2();
+        if keyboard_check_pressed(global.chat3) inputChat3();
+        if keyboard_check_pressed(global.drop) inputDrop();
+    }
 
     /*I originally was going to allow mouse buttons for use for any keys, but I can't see anyone using
     them for movement/taunts/etc so I commented it out to make it a little easier to code

@@ -55,14 +55,6 @@
     player.object=-1;
     if (player.quickspawn==0) player.alarm[5] = global.Server_Respawntime;
     else player.alarm[5] = 1;
-
-    //CP - remove self from zone
-    if inZone == 1 &amp;&amp; instance_exists(CaptureZone){       
-        zone = instance_nearest(x,y,CaptureZone);
-        if player.team==TEAM_RED zone.cp.redCappers-=capStrength;
-        else if player.team==TEAM_BLUE zone.cp.blueCappers-=capStrength;
-        inZone=0;     
-    }
     
     //part type destroy
     if(variable_local_exists("jumpFlameParticleType")) {

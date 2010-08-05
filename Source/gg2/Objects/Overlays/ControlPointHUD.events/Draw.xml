@@ -30,8 +30,8 @@ for (i=1; i&lt;= global.totalControlPoints; i+=1) {
     else if global.cp[i].cappingTeam != TEAM_RED &amp;&amp; global.cp[i].team == -1 teamoffset = 0;    
     if global.cp[i].capping != 0 draw_sprite_ext(ControlPointStatusS, teamoffset+floor(global.cp[i].capping/global.cp[i].capTime*30), drawx, yoffset+560, 3, 3, 0, c_white, 1);
     else if global.cp[i].capping == 0 draw_sprite_ext(ControlPointStatusS, teamoffset, drawx, yoffset+560, 3, 3, 0, c_white, 1);
-    if global.cp[i].locked == 1 draw_sprite_ext(ControlPointLockS, 0, drawx, yoffset+560, 3, 3, 0, c_white, 1);
-    if global.cp[i].cappers &gt; 0 &amp;&amp; global.cp[i].locked == 0{
+    if global.cp[i].locked draw_sprite_ext(ControlPointLockS, 0, drawx, yoffset+560, 3, 3, 0, c_white, 1);
+    if global.cp[i].cappers &gt; 0 &amp;&amp; not global.cp[i].locked {
         draw_sprite_ext(ControlPointCappersS, 0, drawx, yoffset+560, 3, 3, 0, c_white, 1);
         draw_set_halign(fa_center);
         draw_set_valign(fa_center);

@@ -23,6 +23,7 @@
   <resource name="Input" type="GROUP"/>
   <resource name="recordKillInLog_Original" type="RESOURCE"/>
   <resource name="recordKillInLog" type="RESOURCE"/>
+  <resource name="Graphics" type="GROUP"/>
   <resource name="recordDestructionInLog" type="RESOURCE"/>
   <resource name="recordEventInLog_Original" type="RESOURCE"/>
   <resource name="recordEventInLog" type="RESOURCE"/>
