@@ -23,6 +23,13 @@
             if sticksTo.ubered == 0 &amp;&amp; sticksTo.hp &gt; 0{
                 if extinguish &gt;= 0.2 sticksTo.hp -= burnDamage;
                 else sticksTo.hp -= extinguish/10;
+//new stuff
+                if (sticksTo.lastDamageDealer != ownerPlayer &amp;&amp; sticksTo.lastDamageDealer != sticksTo.player){
+                    sticksTo.secondToLastDamageDealer = sticksTo.lastDamageDealer;
+                    sticksTo.alarm[4] = sticksTo.alarm[3]
+                }
+                sticksTo.alarm[3] = ASSIST_TIME;
+//end new stuff
                 sticksTo.lastDamageDealer = ownerPlayer;
                 sticksTo.lastDamageSource = weapon;
 

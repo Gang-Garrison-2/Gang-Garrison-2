@@ -27,6 +27,7 @@ landed=0;
        
 lastDamageDealer = -1;
 lastDamageSource = -1;
+secondToLastDamageDealer = -1;
 
 idleTimer = true;
 </argument>

@@ -16,8 +16,12 @@
         <argument kind="STRING">if(other.team != team) {
 other.hp -= hitDamage;
 with owner.currentWeapon BladesOut -= 1;
+//new stuff
+other.lastDamageDealer = ownerPlayer;
+other.lastDamageSource = weapon;
 instance_destroy();
-}</argument>
+}
+</argument>
       </arguments>
     </action>
   </actions>

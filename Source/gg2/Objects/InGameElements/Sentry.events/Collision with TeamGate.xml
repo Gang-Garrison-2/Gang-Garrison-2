@@ -13,7 +13,9 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">hp -= 999;</argument>
+        <argument kind="STRING">hp -= 999;
+lastDamageDealer = -1;
+</argument>
       </arguments>
     </action>
   </actions>

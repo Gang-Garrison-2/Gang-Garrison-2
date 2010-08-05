@@ -14,10 +14,23 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">    if(global.updateType == FULL_UPDATE) {
-        receiveCompleteMessage(global.serverSocket,6,global.deserializeBuffer);
+        /*receiveCompleteMessage(global.serverSocket,6,global.deserializeBuffer);
         kills = readshort(global.deserializeBuffer);
         deaths = readshort(global.deserializeBuffer);
-        caps = readshort(global.deserializeBuffer);
+        caps = readshort(global.deserializeBuffer); */
+        receiveCompleteMessage(global.serverSocket,12,global.deserializeBuffer);
+        stats[KILLS] = readbyte(global.deserializeBuffer);
+        stats[DEATHS] = readbyte(global.deserializeBuffer);
+        stats[CAPS] = readbyte(global.deserializeBuffer);
+        stats[ASSISTS] = readbyte(global.deserializeBuffer);
+        stats[DESTRUCTION] = readbyte(global.deserializeBuffer);
+        stats[STABS] = readbyte(global.deserializeBuffer);
+        stats[HEALING] = readushort(global.deserializeBuffer);
+        stats[DEFENSES] = readbyte(global.deserializeBuffer);
+        stats[INVULNS] = readbyte(global.deserializeBuffer);
+        stats[BONUS] = readbyte(global.deserializeBuffer);
+        stats[POINTS] = readbyte(global.deserializeBuffer); 
+
         receiveCompleteMessage(global.serverSocket,1,global.deserializeBuffer);
         lim = readbyte(global.deserializeBuffer);
         receiveCompleteMessage(global.serverSocket,lim,global.deserializeBuffer);

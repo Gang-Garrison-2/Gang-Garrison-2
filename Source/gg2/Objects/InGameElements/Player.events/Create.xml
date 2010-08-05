@@ -22,11 +22,15 @@
     socket = -1;
     name = "";
     
-    kills = 0;
+    /*kills = 0;
         
     deaths = 0;
     caps = 0;
     healpoints = 0;
+    //new vars
+    assists = 0;
+    bonus = 0;
+    destruction = 0;
     
     domPlayers = ds_list_create(); //Players(id) of those who this player has kills on
     dominations = ds_list_create(); //Number of kills, per player index...
@@ -41,6 +45,43 @@
     roundKills = 0;
     //arena stabKills (per round)
     roundStabKills = 0;
+    //arena assists (per round)
+    roundAssists = 0;
+    //arena bonus (per round)
+    roundBonus = 0;
+    //arena destruction (per round)
+    roundDestruction = 0;
+    */
+    
+    //fuck your shit I'm making statistic arrays
+    stats[KILLS] = 0;
+    stats[DEATHS] = 0;
+    stats[CAPS] = 0;
+    stats[ASSISTS] = 0;
+    stats[DESTRUCTION] = 0;
+    stats[STABS] = 0;
+    stats[HEALING] = 0;
+    stats[DEFENSES] = 0;
+    stats[INVULNS] = 0;
+    stats[BONUS] = 0;
+    stats[DOMINATIONS] = 0;
+    stats[REVENGE] = 0;
+    stats[POINTS] = 0;
+    
+    //statistic array for single life/arena
+    roundStats[KILLS] = 0;
+    roundStats[DEATHS] = 0;
+    roundStats[CAPS] = 0;
+    roundStats[ASSISTS] = 0;
+    roundStats[DESTRUCTION] = 0;
+    roundStats[STABS] = 0;
+    roundStats[HEALING] = 0;
+    roundStats[DEFENSES] = 0;
+    roundStats[INVULNS] = 0;
+    roundStats[BONUS] = 0;
+    roundStats[DOMINATIONS] = 0;
+    roundStats[REVENGE] = 0;
+    roundStats[POINTS] = 0;
     
     quickspawn = 0;
     timesChangedCapLimit = 0;

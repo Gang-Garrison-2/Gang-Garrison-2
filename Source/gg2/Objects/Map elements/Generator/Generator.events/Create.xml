@@ -20,6 +20,7 @@ lastDamageDealer = -1;
 lastDamageSource = -1;
 smokeCount = 0;
 image_speed = 0.3;
+blastRadius = 400;
 </argument>
       </arguments>
     </action>

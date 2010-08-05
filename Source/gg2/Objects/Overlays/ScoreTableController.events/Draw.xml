@@ -20,7 +20,14 @@
     yoffset = view_yview[0]+view_hview[0]/10+50;
     xsize = view_wview[0]/5*3;
     ysize = view_hview[0]/5*3;
-    
+    //debug
+    /*player = global.myself
+    draw_set_halign(fa_left);
+    draw_text(view_xview[0]+20, player.y-view_hview[0]/2+20, "K:" + string(player.stats[KILLS]) + " D:" + string(player.stats[DEATHS])
+    + " A:" + string(player.stats[ASSISTS]) + " De:" + string(player.stats[DESTRUCTION]) + " C:" + string(player.stats[CAPS])
+    + " Def:" + string(player.stats[DEFENSES]) + "#H:" + string(player.stats[HEALING]) + " S:" + string(player.stats[STABS]) 
+    + " I:" + string(player.stats[INVULNS]) + " B:" + string(player.stats[BONUS]));
+//end debug*/
     draw_sprite_ext(Scoreboard, 0, xoffset, yoffset, 1, 1, 0, c_white, alpha*0.8);    
 
     draw_set_alpha(alpha);
@@ -34,10 +41,13 @@
     
     for(i=0; i&lt;ds_list_size(global.players); i+=1) {
         player = ds_list_find_value(global.players, i);
+        //changes :o
         if(player.team == TEAM_RED) {
-            ds_priority_add(redteam, player, player.kills+2*player.caps+player.healpoints);
+            //ds_priority_add(redteam, player, player.stats[KILLS]+2*player.stats[CAPS]+.5*player.stats[ASSISTS]+player.stats[DESTRUCTION]+player.stats[STABS]+floor(player.stats[HEALING]/200)+player.stats[DEFENSES]+player.stats[INVULNS]+player.stats[BONUS]);
+            ds_priority_add(redteam, player, player.stats[POINTS]);
         } else if (player.team == TEAM_BLUE) {
-            ds_priority_add(blueteam, player, player.kills+2*player.caps+player.healpoints);
+            //ds_priority_add(blueteam, player, player.stats[KILLS]+2*player.stats[CAPS]+.5*player.stats[ASSISTS]+player.stats[DESTRUCTION]+player.stats[STABS]+floor(player.stats[HEALING]/200)+player.stats[DEFENSES]+player.stats[INVULNS]+player.stats[BONUS]);
+            ds_priority_add(blueteam, player, player.stats[POINTS]);
         }
         else if (player.team == TEAM_SPECTATOR)
         {
@@ -75,7 +85,7 @@
             draw_text(xoffset-4, yoffset+70+20*(i+1),"    "+player.name);
         
             draw_set_halign(fa_right);
-            draw_text(xoffset+xsize/2-15, yoffset+70+20*(i+1), string(player.kills+2*player.caps+player.healpoints));
+            draw_text(xoffset+xsize/2-15, yoffset+70+20*(i+1), string(floor(player.stats[POINTS])));
             
             //Draw domination icons
             if (player.dominated) draw_sprite_ext(ScoreIcons,5,xoffset+xsize/2-10, yoffset+70+20*(i+1),1,1,0,c_white,alpha);
@@ -106,7 +116,8 @@
             draw_text(xoffset+xsize/2+32, yoffset+70+20*(i+1),"    "+player.name);
         
             draw_set_halign(fa_right);
-            draw_text(xoffset+xsize+25, yoffset+70+20*(i+1), string(player.kills+2*player.caps+player.healpoints));
+            //long change -&gt;
+            draw_text(xoffset+xsize+25, yoffset+70+20*(i+1), string(floor(player.stats[POINTS])));
         
             //Draw icon
             if (player.dominated) draw_sprite_ext(ScoreIcons,5,xoffset+xsize+30, yoffset+70+20*(i+1),1,1,0,c_white,alpha);

@@ -110,10 +110,23 @@ if roundStart == 1 {
                 alarm[5]=1;
             }
             alarm[0]=2;
-            roundHealPoints = 0;
-            roundHealed = 0;
-            roundKills = 0;
-            roundStabKills = 0; 
+            //roundHealPoints = 0;
+            //roundHealed = 0;
+            //roundKills = 0;
+            //roundStabKills = 0;
+            roundStats[KILLS] = 0;
+            roundStats[DEATHS] = 0;
+            roundStats[ASSISTS] = 0;
+            roundStats[DESTRUCTION] = 0;
+            roundStats[STABS] = 0;
+            roundStats[HEALING] = 0;
+            roundStats[INVULNS] = 0;
+            roundStats[BONUS] = 0;
+            roundStats[CAPS] = 0;
+            roundStats[DEFENSES] = 0;
+            roundStats[DOMINATIONS] = 0;
+            roundStats[REVENGE] = 0;
+            roundStats[POINTS] = 0;
         }
         with Sentry instance_destroy();
         with SentryGibs instance_destroy();

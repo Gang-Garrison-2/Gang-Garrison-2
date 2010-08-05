@@ -14,7 +14,17 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">if(global.isHost) &amp;&amp; (hp&lt;=0) {
-    instance_destroy();
+    var healer;
+    healer = -1;
+    if (lastDamageDealer != -1) {
+        if (lastDamageDealer.object != -1) {
+            if (lastDamageDealer.object.healer != -1)
+                healer = lastDamageDealer.object.healer;
+        }
+    }
+    sendEventDestruction(ownerPlayer, lastDamageDealer, healer, lastDamageSource);
+    doEventDestruction(ownerPlayer, lastDamageDealer, healer, lastDamageSource);
+    //instance_destroy();
 }         
 if(hp&gt;maxHp) hp=maxHp;
 
@@ -46,7 +56,8 @@ if (built == 1)
         noticedTarget = SentryTurret.noticedTarget;
     }
     */
-}</argument>
+}
+</argument>
       </arguments>
     </action>
   </actions>

@@ -15,6 +15,10 @@
       <arguments>
         <argument kind="STRING">if(other.team != team and sticksTo = -1) {
     other.hp -= hitDamage;
+//new
+    other.lastDamageDealer = ownerPlayer;
+    other.lastDamageSource = weapon;
+//end
     instance_destroy();
 }
 </argument>

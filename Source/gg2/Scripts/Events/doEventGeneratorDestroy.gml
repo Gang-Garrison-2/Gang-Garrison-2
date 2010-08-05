@@ -11,4 +11,6 @@ if(argument0 == TEAM_RED) {
     global.redCaps += 1;
     with GeneratorBlue instance_destroy();
 }
-recordEventInLog(7, winTeam, "");
+var myTeam;
+myTeam = (winTeam == global.myself.team);
+recordEventInLog(7, winTeam, "", myTeam);

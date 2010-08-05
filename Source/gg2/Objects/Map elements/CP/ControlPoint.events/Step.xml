@@ -101,11 +101,15 @@ if(redPresence&gt;0 and bluePresence&gt;0) {
     if(not (oldRedPresence&gt;0 and oldBluePresence&gt;0)) {
         // ...and the defense happened this step, with the cap meter more than half full
         if(bluePresence&gt;0 and oldBluePresence==0 and team==TEAM_BLUE) {
-            recordEventInLog(2,randomBlueCapper.player.team, randomBlueCapper.player.name);
+            var isMe;
+            isMe = randomBlueCapper.player == global.myself;
+            recordEventInLog(2,TEAM_BLUE, randomBlueCapper.player.name, isMe);
             playsound(soundx, soundy, CPDefendedSnd);
         }
         if(redPresence&gt;0 and oldRedPresence==0 and team==TEAM_RED) {
-            recordEventInLog(2,randomRedCapper.player.team, randomRedCapper.player.name);
+            var isMe;
+            isMe = randomRedCapper.player == global.myself;
+            recordEventInLog(2,TEAM_RED, randomRedCapper.player.name, isMe);
             playsound(soundx, soundy, CPDefendedSnd);
         }
     }

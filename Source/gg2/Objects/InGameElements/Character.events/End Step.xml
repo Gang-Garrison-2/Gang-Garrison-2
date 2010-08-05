@@ -14,8 +14,22 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">if(global.isHost &amp;&amp; hp&lt;=0) {
-    sendEventPlayerDeath(player, lastDamageDealer, lastDamageSource);
-    doEventPlayerDeath(player, lastDamageDealer, lastDamageSource);
+    //sendEventPlayerDeath(player, lastDamageDealer, lastDamageSource);
+    //doEventPlayerDeath(player, lastDamageDealer, lastDamageSource);
+    var assistant;
+    assistant = -1;
+    if (lastDamageDealer != -1) {
+        if (lastDamageDealer.object != -1) {
+            if (lastDamageDealer.object.healer != -1)
+                assistant = lastDamageDealer.object.healer;
+            else 
+                assistant = secondToLastDamageDealer;
+        }
+        else
+            assistant = secondToLastDamageDealer;
+    }
+    sendEventPlayerDeath(player, lastDamageDealer, assistant, lastDamageSource);
+    doEventPlayerDeath(player, lastDamageDealer, assistant, lastDamageSource);
     with(GameServer) {
         ServerBalanceTeams();
     }
@@ -44,14 +58,14 @@ currentWeapon.y=round(y);
 if(x&lt;0) {
     x=0;
 }
-if(x&gt;room_width) {
-    x = room_width
+if(x&gt;map_width()){
+    x = map_width();
 }
 if(y&lt;0) {
     y = 0;
 }
-if(y&gt;room_height) {
-    y = room_height;
+if(y&gt;map_height()){
+    y = map_height();
 }
 
     

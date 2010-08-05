@@ -28,8 +28,24 @@
             motion_add(point_direction(other.x,other.y,x,y),10-10*(distance_to_object(other)/other.blastRadius));
             if(other.team != team or id==other.ownerPlayer.object) &amp;&amp; ubered == 0 &amp;&amp; hp &gt; 0 {
                 hp -= other.explosionDamage*(1-(distance_to_object(other)/other.blastRadius));
-                lastDamageDealer = other.ownerPlayer;
-                lastDamageSource = other.weapon;
+//new stuff
+                if id==other.ownerPlayer.object &amp;&amp; lastDamageDealer != -1 &amp;&amp; lastDamageDealer != other.ownerPlayer{
+                        lastDamageSource = FINISHED_OFF_GIB;
+                    }
+                    else 
+                    {
+                        if (lastDamageDealer != other.ownerPlayer &amp;&amp; lastDamageDealer != player){
+                            secondToLastDamageDealer = lastDamageDealer;
+                            alarm[4] = alarm[3]
+                        }
+                        if (other.ownerPlayer != id)
+                            alarm[3] = ASSIST_TIME;
+                        lastDamageDealer = other.ownerPlayer;
+                        lastDamageSource = other.weapon;
+                    }
+//end new stuff
+                //lastDamageDealer = other.ownerPlayer;
+                //lastDamageSource = other.weapon;
                 if(global.gibLevel &gt; 0){
                 repeat(3) {
                     var blood;
@@ -49,6 +65,8 @@
     with (Sentry){
         if (distance_to_object(other) &lt; other.blastRadius) &amp;&amp; (team != other.team) { 
         hp -= other.explosionDamage*(1-(distance_to_object(other)/other.blastRadius));
+        lastDamageDealer = other.ownerPlayer;
+        lastDamageSource = WEAPON_MINEGUN;
         }   
     }    
      

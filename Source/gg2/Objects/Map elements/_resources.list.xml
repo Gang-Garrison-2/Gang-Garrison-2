@@ -7,9 +7,11 @@
   <resource name="CP" type="GROUP"/>
   <resource name="KOTH" type="GROUP"/>
   <resource name="SpawnPointRed" type="RESOURCE"/>
+  <resource name="SpawnPointRed" type="GROUP"/>
   <resource name="SpawnRoom" type="RESOURCE"/>
   <resource name="Desensitizer" type="RESOURCE"/>
   <resource name="SpawnPointBlue" type="RESOURCE"/>
+  <resource name="SpawnPointBlue" type="GROUP"/>
   <resource name="On_Map_End_Trigger_Red" type="RESOURCE"/>
   <resource name="On_Map_End_Trigger_Red_Back" type="RESOURCE"/>
   <resource name="On_Map_End_Trigger_Blu_Back" type="RESOURCE"/>

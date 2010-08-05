@@ -14,8 +14,12 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">playsound(x,y,ExplosionSnd);
-lastDamageDealer = -1;
-lastDamageSource = FRAG_BOX;
+/*if (lastDamageDealer != player &amp;&amp; lastDamageDealer != -1)
+    lastDamageSource = FINISHED_OFF_GIB;
+else*/ {
+    //lastDamageDealer = -1;
+    lastDamageSource = FRAG_BOX;
+}
 hp=0;
 </argument>
       </arguments>
