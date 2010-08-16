@@ -395,9 +395,6 @@ for(i=0; i<ds_list_size(global.players); i+=1) {
         }
         // remove the processed bytes from the buffer        
         if(hitBufferEnd) {
-            if(not variable_global_exists("tempBuffer")) {
-                global.tempBuffer = createbuffer();
-            }
             clearbuffer(global.tempBuffer);
             copybuffer2(global.tempBuffer, processedUntil, buffsize(receiveBuffer)-processedUntil, receiveBuffer);
             clearbuffer(receiveBuffer);
