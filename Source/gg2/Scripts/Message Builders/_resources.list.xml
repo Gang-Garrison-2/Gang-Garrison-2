@@ -8,7 +8,6 @@
   <resource name="ServerPlayerLeave" type="RESOURCE"/>
   <resource name="ServerPlayerChangeteam" type="RESOURCE"/>
   <resource name="ServerPlayerChangeclass" type="RESOURCE"/>
-  <resource name="ServerPlayerSpawn" type="RESOURCE"/>
   <resource name="ServerChangeMap" type="RESOURCE"/>
   <resource name="ServerServerFull" type="RESOURCE"/>
 </resources>
