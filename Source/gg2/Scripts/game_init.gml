@@ -8,7 +8,6 @@
     global.IngameMusic=sound_add("Music/ingamemusic.wav", 1, true);
     global.FaucetMusic=sound_add("Music/faucetmusic.wav", 1, true);
 
-    global.receiveBuffer = createbuffer();
     global.sendBuffer = createbuffer();
     global.tempBuffer = createbuffer();
     global.HudCheck = false;

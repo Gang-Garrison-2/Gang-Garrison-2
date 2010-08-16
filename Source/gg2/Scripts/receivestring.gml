@@ -1,11 +1,14 @@
 {
-    var size;
-    receiveCompleteMessage(argument0, argument1, global.receiveBuffer);
+    var size,buffer,result;
+    buffer = createbuffer();
+    receiveCompleteMessage(argument0, argument1, buffer);
     if(argument1 == 1) {
-        size = readbyte(global.receiveBuffer);
+        size = readbyte(buffer);
     } else {
-        size = readushort(global.receiveBuffer);
+        size = readushort(buffer);
     }
-    receiveCompleteMessage(argument0, size, global.receiveBuffer);
-    return readchars(size, global.receiveBuffer);
+    receiveCompleteMessage(argument0, size, buffer);
+    result = readchars(size, buffer);
+    freebuffer(buffer);
+    return result;
 }

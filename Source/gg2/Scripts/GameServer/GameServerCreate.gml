@@ -6,7 +6,6 @@
     global.joiningPlayers = ds_list_create();
     global.players = ds_list_create();
     global.sendBuffer = createbuffer();
-    global.receiveBuffer = createbuffer();
     global.eventBuffer = createbuffer();      // Buffer for events that happen during the step
     global.currentMapIndex = 0;
     serverbalance=0;
