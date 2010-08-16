@@ -14,8 +14,9 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">{
-    room_goto(Menu);
-}</argument>
+    room_goto_fix(Menu);
+}
+</argument>
       </arguments>
     </action>
   </actions>

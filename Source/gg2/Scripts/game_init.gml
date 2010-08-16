@@ -272,7 +272,7 @@ global.launchMap = "";
     
     if(global.dedicatedMode == 1) {
         AudioControlToggleMute();
-        room_goto(Menu);
+        room_goto_fix(Menu);
     }
     
     // custom dialog box graphics
