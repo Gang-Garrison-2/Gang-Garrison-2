@@ -1,3 +1,1 @@
-{
-    writebyte(SERVER_FULL, argument0);
-}
+writebyte(SERVER_FULL, argument0);

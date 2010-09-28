@@ -2,4 +2,6 @@
 <resources>
   <resource name="GameServerCreate" type="RESOURCE"/>
   <resource name="GameServerBeginStep" type="RESOURCE"/>
+  <resource name="acceptJoiningPlayer" type="RESOURCE"/>
+  <resource name="serviceJoiningPlayer" type="RESOURCE"/>
 </resources>
