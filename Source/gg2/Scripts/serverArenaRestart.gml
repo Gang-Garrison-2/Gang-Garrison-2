@@ -67,14 +67,5 @@
         alarm[5] = 1;
     }
     
-    writebyte(ARENA_RESTART,global.eventBuffer);
-    roundStart = 300;
-    endCount = 0;
-    cpUnlock = 1800;
-    ArenaControlPoint.team = -1;
-    ArenaControlPoint.locked = 1;
-    with Player humiliated = 0;
-    with Sentry instance_destroy();
-    with SentryGibs instance_destroy();
-    
-    winners = TEAM_SPECTATOR;
+    sendEventArenaRestart();
+    doEventArenaRestart();

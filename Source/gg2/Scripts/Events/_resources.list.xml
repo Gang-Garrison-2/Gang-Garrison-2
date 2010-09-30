@@ -17,4 +17,6 @@
   <resource name="sendEventArenaUnlockCP" type="RESOURCE"/>
   <resource name="doEventArenaUnlockCP" type="RESOURCE"/>
   <resource name="doEventArenaEndRound" type="RESOURCE"/>
+  <resource name="sendEventArenaRestart" type="RESOURCE"/>
+  <resource name="doEventArenaRestart" type="RESOURCE"/>
 </resources>
