@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<event category="STEP" id="2">
+<event category="OTHER" id="10">
   <actions>
     <action id="603" library="1">
       <!--action name: Code-->
@@ -13,18 +13,21 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if(global.isHost) &amp;&amp; (hp&lt;=0) {
-    instance_destroy();
-}         
-if(hp&gt;maxHp) hp=maxHp;
-
-if (built == 1) {
-    if (idleTimer == true) {
-        playsound(x,y,SentryIdle);
-        alarm[5] = 90;    
-    }    
-    idleTimer = false;
+        <argument kind="STRING">if (startDirection &gt; 0) {
+    direction=0;
+} else {
+    direction=180;
 }
+
+if(team == TEAM_RED) {
+    rotateoffset=0;
+} else {
+    rotateoffset=5;
+}
+
+rotatestart = rotateoffset;
+rotateend = rotateoffset+4;
+rotateindex = rotatestart;
 </argument>
       </arguments>
     </action>

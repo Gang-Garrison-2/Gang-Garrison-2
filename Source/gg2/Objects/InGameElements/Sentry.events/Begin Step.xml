@@ -32,8 +32,9 @@ if (built == 1 &amp;&amp; currentWeapon == -1){
     currentWeapon.ownerPlayer=ownerPlayer;
     currentWeapon.team=team;
     currentWeapon.startDirection=startDirection;
-    if startDirection == 1 currentWeapon.direction=0;
-    else if startDirection == -1 currentWeapon.direction=180;
+    with(currentWeapon) {
+        event_user(0);
+    }
 }
 
     
@@ -43,7 +44,8 @@ if(place_free(x,y+1)) {
 
 if(vspeed&gt;10) {
     vspeed=10;
-}</argument>
+}
+</argument>
       </arguments>
     </action>
   </actions>
