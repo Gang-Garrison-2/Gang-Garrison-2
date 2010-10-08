@@ -29,38 +29,11 @@
         with(poof) {
             motion_add(owner.direction, owner.speed);
         }
-        
-        /*if owner.keyState &amp; $10 &amp;&amp; !collision_line(x,y,x+lengthdir_x(28,owner.aimDirection),y+lengthdir_y(28,owner.aimDirection),Obstacle,1,0) and !place_meeting(x+lengthdir_x(25,owner.aimDirection),y+lengthdir_y(25,owner.aimDirection),TeamGate){
-            readyToBlast=false;
-            readyToShoot=false;
-            alarm[1]=blastReloadTime;
-            alarm[0]=blastReloadTime;
-            flameBlasted=true;
-            shot = instance_create(x+lengthdir_x(25,owner.aimDirection),y+lengthdir_y(25,owner.aimDirection),Flame);
-            shot.direction=owner.aimDirection+(random(10)-5);
-            shot.speed=15;
-            shot.owner=owner;
-            shot.ownerPlayer=ownerPlayer;
-            shot.team=owner.team;
-            shot.weapon=WEAPON_FLAMETHROWER;
-            with(shot) {
-                //motion_add(owner.direction, owner.speed);
-                hitDamage = 9;
-                alarm[0] = 60;
-                burnDamage = 0.06;
-                blasted = true;
-                sprite_index = BlastedFlameS;
-            }
-        }*/
             
         with Flame { 
             dir = point_direction(other.x, other.y, x, y);
             dist = point_distance(other.x, other.y, x, y);
             angle = abs((dir-other.owner.aimDirection)+720) mod 360;
-            /*if(angle&gt;180) {
-                angle=360-angle;
-            }*/
-            //if(angle&lt;(other.blastAngle/2) and dist&lt;other.blastDistance) {
             if collision_circle(x,y,25,other.poof,false,true) {
                 if sticksTo != -1 {
                     if instance_exists(sticksTo) {
@@ -76,7 +49,6 @@
                 dir = point_direction(other.x, other.y, x, y);
                 dist = point_distance(other.x, other.y, x, y);
                 angle = abs((dir-other.owner.aimDirection)+720) mod 360;
-                //if(angle&lt;=other.blastAngle/2) and dist&lt;=other.blastDistance {
                 if collision_circle(x,y,25,other.poof,false,true) {
                     ownerPlayer = other.ownerPlayer;
                     team = other.owner.team;
@@ -87,10 +59,6 @@
                     alarm[0] = 200;
                     alarm[1] = 40;
                     alarm[2] = 80;
-                    /*if(angle&gt;180) {
-                        angle=360-angle;
-                    }*/
-                   // motion_add(other.owner.aimDirection, other.blastStrength*(1-dist/other.blastDistance) );
                     motion_set(other.owner.aimDirection, speed);
                 }
             }
@@ -102,10 +70,6 @@
                 dist = point_distance(other.x, other.y, x, y);
                 angle = abs((dir-other.owner.aimDirection)+720) mod 360;
                 weapon = WEAPON_REFLECTED_STICKY;
-                /*if(angle&gt;180) {
-                    angle=360-angle;
-                }*/
-                //if(angle&lt;(other.blastAngle/2) and dist&lt;other.blastDistance) {
                 if collision_circle(x,y,25,other.poof,false,true) {
                     motion_add(other.owner.aimDirection, other.blastStrength*(1-dist/other.blastDistance) );
                     stickied = false;
@@ -122,10 +86,6 @@
                 dir = point_direction(other.x, other.y, x, y);
                 dist = point_distance(other.x, other.y, x, y);
                 angle = abs((dir-other.owner.aimDirection)+720) mod 360;
-                /*if(angle&gt;180) {
-                    angle=360-angle;
-                }*/
-                //if(angle&lt;(other.blastAngle/2) and dist&lt;other.blastDistance) {
                 if collision_circle(x,y,25,other.poof,false,true) {
                     if(team != other.owner.team) {
                         motion_add(other.owner.aimDirection, other.characterBlastStrength*(1-dist/other.blastDistance) );
@@ -138,11 +98,7 @@
         with(LooseSheet) {
             dir = point_direction(other.x, other.y, x, y);
             dist = point_distance(other.x, other.y, x, y);
-                angle = abs((dir-other.owner.aimDirection)+720) mod 360;
-                /*if(angle&gt;180) {
-                    angle=360-angle;
-                }*/
-            //if(angle&lt;(other.blastAngle/2) and dist&lt;other.blastDistance) {
+            angle = abs((dir-other.owner.aimDirection)+720) mod 360;
             if collision_circle(x,y,25,other.poof,false,true) {
                 motion_add(other.owner.aimDirection, other.blastStrength*(1-dist/other.blastDistance) );
             }
@@ -151,24 +107,17 @@
         with(Gib) {
             dir = point_direction(other.x, other.y, x, y);
             dist = point_distance(other.x, other.y, x, y);
-                angle = abs((dir-other.owner.aimDirection)+720) mod 360;
-                /*if(angle&gt;180) {
-                    angle=360-angle;
-                }*/
-            //if(angle&lt;(other.blastAngle/2) and dist&lt;other.blastDistance) {
+            angle = abs((dir-other.owner.aimDirection)+720) mod 360;
             if collision_circle(x,y,25,other.poof,false,true) {
                 motion_add(other.owner.aimDirection, other.blastStrength*(1-dist/other.blastDistance) );
             }
         }
         
-        //if flameBlasted == false {        
-            readyToBlast=false;
-            readyToShoot=false;
-            alarm[1]=blastReloadTime;
-            alarm[0]=blastNoFlameTime;
-            gas -= 66;
-        //}
-        //flameBlasted = false;
+        readyToBlast=false;
+        readyToShoot=false;
+        alarm[1]=blastReloadTime;
+        alarm[0]=blastNoFlameTime;
+        gas -= 66;
     }
 }
 </argument>

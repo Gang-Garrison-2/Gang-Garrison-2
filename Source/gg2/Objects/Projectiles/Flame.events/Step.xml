@@ -14,8 +14,7 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">    if(sticksTo == -1) {
-        /*if blasted == false vspeed-=0.1;
-        else*/ vspeed += 0.15;
+        vspeed += 0.15;
         image_alpha*=0.95;
     } else {
         if extinguish &lt;= 0 instance_destroy();
