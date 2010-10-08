@@ -13,13 +13,10 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">/*if global.dedicatedMode == 0 {
-    with(all) if id != AudioControl.id instance_destroy();
-    room_goto_fix(Menu);
+        <argument kind="STRING">if(!instance_exists(InGameMenuController) &amp;&amp; !instance_exists(OptionsController) &amp;&amp; !instance_exists(ControlsController)) {
+    instance_create(x,y,InGameMenuController);
 }
-else game_end();
-*/
-if !instance_exists(InGameMenuController) &amp;&amp; !instance_exists(OptionsController) &amp;&amp; !instance_exists(ControlsController) instance_create(x,y,InGameMenuController);</argument>
+</argument>
       </arguments>
     </action>
   </actions>
