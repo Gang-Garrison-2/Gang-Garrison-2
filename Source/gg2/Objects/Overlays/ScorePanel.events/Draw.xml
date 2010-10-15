@@ -122,27 +122,6 @@
     
     draw_sprite_ext(IntelStatusS, redintelstatus, redx, redy, 2, 2, 0, c_white, 1);
     draw_sprite_ext(IntelStatusS, blueintelstatus, bluex, bluey, 2, 2, 0, c_white, 1);
-    
-    /*
-    if (global.myself.canRespawn == false)
-    {
-        draw_sprite_ext(RespawnTimerS, 0, (xoffset+xsize)-150, (yoffset+ysize) +300, 1, 1, 0, c_white, 1);
-    
-        if (RespawnTimer.wait != -1)
-        {
-            draw_text((xoffset+xsize)-150, (yoffset+ysize) +400, "Respawning in: Next round");
-        }
-        else
-        {
-            draw_text((xoffset+xsize)-150, (yoffset+ysize) +400, "Respawning in: "+string(Player.alarm[5]));
-        }
-    }
-    else
-    {
-        draw_sprite_ext(RespawnTimerS, 1, (xoffset+xsize)-150, (yoffset+ysize) +300, 1, 1, 0, c_white, 1);
-    }
-    */
-
 
 //timer
 if instance_exists(WinBanner) exit;
@@ -171,26 +150,6 @@ else{
     if seconds &gt;= 10 draw_text_transformed(xoffset+xsize/2+20,yoffset+32,string(seconds),1.5,1.5,0);
     else if seconds &lt; 10 draw_text_transformed(xoffset+xsize/2+20,yoffset+32,"0"+string(seconds),1.5,1.5,0);
 }
-    
-    /*
-    if (global.myself.canRespawn == false)
-    {
-        draw_sprite_ext(RespawnTimerS, 0, (xoffset+xsize)-150, (yoffset+ysize) +300, 1, 1, 0, c_white, 1);
-    
-        if (RespawnTimer.wait != -1)
-        {
-            draw_text((xoffset+xsize)-150, (yoffset+ysize) +400, "Respawning in: Next round");
-        }
-        else
-        {
-            draw_text((xoffset+xsize)-150, (yoffset+ysize) +400, "Respawning in: "+string(Player.alarm[5]));
-        }
-    }
-    else
-    {
-        draw_sprite_ext(RespawnTimerS, 1, (xoffset+xsize)-150, (yoffset+ysize) +300, 1, 1, 0, c_white, 1);
-    }
-    */
 </argument>
       </arguments>
     </action>

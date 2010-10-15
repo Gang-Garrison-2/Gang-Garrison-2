@@ -12,9 +12,9 @@ blueteam = ds_priority_create();
 for(i=0; i<ds_list_size(global.players); i+=1) {
     player = ds_list_find_value(global.players, i);
     if(player.team == TEAM_RED) {
-        ds_priority_add(redteam, player, player.roundKills+player.roundHealPoints+player.roundStabKills);
+        ds_priority_add(redteam, player, player.roundKills+player.roundHealPoints);
     } else if (player.team == TEAM_BLUE) {
-        ds_priority_add(blueteam, player, player.roundKills+player.roundHealPoints+player.roundStabKills);
+        ds_priority_add(blueteam, player, player.roundKills+player.roundHealPoints);
     }
 }
 

@@ -14,7 +14,6 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">writebyte(team, global.serializeBuffer);
-writebyte(capTeam, global.serializeBuffer);
 writebyte(cappingTeam, global.serializeBuffer);
 writeushort(round(capping), global.serializeBuffer);
 </argument>

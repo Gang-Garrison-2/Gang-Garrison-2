@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <event category="CREATE" id="0">
   <actions>
+    <action id="604" library="1">
+      <!--action name: Inherited-->
+      <kind>NORMAL</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>false</canApplyTo>
+      <actionType>FUNCTION</actionType>
+      <functionName>action_inherited</functionName>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments/>
+    </action>
     <action id="603" library="1">
       <!--action name: Code-->
       <kind>CODE</kind>
@@ -14,32 +27,15 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">{
-    canDoublejump = 0;
-    canCloak = 0;
-    jumpStrength = 8;
     maxHp = 120;
     runPower = 1.09;
     weapons[0]=Medigun;
-    canBuild = 0; 
-    alarm[11] = 30;
-    tauntspeed = 3;
-    tauntlength = 10;
     tauntsprite = MedicTauntS; 
-}</argument>
+    
+    alarm[11] = 30;
+}
+</argument>
       </arguments>
-    </action>
-    <action id="604" library="1">
-      <!--action name: Inherited-->
-      <kind>NORMAL</kind>
-      <allowRelative>false</allowRelative>
-      <question>false</question>
-      <canApplyTo>false</canApplyTo>
-      <actionType>FUNCTION</actionType>
-      <functionName>action_inherited</functionName>
-      <relative>false</relative>
-      <not>false</not>
-      <appliesTo>.self</appliesTo>
-      <arguments/>
     </action>
   </actions>
 </event>

@@ -232,18 +232,17 @@ do {
               case OMNOMNOMNOM:
                   receiveCompleteMessage(global.serverSocket,1,0);
                   player = ds_list_find_value(global.players, readbyte(0));
-                  if player.object != -1 {
-                    with player.object {
+                  if(player.object != -1) {
+                    with(player.object) {
                         omnomnomnom=true;
-                        if player.team == TEAM_RED {
+                        if(player.team == TEAM_RED) {
                             omnomnomnomindex=0;
                             omnomnomnomend=31;
-                        }
-                        else if player.team==TEAM_BLUE {
+                        } else if(player.team==TEAM_BLUE) {
                             omnomnomnomindex=32;
                             omnomnomnomend=63;
                         }
-                    xscale=image_xscale; 
+                        xscale=image_xscale; 
                     } 
                   }
                   break;
