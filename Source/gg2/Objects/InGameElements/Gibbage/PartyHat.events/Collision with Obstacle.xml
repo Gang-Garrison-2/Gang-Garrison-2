@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="COLLISION" with="Obstacle">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{
+    hspeed*=hfric;
+    rotspeed*=rotfric;
+
+    if((speed&gt;4) and (vspeed&gt;2) and (snd)){
+            repeat(9)
+if(abs(speed/bloodchance)&gt;random(3)) {
+    var blood;
+    blood = instance_create(x,y-1,BloodDrop);
+    blood.ogib=self;
+    blood.odir=point_direction(x,y,x+hspeed,y+vspeed);
+     with(blood) {
+     motion_add(odir, ogib.speed*-0.8);
+     hspeed+=random(8)-3.5;
+     vspeed-=random(6)-2;
+        }
+    }
+            
+                }
+
+    move_contact_solid(point_direction(x,y,x+hspeed,y+vspeed), speed);
+    if(not place_free(x,y+sign(vspeed))) {
+        vspeed*=-0.4;
+        if(not place_free(x+hspeed,y)){
+            move_contact_solid(point_direction(x,y,x+hspeed,y+vspeed), speed);
+            hspeed*=-0.4;
+        }
+    }
+    if(not place_free(x+sign(hspeed),y)){
+        hspeed*=-0.4;
+        if(not place_free(x,y+vspeed)) {
+            move_contact_solid(point_direction(x,y,x+hspeed,y+vspeed), speed);
+            vspeed*=-0.4;
+        }
+    }
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

@@ -17,7 +17,10 @@
     alarm[0]=lifetime;
     stick = false;
     ogib=-1;
-    odir=0;</argument>
+    odir=0;
+    image_index=random(7)*global.gg_birthday;
+    image_speed=0;
+</argument>
       </arguments>
     </action>
   </actions>

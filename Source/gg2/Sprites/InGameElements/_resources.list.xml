@@ -19,5 +19,4 @@
   <resource name="SentryTurretLogS" type="RESOURCE"/>
   <resource name="DeathCamHealthBarS" type="RESOURCE"/>
   <resource name="BubblesS" type="RESOURCE"/>
-  <resource name="BubbleFaceS" type="RESOURCE"/>
 </resources>

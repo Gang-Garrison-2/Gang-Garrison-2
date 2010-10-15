@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="Characters" type="GROUP"/>
+  <resource name="Weapons" type="GROUP"/>
+  <resource name="InGameElements" type="GROUP"/>
+</resources>

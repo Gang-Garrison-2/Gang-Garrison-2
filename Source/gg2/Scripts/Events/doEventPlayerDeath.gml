@@ -409,7 +409,10 @@ with(victim.object) {
         }
     }
 }
-
+if global.gg_birthday {
+    myHat = instance_create(victim.object.x,victim.object.y,PartyHat);
+    myHat.image_index = victim.team;
+}
 with(victim.object) {       
     instance_destroy();
 }

@@ -37,4 +37,5 @@
   <resource name="parseProtocolUuid" type="RESOURCE"/>
   <resource name="pointCapture" type="RESOURCE"/>
   <resource name="calculateMonthAndDay" type="RESOURCE"/>
+  <resource name="partyTime" type="RESOURCE"/>
 </resources>
