@@ -13,8 +13,8 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if gas &lt; 0 gas = 0;
-else if gas &lt;= 200 gas +=1;
+        <argument kind="STRING">if ammoCount &lt; 0 ammoCount = 0;
+else if ammoCount &lt;= maxAmmo ammoCount +=1;
 </argument>
       </arguments>
     </action>

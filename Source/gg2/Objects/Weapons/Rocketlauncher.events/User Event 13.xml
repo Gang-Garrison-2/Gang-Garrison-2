@@ -28,8 +28,10 @@
       <arguments>
         <argument kind="STRING">{
     receiveCompleteMessage(global.serverSocket, 1, global.deserializeBuffer);
-    alarm[5] = readbyte(global.deserializeBuffer);    
-}</argument>
+    //alarm[5] = readbyte(global.deserializeBuffer);   
+    ammoCount = readbyte(global.deserializeBuffer); 
+}
+</argument>
       </arguments>
     </action>
   </actions>

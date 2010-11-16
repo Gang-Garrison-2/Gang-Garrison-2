@@ -16,14 +16,17 @@
         <argument kind="STRING">{
     xoffset = 0;
     yoffset = -3;
-    reloadTime = 5;
+    refireTime = 5;
     bubbleCount = 0;
     BladesOut = 0;
     MaxBlades = 1;
-    bladePower = 100;
-    bladeBaseDamage = 3;
+    maxAmmo = 200;
+    ammoCount = maxAmmo;
+    reloadTime = 55;
+    reloadBuffer = 0;
+    /*bladeBaseDamage = 3;
     bladeMaxAddDamage = 15;
-    bladeAddDamage = bladeMaxAddDamage;
+    bladeAddDamage = bladeMaxAddDamage;*/
 }
 </argument>
       </arguments>

@@ -27,6 +27,7 @@
   <resource name="recordDestructionInLog" type="RESOURCE"/>
   <resource name="recordEventInLog_Original" type="RESOURCE"/>
   <resource name="recordEventInLog" type="RESOURCE"/>
+  <resource name="recordDominationInLog" type="RESOURCE"/>
   <resource name="serializeState" type="RESOURCE"/>
   <resource name="deserializeState" type="RESOURCE"/>
   <resource name="mapEnd" type="RESOURCE"/>
@@ -42,4 +43,5 @@
   <resource name="pointCapture" type="RESOURCE"/>
   <resource name="calculateMonthAndDay" type="RESOURCE"/>
   <resource name="selectSpawnGroup" type="RESOURCE"/>
+  <resource name="partyTime" type="RESOURCE"/>
 </resources>

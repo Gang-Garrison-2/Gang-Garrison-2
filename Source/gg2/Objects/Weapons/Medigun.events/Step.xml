@@ -13,8 +13,8 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if idle and needleCount&lt;40  and not alarm[5] {
-    alarm[5] = newNeedleTime;
+        <argument kind="STRING">/*if idle and ammoCount&lt;maxAmmo  and not alarm[5] {
+    alarm[5] = reloadTime;
 }
 idle = readyToShoot;
 </argument>

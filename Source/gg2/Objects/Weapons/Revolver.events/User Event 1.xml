@@ -14,8 +14,8 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">{
-    if(readyToShoot &amp;&amp; !owner.cloak &amp;&amp; bulletCount &gt; 0) {
-        bulletCount-=1;
+    if(readyToShoot &amp;&amp; !owner.cloak &amp;&amp; ammoCount &gt; 0) {
+        ammoCount-=1;
         playsound(x,y,RevolverSnd);
         var shot;
         randomize();
@@ -34,8 +34,8 @@
         }
         justShot=true;
         readyToShoot=false;
-        alarm[0]=reloadTime;
-        alarm[5] = 0;
+        alarm[0]=refireTime;
+        alarm[5] = reloadBuffer + reloadTime;
     } else {
         /*with(owner) { // we can't let the user backstab unless the spy is standing on the ground
             other.__backstab_standing_on_the_ground_detection = place_meeting(x, y+1, Obstacle);

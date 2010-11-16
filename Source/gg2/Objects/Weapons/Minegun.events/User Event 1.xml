@@ -14,10 +14,10 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">{
-    if(readyToShoot == true &amp;&amp; mineCount &gt;0 and lobbed&lt;maxMines) {
+    if(readyToShoot == true &amp;&amp; ammoCount &gt;0 and lobbed&lt;maxMines) {
         var oid, newx, newy;
         playsound(x,y,MinegunSnd);
-        mineCount -= 1;
+        ammoCount -= 1;
 
         oid = instance_create(x+lengthdir_x(10,owner.aimDirection),y+lengthdir_y(10,owner.aimDirection), Mine);
         
@@ -30,8 +30,8 @@
         lobbed += 1;
         justShot=true;
         readyToShoot = false;
-        alarm[0] = reloadTime;
-        alarm[5] = 0;
+        alarm[0] = refireTime;
+        alarm[5] = reloadBuffer + reloadTime;
     }
 }
 </argument>

@@ -166,7 +166,7 @@
             readyToShoot=false;
             alarm[1]=blastReloadTime;
             alarm[0]=blastNoFlameTime;
-            gas -= 66;
+            ammoCount -= 66;
         //}
         //flameBlasted = false;
     }

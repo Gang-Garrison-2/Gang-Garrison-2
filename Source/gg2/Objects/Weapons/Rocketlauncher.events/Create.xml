@@ -16,12 +16,15 @@
         <argument kind="STRING">{
     xoffset = -15;
     yoffset = -10;
-    reloadTime = 30;
-    newRocketTime = 25;
-    rocketcount = 4;
+    refireTime = 30;
+    reloadTime = 25;
+    reloadBuffer = 0;
+    maxAmmo = 4;
+    ammoCount = maxAmmo;
     rocketrange=501;
     idle=true;
-}</argument>
+}
+</argument>
       </arguments>
     </action>
     <action id="604" library="1">

@@ -15,7 +15,8 @@
       <arguments>
         <argument kind="STRING">{
     receiveCompleteMessage(global.serverSocket, 3, global.deserializeBuffer);
-    alarm[5] = readbyte(global.deserializeBuffer); 
+    //alarm[5] = readbyte(global.deserializeBuffer);
+    ammoCount = readbyte(global.deserializeBuffer); 
     healing = readushort(global.deserializeBuffer);
     if(healing) {
         receiveCompleteMessage(global.serverSocket, 1, global.deserializeBuffer);

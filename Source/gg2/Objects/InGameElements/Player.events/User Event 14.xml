@@ -13,7 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">dominated = false;
+        <argument kind="STRING">/*dominated = false;
 dominating = false;
 domcount = 0;
 for(i = 0; i &lt; ds_list_size(dominations); i+=1)

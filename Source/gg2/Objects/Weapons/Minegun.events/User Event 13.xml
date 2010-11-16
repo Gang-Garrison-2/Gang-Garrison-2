@@ -30,7 +30,8 @@
     var i, mine;
     receiveCompleteMessage(global.serverSocket, 2, global.deserializeBuffer);
     lobbed  = readbyte(global.deserializeBuffer);
-    alarm[5] = readbyte(global.deserializeBuffer);
+    //alarm[5] = readbyte(global.deserializeBuffer);
+    ammoCount = readbyte(global.deserializeBuffer);
     
     with(Mine) {
         if(ownerPlayer == other.ownerPlayer) {

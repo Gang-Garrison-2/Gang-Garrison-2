@@ -30,7 +30,7 @@
             }
         justShot=true;
         readyToShoot=false;
-        alarm[0]=reloadTime-random(3);
+        alarm[0]=refireTime;//-random(3);
         bubbleCount+=1;
     }
 }

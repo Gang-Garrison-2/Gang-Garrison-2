@@ -14,10 +14,9 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">{
-    if(readyToShoot == true and BladesOut&lt;MaxBlades)  {
+    if(readyToShoot == true and BladesOut&lt;MaxBlades &amp;&amp; ammoCount &gt; 0)  {
         playsound(x,y,BladeSnd);
-        bladePower -= 15;
-        if bladePower &lt;0 bladePower = 0;
+        ammoCount -= 15;
         var shot;
         randomize();
             shot = instance_create(x+lengthdir_x(5,owner.aimDirection),y+lengthdir_y(5,owner.aimDirection),BladeB);
@@ -26,8 +25,9 @@
             shot.owner=owner;
             shot.ownerPlayer=ownerPlayer;
             shot.team=owner.team;
-            bladeAddDamage = floor((bladeMaxAddDamage/100)*bladePower+bladeBaseDamage);
-            shot.hitDamage = bladeBaseDamage + bladeAddDamage;
+            //bladeAddDamage = floor((bladeMaxAddDamage/100)*bladePower+bladeBaseDamage);
+            //shot.hitDamage = bladeBaseDamage + bladeAddDamage;
+            shot.hitDamage = 17;
             BladesOut += 1;
             shot.weapon=WEAPON_BLADE;
             with(shot) {
@@ -35,7 +35,8 @@
             }
         justShot=true;
         readyToShoot=false;
-        alarm[0]=reloadTime;
+        alarm[0]=refireTime;
+        alarm[5]=reloadBuffer + reloadTime;
     }
 }
 </argument>

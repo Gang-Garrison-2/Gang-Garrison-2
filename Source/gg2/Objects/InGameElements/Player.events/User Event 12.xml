@@ -29,7 +29,7 @@
         writebyte(stats[POINTS], global.serializeBuffer); 
 
         //Syncing!
-        writebyte(ds_list_size(domPlayers), global.serializeBuffer);
+        /*writebyte(ds_list_size(domPlayers), global.serializeBuffer);
         
         if (ds_list_size(domPlayers) &gt; 0)
         {
@@ -42,7 +42,7 @@
         {
              writebyte(ds_list_find_index(dominations,j), global.serializeBuffer); 
         }
-        }
+        }*/
     } 
     
     subobjects=0;

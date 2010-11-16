@@ -41,7 +41,7 @@ if(killer != -1 /*and killer != victim*/) {
         killer.stats[POINTS] += 1;
         killer.roundStats[POINTS] += 1;
         //Clear the killer from the victim's domination lists, while adding/incrementing the killer's
-        if (ds_list_find_index(victim.domPlayers,killer) != -1)
+        /*if (ds_list_find_index(victim.domPlayers,killer) != -1)
         {
             ind = ds_list_find_index(victim.domPlayers,killer);
             ds_list_delete(victim.domPlayers,ind);
@@ -61,7 +61,7 @@ if(killer != -1 /*and killer != victim*/) {
         }
         //Tell the player objects to refresh the domination statuses
         with(killer) event_user(14);
-        with(victim) event_user(14);
+        with(victim) event_user(14);*/
         //End    
     }
     if (assistant != -1) {
@@ -460,7 +460,10 @@ with(victim.object) {
         }
     }
 }
-
+if global.gg_birthday {
+    myHat = instance_create(victim.object.x,victim.object.y,PartyHat);
+    myHat.image_index = victim.team;
+}
 with(victim.object) {       
     instance_destroy();
 }

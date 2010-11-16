@@ -13,8 +13,8 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if(readyToShoot == true &amp;&amp; rocketcount &gt; 0) {
-    rocketcount-=1;    
+        <argument kind="STRING">if(readyToShoot == true &amp;&amp; ammoCount &gt; 0) {
+    ammoCount-=1;    
     playsound(x,y,RocketSnd);
     var oid, newx, newy;
     oid = instance_create(x+lengthdir_x(20,owner.aimDirection),y+lengthdir_y(20,owner.aimDirection), Rocket);
@@ -34,8 +34,8 @@
         
     justShot=true;
     readyToShoot = false;
-    alarm[0] = reloadTime;
-    alarm[5] = 0;
+    alarm[0] = refireTime;
+    alarm[5] = reloadBuffer + reloadTime;
 }
 </argument>
       </arguments>

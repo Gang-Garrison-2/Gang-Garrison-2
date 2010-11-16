@@ -31,7 +31,7 @@
         stats[BONUS] = readbyte(global.deserializeBuffer);
         stats[POINTS] = readbyte(global.deserializeBuffer); 
 
-        receiveCompleteMessage(global.serverSocket,1,global.deserializeBuffer);
+        /*receiveCompleteMessage(global.serverSocket,1,global.deserializeBuffer);
         lim = readbyte(global.deserializeBuffer);
         receiveCompleteMessage(global.serverSocket,lim,global.deserializeBuffer);
         if (lim &gt; 0)
@@ -48,7 +48,7 @@
             ds_list_add(dominations,readbyte(global.deserializeBuffer));
         }
         }
-        event_user(14);
+        event_user(14);*/
     }
  
     var charObj, subobjects;

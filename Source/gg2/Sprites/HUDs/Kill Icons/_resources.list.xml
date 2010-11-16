@@ -24,4 +24,6 @@
   <resource name="FlameKL" type="RESOURCE"/>
   <resource name="BackstabKL" type="RESOURCE"/>
   <resource name="DeadKL" type="RESOURCE"/>
+  <resource name="DominationKL" type="RESOURCE"/>
+  <resource name="sprite529" type="RESOURCE"/>
 </resources>

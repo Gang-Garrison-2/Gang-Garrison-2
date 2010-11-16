@@ -14,7 +14,8 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">{
-    writebyte(alarm[5], global.serializeBuffer);
+    //writebyte(alarm[5], global.serializeBuffer);
+    writebyte(ammoCount, global.serializeBuffer);
     writeushort(healing, global.serializeBuffer);
     if(healing) {
         if(healTarget != -1 and instance_exists(healTarget)) {

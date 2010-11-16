@@ -16,11 +16,12 @@
         <argument kind="STRING">if owner.zoomed &amp;&amp; readyToShoot
 {
     t += 1;
-    if t &gt; 120 t = 120;
+    if t &gt; chargeTime t = chargeTime;
 }
 else
     t = 0;
-hitDamage = 35 + owner.zoomed*floor(sqrt(t*125/6));  
+//hitDamage = 35 + owner.zoomed*floor(sqrt(t*125/6));  
+hitDamage = baseDamage + owner.zoomed*floor(sqrt(t*(sqr(maxDamage-baseDamage)/chargeTime));
 </argument>
       </arguments>
     </action>

@@ -13,8 +13,8 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">    if readyToShoot &amp;&amp; !healing &amp;&amp; ubering == false &amp;&amp; needleCount &gt; 0{
-        needleCount -= 1;
+        <argument kind="STRING">    if readyToShoot &amp;&amp; !healing &amp;&amp; ubering == false &amp;&amp; ammoCount &gt; 0{
+        ammoCount -= 1;
         playsound(x,y,MedichaingunSnd);
                 var shot;
                 
@@ -32,8 +32,8 @@
             //motion_add(owner.direction, owner.speed);
         }
         readyToShoot=false;
-        alarm[0]=reloadTime;
-        alarm[5] = 0;
+        alarm[0]=refireTime;
+        alarm[5] = reloadBuffer + reloadTime;
     } else if (uberReady &amp;&amp; (owner.keyState &amp; $10)) {
         if(global.isHost) {
             sendEventUber(ownerPlayer);

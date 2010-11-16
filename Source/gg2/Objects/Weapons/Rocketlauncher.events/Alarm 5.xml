@@ -13,9 +13,13 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if rocketcount &lt; 4 {
-    rocketcount+=1;
-}</argument>
+        <argument kind="STRING">if ammoCount &lt; maxAmmo {
+    ammoCount+=1;
+}
+if ammoCount &lt; maxAmmo {
+    alarm[5] = reloadTime;
+}
+</argument>
       </arguments>
     </action>
   </actions>

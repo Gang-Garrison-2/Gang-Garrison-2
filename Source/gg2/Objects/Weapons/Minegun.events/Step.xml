@@ -13,8 +13,8 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if idle and readyToShoot and mineCount&lt;8  and not alarm[5] {
-    alarm[5] = newMineTime;
+        <argument kind="STRING">/*if idle and readyToShoot and ammoCount&lt;8  and not alarm[5] {
+    alarm[5] = reloadTime;
 }
 idle = readyToShoot;
 </argument>

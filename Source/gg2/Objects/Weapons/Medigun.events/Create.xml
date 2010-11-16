@@ -16,7 +16,7 @@
         <argument kind="STRING">{
     xoffset = -7;
     yoffset = 0;
-    reloadTime = 3;
+    refireTime = 3;
     healTarget = -1;
     healAmmount = 1;
     healing=false;
@@ -25,8 +25,10 @@
     ubering = false;
     uberCharge=0;
     uberReady=false;
-    needleCount = 40;
-    newNeedleTime = 55;
+    maxAmmo = 40
+    ammoCount = maxAmmo;
+    reloadTime = 55;
+    reloadBuffer = 0;
     idle=true;
 }
 </argument>

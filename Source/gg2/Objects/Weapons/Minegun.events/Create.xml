@@ -16,11 +16,13 @@
         <argument kind="STRING">{
     xoffset = -3;
     yoffset = -2;
-    reloadTime = 26;
+    refireTime = 26;
     maxMines = 8;
     lobbed = 0;
-    newMineTime = 20;
-    mineCount = 8;
+    reloadTime = 20;
+    reloadBuffer = 0;
+    maxAmmo = 8;
+    ammoCount = maxAmmo;
     idle=true;
 }
 </argument>

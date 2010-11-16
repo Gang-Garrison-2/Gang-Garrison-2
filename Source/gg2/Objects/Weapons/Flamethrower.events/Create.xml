@@ -16,7 +16,7 @@
         <argument kind="STRING">{
     xoffset = -11;
     yoffset = 4;
-    reloadTime = 1;
+    refireTime = 1;
     
     blastDistance = 150;
     blastAngle = 75;
@@ -28,7 +28,8 @@
     readyToBlast = false;
     //flameBlasted = false;
     
-    gas = 200;
+    maxAmmo = 200
+    ammoCount = maxAmmo;
     soundLoopTime = 30;
     currentTime = 0;
     

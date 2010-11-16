@@ -30,8 +30,10 @@ if global.autobalance == 1 && !instance_exists(ArenaHUD) {
         balanceplayer=-1;
         for(i=0; i<ds_list_size(global.players); i+=1) {
             player = ds_list_find_value(global.players, i);
-            if(player.team == balance && player.kills+(player.caps*2)+player.healpoints < points) {
-                points=player.kills+(player.caps*2)+player.healpoints;
+            //if(player.team == balance && player.kills+(player.caps*2)+player.healpoints < points) {
+            if(player.team == balance && player.stats[POINTS] < points) {
+                //points=player.kills+(player.caps*2)+player.healpoints;
+                points = player.stats[POINTS];
                 balanceplayer=player;
             }
         }

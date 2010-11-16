@@ -50,8 +50,7 @@
   <resource name="ReflectedStickyS" type="RESOURCE"/>
   <resource name="RespawnTimerS" type="RESOURCE"/>
   <resource name="infinity" type="RESOURCE"/>
-  <resource name="Domination" type="RESOURCE"/>
-  <resource name="Nemesis" type="RESOURCE"/>
-  <resource name="ScoreIcons" type="RESOURCE"/>
+  <resource name="NemesisS" type="RESOURCE"/>
+  <resource name="MedalS" type="RESOURCE"/>
   <resource name="TimerOutlineS" type="RESOURCE"/>
 </resources>

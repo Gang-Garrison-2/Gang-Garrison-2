@@ -33,8 +33,8 @@ if global.myself.object != -1 {
         if global.myself.class==CLASS_SOLDIER {
             if global.myself.team == TEAM_BLUE toffset = 5;
             else toffset = 0;
-            reloadscalar = 100-global.myself.object.currentWeapon.alarm[5]/global.myself.object.currentWeapon.newRocketTime*100;
-            draw_sprite_ext(Rocketclip,global.myself.object.currentWeapon.rocketcount+toffset,xoffset+728,yoffset+ysize/1.26+86,2.4,2.4,0,c_white,100);
+            reloadscalar = 100-global.myself.object.currentWeapon.alarm[5]/global.myself.object.currentWeapon.reloadTime*100;
+            draw_sprite_ext(Rocketclip,global.myself.object.currentWeapon.ammoCount+toffset,xoffset+728,yoffset+ysize/1.26+86,2.4,2.4,0,c_white,100);
             draw_healthbar(xoffset+689,yoffset+ysize/1.26+90,xoffset+723,yoffset+ysize/1.26+98,reloadscalar,c_black,barcolor,barcolor,0,true,false);
         }
         else if global.myself.class==CLASS_DEMOMAN{        

@@ -16,9 +16,11 @@
         <argument kind="STRING">{
     xoffset=-5;
     yoffset=-4;
-    reloadTime=20;
-    shellCount = 6;
-    newShellTime = 15;
+    refireTime=20;
+    maxAmmo = 6
+    ammoCount = maxAmmo;
+    reloadTime = 15;
+    reloadBuffer = 0;
     idle=true;
 }
 </argument>

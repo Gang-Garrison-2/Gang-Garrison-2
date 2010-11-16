@@ -16,14 +16,16 @@
         <argument kind="STRING">{
     xoffset=-3;
     yoffset=-6;
-    reloadTime=18;
+    refireTime=18;
     StabreloadTime = 32;
     readyToStab = true;
     //alarm[1] = StabreloadTime;
 
     stabdirection=0;
-    bulletCount = 6;
-    newBulletTime = 55;
+    maxAmmo = 6;
+    bulletCount = maxAmmo;
+    reloadTime = 55;
+    reloadBuffer = 0;
     idle=true;
 }
 </argument>

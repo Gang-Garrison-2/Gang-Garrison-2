@@ -16,9 +16,10 @@
         <argument kind="STRING">{
     xoffset = -11;
     yoffset = 0;
-    reloadTime = 2;
+    refireTime = 2;
     sndlooping = false;
-    bullets = 200;
+    maxAmmo = 200;
+    ammoCount = maxAmmo;
 }
 </argument>
       </arguments>

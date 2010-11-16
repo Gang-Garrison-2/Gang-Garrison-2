@@ -17,7 +17,10 @@
     xoffset = -5;
     yoffset = -8;
     reloadTime = 40;
-    hitDamage=35;
+    baseDamage = 35
+    maxDamage = 85
+    chargeTime = 120;
+    hitDamage=baseDamage;
     shot=false;
     t=0;
 }

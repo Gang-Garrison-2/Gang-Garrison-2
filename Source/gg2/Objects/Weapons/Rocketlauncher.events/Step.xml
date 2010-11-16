@@ -13,10 +13,11 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if idle and readyToShoot and rocketcount&lt;4  and not alarm[5] {
+        <argument kind="STRING">/*if idle and readyToShoot and rocketcount&lt;4  and not alarm[5] {
     alarm[5] = newRocketTime;
 }
-idle = readyToShoot;</argument>
+idle = readyToShoot;
+</argument>
       </arguments>
     </action>
   </actions>
