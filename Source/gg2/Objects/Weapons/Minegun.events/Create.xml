@@ -20,7 +20,7 @@
     maxMines = 8;
     lobbed = 0;
     reloadTime = 20;
-    reloadBuffer = 0;
+    reloadBuffer = 26;
     maxAmmo = 8;
     ammoCount = maxAmmo;
     idle=true;

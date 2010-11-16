@@ -23,9 +23,9 @@
 
     stabdirection=0;
     maxAmmo = 6;
-    bulletCount = maxAmmo;
-    reloadTime = 55;
-    reloadBuffer = 0;
+    ammoCount = maxAmmo;
+    reloadTime = 45;
+    reloadBuffer = 18;
     idle=true;
 }
 </argument>

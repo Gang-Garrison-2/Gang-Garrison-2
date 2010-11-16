@@ -13,7 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if team == TEAM_BLUE || intel == true || global.mapchanging == 1 other.solid = false;
+        <argument kind="STRING">if team == TEAM_BLUE || intel == false || global.mapchanging == 1 other.solid = false;
 else other.solid = true;
 
         var oldx, oldy, oldhspeed, oldvspeed, distleft, hleft, vleft;

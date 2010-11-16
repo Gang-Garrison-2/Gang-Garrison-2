@@ -21,12 +21,12 @@
         randomize();
         
         shot = instance_create(x,y + yoffset + 1,Shot);
-        shot.direction=owner.aimDirection+ random(3)-1;
-        shot.speed=20;
+        shot.direction=owner.aimDirection+ random(2)-1;
+        shot.speed=21;
         shot.owner=owner;
         shot.ownerPlayer=ownerPlayer;
         shot.team=owner.team;
-        shot.damage = 25;
+        shot.damage = 28;
         shot.weapon=WEAPON_REVOLVER;
         with(shot) {
             hspeed+=owner.hspeed;

@@ -20,7 +20,7 @@
     maxAmmo = 8
     ammoCount = maxAmmo;
     reloadTime = 15;
-    reloadBuffer = 0;
+    reloadBuffer = 20;
     idle=true;
 }
 </argument>

@@ -18,8 +18,9 @@
     yoffset += sprite_yoffset;
     readyToShoot = false;
     justShot = false;
-    alarm[0] = reloadTime;
-}</argument>
+    alarm[0] = refireTime;
+}
+</argument>
       </arguments>
     </action>
   </actions>

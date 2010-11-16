@@ -16,7 +16,7 @@
         <argument kind="STRING">{
     xoffset = 0;
     yoffset = -3;
-    refireTime = 5;
+    refireTime = 4;
     bubbleCount = 0;
     BladesOut = 0;
     MaxBlades = 1;

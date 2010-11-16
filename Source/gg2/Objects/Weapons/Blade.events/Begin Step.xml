@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<event category="ALARM" id="5">
+<event category="STEP" id="1">
   <actions>
     <action id="603" library="1">
       <!--action name: Code-->
@@ -13,7 +13,8 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">ammoCount = maxAmmo;
+        <argument kind="STRING">if ammoCount &lt; 0 ammoCount = 0;
+else if ammoCount &lt;= maxAmmo ammoCount +=2;
 </argument>
       </arguments>
     </action>

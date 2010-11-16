@@ -21,7 +21,7 @@
 else
     t = 0;
 //hitDamage = 35 + owner.zoomed*floor(sqrt(t*125/6));  
-hitDamage = baseDamage + owner.zoomed*floor(sqrt(t*(sqr(maxDamage-baseDamage)/chargeTime));
+hitDamage = baseDamage + owner.zoomed*floor(sqrt(t*(sqr(maxDamage-baseDamage)/chargeTime)));
 </argument>
       </arguments>
     </action>
