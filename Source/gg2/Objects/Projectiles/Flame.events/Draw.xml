@@ -14,8 +14,8 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">if sticksTo != -1 draw_sprite_ext(sprite_index, image_index, x, y, image_xscale, image_yscale, 0, c_white, extinguish);
-//else if blasted == true draw_sprite_ext(sprite_index, image_index, x, y, image_xscale, image_yscale, direction, c_white, 1);
-else draw_sprite_ext(sprite_index, image_index, x, y, image_xscale, image_yscale, 0, c_white, 1);</argument>
+else draw_sprite_ext(sprite_index, image_index, x, y, image_xscale, image_yscale, 0, c_white, 1);
+</argument>
       </arguments>
     </action>
   </actions>

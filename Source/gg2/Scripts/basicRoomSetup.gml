@@ -23,7 +23,10 @@ if global.totalMapAreas > 1 {
 }
 
 offloadSpawnPoints();
-with Player canSpawn = 1;
+with(Player) {
+    canSpawn = 1;
+    humiliated = 0;
+}
 
 if instance_exists(IntelligenceBaseBlue) || instance_exists(IntelligenceBaseRed) || instance_exists(IntelligenceRed) || instance_exists(IntelligenceBlue) instance_create(0,0,ScorePanel);
 else if instance_exists(GeneratorBlue) || instance_exists(GeneratorRed) {
@@ -47,8 +50,6 @@ if(global.ingameMusic) {
     AudioControlPlaySong(global.IngameMusic, true);
 }
 instance_create(map_width()/2,map_height()/2,Spectator);
-
-global.myself.humiliated=0;
 
 global.redCaps = 0;
 global.blueCaps = 0;

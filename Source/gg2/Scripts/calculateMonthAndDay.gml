@@ -4,6 +4,7 @@ if date_get_month(currentDate) == 4 && date_get_day(currentDate) == 1 {
     sprite_assign(BubblesS, BubbleFaceS);
 }
 else global.aFirst = false;
+
 if date_get_month(currentDate) == 9 && date_get_day(currentDate) == 7 {
     global.gg_birthday = true;
     partyTime();

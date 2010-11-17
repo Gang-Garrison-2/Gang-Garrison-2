@@ -31,6 +31,5 @@
     sprite_assign(CurlyBlueS, CurlyBlueSP);
     sprite_assign(BackstabRedS, BackstabRedSP);
     sprite_assign(BackstabBlueS, BackstabBlueSP);
-    sprite_assign(OmnomnomnomS, OmnomnomnomSP);
     sprite_assign(BloodDropS, BloodDropSP);
 }

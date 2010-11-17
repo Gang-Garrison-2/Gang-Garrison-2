@@ -6,7 +6,6 @@
     global.joiningPlayers = ds_list_create();
     global.players = ds_list_create();
     global.sendBuffer = createbuffer();
-    global.receiveBuffer = createbuffer();
     global.eventBuffer = createbuffer();      // Buffer for events that happen during the step
     global.currentMapIndex = 0;
     serverbalance=0;
@@ -53,7 +52,6 @@
     global.playerID = 0;
     global.myself = serverPlayer;
     playerControl = instance_create(0,0,PlayerControl);
-    global.playerCtrl = playerControl;
         
     global.currentMap = ds_list_find_value(global.map_rotation, global.currentMapIndex);
     if(file_exists("Maps/" + global.currentMap + ".png")) { // if this is an external map

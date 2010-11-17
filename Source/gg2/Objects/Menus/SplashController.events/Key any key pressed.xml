@@ -15,8 +15,9 @@
       <arguments>
         <argument kind="STRING">{
     //if sound_isplaying(FaucetMusic) sound_stop(FaucetMusic);
-    room_goto(Menu);
-}</argument>
+    room_goto_fix(Menu);
+}
+</argument>
       </arguments>
     </action>
   </actions>

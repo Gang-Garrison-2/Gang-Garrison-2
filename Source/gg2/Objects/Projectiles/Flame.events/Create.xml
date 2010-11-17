@@ -18,7 +18,7 @@ alarm[0] = 15;
 burnDamage = 0.06;
 sticksTo = -1;
 extinguish = 0.3;
-//blasted = false;</argument>
+</argument>
       </arguments>
     </action>
   </actions>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<event category="KEYPRESS" id="57">
+<event category="OTHER" id="10">
   <actions>
     <action id="603" library="1">
       <!--action name: Code-->
@@ -13,23 +13,21 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">// SauceMod map changer.
-
-if (global.mapchanging == 0)
-{
-if (global.isHost == false)
-{
-    done = true;
+        <argument kind="STRING">if (startDirection &gt; 0) {
+    direction=0;
+} else {
+    direction=180;
 }
 
-else
-{
-    if (firstPage == 1)
-    {
-        
-    }
+if(team == TEAM_RED) {
+    rotateoffset=0;
+} else {
+    rotateoffset=5;
 }
-}
+
+rotatestart = rotateoffset;
+rotateend = rotateoffset+4;
+rotateindex = rotatestart;
 </argument>
       </arguments>
     </action>

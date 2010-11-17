@@ -28,34 +28,12 @@
 }         
 if(hp&gt;maxHp) hp=maxHp;
 
-if (built == 1)
-{   
-    /*   This code was for creating "spacey" sounds if the Sentry was in a "room", but it doesn't work so well (co-ords off?)
-    if (idleTimer == true &amp;&amp; collision_rectangle(x-150,y-100,x+150,y-20,Obstacle,false,true)&gt;=0)
-    {
-        playsound(x,y,SentryIdleInRoom);      &lt;---- the spacey sound
-        alarm[5] = 60;    
-    }
-    else if (idleTimer == true &amp;&amp; collision_rectangle(x-150,y-100,x+150,y-20,Obstacle,false,true)&lt;0)
-    {
-        playsound(x,y,SentryIdle);           &lt;----- original sound
-        alarm[5] = 60;
-    }
-    */
-    
-    if (idleTimer == true)
-    {
+if (built == 1) {
+    if (idleTimer == true) {
         playsound(x,y,SentryIdle);
         alarm[5] = 90;    
     }    
     idleTimer = false;
-    
-    /*
-    if (global.mapchanging != 1)
-    {
-        noticedTarget = SentryTurret.noticedTarget;
-    }
-    */
 }
 </argument>
       </arguments>

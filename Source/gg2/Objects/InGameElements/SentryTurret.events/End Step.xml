@@ -109,7 +109,7 @@ if(nearestTarget == -1) {
     
     noticedTarget = false;
     
-    if((readyToShoot) &amp;&amp; rotating == false) {
+    if(readyToShoot &amp;&amp; (rotating == false)) {
         direction = point_direction(x,y,nearestTarget.x,nearestTarget.y);
         
         // Prevent the turret from turning too high even if it is shooting in that direction.
@@ -150,28 +150,13 @@ if(nearestTarget == -1) {
     }
 }
 
-if(team == TEAM_RED) {
-    rotateoffset=0;
-} else {
-    rotateoffset=5;
-}
-        
-if(image_xscale &gt; 0) {
-    rotatestart = rotateoffset;
-    rotateend = rotateoffset+4;
-} else {
-    rotatestart = rotateoffset+4;
-    rotateend = rotateoffset;
-}       
-
-if(rotating == false) {
-    rotateindex = rotatestart;
-} else {
-    rotateindex += 0.3*sign(image_xscale);
-    if((rotateindex &gt;= rotateend &amp;&amp; rotatestart &lt; rotateend) || (rotateindex &lt;= rotateend &amp;&amp; rotatestart &gt; rotateend)) {
+if(rotating) {
+    rotateindex += 0.3;
+    if(rotateindex &gt;= rotateend) {
         image_xscale = -image_xscale;
         direction += 180;
         rotating = false;
+        rotateindex = rotatestart;
     }
 }
 </argument>

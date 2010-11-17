@@ -13,37 +13,36 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">    if(sticksTo == -1 and other.id != ownerPlayer.object and other.team != team &amp;&amp; other.ubered == 0  &amp;&amp; other.hp &gt; 0) {
-        other.hp -= hitDamage;
-//new stuff
-            if (other.lastDamageDealer != ownerPlayer &amp;&amp; other.lastDamageDealer != other.player){
-                other.secondToLastDamageDealer = other.lastDamageDealer;
-                other.alarm[4] = other.alarm[3]
-            }
-            other.alarm[3] = ASSIST_TIME;
-//end new stuff
-        other.lastDamageDealer = ownerPlayer;
-        other.lastDamageSource = weapon;
-        if(object_is_ancestor(other.object_index, Pyro) or (other.flamecount&gt;7) or other.ubered == 1) {
-            instance_destroy();
-        } else if other.ubered == 0 {
-            /*if blasted == true {
-                sprite_index = FlameS;
-                hspeed = 0;
-                repeat(2){
-                    landedBlast = instance_copy(true);
-                    landedBlast.x+= -3 + random(6);
-                    landedBlast.y+= -3 + random(6);
-                }
-            }*/
-            sticksTo = other.id;
-            stickRelativeX = x-other.x;
-            stickRelativeY = y-other.y;
-            speed=0;
-            alarm[0]=150;
-            other.flamecount += 1;
-        }
+        <argument kind="STRING">if(sticksTo == -1 and other.id != ownerPlayer.object and other.team != team &amp;&amp; other.ubered == 0  &amp;&amp; other.hp &gt; 0) {
+    other.hp -= hitDamage;
+    if (other.lastDamageDealer != ownerPlayer &amp;&amp; other.lastDamageDealer != other.player){
+        other.secondToLastDamageDealer = other.lastDamageDealer;
+        other.alarm[4] = other.alarm[3]
     }
+    other.alarm[3] = ASSIST_TIME;
+    other.lastDamageDealer = ownerPlayer;
+    other.lastDamageSource = weapon;
+    if(object_is_ancestor(other.object_index, Pyro) or other.ubered == 1) {
+        instance_destroy();
+    } else {
+        if(other.flamecount&gt;7) {
+            var character;
+            character = other.id;
+            with(Flame) {
+                if(sticksTo == character) {
+                    instance_destroy();
+                    break;
+                }
+            }
+        }
+        sticksTo = other.id;
+        stickRelativeX = x-other.x;
+        stickRelativeY = y-other.y;
+        speed=0;
+        alarm[0]=150;
+        other.flamecount += 1;
+    }
+}
 </argument>
       </arguments>
     </action>

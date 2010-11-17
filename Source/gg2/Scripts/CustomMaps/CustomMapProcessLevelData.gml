@@ -13,7 +13,9 @@
   WALKMASKTAG = "{WALKMASK}";
   ENDWALKMASKTAG = "{END WALKMASK}";
   DIVIDER = chr(10);
-  
+  draw_clear(c_white)
+  draw_text_transformed(200,200,"LOADING...",2,2,0)
+
   // grab the walkmask data
   a = string_pos(WALKMASKTAG, argument0);
   b = string_pos(ENDWALKMASKTAG, argument0);
@@ -21,18 +23,22 @@
     show_message("Error: This file does not contain valid level data.");
     break;
   }
+  set_automatic_draw(0)
   walkmaskString = string_copy(argument0, a + string_length(WALKMASKTAG) + string_length(DIVIDER), b - a - string_length(WALKMASKTAG) - string_length(DIVIDER) - 1);
   
   // create the walkmask surface
   walkmaskSurface = CustomMapDecompressWalkmaskToSurface(walkmaskString);
-  
+  draw_text_transformed(200,200,"LOADING...",2,2,0)
+  screen_refresh()
+  io_handle()
   // convert it to a sprite, and delete the surface
   if(global.CustomMapCollisionSprite != -1) {
     sprite_delete(global.CustomMapCollisionSprite);
   }
   global.CustomMapCollisionSprite = sprite_create_from_surface(walkmaskSurface, 0, 0, surface_get_width(walkmaskSurface), surface_get_height(walkmaskSurface), true, true, 0, 0);
+    draw_text_transformed(200,200,"LOADING...",2,2,0)
   surface_free(walkmaskSurface);
-
+  screen_refresh()
 
   // grab the entity data
   a = string_pos(ENTITYTAG, argument0);
@@ -44,5 +50,6 @@
   entityString = string_copy(argument0, a + string_length(ENTITYTAG) + string_length(DIVIDER), b - a - string_length(ENTITYTAG) - string_length(DIVIDER) - 1);
   
   // create entities
+    screen_refresh()
   CustomMapCreateEntitiesFromEntityData(entityString);
 }

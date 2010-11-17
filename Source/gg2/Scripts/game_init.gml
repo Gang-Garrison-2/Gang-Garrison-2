@@ -8,7 +8,6 @@
     global.IngameMusic=sound_add("Music/ingamemusic.wav", 1, true);
     global.FaucetMusic=sound_add("Music/faucetmusic.wav", 1, true);
 
-    global.receiveBuffer = createbuffer();
     global.sendBuffer = createbuffer();
     global.tempBuffer = createbuffer();
     global.HudCheck = false;
@@ -291,7 +290,7 @@ global.launchMap = "";
     
     if(global.dedicatedMode == 1) {
         AudioControlToggleMute();
-        room_goto(Menu);
+        room_goto_fix(Menu);
     }
     
     // custom dialog box graphics

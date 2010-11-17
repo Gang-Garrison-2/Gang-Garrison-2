@@ -23,4 +23,6 @@
   <resource name="sendEventKothUnlockCP" type="RESOURCE"/>
   <resource name="doEventArenaEndRound" type="RESOURCE"/>
   <resource name="doEventKothUnlockCP" type="RESOURCE"/>
+  <resource name="sendEventArenaRestart" type="RESOURCE"/>
+  <resource name="doEventArenaRestart" type="RESOURCE"/>
 </resources>

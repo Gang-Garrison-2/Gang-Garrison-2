@@ -6,9 +6,11 @@
   var width, height;
   var TRANSPARENT_COLOR, SOLID_COLOR;
   var DIVIDER;
+  frame=0
   TRANSPARENT_COLOR = c_white;
   SOLID_COLOR = c_black;
   DIVIDER = chr(10);
+  set_automatic_draw(0) // manual drawing tiem
   
   // extract the width and height from the compressed walkmask
   var temp;
@@ -49,14 +51,18 @@
         string_index -= 1; // grab the preview character
         num_value = ord(string_char_at(argument0, string_index)) - 32;
         bit_mask = 1;
+
       }
+      frame+=1
+       if frame mod 20 = 20{screen_redraw(); screen_refresh();io_handle()}
       // draw a solid dot if this bit is a 1
       if(num_value & bit_mask) draw_point(b, a);
       bit_mask *= 2;
     }
+           
   }
   
   surface_reset_target();
-  
+  set_automatic_draw(1)
   return wm_surface;
 }

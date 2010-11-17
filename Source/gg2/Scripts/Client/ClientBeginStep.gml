@@ -338,17 +338,7 @@ do {
                   break;   
               
               case ARENA_RESTART:
-                  with ArenaHUD {
-                    endCount = 0;
-                    winners = TEAM_SPECTATOR;
-                    roundStart = 300;
-                    cpUnlock = 1800;
-                    ArenaControlPoint.team = -1;
-                    ArenaControlPoint.locked = 1;
-                    with Sentry instance_destroy();
-                    with SentryGibs instance_destroy();
-                  }
-                  with Player humiliated = 0;
+                  doEventArenaRestart();
                   break;
                   
               case ARENA_UNLOCKCP:

@@ -51,76 +51,11 @@ if(global.myself.object != -1) {
     playerControl.keybyte = 0;
 }
 
-    client = tcpaccept(global.tcpListener, 1);
-    if(client != 0) {
-        setformat(client, 2, 0);
-        setnagle(client, true);
-        
-        joiningPlayer = instance_create(0,0,JoiningPlayer);
-        joiningPlayer.socket = client;
+clearbuffer(global.sendBuffer);
 
-        clearbuffer(global.sendBuffer);
-
-        receiveBuffer = joiningPlayer.buffer;
-        socket = joiningPlayer.socket;
-    
-        setsync(socket, 1);
-        sockstatus = nibbleMessage(socket,2,receiveBuffer);
-        setpos(0, receiveBuffer);
-    
-        if(sockstatus == 2) {
-        // Connection closed unexpectedly, remove client
-            with(joiningPlayer) {
-                instance_destroy();
-            }
-
-        } else if(sockstatus == 0) {
-
-            if(ds_list_size(global.players) == global.playerLimit) {
-                limit = 1;
-            }
-        
-            if((readbyte(receiveBuffer) == PLAYER_JOIN) and (limit != 1))
-            {
-                                        
-                    size = readbyte(receiveBuffer);
-                    sockstatus = nibbleMessage(socket,size+2,receiveBuffer);
-                    if(sockstatus == 0) {                        
-                        clearbuffer(0);
-                        ServerJoinUpdate(0);
-                    
-                        player = instance_create(0,0,Player);
-                        player.name = readchars(size, receiveBuffer);
-                        player.name = string_copy(player.name, 0, min(string_length(player.name), MAX_PLAYERNAME_LENGTH));
-                        if string_count("#",player.name) > 0 {
-                            player.name = "I <3 Bacon";
-                        }
-                        
-                        player.socket = socket;
-                        ds_list_add(global.players, player);
-                        
-                        sendMessageNonblock(socket, 0);
-                        copybuffer(player.sendBuffer, 0);
-                        
-                        with(joiningPlayer) {
-                            instance_destroy();
-                        }
-                
-                        ServerPlayerJoin(player.name, global.sendBuffer);
-                    }
-            }
-            else {
-                clearbuffer(0);
-                if(limit) {
-                    ServerServerFull(0);
-                    sendMessageNonblock(socket,0);
-                }
-                closesocket(socket);
-                with(joiningPlayer) {
-                    instance_destroy();
-                }
-        }
-    }
+acceptJoiningPlayer();
+with(JoiningPlayer) {
+    serviceJoiningPlayer();
 }
 
 // Service all players
@@ -433,9 +368,6 @@ for(i=0; i<ds_list_size(global.players); i+=1) {
         }
         // remove the processed bytes from the buffer        
         if(hitBufferEnd) {
-            if(not variable_global_exists("tempBuffer")) {
-                global.tempBuffer = createbuffer();
-            }
             clearbuffer(global.tempBuffer);
             copybuffer2(global.tempBuffer, processedUntil, buffsize(receiveBuffer)-processedUntil, receiveBuffer);
             clearbuffer(receiveBuffer);

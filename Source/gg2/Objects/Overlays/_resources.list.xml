@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
-  <resource name="Admin_Menus" type="GROUP"/>
   <resource name="TeamSelectController" type="RESOURCE"/>
   <resource name="ClassSelectController" type="RESOURCE"/>
   <resource name="ScoreTableController" type="RESOURCE"/>
