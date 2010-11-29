@@ -17,7 +17,19 @@
     receiveCompleteMessage(global.serverSocket,3,global.deserializeBuffer);
     keyState = readbyte(global.deserializeBuffer);
     aimDirection = readshort(global.deserializeBuffer)*360/65536;
-    
+    if (player.class == CLASS_SPY)
+    {
+    receiveCompleteMessage(global.serverSocket,1,global.deserializeBuffer);
+    event = readbyte(global.deserializeBuffer);
+    if (event != 0)
+    {
+    receiveCompleteMessage(global.serverSocket,4,global.deserializeBuffer);
+    sx = readushort(global.deserializeBuffer)/5;
+    sy = readushort(global.deserializeBuffer)/5;
+    if (event == 1) playsound(sx,sy,JumpSnd);
+    else if (event = 2) x = sx; y = sy;
+    }
+    }
     var temp, newIntel;
     if(global.updateType == QUICK_UPDATE or global.updateType == FULL_UPDATE) {
         receiveCompleteMessage(global.serverSocket,8,global.deserializeBuffer);
@@ -27,13 +39,10 @@
         vspeed = readsbyte(global.deserializeBuffer)/5;
         xprevious = x;
         yprevious = y;
-        
         hp = readbyte(global.deserializeBuffer);
-        
         temp = readbyte(global.deserializeBuffer);
         cloak = (temp &amp; $01 != 0);
         newIntel = (temp &amp; $02 != 0);
-        
         // Drop the intel if intel changes from true to false, destroy the intel when if changes from false to true
         // This is more of a workaround to keep 2.1.2 compatible with 2.1.1, it should be solved later by
         // fully syncing intel drop.
@@ -67,7 +76,8 @@
     }
     
     event_user(1);
-}</argument>
+}
+</argument>
       </arguments>
     </action>
   </actions>

@@ -17,20 +17,37 @@
     var temp;
     writebyte(keyState, global.serializeBuffer);
     writeshort(netAimDirection, global.serializeBuffer);
-
-    if(global.updateType == QUICK_UPDATE or global.updateType == FULL_UPDATE) {
+    if (player.class == CLASS_SPY)
+    if (spyjump || spystab || inRange)
+    {
+        if (spyjump) writebyte(1, global.serializeBuffer);
+        else if (spystab || inRange) writebyte(2, global.serializeBuffer);
+        spyjump = false;
+        spystab = false;
         writeushort(round(x*5), global.serializeBuffer);
         writeushort(round(y*5), global.serializeBuffer);
+    }
+    else writebyte(0, global.serializeBuffer);
+    if(global.updateType == QUICK_UPDATE or global.updateType == FULL_UPDATE) {
+        if (cloak &amp;&amp; !inRange &amp;&amp; global.buffer_team != player.team)
+        {
+        writeushort(0, global.serializeBuffer);
+        writeushort(0, global.serializeBuffer);
+        }
+        else
+        {
+        writeushort(round(x*5), global.serializeBuffer);
+        writeushort(round(y*5), global.serializeBuffer);
+        }
         writebyte(round(hspeed*5), global.serializeBuffer);
         writebyte(round(vspeed*5), global.serializeBuffer);
         writebyte(ceil(hp), global.serializeBuffer);
-        
         temp = 0;
         if(cloak) temp |= $01;
         if(intel) temp |= $02;
-        writebyte(temp, global.serializeBuffer);               
+        writebyte(temp, global.serializeBuffer);      
     }
-        
+    
     if(global.updateType == FULL_UPDATE) {
         writebyte(animationOffset, global.serializeBuffer);
         writebyte(round(cloakAlpha*255), global.serializeBuffer);
@@ -40,7 +57,8 @@
         }
         
     }
-}</argument>
+}
+</argument>
       </arguments>
     </action>
   </actions>

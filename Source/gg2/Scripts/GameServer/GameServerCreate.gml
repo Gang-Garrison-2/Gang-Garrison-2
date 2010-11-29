@@ -3,6 +3,13 @@
     if global.dedicatedMode == 1 { 
         global.playerLimit += 1;
     }
+    //Vindicator
+    global.buffer_team = TEAM_SPECTATOR;
+    global.buffer_switch = false;
+    global.buffer_all = createbuffer();
+    global.buffer_red = createbuffer();
+    global.buffer_blue = createbuffer();
+    ////
     global.joiningPlayers = ds_list_create();
     global.players = ds_list_create();
     global.sendBuffer = createbuffer();

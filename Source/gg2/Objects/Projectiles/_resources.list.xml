@@ -12,4 +12,5 @@
   <resource name="Mine" type="RESOURCE"/>
   <resource name="Needle" type="RESOURCE"/>
   <resource name="AirBlastO" type="RESOURCE"/>
+  <resource name="Projectile" type="RESOURCE"/>
 </resources>

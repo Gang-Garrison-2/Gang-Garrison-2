@@ -29,8 +29,8 @@
 }
 
 else if killedby.object != -1 {
-    view_xview=killedby.object.x-400;
-    view_yview=killedby.object.y-300;
+    view_xview=killedby.lastKnownx-400;
+    view_yview=killedby.lastKnowny-300;
     hp=killedby.object.hp;
     maxHp=killedby.object.maxHp
 }

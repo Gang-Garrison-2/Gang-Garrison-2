@@ -383,11 +383,27 @@ if syncTimer == 1 || ((frame mod 3600)==0) || global.setupTimer == 180 {
     syncTimer = 0;
 }
 
+global.buffer_team = TEAM_SPECTATOR;
 if((frame mod 7) == 0) {
-    serializeState(QUICK_UPDATE, global.sendBuffer);
+    //Copy normal data into new buffer
+    //serializeState(QUICK_UPDATE, global.sendBuffer);
+    //Toggle to red team
+    global.buffer_team = TEAM_RED;
+    clearbuffer(global.buffer_red);
+    serializeState(QUICK_UPDATE, global.buffer_red);
+    //Toggle to blue team
+    global.buffer_team = TEAM_BLUE;
+    clearbuffer(global.buffer_blue);
+    serializeState(QUICK_UPDATE, global.buffer_blue);
+    global.buffer_team = TEAM_SPECTATOR;
+    //Toggle back to all
+    clearbuffer(global.buffer_all);
+    serializeState(QUICK_UPDATE, global.buffer_all);
+    global.buffer_switch = true;
 } else {
-    serializeState(INPUTSTATE, global.sendBuffer);
+serializeState(INPUTSTATE, global.sendBuffer);
 }
+
 
 
 
@@ -482,10 +498,17 @@ if(impendingMapChange == 0) {
 for(i=1; i<ds_list_size(global.players); i+=1) {
     player = ds_list_find_value(global.players, i);
     socket = player.socket;
-    copybuffer(player.sendBuffer, global.eventBuffer);
-    copybuffer(player.sendBuffer, global.sendBuffer);
+    copybuffer(player.sendBuffer, global.eventBuffer); //Events
+    copybuffer(player.sendBuffer, global.sendBuffer); //Player info
+    if (global.buffer_switch)
+    {
+    if (player.team == TEAM_RED) copybuffer(player.sendBuffer, global.buffer_red);
+    else if (player.team == TEAM_BLUE) copybuffer(player.sendBuffer, global.buffer_blue);
+    else copybuffer(player.sendBuffer, global.buffer_all);
+    }
     sendMessageNonblock(socket, player.sendBuffer);
 }
+if (global.buffer_switch) global.buffer_switch = false;
 clearbuffer(global.eventBuffer);
 
 with(Character) {

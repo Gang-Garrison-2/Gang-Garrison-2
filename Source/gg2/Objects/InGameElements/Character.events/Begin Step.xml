@@ -13,7 +13,30 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if(pressedKeys &amp; $01) &amp;&amp; taunting==false &amp;&amp; omnomnomnom==false {
+        <argument kind="STRING">if (cloak)
+{
+            inRange = false;
+            with (Projectile) if (point_distance(x,y,other.x,other.y) &lt; 100 &amp;&amp; team != other.team) then other.inRange = true;
+            with (StabMask) if (point_distance(x,y,other.x,other.y) &lt; 50) then other.inRange = true;
+            with (StabAnim) if (point_distance(x,y,other.x,other.y) &lt; 50) then other.inRange = true;
+            with (SentryTurret)
+            {
+                if (team != other.team &amp;&amp; point_distance(x,y,other.x,other.y) &lt; 375
+                    &amp;&amp; collision_line(x,y,other.x,other.y,Obstacle,true,true) &lt; 0 ) other.inRange = true;
+            }
+            with (Character)
+            {
+                if (player.team != other.player.team &amp;&amp; player.class == CLASS_SNIPER &amp;&amp; abs((abs(point_direction(x,y,other.x,other.y)) - abs(aimDirection))) &lt; 5) then other.inRange = true;
+                if (other.id != id &amp;&amp; other.team != team &amp;&amp; point_distance(x,y,other.x,other.y) &lt; 40) then other.inRange = true;
+            }
+            if (moveStatus == 2 || rocketjuggled){
+            other.inRange = true;
+            rocketjuggled = false;
+            }
+}
+else inRange = false;
+
+if(pressedKeys &amp; $01) &amp;&amp; taunting==false &amp;&amp; omnomnomnom==false {
     if taunting==false &amp;&amp; !invisible &amp;&amp; cloakAlpha == 1 taunting=true;
     if team==TEAM_RED {
         tauntindex=0;
@@ -38,6 +61,7 @@ if(pressedKeys &amp; $80) &amp;&amp; taunting==false &amp;&amp; omnomnomnom==fal
             playsound(x,y,JumpSnd);
             vspeed = -jumpStrength;
         }
+        if(player.class == CLASS_SPY &amp;&amp; cloak) spyjump = true;
     }
     else if((canDoublejump == 1) and (doublejumpUsed == 0) and (vspeed&gt;-jumpStrength)) {
         vspeed = -jumpStrength;
@@ -53,7 +77,11 @@ xsize = view_wview[0];
 ysize = view_hview[0];
    
 if(keyState &amp; $10)  &amp;&amp; taunting==false &amp;&amp; omnomnomnom==false {
-    if (global.isHost==true) || (global.isHost==false &amp;&amp; distance_to_point(xoffset+xsize/2,yoffset+ysize/2) &lt; 1600) || (player.class == CLASS_DEMOMAN) with(currentWeapon) event_user(1);
+    if (global.isHost==true) || (global.isHost==false &amp;&amp; distance_to_point(xoffset+xsize/2,yoffset+ysize/2) &lt; 1600) || (player.class == CLASS_DEMOMAN)
+    {
+    with(currentWeapon) event_user(1);
+    if(player.class == CLASS_SPY &amp;&amp; cloak) spystab = true;
+    }
 } else {
     with(currentWeapon) event_user(3);
 }
@@ -69,7 +97,11 @@ if ((pressedKeys &amp; $08) &amp;&amp; canCloak &amp;&amp; ((cloakAlpha &lt;= 0.
 }
 
 if moveStatus == 1 speedfactor = 0.65;
-else if moveStatus == 2 speedfactor = 0.17;
+else if moveStatus == 2
+{
+    speedfactor = 0.17;
+    rocketjuggled = true;
+}
 else if moveStatus == 3 speedfactor = 0.1;
 else speedfactor = 0.85;
 

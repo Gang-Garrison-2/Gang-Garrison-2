@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <event category="DRAW" id="0">
   <actions>
     <action id="603" library="1">
@@ -40,7 +40,7 @@ if global.myself == -1 &amp;&amp; cloakAlpha==1{
 } else if (!invisible) {
     image_alpha = cloakAlpha;
 } else {
-    exit;
+    //exit;
 }
    
 if global.myself.team == team &amp;&amp; cloakAlpha&lt;0.5 {
@@ -66,12 +66,10 @@ if(distance_to_point(mouse_x, mouse_y)&lt;25) {
     }
 draw_text(xr, yr-35, player.name);
 }  
-/*else
-{
-    //Display Domination
-    consKills = ds_list_find_value(player.dominations,ds_list_find_index(player.domPlayers,global.myself));
-    if (consKills &gt;= 4) draw_sprite_ext(Domination,player.team,x,y-35,0.5,0.5,0,c_white,cloakAlpha);
-}*/
+//spy HAAAAXXXX
+if (cloakAlpha &lt; 0.5) cloakAlpha = 0.5;
+
+
 draw_set_alpha(1);
 if team == TEAM_RED ubercolour = c_red;
 if team == TEAM_BLUE ubercolour = c_blue;
