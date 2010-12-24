@@ -61,20 +61,36 @@ draw_text(xr, yr-35, player.name);
 draw_set_alpha(1);
 if team == TEAM_RED ubercolour = c_red;
 if team == TEAM_BLUE ubercolour = c_blue;
-    
+
+var hatSuffix;
+switch(player.hat) {
+    case 1:
+        hatSuffix = "X";
+        break;
+    case 2:
+        hatSuffix = "P";
+        break;
+    default:
+        hatSuffix = "";
+}
+
 if omnomnomnom == true {
-    draw_sprite_ext(OmnomnomnomS,omnomnomnomindex,xr,yr,image_xscale,image_yscale,image_angle,c_white,1);
-    if ubered == 1 draw_sprite_ext(OmnomnomnomS,omnomnomnomindex,xr,yr,image_xscale,image_yscale,image_angle,ubercolour,0.7);
-}
-else if taunting == true{
-    draw_sprite_ext(tauntsprite,tauntindex,xr,yr,image_xscale,image_yscale,image_angle,c_white,1);
-    if ubered == 1 draw_sprite_ext(tauntsprite,tauntindex,xr,yr,image_xscale,image_yscale,image_angle,ubercolour,0.7);
-}
-else if taunting == false {
-    if ubered == 0 draw_sprite_ext(sprite_index,floor(animationImage+animationOffset),xr,yr,image_xscale,image_yscale,image_angle,c_white,cloakAlpha);
+    var hatOmnomnomSprite;
+    hatOmnomnomSprite = execute_string("return OmnomnomnomS"+hatSuffix+";");
+    draw_sprite_ext(hatOmnomnomSprite,omnomnomnomindex,xr,yr,image_xscale,image_yscale,image_angle,c_white,1);
+    if ubered == 1 draw_sprite_ext(hatOmnomnomSprite,omnomnomnomindex,xr,yr,image_xscale,image_yscale,image_angle,ubercolour,0.7);
+} else if taunting == true{
+    var hatTauntSprite;
+    hatTauntSprite = execute_string("return "+sprite_get_name(tauntsprite)+hatSuffix+";");
+    draw_sprite_ext(hatTauntSprite,tauntindex,xr,yr,image_xscale,image_yscale,image_angle,c_white,1);
+    if ubered == 1 draw_sprite_ext(hatTauntSprite,tauntindex,xr,yr,image_xscale,image_yscale,image_angle,ubercolour,0.7);
+} else if taunting == false {
+    var hatSprite;
+    hatSprite = execute_string("return "+sprite_get_name(sprite_index)+hatSuffix+";");
+    if ubered == 0 draw_sprite_ext(hatSprite,floor(animationImage+animationOffset),xr,yr,image_xscale,image_yscale,image_angle,c_white,cloakAlpha);
     else if ubered == 1 {
-        draw_sprite_ext(sprite_index,floor(animationImage+animationOffset),xr,yr,image_xscale,image_yscale,image_angle,c_white,1);
-        draw_sprite_ext(sprite_index,floor(animationImage+animationOffset),xr,yr,image_xscale,image_yscale,image_angle,ubercolour,0.7);
+        draw_sprite_ext(hatSprite,floor(animationImage+animationOffset),xr,yr,image_xscale,image_yscale,image_angle,c_white,1);
+        draw_sprite_ext(hatSprite,floor(animationImage+animationOffset),xr,yr,image_xscale,image_yscale,image_angle,ubercolour,0.7);
     }
 }
 </argument>

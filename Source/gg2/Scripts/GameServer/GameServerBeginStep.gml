@@ -79,6 +79,17 @@ for(i=0; i<ds_list_size(global.players); i+=1) {
         
         while((not hitBufferEnd) and (bytesleft(receiveBuffer)>=1)) {
             switch(readbyte(receiveBuffer)) {
+                case PLAYER_HAT:
+                    if(bytesleft(receiveBuffer)>=1) {
+                        player.hat = readbyte(receiveBuffer);
+                        player.hatAware = true;
+                        performHatUpdate = true;
+                        processedUntil = getpos(1, receiveBuffer);
+                    } else {
+                        hitBufferEnd = true;
+                    }
+                    break;
+                    
                 case PLAYER_LEAVE:
                     removePlayer(player);
                     ServerPlayerLeave(i);
@@ -416,13 +427,34 @@ if(impendingMapChange == 0) {
     }
 }
 
+var hatBuffer;
+hatBuffer = createbuffer();
+if(performHatUpdate) {
+    performHatUpdate = false;
+    writebyte(PLAYER_HAT, hatBuffer);
+    writebyte(ds_list_size(global.players), hatBuffer);
+    for(i=0; i<ds_list_size(global.players); i+=1) {
+        player = ds_list_find_value(global.players, i);
+        writebyte(player.hat, hatBuffer);
+    }
+    if(global.myHat != global.myself.hat) {
+        global.myHat = global.myself.hat;
+        ini_open("gg2.ini");
+        ini_write_real("Settings", "Festive", global.myHat);
+        ini_close();
+    }
+}
+
 for(i=1; i<ds_list_size(global.players); i+=1) {
     player = ds_list_find_value(global.players, i);
-    socket = player.socket;
     copybuffer(player.sendBuffer, global.eventBuffer);
     copybuffer(player.sendBuffer, global.sendBuffer);
-    sendMessageNonblock(socket, player.sendBuffer);
+    if(player.hatAware) {
+        copybuffer(player.sendBuffer, hatBuffer);
+    }
+    sendMessageNonblock(player.socket, player.sendBuffer);
 }
+freebuffer(hatBuffer);
 clearbuffer(global.eventBuffer);
 
 with(Character) {

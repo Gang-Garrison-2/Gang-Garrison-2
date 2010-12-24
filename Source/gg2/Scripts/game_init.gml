@@ -30,6 +30,7 @@
     global.particles =  ini_read_real("Settings", "Particles", PARTICLES_NORMAL);
     global.gibLevel = ini_read_real("Settings", "Gib Level", 3);
     global.killCam = ini_read_real("Settings", "Kill Cam", 1);
+    global.myHat = ini_read_real("Settings", "Festive", 0);
     global.monitorSync = ini_read_real("Settings", "Monitor Sync", 0);
     if global.monitorSync == 1 set_synchronization(true);
     else set_synchronization(false);
@@ -67,6 +68,7 @@
     ini_write_real("Settings", "Particles", global.particles);
     ini_write_real("Settings", "Gib Level", global.gibLevel);
     ini_write_real("Settings", "Kill Cam", global.killCam);
+    ini_write_real("Settings", "Festive", global.myHat);
     ini_write_real("Settings", "Monitor Sync", global.monitorSync);
     ini_write_real("Settings", "Healer Radar", global.medicRadar);
     ini_write_real("Settings", "Show Healer", global.showHealer);

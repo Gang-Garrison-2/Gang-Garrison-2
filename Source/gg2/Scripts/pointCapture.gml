@@ -11,6 +11,10 @@ with(Character) {
         if(player.team == other.point.cappingTeam) {
             ds_list_add(other.capList, player);
             player.caps +=1;
+            if(global.isHost and player.hat==0 and random(1)<0.33) {
+                player.hat = choose(1,2);
+                GameServer.performHatUpdate=true;
+            }
         }
         if(player == global.myself) {
             playsound(x,y,CPCapturedSnd);

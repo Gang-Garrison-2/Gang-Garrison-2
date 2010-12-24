@@ -49,6 +49,8 @@
         
     clearbuffer(global.sendBuffer);
     ClientPlayerJoin(global.playerName);
+    writebyte(PLAYER_HAT, global.sendBuffer);
+    writebyte(global.myHat, global.sendBuffer);
     sendmessage(global.serverSocket,0,0,global.sendBuffer);
         
 }

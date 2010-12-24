@@ -18,8 +18,13 @@
         sendEventScoreIntel(player);
         doEventScoreIntel(player);
         GameServer.syncTimer = 1;
+        if(player.hat==0 and random(1)&lt;0.5) {
+            player.hat = choose(1,2);
+            GameServer.performHatUpdate=true;
+        }
     }
-}</argument>
+}
+</argument>
       </arguments>
     </action>
   </actions>

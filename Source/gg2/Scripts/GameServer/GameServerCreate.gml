@@ -1,4 +1,5 @@
 {
+    performHatUpdate = true;
     maxplayers = global.playerLimit;
     if global.dedicatedMode == 1 { 
         global.playerLimit += 1;
@@ -31,6 +32,7 @@
     // Player 0 is reserved for the Server.
     serverPlayer = instance_create(0,0,Player);
     serverPlayer.name = global.playerName;
+    serverPlayer.hat = global.myHat;
     ds_list_add(global.players, serverPlayer);
 
     global.tcpListener = tcplisten(global.hostingPort, 2, true);

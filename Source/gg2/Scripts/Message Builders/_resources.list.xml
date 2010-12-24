@@ -10,4 +10,5 @@
   <resource name="ServerPlayerChangeclass" type="RESOURCE"/>
   <resource name="ServerChangeMap" type="RESOURCE"/>
   <resource name="ServerServerFull" type="RESOURCE"/>
+  <resource name="ServerPlayerHat" type="RESOURCE"/>
 </resources>

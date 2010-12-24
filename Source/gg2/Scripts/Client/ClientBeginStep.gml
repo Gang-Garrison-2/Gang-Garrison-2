@@ -169,7 +169,27 @@ do {
             player = ds_list_find_value(global.players, readbyte(0));
             doEventSpawn(player, readbyte(0));
             break;
-              
+            
+        case PLAYER_HAT:
+            receiveCompleteMessage(global.serverSocket,1,0);
+            var numPlayers;
+            numPlayers = readbyte(0);
+            if(numPlayers != ds_list_size(global.players)) {
+                show_message("Wrong number of players while deserializing hats.");
+            }
+            receiveCompleteMessage(global.serverSocket,numPlayers,0);
+            for(i=0; i<numPlayers; i+=1) {
+                player = ds_list_find_value(global.players, i);
+                player.hat = readbyte(0);
+                if(player==global.myself and global.myHat != player.hat) {
+                    global.myHat = player.hat;
+                    ini_open("gg2.ini");
+                    ini_write_real("Settings", "Festive", global.myHat);
+                    ini_close();
+                }
+            }
+            break;
+            
               case CHAT_BUBBLE:
                   var bubbleImage;
                   receiveCompleteMessage(global.serverSocket,2,0);

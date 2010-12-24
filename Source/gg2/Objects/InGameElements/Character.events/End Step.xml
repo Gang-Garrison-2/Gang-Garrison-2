@@ -16,6 +16,11 @@
         <argument kind="STRING">if(global.isHost &amp;&amp; hp&lt;=0) {
     sendEventPlayerDeath(player, lastDamageDealer, lastDamageSource);
     doEventPlayerDeath(player, lastDamageDealer, lastDamageSource);
+    if(player.hat&gt;0 and lastDamageDealer != -1 and lastDamageDealer != player and random(1)&lt;0.25) {
+        lastDamageDealer.hat = player.hat;
+        player.hat = 0;
+        GameServer.performHatUpdate=true;
+    }
     with(GameServer) {
         ServerBalanceTeams();
     }
