@@ -61,7 +61,7 @@ with(JoiningPlayer) {
 // Service all players
 for(i=0; i<ds_list_size(global.players); i+=1) {
     player = ds_list_find_value(global.players, i);
-       
+    player_exists = true;
     // Fill up the buffer from the player socket
     // 100 Bytes should be plenty.
     receiveBuffer = player.receiveBuffer;
@@ -82,6 +82,7 @@ for(i=0; i<ds_list_size(global.players); i+=1) {
                 case PLAYER_LEAVE:
                     removePlayer(player);
                     ServerPlayerLeave(i);
+                    player_exists = false;
                     i-=1;
                     hitBufferEnd = true;
                     break;
@@ -318,6 +319,8 @@ for(i=0; i<ds_list_size(global.players); i+=1) {
                     break; 
             }
         }
+        if (player_exists)
+        {
         if player.authorized == false && player != global.myself {
             player.passwordCount += 1;
             if player.passwordCount == 30*30 {
@@ -337,6 +340,7 @@ for(i=0; i<ds_list_size(global.players); i+=1) {
             copybuffer(receiveBuffer, global.tempBuffer);
         } else {
             clearbuffer(receiveBuffer);
+        }
         }
     }
 }
