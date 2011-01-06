@@ -79,6 +79,18 @@ for(i=0; i<ds_list_size(global.players); i+=1) {
         
         while((not hitBufferEnd) and (bytesleft(receiveBuffer)>=1)) {
             switch(readbyte(receiveBuffer)) {
+                case PLAYER_HAT:
+                    // Dummy command that does nothing
+                    // Added for compatibility with the xmas2010 version.
+                    // Can be removed any time after the next protocol change.
+                    if(bytesleft(receiveBuffer)>=1) {
+                        readbyte(receiveBuffer);
+                        processedUntil = getpos(1, receiveBuffer);
+                    } else {
+                        hitBufferEnd = true;
+                    }
+                    break;
+                    
                 case PLAYER_LEAVE:
                     removePlayer(player);
                     ServerPlayerLeave(i);

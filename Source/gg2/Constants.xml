@@ -43,6 +43,7 @@
   <constant name="KICK_PASSWORDCOUNT" value="39"/>
   <constant name="SCOPE_IN" value="40"/>
   <constant name="SCOPE_OUT" value="41"/>
+  <constant name="PLAYER_HAT" value="50"/>
   <constant name="TEAM_RED" value="0"/>
   <constant name="TEAM_BLUE" value="1"/>
   <constant name="TEAM_SPECTATOR" value="2"/>
