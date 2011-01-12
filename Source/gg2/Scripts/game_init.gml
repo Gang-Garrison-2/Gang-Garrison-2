@@ -8,8 +8,9 @@
     global.IngameMusic=sound_add("Music/ingamemusic.wav", 1, true);
     global.FaucetMusic=sound_add("Music/faucetmusic.wav", 1, true);
 
-    global.sendBuffer = createbuffer();
-    global.tempBuffer = createbuffer();
+    global.sendBuffer = buffer_create();
+    global.eventBuffer = buffer_create();
+    global.tempBuffer = buffer_create();
     global.HudCheck = false;
     
     global.map_rotation = ds_list_create();

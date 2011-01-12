@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
-  <resource name="sendCompleteMessage" type="RESOURCE"/>
-  <resource name="sendMessageNonblock" type="RESOURCE"/>
   <resource name="receiveCompleteMessage" type="RESOURCE"/>
-  <resource name="nibbleMessage" type="RESOURCE"/>
+  <resource name="receivestring" type="RESOURCE"/>
 </resources>

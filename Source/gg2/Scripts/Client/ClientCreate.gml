@@ -8,7 +8,7 @@
     nocreate=false;
     
     global.players = ds_list_create();
-    global.deserializeBuffer = createbuffer();
+    global.deserializeBuffer = buffer_create();
     global.isHost = false;
     global.randomSeed=0;
 
@@ -19,12 +19,7 @@
     global.clientFrame = 0;
     global.serverFrame = 0;
     
-    global.serverSocket = tcpconnect(global.serverIP, global.serverPort, true);
-    if(global.serverSocket<=0) {
-        show_message("Connection failed.");
-        instance_destroy();
-        exit;
-    }
+    global.serverSocket = tcp_connect(global.serverIP, global.serverPort);
     
     //Uses the lobby name to create a global variable for use with scoreboard
     //deletes the part up to "] ", which is the end of the map listing
@@ -41,14 +36,9 @@
         global.joinedServerName = string_copy(global.joinedServerName, 1, string_length(global.joinedServerName) - string_length(tempServName));
     }
     else global.joinedServerName = string_copy(global.joinedServerName, 1, string_pos(" [", global.joinedServerName) - 1);
-    
-   
-    setnagle(global.serverSocket, true);
-    setsync(global.serverSocket, 0);
-    setformat(global.serverSocket, 2, 0);
         
-    clearbuffer(global.sendBuffer);
+    buffer_clear(global.sendBuffer);
     ClientPlayerJoin(global.playerName);
-    sendmessage(global.serverSocket,0,0,global.sendBuffer);
-        
+    write_buffer(global.serverSocket, global.sendBuffer);
+    socket_send(global.serverSocket);
 }

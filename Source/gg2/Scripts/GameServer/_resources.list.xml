@@ -4,4 +4,6 @@
   <resource name="GameServerBeginStep" type="RESOURCE"/>
   <resource name="acceptJoiningPlayer" type="RESOURCE"/>
   <resource name="serviceJoiningPlayer" type="RESOURCE"/>
+  <resource name="processClientCommands" type="RESOURCE"/>
+  <resource name="ServerDefineCommands" type="RESOURCE"/>
 </resources>

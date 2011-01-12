@@ -13,13 +13,18 @@
     // argument 1: size of the message to receive
     // argument 2: Buffer
     
-    var status;
-    clearbuffer(argument2);
-    setsync(argument0, 0);
+    var buffer;
+    buffer_clear(argument2);
     
     do {
-        status = nibbleMessage(argument0, argument1, argument2);
-    } until(status != 1);
+        if(socket_has_error(argument0)) {
+            return 2;
+        }
+        buffer = tcp_receive(argument0, argument1);
+    } until(buffer >= 0);
     
-    return status;
+    write_buffer(argument2, buffer);
+    buffer_destroy(buffer);
+    
+    return 0;
 }

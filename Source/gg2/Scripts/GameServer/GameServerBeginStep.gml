@@ -3,41 +3,35 @@ if serverbalance!=0 balancecounter+=1;
 
 // Register with Lobby Server every 30 seconds
 if(global.useLobbyServer and (frame mod 900)==0) {
-    if(lobbysocket!=-1) {
-        // Resolve the Lobby Server's IP every 10 minutes, in case the IP changed
-        if((frame mod 18000)==0) {
-            lobbyip = hostip(LOBBY_SERVER_HOST);
-        }
-        
-        if global.dedicatedMode == 1 noOfPlayers = ds_list_size(global.players) - 1;
-        else noOfPlayers = ds_list_size(global.players);
-        if global.serverPassword != "" {
-            global.map_serverName = "!private!" + "[" + string(global.currentMap) +"] " + global.serverName + " [" + string(noOfPlayers) + "/" + string(maxplayers) + "]";
-        }
-        else global.map_serverName = "[" + string(global.currentMap) +"] " + string(global.serverName) + " [" + string(noOfPlayers) + "/" + string(maxplayers) + "]";
-
-
-        clearbuffer(0);
-        // Magic numbers
-        writebyte(4, 0);
-        writebyte(8, 0);
-        writebyte(15, 0);
-        writebyte(16, 0);
-        writebyte(23, 0);
-        writebyte(42, 0);
-        
-        // Indicate that a UUID follows
-        writebyte(128, 0);
-        
-        // Send version UUID (big endian)
-        for(i=0; i<16; i+=1) {
-            writebyte(global.protocolUuid[i], 0);
-        }
-        writeshort(global.hostingPort, 0);
-        writebyte(string_length(global.map_serverName), 0);
-        writechars(global.map_serverName, 0);
-        sendmessage(lobbysocket, lobbyip, LOBBY_SERVER_PORT, 0);   
+    if global.dedicatedMode == 1 noOfPlayers = ds_list_size(global.players) - 1;
+    else noOfPlayers = ds_list_size(global.players);
+    if global.serverPassword != "" {
+        global.map_serverName = "!private!" + "[" + string(global.currentMap) +"] " + global.serverName + " [" + string(noOfPlayers) + "/" + string(maxplayers) + "]";
     }
+    else global.map_serverName = "[" + string(global.currentMap) +"] " + string(global.serverName) + " [" + string(noOfPlayers) + "/" + string(maxplayers) + "]";
+
+    var lobbyBuffer;
+    
+    // Magic numbers
+    write_ubyte(lobbyBuffer, 4);
+    write_ubyte(lobbyBuffer, 8);
+    write_ubyte(lobbyBuffer, 15);
+    write_ubyte(lobbyBuffer, 16);
+    write_ubyte(lobbyBuffer, 23);
+    write_ubyte(lobbyBuffer, 42);
+    
+    // Indicate that a UUID follows
+    write_ubyte(lobbyBuffer, 128);
+    
+    // Send version UUID (big endian)
+    for(i=0; i<16; i+=1) {
+        write_ubyte(lobbyBuffer, global.protocolUuid[i]);
+    }
+    write_ushort(lobbyBuffer, global.hostingPort);
+    write_ubyte(lobbyBuffer, string_length(global.map_serverName));
+    write_string(lobbyBuffer, global.map_serverName);
+    udp_send(lobbyBuffer, LOBBY_SERVER_HOST, LOBBY_SERVER_PORT);
+    buffer_destroy(lobbyBuffer);
 }
 
 frame += 1;
@@ -45,13 +39,14 @@ limit = 0;
 if(impendingMapChange > 0) impendingMapChange -= 1; // countdown until a map change
 
 if(global.myself.object != -1) {
-    clearbuffer(global.sendBuffer);
+    buffer_clear(global.sendBuffer);
     ClientInputstate(playerControl.keybyte, global.myself.object.x, global.myself.object.y);
-    sendmessage(global.serverSocket,0,0,global.sendBuffer);
+    write_buffer(global.serverSocket, global.sendBuffer);
+    socket_send(global.serverSocket);
     playerControl.keybyte = 0;
 }
 
-clearbuffer(global.sendBuffer);
+buffer_clear(global.sendBuffer);
 
 acceptJoiningPlayer();
 with(JoiningPlayer) {
@@ -61,299 +56,25 @@ with(JoiningPlayer) {
 // Service all players
 for(i=0; i<ds_list_size(global.players); i+=1) {
     player = ds_list_find_value(global.players, i);
-    player_exists = true;
     // Fill up the buffer from the player socket
     // 100 Bytes should be plenty.
-    receiveBuffer = player.receiveBuffer;
     socket = player.socket;
-    setsync(socket, 1);
-    sockstatus = nibbleMessage(socket,100,receiveBuffer);
     
-    if(sockstatus == 2) {
+    if(socket_has_error(socket)) {
         removePlayer(player);
         ServerPlayerLeave(i);
         i-=1;
     } else {
-        hitBufferEnd = false;
-        processedUntil = 0;
-        
-        while((not hitBufferEnd) and (bytesleft(receiveBuffer)>=1)) {
-            switch(readbyte(receiveBuffer)) {
-                case PLAYER_HAT:
-                    // Dummy command that does nothing
-                    // Added for compatibility with the xmas2010 version.
-                    // Can be removed any time after the next protocol change.
-                    if(bytesleft(receiveBuffer)>=1) {
-                        readbyte(receiveBuffer);
-                        processedUntil = getpos(1, receiveBuffer);
-                    } else {
-                        hitBufferEnd = true;
-                    }
-                    break;
-                    
-                case PLAYER_LEAVE:
-                    removePlayer(player);
-                    ServerPlayerLeave(i);
-                    player_exists = false;
-                    i-=1;
-                    hitBufferEnd = true;
-                    break;
-                
-                case PLAYER_CHANGECLASS:
-                    if(bytesleft(receiveBuffer)>=1) {
-                        temp = readbyte(receiveBuffer);
-                        if(getCharacterObject(player.team, temp) != -1) {
-                            player.class = temp
-                            if(player.object != -1) {
-                                with(player.object) {
-                                    instance_destroy();
-                                }
-                                player.object = -1;
-                                if (player.quickspawn=0){
-                                    player.alarm[5] = global.Server_Respawntime;
-                                } else {
-                                    player.alarm[5] = 1;
-                                }    
-                            } else if(player.alarm[5]<=0) {
-                                player.alarm[5] = 1;
-                            }
-                            ServerPlayerChangeclass(i, player.class, global.sendBuffer);
-                        }
-                        processedUntil = getpos(1, receiveBuffer);
-                    } else {
-                        hitBufferEnd = true;
-                    }
-                    break;
-                    
-                    
-                case PLAYER_CHANGETEAM:
-                    if(bytesleft(receiveBuffer)>=1) {
-                        temp = readbyte(receiveBuffer);
-                        if(getCharacterObject(temp, player.class) != -1 or temp==TEAM_SPECTATOR) {  
-                            if(player.object != -1) {
-                                with(player.object) {
-                                    instance_destroy();
-                                }
-                                player.object = -1;
-                                player.alarm[5] = global.Server_Respawntime;
-                            } else if(player.alarm[5]<=0) {
-                                player.alarm[5] = 1;
-                            }
-                            player.team = temp;
-                            ServerPlayerChangeteam(i, player.team, global.sendBuffer);
-                        }
-                        processedUntil = getpos(1, receiveBuffer);
-                    } else {
-                        hitBufferEnd = true;
-                    }
-                    break;                   
-                    
-                    
-                case CHAT_BUBBLE:
-                    var bubbleImage;
-                    if(bytesleft(receiveBuffer)>=1) {
-                        bubbleImage = readbyte(receiveBuffer);
-                        if global.aFirst {
-                            bubbleImage = 0;
-                        }
-                        writebyte(CHAT_BUBBLE,global.sendBuffer);
-                        writebyte(i, global.sendBuffer);
-                        writebyte(bubbleImage,global.sendBuffer);
-                        
-                        setChatBubble(player, bubbleImage);
-                        
-                        processedUntil = getpos(1, receiveBuffer);
-                    } else {
-                        hitBufferEnd = true;
-                    }
-                    break;                    
-                    
-                    
-                case BUILD_SENTRY:
-                    if(player.object != -1) {
-                        if(player.class == CLASS_ENGINEER
-                                && collision_circle(player.object.x,player.object.y,50,Sentry,false,true)<0
-                                && player.object.nutsNBolts == 100 && player.quickspawn != 1
-                                && player.sentry == -1){ 
-                            buildSentry(player);
-                            writebyte(BUILD_SENTRY,global.sendBuffer);
-                            writebyte(i, global.sendBuffer);
-                            processedUntil = getpos(1, receiveBuffer);
-                        }
-                    }
-                    break;                                       
-
-                case DESTROY_SENTRY:
-                    if(player.sentry != -1) {
-                        with(player.sentry) {
-                            instance_destroy();
-                        }
-                    }
-                    player.sentry = -1;                        
-                    processedUntil = getpos(1, receiveBuffer);
-                    break;                     
-                
-                case DROP_INTEL:                                                                  
-                    if(player.object != -1) {
-                        writebyte(DROP_INTEL,global.sendBuffer);
-                        writebyte(i, global.sendBuffer);
-                        with player.object event_user(5);  
-                    }    
-                    processedUntil = getpos(1, receiveBuffer);
-                    break;     
-                      
-                case OMNOMNOMNOM:
-                    if(player.object != -1) {
-                        if(player.humiliated == 0
-                                && player.object.taunting==false
-                                && player.object.omnomnomnom==false
-                                && player.class==CLASS_HEAVY) {                            
-                            writebyte(OMNOMNOMNOM, global.sendBuffer);
-                            writebyte(i, global.sendBuffer);
-                            with(player.object) {
-                                omnomnomnom=true;
-                                if player.team == TEAM_RED {
-                                    omnomnomnomindex=0;
-                                    omnomnomnomend=31;
-                                } else if player.team==TEAM_BLUE {
-                                    omnomnomnomindex=32;
-                                    omnomnomnomend=63;
-                                } 
-                                xscale=image_xscale;
-                            }             
-                        }
-                    }      
-                    processedUntil = getpos(1, receiveBuffer);
-                    break;
-                     
-                case SCOPE_IN:
-                     if player.object != -1 {
-                        if player.class == CLASS_SNIPER {
-                           writebyte(SCOPE_IN,global.sendBuffer);
-                           writebyte(i, global.sendBuffer);
-                           with player.object {
-                                zoomed = true;
-                                runPower = 0.6;
-                                jumpStrength = 6;
-                           }
-                        }
-                     }
-                     processedUntil = getpos(1, receiveBuffer);
-                     break;
-                        
-                case SCOPE_OUT:
-                     if player.object != -1 {
-                        if player.class == CLASS_SNIPER {
-                           writebyte(SCOPE_OUT,global.sendBuffer);
-                           writebyte(i, global.sendBuffer);
-                           with player.object {
-                                zoomed = false;
-                                runPower = 0.9;
-                                jumpStrength = 8;
-                           }
-                        }
-                     }
-                     processedUntil = getpos(1, receiveBuffer);
-                     break;
-                                                              
-                case PASSWORD_SEND:
-                    if(bytesleft(receiveBuffer)>=1) {
-                        passwordlength = readbyte(receiveBuffer);
-                        if(bytesleft(receiveBuffer)>=passwordlength) {
-                            password = readchars(passwordlength, receiveBuffer);
-                            if global.serverPassword != password {
-                                socket = player.socket;
-                                clearbuffer(player.sendBuffer);
-                                writebyte(PASSWORD_WRONG, player.sendBuffer);
-                                sendMessageNonblock(socket, player.sendBuffer);
-                                closesocket(socket);
-                            } else player.authorized = true;
-                            processedUntil = getpos(1, receiveBuffer);
-                        } else {
-                            hitBufferEnd = true;
-                        }  
-                    } else {
-                        hitBufferEnd = true;
-                    }
-                    break;
-                    
-                case PLAYER_CHANGENAME:
-                    if(bytesleft(receiveBuffer)>=1) {
-                        nameLength = readbyte(receiveBuffer);
-                        if(nameLength > MAX_PLAYERNAME_LENGTH) {
-                            clearbuffer(receiveBuffer);
-                            socket = player.socket;
-                            clearbuffer(player.sendBuffer);
-                            writebyte(KICK, player.sendBuffer);
-                            writebyte(KICK_NAME, player.sendBuffer);
-                            sendMessageNonblock(socket, player.sendBuffer);
-                            closesocket(socket);
-                            break;
-                        }
-                        else if(bytesleft(receiveBuffer)>=nameLength) {
-                            player.name = readchars(nameLength, receiveBuffer);
-                            if string_count("#",player.name) > 0 {
-                                player.name = "I <3 Bacon";
-                            }
-                            writebyte(PLAYER_CHANGENAME, global.sendBuffer);
-                            writebyte(i, global.sendBuffer);
-                            writebyte(string_length(player.name), global.sendBuffer);
-                            writechars(player.name, global.sendBuffer);
-                            processedUntil = getpos(1, receiveBuffer);
-                        } else {
-                            hitBufferEnd = true;
-                        }  
-                    } else {
-                        hitBufferEnd = true;
-                    }
-                    break;
-                    
-                case INPUTSTATE:
-                    if(bytesleft(receiveBuffer)>=3) {
-                        if player = global.myself player.authorized = true;
-                        if(player.object != -1) && player.authorized == true {
-                            player.object.keyState = readbyte(receiveBuffer);
-                            player.object.netAimDirection = readshort(receiveBuffer);
-                            player.object.aimDirection = player.object.netAimDirection*360/65536;
-                        } else {
-                            readbyte(receiveBuffer);
-                            readshort(receiveBuffer);
-                        }
-                        if player.authorized == false { //disconnect them
-                            socket = player.socket;
-                            clearbuffer(player.sendBuffer);
-                            closesocket(socket);
-                        }
-                        processedUntil = getpos(1, receiveBuffer);
-                    } else {
-                        hitBufferEnd = true;
-                    }
-                    break; 
-            }
-        }
-        if (player_exists)
-        {
-        if player.authorized == false && player != global.myself {
+        if(player.authorized == false) {
             player.passwordCount += 1;
-            if player.passwordCount == 30*30 {
-                socket = player.socket;
-                clearbuffer(player.sendBuffer);
-                writebyte(KICK, player.sendBuffer);
-                writebyte(KICK_PASSWORDCOUNT, player.sendBuffer);
-                sendMessageNonblock(socket, player.sendBuffer);
-                closesocket(socket);
+            if(player.passwordCount == 30*30) {
+                write_ubyte(player.socket, KICK);
+                write_ubyte(player.socket, KICK_PASSWORDCOUNT);
+                socket_destroy(player.socket, false);
             }
         }
-        // remove the processed bytes from the buffer        
-        if(hitBufferEnd) {
-            clearbuffer(global.tempBuffer);
-            copybuffer2(global.tempBuffer, processedUntil, buffsize(receiveBuffer)-processedUntil, receiveBuffer);
-            clearbuffer(receiveBuffer);
-            copybuffer(receiveBuffer, global.tempBuffer);
-        } else {
-            clearbuffer(receiveBuffer);
-        }
-        }
+    } else {
+        processClientCommands(player, i);
     }
 }
 

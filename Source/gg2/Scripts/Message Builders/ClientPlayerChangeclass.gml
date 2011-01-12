@@ -1,2 +1,2 @@
-writebyte(PLAYER_CHANGECLASS, global.sendBuffer);
-writebyte(argument0, global.sendBuffer);
+write_ubyte(global.sendBuffer, PLAYER_CHANGECLASS);
+write_ubyte(global.sendBuffer, argument0);
