@@ -2,14 +2,12 @@
 <resources>
   <resource name="game_init" type="RESOURCE"/>
   <resource name="offloadSpawnPoints" type="RESOURCE"/>
-  <resource name="receivestring" type="RESOURCE"/>
   <resource name="removePlayer" type="RESOURCE"/>
   <resource name="ServerJoinUpdate" type="RESOURCE"/>
   <resource name="basicRoomSetup" type="RESOURCE"/>
   <resource name="serialize" type="RESOURCE"/>
   <resource name="deserialize" type="RESOURCE"/>
   <resource name="getCharacterObject" type="RESOURCE"/>
-  <resource name="readsbyte" type="RESOURCE"/>
   <resource name="room_goto_fix" type="RESOURCE"/>
   <resource name="Message Builders" type="GROUP"/>
   <resource name="Sound" type="GROUP"/>

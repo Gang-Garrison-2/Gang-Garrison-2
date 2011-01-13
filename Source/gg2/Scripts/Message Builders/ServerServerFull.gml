@@ -1,1 +1,1 @@
-writebyte(SERVER_FULL, argument0);
+write_ubyte(argument0, SERVER_FULL);

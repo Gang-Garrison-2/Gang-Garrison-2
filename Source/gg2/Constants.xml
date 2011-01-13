@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <constants>
-  <constant name="VERSION" value="22300"/>
+  <constant name="VERSION" value="22400"/>
   <constant name="PROTOCOL_UUID" value="&quot;60069b60-458c-945d-b0e3-b76bc565b18a&quot;"/>
   <constant name="HELLO" value="0"/>
   <constant name="PLAYER_JOIN" value="1"/>
@@ -44,6 +44,7 @@
   <constant name="SCOPE_IN" value="40"/>
   <constant name="SCOPE_OUT" value="41"/>
   <constant name="KOTH_UNLOCKCP" value="42"/>
+  <constant name="PLAYER_HAT" value="50"/>
   <constant name="TEAM_RED" value="0"/>
   <constant name="TEAM_BLUE" value="1"/>
   <constant name="TEAM_SPECTATOR" value="2"/>

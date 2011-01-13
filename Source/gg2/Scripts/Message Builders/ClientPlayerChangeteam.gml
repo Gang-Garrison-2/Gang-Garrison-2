@@ -1,2 +1,2 @@
-writebyte(PLAYER_CHANGETEAM, global.sendBuffer);
-writebyte(argument0, global.sendBuffer);
+write_ubyte(global.sendBuffer, PLAYER_CHANGETEAM);
+write_ubyte(global.sendBuffer, argument0);

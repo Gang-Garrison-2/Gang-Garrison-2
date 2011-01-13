@@ -1,13 +1,13 @@
 // receive and interpret the server's message(s)
-var sockstatus, i, playerObject, playerID, player, otherPlayerID, otherPlayer, sameVersion;
+var i, playerObject, playerID, player, otherPlayerID, otherPlayer, sameVersion, buffer;
 
 if(global.myself != -1) {
     if(global.myself.object != -1) {
         /*if(lastSentKeystate != playerControl.keybyte) {
             lastSentKeystate = playerControl.keybyte;*/
-            clearbuffer(global.sendBuffer);
+            buffer_clear(global.sendBuffer);
             ClientInputstate(playerControl.keybyte, global.myself.object.x, global.myself.object.y);
-            sendmessage(global.serverSocket,0,0,global.sendBuffer);
+            write_buffer(global.serverSocket, global.sendBuffer);
         /*}*/
         playerControl.keybyte = 0;
     }
@@ -15,26 +15,28 @@ if(global.myself != -1) {
 
 roomchange = false;
 do {
-    setsync(global.serverSocket, 1);
-    clearbuffer(0);
-    sockstatus = nibbleMessage(global.serverSocket,1,0);
-    if(sockstatus == 2) {
+    if(socket_has_error(global.serverSocket)) {
         show_message("You have been disconnected from the server.");
         with(all) if id != AudioControl.id instance_destroy();
         room_goto_fix(Menu);
         exit; 
-    } else if(sockstatus == 0) {
-    switch(readbyte(0)) {
+    }
+    buffer = tcp_receive(global.serverSocket,1);
+    if(buffer >= 0) {
+        var commandByte;
+        commandByte = read_ubyte(buffer);
+        buffer_destroy(buffer);
+        switch(commandByte) {
         case HELLO:
                   sameVersion = true;
                   
-            receiveCompleteMessage(global.serverSocket,2,0);
-            if(readshort(0) != 128) {
+            receiveCompleteMessage(global.serverSocket,2,global.tempBuffer);
+            if(read_ushort(global.tempBuffer) != 128) {
                       sameVersion = false;
             } else {
-                      receiveCompleteMessage(global.serverSocket,16,0);
+                receiveCompleteMessage(global.serverSocket,16,global.tempBuffer);
                       for(i=0; i<16; i+=1) {
-                        if(readbyte(0) != global.protocolUuid[i]) {
+                    if(read_ubyte(global.tempBuffer) != global.protocolUuid[i]) {
                             sameVersion = false;
                         }
                       }
@@ -45,10 +47,10 @@ do {
                       room_goto_fix(Menu);
                       exit;
                   } else {
-                receiveCompleteMessage(global.serverSocket,10,0);
-                global.playerID = readbyte(0);
-                global.randomSeed = readdouble(0);
-                      global.currentMapArea = readbyte(0);
+                receiveCompleteMessage(global.serverSocket,10,global.tempBuffer);
+                global.playerID = read_ubyte(global.tempBuffer);
+                global.randomSeed = read_double(global.tempBuffer);
+                global.currentMapArea = read_ubyte(global.tempBuffer);
                   }
                   break;
         
@@ -83,8 +85,8 @@ do {
             
         case PLAYER_LEAVE:
             // Delete player from the game, adjust own ID accordingly
-            receiveCompleteMessage(global.serverSocket,1,0);
-            playerID = readbyte(0);
+            receiveCompleteMessage(global.serverSocket,1,global.tempBuffer);
+            playerID = read_ubyte(global.tempBuffer);
             player = ds_list_find_value(global.players, playerID);
             removePlayer(player);
             if(playerID < global.playerID) {
@@ -92,13 +94,13 @@ do {
             }
             break;
                                    
-        case PLAYER_DEATH:            
+        case PLAYER_DEATH:
             var causeOfDeath;
-            receiveCompleteMessage(global.serverSocket,4,0);
-            playerID = readbyte(0);
-            otherPlayerID = readbyte(0);
-            assistantPlayerID = readbyte(0);
-                  causeOfDeath = readbyte(0);
+            receiveCompleteMessage(global.serverSocket,4,global.tempBuffer);
+            playerID = read_ubyte(global.tempBuffer);
+            otherPlayerID = read_ubyte(global.tempBuffer));
+            assistantPlayerID = read_ubyte(global.tempBuffer);
+                  causeOfDeath = read_ubyte(global.tempBuffer);
                   
             player = ds_list_find_value(global.players, playerID);
                   if(otherPlayerID == 255) {
@@ -115,8 +117,8 @@ do {
             break;
              
               case BALANCE:
-                  receiveCompleteMessage(global.serverSocket,1,0);
-                  balanceplayer=readbyte(0);
+            receiveCompleteMessage(global.serverSocket,1,global.tempBuffer);
+            balanceplayer=read_ubyte(global.tempBuffer);
                   if balanceplayer == 255 {
                     if !instance_exists(Balancer) instance_create(x,y,Balancer);
                     with(Balancer) notice=0;
@@ -136,75 +138,66 @@ do {
                     if !instance_exists(Balancer) instance_create(x,y,Balancer);
                     Balancer.name=player.name;
                     with (Balancer) notice=1;
-
                   }
                   break;
                   
         case PLAYER_CHANGETEAM:
-            receiveCompleteMessage(global.serverSocket,2,0);
-            player = ds_list_find_value(global.players, readbyte(0));
+            receiveCompleteMessage(global.serverSocket,2,global.tempBuffer);
+            player = ds_list_find_value(global.players, read_ubyte(global.tempBuffer));
             if(player.object != -1) {
                 with(player.object) {
                     instance_destroy();
                 }
                 player.object = -1;
             }
-            player.team = readbyte(0);
+            player.team = read_ubyte(global.tempBuffer);
             break;
              
         case PLAYER_CHANGECLASS:
-            receiveCompleteMessage(global.serverSocket,2,0);
-            player = ds_list_find_value(global.players, readbyte(0));
+            receiveCompleteMessage(global.serverSocket,2,global.tempBuffer);
+            player = ds_list_find_value(global.players, read_ubyte(global.tempBuffer));
             if(player.object != -1) {
                 with(player.object) {
                     instance_destroy();
                 }
                 player.object = -1;
             }
-            player.class = readbyte(0);
+            player.class = read_ubyte(global.tempBuffer);
             break;             
         
         case PLAYER_CHANGENAME:
-                    receiveCompleteMessage(global.serverSocket,1,0);
-            player = ds_list_find_value(global.players, readbyte(0));
+            receiveCompleteMessage(global.serverSocket,1,global.tempBuffer);
+            player = ds_list_find_value(global.players, read_ubyte(global.tempBuffer));
             player.name = receivestring(global.serverSocket, 1);
             break;
                  
-        /*case PLAYER_SPAWN:
-            receiveCompleteMessage(global.serverSocket,2,0);
-            player = ds_list_find_value(global.players, readbyte(0));
-            doEventSpawn(player, readbyte(0));
-            break;*/
         case PLAYER_SPAWN:
-            receiveCompleteMessage(global.serverSocket,3,0);
-            player = ds_list_find_value(global.players, readbyte(0));
-            doEventSpawn(player, readbyte(0), readbyte(0));
+            receiveCompleteMessage(global.serverSocket,3,global.tempBuffer);
+            player = ds_list_find_value(global.players, read_ubyte(global.tempBuffer));
+            doEventSpawn(player, read_ubyte(global.tempBuffer), read_ubyte(global.tempBuffer));
             break;
               
               case CHAT_BUBBLE:
                   var bubbleImage;
-                  receiveCompleteMessage(global.serverSocket,2,0);
-                  player = ds_list_find_value(global.players, readbyte(0));
-                  setChatBubble(player, readbyte(0));
+            receiveCompleteMessage(global.serverSocket,2,global.tempBuffer);
+            player = ds_list_find_value(global.players, read_ubyte(global.tempBuffer));
+            setChatBubble(player, read_ubyte(global.tempBuffer));
                   break;
              
               case BUILD_SENTRY:
-                  receiveCompleteMessage(global.serverSocket,1,0);
-                  player = ds_list_find_value(global.players, readbyte(0));
+            receiveCompleteMessage(global.serverSocket,1,global.tempBuffer);
+            player = ds_list_find_value(global.players, read_ubyte(global.tempBuffer));
                   if player.sentry == -1 {
                     buildSentry(player);
                   }
                   break;
               
               case DESTROY_SENTRY:
-                  //receiveCompleteMessage(global.serverSocket,1,0);
-                  //player = ds_list_find_value(global.players, readbyte(0));
-                  //new
-                  receiveCompleteMessage(global.serverSocket,4,0);
-                  playerID = readbyte(0);
-                  otherPlayerID = readbyte(0);
-                  assistantPlayerID = readbyte(0);
-                  causeOfDeath = readbyte(0);
+                  receiveCompleteMessage(global.serverSocket,4,global.tempBuffer);
+                  playerID = read_ubyte(global.tempBuffer);
+                  otherPlayerID = read_ubyte(global.tempBuffer);
+                  assistantPlayerID = read_ubyte(global.tempBuffer);
+                  causeOfDeath = read_ubyte(global.tempBuffer);
                   
                   player = ds_list_find_value(global.players, playerID);
                   if(otherPlayerID == 255) {
@@ -217,53 +210,50 @@ do {
                          assistantPlayer = ds_list_find_value(global.players, assistantPlayerID);
                          doEventDestruction(player, otherPlayer, assistantPlayer, causeOfDeath);
                       }
-                  }  
-                  
-                  //end new
-                  //if player.sentry != -1 with player.sentry instance_destroy();
+                  }
                   break;
                       
               case GRAB_INTEL:
-                  receiveCompleteMessage(global.serverSocket,1,0);
-                  player = ds_list_find_value(global.players, readbyte(0));
+            receiveCompleteMessage(global.serverSocket,1,global.tempBuffer);
+            player = ds_list_find_value(global.players, read_ubyte(global.tempBuffer));
                   doEventGrabIntel(player);
                   break;
                   
               case SCORE_INTEL:
-                  receiveCompleteMessage(global.serverSocket,1,0);
-                  player = ds_list_find_value(global.players, readbyte(0));
+            receiveCompleteMessage(global.serverSocket,1,global.tempBuffer);
+            player = ds_list_find_value(global.players, read_ubyte(global.tempBuffer));
                   doEventScoreIntel(player);
                   break;
                   
               case DROP_INTEL:
-                  receiveCompleteMessage(global.serverSocket,1,0);
-                  player = ds_list_find_value(global.players, readbyte(0));
+            receiveCompleteMessage(global.serverSocket,1,global.tempBuffer);
+            player = ds_list_find_value(global.players, read_ubyte(global.tempBuffer));
                   if player.object != -1 {
                     with player.object event_user(5); 
                     }
                   break;
               
               case GENERATOR_DESTROY:
-                  receiveCompleteMessage(global.serverSocket,1,0);
-                  team = readbyte(0);
+            receiveCompleteMessage(global.serverSocket,1,global.tempBuffer);
+            team = read_ubyte(global.tempBuffer);
                   doEventGeneratorDestroy(team);
                   break;
                   
               case UBER_CHARGED:
-                  receiveCompleteMessage(global.serverSocket,1,0);
-                  player = ds_list_find_value(global.players, readbyte(0));
+            receiveCompleteMessage(global.serverSocket,1,global.tempBuffer);
+            player = ds_list_find_value(global.players, read_ubyte(global.tempBuffer));
                   doEventUberReady(player);
                   break;
               
               case UBER:
-                  receiveCompleteMessage(global.serverSocket,1,0);
-                  player = ds_list_find_value(global.players, readbyte(0));
+            receiveCompleteMessage(global.serverSocket,1,global.tempBuffer);
+            player = ds_list_find_value(global.players, read_ubyte(global.tempBuffer));
                   doEventUber(player);
                   break;    
               
               case OMNOMNOMNOM:
-                  receiveCompleteMessage(global.serverSocket,1,0);
-                  player = ds_list_find_value(global.players, readbyte(0));
+            receiveCompleteMessage(global.serverSocket,1,global.tempBuffer);
+            player = ds_list_find_value(global.players, read_ubyte(global.tempBuffer));
                   if(player.object != -1) {
                     with(player.object) {
                         omnomnomnom=true;
@@ -280,8 +270,8 @@ do {
                   break;
                   
               case SCOPE_IN:
-                   receiveCompleteMessage(global.serverSocket,1,0);
-                   player = ds_list_find_value(global.players, readbyte(0));
+            receiveCompleteMessage(global.serverSocket,1,global.tempBuffer);
+            player = ds_list_find_value(global.players, read_ubyte(global.tempBuffer));
                    if player.object != -1 {
                       with player.object {
                            zoomed = true;
@@ -292,8 +282,8 @@ do {
                    break;
                         
               case SCOPE_OUT:
-                   receiveCompleteMessage(global.serverSocket,1,0);
-                   player = ds_list_find_value(global.players, readbyte(0));
+             receiveCompleteMessage(global.serverSocket,1,global.tempBuffer);
+             player = ds_list_find_value(global.players, read_ubyte(global.tempBuffer));
                    if player.object != -1 {
                       with player.object {
                            zoomed = false;
@@ -305,15 +295,12 @@ do {
                                          
               case PASSWORD_REQUEST:             
                     global.clientPassword = get_string("Enter Password:", "");
-                    clearbuffer(global.sendBuffer);
-                    writebyte(PASSWORD_SEND, global.sendBuffer);
-                    writebyte(string_length(global.clientPassword), global.sendBuffer);
-                    writechars(global.clientPassword, global.sendBuffer);
-                    sendmessage(global.serverSocket,0,0,global.sendBuffer);
+            write_ubyte(global.serverSocket, PASSWORD_SEND);
+            write_ubyte(global.serverSocket, string_length(global.clientPassword));
+            write_string(global.serverSocket, global.clientPassword);
                   break;
                    
               case PASSWORD_WRONG:                                    
-                  clearbuffer(0);
                   show_message("Incorrect Password.");
                   global.clientPassword = "";
                   with(all) if id != AudioControl.id instance_destroy();
@@ -322,11 +309,10 @@ do {
                   break;
               
               case KICK:
-                  receiveCompleteMessage(global.serverSocket,1,0);
-                  reason = readbyte(0);
+            receiveCompleteMessage(global.serverSocket,1,global.tempBuffer);
+            reason = read_ubyte(global.tempBuffer);
                   if reason == KICK_NAME kickReason = "Name Exploit";
                   else if reason == KICK_PASSWORDCOUNT kickReason = "Timed out from not submitting a password";                                    
-                  clearbuffer(0);
                   show_message("You have been kicked from the server. "+kickReason+".");
                   with(all) if id != AudioControl.id instance_destroy();
                   room_goto_fix(Lobby);
@@ -350,9 +336,9 @@ do {
                          
               case MAP_END:
                   global.nextMap=receivestring(global.serverSocket, 1);
-                  receiveCompleteMessage(global.serverSocket,2,0);
-                  global.winners=readbyte(0);
-                  global.currentMapArea=readbyte(0);
+            receiveCompleteMessage(global.serverSocket,2,global.tempBuffer);
+            global.winners=read_ubyte(global.tempBuffer);
+            global.currentMapArea=read_ubyte(global.tempBuffer);
                   if !instance_exists(ScoreTableController) instance_create(0,0,ScoreTableController);
                   instance_create(0,0,WinBanner);
                   break;
@@ -419,7 +405,10 @@ do {
             game_end();
             exit; 
     }
+    } else {
+        break;
     }
-} until(sockstatus != 0 or roomchange);
+} until(roomchange);
 
+socket_send(global.serverSocket);
 global.clientFrame += 1;
