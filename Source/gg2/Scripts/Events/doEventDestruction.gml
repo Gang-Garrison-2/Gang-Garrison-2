@@ -32,33 +32,3 @@ if(killer != -1 && killer != owner) {
 with(owner.sentry) {
     instance_destroy();
 }
-    /*if built==1 {
-        with(currentWeapon) {
-            instance_destroy();
-        }
-    }
-    if global.myself == owner {
-        if !instance_exists(NoticeO) instance_create(0,0,NoticeO);
-        with NoticeO notice = NOTICE_AUTOGUNSCRAPPED;
-    }
-
-    // Allow the mines stickied to this autogun to drop to the floor
-    with(Mine) {
-        if(place_meeting(x,y,other.id)) {
-            stickied = false;
-        }
-    }
-    
-    ownerPlayer.sentry=-1;
-    instance_create(x,y,Explosion)
-    playsound(x,y,ExplosionSnd);
-    sentrygibs=instance_create(x,y,SentryGibs);
-    sentrygibs.image_speed=0;
-    if team == TEAM_RED sentrygibs.image_index=0;
-    else sentrygibs.image_index=1;
-}*/
-//end
-
-/*with(owner.sentry) {       
-    instance_destroy();
-}*/

@@ -14,13 +14,13 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">if(global.updateType == FULL_UPDATE) {
-    writebyte(startDirection, global.serializeBuffer);
-    writeushort(round(x*5), global.serializeBuffer);
-    writeushort(round(y*5), global.serializeBuffer);
+    write_ubyte(global.serializeBuffer, startDirection);
+    write_ushort(global.serializeBuffer, round(x*5));
+    write_ushort(global.serializeBuffer, round(y*5));
 }
 if(global.updateType == QUICK_UPDATE or global.updateType == FULL_UPDATE) {
-    writebyte(built, global.serializeBuffer);
-    writebyte(hp, global.serializeBuffer);
+    write_ubyte(global.serializeBuffer, built);
+    write_ubyte(global.serializeBuffer, hp);
 }
 </argument>
       </arguments>

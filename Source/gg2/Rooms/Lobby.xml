@@ -6,7 +6,7 @@
     <isometric>false</isometric>
     <snap x="8" y="8"/>
   </grid>
-  <speed>30</speed>
+  <speed>100</speed>
   <persistent>false</persistent>
   <creationCode/>
   <backgroundColor>C0C0C0</backgroundColor>

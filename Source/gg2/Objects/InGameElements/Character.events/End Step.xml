@@ -14,8 +14,6 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">if(global.isHost &amp;&amp; hp&lt;=0) {
-    //sendEventPlayerDeath(player, lastDamageDealer, lastDamageSource);
-    //doEventPlayerDeath(player, lastDamageDealer, lastDamageSource);
     var assistant;
     assistant = -1;
     if (lastDamageDealer != -1) {

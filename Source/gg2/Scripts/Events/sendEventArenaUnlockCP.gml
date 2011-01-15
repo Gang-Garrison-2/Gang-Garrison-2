@@ -1,1 +1,1 @@
-writebyte(ARENA_UNLOCKCP,global.eventBuffer);
+write_ubyte(global.eventBuffer, ARENA_UNLOCKCP);

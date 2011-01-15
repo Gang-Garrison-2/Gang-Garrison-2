@@ -13,9 +13,9 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">writebyte(team, global.serializeBuffer);
-writebyte(cappingTeam, global.serializeBuffer);
-writeushort(round(capping), global.serializeBuffer);
+        <argument kind="STRING">write_byte(global.serializeBuffer, team);
+write_byte(global.serializeBuffer, cappingTeam);
+write_ushort(global.serializeBuffer, round(capping));
 </argument>
       </arguments>
     </action>

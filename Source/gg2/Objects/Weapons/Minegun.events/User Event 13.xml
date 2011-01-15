@@ -29,9 +29,8 @@
         <argument kind="STRING">{
     var i, mine;
     receiveCompleteMessage(global.serverSocket, 2, global.deserializeBuffer);
-    lobbed  = readbyte(global.deserializeBuffer);
-    //alarm[5] = readbyte(global.deserializeBuffer);
-    ammoCount = readbyte(global.deserializeBuffer);
+    lobbed = read_ubyte(global.deserializeBuffer);
+    ammoCount = read_ubyte(global.deserializeBuffer);
     
     with(Mine) {
         if(ownerPlayer == other.ownerPlayer) {

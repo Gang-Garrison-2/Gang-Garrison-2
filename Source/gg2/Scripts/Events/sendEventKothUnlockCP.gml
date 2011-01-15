@@ -1,1 +1,1 @@
-writebyte(KOTH_UNLOCKCP,global.eventBuffer);
+write_ubyte(global.eventBuffer, KOTH_UNLOCKCP);

@@ -226,38 +226,11 @@ else if nutsNBolts &gt; 100 nutsNBolts = 100;
 //ubered max out ammo
 if ubered == 1 {
     if instance_exists(currentWeapon) {
-        if currentWeapon.object_index == Rocketlauncher {
-            currentWeapon.rocketcount = 4;
-            currentWeapon.alarm[5] = -1;
-        }
-        else if currentWeapon.object_index == Scattergun {
-            currentWeapon.shellCount = 6;
-            currentWeapon.alarm[5] = -1;
-        }
-        else if currentWeapon.object_index == Flamethrower {
-            currentWeapon.gas = 200;
-        }
-        else if currentWeapon.object_index == Shotgun {
-            currentWeapon.shellCount = 8;
-            currentWeapon.alarm[5] = -1;
-        }
-        else if currentWeapon.object_index == Revolver {
-            currentWeapon.bulletCount = 6;
-            currentWeapon.alarm[5] = -1;
-        }
-        else if currentWeapon.object_index == Minigun {
-            currentWeapon.bullets = 200;
-        }
-        else if currentWeapon.object_index == Minegun {
-            currentWeapon.mineCount = 8;
-            currentWeapon.alarm[5] = -1;
-        }
-        else if currentWeapon.object_index == Blade {
-            currentWeapon.bladePower = 100;
-        }
-        else if currentWeapon.object_index == Medigun {
-            currentWeapon.needleCount = 40;
-            currentWeapon.alarm[5] = -1;
+        with(currentWeapon) {
+            if(variable_local_exists("maxAmmo")) {
+                ammoCount = maxAmmo;
+            }
+            alarm[5] = -1;
         }
     }
 }

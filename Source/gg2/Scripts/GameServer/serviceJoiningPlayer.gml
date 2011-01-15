@@ -1,44 +1,49 @@
-var status, player;
+var buffer, player;
 
-status = nibbleMessage(socket, expectedBytes, receiveBuffer);
-if(status==2) {
+if(socket_has_error(socket)) {
     // Connection closed unexpectedly, remove client
     instance_destroy();
-} else if(status==0) {
+    exit;
+}
+
+buffer = tcp_receive(socket, expectedBytes);
+if(buffer >= 0) {
     switch(state) {
     case STATE_EXPECT_HELLO:
-        if(readbyte(receiveBuffer) == PLAYER_JOIN) {
+        if(read_ubyte(buffer) == PLAYER_JOIN) {
             state = STATE_EXPECT_NAME;
-            expectedBytes = readbyte(receiveBuffer);
+            expectedBytes = read_ubyte(buffer);
         } else {
-            closesocket(socket);
+            socket_destroy(socket, true);
             instance_destroy();
         }
         break;
         
     case STATE_EXPECT_NAME:
-        clearbuffer(0);
-        ServerJoinUpdate(0);
-        
-        player = instance_create(0,0,Player);
-        player.socket = socket;
-        
-        player.name = readchars(expectedBytes, receiveBuffer);
-        
-        // sanitize player name
-        player.name = string_copy(player.name, 0, MAX_PLAYERNAME_LENGTH);
-        player.name = string_replace_all(player.name, "#", " ");
-        
-        //ServerJoinUpdate(player.sendBuffer);
-        ds_list_add(global.players, player);
-        
-        sendMessageNonblock(socket, 0);
-        copybuffer(player.sendBuffer, 0);
-        
-        ServerPlayerJoin(player.name, global.sendBuffer);
-        
-        instance_destroy();
+        if(ds_list_size(global.players) >= global.playerLimit) {
+            write_ubyte(socket, SERVER_FULL);
+            socket_destroy(socket, false);
+            instance_destroy();
+        } else {
+            ServerJoinUpdate(socket);
+            
+            player = instance_create(0,0,Player);
+            player.socket = socket;
+            
+            player.name = read_string(buffer, expectedBytes);
+            
+            // sanitize player name
+            player.name = string_copy(player.name, 0, MAX_PLAYERNAME_LENGTH);
+            player.name = string_replace_all(player.name, "#", " ");
+            
+            //ServerJoinUpdate(player.sendBuffer);
+            ds_list_add(global.players, player);
+            
+            ServerPlayerJoin(player.name, global.sendBuffer);
+            
+            instance_destroy();
+        }
         break;
     }
-    clearbuffer(receiveBuffer);
+    buffer_destroy(buffer);
 }

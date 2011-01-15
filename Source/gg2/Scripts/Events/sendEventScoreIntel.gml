@@ -2,5 +2,5 @@
  * argument0: The player who scored with the intel
  */
  
-writebyte(SCORE_INTEL, global.eventBuffer);
-writebyte(ds_list_find_index(global.players, argument0), global.eventBuffer);
+write_ubyte(global.eventBuffer, SCORE_INTEL);
+write_ubyte(global.eventBuffer, ds_list_find_index(global.players, argument0));

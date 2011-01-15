@@ -14,9 +14,9 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">receiveCompleteMessage(global.serverSocket,6,global.deserializeBuffer);
-cpUnlock=readushort(global.deserializeBuffer);
-redTimer=readushort(global.deserializeBuffer);
-blueTimer=readushort(global.deserializeBuffer);
+cpUnlock=read_ushort(global.deserializeBuffer);
+redTimer=read_ushort(global.deserializeBuffer);
+blueTimer=read_ushort(global.deserializeBuffer);
 with KothControlPoint event_user(13);
 if cpUnlock == 0 &amp;&amp; KothControlPoint.locked {
     doEventKothUnlockCP();

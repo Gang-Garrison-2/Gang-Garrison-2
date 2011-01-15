@@ -3,12 +3,10 @@
 // argument2 - mapmd5
 // argument3 - buffer
 
-{
-    writebyte(CHANGE_MAP, argument3);
-    writebyte(string_length(argument0), argument3);
-    writechars(argument0, argument3);
-    writebyte(string_length(argument1), argument3);
-    writechars(argument1, argument3);
-    writebyte(string_length(argument2), argument3);
-    writechars(argument2, argument3);
-}
+write_ubyte(argument3, CHANGE_MAP);
+write_ubyte(argument3, string_length(argument0));
+write_string(argument3, argument0);
+write_ubyte(argument3, string_length(argument1));
+write_string(argument3, argument1);
+write_ubyte(argument3, string_length(argument2));
+write_string(argument3, argument2);

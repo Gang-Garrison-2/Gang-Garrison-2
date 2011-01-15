@@ -14,7 +14,7 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">{
-    if (readyToBlast &amp;&amp; gas &gt;= 66) {
+    if (readyToBlast &amp;&amp; ammoCount &gt;= 66) {
         playsound(x,y,CompressionBlastSnd);
         poof = instance_create(x+lengthdir_x(25,owner.aimDirection),y+lengthdir_y(25,owner.aimDirection),AirBlastO);
         if image_xscale == 1 {

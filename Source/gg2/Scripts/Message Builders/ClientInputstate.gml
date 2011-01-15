@@ -2,6 +2,6 @@
 // Argument 1: Player x
 // Argument 2: Player y
 
-writebyte(INPUTSTATE, global.sendBuffer);
-writebyte(argument0, global.sendBuffer);
-writeshort(point_direction(argument1,argument2, mouse_x, mouse_y)*65536/360, global.sendBuffer);
+write_ubyte(global.sendBuffer, INPUTSTATE);
+write_ubyte(global.sendBuffer, argument0);
+write_ushort(global.sendBuffer, point_direction(argument1,argument2, mouse_x, mouse_y)*65536/360);

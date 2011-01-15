@@ -17,7 +17,9 @@
     xoffset = -15;
     yoffset = -10;
     reloadTime = 25;
-}</argument>
+    maxAmmo = 0;
+}
+</argument>
       </arguments>
     </action>
     <action id="604" library="1">

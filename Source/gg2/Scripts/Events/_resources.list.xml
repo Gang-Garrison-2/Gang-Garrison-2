@@ -6,10 +6,8 @@
   <resource name="sendEventScoreIntel" type="RESOURCE"/>
   <resource name="doEventGeneratorDestroy" type="RESOURCE"/>
   <resource name="sendEventGeneratorDestroy" type="RESOURCE"/>
-  <resource name="doEventPlayerDeath_Original" type="RESOURCE"/>
   <resource name="doEventPlayerDeath" type="RESOURCE"/>
   <resource name="doEventDestruction" type="RESOURCE"/>
-  <resource name="sendEventPlayerDeath_Original" type="RESOURCE"/>
   <resource name="sendEventPlayerDeath" type="RESOURCE"/>
   <resource name="sendEventDestruction" type="RESOURCE"/>
   <resource name="doEventSpawn" type="RESOURCE"/>

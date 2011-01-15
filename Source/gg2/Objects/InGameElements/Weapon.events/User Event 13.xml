@@ -15,9 +15,10 @@
       <arguments>
         <argument kind="STRING">{
     receiveCompleteMessage(global.serverSocket, 2, global.deserializeBuffer);
-    readyToShoot = readbyte(global.deserializeBuffer);
-    alarm[0] = readbyte(global.deserializeBuffer);    
-}</argument>
+    readyToShoot = read_ubyte(global.deserializeBuffer);
+    alarm[0] = read_ubyte(global.deserializeBuffer);    
+}
+</argument>
       </arguments>
     </action>
   </actions>

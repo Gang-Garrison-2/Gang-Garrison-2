@@ -6,14 +6,12 @@
     //Vindicator
     global.buffer_team = TEAM_SPECTATOR;
     global.buffer_switch = false;
-    global.buffer_all = createbuffer();
-    global.buffer_red = createbuffer();
-    global.buffer_blue = createbuffer();
+    global.buffer_all = buffer_create();
+    global.buffer_red = buffer_create();
+    global.buffer_blue = buffer_create();
     ////
     global.joiningPlayers = ds_list_create();
     global.players = ds_list_create();
-    global.sendBuffer = createbuffer();
-    global.eventBuffer = createbuffer();      // Buffer for events that happen during the step
     global.currentMapIndex = 0;
     serverbalance=0;
     balancecounter=0;
@@ -24,40 +22,24 @@
     impendingMapChange = -1; // timer variable used by GameServerBeginStep, when it hits 0, the server executes a map change to global.nextMap
     syncTimer = 0; //called in GameServerBeginsStep on CP/intel cap to update everyone with timer/caps/cp status
     
-    if(global.useLobbyServer) {
-        lobbysocket = udpconnect(global.hostingPort, 1);
-        setformat(lobbysocket, 2, 0);
-        lobbyip = hostip(LOBBY_SERVER_HOST);
-        if(lobbysocket == -1) {
-            show_message("Unable to contact Lobby server");
-        }
-    } else {
-        lobbysocket = -1;
-    }
-    
     // Player 0 is reserved for the Server.
     serverPlayer = instance_create(0,0,Player);
     serverPlayer.name = global.playerName;
     ds_list_add(global.players, serverPlayer);
 
-    global.tcpListener = tcplisten(global.hostingPort, 2, true);
-    global.serverSocket = tcpconnect("127.0.0.1", global.hostingPort, 1);    
-    if(global.serverSocket<=0) {
+    global.tcpListener = tcp_listen(global.hostingPort);
+    global.serverSocket = tcp_connect("127.0.0.1", global.hostingPort);    
+    if(socket_has_error(global.serverSocket)) {
         show_message("Unable to connect to self. Epic fail, dude.");
     }
-    setformat(global.serverSocket, 2, 0);
-    setnagle(global.serverSocket, true);
     
     do {
-        serverPlayer.socket = tcpaccept(global.tcpListener, 0);
-        if(serverPlayer.socket>0) {
-            setformat(serverPlayer.socket, 2, 0);
-            setnagle(serverPlayer.socket, true);
-        }
-    } until(serverPlayer.socket>0);
+        serverPlayer.socket = socket_accept(global.tcpListener);
+    } until(serverPlayer.socket>=0);
     
     global.playerID = 0;
     global.myself = serverPlayer;
+    global.myself.authorized = true;
     playerControl = instance_create(0,0,PlayerControl);
         
     global.currentMap = ds_list_find_value(global.map_rotation, global.currentMapIndex);
@@ -87,5 +69,6 @@
     global.red_next_map_temp = false;
     global.nextmap_temp_blu_back = false;
     global.nextmap_temp_red_back = false;
-       
+    
+    GameServerDefineCommands();
 }

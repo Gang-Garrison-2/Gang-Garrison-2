@@ -13,8 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">receiveBuffer = createbuffer();
-socket = -1;
+        <argument kind="STRING">socket = -1;
 
 STATE_EXPECT_HELLO = 0;
 STATE_EXPECT_NAME = 1;

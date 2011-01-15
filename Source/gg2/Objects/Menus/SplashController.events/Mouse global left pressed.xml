@@ -14,7 +14,6 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">{
-    //if sound_isplaying(FaucetMusic) sound_stop(FaucetMusic);
     room_goto_fix(Menu);
 }
 </argument>

@@ -14,14 +14,13 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">{
-    //writebyte(alarm[5], global.serializeBuffer);
-    writebyte(ammoCount, global.serializeBuffer);
-    writeushort(healing, global.serializeBuffer);
+    write_ubyte(global.serializeBuffer, ammoCount);
+    write_ushort(global.serializeBuffer, healing);
     if(healing) {
         if(healTarget != -1 and instance_exists(healTarget)) {
-            writebyte(ds_list_find_index(global.players,healTarget), global.serializeBuffer);
+            write_ubyte(global.serializeBuffer, ds_list_find_index(global.players,healTarget));
         } else {
-            writebyte(200, global.serializeBuffer);
+            write_ubyte(global.serializeBuffer, 200);
         }
     }
 }

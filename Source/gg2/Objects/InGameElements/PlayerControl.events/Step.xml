@@ -55,64 +55,32 @@ if global.myself.object != -1 {
     /*I originally was going to allow mouse buttons for use for any keys, but I can't see anyone using
     them for movement/taunts/etc so I commented it out to make it a little easier to code
     - Bacon */
+    
+    /*I removed your commented out code because I hate having stale and useless blocks of old code in
+    the source.
+    - MedO */
     if mouse_check_button(mb_left) {
-        /*if global.left == MOUSE_LEFT keybyte |= $40;
-        else if global.right == MOUSE_LEFT keybyte |= $20;
-        else if global.medic == MOUSE_LEFT keybyte |= $04;
-        else if global.jump == MOUSE_LEFT keybyte |= $80;
-        else*/ if global.attack == MOUSE_LEFT &amp;&amp;  menuOpen == false &amp;&amp; global.myself.humiliated == 0 keybyte |= $10;
+        if global.attack == MOUSE_LEFT &amp;&amp;  menuOpen == false &amp;&amp; global.myself.humiliated == 0 keybyte |= $10;
         else if global.special == MOUSE_LEFT &amp;&amp;  menuOpen == false &amp;&amp; global.myself.humiliated == 0 {
             keybyte |= $08;
             inputSpecial();
         }
-        /*else if global.taunt == MOUSE_LEFT keybyte |= $01;
-        else if global.drop == MOUSE_LEFT inputDrop();
-        else if global.changeTeam == MOUSE_LEFT inputChangeTeam();
-        else if global.changeClass == MOUSE_LEFT inputChangeClass();
-        else if global.chat1 == MOUSE_LEFT inputChat1();
-        else if global.chat2 == MOUSE_LEFT inputChat2();
-        else if global.chat3 == MOUSE_LEFT inputChat3();*/
     }
     if mouse_check_button(mb_right) {
-        /*if global.left == MOUSE_RIGHT keybyte |= $40;
-        else if global.right == MOUSE_RIGHT keybyte |= $20;
-        else if global.medic == MOUSE_RIGHT keybyte |= $04;
-        else if global.jump == MOUSE_RIGHT keybyte |= $80;
-        else*/ if global.attack == MOUSE_RIGHT &amp;&amp;  menuOpen == false &amp;&amp; global.myself.humiliated == 0 keybyte |= $10;
+        if global.attack == MOUSE_RIGHT &amp;&amp;  menuOpen == false &amp;&amp; global.myself.humiliated == 0 keybyte |= $10;
         else if global.special == MOUSE_RIGHT &amp;&amp;  menuOpen == false &amp;&amp; global.myself.humiliated == 0 {
             keybyte |= $08;
             inputSpecial();
         }
-        /*else if global.taunt == MOUSE_RIGHT keybyte |= $01;
-        else if global.drop == MOUSE_RIGHT inputDrop();
-        else if global.changeTeam == MOUSE_RIGHT inputChangeTeam();
-        else if global.changeClass == MOUSE_RIGHT inputChangeClass();
-        else if global.chat1 == MOUSE_RIGHT inputChat1();
-        else if global.chat2 == MOUSE_RIGHT inputChat2();
-        else if global.chat3 == MOUSE_RIGHT inputChat3();*/
     }
 }
 
-if keybyte != 0 afktimer=afktimeout;
-
-//when you're dead
-else {
-    if keyboard_check(global.left) {
-        //if view_xview &gt; 0 view_xview-=20;
-        afktimer=afktimeout;
-    }
-    else if keyboard_check(global.right) {
-        //if view_xview&lt; map_width()-400 view_xview+=20;
-        afktimer=afktimeout;
-    }
-    if keyboard_check(global.jump) {
-        //if view_yview &gt; 300 view_yview-=20;
-        afktimer=afktimeout;
-    }
-    else if keyboard_check(global.down) {
-        //if view_yview &lt; map_height()-300 view_yview+=20;
-        afktimer=afktimeout;
-    }
+if(keybyte != 0
+        or keyboard_check(global.left)
+        or keyboard_check(global.right)
+        or keyboard_check(global.jump)
+        or keyboard_check(global.down)) {
+    afktimer=afktimeout;
 }
 
 </argument>

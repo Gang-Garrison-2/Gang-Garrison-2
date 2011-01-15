@@ -167,6 +167,18 @@ while(string_pos(DIVIDER, argument0) != 0) { // continue until there are no more
     break;
     case "GeneratorBlue":
       instance_create(entityX, entityY, GeneratorBlue);
+    break;
+    case "MoveBoxUp":
+      instance_create(entityX, entityY, MoveBoxUp);
+    break;
+    case "MoveBoxDown":
+      instance_create(entityX, entityY, MoveBoxDown);
+    break;
+    case "MoveBoxLeft":
+      instance_create(entityX, entityY, MoveBoxLeft);
+    break;
+    case "MoveBoxRight":
+      instance_create(entityX, entityY, MoveBoxRight);
     break;     
     case "KothControlPoint":
       instance_create(entityX, entityY, KothControlPoint);

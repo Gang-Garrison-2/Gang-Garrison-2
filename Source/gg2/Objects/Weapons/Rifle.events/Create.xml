@@ -21,6 +21,7 @@
     maxDamage = 85
     chargeTime = 120;
     hitDamage=baseDamage;
+    maxAmmo = 0;
     shot=false;
     t=0;
 }

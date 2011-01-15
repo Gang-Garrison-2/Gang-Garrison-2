@@ -13,23 +13,19 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">{
-    virtualitem = -1;
-    xbegin = 20;
-    ybegin = 150;
-    spacing = 30;
-    width = 100; 
-    items = 4;
-    
-    item[0] = "Refresh";
-    item[1] = "Ping Servers";
-    item[2] = "Join manually";
-    item[3] = "Back";
-    
-    cooleddown = false;
-    alarm[0] = 90;
-    
-}</argument>
+        <argument kind="STRING">virtualitem = -1;
+xbegin = 20;
+ybegin = 150;
+spacing = 30;
+width = 100; 
+items = 2;
+
+item[0] = "Refresh";
+item[1] = "Back";
+
+cooleddown = false;
+alarm[0] = 90;
+</argument>
       </arguments>
     </action>
   </actions>

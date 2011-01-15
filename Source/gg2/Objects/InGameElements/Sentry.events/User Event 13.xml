@@ -15,15 +15,16 @@
       <arguments>
         <argument kind="STRING">if(global.updateType == FULL_UPDATE) {
     receiveCompleteMessage(global.serverSocket, 5, global.deserializeBuffer);
-    startDirection = readsbyte(global.deserializeBuffer);
-    x = readushort(global.deserializeBuffer)/5;
-    y = readushort(global.deserializeBuffer)/5;
+    startDirection = read_byte(global.deserializeBuffer);
+    x = read_ushort(global.deserializeBuffer)/5;
+    y = read_ushort(global.deserializeBuffer)/5;
 }
 if(global.updateType == QUICK_UPDATE or global.updateType == FULL_UPDATE) {
     receiveCompleteMessage(global.serverSocket, 2, global.deserializeBuffer);
-    built = readbyte(global.deserializeBuffer);
-    hp = readbyte(global.deserializeBuffer);
-}</argument>
+    built = read_ubyte(global.deserializeBuffer);
+    hp = read_ubyte(global.deserializeBuffer);
+}
+</argument>
       </arguments>
     </action>
   </actions>

@@ -16,12 +16,14 @@
         <argument kind="STRING">{
     event_user(0);
     if((not done) and (class != global.myself.class)) {
-        clearbuffer(global.sendBuffer);
+        buffer_clear(global.sendBuffer);
         ClientPlayerChangeclass(class);
-        sendmessage(global.serverSocket, 0, 0, global.sendBuffer);
+        write_buffer(global.serverSocket, global.sendBuffer);
+        socket_send(global.serverSocket);
     }
     done=true;
-}</argument>
+}
+</argument>
       </arguments>
     </action>
   </actions>

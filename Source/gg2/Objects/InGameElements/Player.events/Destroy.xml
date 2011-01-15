@@ -13,11 +13,8 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">    freebuffer(receiveBuffer);
-    freebuffer(sendBuffer);
-    
-    if(object != -1) with(object) instance_destroy();
-    if(socket != -1) closesocket(socket);
+        <argument kind="STRING">    if(object != -1) with(object) instance_destroy();
+    socket_destroy(socket, false);
     
     with(Rocket) if(ownerPlayer == other.id) instance_destroy();
     with(Flame) if(ownerPlayer == other.id) instance_destroy();

@@ -1,19 +1,19 @@
 {
     var i, player;
 
-    writebyte(HELLO, argument0);
+    write_ubyte(argument0, HELLO);
     
     // Write version 128 to indicate that a UUID follows
-    writeshort(128, argument0);
+    write_short(argument0, 128);
     
     // Send version UUID (big endian)
     for(i=0; i<16; i+=1) {
-        writebyte(global.protocolUuid[i], argument0);
+        write_ubyte(argument0, global.protocolUuid[i]);
     }
     
-    writebyte(ds_list_size(global.players), argument0);
-    writedouble(global.randomSeed, argument0);
-    writebyte(global.currentMapArea, argument0);
+    write_ubyte(argument0, ds_list_size(global.players));
+    write_double(argument0, global.randomSeed);
+    write_ubyte(argument0, global.currentMapArea);
     
     ServerChangeMap(global.currentMap, global.currentMapURL, global.currentMapMD5, argument0);
     
@@ -26,5 +26,5 @@
     
     serializeState(FULL_UPDATE, argument0);
     
-    if global.serverPassword != "" writebyte(PASSWORD_REQUEST, argument0);
+    if global.serverPassword != "" write_ubyte(argument0, PASSWORD_REQUEST);
 }

@@ -14,9 +14,9 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">receiveCompleteMessage(global.serverSocket,4,global.deserializeBuffer);
-temp = readsbyte(global.deserializeBuffer);
-cappingTeam = readsbyte(global.deserializeBuffer);
-capping = readushort(global.deserializeBuffer);
+temp = read_byte(global.deserializeBuffer);
+cappingTeam = read_byte(global.deserializeBuffer);
+capping = read_ushort(global.deserializeBuffer);
 if team != temp {
     pointCapture(cp);
     team = temp;

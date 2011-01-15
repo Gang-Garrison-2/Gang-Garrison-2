@@ -27,8 +27,7 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">{
-    //writebyte(alarm[5], global.serializeBuffer);
-    writebyte(ammoCount, global.serializeBuffer);    
+    write_ubyte(global.serializeBuffer, ammoCount);    
 }
 </argument>
       </arguments>

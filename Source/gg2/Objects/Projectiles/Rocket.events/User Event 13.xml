@@ -15,9 +15,10 @@
       <arguments>
         <argument kind="STRING">if(global.updateType == QUICK_UPDATE or global.updateType == FULL_UPDATE) {
         receiveCompleteMessage(global.serverSocket,4,global.deserializeBuffer);
-        x = readushort(global.deserializeBuffer)/5;
-        y = readushort(global.deserializeBuffer)/5;
-}</argument>
+        x = read_ushort(global.deserializeBuffer)/5;
+        y = read_ushort(global.deserializeBuffer)/5;
+}
+</argument>
       </arguments>
     </action>
   </actions>

@@ -13,9 +13,8 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">{
-    cooleddown = true;
-}</argument>
+        <argument kind="STRING">cooleddown = true;
+</argument>
       </arguments>
     </action>
   </actions>

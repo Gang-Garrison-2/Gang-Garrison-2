@@ -4,5 +4,5 @@
  * argument0: The player who just fired his Ubercharge
  */
  
-writebyte(UBER,global.eventBuffer);
-writebyte(ds_list_find_index(global.players,argument0), global.eventBuffer);
+write_ubyte(global.eventBuffer, UBER);
+write_ubyte(global.eventBuffer, ds_list_find_index(global.players,argument0));

@@ -3,8 +3,8 @@
 
 global.updateType = argument0;
 
-receiveCompleteMessage(global.serverSocket,1,0);
-if(readbyte(0) != ds_list_size(global.players)) {
+receiveCompleteMessage(global.serverSocket,1,global.tempBuffer);
+if(read_ubyte(global.tempBuffer) != ds_list_size(global.players)) {
 show_message("Wrong number of players while deserializing state");
 }
 
@@ -22,11 +22,11 @@ if(argument0 == FULL_UPDATE) {
 deserialize(IntelligenceRed);
 deserialize(IntelligenceBlue);
 
-receiveCompleteMessage(global.serverSocket,4,0);
-      global.caplimit = readbyte(0);
-global.redCaps = readbyte(0);
-global.blueCaps = readbyte(0);
-      global.Server_RespawntimeSec = readbyte(0);
+receiveCompleteMessage(global.serverSocket,4,global.tempBuffer);
+      global.caplimit = read_ubyte(global.tempBuffer);
+global.redCaps = read_ubyte(global.tempBuffer);
+global.blueCaps = read_ubyte(global.tempBuffer);
+      global.Server_RespawntimeSec = read_ubyte(global.tempBuffer);
       global.Server_Respawntime = global.Server_RespawntimeSec * 30;
          
         if instance_exists(ControlPointHUD){
@@ -47,10 +47,10 @@ global.blueCaps = readbyte(0);
 }
 
 if(argument0 == CAPS_UPDATE) {
-    receiveCompleteMessage(global.serverSocket,3,0);          
-    global.redCaps = readbyte(0);
-    global.blueCaps = readbyte(0);
-    global.Server_RespawntimeSec = readbyte(0);
+    receiveCompleteMessage(global.serverSocket,3,global.tempBuffer);          
+    global.redCaps = read_ubyte(global.tempBuffer);
+    global.blueCaps = read_ubyte(global.tempBuffer);
+    global.Server_RespawntimeSec = read_ubyte(global.tempBuffer);
 
     if instance_exists(ControlPointHUD){
         with ControlPointHUD event_user(13);

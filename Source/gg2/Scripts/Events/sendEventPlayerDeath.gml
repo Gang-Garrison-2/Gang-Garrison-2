@@ -12,16 +12,16 @@ killer = argument1;
 assistant = argument2;
 damageSource = argument3;
 
-writebyte(PLAYER_DEATH, global.eventBuffer);
-writebyte(ds_list_find_index(global.players, victim), global.eventBuffer);
+write_ubyte(global.eventBuffer, PLAYER_DEATH);
+write_ubyte(global.eventBuffer, ds_list_find_index(global.players, victim));
 if(killer != -1) {
-    writebyte(ds_list_find_index(global.players, killer), global.eventBuffer);
+    write_ubyte(global.eventBuffer, ds_list_find_index(global.players, killer));
 } else {
-    writebyte(255, global.eventBuffer);
+    write_ubyte(global.eventBuffer, 255);
 }
 if(assistant != -1) {
-    writebyte(ds_list_find_index(global.players, assistant), global.eventBuffer);
+    write_ubyte(global.eventBuffer, ds_list_find_index(global.players, assistant));
 } else {
-    writebyte(255, global.eventBuffer);
+    write_ubyte(global.eventBuffer, 255);
 }  
-writebyte(damageSource, global.eventBuffer);
+write_ubyte(global.eventBuffer, damageSource);

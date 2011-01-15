@@ -13,9 +13,10 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">writeushort(round(x*5), global.serializeBuffer);
-writeushort(round(y*5), global.serializeBuffer);
-writeshort(alarm[0], global.serializeBuffer);</argument>
+        <argument kind="STRING">write_ushort(global.serializeBuffer, round(x*5));
+write_ushort(global.serializeBuffer, round(y*5));
+write_short(global.serializeBuffer, alarm[0]);
+</argument>
       </arguments>
     </action>
   </actions>
