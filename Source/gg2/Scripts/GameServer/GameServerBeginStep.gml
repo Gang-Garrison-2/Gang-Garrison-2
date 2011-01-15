@@ -11,6 +11,7 @@ if(global.useLobbyServer and (frame mod 900)==0) {
     else global.map_serverName = "[" + string(global.currentMap) +"] " + string(global.serverName) + " [" + string(noOfPlayers) + "/" + string(maxplayers) + "]";
 
     var lobbyBuffer;
+    lobbyBuffer = buffer_create();
     
     // Magic numbers
     write_ubyte(lobbyBuffer, 4);

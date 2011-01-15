@@ -26,7 +26,6 @@
     blastNoFlameTime = 25;
     alarm[1] = blastReloadTime;
     readyToBlast = false;
-    //flameBlasted = false;
     
     maxAmmo = 200
     ammoCount = maxAmmo;

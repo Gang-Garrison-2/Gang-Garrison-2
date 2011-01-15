@@ -19,7 +19,6 @@
     refireTime=18;
     StabreloadTime = 32;
     readyToStab = true;
-    //alarm[1] = StabreloadTime;
 
     stabdirection=0;
     maxAmmo = 6;

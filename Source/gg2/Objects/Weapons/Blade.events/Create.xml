@@ -24,9 +24,6 @@
     ammoCount = maxAmmo;
     reloadTime = 55;
     reloadBuffer = 0;
-    /*bladeBaseDamage = 3;
-    bladeMaxAddDamage = 15;
-    bladeAddDamage = bladeMaxAddDamage;*/
 }
 </argument>
       </arguments>

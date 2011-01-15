@@ -3,12 +3,9 @@ var i, playerObject, playerID, player, otherPlayerID, otherPlayer, sameVersion, 
 
 if(global.myself != -1) {
     if(global.myself.object != -1) {
-        /*if(lastSentKeystate != playerControl.keybyte) {
-            lastSentKeystate = playerControl.keybyte;*/
             buffer_clear(global.sendBuffer);
             ClientInputstate(playerControl.keybyte, global.myself.object.x, global.myself.object.y);
             write_buffer(global.serverSocket, global.sendBuffer);
-        /*}*/
         playerControl.keybyte = 0;
     }
 }

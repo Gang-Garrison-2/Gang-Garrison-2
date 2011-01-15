@@ -19,10 +19,10 @@
     write_ushort(global.serializeBuffer, netAimDirection);
 
     if(global.updateType == QUICK_UPDATE or global.updateType == FULL_UPDATE) {
-        write_ushort(global.serializeBuffer, round(x*5));
-        write_ushort(global.serializeBuffer, round(y*5));
-        write_byte(global.serializeBuffer, round(hspeed*5));
-        write_byte(global.serializeBuffer, round(vspeed*5));
+        write_ushort(global.serializeBuffer, x*5);
+        write_ushort(global.serializeBuffer, y*5);
+        write_byte(global.serializeBuffer, hspeed*5);
+        write_byte(global.serializeBuffer, vspeed*5);
         write_ubyte(global.serializeBuffer, ceil(hp));
         
         temp = 0;
@@ -33,7 +33,7 @@
         
     if(global.updateType == FULL_UPDATE) {
         write_ubyte(global.serializeBuffer, animationOffset);
-        write_ubyte(global.serializeBuffer, round(cloakAlpha*255));
+        write_ubyte(global.serializeBuffer, cloakAlpha*255);
         write_short(global.serializeBuffer, alarm[1]);
         with(currentWeapon) {
             event_user(12);

@@ -63,5 +63,5 @@
     global.nextmap_temp_blu_back = false;
     global.nextmap_temp_red_back = false;
     
-    ServerDefineCommands();
+    GameServerDefineCommands();
 }
