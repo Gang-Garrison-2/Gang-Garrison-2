@@ -15,22 +15,22 @@
       <arguments>
         <argument kind="STRING">{
     receiveCompleteMessage(global.serverSocket,3,global.deserializeBuffer);
-    keyState = readbyte(global.deserializeBuffer);
-    aimDirection = readshort(global.deserializeBuffer)*360/65536;
+    keyState = read_ubyte(global.deserializeBuffer);
+    aimDirection = read_ushort(global.deserializeBuffer)*360/65536;
     
     var temp, newIntel;
     if(global.updateType == QUICK_UPDATE or global.updateType == FULL_UPDATE) {
         receiveCompleteMessage(global.serverSocket,8,global.deserializeBuffer);
-        x = readushort(global.deserializeBuffer)/5;
-        y = readushort(global.deserializeBuffer)/5;
-        hspeed = readsbyte(global.deserializeBuffer)/5;
-        vspeed = readsbyte(global.deserializeBuffer)/5;
+        x = read_ushort(global.deserializeBuffer)/5;
+        y = read_ushort(global.deserializeBuffer)/5;
+        hspeed = read_byte(global.deserializeBuffer)/5;
+        vspeed = read_byte(global.deserializeBuffer)/5;
         xprevious = x;
         yprevious = y;
         
-        hp = readbyte(global.deserializeBuffer);
+        hp = read_ubyte(global.deserializeBuffer);
         
-        temp = readbyte(global.deserializeBuffer);
+        temp = read_ubyte(global.deserializeBuffer);
         cloak = (temp &amp; $01 != 0);
         newIntel = (temp &amp; $02 != 0);
         
@@ -55,19 +55,17 @@
     
     if(global.updateType == FULL_UPDATE) {
         receiveCompleteMessage(global.serverSocket,4,global.deserializeBuffer);
-        animationOffset = readbyte(global.deserializeBuffer);
-        cloakAlpha = readbyte(global.deserializeBuffer)/255;
-        alarm[1]=readshort(global.deserializeBuffer); 
+        animationOffset = read_ubyte(global.deserializeBuffer);
+        cloakAlpha = read_ubyte(global.deserializeBuffer)/255;
+        alarm[1]=read_short(global.deserializeBuffer); 
         if alarm[1] != 0 canGrabIntel = false;
         with(currentWeapon) {
             event_user(13);
         }
-        
-
     }
-    
     event_user(1);
-}</argument>
+}
+</argument>
       </arguments>
     </action>
   </actions>

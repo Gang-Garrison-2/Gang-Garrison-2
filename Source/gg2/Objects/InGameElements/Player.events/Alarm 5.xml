@@ -13,17 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">/*if(global.isHost &amp;&amp; global.mapchanging == 0 &amp;&amp; team != TEAM_SPECTATOR &amp;&amp; canSpawn == 1) {
-    if(team == TEAM_RED) {
-        numSpawnpoints = ds_list_size(global.spawnPointsRedX);
-    } else {
-        numSpawnpoints = ds_list_size(global.spawnPointsBlueX);
-    }
-    spawnpointID = floor(random(numSpawnpoints));
-    sendEventSpawn(id, spawnpointID);
-    doEventSpawn(id, spawnpointID);
-}*/
-if(global.isHost &amp;&amp; global.mapchanging == 0 &amp;&amp; team != TEAM_SPECTATOR &amp;&amp; canSpawn == 1) {
+        <argument kind="STRING">if(global.isHost &amp;&amp; global.mapchanging == 0 &amp;&amp; team != TEAM_SPECTATOR &amp;&amp; canSpawn == 1) {
     var group, spawnpointID, numSpawnPoints;
     group = selectSpawnGroup(team);
     if (group==-1) {

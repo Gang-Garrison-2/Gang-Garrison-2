@@ -15,9 +15,9 @@
       <arguments>
         <argument kind="STRING">done=true;
 if global.myself.sentry == -1 exit;
-clearbuffer(global.sendBuffer);
-writebyte(DESTROY_SENTRY,global.sendBuffer);
-sendmessage(global.serverSocket, 0, 0, global.sendBuffer);</argument>
+write_ubyte(global.serverSocket, DESTROY_SENTRY);
+socket_send(global.serverSocket);
+</argument>
       </arguments>
     </action>
   </actions>

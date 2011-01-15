@@ -15,9 +15,9 @@
       <arguments>
         <argument kind="STRING">{
     if(not nocreate) {
-        closesocket(global.serverSocket);
+        socket_destroy(global.serverSocket, false);
         ds_list_destroy(global.players);
-        freebuffer(global.deserializeBuffer);    
+        buffer_destroy(global.deserializeBuffer);    
         
         if(playerControl != -1 and instance_exists(playerControl)) {
             with(playerControl) {
@@ -25,7 +25,8 @@
             }
         }
     }
-}</argument>
+}
+</argument>
       </arguments>
     </action>
   </actions>

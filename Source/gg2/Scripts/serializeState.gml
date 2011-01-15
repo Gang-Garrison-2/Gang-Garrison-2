@@ -12,13 +12,12 @@
         
     global.updateType=argument0;
     
-    writebyte(argument0, argument1);
-    writebyte(ds_list_size(global.players), argument1);
+    write_ubyte(argument1, argument0);
+    write_ubyte(argument1, ds_list_size(global.players));
     
     global.serializeBuffer = argument1;
 
     if argument0 != CAPS_UPDATE {
-       
         for(i=0; i<ds_list_size(global.players); i+=1) {
             player = ds_list_find_value(global.players, i);
             with(player) {
@@ -31,10 +30,10 @@
         serialize(IntelligenceRed);
         serialize(IntelligenceBlue);
         
-        writebyte(global.caplimit, argument1);
-        writebyte(global.redCaps, argument1);
-        writebyte(global.blueCaps, argument1);
-        writebyte(global.Server_RespawntimeSec, argument1);
+        write_ubyte(argument1, global.caplimit);
+        write_ubyte(argument1, global.redCaps);
+        write_ubyte(argument1, global.blueCaps);
+        write_ubyte(argument1, global.Server_RespawntimeSec);
         if instance_exists(ControlPointHUD) {
             with ControlPointHUD event_user(12);
         }
@@ -54,9 +53,9 @@
     
     if(argument0 == CAPS_UPDATE) {
               
-        writebyte(global.redCaps, argument1);
-        writebyte(global.blueCaps, argument1);
-        writebyte(global.Server_RespawntimeSec, argument1);
+        write_ubyte(argument1, global.redCaps);
+        write_ubyte(argument1, global.blueCaps);
+        write_ubyte(argument1, global.Server_RespawntimeSec);
         if instance_exists(ControlPointHUD) {
             with ControlPointHUD event_user(12);
         }

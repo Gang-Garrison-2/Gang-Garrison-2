@@ -56,11 +56,8 @@ with(JoiningPlayer) {
 // Service all players
 for(i=0; i<ds_list_size(global.players); i+=1) {
     player = ds_list_find_value(global.players, i);
-    // Fill up the buffer from the player socket
-    // 100 Bytes should be plenty.
-    socket = player.socket;
     
-    if(socket_has_error(socket)) {
+    if(socket_has_error(player.socket)) {
         removePlayer(player);
         ServerPlayerLeave(i);
         i-=1;
@@ -71,10 +68,10 @@ for(i=0; i<ds_list_size(global.players); i+=1) {
                 write_ubyte(player.socket, KICK);
                 write_ubyte(player.socket, KICK_PASSWORDCOUNT);
                 socket_destroy(player.socket, false);
+                player.socket = -1;
             }
         }
-    } else {
-        processClientCommands(player, i);
+        processClientCommands(player, i);        
     }
 }
 
@@ -111,11 +108,11 @@ if (global.winners != -1 and (global.mapchanging == 0) /*or (global.vipDied == t
     global.mapchanging=1;
     impendingMapChange = 300; // in 300 frames (ten seconds), we'll do a map change
     
-    writebyte(MAP_END,global.sendBuffer);
-    writebyte(string_length(global.nextMap), global.sendBuffer);
-    writechars(global.nextMap, global.sendBuffer);
-    writebyte(global.winners,global.sendBuffer);
-    writebyte(global.currentMapArea, global.sendBuffer);
+    write_ubyte(global.sendBuffer, MAP_END);
+    write_ubyte(global.sendBuffer, string_length(global.nextMap));
+    write_string(global.sendBuffer, global.nextMap);
+    write_ubyte(global.sendBuffer, global.winners);
+    write_ubyte(global.sendBuffer, global.currentMapArea);
     if !instance_exists(ScoreTableController) instance_create(0,0,ScoreTableController);
     instance_create(0,0,WinBanner);
 }
@@ -143,9 +140,6 @@ if(impendingMapChange == 0) {
     for(i=0; i<ds_list_size(global.players); i+=1) {
         player = ds_list_find_value(global.players, i);
         if(global.currentMapArea == 1){
-            //player.kills=0;
-            //player.caps=0;
-            //player.healpoints=0;
             player.stats[KILLS] = 0;
             player.stats[DEATHS] = 0;
             player.stats[CAPS] = 0;
@@ -181,15 +175,13 @@ if(impendingMapChange == 0) {
 
 for(i=1; i<ds_list_size(global.players); i+=1) {
     player = ds_list_find_value(global.players, i);
-    socket = player.socket;
-    copybuffer(player.sendBuffer, global.eventBuffer);
-    copybuffer(player.sendBuffer, global.sendBuffer);
-    sendMessageNonblock(socket, player.sendBuffer);
+    write_buffer(player.socket, global.eventBuffer);
+    write_buffer(player.socket, global.sendBuffer);
+    socket_send(player.socket);
 }
-clearbuffer(global.eventBuffer);
+buffer_clear(global.eventBuffer);
 
 with(Character) {
     event_user(1);
 }
 
-//if (frame mod 2) == 0 screen_redraw();

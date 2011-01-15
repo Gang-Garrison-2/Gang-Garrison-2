@@ -44,7 +44,6 @@
   <constant name="SCOPE_IN" value="40"/>
   <constant name="SCOPE_OUT" value="41"/>
   <constant name="KOTH_UNLOCKCP" value="42"/>
-  <constant name="PLAYER_HAT" value="50"/>
   <constant name="TEAM_RED" value="0"/>
   <constant name="TEAM_BLUE" value="1"/>
   <constant name="TEAM_SPECTATOR" value="2"/>
@@ -62,7 +61,7 @@
   <constant name="CHARACTER_ANIMATION_INTEL" value="2"/>
   <constant name="CHARACTER_ANIMATION_LEN" value="2"/>
   <constant name="CHARACTER_ANIMATION_DEAD" value="5"/>
-  <constant name="LOBBY_SERVER_HOST" value="&quot;gg2.game-host.org&quot;"/>
+  <constant name="LOBBY_SERVER_HOST" value="&quot;ganggarrison.com&quot;"/>
   <constant name="LOBBY_SERVER_PORT" value="29942"/>
   <constant name="WSAEWOULDBLOCK" value="-10035"/>
   <constant name="WSAENETDOWN" value="-10050"/>

@@ -15,12 +15,11 @@
       <arguments>
         <argument kind="STRING">{
     receiveCompleteMessage(global.serverSocket, 3, global.deserializeBuffer);
-    //alarm[5] = readbyte(global.deserializeBuffer);
-    ammoCount = readbyte(global.deserializeBuffer); 
-    healing = readushort(global.deserializeBuffer);
+    ammoCount = read_ubyte(global.deserializeBuffer); 
+    healing = read_ushort(global.deserializeBuffer);
     if(healing) {
         receiveCompleteMessage(global.serverSocket, 1, global.deserializeBuffer);
-        healTarget = readbyte(global.deserializeBuffer);
+        healTarget = read_ubyte(global.deserializeBuffer);
         if(healTarget != 200) {
             healTarget = ds_list_find_value(global.players, healTarget);
         } else {

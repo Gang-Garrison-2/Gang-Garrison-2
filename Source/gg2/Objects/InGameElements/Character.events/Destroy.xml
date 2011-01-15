@@ -60,12 +60,6 @@
     if(variable_local_exists("jumpFlameParticleType")) {
             part_type_destroy(jumpFlameParticleType);
     }
-        
-    //if (not (instance_exists(RespawnTimer)))
-    //{
-    //    instance_create(x,y,RespawnTimer);
-    //}
-
 }
 </argument>
       </arguments>

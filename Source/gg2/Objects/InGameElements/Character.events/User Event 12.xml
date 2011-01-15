@@ -15,32 +15,32 @@
       <arguments>
         <argument kind="STRING">{
     var temp;
-    writebyte(keyState, global.serializeBuffer);
-    writeshort(netAimDirection, global.serializeBuffer);
+    write_ubyte(global.serializeBuffer, keyState);
+    write_ushort(global.serializeBuffer, netAimDirection);
 
     if(global.updateType == QUICK_UPDATE or global.updateType == FULL_UPDATE) {
-        writeushort(round(x*5), global.serializeBuffer);
-        writeushort(round(y*5), global.serializeBuffer);
-        writebyte(round(hspeed*5), global.serializeBuffer);
-        writebyte(round(vspeed*5), global.serializeBuffer);
-        writebyte(ceil(hp), global.serializeBuffer);
+        write_ushort(global.serializeBuffer, round(x*5));
+        write_ushort(global.serializeBuffer, round(y*5));
+        write_byte(global.serializeBuffer, round(hspeed*5));
+        write_byte(global.serializeBuffer, round(vspeed*5));
+        write_ubyte(global.serializeBuffer, ceil(hp));
         
         temp = 0;
         if(cloak) temp |= $01;
         if(intel) temp |= $02;
-        writebyte(temp, global.serializeBuffer);               
+        write_ubyte(global.serializeBuffer, temp);               
     }
         
     if(global.updateType == FULL_UPDATE) {
-        writebyte(animationOffset, global.serializeBuffer);
-        writebyte(round(cloakAlpha*255), global.serializeBuffer);
-        writeshort(alarm[1], global.serializeBuffer);
+        write_ubyte(global.serializeBuffer, animationOffset);
+        write_ubyte(global.serializeBuffer, round(cloakAlpha*255));
+        write_short(global.serializeBuffer, alarm[1]);
         with(currentWeapon) {
             event_user(12);
         }
-        
     }
-}</argument>
+}
+</argument>
       </arguments>
     </action>
   </actions>

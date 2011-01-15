@@ -14,11 +14,11 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">receiveCompleteMessage(global.serverSocket,8,global.deserializeBuffer);
-global.timeLimitMins = readbyte(global.deserializeBuffer);
+global.timeLimitMins = read_ubyte(global.deserializeBuffer);
 timeLimit=global.timeLimitMins*30*60;
-timer=readuint(global.deserializeBuffer);
-cpUnlock=readushort(global.deserializeBuffer);
-roundStart = readbyte(global.deserializeBuffer)*2;
+timer=read_uint(global.deserializeBuffer);
+cpUnlock=read_ushort(global.deserializeBuffer);
+roundStart = read_ubyte(global.deserializeBuffer)*2;
 with ArenaControlPoint event_user(13);
 </argument>
       </arguments>

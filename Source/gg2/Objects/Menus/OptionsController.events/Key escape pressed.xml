@@ -13,20 +13,8 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">instance_destroy();
-if room == Options {
-    instance_create(0,0,MainMenuController);
-}
-else {
-    instance_create(0,0,InGameMenuController);
-    if oldName != global.playerName {
-        clearbuffer(global.sendBuffer);
-        writebyte(PLAYER_CHANGENAME, global.sendBuffer);
-        writebyte(string_length(global.playerName), global.sendBuffer);
-        writechars(global.playerName, global.sendBuffer);
-        sendmessage(global.serverSocket,0,0,global.sendBuffer);
-    }
-}</argument>
+        <argument kind="STRING">event_user(12);
+</argument>
       </arguments>
     </action>
   </actions>

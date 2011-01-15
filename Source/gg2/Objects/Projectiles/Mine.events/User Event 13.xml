@@ -14,15 +14,15 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">if(global.updateType == QUICK_UPDATE or global.updateType == FULL_UPDATE) {
-
     receiveCompleteMessage(global.serverSocket, 7, global.deserializeBuffer);
 
-    x = readushort(global.deserializeBuffer)/5;
-    y = readushort(global.deserializeBuffer)/5;
-    hspeed = readsbyte(global.deserializeBuffer)/5;
-    vspeed = readsbyte(global.deserializeBuffer)/5;
-    stickied = readbyte(global.deserializeBuffer);
-}</argument>
+    x = read_ushort(global.deserializeBuffer)/5;
+    y = read_ushort(global.deserializeBuffer)/5;
+    hspeed = read_byte(global.deserializeBuffer)/5;
+    vspeed = read_byte(global.deserializeBuffer)/5;
+    stickied = read_ubyte(global.deserializeBuffer);
+}
+</argument>
       </arguments>
     </action>
   </actions>

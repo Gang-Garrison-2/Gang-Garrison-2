@@ -80,41 +80,12 @@
                     break;
                 case BID_FAREWELL:
                     ds_map_add(map, "weapon", DeadKL);
-                    //ds_map_replace(map, "name1", string_copy(argument0.name, 1, 20));
-                    //ds_map_replace(map, "team1", argument0.team);
                     ds_map_replace(map, "string", string_copy(argument0.name, 1, 20) + " bid farewell, cruel world!");
                     ds_map_replace(map, "name2", "");
                     ds_map_replace(map, "team2", 0);
                     break;
                 case GENERATOR_EXPLOSION:
                     ds_map_add(map, "weapon", ExplodeKL);
-                    /*
-                         
-                    This was for the build that included Citizwn (VIP) and other items. Obsolete now, until it gets added
-                     
-                case SUICIDE_GIBBED:
-                    ds_map_add(map, 2, DeadS);
-                    break;    
-                case SUICIDE_DEATH:
-                    ds_map_add(map, 2, DeadS);
-                    break;       
-                case RED_CAP_INTEL:
-                    ds_map_add(map, 2, IntelligenceBlueS);
-                    break;                         
-                case BLU_CAP_INTEL:
-                    ds_map_add(map, 2, IntelligenceRedS);
-                    break;     
-                case RED_DEFEND_INTEL:
-                    ds_map_add(map, 2, DefendedRedS);
-                    break;                         
-                case BLU_DEFEND_INTEL:
-                    ds_map_add(map, 2, DefendedBlueS);
-                    break;       
-                case WEAPON_UMBRELLA:
-                    ds_map_add(map, 2, UmbrellaS);
-                    break;                                
-                    
-                    */                  
 
                 default:
                     ds_map_add(map, "weapon", DeadKL);

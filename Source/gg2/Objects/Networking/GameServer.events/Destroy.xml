@@ -15,8 +15,8 @@
       <arguments>
         <argument kind="STRING">ds_list_destroy(global.joiningPlayers);
 ds_list_destroy(global.players);
-closesocket(global.tcpListener);
-closesocket(global.serverSocket);
+socket_destroy(global.tcpListener, false);
+socket_destroy(global.serverSocket, false);
 </argument>
       </arguments>
     </action>

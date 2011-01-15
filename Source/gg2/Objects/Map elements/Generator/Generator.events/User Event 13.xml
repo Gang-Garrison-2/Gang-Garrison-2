@@ -14,7 +14,7 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">receiveCompleteMessage(global.serverSocket,2,global.deserializeBuffer);
-hp = readshort(global.deserializeBuffer);
+hp = read_short(global.deserializeBuffer);
 </argument>
       </arguments>
     </action>

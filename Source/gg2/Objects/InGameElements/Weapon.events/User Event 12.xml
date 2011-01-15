@@ -14,9 +14,10 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">{
-    writebyte(readyToShoot, global.serializeBuffer);
-    writebyte(alarm[0], global.serializeBuffer);    
-}</argument>
+    write_ubyte(global.serializeBuffer, readyToShoot);
+    write_ubyte(global.serializeBuffer, alarm[0]);    
+}
+</argument>
       </arguments>
     </action>
   </actions>

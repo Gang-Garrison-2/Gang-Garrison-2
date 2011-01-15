@@ -32,6 +32,7 @@
     
     global.playerID = 0;
     global.myself = serverPlayer;
+    global.myself.authorized = true;
     playerControl = instance_create(0,0,PlayerControl);
         
     global.currentMap = ds_list_find_value(global.map_rotation, global.currentMapIndex);
@@ -61,5 +62,6 @@
     global.red_next_map_temp = false;
     global.nextmap_temp_blu_back = false;
     global.nextmap_temp_red_back = false;
-       
+    
+    ServerDefineCommands();
 }

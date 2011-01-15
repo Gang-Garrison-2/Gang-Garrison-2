@@ -20,23 +20,29 @@ if(buffer >= 0) {
         break;
         
     case STATE_EXPECT_NAME:
-        ServerJoinUpdate(socket);
-        
-        player = instance_create(0,0,Player);
-        player.socket = socket;
-        
-        player.name = read_string(buffer, expectedBytes);
-        
-        // sanitize player name
-        player.name = string_copy(player.name, 0, MAX_PLAYERNAME_LENGTH);
-        player.name = string_replace_all(player.name, "#", " ");
-        
-        //ServerJoinUpdate(player.sendBuffer);
-        ds_list_add(global.players, player);
-        
-        ServerPlayerJoin(player.name, global.sendBuffer);
-        
-        instance_destroy();
+        if(ds_list_size(global.players) >= global.playerLimit) {
+            write_ubyte(socket, SERVER_FULL);
+            socket_destroy(socket, false);
+            instance_destroy();
+        } else {
+            ServerJoinUpdate(socket);
+            
+            player = instance_create(0,0,Player);
+            player.socket = socket;
+            
+            player.name = read_string(buffer, expectedBytes);
+            
+            // sanitize player name
+            player.name = string_copy(player.name, 0, MAX_PLAYERNAME_LENGTH);
+            player.name = string_replace_all(player.name, "#", " ");
+            
+            //ServerJoinUpdate(player.sendBuffer);
+            ds_list_add(global.players, player);
+            
+            ServerPlayerJoin(player.name, global.sendBuffer);
+            
+            instance_destroy();
+        }
         break;
     }
     buffer_destroy(buffer);

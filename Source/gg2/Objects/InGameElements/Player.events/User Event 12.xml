@@ -16,40 +16,24 @@
         <argument kind="STRING">var subobjects;
 
     if(global.updateType == FULL_UPDATE) {
-        writebyte(stats[KILLS], global.serializeBuffer);
-        writebyte(stats[DEATHS], global.serializeBuffer);
-        writebyte(stats[CAPS], global.serializeBuffer);
-        writebyte(stats[ASSISTS], global.serializeBuffer);
-        writebyte(stats[DESTRUCTION], global.serializeBuffer);
-        writebyte(stats[STABS], global.serializeBuffer);
-        writeushort(stats[HEALING], global.serializeBuffer);
-        writebyte(stats[DEFENSES], global.serializeBuffer);
-        writebyte(stats[INVULNS], global.serializeBuffer);
-        writebyte(stats[BONUS], global.serializeBuffer);
-        writebyte(stats[POINTS], global.serializeBuffer); 
-
-        //Syncing!
-        /*writebyte(ds_list_size(domPlayers), global.serializeBuffer);
-        
-        if (ds_list_size(domPlayers) &gt; 0)
-        {
-        for(k=0;k&lt;ds_list_size(domPlayers);k+=1)
-        {
-            writebyte(ds_list_find_index(global.players,ds_list_find_value(domPlayers,k)), global.serializeBuffer); 
-        }
-        writebyte(ds_list_size(dominations), global.serializeBuffer); 
-        for(j=0;j&lt;ds_list_size(dominations);j+=1)
-        {
-             writebyte(ds_list_find_index(dominations,j), global.serializeBuffer); 
-        }
-        }*/
+        write_ubyte(global.serializeBuffer, stats[KILLS]);
+        write_ubyte(global.serializeBuffer, stats[DEATHS]);
+        write_ubyte(global.serializeBuffer, stats[CAPS]);
+        write_ubyte(global.serializeBuffer, stats[ASSISTS]);
+        write_ubyte(global.serializeBuffer, stats[DESTRUCTION]);
+        write_ubyte(global.serializeBuffer, stats[STABS]);
+        write_ushort(global.serializeBuffer, stats[HEALING]);
+        write_ubyte(global.serializeBuffer, stats[DEFENSES]);
+        write_ubyte(global.serializeBuffer, stats[INVULNS]);
+        write_ubyte(global.serializeBuffer, stats[BONUS]);
+        write_ubyte(global.serializeBuffer, stats[POINTS]); 
     } 
     
     subobjects=0;
     
     if(object != -1) subobjects |= $01;
     if(sentry != -1) subobjects |= $02;
-    writebyte(subobjects, global.serializeBuffer);
+    write_ubyte(global.serializeBuffer, subobjects);
 
     if(object != -1) with(object) event_user(12);     
     if(sentry != -1) with(sentry) event_user(12);

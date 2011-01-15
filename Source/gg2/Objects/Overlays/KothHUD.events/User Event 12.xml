@@ -13,9 +13,9 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">writeushort(cpUnlock, global.serializeBuffer);
-writeushort(redTimer, global.serializeBuffer);
-writeushort(blueTimer, global.serializeBuffer);
+        <argument kind="STRING">write_ushort(global.serializeBuffer, cpUnlock);
+write_ushort(global.serializeBuffer, redTimer);
+write_ushort(global.serializeBuffer, blueTimer);
 with KothControlPoint event_user(12);
 </argument>
       </arguments>

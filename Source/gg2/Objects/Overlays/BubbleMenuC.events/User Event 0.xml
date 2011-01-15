@@ -14,12 +14,11 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">    if(not done) {
-        clearbuffer(global.sendBuffer);
-        writebyte(CHAT_BUBBLE,global.sendBuffer);
-        writebyte(bubbleImage,global.sendBuffer);
-        sendmessage(global.serverSocket, 0, 0, global.sendBuffer);
+        write_ubyte(global.serverSocket, CHAT_BUBBLE);
+        write_ubyte(global.serverSocket, bubbleImage);
     }
-    done = true;</argument>
+    done = true;
+</argument>
       </arguments>
     </action>
   </actions>

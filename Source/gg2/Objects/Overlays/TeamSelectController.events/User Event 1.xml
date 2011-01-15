@@ -14,9 +14,10 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">    if((not done) and (global.myself.team != team)) {
-        clearbuffer(global.sendBuffer);
+        buffer_clear(global.sendBuffer);
         ClientPlayerChangeteam(team);
-        sendmessage(global.serverSocket, 0, 0, global.sendBuffer);
+        write_buffer(global.serverSocket, global.sendBuffer);
+        socket_send(global.serverSocket);
     }
     done = true;
     if team == TEAM_SPECTATOR{

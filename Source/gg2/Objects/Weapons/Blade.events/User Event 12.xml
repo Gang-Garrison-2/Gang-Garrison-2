@@ -26,7 +26,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">writebyte(ammoCount, global.serializeBuffer);
+        <argument kind="STRING">write_ubyte(global.serializeBuffer, ammoCount);
 </argument>
       </arguments>
     </action>

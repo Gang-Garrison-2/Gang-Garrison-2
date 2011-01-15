@@ -13,7 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">writeshort(ceil(hp), global.serializeBuffer);
+        <argument kind="STRING">write_short(global.serializeBuffer, ceil(hp));
 </argument>
       </arguments>
     </action>

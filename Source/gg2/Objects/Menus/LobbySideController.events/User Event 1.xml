@@ -13,18 +13,10 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if(cooleddown) {
-    with(LobbyController) {
-        instance_destroy();
-    }
-    with(PingLobbyController) {
-        instance_destroy();
-    }
-    
-    instance_create(0,0,PingLobbyController);
-    cooleddown = false;
-    alarm[0] = 90;
-}</argument>
+        <argument kind="STRING">if(instance_exists(LobbyController)) {
+    LobbyController.pingServers = true;
+}
+</argument>
       </arguments>
     </action>
   </actions>

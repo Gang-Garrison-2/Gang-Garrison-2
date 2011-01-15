@@ -27,9 +27,8 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">{
-    writebyte(lobbed, global.serializeBuffer);
-    //writebyte(alarm[5], global.serializeBuffer); 
-    writebyte(ammoCount, global.serializeBuffer); 
+    write_ubyte(global.serializeBuffer, lobbed);
+    write_ubyte(global.serializeBuffer, ammoCount); 
     with(Mine) {
         if(ownerPlayer == other.ownerPlayer) {
             event_user(12);

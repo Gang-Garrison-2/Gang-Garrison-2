@@ -5,8 +5,7 @@ if(
         global.myself.object.cloak == false &&
         random(9) <= 1) {
     bubbleImage = 50 + global.myself.class;
-    clearbuffer(global.sendBuffer);
-    writebyte(CHAT_BUBBLE,global.sendBuffer);
-    writebyte(bubbleImage,global.sendBuffer);
-    sendmessage(global.serverSocket, 0, 0, global.sendBuffer);
+    write_ubyte(global.serverSocket, CHAT_BUBBLE);
+    write_ubyte(global.serverSocket, bubbleImage);
+    socket_send(global.serverSocket);
 }

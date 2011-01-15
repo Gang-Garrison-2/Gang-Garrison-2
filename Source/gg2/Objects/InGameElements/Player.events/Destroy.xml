@@ -14,7 +14,7 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">    if(object != -1) with(object) instance_destroy();
-    if(socket != -1) closesocket(socket);
+    socket_destroy(socket, false);
     
     with(Rocket) if(ownerPlayer == other.id) instance_destroy();
     with(Flame) if(ownerPlayer == other.id) instance_destroy();

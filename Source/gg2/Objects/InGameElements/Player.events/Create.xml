@@ -20,37 +20,6 @@
     socket = -1;
     name = "";
     
-    /*kills = 0;
-        
-    deaths = 0;
-    caps = 0;
-    healpoints = 0;
-    //new vars
-    assists = 0;
-    bonus = 0;
-    destruction = 0;
-    
-    //arena healed (per round)
-    roundHealed = 0;
-    roundHealPoints = 0;
-    //arena kills (per round)
-    roundKills = 0;
-    //arena stabKills (per round)
-    roundStabKills = 0;
-    //arena assists (per round)
-    roundAssists = 0;
-    //arena bonus (per round)
-    roundBonus = 0;
-    //arena destruction (per round)
-    roundDestruction = 0;
-    */
-
-    //domPlayers = ds_list_create(); //Players(id) of those who this player has kills on
-    //dominations = ds_list_create(); //Number of kills, per player index...
-    //dominated = false;
-    //dominating = false;
-    //domcount = 0;
-    
     //fuck your shit I'm making statistic arrays
     stats[KILLS] = 0;
     stats[DEATHS] = 0;

@@ -13,10 +13,10 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">writebyte(global.timeLimitMins, global.serializeBuffer);
-writeuint(timer, global.serializeBuffer);
-writeushort(cpUnlock, global.serializeBuffer);
-writebyte(floor(roundStart/2), global.serializeBuffer);
+        <argument kind="STRING">write_ubyte(global.serializeBuffer, global.timeLimitMins);
+write_uint(global.serializeBuffer, timer);
+write_ushort(global.serializeBuffer, cpUnlock);
+write_ubyte(global.serializeBuffer, floor(roundStart/2));
 with ArenaControlPoint event_user(12);
 </argument>
       </arguments>

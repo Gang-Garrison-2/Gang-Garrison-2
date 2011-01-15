@@ -13,17 +13,14 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">{
-    with(Server) {
-        instance_destroy();
-    }
-    
-    if(lobbysocket != -1) {
-        closesocket(lobbysocket);
-    }
-    ds_list_destroy(servers);
-    show_debug_message("Lobby is beiing destroyed");
+        <argument kind="STRING">with(Server) {
+    instance_destroy();
 }
+
+socket_destroy(lobbysocket, false);
+ds_list_destroy(servers);
+show_debug_message("Lobby is being destroyed");
+
 </argument>
       </arguments>
     </action>
