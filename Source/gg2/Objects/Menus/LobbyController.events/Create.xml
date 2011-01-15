@@ -26,8 +26,6 @@ servers = ds_list_create();
 numServers = -1;
 serversRead = 0;
 serverNameLength = -1;
-pingServers = false;
-runningPingCount = 0;
 
 lobbysocket = tcp_connect(LOBBY_SERVER_HOST, LOBBY_SERVER_PORT);
 

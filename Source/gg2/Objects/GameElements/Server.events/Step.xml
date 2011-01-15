@@ -13,27 +13,23 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if(instance_exists(LobbyController)) {
-    if(LobbyController.pingServers) {
-        if(!pingRunning and !pingFinished and LobbyController.runningPingCount &lt; 10) {
-            LobbyController.runningPingCount += 1;
-            pingSocket = tcp_connect(ip, port);
-            pingStartTime = current_time;
-            pingRunning = true;
-        } else if(pingRunning and !pingFinished) {
-            if(not socket_connecting(pingSocket)) {
-                if(socket_has_error(pingSocket)) {
-                    ping = -1;
-                } else {
-                    ping = current_time - pingStartTime;
-                }
-                socket_destroy(pingSocket, true);
-                LobbyController.runningPingCount -= 1;
-                pingSocket = -1;
-                pingRunning = false;
-                pingFinished = true;
-            }
+        <argument kind="STRING">if(!pingRunning and !pingFinished and global.runningPingCount &lt; 10) {
+    global.runningPingCount += 1;
+    pingSocket = tcp_connect(ip, port);
+    pingStartTime = current_time;
+    pingRunning = true;
+} else if(pingRunning and !pingFinished) {
+    if(not socket_connecting(pingSocket)) {
+        if(socket_has_error(pingSocket)) {
+            ping = -1;
+        } else {
+            ping = current_time - pingStartTime;
         }
+        socket_destroy(pingSocket, true);
+        global.runningPingCount -= 1;
+        pingSocket = -1;
+        pingRunning = false;
+        pingFinished = true;
     }
 }
 </argument>

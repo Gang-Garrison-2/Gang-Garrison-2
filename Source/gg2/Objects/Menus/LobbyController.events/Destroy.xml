@@ -19,8 +19,6 @@
 
 socket_destroy(lobbysocket, false);
 ds_list_destroy(servers);
-show_debug_message("Lobby is being destroyed");
-
 </argument>
       </arguments>
     </action>

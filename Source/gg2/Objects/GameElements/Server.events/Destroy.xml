@@ -14,10 +14,8 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">socket_destroy(pingSocket, true);
-if(instance_exists(LobbyController)) {
-    if(pingRunning) {
-        LobbyController.runningPingCount -= 1;
-    }
+if(pingRunning) {
+    global.runningPingCount -= 1;
 }
 </argument>
       </arguments>

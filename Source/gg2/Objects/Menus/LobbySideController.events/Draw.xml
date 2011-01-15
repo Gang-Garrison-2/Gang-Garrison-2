@@ -13,24 +13,23 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">{
-    var i; 
-    draw_set_color(c_white);
+        <argument kind="STRING">var i; 
+draw_set_color(c_white);
 
-    draw_set_valign(fa_middle);
-    draw_set_halign(fa_left);
-    draw_set_alpha(1);
-    
-    for(i=0; i&lt;items; i+=1) {
-        if(i == virtualitem) {
-            draw_set_color(c_red);    
-        } else {
-            draw_set_color(c_white);    
-        }
+draw_set_valign(fa_middle);
+draw_set_halign(fa_left);
+draw_set_alpha(1);
 
-        draw_text(xbegin,ybegin+i*spacing,item[i]);
+for(i=0; i&lt;items; i+=1) {
+    if(i == virtualitem) {
+        draw_set_color(c_red);    
+    } else {
+        draw_set_color(c_white);    
     }
-}</argument>
+
+    draw_text(xbegin,ybegin+i*spacing,item[i]);
+}
+</argument>
       </arguments>
     </action>
   </actions>

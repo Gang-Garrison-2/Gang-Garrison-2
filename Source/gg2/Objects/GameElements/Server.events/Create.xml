@@ -16,6 +16,10 @@
         <argument kind="STRING">pingSocket = -1;
 pingRunning = false;
 pingFinished = false;
+
+if(!variable_global_exists("runningPingCount")) {
+    global.runningPingCount = 0;
+}
 </argument>
       </arguments>
     </action>

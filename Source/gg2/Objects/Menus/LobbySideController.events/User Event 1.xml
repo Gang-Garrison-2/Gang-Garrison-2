@@ -13,9 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if(instance_exists(LobbyController)) {
-    LobbyController.pingServers = true;
-}
+        <argument kind="STRING">room_goto_fix(Menu);
 </argument>
       </arguments>
     </action>
