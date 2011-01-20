@@ -9,4 +9,5 @@
   <resource name="MainMenuController" type="RESOURCE"/>
   <resource name="InGameMenuController" type="RESOURCE"/>
   <resource name="CreditsController" type="RESOURCE"/>
+  <resource name="DevMessageChecker" type="RESOURCE"/>
 </resources>

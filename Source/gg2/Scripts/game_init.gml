@@ -1,4 +1,5 @@
 {
+    set_little_endian_global(true);
     if file_exists("game_errors.log") file_delete("game_errors.log");
     
     var customMapRotationFile;
@@ -12,7 +13,6 @@
     global.eventBuffer = buffer_create();
     global.tempBuffer = buffer_create();
     global.HudCheck = false;
-    
     global.map_rotation = ds_list_create();
     
     global.CustomMapCollisionSprite = -1;

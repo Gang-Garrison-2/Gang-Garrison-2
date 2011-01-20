@@ -14,33 +14,28 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">{
-    var size, namelength, server, buffer;
+    var size, namelength, server;
     
     if(lobbysocket != -1) {
         if(socket_has_error(lobbysocket)) {
             if(numServers == -1) {
                 show_message("Connecting to the lobby server has failed.");
             }
-            socket_destroy(lobbysocket, true);
+            socket_destroy(lobbysocket);
             lobbysocket = -1;
         } else if(numServers == -1) {
-            buffer = tcp_receive(lobbysocket, 1);
-            if(buffer &gt;= 0) {
-                numServers = read_ubyte(buffer);
-                buffer_destroy(buffer);
+            if(tcp_receive(lobbysocket, 1)) {
+                numServers = read_ubyte(lobbysocket);
             }
         } else if(serversRead &lt; numServers) {
             if(serverNameLength == -1) {
-                buffer = tcp_receive(lobbysocket, 1);
-                if(buffer &gt;= 0) {
-                    serverNameLength = read_ubyte(buffer);
-                    buffer_destroy(buffer);
+                if(tcp_receive(lobbysocket, 1)) {
+                    serverNameLength = read_ubyte(lobbysocket);
                 }
             } else {
-                buffer = tcp_receive(lobbysocket, serverNameLength+6);
-                if(buffer &gt;= 0) {
+                if(tcp_receive(lobbysocket, serverNameLength+6)) {
                     server = instance_create(0,0,Server);
-                    server.name = read_string(buffer, serverNameLength);
+                    server.name = read_string(lobbysocket, serverNameLength);
                     if(string_pos("!private!", server.name) == 1) {
                         server.name = string_copy(server.name, 10, string_length(server.name)-9);
                         server.private = true;
@@ -50,16 +45,15 @@
                     if string_count("#",server.name) &gt; 0 {
                         server.name = "Tornado";
                     }
-                    server.ip = string(read_ubyte(buffer))+"."+string(read_ubyte(buffer))+"."+string(read_ubyte(buffer))+"."+string(read_ubyte(buffer));
-                    server.port = read_ushort(buffer);
+                    server.ip = string(read_ubyte(lobbysocket))+"."+string(read_ubyte(lobbysocket))+"."+string(read_ubyte(lobbysocket))+"."+string(read_ubyte(lobbysocket));
+                    server.port = read_ushort(lobbysocket);
                     ds_list_add(servers, server);
                     serversRead += 1;
-                    buffer_destroy(buffer);
                     serverNameLength = -1;
                 }
             }
         } else {
-            socket_destroy(lobbysocket, false);
+            socket_destroy(lobbysocket);
             lobbysocket = -1;
         }                    
     }

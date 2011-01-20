@@ -6,7 +6,7 @@
 // If there was some other error (probably wrong arguments), it returns 3
 
 // The given buffer will be cleared before reading the message.
-// The socket will be set to blocking mode.
+// The socket's receive buffer will contain the message as well.
 
 // argument 0: Socket
 // argument 1: size of the message to receive
@@ -19,10 +19,8 @@ do {
     if(socket_has_error(argument0)) {
         return 2;
     }
-    buffer = tcp_receive(argument0, argument1);
-} until(buffer >= 0);
+} until(tcp_receive(argument0, argument1));
 
-write_buffer(argument2, buffer);
-buffer_destroy(buffer);
+write_buffer(argument2, argument0);
 
 return 0;

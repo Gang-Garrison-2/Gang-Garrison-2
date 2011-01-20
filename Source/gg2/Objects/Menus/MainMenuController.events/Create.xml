@@ -32,11 +32,10 @@
     if !sound_isplaying(global.MenuMusic) AudioControlPlaySong(global.MenuMusic);
     menuimage=choose(0,1);
     
-    checkForDevMessages("ganggarrison.com", "/devmessages.txt");
-    
     if(global.dedicatedMode == 1)
         event_user(0);
-}</argument>
+}
+</argument>
       </arguments>
     </action>
   </actions>

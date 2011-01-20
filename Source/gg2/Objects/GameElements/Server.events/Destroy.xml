@@ -13,7 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">socket_destroy(pingSocket, true);
+        <argument kind="STRING">socket_destroy_abortive(pingSocket);
 if(pingRunning) {
     global.runningPingCount -= 1;
 }

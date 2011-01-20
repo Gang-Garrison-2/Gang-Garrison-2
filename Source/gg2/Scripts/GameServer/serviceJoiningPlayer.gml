@@ -1,4 +1,4 @@
-var buffer, player;
+var player;
 
 if(socket_has_error(socket)) {
     // Connection closed unexpectedly, remove client
@@ -6,15 +6,14 @@ if(socket_has_error(socket)) {
     exit;
 }
 
-buffer = tcp_receive(socket, expectedBytes);
-if(buffer >= 0) {
+if(tcp_receive(socket, expectedBytes)) {
     switch(state) {
     case STATE_EXPECT_HELLO:
-        if(read_ubyte(buffer) == PLAYER_JOIN) {
+        if(read_ubyte(socket) == PLAYER_JOIN) {
             state = STATE_EXPECT_NAME;
-            expectedBytes = read_ubyte(buffer);
+            expectedBytes = read_ubyte(socket);
         } else {
-            socket_destroy(socket, true);
+            socket_destroy_abortive(socket);
             instance_destroy();
         }
         break;
@@ -22,7 +21,7 @@ if(buffer >= 0) {
     case STATE_EXPECT_NAME:
         if(ds_list_size(global.players) >= global.playerLimit) {
             write_ubyte(socket, SERVER_FULL);
-            socket_destroy(socket, false);
+            socket_destroy(socket);
             instance_destroy();
         } else {
             ServerJoinUpdate(socket);
@@ -30,13 +29,12 @@ if(buffer >= 0) {
             player = instance_create(0,0,Player);
             player.socket = socket;
             
-            player.name = read_string(buffer, expectedBytes);
+            player.name = read_string(socket, expectedBytes);
             
             // sanitize player name
             player.name = string_copy(player.name, 0, MAX_PLAYERNAME_LENGTH);
             player.name = string_replace_all(player.name, "#", " ");
             
-            //ServerJoinUpdate(player.sendBuffer);
             ds_list_add(global.players, player);
             
             ServerPlayerJoin(player.name, global.sendBuffer);
@@ -45,5 +43,4 @@ if(buffer >= 0) {
         }
         break;
     }
-    buffer_destroy(buffer);
 }
