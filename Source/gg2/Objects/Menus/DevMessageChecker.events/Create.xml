@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="CREATE" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">var host, path;
+host = "www.ganggarrison.com";
+path = "/devmessages.txt";
+
+socket = noone;
+
+// We only want to check for messages once per run
+if(variable_global_exists("devMessagesChecked")) {
+    if(global.devMessagesChecked) {
+        instance_destroy();
+        exit;
+    }
+}
+
+global.devMessagesChecked = true;
+
+// downloads a text file off the internet, and parses it for instructions
+// from the developers
+// If any are found, they will be shown/executed/whatever
+
+var CRLF;
+CRLF = chr(13) + chr(10);
+
+socket = tcp_connect(host, 80);
+response = "";
+
+// Send HTTP Request (HTTP 1.0, so we can just read until the server closes the connection)
+write_string(socket, "GET " + path + " HTTP/1.0" + CRLF);
+write_string(socket, "Host: " + host + CRLF + CRLF);
+socket_send(socket);
+
+image_speed = 5/room_speed;
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

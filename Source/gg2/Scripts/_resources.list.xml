@@ -34,7 +34,6 @@
   <resource name="serverArenaRestart" type="RESOURCE"/>
   <resource name="serverArenaEndRound" type="RESOURCE"/>
   <resource name="clientArenaEndRound" type="RESOURCE"/>
-  <resource name="checkForDevMessages" type="RESOURCE"/>
   <resource name="parseProtocolUuid" type="RESOURCE"/>
   <resource name="pointCapture" type="RESOURCE"/>
   <resource name="calculateMonthAndDay" type="RESOURCE"/>

@@ -101,6 +101,12 @@
       <creationCode/>
       <locked>false</locked>
     </instance>
+    <instance>
+      <object>DevMessageChecker</object>
+      <position x="32" y="528"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
   </instances>
   <tiles/>
   <editorSettings remember="false"/>

@@ -25,7 +25,7 @@
         } else {
             ping = current_time - pingStartTime;
         }
-        socket_destroy(pingSocket, true);
+        socket_destroy_abortive(pingSocket);
         global.runningPingCount -= 1;
         pingSocket = -1;
         pingRunning = false;

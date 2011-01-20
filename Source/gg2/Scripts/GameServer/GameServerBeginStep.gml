@@ -68,7 +68,7 @@ for(i=0; i<ds_list_size(global.players); i+=1) {
             if(player.passwordCount == 30*30) {
                 write_ubyte(player.socket, KICK);
                 write_ubyte(player.socket, KICK_PASSWORDCOUNT);
-                socket_destroy(player.socket, false);
+                socket_destroy(player.socket);
                 player.socket = -1;
             }
         }

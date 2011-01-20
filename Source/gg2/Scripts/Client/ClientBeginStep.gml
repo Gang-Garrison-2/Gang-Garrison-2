@@ -18,12 +18,8 @@ do {
         room_goto_fix(Menu);
         exit; 
     }
-    buffer = tcp_receive(global.serverSocket,1);
-    if(buffer >= 0) {
-        var commandByte;
-        commandByte = read_ubyte(buffer);
-        buffer_destroy(buffer);
-        switch(commandByte) {
+    if(tcp_receive(global.serverSocket,1)) {
+        switch(read_ubyte(global.serverSocket)) {
         case HELLO:
             sameVersion = true;
                   
