@@ -32,6 +32,7 @@
     taunting = false;
     doublejumpUsed = 0;
     ubered=0;
+    beingHealed = false;
     
     // controls
     keyState = 0;

@@ -15,8 +15,16 @@
       <arguments>
         <argument kind="STRING">{
     var temp;
+    if (cloak &amp;&amp; !inRange &amp;&amp; global.buffer_team != player.team)
+    {
+    write_ubyte(global.serializeBuffer, 0);
+    write_ushort(global.serializeBuffer, 0);
+    }
+    else
+    {
     write_ubyte(global.serializeBuffer, keyState);
     write_ushort(global.serializeBuffer, netAimDirection);
+    }
     if (player.class == CLASS_SPY)
     if (spyjump || spystab || inRange)
     {
@@ -29,7 +37,7 @@
     }
     else write_ubyte(global.serializeBuffer, 0);
     if(global.updateType == QUICK_UPDATE or global.updateType == FULL_UPDATE) {
-        if (cloak &amp;&amp; !inRange &amp;&amp; global.buffer_team != player.team)
+        if (cloak &amp;&amp; !inRange &amp;&amp; !beingHealed&amp;&amp; global.buffer_team != player.team)
         {
         write_ushort(global.serializeBuffer, 0);
         write_ushort(global.serializeBuffer, 0);
@@ -47,15 +55,15 @@
         if(intel) temp |= $02;
         write_ubyte(global.serializeBuffer, temp);               
     }
-    
     if(global.updateType == FULL_UPDATE) {
         write_ubyte(global.serializeBuffer, animationOffset);
         write_ubyte(global.serializeBuffer, cloakAlpha*255);
         write_short(global.serializeBuffer, alarm[1]);
         with(currentWeapon) {
             event_user(12);
-        }
+        }   
     }
+    beingHealed = false;
 }
 </argument>
       </arguments>

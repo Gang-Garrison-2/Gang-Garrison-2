@@ -24,6 +24,7 @@
                     with Flame {
                         if sticksTo = other.healTarget.object extinguish -= 0.005;
                     } 
+                    healTarget.object.beingHealed = true;
                     if(healTarget.object.hp &lt; healTarget.object.maxHp/2) {
                         healTarget.object.hp+=healAmmount;
                         hphealed+=healAmmount;
