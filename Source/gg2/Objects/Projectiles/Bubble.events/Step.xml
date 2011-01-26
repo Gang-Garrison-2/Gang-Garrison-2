@@ -13,17 +13,18 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">direction+=random(24)-12;
-speed += 2.2;
-speed *= 0.6;
-motion_add(point_direction(owner.x,owner.y,owner.x+owner.hspeed,owner.y+owner.vspeed)+random(6)-3,owner.speed*0.2)
-motion_add(owner.aimDirection+random(8)-4,0.3)
-if(point_distance(x,y,owner.x,owner.y)&lt;110-random(41)) {
-    motion_add(point_direction(x,y,owner.x,owner.y)+random(8)-4,-1.5)
-    }
-else {
-    motion_add(point_direction(x,y,owner.x,owner.y)+random(8)-4,1.2)
-    }</argument>
+        <argument kind="STRING">//The speed should stay around 3.3, which this code stablizes the speed to.
+speed = (speed+2.2) * 0.6;
+
+//We want to move when the owner does, somewhat.
+motion_add(point_direction(owner.x, owner.y, owner.x+owner.hspeed, owner.y+owner.vspeed), owner.speed * 0.2);
+
+//We want to be near the crosshair, in respect to the player.
+motion_add(owner.aimDirection, 2);
+
+//We want to stay in the circular area around the player.
+motion_add(point_direction(owner.x, owner.y, x, y), -2 * arctan((point_distance(x, y, owner.x, owner.y)-90)/4));
+</argument>
       </arguments>
     </action>
   </actions>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<event category="STEP" id="1">
+<event category="COLLISION" with="Bubble">
   <actions>
     <action id="603" library="1">
       <!--action name: Code-->
@@ -13,14 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if(!instance_exists(owner) and !(owner != -1))
-{
-    instance_destroy();
-}
-else if(distance_to_object(owner) &gt; 160)
-{
-    instance_destroy();
-}
+        <argument kind="STRING">motion_add(point_direction(x, y, other.x, other.y), -0.5);
 </argument>
       </arguments>
     </action>
