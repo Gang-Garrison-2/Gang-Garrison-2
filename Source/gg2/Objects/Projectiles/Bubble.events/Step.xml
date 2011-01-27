@@ -17,7 +17,8 @@
 speed = (speed+2.2) * 0.6;
 
 //We want to move when the owner does, somewhat.
-motion_add(point_direction(owner.x, owner.y, owner.x+owner.hspeed, owner.y+owner.vspeed), owner.speed * 0.2);
+hspeed += owner.hspeed*0.2;
+vspeed += owner.vspeed*0.2;
 
 //We want to be near the crosshair, in respect to the player.
 motion_add(owner.aimDirection, 2);

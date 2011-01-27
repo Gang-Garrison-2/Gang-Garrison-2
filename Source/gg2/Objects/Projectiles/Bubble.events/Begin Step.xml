@@ -13,11 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if(!instance_exists(owner) and !(owner != -1))
-{
-    instance_destroy();
-}
-else if(distance_to_object(owner) &gt; 160)
+        <argument kind="STRING">if(distance_to_object(owner) &gt; 160)
 {
     instance_destroy();
 }
