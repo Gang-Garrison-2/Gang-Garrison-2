@@ -13,18 +13,16 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">    vspeed+=0.15;
-    image_alpha*=0.95;
+        <argument kind="STRING">{
+    vspeed+=0.15;
+    if(global.particles != PARTICLES_OFF) {
+        //We don't want it to be almost invisible if it's still "active", so
+        //we have it as if 0.3 is its lower limit
+        image_alpha = (alarm[0]/lifetime)/2+0.5;
+    }
     image_angle=direction;
-    
-/*
-FALL OFF
-    if ownerPlayer.object != -1 &amp;&amp; weapon != WEAPON_SENTRYTURRET{
-        originx=ownerPlayer.object.x;
-        originy=ownerPlayer.object.y;
-        }
-    if (distance_to_point(originx,originy)&gt;maxdist) instance_destroy();
-*/</argument>
+}
+</argument>
       </arguments>
     </action>
   </actions>

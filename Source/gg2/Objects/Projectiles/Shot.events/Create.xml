@@ -15,7 +15,8 @@
       <arguments>
         <argument kind="STRING">{
     damage = 8;
-    alarm[0]=40;
+    lifetime = 40;
+    alarm[0] = lifetime;
     originx=x;
     originy=y;
 }

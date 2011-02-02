@@ -15,7 +15,8 @@
       <arguments>
         <argument kind="STRING">{
     hitDamage = 4;
-    alarm[0] = 40;
+    lifetime = 40;
+    alarm[0] = lifetime;
 }
 </argument>
       </arguments>
