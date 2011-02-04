@@ -15,7 +15,9 @@
       <arguments>
         <argument kind="STRING">owner.runPower = 1.07;
 owner.jumpStrength = 8;
-owner.canCloak = 1;</argument>
+owner.canCloak = 1;
+owner.stabbing = 0;
+</argument>
       </arguments>
     </action>
   </actions>
