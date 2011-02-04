@@ -112,9 +112,17 @@ while(true) {
         case BUILD_SENTRY:
             if(player.object != -1) {
                 if(player.class == CLASS_ENGINEER
-                        && collision_circle(player.object.x,player.object.y,50,Sentry,false,true)<0
-                        && player.object.nutsNBolts == 100 && player.quickspawn != 1
-                        && player.sentry == -1){ 
+                && collision_circle(player.object.x,player.object.y,50,Sentry,false,true)<0
+                && player.object.nutsNBolts == 100 && player.quickspawn != 1
+                && player.sentry == -1)
+                {
+                    var col;
+                    with(player.object)
+                    {
+                        if(place_meeting(x, y, HealingCabinet)) col = 1;
+                    }
+                    if(col) break;
+                    
                     buildSentry(player);
                     write_ubyte(global.sendBuffer, BUILD_SENTRY);
                     write_ubyte(global.sendBuffer, playerId);
