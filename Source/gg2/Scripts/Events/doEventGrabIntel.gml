@@ -24,5 +24,4 @@ if(argument0.team == TEAM_RED) {
 if(argument0.object != -1) {
     argument0.object.intel = true;
     argument0.object.animationOffset = CHARACTER_ANIMATION_INTEL;
-    argument0.object.cloak = 0;
 }
