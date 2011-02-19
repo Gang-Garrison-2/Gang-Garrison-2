@@ -104,8 +104,7 @@ serializeState(INPUTSTATE, global.sendBuffer);
 
 
 
-
-if (global.winners != -1 and (global.mapchanging == 0) /*or (global.vipDied == true) or (global.goalReached == true)*/ )
+if (global.winners != -1 and !global.mapchanging)
 {
             
     if global.winners == TEAM_RED && global.currentMapArea < global.totalMapAreas {
@@ -122,7 +121,7 @@ if (global.winners != -1 and (global.mapchanging == 0) /*or (global.vipDied == t
         }
         global.nextMap = ds_list_find_value(global.map_rotation, global.currentMapIndex);
     }
-    global.mapchanging=1;
+    global.mapchanging = 1;
     impendingMapChange = 300; // in 300 frames (ten seconds), we'll do a map change
     
     write_ubyte(global.sendBuffer, MAP_END);

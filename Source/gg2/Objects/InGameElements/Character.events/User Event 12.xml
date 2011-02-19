@@ -57,7 +57,21 @@
     }
     if(global.updateType == FULL_UPDATE) {
         write_ubyte(global.serializeBuffer, animationOffset);
-        write_ubyte(global.serializeBuffer, cloakAlpha*255);
+        //class specific syncs
+        switch(player.class)
+        {
+        case CLASS_SPY:
+            write_ubyte(global.serializeBuffer, cloakAlpha*255);
+            break;
+        case CLASS_MEDIC:
+            write_ubyte(global.serializeBuffer, weapon.uberCharge*255/2000);
+            break;
+        case CLASS_ENGINEER:
+            write_ubyte(global.serializeBuffer, nutsNBolts);
+            break;
+        default:
+            write_ubyte(global.serializeBuffer, 0);
+        }
         write_short(global.serializeBuffer, alarm[1]);
         with(currentWeapon) {
             event_user(12);

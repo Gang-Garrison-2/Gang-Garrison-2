@@ -66,7 +66,21 @@
     if(global.updateType == FULL_UPDATE) {
         receiveCompleteMessage(global.serverSocket,4,global.deserializeBuffer);
         animationOffset = read_ubyte(global.deserializeBuffer);
-        cloakAlpha = read_ubyte(global.deserializeBuffer)/255;
+        //class specific syncs
+        switch(player.class)
+        {
+        case CLASS_SPY:
+            cloakAlpha = read_ubyte(global.deserializeBuffer)/255;
+            break;
+        case CLASS_MEDIC:
+            weapon.uberCharge = read_ubyte(global.deserializeBuffer)*2000/255;
+            break;
+        case CLASS_ENGINEER:
+            nutsNBolts = read_ubyte(global.deserializeBuffer);
+            break;
+        default:
+            read_ubyte(global.deserializeBuffer)
+        }
         alarm[1]=read_short(global.deserializeBuffer); 
         if alarm[1] != 0 canGrabIntel = false;
         with(currentWeapon) {

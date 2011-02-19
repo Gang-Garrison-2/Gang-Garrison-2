@@ -79,20 +79,35 @@ while(true) {
             break;
             
         case PLAYER_CHANGETEAM:
-            var team;
-            team = read_ubyte(socket);
-            if(getCharacterObject(team, player.class) != -1 or team==TEAM_SPECTATOR) {  
-                if(player.object != -1) {
-                    with(player.object) {
-                        instance_destroy();
-                    }
-                    player.object = -1;
-                    player.alarm[5] = global.Server_Respawntime;
-                } else if(player.alarm[5]<=0) {
-                    player.alarm[5] = 1;
+            var newTeam, balance, redSuperiority;
+            newTeam = read_ubyte(socket);
+            
+            redSuperiority = 0   //calculate which team is bigger
+            with(Player) {
+                if(team == TEAM_RED) {
+                    redSuperiority += 1;
+                } else if(team == TEAM_BLUE) {
+                    redSuperiority -= 1;
                 }
-                player.team = team;
-                ServerPlayerChangeteam(playerId, player.team, global.sendBuffer);
+            }
+            if(redSuperiority > 0) balance= TEAM_RED;
+            else if(redSuperiority < 0) balance= TEAM_BLUE;
+            else balance= -1;
+            
+            if(balance != newTeam) {
+                if(getCharacterObject(newTeam, player.class) != -1 or newTeam==TEAM_SPECTATOR) {  
+                    if(player.object != -1) {
+                        with(player.object) {
+                            instance_destroy();
+                        }
+                        player.object = -1;
+                        player.alarm[5] = global.Server_Respawntime;
+                    } else if(player.alarm[5]<=0) {
+                        player.alarm[5] = 1;
+                    }
+                    player.team = newTeam;
+                    ServerPlayerChangeteam(playerId, player.team, global.sendBuffer);
+                }
             }
             break;                   
             
@@ -110,11 +125,13 @@ while(true) {
             break;
             
         case BUILD_SENTRY:
-            if(player.object != -1) {
+            if(player.object != -1)
+            {
                 if(player.class == CLASS_ENGINEER
-                        && collision_circle(player.object.x,player.object.y,50,Sentry,false,true)<0
-                        && player.object.nutsNBolts == 100 && player.quickspawn != 1
-                        && player.sentry == -1){ 
+                and collision_circle(player.object.x, player.object.y, 50, Sentry, false, true) < 0
+                and player.object.nutsNBolts == 100 and player.quickspawn != 1
+                and player.sentry == -1 and !player.object.onCabinet)
+                {
                     buildSentry(player);
                     write_ubyte(global.sendBuffer, BUILD_SENTRY);
                     write_ubyte(global.sendBuffer, playerId);

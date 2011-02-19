@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<event category="STEP" id="2">
+<event category="COLLISION" with="Bubble">
   <actions>
     <action id="603" library="1">
       <!--action name: Code-->
@@ -13,22 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if(visible) {
-    if(fadeout) {
-        bubbleAlpha -= 0.05;
-        if(bubbleAlpha &lt;= 0) {
-            bubbleAlpha = 0;
-            visible = false;
-            fadeout = false;
-        }
-    }
-    x = round(owner.x)+10;
-    y = round(owner.y)-18;
-    if(owner.stabbing)
-        image_alpha = (1-((1-owner.currentWeapon.stab.alpha)*(1-owner.image_alpha)))*bubbleAlpha;
-    else
-        image_alpha = owner.image_alpha*bubbleAlpha;
-}
+        <argument kind="STRING">motion_add(point_direction(x, y, other.x, other.y), -0.5);
 </argument>
       </arguments>
     </action>

@@ -87,7 +87,10 @@ if omnomnomnom == true{
     if hp &lt;= maxHp hp += 0.4;
     if omnomnomnomindex &gt;= omnomnomnomend omnomnomnom=false;
 }
-        
+
+//for things polling whether the character is on a medcabinet
+onCabinet = place_meeting(x, y, HealingCabinet);
+
 // Last x/y position for death cam if player is dead
 if (x &gt; 5 &amp;&amp; y &gt; 5)
 {

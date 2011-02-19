@@ -192,11 +192,7 @@ if(place_free(x,y+1)) {
         doublejumpUsed = 0;
     }
 }
-    
-if(speed&gt;15) {
-    speed=15;
-}
-    
+
 if intel { 
     if random(1)&gt;0.90 &amp;&amp; speed&gt;2 {
         var sheet;

@@ -15,11 +15,12 @@
       <arguments>
         <argument kind="STRING">// Intelligence grabbing is synced now, so it's only tested on the server
 if(global.isHost) {
-    if(team == TEAM_RED and not place_meeting(x,y,TeamGate) &amp;&amp; canGrabIntel == 1 &amp;&amp; ubered == 0) {
+    if(team == TEAM_RED and !place_meeting(x,y,TeamGate) and canGrabIntel == 1 and ubered == 0 and !cloak) {
         sendEventGrabIntel(player);
         doEventGrabIntel(player);
     }
-}</argument>
+}
+</argument>
       </arguments>
     </action>
   </actions>

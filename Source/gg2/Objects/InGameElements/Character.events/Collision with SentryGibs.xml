@@ -17,7 +17,8 @@
     with other instance_destroy();
     nutsNBolts += 50;
     playsound(x,y,PickupSnd);
-}</argument>
+}
+</argument>
       </arguments>
     </action>
   </actions>
