@@ -16,12 +16,14 @@
         <argument kind="STRING">{
     xoffset = -5;
     yoffset = -8;
+    refireTime = 40;
     reloadTime = 40;
     baseDamage = 35
     maxDamage = 85
     chargeTime = 120;
     hitDamage=baseDamage;
     maxAmmo = 0;
+    ammoCount = maxAmmo;
     shot=false;
     t=0;
 }
