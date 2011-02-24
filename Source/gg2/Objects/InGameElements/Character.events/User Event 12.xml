@@ -40,7 +40,7 @@
             write_ubyte(global.serializeBuffer, cloakAlpha*255);
             break;
         case CLASS_MEDIC:
-            write_ubyte(global.serializeBuffer, weapon.uberCharge*255/2000);
+            write_ubyte(global.serializeBuffer, currentWeapon.uberCharge*255/2000);
             break;
         case CLASS_ENGINEER:
             write_ubyte(global.serializeBuffer, nutsNBolts);
