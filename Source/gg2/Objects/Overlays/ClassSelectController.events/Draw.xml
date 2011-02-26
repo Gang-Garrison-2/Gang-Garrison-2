@@ -40,7 +40,9 @@ if newclass != -1 &amp;&amp; y==120 {
         exit;
     }
     draw_sprite_ext(ClassSelectSpritesS,newclass+indexoffset,xoffset+drawx,yoffset,1,1,0,c_white, alpha);
-    draw_sprite_ext(ClassSelectPortraitS,newclass+indexoffset,xoffset+230,yoffset+128,4,4,0,c_white,alpha);
+    //draw_sprite_ext(ClassSelectPortraitS,newclass+indexoffset,xoffset+230,yoffset+128,4,4,0,c_white,alpha);
+    
+
     draw_set_color(c_white);
     draw_set_halign(fa_left);
     draw_text(xoffset+495,yoffset+80,text[0]);

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="RandomPortraitAnimationS" type="RESOURCE"/>
+  <resource name="ScoutPortraitAnimationS" type="RESOURCE"/>
+  <resource name="PyroPortraitAnimationS" type="RESOURCE"/>
+  <resource name="SoldierPortraitanimationS" type="RESOURCE"/>
+  <resource name="HeavyPortraitAnimationS" type="RESOURCE"/>
+  <resource name="DemomanPortraitAnimationS" type="RESOURCE"/>
+  <resource name="MedicPortraitAnimationS" type="RESOURCE"/>
+  <resource name="EngineerPortraitAnimationS" type="RESOURCE"/>
+  <resource name="SpyPortraitAnimationS" type="RESOURCE"/>
+  <resource name="SniperPortraitAnimationS" type="RESOURCE"/>
+</resources>

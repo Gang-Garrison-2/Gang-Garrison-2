@@ -16,12 +16,19 @@
         <argument kind="STRING">{
     xoffset = 0;
     yoffset = -3;
-    refireTime = 4;
+    refireTime = 5;
+    replenishing = 1;
     bubbleCount = 0;
-    BladesOut = 0;
-    MaxBlades = 1;
-    maxAmmo = 200;
+    bladesOut = 0;
+    bladeLife = 15;
+    maxBlades = 1;
+    bladeDamage = 17;
+    depletedBladeDamage = 8;
+    maxAmmo = 90;
+    replenishingRate = 2;
     ammoCount = maxAmmo;
+    lowAmmoThreshold = 1/3 * maxAmmo;
+    highAmmoThreshold = 2/3 * maxAmmo;
     reloadTime = 55;
     reloadBuffer = 0;
 }

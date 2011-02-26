@@ -13,7 +13,9 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING"/>
+        <argument kind="STRING">owner.currentWeapon.bladesOut -= 1;
+owner.currentWeapon.ammoCount -= ammoUsage;
+</argument>
       </arguments>
     </action>
   </actions>

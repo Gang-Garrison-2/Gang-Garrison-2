@@ -13,9 +13,10 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if (mouse_x&lt;owner.x){ 
-image_xscale=-1 ;
-}else{ image_xscale = 1} 
+        <argument kind="STRING">if (mouse_x &lt; owner.x)
+    image_xscale = -1;
+else
+    image_xscale = 1;
 </argument>
       </arguments>
     </action>

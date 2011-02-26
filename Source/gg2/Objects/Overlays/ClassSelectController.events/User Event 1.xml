@@ -19,7 +19,7 @@
         buffer_clear(global.sendBuffer);
         ClientPlayerChangeclass(class);
         write_buffer(global.serverSocket, global.sendBuffer);
-        socket_send(global.serverSocket);
+        socket_send(global.serverSocket);    
     }
     done=true;
 }

@@ -44,18 +44,18 @@ else if KothControlPoint.cappers &gt; 0 &amp;&amp; KothControlPoint.locked == 0{
 if instance_exists(WinBanner) exit;
 draw_set_color(c_white);
 var coffset;
-coffset = 43*1.75;
+coffset = 43*1.15; //edited, used to be 1.75, but shrinked for a more 'minimalist' hud 
 //timer highlight
 if KothControlPoint.team != -1 {
     if KothControlPoint.team == TEAM_RED {
-        draw_sprite_ext(TimerOutlineS, 0, xoffset+xsize/2-coffset, yoffset+36, 3,3,0,c_white,1);
+        draw_sprite_ext(TimerOutlineS, 0, xoffset+xsize/2-coffset, yoffset+36, 2,2,0,c_white,1);
     }
     else if KothControlPoint.team == TEAM_BLUE {
-        draw_sprite_ext(TimerOutlineS, 0, xoffset+xsize/2+coffset, yoffset+36, 3,3,0,c_white,1);
+        draw_sprite_ext(TimerOutlineS, 0, xoffset+xsize/2+coffset, yoffset+36, 2,2,0,c_white,1);
     }
 }
 //red timer HUD
-draw_sprite_ext(TimerHudS, 2, xoffset+xsize/2-coffset, yoffset+36, 3,3,0,c_white,1);
+draw_sprite_ext(TimerHudS, 2, xoffset+xsize/2-coffset, yoffset+36, 2,2,0,c_white,1);
 if (redTimer &gt; 0) {
     redMinutes=floor(redTimer/1800);
     redSecondcounter=redTimer-redMinutes*1800;
@@ -72,7 +72,7 @@ else
     draw_text(xoffset+xsize/2-coffset,yoffset+36,"OVERTIME");
 }
 //blue timer HUD    
-draw_sprite_ext(TimerHudS, 3, xoffset+xsize/2+coffset, yoffset+36, 3,3,0,c_white,1);
+draw_sprite_ext(TimerHudS, 3, xoffset+xsize/2+coffset, yoffset+36, 2,2,0,c_white,1);
 if (blueTimer &gt;0) {
     blueMinutes=floor(blueTimer/1800);
     blueSecondcounter=blueTimer-blueMinutes*1800;

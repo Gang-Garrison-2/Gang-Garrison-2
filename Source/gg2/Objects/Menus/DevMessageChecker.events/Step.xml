@@ -13,15 +13,19 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">// Read the response
-response += read_string(socket, tcp_receive_available(socket))
+        <argument kind="STRING">if(!variable_local_exists("socket"))
+    instance_destroy();
 
-if(tcp_eof(socket)) {
-    if(socket_has_error(socket)) {
-        // Can't download the file? Then simply stop.
-        instance_destroy();
-        exit;
-    }
+if(socket_has_error(socket)) {
+    // Can't download the file? Then simply stop.
+    instance_destroy();
+    exit;
+}
+
+// Read the response
+response += read_string(socket, tcp_receive_available(socket));
+if(tcp_eof(socket))
+{
     
     // Process the received file
     var CRLF, LF, CR;

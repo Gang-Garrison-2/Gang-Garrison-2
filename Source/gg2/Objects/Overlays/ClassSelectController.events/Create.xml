@@ -18,8 +18,8 @@
     characters = ds_list_create();
     done = false;
     newclass=-1;
+    mousedclass=-1
     y=-120;
-    
     switch(global.myself.team) {
         case TEAM_RED:
             ds_list_add(characters, ScoutRed);
@@ -47,7 +47,8 @@
             instance_destroy();
             exit;
     }
-}</argument>
+}
+</argument>
       </arguments>
     </action>
   </actions>

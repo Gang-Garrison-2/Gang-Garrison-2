@@ -18,9 +18,9 @@
     yoffset = -8;
     refireTime = 40;
     reloadTime = 40;
-    baseDamage = 35
-    maxDamage = 85
-    chargeTime = 120;
+    baseDamage = 40;
+    maxDamage = 70;
+    chargeTime = 105;
     hitDamage=baseDamage;
     maxAmmo = 0;
     ammoCount = maxAmmo;

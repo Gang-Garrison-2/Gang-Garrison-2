@@ -130,6 +130,53 @@ else if mouse_x&gt;xoffset+420 &amp;&amp; mouse_x &lt;xoffset+456 &amp;&amp; mou
 
 else newclass=-1;
 
+if newclass != mousedclass &amp;&amp; newclass !=-1 &amp;&amp; y=120{
+    if instance_exists(CharacterPortraitAnimation){
+        with(CharacterPortraitAnimation){
+            instance_destroy()
+        }
+    }
+    switch (newclass) {
+        case(0):
+            instance_create(xoffset+230,yoffset+128,ScoutPortraitAnimation)
+            break;
+        case(1):
+            instance_create(xoffset+230,yoffset+128,PyroPortraitAnimation)
+            break;
+        case(2):
+            instance_create(xoffset+230,yoffset+128,SoldierPortraitAnimation)
+            break;
+        case(3):
+            instance_create(xoffset+230,yoffset+128,HeavyPortraitAnimation)
+            break;
+        case(4):
+            instance_create(xoffset+230,yoffset+128,DemomanPortraitAnimation)
+            break;
+        case(5):
+            instance_create(xoffset+230,yoffset+128,MedicPortraitAnimation)
+            break;
+        case(6):
+            instance_create(xoffset+230,yoffset+128,EngineerPortraitAnimation)
+            break;
+        case(7):
+            instance_create(xoffset+230,yoffset+128,SpyPortraitAnimation)
+            break;
+        case(8):
+            instance_create(xoffset+230,yoffset+128,SniperPortraitAnimation)
+            break;
+        case(9):
+            instance_create(xoffset+230,yoffset+128,RandomPortraitAnimation)
+            break;
+
+    }
+        mousedclass=newclass; //set the 'moused class' (current moused class) to that of newclass
+        if global.myself.team=TEAM_RED{
+                CharacterPortraitAnimation.teamoffsest=2 //divide by 2
+            }else{
+                CharacterPortraitAnimation.teamoffsest=1
+        }
+}       
+
 if mouse_check_button(mb_left) &amp;&amp; newclass !=-1{
     if newclass==0 class = CLASS_SCOUT;
     else if newclass==1 class = CLASS_PYRO;
@@ -142,7 +189,9 @@ if mouse_check_button(mb_left) &amp;&amp; newclass !=-1{
     else if newclass==8 class = CLASS_SNIPER;
     else class=random(9);
     event_user(1);
-}</argument>
+}
+
+</argument>
       </arguments>
     </action>
   </actions>
