@@ -135,20 +135,20 @@ if global.myself != -1 {
 }
 if overtime == 1 {
     draw_set_halign(fa_center);
-    draw_sprite_ext(TimerHudS,2+teamoffset,xoffset+xsize/2,yoffset+30,3,3,0,c_white,1);
+    draw_sprite_ext(TimerHudS,2+teamoffset,xoffset+xsize/2 +xshift,yoffset+30,3,3,0,c_white,1);
     draw_text(xoffset+xsize/2,yoffset+30,"OVERTIME");
 }
 else{
     draw_set_halign(fa_right);
-    draw_sprite_ext(TimerHudS,teamoffset,xoffset+xsize/2,yoffset+30,3,3,0,c_white,1);
-    draw_sprite_ext(TimerS,floor(timer/timeLimit*12),xoffset+xsize/2+39,yoffset+30,3,3,0,c_white,1);
+    draw_sprite_ext(TimerHudS,teamoffset,xoffset+xsize/2 +xshift,yoffset+30,3,3,0,c_white,1);
+    draw_sprite_ext(TimerS,floor(timer/timeLimit*12),xoffset+xsize/2+39 +xshift,yoffset+30,3,3,0,c_white,1);
     minutes=floor(timer/1800);
     secondcounter=timer-minutes*1800;
     seconds=floor(secondcounter/30);    
-    draw_text_transformed(xoffset+xsize/2-10,yoffset+32,string(minutes),1.5,1.5,0);
-    draw_text_transformed(xoffset+xsize/2,yoffset+32,":",1.5,1.5,0);
-    if seconds &gt;= 10 draw_text_transformed(xoffset+xsize/2+20,yoffset+32,string(seconds),1.5,1.5,0);
-    else if seconds &lt; 10 draw_text_transformed(xoffset+xsize/2+20,yoffset+32,"0"+string(seconds),1.5,1.5,0);
+    draw_text_transformed((xoffset+xsize/2-1)-10+xshift,yoffset+32,string(minutes),1.5,1.5,0);
+    draw_text_transformed((xoffset+xsize/2)+xshift,yoffset+32,":",1.5,1.5,0);
+    if seconds &gt;= 10 draw_text_transformed((xoffset+xsize/2+20)+xshift,yoffset+32,string(seconds),1.5,1.5,0);
+    else if seconds &lt; 10 draw_text_transformed((xoffset+xsize/2+20)+xshift,yoffset+32,"0"+string(seconds),1.5,1.5,0);
 }
 </argument>
       </arguments>

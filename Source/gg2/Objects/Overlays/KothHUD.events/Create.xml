@@ -16,6 +16,8 @@
         <argument kind="STRING">redTimer = 180*30;
 blueTimer = 180*30;
 cpUnlock = 900;
+xshift=0
+yshift=0 //amount of pixels to go down
 </argument>
       </arguments>
     </action>

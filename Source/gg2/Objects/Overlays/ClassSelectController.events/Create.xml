@@ -20,6 +20,16 @@
     newclass=-1;
     mousedclass=-1
     y=-120;
+    portraitAnimations[0]=ScoutPortraitAnimation;
+    portraitAnimations[1]=PyroPortraitAnimation;
+    portraitAnimations[2]=SoldierPortraitAnimation;
+    portraitAnimations[3]=HeavyPortraitAnimation;
+    portraitAnimations[4]=DemomanPortraitAnimation;
+    portraitAnimations[5]=MedicPortraitAnimation;
+    portraitAnimations[6]=EngineerPortraitAnimation;
+    portraitAnimations[7]=SpyPortraitAnimation;
+    portraitAnimations[8]=SniperPortraitAnimation;
+    portraitAnimations[9]=RandomPortraitAnimation;
     switch(global.myself.team) {
         case TEAM_RED:
             ds_list_add(characters, ScoutRed);

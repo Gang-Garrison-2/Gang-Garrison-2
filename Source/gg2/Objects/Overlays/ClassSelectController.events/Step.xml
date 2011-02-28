@@ -136,45 +136,11 @@ if newclass != mousedclass &amp;&amp; newclass !=-1 &amp;&amp; y=120{
             instance_destroy()
         }
     }
-    switch (newclass) {
-        case(0):
-            instance_create(xoffset+230,yoffset+128,ScoutPortraitAnimation)
-            break;
-        case(1):
-            instance_create(xoffset+230,yoffset+128,PyroPortraitAnimation)
-            break;
-        case(2):
-            instance_create(xoffset+230,yoffset+128,SoldierPortraitAnimation)
-            break;
-        case(3):
-            instance_create(xoffset+230,yoffset+128,HeavyPortraitAnimation)
-            break;
-        case(4):
-            instance_create(xoffset+230,yoffset+128,DemomanPortraitAnimation)
-            break;
-        case(5):
-            instance_create(xoffset+230,yoffset+128,MedicPortraitAnimation)
-            break;
-        case(6):
-            instance_create(xoffset+230,yoffset+128,EngineerPortraitAnimation)
-            break;
-        case(7):
-            instance_create(xoffset+230,yoffset+128,SpyPortraitAnimation)
-            break;
-        case(8):
-            instance_create(xoffset+230,yoffset+128,SniperPortraitAnimation)
-            break;
-        case(9):
-            instance_create(xoffset+230,yoffset+128,RandomPortraitAnimation)
-            break;
-
+    if(newclass&gt;=0 and newclass&lt;=9) {
+        instance_create(xoffset+230, yoffset+128, portraitAnimations[newclass]);
     }
+    
         mousedclass=newclass; //set the 'moused class' (current moused class) to that of newclass
-        if global.myself.team=TEAM_RED{
-                CharacterPortraitAnimation.teamoffsest=2 //divide by 2
-            }else{
-                CharacterPortraitAnimation.teamoffsest=1
-        }
 }       
 
 if mouse_check_button(mb_left) &amp;&amp; newclass !=-1{

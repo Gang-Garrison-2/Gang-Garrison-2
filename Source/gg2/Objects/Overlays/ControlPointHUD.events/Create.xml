@@ -17,6 +17,7 @@
 timer=timeLimit;
 teamoffset=0;
 overtime = 0;
+xshift=0
 
 global.totalControlPoints = instance_number(ControlPoint);
 

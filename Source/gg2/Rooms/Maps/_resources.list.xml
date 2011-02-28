@@ -2,6 +2,7 @@
 <resources>
   <resource name="Truefort" type="RESOURCE"/>
   <resource name="TwodFortTwo" type="RESOURCE"/>
+  <resource name="TwodFortTwoRemix" type="RESOURCE"/>
   <resource name="Conflict" type="RESOURCE"/>
   <resource name="ClassicWell" type="RESOURCE"/>
   <resource name="Waterway" type="RESOURCE"/>
