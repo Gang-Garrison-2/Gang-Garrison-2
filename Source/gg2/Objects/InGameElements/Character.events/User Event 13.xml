@@ -53,7 +53,7 @@
         intel = newIntel;
     }
     
-if(global.updateType == FULL_UPDATE) {
+if(global.updateType == QUICK_UPDATE) {
         receiveCompleteMessage(global.serverSocket,4,global.deserializeBuffer);
         animationOffset = read_ubyte(global.deserializeBuffer);
         //class specific syncs

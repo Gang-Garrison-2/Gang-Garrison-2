@@ -32,7 +32,7 @@
     }
    
 
-if(global.updateType == FULL_UPDATE) {
+if(global.updateType == QUICK_UPDATE) {
     write_ubyte(global.serializeBuffer, animationOffset);
         //class specific syncs
         switch(player.class)
