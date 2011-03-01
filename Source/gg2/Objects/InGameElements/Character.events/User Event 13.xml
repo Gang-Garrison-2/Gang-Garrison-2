@@ -53,33 +53,37 @@
         intel = newIntel;
     }
     
-    receiveCompleteMessage(global.serverSocket,4,global.deserializeBuffer);
-    animationOffset = read_ubyte(global.deserializeBuffer);
-    //class specific syncs
-    switch(player.class)
-    {
-    case CLASS_SPY:
-        cloakAlpha = read_ubyte(global.deserializeBuffer)/255;
-        break;
-    case CLASS_MEDIC:
-        currentWeapon.uberCharge = read_ubyte(global.deserializeBuffer)*2000/255;
-        break;
-    case CLASS_ENGINEER:
-        nutsNBolts = read_ubyte(global.deserializeBuffer);
-        break;
-    case CLASS_SNIPER:
-        currentWeapon.t = read_ubyte(global.deserializeBuffer);
-        break;
-    default:
-        read_ubyte(global.deserializeBuffer)
+if(global.updateType == FULL_UPDATE) {
+        receiveCompleteMessage(global.serverSocket,4,global.deserializeBuffer);
+        animationOffset = read_ubyte(global.deserializeBuffer);
+        //class specific syncs
+        switch(player.class)
+        {
+        case CLASS_SPY:
+            cloakAlpha = read_ubyte(global.deserializeBuffer)/255;
+            break;
+        case CLASS_MEDIC:
+            currentWeapon.uberCharge = read_ubyte(global.deserializeBuffer)*2000/255;
+            break;
+        case CLASS_ENGINEER:
+            nutsNBolts = read_ubyte(global.deserializeBuffer);
+            break;
+        case CLASS_SNIPER:
+            currentWeapon.t = read_ubyte(global.deserializeBuffer);
+            break;
+        default:
+            read_ubyte(global.deserializeBuffer)
+        }
+        alarm[1]=read_short(global.deserializeBuffer); 
+        if alarm[1] != 0 canGrabIntel = false;
+        with(currentWeapon) {
+            event_user(13);
+        }
     }
-    alarm[1] = read_short(global.deserializeBuffer); 
-    if (alarm[1] != 0)
-        canGrabIntel = false;
-    with(currentWeapon)
-        event_user(13);
     event_user(1);
 }
+
+
 </argument>
       </arguments>
     </action>

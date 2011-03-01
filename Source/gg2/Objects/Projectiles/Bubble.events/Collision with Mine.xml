@@ -14,7 +14,7 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">{
-    if(other.team != team and !other.stickied and !bubbled)
+    if(other.team != team and !other.stickied and !other.bubbled)
     {
         with(other)
         {
