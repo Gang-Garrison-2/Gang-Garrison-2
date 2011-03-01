@@ -19,7 +19,7 @@
     aimDirection = read_ushort(global.deserializeBuffer)*360/65536;
     
     var temp, newIntel;
-    if(global.updateType == QUICK_UPDATE or global.updateType == FULL_UPDATE) {
+    if(global.updateType == QUICK_UPDATE) or (global.updateType == FULL_UPDATE) {
         receiveCompleteMessage(global.serverSocket,8,global.deserializeBuffer);
         x = read_ushort(global.deserializeBuffer)/5;
         y = read_ushort(global.deserializeBuffer)/5;
@@ -53,7 +53,7 @@
         intel = newIntel;
     }
     
-if(global.updateType == QUICK_UPDATE) {
+if(global.updateType == FULL_UPDATE){
         receiveCompleteMessage(global.serverSocket,4,global.deserializeBuffer);
         animationOffset = read_ubyte(global.deserializeBuffer);
         //class specific syncs

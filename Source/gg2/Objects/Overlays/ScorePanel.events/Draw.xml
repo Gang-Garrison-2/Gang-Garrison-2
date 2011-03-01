@@ -136,7 +136,7 @@ if global.myself != -1 {
 if overtime == 1 {
     draw_set_halign(fa_center);
     draw_sprite_ext(TimerHudS,2+teamoffset,xoffset+xsize/2 +xshift,yoffset+30,3,3,0,c_white,1);
-    draw_text(xoffset+xsize/2,yoffset+30,"OVERTIME");
+    draw_text((xoffset+xsize/2)+xshift,yoffset+30,"OVERTIME");
 }
 else{
     draw_set_halign(fa_right);
