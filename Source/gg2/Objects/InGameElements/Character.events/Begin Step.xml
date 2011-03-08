@@ -34,18 +34,14 @@ if(!taunting and !omnomnomnom)
     } 
     
     if(pressedKeys &amp; $80){
-        if(!place_free(x,y+1) &amp;&amp; place_free(x,y))
-        {
-            if(canCloak)
-            {
-                if(currentWeapon.readyToStab)
-                {
-                    playsound(x,y,JumpSnd);
-                    vspeed = -jumpStrength;
+        if(!place_free(x,y+1) &amp;&amp; place_free(x,y)){
+            if (canCloak) {
+                if currentWeapon.readyToStab==true {
+                playsound(x,y,JumpSnd);
+                vspeed = -jumpStrength;
                 }
             }
-            else
-            {
+            else {
                 playsound(x,y,JumpSnd);
                 vspeed = -jumpStrength;
             }
@@ -177,7 +173,6 @@ if(place_free(x,y+1)) {
     }
     animationImage = 1;
 } else {
-//moveStatus = 0; 
     if(place_free(x,y)) {
         doublejumpUsed = 0;
     }

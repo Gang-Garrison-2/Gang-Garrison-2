@@ -63,7 +63,6 @@ while(true) {
                 player.class = class;
                 if(player.object != -1) {
                     with(player.object) {
-                    //new
                         if (player.quickspawn = 0){
                             if (lastDamageDealer == -1 || lastDamageDealer == player) {
                                 sendEventPlayerDeath(player, player, -1, BID_FAREWELL);
@@ -79,7 +78,6 @@ while(true) {
                                             doEventPlayerDeath(player, lastDamageDealer, assistant, FINISHED_OFF);
                                         }
                                     }
-                                //end new
                         instance_destroy();
                     }
                     player.object = -1;

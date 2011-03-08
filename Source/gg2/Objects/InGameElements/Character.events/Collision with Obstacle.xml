@@ -63,8 +63,8 @@
                 // determine what we hit, and act accordingly
 
                 if(vleft != 0 &amp;&amp; !place_free(x, y + sign(vleft))) { // we hit a ceiling or floor
-                        if (place_free(x, y - 1)) // reset movestatus if on floor
-                            moveStatus = 0;
+                            if(vleft&gt;0) {
+                                movestatus = 0; }
                         vleft = 0; // don't go up or down anymore
                         vspeed = 0; // don't try it next frame, either
                         collisionRectified = true;

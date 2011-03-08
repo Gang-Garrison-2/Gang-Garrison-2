@@ -65,6 +65,8 @@ if(y&lt;0) {
 if(y&gt;map_height()){
     y = map_height();
 }
+if(!place_free(x,y+1))
+    moveStatus=0
 
     
 // Cloak
