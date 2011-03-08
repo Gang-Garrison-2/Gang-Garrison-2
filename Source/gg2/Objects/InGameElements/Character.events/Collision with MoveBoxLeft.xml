@@ -13,7 +13,8 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">hspeed -= 5;
+        <argument kind="STRING">moveStatus = 0;
+hspeed -= 5;
 </argument>
       </arguments>
     </action>

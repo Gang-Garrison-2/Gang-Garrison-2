@@ -75,13 +75,15 @@ if (cloak) {
 }
     
 // Taunts
-if taunting == true{
+if (taunting)
+{
     tauntindex += tauntspeed*0.1;
     if tauntindex &gt;= tauntend taunting=false;
 }
     
 //sandvich
-if omnomnomnom == true{
+if (omnomnomnom)
+{
     omnomnomnomindex += 0.25;
     image_xscale=xscale;
     if hp &lt;= maxHp hp += 0.4;

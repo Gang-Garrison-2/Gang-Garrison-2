@@ -18,6 +18,7 @@
 if(team == TEAM_RED or intel == true) {
     x=xprevious;
     hspeed=0;
+    moveStatus = 0;
     if(place_meeting(x,y,TeamGate)) {
         if(not place_meeting(x+8,y,TeamGate)) {
             move_contact_solid(0,8);

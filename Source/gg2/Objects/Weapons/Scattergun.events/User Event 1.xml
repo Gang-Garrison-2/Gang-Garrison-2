@@ -27,9 +27,10 @@
         shot.team = owner.team;
         shot.weapon = WEAPON_SCATTERGUN;
         with(shot) {   
-            hspeed += owner.hspeed/2;
-            alarm[0] = 35;
-            //motion_add(owner.direction, owner.speed);
+            hspeed += owner.hspeed;
+        
+            alarm[0] = 35 * ((min(1, abs(cos(degtorad(other.owner.aimDirection)))*13 / abs(cos(degtorad(other.owner.aimDirection))*13+owner.hspeed))-1)/2+1)
+           // motion_add(owner.direction, owner.speed);
         }
     }
     justShot = true;

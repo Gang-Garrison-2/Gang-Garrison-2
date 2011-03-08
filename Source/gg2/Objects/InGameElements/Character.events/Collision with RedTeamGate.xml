@@ -15,9 +15,10 @@
       <arguments>
         <argument kind="STRING">if (global.mapchanging != 1)
 {
-if(team == TEAM_BLUE or intel == true) {
+if(team == TEAM_BLUE or intel) {
     x=xprevious;
     hspeed=0;
+    moveStatus = 0;
     if(place_meeting(x,y,TeamGate)) {
         if(not place_meeting(x+8,y,TeamGate)) {
             move_contact_solid(0,8);
