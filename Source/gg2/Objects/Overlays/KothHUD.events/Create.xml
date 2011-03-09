@@ -16,8 +16,11 @@
         <argument kind="STRING">redTimer = 180*30;
 blueTimer = 180*30;
 cpUnlock = 900;
-xshift=-332
-yshift=0
+xshift=-323*global.timerPos
+yshift=35*global.kothHudPos
+if (global.kothHudPos) {
+coffset = 0
+}else coffset=43*1.15
 </argument>
       </arguments>
     </action>

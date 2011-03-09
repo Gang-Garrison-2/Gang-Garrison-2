@@ -43,9 +43,6 @@ else if KothControlPoint.cappers &gt; 0 &amp;&amp; KothControlPoint.locked == 0{
 
 if instance_exists(WinBanner) exit;
 draw_set_color(c_white);
-var coffset;
-coffset = 43*1.15
-//coffset = 0
 //timer highlight
 if KothControlPoint.team != -1 {
     if KothControlPoint.team == TEAM_RED {

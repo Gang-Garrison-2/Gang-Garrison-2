@@ -16,7 +16,8 @@
         <argument kind="STRING">timeLimit=global.timeLimitMins*30*60;
 timer=timeLimit;
 teamoffset=0;
-xshift=-323
+xshift=-320*global.timerPos
+yshift=5*global.timerPos
 </argument>
       </arguments>
     </action>

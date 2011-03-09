@@ -4,6 +4,7 @@
   <resource name="TeamSelectController" type="RESOURCE"/>
   <resource name="ClassSelectController" type="RESOURCE"/>
   <resource name="ScoreTableController" type="RESOURCE"/>
+  <resource name="HUD" type="RESOURCE"/>
   <resource name="ScorePanel" type="RESOURCE"/>
   <resource name="ControlPointHUD" type="RESOURCE"/>
   <resource name="ArenaHUD" type="RESOURCE"/>

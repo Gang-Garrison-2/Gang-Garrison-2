@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<event category="CREATE" id="0">
+<event category="OTHER" id="13">
   <actions>
     <action id="603" library="1">
       <!--action name: Code-->
@@ -13,12 +13,8 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">timeLimit=global.timeLimitMins*30*60;
-timer=timeLimit;
-teamoffset=0;
-overtime = 0;
-xshift=-320*global.timerPos
-yshift=5*global.timerPos
+        <argument kind="STRING">instance_create(x,y,OptionsController);
+instance_destroy();
 </argument>
       </arguments>
     </action>

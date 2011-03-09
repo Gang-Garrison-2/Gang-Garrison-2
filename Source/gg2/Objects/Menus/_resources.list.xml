@@ -2,6 +2,7 @@
 <resources>
   <resource name="LobbySideController" type="RESOURCE"/>
   <resource name="OptionsController" type="RESOURCE"/>
+  <resource name="HUDOptionsController" type="RESOURCE"/>
   <resource name="HostOptionsController" type="RESOURCE"/>
   <resource name="ControlsController" type="RESOURCE"/>
   <resource name="SplashController" type="RESOURCE"/>
