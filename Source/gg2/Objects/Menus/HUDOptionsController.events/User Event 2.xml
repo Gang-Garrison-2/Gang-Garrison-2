@@ -27,11 +27,14 @@
     }
     if instance_exists(KothHUD) {
             with(KothHUD) {
-                yshift=35*global.kothHudPos
                 if (global.kothHudPos) {
                     coffset=0
+                    xshift=-323*global.timerPos
+                    yshift=35*global.kothHudPos
                 }else {
                     coffset=43*1.15
+                    xshift=-290*global.timerPos
+                    yshift=35*global.kothHudPos
                 }
             }
         }

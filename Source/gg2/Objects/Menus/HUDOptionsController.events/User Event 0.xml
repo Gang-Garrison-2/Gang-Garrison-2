@@ -30,11 +30,13 @@
             if (object_index != KothHUD) {
                 xshift=-320*global.timerPos
                 yshift=5
-            }else if global.kothHudPos=false{
-                xshift=-300*global.timerPos
+            }else if (global.kothHudPos){
+                xshift=-323*global.timerPos
+                yshift=35*global.kothHudPos   
             }
             else{
-                xshift=-334*global.timerPos
+                xshift=-290*global.timerPos
+                yshift=35*global.kothHudPos
             }
         }
     

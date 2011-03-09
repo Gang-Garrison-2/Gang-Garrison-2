@@ -13,7 +13,8 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">event_user(12);
+        <argument kind="STRING">instance_create(x,y,OptionsController);
+instance_destroy();
 </argument>
       </arguments>
     </action>
