@@ -163,6 +163,9 @@ do {
             receiveCompleteMessage(global.serverSocket,1,global.tempBuffer);
             player = ds_list_find_value(global.players, read_ubyte(global.tempBuffer));
             player.name = receivestring(global.serverSocket, 1);
+            if player=global.myself {
+            global.playerName=player.name
+            }
             break;
                  
         case PLAYER_SPAWN:

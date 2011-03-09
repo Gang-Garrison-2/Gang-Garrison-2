@@ -85,9 +85,11 @@
     //3 for getting air blasted
     moveStatus = 0;
     
-    controlFactor = 0.85;
-    frictionFactor = 0.85;
+    baseControl=0.85;
     baseFriction = 1.15;
+    controlFactor = baseControl;
+    frictionFactor = baseFriction;
+    
 }
 </argument>
       </arguments>

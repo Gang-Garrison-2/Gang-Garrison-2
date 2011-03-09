@@ -55,8 +55,11 @@
                 if id==other.ownerPlayer.object and other.team == team {
                     moveStatus = 1;
                     vspeed*=0.8;
+             } else {
+                moveStatus = 4;
+                vspeed*=0.8
                 }
-            }
+             }
             cloakAlpha = min(cloakAlpha + 0.2, 1);
         }
     }
