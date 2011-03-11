@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="DESTROY" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">ini_open("controls.gg2");
+ini_write_real("Controls", "jump", global.jump);
+ini_write_real("Controls", "down", global.down);
+ini_write_real("Controls", "left", global.left);
+ini_write_real("Controls", "right", global.right);
+ini_write_real("Controls", "attack", global.attack);
+ini_write_real("Controls", "special", global.special);
+ini_write_real("Controls", "taunt", global.taunt);
+ini_write_real("Controls", "chat1", global.chat1);
+ini_write_real("Controls", "chat2", global.chat2);
+ini_write_real("Controls", "chat3", global.chat3);
+ini_write_real("Controls", "medic", global.medic);
+ini_write_real("Controls", "drop", global.drop);
+ini_write_real("Controls", "changeTeam", global.changeTeam);
+ini_write_real("Controls", "changeClass", global.changeClass);
+ini_write_real("Controls", "showScores", global.showScores);
+ini_close();
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>
