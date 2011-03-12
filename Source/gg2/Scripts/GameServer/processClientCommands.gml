@@ -219,21 +219,33 @@ while(true) {
             break;
             
         case PLAYER_CHANGENAME:
+            var nameLength;
             nameLength = socket_receivebuffer_size(socket);
-            if(nameLength > MAX_PLAYERNAME_LENGTH) {
+            if(nameLength > MAX_PLAYERNAME_LENGTH)
+            {
                 write_ubyte(player.socket, KICK);
                 write_ubyte(player.socket, KICK_NAME);
                 socket_destroy(player.socket);
                 player.socket = -1;
-            } else {
-                player.name = read_string(socket, nameLength);
-                if(string_count("#",player.name) > 0) {
-                    player.name = "I <3 Bacon";
+            }
+            else
+            {
+                with(player)
+                {
+                    if(variable_local_exists("lastNamechange")) 
+                        if(current_time - lastNamechange < 1000)
+                            break;
+                    lastNamechange = current_time;
+                    name = read_string(socket, nameLength);
+                    if(string_count("#",name) > 0)
+                    {
+                        name = "I <3 Bacon";
+                    }
+                    write_ubyte(global.sendBuffer, PLAYER_CHANGENAME);
+                    write_ubyte(global.sendBuffer, playerId);
+                    write_ubyte(global.sendBuffer, string_length(name));
+                    write_string(global.sendBuffer, name);
                 }
-                write_ubyte(global.sendBuffer, PLAYER_CHANGENAME);
-                write_ubyte(global.sendBuffer, playerId);
-                write_ubyte(global.sendBuffer, string_length(player.name));
-                write_string(global.sendBuffer, player.name);
             }
             break;
             
