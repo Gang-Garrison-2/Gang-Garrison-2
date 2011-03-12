@@ -14,17 +14,27 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">if editing == 0 {
-    global.playerName = string_copy(global.playerName, 0, min(string_length(global.playerName), MAX_PLAYERNAME_LENGTH));
+    global.playerName = string_copy(value[0], 0, min(string_length(value[0]), MAX_PLAYERNAME_LENGTH));
     if string_count("#",global.playerName) &gt; 0 {
         show_message("Invalid character '\#' in name");
         global.playerName = "Player";
-        value[0] = global.playerName;
     }
+    value[0] = global.playerName;
     ini_open("gg2.ini");
     ini_write_string("Settings", "PlayerName", global.playerName);
     ini_close();
+    
+    if(room != Options and oldName != global.playerName)
+    {
+        write_ubyte(global.serverSocket, PLAYER_CHANGENAME);
+        write_ubyte(global.serverSocket, string_length(global.playerName));
+        write_string(global.serverSocket, global.playerName);
+        socket_send(global.serverSocket);
+    }
+    oldName = global.playerName;
     editing = -1;
-}</argument>
+}
+</argument>
       </arguments>
     </action>
   </actions>

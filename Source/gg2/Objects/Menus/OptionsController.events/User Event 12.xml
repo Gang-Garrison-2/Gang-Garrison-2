@@ -14,18 +14,10 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">instance_destroy();
-if room == Options {
+if(room == Options)
     instance_create(0,0,MainMenuController);
-}
-else {
+else
     instance_create(0,0,InGameMenuController);
-    if oldName != global.playerName {
-        write_ubyte(global.serverSocket, PLAYER_CHANGENAME);
-        write_ubyte(global.serverSocket, string_length(global.playerName));
-        write_string(global.serverSocket, global.playerName);
-        socket_send(global.serverSocket);
-    }
-}
 </argument>
       </arguments>
     </action>
