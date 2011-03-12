@@ -18,6 +18,8 @@
     startDirection = read_byte(global.deserializeBuffer);
     x = read_ushort(global.deserializeBuffer)/5;
     y = read_ushort(global.deserializeBuffer)/5;
+    xprevious = x;
+    yprevious = y;
 }
 if(global.updateType == QUICK_UPDATE or global.updateType == FULL_UPDATE) {
     receiveCompleteMessage(global.serverSocket, 2, global.deserializeBuffer);
