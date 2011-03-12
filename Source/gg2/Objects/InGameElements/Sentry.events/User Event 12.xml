@@ -14,7 +14,7 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">if(global.updateType == FULL_UPDATE) {
-    write_ubyte(global.serializeBuffer, startDirection);
+    write_byte(global.serializeBuffer, startDirection);
     write_ushort(global.serializeBuffer, round(x*5));
     write_ushort(global.serializeBuffer, round(y*5));
 }
