@@ -152,13 +152,15 @@ if(abs(hspeed) &gt; abs(1 * baseControl / (baseFriction - 1))*2)// divide fricti
 else // otherwise divide by the moveStatus's friction
     hspeed /= frictionFactor;
 
-pressedKeys = 0;
-releasedKeys = 0;
-
 
 if(pressedKeys &amp; $04) {
     setChatBubble(player, 45);
 }
+    
+pressedKeys = 0;
+releasedKeys = 0;
+
+
     
 // flame bubble
 if flamecount&gt;0 &amp;&amp; player.class != CLASS_PYRO &amp;&amp; random(80) &lt;= 1 {
