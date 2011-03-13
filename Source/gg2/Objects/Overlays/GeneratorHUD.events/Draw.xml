@@ -52,7 +52,7 @@ draw_sprite_ext(TimerS,floor(timer/timeLimit*12),xoffset+xsize/2+39 +xshift,yoff
 minutes=floor(timer/1800);
 secondcounter=timer-minutes*1800;
 seconds=floor(secondcounter/30);    
-draw_text_transformed((xoffset+xsize/2-1)-10+xshift,yoffset+32,string(minutes)+ yshift,1.5,1.5,0);
+draw_text_transformed((xoffset+xsize/2-1)-10+xshift,yoffset+32+ yshift,string(minutes),1.5,1.5,0);
 draw_text_transformed((xoffset+xsize/2)+xshift,yoffset+32+ yshift,":",1.5,1.5,0);
 if seconds &gt;= 10 draw_text_transformed((xoffset+xsize/2+20)+xshift,yoffset+32+ yshift,string(seconds),1.5,1.5,0);
 else if seconds &lt; 10 draw_text_transformed((xoffset+xsize/2+20)+xshift,yoffset+32+ yshift,"0"+string(seconds),1.5,1.5,0);
