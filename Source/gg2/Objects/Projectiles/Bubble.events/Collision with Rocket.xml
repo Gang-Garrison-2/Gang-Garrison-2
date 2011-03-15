@@ -13,20 +13,9 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if other.team != team instance_destroy();
-/*{
-if(other.team != team and RNG.randomer&lt;=20) {
-    with(other) {
-    if bubbled==false{
-    //motion_add(point_direction(x,y,other.x,other.y),speed*-1.2)
-    hspeed*=-1;
-    bubbled=true;
-    }
-            }
-}
-    alarm[0]-=63;
-}
-*/</argument>
+        <argument kind="STRING">if(team != other.team)
+    instance_destroy();
+</argument>
       </arguments>
     </action>
   </actions>

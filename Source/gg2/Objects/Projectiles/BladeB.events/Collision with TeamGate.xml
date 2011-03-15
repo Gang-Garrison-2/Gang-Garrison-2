@@ -18,9 +18,9 @@
     move_contact_solid(direction, speed);
     imp = instance_create(x,y,Impact);
     imp.image_angle=direction;
-    with owner.currentWeapon BladesOut -= 1;
     instance_destroy();
-}</argument>
+}
+</argument>
       </arguments>
     </action>
   </actions>

@@ -17,7 +17,8 @@
 timer=timeLimit;
 teamoffset=0;
 overtime = 0;
-
+xshift=-320*global.timerPos
+yshift=5*global.timerPos
 global.totalControlPoints = instance_number(ControlPoint);
 
 middlePoint = global.totalControlPoints/2;

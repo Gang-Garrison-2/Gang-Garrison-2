@@ -13,11 +13,8 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">instance_destroy();
-if(room == Options)
-    instance_create(0,0,MainMenuController);
-else
-    instance_create(0,0,InGameMenuController);
+        <argument kind="STRING">instance_create(x,y,HUDOptionsController);
+instance_destroy();
 </argument>
       </arguments>
     </action>

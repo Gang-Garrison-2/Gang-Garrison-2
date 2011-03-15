@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="CREATE" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{
+    xoffset = view_xview[0];
+    yoffset = view_yview[0];
+    xsize = view_wview[0];
+    ysize = view_hview[0];
+    
+    virtualitem = -1;
+    xbegin = 40;
+    ybegin = 170;
+    spacing = 30;
+    width = 300; 
+    items = 4;
+    valueoffset = 300;
+    editing = -1;
+    
+    item[0] = "Timer Position";
+    item[1] = "Kill Log Position";
+    item[2] = "KOTH Timer Orientation";
+    item[3] = "Back";
+    
+      
+    if(global.timerPos) {
+        value[0] = "Left";
+    } else {
+        value[0] = "Center";
+    }
+    
+    if(global.killLogPos) {
+        value[1] = "Just Below Timers";
+    } else {
+        value[1] = "Default";
+    }
+    
+    if(global.kothHudPos) {
+        value[2] = "Stacked";
+    } else {
+        value[2] = "Default";
+    }
+    value[3] = "";
+
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

@@ -13,8 +13,8 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">        owner.currentWeapon.BladesOut -= 1;
-        instance_destroy();</argument>
+        <argument kind="STRING">instance_destroy();
+</argument>
       </arguments>
     </action>
   </actions>

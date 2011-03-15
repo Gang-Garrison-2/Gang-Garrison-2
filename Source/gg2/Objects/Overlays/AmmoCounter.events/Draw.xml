@@ -77,7 +77,7 @@ if global.myself.object != -1 {
         }
         else if global.myself.class == CLASS_QUOTE {       
             draw_sprite_ext(BladeAmmoS,toffset,xoffset+728,yoffset+ysize/1.26+86,2.4,2.4,0,c_white,100);
-            draw_healthbar(xoffset+689,yoffset+ysize/1.26+90,xoffset+723,yoffset+ysize/1.26+98,global.myself.object.currentWeapon.ammoCount/2,c_black,barcolor,barcolor,0,true,false);
+            draw_healthbar(xoffset+689,yoffset+ysize/1.26+90,xoffset+723,yoffset+ysize/1.26+98,global.myself.object.currentWeapon.ammoCount/global.myself.object.currentWeapon.maxAmmo*100,c_black,barcolor,barcolor,0,true,false);
         }
     }
 }

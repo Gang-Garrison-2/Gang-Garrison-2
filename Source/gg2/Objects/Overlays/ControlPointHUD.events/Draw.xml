@@ -53,34 +53,34 @@ if global.myself != -1 {
 }
 if overtime == 1 {
     draw_set_halign(fa_center);
-    draw_sprite_ext(TimerHudS,2+teamoffset,xoffset+xsize/2,yoffset+30,3,3,0,c_white,1);
-    draw_text(xoffset+xsize/2,yoffset+30,"OVERTIME");
+    draw_sprite_ext(TimerHudS,2+teamoffset,xoffset+xsize/2+xshift,yoffset+30+ yshift,3,3,0,c_white,1);
+    draw_text(xoffset+xsize/2+xshift,yoffset+30+ yshift,"OVERTIME");
 }
 else{
     draw_set_halign(fa_right);
     if mode == 1 &amp;&amp; global.setupTimer &gt; 0 {
-        draw_sprite_ext(TimerHudS,teamoffset,xoffset+xsize/2,yoffset+30,3,3,0,c_white,1);
-        draw_sprite_ext(TimerS,floor(global.setupTimer/1800*12),xoffset+xsize/2+39,yoffset+30,3,3,0,c_white,1);
+        draw_sprite_ext(TimerHudS,teamoffset,xoffset+xsize/2+xshift,yoffset+30+ yshift,3,3,0,c_white,1);
+        draw_sprite_ext(TimerS,floor(global.setupTimer/1800*12),xoffset+xsize/2+39+xshift,yoffset+30+ yshift,3,3,0,c_white,1);
         seconds=floor(global.setupTimer/30);
-        draw_text_transformed(xoffset+xsize/2-10,yoffset+27,"00",1.5,1.5,0);
-        draw_text_transformed(xoffset+xsize/2,yoffset+27,":",1.5,1.5,0);
-        if seconds &gt;= 10 draw_text_transformed(xoffset+xsize/2+20,yoffset+27,string(seconds),1.5,1.5,0);
-        else if seconds &lt; 10 draw_text_transformed(xoffset+xsize/2+20,yoffset+27,"0"+string(seconds),1.5,1.5,0);
+        draw_text_transformed(xoffset+xsize/2-10+xshift,yoffset+27+ yshift,"00",1.5,1.5,0);
+        draw_text_transformed(xoffset+xsize/2+xshift,yoffset+27+ yshift,":",1.5,1.5,0);
+        if seconds &gt;= 10 draw_text_transformed(xoffset+xsize/2+20+xshift,yoffset+27+ yshift,string(seconds),1.5,1.5,0);
+        else if seconds &lt; 10 draw_text_transformed(xoffset+xsize/2+20+xshift,yoffset+27+ yshift,"0"+string(seconds),1.5,1.5,0);
         draw_set_halign(fa_center);
-        draw_text_transformed(xoffset+xsize/2-5,yoffset+38,"Setup",1,1,0);
+        draw_text_transformed(xoffset+xsize/2-5+xshift,yoffset+38+ yshift,"Setup",1,1,0);
     }
     else{
-        draw_sprite_ext(TimerHudS,teamoffset,xoffset+xsize/2,yoffset+30,3,3,0,c_white,1);
+        draw_sprite_ext(TimerHudS,teamoffset,xoffset+xsize/2 +xshift,yoffset+30+ yshift,3,3,0,c_white,1);
         if timer &gt; timeLimit timeDraw = timeLimit-1;
         else timeDraw = timer;
-        draw_sprite_ext(TimerS,floor(timeDraw/timeLimit*12),xoffset+xsize/2+39,yoffset+30,3,3,0,c_white,1);
+        draw_sprite_ext(TimerS,floor(timeDraw/timeLimit*12),(xoffset+xsize/2+39)+xshift,yoffset+30+ yshift,3,3,0,c_white,1);
         minutes=floor(timer/1800);
         secondcounter=timer-minutes*1800;
         seconds=floor(secondcounter/30);    
-        draw_text_transformed(xoffset+xsize/2-10,yoffset+32,string(minutes),1.5,1.5,0);
-        draw_text_transformed(xoffset+xsize/2,yoffset+32,":",1.5,1.5,0);
-        if seconds &gt;= 10 draw_text_transformed(xoffset+xsize/2+20,yoffset+32,string(seconds),1.5,1.5,0);
-        else if seconds &lt; 10 draw_text_transformed(xoffset+xsize/2+20,yoffset+32,"0"+string(seconds),1.5,1.5,0);
+        draw_text_transformed((xoffset+xsize/2-10)+xshift,yoffset+32+ yshift,string(minutes),1.5,1.5,0);
+        draw_text_transformed((xoffset+xsize/2)+xshift,yoffset+32+ yshift,":",1.5,1.5,0);
+        if seconds &gt;= 10 draw_text_transformed((xoffset+xsize/2+20)+xshift,yoffset+32+ yshift,string(seconds),1.5,1.5,0);
+        else if seconds &lt; 10 draw_text_transformed((xoffset+xsize/2+20)+xshift,yoffset+32+ yshift,"0"+string(seconds),1.5,1.5,0);
     }
 }
 </argument>

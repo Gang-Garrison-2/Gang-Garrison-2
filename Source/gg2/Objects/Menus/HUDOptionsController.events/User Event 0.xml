@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="OTHER" id="10">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{
+    global.timerPos = not global.timerPos
+
+    ini_open("gg2.ini");
+    ini_write_real("Settings","Timer Position", global.timerPos);
+    ini_close();
+    
+    if(global.timerPos) {
+        value[0] = "Left";
+    } else {
+        value[0] = "Center";
+    }
+    if instance_exists(HUD) {
+        with(HUD) {
+            if (object_index != KothHUD) {
+                xshift=-320*global.timerPos
+                yshift=5
+            }else if (global.kothHudPos){
+                xshift=-323*global.timerPos
+                yshift=35*global.kothHudPos   
+            }
+            else{
+                xshift=-290*global.timerPos
+                yshift=35*global.kothHudPos
+            }
+        }
+    
+    }
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

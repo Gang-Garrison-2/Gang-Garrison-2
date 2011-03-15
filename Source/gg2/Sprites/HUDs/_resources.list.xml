@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
-  <resource name="Icon" type="RESOURCE"/>
   <resource name="Ammo" type="GROUP"/>
   <resource name="Kill Icons" type="GROUP"/>
+  <resource name="PortraitAnimations" type="GROUP"/>
+  <resource name="Icon" type="RESOURCE"/>
   <resource name="ScorePanelS" type="RESOURCE"/>
   <resource name="GeneratorHUDS" type="RESOURCE"/>
   <resource name="SentryHUD" type="RESOURCE"/>

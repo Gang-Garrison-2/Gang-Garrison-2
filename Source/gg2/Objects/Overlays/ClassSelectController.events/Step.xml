@@ -130,6 +130,19 @@ else if mouse_x&gt;xoffset+420 &amp;&amp; mouse_x &lt;xoffset+456 &amp;&amp; mou
 
 else newclass=-1;
 
+if newclass != mousedclass &amp;&amp; newclass !=-1 &amp;&amp; y=120{
+    if instance_exists(CharacterPortraitAnimation){
+        with(CharacterPortraitAnimation){
+            instance_destroy()
+        }
+    }
+    if(newclass&gt;=0 and newclass&lt;=9) {
+        instance_create(xoffset+230, yoffset+128, portraitAnimations[newclass]);
+    }
+    
+        mousedclass=newclass; //set the 'moused class' (current moused class) to that of newclass
+}       
+
 if mouse_check_button(mb_left) &amp;&amp; newclass !=-1{
     if newclass==0 class = CLASS_SCOUT;
     else if newclass==1 class = CLASS_PYRO;
@@ -142,7 +155,9 @@ if mouse_check_button(mb_left) &amp;&amp; newclass !=-1{
     else if newclass==8 class = CLASS_SNIPER;
     else class=random(9);
     event_user(1);
-}</argument>
+}
+
+</argument>
       </arguments>
     </action>
   </actions>

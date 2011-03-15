@@ -63,25 +63,35 @@
                 // determine what we hit, and act accordingly
 
                 if(vleft != 0 &amp;&amp; !place_free(x, y + sign(vleft))) { // we hit a ceiling or floor
+                            if(vleft&gt;0) {
+                                movestatus = 0; }
                         vleft = 0; // don't go up or down anymore
                         vspeed = 0; // don't try it next frame, either
-                        moveStatus = 0;
                         collisionRectified = true;
                 }
 
                 if(hleft != 0 &amp;&amp; !place_free(x + sign(hleft), y)) { // we hit a wall on the left or right
-                        if(place_free(x + sign(hleft), y - 6)) { // if we could just walk up the step
+                        moveStatus = 0;
+                        if(place_free(x + sign(hleft), y - 6)) // if we could just walk up the step
+                        {
                                 y -= 6; // hop up the step.
                                 collisionRectified = true;
-                        } else { // it's not just a step, we've actually gotta stop
+                        }
+                        else if(place_free(x + sign(hleft), y + 6) and abs(hspeed) &gt;= abs(vspeed)) // ceiling sloping
+                        {
+                                y += 6;
+                                collisionRectified = true;
+                        }
+                        else // it's not just a step, we've actually gotta stop
+                        {
                                 hspeed = 0; // don't go left or right anymore
                                 hleft = 0; // don't try it next frame, either
                                 collisionRectified = true;
                         }
                 }
                 if(!collisionRectified &amp;&amp; (abs(hleft) &gt;= 1 || abs(vleft) &gt;= 1)) {
-                        vspeed=0;
-                        vleft=0;
+                        vspeed = 0;
+                        vleft = 0;
                 }
                 // here we should probably be checking for cases when collisions aren't rectified
         }

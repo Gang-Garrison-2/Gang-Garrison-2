@@ -28,11 +28,25 @@
         temp = 0;
         if(cloak) temp |= $01;
         if(intel) temp |= $02;
+        /* coding for later in case we want to sync moveStatus
+        switch (moveStatus) {
+            case (0): temp |=$04
+            break;
+            case (1): temp |=$08
+            break;
+            case (2): temp |=$10
+            break;
+            case (3): temp |=$10
+            break;
+            case (4): temp |=$20
+            break;
+        }*/
         write_ubyte(global.serializeBuffer, temp);               
     }
-        
-    if(global.updateType == FULL_UPDATE) {
-        write_ubyte(global.serializeBuffer, animationOffset);
+   
+
+if(global.updateType == FULL_UPDATE){
+    write_ubyte(global.serializeBuffer, animationOffset);
         //class specific syncs
         switch(player.class)
         {
@@ -45,6 +59,9 @@
         case CLASS_ENGINEER:
             write_ubyte(global.serializeBuffer, nutsNBolts);
             break;
+        case CLASS_SNIPER:
+            write_ubyte(global.serializeBuffer, currentWeapon.t);
+            break;
         default:
             write_ubyte(global.serializeBuffer, 0);
         }
@@ -54,6 +71,8 @@
         }
     }
 }
+
+
 </argument>
       </arguments>
     </action>

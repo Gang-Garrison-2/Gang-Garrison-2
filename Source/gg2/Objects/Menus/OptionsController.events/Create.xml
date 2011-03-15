@@ -22,10 +22,10 @@
     oldName = global.playerName;
     virtualitem = -1;
     xbegin = 40;
-    ybegin = 170;
+    ybegin = 140;
     spacing = 30;
     width = 300; 
-    items = 13;
+    items = 14;
     valueoffset = 200;
     editing = -1;
     
@@ -41,7 +41,8 @@
     item[9] = "Kill Cam:";
     item[10] = "V Sync:";
     item[11] = "Controls";
-    item[12] = "Back";
+    item[12] = "HUD Options";
+    item[13] = "Back";
     
     value[0] = global.playerName;
       
@@ -110,6 +111,7 @@
     
     value[11] = "";
     value[12] = "";
+    value[13] = "";
 
 }
 </argument>

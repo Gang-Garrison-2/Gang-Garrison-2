@@ -68,6 +68,9 @@
                         moveStatus = 1;
                         speed*=1.06;
                         hp+=(other.explosionDamage*(1-(distance_to_object(other)/other.blastRadius)))/3;
+                    }else if other.team == team {
+                        moveStatus = 4;
+                        speed*=1.06;
                     } else {
                         moveStatus = 2;
                         if point_direction(x,y+5,other.x,other.y-5)&gt;210 and point_direction(x,y,other.x,other.y)&lt;330 {

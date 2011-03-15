@@ -13,8 +13,10 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if (team == TEAM_BLUE &amp;&amp; intel == false) || global.mapchanging == 1 other.solid = false;
-else other.solid = true;
+        <argument kind="STRING">if ((team == TEAM_BLUE and !intel) or global.mapchanging)
+    other.solid = false;
+else
+    other.solid = true;
 
         var oldx, oldy, oldhspeed, oldvspeed, distleft, hleft, vleft;
         oldx=x;
@@ -67,12 +69,14 @@ else other.solid = true;
                 // determine what we hit, and act accordingly
 
                 if(vleft != 0 &amp;&amp; !place_free(x, y + sign(vleft))) { // we hit a ceiling or floor
+                        moveStatus = 0;
                         vleft = 0; // don't go up or down anymore
                         vspeed = 0; // don't try it next frame, either
                         collisionRectified = true;
                 }
 
                 if(hleft != 0 &amp;&amp; !place_free(x + sign(hleft), y)) { // we hit a wall on the left or right
+                        moveStatus = 0;
                         if(place_free(x + sign(hleft), y - 6)) { // if we could just walk up the step
                                 y -= 6; // hop up the step.
                                 collisionRectified = true;
