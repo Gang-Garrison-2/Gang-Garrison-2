@@ -17,7 +17,7 @@ maxHp = argument3;
 draw_set_valign(fa_center);
 draw_set_halign(fa_center);
 draw_set_alpha(1);
-draw_healthbar(xoffset+xpos, yoffset+ypos, xoffset+xpos+42, yoffset+ypos+38, hp*100/maxHp, c_black, c_red, c_green, 3, true, false);
+draw_healthbar(xoffset+xpos, yoffset+ypos, xoffset+xpos+41, yoffset+ypos+37, hp*100/maxHp, c_black, c_red, c_green, 3, true, false);
 
 var hpText,hpColor;
 if(hp > (maxHp/3.5)) {

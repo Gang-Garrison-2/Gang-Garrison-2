@@ -1,4 +1,5 @@
 {
+    instance_create(0,0,RoomChangeObserver);
     set_little_endian_global(true);
     if file_exists("game_errors.log") file_delete("game_errors.log");
     
@@ -38,13 +39,17 @@
     global.showHealer = ini_read_real("Settings", "Show Healer", 1);
     global.showHealing = ini_read_real("Settings", "Show Healing",1);
     global.showHealthBar = ini_read_real("Settings", "Show Healthbar",0);
+    //user HUD settings
+    global.timerPos=ini_read_real("Settings","Timer Position", 0)
+    global.killLogPos=ini_read_real("Settings","Kill Log Position", 0)
+    global.kothHudPos=ini_read_real("Settings","KoTH HUD Position", 0)
+    global.clientPassword = "";
+    // for admin menu
     customMapRotationFile = ini_read_string("Server", "MapRotation", "");
     global.timeLimitMins = ini_read_real("Server", "Time Limit", 15);
     if global.timeLimitMins >255 global.timeLimitMins=255;
     else if global.timeLimitMins < 1 global.timeLimitMins =1;
     global.serverPassword = ini_read_string("Server", "Password", "");
-    global.clientPassword = "";
-    // for admin menu
     global.mapRotationFile = customMapRotationFile;
     global.dedicatedMode = ini_read_real("Server", "Dedicated", 0);
     global.defaultServerName = ini_read_string("Server", "ServerName", "My Server");
@@ -73,6 +78,9 @@
     ini_write_real("Settings", "Show Healer", global.showHealer);
     ini_write_real("Settings", "Show Healing", global.showHealing);
     ini_write_real("Settings", "Show Healthbar", global.showHealthBar);
+    ini_write_real("Settings","Timer Position", global.timerPos)
+    ini_write_real("Settings","Kill Log Position", global.killLogPos)
+    ini_write_real("Settings","KoTH HUD Position", global.kothHudPos)
     ini_write_string("Server", "MapRotation", customMapRotationFile);
     ini_write_real("Server", "Dedicated", global.dedicatedMode);
     ini_write_string("Server", "ServerName", global.defaultServerName);

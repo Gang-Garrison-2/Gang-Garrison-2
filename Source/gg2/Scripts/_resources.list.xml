@@ -19,8 +19,8 @@
   <resource name="Events" type="GROUP"/>
   <resource name="TeamSelectController" type="GROUP"/>
   <resource name="Input" type="GROUP"/>
-  <resource name="recordKillInLog" type="RESOURCE"/>
   <resource name="Graphics" type="GROUP"/>
+  <resource name="recordKillInLog" type="RESOURCE"/>
   <resource name="recordDestructionInLog" type="RESOURCE"/>
   <resource name="recordEventInLog" type="RESOURCE"/>
   <resource name="recordDominationInLog" type="RESOURCE"/>

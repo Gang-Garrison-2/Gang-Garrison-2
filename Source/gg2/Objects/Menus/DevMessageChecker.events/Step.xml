@@ -14,7 +14,7 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">// Read the response
-response += read_string(socket, tcp_receive_available(socket))
+response += read_string(socket, tcp_receive_available(socket));
 
 if(tcp_eof(socket)) {
     if(socket_has_error(socket)) {
@@ -22,6 +22,8 @@ if(tcp_eof(socket)) {
         instance_destroy();
         exit;
     }
+    
+    global.devMessagesChecked = true;
     
     // Process the received file
     var CRLF, LF, CR;

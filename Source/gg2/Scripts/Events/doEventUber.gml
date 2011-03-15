@@ -9,7 +9,7 @@ uberer = argument0;
                     
 if(uberer.object != -1) {
     playsound(uberer.object.x,uberer.object.y,UberStartSnd);
-    with(uberer.object.weapon) {
+    with(uberer.object.currentWeapon) {
         ubering = true;
         uberReady = false;
         uberer.stats[INVULNS] += 1;

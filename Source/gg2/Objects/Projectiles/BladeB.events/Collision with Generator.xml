@@ -15,7 +15,6 @@
       <arguments>
         <argument kind="STRING">if(other.team != team) {
     other.hp -= hitDamage;
-    with owner.currentWeapon BladesOut -= 1;
     instance_destroy();
 }
 </argument>

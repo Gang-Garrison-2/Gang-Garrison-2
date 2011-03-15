@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
   <resource name="Gibs" type="GROUP"/>
+  <resource name="ParachuteSentry" type="RESOURCE"/>
   <resource name="CrosshairS" type="RESOURCE"/>
   <resource name="ImpactS" type="RESOURCE"/>
   <resource name="DeadS" type="RESOURCE"/>

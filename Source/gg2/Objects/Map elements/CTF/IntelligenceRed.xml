@@ -3,7 +3,7 @@
   <sprite>IntelligenceRedS</sprite>
   <solid>false</solid>
   <visible>true</visible>
-  <depth>0</depth>
+  <depth>-2</depth>
   <persistent>false</persistent>
   <parent>Intelligence</parent>
   <mask/>

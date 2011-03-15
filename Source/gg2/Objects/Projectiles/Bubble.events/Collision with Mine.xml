@@ -14,18 +14,18 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">{
-if(other.team != team and not other.stickied) {
-    with(other) {
-    if bubbled==false{
-    //motion_add(point_direction(x,y,other.x,other.y),speed*-1.2)
-    hspeed*=-1;
-    vspeed*=-1;
-    bubbled=true;
+    if(other.team != team and !other.stickied and !other.bubbled)
+    {
+        with(other)
+        {
+            hspeed *= -1;
+            vspeed *= -1;
+            bubbled = true;
+        }
     }
-            }
+    alarm[0] -= 60;
 }
-    alarm[0]-=63;
-}</argument>
+</argument>
       </arguments>
     </action>
   </actions>

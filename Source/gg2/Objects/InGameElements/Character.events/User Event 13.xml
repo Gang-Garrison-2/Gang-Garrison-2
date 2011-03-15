@@ -31,7 +31,7 @@
     }
     }
     var temp, newIntel;
-    if(global.updateType == QUICK_UPDATE or global.updateType == FULL_UPDATE) {
+    if(global.updateType == QUICK_UPDATE) or (global.updateType == FULL_UPDATE) {
         receiveCompleteMessage(global.serverSocket,8,global.deserializeBuffer);
         x = read_ushort(global.deserializeBuffer)/5;
         y = read_ushort(global.deserializeBuffer)/5;
@@ -63,7 +63,7 @@
         intel = newIntel;
     }
     
-    if(global.updateType == FULL_UPDATE) {
+if(global.updateType == FULL_UPDATE){
         receiveCompleteMessage(global.serverSocket,4,global.deserializeBuffer);
         animationOffset = read_ubyte(global.deserializeBuffer);
         //class specific syncs
@@ -73,10 +73,13 @@
             cloakAlpha = read_ubyte(global.deserializeBuffer)/255;
             break;
         case CLASS_MEDIC:
-            weapon.uberCharge = read_ubyte(global.deserializeBuffer)*2000/255;
+            currentWeapon.uberCharge = read_ubyte(global.deserializeBuffer)*2000/255;
             break;
         case CLASS_ENGINEER:
             nutsNBolts = read_ubyte(global.deserializeBuffer);
+            break;
+        case CLASS_SNIPER:
+            currentWeapon.t = read_ubyte(global.deserializeBuffer);
             break;
         default:
             read_ubyte(global.deserializeBuffer)
@@ -89,6 +92,8 @@
     }
     event_user(1);
 }
+
+
 </argument>
       </arguments>
     </action>

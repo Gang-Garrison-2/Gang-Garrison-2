@@ -35,8 +35,13 @@
     
     do {
         serverPlayer.socket = socket_accept(global.tcpListener);
+        if(keyboard_check(vk_escape)) {
+        show_message("Exited");
+        game_end();
+        exit;
+      }
     } until(serverPlayer.socket>=0);
-    
+    //show_message("END")
     global.playerID = 0;
     global.myself = serverPlayer;
     global.myself.authorized = true;

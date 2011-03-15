@@ -63,6 +63,21 @@ while(true) {
                 player.class = class;
                 if(player.object != -1) {
                     with(player.object) {
+                        if (player.quickspawn = 0){
+                            if (lastDamageDealer == -1 || lastDamageDealer == player) {
+                                sendEventPlayerDeath(player, player, -1, BID_FAREWELL);
+                                doEventPlayerDeath(player, player, -1, BID_FAREWELL);
+                                    } else {
+                                    var assistant;
+                                    assistant = -1;
+                                        if (lastDamageDealer.object.healer != -1)
+                                            assistant = lastDamageDealer.object.healer;
+                                        else
+                                            assistant = secondToLastDamageDealer;
+                                            sendEventPlayerDeath(player, lastDamageDealer, assistant, FINISHED_OFF);
+                                            doEventPlayerDeath(player, lastDamageDealer, assistant, FINISHED_OFF);
+                                        }
+                                    }
                         instance_destroy();
                     }
                     player.object = -1;
@@ -219,21 +234,33 @@ while(true) {
             break;
             
         case PLAYER_CHANGENAME:
+            var nameLength;
             nameLength = socket_receivebuffer_size(socket);
-            if(nameLength > MAX_PLAYERNAME_LENGTH) {
+            if(nameLength > MAX_PLAYERNAME_LENGTH)
+            {
                 write_ubyte(player.socket, KICK);
                 write_ubyte(player.socket, KICK_NAME);
                 socket_destroy(player.socket);
                 player.socket = -1;
-            } else {
-                player.name = read_string(socket, nameLength);
-                if(string_count("#",player.name) > 0) {
-                    player.name = "I <3 Bacon";
+            }
+            else
+            {
+                with(player)
+                {
+                    if(variable_local_exists("lastNamechange")) 
+                        if(current_time - lastNamechange < 1000)
+                            break;
+                    lastNamechange = current_time;
+                    name = read_string(socket, nameLength);
+                    if(string_count("#",name) > 0)
+                    {
+                        name = "I <3 Bacon";
+                    }
+                    write_ubyte(global.sendBuffer, PLAYER_CHANGENAME);
+                    write_ubyte(global.sendBuffer, playerId);
+                    write_ubyte(global.sendBuffer, string_length(name));
+                    write_string(global.sendBuffer, name);
                 }
-                write_ubyte(global.sendBuffer, PLAYER_CHANGENAME);
-                write_ubyte(global.sendBuffer, playerId);
-                write_ubyte(global.sendBuffer, string_length(player.name));
-                write_string(global.sendBuffer, player.name);
             }
             break;
             

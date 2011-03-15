@@ -65,6 +65,8 @@ if(y&lt;0) {
 if(y&gt;map_height()){
     y = map_height();
 }
+if(!place_free(x,y+1))
+    moveStatus=0
 
     
 // Cloak
@@ -75,13 +77,15 @@ if (cloak) {
 }
     
 // Taunts
-if taunting == true{
+if (taunting)
+{
     tauntindex += tauntspeed*0.1;
     if tauntindex &gt;= tauntend taunting=false;
 }
     
 //sandvich
-if omnomnomnom == true{
+if (omnomnomnom)
+{
     omnomnomnomindex += 0.25;
     image_xscale=xscale;
     if hp &lt;= maxHp hp += 0.4;

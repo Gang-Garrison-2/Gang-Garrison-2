@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="OTHER" id="11">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{
+    global.killLogPos = not global.killLogPos
+
+    ini_open("gg2.ini");
+    ini_write_real("Settings","Kill Log Position", global.killLogPos)
+    ini_close();
+    
+    if(global.killLogPos) {
+        value[1] = "Just Below Timers";
+    } else {
+        value[1] = "Default";
+    }
+    if instance_exists(KillLog) {
+        with(KillLog) {
+           if (global.kothHudPos) {
+                yoffset=65*global.killLogPos
+            }else if (global.kothHudPos) = false{
+                yoffset=45*global.killLogPos
+            }
+
+        }
+    
+    }
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

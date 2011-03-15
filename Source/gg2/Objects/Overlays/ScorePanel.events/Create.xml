@@ -17,6 +17,8 @@
 timer=timeLimit;
 teamoffset=0;
 overtime = 0;
+xshift=-320*global.timerPos
+yshift=5*global.timerPos
 </argument>
       </arguments>
     </action>
