@@ -23,6 +23,8 @@ if(tcp_eof(socket)) {
         exit;
     }
     
+    global.devMessagesChecked = true;
+    
     // Process the received file
     var CRLF, LF, CR;
     CR = chr(13);

@@ -4,7 +4,7 @@
   <solid>false</solid>
   <visible>true</visible>
   <depth>0</depth>
-  <persistent>true</persistent>
+  <persistent>false</persistent>
   <parent/>
   <mask/>
 </object>

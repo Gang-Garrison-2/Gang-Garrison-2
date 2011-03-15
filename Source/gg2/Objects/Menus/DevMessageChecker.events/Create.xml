@@ -27,8 +27,6 @@ if(variable_global_exists("devMessagesChecked")) {
     }
 }
 
-global.devMessagesChecked = true;
-
 // downloads a text file off the internet, and parses it for instructions
 // from the developers
 // If any are found, they will be shown/executed/whatever
