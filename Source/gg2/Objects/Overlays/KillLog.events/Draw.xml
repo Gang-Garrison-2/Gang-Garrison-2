@@ -35,7 +35,7 @@ for (i = 0; i &lt; ds_list_size(kills); i += 1) {
     else color = make_color_rgb(49,45,26);
     //draw_roundrect_color(view_xview[0] + view_wview[0] - string_width(n1 + n2 + str) - 16 /*8*/ - sprite_get_width(w1), view_yview[0] + i * 16 +8/*+ 16*/,
 //view_xview[0] + view_wview[0], view_yview[0] + i * 16 + 16 + 8, color, color, 0);
-draw_rectangle_color(view_xview[0] + view_wview[0] - string_width(n1 + n2 + str) - 8 - sprite_get_width(w1), view_yview[0] + i * 16 + 16 + yoffset,
+draw_rectangle_color(view_xview[0] + view_wview[0] - string_width(n1 + n2 + str) - 8 - sprite_get_width(w1), view_yview[0] + i * 16 + 14 + yoffset,
     view_xview[0] + view_wview[0] - 8, view_yview[0] + i * 16 + 24 + 8 + yoffset, color, color, color, color, 0);
 draw_rectangle_color(view_xview[0] + view_wview[0] - string_width(n1 + n2 + str) - 10 - sprite_get_width(w1), view_yview[0] + i * 16 + 16 + yoffset,
     view_xview[0] + view_wview[0] - 6, view_yview[0] + i * 16 + 24 + 6+ yoffset, color, color, color, color, 0);
