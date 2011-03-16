@@ -52,7 +52,7 @@
     global.serverPassword = ini_read_string("Server", "Password", "");
     global.mapRotationFile = customMapRotationFile;
     global.dedicatedMode = ini_read_real("Server", "Dedicated", 0);
-    global.defaultServerName = ini_read_string("Server", "ServerName", "My Server");
+    global.serverName = ini_read_string("Server", "ServerName", "My Server");
     global.caplimit = ini_read_real("Server", "CapLimit", 5);
     if global.caplimit > 255 global.caplimit = 255;
     else if global.caplimit < 1 global.caplimit =1;
@@ -83,7 +83,7 @@
     ini_write_real("Settings","KoTH HUD Position", global.kothHudPos)
     ini_write_string("Server", "MapRotation", customMapRotationFile);
     ini_write_real("Server", "Dedicated", global.dedicatedMode);
-    ini_write_string("Server", "ServerName", global.defaultServerName);
+    ini_write_string("Server", "ServerName", global.serverName);
     ini_write_real("Server", "CapLimit", global.caplimit);
     ini_write_real("Server", "AutoBalance", global.autobalance);
     ini_write_real("Server", "Respawn Time", global.Server_RespawntimeSec);
