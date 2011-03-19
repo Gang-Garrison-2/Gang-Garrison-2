@@ -113,8 +113,23 @@ while(true) {
                 if(getCharacterObject(newTeam, player.class) != -1 or newTeam==TEAM_SPECTATOR) {  
                     if(player.object != -1) {
                         with(player.object) {
-                            instance_destroy();
-                        }
+                            if (player.quickspawn = 0){
+                                if (lastDamageDealer == -1 || lastDamageDealer == player) {
+                                    sendEventPlayerDeath(player, player, -1, BID_FAREWELL);
+                                    doEventPlayerDeath(player, player, -1, BID_FAREWELL);
+                                } else {
+                                    var assistant;
+                                    assistant = -1;
+                                        if (lastDamageDealer.object.healer != -1)
+                                            assistant = lastDamageDealer.object.healer;
+                                        else
+                                            assistant = secondToLastDamageDealer;
+                                            sendEventPlayerDeath(player, lastDamageDealer, assistant, FINISHED_OFF);
+                                            doEventPlayerDeath(player, lastDamageDealer, assistant, FINISHED_OFF);
+                                        }
+                                    }
+                        instance_destroy();
+                    }
                         player.object = -1;
                         player.alarm[5] = global.Server_Respawntime;
                     } else if(player.alarm[5]<=0) {
