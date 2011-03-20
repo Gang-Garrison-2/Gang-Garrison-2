@@ -21,9 +21,8 @@
                     //new
                     if (healTarget.object.healer == -1)
                         healTarget.object.healer = ownerPlayer;
-                    with Flame {
-                        if sticksTo = other.healTarget.object extinguish -= 0.005;
-                    } 
+                    if (healTarget.object.burnDuration &gt; 0)
+                        healTarget.object.burnDuration -= 1;
                     if(healTarget.object.hp &lt; healTarget.object.maxHp/2) {
                         healTarget.object.hp+=healAmmount;
                         hphealed+=healAmmount;

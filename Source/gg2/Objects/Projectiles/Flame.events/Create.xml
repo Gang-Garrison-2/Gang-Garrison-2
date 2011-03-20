@@ -14,10 +14,10 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">hitDamage = 3;
-alarm[0] = 15;
-burnDamage = 0.06;
-sticksTo = -1;
-extinguish = 0.3;
+flameLife = 15
+alarm[0] = flameLife;
+burnIncrease = 1;
+durationIncrease = 30;
 </argument>
       </arguments>
     </action>

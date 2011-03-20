@@ -46,16 +46,12 @@
     global.clientPassword = "";
     // for admin menu
     customMapRotationFile = ini_read_string("Server", "MapRotation", "");
-    global.timeLimitMins = ini_read_real("Server", "Time Limit", 15);
-    if global.timeLimitMins >255 global.timeLimitMins=255;
-    else if global.timeLimitMins < 1 global.timeLimitMins =1;
+    global.timeLimitMins = max(1, min(255, ini_read_real("Server", "Time Limit", 15)));
     global.serverPassword = ini_read_string("Server", "Password", "");
     global.mapRotationFile = customMapRotationFile;
     global.dedicatedMode = ini_read_real("Server", "Dedicated", 0);
     global.serverName = ini_read_string("Server", "ServerName", "My Server");
-    global.caplimit = ini_read_real("Server", "CapLimit", 5);
-    if global.caplimit > 255 global.caplimit = 255;
-    else if global.caplimit < 1 global.caplimit =1;
+    global.caplimit = max(1, min(255, ini_read_real("Server", "CapLimit", 5)));
     global.caplimitBkup = global.caplimit;
     global.autobalance = ini_read_real("Server", "AutoBalance",1);
     global.Server_RespawntimeSec = ini_read_real("Server", "Respawn Time", 5);

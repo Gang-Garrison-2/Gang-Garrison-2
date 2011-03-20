@@ -30,19 +30,6 @@
             motion_add(owner.direction, owner.speed);
         }
             
-        with Flame { 
-            dir = point_direction(other.x, other.y, x, y);
-            dist = point_distance(other.x, other.y, x, y);
-            angle = abs((dir-other.owner.aimDirection)+720) mod 360;
-            if collision_circle(x,y,25,other.poof,false,true) {
-                if sticksTo != -1 {
-                    if instance_exists(sticksTo) {
-                        if other.owner.team == sticksTo.team instance_destroy();
-                    }
-                } 
-            }
-       
-        } 
         
         with(Rocket) {
             if(ownerPlayer.team != other.owner.team) {
@@ -91,6 +78,12 @@
                         motion_add(other.owner.aimDirection, other.characterBlastStrength*(1-dist/other.blastDistance) );
                         vspeed -= 2;
                         moveStatus = 3;
+                    } 
+                    else if (burnIntensity &gt; 0 || burnDuration &gt; 0)
+                    {
+                        burnIntensity = 0;
+                        burnDuration = 0;
+                        burnedBy = -1;
                     }
             }
         }

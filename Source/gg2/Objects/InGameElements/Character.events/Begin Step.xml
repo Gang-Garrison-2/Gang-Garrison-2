@@ -163,7 +163,7 @@ releasedKeys = 0;
 
     
 // flame bubble
-if flamecount&gt;0 &amp;&amp; player.class != CLASS_PYRO &amp;&amp; random(80) &lt;= 1 {
+if burnDuration&gt;0 &amp;&amp; player.class != CLASS_PYRO &amp;&amp; random(80) &lt;= 1 {
     setChatBubble(player, 49);
 }
 
@@ -210,8 +210,14 @@ if(intel) &amp;&amp; ubered {
 if nutsNBolts &lt; 100 nutsNBolts += 0.1;
 else if nutsNBolts &gt; 100 nutsNBolts = 100;
 
-//ubered max out ammo
+//ubered max out ammo and extinguish flames
 if ubered {
+    if (burnIntensity &gt; 0 || burnDuration &gt; 0)
+    {
+        burnIntensity = 0;
+        burnDuration = 0;
+        burnedBy = -1;
+    }
     if instance_exists(currentWeapon) {
         with(currentWeapon) {
             if(variable_local_exists("maxAmmo")) {

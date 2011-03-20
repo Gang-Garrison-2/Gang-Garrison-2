@@ -31,6 +31,24 @@
     stabbing = 0;
     onCabinet = 0;
     
+    //afterburn stuff
+    burnIntensity = 0;
+    maxIntensity = 8; //maximum afterburn intensity in DPS
+    burnDuration = 0;
+    maxDuration = 210; //maximum afterburn length
+    decayDelay = 45; //time between burning and intensity lowering
+    decayDuration = 170; //time between intensity lowering and zeroing out
+    durationDecay = 1; //amount that duration lowers per step
+    intensityDecay = burnIntensity / decayDuration;
+    burnedBy = -1;
+    numFlames = 5; //purely cosmetic - the number of flames that someone has with max burnIntensity
+    for(i = 0; i &lt; numFlames; i += 1)
+    {
+        flameArray_x[i] = random_range(-(bbox_right-bbox_left)/2, (bbox_right-bbox_left)/2);
+        flameArray_y[i] = random_range(-(bbox_top-bbox_bottom)/2, (bbox_top-bbox_bottom)/2);
+    }
+    alarm[5] = 1; //this alarm re-randomizes the flame positions
+    
     // controls
     keyState = 0;
     lastKeyState = 0;

@@ -21,7 +21,8 @@ while(true) {
         return 0;
     }
     
-    switch(player.commandReceiveState) {
+    switch(player.commandReceiveState)
+    {
     case 0:
         player.commandReceiveCommand = read_ubyte(socket);
         switch(commandBytes[player.commandReceiveCommand]) {
@@ -50,7 +51,8 @@ while(true) {
         player.commandReceiveState = 0;
         player.commandReceiveExpectedBytes = 1;
         
-        switch(player.commandReceiveCommand) {
+        switch(player.commandReceiveCommand)
+        {
         case PLAYER_LEAVE:
             socket_destroy(player.socket);
             player.socket = -1;
@@ -59,15 +61,22 @@ while(true) {
         case PLAYER_CHANGECLASS:
             var class;
             class = read_ubyte(socket);
-            if(getCharacterObject(player.team, class) != -1) {
+            if(getCharacterObject(player.team, class) != -1)
+            {
                 player.class = class;
-                if(player.object != -1) {
-                    with(player.object) {
-                        if (player.quickspawn = 0){
-                            if (lastDamageDealer == -1 || lastDamageDealer == player) {
+                if(player.object != -1)
+                {
+                    with(player.object)
+                    {
+                        if (!player.quickspawn)
+                        {
+                            if (lastDamageDealer == -1 || lastDamageDealer == player)
+                            {
                                 sendEventPlayerDeath(player, player, -1, BID_FAREWELL);
                                 doEventPlayerDeath(player, player, -1, BID_FAREWELL);
-                            } else {
+                            }
+                            else
+                            {
                                 var assistant;
                                 assistant = -1;
                                 if (lastDamageDealer.object.healer != -1)
@@ -81,14 +90,13 @@ while(true) {
                         instance_destroy();
                     }
                     player.object = -1;
-                    if (player.quickspawn==0){
+                    if (!player.quickspawn)
                         player.alarm[5] = global.Server_Respawntime;
-                    } else {
+                    else
                         player.alarm[5] = 1;
-                    }    
-                } else if(player.alarm[5]<=0) {
-                    player.alarm[5] = 1;
                 }
+                else if(player.alarm[5]<=0)
+                    player.alarm[5] = 1;
                 ServerPlayerChangeclass(playerId, player.class, global.sendBuffer);
             }
             break;
@@ -98,16 +106,19 @@ while(true) {
             newTeam = read_ubyte(socket);
             
             redSuperiority = 0   //calculate which team is bigger
-            with(Player) {
-                if(team == TEAM_RED) {
+            with(Player)
+            {
+                if(team == TEAM_RED)
                     redSuperiority += 1;
-                } else if(team == TEAM_BLUE) {
+                else if(team == TEAM_BLUE)
                     redSuperiority -= 1;
-                }
             }
-            if(redSuperiority > 0) balance= TEAM_RED;
-            else if(redSuperiority < 0) balance= TEAM_BLUE;
-            else balance= -1;
+            if(redSuperiority > 0)
+                balance = TEAM_RED;
+            else if(redSuperiority < 0)
+                balance = TEAM_BLUE;
+            else
+                balance = -1;
             
             if(balance != newTeam) {
                 if(getCharacterObject(newTeam, player.class) != -1 or newTeam==TEAM_SPECTATOR) {  

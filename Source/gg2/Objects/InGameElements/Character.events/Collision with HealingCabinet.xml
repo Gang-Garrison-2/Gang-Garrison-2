@@ -19,7 +19,12 @@
         hp = maxHp;
         nutsNBolts = maxNutsNBolts;
     }
-
+    if (burnIntensity &gt; 0 || burnDuration &gt; 0)
+    {
+        burnIntensity = 0;
+        burnDuration = 0;
+        burnedBy = -1;
+    }
     //ammo stuffs
     if instance_exists(currentWeapon) {
         if(currentWeapon.ammoCount &lt; currentWeapon.maxAmmo) {
