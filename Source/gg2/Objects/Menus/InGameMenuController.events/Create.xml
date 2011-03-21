@@ -29,8 +29,14 @@
     item[1] = "Return to Game";
     item[2] = "Disconnect";
     item[3] = "Quit Game";
+    xoffset = view_xview[0];
+    yoffset = view_yview[0];
+    xsize = view_wview[0];
+    ysize = view_hview[0];
+
     
-}</argument>
+}
+</argument>
       </arguments>
     </action>
   </actions>
