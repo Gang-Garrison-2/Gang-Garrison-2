@@ -86,8 +86,9 @@ while(true) {
                                 sendEventPlayerDeath(player, lastDamageDealer, assistant, FINISHED_OFF);
                                 doEventPlayerDeath(player, lastDamageDealer, assistant, FINISHED_OFF);
                             }
-                        }
+                        } else {
                         instance_destroy();
+                        }
                     }
                     player.object = -1;
                     if (!player.quickspawn)
@@ -138,8 +139,9 @@ while(true) {
                                     sendEventPlayerDeath(player, lastDamageDealer, assistant, FINISHED_OFF);
                                     doEventPlayerDeath(player, lastDamageDealer, assistant, FINISHED_OFF);
                                 }
-                            }
+                            } else {
                             instance_destroy();
+                            }
                         }
                         player.object = -1;
                         player.alarm[5] = global.Server_Respawntime;
