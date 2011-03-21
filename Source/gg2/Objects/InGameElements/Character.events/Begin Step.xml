@@ -33,20 +33,18 @@ if(!taunting and !omnomnomnom)
         image_speed=tauntspeed;
     } 
     
-    if(pressedKeys &amp; $80){
-       if(!place_free(x,y+1) and place_free(x,y)) {
-           if(canCloak){
-                if(currentWeapon.readyToStab){
-                playsound(x,y,JumpSnd);
-                vspeed = -jumpStrength;
-                }
-            }
-            else {
+    if(pressedKeys &amp; $80)
+    {
+        if(!place_free(x,y+1) and place_free(x,y))
+        {
+            if(not stabbing)
+            {
                 playsound(x,y,JumpSnd);
                 vspeed = -jumpStrength;
             }
         }
-        else if(canDoublejump and !doublejumpUsed and vspeed &gt; -jumpStrength) {
+        else if(canDoublejump and !doublejumpUsed and vspeed &gt; -jumpStrength)
+        {
             vspeed = -jumpStrength;
             playsound(x,y,JumpSnd);
             doublejumpUsed = 1;
@@ -66,9 +64,9 @@ if(keyState &amp; $08 and (!taunting or player.class == CLASS_DEMOMAN) and !omno
         event_user(2);
             
 // Cloak
-if ((pressedKeys &amp; $08) &amp;&amp; canCloak &amp;&amp; ((cloakAlpha &lt;= 0.5 and cloak) || (cloakAlpha == 1 and !cloak)) &amp;&amp; !intel  &amp;&amp; taunting==false &amp;&amp; !(keyState &amp; $10)) {
-    cloak = !cloak;
-}
+if ((pressedKeys &amp; $08) &amp;&amp; canCloak &amp;&amp; ((cloakAlpha &lt;= 0.5 and cloak) || (cloakAlpha == 1 and !cloak)) &amp;&amp; !intel  &amp;&amp; taunting==false &amp;&amp; !(keyState &amp; $10))
+    if(currentWeapon.readyToStab)
+        cloak = !cloak;
 
 switch(moveStatus) // moveStatus is reset in collision with obstacles (including doors if they reject you)
 {
@@ -132,20 +130,10 @@ if(moveStatus == 1 or moveStatus == 2)
 if(!taunting &amp;&amp; !omnomnomnom)
 {
     if(keyState &amp; $40 and hspeed &gt; -runPower * controlFactor / (baseFriction - 1))
-    {
-        if (!canCloak)
-            hspeed -= runPower*controlFactor;
-        else if (currentWeapon.readyToStab)
-            hspeed -= runPower*controlFactor;
-    }
+        hspeed -= runPower*controlFactor;
         
     if(keyState &amp; $20 and hspeed &lt; runPower * controlFactor / (baseFriction - 1))
-    {   
-        if (!canCloak)
-            hspeed += runPower*controlFactor;
-        else if (currentWeapon.readyToStab)
-            hspeed += runPower*controlFactor;
-    }
+        hspeed += runPower*controlFactor;
 }
 if(abs(hspeed) &gt; abs(1 * baseControl / (baseFriction - 1))*2)// divide friction as normal if going way too fast, based on normal max speed
     hspeed /= baseFriction;
