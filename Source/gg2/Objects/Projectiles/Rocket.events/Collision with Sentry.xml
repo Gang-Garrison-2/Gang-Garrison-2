@@ -13,18 +13,12 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">/*if(other.owner.team != team) {
-other.hp -= hitDamage;
-other.hp -= explosionDamage;
-effect_create_below(ef_explosion,x,y,0,c_yellow);
-playsound(x,y,ExplosionSnd);
-instance_destroy();
-}
-*/
+        <argument kind="STRING">if fade==false {
 if(team != other.team) {
     characterHit=other;
     event_user(5);
 }
+} else instance_destroy();
 </argument>
       </arguments>
     </action>

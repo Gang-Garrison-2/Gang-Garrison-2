@@ -17,6 +17,7 @@
         receiveCompleteMessage(global.serverSocket,4,global.deserializeBuffer);
         x = read_ushort(global.deserializeBuffer)/5;
         y = read_ushort(global.deserializeBuffer)/5;
+        alarm[0] = read_ubyte(global.deserializeBuffer);
 }
 </argument>
       </arguments>

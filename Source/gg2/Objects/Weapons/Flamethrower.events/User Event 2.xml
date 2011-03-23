@@ -50,6 +50,21 @@
                 }
             }
         }
+        with(Flare) {
+            if(ownerPlayer.team != other.owner.team) {
+                dir = point_direction(other.x, other.y, x, y);
+                dist = point_distance(other.x, other.y, x, y);
+                angle = abs((dir-other.owner.aimDirection)+720) mod 360;
+                if collision_circle(x,y,25,other.poof,false,true) {
+                    ownerPlayer = other.ownerPlayer;
+                    team = other.owner.team;
+                    weapon = WEAPON_REFLECTEDFLARE;
+                    alarm[0]=40;
+                    
+                    motion_set(other.owner.aimDirection, speed);
+                }
+            }
+        }
         
         with(Mine) {
             if(ownerPlayer.team != other.owner.team) {

@@ -112,6 +112,8 @@
   <constant name="GENERATOR_EXPLOSION" value="22"/>
   <constant name="WEAPON_RIFLE_CHARGED" value="23"/>
   <constant name="WEAPON_BACKSTAB" value="24"/>
+  <constant name="WEAPON_FLARE" value="25"/>
+  <constant name="WEAPON_REFLECTEDFLARE" value="26"/>
   <constant name="ASSIST_TIME" value="120"/>
   <constant name="NOTICE_NUTSNBOLTS" value="0"/>
   <constant name="NOTICE_TOOCLOSE" value="1"/>

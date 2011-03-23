@@ -13,12 +13,11 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if explosionDamage &lt; 50 explosionDamage += 1;
-
-if(not stickied) {
+        <argument kind="STRING">if(not stickied) {
+    if explosionDamage &lt; 50 explosionDamage += 1;
     vspeed+=0.2;
     vspeed=min(vspeed,8);
-}
+} else explosionDamage=50;
 
 </argument>
       </arguments>

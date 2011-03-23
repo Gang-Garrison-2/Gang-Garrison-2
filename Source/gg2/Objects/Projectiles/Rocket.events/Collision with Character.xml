@@ -13,19 +13,25 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if other.team != team {
-    characterHit=other;
-    other.cloakAlpha = min(other.cloakAlpha + 0.1, 1);
-    event_user(5);
+        <argument kind="STRING">if !fade {
+    if other.team != team {
+        characterHit=other;
+        other.cloakAlpha = min(other.cloakAlpha + 0.1, 1);
+        event_user(5);
+    }
+    else {
+        /*hitDamage -= 3;
+        explosionDamage -= 1;
+        knockback -= 1;
+        if hitDamage &lt;= 0 hitDamage = 0;
+        if explosionDamage &lt;= 0 explosionDamage = 0;
+        if knockback &lt;= 0 knockback = 0;*/
+        var temp;
+        temp = 31 - travelDistance;
+        alarm[0] = temp;
+    }
 }
-else {
-    hitDamage -= 3;
-    explosionDamage -= 1;
-    knockback -= 1;
-    if hitDamage &lt;= 0 hitDamage = 0;
-    if explosionDamage &lt;= 0 explosionDamage = 0;
-    if knockback &lt;= 0 knockback = 0;
-}</argument>
+</argument>
       </arguments>
     </action>
   </actions>

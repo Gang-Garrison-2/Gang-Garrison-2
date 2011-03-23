@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
+  <resource name="FlareReflectKL" type="RESOURCE"/>
+  <resource name="FlareKL" type="RESOURCE"/>
   <resource name="RocketReflectKL" type="RESOURCE"/>
   <resource name="MineReflectKL" type="RESOURCE"/>
   <resource name="ShotgunKL" type="RESOURCE"/>

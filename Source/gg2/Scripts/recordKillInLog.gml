@@ -81,6 +81,12 @@
                 case WEAPON_BACKSTAB:
                     ds_map_add(map, "weapon", BackstabKL);
                     break;
+                case WEAPON_FLARE:
+                    ds_map_add(map, "weapon", FlareKL);
+                    break;
+                case WEAPON_REFLECTEDFLARE:
+                    ds_map_add(map, "weapon", FlareReflectKL);
+                    break;
                 case KILL_BOX:
                 case FRAG_BOX:
                     if (argument1==-1 || argument1==argument0) {
