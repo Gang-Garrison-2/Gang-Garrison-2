@@ -39,4 +39,5 @@
   <resource name="calculateMonthAndDay" type="RESOURCE"/>
   <resource name="selectSpawnGroup" type="RESOURCE"/>
   <resource name="partyTime" type="RESOURCE"/>
+  <resource name="characterHitObstacle" type="RESOURCE"/>
 </resources>
