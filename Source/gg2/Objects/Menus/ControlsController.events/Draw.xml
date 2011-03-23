@@ -13,7 +13,12 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if room != Options {
+        <argument kind="STRING">xoffset = view_xview[0];
+yoffset = view_yview[0];
+xsize = view_wview[0];
+ysize = view_hview[0];
+
+if room != Options {
     draw_set_color(c_black);
     draw_set_alpha(0.8);
     draw_rectangle(xoffset, yoffset, xoffset+xsize, yoffset+ysize, false);   

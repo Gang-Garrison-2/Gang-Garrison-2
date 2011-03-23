@@ -13,13 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">xoffset = view_xview[0];
-yoffset = view_yview[0];
-xsize = view_wview[0];
-ysize = view_hview[0];
-
-
-if editing == -1 &amp;&amp; mouse_x &gt; xoffset+xbegin and mouse_x &lt; xoffset+xbegin+width {
+        <argument kind="STRING">if editing == -1 &amp;&amp; mouse_x &gt; xoffset+xbegin and mouse_x &lt; xoffset+xbegin+width {
     virtualitem = round((mouse_y-ybegin-yoffset)/spacing);
     if(mouse_check_button_pressed(mb_left)){
         if(virtualitem &gt;= 0 and virtualitem &lt; items) {
