@@ -14,8 +14,6 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">vspeed += 0.15;
-image_alpha*=0.95;
-
     
 if(global.particles == PARTICLES_NORMAL) {
     if(random(5)&lt;1) effect_create_below(ef_smokeup,x,y-8,0,c_gray);

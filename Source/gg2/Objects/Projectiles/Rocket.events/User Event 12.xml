@@ -17,6 +17,7 @@
         write_ushort(global.serializeBuffer, round(x*5));
         write_ushort(global.serializeBuffer, round(y*5));
         write_ubyte(global.serializeBuffer,alarm[0]);
+        write_ubyte(global.serializeBuffer,travelDistance);
 }
 </argument>
       </arguments>

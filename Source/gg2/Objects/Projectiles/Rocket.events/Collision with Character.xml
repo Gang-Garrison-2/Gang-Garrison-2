@@ -20,15 +20,7 @@
         event_user(5);
     }
     else {
-        /*hitDamage -= 3;
-        explosionDamage -= 1;
-        knockback -= 1;
-        if hitDamage &lt;= 0 hitDamage = 0;
-        if explosionDamage &lt;= 0 explosionDamage = 0;
-        if knockback &lt;= 0 knockback = 0;*/
-        var temp;
-        temp = 31 - travelDistance;
-        alarm[0] = temp;
+        alarm[0] = 31 - travelDistance;
     }
 }
 </argument>
