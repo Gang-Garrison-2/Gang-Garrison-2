@@ -13,7 +13,12 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if editing != -1 {
+        <argument kind="STRING">xoffset = view_xview[0];
+yoffset = view_yview[0];
+xsize = view_wview[0];
+ysize = view_hview[0];
+
+if editing != -1 {
     button = 0;
     /*I originally allowed mouse buttons for use for any keys, but I can't see anyone using
     them for movement/taunts/etc so I commented it out to make it a little easier to code
