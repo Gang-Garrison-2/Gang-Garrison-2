@@ -101,6 +101,7 @@
     //1 for rocket jump
     //2 for rocket juggle
     //3 for getting air blasted
+    //4 for friendly juggles!
     moveStatus = 0;
     
     baseControl=0.85;
