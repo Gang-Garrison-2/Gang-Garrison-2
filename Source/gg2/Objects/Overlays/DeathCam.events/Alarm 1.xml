@@ -19,9 +19,10 @@
 }
 else if killedby.object!=-1 killmessage = "You were killed by";
 else if killedby.object==-1 killmessage = "You were killed by the late";
-if !file_exists("deathcam.png") screen_save_part("deathcam.png",0,0,800,600);
-DeathCamS=sprite_add("deathcam.png",1,0,0,400,300);
-file_delete("deathcam.png");
+view_xview=camX
+view_yview=camY
+screen_redraw()//redraw screen so that the print screening function will work
+DeathCamS=sprite_create_from_screen(0,0,800,600,0,0,400,300);
 zooming=true;
 playsound(view_xview[0]+400,view_yview[0]+300,DeathCamSnd);
 </argument>
