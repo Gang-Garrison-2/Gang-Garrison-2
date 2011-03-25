@@ -13,7 +13,12 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">owner.runPower = 1.07;
+        <argument kind="STRING">// Don't re-allow movement if there's another StabAnim running for the same player
+with(StabAnim)
+    if(id != other.id and owner == other.owner)
+        exit;
+
+owner.runPower = 1.07;
 owner.jumpStrength = 8;
 owner.stabbing = 0;
 </argument>

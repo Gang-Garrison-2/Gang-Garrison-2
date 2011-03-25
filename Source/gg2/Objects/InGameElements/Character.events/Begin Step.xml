@@ -13,11 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">xoffset = view_xview[0];
-yoffset = view_yview[0];
-xsize = view_wview[0];
-ysize = view_hview[0];
-if(!taunting and !omnomnomnom)
+        <argument kind="STRING">if(!taunting and !omnomnomnom)
 {
     if(pressedKeys &amp; $01)  {
         if (!invisible &amp;&amp; cloakAlpha == 1)
