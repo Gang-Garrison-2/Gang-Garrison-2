@@ -31,6 +31,8 @@ killmessage = "";
 DeathCamS=-1
 hp=0;
 maxHp=0;
+camX=0
+camY=0
 if instance_exists(NoticeO) with NoticeO instance_destroy();
 if instance_exists(Balancer) with Balancer instance_destroy();
 </argument>

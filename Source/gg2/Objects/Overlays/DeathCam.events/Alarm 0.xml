@@ -41,6 +41,8 @@ else if killedby.object == -1 {
     hp=0;
     maxHp=0;
 }
+camX=view_xview;
+camY=view_yview;
 
 if instance_exists(WinBanner) instance_destroy();
 </argument>
