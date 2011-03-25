@@ -50,7 +50,6 @@
     roundStats[REVENGE] = 0;
     roundStats[POINTS] = 0;
     
-    quickspawn = 0;
     timesChangedCapLimit = 0;
     
     lastKnownx=0;

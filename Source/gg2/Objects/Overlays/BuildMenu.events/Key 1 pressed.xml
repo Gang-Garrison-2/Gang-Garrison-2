@@ -31,7 +31,7 @@ else if collision_circle(global.myself.object.x,global.myself.object.y,50,Sentry
     instance_create(0,0,NoticeO);
     with NoticeO notice = NOTICE_TOOCLOSE;
 }
-else if (global.myself.quickspawn != 1 &amp;&amp; global.myself.object.nutsNBolts == 100 &amp;&amp; collision_circle(global.myself.object.x,global.myself.object.y,50,Sentry,false,true)&lt;0)
+else if (collision_point(global.myself.object.x,global.myself.object.y,SpawnRoom,0,0) &lt; 0)
 {
     write_ubyte(global.serverSocket, BUILD_SENTRY);
     socket_send(global.serverSocket);

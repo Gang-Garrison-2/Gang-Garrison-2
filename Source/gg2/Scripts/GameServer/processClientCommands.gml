@@ -68,7 +68,7 @@ while(true) {
                 {
                     with(player.object)
                     {
-                        if (!player.quickspawn)
+                        if (collision_point(x,y,SpawnRoom,0,0) < 0)
                         {
                             if (lastDamageDealer == -1 || lastDamageDealer == player)
                             {
@@ -86,15 +86,10 @@ while(true) {
                                 sendEventPlayerDeath(player, lastDamageDealer, assistant, FINISHED_OFF);
                                 doEventPlayerDeath(player, lastDamageDealer, assistant, FINISHED_OFF);
                             }
-                        } else {
-                        instance_destroy();
                         }
+                        else
+                            instance_destroy();
                     }
-                    player.object = -1;
-                    if (!player.quickspawn)
-                        player.alarm[5] = global.Server_Respawntime;
-                    else
-                        player.alarm[5] = 1;
                 }
                 else if(player.alarm[5]<=0)
                     player.alarm[5] = 1;
@@ -121,15 +116,23 @@ while(true) {
             else
                 balance = -1;
             
-            if(balance != newTeam) {
-                if(getCharacterObject(newTeam, player.class) != -1 or newTeam==TEAM_SPECTATOR) {  
-                    if(player.object != -1) {
-                        with(player.object) {
-                            if (player.quickspawn = 0){
-                                if (lastDamageDealer == -1 || lastDamageDealer == player) {
+            if(balance != newTeam)
+            {
+                if(getCharacterObject(newTeam, player.class) != -1 or newTeam==TEAM_SPECTATOR)
+                {  
+                    if(player.object != -1)
+                    {
+                        with(player.object)
+                        {
+                            if (collision_point(x,y,SpawnRoom,0,0) < 0)
+                            {
+                                if (lastDamageDealer == -1 || lastDamageDealer == player)
+                                {
                                     sendEventPlayerDeath(player, player, -1, BID_FAREWELL);
                                     doEventPlayerDeath(player, player, -1, BID_FAREWELL);
-                                } else {
+                                }
+                                else
+                                {
                                     var assistant;
                                     assistant = -1;
                                     if (lastDamageDealer.object.healer != -1)
@@ -139,15 +142,14 @@ while(true) {
                                     sendEventPlayerDeath(player, lastDamageDealer, assistant, FINISHED_OFF);
                                     doEventPlayerDeath(player, lastDamageDealer, assistant, FINISHED_OFF);
                                 }
-                            } else {
-                            instance_destroy();
                             }
+                            else
+                                instance_destroy();
                         }
-                        player.object = -1;
                         player.alarm[5] = global.Server_Respawntime;
-                    } else if(player.alarm[5]<=0) {
-                        player.alarm[5] = 1;
                     }
+                    else if(player.alarm[5]<=0)
+                        player.alarm[5] = 1;
                     player.team = newTeam;
                     ServerPlayerChangeteam(playerId, player.team, global.sendBuffer);
                 }
@@ -172,7 +174,7 @@ while(true) {
             {
                 if(player.class == CLASS_ENGINEER
                 and collision_circle(player.object.x, player.object.y, 50, Sentry, false, true) < 0
-                and player.object.nutsNBolts == 100 and player.quickspawn != 1
+                and player.object.nutsNBolts == 100 and (collision_point(player.object.x,player.object.y,SpawnRoom,0,0) < 0)
                 and player.sentry == -1 and !player.object.onCabinet)
                 {
                     buildSentry(player);

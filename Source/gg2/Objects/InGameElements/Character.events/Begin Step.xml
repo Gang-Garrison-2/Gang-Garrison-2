@@ -185,9 +185,6 @@ if intel {
 }
     
 animationImage = (animationImage+abs(hspeed)/20) mod CHARACTER_ANIMATION_LEN;
-
-if collision_point(x,y,SpawnRoom,0,0) player.quickspawn = 1;
-else player.quickspawn=0;
     
 // drop intel if ubered
 if(intel) &amp;&amp; ubered {
