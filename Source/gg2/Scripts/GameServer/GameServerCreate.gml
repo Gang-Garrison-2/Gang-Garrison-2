@@ -9,6 +9,7 @@
     global.serverSocket = -1;
     
     global.currentMapIndex = 0;
+    global.currentMapArea = 1;
     
     serverbalance=0;
     balancecounter=0;
