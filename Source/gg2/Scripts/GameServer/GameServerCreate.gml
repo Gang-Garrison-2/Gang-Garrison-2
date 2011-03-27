@@ -5,7 +5,11 @@
     }
     global.joiningPlayers = ds_list_create();
     global.players = ds_list_create();
+    global.tcpListener = -1;
+    global.serverSocket = -1;
+    
     global.currentMapIndex = 0;
+    
     serverbalance=0;
     balancecounter=0;
     randomize();
@@ -21,20 +25,33 @@
     ds_list_add(global.players, serverPlayer);
 
     global.tcpListener = tcp_listen(global.hostingPort);
+    if(socket_has_error(global.tcpListener))
+    {
+        show_message("Unable to host: " + socket_error(global.tcpListener));
+        instance_destroy();
+        exit;
+    }
     global.serverSocket = tcp_connect("127.0.0.1", global.hostingPort);    
-    if(socket_has_error(global.serverSocket)) {
+    if(socket_has_error(global.serverSocket))
+    {
         show_message("Unable to connect to self. Epic fail, dude.");
+        instance_destroy();
+        exit;
     }
     
+    var loopbackStartTime;
+    loopbackStartTime = current_time;
     do {
+        if(current_time - loopbackStartTime > 500) // 0.5s should be enough to create a loopback connection...
+        {
+            show_message("Unable to host: Maybe the port is already in use.");
+            instance_destroy();
+            exit;
+        }
         serverPlayer.socket = socket_accept(global.tcpListener);
-        if(keyboard_check(vk_escape)) {
-        show_message("Exited");
-        game_end();
-        exit;
-      }
+        io_handle(); // Make sure the game doesn't appear to freeze
     } until(serverPlayer.socket>=0);
-    //show_message("END")
+
     global.playerID = 0;
     global.myself = serverPlayer;
     global.myself.authorized = true;
