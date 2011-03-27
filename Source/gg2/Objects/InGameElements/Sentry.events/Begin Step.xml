@@ -36,6 +36,9 @@ if (built == 1 &amp;&amp; currentWeapon == -1){
         event_user(0);
     }
 }
+if (humiliated == 1 &amp;&amp; built == 1 &amp;&amp; currentWeapon != -1) {
+    event_user(1);
+}
 
     
 if(place_free(x,y+1)) {

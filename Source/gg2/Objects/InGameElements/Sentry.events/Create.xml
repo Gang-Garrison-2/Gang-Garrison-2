@@ -24,6 +24,7 @@ kills=0;
 ubered=0;
 image_speed = 0;
 landed=0;
+humiliated = 0;
        
 lastDamageDealer = -1;
 lastDamageSource = -1;
