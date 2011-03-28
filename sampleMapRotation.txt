@@ -27,3 +27,9 @@ ctf_waterway
 ctf_orange
 cp_egypt
 cp_dirtbowl
+arena_montane
+arena_lumberyard
+gen_destroy
+koth_valley
+koth_corinth
+koth_harvest
