@@ -71,10 +71,11 @@
                 dir = point_direction(other.x, other.y, x, y);
                 dist = point_distance(other.x, other.y, x, y);
                 angle = abs((dir-other.owner.aimDirection)+720) mod 360;
-                weapon = WEAPON_REFLECTED_STICKY;
+                //weapon = WEAPON_REFLECTED_STICKY;
                 if collision_circle(x,y,25,other.poof,false,true) {
                     motion_add(other.owner.aimDirection, other.blastStrength*(1-dist/other.blastDistance) );
                     stickied = false;
+                    reflector = other.ownerPlayer;
                 }
                 if(position_meeting(x+hspeed,y+vspeed,Obstacle)) { 
                     motion_add(point_direction(x,y,x-hspeed,y-vspeed),speed*1.4) 

@@ -29,20 +29,24 @@
             if(other.team != team or id==other.ownerPlayer.object) &amp;&amp; ubered == 0 &amp;&amp; hp &gt; 0 {
                 hp -= other.explosionDamage*(1-(distance_to_object(other)/other.blastRadius));
 //new stuff
-                if id==other.ownerPlayer.object &amp;&amp; lastDamageDealer != -1 &amp;&amp; lastDamageDealer != other.ownerPlayer{
-                        lastDamageSource = FINISHED_OFF_GIB;
+                if id==other.ownerPlayer.object &amp;&amp; lastDamageDealer != -1 &amp;&amp; lastDamageDealer != other.ownerPlayer &amp;&amp; other.reflector == -1{
+                    lastDamageSource = FINISHED_OFF_GIB;
+                }
+                else 
+                {
+                    if (lastDamageDealer != other.ownerPlayer &amp;&amp; lastDamageDealer != player &amp;&amp; other.reflector != lastDamageDealer){
+                        secondToLastDamageDealer = lastDamageDealer;
+                        alarm[4] = alarm[3]
                     }
-                    else 
-                    {
-                        if (lastDamageDealer != other.ownerPlayer &amp;&amp; lastDamageDealer != player){
-                            secondToLastDamageDealer = lastDamageDealer;
-                            alarm[4] = alarm[3]
-                        }
-                        if (other.ownerPlayer != id)
-                            alarm[3] = ASSIST_TIME;
-                        lastDamageDealer = other.ownerPlayer;
-                        lastDamageSource = other.weapon;
+                    if (other.ownerPlayer != id || (other.reflector != -1 &amp;&amp; other.ownerPlayer == id))
+                        alarm[3] = ASSIST_TIME;
+                    lastDamageDealer = other.ownerPlayer;
+                    lastDamageSource = other.weapon;
+                    if (id==other.ownerPlayer.object &amp;&amp; other.reflector != -1) {
+                        lastDamageDealer = other.reflector;
+                        lastDamageSource = WEAPON_REFLECTED_STICKY;
                     }
+                }
 //end new stuff
                 //lastDamageDealer = other.ownerPlayer;
                 //lastDamageSource = other.weapon;
