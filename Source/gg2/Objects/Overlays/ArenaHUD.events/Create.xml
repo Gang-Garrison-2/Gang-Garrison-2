@@ -17,8 +17,8 @@
 timer=timeLimit;
 teamoffset=0;
 winners = TEAM_SPECTATOR;
-consecutiveRedWins = 0;
-consecutiveBlueWins = 0;
+redWins = 0;
+blueWins = 0;
 endCount = 0;
 roundStart = 0;
 gameStarted = 0;

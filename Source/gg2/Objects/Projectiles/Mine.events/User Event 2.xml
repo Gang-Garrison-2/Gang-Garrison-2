@@ -20,7 +20,6 @@
         exploded = true;
     }
     instance_create(x,y,Explosion);
-    //effect_create_below(ef_explosion,x,y,0,c_orange);
     playsound(x,y,ExplosionSnd);
     
     with (Character) {
@@ -28,28 +27,24 @@
             motion_add(point_direction(other.x,other.y,x,y),10-10*(distance_to_object(other)/other.blastRadius));
             if(other.team != team or id==other.ownerPlayer.object) &amp;&amp; ubered == 0 &amp;&amp; hp &gt; 0 {
                 hp -= other.explosionDamage*(1-(distance_to_object(other)/other.blastRadius));
-//new stuff
                 if id==other.ownerPlayer.object &amp;&amp; lastDamageDealer != -1 &amp;&amp; lastDamageDealer != other.ownerPlayer &amp;&amp; other.reflector == -1{
                     lastDamageSource = FINISHED_OFF_GIB;
                 }
                 else 
                 {
-                    if (lastDamageDealer != other.ownerPlayer &amp;&amp; lastDamageDealer != player &amp;&amp; other.reflector != lastDamageDealer){
+                    if (lastDamageDealer != other.ownerPlayer and lastDamageDealer != player and other.reflector != lastDamageDealer){
                         secondToLastDamageDealer = lastDamageDealer;
                         alarm[4] = alarm[3]
                     }
-                    if (other.ownerPlayer != id || (other.reflector != -1 &amp;&amp; other.ownerPlayer == id))
+                    if (other.ownerPlayer != id or (other.reflector != noone and other.ownerPlayer == id))
                         alarm[3] = ASSIST_TIME;
                     lastDamageDealer = other.ownerPlayer;
                     lastDamageSource = other.weapon;
-                    if (id==other.ownerPlayer.object &amp;&amp; other.reflector != -1) {
+                    if (id==other.ownerPlayer.object and other.reflector != noone) {
                         lastDamageDealer = other.reflector;
                         lastDamageSource = WEAPON_REFLECTED_STICKY;
                     }
                 }
-//end new stuff
-                //lastDamageDealer = other.ownerPlayer;
-                //lastDamageSource = other.weapon;
                 if(global.gibLevel &gt; 0){
                 repeat(3) {
                     var blood;

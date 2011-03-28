@@ -19,7 +19,7 @@
     vspeed=min(vspeed,8);
 } else {
     explosionDamage=50;
-    if (reflector != -1 and alarm[0] &lt; 0) alarm[0] = 30;
+    if (reflector != noone and alarm[0] &lt; 0) alarm[0] = 30;
 }
 </argument>
       </arguments>

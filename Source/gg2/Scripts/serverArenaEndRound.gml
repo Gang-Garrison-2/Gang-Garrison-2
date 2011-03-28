@@ -1,10 +1,8 @@
 if winners == TEAM_RED {
-    consecutiveRedWins += 1;
-    //consecutiveBlueWins = 0;
+    redWins += 1;
 }
 else {
-    consecutiveBlueWins += 1;
-    //consecutiveRedWins = 0;
+    blueWins += 1;
 }
 redteam = ds_priority_create();
 blueteam = ds_priority_create();  
@@ -34,8 +32,8 @@ write_ubyte(global.eventBuffer, ARENA_ENDROUND);
 write_ubyte(global.eventBuffer, winners);
 write_ubyte(global.eventBuffer, redMVPs);
 write_ubyte(global.eventBuffer, blueMVPs);
-write_ubyte(global.eventBuffer, consecutiveRedWins);
-write_ubyte(global.eventBuffer, consecutiveBlueWins);
+write_ubyte(global.eventBuffer, redWins);
+write_ubyte(global.eventBuffer, blueWins);
 
 for(i=0; i < redMVPs; i+=1) {
     redMVP[i] = ds_priority_delete_max(redteam);

@@ -21,7 +21,7 @@
     blastRadius = 60;
     exploded = false;
     bubbled = false;
-    reflector = -1;
+    reflector = noone;
 }
 </argument>
       </arguments>

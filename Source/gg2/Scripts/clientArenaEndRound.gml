@@ -2,8 +2,8 @@ receiveCompleteMessage(global.serverSocket,5,global.tempBuffer);
 winners = read_ubyte(global.tempBuffer);
 redMVPs = read_ubyte(global.tempBuffer);
 blueMVPs = read_ubyte(global.tempBuffer);
-consecutiveRedWins = read_ubyte(global.tempBuffer);
-consecutiveBlueWins = read_ubyte(global.tempBuffer);
+redWins = read_ubyte(global.tempBuffer);
+blueWins = read_ubyte(global.tempBuffer);
 
 for(i=0; i < redMVPs; i+=1) {
     receiveCompleteMessage(global.serverSocket,5,global.tempBuffer);
