@@ -21,6 +21,7 @@
             hspeed *= -1;
             vspeed *= -1;
             bubbled = true;
+            reflector = other.ownerPlayer;
         }
     }
     alarm[0] -= 60;

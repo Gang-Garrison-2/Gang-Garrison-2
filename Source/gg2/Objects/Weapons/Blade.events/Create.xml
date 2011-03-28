@@ -24,12 +24,12 @@
     bladeLife = 15;
     maxBlades = 1;
     bladeDamage = 17;
-    depletedBladeDamage = 8;
+    depletedBladeDamage = 6;
     maxAmmo = 90;
     replenishingRate = 2;
     ammoCount = maxAmmo;
-    lowAmmoThreshold = 1/3 * maxAmmo;
-    highAmmoThreshold = 2/3 * maxAmmo;
+    lowAmmoThreshold = 1/2 * maxAmmo;
+    highAmmoThreshold = 3/4 * maxAmmo;
     reloadTime = 55;
     reloadBuffer = 0;
 }
