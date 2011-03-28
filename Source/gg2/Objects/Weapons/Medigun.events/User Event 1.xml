@@ -18,7 +18,6 @@
         if(healTarget.object != -1) {
             if(point_distance(x,y,healTarget.object.x, healTarget.object.y)&lt;=maxHealDistance) {
                 if(collision_line(x,y, healTarget.object.x, healTarget.object.y, Obstacle, true, true)&lt;0) {
-                    //new
                     if (healTarget.object.healer == -1)
                         healTarget.object.healer = ownerPlayer;
                     if (healTarget.object.burnDuration &gt; 0)
@@ -37,8 +36,14 @@
                     
                     if(ubering == false &amp;&amp; uberCharge&lt;2000){
                         uberCharge+=1;
-                        if(healTarget.object.hp &lt; healTarget.object.maxHp) uberCharge += 0.5;
-                        if(healTarget.object.hp &lt; healTarget.object.maxHp/2) uberCharge += 1;
+                        var setup;
+                        setup = false;
+                        if instance_exists(ControlPointSetupGate) {
+                            if (ControlPointSetupGate.solid)
+                                setup = true;
+                        }
+                        if(healTarget.object.hp &lt; healTarget.object.maxHp or setup) uberCharge += 0.5;
+                        if(healTarget.object.hp &lt; healTarget.object.maxHp/2 or setup) uberCharge += 1;
                         if(uberCharge &gt;= 2000) {
                             uberCharge = 2000;
                             if(global.isHost) {
@@ -80,30 +85,30 @@
             healing = false;
         }
     } else {
-            if(readyToShoot) {
-                var bestTarget, bestTargetDist;
-                bestTarget=-1;
-                bestTargetDist=maxHealDistance;
-        
-                with(Player) {
-                    if(id != other.ownerPlayer and team == other.owner.team and object != -1) {
-                        if(collision_line(other.x, other.y, other.x+lengthdir_x(other.maxHealDistance, other.owner.aimDirection), other.y+lengthdir_y(other.maxHealDistance, other.owner.aimDirection), object, true, true)) {
-                            if(point_distance(object.x,object.y,other.x,other.y)&lt;=bestTargetDist) {
-                                bestTargetDist = point_distance(object.x,object.y,other.x,other.y);
-                                bestTarget = id;
-                            }
-                        } 
-                    }
+        if(readyToShoot) {
+            var bestTarget, bestTargetDist;
+            bestTarget=-1;
+            bestTargetDist=maxHealDistance;
+    
+            with(Player) {
+                if(id != other.ownerPlayer and team == other.owner.team and object != -1) {
+                    if(collision_line(other.x, other.y, other.x+lengthdir_x(other.maxHealDistance, other.owner.aimDirection), other.y+lengthdir_y(other.maxHealDistance, other.owner.aimDirection), object, true, true)) {
+                        if(point_distance(object.x,object.y,other.x,other.y)&lt;=bestTargetDist) {
+                            bestTargetDist = point_distance(object.x,object.y,other.x,other.y);
+                            bestTarget = id;
+                        }
+                    } 
                 }
-        
-                if(bestTarget != -1) {
-                    healTarget = bestTarget;
-                } else {
-                    healing = false;
-                }
-                readyToShoot=false;
-                alarm[0]=1;
             }
+    
+            if(bestTarget != -1) {
+                healTarget = bestTarget;
+            } else {
+                healing = false;
+            }
+            readyToShoot=false;
+            alarm[0]=1;
+        }
     }
 }
 </argument>
