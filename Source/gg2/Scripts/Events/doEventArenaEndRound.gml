@@ -20,3 +20,6 @@ if global.myself.team == ArenaHUD.winners
 || global.myself.team == TEAM_SPECTATOR sound = VictorySnd;
 else sound = FailureSnd;
 AudioControlPlaySong(sound, false);
+
+if ArenaHUD.consecutiveRedWins = global.caplimit { global.winners = TEAM_RED; }
+if ArenaHUD.consecutiveBlueWins = global.caplimit { global.winners = TEAM_BLUE; }

@@ -1,10 +1,10 @@
 if winners == TEAM_RED {
     consecutiveRedWins += 1;
-    consecutiveBlueWins = 0;
+    //consecutiveBlueWins = 0;
 }
 else {
     consecutiveBlueWins += 1;
-    consecutiveRedWins = 0;
+    //consecutiveRedWins = 0;
 }
 redteam = ds_priority_create();
 blueteam = ds_priority_create();  
