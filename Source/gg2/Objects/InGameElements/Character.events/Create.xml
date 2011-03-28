@@ -41,6 +41,7 @@
     durationDecay = 1; //amount that duration lowers per step
     intensityDecay = burnIntensity / decayDuration;
     burnedBy = -1;
+    afterburnSource = -1;
     numFlames = 5; //purely cosmetic - the number of flames that someone has with max burnIntensity
     for(i = 0; i &lt; numFlames; i += 1)
     {

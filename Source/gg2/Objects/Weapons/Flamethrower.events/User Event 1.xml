@@ -14,27 +14,7 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">{
-    if (readyToShoot &amp;&amp; ammoCount &gt;= 66) &amp;&amp; owner.keyState &amp; $08 {
-    
-     var shot;
-        randomize();
-        if !collision_line(x,y,x+lengthdir_x(28,owner.aimDirection),y+lengthdir_y(28,owner.aimDirection),Obstacle,1,0) and !place_meeting(x+lengthdir_x(25,owner.aimDirection),y+lengthdir_y(25,owner.aimDirection),TeamGate) {
-            playsound(x,y,CompressionBlastSnd);
-            shot = instance_create(x+lengthdir_x(25,owner.aimDirection),y+lengthdir_y(25,owner.aimDirection),Flare);
-            shot.direction=owner.aimDirection;
-            shot.speed=15;
-            shot.owner=owner;
-            shot.ownerPlayer=ownerPlayer;
-            shot.team=owner.team;
-            shot.weapon=WEAPON_FLARE;
-            justShot=true;
-            readyToShoot=false;
-            ammoCount-=66;
-            if ammoCount &gt; 0 alarm[0]=refireTime+39;
-            else alarm[0]=50;
-        }
-    }
-    else if (readyToShoot &amp;&amp; ammoCount &gt;= 2) {
+    if (readyToShoot &amp;&amp; ammoCount &gt;= 2) {
         if(alarm[3]&lt;=0) {
             loopsoundstart(x,y,FlamethrowerSnd);
         } else {

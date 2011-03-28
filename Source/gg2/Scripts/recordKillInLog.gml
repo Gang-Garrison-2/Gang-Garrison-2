@@ -84,7 +84,7 @@
                 case WEAPON_FLARE:
                     ds_map_add(map, "weapon", FlareKL);
                     break;
-                case WEAPON_REFLECTEDFLARE:
+                case WEAPON_REFLECTED_FLARE:
                     ds_map_add(map, "weapon", FlareReflectKL);
                     break;
                 case KILL_BOX:

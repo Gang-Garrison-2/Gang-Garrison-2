@@ -29,6 +29,19 @@
         with(poof) {
             motion_add(owner.direction, owner.speed);
         }
+        var shot;
+        if (owner.keyState &amp; $10) {
+            if !collision_line(x,y,x+lengthdir_x(28,owner.aimDirection),y+lengthdir_y(28,owner.aimDirection),Obstacle,1,0) and !place_meeting(x+lengthdir_x(25,owner.aimDirection),y+lengthdir_y(25,owner.aimDirection),TeamGate) {
+                shot = instance_create(x+lengthdir_x(25,owner.aimDirection),y+lengthdir_y(25,owner.aimDirection),Flare);
+                shot.direction=owner.aimDirection;
+                shot.speed=15;
+                shot.owner=owner;
+                shot.ownerPlayer=ownerPlayer;
+                shot.team=owner.team;
+                shot.weapon=WEAPON_FLARE;
+                justShot=true;
+            }
+        }
             
         
         with(Rocket) {
@@ -58,7 +71,7 @@
                 if collision_circle(x,y,25,other.poof,false,true) {
                     ownerPlayer = other.ownerPlayer;
                     team = other.owner.team;
-                    weapon = WEAPON_REFLECTEDFLARE;
+                    weapon = WEAPON_REFLECTED_FLARE;
                     alarm[0]=40;
                     
                     motion_set(other.owner.aimDirection, speed);
@@ -93,12 +106,20 @@
                         motion_add(other.owner.aimDirection, other.characterBlastStrength*(1-dist/other.blastDistance) );
                         vspeed -= 2;
                         moveStatus = 3;
+                        if (lastDamageDealer != other.ownerPlayer &amp;&amp; lastDamageDealer != player){
+                            secondToLastDamageDealer = lastDamageDealer;
+                            alarm[4] = alarm[3];
+                        }
+                        alarm[3] = ASSIST_TIME;
+                        lastDamageDealer = other.ownerPlayer;
+                        lastDamageSource = -1;
                     } 
                     else if (burnIntensity &gt; 0 || burnDuration &gt; 0)
                     {
                         burnIntensity = 0;
                         burnDuration = 0;
                         burnedBy = -1;
+                        afterburnSource = -1;
                     }
             }
         }

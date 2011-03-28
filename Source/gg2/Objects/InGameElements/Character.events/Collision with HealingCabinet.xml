@@ -24,6 +24,7 @@
         burnIntensity = 0;
         burnDuration = 0;
         burnedBy = -1;
+        afterburnSource = -1;
     }
     //ammo stuffs
     if instance_exists(currentWeapon) {
