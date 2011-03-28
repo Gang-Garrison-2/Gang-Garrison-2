@@ -55,17 +55,14 @@ while(nearestTarget == -1 &amp;&amp; !ds_priority_empty(targetQueue)) {
         &amp;&amp; playercheck.hp &gt; 0
         &amp;&amp; collision_line(x,y,playercheck.x,playercheck.y,Obstacle,true,true)&lt;0
         &amp;&amp; collision_line(x,y,playercheck.x,playercheck.y,TeamGate,true,true)&lt;0
-        //&amp;&amp; collision_line(x,y,playercheck.x,playercheck.y,ControlPointSetupGate,true,true)&lt;0
         &amp;&amp; collision_line(x,y,playercheck.x,playercheck.y,IntelGate,true,true)&lt;0
         &amp;&amp; collision_line(x,y,playercheck.x,playercheck.y,BulletWall,true,true)&lt;0) {
-        //dunno if this block of stuff works
-            var setupGateCheck, good;
+            var setupGateCheck, blockedBySetupGate;
             setupGateCheck = collision_line(x,y,playercheck.x,playercheck.y,ControlPointSetupGate,true,true);
-            good = false;
-            if (setupGateCheck&lt;0) { good = true; }
-            else if (setupGateCheck.solid == false) { good = true; }
-            if (good) {
-        //end stuff
+            blockedBySetupGate = true;
+            if (setupGateCheck&lt;0) { blockedBySetupGate = false; }
+            else if (setupGateCheck.solid == false) { blockedBySetupGate = false; }
+            if (!blockedBySetupGate) {
                 // Target looks valid, but it might be obscured by a sentry.
                 // That has to be tested individually because we have to exclude both this sentry and the target
                 // from the collision check
@@ -79,7 +76,7 @@ while(nearestTarget == -1 &amp;&amp; !ds_priority_empty(targetQueue)) {
                     nearestTarget = playercheck;
                 }
             }
-        }//remove one of these if the above fix didn't work right
+        }
 }
 ds_priority_destroy(targetQueue);
 
@@ -127,8 +124,7 @@ if(nearestTarget == -1) {
         
         if(nearestTarget.ubered == 0) {
             nearestTarget.hp -= hitDamage;
-        //new
-        //other.lastDamageDealer != ownerPlayer &amp;&amp; other.lastDamageDealer != other.player
+
             if (nearestTarget.lastDamageDealer != ownerPlayer &amp;&amp; object_is_ancestor(nearestTarget.object_index, Character)) {
                 if (nearestTarget.lastDamageDealer != nearestTarget.player){
                     nearestTarget.secondToLastDamageDealer = nearestTarget.lastDamageDealer;
@@ -136,7 +132,6 @@ if(nearestTarget == -1) {
                 }
             }
             nearestTarget.alarm[3] = ASSIST_TIME;
-        //end
             nearestTarget.lastDamageDealer = ownerPlayer;
             nearestTarget.lastDamageSource = WEAPON_SENTRYTURRET;
             if(global.gibLevel &gt; 0 &amp;&amp; object_is_ancestor(nearestTarget.object_index, Character)){
