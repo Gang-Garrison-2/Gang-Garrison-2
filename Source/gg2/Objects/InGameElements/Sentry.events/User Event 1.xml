@@ -13,10 +13,13 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">    if built==1 with (currentWeapon) instance_destroy();
-    image_index = 9;
-    image_speed = 0;
-    idleTimer = false;    
+        <argument kind="STRING">    if built==1 {
+        with (currentWeapon) instance_destroy();
+        image_index = 9;
+        image_speed = 0;
+        idleTimer = false;
+    }
+    humiliated = 1;
 </argument>
       </arguments>
     </action>

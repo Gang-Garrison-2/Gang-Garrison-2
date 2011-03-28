@@ -47,39 +47,40 @@ with(Sentry) {
     }
 }
 
-with(Generator) {
-    testDist = distance_to_object(other);
-    if(testDist&lt;=375) {
-        ds_priority_add(targetQueue, id, testDist);
-    }
-}
-
 while(nearestTarget == -1 &amp;&amp; !ds_priority_empty(targetQueue)) {
     playercheck = ds_priority_delete_min(targetQueue);
     targetAngle = point_direction(x,y,playercheck.x,playercheck.y);
     if((targetAngle &lt;= 45 || targetAngle &gt;= 315 || (targetAngle &gt;= 135 &amp;&amp; targetAngle &lt;= 225) || place_meeting(x,y,playercheck)) 
-            &amp;&amp; playercheck.team != team 
-            &amp;&amp; playercheck.hp &gt; 0
-            &amp;&amp; collision_line(x,y,playercheck.x,playercheck.y,Obstacle,true,true)&lt;0
-            &amp;&amp; collision_line(x,y,playercheck.x,playercheck.y,TeamGate,true,true)&lt;0
-            &amp;&amp; collision_line(x,y,playercheck.x,playercheck.y,ControlPointSetupGate,true,true)&lt;0
-            &amp;&amp; collision_line(x,y,playercheck.x,playercheck.y,IntelGate,true,true)&lt;0
-            &amp;&amp; collision_line(x,y,playercheck.x,playercheck.y,BulletWall,true,true)&lt;0) {
-        // Target looks valid, but it might be obscured by a sentry.
-        // That has to be tested individually because we have to exclude both this sentry and the target
-        // from the collision check
-        obscured = false;
-        with(Sentry) {
-            if(!obscured &amp;&amp; id != other.ownerPlayer.sentry &amp;&amp; id != playercheck &amp;&amp; collision_line(other.x,other.y,playercheck.x,playercheck.y,id,false,false)&gt;=0) {
-                obscured = true;
+        &amp;&amp; playercheck.team != team 
+        &amp;&amp; playercheck.hp &gt; 0
+        &amp;&amp; collision_line(x,y,playercheck.x,playercheck.y,Obstacle,true,true)&lt;0
+        &amp;&amp; collision_line(x,y,playercheck.x,playercheck.y,TeamGate,true,true)&lt;0
+        //&amp;&amp; collision_line(x,y,playercheck.x,playercheck.y,ControlPointSetupGate,true,true)&lt;0
+        &amp;&amp; collision_line(x,y,playercheck.x,playercheck.y,IntelGate,true,true)&lt;0
+        &amp;&amp; collision_line(x,y,playercheck.x,playercheck.y,BulletWall,true,true)&lt;0) {
+        //dunno if this block of stuff works
+            var setupGateCheck, good;
+            setupGateCheck = collision_line(x,y,playercheck.x,playercheck.y,ControlPointSetupGate,true,true);
+            good = false;
+            if (setupGateCheck&lt;0) { good = true; }
+            else if (setupGateCheck.solid == false) { good = true; }
+            if (good) {
+        //end stuff
+                // Target looks valid, but it might be obscured by a sentry.
+                // That has to be tested individually because we have to exclude both this sentry and the target
+                // from the collision check
+                obscured = false;
+                with(Sentry) {
+                    if(!obscured &amp;&amp; id != other.ownerPlayer.sentry &amp;&amp; id != playercheck &amp;&amp; collision_line(other.x,other.y,playercheck.x,playercheck.y,id,false,false)&gt;=0) {
+                        obscured = true;
+                    }
+                }
+                if(!obscured) {
+                    nearestTarget = playercheck;
+                }
             }
-        }
-        if(!obscured) {
-            nearestTarget = playercheck;
-        }
-    }
+        }//remove one of these if the above fix didn't work right
 }
-
 ds_priority_destroy(targetQueue);
 
 if(nearestTarget == -1) {

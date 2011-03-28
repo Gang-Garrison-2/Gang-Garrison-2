@@ -20,6 +20,31 @@
 }
 
 else if timer == 0{
+    if (global.redCaps &gt;= global.blueCaps + 2) { global.winners = TEAM_RED; exit; }
+    if (global.blueCaps &gt;= global.redCaps + 2) { global.winners = TEAM_BLUE; exit; }
+    var capping;
+    capping = false;
+    if !instance_exists(IntelligenceBlue)
+        { capping = true; }
+    else if (IntelligenceBlue.x != IntelligenceBaseBlue.x || IntelligenceBlue.y != IntelligenceBaseBlue.y )
+        { capping = true;}    
+    if (capping == true) {    
+        //red is capping but trailing too far behind
+        if (global.blueCaps - global.redCaps &gt;= 2) {global.winners = TEAM_BLUE; exit;}
+        //red is capping but already has a lead
+        if (global.blueCaps &lt; global.redCaps) {global.winners = TEAM_RED; exit;}
+    }
+    capping = false;
+    if !instance_exists(IntelligenceRed)
+        { capping = true; }
+    else if (IntelligenceRed.x != IntelligenceBaseRed.x || IntelligenceRed.y != IntelligenceBaseRed.y ) 
+        { capping = true; }
+    if (capping == true) {
+        //blue is capping but trailing too far behind
+        if (global.redCaps - global.blueCaps &gt;= 2) {global.winners = TEAM_RED; exit;}
+        //blue is capping but already has a lead
+        if (global.redCaps &lt; global.blueCaps) {global.winners = TEAM_BLUE; exit;}
+    }
     if instance_exists(IntelligenceRed) &amp;&amp; instance_exists(IntelligenceBlue) {
         if IntelligenceRed.x == IntelligenceBaseRed.x &amp;&amp; IntelligenceRed.y == IntelligenceBaseRed.y &amp;&amp;
         IntelligenceBlue.x == IntelligenceBaseBlue.x &amp;&amp; IntelligenceBlue.y == IntelligenceBaseBlue.y {
