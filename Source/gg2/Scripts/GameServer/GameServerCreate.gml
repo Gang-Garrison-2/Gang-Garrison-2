@@ -1,4 +1,7 @@
 {
+    with(Client)
+        instance_destroy();
+        
     maxplayers = global.playerLimit;
     if global.dedicatedMode == 1 { 
         global.playerLimit += 1;
