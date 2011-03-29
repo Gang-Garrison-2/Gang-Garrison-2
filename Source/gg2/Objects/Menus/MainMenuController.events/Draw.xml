@@ -17,7 +17,7 @@
     var i; 
     
     draw_sprite(MenuBackgroundS,menuimage,300,300);
-    
+    draw_sprite(MenuBackgroundVersionS,0,300,300);
     draw_set_color(c_white);
     
     draw_set_valign(fa_middle);
@@ -33,7 +33,8 @@
 
         draw_text(xbegin,ybegin+i*spacing,item[i]);
     }
-}</argument>
+}
+</argument>
       </arguments>
     </action>
   </actions>
