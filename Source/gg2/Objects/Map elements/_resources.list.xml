@@ -18,6 +18,7 @@
   <resource name="On_Map_End_Trigger_Blu_Back" type="RESOURCE"/>
   <resource name="On_Map_End_Trigger_Blu" type="RESOURCE"/>
   <resource name="KillBox" type="RESOURCE"/>
+  <resource name="PitFall" type="RESOURCE"/>
   <resource name="FragBox" type="RESOURCE"/>
   <resource name="RedTeamGate" type="RESOURCE"/>
   <resource name="BulletWall" type="RESOURCE"/>

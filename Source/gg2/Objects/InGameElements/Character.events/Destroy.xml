@@ -31,7 +31,7 @@
             recordEventInLog(5, TEAM_BLUE, player.name, isMe);
         }
         newIntel.alarm[0] = 900;
-        if (lastDamageSource == KILL_BOX || lastDamageSource == FRAG_BOX) {
+        if (lastDamageSource == KILL_BOX || lastDamageSource == FRAG_BOX || lastDamageSource == PITFALL) {
             if (team == TEAM_RED) {
                 newIntel.x = IntelligenceBaseBlue.x;
                 newIntel.y = IntelligenceBaseBlue.y;
