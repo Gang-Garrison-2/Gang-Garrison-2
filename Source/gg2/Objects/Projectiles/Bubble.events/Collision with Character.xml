@@ -26,6 +26,7 @@
     //end new
     other.lastDamageDealer = ownerPlayer;
     other.lastDamageSource = weapon;
+    instance_destroy();
 }
 
 

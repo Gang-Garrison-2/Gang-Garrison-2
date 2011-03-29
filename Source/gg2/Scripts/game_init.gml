@@ -6,7 +6,7 @@
     var customMapRotationFile;
 
     //import wav files for music
-    global.MenuMusic=sound_add(choose("Music/menumusic1.wav","Music/menumusic2.wav"), 1, true);
+    global.MenuMusic=sound_add(choose("Music/menumusic1.wav","Music/menumusic2.wav","Music/menumusic3.wav","Music/menumusic4.wav"), 1, true);
     global.IngameMusic=sound_add("Music/ingamemusic.wav", 1, true);
     global.FaucetMusic=sound_add("Music/faucetmusic.wav", 1, true);
 
@@ -46,16 +46,12 @@
     global.clientPassword = "";
     // for admin menu
     customMapRotationFile = ini_read_string("Server", "MapRotation", "");
-    global.timeLimitMins = ini_read_real("Server", "Time Limit", 15);
-    if global.timeLimitMins >255 global.timeLimitMins=255;
-    else if global.timeLimitMins < 1 global.timeLimitMins =1;
+    global.timeLimitMins = max(1, min(255, ini_read_real("Server", "Time Limit", 15)));
     global.serverPassword = ini_read_string("Server", "Password", "");
     global.mapRotationFile = customMapRotationFile;
     global.dedicatedMode = ini_read_real("Server", "Dedicated", 0);
-    global.defaultServerName = ini_read_string("Server", "ServerName", "My Server");
-    global.caplimit = ini_read_real("Server", "CapLimit", 5);
-    if global.caplimit > 255 global.caplimit = 255;
-    else if global.caplimit < 1 global.caplimit =1;
+    global.serverName = ini_read_string("Server", "ServerName", "My Server");
+    global.caplimit = max(1, min(255, ini_read_real("Server", "CapLimit", 5)));
     global.caplimitBkup = global.caplimit;
     global.autobalance = ini_read_real("Server", "AutoBalance",1);
     global.Server_RespawntimeSec = ini_read_real("Server", "Respawn Time", 5);
@@ -83,7 +79,7 @@
     ini_write_real("Settings","KoTH HUD Position", global.kothHudPos)
     ini_write_string("Server", "MapRotation", customMapRotationFile);
     ini_write_real("Server", "Dedicated", global.dedicatedMode);
-    ini_write_string("Server", "ServerName", global.defaultServerName);
+    ini_write_string("Server", "ServerName", global.serverName);
     ini_write_real("Server", "CapLimit", global.caplimit);
     ini_write_real("Server", "AutoBalance", global.autobalance);
     ini_write_real("Server", "Respawn Time", global.Server_RespawntimeSec);

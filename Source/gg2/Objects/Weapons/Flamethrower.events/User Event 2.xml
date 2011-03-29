@@ -29,20 +29,20 @@
         with(poof) {
             motion_add(owner.direction, owner.speed);
         }
-            
-        with Flame { 
-            dir = point_direction(other.x, other.y, x, y);
-            dist = point_distance(other.x, other.y, x, y);
-            angle = abs((dir-other.owner.aimDirection)+720) mod 360;
-            if collision_circle(x,y,25,other.poof,false,true) {
-                if sticksTo != -1 {
-                    if instance_exists(sticksTo) {
-                        if other.owner.team == sticksTo.team instance_destroy();
-                    }
-                } 
+        var shot;
+        if (owner.keyState &amp; $10) {
+            if !collision_line(x,y,x+lengthdir_x(28,owner.aimDirection),y+lengthdir_y(28,owner.aimDirection),Obstacle,1,0) and !place_meeting(x+lengthdir_x(25,owner.aimDirection),y+lengthdir_y(25,owner.aimDirection),TeamGate) {
+                shot = instance_create(x+lengthdir_x(25,owner.aimDirection),y+lengthdir_y(25,owner.aimDirection),Flare);
+                shot.direction=owner.aimDirection;
+                shot.speed=15;
+                shot.owner=owner;
+                shot.ownerPlayer=ownerPlayer;
+                shot.team=owner.team;
+                shot.weapon=WEAPON_FLARE;
+                justShot=true;
             }
-       
-        } 
+        }
+            
         
         with(Rocket) {
             if(ownerPlayer.team != other.owner.team) {
@@ -63,16 +63,31 @@
                 }
             }
         }
+        with(Flare) {
+            if(ownerPlayer.team != other.owner.team) {
+                dir = point_direction(other.x, other.y, x, y);
+                dist = point_distance(other.x, other.y, x, y);
+                angle = abs((dir-other.owner.aimDirection)+720) mod 360;
+                if collision_circle(x,y,25,other.poof,false,true) {
+                    ownerPlayer = other.ownerPlayer;
+                    team = other.owner.team;
+                    weapon = WEAPON_REFLECTED_FLARE;
+                    alarm[0]=40;
+                    
+                    motion_set(other.owner.aimDirection, speed);
+                }
+            }
+        }
         
         with(Mine) {
             if(ownerPlayer.team != other.owner.team) {
                 dir = point_direction(other.x, other.y, x, y);
                 dist = point_distance(other.x, other.y, x, y);
                 angle = abs((dir-other.owner.aimDirection)+720) mod 360;
-                weapon = WEAPON_REFLECTED_STICKY;
                 if collision_circle(x,y,25,other.poof,false,true) {
                     motion_add(other.owner.aimDirection, other.blastStrength*(1-dist/other.blastDistance) );
                     stickied = false;
+                    reflector = other.ownerPlayer;
                 }
                 if(position_meeting(x+hspeed,y+vspeed,Obstacle)) { 
                     motion_add(point_direction(x,y,x-hspeed,y-vspeed),speed*1.4) 
@@ -91,6 +106,20 @@
                         motion_add(other.owner.aimDirection, other.characterBlastStrength*(1-dist/other.blastDistance) );
                         vspeed -= 2;
                         moveStatus = 3;
+                        if (lastDamageDealer != other.ownerPlayer &amp;&amp; lastDamageDealer != player){
+                            secondToLastDamageDealer = lastDamageDealer;
+                            alarm[4] = alarm[3];
+                        }
+                        alarm[3] = ASSIST_TIME;
+                        lastDamageDealer = other.ownerPlayer;
+                        lastDamageSource = -1;
+                    } 
+                    else if (burnIntensity &gt; 0 || burnDuration &gt; 0)
+                    {
+                        burnIntensity = 0;
+                        burnDuration = 0;
+                        burnedBy = -1;
+                        afterburnSource = -1;
                     }
             }
         }

@@ -81,12 +81,24 @@
                 case WEAPON_BACKSTAB:
                     ds_map_add(map, "weapon", BackstabKL);
                     break;
+                case WEAPON_FLARE:
+                    ds_map_add(map, "weapon", FlareKL);
+                    break;
+                case WEAPON_REFLECTED_FLARE:
+                    ds_map_add(map, "weapon", FlareReflectKL);
+                    break;
                 case KILL_BOX:
                 case FRAG_BOX:
                     if (argument1==-1 || argument1==argument0) {
                         ds_map_add(map, "weapon", DeadKL);
                         break;
-                    }           
+                    }
+                case PITFALL:
+                    ds_map_add(map, "weapon", DeadKL);
+                    ds_map_replace(map, "string", string_copy(argument0.name, 1, 20) + " fell to a clumsy, painful death.");
+                    ds_map_replace(map, "name2", "");
+                    ds_map_replace(map, "team2", 0);
+                    break;          
                 case FINISHED_OFF:
                 case FINISHED_OFF_GIB:
                     ds_map_add(map, "weapon", DeadKL);
@@ -101,7 +113,6 @@
                 case GENERATOR_EXPLOSION:
                     ds_map_add(map, "weapon", ExplodeKL);
                     break;                
-
                 default:
                     ds_map_add(map, "weapon", DeadKL);
                     break;            

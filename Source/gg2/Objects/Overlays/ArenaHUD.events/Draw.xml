@@ -51,7 +51,7 @@ if global.myself != -1 {
 }
 if overtime == 1 {
     draw_set_halign(fa_center);
-    draw_sprite_ext(TimerHudS,2+teamoffset+xshift,xoffset+xsize/2,yoffset+30+ yshift,3,3,0,c_white,1);
+    draw_sprite_ext(TimerHudS,2+teamoffset,xoffset+xsize/2+xshift,yoffset+30+ yshift,3,3,0,c_white,1);
     draw_text(xoffset+xsize/2+xshift,yoffset+30+ yshift,"OVERTIME");
 }
 else{
@@ -137,9 +137,9 @@ if endCount &gt; 0 &amp;&amp; global.winners == -1 &amp;&amp; !instance_exists(S
     }
     draw_set_color(make_color_rgb(227,226,225));
     draw_set_halign(fa_right);
-    draw_text_transformed(xoffset+384,yoffset+210,consecutiveRedWins,3.5,3.5,0);
+    draw_text_transformed(xoffset+384,yoffset+210,redWins,3.5,3.5,0);
     draw_set_halign(fa_left);
-    draw_text_transformed(xoffset+415,yoffset+210,consecutiveBlueWins,3.5,3.5,0);
+    draw_text_transformed(xoffset+415,yoffset+210,blueWins,3.5,3.5,0);
 
 }
  

@@ -72,7 +72,13 @@
                 case WEAPON_BACKSTAB:                   
                 case WEAPON_KNIFE:
                     ds_map_add(map, "weapon", KnifeKL);
-                    break;              
+                    break;  
+                case WEAPON_FLARE:
+                    ds_map_add(map, "weapon", FlareKL);
+                    break;
+                case WEAPON_REFLECTED_FLARE:
+                    ds_map_add(map, "weapon", FlareReflectKL);
+                    break;            
                 case FINISHED_OFF:
                 case FINISHED_OFF_GIB:
                     ds_map_add(map, "weapon", DeadKL);

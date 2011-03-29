@@ -15,8 +15,10 @@
       <arguments>
         <argument kind="STRING">{
     characterHit=-1;
-    event_user(5);
-}</argument>
+    if fade==false event_user(5);
+    else instance_destroy();
+}
+</argument>
       </arguments>
     </action>
   </actions>

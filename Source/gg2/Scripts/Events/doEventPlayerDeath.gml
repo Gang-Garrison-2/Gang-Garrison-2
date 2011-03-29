@@ -74,7 +74,7 @@ if victim == global.myself {
 //*************************************
 //*         Deathcam
 //*************************************
-if( global.killCam == 1 && victim == global.myself && killer != -1 && killer != victim && global.myself.quickspawn == 0 && !(damageSource == KILL_BOX || damageSource == FRAG_BOX || damageSource == FINISHED_OFF || damageSource == FINISHED_OFF_GIB || damageSource == GENERATOR_EXPLOSION)) {
+if( global.killCam == 1 && victim == global.myself && killer != -1 && killer != victim && (collision_point(victim.object.x,victim.object.y,SpawnRoom,0,0) < 0) && !(damageSource == KILL_BOX || damageSource == FRAG_BOX || damageSource == FINISHED_OFF || damageSource == FINISHED_OFF_GIB || damageSource == GENERATOR_EXPLOSION)) {
     instance_create(0,0,DeathCam);
     DeathCam.killedby=killer;
     DeathCam.name=killer.name;

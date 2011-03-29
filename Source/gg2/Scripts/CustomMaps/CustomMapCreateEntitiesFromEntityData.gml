@@ -117,6 +117,9 @@ while(string_pos(DIVIDER, argument0) != 0) { // continue until there are no more
     case "killbox":
       instance_create(entityX, entityY, KillBox);
     break;
+    case "pitfall":
+      instance_create(entityX, entityY, PitFall);
+    break;
     case "fragbox":
       instance_create(entityX, entityY, FragBox);
     break;

@@ -13,35 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">    if(sticksTo == -1) {
-        vspeed += 0.15;
-        image_alpha*=0.95;
-    } else {
-        if extinguish &lt;= 0 instance_destroy();
-        if(instance_exists(sticksTo)) { 
-            if sticksTo.ubered == 0 &amp;&amp; sticksTo.hp &gt; 0{
-                if extinguish &gt;= 0.2 sticksTo.hp -= burnDamage;
-                else sticksTo.hp -= extinguish/10;
-//new stuff
-                if (sticksTo.lastDamageDealer != ownerPlayer &amp;&amp; sticksTo.lastDamageDealer != sticksTo.player){
-                    sticksTo.secondToLastDamageDealer = sticksTo.lastDamageDealer;
-                    sticksTo.alarm[4] = sticksTo.alarm[3]
-                }
-                sticksTo.alarm[3] = ASSIST_TIME;
-//end new stuff
-                sticksTo.lastDamageDealer = ownerPlayer;
-                sticksTo.lastDamageSource = weapon;
-
-                x = sticksTo.x+stickRelativeX*sticksTo.image_xscale;
-                y = sticksTo.y+stickRelativeY;
-            } else {
-                instance_destroy();
-            }
-                             
-        } else {
-            instance_destroy();
-        }
-    }
+        <argument kind="STRING">vspeed += 0.15;
     
 if(global.particles == PARTICLES_NORMAL) {
     if(random(5)&lt;1) effect_create_below(ef_smokeup,x,y-8,0,c_gray);

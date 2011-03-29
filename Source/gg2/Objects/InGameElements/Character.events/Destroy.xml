@@ -31,8 +31,7 @@
             recordEventInLog(5, TEAM_BLUE, player.name, isMe);
         }
         newIntel.alarm[0] = 900;
-        //new
-        if (lastDamageSource == KILL_BOX || lastDamageSource == FRAG_BOX) {
+        if (lastDamageSource == KILL_BOX || lastDamageSource == FRAG_BOX || lastDamageSource == PITFALL) {
             if (team == TEAM_RED) {
                 newIntel.x = IntelligenceBaseBlue.x;
                 newIntel.y = IntelligenceBaseBlue.y;
@@ -44,7 +43,6 @@
                 newIntel.alarm[0] = -1;
             }
         }
-        //end new
         sound_play(IntelDropSnd);
     }
     
@@ -53,8 +51,10 @@
     }
     
     player.object=-1;
-    if (player.quickspawn==0) player.alarm[5] = global.Server_Respawntime;
-    else player.alarm[5] = 1;
+    if (collision_point(x,y,SpawnRoom,0,0))
+        player.alarm[5] = 1;
+    else 
+        player.alarm[5] = global.Server_Respawntime;
     
     //part type destroy
     if(variable_local_exists("jumpFlameParticleType")) {

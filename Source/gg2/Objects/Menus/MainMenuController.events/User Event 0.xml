@@ -20,9 +20,9 @@ if(global.dedicatedMode == 0) {
     instance_destroy();
 }
 else {
-    global.serverName = global.defaultServerName;
     global.gameServer = instance_create(0,0,GameServer);    
-}</argument>
+}
+</argument>
       </arguments>
     </action>
   </actions>

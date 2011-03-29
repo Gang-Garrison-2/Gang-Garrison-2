@@ -13,36 +13,48 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if lastDamageSource == WEAPON_SENTRYTURRET {
-    if killedby.sentry != -1{
-        view_xview=killedby.sentry.x-400;
-        view_yview=killedby.sentry.y-300;
-        hp=killedby.sentry.hp;
-        maxHp=killedby.sentry.maxHp;
-    }
-    else if killedby.object != -1{
-        view_xview=killedby.object.x-400;
-        view_yview=killedby.object.y-300;
-        hp=killedby.object.hp;
-        maxHp=killedby.object.maxHp;
-    }
+        <argument kind="STRING">if instance_exists(WinBanner)
+{
+    instance_destroy();
+    exit;
 }
 
-else if killedby.object != -1 {
+if(lastDamageSource == WEAPON_SENTRYTURRET and killedby.sentry != -1)
+{
+    view_xview=killedby.sentry.x-400;
+    view_yview=killedby.sentry.y-300;
+    hp=killedby.sentry.hp;
+    maxHp=killedby.sentry.maxHp;
+    killmessage = "You were killed by the autogun of";
+}
+else if(killedby.object != -1)
+{
     view_xview=killedby.lastKnownx-400;
     view_yview=killedby.lastKnowny-300;
     hp=killedby.object.hp;
-    maxHp=killedby.object.maxHp
+    maxHp=killedby.object.maxHp;
+    killmessage = "You were killed by";
 }
-
-else if killedby.object == -1 {
+else
+{
     view_xview=killedby.lastKnownx-400;
     view_yview=killedby.lastKnowny-300;
     hp=0;
     maxHp=0;
+    killmessage = "You were killed by the late";
 }
 
-if instance_exists(WinBanner) instance_destroy();
+screen_redraw();
+
+var tempfile;
+tempfile = temp_directory + "/deathcam.png";
+if !file_exists(tempfile)
+    screen_save_part(tempfile,0,0,800,600);
+DeathCamS=sprite_add(tempfile,1,0,0,400,300);
+file_delete(tempfile);
+
+zooming=true;
+playsound(view_xview[0]+400,view_yview[0]+300,DeathCamSnd);
 </argument>
       </arguments>
     </action>

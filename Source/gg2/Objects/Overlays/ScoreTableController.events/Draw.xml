@@ -34,12 +34,9 @@
     
     for(i=0; i&lt;ds_list_size(global.players); i+=1) {
         player = ds_list_find_value(global.players, i);
-        //changes :o
         if(player.team == TEAM_RED) {
-            //ds_priority_add(redteam, player, player.stats[KILLS]+2*player.stats[CAPS]+.5*player.stats[ASSISTS]+player.stats[DESTRUCTION]+player.stats[STABS]+floor(player.stats[HEALING]/200)+player.stats[DEFENSES]+player.stats[INVULNS]+player.stats[BONUS]);
             ds_priority_add(redteam, player, player.stats[POINTS]);
         } else if (player.team == TEAM_BLUE) {
-            //ds_priority_add(blueteam, player, player.stats[KILLS]+2*player.stats[CAPS]+.5*player.stats[ASSISTS]+player.stats[DESTRUCTION]+player.stats[STABS]+floor(player.stats[HEALING]/200)+player.stats[DEFENSES]+player.stats[INVULNS]+player.stats[BONUS]);
             ds_priority_add(blueteam, player, player.stats[POINTS]);
         }
         else if (player.team == TEAM_SPECTATOR)
@@ -59,9 +56,9 @@
         draw_text_transformed(view_xview[0]+412,view_yview[0]+110,global.blueCaps,3.5,3.5,0);
     }
     else if instance_exists(ArenaHUD){
-        draw_text_transformed(view_xview[0]+384,view_yview[0]+110,ArenaHUD.consecutiveRedWins,3.5,3.5,0);
+        draw_text_transformed(view_xview[0]+384,view_yview[0]+110,ArenaHUD.redWins,3.5,3.5,0);
         draw_set_halign(fa_left);
-        draw_text_transformed(view_xview[0]+412,view_yview[0]+110,ArenaHUD.consecutiveBlueWins,3.5,3.5,0);
+        draw_text_transformed(view_xview[0]+412,view_yview[0]+110,ArenaHUD.blueWins,3.5,3.5,0);
     }
     
     draw_set_color(c_red);   
@@ -99,7 +96,6 @@
             draw_text(xoffset+xsize/2+32, yoffset+70+20*(i+1),"    "+player.name);
         
             draw_set_halign(fa_right);
-            //long change -&gt;
             draw_text(xoffset+xsize+25, yoffset+70+20*(i+1), string(floor(player.stats[POINTS])));
             
             if (player.object==-1) draw_sprite_ext(DeadS,0,xoffset+472,yoffset+75+20*(i+1),1,1,0,c_white,alpha);    

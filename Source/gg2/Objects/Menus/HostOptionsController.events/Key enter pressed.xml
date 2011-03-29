@@ -31,6 +31,7 @@
         }
     }
     ini_open("gg2.ini");
+    ini_write_string("Server", "ServerName", global.serverName);
     ini_write_real("Settings", "UseLobby", global.useLobbyServer);
     ini_write_real("Settings", "HostingPort", global.hostingPort);
     ini_write_real("Settings", "PlayerLimit", global.playerLimit);

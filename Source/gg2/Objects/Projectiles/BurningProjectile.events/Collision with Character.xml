@@ -13,35 +13,30 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if(sticksTo == -1 and other.id != ownerPlayer.object and other.team != team &amp;&amp; other.ubered == 0  &amp;&amp; other.hp &gt; 0) {
+        <argument kind="STRING">if(other.id != ownerPlayer.object and other.team != team &amp;&amp; other.ubered == 0  &amp;&amp; other.hp &gt; 0) {
     other.hp -= hitDamage;
     if (other.lastDamageDealer != ownerPlayer &amp;&amp; other.lastDamageDealer != other.player){
         other.secondToLastDamageDealer = other.lastDamageDealer;
-        other.alarm[4] = other.alarm[3]
+        other.alarm[4] = other.alarm[3];
     }
     other.alarm[3] = ASSIST_TIME;
     other.lastDamageDealer = ownerPlayer;
     other.lastDamageSource = weapon;
-    if(object_is_ancestor(other.object_index, Pyro) or other.ubered == 1) {
-        instance_destroy();
-    } else {
-        if(other.flamecount&gt;7) {
-            var character;
-            character = other.id;
-            with(Flame) {
-                if(sticksTo == character) {
-                    instance_destroy();
-                    break;
-                }
-            }
+    
+    if(!object_is_ancestor(other.object_index, Pyro)) {
+        if (other.burnDuration &lt; other.maxDuration) {
+            other.burnDuration += durationIncrease; 
+            other.burnDuration = min(other.burnDuration, other.maxDuration);
         }
-        sticksTo = other.id;
-        stickRelativeX = x-other.x;
-        stickRelativeY = y-other.y;
-        speed=0;
-        alarm[0]=150;
-        other.flamecount += 1;
+        if (other.burnIntensity &lt; other.maxIntensity) {
+            other.burnIntensity += burnIncrease * cos((flameLife - alarm[0])/flameLife * pi / 2);
+            other.burnIntensity = min(other.burnIntensity, other.maxIntensity);
+        }
+        other.burnedBy = ownerPlayer;
+        other.afterburnSource = weapon;
+        other.alarm[0] = other.decayDelay;
     }
+    instance_destroy();
 }
 </argument>
       </arguments>

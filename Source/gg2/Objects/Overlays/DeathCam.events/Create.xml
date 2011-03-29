@@ -15,7 +15,6 @@
       <arguments>
         <argument kind="STRING">cursor_sprite = -1;
 alarm[0]=60;
-alarm[1]=61;
 if(global.Server_Respawntime &gt; 0) {
     if(global.Server_Respawntime &lt;= 150) {
         alarm[2]=global.Server_Respawntime;

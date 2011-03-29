@@ -13,10 +13,12 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if(team != other.team) {
-    characterHit=other;
-    event_user(5);
-}
+        <argument kind="STRING">if fade==false {
+    if(team != other.team) {
+        characterHit=other;
+        event_user(5);
+    }
+} else instance_destroy();
 </argument>
       </arguments>
     </action>

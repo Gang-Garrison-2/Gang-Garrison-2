@@ -112,6 +112,9 @@
   <constant name="GENERATOR_EXPLOSION" value="22"/>
   <constant name="WEAPON_RIFLE_CHARGED" value="23"/>
   <constant name="WEAPON_BACKSTAB" value="24"/>
+  <constant name="WEAPON_FLARE" value="25"/>
+  <constant name="WEAPON_REFLECTED_FLARE" value="26"/>
+  <constant name="PITFALL" value="27"/>
   <constant name="ASSIST_TIME" value="120"/>
   <constant name="NOTICE_NUTSNBOLTS" value="0"/>
   <constant name="NOTICE_TOOCLOSE" value="1"/>
@@ -127,5 +130,5 @@
   <constant name="PARTICLES_ALTERNATIVE" value="2"/>
   <constant name="MOUSE_LEFT" value="9001"/>
   <constant name="MOUSE_RIGHT" value="9002"/>
-  <constant name="HP_PER_POINT" value="600"/>
+  <constant name="HP_PER_POINT" value="400"/>
 </constants>

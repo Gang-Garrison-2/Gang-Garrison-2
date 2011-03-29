@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<event category="COLLISION" with="HealingCabinet">
+<event category="COLLISION" with="Sentry">
   <actions>
     <action id="603" library="1">
       <!--action name: Code-->
@@ -13,7 +13,15 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if sticksTo != -1 instance_destroy();</argument>
+        <argument kind="STRING">if(other.team != team) {
+    other.hp -= hitDamage;
+//new
+    other.lastDamageDealer = ownerPlayer;
+    other.lastDamageSource = weapon;
+//end
+    instance_destroy();
+}
+</argument>
       </arguments>
     </action>
   </actions>

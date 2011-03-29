@@ -14,9 +14,11 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">if(global.updateType == QUICK_UPDATE or global.updateType == FULL_UPDATE) {
-        receiveCompleteMessage(global.serverSocket,4,global.deserializeBuffer);
+        receiveCompleteMessage(global.serverSocket,6,global.deserializeBuffer);
         x = read_ushort(global.deserializeBuffer)/5;
         y = read_ushort(global.deserializeBuffer)/5;
+        alarm[0] = read_ubyte(global.deserializeBuffer);
+        travelDistance = read_ubyte(global.deserializeBuffer);
 }
 </argument>
       </arguments>

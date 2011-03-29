@@ -555,6 +555,30 @@ instance_create(0,0,TwodFortTwoRemixO);
       <creationCode/>
       <locked>false</locked>
     </instance>
+    <instance>
+      <object>HealingCabinet</object>
+      <position x="324" y="876"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HealingCabinet</object>
+      <position x="342" y="876"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HealingCabinet</object>
+      <position x="3042" y="876"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HealingCabinet</object>
+      <position x="3066" y="876"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
   </instances>
   <tiles/>
   <editorSettings remember="false"/>

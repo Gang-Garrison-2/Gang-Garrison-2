@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="ALARM" id="5">
+  <actions>
+    <action id="605" library="1">
+      <!--action name: Comment-->
+      <kind>NORMAL</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>false</canApplyTo>
+      <actionType>NONE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">Cosmetic flame randomization</argument>
+      </arguments>
+    </action>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">for(i = 0; i &lt; numFlames * floor(burnIntensity/maxIntensity); i += 1)
+{
+    flameArray_x[i] = random_range(-(bbox_right-bbox_left)/2, (bbox_right-bbox_left)/2);
+    flameArray_y[i] = random_range(-(bbox_top-bbox_bottom)/2, (bbox_top-bbox_bottom)/2);
+}
+alarm[5] = 30;
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

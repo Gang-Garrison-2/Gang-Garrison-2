@@ -19,19 +19,38 @@
         hp = maxHp;
         nutsNBolts = maxNutsNBolts;
     }
-
+    if (burnIntensity &gt; 0 || burnDuration &gt; 0)
+    {
+        burnIntensity = 0;
+        burnDuration = 0;
+        burnedBy = -1;
+        afterburnSource = -1;
+    }
     //ammo stuffs
     if instance_exists(currentWeapon) {
         if(currentWeapon.ammoCount &lt; currentWeapon.maxAmmo) {
-            playsound(x,y,PickupSnd);
-        }
-        currentWeapon.ammoCount = currentWeapon.maxAmmo;
-        switch(currentWeapon.object_index) {
-        case Rocketlauncher:
-        case Scattergun:
-        case Shotgun:
-        case Revolver:
-            currentWeapon.alarm[5] = -1;
+            switch(currentWeapon.object_index) {
+            case Medigun:
+            case Minigun:
+            case Flamethrower:
+            case Blade:
+                if (currentWeapon.ammoCount / currentWeapon.maxAmmo &lt; 5/6)
+                    playsound(x,y,PickupSnd);
+                break;
+            default:
+                playsound(x,y,PickupSnd);
+                break;
+            }
+            currentWeapon.ammoCount = currentWeapon.maxAmmo;
+            switch(currentWeapon.object_index) {
+            case Rocketlauncher:
+            case Scattergun:
+            case Shotgun:
+            case Revolver:
+            case Medigun:
+                currentWeapon.alarm[5] = -1;
+                break;
+            }
         }
     }
 }

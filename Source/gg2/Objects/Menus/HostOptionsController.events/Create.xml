@@ -52,7 +52,6 @@ item[8] = "Announce to Lobby:";
 item[9] = "Start Game";
 item[10] = "Back";
     
-global.serverName = global.defaultServerName;
 value[0] = global.serverName;
 value[1] = global.serverPassword;
 value[2] = global.hostingPort;

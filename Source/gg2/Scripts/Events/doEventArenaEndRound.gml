@@ -1,4 +1,3 @@
-//changes
 for(i=0; i < redMVPs; i+=1) {
     redMVPName[i] = redMVP[i].name;
     redMVPKills[i] = redMVP[i].roundStats[KILLS];
@@ -20,3 +19,6 @@ if global.myself.team == ArenaHUD.winners
 || global.myself.team == TEAM_SPECTATOR sound = VictorySnd;
 else sound = FailureSnd;
 AudioControlPlaySong(sound, false);
+
+if ArenaHUD.redWins = global.caplimit { global.winners = TEAM_RED; }
+if ArenaHUD.blueWins = global.caplimit { global.winners = TEAM_BLUE; }

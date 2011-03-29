@@ -18,7 +18,6 @@ yoffset = view_yview[0];
 xsize = view_wview[0];
 ysize = view_hview[0];
 
-
 if editing == -1 &amp;&amp; mouse_x &gt; xoffset+xbegin and mouse_x &lt; xoffset+xbegin+width {
     virtualitem = round((mouse_y-ybegin-yoffset)/spacing);
     if(mouse_check_button_pressed(mb_left)){

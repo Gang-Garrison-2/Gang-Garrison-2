@@ -41,7 +41,6 @@
         {
             owner.runPower = 0;
             owner.jumpStrength = 0;
-            owner.canCloak = 0;
             owner.stabbing = 1;
             
             stabdirection = owner.aimDirection;
