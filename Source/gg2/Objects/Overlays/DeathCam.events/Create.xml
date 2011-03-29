@@ -15,7 +15,6 @@
       <arguments>
         <argument kind="STRING">cursor_sprite = -1;
 alarm[0]=60;
-alarm[1]=61;
 if(global.Server_Respawntime &gt; 0) {
     if(global.Server_Respawntime &lt;= 150) {
         alarm[2]=global.Server_Respawntime;
@@ -31,8 +30,6 @@ killmessage = "";
 DeathCamS=-1
 hp=0;
 maxHp=0;
-camX=0
-camY=0
 if instance_exists(NoticeO) with NoticeO instance_destroy();
 if instance_exists(Balancer) with Balancer instance_destroy();
 </argument>
