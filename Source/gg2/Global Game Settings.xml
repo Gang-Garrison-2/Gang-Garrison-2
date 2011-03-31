@@ -25,7 +25,7 @@
     <scaleImage>true</scaleImage>
   </progressBar>
   <keys>
-    <letF1ShowGameInfo>true</letF1ShowGameInfo>
+    <letF1ShowGameInfo>false</letF1ShowGameInfo>
     <letF4SwitchFullscreen>false</letF4SwitchFullscreen>
     <letF5SaveF6Load>false</letF5SaveF6Load>
     <letF9Screenshot>true</letF9Screenshot>
@@ -49,7 +49,7 @@
     <versionBuild>0</versionBuild>
     <company>Faucet Software</company>
     <product>Gang Garrison 2</product>
-    <copyright/>
+    <copyright>Copyright © 2011 Faucet Software</copyright>
     <description/>
   </gameInfo>
   <system>
