@@ -83,6 +83,7 @@ Meet The Firebug:
 		      Airblast can also blow afterburn off your teammates!
 	   Afterburn - Even touching your enemy with fire will make him feel the heat!
 		       Continuous damage over time! Firebug is immune to afterburn!
+	   Flare - Use your Airblast while shooting to create a fireball!
 
 Meet The Rocketman:
 	Strong yet graceful, he can
@@ -450,7 +451,7 @@ Sound & Music:
 Synnah, Scoot, and Elkondo
 
 Map Creators: 
-fishmatt, vaati, king metroid, Taters, agh, Faust, Tarzan, BassieEnAdriaan, McGenio, and Wherewolf
+fishmatt, vaati, king metroid, Taters, agh, Faust, Tarzan, BassieEnAdriaan, McGenio, Wherewolf and Shawnachu
 
 With additional art and inspiration provided by the incredible Gang Garrison community!
 
