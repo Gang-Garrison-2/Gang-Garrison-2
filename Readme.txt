@@ -477,7 +477,7 @@ the licensors of this Program grant you additional permission to convey the resu
 This is a demake of Team Fortress 2 by Valve Software. All likenesses and similarities 
 are intended as a respectful homage.
 
-This game uses the Faucet Networking extension for by MedO, which is available under the terms of the ISC license.
+This game uses the Faucet Networking extension by MedO, which is available under the terms of the ISC license.
 You can find more information on Faucet Networking at http://gmc.yoyogames.com/index.php?showtopic=498062.
 
 This game uses the Download Manager DLL, created by Hobbel.  It was wrapped into an extension by cspotcode.
