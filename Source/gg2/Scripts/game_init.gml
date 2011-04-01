@@ -9,6 +9,10 @@
     global.MenuMusic=sound_add(choose("Music/menumusic1.wav","Music/menumusic2.wav","Music/menumusic3.wav","Music/menumusic4.wav"), 1, true);
     global.IngameMusic=sound_add("Music/ingamemusic.wav", 1, true);
     global.FaucetMusic=sound_add("Music/faucetmusic.wav", 1, true);
+    sound_volume(global.MenuMusic, 0.8);
+    sound_volume(global.IngameMusic, 0.8);
+    sound_volume(global.FaucetMusic, 0.8);
+        
 
     global.sendBuffer = buffer_create();
     global.eventBuffer = buffer_create();
