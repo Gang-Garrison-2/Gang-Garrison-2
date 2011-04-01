@@ -149,10 +149,10 @@ if(moveStatus == 1 or moveStatus == 2 or moveStatus == 4)
 }
 if(!taunting &amp;&amp; !omnomnomnom)
 {
-    if(keyState &amp; $40 and hspeed &gt; -runPower * controlFactor / (baseFriction - 1))
+    if((keyState|pressedKeys) &amp; $40 and hspeed &gt; -runPower * controlFactor / (baseFriction - 1))
         hspeed -= runPower*controlFactor;
         
-    if(keyState &amp; $20 and hspeed &lt; runPower * controlFactor / (baseFriction - 1))
+    if((keyState|pressedKeys) &amp; $20 and hspeed &lt; runPower * controlFactor / (baseFriction - 1))
         hspeed += runPower*controlFactor;
 }
 if(abs(hspeed) &gt; abs(1 * baseControl / (baseFriction - 1))*2)// divide friction as normal if going way too fast, based on normal max speed
