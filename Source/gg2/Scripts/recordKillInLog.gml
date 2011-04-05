@@ -1,19 +1,19 @@
     // Record kill in killlog
     // argument0: The killed player
-    // argument1: The killer, or -1 for suicides
-    // argument2: The assistant, or -1 for no assist
+    // argument1: The killer, or a false value for suicides
+    // argument2: The assistant, or a false value for no assist
     // argument3: The source of the damage (e.g. WEAPON_SCATTERGUN)
       
         with (KillLog) {
             map = ds_map_create();
 
-            if (argument1==-1 || argument1==argument0) {
+            if (!argument1 || argument1==argument0) {
                 ds_map_add(map, "name1", "");
                 ds_map_add(map, "team1", 0);
             } else {
                 var killer;
                 killer = string_copy(argument1.name, 1, 20);
-                if (argument2 != -1)
+                if (argument2)
                     killer += " + " + string_copy(argument2.name, 1, 20);
                 ds_map_add(map, "name1", killer);
                 ds_map_add(map, "team1", argument1.team);
@@ -89,7 +89,7 @@
                     break;
                 case KILL_BOX:
                 case FRAG_BOX:
-                    if (argument1==-1 || argument1==argument0) {
+                    if (!argument1 || argument1==argument0) {
                         ds_map_add(map, "weapon", DeadKL);
                         break;
                     }
