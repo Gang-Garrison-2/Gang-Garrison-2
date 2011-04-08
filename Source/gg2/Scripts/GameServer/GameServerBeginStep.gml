@@ -138,39 +138,38 @@ if(impendingMapChange == 0) {
     ServerChangeMap(global.currentMap, global.currentMapURL, global.currentMapMD5, global.sendBuffer);
     impendingMapChange = -1;
     
-    for(i=0; i<ds_list_size(global.players); i+=1) {
-        player = ds_list_find_value(global.players, i);
+    with(Player) {
         if(global.currentMapArea == 1){
-            player.stats[KILLS] = 0;
-            player.stats[DEATHS] = 0;
-            player.stats[CAPS] = 0;
-            player.stats[ASSISTS] = 0;
-            player.stats[DESTRUCTION] = 0;
-            player.stats[STABS] = 0;
-            player.stats[HEALING] = 0;
-            player.stats[DEFENSES] = 0;
-            player.stats[INVULNS] = 0;
-            player.stats[BONUS] = 0;
-            player.stats[DOMINATIONS] = 0;
-            player.stats[REVENGE] = 0;
-            player.stats[POINTS] = 0;
-            player.roundStats[KILLS] = 0;
-            player.roundStats[DEATHS] = 0;
-            player.roundStats[CAPS] = 0;
-            player.roundStats[ASSISTS] = 0;
-            player.roundStats[DESTRUCTION] = 0;
-            player.roundStats[STABS] = 0;
-            player.roundStats[HEALING] = 0;
-            player.roundStats[DEFENSES] = 0;
-            player.roundStats[INVULNS] = 0;
-            player.roundStats[BONUS] = 0;
-            player.roundStats[DOMINATIONS] = 0;
-            player.roundStats[REVENGE] = 0;
-            player.roundStats[POINTS] = 0;
-            player.team = TEAM_SPECTATOR;
+            stats[KILLS] = 0;
+            stats[DEATHS] = 0;
+            stats[CAPS] = 0;
+            stats[ASSISTS] = 0;
+            stats[DESTRUCTION] = 0;
+            stats[STABS] = 0;
+            stats[HEALING] = 0;
+            stats[DEFENSES] = 0;
+            stats[INVULNS] = 0;
+            stats[BONUS] = 0;
+            stats[DOMINATIONS] = 0;
+            stats[REVENGE] = 0;
+            stats[POINTS] = 0;
+            roundStats[KILLS] = 0;
+            roundStats[DEATHS] = 0;
+            roundStats[CAPS] = 0;
+            roundStats[ASSISTS] = 0;
+            roundStats[DESTRUCTION] = 0;
+            roundStats[STABS] = 0;
+            roundStats[HEALING] = 0;
+            roundStats[DEFENSES] = 0;
+            roundStats[INVULNS] = 0;
+            roundStats[BONUS] = 0;
+            roundStats[DOMINATIONS] = 0;
+            roundStats[REVENGE] = 0;
+            roundStats[POINTS] = 0;
+            team = TEAM_SPECTATOR;
         }
-        player.timesChangedCapLimit = 0;
-        player.alarm[5]=1;
+        timesChangedCapLimit = 0;
+        alarm[5]=1;
     }
 }
 
