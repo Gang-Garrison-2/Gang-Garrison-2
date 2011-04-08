@@ -19,7 +19,7 @@
     if(lobbysocket != -1) {
         if(socket_has_error(lobbysocket)) {
             if(numServers == -1) {
-                show_message("Connecting to the lobby server has failed.");
+                show_message("Connecting to the lobby server has failed. Reason:#" + socket_error(lobbysocket));
             }
             socket_destroy(lobbysocket);
             lobbysocket = -1;
