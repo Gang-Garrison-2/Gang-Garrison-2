@@ -5,7 +5,7 @@ commandBytesPrefixLength1 = -2;  // The length of the command is indicated by th
 
 for(i=0; i<256; i+=1) {
     // -1 indicates an invalid command byte
-    requiredBytes[i] = commandBytesInvalidCommand;
+    commandBytes[i] = commandBytesInvalidCommand;
 }
 
 commandBytes[PLAYER_LEAVE] = 0;
