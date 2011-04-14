@@ -13,20 +13,12 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">healed = false;
-healing = "";
-target = -1;
-//global.HudCheck = false;
+        <argument kind="STRING">if (!global.showHealing or global.myself.object == -1 or global.myself.class != CLASS_MEDIC)
+    instance_destroy();
 
-if global.myself.object != -1 &amp;&amp; global.myself.class == CLASS_MEDIC {
-    if instance_exists(global.myself.object.currentWeapon) {
-        if(global.myself.object.currentWeapon.healTarget != -1 &amp;&amp; instance_exists(global.myself.object.currentWeapon.healTarget)){
-            target = global.myself.object.currentWeapon.healTarget;
-            healed = true;
-            healing = target.name;
-            //global.HudCheck = true;
-        }
-    }
+target = noone;
+if (instance_exists(global.myself.object.currentWeapon)) {
+    target = global.myself.object.currentWeapon.healTarget;
 }
 </argument>
       </arguments>

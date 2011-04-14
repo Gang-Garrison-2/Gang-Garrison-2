@@ -13,9 +13,8 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">{
-    loopsoundstop(MedigunSnd);
-}</argument>
+        <argument kind="STRING">loopsoundstop(MedigunSnd);
+</argument>
       </arguments>
     </action>
   </actions>
