@@ -14,7 +14,10 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">if (!global.showHealing or global.myself.object == -1 or global.myself.class != CLASS_MEDIC)
+{
     instance_destroy();
+    exit;
+}
 
 target = noone;
 if (instance_exists(global.myself.object.currentWeapon)) {
