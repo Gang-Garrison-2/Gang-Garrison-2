@@ -16,10 +16,11 @@
         <argument kind="STRING">{
     xoffset = 0;
     yoffset = -3;
+    bubbleRefireTime = 7;
     refireTime = 5;
     replenishing = 1;
     bubbleCount = 0;
-    maxBubbles = 30;
+    maxBubbles = 22;
     bladesOut = 0;
     bladeLife = 15;
     maxBlades = 1;
