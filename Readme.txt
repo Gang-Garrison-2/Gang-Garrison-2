@@ -442,10 +442,11 @@ mrfredman, MedO, Synnah
 
 Programmers:
 MedO, Cube7 aka Chris P. Bacon, Andrew "cspotcode" Bradley, Vaati, Taimat, Findude, Juicebox360, Jebus_Chris,
-Leiche, Xeyk, pach, Austin "Psychopath" Benz, L, technoviking, AJF, Alexander "Wareya" Nadeau, Vindicator, and NAGN
+Leiche, Xeyk, pach, Austin "Psychopath" Benz, L, technoviking, AJF, Alexander "Wareya" Nadeau, Vindicator,
+NAGN and RebelINS
 
 Artists:
-mrfredman, Fishmatt, BassieEnAdriaan, Timohtep, and Elkondo
+mrfredman, Fishmatt, BassieEnAdriaan, Timohtep, Elkondo and Waterfall
 
 Sound & Music:
 Synnah, Scoot, and Elkondo
