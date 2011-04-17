@@ -24,8 +24,8 @@ if instance_exists(Character) {
     }
     do {
         track_id -= 1;
-            if track_id &lt; ds_list_size(global.players) -1 {
-                track_id = 0;
+            if track_id &lt; 0 {
+                track_id = ds_list_size(global.players) - 1;
             }
             player = ds_list_find_value(global.players, track_id);
                 with (player) {
