@@ -14,7 +14,7 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">if(!instance_exists(InGameMenuController) &amp;&amp; !instance_exists(OptionsController) &amp;&amp; !instance_exists(ControlsController))
- &amp;&amp; !instance_exists(HUDOptionsController) {
+ &amp;&amp; !instance_exists(HUDOptionsController) &amp;&amp; !instance_exists(TTSConsole) {
     instance_create(x,y,InGameMenuController);
 }
 </argument>

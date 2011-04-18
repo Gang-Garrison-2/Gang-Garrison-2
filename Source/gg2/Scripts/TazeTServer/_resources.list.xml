@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="TTS_addcommand" type="RESOURCE"/>
+  <resource name="TTS_runcommand" type="RESOURCE"/>
+  <resource name="TTS_writetoconsole" type="RESOURCE"/>
+  <resource name="TTS_init" type="RESOURCE"/>
+  <resource name="TTS_addcommandfromfile" type="RESOURCE"/>
+  <resource name="TTS_saveclasslimits" type="RESOURCE"/>
+</resources>

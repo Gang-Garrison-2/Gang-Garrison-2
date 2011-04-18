@@ -1,5 +1,5 @@
 //auto balance 
-if global.autobalance == 1 && !instance_exists(ArenaHUD) {
+if (global.autobalance == 1 || argument0 == 42) && !instance_exists(ArenaHUD) {
     redteam = 0;
     blueteam = 0;  
     for(i=0; i<ds_list_size(global.players); i+=1) {

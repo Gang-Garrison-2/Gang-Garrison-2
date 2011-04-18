@@ -1,4 +1,4 @@
-{
+{   
     instance_create(0,0,RoomChangeObserver);
     set_little_endian_global(true);
     if file_exists("game_errors.log") file_delete("game_errors.log");
@@ -336,4 +336,5 @@ global.launchMap = "";
     
     calculateMonthAndDay();
     
+    TTS_init();
 }

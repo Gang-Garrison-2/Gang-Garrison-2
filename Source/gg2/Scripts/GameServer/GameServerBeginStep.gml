@@ -58,7 +58,7 @@ with(JoiningPlayer) {
 for(i=0; i<ds_list_size(global.players); i+=1) {
     player = ds_list_find_value(global.players, i);
     
-    if(socket_has_error(player.socket)) {
+    if(socket_has_error(player.socket)||player.kicked) {
         removePlayer(player);
         ServerPlayerLeave(i);
         i-=1;

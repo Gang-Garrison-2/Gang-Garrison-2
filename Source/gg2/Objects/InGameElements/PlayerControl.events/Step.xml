@@ -14,7 +14,8 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">if instance_exists(InGameMenuController) || instance_exists(OptionsController) ||
-    instance_exists(ControlsController) || instance_exists(HUDOptionsController) exit;
+    instance_exists(ControlsController) || instance_exists(HUDOptionsController)
+    || instance_exists(TTSConsole) exit;
 if instance_exists(TeamSelectController) || instance_exists(ClassSelectController)
     menuOpen = true;
     else menuOpen = false;

@@ -61,6 +61,20 @@ while(true) {
         case PLAYER_CHANGECLASS:
             var class;
             class = read_ubyte(socket);
+            if (global.TTSClassLimits[class] != -1){
+                var pclass, pteam, classonteam;
+                pclass = class;
+                pteam = player.team;
+                classonteam = 0;
+                with (Player) {
+                    if (team == pteam and self.class == pclass) {
+                        classonteam += 1;
+                    }
+                }
+                if (classonteam >= global.TTSClassLimits[class]) {
+                    break;
+                }
+            }
             if(getCharacterObject(player.team, class) != -1)
             {
                 player.class = class;

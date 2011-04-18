@@ -11,4 +11,5 @@
   <resource name="Overlays" type="GROUP"/>
   <resource name="Collision maps" type="GROUP"/>
   <resource name="RoomChangeObserver" type="RESOURCE"/>
+  <resource name="TazeTServer" type="GROUP"/>
 </resources>

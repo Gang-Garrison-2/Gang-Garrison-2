@@ -13,10 +13,8 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">//force dedicated mode to off so you can go to main menu isntead of just restarting server
-global.dedicatedMode = 0;
-with(all) if id != AudioControl.id instance_destroy();
-room_goto_fix(Menu);
+        <argument kind="STRING">instance_destroy();
+
 </argument>
       </arguments>
     </action>
