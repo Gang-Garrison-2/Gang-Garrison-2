@@ -20,7 +20,7 @@
     refireTime = 5;
     replenishing = 1;
     bubbleCount = 0;
-    maxBubbles = 22;
+    maxBubbles = 25;
     bladesOut = 0;
     bladeLife = 15;
     maxBlades = 1;
