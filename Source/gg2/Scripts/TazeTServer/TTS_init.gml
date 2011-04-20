@@ -52,7 +52,7 @@ TTS_addcommand("kick","
     nameneeded = argument0;
     found = false;
     with (Player) {
-        if (name==nameneeded) {
+        if (string_lower(name)==string_lower(nameneeded)) {
             kicked = true;
             TTS_writetoconsole('Kicked: '+name);
             found = true;
