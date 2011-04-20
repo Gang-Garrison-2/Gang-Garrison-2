@@ -13,9 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">healing = "";
-healed = false;
-target = -1;
+        <argument kind="STRING">target = noone;
 </argument>
       </arguments>
     </action>

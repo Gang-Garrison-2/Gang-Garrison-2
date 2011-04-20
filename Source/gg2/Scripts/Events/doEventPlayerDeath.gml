@@ -13,24 +13,36 @@ killer = argument1;
 assistant = argument2;
 damageSource = argument3;
 
-if(!instance_exists(killer)) {
-    killer = -1;
+if(!(killer and instance_exists(killer))) {
+    killer = noone;
+}
+
+if(!(assistant and instance_exists(assistant))) {
+    assistant = noone;
 }
 
 //*************************************
 //*      Scoring and Kill log
 //*************************************
  
+
+recordKillInLog(victim, killer, assistant, damageSource);
+
 victim.stats[DEATHS] += 1;
-if(killer != -1) {
-    if(damageSource == WEAPON_KNIFE || damageSource == WEAPON_BACKSTAB) {
+if(killer)
+{
+    if(damageSource == WEAPON_KNIFE || damageSource == WEAPON_BACKSTAB)
+    {
         killer.stats[STABS] += 1;
         killer.roundStats[STABS] += 1;
         killer.stats[POINTS] += 1;
         killer.roundStats[POINTS] +=1;
     }
-    if (victim.object.currentWeapon.object_index == Medigun && victim.class == CLASS_MEDIC) {
-        if (victim.object.currentWeapon.uberReady){
+    
+    if (victim.object.currentWeapon.object_index == Medigun)
+    {
+        if (victim.object.currentWeapon.uberReady)
+        {
             killer.stats[BONUS] += 1;
             killer.roundStats[BONUS] += 1;
             killer.stats[POINTS] += 1;
@@ -38,51 +50,34 @@ if(killer != -1) {
         }
     }
         
-    if (killer != victim) {
+    if (killer != victim)
+    {
         killer.stats[KILLS] += 1;
         killer.roundStats[KILLS] += 1;
         killer.stats[POINTS] += 1;
         killer.roundStats[POINTS] += 1;
-    }
-    if (assistant != -1) {
-        assistant.stats[ASSISTS] +=1;
-        assistant.roundStats[ASSISTS] += 1;
-        assistant.stats[POINTS] += .5;
-        assistant.roundStats[POINTS] += .5;
-    }
-}
-recordKillInLog(victim, killer, assistant, damageSource);
-
-if(victim.object.intel) {
-    if(killer != -1 && killer != victim) {
-        var isMe;
-        isMe = (global.myself == killer);
-        killer.stats[DEFENSES] += 1;
-        killer.roundStats[DEFENSES] += 1;
-        killer.stats[POINTS] += 1;
-        killer.roundStats[POINTS] += 1;
-        recordEventInLog(4, killer.team, killer.name, isMe);
+        if(victim.object.intel)
+        {
+            killer.stats[DEFENSES] += 1;
+            killer.roundStats[DEFENSES] += 1;
+            killer.stats[POINTS] += 1;
+            killer.roundStats[POINTS] += 1;
+            recordEventInLog(4, killer.team, killer.name, global.myself == killer);
+        }
     }
 }
 
+if (assistant)
+{
+    assistant.stats[ASSISTS] += 1;
+    assistant.roundStats[ASSISTS] += 1;
+    assistant.stats[POINTS] += .5;
+    assistant.roundStats[POINTS] += .5;
+}
 
 //SPEC
-if victim == global.myself {
-    instance_create(victim.object.x,victim.object.y,Spectator);
-}
-
-//*************************************
-//*         Deathcam
-//*************************************
-if( global.killCam == 1 && victim == global.myself && killer != -1 && killer != victim && (collision_point(victim.object.x,victim.object.y,SpawnRoom,0,0) < 0) && !(damageSource == KILL_BOX || damageSource == FRAG_BOX || damageSource == FINISHED_OFF || damageSource == FINISHED_OFF_GIB || damageSource == GENERATOR_EXPLOSION)) {
-    instance_create(0,0,DeathCam);
-    DeathCam.killedby=killer;
-    DeathCam.name=killer.name;
-    DeathCam.oldxview=view_xview[0];
-    DeathCam.oldyview=view_yview[0];
-    DeathCam.lastDamageSource=damageSource;
-    DeathCam.team = global.myself.team;
-}
+if (victim == global.myself)
+    instance_create(victim.object.x, victim.object.y, Spectator);
 
 //*************************************
 //*         Gibbing
@@ -439,10 +434,25 @@ with(victim.object) {
         }
     }
 }
+
 if global.gg_birthday {
     myHat = instance_create(victim.object.x,victim.object.y,PartyHat);
     myHat.image_index = victim.team;
 }
+
 with(victim.object) {       
     instance_destroy();
+}
+
+//*************************************
+//*         Deathcam
+//*************************************
+if( global.killCam and victim == global.myself and killer and killer != victim and !(damageSource == KILL_BOX || damageSource == FRAG_BOX || damageSource == FINISHED_OFF || damageSource == FINISHED_OFF_GIB || damageSource == GENERATOR_EXPLOSION)) {
+    instance_create(0,0,DeathCam);
+    DeathCam.killedby=killer;
+    DeathCam.name=killer.name;
+    DeathCam.oldxview=view_xview[0];
+    DeathCam.oldyview=view_yview[0];
+    DeathCam.lastDamageSource=damageSource;
+    DeathCam.team = global.myself.team;
 }

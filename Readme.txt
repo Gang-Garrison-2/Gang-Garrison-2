@@ -68,7 +68,7 @@ Meet The Runner:
 	excels in recovering objectives!
 	He can double jump in mid-air!
    Hit Points: 100
-   Weapon: Scattergun (8 damage per shot, shoots 6 bullets)
+   Weapon: Scattergun
    Special abilities:
            Double-Jump - Jump again while in the air!
 
@@ -77,20 +77,20 @@ Meet The Firebug:
 	Push enemies and projectiles
 	away with a burst of air!
    Hit Points: 120
-   Weapon: Flamethrower (90 damage per second)
+   Weapon: Flamethrower
    Special abilities: 
            Airblast - Right-click to blow away enemies, reflect rockets and mines!
 		      Airblast can also blow afterburn off your teammates!
 	   Afterburn - Even touching your enemy with fire will make him feel the heat!
-		       Continuous damage over time that's only worse when they move!
-		       Firebug is immune to afterburn!
+		       Continuous damage over time! Firebug is immune to afterburn!
+	   Flare - Use your Airblast while shooting to create a fireball!
 
-Meet The Rocket Man:
+Meet The Rocketman:
 	Strong yet graceful, he can
 	launch himself skyward with his
 	rockets as well as do damage!
    Hit Points: 175
-   Weapon: Rocket Launcher (55 damage per shot)
+   Weapon: Rocket Launcher
    Special abilities: 
            Rocket-Jump - Fire at your feet when you jump to reach great heights!
 
@@ -99,68 +99,68 @@ Meet The Overweight:
 	a heavy weapon that will shred
 	enemies! He can sure eat, too!
    Hit Points: 200
-   Weapon: Chaingun (8 damage per shot, 120 damage per second)
+   Weapon: Chaingun
    Special abilities: 
-           Manvich - Right-Click to eat a tasty Manvich to fill your belly and 50 HP! 
-             You get infinite Manviches so make sure you eat up!
+           Manvich - Right-Click to eat a tasty Manvich to fill your belly and recover HP! 
+                     You get infinite Manviches so make sure you eat up!
 
 Meet The Detonator:
 	A master of explosives, the
 	Detonator can shoot sticky mines
 	to any surface and set them off!
    Hit Points: 120
-   Weapon: Minebomb (25-50 damage per mine)
+   Weapon: Minebomb
    Special abilities: 
-           Detonate Mines - Right-click to detonate up to eight mines at once!
+           Detonate Mines - Right-click to detonate all of your mines at once!
 
 Meet The Healer:
 	His all-purpose healing gun can
 	both heal a teammate from afar
 	and rain syringes on foes!
    Hit Points: 120
-   Weapon: Needlegun (3 damage per shot)
+   Weapon: Needlegun
    Special abilities: 
 	   Healing - Heal a teammate with a beam by holding the Left Click! 
 	   Superburst - Charge your Superburst then Right-Click while holding 
-			Left-Click to make a team-mate invincible!
+			Left-Click to make a team-mate invincible and get infinite ammo!
 	   Needlegun - Hold right click to shoot a gun of your own!
+           Passive Regeneration - You recover health slowly over time!
 
 Meet The Constructor:
 	A brilliant inventor, the 
 	Constructor can build autoguns 
         that shoot anything they see!
    Hit Points: 120
-   Weapon: Shotgun (6 damage per shot, shoots 4 bullets)
+   Weapon: Shotgun
    Special abilities: 
-	   Build/Destroy an Autogun - Right-click to open the Build menu, and 
-			 	      build/destroy an autogun! Each autogun
-				      costs 100 Nuts and Bolts to make.
+	   Build Tool - Right-click to open the Build menu and build or destroy
+			an autogun! Each autogun costs 100 Nuts and Bolts to make.
+           Passive Regeneration - You recover Nuts and Bolts slowly over time!
+           
 
 Meet The Infiltrator:
 	A master assassin who can slip
 	into combat unseen and deliver
 	a fatal strike with his knife!
    Hit Points: 100
-   Weapon: Revolver (25 damage per shot)
+   Weapon: Revolver
    Special abilities: 
 	   Cloak - Right-click to become invisible to foes! Right-click again to come 
 		   out of cloak!
 	   Stab - Left-click while invisible to stab! A successful stab is guaranteed 
 		  to kill!	
 	   Passive Invisibility - Even if you aren't cloaked, enemies can't see you 
-				  if they aren't looking directly at you!
+				  as long as they aren't looking directly at you!
 
 Meet The Rifleman:
 	Armed with his trusty rifle
 	and dead aim, his zoom scope
 	allows him to attack from afar.
    Hit Points: 120
-   Weapon: Sniper Rifle (35 unscoped, 35-85 when scoped)
-   Special abilities: 
-	   Scope-In - Right-Click to scope in and see more of the battlefield than 
-		      anyone else! Beware, the Rifleman doesn't like moving when 
-		      he's scoped in!
-           Charge - The longer you stayed scoped, the more damage you do!
+   Weapon: Sniper Rifle
+   Special abilities:
+           Charge - Use Right-Click to toggle between scoping in and out!
+                    While scoped in, damage will increase with time!
 
 Meet The Secret Character:
 	There is totally no secret
@@ -176,11 +176,12 @@ lobby will show the current map, number of players, and IP of servers running.
 Alternatively, you can manually join a server if you know their IP and their
 forwarded port.
 
-There are four gameplay modes: 
+There are five gameplay modes: 
 - Capture the Flag
 - Control Point
 - Arena
 - Generator
+- King of the Hill
 
 Choose a team, RED or BLU, or select AutoSelect and let us choose your team for you. 
 Press N to change your team, or to Spectate and watch the action! Keep in mind you 
@@ -195,7 +196,8 @@ rifleman) have ammunition that replenishes over time. Certain classes will also
 have HUDs unique to them. Depending on the game mode, the HUD will display the 
 locations and status of the intels (Capture the Flag), the status of the Control 
 Points (Control Point), the number of players left and the status of the Arena 
-Point (Arena), or the health of the Generators (Generator).
+Point (Arena), the health of the Generators (Generator), or the team-specific
+countdown timers and the status of the KotH Point (King of the Hill).
 
 The scoreboard shows the current score of every player. It also displays the 
 name of the current server and map. 
@@ -220,6 +222,11 @@ Generator:
 An original mode exclusive to Gang Garrison 2. Both teams have a special generator which 
 are the objectives of the map. A team must keep their generator running and destroy the 
 enemy generator to win.
+
+King of the Hill:
+There exists a lone control point in the center of the map. Both teams compete to take
+control to start their countdown. First team to hold onto the point for 3 full minutes
+is victorious.
 
 ----------------------------------------------------------
 
@@ -288,12 +295,26 @@ by agh
 In the first ever generator map for Gang Garrison, RED and BLU must destroy the others'
 power generator while keeping their own running!
 
+12. koth_valley
+by agh
+An abandoned spytech base conveniently concealed within a mountain range becomes a hotspot for 
+waging battle. RED and BLU butt heads to take control over the technology left behind.
 
+13. koth_corinth
+by BassieEnAdrian and McGenio
+An arms carrier is leaving a major port, but both RED and BLU have plans to seize the weapons.
+Duke it out on the shipyard to discover who will obtain the goods.
+
+14. koth_harvest
+by Wherewolf
+A community-made arena map gone official! RED and BLU fight for control of an abandoned farmyard. 
+It is unknown what significance this location holds to both factions, but fear keeps invesigators 
+from delving any further.
 
 B. Using Custom Maps:
 
 To run a server using custom maps, make a folder called "Maps" in the same 
-path as Gang Garrison 2.1.exe and place the compiled map file (it will have 
+path as Gang Garrison 2.exe and place the compiled map file (it will have 
 a ".png" extension) inside. Create a text file with any name, like "maplist.txt", and 
 open gg2.ini. Next to "MapRotation=" under [Server], type the name of this file.
 
@@ -355,9 +376,9 @@ Runner:
 - Keep some ammo saved up in case you need to fight an infiltrator!
 
 Firebug:
-- Use your airblast to push foes into a bad spot!
-- Always extinguish your teammates with the airblast if they're on fire!
-- Put a foe on fire and let the afterburn take care of the rest!
+- Use your airblast to push your enemies around!
+- Extinguish your teammates with the airblast if they're on fire!
+- Set a foe on fire and let the afterburn take care of the rest!
 
 Rocketman:
 - Your rockets can go through teammates!
@@ -379,10 +400,9 @@ Detonator:
   to propel yourself like a Rocketman!
 
 Healer:
-- You heal and charge superburst twice as fast on teammates low on health!
-- You slowly regenerate your health!
-- Quickly use your medigun to heal off afterburn!
-- Use your superburst to get past a tight chokepoint!
+- You slowly regenerate your health! Dodge well to maximize it!
+- Use your medigun to rapidly heal off afterburn!
+- Use your superburst to get past tight chokepoints!
 
 Constructor:
 - You regenerate Nuts and Bolts slowly, but picking up metal from a
@@ -415,36 +435,51 @@ ganggarrison.com/forums
    
 Gang Garrison 2 
 
-Created By
+Created By the FAUCET Team
 
+Founders:
 mrfredman, MedO, Synnah
 
-The FAUCET Team
- 
-Cube7 aka Chris P. Bacon
-Fishmatt
-Andrew "cspotcode" Bradley
-Vaati
+Programmers:
+MedO, Cube7 aka Chris P. Bacon, Andrew "cspotcode" Bradley, Vaati, Taimat, Findude, Juicebox360, Jebus_Chris,
+Leiche, Xeyk, pach, Austin "Psychopath" Benz, L, technoviking, AJF, Alexander "Wareya" Nadeau, Vindicator,
+NAGN and RebelINS
 
-Taimat, Findude, Juicebox360, Jebus_Chris, Scoot, Leiche, Xeyk, Psychopath, BassieEnAdriaan, L, pach, and technoviking
+Artists:
+mrfredman, Fishmatt, BassieEnAdriaan, Timohtep, Elkondo and Waterfall
 
-map art by: 
-fishmatt, vaati, king metroid, Taters, agh, Faust, and Tarzan
+Sound & Music:
+Synnah, Scoot, and Elkondo
+
+Map Creators: 
+fishmatt, vaati, king metroid, Taters, agh, Faust, Tarzan, BassieEnAdriaan, McGenio, Wherewolf and Shawnachu
 
 With additional art and inspiration provided by the incredible Gang Garrison community!
 
 License:
-You may use this game under the GNU GPL, version 3, which is included and visible 
-in the game by pressing F1. Static or dynamic linking with other software (the Game 
-Maker runtime and the 39dll extension) without applying the GPL to it is allowed though.
+Copyright (C) 2008-2011 Faucet Software
+http://www.ganggarrison.com
+
+This program is free software; 
+you can redistribute it and/or modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 3 of the License, or (at your option)
+any later version.
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; 
+without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+See the GNU General Public License for more details.
+You should have received a copy of the GNU General Public License along with this program; if not,
+see <http://www.gnu.org/licenses>.
+
+Additional permission under GNU GPL version 3 section 7
+If you modify this Program, or any covered work, by linking or combining it with the Game Maker runtime library, 
+the 39dll library/extension, Hobbel's Download Manager DLL, or modified versions of these libraries,
+the licensors of this Program grant you additional permission to convey the resulting work.
 
 This is a demake of Team Fortress 2 by Valve Software. All likenesses and similarities 
 are intended as a respectful homage.
 
-This game uses the 39dll networking extension for Game Maker. 39dll was created by 39ster 
-and wrapped into an extension by the_doominator.
-You can find more information on 39dll at http://gmc.yoyogames.com/index.php?showtopic=90437.
-For information on the 39dll extension, visit http://gmc.yoyogames.com/index.php?showtopic=300449.
+This game uses the Faucet Networking extension by MedO, which is available under the terms of the ISC license.
+You can find more information on Faucet Networking at http://gmc.yoyogames.com/index.php?showtopic=498062.
 
 This game uses the Download Manager DLL, created by Hobbel.  It was wrapped into an extension by cspotcode.
 You can find more information on the Download Manager DLL at http://www.hobbl.com/gmdlls/downloadmanager
@@ -452,4 +487,6 @@ You can find more information on the Download Manager DLL at http://www.hobbl.co
 Readme Changelog
 2/7/09 - fishmatt - cleaned everything up for 2.0
 5/3/09 - mrfredman - updated things for 2.1
-3/20/01 - technoviking - updated things for 2.2
+3/20/10 - technoviking - updated things for 2.2
+3/16/11 - Psychopath - updated things for 2.3
+3/31/11 - Medo - some more updating

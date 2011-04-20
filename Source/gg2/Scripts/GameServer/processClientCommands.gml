@@ -72,8 +72,8 @@ while(true) {
                         {
                             if (lastDamageDealer == -1 || lastDamageDealer == player)
                             {
-                                sendEventPlayerDeath(player, player, -1, BID_FAREWELL);
-                                doEventPlayerDeath(player, player, -1, BID_FAREWELL);
+                                sendEventPlayerDeath(player, player, noone, BID_FAREWELL);
+                                doEventPlayerDeath(player, player, noone, BID_FAREWELL);
                             }
                             else
                             {
@@ -126,8 +126,8 @@ while(true) {
                         {
                             if (lastDamageDealer == -1 || lastDamageDealer == player)
                             {
-                                sendEventPlayerDeath(player, player, -1, BID_FAREWELL);
-                                doEventPlayerDeath(player, player, -1, BID_FAREWELL);
+                                sendEventPlayerDeath(player, player, noone, BID_FAREWELL);
+                                doEventPlayerDeath(player, player, noone, BID_FAREWELL);
                             }
                             else
                             {

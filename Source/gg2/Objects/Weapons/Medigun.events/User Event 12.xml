@@ -13,17 +13,12 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">{
-    write_ubyte(global.serializeBuffer, ammoCount);
-    write_ushort(global.serializeBuffer, healing);
-    if(healing) {
-        if(healTarget != -1 and instance_exists(healTarget)) {
-            write_ubyte(global.serializeBuffer, ds_list_find_index(global.players,healTarget));
-        } else {
-            write_ubyte(global.serializeBuffer, 200);
-        }
-    }
-}
+        <argument kind="STRING">write_ubyte(global.serializeBuffer, ammoCount);
+
+if(instance_exists(healTarget))
+    write_ubyte(global.serializeBuffer, ds_list_find_index(global.players, healTarget));
+else
+    write_ubyte(global.serializeBuffer, 255);
 </argument>
       </arguments>
     </action>

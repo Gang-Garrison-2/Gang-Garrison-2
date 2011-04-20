@@ -30,7 +30,8 @@ if(ubering) {
         uberCharge = 0;
         ubering = false;
     }
-}</argument>
+}
+</argument>
       </arguments>
     </action>
   </actions>

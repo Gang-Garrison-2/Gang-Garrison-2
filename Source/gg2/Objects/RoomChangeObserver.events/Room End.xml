@@ -13,14 +13,8 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if(not transitioning and not room_persistent) {
-    with(all) {
-        if(not persistent) {
-            instance_destroy();
-        }
-    }
-}
-
+        <argument kind="STRING">// Ensure that we notice there's a room change in progress
+// even if room_goto is used directly
 transitioning = true;
 </argument>
       </arguments>

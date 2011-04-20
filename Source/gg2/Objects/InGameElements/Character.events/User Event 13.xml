@@ -32,7 +32,7 @@
     }
     var temp, newIntel;
     if(global.updateType == QUICK_UPDATE) or (global.updateType == FULL_UPDATE) {
-        receiveCompleteMessage(global.serverSocket,8,global.deserializeBuffer);
+        receiveCompleteMessage(global.serverSocket,9,global.deserializeBuffer);
         x = read_ushort(global.deserializeBuffer)/5;
         y = read_ushort(global.deserializeBuffer)/5;
         hspeed = read_byte(global.deserializeBuffer)/5;
@@ -40,6 +40,7 @@
         xprevious = x;
         yprevious = y;
         hp = read_ubyte(global.deserializeBuffer);
+        currentWeapon.ammoCount = read_ubyte(global.deserializeBuffer);
         
         temp = read_ubyte(global.deserializeBuffer);
         cloak = (temp &amp; $01 != 0);

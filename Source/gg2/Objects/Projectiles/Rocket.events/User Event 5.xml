@@ -14,16 +14,15 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">{  
-    if(characterHit.id != ownerPlayer.object) {
-        if(exploded == true) {
+    if(characterHit.id != ownerPlayer.object)
+    {
+        if(exploded)
             exit;
-        } else {
+        else
             exploded = true;
-        }
         if(characterHit != -1) {
             if(characterHit.team != team || characterHit.id == ownerPlayer.object  &amp;&amp; characterHit.ubered == 0 ) {
                 characterHit.hp -= hitDamage;
-//new stuff     
                 if object_is_ancestor(characterHit.object_index, Character) {
                     if (characterHit.lastDamageDealer != ownerPlayer &amp;&amp; characterHit.lastDamageDealer != characterHit.player){
                         characterHit.secondToLastDamageDealer = characterHit.lastDamageDealer;
@@ -31,7 +30,6 @@
                     }
                     characterHit.alarm[3] = ASSIST_TIME;
                 }
-//end new stuff
                 characterHit.lastDamageDealer = ownerPlayer;
                 characterHit.lastDamageSource = weapon;
             }
@@ -40,14 +38,18 @@
         playsound(x,y,ExplosionSnd);
         
         with (Character) {
-            if (distance_to_object(other) &lt; other.blastRadius){
-                //if(other.team != team or id==other.ownerPlayer.object) {
-                    motion_add(point_direction(other.x,other.y,x,y),other.knockback-other.knockback*(distance_to_object(other)/other.blastRadius));
-                //}
-                if( ubered == 0) and (hp &gt; 0){
-                    if (other.team != team) or (id==other.ownerPlayer.object) {
+            if (distance_to_object(other) &lt; other.blastRadius and !(team == other.team and id != other.ownerPlayer.object and place_meeting(x, y+1, Obstacle))){
+                var rdir, vectorfactor;
+                rdir = point_direction(other.x,other.y,x,y);
+                vectorfactor = point_distance(0, 0, power(sin(degtorad(rdir)), 2), power(cos(degtorad(rdir)), 2));
+                motion_add(rdir, min(15, other.knockback-other.knockback*(distance_to_object(other)/other.blastRadius)) * vectorfactor);
+                if(!ubered and hp &gt; 0)
+                {
+                    if (other.team != team) or (id==other.ownerPlayer.object)
+                    {
                         hp -= other.explosionDamage*(1-(distance_to_object(other)/other.blastRadius));
-                        if id==other.ownerPlayer.object &amp;&amp; lastDamageDealer != -1 &amp;&amp; lastDamageDealer != other.ownerPlayer{
+                        if(id == other.ownerPlayer.object and lastDamageDealer != -1 and lastDamageDealer != other.ownerPlayer)
+                        {
                             lastDamageSource = FINISHED_OFF_GIB;
                         }
                         else 
@@ -63,12 +65,9 @@
                         }
                         cloakAlpha = min(cloakAlpha + 0.1, 1);
                     }
-                    //lastDamageDealer = other.ownerPlayer;
-                    //lastDamageSource = other.weapon;
                     if id==other.ownerPlayer.object and other.team == team {
                         moveStatus = 1;
                         speed*=1.06;
-                        hp+=(other.explosionDamage*(1-(distance_to_object(other)/other.blastRadius)))/3;
                     }else if other.team == team and (id!=other.ownerPlayer.object){
                         moveStatus = 4;
                             if point_direction(x,y+5,other.x,other.y-5)&gt;210 and point_direction(x,y,other.x,other.y)&lt;330 {
@@ -114,17 +113,6 @@
                 }
             }
         }
-            
-        /*with (Rocket) {
-          if (distance_to_object(other) &lt; other.blastRadius){
-            if(distance_to_object(other) &lt; other.blastRadius*0.66 and (other.team != team or other.ownerPlayer == ownerPlayer)) {
-                characterHit = -1;
-                event_user(5);
-            } else {
-                motion_add(point_direction(other.x,other.y,x,y),12-12*(distance_to_object(other)/other.blastRadius));
-            }
-          }
-        }*/
         
         with (DeadGuy) {
           if (distance_to_object(other) &lt; other.blastRadius){
