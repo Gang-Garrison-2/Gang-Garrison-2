@@ -73,11 +73,8 @@ if(!taunting and !omnomnomnom)
        
     if((keyState | pressedKeys) &amp; $10)
         with(currentWeapon) event_user(1);
-    else if(releasedKeys &amp; $10)
-        with(currentWeapon) event_user(3);
-    
 }
-
+        
 // Right click
 if(((keyState | pressedKeys) &amp; $08) and (!taunting or player.class == CLASS_DEMOMAN) and !omnomnomnom)
     with(currentWeapon)
@@ -95,11 +92,11 @@ case 1: //If I am rocketing myself
     frictionFactor = 1;
     break;
 case 2: //If I am rocketing an enemy
-    controlFactor = 0.3;
+    controlFactor = 0.45;
     frictionFactor = 1.05;
     break;
 case 3: //Airblast
-    controlFactor = 0.2;
+    controlFactor = 0.3;
     frictionFactor = 1;
     break;
 case 4: //If I am rocketing a teamate/mining someone (more control than 2)

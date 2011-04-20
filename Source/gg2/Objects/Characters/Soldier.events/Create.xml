@@ -28,7 +28,7 @@
       <arguments>
         <argument kind="STRING">{
     runPower = .9;
-    maxHp = 175;
+    maxHp = 160;
     weapons[0] = Rocketlauncher;
     tauntsprite = SoldierTauntS;
 }

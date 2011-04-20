@@ -25,9 +25,9 @@
     draw_set_alpha(.5);
     
     drawy = yoffset+450;
-    if instance_exists(HealingHud) {
-        if HealingHud.healed == true drawy = yoffset+490;
-    }
+    if(instance_exists(HealingHud))
+        if(instance_exists(HealingHud.target))
+            drawy = yoffset+490;
     
     draw_sprite_stretched_ext(sprite_index, global.myself.team == TEAM_BLUE, 
         xoffset+mid-(HUDwidth/2), drawy, HUDwidth, 40, c_white, .5);

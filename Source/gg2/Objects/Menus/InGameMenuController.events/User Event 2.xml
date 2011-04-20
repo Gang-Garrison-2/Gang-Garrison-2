@@ -14,7 +14,6 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">instance_destroy();
-
 </argument>
       </arguments>
     </action>

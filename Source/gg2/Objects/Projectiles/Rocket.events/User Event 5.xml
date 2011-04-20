@@ -14,12 +14,12 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">{  
-    if(characterHit.id != ownerPlayer.object) {
-        if(exploded == true) {
+    if(characterHit.id != ownerPlayer.object)
+    {
+        if(exploded)
             exit;
-        } else {
+        else
             exploded = true;
-        }
         if(characterHit != -1) {
             if(characterHit.team != team || characterHit.id == ownerPlayer.object  &amp;&amp; characterHit.ubered == 0 ) {
                 characterHit.hp -= hitDamage;
@@ -38,12 +38,18 @@
         playsound(x,y,ExplosionSnd);
         
         with (Character) {
-            if (distance_to_object(other) &lt; other.blastRadius){
-                motion_add(point_direction(other.x,other.y,x,y),other.knockback-other.knockback*(distance_to_object(other)/other.blastRadius));
-                if( ubered == 0) and (hp &gt; 0){
-                    if (other.team != team) or (id==other.ownerPlayer.object) {
+            if (distance_to_object(other) &lt; other.blastRadius and !(team == other.team and id != other.ownerPlayer.object and place_meeting(x, y+1, Obstacle))){
+                var rdir, vectorfactor;
+                rdir = point_direction(other.x,other.y,x,y);
+                vectorfactor = point_distance(0, 0, power(sin(degtorad(rdir)), 2), power(cos(degtorad(rdir)), 2));
+                motion_add(rdir, min(15, other.knockback-other.knockback*(distance_to_object(other)/other.blastRadius)) * vectorfactor);
+                if(!ubered and hp &gt; 0)
+                {
+                    if (other.team != team) or (id==other.ownerPlayer.object)
+                    {
                         hp -= other.explosionDamage*(1-(distance_to_object(other)/other.blastRadius));
-                        if id==other.ownerPlayer.object &amp;&amp; lastDamageDealer != -1 &amp;&amp; lastDamageDealer != other.ownerPlayer{
+                        if(id == other.ownerPlayer.object and lastDamageDealer != -1 and lastDamageDealer != other.ownerPlayer)
+                        {
                             lastDamageSource = FINISHED_OFF_GIB;
                         }
                         else 
