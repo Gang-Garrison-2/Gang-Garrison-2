@@ -44,10 +44,7 @@ ini_write_real("Classlimits","Infiltrator",global.TTSClassLimits[global.TTSClass
 ini_write_real("Classlimits","Rifleman",global.TTSClassLimits[global.TTSClassLimitsMap[9]]);
 ini_close();
 
-// Load Plugins
-var plugin, first;
-first = true;
-
+// Add built-in commands
 TTS_addcommand("kick","
     var found, nameneeded;
     nameneeded = argument0;
@@ -188,6 +185,22 @@ TTS_addcommand("changenameto","
         TTS_writetoconsole('You need to have selected a player with changename');
     }
 ");
+
+TTS_addcommand("loadvinplugin","
+    if (file_exists('Plugins/'+argument0+'.txt')){
+        TTS_writetoconsole('Loading Vindicator`s mod (compatible) plugin '+argument0+'...');
+        with (instance_create(0,0,PluginSandbox)) {
+            execute_file('Plugins/'+argument0+'.txt');
+            instance_destroy();
+        }
+    }else{
+        TTS_writetoconsole('Could not find plugin: '+argument0);
+    }
+");
+
+// Load Plugins
+var plugin, first;
+first = true;
     
 TTS_writetoconsole("Loading plugins...");
 while (true) {
