@@ -83,6 +83,7 @@ Meet The Firebug:
 		      Airblast can also blow afterburn off your teammates!
 	   Afterburn - Even touching your enemy with fire will make him feel the heat!
 		       Continuous damage over time! Firebug is immune to afterburn!
+	   Flare - Use your Airblast while shooting to create a fireball!
 
 Meet The Rocketman:
 	Strong yet graceful, he can
@@ -441,29 +442,43 @@ mrfredman, MedO, Synnah
 
 Programmers:
 MedO, Cube7 aka Chris P. Bacon, Andrew "cspotcode" Bradley, Vaati, Taimat, Findude, Juicebox360, Jebus_Chris,
-Leiche, Xeyk, pach, Austin "Psychopath" Benz, L, technoviking, AJF, Alexander "Wareya" Nadeau, Vindicator, and NAGN
+Leiche, Xeyk, pach, Austin "Psychopath" Benz, L, technoviking, AJF, Alexander "Wareya" Nadeau, Vindicator,
+NAGN and RebelINS
 
 Artists:
-mrfredman, Fishmatt, BassieEnAdriaan, Timohtep, and Elkondo
+mrfredman, Fishmatt, BassieEnAdriaan, Timohtep, Elkondo and Waterfall
 
 Sound & Music:
 Synnah, Scoot, and Elkondo
 
 Map Creators: 
-fishmatt, vaati, king metroid, Taters, agh, Faust, Tarzan, BassieEnAdriaan, McGenio, and Wherewolf
+fishmatt, vaati, king metroid, Taters, agh, Faust, Tarzan, BassieEnAdriaan, McGenio, Wherewolf and Shawnachu
 
 With additional art and inspiration provided by the incredible Gang Garrison community!
 
 License:
-You may use this game under the GNU GPL, version 3, which is included and visible 
-in the game by pressing F1. Static or dynamic linking with other software (the Game 
-Maker runtime and the 39dll extension) without applying the GPL to it is allowed though.
+Copyright (C) 2008-2011 Faucet Software
+http://www.ganggarrison.com
+
+This program is free software; 
+you can redistribute it and/or modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 3 of the License, or (at your option)
+any later version.
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; 
+without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+See the GNU General Public License for more details.
+You should have received a copy of the GNU General Public License along with this program; if not,
+see <http://www.gnu.org/licenses>.
+
+Additional permission under GNU GPL version 3 section 7
+If you modify this Program, or any covered work, by linking or combining it with the Game Maker runtime library, 
+the 39dll library/extension, Hobbel's Download Manager DLL, or modified versions of these libraries,
+the licensors of this Program grant you additional permission to convey the resulting work.
 
 This is a demake of Team Fortress 2 by Valve Software. All likenesses and similarities 
 are intended as a respectful homage.
 
-This game uses the Faucet Networking extension for Game Maker. Faucet Networking was
-created by MedO and is available under the terms of the ISC license.
+This game uses the Faucet Networking extension by MedO, which is available under the terms of the ISC license.
 You can find more information on Faucet Networking at http://gmc.yoyogames.com/index.php?showtopic=498062.
 
 This game uses the Download Manager DLL, created by Hobbel.  It was wrapped into an extension by cspotcode.

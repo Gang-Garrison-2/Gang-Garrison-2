@@ -17,9 +17,9 @@
     xoffset = -7;
     yoffset = 0;
     refireTime = 3;
-    healTarget = -1;
+    healTarget = noone;
+    healedThisStep = false;
     healAmmount = 1;
-    healing=false;
     hphealed = 0;
     maxHealDistance = 300;
     ubering = false;

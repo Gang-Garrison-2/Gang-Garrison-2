@@ -16,5 +16,13 @@ if(not instance_exists(RoomChangeObserver)) {
 if(RoomChangeObserver.transitioning) {
     RoomChangeObserver.nextRoom = argument0;
 } else {
+    if(not room_persistent) {
+        with(all) {
+            if(not persistent) {
+                instance_destroy();
+            }
+        }
+    }
+    RoomChangeObserver.transitioning = true;
     room_goto(argument0);
 }

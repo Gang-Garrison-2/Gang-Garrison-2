@@ -14,10 +14,35 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">{
-    if(healTarget != -1 and instance_exists(healTarget)) {
+    if(!instance_exists(healTarget) and readyToShoot) {
+        var bestTarget, bestTargetDist;
+        bestTarget=noone;
+        bestTargetDist=maxHealDistance;
+
+        with(Character) {
+            if(id != other.owner and team == other.owner.team) {
+                if(point_distance(x,y,other.x,other.y)&lt;=bestTargetDist) {
+                    if(collision_line(other.x, other.y, other.x+lengthdir_x(other.maxHealDistance, other.owner.aimDirection), other.y+lengthdir_y(other.maxHealDistance, other.owner.aimDirection), id, true, false)) {
+                        if(!collision_line(other.x, other.y, x, y, Obstacle, true, true)) {
+                            bestTargetDist = point_distance(x,y,other.x,other.y);
+                            bestTarget = player;
+                        }
+                    }
+                }
+            }
+        }
+
+        healTarget = bestTarget;
+        readyToShoot=false;
+        alarm[0]=1;
+    }
+    
+    if(instance_exists(healTarget)) {
         if(healTarget.object != -1) {
             if(point_distance(x,y,healTarget.object.x, healTarget.object.y)&lt;=maxHealDistance) {
                 if(collision_line(x,y, healTarget.object.x, healTarget.object.y, Obstacle, true, true)&lt;0) {
+                    healedThisStep = true;
+                    
                     if (healTarget.object.healer == -1)
                         healTarget.object.healer = ownerPlayer;
                     if (healTarget.object.burnDuration &gt; 0)
@@ -62,7 +87,7 @@
                         ownerPlayer.roundStats[POINTS] += 1;
                         hphealed -= HP_PER_POINT;
                     }
-                    healing=true;
+
                     if(alarm[3]&lt;=0) {
                         loopsoundstart(x,y,MedigunSnd);
                     } else {
@@ -71,43 +96,14 @@
                     alarm[3]=2;
                 } else {
                     healTarget.object.healer = -1;
-                    healTarget = -1;
-                    healing = false;
+                    healTarget = noone;
                 }
             } else {
                 healTarget.object.healer = -1;
-                healTarget = -1;
-                healing = false;
+                healTarget = noone;
             }
         } else {
-            healTarget.object.healer = -1;
-            healTarget = -1;
-            healing = false;
-        }
-    } else {
-        if(readyToShoot) {
-            var bestTarget, bestTargetDist;
-            bestTarget=-1;
-            bestTargetDist=maxHealDistance;
-    
-            with(Player) {
-                if(id != other.ownerPlayer and team == other.owner.team and object != -1) {
-                    if(collision_line(other.x, other.y, other.x+lengthdir_x(other.maxHealDistance, other.owner.aimDirection), other.y+lengthdir_y(other.maxHealDistance, other.owner.aimDirection), object, true, true)) {
-                        if(point_distance(object.x,object.y,other.x,other.y)&lt;=bestTargetDist) {
-                            bestTargetDist = point_distance(object.x,object.y,other.x,other.y);
-                            bestTarget = id;
-                        }
-                    } 
-                }
-            }
-    
-            if(bestTarget != -1) {
-                healTarget = bestTarget;
-            } else {
-                healing = false;
-            }
-            readyToShoot=false;
-            alarm[0]=1;
+            healTarget = noone;
         }
     }
 }

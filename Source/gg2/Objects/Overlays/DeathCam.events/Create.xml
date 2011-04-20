@@ -14,16 +14,9 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">cursor_sprite = -1;
-alarm[0]=60;
-if(global.Server_Respawntime &gt; 0) {
-    if(global.Server_Respawntime &lt;= 150) {
-        alarm[2]=global.Server_Respawntime;
-    } else {
-        alarm[2]=150;
-    }
-} else {
-    alarm[2]=1;
-}
+alarm[0] = 60;
+alarm[2] = max(1, min(150, global.myself.alarm[5]));
+
 zoom=1;
 zooming=false;
 killmessage = "";

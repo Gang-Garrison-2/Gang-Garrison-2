@@ -89,7 +89,7 @@ do {
             break;
                                    
         case PLAYER_DEATH:
-            var causeOfDeath;
+            var causeOfDeath, assistantPlayerID, assistantPlayer;
             receiveCompleteMessage(global.serverSocket,4,global.tempBuffer);
             playerID = read_ubyte(global.tempBuffer);
             otherPlayerID = read_ubyte(global.tempBuffer);
@@ -97,17 +97,16 @@ do {
             causeOfDeath = read_ubyte(global.tempBuffer);
                   
             player = ds_list_find_value(global.players, playerID);
-            if(otherPlayerID == 255) {
-                doEventPlayerDeath(player, -1, -1, causeOfDeath);
-            } else {
+            
+            otherPlayer = noone;
+            if(otherPlayerID != 255)
                 otherPlayer = ds_list_find_value(global.players, otherPlayerID);
-                if (assistantPlayerID == 255) {
-                    doEventPlayerDeath(player, otherPlayer, -1, causeOfDeath);
-                } else {
-                    assistantPlayer = ds_list_find_value(global.players, assistantPlayerID);
-                    doEventPlayerDeath(player, otherPlayer, assistantPlayer, causeOfDeath);
-                }
-            }                  
+            
+            assistantPlayer = noone;
+            if(assistantPlayerID != 255)
+                assistantPlayer = ds_list_find_value(global.players, assistantPlayerID);
+            
+            doEventPlayerDeath(player, otherPlayer, assistantPlayer, causeOfDeath);
             break;
              
         case BALANCE:

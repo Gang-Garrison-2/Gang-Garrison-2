@@ -23,16 +23,23 @@
     playsound(x,y,ExplosionSnd);
     
     with (Character) {
-        if (distance_to_object(other) &lt; other.blastRadius){
-            motion_add(point_direction(other.x,other.y,x,y),10-10*(distance_to_object(other)/other.blastRadius));
-            if(other.team != team or id==other.ownerPlayer.object) &amp;&amp; ubered == 0 &amp;&amp; hp &gt; 0 {
+        if (distance_to_object(other) &lt; other.blastRadius and !(team == other.team and id != other.ownerPlayer.object and place_meeting(x, y+1, Obstacle)))
+        {
+            var rdir, vectorfactor;
+            rdir = point_direction(other.x,other.y,x,y);
+            vectorfactor = point_distance(0, 0, power(sin(degtorad(rdir)), 2), power(cos(degtorad(rdir)), 2));
+            motion_add(rdir, min(15, 10-10*(distance_to_object(other)/other.blastRadius)) * vectorfactor);
+            if(other.team != team or id==other.ownerPlayer.object) &amp;&amp; !ubered and hp &gt; 0
+            {
                 hp -= other.explosionDamage*(1-(distance_to_object(other)/other.blastRadius));
-                if id==other.ownerPlayer.object &amp;&amp; lastDamageDealer != -1 &amp;&amp; lastDamageDealer != other.ownerPlayer &amp;&amp; other.reflector == noone{
+                if (id == other.ownerPlayer.object and lastDamageDealer != -1 and lastDamageDealer != other.ownerPlayer and other.reflector == noone)
+                {
                     lastDamageSource = FINISHED_OFF_GIB;
                 }
                 else 
                 {
-                    if (lastDamageDealer != other.ownerPlayer and lastDamageDealer != player and other.reflector != lastDamageDealer){
+                    if (lastDamageDealer != other.ownerPlayer and lastDamageDealer != player and other.reflector != lastDamageDealer)
+                    {
                         secondToLastDamageDealer = lastDamageDealer;
                         alarm[4] = alarm[3]
                     }
@@ -40,25 +47,32 @@
                         alarm[3] = ASSIST_TIME;
                     lastDamageDealer = other.ownerPlayer;
                     lastDamageSource = other.weapon;
-                    if (id==other.ownerPlayer.object and other.reflector != noone) {
+                    if (id==other.ownerPlayer.object and other.reflector != noone)
+                    {
                         lastDamageDealer = other.reflector;
                         lastDamageSource = WEAPON_REFLECTED_STICKY;
                     }
                 }
-                if(global.gibLevel &gt; 0){
-                repeat(3) {
-                    var blood;
-                    blood = instance_create(x,y,Blood);
-                    blood.direction = point_direction(other.x,other.y,x,y)-180;}
+                if(global.gibLevel &gt; 0)
+                {
+                    repeat(3)
+                    {
+                        var blood;
+                        blood = instance_create(x,y,Blood);
+                        blood.direction = point_direction(other.x,other.y,x,y)-180;
+                    }
                 }
-                if id==other.ownerPlayer.object and other.team == team {
+                if (id==other.ownerPlayer.object and other.team == team)
+                {
                     moveStatus = 1;
                     vspeed*=0.8;
-             } else {
-                moveStatus = 4;
-                vspeed*=0.8
                 }
-             }
+                else
+                {
+                    moveStatus = 4;
+                    vspeed*=0.8
+                }
+            }
             cloakAlpha = min(cloakAlpha + 0.2, 1);
         }
     }
