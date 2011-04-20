@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <constants>
-  <constant name="VERSION" value="23000"/>
-  <constant name="PROTOCOL_UUID" value="&quot;1bb1952c-4784-850c-4587-db3e6f173ff7&quot;"/>
+  <constant name="VERSION" value="23100"/>
+  <constant name="PROTOCOL_UUID" value="&quot;f005ada7-49a5-9ff9-855b-1c2ed542a7e3&quot;"/>
   <constant name="HELLO" value="0"/>
   <constant name="PLAYER_JOIN" value="1"/>
   <constant name="PLAYER_LEAVE" value="2"/>

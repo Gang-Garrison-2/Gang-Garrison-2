@@ -13,15 +13,18 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if owner.zoomed &amp;&amp; readyToShoot
+        <argument kind="STRING">if(owner.zoomed and readyToShoot)
 {
     t += 1;
     if t &gt; chargeTime t = chargeTime;
 }
 else
     t = 0;
+if(!owner.zoomed)
+    hitDamage = unscopedDamage
+else
+    hitDamage = baseDamage + owner.zoomed*floor(sqrt(t*(sqr(maxDamage-baseDamage)/chargeTime)));
 //hitDamage = 35 + owner.zoomed*floor(sqrt(t*125/6));  
-hitDamage = baseDamage + owner.zoomed*floor(sqrt(t*(sqr(maxDamage-baseDamage)/chargeTime)));
 </argument>
       </arguments>
     </action>
