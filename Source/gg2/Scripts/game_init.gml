@@ -336,5 +336,5 @@ global.launchMap = "";
     
     calculateMonthAndDay();
     
-    TTS_init();
+    TTS_init(customMapRotationFile);
 }

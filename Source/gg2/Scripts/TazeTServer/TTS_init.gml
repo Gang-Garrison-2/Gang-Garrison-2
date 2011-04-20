@@ -5,6 +5,7 @@ global.TTSCommandNames = ds_list_create();
 global.TTSCommandScripts = ds_list_create();
 global.TTSConsoleLog = ds_list_create();
 global.TTSConsoleCmdLog = ds_list_create();
+global.TTSRotationFile = argument0;
 
 // Map of class limit numbers to class IDs
 global.TTSClassLimitsMap[0] = CLASS_QUOTE;
@@ -118,6 +119,29 @@ TTS_addcommand("listclasslimits","
     }
     TTS_writetoconsole('Current class limits:');
     TTS_writetoconsole(list);
+");
+
+TTS_addcommand("reloadrotation","
+    if(global.TTSRotationFile != '' && file_exists(global.TTSRotationFile) && global.launchMap == '') {
+        global.customMapdesginated = 1;
+        var fileHandle, i, mapname;
+        fileHandle = file_text_open_read(global.TTSRotationFile);
+        for(i = 1; !file_text_eof(fileHandle); i += 1) {
+            mapname = file_text_read_string(fileHandle);
+            // remove leading whitespace from the string
+            while(string_char_at(mapname, 0) == ' ' || string_char_at(mapname, 0) == chr(9)) { // while it starts with a space or tab
+              mapname = string_delete(mapname, 0, 1); // delete that space or tab
+            }
+            if(mapname != '' && string_char_at(mapname, 0) != '#') { // if it's not blank and it's not a comment (starting with #)
+                ds_list_add(global.map_rotation, mapname);
+            }
+            file_text_readln(fileHandle);
+        }
+        file_text_close(fileHandle);
+        TTS_writetoconsole('Reloaded rotation from '+global.TTSRotationFile);
+    }else{
+        TTS_writetoconsole('Error: No rotation file set/found');
+    }
 ");
 
 TTS_writetoconsole("Loading plugins...");
