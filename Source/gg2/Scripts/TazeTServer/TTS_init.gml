@@ -6,6 +6,7 @@ global.TTSCommandScripts = ds_list_create();
 global.TTSConsoleLog = ds_list_create();
 global.TTSConsoleCmdLog = ds_list_create();
 global.TTSRotationFile = argument0;
+global.TTSChangeNameFrom = "";
 
 // Map of class limit numbers to class IDs
 global.TTSClassLimitsMap[0] = CLASS_QUOTE;
@@ -149,6 +150,45 @@ TTS_addcommand("reloadrotation","
     }
 ");
 
+TTS_addcommand("changename","
+    var found, foundname;
+    found = false;
+    foundname = '';
+    with (Player) {
+        if (string_lower(name) == string_lower(argument0)) {
+            found = true;
+            foundname = name;
+        }
+    }
+    if (found) {
+        TTS_writetoconsole('Selected: '+foundname);
+        TTS_writetoconsole('Now type changenameto newname');
+        global.TTSChangeNameFrom = foundname;
+    }else{
+        TTS_writetoconsole('Could not find: '+argument0);
+    }
+");
+
+TTS_addcommand("changenameto","
+    if (global.TTSChangeNameFrom != '') {
+        var newname;
+        newname = argument0;
+        with (Player) {
+            if (string_lower(name) == string_lower(global.TTSChangeNameFrom)) {
+                name = newname;
+                write_ubyte(global.eventBuffer, PLAYER_CHANGENAME);
+                write_ubyte(global.eventBuffer, ds_list_find_index(global.players,id));
+                write_ubyte(global.eventBuffer, string_length(name));
+                write_string(global.eventBuffer, name);
+            }
+        }
+        global.TTSChangeNameFrom = '';
+        TTS_writetoconsole('Changed name to: '+newname);
+    }else{
+        TTS_writetoconsole('You need to have selected a player with changename');
+    }
+");
+    
 TTS_writetoconsole("Loading plugins...");
 while (true) {
     if (first == true){
