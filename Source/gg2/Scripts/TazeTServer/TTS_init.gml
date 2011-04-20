@@ -64,14 +64,19 @@ TTS_addcommand("kick","
 ");
 
 TTS_addcommand("endround","
-    with (HUD) {
-        timer = 0;
-        TTS_writetoconsole('Round ended');
+    TTS_writetoconsole('Round ended');
+    global.currentMapIndex += 1;
+    global.currentMapArea = 1;
+    if (global.currentMapIndex == ds_list_size(global.map_rotation)) 
+    {
+        global.currentMapIndex = 0;
     }
+    global.nextMap = ds_list_find_value(global.map_rotation, global.currentMapIndex);
+    TTS_runcommand('changemap',global.nextMap);
 ");
 
 TTS_addcommand("changemap","
-    global.winners = 0;
+    global.winners = TEAM_SPECTATOR;
     global.mapchanging = 1;
     global.nextMap = argument0;
     GameServer.impendingMapChange = 300;
