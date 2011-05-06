@@ -78,11 +78,10 @@ while(true) {
                             else
                             {
                                 var assistant;
-                                assistant = -1;
-                                if (lastDamageDealer.object.healer != -1)
-                                    assistant = lastDamageDealer.object.healer;
-                                else
-                                    assistant = secondToLastDamageDealer;
+                                assistant = secondToLastDamageDealer;
+                                if (lastDamageDealer.object != -1)
+                                    if (lastDamageDealer.object.healer != -1)
+                                        assistant = lastDamageDealer.object.healer;
                                 sendEventPlayerDeath(player, lastDamageDealer, assistant, FINISHED_OFF);
                                 doEventPlayerDeath(player, lastDamageDealer, assistant, FINISHED_OFF);
                             }
@@ -132,11 +131,10 @@ while(true) {
                             else
                             {
                                 var assistant;
-                                assistant = -1;
-                                if (lastDamageDealer.object.healer != -1)
-                                    assistant = lastDamageDealer.object.healer;
-                                else
-                                    assistant = secondToLastDamageDealer;
+                                assistant = secondToLastDamageDealer;
+                                if (lastDamageDealer.object != -1)
+                                    if (lastDamageDealer.object.healer != -1)
+                                        assistant = lastDamageDealer.object.healer;
                                 sendEventPlayerDeath(player, lastDamageDealer, assistant, FINISHED_OFF);
                                 doEventPlayerDeath(player, lastDamageDealer, assistant, FINISHED_OFF);
                             }
