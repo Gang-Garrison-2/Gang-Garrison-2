@@ -63,7 +63,6 @@ while(true) {
             class = read_ubyte(socket);
             if(getCharacterObject(player.team, class) != -1)
             {
-                player.class = class;
                 if(player.object != -1)
                 {
                     with(player.object)
@@ -92,6 +91,7 @@ while(true) {
                 }
                 else if(player.alarm[5]<=0)
                     player.alarm[5] = 1;
+                player.class = class;
                 ServerPlayerChangeclass(playerId, player.class, global.sendBuffer);
             }
             break;
