@@ -1,7 +1,6 @@
-// Argument 0: Tastenbyte
-// Argument 1: Player x
-// Argument 2: Player y
+// Notify the server about the current keystate and aim direction
+// Argument 0: Buffer or socket to write to
 
-write_ubyte(global.sendBuffer, INPUTSTATE);
-write_ubyte(global.sendBuffer, argument0);
-write_ushort(global.sendBuffer, point_direction(argument1,argument2, mouse_x, mouse_y)*65536/360);
+write_ubyte(argument0, INPUTSTATE);
+write_ubyte(argument0, playerControl.keybyte);
+write_ushort(argument0, point_direction(global.myself.object.x, global.myself.object.y, mouse_x, mouse_y)*65536/360);

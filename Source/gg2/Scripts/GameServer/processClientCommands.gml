@@ -289,9 +289,13 @@ while(true) {
             
         case INPUTSTATE:
             if(player.object != -1 && player.authorized == true) {
-                player.object.keyState = read_ubyte(socket);
-                player.object.netAimDirection = read_ushort(socket);
-                player.object.aimDirection = player.object.netAimDirection*360/65536;
+                with(player.object)
+                {
+                    keyState = read_ubyte(socket);
+                    netAimDirection = read_ushort(socket);
+                    aimDirection = netAimDirection*360/65536;
+                    event_user(1);
+                }
             } else if(player.authorized == false) { //disconnect them
                 socket_destroy_abortive(player.socket);
                 player.socket = -1;

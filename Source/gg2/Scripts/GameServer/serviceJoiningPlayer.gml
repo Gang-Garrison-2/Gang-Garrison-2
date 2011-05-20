@@ -19,7 +19,12 @@ if(tcp_receive(socket, expectedBytes)) {
         break;
         
     case STATE_EXPECT_NAME:
-        if(ds_list_size(global.players) >= global.playerLimit) {
+        var noOfPlayers;
+        noOfPlayers = ds_list_size(global.players);
+        if(global.dedicatedMode)
+            noOfPlayers -= 1;
+            
+        if(noOfPlayers >= global.playerLimit) {
             write_ubyte(socket, SERVER_FULL);
             socket_destroy(socket);
             instance_destroy();

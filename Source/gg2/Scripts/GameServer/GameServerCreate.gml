@@ -2,10 +2,6 @@
     with(Client)
         instance_destroy();
         
-    maxplayers = global.playerLimit;
-    if global.dedicatedMode == 1 { 
-        global.playerLimit += 1;
-    }
     global.players = ds_list_create();
     global.tcpListener = -1;
     global.serverSocket = -1;

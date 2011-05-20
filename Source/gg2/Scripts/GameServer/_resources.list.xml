@@ -6,4 +6,5 @@
   <resource name="acceptJoiningPlayer" type="RESOURCE"/>
   <resource name="serviceJoiningPlayer" type="RESOURCE"/>
   <resource name="processClientCommands" type="RESOURCE"/>
+  <resource name="sendLobbyRegistration" type="RESOURCE"/>
 </resources>
