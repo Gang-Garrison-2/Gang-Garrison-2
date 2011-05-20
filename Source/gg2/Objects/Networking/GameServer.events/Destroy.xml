@@ -13,8 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">ds_list_destroy(global.joiningPlayers);
-ds_list_destroy(global.players);
+        <argument kind="STRING">ds_list_destroy(global.players);
 socket_destroy(global.tcpListener);
 socket_destroy(global.serverSocket);
 </argument>
