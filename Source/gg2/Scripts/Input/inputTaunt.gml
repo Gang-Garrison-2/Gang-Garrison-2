@@ -1,4 +1,3 @@
-keybyte |= $01;
 if(
         global.myself.object.taunting == false &&
         global.myself.object.omnomnomnom == false &&

@@ -1,13 +1,6 @@
 // receive and interpret the server's message(s)
 var i, playerObject, playerID, player, otherPlayerID, otherPlayer, sameVersion, buffer;
 
-if(global.myself != -1) {
-    if(global.myself.object != -1) {
-        ClientInputstate(global.serverSocket);
-        playerControl.keybyte = 0;
-    }
-}
-
 roomchange = false;
 do {
     if(socket_has_error(global.serverSocket)) {
@@ -400,5 +393,4 @@ do {
     }
 } until(roomchange);
 
-socket_send(global.serverSocket);
 global.clientFrame += 1;

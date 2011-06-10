@@ -1,10 +1,3 @@
-if(global.myself.object != -1)
-{
-    ClientInputstate(global.serverSocket);
-    socket_send(global.serverSocket);
-    playerControl.keybyte = 0;
-}
-
 if(serverbalance != 0)
     balancecounter+=1;
 
