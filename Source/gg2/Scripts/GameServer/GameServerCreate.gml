@@ -72,17 +72,7 @@
     }
     
     global.joinedServerName = global.serverName; // so no errors of unknown variable occur when you create a server
-                    
     global.mapchanging=0; 
-    
-    global.blu_next_map = false;
-    global.red_next_map = false;        
-    global.blu_next_map_back = false;
-    global.red_next_map_back = false;
-    global.red_next_map_temp = false;
-    global.red_next_map_temp = false;
-    global.nextmap_temp_blu_back = false;
-    global.nextmap_temp_red_back = false;
     
     GameServerDefineCommands();
 }
