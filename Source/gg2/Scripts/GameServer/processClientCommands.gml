@@ -1,7 +1,10 @@
-var player, playerId;
+var player, playerId, commandLimitRemaining;
 
 player = argument0;
 playerId = argument1;
+
+// To prevent players from flooding the server, limit the number of commands to process per step and player.
+commandLimitRemaining = 10;
 
 with(player) {
     if(!variable_local_exists("commandReceiveState")) {
@@ -14,7 +17,7 @@ with(player) {
     }
 }
 
-while(true) {
+while(commandLimitRemaining > 0) {
     var socket;
     socket = player.socket;
     if(!tcp_receive(socket, player.commandReceiveExpectedBytes)) {
@@ -50,6 +53,7 @@ while(true) {
     case 2:
         player.commandReceiveState = 0;
         player.commandReceiveExpectedBytes = 1;
+        commandLimitRemaining -= 1;
         
         switch(player.commandReceiveCommand)
         {
