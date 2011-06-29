@@ -1,7 +1,7 @@
     // Record event in killlog
     // argument0: The type of event 1=capped point 2=defended point
     //            3=intel capped 4=intel defended 5=intel dropped
-    //            6=taken intel 7=generator destoyed  
+    //            6=taken intel 7=generator destoyed  8=intel returned
     // argument1: The team
     // argument2: The player(s) name(s)
     // argument3: Am I involved?
@@ -40,6 +40,12 @@
             else if argument1==TEAM_BLUE name = "Blue team";
             action = " has destroyed the enemy generator!";
         }
+        else if argument0==8 {
+            if argument1==TEAM_RED name = "Red";
+            else if argument1==TEAM_BLUE name = "Blue";
+            action = " Intel has returned to base!";
+            //icon = "intel"; Commented out until a suitable sprite is found
+        }
         
         if icon == "capture" {
             if argument1==TEAM_RED sprite = RedCaptureS;
@@ -47,6 +53,9 @@
         } else if icon == "defense" {
             if argument1==TEAM_RED sprite = RedDefenseS;
             else if argument1==TEAM_BLUE sprite = BlueDefenseS;
+        } else if icon == "intel" {
+            if argument1==TEAM_RED sprite = RedIntelSL;
+            else if argument1==TEAM_BLUE sprite = BlueIntelSL;
         }
         
         with (KillLog) {
@@ -68,3 +77,4 @@
             
             alarm[0] = 30*5;
         }
+

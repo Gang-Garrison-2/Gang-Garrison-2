@@ -219,6 +219,10 @@ do {
                 with player.object event_user(5); 
             }
             break;
+        case RETURN_INTEL:
+            receiveCompleteMessage(global.serverSocket,1,global.tempBuffer);
+            doEventReturnIntel(read_ubyte(global.tempBuffer));
+            break;
   
         case GENERATOR_DESTROY:
             receiveCompleteMessage(global.serverSocket,1,global.tempBuffer);

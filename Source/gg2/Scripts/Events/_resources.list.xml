@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
+  <resource name="doEventReturnIntel" type="RESOURCE"/>
+  <resource name="sendEventReturnIntel" type="RESOURCE"/>
   <resource name="doEventGrabIntel" type="RESOURCE"/>
   <resource name="sendEventGrabIntel" type="RESOURCE"/>
   <resource name="doEventScoreIntel" type="RESOURCE"/>
