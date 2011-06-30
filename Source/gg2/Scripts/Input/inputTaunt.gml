@@ -6,5 +6,4 @@ if(
     bubbleImage = 50 + global.myself.class;
     write_ubyte(global.serverSocket, CHAT_BUBBLE);
     write_ubyte(global.serverSocket, bubbleImage);
-    socket_send(global.serverSocket);
 }
