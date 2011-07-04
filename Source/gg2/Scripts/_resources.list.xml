@@ -40,4 +40,5 @@
   <resource name="selectSpawnGroup" type="RESOURCE"/>
   <resource name="partyTime" type="RESOURCE"/>
   <resource name="characterHitObstacle" type="RESOURCE"/>
+  <resource name="toggleZoom" type="RESOURCE"/>
 </resources>

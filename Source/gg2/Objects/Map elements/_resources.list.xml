@@ -7,6 +7,7 @@
   <resource name="CP" type="GROUP"/>
   <resource name="KOTH" type="GROUP"/>
   <resource name="MoveBoxes" type="GROUP"/>
+  <resource name="DKOTH" type="GROUP"/>
   <resource name="SpawnPointRed" type="RESOURCE"/>
   <resource name="SpawnPointRed" type="GROUP"/>
   <resource name="SpawnRoom" type="RESOURCE"/>

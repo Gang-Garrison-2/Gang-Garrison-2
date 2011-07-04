@@ -30,7 +30,7 @@ if distance_to_point(xviewoffset+xviewsize/2,yviewoffset+yviewsize/2) &gt; 800 e
     }
 
 if object_index != SentryTurret {    
-    if (!owner.invisible) &amp;&amp; (!owner.taunting) &amp;&amp; owner.cloakAlpha &gt; 0.5 &amp;&amp; !owner.omnomnomnom{
+    if (!owner.invisible) &amp;&amp; (!owner.taunting) &amp;&amp; owner.cloakAlpha &gt; 0.5 &amp;&amp; !owner.omnomnomnom /*&amp;&amp; !ownerPlayer.humiliated*/{
         draw_sprite_ext(sprite_index,owner.team+offset,round(x+xoffset*image_xscale),round(y+yoffset),image_xscale,image_yscale,image_angle,c_white,owner.cloakAlpha);
         if owner.ubered == 1 {
             if owner.team == TEAM_RED ubercolour = c_red;

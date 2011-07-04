@@ -17,6 +17,8 @@
   <resource name="ValleyB" type="RESOURCE"/>
   <resource name="CorinthB" type="RESOURCE"/>
   <resource name="HarvestB" type="RESOURCE"/>
+  <resource name="AtaliaB" type="RESOURCE"/>
+  <resource name="SixtiesB" type="RESOURCE"/>
   <resource name="CustomMapB" type="RESOURCE"/>
   <resource name="popupBackgroundB" type="RESOURCE"/>
   <resource name="OldfortB" type="RESOURCE"/>

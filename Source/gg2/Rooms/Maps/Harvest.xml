@@ -791,5 +791,18 @@ instance_create(0,0,HarvestO);
     </instance>
   </instances>
   <tiles/>
-  <editorSettings remember="false"/>
+  <editorSettings remember="true">
+    <size height="692" width="828"/>
+    <showGrid>true</showGrid>
+    <showObjects>true</showObjects>
+    <showTiles>true</showTiles>
+    <showBackgrounds>true</showBackgrounds>
+    <showForegrounds>true</showForegrounds>
+    <showViews>false</showViews>
+    <deleteUnderlyingObjects>true</deleteUnderlyingObjects>
+    <deleteUnderlyingTiles>true</deleteUnderlyingTiles>
+    <currentTab>4</currentTab>
+    <horizontalScrollPosition>0</horizontalScrollPosition>
+    <verticalScrollPosition>0</verticalScrollPosition>
+  </editorSettings>
 </room>

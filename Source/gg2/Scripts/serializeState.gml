@@ -49,6 +49,9 @@
         else if instance_exists(KothHUD) {
             with KothHUD event_user(12);
         }
+        else if instance_exists(DKothHUD) {
+            with DKothHUD event_user(12);
+        }
     }
     
     if(argument0 == CAPS_UPDATE) {
@@ -70,6 +73,9 @@
         }
         else if instance_exists(KothHUD) {
             with KothHUD event_user(12);
+        }
+        else if instance_exists(DKothHUD) {
+            with DKothHUD event_user(12);
         }
     }
 }

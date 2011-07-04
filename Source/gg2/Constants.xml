@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <constants>
   <constant name="VERSION" value="23300"/>
-  <constant name="PROTOCOL_UUID" value="&quot;f005ada7-49a5-9ff9-855b-1c2ed542a7e3&quot;"/>
+  <constant name="PROTOCOL_UUID" value="&quot;3ac1514f-4c44-847e-9c1f-951f319678fe&quot;"/>
   <constant name="HELLO" value="0"/>
   <constant name="PLAYER_JOIN" value="1"/>
   <constant name="PLAYER_LEAVE" value="2"/>
@@ -36,14 +36,12 @@
   <constant name="GENERATOR_DESTROY" value="32"/>
   <constant name="ARENA_ENDROUND" value="33"/>
   <constant name="ARENA_RESTART" value="34"/>
-  <constant name="ARENA_UNLOCKCP" value="35"/>
+  <constant name="UNLOCKCP" value="35"/>
   <constant name="SERVER_KICK" value="36"/>
   <constant name="KICK" value="37"/>
   <constant name="KICK_NAME" value="38"/>
   <constant name="KICK_PASSWORDCOUNT" value="39"/>
-  <constant name="SCOPE_IN" value="40"/>
-  <constant name="SCOPE_OUT" value="41"/>
-  <constant name="KOTH_UNLOCKCP" value="42"/>
+  <constant name="TOGGLE_ZOOM" value="40"/>
   <constant name="TEAM_RED" value="0"/>
   <constant name="TEAM_BLUE" value="1"/>
   <constant name="TEAM_SPECTATOR" value="2"/>

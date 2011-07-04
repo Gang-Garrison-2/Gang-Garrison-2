@@ -6,11 +6,6 @@ if(global.myself.class == CLASS_ENGINEER)
     write_ubyte(global.serverSocket, OMNOMNOMNOM);
     socket_send(global.serverSocket);
 } else if global.myself.class == CLASS_SNIPER {
-    if global.myself.object.zoomed == 0 {
-        write_ubyte(global.serverSocket, SCOPE_IN);
-        socket_send(global.serverSocket);
-    } else if global.myself.object.zoomed == 1 {
-        write_ubyte(global.serverSocket, SCOPE_OUT);
-        socket_send(global.serverSocket);
-    }
+    write_ubyte(global.serverSocket, TOGGLE_ZOOM);
+    socket_send(global.serverSocket);
 }

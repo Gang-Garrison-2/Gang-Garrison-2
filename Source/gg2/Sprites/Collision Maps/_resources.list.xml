@@ -16,4 +16,6 @@
   <resource name="CorinthS" type="RESOURCE"/>
   <resource name="HarvestS" type="RESOURCE"/>
   <resource name="OldfortS" type="RESOURCE"/>
+  <resource name="AtaliaS" type="RESOURCE"/>
+  <resource name="SixtiesS" type="RESOURCE"/>
 </resources>

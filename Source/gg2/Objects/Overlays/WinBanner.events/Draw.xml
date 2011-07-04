@@ -20,8 +20,11 @@ yoffset = view_yview[0];
 xsize = view_wview[0];
 ysize = view_hview[0];
 
-draw_set_alpha(1);
-draw_sprite(sprite_index, teamoffset, xoffset+xsize/2, yoffset+ysize/9);
+if instance_exists(ScoreTableController)
+    image_alpha = ScoreTableController.alpha;
+else
+    image_alpha = 0;
+draw_sprite_ext(sprite_index, teamoffset, xoffset+xsize/2, yoffset+ysize/9, 1, 1, 0, c_white, image_alpha*0.8);
 
 draw_set_color(c_black);
 draw_set_valign(fa_middle);

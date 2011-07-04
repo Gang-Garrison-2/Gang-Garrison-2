@@ -16,11 +16,9 @@
   <resource name="sendEventUberReady" type="RESOURCE"/>
   <resource name="doEventUber" type="RESOURCE"/>
   <resource name="sendEventUber" type="RESOURCE"/>
-  <resource name="sendEventArenaUnlockCP" type="RESOURCE"/>
-  <resource name="doEventArenaUnlockCP" type="RESOURCE"/>
-  <resource name="sendEventKothUnlockCP" type="RESOURCE"/>
+  <resource name="sendEventUnlockCP" type="RESOURCE"/>
+  <resource name="doEventUnlockCP" type="RESOURCE"/>
   <resource name="doEventArenaEndRound" type="RESOURCE"/>
-  <resource name="doEventKothUnlockCP" type="RESOURCE"/>
   <resource name="sendEventArenaRestart" type="RESOURCE"/>
   <resource name="doEventArenaRestart" type="RESOURCE"/>
 </resources>

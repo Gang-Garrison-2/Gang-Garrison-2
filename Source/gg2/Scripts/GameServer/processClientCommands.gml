@@ -221,33 +221,15 @@ while(commandLimitRemaining > 0) {
             }
             break;
              
-        case SCOPE_IN:
-             if player.object != -1 {
+        case TOGGLE_ZOOM:
+            if player.object != -1 {
                 if player.class == CLASS_SNIPER {
-                   write_ubyte(global.sendBuffer, SCOPE_IN);
-                   write_ubyte(global.sendBuffer, playerId);
-                   with player.object {
-                        zoomed = true;
-                        runPower = 0.6;
-                        jumpStrength = 6;
-                   }
+                    write_ubyte(global.sendBuffer, TOGGLE_ZOOM);
+                    write_ubyte(global.sendBuffer, playerId);
+                    toggleZoom(player.object);
                 }
-             }
-             break;
-                
-        case SCOPE_OUT:
-             if player.object != -1 {
-                if player.class == CLASS_SNIPER {
-                   write_ubyte(global.sendBuffer, SCOPE_OUT);
-                   write_ubyte(global.sendBuffer, playerId);
-                   with player.object {
-                        zoomed = false;
-                        runPower = 0.9;
-                        jumpStrength = 8;
-                   }
-                }
-             }
-             break;
+            }
+            break;
                                                       
         case PASSWORD_SEND:
             password = read_string(socket, socket_receivebuffer_size(socket));

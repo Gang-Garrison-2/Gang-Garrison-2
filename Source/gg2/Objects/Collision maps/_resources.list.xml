@@ -16,6 +16,8 @@
   <resource name="ValleyO" type="RESOURCE"/>
   <resource name="CorinthO" type="RESOURCE"/>
   <resource name="HarvestO" type="RESOURCE"/>
+  <resource name="AtaliaO" type="RESOURCE"/>
+  <resource name="SixtiesO" type="RESOURCE"/>
   <resource name="OldfortO" type="RESOURCE"/>
   <resource name="CustomMapO" type="RESOURCE"/>
 </resources>

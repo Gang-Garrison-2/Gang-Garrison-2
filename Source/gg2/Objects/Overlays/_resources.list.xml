@@ -9,6 +9,7 @@
   <resource name="ControlPointHUD" type="RESOURCE"/>
   <resource name="ArenaHUD" type="RESOURCE"/>
   <resource name="KothHUD" type="RESOURCE"/>
+  <resource name="DKothHUD" type="RESOURCE"/>
   <resource name="GeneratorHUD" type="RESOURCE"/>
   <resource name="KillLog" type="RESOURCE"/>
   <resource name="BubbleMenuZ" type="RESOURCE"/>

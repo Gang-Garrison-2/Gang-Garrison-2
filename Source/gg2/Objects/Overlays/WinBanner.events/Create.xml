@@ -28,6 +28,13 @@ if(global.myself.team != global.winners) {
     sound = VictorySnd;
 }
 
+with (Player) {
+    if team == global.winners
+        humiliated = 0;
+    else
+        humiliated = 1;
+}
+
 if(!instance_exists(ArenaHUD)) {
     AudioControlPlaySong(sound, false);
 }
