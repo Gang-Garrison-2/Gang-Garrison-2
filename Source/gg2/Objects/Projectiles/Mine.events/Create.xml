@@ -22,6 +22,7 @@
     exploded = false;
     bubbled = false;
     reflector = noone;
+    knockback = 10;
 }
 </argument>
       </arguments>
