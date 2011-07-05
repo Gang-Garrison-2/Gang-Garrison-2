@@ -123,7 +123,7 @@
     //koth_harvest
     maps[14] = ini_read_real("Maps", "koth_harvest", 14);
     //dkoth_atalia
-    maps[15] = ini_read_real("Maps", "dkoth_atalai", 15);
+    maps[15] = ini_read_real("Maps", "dkoth_atalia", 15);
     //dkoth_sixties
     maps[16] = ini_read_real("Maps", "dkoth_sixties", 16);
     
@@ -295,7 +295,7 @@ global.launchMap = "";
                     ds_list_add(global.map_rotation, "dkoth_atalia");
                 break;
                 case 16:
-                    ds_list_add(global.map_rotation, "dkoth_sixites");
+                    ds_list_add(global.map_rotation, "dkoth_sixties");
                 break;
                     
             }
