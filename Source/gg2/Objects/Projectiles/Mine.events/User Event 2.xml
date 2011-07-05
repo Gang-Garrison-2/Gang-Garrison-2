@@ -28,7 +28,7 @@
             var rdir, vectorfactor;
             rdir = point_direction(other.x,other.y,x,y);
             vectorfactor = point_distance(0, 0, power(sin(degtorad(rdir)), 2), power(cos(degtorad(rdir)), 2));
-            motion_add(rdir, min(15, 10-10*(distance_to_object(other)/other.blastRadius)) * vectorfactor);
+            motion_add(rdir, min(15, other.knockback-other.knockback*(distance_to_object(other)/other.blastRadius)) * vectorfactor);
             if(other.team != team or id==other.ownerPlayer.object) &amp;&amp; !ubered and hp &gt; 0
             {
                 hp -= other.explosionDamage*(1-(distance_to_object(other)/other.blastRadius));
@@ -62,9 +62,14 @@
                         blood.direction = point_direction(other.x,other.y,x,y)-180;
                     }
                 }
-                if (id==other.ownerPlayer.object and other.team == team)
+                if (id==other.ownerPlayer.object)
                 {
                     moveStatus = 1;
+                    vspeed*=0.8;
+                }
+                else if (other.team == team)
+                {
+                    moveStatus = 2;
                     vspeed*=0.8;
                 }
                 else
