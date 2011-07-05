@@ -21,8 +21,6 @@ if(instance_exists(TeamSelectController) || instance_exists(ClassSelectControlle
 else
     menuOpen = false;
 
-io_handle();
-
 //Checking for input - Mapped Keys
 if(keyboard_check_pressed(global.changeTeam)) inputChangeTeam();
 if(keyboard_check_pressed(global.changeClass)) inputChangeClass();
