@@ -87,20 +87,20 @@ if ((pressedKeys &amp; $08) &amp;&amp; canCloak &amp;&amp; ((cloakAlpha &lt;= 0.
 
 switch(moveStatus) // moveStatus is reset in collision with obstacles (including doors if they reject you)
 {
-case 1: //If I am rocketing myself
+case 1: //If I am rocketing/mining myself
     controlFactor = 0.65;
     frictionFactor = 1;
     break;
-case 2: //If I am rocketing an enemy
+case 2: //If I am rocketing/mining an enemy
     controlFactor = 0.45;
     frictionFactor = 1.05;
     break;
 case 3: //Airblast
-    controlFactor = 0.3;
-    frictionFactor = 1;
+    controlFactor = 0.35;
+    frictionFactor = 1.05;
     break;
-case 4: //If I am rocketing a teamate/mining someone (more control than 2)
-    controlFactor = 0.85;
+case 4: //If I am rocketing/mining a teamate
+    controlFactor = baseControl;
     frictionFactor = 1;
     break;
 default:
@@ -152,9 +152,11 @@ if(!taunting &amp;&amp; !omnomnomnom)
     if((keyState|pressedKeys) &amp; $20 and hspeed &lt; runPower * controlFactor / (baseFriction - 1))
         hspeed += runPower*controlFactor;
 }
-if(abs(hspeed) &gt; abs(1 * baseControl / (baseFriction - 1))*2)// divide friction as normal if going way too fast, based on normal max speed
+//divide friction as normal if going way too fast, or controlling motion, based on normal max speed
+if(abs(hspeed) &gt; abs(baseControl / (baseFriction - 1) * 2) or
+   ((keyState|pressedKeys) &amp; $60 and !(abs(hspeed) &gt; abs(baseControl / (baseFriction - 1)))) )
     hspeed /= baseFriction;
-else // otherwise divide by the moveStatus's friction
+else //otherwise divide by the moveStatus's friction
     hspeed /= frictionFactor;
 
 
