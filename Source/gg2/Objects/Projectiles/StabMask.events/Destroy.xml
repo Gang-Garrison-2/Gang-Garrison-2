@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<event category="COLLISION" with="TeamGate">
+<event category="DESTROY" id="0">
   <actions>
     <action id="603" library="1">
       <!--action name: Code-->
@@ -13,13 +13,15 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">{
-    var imp;
-    move_contact_solid(direction, speed);
-    imp = instance_create(x,y,Impact);
-    imp.image_angle=direction;
-    instance_destroy();
-}</argument>
+        <argument kind="STRING">var imp;
+imp = instance_create(x,y,Impact);
+/*with (imp)
+    move_contact_solid(other.direction, other.speed);*/
+// Make the impact effect occur in the general direction of the stab, far enough from the spy to be noticable
+imp.x += sign(cos(degtorad(direction)))*15;
+imp.y -= 12;
+imp.image_angle = direction;
+</argument>
       </arguments>
     </action>
   </actions>
