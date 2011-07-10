@@ -13,13 +13,9 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if global.setupTimer &gt;0 {
-    var imp;
-    move_contact_solid(direction, speed);
-    imp = instance_create(x,y,Impact);
-    imp.image_angle=direction;
+        <argument kind="STRING">if (global.setupTimer &gt; 0)
     instance_destroy();
-}</argument>
+</argument>
       </arguments>
     </action>
   </actions>
