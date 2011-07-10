@@ -13,31 +13,36 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">    if(other.id != ownerPlayer.object and other.team != team  &amp;&amp; other.hp &gt; 0 &amp;&amp; other.ubered == 0) {
-            other.hp -= hitDamage;
-//new stuff
-            if (other.lastDamageDealer != ownerPlayer &amp;&amp; other.lastDamageDealer != other.player){
-                other.secondToLastDamageDealer = other.lastDamageDealer;
-                other.alarm[4] = other.alarm[3]
-            }
-            other.alarm[3] = ASSIST_TIME;
-//end new stuff
-            other.lastDamageDealer = ownerPlayer;
-//new
-            if sign(other.image_xscale) == sign(image_xscale)
-                other.lastDamageSource = WEAPON_BACKSTAB;
-            else
-                other.lastDamageSource = WEAPON_KNIFE;
-//end new
-            var blood;
-            if(global.gibLevel &gt; 0){
-                repeat(70){
+        <argument kind="STRING">if(other.id != ownerPlayer.object and other.team != team  &amp;&amp; other.hp &gt; 0 &amp;&amp; other.ubered == 0)
+{
+    if(!collision_line(x,y-12,other.x,other.y,Obstacle,true,true)) and (!collision_line(x,y-12,other.x,other.y,TeamGate,true,true))
+    {
+        other.hp -= hitDamage;
+        if (other.lastDamageDealer != ownerPlayer &amp;&amp; other.lastDamageDealer != other.player)
+        {
+            other.secondToLastDamageDealer = other.lastDamageDealer;
+            other.alarm[4] = other.alarm[3]
+        }
+        other.alarm[3] = ASSIST_TIME;
+        other.lastDamageDealer = ownerPlayer;
+        if sign(other.image_xscale) == sign(image_xscale)
+            other.lastDamageSource = WEAPON_BACKSTAB;
+        else
+            other.lastDamageSource = WEAPON_KNIFE;
+        var blood;
+        if(global.gibLevel &gt; 0)
+        {
+            repeat(70)
+            {
                 blood = instance_create(x,y,Blood);
                 blood.direction = direction-180;
-                }
             }
-        instance_destroy();
         }
+        instance_destroy();
+    }
+    else
+        alarm[0] = 0;
+}
 </argument>
       </arguments>
     </action>
