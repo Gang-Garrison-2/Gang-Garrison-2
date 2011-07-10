@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<event category="DRAW" id="0">
+<event category="MOUSE" id="10">
   <actions>
     <action id="603" library="1">
       <!--action name: Code-->
@@ -13,26 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">{
-    var i; 
-    
-    draw_sprite(MenuBackgroundS,menuimage,300,300);
-    draw_set_color(c_white);
-    
-    draw_set_valign(fa_middle);
-    draw_set_halign(fa_left);
-    draw_set_alpha(1);
-    
-    for(i=0; i&lt;items; i+=1) {
-        if(i == virtualitem) {
-            draw_set_color(c_red);    
-        } else {
-            draw_set_color(c_white);    
-        }
-
-        draw_text(xbegin,ybegin+i*spacing,item[i]);
-    }
-}
+        <argument kind="STRING">visible = true;
 </argument>
       </arguments>
     </action>

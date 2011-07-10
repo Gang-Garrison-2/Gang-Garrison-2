@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
   <resource name="MenuBackgroundS" type="RESOURCE"/>
+  <resource name="HaxxyControllerS" type="RESOURCE"/>
   <resource name="MenuBackgroundVersionS" type="RESOURCE"/>
   <resource name="popupButtonS" type="RESOURCE"/>
   <resource name="FaucetLogoS" type="RESOURCE"/>

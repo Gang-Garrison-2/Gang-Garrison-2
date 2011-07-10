@@ -30,7 +30,7 @@
     item[5] = "Quit";
     
     if !sound_isplaying(global.MenuMusic) AudioControlPlaySong(global.MenuMusic);
-    menuimage=choose(0,1);
+    menuimage=0;
     
     if(global.dedicatedMode == 1)
         event_user(0);

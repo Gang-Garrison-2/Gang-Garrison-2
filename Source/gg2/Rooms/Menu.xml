@@ -4,7 +4,7 @@
   <size height="600" width="600"/>
   <grid>
     <isometric>false</isometric>
-    <snap x="16" y="16"/>
+    <snap x="10" y="10"/>
   </grid>
   <speed>30</speed>
   <persistent>false</persistent>
@@ -104,6 +104,12 @@
     <instance>
       <object>DevMessageChecker</object>
       <position x="32" y="528"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HaxxyController</object>
+      <position x="300" y="300"/>
       <creationCode/>
       <locked>false</locked>
     </instance>
