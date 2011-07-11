@@ -96,6 +96,12 @@
   <enableViews>false</enableViews>
   <instances>
     <instance>
+      <object>HaxxyController</object>
+      <position x="300" y="300"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
       <object>OptionsController</object>
       <position x="96" y="208"/>
       <creationCode/>
