@@ -3,7 +3,7 @@
   <sprite>HaxxyControllerS</sprite>
   <solid>false</solid>
   <visible>false</visible>
-  <depth>0</depth>
+  <depth>-1</depth>
   <persistent>false</persistent>
   <parent/>
   <mask/>
