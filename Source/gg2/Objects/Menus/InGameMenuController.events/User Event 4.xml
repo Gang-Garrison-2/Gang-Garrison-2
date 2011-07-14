@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<event category="OTHER" id="12">
+<event category="OTHER" id="14">
   <actions>
     <action id="603" library="1">
       <!--action name: Code-->
@@ -13,10 +13,9 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">//force dedicated mode to off so you can go to main menu isntead of just restarting server
-global.dedicatedMode = 0;
-with(all) if id != AudioControl.id instance_destroy();
-room_goto_fix(Lobby);
+        <argument kind="STRING">{
+    game_end();
+}
 </argument>
       </arguments>
     </action>

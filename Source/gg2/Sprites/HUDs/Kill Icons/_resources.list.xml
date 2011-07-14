@@ -17,6 +17,8 @@
   <resource name="TurretKL" type="RESOURCE"/>
   <resource name="KnifeKL" type="RESOURCE"/>
   <resource name="ExplodeKL" type="RESOURCE"/>
+  <resource name="RedIntelSL" type="RESOURCE"/>
+  <resource name="BlueIntelSL" type="RESOURCE"/>
   <resource name="RedDefenseS" type="RESOURCE"/>
   <resource name="BlueDefenseS" type="RESOURCE"/>
   <resource name="RedCaptureS" type="RESOURCE"/>

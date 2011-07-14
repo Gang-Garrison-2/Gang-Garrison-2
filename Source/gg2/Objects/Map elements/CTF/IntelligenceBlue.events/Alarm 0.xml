@@ -14,9 +14,12 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">{
-    x = IntelligenceBaseBlue.x;
-    y = IntelligenceBaseBlue.y;
-}</argument>
+    if (global.isHost){
+        doEventReturnIntel(TEAM_BLUE);
+        sendEventReturnIntel(TEAM_BLUE);
+    }
+}
+</argument>
       </arguments>
     </action>
   </actions>

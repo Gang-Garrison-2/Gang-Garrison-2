@@ -21,14 +21,15 @@
     ybegin = 300;
     spacing = 30;
     width = 200; 
-    items = 4;
+    items = 5;
     canEsc = false;
     alarm[0] = 15;
     
     item[0] = "Options";
     item[1] = "Return to Game";
-    item[2] = "Disconnect";
-    item[3] = "Quit Game";
+    item[2] = "";
+    item[3] = "Disconnect";
+    item[4] = "Quit Game";
     xoffset = view_xview[0];
     yoffset = view_yview[0];
     xsize = view_wview[0];
