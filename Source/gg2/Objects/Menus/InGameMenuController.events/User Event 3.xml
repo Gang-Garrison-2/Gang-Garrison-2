@@ -13,14 +13,16 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">//force dedicated mode to off so you can go to main menu isntead of just restarting server
+        <argument kind="STRING">// Force dedicated mode to off so you can go to main menu instead of just restarting server
 global.dedicatedMode = 0;
-with(all) if id != AudioControl.id instance_destroy();
-if (global.isHost) = false {
+with(all)
+    if(id != AudioControl.id)
+        instance_destroy();
+
+if(!global.isHost)
     room_goto_fix(Lobby);
-}else{
+else
     room_goto_fix(Menu);
-}
 </argument>
       </arguments>
     </action>
