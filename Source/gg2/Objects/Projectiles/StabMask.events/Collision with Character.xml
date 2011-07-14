@@ -41,7 +41,7 @@
         instance_destroy();
     }
     else
-        alarm[0] = 0;
+        alarm[0] = 1;
 }
 </argument>
       </arguments>
