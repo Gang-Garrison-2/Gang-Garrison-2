@@ -28,13 +28,17 @@
     if(instance_exists(HealingHud))
         if(instance_exists(HealingHud.target))
             drawy = yoffset+490;
-    
+        
     draw_sprite_stretched_ext(sprite_index, global.myself.team == TEAM_BLUE, 
-        xoffset+mid-(HUDwidth/2), drawy, HUDwidth, 40, c_white, .5);
-    draw_text_color(xoffset+mid, drawy+12, "Healer: " +healer, c_white, c_white, c_white, c_white, .5);
-    draw_healthbar(xoffset+mid-(HUDwidth/2)+10, drawy+20, 
-        xoffset+mid+HUDwidth/2-10, drawy+28,
-        healerUberCharge*100/2000,c_black,c_white,c_white,0,true,true);
+        xoffset+mid-(HUDwidth/2)+20, drawy, HUDwidth, 36, c_white, 1);
+    draw_text_color(xoffset+mid+20, drawy+12, "Healer: " +healer, c_white, c_white, c_white, c_white, 1);    
+    draw_healthbar(xoffset+mid-(HUDwidth/2)-24, drawy+2,xoffset+mid-(HUDwidth/2)+20, drawy+34,healerhp*100/120,c_black,c_white,c_white,3,true,false);
+    draw_healthbar(xoffset+mid-(HUDwidth/2)+30, drawy+20, xoffset+mid+HUDwidth/2+10, drawy+28, healerUberCharge*100/2000,c_black,c_white,c_white,0,true,true);
+    draw_sprite_stretched_ext(HealedHudHPS, global.myself.team == TEAM_BLUE,
+        xoffset+mid-(HUDwidth/2)-26, drawy,48,36,c_white, 1);
+    draw_sprite_stretched_ext(HealedHudCapS, global.myself.team == TEAM_BLUE,
+        xoffset+mid+(HUDwidth/2)+18, drawy,6,36,c_white, 1);
+    draw_text_color(xoffset+mid-(HUDwidth/2)-2, drawy+18, healerhp, c_white, c_white, c_white, c_white, 1);
 }
 </argument>
       </arguments>

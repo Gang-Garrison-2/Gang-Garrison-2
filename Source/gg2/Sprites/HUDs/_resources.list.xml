@@ -50,4 +50,6 @@
   <resource name="NemesisS" type="RESOURCE"/>
   <resource name="MedalS" type="RESOURCE"/>
   <resource name="TimerOutlineS" type="RESOURCE"/>
+  <resource name="HealedHudCapS" type="RESOURCE"/>
+  <resource name="HealedHudHPS" type="RESOURCE"/>
 </resources>
