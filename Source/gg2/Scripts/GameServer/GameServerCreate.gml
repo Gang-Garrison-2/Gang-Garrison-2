@@ -72,7 +72,7 @@
     }
     
     global.joinedServerName = global.serverName; // so no errors of unknown variable occur when you create a server
-    global.mapchanging=0; 
+    global.mapchanging = false; 
     
     GameServerDefineCommands();
 }

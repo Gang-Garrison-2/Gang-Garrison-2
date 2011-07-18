@@ -254,9 +254,12 @@ if (arenaRoundEnd and global.mapchanging and !player.humiliated) {
 }
 
 //drop cloak and unscope if on losing team or stalemate
-if (player.humiliated) {
-    if zoomed toggleZoom(self);
-    if (!stabbing) cloak = false;
+if (player.humiliated)
+{
+    if (zoomed)
+        toggleZoom(id);
+    if (!stabbing)
+        cloak = false;
 }
 
 // Determine if the character is capturing a CP, and which

@@ -71,7 +71,7 @@ if(global.winners != -1 and !global.mapchanging)
             global.currentMapIndex = 0;
         global.nextMap = ds_list_find_value(global.map_rotation, global.currentMapIndex);
     }
-    global.mapchanging = 1;
+    global.mapchanging = true;
     impendingMapChange = 300; // in 300 frames (ten seconds), we'll do a map change
     
     write_ubyte(global.sendBuffer, MAP_END);
@@ -88,7 +88,7 @@ if(global.winners != -1 and !global.mapchanging)
 // if map change timer hits 0, do a map change
 if(impendingMapChange == 0)
 {
-    global.mapchanging = 0;
+    global.mapchanging = false;
     global.currentMap = global.nextMap;
     if(file_exists("Maps/" + global.currentMap + ".png"))
     { // if this is an external map, get the md5 and url for the map

@@ -13,7 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if(global.isHost &amp;&amp; global.mapchanging == 0 &amp;&amp; team != TEAM_SPECTATOR &amp;&amp; canSpawn == 1) {
+        <argument kind="STRING">if(global.isHost &amp;&amp; !global.mapchanging &amp;&amp; team != TEAM_SPECTATOR &amp;&amp; canSpawn == 1) {
     var group, spawnpointID, numSpawnPoints;
     group = selectSpawnGroup(team);
     if (group==-1) {

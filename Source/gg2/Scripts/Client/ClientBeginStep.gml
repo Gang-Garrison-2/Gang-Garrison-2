@@ -311,14 +311,14 @@ do {
             receiveCompleteMessage(global.serverSocket,2,global.tempBuffer);
             global.winners=read_ubyte(global.tempBuffer);
             global.currentMapArea=read_ubyte(global.tempBuffer);
-            global.mapchanging = 1;
+            global.mapchanging = true;
             if !instance_exists(ScoreTableController) instance_create(0,0,ScoreTableController);
             instance_create(0,0,WinBanner);
             break;
 
         case CHANGE_MAP:
             roomchange=true;
-            global.mapchanging = 0
+            global.mapchanging = false;
             global.currentMap = receivestring(global.serverSocket, 1);
             global.currentMapURL = receivestring(global.serverSocket, 1);
             global.currentMapMD5 = receivestring(global.serverSocket, 1);

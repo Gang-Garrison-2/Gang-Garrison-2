@@ -5,20 +5,13 @@ if instance_exists(ArenaHUD) {
     if ArenaHUD.roundStart == 0 && ArenaHUD.endCount == 0 && global.myself.object != -1 exit;
 }
 
-if (global.mapchanging != 1)
+if (!global.mapchanging)
 {
-ClassSelectController.done = true;
+    ClassSelectController.done = true;
     if !instance_exists(TeamSelectController)
-    {
-        instance_create(0,0,TeamSelectController);      
-    }
-    
-    else if(instance_exists(TeamSelectController)) 
-    {
+        instance_create(0,0,TeamSelectController);
+    else
         TeamSelectController.done = true;
-    }   
 }
-else if (global.mapchanging == 1)
-{
+else
     TeamSelectController.done = true;
-}
