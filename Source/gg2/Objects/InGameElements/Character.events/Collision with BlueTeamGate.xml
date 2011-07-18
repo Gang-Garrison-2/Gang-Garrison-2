@@ -13,7 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if (global.mapchanging != 1) and (player.humiliated = 0)
+        <argument kind="STRING">if (global.mapchanging != 1)
 {
 if(team == TEAM_RED or intel == true) {
     x=xprevious;

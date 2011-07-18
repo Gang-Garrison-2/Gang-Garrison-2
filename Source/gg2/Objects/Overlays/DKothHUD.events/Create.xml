@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="CREATE" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">redTimer = 180*30;
+blueTimer = 180*30;
+cpUnlock = 900;
+hostTimer = global.timeLimitMins*30*60;
+global.totalControlPoints = 2;
+
+if (global.kothHudPos) {
+    coffset=0
+    xshift=-323*global.timerPos
+    yshift=35*global.kothHudPos
+}else {
+    coffset=43*1.15
+    xshift=-290*global.timerPos
+    yshift=35*global.kothHudPos
+}
+
+KothRedControlPoint.team = TEAM_RED;
+KothBlueControlPoint.team = TEAM_BLUE;
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

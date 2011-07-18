@@ -24,8 +24,16 @@ var arenaRoundEnd;
 arenaRoundEnd = false;
 if(mode == 2) {
     if(ArenaHUD.endCount!=0) arenaRoundEnd=true;
+} else if (mode == 4) {  
+    if (DKothHUD.cpUnlock&gt;0) 
+        locked = true; 
+    else //bruteforce because the below code won't lock the two edge cases without causing errors in other modes.
+    {
+        if (cp == 1) { if (global.cp[2].team == TEAM_RED) locked = true else locked = false; }
+        if (cp == 2) { if (global.cp[1].team == TEAM_BLUE) locked = true else locked = false; }
+    }
 } else if (mode != 3){
-    // Locking is done externally in Arena mode
+    // Locking is done externally in Arena mode and KotH
     if(team == TEAM_BLUE) {
         if(cp &gt; 1) {
             if(global.cp[cp-1].team != TEAM_RED) locked = true;
@@ -40,6 +48,9 @@ if(mode == 2) {
     
     if(mode==1 &amp;&amp; team == TEAM_RED) locked = true;
 }
+
+//autolock if the round is over, regardless of game mode
+if (arenaRoundEnd || global.mapchanging) locked = true;
 
 if(locked) {
     capping = 0;

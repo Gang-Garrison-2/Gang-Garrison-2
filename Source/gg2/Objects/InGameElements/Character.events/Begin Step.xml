@@ -205,8 +205,9 @@ if intel {
     
 animationImage = (animationImage+abs(hspeed)/20) mod CHARACTER_ANIMATION_LEN;
     
-// drop intel if ubered
-if(intel) &amp;&amp; ubered {
+
+// drop intel if ubered or round is over
+if(intel) &amp;&amp; (ubered || global.mapchanging){
     event_user(5);
 }
 
@@ -230,6 +231,32 @@ if ubered {
             alarm[5] = -1;
         }
     }
+}
+
+//give max ammo for players on the winning team
+var arenaRoundEnd;
+arenaRoundEnd = true;
+if instance_exists(ArenaHUD) { 
+    if(ArenaHUD.endCount!=0) 
+        arenaRoundEnd=true;
+    else arenaRoundEnd=false;
+}
+
+if (arenaRoundEnd and global.mapchanging and !player.humiliated) {
+    if instance_exists(currentWeapon) {
+        with(currentWeapon){
+            if(variable_local_exists("maxAmmo")) {
+                ammoCount = maxAmmo;
+            }
+            alarm[5] = -1;
+        }
+    }
+}
+
+//drop cloak and unscope if on losing team or stalemate
+if (player.humiliated) {
+    if zoomed toggleZoom(self);
+    if (!stabbing) cloak = false;
 }
 
 // Determine if the character is capturing a CP, and which

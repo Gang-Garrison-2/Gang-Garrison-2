@@ -45,6 +45,13 @@
         case "koth_corinth":
             room_goto_fix(Corinth);
             break;
+        case "dkoth_atalia":
+            room_goto_fix(Atalia);
+            break;
+        case "dkoth_sixties":
+        case "dkoth_60s":
+            room_goto_fix(Sixties);
+            break;
         case "ctf_2dfort[0]":
         case "ctf_2dfort1":
         case "ctf_oldfort":
@@ -52,12 +59,6 @@
             break;
         case "ctf_2dfort2":
         case "ctf_2dfortremix":
-        case "ctf_2dfortredux":
-        case "ctf_2dfortreach":
-        case "ctf_2dfortrehash":
-        case "ctf_2dfortreturn":
-        case "ctf_2dfortcrossmix":
-        case "ctf_2dfort2000":
             room_goto_fix(TwodFortTwoRemix);
             break;
         default:

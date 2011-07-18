@@ -122,6 +122,10 @@
     maps[13] = ini_read_real("Maps", "koth_corinth", 13);
     //koth_harvest
     maps[14] = ini_read_real("Maps", "koth_harvest", 14);
+    //dkoth_atalia
+    maps[15] = ini_read_real("Maps", "dkoth_atalia", 15);
+    //dkoth_sixties
+    maps[16] = ini_read_real("Maps", "dkoth_sixties", 16);
     
     //Server respawn time calculator. Converts each second to a frame. (read: multiply by 30 :hehe:)
     if (global.Server_RespawntimeSec == 0)
@@ -150,6 +154,8 @@
     ini_write_real("Maps", "koth_valley", maps[12]);
     ini_write_real("Maps", "koth_corinth", maps[13]);
     ini_write_real("Maps", "koth_harvest", maps[14]);
+    ini_write_real("Maps", "dkoth_atalia", maps[15]);
+    ini_write_real("Maps", "dkoth_sixties", maps[16]);
 
     ini_close();
     
@@ -235,7 +241,7 @@ global.launchMap = "";
         //Set up the map rotation stuff
         var i, sort_list;
         sort_list = ds_list_create();
-        for(i=1; i <= 14; i += 1) {
+        for(i=1; i <= 16; i += 1) {
             if(maps[i] != 0) ds_list_add(sort_list, ((100*maps[i])+i));
         }
         ds_list_sort(sort_list, 1);
@@ -284,6 +290,12 @@ global.launchMap = "";
                 break;
                 case 14:
                     ds_list_add(global.map_rotation, "koth_harvest");
+                break;
+                case 15:
+                    ds_list_add(global.map_rotation, "dkoth_atalia");
+                break;
+                case 16:
+                    ds_list_add(global.map_rotation, "dkoth_sixties");
                 break;
                     
             }

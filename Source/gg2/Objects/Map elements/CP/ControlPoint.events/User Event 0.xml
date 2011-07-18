@@ -22,6 +22,9 @@ if(instance_exists(ArenaControlPoint)) {
 } else if(instance_exists(KothControlPoint)) {
     mode=3;     // King of the Hill
     locked=true;
+} else if(instance_exists(KothRedControlPoint) &amp;&amp; instance_exists(KothBlueControlPoint)) {
+    mode=4;     // Dual King of the Hill
+    locked=true;
 }else if(instance_exists(ControlPointSetupGate)) {
     mode=1;     // A/D
     locked=false;
