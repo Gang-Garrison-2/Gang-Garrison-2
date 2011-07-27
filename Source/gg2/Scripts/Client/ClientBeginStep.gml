@@ -3,8 +3,11 @@ var i, playerObject, playerID, player, otherPlayerID, otherPlayer, sameVersion, 
 
 roomchange = false;
 do {
-    if(socket_has_error(global.serverSocket)) {
-        show_message("You have been disconnected from the server.");
+    if(tcp_eof(global.serverSocket)) {
+        if(gotServerHello)
+            show_message("You have been disconnected from the server.");
+        else
+            show_message("Unable to connect to the server.");
         with(all) if id != AudioControl.id instance_destroy();
         room_goto_fix(Menu);
         exit; 
@@ -12,6 +15,7 @@ do {
     if(tcp_receive(global.serverSocket,1)) {
         switch(read_ubyte(global.serverSocket)) {
         case HELLO:
+            gotServerHello = true;
             global.joinedServerName = receivestring(global.serverSocket, 1);
             ClientPlayerJoin(global.serverSocket);
             socket_send(global.serverSocket);

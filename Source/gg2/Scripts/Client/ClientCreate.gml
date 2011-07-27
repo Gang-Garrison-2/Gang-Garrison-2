@@ -14,7 +14,7 @@
     global.myself = -1;
     playerControl = -1;
     lastSentKeystate = 0;
-    
+    gotServerHello = false;   
     global.clientFrame = 0;
     global.serverFrame = 0;
     
