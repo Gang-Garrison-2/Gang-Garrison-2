@@ -26,20 +26,7 @@ for(i=0; i<ds_list_size(global.players); i+=1)
         i-=1;
     }
     else
-    {
-        if(player.authorized == false)
-        {
-            player.passwordCount += 1;
-            if(player.passwordCount == 30*30)
-            {
-                write_ubyte(player.socket, KICK);
-                write_ubyte(player.socket, KICK_PASSWORDCOUNT);
-                socket_destroy(player.socket);
-                player.socket = -1;
-            }
-        }
-        processClientCommands(player, i);        
-    }
+        processClientCommands(player, i);
 }
 
 if(syncTimer == 1 || ((frame mod 3600)==0) || global.setupTimer == 180)

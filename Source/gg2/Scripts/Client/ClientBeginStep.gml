@@ -12,31 +12,15 @@ do {
     if(tcp_receive(global.serverSocket,1)) {
         switch(read_ubyte(global.serverSocket)) {
         case HELLO:
-            sameVersion = true;
-                  
+            global.joinedServerName = receivestring(global.serverSocket, 1);
+            ClientPlayerJoin(global.serverSocket);
+            socket_send(global.serverSocket);
+            break;
+            
+        case JOIN_UPDATE:
             receiveCompleteMessage(global.serverSocket,2,global.tempBuffer);
-            if(read_ushort(global.tempBuffer) != 128) {
-                sameVersion = false;
-            } else {
-                receiveCompleteMessage(global.serverSocket,16,global.tempBuffer);
-                for(i=0; i<16; i+=1) {
-                    if(read_ubyte(global.tempBuffer) != global.protocolUuid[i]) {
-                        sameVersion = false;
-                    }
-                }
-            }
-
-            if(not sameVersion) {
-                show_message("Incompatible server protocol version.");
-                with(all) if id != AudioControl.id instance_destroy();
-                room_goto_fix(Menu);
-                exit;
-            } else {
-                receiveCompleteMessage(global.serverSocket,10,global.tempBuffer);
-                global.playerID = read_ubyte(global.tempBuffer);
-                global.randomSeed = read_double(global.tempBuffer);
-                global.currentMapArea = read_ubyte(global.tempBuffer);
-            }
+            global.playerID = read_ubyte(global.tempBuffer);
+            global.currentMapArea = read_ubyte(global.tempBuffer);
             break;
         
         case FULL_UPDATE:
@@ -219,6 +203,7 @@ do {
                 with player.object event_user(5); 
             }
             break;
+            
         case RETURN_INTEL:
             receiveCompleteMessage(global.serverSocket,1,global.tempBuffer);
             doEventReturnIntel(read_ubyte(global.tempBuffer));
@@ -270,24 +255,27 @@ do {
                                          
         case PASSWORD_REQUEST:             
             global.clientPassword = get_string("Enter Password:", "");
-            write_ubyte(global.serverSocket, PASSWORD_SEND);
             write_ubyte(global.serverSocket, string_length(global.clientPassword));
             write_string(global.serverSocket, global.clientPassword);
+            socket_send(global.serverSocket);
             break;
        
         case PASSWORD_WRONG:                                    
             show_message("Incorrect Password.");
-            global.clientPassword = "";
+            instance_destroy();
+            exit;
+        
+        case INCOMPATIBLE_PROTOCOL:
+            show_message("Incompatible server protocol version.");
             with(all) if id != AudioControl.id instance_destroy();
             room_goto_fix(Lobby);
-            exit;                  
-            break;
-              
+            exit;
+            
         case KICK:
             receiveCompleteMessage(global.serverSocket,1,global.tempBuffer);
             reason = read_ubyte(global.tempBuffer);
             if reason == KICK_NAME kickReason = "Name Exploit";
-            else if reason == KICK_PASSWORDCOUNT kickReason = "Timed out from not submitting a password";                                    
+            else kickReason = "";                                    
             show_message("You have been kicked from the server. "+kickReason+".");
             with(all) if id != AudioControl.id instance_destroy();
             room_goto_fix(Lobby);

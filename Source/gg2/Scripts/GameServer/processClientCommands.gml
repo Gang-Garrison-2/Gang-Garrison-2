@@ -231,17 +231,6 @@ while(commandLimitRemaining > 0) {
             }
             break;
                                                       
-        case PASSWORD_SEND:
-            password = read_string(socket, socket_receivebuffer_size(socket));
-            if(global.serverPassword != password) {
-                write_ubyte(player.socket, PASSWORD_WRONG);
-                socket_destroy(player.socket);
-                player.socket = -1;
-            } else {
-                player.authorized = true;
-            }
-            break;
-            
         case PLAYER_CHANGENAME:
             var nameLength;
             nameLength = socket_receivebuffer_size(socket);
@@ -274,7 +263,8 @@ while(commandLimitRemaining > 0) {
             break;
             
         case INPUTSTATE:
-            if(player.object != -1 && player.authorized == true) {
+            if(player.object != -1)
+            {
                 with(player.object)
                 {
                     keyState = read_ubyte(socket);
@@ -282,9 +272,6 @@ while(commandLimitRemaining > 0) {
                     aimDirection = netAimDirection*360/65536;
                     event_user(1);
                 }
-            } else if(player.authorized == false) { //disconnect them
-                socket_destroy_abortive(player.socket);
-                player.socket = -1;
             }
             break; 
         }

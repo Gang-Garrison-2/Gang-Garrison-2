@@ -17,6 +17,5 @@ commandBytes[DESTROY_SENTRY] = 0;
 commandBytes[DROP_INTEL] = 0;
 commandBytes[OMNOMNOMNOM] = 0;
 commandBytes[TOGGLE_ZOOM] = 0;
-commandBytes[PASSWORD_SEND] = commandBytesPrefixLength1;
 commandBytes[PLAYER_CHANGENAME] = commandBytesPrefixLength1;
 commandBytes[INPUTSTATE] = 3;

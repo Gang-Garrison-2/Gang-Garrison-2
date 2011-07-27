@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <constants>
   <constant name="VERSION" value="23300"/>
-  <constant name="PROTOCOL_UUID" value="&quot;e30c88f4-4fda-9bf6-522b-4c83c286ecad&quot;"/>
+  <constant name="PROTOCOL_UUID" value="&quot;37b7e2c1-458a-a04c-86b6-27066421e1bd&quot;"/>
   <constant name="HELLO" value="0"/>
   <constant name="PLAYER_JOIN" value="1"/>
   <constant name="PLAYER_LEAVE" value="2"/>
@@ -28,7 +28,6 @@
   <constant name="UBER" value="23"/>
   <constant name="OMNOMNOMNOM" value="24"/>
   <constant name="PASSWORD_REQUEST" value="25"/>
-  <constant name="PASSWORD_SEND" value="26"/>
   <constant name="PASSWORD_WRONG" value="27"/>
   <constant name="CAPS_UPDATE" value="28"/>
   <constant name="CP_CAPTURED" value="30"/>
@@ -40,9 +39,10 @@
   <constant name="SERVER_KICK" value="36"/>
   <constant name="KICK" value="37"/>
   <constant name="KICK_NAME" value="38"/>
-  <constant name="KICK_PASSWORDCOUNT" value="39"/>
   <constant name="TOGGLE_ZOOM" value="40"/>
   <constant name="RETURN_INTEL" value="41"/>
+  <constant name="INCOMPATIBLE_PROTOCOL" value="42"/>
+  <constant name="JOIN_UPDATE" value="43"/>
   <constant name="TEAM_RED" value="0"/>
   <constant name="TEAM_BLUE" value="1"/>
   <constant name="TEAM_SPECTATOR" value="2"/>

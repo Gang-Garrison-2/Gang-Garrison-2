@@ -68,7 +68,6 @@
         if(mouse_check_button_pressed(mb_left) and virtualitem&lt;ds_list_size(servers) and virtualitem&gt;=0){
             global.isHost = false;
             server = ds_list_find_value(servers, virtualitem);
-            global.joinedServerName = server.name;
             global.serverIP = server.ip;
             global.serverPort = server.port;
             if instance_exists(Client) with(Client)instance_destroy();

@@ -11,8 +11,6 @@
     
     serverbalance=0;
     balancecounter=0;
-    randomize();
-    global.randomSeed=random_get_seed();
     frame = 0;
     updatePlayer = 1;
     impendingMapChange = -1; // timer variable used by GameServerBeginStep, when it hits 0, the server executes a map change to global.nextMap
@@ -53,7 +51,6 @@
 
     global.playerID = 0;
     global.myself = serverPlayer;
-    global.myself.authorized = true;
     playerControl = instance_create(0,0,PlayerControl);
         
     global.currentMap = ds_list_find_value(global.map_rotation, global.currentMapIndex);

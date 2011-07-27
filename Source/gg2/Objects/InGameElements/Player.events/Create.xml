@@ -66,19 +66,6 @@
     //Sentries for Engies
     //sentryBuilt = 0;
     sentry=-1;
-    
-    //authorization for servers with passwords
-    //clients who change the source to get around passwords will be sent
-    //garbage which will disconnect them in gameserverbeginstep
-    if global.isHost {
-        if global.serverPassword == "" authorized = true;
-        else {
-            authorized = false;
-            //counter to limit players to 30 seconds to send a password before they
-            //get das boot
-            passwordCount = 0;
-        }
-    }
 }
 </argument>
       </arguments>
