@@ -70,10 +70,10 @@
             server = ds_list_find_value(servers, virtualitem);
             global.serverIP = server.ip;
             global.serverPort = server.port;
-            if instance_exists(Client) with(Client)instance_destroy();
-            global.client = instance_create(0,0,Client);
+            with(Client)instance_destroy();
+            instance_create(0,0,Client);
             
-            if(not instance_exists(global.client)) {
+            if(not instance_exists(Client)) {
                 room_goto_fix(Lobby);
             }
         }

@@ -62,6 +62,7 @@
     global.caplimitBkup = global.caplimit;
     global.autobalance = ini_read_real("Server", "AutoBalance",1);
     global.Server_RespawntimeSec = ini_read_real("Server", "Respawn Time", 5);
+    global.mapdownloadLimitBps = ini_read_real("Server", "Total bandwidth limit for map downloads in bytes per second", 50000);
     global.currentMapArea=1;
     global.totalMapAreas=1;
     global.setupTimer=1800;
@@ -90,6 +91,7 @@
     ini_write_real("Server", "CapLimit", global.caplimit);
     ini_write_real("Server", "AutoBalance", global.autobalance);
     ini_write_real("Server", "Respawn Time", global.Server_RespawntimeSec);
+    ini_write_real("Server", "Total bandwidth limit for map downloads in bytes per second", global.mapdownloadLimitBps);
     ini_write_real("Server", "Time Limit", global.timeLimitMins);
     ini_write_string("Server", "Password", global.serverPassword);
     
@@ -207,7 +209,7 @@ global.launchMap = "";
         global.serverPort = real(portRaw);
         global.serverIP = IPRaw;
         global.isHost = false;
-        global.client = instance_create(0,0,Client);
+        instance_create(0,0,Client);
     }   
     
     global.customMapdesginated = 0;    

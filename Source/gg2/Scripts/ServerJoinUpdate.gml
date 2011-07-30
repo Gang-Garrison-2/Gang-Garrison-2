@@ -5,7 +5,7 @@
     write_ubyte(argument0, ds_list_size(global.players));
     write_ubyte(argument0, global.currentMapArea);
     
-    ServerChangeMap(global.currentMap, global.currentMapURL, global.currentMapMD5, socket);
+    ServerChangeMap(global.currentMap, global.currentMapMD5, socket);
     
     for(i=0; i<ds_list_size(global.players); i+=1) {
         player = ds_list_find_value(global.players, i);

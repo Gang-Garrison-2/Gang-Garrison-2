@@ -17,6 +17,36 @@ do {
         case HELLO:
             gotServerHello = true;
             global.joinedServerName = receivestring(global.serverSocket, 1);
+            advertisedMap = receivestring(global.serverSocket, 1);
+            advertisedMapMd5 = receivestring(global.serverSocket, 1);
+            if(string_pos("/", advertisedMap) != 0 or string_pos("\", advertisedMap) != 0)
+            {
+                show_message("Server sent illegal map name: "+advertisedMap);
+                instance_destroy();
+                exit;
+            }
+            
+            if(advertisedMapMd5 != "")
+            {
+                var download;
+                download = not file_exists("Maps/" + advertisedMap + ".png");
+                if(!download and CustomMapGetMapMD5(advertisedMap) != advertisedMapMd5)
+                    download = show_question("The server's copy of the map (" + advertisedMap + ") differs from ours.#Would you like to download this server's version of the map?");
+                
+                if(download)
+                {
+                    var fileid, filesize;
+                    write_ubyte(global.serverSocket, DOWNLOAD_MAP);
+                    socket_send(global.serverSocket);
+                    receiveCompleteMessage(global.serverSocket,4,global.tempBuffer);
+                    filesize = read_uint(global.tempBuffer);
+                    receiveCompleteMessage(global.serverSocket, filesize, global.tempBuffer);
+                    fileid = file_bin_open("Maps/" + advertisedMap + ".png", 1);
+                    repeat(filesize)
+                        file_bin_write_byte(fileid, read_ubyte(global.tempBuffer));
+                    file_bin_close(fileid);
+                }
+            }
             ClientPlayerJoin(global.serverSocket);
             socket_send(global.serverSocket);
             break;
@@ -257,8 +287,9 @@ do {
             }
             break;
                                          
-        case PASSWORD_REQUEST:             
-            global.clientPassword = get_string("Enter Password:", "");
+        case PASSWORD_REQUEST:
+            if(!usePreviousPwd)
+                global.clientPassword = get_string("Enter Password:", "");
             write_ubyte(global.serverSocket, string_length(global.clientPassword));
             write_string(global.serverSocket, global.clientPassword);
             socket_send(global.serverSocket);
@@ -312,7 +343,6 @@ do {
             roomchange=true;
             global.mapchanging = false;
             global.currentMap = receivestring(global.serverSocket, 1);
-            global.currentMapURL = receivestring(global.serverSocket, 1);
             global.currentMapMD5 = receivestring(global.serverSocket, 1);
             if(global.currentMapMD5 == "") { // if this is an internal map (signified by the lack of an md5)
                 if(gotoInternalMapRoom(global.currentMap) != 0) {
@@ -320,7 +350,22 @@ do {
                     game_end();
                 }
             } else { // it's an external map
-                CustomMapDownload();
+                if(string_pos("/", advertisedMap) != 0 or string_pos("\", advertisedMap) != 0)
+                {
+                    show_message("Server sent illegal map name: "+advertisedMap);
+                    with(all) if id != AudioControl.id instance_destroy();
+                    room_goto_fix(Lobby);
+                    exit;
+                }
+                if(!file_exists("Maps/" + global.currentMap + ".png") or CustomMapGetMapMD5(global.currentMap) != global.currentMapMD5)
+                {   // Reconnect to the server to download the map
+                    with(all) if id != AudioControl.id instance_destroy();
+                    instance_create(0,0,Client);
+                    Client.usePreviousPwd = true;
+                    room_goto_fix(Menu);
+                    exit;
+                }
+                room_goto_fix(CustomMapRoom);
             }
                  
             for(i=0; i<ds_list_size(global.players); i+=1) {

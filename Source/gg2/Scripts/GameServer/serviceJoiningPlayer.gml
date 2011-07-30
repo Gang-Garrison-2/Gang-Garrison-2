@@ -5,6 +5,29 @@ if(socket_has_error(socket) or (current_time-lastContact > 30000))
     exit;
 }
 
+if(state==STATE_CLIENT_DOWNLOADING)
+{
+    lastContact = current_time;
+    cumulativeMapBytes += global.mapdownloadLimitBps/(room_speed*global.runningMapDownloads);
+    if(cumulativeMapBytes>=400 and global.mapBytesRemainingInStep>0)
+    {
+        var bytesToSend;
+        bytesToSend = round(min(max(global.mapBytesRemainingInStep, 400), cumulativeMapBytes));
+        write_buffer_part(socket, mapDownloadBuffer, bytesToSend);
+        socket_send(socket);
+        global.mapBytesRemainingInStep -= bytesToSend;
+        cumulativeMapBytes -= bytesToSend;
+        if(!buffer_bytes_left(mapDownloadBuffer))
+        {
+            buffer_destroy(mapDownloadBuffer);
+            mapDownloadBuffer = -1;
+            state = STATE_EXPECT_COMMAND;
+            expectedBytes = 1;
+        }
+    }
+    exit;
+}
+
 if(!tcp_receive(socket, expectedBytes))
     exit;
 
@@ -57,6 +80,12 @@ case STATE_CLIENT_AUTHENTICATED:
     write_ubyte(socket, HELLO);
     write_ubyte(socket, string_length(global.serverName));
     write_string(socket, global.serverName);
+    write_ubyte(socket, string_length(global.currentMap));
+    write_string(socket, global.currentMap);
+    write_ubyte(socket, string_length(global.currentMapMD5));
+    write_string(socket, global.currentMapMD5);
+    advertisedMap = global.currentMap;
+    advertisedMapMd5 = global.currentMapMD5;
     newState = STATE_EXPECT_COMMAND;
     expectedBytes = 1;
     break;
@@ -68,6 +97,22 @@ case STATE_EXPECT_COMMAND:
         newState = STATE_EXPECT_MESSAGELEN;
         messageState = STATE_EXPECT_NAME;
         expectedBytes = 1;
+        break;
+        
+    case DOWNLOAD_MAP:
+        if(advertisedMapMd5 != "" and file_exists("Maps/" + advertisedMap + ".png"))
+        {   // If the md5 was empty, we advertised an internal map, which obviously can't be downloaded.
+            var fileid, filesize;
+            buffer_destroy(mapDownloadBuffer);
+            mapDownloadBuffer = buffer_create();
+            fileid = file_bin_open("Maps/" + advertisedMap + ".png", 0);
+            filesize = file_bin_size(fileid);
+            write_uint(socket, filesize);
+            repeat(filesize)
+                write_ubyte(mapDownloadBuffer, file_bin_read_byte(fileid));
+            file_bin_close(fileid);
+            newState = STATE_CLIENT_DOWNLOADING;
+        }
         break;
     // Other stuff like RCON_LOGIN can branch off here.
     }

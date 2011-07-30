@@ -6,6 +6,7 @@
         exit;
     }
     nocreate=false;
+    usePreviousPwd = false;
     
     global.players = ds_list_create();
     global.deserializeBuffer = buffer_create();

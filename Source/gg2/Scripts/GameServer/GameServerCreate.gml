@@ -56,11 +56,9 @@
     global.currentMap = ds_list_find_value(global.map_rotation, global.currentMapIndex);
     if(file_exists("Maps/" + global.currentMap + ".png")) { // if this is an external map
         // get the md5 and url for the map
-        global.currentMapURL = CustomMapGetMapURL(global.currentMap);
         global.currentMapMD5 = CustomMapGetMapMD5(global.currentMap);
         room_goto_fix(CustomMapRoom);
     } else { // internal map, so at the very least, MD5 must be blank
-        global.currentMapURL = "";
         global.currentMapMD5 = "";
         if(gotoInternalMapRoom(global.currentMap) != 0) {
             show_message("Error:#Map " + global.currentMap + " is not in maps folder, and it is not a valid internal map.#Exiting.");

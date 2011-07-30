@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <constants>
-  <constant name="VERSION" value="23300"/>
+  <constant name="VERSION" value="24000"/>
   <constant name="PROTOCOL_UUID" value="&quot;37b7e2c1-458a-a04c-86b6-27066421e1bd&quot;"/>
   <constant name="HELLO" value="0"/>
   <constant name="PLAYER_JOIN" value="1"/>
@@ -43,6 +43,7 @@
   <constant name="RETURN_INTEL" value="41"/>
   <constant name="INCOMPATIBLE_PROTOCOL" value="42"/>
   <constant name="JOIN_UPDATE" value="43"/>
+  <constant name="DOWNLOAD_MAP" value="44"/>
   <constant name="TEAM_RED" value="0"/>
   <constant name="TEAM_BLUE" value="1"/>
   <constant name="TEAM_SPECTATOR" value="2"/>

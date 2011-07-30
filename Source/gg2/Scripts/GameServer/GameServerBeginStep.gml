@@ -8,7 +8,13 @@ frame += 1;
 
 buffer_clear(global.sendBuffer);
 
-acceptJoiningPlayer();
+global.runningMapDownloads = 0;
+global.mapBytesRemainingInStep = global.mapdownloadLimitBps/room_speed;
+with(JoiningPlayer)
+    if(state==STATE_CLIENT_DOWNLOADING)
+        global.runningMapDownloads += 1;
+
+acceptJoiningPlayer();        
 with(JoiningPlayer)
     serviceJoiningPlayer();
 
@@ -79,13 +85,11 @@ if(impendingMapChange == 0)
     global.currentMap = global.nextMap;
     if(file_exists("Maps/" + global.currentMap + ".png"))
     { // if this is an external map, get the md5 and url for the map
-        global.currentMapURL = CustomMapGetMapURL(global.currentMap);
         global.currentMapMD5 = CustomMapGetMapMD5(global.currentMap);
         room_goto_fix(CustomMapRoom);
     }
     else
     { // internal map, so at the very least, MD5 must be blank
-        global.currentMapURL = "";
         global.currentMapMD5 = "";
         if(gotoInternalMapRoom(global.currentMap) != 0)
         {
@@ -93,7 +97,7 @@ if(impendingMapChange == 0)
             game_end();
         }
     }
-    ServerChangeMap(global.currentMap, global.currentMapURL, global.currentMapMD5, global.sendBuffer);
+    ServerChangeMap(global.currentMap, global.currentMapMD5, global.sendBuffer);
     impendingMapChange = -1;
     
     with(Player)
