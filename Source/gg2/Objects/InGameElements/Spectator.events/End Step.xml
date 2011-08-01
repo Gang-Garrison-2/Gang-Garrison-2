@@ -84,13 +84,9 @@ afktimer-=1;
 
 if((afktimer&lt;=0) and global.isHost==false)
 {
-    with(all)
-    { 
-        if (id != AudioControl.id) 
-            instance_destroy();
-    }
-    room_goto_fix(Menu);
     show_message("You have been disconnected from the server. Reason: AFK");
+    with(Client)
+        instance_destroy();
 }
 </argument>
       </arguments>

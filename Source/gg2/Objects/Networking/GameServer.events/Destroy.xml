@@ -16,6 +16,14 @@
         <argument kind="STRING">ds_list_destroy(global.players);
 socket_destroy(global.tcpListener);
 socket_destroy(global.serverSocket);
+
+with(Player)
+    instance_destroy();
+
+with(PlayerControl)
+    instance_destroy();
+
+room_goto_fix(Menu);
 </argument>
       </arguments>
     </action>

@@ -51,7 +51,7 @@
 
     global.playerID = 0;
     global.myself = serverPlayer;
-    playerControl = instance_create(0,0,PlayerControl);
+    instance_create(0,0,PlayerControl);
         
     global.currentMap = ds_list_find_value(global.map_rotation, global.currentMapIndex);
     if(file_exists("Maps/" + global.currentMap + ".png")) { // if this is an external map

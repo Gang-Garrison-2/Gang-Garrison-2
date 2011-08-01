@@ -13,11 +13,8 @@
     global.isHost = false;
 
     global.myself = -1;
-    playerControl = -1;
-    lastSentKeystate = 0;
-    gotServerHello = false;   
-    global.clientFrame = 0;
-    global.serverFrame = 0;
+    gotServerHello = false;  
+    returnRoom = Menu;
     
     global.serverSocket = tcp_connect(global.serverIP, global.serverPort);
     

@@ -8,9 +8,8 @@ do {
             show_message("You have been disconnected from the server.");
         else
             show_message("Unable to connect to the server.");
-        with(all) if id != AudioControl.id instance_destroy();
-        room_goto_fix(Menu);
-        exit; 
+        instance_destroy();
+        exit;
     }
     if(tcp_receive(global.serverSocket,1)) {
         switch(read_ubyte(global.serverSocket)) {
@@ -63,7 +62,6 @@ do {
         
         case QUICK_UPDATE:
             deserializeState(QUICK_UPDATE);
-            global.serverFrame += 1;
             break;
              
         case CAPS_UPDATE:
@@ -72,7 +70,6 @@ do {
                   
         case INPUTSTATE:
             deserializeState(INPUTSTATE);
-            global.serverFrame += 1;
             break;             
         
         case PLAYER_JOIN:
@@ -82,7 +79,7 @@ do {
             ds_list_add(global.players, player);
             if(ds_list_size(global.players)-1 == global.playerID) {
                 global.myself = player;
-                playerControl = instance_create(0,0,PlayerControl);
+                instance_create(0,0,PlayerControl);
             }
             break;
             
@@ -121,27 +118,27 @@ do {
         case BALANCE:
             receiveCompleteMessage(global.serverSocket,1,global.tempBuffer);
             balanceplayer=read_ubyte(global.tempBuffer);
-                  if balanceplayer == 255 {
-                    if !instance_exists(Balancer) instance_create(x,y,Balancer);
-                    with(Balancer) notice=0;
-                  } else {
-                    player = ds_list_find_value(global.players, balanceplayer);
-                    if(player.object != -1) {
-                with(player.object) {
-                    instance_destroy();
-                }
-                player.object = -1;
-              }
-              if(player.team==TEAM_RED) {
-                        player.team = TEAM_BLUE;
-                    } else {
-                        player.team = TEAM_RED;
+            if balanceplayer == 255 {
+                if !instance_exists(Balancer) instance_create(x,y,Balancer);
+                with(Balancer) notice=0;
+            } else {
+                player = ds_list_find_value(global.players, balanceplayer);
+                if(player.object != -1) {
+                    with(player.object) {
+                        instance_destroy();
                     }
-                    if !instance_exists(Balancer) instance_create(x,y,Balancer);
-                    Balancer.name=player.name;
-                    with (Balancer) notice=1;
-                  }
-                  break;
+                    player.object = -1;
+                }
+                if(player.team==TEAM_RED) {
+                    player.team = TEAM_BLUE;
+                } else {
+                    player.team = TEAM_RED;
+                }
+                if !instance_exists(Balancer) instance_create(x,y,Balancer);
+                Balancer.name=player.name;
+                with (Balancer) notice=1;
+            }
+            break;
                   
         case PLAYER_CHANGETEAM:
             receiveCompleteMessage(global.serverSocket,2,global.tempBuffer);
@@ -172,7 +169,7 @@ do {
             player = ds_list_find_value(global.players, read_ubyte(global.tempBuffer));
             player.name = receivestring(global.serverSocket, 1);
             if player=global.myself {
-            global.playerName=player.name
+                global.playerName=player.name
             }
             break;
                  
@@ -193,7 +190,7 @@ do {
             receiveCompleteMessage(global.serverSocket,1,global.tempBuffer);
             player = ds_list_find_value(global.players, read_ubyte(global.tempBuffer));
             if player.sentry == -1 {
-              buildSentry(player);
+                buildSentry(player);
             }
             break;
               
@@ -210,10 +207,10 @@ do {
             } else {
                 otherPlayer = ds_list_find_value(global.players, otherPlayerID);
                 if (assistantPlayerID == 255) {
-                   doEventDestruction(player, otherPlayer, -1, causeOfDeath);
+                    doEventDestruction(player, otherPlayer, -1, causeOfDeath);
                 } else {
-                   assistantPlayer = ds_list_find_value(global.players, assistantPlayerID);
-                   doEventDestruction(player, otherPlayer, assistantPlayer, causeOfDeath);
+                    assistantPlayer = ds_list_find_value(global.players, assistantPlayerID);
+                    doEventDestruction(player, otherPlayer, assistantPlayer, causeOfDeath);
                 }
             }
             break;
@@ -265,17 +262,17 @@ do {
             receiveCompleteMessage(global.serverSocket,1,global.tempBuffer);
             player = ds_list_find_value(global.players, read_ubyte(global.tempBuffer));
             if(player.object != -1) {
-              with(player.object) {
-                  omnomnomnom=true;
-                  if(player.team == TEAM_RED) {
-                      omnomnomnomindex=0;
-                      omnomnomnomend=31;
-                  } else if(player.team==TEAM_BLUE) {
-                      omnomnomnomindex=32;
-                      omnomnomnomend=63;
-                  }
-                  xscale=image_xscale; 
-              } 
+                with(player.object) {
+                    omnomnomnom=true;
+                    if(player.team == TEAM_RED) {
+                        omnomnomnomindex=0;
+                        omnomnomnomend=31;
+                    } else if(player.team==TEAM_BLUE) {
+                        omnomnomnomindex=32;
+                        omnomnomnomend=63;
+                    }
+                    xscale=image_xscale; 
+                } 
             }
             break;
       
@@ -302,20 +299,17 @@ do {
         
         case INCOMPATIBLE_PROTOCOL:
             show_message("Incompatible server protocol version.");
-            with(all) if id != AudioControl.id instance_destroy();
-            room_goto_fix(Lobby);
+            instance_destroy();
             exit;
             
         case KICK:
             receiveCompleteMessage(global.serverSocket,1,global.tempBuffer);
             reason = read_ubyte(global.tempBuffer);
             if reason == KICK_NAME kickReason = "Name Exploit";
-            else kickReason = "";                                    
+            else kickReason = "";
             show_message("You have been kicked from the server. "+kickReason+".");
-            with(all) if id != AudioControl.id instance_destroy();
-            room_goto_fix(Lobby);
-            exit;                  
-            break;
+            instance_destroy();
+            exit;
               
         case ARENA_ENDROUND:
             with ArenaHUD clientArenaEndRound();
@@ -347,22 +341,23 @@ do {
             if(global.currentMapMD5 == "") { // if this is an internal map (signified by the lack of an md5)
                 if(gotoInternalMapRoom(global.currentMap) != 0) {
                     show_message("Error:#Server went to invalid internal map: " + global.currentMap + "#Exiting.");
-                    game_end();
+                    instance_destroy();
+                    exit;
                 }
             } else { // it's an external map
                 if(string_pos("/", advertisedMap) != 0 or string_pos("\", advertisedMap) != 0)
                 {
                     show_message("Server sent illegal map name: "+advertisedMap);
-                    with(all) if id != AudioControl.id instance_destroy();
-                    room_goto_fix(Lobby);
+                    instance_destroy();
                     exit;
                 }
                 if(!file_exists("Maps/" + global.currentMap + ".png") or CustomMapGetMapMD5(global.currentMap) != global.currentMapMD5)
                 {   // Reconnect to the server to download the map
-                    with(all) if id != AudioControl.id instance_destroy();
+                    event_perform(ev_destroy,0);
+                    event_perform(ev_create,0);
                     instance_create(0,0,Client);
-                    Client.usePreviousPwd = true;
-                    room_goto_fix(Menu);
+                    usePreviousPwd = true;
+                    Client.returnRoom = returnRoom;
                     exit;
                 }
                 room_goto_fix(CustomMapRoom);
@@ -416,5 +411,3 @@ do {
         break;
     }
 } until(roomchange);
-
-global.clientFrame += 1;

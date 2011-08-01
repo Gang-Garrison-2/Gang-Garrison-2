@@ -72,10 +72,7 @@
             global.serverPort = server.port;
             with(Client)instance_destroy();
             instance_create(0,0,Client);
-            
-            if(not instance_exists(Client)) {
-                room_goto_fix(Lobby);
-            }
+            Client.returnRoom = Lobby;
         }
     } else {
         virtualitem = -1;
