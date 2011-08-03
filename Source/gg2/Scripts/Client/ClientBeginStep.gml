@@ -1,26 +1,42 @@
 // receive and interpret the server's message(s)
 var i, playerObject, playerID, player, otherPlayerID, otherPlayer, sameVersion, buffer;
 
+if(tcp_eof(global.serverSocket)) {
+    if(gotServerHello)
+        show_message("You have been disconnected from the server.");
+    else
+        show_message("Unable to connect to the server.");
+    instance_destroy();
+    exit;
+}
+
+if(downloadingMap)
+{
+    if(tcp_receive(global.serverSocket, downloadMapBytes))
+    {
+        var fileid;
+        fileid = file_bin_open("Maps/" + downloadMapName + ".png", 1);
+        repeat(downloadMapBytes)
+            file_bin_write_byte(fileid, read_ubyte(global.serverSocket));
+        file_bin_close(fileid);
+        downloadingMap = false;
+    }
+    else
+        exit;
+}
+
 roomchange = false;
 do {
-    if(tcp_eof(global.serverSocket)) {
-        if(gotServerHello)
-            show_message("You have been disconnected from the server.");
-        else
-            show_message("Unable to connect to the server.");
-        instance_destroy();
-        exit;
-    }
     if(tcp_receive(global.serverSocket,1)) {
         switch(read_ubyte(global.serverSocket)) {
         case HELLO:
             gotServerHello = true;
             global.joinedServerName = receivestring(global.serverSocket, 1);
-            advertisedMap = receivestring(global.serverSocket, 1);
+            downloadMapName = receivestring(global.serverSocket, 1);
             advertisedMapMd5 = receivestring(global.serverSocket, 1);
-            if(string_pos("/", advertisedMap) != 0 or string_pos("\", advertisedMap) != 0)
+            if(string_pos("/", downloadMapName) != 0 or string_pos("\", downloadMapName) != 0)
             {
-                show_message("Server sent illegal map name: "+advertisedMap);
+                show_message("Server sent illegal map name: "+downloadMapName);
                 instance_destroy();
                 exit;
             }
@@ -28,22 +44,17 @@ do {
             if(advertisedMapMd5 != "")
             {
                 var download;
-                download = not file_exists("Maps/" + advertisedMap + ".png");
-                if(!download and CustomMapGetMapMD5(advertisedMap) != advertisedMapMd5)
-                    download = show_question("The server's copy of the map (" + advertisedMap + ") differs from ours.#Would you like to download this server's version of the map?");
+                download = not file_exists("Maps/" + downloadMapName + ".png");
+                if(!download and CustomMapGetMapMD5(downloadMapName) != advertisedMapMd5)
+                    download = show_question("The server's copy of the map (" + downloadMapName + ") differs from ours.#Would you like to download this server's version of the map?");
                 
                 if(download)
                 {
-                    var fileid, filesize;
                     write_ubyte(global.serverSocket, DOWNLOAD_MAP);
                     socket_send(global.serverSocket);
                     receiveCompleteMessage(global.serverSocket,4,global.tempBuffer);
-                    filesize = read_uint(global.tempBuffer);
-                    receiveCompleteMessage(global.serverSocket, filesize, global.tempBuffer);
-                    fileid = file_bin_open("Maps/" + advertisedMap + ".png", 1);
-                    repeat(filesize)
-                        file_bin_write_byte(fileid, read_ubyte(global.tempBuffer));
-                    file_bin_close(fileid);
+                    downloadMapBytes = read_uint(global.tempBuffer);
+                    downloadingMap = true;
                 }
             }
             ClientPlayerJoin(global.serverSocket);
@@ -345,19 +356,17 @@ do {
                     exit;
                 }
             } else { // it's an external map
-                if(string_pos("/", advertisedMap) != 0 or string_pos("\", advertisedMap) != 0)
+                if(string_pos("/", global.currentMap) != 0 or string_pos("\", global.currentMap) != 0)
                 {
-                    show_message("Server sent illegal map name: "+advertisedMap);
+                    show_message("Server sent illegal map name: "+global.currentMap);
                     instance_destroy();
                     exit;
                 }
                 if(!file_exists("Maps/" + global.currentMap + ".png") or CustomMapGetMapMD5(global.currentMap) != global.currentMapMD5)
                 {   // Reconnect to the server to download the map
                     event_perform(ev_destroy,0);
-                    event_perform(ev_create,0);
-                    instance_create(0,0,Client);
+                    ClientCreate();
                     usePreviousPwd = true;
-                    Client.returnRoom = returnRoom;
                     exit;
                 }
                 room_goto_fix(CustomMapRoom);

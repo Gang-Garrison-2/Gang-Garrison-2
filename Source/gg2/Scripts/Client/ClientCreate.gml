@@ -15,6 +15,7 @@
     global.myself = -1;
     gotServerHello = false;  
     returnRoom = Menu;
+    downloadingMap = false;
     
     global.serverSocket = tcp_connect(global.serverIP, global.serverPort);
     
