@@ -16,6 +16,7 @@
     gotServerHello = false;  
     returnRoom = Menu;
     downloadingMap = false;
+    downloadMapBuffer = -1;
     
     global.serverSocket = tcp_connect(global.serverIP, global.serverPort);
     

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<event category="DESTROY" id="0">
+<event category="DRAW" id="0">
   <actions>
     <action id="603" library="1">
       <!--action name: Code-->
@@ -13,21 +13,17 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if(not nocreate) {
-    socket_destroy(global.serverSocket);
-    ds_list_destroy(global.players);
-    buffer_destroy(global.deserializeBuffer);
-    buffer_destroy(downloadMapBuffer);
-    
-    with(Player)
-        instance_destroy();
-        
-    with(PlayerControl)
-        instance_destroy();
-    
-    room_goto_fix(returnRoom);
+        <argument kind="STRING">if(downloadingMap)
+{
+    draw_set_color(c_white);
+    draw_set_alpha(1);
+    if(downloadMapBytes &gt; 0)
+    {
+        draw_rectangle(50, 550, 300, 560, 2);
+        draw_rectangle(50, 550, 50+buffer_size(downloadMapBuffer)/downloadMapBytes * 250, 560, 0);
+    }
+    draw_text(50, 530, "Downloading map (press Esc to abort)");
 }
-
 </argument>
       </arguments>
     </action>

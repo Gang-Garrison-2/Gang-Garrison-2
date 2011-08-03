@@ -6,4 +6,5 @@
   <resource name="Options" type="RESOURCE"/>
   <resource name="Lobby" type="RESOURCE"/>
   <resource name="Maps" type="GROUP"/>
+  <resource name="DownloadRoom" type="RESOURCE"/>
 </resources>

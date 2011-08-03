@@ -12,17 +12,25 @@ if(tcp_eof(global.serverSocket)) {
 
 if(downloadingMap)
 {
-    if(tcp_receive(global.serverSocket, downloadMapBytes))
+    while(tcp_receive(global.serverSocket, min(1024, downloadMapBytes-buffer_size(downloadMapBuffer))))
     {
-        var fileid;
-        fileid = file_bin_open("Maps/" + downloadMapName + ".png", 1);
-        repeat(downloadMapBytes)
-            file_bin_write_byte(fileid, read_ubyte(global.serverSocket));
-        file_bin_close(fileid);
-        downloadingMap = false;
+        write_buffer(downloadMapBuffer, global.serverSocket);
+        if(buffer_size(downloadMapBuffer) == downloadMapBytes)
+        {
+            var fileid;
+            fileid = file_bin_open("Maps/" + downloadMapName + ".png", 1);
+            repeat(downloadMapBytes)
+                file_bin_write_byte(fileid, read_ubyte(downloadMapBuffer));
+            file_bin_close(fileid);
+            downloadingMap = false;
+            buffer_destroy(downloadMapBuffer);
+            downloadMapBuffer = -1;
+            exit;
+        }
     }
-    else
-        exit;
+    if(keyboard_check(vk_escape))
+        instance_destroy();
+    exit;
 }
 
 roomchange = false;
@@ -46,7 +54,15 @@ do {
                 var download;
                 download = not file_exists("Maps/" + downloadMapName + ".png");
                 if(!download and CustomMapGetMapMD5(downloadMapName) != advertisedMapMd5)
-                    download = show_question("The server's copy of the map (" + downloadMapName + ") differs from ours.#Would you like to download this server's version of the map?");
+                {
+                    if(show_question("The server's copy of the map (" + downloadMapName + ") differs from ours.#Would you like to download this server's version of the map?"))
+                        download = true;
+                    else
+                    {
+                        instance_destroy();
+                        exit;
+                    }
+                }
                 
                 if(download)
                 {
@@ -54,7 +70,10 @@ do {
                     socket_send(global.serverSocket);
                     receiveCompleteMessage(global.serverSocket,4,global.tempBuffer);
                     downloadMapBytes = read_uint(global.tempBuffer);
+                    downloadMapBuffer = buffer_create();
                     downloadingMap = true;
+                    room_goto_fix(DownloadRoom);
+                    roomchange=true;
                 }
             }
             ClientPlayerJoin(global.serverSocket);
@@ -364,8 +383,12 @@ do {
                 }
                 if(!file_exists("Maps/" + global.currentMap + ".png") or CustomMapGetMapMD5(global.currentMap) != global.currentMapMD5)
                 {   // Reconnect to the server to download the map
+                    var oldReturnRoom;
+                    oldReturnRoom = returnRoom;
+                    returnRoom = DownloadRoom;
                     event_perform(ev_destroy,0);
                     ClientCreate();
+                    returnRoom = oldReturnRoom;
                     usePreviousPwd = true;
                     exit;
                 }
