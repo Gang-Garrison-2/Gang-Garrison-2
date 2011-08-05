@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <constants>
-  <constant name="VERSION" value="23400"/>
+  <constant name="VERSION" value="23500"/>
   <constant name="PROTOCOL_UUID" value="&quot;bb9dc83d-4ffc-9963-b3a8-23ea87d30b2c&quot;"/>
   <constant name="HELLO" value="0"/>
   <constant name="PLAYER_JOIN" value="1"/>
@@ -61,7 +61,7 @@
   <constant name="CHARACTER_ANIMATION_INTEL" value="2"/>
   <constant name="CHARACTER_ANIMATION_LEN" value="2"/>
   <constant name="CHARACTER_ANIMATION_DEAD" value="5"/>
-  <constant name="LOBBY_SERVER_HOST" value="&quot;ganggarrison.com&quot;"/>
+  <constant name="LOBBY_SERVER_HOST" value="&quot;gg2.game-host.org&quot;"/>
   <constant name="LOBBY_SERVER_PORT" value="29942"/>
   <constant name="WSAEWOULDBLOCK" value="-10035"/>
   <constant name="WSAENETDOWN" value="-10050"/>
