@@ -40,5 +40,7 @@
     buffer_clear(global.sendBuffer);
     ClientPlayerJoin(global.playerName);
     write_buffer(global.serverSocket, global.sendBuffer);
+    if(global.haxxyKey != "")
+        write_byte(global.serverSocket, I_AM_A_HAXXY_WINNER);
     socket_send(global.serverSocket);
 }

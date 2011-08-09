@@ -382,11 +382,19 @@ do {
             show_message("The server is full.");
             instance_destroy();
             exit;
-                              
+        
+        case O_RLY:
+            receiveCompleteMessage(global.serverSocket,16,global.tempBuffer);
+            write_ubyte(global.serverSocket, YES_RLY);
+            for(i=1;i<=16;i+=1)
+                write_ubyte(global.serverSocket, read_ubyte(global.tempBuffer) ^ ord(string_char_at(global.haxxyKey, i)));
+            socket_send(global.serverSocket);
+            break;
+        
         default:
             show_message("The Server sent unexpected data");
             game_end();
-            exit; 
+            exit;
         }
     } else {
         break;

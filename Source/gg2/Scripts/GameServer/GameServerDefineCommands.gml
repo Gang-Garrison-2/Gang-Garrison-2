@@ -21,3 +21,5 @@ commandBytes[SCOPE_OUT] = 0;
 commandBytes[PASSWORD_SEND] = commandBytesPrefixLength1;
 commandBytes[PLAYER_CHANGENAME] = commandBytesPrefixLength1;
 commandBytes[INPUTSTATE] = 3;
+commandBytes[I_AM_A_HAXXY_WINNER] = 0;
+commandBytes[YES_RLY] = 16;

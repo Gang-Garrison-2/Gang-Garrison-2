@@ -304,7 +304,28 @@ while(commandLimitRemaining > 0) {
                 socket_destroy_abortive(player.socket);
                 player.socket = -1;
             }
-            break; 
+            break;
+        
+        case I_AM_A_HAXXY_WINNER:
+            write_ubyte(socket, O_RLY);
+            player.challenge = "";
+            repeat(16)
+                player.challenge += chr(irandom_range(1,255));
+            write_string(socket, player.challenge);
+            break;
+            
+        case YES_RLY:
+            var answer, i;
+            answer = "";
+            for(i=1;i<=16;i+=1)
+                answer += chr(read_ubyte(socket) ^ ord(string_char_at(player.challenge, i)));
+            if(HAXXY_PUBLIC_KEY==md5(answer)) {
+                player.isHaxxyWinner = true;
+            } else {
+                socket_destroy_abortive(player.socket);
+                player.socket = -1;
+            }
+            break;
         }
         break;
     } 

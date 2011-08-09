@@ -62,6 +62,7 @@
     global.caplimitBkup = global.caplimit;
     global.autobalance = ini_read_real("Server", "AutoBalance",1);
     global.Server_RespawntimeSec = ini_read_real("Server", "Respawn Time", 5);
+    global.haxxyKey = ini_read_string("Haxxy", "SecretHaxxyKey", "");
     global.currentMapArea=1;
     global.totalMapAreas=1;
     global.setupTimer=1800;
@@ -92,6 +93,7 @@
     ini_write_real("Server", "Respawn Time", global.Server_RespawntimeSec);
     ini_write_real("Server", "Time Limit", global.timeLimitMins);
     ini_write_string("Server", "Password", global.serverPassword);
+    ini_write_string("Haxxy", "SecretHaxxyKey", global.haxxyKey);
     
     //screw the 0 index we will start with 1
     //map_truefort 

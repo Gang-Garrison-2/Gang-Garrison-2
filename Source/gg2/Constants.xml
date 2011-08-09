@@ -44,6 +44,10 @@
   <constant name="SCOPE_IN" value="40"/>
   <constant name="SCOPE_OUT" value="41"/>
   <constant name="KOTH_UNLOCKCP" value="42"/>
+  <constant name="I_AM_A_HAXXY_WINNER" value="50"/>
+  <constant name="O_RLY" value="51"/>
+  <constant name="YES_RLY" value="52"/>
+  <constant name="HAXXY_PUBLIC_KEY" value="&quot;3cca03b3c2089efdea66a374081d54ed&quot;"/>
   <constant name="TEAM_RED" value="0"/>
   <constant name="TEAM_BLUE" value="1"/>
   <constant name="TEAM_SPECTATOR" value="2"/>

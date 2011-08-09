@@ -79,6 +79,8 @@
             passwordCount = 0;
         }
     }
+    
+    isHaxxyWinner = false;
 }
 </argument>
       </arguments>
