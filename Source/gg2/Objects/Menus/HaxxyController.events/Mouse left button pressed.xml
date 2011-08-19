@@ -12,7 +12,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="BOTH">http://www.ganggarrison.com/haxxy</argument>
+        <argument kind="BOTH">http://www.ganggarrison.com/forums/index.php?topic=29159.0</argument>
         <argument kind="MENU">1</argument>
       </arguments>
     </action>
