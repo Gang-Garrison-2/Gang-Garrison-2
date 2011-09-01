@@ -20,6 +20,9 @@ socket_destroy(global.serverSocket);
 with(Player)
     instance_destroy();
 
+with(JoiningPlayer)
+    instance_destroy();
+    
 with(PlayerControl)
     instance_destroy();
 

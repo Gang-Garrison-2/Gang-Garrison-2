@@ -14,6 +14,7 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">buffer_destroy(mapDownloadBuffer);
+socket_destroy_abortive(socket);
 </argument>
       </arguments>
     </action>
