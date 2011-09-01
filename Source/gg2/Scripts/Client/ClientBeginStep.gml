@@ -17,11 +17,7 @@ if(downloadingMap)
         write_buffer(downloadMapBuffer, global.serverSocket);
         if(buffer_size(downloadMapBuffer) == downloadMapBytes)
         {
-            var fileid;
-            fileid = file_bin_open("Maps/" + downloadMapName + ".png", 1);
-            repeat(downloadMapBytes)
-                file_bin_write_byte(fileid, read_ubyte(downloadMapBuffer));
-            file_bin_close(fileid);
+            write_buffer_to_file(downloadMapBuffer, "Maps/" + downloadMapName + ".png");
             downloadingMap = false;
             buffer_destroy(downloadMapBuffer);
             downloadMapBuffer = -1;

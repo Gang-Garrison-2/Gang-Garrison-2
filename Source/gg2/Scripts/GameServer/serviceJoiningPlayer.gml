@@ -102,15 +102,14 @@ case STATE_EXPECT_COMMAND:
     case DOWNLOAD_MAP:
         if(advertisedMapMd5 != "" and file_exists("Maps/" + advertisedMap + ".png"))
         {   // If the md5 was empty, we advertised an internal map, which obviously can't be downloaded.
-            var fileid, filesize;
             buffer_destroy(mapDownloadBuffer);
             mapDownloadBuffer = buffer_create();
-            fileid = file_bin_open("Maps/" + advertisedMap + ".png", 0);
-            filesize = file_bin_size(fileid);
-            write_uint(socket, filesize);
-            repeat(filesize)
-                write_ubyte(mapDownloadBuffer, file_bin_read_byte(fileid));
-            file_bin_close(fileid);
+            if(!append_file_to_buffer(mapDownloadBuffer, "Maps/" + advertisedMap + ".png")) {
+                buffer_destroy(mapDownloadBuffer);
+                mapDownloadBuffer = -1;
+                break;
+            }
+            write_uint(socket, buffer_size(mapDownloadBuffer));
             newState = STATE_CLIENT_DOWNLOADING;
         }
         break;
@@ -134,7 +133,7 @@ case STATE_EXPECT_NAME:
     
     player = instance_create(0,0,Player);
     player.socket = socket;
-    socket = -1;
+    socket = -1; // Prevent the socket from being destroyed with the JoiningPlayer - it belongs to the Player now.
     
     player.name = read_string(socket, expectedBytes);
     player.name = string_copy(player.name, 0, MAX_PLAYERNAME_LENGTH);
@@ -149,7 +148,6 @@ socket_send(socket);
 state = newState;
 if(state==-1)
 {   // We're done, either because of a protocol error or because the client finished joining.
-    socket_destroy(socket);
     instance_destroy();
     exit;
 }
