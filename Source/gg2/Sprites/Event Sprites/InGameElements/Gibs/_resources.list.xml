@@ -2,4 +2,5 @@
 <resources>
   <resource name="PartyhatS" type="RESOURCE"/>
   <resource name="BloodDropSP" type="RESOURCE"/>
+  <resource name="PartyBalloonS" type="RESOURCE"/>
 </resources>
