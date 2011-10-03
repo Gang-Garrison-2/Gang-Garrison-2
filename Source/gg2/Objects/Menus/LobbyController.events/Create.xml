@@ -33,9 +33,7 @@ lobbysocket = tcp_connect(LOBBY_SERVER_HOST, LOBBY_SERVER_PORT);
 write_ubyte(lobbysocket, 128);
 
 // Send version UUID (big endian)
-for(i=0; i&lt;16; i+=1) {
-    write_ubyte(lobbysocket, global.protocolUuid[i]);
-}
+write_buffer(lobbysocket, global.protocolUuid);
 
 socket_send(lobbysocket);
 </argument>

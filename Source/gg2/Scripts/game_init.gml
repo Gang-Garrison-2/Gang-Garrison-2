@@ -327,7 +327,8 @@ global.launchMap = "";
     message_input_font("Century",9,c_white,0);
     
     // parse the protocol version UUID for later use
-    parseProtocolUuid();
+    global.protocolUuid = buffer_create();
+    parseUuid(PROTOCOL_UUID, global.protocolUuid);
     
     //Key Mapping
     ini_open("controls.gg2");

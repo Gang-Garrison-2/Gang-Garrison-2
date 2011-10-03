@@ -22,8 +22,7 @@ write_ubyte(lobbyBuffer, 42);
 write_ubyte(lobbyBuffer, 128);
 
 // Send version UUID (big endian)
-for(i=0; i<16; i+=1)
-    write_ubyte(lobbyBuffer, global.protocolUuid[i]);
+write_buffer(lobbyBuffer, global.protocolUuid);
     
 write_ushort(lobbyBuffer, global.hostingPort);
 write_ubyte(lobbyBuffer, string_length(serverDescription));
