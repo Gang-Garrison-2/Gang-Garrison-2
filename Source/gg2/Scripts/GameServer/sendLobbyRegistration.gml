@@ -16,10 +16,9 @@ write_ushort(lobbyBuffer, global.playerLimit);
 write_ushort(lobbyBuffer, noOfPlayers);
 write_ushort(lobbyBuffer, 0); // Number of bots
 if(global.serverPassword != "")
-    write_ubyte(lobbyBuffer, 1);
+    write_ushort(lobbyBuffer, 1);
 else
-    write_ubyte(lobbyBuffer, 0);
-write_ubyte(lobbyBuffer, 0); // Reserved flags
+    write_ushort(lobbyBuffer, 0);
 
 writeKeyValue(lobbyBuffer, "name", global.serverName);
 writeKeyValue(lobbyBuffer, "game", "Gang Garrison 2");
