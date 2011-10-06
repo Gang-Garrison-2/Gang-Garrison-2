@@ -32,6 +32,7 @@
             if(other.team != team or id==other.ownerPlayer.object) &amp;&amp; !ubered and hp &gt; 0
             {
                 hp -= other.explosionDamage*(1-(distance_to_object(other)/other.blastRadius));
+                timeUnscathed = 0;
                 if (id == other.ownerPlayer.object and lastDamageDealer != -1 and lastDamageDealer != other.ownerPlayer and other.reflector == noone)
                 {
                     lastDamageSource = FINISHED_OFF_GIB;

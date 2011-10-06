@@ -13,10 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if(other.team != team) {
-    other.hp -= hitDamage;
-    instance_destroy();
-}
+        <argument kind="STRING">instance_destroy()
 </argument>
       </arguments>
     </action>

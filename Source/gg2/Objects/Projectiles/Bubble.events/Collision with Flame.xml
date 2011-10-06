@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<event category="COLLISION" with="BurningProjectile">
+<event category="COLLISION" with="Flame">
   <actions>
     <action id="603" library="1">
       <!--action name: Code-->
@@ -13,13 +13,9 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if(not burning) {
-    sprite_index = SheetBurning;
-    burning = true;
-    image_index = 0;
-    image_speed = (1/4);
-    alarm[1] = 24;
-}</argument>
+        <argument kind="STRING">if(team != other.team)
+    instance_destroy();
+</argument>
       </arguments>
     </action>
   </actions>

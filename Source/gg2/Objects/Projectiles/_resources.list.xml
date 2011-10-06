@@ -9,7 +9,6 @@
   <resource name="Pop" type="RESOURCE"/>
   <resource name="BladeB" type="RESOURCE"/>
   <resource name="Flame" type="RESOURCE"/>
-  <resource name="BurningProjectile" type="RESOURCE"/>
   <resource name="Flare" type="RESOURCE"/>
   <resource name="Mine" type="RESOURCE"/>
   <resource name="Needle" type="RESOURCE"/>

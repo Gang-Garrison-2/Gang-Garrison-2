@@ -23,6 +23,7 @@
         if(characterHit != -1) {
             if(characterHit.team != team || characterHit.id == ownerPlayer.object  &amp;&amp; characterHit.ubered == 0 ) {
                 characterHit.hp -= hitDamage;
+                characterHit.timeUnscathed = 0;
                 if object_is_ancestor(characterHit.object_index, Character) {
                     if (characterHit.lastDamageDealer != ownerPlayer &amp;&amp; characterHit.lastDamageDealer != characterHit.player){
                         characterHit.secondToLastDamageDealer = characterHit.lastDamageDealer;
@@ -48,6 +49,7 @@
                     if (other.team != team) or (id==other.ownerPlayer.object)
                     {
                         hp -= other.explosionDamage*(1-(distance_to_object(other)/other.blastRadius));
+                        timeUnscathed = 0;
                         if(id == other.ownerPlayer.object and lastDamageDealer != -1 and lastDamageDealer != other.ownerPlayer)
                         {
                             lastDamageSource = FINISHED_OFF_GIB;

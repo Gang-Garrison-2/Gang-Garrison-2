@@ -18,6 +18,7 @@ if (burnDuration &gt; 0)
 {
     burnDuration -= durationDecay;
     hp -= burnIntensity / 30;
+    timeUnscathed = 0;
     if (lastDamageDealer != burnedBy &amp;&amp; lastDamageDealer != player) {
         secondToLastDamageDealer = lastDamageDealer;
         alarm[4] = alarm[3];

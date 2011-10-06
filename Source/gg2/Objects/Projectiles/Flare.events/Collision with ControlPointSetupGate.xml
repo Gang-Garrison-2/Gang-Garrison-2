@@ -13,10 +13,8 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if global.setupTimer &gt;0 {
-
+        <argument kind="STRING">{
     instance_destroy();
-
 }</argument>
       </arguments>
     </action>

@@ -124,7 +124,7 @@ if(nearestTarget == -1) {
         
         if(nearestTarget.ubered == 0) {
             nearestTarget.hp -= hitDamage;
-
+            nearestTarget.timeUnscathed = 0;
             if (nearestTarget.lastDamageDealer != ownerPlayer &amp;&amp; object_is_ancestor(nearestTarget.object_index, Character)) {
                 if (nearestTarget.lastDamageDealer != nearestTarget.player){
                     nearestTarget.secondToLastDamageDealer = nearestTarget.lastDamageDealer;
