@@ -13,8 +13,15 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">hp = 4000;
-maxHP = hp;
+        <argument kind="STRING">maxHp = 1400;
+hp = maxHp;
+maxShieldHp = 200;
+shieldHp = maxShieldHp;
+maxShieldResistance = 0.75;
+minShieldResistance = 0.25;
+shieldResistance = maxShieldResistance;
+isShieldRegenerating = false;
+regenerationBuffer = 4 * 30;
 ubered=0;
 lastDamageDealer = -1;
 lastDamageSource = -1;

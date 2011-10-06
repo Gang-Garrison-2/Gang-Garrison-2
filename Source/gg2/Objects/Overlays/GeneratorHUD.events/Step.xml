@@ -15,14 +15,26 @@
       <arguments>
         <argument kind="STRING">if timer &gt; 0 {
     timer -=1;
-    if global.redCaps == 1 global.winners = TEAM_RED;
-    else if global.blueCaps == 1 global.winners = TEAM_BLUE;
-}
-
-else if timer == 0{
-    /*if global.redCaps &gt; global.blueCaps global.winners = TEAM_RED;
-    else if global.blueCaps &gt; global.redCaps global.winners = TEAM_BLUE;
-    else*/ global.winners = TEAM_SPECTATOR;
+} else if (timer == 0) {
+    var redStage, blueStage;
+    with (Generator) {
+        if (hp &gt;= maxHp*0.66) {
+            if (team == TEAM_RED) 
+                redStage = 3 
+            else blueStage = 3;
+        } else if (hp &gt;= maxHp*0.33 &amp;&amp; hp &lt; maxHp*0.66) {
+            if (team == TEAM_RED)
+                redStage = 2;
+            else blueStage = 2;
+        } else {
+            if (team == TEAM_RED)
+                redStage = 1;
+            else blueStage = 1;
+        }
+    }
+    if (redStage &gt; blueStage) global.winners = TEAM_RED;
+    if (redStage &lt; blueStage) global.winners = TEAM_BLUE;
+    if (redStage == blueStage) global.winners = TEAM_SPECTATOR;
 }
 </argument>
       </arguments>

@@ -22,14 +22,27 @@
             exploded = true;
         if(characterHit != -1) {
             if(characterHit.team != team || characterHit.id == ownerPlayer.object  &amp;&amp; characterHit.ubered == 0 ) {
-                characterHit.hp -= hitDamage;
-                characterHit.timeUnscathed = 0;
-                if object_is_ancestor(characterHit.object_index, Character) {
-                    if (characterHit.lastDamageDealer != ownerPlayer &amp;&amp; characterHit.lastDamageDealer != characterHit.player){
-                        characterHit.secondToLastDamageDealer = characterHit.lastDamageDealer;
-                        characterHit.alarm[4] = characterHit.alarm[3]
+                if object_is_ancestor(characterHit.object_index, Generator) {
+                    alarm[0] = characterHit.regenerationBuffer;
+                    //allow overkill to be applied directly to the target
+                    if (hitDamage &gt; characterHit.shieldHp) {
+                        characterHit.hp -= hitDamage - characterHit.shieldHp;
+                        characterHit.hp -= characterHit.shieldHp * characterHit.shieldResistance;
+                        shieldHp = 0;
+                    } else {
+                        characterHit.hp -= hitDamage * characterHit.shieldResistance;
+                        characterHit.shieldHp -= hitDamage;
                     }
-                    characterHit.alarm[3] = ASSIST_TIME;
+                } else {
+                    characterHit.hp -= hitDamage;
+                    characterHit.timeUnscathed = 0;
+                    if object_is_ancestor(characterHit.object_index, Character) {
+                        if (characterHit.lastDamageDealer != ownerPlayer &amp;&amp; characterHit.lastDamageDealer != characterHit.player){
+                            characterHit.secondToLastDamageDealer = characterHit.lastDamageDealer;
+                            characterHit.alarm[4] = characterHit.alarm[3]
+                        }
+                        characterHit.alarm[3] = ASSIST_TIME;
+                    }
                 }
                 characterHit.lastDamageDealer = ownerPlayer;
                 characterHit.lastDamageSource = weapon;
@@ -109,7 +122,19 @@
         with (Generator) {
             if (distance_to_object(other) &lt; other.blastRadius){
                 if(other.team != team) {
-                    hp -= other.explosionDamage*(1-(distance_to_object(other)/other.blastRadius));
+                    alarm[0] = regenerationBuffer;
+                    //allow overkill to be applied directly to the target
+                    var hitDamage;
+                    hitDamage = other.explosionDamage*(1-(distance_to_object(other)/other.blastRadius));
+                    if (hitDamage &gt; shieldHp) {
+                        hp -= hitDamage - shieldHp;
+                        hp -= shieldHp * shieldResistance;
+                        shieldHp = 0;
+                    } else {
+                        hp -= hitDamage * shieldResistance;
+                        shieldHp -= hitDamage;
+                    }
+                    
                     lastDamageDealer = other.ownerPlayer;
                     lastDamageSource = other.weapon;
                 }

@@ -19,7 +19,6 @@ playsound(x,y,CPBeginCapSnd);
 effect_create_above(ef_explosion,x+30-random(60),y+30-random(60),2,c_gray);
 effect_create_above(ef_explosion,x,y,2,c_red);
 
-//new
 with (Character) {
     if (distance_to_object(other) &lt; other.blastRadius){
         motion_add(point_direction(other.x,other.y,x,y),15-15*(distance_to_object(other)/other.blastRadius));

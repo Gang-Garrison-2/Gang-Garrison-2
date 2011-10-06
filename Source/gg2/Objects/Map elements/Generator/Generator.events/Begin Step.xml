@@ -21,8 +21,8 @@ if global.isHost {
     }
     else if GameServer.frame mod 1800 ==0 GameServer.syncTimer = 1;
 }
-if hp &gt;= maxHP*0.66 spriteStart = 0;
-else if hp &gt;= maxHP*0.33 &amp;&amp; hp &lt; maxHP*0.66{ 
+if hp &gt;= maxHp*0.66 spriteStart = 0;
+else if hp &gt;= maxHp*0.33 &amp;&amp; hp &lt; maxHp*0.66{ 
     spriteStart = 16;
     if(global.particles = PARTICLES_NORMAL) {
         if smokeCount mod 50 == 0 effect_create_above(ef_smoke,x+20-random(40),y+20-random(40),choose(0,1),c_gray);

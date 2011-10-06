@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<event category="OTHER" id="23">
+<event category="ALARM" id="0">
   <actions>
     <action id="603" library="1">
       <!--action name: Code-->
@@ -13,9 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">receiveCompleteMessage(global.serverSocket,3,global.deserializeBuffer);
-hp = read_ushort(global.deserializeBuffer);
-sheildHp = read_byte(global.deserializeBuffer);
+        <argument kind="STRING">isShieldRegenerating = true;
 </argument>
       </arguments>
     </action>

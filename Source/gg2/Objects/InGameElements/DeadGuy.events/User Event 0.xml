@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="OTHER" id="10">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{
+    if(not place_free(x,y)) {
+        move_outside_solid(270,35);
+    }
+    
+    move_contact_solid(direction, speed);
+    if(not place_free(x,y+sign(vspeed))) {
+        vspeed=0;
+        if(not place_free(x+hspeed,y)){
+            move_contact_solid(direction, speed);
+            hspeed=0;
+        }
+    }
+    if(not place_free(x+sign(hspeed),y)){
+        hspeed=0;
+        if(not place_free(x,y+vspeed)) {
+            move_contact_solid(direction, speed);
+            vspeed=0;
+        }
+    }
+}</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

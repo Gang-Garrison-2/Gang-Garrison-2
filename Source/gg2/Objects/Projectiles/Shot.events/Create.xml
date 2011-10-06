@@ -14,7 +14,7 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">{
-    damage = 8;
+    hitDamage = 8;
     lifetime = 40;
     alarm[0] = lifetime;
     originx=x;
