@@ -85,14 +85,15 @@
                 dist = point_distance(other.x, other.y, x, y);
                 angle = abs((dir-other.owner.aimDirection)+720) mod 360;
                 if collision_circle(x,y,25,other.poof,false,true) {
-                    motion_add(other.owner.aimDirection, other.blastStrength*(1-dist/other.blastDistance) );
+                    //motion_add(other.owner.aimDirection, other.blastStrength*(1-dist/other.blastDistance) );
+                    motion_set(other.owner.aimDirection, max(speed, other.blastStrength / 3));
                     stickied = false;
                     reflector = other.ownerPlayer;
+                    if (position_meeting(x+hspeed,y+vspeed,Obstacle)) { 
+                        motion_add(point_direction(x,y,x-hspeed,y-vspeed),speed*1.4) 
+                        stickied = false;
+                    } 
                 }
-                if(position_meeting(x+hspeed,y+vspeed,Obstacle)) { 
-                    motion_add(point_direction(x,y,x-hspeed,y-vspeed),speed*1.4) 
-                    stickied = false;
-                }  
             }
         }
         

@@ -19,8 +19,11 @@
     image_xscale = 1;
 } 
 
-if team==TEAM_RED sprite_index=BackstabRedS;
-else sprite_index=BackstabBlueS;
+//if team==TEAM_RED sprite_index=BackstabRedS;
+//else sprite_index=BackstabBlueS;
+
+if team==TEAM_RED sprite_index=BackstabTorsoRedS;
+else sprite_index=BackstabTorsoBlueS;
 
 //alarm[0] = 43;
 x=owner.x;
@@ -44,7 +47,8 @@ if(not done) {
 
         instance_destroy();
     }
-}</argument>
+}
+</argument>
       </arguments>
     </action>
   </actions>
