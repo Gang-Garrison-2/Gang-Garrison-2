@@ -30,11 +30,13 @@
     if(shot) {
         shot=false;
         draw_set_alpha(0.8);
+        depth = -2;
         if(owner.team==TEAM_RED) {
             draw_line_width_color(x,y,x2,y2,2,c_red,c_red);
         } else {
             draw_line_width_color(x,y,x2,y2,2,c_blue,c_blue);
         }
+        depth = -1;
     }
     //draw_text(x, y - 35, hitDamage);
     if (owner.zoomed &amp;&amp; owner == global.myself.object) {

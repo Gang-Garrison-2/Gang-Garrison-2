@@ -8,6 +8,7 @@
   <resource name="SentryRed" type="RESOURCE"/>
   <resource name="SentryBlue" type="RESOURCE"/>
   <resource name="SentryMaskS" type="RESOURCE"/>
+  <resource name="SentryMaskS2" type="RESOURCE"/>
   <resource name="SentryTurretS" type="RESOURCE"/>
   <resource name="SentryGibsS" type="RESOURCE"/>
   <resource name="TurretRotateS" type="RESOURCE"/>
