@@ -28,7 +28,7 @@
     <letF1ShowGameInfo>false</letF1ShowGameInfo>
     <letF4SwitchFullscreen>false</letF4SwitchFullscreen>
     <letF5SaveF6Load>false</letF5SaveF6Load>
-    <letF9Screenshot>true</letF9Screenshot>
+    <letF9Screenshot>false</letF9Screenshot>
     <letEscEndGame>false</letEscEndGame>
     <treatCloseAsEscape>false</treatCloseAsEscape>
   </keys>

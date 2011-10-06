@@ -313,6 +313,7 @@ global.launchMap = "";
     if(!directory_exists(working_directory + "\Maps")) directory_create(working_directory + "\Maps");
     
     instance_create(0, 0, AudioControl);
+    instance_create(0, 0, SSControl);
     
     if(global.dedicatedMode == 1) {
         AudioControlToggleMute();
