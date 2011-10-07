@@ -14,7 +14,7 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">{
-    if (readyToBlast &amp;&amp; ammoCount &gt;= 33) {
+    if (readyToBlast &amp;&amp; ammoCount &gt;= 50) {
         playsound(x,y,CompressionBlastSnd);
         poof = instance_create(x+lengthdir_x(25,owner.aimDirection),y+lengthdir_y(25,owner.aimDirection),AirBlastO);
         if image_xscale == 1 {
@@ -149,7 +149,7 @@
         isRefilling = false;
         alarm[1]=blastReloadTime;
         alarm[0]=blastNoFlameTime;
-        ammoCount -= 66;
+        ammoCount -= 50;
     }
 }
 </argument>

@@ -64,6 +64,7 @@
     
     animationOffset = CHARACTER_ANIMATION_NORMAL;
     animationImage = 0;
+    humiliationOffset = irandom(10)*3; //support for 10 different animations is more than enough
     
     //kill assist/finish off addition
     lastDamageDealer = -1;
