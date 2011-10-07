@@ -145,6 +145,8 @@
         
         readyToBlast=false;
         readyToShoot=false;
+        alarm[5]=reloadBuffer*1.5;
+        isRefilling = false;
         alarm[1]=blastReloadTime;
         alarm[0]=blastNoFlameTime;
         ammoCount -= 66;

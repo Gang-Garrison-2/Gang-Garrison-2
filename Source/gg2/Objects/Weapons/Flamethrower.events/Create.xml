@@ -32,6 +32,9 @@
     soundLoopTime = 30;
     currentTime = 0;
     
+    reloadBuffer = 15;
+    isRefilling = false;
+    
 }
 </argument>
       </arguments>
