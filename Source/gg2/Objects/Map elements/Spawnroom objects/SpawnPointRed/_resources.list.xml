@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
+  <resource name="SpawnPointRed" type="RESOURCE"/>
   <resource name="SpawnPointRed1" type="RESOURCE"/>
   <resource name="SpawnPointRed2" type="RESOURCE"/>
   <resource name="SpawnPointRed3" type="RESOURCE"/>

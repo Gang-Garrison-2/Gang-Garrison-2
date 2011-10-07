@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="CTF" type="GROUP"/>
+  <resource name="Arena" type="GROUP"/>
+  <resource name="Generator" type="GROUP"/>
+  <resource name="CP" type="GROUP"/>
+  <resource name="KOTH" type="GROUP"/>
+  <resource name="DKOTH" type="GROUP"/>
+</resources>
