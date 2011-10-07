@@ -13,9 +13,9 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">maxHp = 1400;
+        <argument kind="STRING">maxHp = 2100;
 hp = maxHp;
-maxShieldHp = 200;
+maxShieldHp = 300;
 shieldHp = maxShieldHp;
 maxShieldResistance = 0.75;
 minShieldResistance = 0.25;

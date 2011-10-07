@@ -32,6 +32,9 @@
             else blueStage = 1;
         }
     }
+    if (redStage &gt; blueStage &amp;&amp; GeneratorRed.alarm[0] &gt; -1) { overtime = true; exit; }
+    if (redStage &lt; blueStage &amp;&amp; GeneratorBlue.alarm[0] &gt; -1) { overtime = true; exit; }
+    if (redStage == blueStage &amp;&amp; (GeneratorRed.alarm[0] &gt; -1 || GeneratorBlue.alarm[0] &gt; -1)) { overtime = true; exit; }    
     if (redStage &gt; blueStage) global.winners = TEAM_RED;
     if (redStage &lt; blueStage) global.winners = TEAM_BLUE;
     if (redStage == blueStage) global.winners = TEAM_SPECTATOR;

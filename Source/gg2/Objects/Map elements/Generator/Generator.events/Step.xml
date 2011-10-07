@@ -14,7 +14,7 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">if (isShieldRegenerating) {
-    shieldHp = min(shieldHp+(2*isShieldRegenerating)/3, maxShieldHp);  
+    shieldHp = min(shieldHp+isShieldRegenerating, maxShieldHp);  
     if (shieldHp == maxShieldHp)
         isShieldRegenerating = false;
 }

@@ -24,6 +24,7 @@
         other.hp -= hitDamage/2 * other.shieldResistance;
         other.shieldHp -= hitDamage/2;
     }
+    instance_destroy();
 }
 </argument>
       </arguments>
