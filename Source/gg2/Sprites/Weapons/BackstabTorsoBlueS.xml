@@ -5,8 +5,8 @@
     <separate>true</separate>
     <shape>RECTANGLE</shape>
     <bounds alphaTolerance="0" mode="MANUAL">
-      <left>27</left>
-      <right>39</right>
+      <left>23</left>
+      <right>35</right>
       <top>30</top>
       <bottom>63</bottom>
     </bounds>

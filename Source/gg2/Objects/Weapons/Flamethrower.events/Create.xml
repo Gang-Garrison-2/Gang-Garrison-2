@@ -22,8 +22,8 @@
     blastAngle = 75;
     blastStrength = 28;
     characterBlastStrength = 15;
-    blastReloadTime = 50;
-    blastNoFlameTime = 25;
+    blastReloadTime = 35;
+    blastNoFlameTime = 15;
     alarm[1] = blastReloadTime;
     readyToBlast = false;
     
