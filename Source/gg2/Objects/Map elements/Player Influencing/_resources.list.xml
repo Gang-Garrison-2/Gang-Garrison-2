@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="MoveBoxes" type="GROUP"/>
+  <resource name="KillBox" type="RESOURCE"/>
+  <resource name="PitFall" type="RESOURCE"/>
+  <resource name="FragBox" type="RESOURCE"/>
+</resources>

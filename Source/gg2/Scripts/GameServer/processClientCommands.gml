@@ -89,8 +89,9 @@ while(commandLimitRemaining > 0) {
                                 doEventPlayerDeath(player, lastDamageDealer, assistant, FINISHED_OFF);
                             }
                         }
-                        else
-                            instance_destroy();
+                        else 
+                        instance_destroy(); 
+                        
                     }
                 }
                 else if(player.alarm[5]<=0)

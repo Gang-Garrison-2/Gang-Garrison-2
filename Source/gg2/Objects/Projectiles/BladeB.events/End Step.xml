@@ -13,7 +13,10 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">ammoUsage += 1;
+        <argument kind="STRING">if instance_exists(owner.currentWeapon) {
+    owner.currentWeapon.ammoCount -= 1;
+    ammoDrained += 1;
+}
 </argument>
       </arguments>
     </action>

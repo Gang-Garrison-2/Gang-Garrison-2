@@ -32,7 +32,9 @@
             }
         justShot=true;
         readyToShoot=false;
-        ammoCount-=4;
+        alarm[5] = reloadBuffer;
+        isRefilling = false;
+        ammoCount-=3;
         if ammoCount &gt; 0 alarm[0]=refireTime;
         else alarm[0]=50;
     }

@@ -18,6 +18,7 @@ if (burnDuration &gt; 0)
 {
     burnDuration -= durationDecay;
     hp -= burnIntensity / 30;
+    timeUnscathed = 0;
     if (lastDamageDealer != burnedBy &amp;&amp; lastDamageDealer != player) {
         secondToLastDamageDealer = lastDamageDealer;
         alarm[4] = alarm[3];
@@ -202,12 +203,21 @@ if intel {
         cloakAplha=1;
     }
 }
-    
-animationImage = (animationImage+abs(hspeed)/20) mod CHARACTER_ANIMATION_LEN;
-    
+ 
+if (player.humiliated) {
+    if (!place_free(x,y+1) &amp;&amp; hspeed == 0)
+        animationImage = 0;
+    else if place_free(x,y+1)
+        animationImage = 2;
+    if (!place_free(x,y+1) &amp;&amp; hspeed != 0)
+        animationImage = 1+((animationImage-1+abs(hspeed)/20) mod CHARACTER_ANIMATION_LEN);
+}
+
+if (!player.humiliated) animationImage = (animationImage+abs(hspeed)/20) mod CHARACTER_ANIMATION_LEN;
+
 
 // drop intel if ubered or round is over
-if(intel) &amp;&amp; (ubered || global.mapchanging){
+if(intel) &amp;&amp; (ubered || global.mapchanging) {
     event_user(5);
 }
 

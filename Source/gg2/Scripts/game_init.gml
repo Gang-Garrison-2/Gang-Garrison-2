@@ -6,7 +6,7 @@
     var customMapRotationFile;
 
     //import wav files for music
-    global.MenuMusic=sound_add(choose("Music/menumusic1.wav","Music/menumusic2.wav","Music/menumusic3.wav","Music/menumusic4.wav"), 1, true);
+    global.MenuMusic=sound_add(choose("Music/menumusic1.wav","Music/menumusic2.wav","Music/menumusic3.wav","Music/menumusic4.wav","Music/menumusic5.wav","Music/menumusic6.wav"), 1, true);
     global.IngameMusic=sound_add("Music/ingamemusic.wav", 1, true);
     global.FaucetMusic=sound_add("Music/faucetmusic.wav", 1, true);
     if(global.MenuMusic != -1)
@@ -313,6 +313,7 @@ global.launchMap = "";
     if(!directory_exists(working_directory + "\Maps")) directory_create(working_directory + "\Maps");
     
     instance_create(0, 0, AudioControl);
+    instance_create(0, 0, SSControl);
     
     if(global.dedicatedMode == 1) {
         AudioControlToggleMute();

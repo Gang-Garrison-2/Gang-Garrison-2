@@ -14,7 +14,7 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">{
-    if (readyToBlast &amp;&amp; ammoCount &gt;= 66) {
+    if (readyToBlast &amp;&amp; ammoCount &gt;= 50) {
         playsound(x,y,CompressionBlastSnd);
         poof = instance_create(x+lengthdir_x(25,owner.aimDirection),y+lengthdir_y(25,owner.aimDirection),AirBlastO);
         if image_xscale == 1 {
@@ -85,14 +85,15 @@
                 dist = point_distance(other.x, other.y, x, y);
                 angle = abs((dir-other.owner.aimDirection)+720) mod 360;
                 if collision_circle(x,y,25,other.poof,false,true) {
-                    motion_add(other.owner.aimDirection, other.blastStrength*(1-dist/other.blastDistance) );
+                    //motion_add(other.owner.aimDirection, other.blastStrength*(1-dist/other.blastDistance) );
+                    motion_set(other.owner.aimDirection, max(speed, other.blastStrength / 3));
                     stickied = false;
                     reflector = other.ownerPlayer;
+                    if (position_meeting(x+hspeed,y+vspeed,Obstacle)) { 
+                        motion_add(point_direction(x,y,x-hspeed,y-vspeed),speed*1.4) 
+                        stickied = false;
+                    } 
                 }
-                if(position_meeting(x+hspeed,y+vspeed,Obstacle)) { 
-                    motion_add(point_direction(x,y,x-hspeed,y-vspeed),speed*1.4) 
-                    stickied = false;
-                }  
             }
         }
         
@@ -144,9 +145,11 @@
         
         readyToBlast=false;
         readyToShoot=false;
+        alarm[5]=reloadBuffer*1.5;
+        isRefilling = false;
         alarm[1]=blastReloadTime;
         alarm[0]=blastNoFlameTime;
-        ammoCount -= 66;
+        ammoCount -= 50;
     }
 }
 </argument>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="Parent Objects" type="GROUP"/>
+  <resource name="Team Gates" type="GROUP"/>
+  <resource name="Intel Gate" type="GROUP"/>
+  <resource name="Player Gates" type="GROUP"/>
+  <resource name="Bullet Wall" type="GROUP"/>
+</resources>

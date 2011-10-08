@@ -18,6 +18,7 @@
     group = selectSpawnGroup(team);
     if (group==-1) {
         show_message("This map does not contain valid spawn points");
+        game_end();
     }
     if(team == TEAM_RED) {
         numSpawnPoints = ds_list_size(global.spawnPointsRed[0,group]);

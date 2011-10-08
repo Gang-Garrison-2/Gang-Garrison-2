@@ -14,7 +14,7 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">if ammoCount &lt; 0 ammoCount = 0;
-else if ammoCount &lt;= maxAmmo ammoCount +=1;
+else if (ammoCount &lt;= maxAmmo &amp;&amp; isRefilling) ammoCount +=2;
 </argument>
       </arguments>
     </action>

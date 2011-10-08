@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="STEP" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if(global.particles == PARTICLES_NORMAL) {
+    if(random(5)&lt;1) effect_create_below(ef_smokeup,x,y-8,0,c_gray);
+} else if(global.particles == PARTICLES_ALTERNATIVE) {
+    if(not variable_global_exists("flameParticleType")) {
+        global.flameParticleType = part_type_create();
+        part_type_sprite(global.flameParticleType,FlameS,true,false,true);
+        part_type_alpha2(global.flameParticleType,1,0.3);
+        part_type_life(global.flameParticleType,4,7);
+    }
+    
+    if(not variable_global_exists("flameParticleSystem")) {
+        global.flameParticleSystem = part_system_create();
+        part_system_depth(global.flameParticleSystem, 10);
+    }
+    if(random(8)&lt;1) {
+        part_particles_create(global.flameParticleSystem,x,y,global.flameParticleType,1);
+    }
+}
+
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

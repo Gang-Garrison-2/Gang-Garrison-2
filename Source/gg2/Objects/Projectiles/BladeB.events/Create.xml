@@ -16,6 +16,7 @@
         <argument kind="STRING">{
     hitDamage = 5;
     alarm[0]=15;
+    ammoDrained = 0;
 }
 </argument>
       </arguments>

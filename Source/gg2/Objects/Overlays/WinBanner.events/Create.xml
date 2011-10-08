@@ -31,8 +31,9 @@ if(global.myself.team != global.winners) {
 with (Player) {
     if team == global.winners
         humiliated = 0;
-    else
+    else {
         humiliated = 1;
+    }
 }
 
 if(!instance_exists(ArenaHUD)) {

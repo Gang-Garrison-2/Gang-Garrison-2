@@ -26,7 +26,7 @@
         shot.owner=owner;
         shot.ownerPlayer=ownerPlayer;
         shot.team=owner.team;
-        shot.damage = 28;
+        shot.hitDamage = 28;
         shot.weapon=WEAPON_REVOLVER;
         with(shot)
             hspeed+=owner.hspeed;
