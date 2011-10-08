@@ -204,7 +204,8 @@ if intel {
     }
 }
  
-if (player.humiliated) {
+if (player.humiliated)
+{
     if (!place_free(x,y+1) &amp;&amp; hspeed == 0)
         animationImage = 0;
     else if place_free(x,y+1)
@@ -212,8 +213,8 @@ if (player.humiliated) {
     if (!place_free(x,y+1) &amp;&amp; hspeed != 0)
         animationImage = 1+((animationImage-1+abs(hspeed)/20) mod CHARACTER_ANIMATION_LEN);
 }
-
-if (!player.humiliated) animationImage = (animationImage+abs(hspeed)/20) mod CHARACTER_ANIMATION_LEN;
+else
+    animationImage = (animationImage+abs(hspeed)/20) mod CHARACTER_ANIMATION_LEN;
 
 
 // drop intel if ubered or round is over
