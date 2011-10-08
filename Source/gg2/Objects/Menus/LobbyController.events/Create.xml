@@ -14,10 +14,10 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">virtualitem = -1;
-xbegin = 150;
+xbegin = 110;
 ybegin = 150;
 spacing = 26;
-width = 400; 
+width = 450; 
 items = 15;
 offset = 0;
 
@@ -25,15 +25,16 @@ servers = ds_list_create();
 
 numServers = -1;
 serversRead = 0;
-serverNameLength = -1;
+serverInfoLength = -1;
 
 lobbysocket = tcp_connect(LOBBY_SERVER_HOST, LOBBY_SERVER_PORT);
+set_little_endian(lobbysocket, false);
 
-// Indicate that we use UUID for version identification
-write_ubyte(lobbysocket, 128);
+// List protocol ID
+parseUuid("297d0df4-430c-bf61-640a-640897eaef57", lobbysocket);
 
-// Send version UUID (big endian)
-write_buffer(lobbysocket, global.protocolUuid);
+// Send Lobby UUID (big endian)
+write_buffer(lobbysocket, global.gg2lobbyId);
 
 socket_send(lobbysocket);
 </argument>

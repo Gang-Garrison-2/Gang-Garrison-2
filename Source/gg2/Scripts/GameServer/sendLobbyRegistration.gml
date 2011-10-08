@@ -20,6 +20,7 @@ if(global.serverPassword != "")
 else
     write_ushort(lobbyBuffer, 0);
 
+write_ushort(lobbyBuffer, 7); // Number of Key/Value pairs that follow
 writeKeyValue(lobbyBuffer, "name", global.serverName);
 writeKeyValue(lobbyBuffer, "game", "Gang Garrison 2");
 writeKeyValue(lobbyBuffer, "game_short", "gg2");
