@@ -14,7 +14,7 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">write_ushort(global.serializeBuffer, ceil(hp));
-write_byte(global.serializeBuffer, ceil(shieldHp));
+write_ushort(global.serializeBuffer, ceil(shieldHp));
 </argument>
       </arguments>
     </action>
