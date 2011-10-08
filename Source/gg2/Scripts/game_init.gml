@@ -328,8 +328,21 @@ global.launchMap = "";
     message_input_font("Century",9,c_white,0);
     
     // parse the protocol version UUID for later use
-    parseProtocolUuid();
+    global.protocolUuid = buffer_create();
+    parseUuid(PROTOCOL_UUID, global.protocolUuid);
     
+    global.gg2lobbyId = buffer_create();
+    parseUuid(GG2_LOBBY_UUID, global.gg2lobbyId);
+    
+    global.lobbyRegProtocolId = buffer_create();
+    parseUuid(LOBBY_REG_PROTOCOL, global.lobbyRegProtocolId);
+    
+    {
+        var i;
+        global.serverId = buffer_create();
+        for(i=0;i<16;i+=1)
+            write_ubyte(global.serverId, irandom(255));
+    }
     //Key Mapping
     ini_open("controls.gg2");
     global.jump = ini_read_real("Controls", "jump", ord("W"));

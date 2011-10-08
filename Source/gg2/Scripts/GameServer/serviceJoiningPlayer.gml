@@ -41,8 +41,9 @@ switch(state)
 case STATE_EXPECT_HELLO:
     var sameProtocol, noOfPlayers;
     sameProtocol = (read_ubyte(socket) == HELLO);
-    for(i=0; i<16; i+=1)
-        if(read_ubyte(socket) != global.protocolUuid[i])
+    buffer_set_readpos(global.protocolUuid, 0)
+    for(i=0; i<4; i+=1)
+        if(read_uint(socket) != read_uint(global.protocolUuid))
             sameProtocol = false;
             
     if(!sameProtocol)

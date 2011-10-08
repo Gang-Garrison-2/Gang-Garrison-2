@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <constants>
   <constant name="VERSION" value="23700"/>
-  <constant name="PROTOCOL_UUID" value="&quot;4471f988-4018-85d8-fcb5-da46daf6d5af&quot;"/>
+  <constant name="GAME_VERSION_STRING" value="&quot;v2.4b3&quot;"/>
+  <constant name="PROTOCOL_UUID" value="&quot;e9f66f6a-4aa0-a56e-7ba8-4788cab8a68a&quot;"/>
+  <constant name="GG2_LOBBY_UUID" value="&quot;1ccf16b1-436d-856f-504d-cc1af306aaa7&quot;"/>
+  <constant name="LOBBY_REG_PROTOCOL" value="&quot;b5dae2e8-424f-9ed0-0fcb-8c21c7ca1352&quot;"/>
   <constant name="HELLO" value="0"/>
   <constant name="PLAYER_JOIN" value="1"/>
   <constant name="PLAYER_LEAVE" value="2"/>
@@ -62,7 +65,7 @@
   <constant name="CHARACTER_ANIMATION_LEN" value="2"/>
   <constant name="CHARACTER_ANIMATION_DEAD" value="5"/>
   <constant name="LOBBY_SERVER_HOST" value="&quot;gg2.game-host.org&quot;"/>
-  <constant name="LOBBY_SERVER_PORT" value="29942"/>
+  <constant name="LOBBY_SERVER_PORT" value="29944"/>
   <constant name="WSAEWOULDBLOCK" value="-10035"/>
   <constant name="WSAENETDOWN" value="-10050"/>
   <constant name="WSAENETRESET" value="-10052"/>

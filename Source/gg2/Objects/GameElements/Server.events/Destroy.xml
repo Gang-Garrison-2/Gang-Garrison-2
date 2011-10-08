@@ -17,6 +17,7 @@
 if(pingRunning) {
     global.runningPingCount -= 1;
 }
+ds_map_destroy(infos);
 </argument>
       </arguments>
     </action>

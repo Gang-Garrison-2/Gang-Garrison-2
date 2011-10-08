@@ -21,8 +21,6 @@
     global.serverSocket = tcp_connect(global.serverIP, global.serverPort);
     
     write_ubyte(global.serverSocket, HELLO);
-    for(i=0; i<16; i+=1) {
-        write_ubyte(global.serverSocket, global.protocolUuid[i]);
-    }
+    write_buffer(global.serverSocket, global.protocolUuid);
     socket_send(global.serverSocket);
 }
