@@ -22,27 +22,14 @@
             exploded = true;
         if(characterHit != -1) {
             if(characterHit.team != team || characterHit.id == ownerPlayer.object  &amp;&amp; characterHit.ubered == 0 ) {
-                if object_is_ancestor(characterHit.object_index, Generator) {
-                    alarm[0] = characterHit.regenerationBuffer;
-                    //allow overkill to be applied directly to the target
-                    if (hitDamage &gt; characterHit.shieldHp) {
-                        characterHit.hp -= hitDamage - characterHit.shieldHp;
-                        characterHit.hp -= characterHit.shieldHp * characterHit.shieldResistance;
-                        shieldHp = 0;
-                    } else {
-                        characterHit.hp -= hitDamage * characterHit.shieldResistance;
-                        characterHit.shieldHp -= hitDamage;
+                characterHit.hp -= hitDamage;
+                characterHit.timeUnscathed = 0;
+                if object_is_ancestor(characterHit.object_index, Character) {
+                    if (characterHit.lastDamageDealer != ownerPlayer &amp;&amp; characterHit.lastDamageDealer != characterHit.player){
+                        characterHit.secondToLastDamageDealer = characterHit.lastDamageDealer;
+                        characterHit.alarm[4] = characterHit.alarm[3]
                     }
-                } else {
-                    characterHit.hp -= hitDamage;
-                    characterHit.timeUnscathed = 0;
-                    if object_is_ancestor(characterHit.object_index, Character) {
-                        if (characterHit.lastDamageDealer != ownerPlayer &amp;&amp; characterHit.lastDamageDealer != characterHit.player){
-                            characterHit.secondToLastDamageDealer = characterHit.lastDamageDealer;
-                            characterHit.alarm[4] = characterHit.alarm[3]
-                        }
-                        characterHit.alarm[3] = ASSIST_TIME;
-                    }
+                    characterHit.alarm[3] = ASSIST_TIME;
                 }
                 characterHit.lastDamageDealer = ownerPlayer;
                 characterHit.lastDamageSource = weapon;
