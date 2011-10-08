@@ -13,12 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if (global.mapchanging)
-    other.solid = false;
-else
-    other.solid = true;
-
-characterHitObstacle();
+        <argument kind="STRING">characterHitObstacle();
 </argument>
       </arguments>
     </action>
