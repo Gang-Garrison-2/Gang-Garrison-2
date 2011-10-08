@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <constants>
-  <constant name="VERSION" value="23700"/>
+  <constant name="VERSION" value="24000"/>
   <constant name="GAME_VERSION_STRING" value="&quot;v2.4b3&quot;"/>
   <constant name="PROTOCOL_UUID" value="&quot;e9f66f6a-4aa0-a56e-7ba8-4788cab8a68a&quot;"/>
   <constant name="GG2_LOBBY_UUID" value="&quot;1ccf16b1-436d-856f-504d-cc1af306aaa7&quot;"/>
