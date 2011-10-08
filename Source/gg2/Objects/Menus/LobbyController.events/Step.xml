@@ -37,7 +37,7 @@
             {
                 if(tcp_receive(lobbysocket, serverInfoLength))
                 {
-                    var protocol, port, infolen, playercount, shortgame;
+                    var protocol, port, infolen, playercount;
                     protocol = read_ubyte(lobbysocket);
                     port = read_ushort(lobbysocket);
                     if(protocol==0 and port&gt;0)
@@ -74,22 +74,19 @@
                             playercount = string(server.players) + "+" + string(server.bots);
                         else 
                             playercount = string(server.players);
-                        server.name = ds_map_find_value(server.infos, "name") + " [" + playercount + "/" + string(server.slots) + "]";
-                        if(ds_map_exists(server.infos, "map")) {
-                            server.name = "["+ds_map_find_value(server.infos, "map")+"] " + server.name;
-                        }
+                        server.playerstring =  playercount + "/" + string(server.slots);
                         
-                        shortgame = "";
+                        server.shortgame = "";
                         if(ds_map_exists(server.infos, "game_short"))
-                            shortgame = ds_map_find_value(server.infos, "game_short");
+                            server.shortgame = ds_map_find_value(server.infos, "game_short");
                         else if(ds_map_exists(server.infos, "game"))
-                            shortgame = ds_map_find_value(server.infos, "game");
-                        if(shortgame != "")
+                            server.shortgame = ds_map_find_value(server.infos, "game");
+                        if(server.shortgame != "")
                         {
                             if(ds_map_exists(server.infos, "game_ver"))
-                                shortgame += " " + ds_map_find_value(server.infos, "game_ver");
-                            server.name = "(" + shortgame + ") " + server.name
+                                server.shortgame += " " + ds_map_find_value(server.infos, "game_ver");
                         }
+                        server.name = ds_map_find_value(server.infos, "name");
                         server.name = string_replace(server.name, "#", "\#");
                         ds_list_add(servers, server);
                         serversRead += 1;

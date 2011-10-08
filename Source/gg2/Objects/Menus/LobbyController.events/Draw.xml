@@ -17,7 +17,7 @@
 draw_set_color(c_black);
 draw_set_alpha(0.8);
 
-draw_rectangle(xbegin-10, ybegin-10, xbegin+width+10, 550, false);
+draw_rectangle(xbegin-10, ybegin-10, xbegin+width+25, 550, false);
 
 draw_set_alpha(1);
 draw_set_color(c_white);
@@ -43,10 +43,17 @@ for(i=offset; i&lt;ds_list_size(servers) and i&lt;offset+items; i+=1) {
         draw_set_color(c_gray);
     }
     
-    if server.private == true draw_sprite(ControlPointLockS,0,xbegin-5,ybegin+spacing*(i-offset)+4);
-    draw_text(xbegin, ybegin+spacing*(i-offset),server.name);
-    draw_text(xbegin+210, ybegin+spacing*(i-offset),"#"+server.ip);
-
+    draw_set_halign(fa_left);
+    if(server.private)
+        draw_sprite(ControlPointLockS,0,xbegin,ybegin+spacing*(i-offset)+5);
+    draw_text(xbegin+10, ybegin+spacing*(i-offset),"["+server.playerstring+"]");
+    draw_text(xbegin+95, ybegin+spacing*(i-offset),server.name);
+    if(ds_map_exists(server.infos, "map"))
+        draw_text(xbegin+95,  ybegin+spacing*(i-offset),"#"+ds_map_find_value(server.infos, "map"));
+    
+    draw_set_halign(fa_right);
+    draw_text(xbegin+425, ybegin+spacing*(i-offset),server.shortgame);
+    
     /* Draw latency and color indicators */
     if(server.pingFinished) {
         docol = c_red;
@@ -61,7 +68,8 @@ for(i=offset; i&lt;ds_list_size(servers) and i&lt;offset+items; i+=1) {
             docol = c_gray;
             showping = "TIMEOUT";
         }
-        draw_text_color(xbegin+335, ybegin+spacing*(i-offset),"#"+showping,docol,docol,docol,docol,1);
+
+        draw_text_color(xbegin+425, ybegin+spacing*(i-offset),"#"+showping,docol,docol,docol,docol,1);
     }
 }
 </argument>

@@ -16,9 +16,9 @@
         <argument kind="STRING">virtualitem = -1;
 xbegin = 110;
 ybegin = 150;
-spacing = 26;
-width = 450; 
-items = 15;
+spacing = 32;
+width = 435; 
+items = 12;
 offset = 0;
 
 servers = ds_list_create();
