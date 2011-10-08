@@ -6,7 +6,6 @@
   <resource name="ShotS" type="RESOURCE"/>
   <resource name="BubbleS" type="RESOURCE"/>
   <resource name="FlameS" type="RESOURCE"/>
-  <resource name="BlastedFlameS" type="RESOURCE"/>
   <resource name="FlareS" type="RESOURCE"/>
   <resource name="MineS" type="RESOURCE"/>
   <resource name="QRocketS" type="RESOURCE"/>
