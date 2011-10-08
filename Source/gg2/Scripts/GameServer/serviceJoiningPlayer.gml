@@ -136,7 +136,7 @@ case STATE_EXPECT_NAME:
     player.socket = socket;
     socket = -1; // Prevent the socket from being destroyed with the JoiningPlayer - it belongs to the Player now.
     
-    player.name = read_string(socket, expectedBytes);
+    player.name = read_string(player.socket, expectedBytes);
     player.name = string_copy(player.name, 0, MAX_PLAYERNAME_LENGTH);
     player.name = string_replace_all(player.name, "#", " ");
     
