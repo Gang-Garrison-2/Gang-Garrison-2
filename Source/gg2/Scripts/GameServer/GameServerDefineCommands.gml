@@ -19,3 +19,5 @@ commandBytes[OMNOMNOMNOM] = 0;
 commandBytes[TOGGLE_ZOOM] = 0;
 commandBytes[PLAYER_CHANGENAME] = commandBytesPrefixLength1;
 commandBytes[INPUTSTATE] = 3;
+commandBytes[I_AM_A_HAXXY_WINNER] = 0;
+commandBytes[YES_RLY] = 16;

@@ -51,6 +51,8 @@
 
     global.playerID = 0;
     global.myself = serverPlayer;
+    if(HAXXY_PUBLIC_KEY==md5(global.haxxyKey))
+        global.myself.isHaxxyWinner = true;
     instance_create(0,0,PlayerControl);
         
     global.currentMap = ds_list_find_value(global.map_rotation, global.currentMapIndex);

@@ -42,4 +42,5 @@
   <resource name="characterHitObstacle" type="RESOURCE"/>
   <resource name="calculateHealingFactor" type="RESOURCE"/>
   <resource name="toggleZoom" type="RESOURCE"/>
+  <resource name="md5" type="RESOURCE"/>
 </resources>

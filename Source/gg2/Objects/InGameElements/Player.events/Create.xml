@@ -66,6 +66,8 @@
     //Sentries for Engies
     //sentryBuilt = 0;
     sentry=-1;
+    
+    isHaxxyWinner = false;
 }
 </argument>
       </arguments>

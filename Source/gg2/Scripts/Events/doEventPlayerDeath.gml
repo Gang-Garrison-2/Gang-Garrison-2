@@ -427,6 +427,8 @@ with(victim.object) {
         if player.class != CLASS_QUOTE playsound(x,y,choose(DeathSnd1, DeathSnd2));
         deadbody = instance_create(x,y-30,DeadGuy);
         deadbody.sprite_index = sprite_index;
+        if(player.isHaxxyWinner)
+            deadbody.image_index += 1;
         deadbody.hspeed=hspeed;
         deadbody.vspeed=vspeed;
         if(hspeed>0) {

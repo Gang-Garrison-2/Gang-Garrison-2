@@ -66,6 +66,8 @@
         if sentry != -1 with sentry instance_destroy();
         sentry = -1;
     }
+    
+    isHaxxyWinner = (subobjects &amp; $04 != 0)
 </argument>
       </arguments>
     </action>
