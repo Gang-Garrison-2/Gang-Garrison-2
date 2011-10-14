@@ -14,6 +14,8 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">{
+    isRefilling = false;
+    alarm[5] = reloadBuffer;
     if(readyToShoot &amp;&amp; ammoCount &gt;= 4) {
         playsound(x,y,ChaingunSnd);
         var shot;
@@ -32,8 +34,6 @@
             }
         justShot=true;
         readyToShoot=false;
-        alarm[5] = reloadBuffer;
-        isRefilling = false;
         ammoCount-=3;
         if ammoCount &gt; 0 alarm[0]=refireTime;
         else alarm[0]=50;

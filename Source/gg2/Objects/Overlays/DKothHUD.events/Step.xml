@@ -28,7 +28,7 @@ if (global.isHost and hostTimer &gt; 0) {
                 global.winners = TEAM_BLUE;
         }
     }
-    else
+    if (KothRedControlPoint.locked or KothBlueControlPoint.locked)
         hostTimer = global.timeLimitMins*30*60;
 }
     

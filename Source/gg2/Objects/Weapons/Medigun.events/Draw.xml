@@ -33,7 +33,7 @@ if(instance_exists(healTarget))
         offset = 2;
     }
 }
-draw_sprite_ext(sprite_index, owner.team+offset, round(x+xoffset*image_xscale), round(y+yoffset), image_xscale, image_yscale, image_angle, c_white, 1);
+if !owner.player.humiliated draw_sprite_ext(sprite_index, owner.team+offset, round(x+xoffset*image_xscale), round(y+yoffset), image_xscale, image_yscale, image_angle, c_white, 1);
 
 </argument>
       </arguments>
