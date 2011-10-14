@@ -426,9 +426,16 @@ with(victim.object) {
         var deadbody;
         if player.class != CLASS_QUOTE playsound(x,y,choose(DeathSnd1, DeathSnd2));
         deadbody = instance_create(x,y-30,DeadGuy);
-        deadbody.sprite_index = sprite_index;
         if(player.isHaxxyWinner)
-            deadbody.image_index += 1;
+        {
+            deadbody.sprite_index = haxxyStatue;
+            deadbody.image_index = 0;
+        }
+        else
+        { 
+            deadbody.sprite_index = sprite_index;
+            deadbody.image_index = CHARACTER_ANIMATION_DEAD;
+        }
         deadbody.hspeed=hspeed;
         deadbody.vspeed=vspeed;
         if(hspeed>0) {

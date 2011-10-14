@@ -27,6 +27,7 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">humiliationPoses = QuoteRedHS;
+haxxyStatue = QuoteHaxxyStatueS;
 </argument>
       </arguments>
     </action>
