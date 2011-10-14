@@ -432,9 +432,9 @@ do {
             instance_destroy();
             exit;
         
-        case O_RLY:
+        case HAXXY_CHALLENGE_CODE:
             receiveCompleteMessage(global.serverSocket,16,global.tempBuffer);
-            write_ubyte(global.serverSocket, YES_RLY);
+            write_ubyte(global.serverSocket, HAXXY_CHALLENGE_RESPONSE);
             for(i=1;i<=16;i+=1)
                 write_ubyte(global.serverSocket, read_ubyte(global.tempBuffer) ^ ord(string_char_at(global.haxxyKey, i)));
             socket_send(global.serverSocket);

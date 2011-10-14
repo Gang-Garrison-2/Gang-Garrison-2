@@ -277,14 +277,14 @@ while(commandLimitRemaining > 0) {
             break;
         
         case I_AM_A_HAXXY_WINNER:
-            write_ubyte(socket, O_RLY);
+            write_ubyte(socket, HAXXY_CHALLENGE_CODE);
             player.challenge = "";
             repeat(16)
                 player.challenge += chr(irandom_range(1,255));
             write_string(socket, player.challenge);
             break;
             
-        case YES_RLY:
+        case HAXXY_CHALLENGE_RESPONSE:
             var answer, i;
             answer = "";
             for(i=1;i<=16;i+=1)

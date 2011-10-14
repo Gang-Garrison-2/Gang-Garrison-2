@@ -48,8 +48,8 @@
   <constant name="JOIN_UPDATE" value="43"/>
   <constant name="DOWNLOAD_MAP" value="44"/>
   <constant name="I_AM_A_HAXXY_WINNER" value="50"/>
-  <constant name="O_RLY" value="51"/>
-  <constant name="YES_RLY" value="52"/>
+  <constant name="HAXXY_CHALLENGE_CODE" value="51"/>
+  <constant name="HAXXY_CHALLENGE_RESPONSE" value="52"/>
   <constant name="HAXXY_PUBLIC_KEY" value="&quot;70095e0fd9754e5a3ce2cb32f109148e&quot;"/>
   <constant name="TEAM_RED" value="0"/>
   <constant name="TEAM_BLUE" value="1"/>
