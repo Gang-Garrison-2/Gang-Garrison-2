@@ -89,7 +89,7 @@ Meet The Rocketman:
 	Strong yet graceful, he can
 	launch himself skyward with his
 	rockets as well as do damage!
-   Hit Points: 175
+   Hit Points: 160
    Weapon: Rocket Launcher
    Special abilities: 
            Rocket-Jump - Fire at your feet when you jump to reach great heights!
