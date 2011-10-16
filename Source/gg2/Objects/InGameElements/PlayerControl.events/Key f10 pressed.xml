@@ -13,7 +13,8 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">game_end();</argument>
+        <argument kind="STRING">window_default();
+</argument>
       </arguments>
     </action>
   </actions>
