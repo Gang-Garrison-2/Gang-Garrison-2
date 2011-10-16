@@ -2,5 +2,4 @@
 <resources>
   <resource name="receiveCompleteMessage" type="RESOURCE"/>
   <resource name="receivestring" type="RESOURCE"/>
-  <resource name="writeKeyValue" type="RESOURCE"/>
 </resources>

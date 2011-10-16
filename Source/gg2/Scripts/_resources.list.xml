@@ -20,6 +20,7 @@
   <resource name="TeamSelectController" type="GROUP"/>
   <resource name="Input" type="GROUP"/>
   <resource name="Graphics" type="GROUP"/>
+  <resource name="Lobby" type="GROUP"/>
   <resource name="recordKillInLog" type="RESOURCE"/>
   <resource name="recordDestructionInLog" type="RESOURCE"/>
   <resource name="recordEventInLog" type="RESOURCE"/>
@@ -43,4 +44,5 @@
   <resource name="calculateHealingFactor" type="RESOURCE"/>
   <resource name="toggleZoom" type="RESOURCE"/>
   <resource name="md5" type="RESOURCE"/>
+  <resource name="ds_list_sorted_insert" type="RESOURCE"/>
 </resources>

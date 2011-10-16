@@ -88,7 +88,7 @@
                         }
                         server.name = ds_map_find_value(server.infos, "name");
                         server.name = string_replace(server.name, "#", "\#");
-                        ds_list_add(servers, server);
+                        ds_list_sorted_insert(servers, server, compareServersByCompatAndName);
                         serversRead += 1;
                         serverInfoLength = -1;
                     }
