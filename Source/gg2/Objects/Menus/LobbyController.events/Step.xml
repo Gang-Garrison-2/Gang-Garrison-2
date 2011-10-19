@@ -114,8 +114,18 @@
                 global.isHost = false;
                 global.serverIP = server.ip;
                 global.serverPort = server.port;
-                with(Client)instance_destroy();
-                instance_create(0,0,Client);
+                if(instance_exists(Client))
+                {   // We can't _actually_ destroy and recreate the Client here, because destroying it will cause a room change and that will cause the Create event not to run... Yay, GM!
+                    with(Client)
+                    {
+                        event_perform(ev_destroy,0);
+                        ClientCreate();
+                    }
+                }
+                else
+                {
+                    instance_create(0,0,Client);
+                }
                 Client.returnRoom = Lobby;
             }
             else

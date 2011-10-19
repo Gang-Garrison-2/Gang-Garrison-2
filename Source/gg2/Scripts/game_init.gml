@@ -332,11 +332,6 @@ global.launchMap = "";
     instance_create(0, 0, AudioControl);
     instance_create(0, 0, SSControl);
     
-    if(global.dedicatedMode == 1) {
-        AudioControlToggleMute();
-        room_goto_fix(Menu);
-    }
-    
     // custom dialog box graphics
     message_background(popupBackgroundB);
     message_button(popupButtonS);
@@ -364,5 +359,9 @@ global.launchMap = "";
     ini_close();
     
     calculateMonthAndDay();
-    
+
+    if(global.dedicatedMode == 1) {
+        AudioControlToggleMute();
+        room_goto_fix(Menu);
+    }    
 }
