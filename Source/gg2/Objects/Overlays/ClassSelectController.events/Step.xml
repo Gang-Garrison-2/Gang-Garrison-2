@@ -30,7 +30,6 @@ yoffset = view_yview[0];
 
 if mouse_x&gt;xoffset+24 &amp;&amp; mouse_x &lt;xoffset+60 &amp;&amp; mouse_y&lt;yoffset+50{
     newclass=0;
-    drawx=24;
     text[0]="Runner";
     text[1]="Weapon: Scattergun";
     text[2]="Quick as the wind, the Runner";
@@ -40,7 +39,6 @@ if mouse_x&gt;xoffset+24 &amp;&amp; mouse_x &lt;xoffset+60 &amp;&amp; mouse_y&lt
 
 else if mouse_x&gt;xoffset+64 &amp;&amp; mouse_x &lt;xoffset+100 &amp;&amp; mouse_y&lt;yoffset+50{
     newclass=1;
-    drawx=64;
     text[0]="Firebug";
     text[1]="Weapon: Flamethrower";
     text[2]="Gets close to burn his foes.";
@@ -50,7 +48,6 @@ else if mouse_x&gt;xoffset+64 &amp;&amp; mouse_x &lt;xoffset+100 &amp;&amp; mous
 
 else if mouse_x&gt;xoffset+104 &amp;&amp; mouse_x &lt;xoffset+140 &amp;&amp; mouse_y&lt;yoffset+50{
     newclass=2;
-    drawx=104;
     text[0]="Rocketman";
     text[1]="Weapon: Rocket Launcher";
     text[2]="Strong yet graceful, he can";
@@ -60,7 +57,6 @@ else if mouse_x&gt;xoffset+104 &amp;&amp; mouse_x &lt;xoffset+140 &amp;&amp; mou
 
 else if mouse_x&gt;xoffset+156 &amp;&amp; mouse_x &lt;xoffset+192 &amp;&amp; mouse_y&lt;yoffset+50{
     newclass=3;
-    drawx=156;
     text[0]="Overweight";
     text[1]="Weapon: Minigun";
     text[2]="A mammoth of a man, carrying";
@@ -70,7 +66,6 @@ else if mouse_x&gt;xoffset+156 &amp;&amp; mouse_x &lt;xoffset+192 &amp;&amp; mou
 
 else if mouse_x&gt;xoffset+196 &amp;&amp; mouse_x &lt;xoffset+232 &amp;&amp; mouse_y&lt;yoffset+50{
     newclass=4;
-    drawx=196;
     text[0]="Detonator";
     text[1]="Weapon: Mine Launcher";
     text[2]="A master of explosives, the";
@@ -80,7 +75,6 @@ else if mouse_x&gt;xoffset+196 &amp;&amp; mouse_x &lt;xoffset+232 &amp;&amp; mou
 
 else if mouse_x&gt;xoffset+236 &amp;&amp; mouse_x &lt;xoffset+272 &amp;&amp; mouse_y&lt;yoffset+50{
     newclass=5;
-    drawx=236;
     text[0]="Healer";
     text[1]="Weapon: Needlegun";
     text[2]="His all-purpose healing gun can";
@@ -90,7 +84,6 @@ else if mouse_x&gt;xoffset+236 &amp;&amp; mouse_x &lt;xoffset+272 &amp;&amp; mou
 
 else if mouse_x&gt;xoffset+288 &amp;&amp; mouse_x &lt;xoffset+324 &amp;&amp; mouse_y&lt;yoffset+50{
     newclass=6;
-    drawx=288;
     text[0]="Constructor";
     text[1]="Weapon: Shotgun";
     text[2]="A brilliant inventor, the";
@@ -100,7 +93,6 @@ else if mouse_x&gt;xoffset+288 &amp;&amp; mouse_x &lt;xoffset+324 &amp;&amp; mou
 
 else if mouse_x&gt;xoffset+328 &amp;&amp; mouse_x &lt;xoffset+364 &amp;&amp; mouse_y&lt;yoffset+50{
     newclass=7;
-    drawx=328;
     text[0]="Infiltrator";
     text[1]="Weapon: Revolver";
     text[2]="Can become invisible to slip";
@@ -110,7 +102,6 @@ else if mouse_x&gt;xoffset+328 &amp;&amp; mouse_x &lt;xoffset+364 &amp;&amp; mou
 
 else if mouse_x&gt;xoffset+368 &amp;&amp; mouse_x &lt;xoffset+404 &amp;&amp; mouse_y&lt;yoffset+50{
     newclass=8;
-    drawx=368;
     text[0]="Rifleman";
     text[1]="Weapon: Sniper Rifle";
     text[2]="Armed with his trusty rifle";
@@ -120,7 +111,6 @@ else if mouse_x&gt;xoffset+368 &amp;&amp; mouse_x &lt;xoffset+404 &amp;&amp; mou
 
 else if mouse_x&gt;xoffset+420 &amp;&amp; mouse_x &lt;xoffset+456 &amp;&amp; mouse_y&lt;yoffset+50{
     newclass=9;
-    drawx=420;
     text[0]="Random Select";
     text[1]="";
     text[2]="Can't decide? Let us choose";
