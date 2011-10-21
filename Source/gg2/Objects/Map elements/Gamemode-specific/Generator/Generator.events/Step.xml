@@ -20,8 +20,10 @@
 }
 shieldResistance = minShieldResistance * (shieldHp &gt; 0) + (maxShieldResistance - minShieldResistance) * (shieldHp/maxShieldHp);
 
-shieldIndex += 4/30;
-if shieldIndex &gt; 4 shieldIndex = 0;
+if (shieldHp &gt; 0) {
+    shieldIndex += 4/30;
+    if shieldIndex &gt; 4 shieldIndex = 0;
+}
 </argument>
       </arguments>
     </action>

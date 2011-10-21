@@ -110,6 +110,7 @@
             if(team != other.owner.team) {
                 if(collision_line(other.x,other.y,other.x2,other.y2,id,true,false)&gt;=0) {
                     alarm[0] = regenerationBuffer;
+                    isShieldRegenerating = false;
                     //allow overkill to be applied directly to the target
                     if (other.hitDamage &gt; shieldHp) {
                         hp -= other.hitDamage - shieldHp;
