@@ -31,4 +31,6 @@
   <resource name="DominationKL" type="RESOURCE"/>
   <resource name="sprite529" type="RESOURCE"/>
   <resource name="FlareKL" type="RESOURCE"/>
+  <resource name="ReflectedStickyS" type="RESOURCE"/>
+  <resource name="ReflectedRocketS" type="RESOURCE"/>
 </resources>
