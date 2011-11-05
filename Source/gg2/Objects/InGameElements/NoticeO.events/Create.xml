@@ -15,7 +15,9 @@
       <arguments>
         <argument kind="STRING">alpha=0.1;
 done=false;
-playsound(view_xview[0]+400,view_yview[0]+300,NoticeSnd);</argument>
+playsound(view_xview[0]+400,view_yview[0]+300,NoticeSnd);
+message = ""
+</argument>
       </arguments>
     </action>
     <action id="301" library="1">
