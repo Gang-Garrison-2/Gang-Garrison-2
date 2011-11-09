@@ -95,6 +95,7 @@
      with (Generator){
         if (distance_to_object(other) &lt; other.blastRadius) &amp;&amp; (team != other.team) { 
             alarm[0] = regenerationBuffer;
+            isShieldRegenerating = false;
             //allow overkill to be applied directly to the target
             var hitDamage;
             hitDamage = other.explosionDamage*sqr((1-(distance_to_object(other)/other.blastRadius)));

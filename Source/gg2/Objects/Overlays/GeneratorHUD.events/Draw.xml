@@ -24,13 +24,15 @@ draw_set_alpha(1);
 draw_sprite_ext(GeneratorHUDS,0,xoffset+xsize/2,yoffset+550,2,2,0,c_white,1);
 if instance_exists(GeneratorRed) {
     draw_sprite_ext(GeneratorRedS,GeneratorRed.image_index,xoffset+xsize/2-50,yoffset+550,1,1,0,c_white,1);
-    draw_healthbar(xoffset+xsize/2-77, yoffset+530, xoffset+xsize/2-25, yoffset+537,GeneratorRed.hp*100/GeneratorRed.maxHp,c_black,barcolor,barcolor,0,true,true);
-    draw_healthbar(xoffset+xsize/2-77, yoffset+520, xoffset+xsize/2-25, yoffset+527,GeneratorRed.shieldHp*100/GeneratorRed.maxShieldHp,c_black,barcolor,barcolor,0,true,true);
+    draw_sprite_ext(GeneratorShieldS,floor(GeneratorRed.shieldIndex),xoffset+xsize/2-50,yoffset+550,1,1,0,c_white, GeneratorRed.shieldResistance);
+    draw_healthbar(xoffset+xsize/2-77, yoffset+525, xoffset+xsize/2-25, yoffset+532,GeneratorRed.hp*100/GeneratorRed.maxHp,c_black,barcolor,barcolor,0,true,true);
+    draw_healthbar(xoffset+xsize/2-77, yoffset+570, xoffset+xsize/2-25, yoffset+577,GeneratorRed.shieldHp*100/GeneratorRed.maxShieldHp,c_black,barcolor,barcolor,0,true,true);
 }
 if instance_exists(GeneratorBlue) {
     draw_sprite_ext(GeneratorBlueS,GeneratorBlue.image_index,xoffset+xsize/2+50,yoffset+550,1,1,0,c_white,1);
-    draw_healthbar(xoffset+xsize/2+23, yoffset+530, xoffset+xsize/2+75, yoffset+537,GeneratorBlue.hp*100/GeneratorBlue.maxHp,c_black,barcolor,barcolor,0,true,true);
-    draw_healthbar(xoffset+xsize/2+23, yoffset+520, xoffset+xsize/2+75, yoffset+527,GeneratorBlue.shieldHp*100/GeneratorBlue.maxShieldHp,c_black,barcolor,barcolor,0,true,true);
+    draw_sprite_ext(GeneratorShieldS,floor(GeneratorBlue.shieldIndex),xoffset+xsize/2+50,yoffset+550,1,1,0,c_white, GeneratorBlue.shieldResistance);
+    draw_healthbar(xoffset+xsize/2+23, yoffset+525, xoffset+xsize/2+75, yoffset+532,GeneratorBlue.hp*100/GeneratorBlue.maxHp,c_black,barcolor,barcolor,0,true,true);
+    draw_healthbar(xoffset+xsize/2+23, yoffset+570, xoffset+xsize/2+75, yoffset+577,GeneratorBlue.shieldHp*100/GeneratorBlue.maxShieldHp,c_black,barcolor,barcolor,0,true,true);
 }
 
 //timer

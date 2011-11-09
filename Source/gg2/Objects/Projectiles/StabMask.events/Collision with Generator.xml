@@ -15,6 +15,7 @@
       <arguments>
         <argument kind="STRING">if (other.team != team) {
     other.alarm[0] = other.regenerationBuffer;
+    other.isShieldRegenerating = false;
     //allow overkill to be applied directly to the target
     if (hitDamage/2 &gt; other.shieldHp) {
         other.hp -= hitDamage/2 - other.shieldHp;
