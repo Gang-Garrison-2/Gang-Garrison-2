@@ -64,6 +64,18 @@
     global.Server_RespawntimeSec = ini_read_real("Server", "Respawn Time", 5);
     global.haxxyKey = ini_read_string("Haxxy", "SecretHaxxyKey", "");
     global.mapdownloadLimitBps = ini_read_real("Server", "Total bandwidth limit for map downloads in bytes per second", 50000);
+
+    global.classlimits[CLASS_SCOUT] = ini_read_real("Classlimits", "Scout", 9999)
+    global.classlimits[CLASS_PYRO] = ini_read_real("Classlimits", "Pyro", 9999)
+    global.classlimits[CLASS_SOLDIER] = ini_read_real("Classlimits", "Soldier", 9999)
+    global.classlimits[CLASS_HEAVY] = ini_read_real("Classlimits", "Heavy", 9999)
+    global.classlimits[CLASS_DEMOMAN] = ini_read_real("Classlimits", "Demoman", 9999)
+    global.classlimits[CLASS_MEDIC] = ini_read_real("Classlimits", "Medic", 9999)
+    global.classlimits[CLASS_ENGINEER] = ini_read_real("Classlimits", "Engineer", 9999)
+    global.classlimits[CLASS_SPY] = ini_read_real("Classlimits", "Spy", 9999)
+    global.classlimits[CLASS_SNIPER] = ini_read_real("Classlimits", "Sniper", 9999)
+    global.classlimits[CLASS_QUOTE] = ini_read_real("Classlimits", "Quote", 9999)
+
     global.currentMapArea=1;
     global.totalMapAreas=1;
     global.setupTimer=1800;
@@ -97,6 +109,17 @@
     ini_write_string("Server", "Password", global.serverPassword);
     ini_write_string("Haxxy", "SecretHaxxyKey", global.haxxyKey);
     
+    ini_write_real("Classlimits", "Scout", global.classlimits[CLASS_SCOUT])
+    ini_write_real("Classlimits", "Pyro", global.classlimits[CLASS_PYRO])
+    ini_write_real("Classlimits", "Soldier", global.classlimits[CLASS_SOLDIER])
+    ini_write_real("Classlimits", "Heavy", global.classlimits[CLASS_HEAVY])
+    ini_write_real("Classlimits", "Demoman", global.classlimits[CLASS_DEMOMAN])
+    ini_write_real("Classlimits", "Medic", global.classlimits[CLASS_MEDIC])
+    ini_write_real("Classlimits", "Engineer", global.classlimits[CLASS_ENGINEER])
+    ini_write_real("Classlimits", "Spy", global.classlimits[CLASS_SPY])
+    ini_write_real("Classlimits", "Sniper", global.classlimits[CLASS_SNIPER])
+    ini_write_real("Classlimits", "Quote", global.classlimits[CLASS_QUOTE])
+
     //screw the 0 index we will start with 1
     //map_truefort 
     maps[1] = ini_read_real("Maps", "ctf_truefort", 1);

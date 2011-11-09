@@ -53,7 +53,16 @@ if newclass != -1 &amp;&amp; y==120 {
     draw_text(xoffset+495,yoffset+140,text[4]);
 }
 
-var classConstant, number;
+var classConstant, number, classCounter;
+for (a=0; a&lt;10; a+=1) classCounter[a] = 0
+
+with Player
+{
+    if team == global.myself.team
+    {
+        classCounter[class] += 1
+    }
+}
     
 for(i=0; i&lt;9; i+=1)
 {
@@ -67,9 +76,24 @@ for(i=0; i&lt;9; i+=1)
     else if i==7 classConstant = CLASS_SPY;
     else if i==8 classConstant = CLASS_SNIPER;
     
-    number = instance_number(getCharacterObject(global.myself.team, classConstant))
-    
-    if number != 0 draw_text(xoffset+drawx[i]+1, yoffset+42+(y-120), string(number))
+    number = classCounter[classConstant]
+
+    if global.classlimits[classConstant] &lt; 255// Not disabled
+    {
+        if number &lt; global.classlimits[classConstant]
+        {
+            draw_set_color(c_white);
+        }
+        else
+        {
+            draw_set_color(c_red);
+        }
+        draw_text(xoffset+drawx[i]+3, yoffset+43+(y-120), string(number)+"/"+string(global.classlimits[classConstant]));
+    }
+    else if number != 0
+    {
+        draw_text(xoffset+drawx[i]+3, yoffset+43+(y-120), string(number));
+    }
 }
 </argument>
       </arguments>

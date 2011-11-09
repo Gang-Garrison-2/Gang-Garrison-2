@@ -20,6 +20,14 @@
     serverPlayer = instance_create(0,0,Player);
     serverPlayer.name = global.playerName;
     ds_list_add(global.players, serverPlayer);
+    
+    for (a=0; a<10; a+=1)
+    {
+        if global.classlimits[a] >= global.playerLimit
+        {
+            global.classlimits[a] = 256
+        }
+    }
 
     global.tcpListener = tcp_listen(global.hostingPort);
     if(socket_has_error(global.tcpListener))
