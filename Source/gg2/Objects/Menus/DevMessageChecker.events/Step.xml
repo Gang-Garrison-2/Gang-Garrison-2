@@ -30,16 +30,6 @@ if(tcp_eof(socket)) {
     CR = chr(13);
     LF = chr(10);
     CRLF = CR + LF;
-    
-    // find where the header ends, so we can chop it off
-    // and just return the important stuff
-    var headerlength;
-    headerlength = string_pos(CRLF + CRLF, response) + 2 * string_length(CRLF);
-    if(headerlength == 0) {
-        response = ""
-    } else {
-        response = string_copy(response, headerlength, string_length(response) - headerlength + 1);
-    }
       
     // split the response into multiple lines, so we can process them
     var messageArray, a, b;
