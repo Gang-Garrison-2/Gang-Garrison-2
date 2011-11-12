@@ -50,6 +50,7 @@
   <constant name="I_AM_A_HAXXY_WINNER" value="50"/>
   <constant name="HAXXY_CHALLENGE_CODE" value="51"/>
   <constant name="HAXXY_CHALLENGE_RESPONSE" value="52"/>
+  <constant name="MESSAGE_STRING" value="53"/>
   <constant name="HAXXY_PUBLIC_KEY" value="&quot;70095e0fd9754e5a3ce2cb32f109148e&quot;"/>
   <constant name="TEAM_RED" value="0"/>
   <constant name="TEAM_BLUE" value="1"/>
@@ -132,6 +133,7 @@
   <constant name="NOTICE_DESTROYCHECKPOINT" value="6"/>
   <constant name="NOTICE_PLAYERTRACKENABLE" value="7"/>
   <constant name="NOTICE_PLAYERTRACKDISABLE" value="8"/>
+  <constant name="NOTICE_CUSTOM" value="9"/>
   <constant name="PARTICLES_NORMAL" value="0"/>
   <constant name="PARTICLES_OFF" value="1"/>
   <constant name="PARTICLES_ALTERNATIVE" value="2"/>
