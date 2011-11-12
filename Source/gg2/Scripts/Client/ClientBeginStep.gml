@@ -447,6 +447,7 @@ do {
             notice = instance_create(0, 0, NoticeO);
             notice.notice = NOTICE_CUSTOM;
             notice.message = message;
+            break;
         
         default:
             show_message("The Server sent unexpected data");

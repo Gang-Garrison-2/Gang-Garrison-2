@@ -16,7 +16,7 @@
         <argument kind="STRING">alpha=0.1;
 done=false;
 playsound(view_xview[0]+400,view_yview[0]+300,NoticeSnd);
-message = ""
+message = "";
 </argument>
       </arguments>
     </action>
