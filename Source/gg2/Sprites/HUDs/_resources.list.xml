@@ -3,53 +3,16 @@
   <resource name="Ammo" type="GROUP"/>
   <resource name="Kill Icons" type="GROUP"/>
   <resource name="PortraitAnimations" type="GROUP"/>
-  <resource name="Icon" type="RESOURCE"/>
-  <resource name="ScorePanelS" type="RESOURCE"/>
-  <resource name="GeneratorHUDS" type="RESOURCE"/>
-  <resource name="SentryHUD" type="RESOURCE"/>
-  <resource name="StickyCounterS" type="RESOURCE"/>
-  <resource name="RedTeamWin" type="RESOURCE"/>
-  <resource name="BlueTeamWin" type="RESOURCE"/>
-  <resource name="WinBannerS" type="RESOURCE"/>
-  <resource name="TeamSelectS" type="RESOURCE"/>
-  <resource name="ClassSelectS" type="RESOURCE"/>
-  <resource name="Scoreboard" type="RESOURCE"/>
-  <resource name="BuildMenuS" type="RESOURCE"/>
-  <resource name="TeamDoorS" type="RESOURCE"/>
-  <resource name="TVLightUpS" type="RESOURCE"/>
-  <resource name="DoorTopLightUpS" type="RESOURCE"/>
-  <resource name="GameNoticeS" type="RESOURCE"/>
+  <resource name="Gamemode HUDS" type="GROUP"/>
+  <resource name="Class and Team Select" type="GROUP"/>
+  <resource name="Menus" type="GROUP"/>
+  <resource name="ScoreBoard" type="GROUP"/>
+  <resource name="WeaponHUDS" type="GROUP"/>
+  <resource name="Timer" type="GROUP"/>
+  <resource name="Lobby" type="GROUP"/>
   <resource name="CharacterHUD" type="RESOURCE"/>
-  <resource name="ClassSelectPortraitS" type="RESOURCE"/>
-  <resource name="ClassSelectSpritesS" type="RESOURCE"/>
-  <resource name="BubbleMenuZS" type="RESOURCE"/>
-  <resource name="BubbleMenuXS" type="RESOURCE"/>
-  <resource name="BubbleMenuCS" type="RESOURCE"/>
-  <resource name="BubbleMenuX2S" type="RESOURCE"/>
-  <resource name="TimerHudS" type="RESOURCE"/>
-  <resource name="TimerS" type="RESOURCE"/>
-  <resource name="ScrollButtonS" type="RESOURCE"/>
-  <resource name="MedAlert" type="RESOURCE"/>
-  <resource name="MedRadarArrow" type="RESOURCE"/>
-  <resource name="HealedHudS" type="RESOURCE"/>
-  <resource name="UberHudS" type="RESOURCE"/>
-  <resource name="ArenaPlayerCountS" type="RESOURCE"/>
-  <resource name="MVPBannerS" type="RESOURCE"/>
-  <resource name="ChargeS" type="RESOURCE"/>
-  <resource name="FullChargeS" type="RESOURCE"/>
-  <resource name="ControlPointStatusS2" type="RESOURCE"/>
-  <resource name="ControlPointStatusS" type="RESOURCE"/>
-  <resource name="ControlPointCappersS" type="RESOURCE"/>
-  <resource name="NutsNBoltsHudS" type="RESOURCE"/>
-  <resource name="IntelStatusS" type="RESOURCE"/>
-  <resource name="IntelArrowS" type="RESOURCE"/>
-  <resource name="ReflectedRocketS" type="RESOURCE"/>
-  <resource name="ReflectedStickyS" type="RESOURCE"/>
-  <resource name="RespawnTimerS" type="RESOURCE"/>
-  <resource name="infinity" type="RESOURCE"/>
+  <resource name="GameNoticeS" type="RESOURCE"/>
   <resource name="NemesisS" type="RESOURCE"/>
+  <resource name="FullChargeS" type="RESOURCE"/>
   <resource name="MedalS" type="RESOURCE"/>
-  <resource name="TimerOutlineS" type="RESOURCE"/>
-  <resource name="HealedHudCapS" type="RESOURCE"/>
-  <resource name="HealedHudHPS" type="RESOURCE"/>
 </resources>
