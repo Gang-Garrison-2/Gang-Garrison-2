@@ -9,6 +9,11 @@
     global.currentMapIndex = 0;
     global.currentMapArea = 1;
     
+    var i;
+    serverId = buffer_create();
+    for(i=0;i<16;i+=1)
+        write_ubyte(serverId, irandom(255));
+    
     serverbalance=0;
     balancecounter=0;
     frame = 0;

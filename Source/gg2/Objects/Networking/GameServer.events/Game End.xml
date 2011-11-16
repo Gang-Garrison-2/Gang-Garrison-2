@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<event category="OTHER" id="30">
+<event category="OTHER" id="3">
   <actions>
     <action id="603" library="1">
       <!--action name: Code-->
@@ -13,7 +13,10 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">game_end();
+        <argument kind="STRING">if(global.useLobbyServer) {
+    sendLobbyUnreg();
+    sleep(10); // Wait a bit so the networking extension has time to send the packet...
+}
 </argument>
       </arguments>
     </action>

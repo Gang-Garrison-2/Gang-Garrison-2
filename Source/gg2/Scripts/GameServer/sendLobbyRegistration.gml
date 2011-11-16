@@ -7,8 +7,8 @@ var lobbyBuffer;
 lobbyBuffer = buffer_create();
 set_little_endian(lobbyBuffer, false);
 
-write_buffer(lobbyBuffer, global.lobbyRegProtocolId);
-write_buffer(lobbyBuffer, global.serverId);
+parseUuid("b5dae2e8-424f-9ed0-0fcb-8c21c7ca1352", lobbyBuffer); // Message Type "register"
+write_buffer(lobbyBuffer, GameServer.serverId);
 write_buffer(lobbyBuffer, global.gg2lobbyId);
 write_ubyte(lobbyBuffer, 0); // TCP
 write_ushort(lobbyBuffer, global.hostingPort);

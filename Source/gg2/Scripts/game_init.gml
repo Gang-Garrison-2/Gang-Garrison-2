@@ -170,16 +170,6 @@
     global.gg2lobbyId = buffer_create();
     parseUuid(GG2_LOBBY_UUID, global.gg2lobbyId);
     
-    global.lobbyRegProtocolId = buffer_create();
-    parseUuid(LOBBY_REG_PROTOCOL, global.lobbyRegProtocolId);
-    
-    {
-        var i;
-        global.serverId = buffer_create();
-        for(i=0;i<16;i+=1)
-            write_ubyte(global.serverId, irandom(255));
-    }
-    
 var a, IPRaw, portRaw;
 doubleCheck=0;
 global.launchMap = "";
