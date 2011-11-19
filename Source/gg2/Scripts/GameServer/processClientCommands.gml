@@ -285,7 +285,12 @@ while(commandLimitRemaining > 0) {
             break;
             
         case HAXXY_CHALLENGE_RESPONSE:
-            var answer, i;
+            var answer, i, challengeSent;
+            with(player)
+                challengeSent = variable_local_exists("challenge");
+            if(!challengeSent)
+                break;
+                
             answer = "";
             for(i=1;i<=16;i+=1)
                 answer += chr(read_ubyte(socket) ^ ord(string_char_at(player.challenge, i)));
