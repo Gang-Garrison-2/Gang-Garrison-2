@@ -10,6 +10,12 @@ if(tcp_eof(global.serverSocket)) {
     exit;
 }
 
+if(room == DownloadRoom and keyboard_check(vk_escape))
+{
+    instance_destroy();
+	exit;
+}
+
 if(downloadingMap)
 {
     while(tcp_receive(global.serverSocket, min(1024, downloadMapBytes-buffer_size(downloadMapBuffer))))
@@ -24,8 +30,6 @@ if(downloadingMap)
             exit;
         }
     }
-    if(keyboard_check(vk_escape))
-        instance_destroy();
     exit;
 }
 
@@ -68,7 +72,6 @@ do {
                     downloadMapBytes = read_uint(global.tempBuffer);
                     downloadMapBuffer = buffer_create();
                     downloadingMap = true;
-                    room_goto_fix(DownloadRoom);
                     roomchange=true;
                 }
             }

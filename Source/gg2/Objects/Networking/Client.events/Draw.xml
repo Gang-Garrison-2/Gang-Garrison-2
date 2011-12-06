@@ -13,16 +13,21 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if(downloadingMap)
+        <argument kind="STRING">if(room==DownloadRoom)
 {
     draw_set_color(c_white);
     draw_set_alpha(1);
-    if(downloadMapBytes &gt; 0)
+    draw_set_halign(fa_left);
+    draw_rectangle(50, 550, 300, 560, 2);
+    
+    if(downloadingMap)
     {
-        draw_rectangle(50, 550, 300, 560, 2);
-        draw_rectangle(50, 550, 50+buffer_size(downloadMapBuffer)/downloadMapBytes * 250, 560, 0);
+        draw_text(50, 530, "Downloading map (press Esc to abort)");
+        if(downloadMapBytes &gt; 0)
+            draw_rectangle(50, 550, 50+buffer_size(downloadMapBuffer)/downloadMapBytes * 250, 560, 0);
     }
-    draw_text(50, 530, "Downloading map (press Esc to abort)");
+    else
+        draw_text(50, 530, "Connecting (press Esc to abort)");
 }
 </argument>
       </arguments>
