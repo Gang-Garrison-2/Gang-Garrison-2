@@ -173,7 +173,7 @@ while(commandLimitRemaining > 0) {
                 if(player.class == CLASS_ENGINEER
                 and collision_circle(player.object.x, player.object.y, 50, Sentry, false, true) < 0
                 and player.object.nutsNBolts == 100 and (collision_point(player.object.x,player.object.y,SpawnRoom,0,0) < 0)
-                and player.sentry == -1 and !player.object.onCabinet)
+                and !player.sentry and !player.object.onCabinet)
                 {
                     buildSentry(player);
                     write_ubyte(global.sendBuffer, BUILD_SENTRY);
@@ -183,12 +183,8 @@ while(commandLimitRemaining > 0) {
             break;                                       
 
         case DESTROY_SENTRY:
-            if(player.sentry != -1) {
-                with(player.sentry) {
-                    instance_destroy();
-                }
-            }
-            player.sentry = -1;
+            with(player.sentry)
+                instance_destroy();
             break;                     
         
         case DROP_INTEL:                                                                  

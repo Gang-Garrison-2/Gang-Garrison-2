@@ -55,16 +55,21 @@
     }   
     
     // If the player has a sentry object on the server
-    if(subobjects &amp; $02 != 0) {
-        if(sentry == -1) {
+    if(subobjects &amp; $02)
+    {
+        if(!sentry)
+        {
             sentry = instance_create(0,0,Sentry);
-            sentry.ownerPlayer=id;
-            sentry.team=team;
+            sentry.ownerPlayer = id;
+            sentry.team = team;
+            sentry.startDirection = image_xscale;
+            sentry.image_xscale = image_xscale;
         }
-        with(sentry) event_user(13);
+        with(sentry)
+            event_user(13);
     } else {
-        if sentry != -1 with sentry instance_destroy();
-        sentry = -1;
+        with(sentry)
+            instance_destroy();
     }
     
     isHaxxyWinner = (subobjects &amp; $04 != 0)

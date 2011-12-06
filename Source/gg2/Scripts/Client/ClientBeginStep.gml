@@ -217,7 +217,7 @@ do {
         case BUILD_SENTRY:
             receiveCompleteMessage(global.serverSocket,1,global.tempBuffer);
             player = ds_list_find_value(global.players, read_ubyte(global.tempBuffer));
-            if player.sentry == -1 {
+            if(!player.sentry) {
                 buildSentry(player);
             }
             break;

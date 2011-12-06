@@ -1,4 +1,5 @@
-if instance_exists(argument0) {
+if(instance_exists(argument0))
+{
     argument0.sentry = instance_create(argument0.object.x,argument0.object.y,Sentry);
     argument0.sentry.ownerPlayer = argument0;
     argument0.sentry.team = argument0.team;

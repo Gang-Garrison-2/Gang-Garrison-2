@@ -24,7 +24,7 @@ if((global.myself.object == -1) || (global.myself.class!=CLASS_ENGINEER)) {
     exit; 
 }
 
-if(global.myself.sentry != -1) {
+if(global.myself.sentry) {
     drawHealth(45, 477, global.myself.sentry.hp, global.myself.sentry.maxHp);
     draw_sprite_ext(sprite_index, image_index, view_xview[0]+5, view_yview[0]+455, 2, 2, 0, c_white, 1);
 }

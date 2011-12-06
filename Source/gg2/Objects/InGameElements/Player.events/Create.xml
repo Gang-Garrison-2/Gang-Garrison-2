@@ -64,8 +64,7 @@
     }
     
     //Sentries for Engies
-    //sentryBuilt = 0;
-    sentry=-1;
+    sentry = noone;
     
     isHaxxyWinner = false;
 }

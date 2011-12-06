@@ -15,11 +15,16 @@
       <arguments>
         <argument kind="STRING">var targetQueue, testDist, playercheck, targetAngle, obscured, rotateoffset;
 
-if ownerPlayer.sentry != -1 {
-    if x != ownerPlayer.sentry.x x = ownerPlayer.sentry.x;
-    if y != ownerPlayer.sentry.y y = ownerPlayer.sentry.y;
+if(ownerPlayer.sentry)
+{
+    x = ownerPlayer.sentry.x;
+    y = ownerPlayer.sentry.y;
 }
-else if ownerPlayer.sentry == -1 instance_destroy();
+else
+{
+    instance_destroy();
+    exit;
+}
 
 if(((direction+270) mod 360)&gt;180) {
     image_xscale=1;
