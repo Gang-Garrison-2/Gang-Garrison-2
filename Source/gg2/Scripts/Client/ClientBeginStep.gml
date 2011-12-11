@@ -218,11 +218,9 @@ do {
             break;
              
         case BUILD_SENTRY:
-            receiveCompleteMessage(global.serverSocket,1,global.tempBuffer);
+            receiveCompleteMessage(global.serverSocket,6,global.tempBuffer);
             player = ds_list_find_value(global.players, read_ubyte(global.tempBuffer));
-            if(!player.sentry) {
-                buildSentry(player);
-            }
+            buildSentry(player, read_ushort(global.tempBuffer)/5, read_ushort(global.tempBuffer)/5, read_byte(global.tempBuffer));
             break;
               
         case DESTROY_SENTRY:
@@ -452,6 +450,19 @@ do {
             notice.message = message;
             break;
         
+        case SENTRY_POSITION:
+            receiveCompleteMessage(global.serverSocket,5,global.tempBuffer);
+            player = ds_list_find_value(global.players, read_ubyte(global.tempBuffer));
+            if(player.sentry)
+            {
+                player.sentry.x = read_ushort(global.tempBuffer) / 5;
+                player.sentry.y = read_ushort(global.tempBuffer) / 5;
+                player.sentry.xprevious = player.sentry.x;
+                player.sentry.yprevious = player.sentry.y;
+                player.sentry.vspeed = 0;
+            }
+            break;
+            
         default:
             show_message("The Server sent unexpected data");
             game_end();

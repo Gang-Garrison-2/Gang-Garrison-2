@@ -46,6 +46,7 @@
   <constant name="INCOMPATIBLE_PROTOCOL" value="42"/>
   <constant name="JOIN_UPDATE" value="43"/>
   <constant name="DOWNLOAD_MAP" value="44"/>
+  <constant name="SENTRY_POSITION" value="45"/>
   <constant name="I_AM_A_HAXXY_WINNER" value="50"/>
   <constant name="HAXXY_CHALLENGE_CODE" value="51"/>
   <constant name="HAXXY_CHALLENGE_RESPONSE" value="52"/>
