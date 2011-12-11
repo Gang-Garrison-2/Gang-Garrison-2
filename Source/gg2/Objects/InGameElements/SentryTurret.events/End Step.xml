@@ -87,6 +87,11 @@ ds_priority_destroy(targetQueue);
 
 if(nearestTarget == -1) {
     noticedTarget = true;
+    if(image_xscale&gt;0)
+        direction = 0;
+    else
+        direction = 180;
+        
     if image_xscale != startDirection {
         rotating=true;
     }
@@ -118,10 +123,10 @@ if(nearestTarget == -1) {
         // Prevent the turret from turning too high even if it is shooting in that direction.
         // This hides the exception to the angle restriction that occurs when a player is standing
         // directly on the sentry gun. 
-        if(direction&gt;45 and direction&lt;90) direction=45;
-        else if(direction&lt;135 and direction&gt;90) direction=135;
-        else if(direction&gt;225 and direction&lt;270) direction=225;
-        else if(direction&lt;315 and direction&gt;270) direction=315;
+        if(direction&gt;=45 and direction&lt;90) direction=45;
+        else if(direction&gt;=90 and direction&lt;135) direction=135;
+        else if(direction&gt;=225 and direction&lt;270) direction=225;
+        else if(direction&gt;=270 and direction&lt;315) direction=315;
         
         playsound(x,y,ShotgunSnd);
         ownerPlayer.sentry.idleTimer = false;
