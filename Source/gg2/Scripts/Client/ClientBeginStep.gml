@@ -13,7 +13,7 @@ if(tcp_eof(global.serverSocket)) {
 if(room == DownloadRoom and keyboard_check(vk_escape))
 {
     instance_destroy();
-	exit;
+    exit;
 }
 
 if(downloadingMap)
@@ -460,6 +460,26 @@ do {
                 player.sentry.xprevious = player.sentry.x;
                 player.sentry.yprevious = player.sentry.y;
                 player.sentry.vspeed = 0;
+            }
+            break;
+          
+        case WEAPON_FIRE:
+            receiveCompleteMessage(global.serverSocket,9,global.tempBuffer);
+            player = ds_list_find_value(global.players, read_ubyte(global.tempBuffer));
+            
+            if(player.object)
+            {
+                with(player.object)
+                {
+                    x = read_ushort(global.tempBuffer)/5;
+                    y = read_ushort(global.tempBuffer)/5;
+                    hspeed = read_byte(global.tempBuffer)/17;
+                    vspeed = read_byte(global.tempBuffer)/17;
+                    xprevious = x;
+                    yprevious = y;
+                }
+                
+                doEventFireWeapon(player, read_ushort(global.tempBuffer));
             }
             break;
             

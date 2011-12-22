@@ -23,4 +23,6 @@
   <resource name="doEventArenaEndRound" type="RESOURCE"/>
   <resource name="sendEventArenaRestart" type="RESOURCE"/>
   <resource name="doEventArenaRestart" type="RESOURCE"/>
+  <resource name="sendEventFireWeapon" type="RESOURCE"/>
+  <resource name="doEventFireWeapon" type="RESOURCE"/>
 </resources>

@@ -13,29 +13,12 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if(readyToShoot &amp;&amp; ammoCount &gt;0) {
-    ammoCount-=1;
-    playsound(x,y,ShotgunSnd);
-    var shot;
-    randomize();
-    repeat(5) {
-        shot = instance_create(x,y,Shot);
-        shot.hitDamage = 7;
-        shot.direction=owner.aimDirection+(random(11)-5);
-        shot.speed=11+random(4);
-        shot.owner=owner;
-        shot.ownerPlayer=ownerPlayer;
-        shot.team=owner.team;
-        shot.weapon=WEAPON_SHOTGUN;
-        with(shot) {
-            hspeed+=owner.hspeed;
-            //motion_add(owner.direction, owner.speed);
-        }
-    }
-    justShot=true;
-    readyToShoot=false;
-    alarm[0]=refireTime;
-    alarm[5] = reloadBuffer + reloadTime;
+        <argument kind="STRING">if(readyToShoot and ammoCount &gt;0 and global.isHost)
+{
+    var seed;
+    seed = irandom(65535);
+    sendEventFireWeapon(ownerPlayer, seed);
+    doEventFireWeapon(ownerPlayer, seed);
 }
 </argument>
       </arguments>
