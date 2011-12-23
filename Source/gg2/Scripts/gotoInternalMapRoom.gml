@@ -6,9 +6,6 @@
         case "ctf_truefort":
             room_goto_fix(Truefort);
             break;
-        case "ctf_2dfort":
-            room_goto_fix(TwodFortTwo);
-            break;
         case "ctf_conflict":
             room_goto_fix(Conflict);
             break;
@@ -57,6 +54,7 @@
         case "ctf_oldfort":
             room_goto_fix(Oldfort);
             break;
+        case "ctf_2dfort":
         case "ctf_2dfort2":
         case "ctf_2dfortremix":
             room_goto_fix(TwodFortTwoRemix);
