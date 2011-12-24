@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
   <resource name="CollisionMapO" type="RESOURCE"/>
-  <resource name="TwodFortTwoO" type="RESOURCE"/>
   <resource name="TwodFortTwoRemixO" type="RESOURCE"/>
   <resource name="TruefortO" type="RESOURCE"/>
   <resource name="ConflictO" type="RESOURCE"/>
