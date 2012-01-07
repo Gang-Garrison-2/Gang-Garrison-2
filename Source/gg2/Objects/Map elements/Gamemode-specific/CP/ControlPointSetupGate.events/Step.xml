@@ -25,7 +25,7 @@ with(KothHUD) {
     else other.solid=false;
 }
 with(DKothHUD) {
-    if cpUnlock &gt; 0 other.solid=truel
+    if cpUnlock &gt; 0 other.solid=true;
     else other.solid=false;
 }
 </argument>

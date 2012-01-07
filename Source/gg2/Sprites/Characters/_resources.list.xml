@@ -14,6 +14,7 @@
   <resource name="SpyRedS" type="RESOURCE"/>
   <resource name="DemomanRedS" type="RESOURCE"/>
   <resource name="SniperRedS" type="RESOURCE"/>
+  <resource name="SniperCrouchRedS" type="RESOURCE"/>
   <resource name="EngineerBlueS" type="RESOURCE"/>
   <resource name="HeavyBlueS" type="RESOURCE"/>
   <resource name="MedicBlueS" type="RESOURCE"/>
@@ -23,5 +24,6 @@
   <resource name="SpyBlueS" type="RESOURCE"/>
   <resource name="DemomanBlueS" type="RESOURCE"/>
   <resource name="SniperBlueS" type="RESOURCE"/>
+  <resource name="SniperCrouchBlueS" type="RESOURCE"/>
   <resource name="CurlyBlueS" type="RESOURCE"/>
 </resources>

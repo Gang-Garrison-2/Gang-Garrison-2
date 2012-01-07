@@ -13,9 +13,14 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">ds_list_destroy(global.players);
+        <argument kind="STRING">if(global.useLobbyServer) {
+    sendLobbyUnreg();
+}
+
+ds_list_destroy(global.players);
 socket_destroy(global.tcpListener);
 socket_destroy(global.serverSocket);
+buffer_destroy(serverId);
 
 with(Player)
     instance_destroy();

@@ -179,24 +179,25 @@ while(commandLimitRemaining > 0) {
             if(player.object != -1)
             {
                 if(player.class == CLASS_ENGINEER
-                and collision_circle(player.object.x, player.object.y, 50, Sentry, false, true) < 0
-                and player.object.nutsNBolts == 100 and (collision_point(player.object.x,player.object.y,SpawnRoom,0,0) < 0)
-                and player.sentry == -1 and !player.object.onCabinet)
+                        and collision_circle(player.object.x, player.object.y, 50, Sentry, false, true) < 0
+                        and player.object.nutsNBolts == 100
+                        and (collision_point(player.object.x,player.object.y,SpawnRoom,0,0) < 0)
+                        and !player.sentry
+                        and !player.object.onCabinet)
                 {
-                    buildSentry(player);
                     write_ubyte(global.sendBuffer, BUILD_SENTRY);
                     write_ubyte(global.sendBuffer, playerId);
+                    write_ushort(global.serializeBuffer, round(player.object.x*5));
+                    write_ushort(global.serializeBuffer, round(player.object.y*5));
+                    write_byte(global.serializeBuffer, player.object.image_xscale);
+                    buildSentry(player, player.object.x, player.object.y, player.object.image_xscale);
                 }
             }
             break;                                       
 
         case DESTROY_SENTRY:
-            if(player.sentry != -1) {
-                with(player.sentry) {
-                    instance_destroy();
-                }
-            }
-            player.sentry = -1;
+            with(player.sentry)
+                instance_destroy();
             break;                     
         
         case DROP_INTEL:                                                                  
@@ -293,7 +294,12 @@ while(commandLimitRemaining > 0) {
             break;
             
         case HAXXY_CHALLENGE_RESPONSE:
-            var answer, i;
+            var answer, i, challengeSent;
+            with(player)
+                challengeSent = variable_local_exists("challenge");
+            if(!challengeSent)
+                break;
+                
             answer = "";
             for(i=1;i<=16;i+=1)
                 answer += chr(read_ubyte(socket) ^ ord(string_char_at(player.challenge, i)));
