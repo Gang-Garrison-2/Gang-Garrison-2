@@ -14,7 +14,7 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">{
-    if (readyToBlast &amp;&amp; ammoCount &gt;= 60)
+    if (readyToBlast &amp;&amp; ammoCount &gt;= 40)
     {
         //Base
         playsound(x,y,CompressionBlastSnd);
@@ -35,7 +35,7 @@
         
         var shot;
         //Flare
-        if (owner.keyState &amp; $10 and ammoCount &gt;= 60)
+        if (owner.keyState &amp; $10 and ammoCount &gt;= 75 and readyToFlare)
         {
             if !collision_line(x,y,x+lengthdir_x(28,owner.aimDirection),y+lengthdir_y(28,owner.aimDirection),Obstacle,1,0)
                 and !place_meeting(x+lengthdir_x(25,owner.aimDirection),y+lengthdir_y(25,owner.aimDirection),TeamGate)
@@ -50,7 +50,7 @@
                 
                 justShot=true;
                 readyToFlare=false;
-                ammoCount -= 40;
+                ammoCount -= 35;
                 alarm[2] = flareReloadTime;
             }
         }
@@ -195,7 +195,7 @@
         isRefilling = false;
         alarm[1]=blastReloadTime;
         alarm[0]=blastNoFlameTime;
-        ammoCount -= 60;
+        ammoCount -= 40;
     }
 }
 </argument>

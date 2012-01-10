@@ -22,9 +22,9 @@
     blastAngle = 75;
     blastStrength = 28;
     characterBlastStrength = 15;
-    blastReloadTime = 40;
     blastNoFlameTime = 15;
-    flareReloadTime = 80;
+    blastReloadTime = 40;
+    flareReloadTime = 60;
     alarm[1] = blastReloadTime;
     alarm[2] = flareReloadTime;
     readyToBlast = false;
