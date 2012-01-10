@@ -39,9 +39,11 @@
             readyToShoot=false;
             alarm[5] = reloadBuffer;
             isRefilling = false;
-            ammoCount-=2;
-            if ammoCount &gt; 0 alarm[0]=refireTime;
-            else alarm[0]=50;
+            ammoCount -= 1.8;
+            if (ammoCount &gt; 0)
+                alarm[0]=refireTime;
+            else
+                alarm[0]=reloadBuffer*2;
         }
     }
 }
