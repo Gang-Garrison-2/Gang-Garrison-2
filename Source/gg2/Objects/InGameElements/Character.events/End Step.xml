@@ -83,7 +83,7 @@ if (omnomnomnom)
 {
     omnomnomnomindex += 0.25;
     image_xscale=xscale;
-    if hp &lt;= maxHp hp += 0.4;
+    if hp &lt;= maxHp hp += 1.6;
     if omnomnomnomindex &gt;= omnomnomnomend omnomnomnom=false;
 }
 
