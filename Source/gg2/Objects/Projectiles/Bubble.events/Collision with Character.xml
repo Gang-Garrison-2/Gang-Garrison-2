@@ -13,7 +13,10 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if (other.team != team and !other.ubered and other.hp &gt; 0)
+        <argument kind="STRING">if(other.cloak)
+    if(other.currentWeapon.readyToStab)
+        exit;
+if (other.team != team and !other.ubered and other.hp &gt; 0)
 {
     other.hp-=hitDamage;
     alarm[0]-=70;

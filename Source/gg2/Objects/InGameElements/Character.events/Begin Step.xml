@@ -82,7 +82,7 @@ if(((keyState | pressedKeys) &amp; $08) and (!taunting or player.class == CLASS_
         event_user(2);
 
 // Cloak
-if ((pressedKeys &amp; $08) &amp;&amp; canCloak &amp;&amp; ((cloakAlpha &lt;= 0.5 and cloak) || (cloakAlpha == 1 and !cloak)) &amp;&amp; !intel  &amp;&amp; taunting==false &amp;&amp; !(keyState &amp; $10))
+if ( ((keyState | pressedKeys) &amp; $08) and canCloak &amp;&amp; ((cloakAlpha &lt;= 0.5 and cloak) || (cloakAlpha == 1 and !cloak)) &amp;&amp; !intel  &amp;&amp; taunting==false &amp;&amp; !(keyState &amp; $10))
     if(currentWeapon.readyToStab)
         cloak = !cloak;
 

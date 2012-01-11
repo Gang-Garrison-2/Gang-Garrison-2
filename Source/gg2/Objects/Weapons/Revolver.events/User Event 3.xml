@@ -18,7 +18,7 @@ playsound(x,y,RevolverSnd);
 var shot;
 
 shot = instance_create(x,y + yoffset + 1,Shot);
-shot.direction=owner.aimDirection+ random(2)-1;
+shot.direction=owner.aimDirection;//+ random(2)-1;
 shot.speed=21;
 shot.owner=owner;
 shot.ownerPlayer=ownerPlayer;
@@ -27,6 +27,7 @@ shot.hitDamage = 28;
 shot.weapon=WEAPON_REVOLVER;
 with(shot)
     hspeed+=owner.hspeed;
+
 justShot=true;
 readyToShoot=false;
 alarm[0]=refireTime;
