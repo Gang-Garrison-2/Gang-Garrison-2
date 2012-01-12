@@ -39,7 +39,7 @@ if (burnDuration &lt;= 0 || burnIntensity &lt;= 0)
 // Handle input
 if(!taunting and !omnomnomnom)
 {
-    if(pressedKeys &amp; $01)  {
+    if(pressedKeys &amp; $01 and !player.humiliated)  {
         if (!invisible &amp;&amp; cloakAlpha == 1)
             taunting=true;
         if (team==TEAM_RED) {
@@ -72,12 +72,12 @@ if(!taunting and !omnomnomnom)
         }
     }
        
-    if((keyState | pressedKeys) &amp; $10)
+    if((keyState | pressedKeys) &amp; $10 and !player.humiliated)
         with(currentWeapon) event_user(1);
 }
         
 // Right click
-if(((keyState | pressedKeys) &amp; $08) and (!taunting or player.class == CLASS_DEMOMAN) and !omnomnomnom)
+if(((keyState | pressedKeys) &amp; $08) and (!taunting or player.class == CLASS_DEMOMAN) and !omnomnomnom and !player.humiliated)
     with(currentWeapon)
         event_user(2);
 
@@ -223,8 +223,7 @@ if(intel) &amp;&amp; (ubered || global.mapchanging) {
 }
 
 //gotta regenerate some nuts
-if nutsNBolts &lt; 100 nutsNBolts += 0.1;
-else if nutsNBolts &gt; 100 nutsNBolts = 100;
+nutsNbolts = min(nutsNBolts+0.1, 100);
 
 //ubered max out ammo and extinguish flames
 if ubered {

@@ -13,7 +13,8 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">{
+        <argument kind="STRING">if (!global.mapchanging)
+{
     characterHit=-1;
     if fade==false event_user(5);
     else instance_destroy();

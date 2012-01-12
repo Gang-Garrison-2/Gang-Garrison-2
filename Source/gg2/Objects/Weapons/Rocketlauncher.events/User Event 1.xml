@@ -26,7 +26,7 @@
     oid.owner=owner;
     oid.gun=id;
     oid.weapon=WEAPON_ROCKETLAUNCHER;
-    if (collision_line(x,y,x+lengthdir_x(28,owner.aimDirection),y+lengthdir_y(28,owner.aimDirection),Obstacle,1,0) || place_meeting(x+lengthdir_x(25,owner.aimDirection),y+lengthdir_y(25,owner.aimDirection),TeamGate)) {
+    if (collision_line(x,y,x+lengthdir_x(28,owner.aimDirection),y+lengthdir_y(28,owner.aimDirection),Obstacle,1,0) || (place_meeting(x+lengthdir_x(25,owner.aimDirection),y+lengthdir_y(25,owner.aimDirection),TeamGate) &amp;&amp; !global.mapchanging) || (collision_line(x,y,x+lengthdir_x(28,owner.aimDirection),y+lengthdir_y(28,owner.aimDirection),BulletWall,1,0))) {
         oid.characterHit = -1;
         with (oid)
             event_user(5);

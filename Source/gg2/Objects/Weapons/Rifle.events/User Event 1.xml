@@ -47,7 +47,7 @@
                 } else if (collision_line(x1,y1,xm,ym,Sentry,true,false)&gt;=0) {
                     hitline = true;
                 } else if (collision_line(x1,y1,xm,ym,TeamGate,true,true)&gt;=0) {
-                    hitline = true;
+                    if (!global.mapchanging) hitline = true;
                 } else if (collision_line(x1,y1,xm,ym,IntelGate,true,true)&gt;=0) {
                     hitline = true;
                 } else if (collision_line(x1,y1,xm,ym,ControlPointSetupGate,true,true)&gt;=0) {
