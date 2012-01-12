@@ -35,7 +35,7 @@
     soundLoopTime = 30;
     currentTime = 0;
     
-    reloadBuffer = 15;
+    reloadBuffer = 7;
     isRefilling = false;
     
 }

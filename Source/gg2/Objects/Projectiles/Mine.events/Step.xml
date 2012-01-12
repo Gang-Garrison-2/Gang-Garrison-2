@@ -14,11 +14,11 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">if(not stickied) {
-    if explosionDamage &lt; 50 explosionDamage += 1;
+    if explosionDamage &lt; 55 explosionDamage += 1;
     vspeed+=0.2;
     vspeed=min(vspeed,8);
 } else {
-    explosionDamage=50;
+    explosionDamage=55;
     if (reflector != noone and alarm[0] &lt; 0) alarm[0] = 30;
 }
 </argument>

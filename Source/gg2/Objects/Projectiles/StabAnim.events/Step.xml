@@ -19,17 +19,18 @@ else
     image_xscale = 1;
 
 if (team == TEAM_RED)
-    sprite_index=BackstabTorsoRedS;
+    sprite_index = BackstabTorsoRedS;
 else
-    sprite_index=BackstabTorsoBlueS;
+    sprite_index = BackstabTorsoBlueS;
 
+<<<<<<< HEAD
 if (image_index == 32)
 {
     done = 1;
     image_speed = 0;
 }
 
-if(not done)
+if(!done)
     if(alpha &lt; 1)
         alpha += 0.1;
     else
