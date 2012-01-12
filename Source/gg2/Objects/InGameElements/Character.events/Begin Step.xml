@@ -82,7 +82,7 @@ if(((keyState | pressedKeys) &amp; $08) and (!taunting or player.class == CLASS_
         event_user(2);
 
 // Cloak
-if ( ((keyState | pressedKeys) &amp; $08) and canCloak &amp;&amp; ((cloakAlpha &lt;= 0.5 and cloak) || (cloakAlpha == 1 and !cloak)) &amp;&amp; !intel  &amp;&amp; taunting==false &amp;&amp; !(keyState &amp; $10))
+if ((pressedKeys &amp; $08) and canCloak and ((cloakAlpha == 1 and !cloak) or cloak) and !intel  and !taunting)
     if(currentWeapon.readyToStab)
         cloak = !cloak;
 
@@ -192,13 +192,16 @@ if(place_free(x,y+1)) {
     }
 }
 
-if intel { 
-    if random(1)&gt;0.90 &amp;&amp; speed&gt;2 {
+if (intel)
+{ 
+    if (random(1) &gt; 0.90 &amp;&amp; speed &gt; 0.195)
+    {
         var sheet;
         sheet = instance_create(x,y-11+random(9),LooseSheet);
         sheet.hspeed = hspeed;
     }
-    if cloak==true {
+    if (cloak)
+    {
         cloak=false;
         cloakAplha=1;
     }
@@ -277,11 +280,11 @@ if (player.humiliated)
 var zone;
 zone = collision_point(x,y,CaptureZone,0,0);
 
-if(zone&gt;=0 &amp;&amp; !cloak) {
+if(zone &gt;= 0 and !cloak)
     cappingPoint = zone.cp;
-} else {
+else
     cappingPoint = noone;
-}
+
 </argument>
       </arguments>
     </action>

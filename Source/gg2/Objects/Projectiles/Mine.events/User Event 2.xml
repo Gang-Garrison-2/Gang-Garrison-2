@@ -79,7 +79,9 @@
                     vspeed*=0.8
                 }
             }
-            cloakAlpha = min(cloakAlpha + 0.2, 1);
+            cloakAlpha = max(cloakAlpha, 0.3);
+            cloakFlicker = true;
+            alarm[7] = 3;
         }
     }
 

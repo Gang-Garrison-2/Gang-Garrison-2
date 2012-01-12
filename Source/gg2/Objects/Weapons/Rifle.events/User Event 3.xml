@@ -76,7 +76,9 @@ with(Player) {
             }
             object.alarm[3] = ASSIST_TIME;
             object.lastDamageDealer = other.ownerPlayer;
-            object.cloakAlpha = min(object.cloakAlpha + 0.3, 1);
+            object.cloakAlpha = max(cloakAlpha, 0.3);
+            object.cloakFlicker = true;
+            object.alarm[7] = 3;
             if(global.gibLevel &gt; 0){
                 blood = instance_create(object.x,object.y,Blood);
                 blood.direction = other.owner.aimDirection-180;
