@@ -13,7 +13,8 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">done = false;
+        <argument kind="STRING">alpha=0.01;
+done = false;
 hitDamage = 0;
 image_speed = 0;
 alarm[0]=10;

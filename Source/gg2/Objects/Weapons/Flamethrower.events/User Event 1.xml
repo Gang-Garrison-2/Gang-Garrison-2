@@ -18,6 +18,7 @@
         and !collision_line(x,y,x+lengthdir_x(28,owner.aimDirection),y+lengthdir_y(28,owner.aimDirection),Obstacle,1,0)
         and !place_meeting(x+lengthdir_x(25,owner.aimDirection),y+lengthdir_y(25,owner.aimDirection),TeamGate))
     {
+        if(alarm[3] &lt;= 0)
             loopsoundstart(x,y,FlamethrowerSnd);
         else
             loopsoundmaintain(x,y,FlamethrowerSnd);
