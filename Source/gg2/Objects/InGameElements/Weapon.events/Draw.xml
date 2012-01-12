@@ -32,12 +32,12 @@ else
 
 if (object_index != SentryTurret)
 {    
-    if (!owner.invisible and !owner.taunting and !owner.player.humiliated)
+    if (!owner.invisible and !owner.taunting and !owner.omnomnomnom and !owner.player.humiliated)
     {
         if (!owner.cloak)
-            image_alpha = min(owner.cloakAlpha*2, 1);
+            image_alpha = power(owner.cloakAlpha, 0.5);
         else
-            image_alpha = max(owner.cloakAlpha*2 - 1, 0);
+            image_alpha = power(owner.cloakAlpha, 2);
         draw_sprite_ext(sprite_index,owner.team+offset,round(x+xoffset*image_xscale),round(y+yoffset),image_xscale,image_yscale,image_angle,c_white,image_alpha);
         if (owner.ubered)
         {

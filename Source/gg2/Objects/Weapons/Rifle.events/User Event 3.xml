@@ -76,7 +76,7 @@ with(Player) {
             }
             object.alarm[3] = ASSIST_TIME;
             object.lastDamageDealer = other.ownerPlayer;
-            object.cloakAlpha = max(cloakAlpha, 0.3);
+            object.cloakAlpha = max(object.cloakAlpha, 0.3);
             object.cloakFlicker = true;
             object.alarm[7] = 3;
             if(global.gibLevel &gt; 0){
