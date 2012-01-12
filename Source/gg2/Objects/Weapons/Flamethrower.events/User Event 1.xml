@@ -14,7 +14,7 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">{
-    if (readyToShoot &amp;&amp; ammoCount &gt;= 2) {
+    if (readyToShoot &amp;&amp; ammoCount &gt;= 1.7) {
         if(alarm[3]&lt;=0) {
             loopsoundstart(x,y,FlamethrowerSnd);
         } else {
@@ -40,7 +40,7 @@
         readyToShoot=false;
         alarm[5] = reloadBuffer;
         isRefilling = false;
-        ammoCount-=2;
+        ammoCount-=1.7;
         if ammoCount &gt; 0 alarm[0]=refireTime;
         else alarm[0]=50;
     }

@@ -52,6 +52,10 @@
             stab.team = owner.team;
             stab.hitDamage = 0;
             stab.weapon = WEAPON_KNIFE;
+            if (owner.team != global.myself.team)
+                stab.minAlpha=0.01;
+            else stab.minAlpha=0.5;
+            stab.alpha = stab.minAlpha;
             readyToStab = false;
             alarm[1] = StabreloadTime;
         }

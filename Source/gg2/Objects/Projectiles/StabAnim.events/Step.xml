@@ -25,9 +25,10 @@ else sprite_index=BackstabTorsoBlueS;
 x=owner.x;
 y=owner.y;
 
-if image_index &gt;= 32 {
+if image_index &gt;= 32{
     done=1;
     image_speed=0;
+    if alarm[1] &lt; 0 alarm[1]=18;
 }
 
 if(not done) {
@@ -37,10 +38,10 @@ if(not done) {
         alpha = 0.99;
     }
 } else {
-    if(alpha&gt;0.01) {
+    if(alpha&gt;minAlpha) {
         alpha = power(alpha,1/0.7);
     } else {
-        instance_destroy();
+        alpha = minAlpha;
     }
 }
 </argument>

@@ -105,10 +105,12 @@ case 4: //If I am rocketing/mining a teamate
     frictionFactor = 1;
     break;
 default:
-    if(!intel)
+    if(!intel &amp;&amp; !player.humiliated)
         controlFactor = baseControl;
-    else
+    else if (!player.humiliated)
         controlFactor = baseControl-0.1;
+    else
+        controlFactor = baseControl-0.2;
     frictionFactor = baseFriction;
 }
 
@@ -223,7 +225,7 @@ if(intel) &amp;&amp; (ubered || global.mapchanging) {
 }
 
 //gotta regenerate some nuts
-nutsNbolts = min(nutsNBolts+0.1, 100);
+nutsNBolts = min(nutsNBolts+0.1, maxNutsNBolts);
 
 //ubered max out ammo and extinguish flames
 if ubered {

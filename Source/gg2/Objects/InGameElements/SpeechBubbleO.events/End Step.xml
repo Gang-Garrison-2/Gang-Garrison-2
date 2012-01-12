@@ -25,9 +25,9 @@
     x = round(owner.x)+10;
     y = round(owner.y)-18;
     if(owner.stabbing)
-        image_alpha = (1-((1-owner.currentWeapon.stab.alpha)*(1-owner.image_alpha)))*bubbleAlpha;
+        image_alpha = owner.currentWeapon.stab.alpha*bubbleAlpha;
     else
-        image_alpha = owner.image_alpha*bubbleAlpha;
+        image_alpha = owner.image_alpha*bubbleAlpha*owner.cloakAlpha;
 }
 </argument>
       </arguments>
