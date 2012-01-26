@@ -45,28 +45,45 @@ if(tcp_eof(socket)) {
     messageArray[a] = response;
     a += 1;
       
-    var c;
-    for(c = 0; c &lt; a; c += 1) {
-        switch(messageArray[c]) {
-            case "ShowMessage":
-                c += 1;
-                show_message(messageArray[c]);
-                break;
-            case "Version":
-                c += 1;
-                versioncheck = (messageArray[c]);
-                versionend = string_pos("!",versioncheck);
-                version = string_copy(versioncheck,1,versionend-1);
-                changeslength = string_length(versioncheck)-versionend;
-                changes=string_copy(versioncheck,versionend+1,changeslength);
-                if real(version) &gt; VERSION {
-                    update=show_message_ext("Updates have been made to Gang Garrison 2!##"+changes,"Update","Cancel","");
-                    if (update == 1){
-                        execute_shell("gg2updater.exe","");
-                        game_end();
-                    }
-                }
+    var c, latestVersion, latestVersionMessage, latestVersionChannel;
+    latestVersion = VERSION;
+    latestVersionMessage = "";
+    latestVersionChannel = "";
+    for(c = 0; c &lt; a; c += 2)
+    {
+        switch(messageArray[c])
+        {
+        case "ShowMessage":
+            show_message(messageArray[c+1]);
             break;
+        case "BetaVersion":
+            if(not global.updaterBetaChannel)
+                break;
+            // deliberate fall-through
+        case "Version":
+            versioncheck = (messageArray[c+1]);
+            versionend = string_pos("!",versioncheck);
+            version = string_copy(versioncheck,1,versionend-1);
+            changeslength = string_length(versioncheck)-versionend;
+            changes=string_copy(versioncheck,versionend+1,changeslength);
+            if(real(version) &gt; VERSION)
+            {
+                latestVersion = real(version);
+                latestVersionMessage = changes;
+                if(messageArray[c]=="BetaVersion")
+                    latestVersionChannel = "beta";
+                else
+                    latestVersionChannel = "release";
+            }
+            break;
+        }
+    }
+    
+    if(latestVersion &gt; VERSION) {
+        update = show_message_ext("Updates have been made to Gang Garrison 2!##"+latestVersionMessage,"Update","Cancel","");
+        if (update == 1){
+            execute_shell("gg2updater.exe",latestVersionChannel);
+            game_end();
         }
     }
     
