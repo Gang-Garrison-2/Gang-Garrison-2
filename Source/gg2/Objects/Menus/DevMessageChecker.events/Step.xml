@@ -47,10 +47,7 @@ if(tcp_eof(socket)) {
     messageArray[a] = response;
     a += 1;
       
-    var c, latestVersion, latestVersionMessage, latestVersionChannel;
-    latestVersion = VERSION;
-    latestVersionMessage = "";
-    latestVersionChannel = "";
+    var c;
     for(c = 0; c &lt; a; c += 2)
     {
         switch(messageArray[c])
@@ -58,10 +55,6 @@ if(tcp_eof(socket)) {
         case "ShowMessage":
             show_message(messageArray[c+1]);
             break;
-        case "BetaVersion":
-            if(not global.updaterBetaChannel)
-                break;
-            // deliberate fall-through
         case "Version":
             versioncheck = (messageArray[c+1]);
             versionend = string_pos("!",versioncheck);
@@ -70,23 +63,13 @@ if(tcp_eof(socket)) {
             changes=string_copy(versioncheck,versionend+1,changeslength);
             if(real(version) &gt; VERSION)
             {
-                latestVersion = real(version);
-                latestVersionMessage = changes;
-                if(messageArray[c]=="BetaVersion")
-                    latestVersionChannel = "beta";
-                else
-                    latestVersionChannel = "release";
+                update = show_message_ext("Updates have been made to Gang Garrison 2!##"+changes,"Update","Cancel","");
+                if (update == 1){
+                    room_goto(UpdaterRoom);
+                    exit;
+                }
             }
             break;
-        }
-    }
-    
-    if(latestVersion &gt; VERSION) {
-        update = show_message_ext("Updates have been made to Gang Garrison 2!##"+latestVersionMessage,"Update","Cancel","");
-        if (update == 1){
-            global.updateDownloadChannel = latestVersionChannel;
-            room_goto(UpdaterRoom);
-            exit;
         }
     }
     

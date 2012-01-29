@@ -24,21 +24,10 @@ window_oldfullscreen = window_get_fullscreen();
 window_set_fullscreen(false);
 window_set_showborder(false);
 
-switch(global.updateDownloadChannel)
-{
-case "release":
+if(global.updaterBetaChannel)
+    updaterSuffix = "_beta";
+else
     updaterSuffix = "";
-    break;
-case "beta":
-    updaterSuffix = "beta";
-    break;
-default:
-    show_message("Error updating: Unknown update channel "+global.updateDownloadChannel);
-    window_set_showborder(window_oldshowborder);
-    window_set_fullscreen(window_oldfullscreen);
-    room_goto_fix(Menu);
-    exit;
-}
 
 if(file_exists("gg2update.exe"))
     file_delete("gg2update.exe");
