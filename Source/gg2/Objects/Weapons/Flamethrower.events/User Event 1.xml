@@ -14,9 +14,10 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">{
-    if (readyToShoot and ammoCount &gt;= 2
-        and !collision_line(x,y,x+lengthdir_x(28,owner.aimDirection),y+lengthdir_y(28,owner.aimDirection),Obstacle,1,0)
-        and !place_meeting(x+lengthdir_x(25,owner.aimDirection),y+lengthdir_y(25,owner.aimDirection),TeamGate))
+    if (readyToShoot and ammoCount &gt;= 1.8
+        and (!collision_line(x,y,x+lengthdir_x(25,owner.aimDirection),y+lengthdir_y(25,owner.aimDirection),Obstacle,1,0)
+         and !place_meeting(x+lengthdir_x(25,owner.aimDirection),y+lengthdir_y(25,owner.aimDirection),TeamGate)
+         or global.mapchanging))
     {
         if(alarm[3] &lt;= 0)
             loopsoundstart(x,y,FlamethrowerSnd);
