@@ -17,28 +17,11 @@
 invisible = false;
 if bubble.alarm[0] &gt;0 bubble.visible = true;
 
-if (global.myself != -1 &amp;&amp; !intel) {
-    if (global.myself.team != team) {
-        invisible = true;
-        bubble.visible = false;
-        if (global.myself.object == -1) {
-            invisible = false;
-            bubble.visible = true;
-        } else if (sign(x - global.myself.object.x) == sign(global.myself.object.image_xscale)) {
-            invisible = false;
-            bubble.visible = true;    
-        }
-    }
-}
-//hide the infiltrator's sprite as long as he's in the stab animation but allow his bubble to be seen if facing him
-if (stabbing) {
-    invisible = true;
-    if (global.myself.team != team) {
-        bubble.visible = false;
-        if (global.myself.object == -1) {
-            bubble.visible = true;
-        } else if (sign(x - global.myself.object.x) == sign(global.myself.object.image_xscale)) {
-            bubble.visible = true;
+if (global.myself != -1) {
+    if (global.myself.object != -1) &amp;&amp; (!intel) {
+        if ((team != global.myself.object.team) &amp;&amp; (sign(x - global.myself.object.x) == -sign(global.myself.object.image_xscale))) {
+            invisible = true;
+            bubble.visible = false;
         }
     }
 }
