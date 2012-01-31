@@ -45,4 +45,5 @@
   <resource name="toggleZoom" type="RESOURCE"/>
   <resource name="md5" type="RESOURCE"/>
   <resource name="ds_list_sorted_insert" type="RESOURCE"/>
+  <resource name="isBetaVersion" type="RESOURCE"/>
 </resources>

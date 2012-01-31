@@ -15,7 +15,10 @@
       <arguments>
         <argument kind="STRING">var host, path;
 host = "www.ganggarrison.com";
-path = "/devmessages.txt";
+if(global.updaterBetaChannel)
+    path = "/devmessages_beta.txt";
+else
+    path = "/devmessages.txt";
 
 socket = noone;
 
