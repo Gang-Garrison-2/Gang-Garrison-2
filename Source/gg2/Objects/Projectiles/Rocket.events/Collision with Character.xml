@@ -17,10 +17,12 @@
 {
     if (other.team != team)
     {
-        other.cloakAlpha = max(cloakAlpha, 0.3); 
-        other.cloakFlicker = true;
-        other.alarm[7] = 3;
-        
+        with(other)
+        {
+            cloakAlpha = max(cloakAlpha, 0.3); 
+            cloakFlicker = true;
+            alarm[7] = 3;
+        }
         characterHit=other;
         event_user(5);
     }
