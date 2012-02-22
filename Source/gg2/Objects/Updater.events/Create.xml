@@ -60,7 +60,6 @@ while(DM_DownloadStatus(downloadHandle) != 3)
     draw_set_valign(fa_center);
     minutes=floor(timer/60);
     seconds=floor(timer-minutes*60);
-    draw_set_font(fnt_gg2);
     draw_text(x,y-20,string(minutes) + " minutes " + string(seconds) + " seconds Remaining...");
     counter+=1;
     progressBar = floor(DM_GetCompleted(downloadHandle)/5);
