@@ -20,6 +20,9 @@
     sndlooping = false;
     maxAmmo = 200;
     ammoCount = maxAmmo;
+    reloadBuffer = 15;
+    isRefilling = false;
+    
 }
 </argument>
       </arguments>

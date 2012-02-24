@@ -10,5 +10,6 @@
   <resource name="InGameElements" type="GROUP"/>
   <resource name="GameElements" type="GROUP"/>
   <resource name="Event Sprites" type="GROUP"/>
+  <resource name="Updater" type="GROUP"/>
   <resource name="DevMessagesCheckerS" type="RESOURCE"/>
 </resources>

@@ -6,7 +6,7 @@
     var customMapRotationFile;
 
     //import wav files for music
-    global.MenuMusic=sound_add(choose("Music/menumusic1.wav","Music/menumusic2.wav","Music/menumusic3.wav","Music/menumusic4.wav"), 1, true);
+    global.MenuMusic=sound_add(choose("Music/menumusic1.wav","Music/menumusic2.wav","Music/menumusic3.wav","Music/menumusic4.wav","Music/menumusic5.wav","Music/menumusic6.wav"), 1, true);
     global.IngameMusic=sound_add("Music/ingamemusic.wav", 1, true);
     global.FaucetMusic=sound_add("Music/faucetmusic.wav", 1, true);
     if(global.MenuMusic != -1)
@@ -62,6 +62,10 @@
     global.caplimitBkup = global.caplimit;
     global.autobalance = ini_read_real("Server", "AutoBalance",1);
     global.Server_RespawntimeSec = ini_read_real("Server", "Respawn Time", 5);
+    global.haxxyKey = ini_read_string("Haxxy", "SecretHaxxyKey", "");
+    global.mapdownloadLimitBps = ini_read_real("Server", "Total bandwidth limit for map downloads in bytes per second", 50000);
+    global.updaterBetaChannel = ini_read_real("General", "UpdaterBetaChannel", isBetaVersion());
+    
     global.currentMapArea=1;
     global.totalMapAreas=1;
     global.setupTimer=1800;
@@ -90,8 +94,11 @@
     ini_write_real("Server", "CapLimit", global.caplimit);
     ini_write_real("Server", "AutoBalance", global.autobalance);
     ini_write_real("Server", "Respawn Time", global.Server_RespawntimeSec);
+    ini_write_real("Server", "Total bandwidth limit for map downloads in bytes per second", global.mapdownloadLimitBps);
     ini_write_real("Server", "Time Limit", global.timeLimitMins);
     ini_write_string("Server", "Password", global.serverPassword);
+    ini_write_string("Haxxy", "SecretHaxxyKey", global.haxxyKey);
+    ini_write_real("General", "UpdaterBetaChannel", global.updaterBetaChannel);
     
     //screw the 0 index we will start with 1
     //map_truefort 
@@ -122,6 +129,10 @@
     maps[13] = ini_read_real("Maps", "koth_corinth", 13);
     //koth_harvest
     maps[14] = ini_read_real("Maps", "koth_harvest", 14);
+    //dkoth_atalia
+    maps[15] = ini_read_real("Maps", "dkoth_atalia", 15);
+    //dkoth_sixties
+    maps[16] = ini_read_real("Maps", "dkoth_sixties", 16);
     
     //Server respawn time calculator. Converts each second to a frame. (read: multiply by 30 :hehe:)
     if (global.Server_RespawntimeSec == 0)
@@ -150,10 +161,17 @@
     ini_write_real("Maps", "koth_valley", maps[12]);
     ini_write_real("Maps", "koth_corinth", maps[13]);
     ini_write_real("Maps", "koth_harvest", maps[14]);
+    ini_write_real("Maps", "dkoth_atalia", maps[15]);
+    ini_write_real("Maps", "dkoth_sixties", maps[16]);
 
     ini_close();
     
-       
+    // parse the protocol version UUID for later use
+    global.protocolUuid = buffer_create();
+    parseUuid(PROTOCOL_UUID, global.protocolUuid);
+    
+    global.gg2lobbyId = buffer_create();
+    parseUuid(GG2_LOBBY_UUID, global.gg2lobbyId);
     
 var a, IPRaw, portRaw;
 doubleCheck=0;
@@ -201,7 +219,7 @@ global.launchMap = "";
         global.serverPort = real(portRaw);
         global.serverIP = IPRaw;
         global.isHost = false;
-        global.client = instance_create(0,0,Client);
+        instance_create(0,0,Client);
     }   
     
     global.customMapdesginated = 0;    
@@ -235,7 +253,7 @@ global.launchMap = "";
         //Set up the map rotation stuff
         var i, sort_list;
         sort_list = ds_list_create();
-        for(i=1; i <= 14; i += 1) {
+        for(i=1; i <= 16; i += 1) {
             if(maps[i] != 0) ds_list_add(sort_list, ((100*maps[i])+i));
         }
         ds_list_sort(sort_list, 1);
@@ -285,6 +303,12 @@ global.launchMap = "";
                 case 14:
                     ds_list_add(global.map_rotation, "koth_harvest");
                 break;
+                case 15:
+                    ds_list_add(global.map_rotation, "dkoth_atalia");
+                break;
+                case 16:
+                    ds_list_add(global.map_rotation, "dkoth_sixties");
+                break;
                     
             }
         }
@@ -293,17 +317,14 @@ global.launchMap = "";
     
     window_set_fullscreen(global.fullscreen);
     
-    draw_set_font(fnt_gg2);
+    global.gg2Font = font_add_sprite(gg2FontS,ord("!"),false,0);
+    draw_set_font(global.gg2Font);
     cursor_sprite = CrosshairS;
     
     if(!directory_exists(working_directory + "\Maps")) directory_create(working_directory + "\Maps");
     
     instance_create(0, 0, AudioControl);
-    
-    if(global.dedicatedMode == 1) {
-        AudioControlToggleMute();
-        room_goto_fix(Menu);
-    }
+    instance_create(0, 0, SSControl);
     
     // custom dialog box graphics
     message_background(popupBackgroundB);
@@ -311,9 +332,6 @@ global.launchMap = "";
     message_text_font("Century",9,c_white,1);
     message_button_font("Century",9,c_white,1);
     message_input_font("Century",9,c_white,0);
-    
-    // parse the protocol version UUID for later use
-    parseProtocolUuid();
     
     //Key Mapping
     ini_open("controls.gg2");
@@ -335,5 +353,9 @@ global.launchMap = "";
     ini_close();
     
     calculateMonthAndDay();
-    
+
+    if(global.dedicatedMode == 1) {
+        AudioControlToggleMute();
+        room_goto_fix(Menu);
+    }    
 }

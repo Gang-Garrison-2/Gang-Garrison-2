@@ -13,7 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if (global.mapchanging != 1)
+        <argument kind="STRING">if (!global.mapchanging)
 {
 if(team == TEAM_BLUE or intel) {
     x=xprevious;

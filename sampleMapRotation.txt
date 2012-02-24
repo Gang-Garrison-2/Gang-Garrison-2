@@ -33,3 +33,5 @@ gen_destroy
 koth_valley
 koth_corinth
 koth_harvest
+dkoth_atalia
+dkoth_sixties

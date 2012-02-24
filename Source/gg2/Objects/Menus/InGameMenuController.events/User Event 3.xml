@@ -13,9 +13,14 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">{
-    game_end();
-}</argument>
+        <argument kind="STRING">// Force dedicated mode to off so you can go to main menu instead of just restarting server
+global.dedicatedMode = 0;
+with(Client)
+    instance_destroy();
+    
+with(GameServer)
+    instance_destroy();
+</argument>
       </arguments>
     </action>
   </actions>

@@ -134,7 +134,13 @@ while(string_pos(DIVIDER, argument0) != 0) { // continue until there are no more
     break; 
     case "bulletwall_horizontal":
       instance_create(entityX, entityY, BulletWallHorizontal);
-    break; 
+    break;
+    case "rightdoor":
+      instance_create(entityX, entityY, RightDoor);
+    break;
+    case "leftdoor":
+      instance_create(entityX, entityY, LeftDoor);
+    break;
     case "controlPoint5":
       instance_create(entityX, entityY, ControlPoint5);
     break;   
@@ -185,6 +191,12 @@ while(string_pos(DIVIDER, argument0) != 0) { // continue until there are no more
     break;     
     case "KothControlPoint":
       instance_create(entityX, entityY, KothControlPoint);
+    break;
+    case "KothRedControlPoint":
+      instance_create(entityX, entityY, KothRedControlPoint);
+    break;
+    case "KothBlueControlPoint":
+      instance_create(entityX, entityY, KothBlueControlPoint);
     break;
     
     /* 

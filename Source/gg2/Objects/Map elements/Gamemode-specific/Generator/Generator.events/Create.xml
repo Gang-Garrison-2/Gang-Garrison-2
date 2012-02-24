@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="CREATE" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">maxHp = 2100;
+hp = maxHp;
+maxShieldHp = 300;
+shieldHp = maxShieldHp;
+maxShieldResistance = 0.75;
+minShieldResistance = 0.25;
+shieldResistance = maxShieldResistance;
+isShieldRegenerating = false;
+regenerationBuffer = 3 * 30;
+ubered=0;
+lastDamageDealer = -1;
+lastDamageSource = -1;
+smokeCount = 0;
+image_speed = 0.3;
+blastRadius = 400;
+shieldIndex = 0;
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

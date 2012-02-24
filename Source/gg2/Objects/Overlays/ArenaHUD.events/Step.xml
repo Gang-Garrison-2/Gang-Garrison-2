@@ -35,8 +35,8 @@ for(i=0; i&lt;ds_list_size(global.players); i+=1) {
 if global.isHost {
     if ArenaControlPoint.team != -1 winners = ArenaControlPoint.team;
     if cpUnlock == 0 {
-        sendEventArenaUnlockCP();
-        doEventArenaUnlockCP();
+        sendEventUnlockCP();
+        doEventUnlockCP();
     }
     else if cpUnlock == 150 {
         GameServer.syncTimer = 1;

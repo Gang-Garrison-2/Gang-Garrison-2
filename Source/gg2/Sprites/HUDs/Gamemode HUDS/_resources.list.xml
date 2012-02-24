@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="CTF" type="GROUP"/>
+  <resource name="Generator" type="GROUP"/>
+  <resource name="Arena" type="GROUP"/>
+  <resource name="Capture Points" type="GROUP"/>
+</resources>

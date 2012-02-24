@@ -17,7 +17,7 @@
     xoffset=-5;
     yoffset=-2;
     refireTime=20;
-    maxAmmo = 8
+    maxAmmo = 6;
     ammoCount = maxAmmo;
     reloadTime = 15;
     reloadBuffer = 20;

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="OTHER" id="23">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">receiveCompleteMessage(global.serverSocket,6,global.deserializeBuffer);
+cpUnlock=read_ushort(global.deserializeBuffer);
+redTimer=read_ushort(global.deserializeBuffer);
+blueTimer=read_ushort(global.deserializeBuffer);
+with KothRedControlPoint event_user(13);
+with KothBlueControlPoint event_user(13);
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

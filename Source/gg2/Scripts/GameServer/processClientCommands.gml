@@ -1,7 +1,10 @@
-var player, playerId;
+var player, playerId, commandLimitRemaining;
 
 player = argument0;
 playerId = argument1;
+
+// To prevent players from flooding the server, limit the number of commands to process per step and player.
+commandLimitRemaining = 10;
 
 with(player) {
     if(!variable_local_exists("commandReceiveState")) {
@@ -14,7 +17,7 @@ with(player) {
     }
 }
 
-while(true) {
+while(commandLimitRemaining > 0) {
     var socket;
     socket = player.socket;
     if(!tcp_receive(socket, player.commandReceiveExpectedBytes)) {
@@ -50,6 +53,7 @@ while(true) {
     case 2:
         player.commandReceiveState = 0;
         player.commandReceiveExpectedBytes = 1;
+        commandLimitRemaining -= 1;
         
         switch(player.commandReceiveCommand)
         {
@@ -63,7 +67,6 @@ while(true) {
             class = read_ubyte(socket);
             if(getCharacterObject(player.team, class) != -1)
             {
-                player.class = class;
                 if(player.object != -1)
                 {
                     with(player.object)
@@ -78,21 +81,22 @@ while(true) {
                             else
                             {
                                 var assistant;
-                                assistant = -1;
-                                if (lastDamageDealer.object.healer != -1)
-                                    assistant = lastDamageDealer.object.healer;
-                                else
-                                    assistant = secondToLastDamageDealer;
+                                assistant = secondToLastDamageDealer;
+                                if (lastDamageDealer.object != -1)
+                                    if (lastDamageDealer.object.healer != -1)
+                                        assistant = lastDamageDealer.object.healer;
                                 sendEventPlayerDeath(player, lastDamageDealer, assistant, FINISHED_OFF);
                                 doEventPlayerDeath(player, lastDamageDealer, assistant, FINISHED_OFF);
                             }
                         }
-                        else
-                            instance_destroy();
+                        else 
+                        instance_destroy(); 
+                        
                     }
                 }
                 else if(player.alarm[5]<=0)
                     player.alarm[5] = 1;
+                player.class = class;
                 ServerPlayerChangeclass(playerId, player.class, global.sendBuffer);
             }
             break;
@@ -132,11 +136,10 @@ while(true) {
                             else
                             {
                                 var assistant;
-                                assistant = -1;
-                                if (lastDamageDealer.object.healer != -1)
-                                    assistant = lastDamageDealer.object.healer;
-                                else
-                                    assistant = secondToLastDamageDealer;
+                                assistant = secondToLastDamageDealer;
+                                if (lastDamageDealer.object != -1)
+                                    if (lastDamageDealer.object.healer != -1)
+                                        assistant = lastDamageDealer.object.healer;
                                 sendEventPlayerDeath(player, lastDamageDealer, assistant, FINISHED_OFF);
                                 doEventPlayerDeath(player, lastDamageDealer, assistant, FINISHED_OFF);
                             }
@@ -168,24 +171,25 @@ while(true) {
             if(player.object != -1)
             {
                 if(player.class == CLASS_ENGINEER
-                and collision_circle(player.object.x, player.object.y, 50, Sentry, false, true) < 0
-                and player.object.nutsNBolts == 100 and (collision_point(player.object.x,player.object.y,SpawnRoom,0,0) < 0)
-                and player.sentry == -1 and !player.object.onCabinet)
+                        and collision_circle(player.object.x, player.object.y, 50, Sentry, false, true) < 0
+                        and player.object.nutsNBolts == 100
+                        and (collision_point(player.object.x,player.object.y,SpawnRoom,0,0) < 0)
+                        and !player.sentry
+                        and !player.object.onCabinet)
                 {
-                    buildSentry(player);
                     write_ubyte(global.sendBuffer, BUILD_SENTRY);
                     write_ubyte(global.sendBuffer, playerId);
+                    write_ushort(global.serializeBuffer, round(player.object.x*5));
+                    write_ushort(global.serializeBuffer, round(player.object.y*5));
+                    write_byte(global.serializeBuffer, player.object.image_xscale);
+                    buildSentry(player, player.object.x, player.object.y, player.object.image_xscale);
                 }
             }
             break;                                       
 
         case DESTROY_SENTRY:
-            if(player.sentry != -1) {
-                with(player.sentry) {
-                    instance_destroy();
-                }
-            }
-            player.sentry = -1;
+            with(player.sentry)
+                instance_destroy();
             break;                     
         
         case DROP_INTEL:                                                                  
@@ -219,45 +223,16 @@ while(true) {
             }
             break;
              
-        case SCOPE_IN:
-             if player.object != -1 {
+        case TOGGLE_ZOOM:
+            if player.object != -1 {
                 if player.class == CLASS_SNIPER {
-                   write_ubyte(global.sendBuffer, SCOPE_IN);
-                   write_ubyte(global.sendBuffer, playerId);
-                   with player.object {
-                        zoomed = true;
-                        runPower = 0.6;
-                        jumpStrength = 6;
-                   }
+                    write_ubyte(global.sendBuffer, TOGGLE_ZOOM);
+                    write_ubyte(global.sendBuffer, playerId);
+                    toggleZoom(player.object);
                 }
-             }
-             break;
-                
-        case SCOPE_OUT:
-             if player.object != -1 {
-                if player.class == CLASS_SNIPER {
-                   write_ubyte(global.sendBuffer, SCOPE_OUT);
-                   write_ubyte(global.sendBuffer, playerId);
-                   with player.object {
-                        zoomed = false;
-                        runPower = 0.9;
-                        jumpStrength = 8;
-                   }
-                }
-             }
-             break;
-                                                      
-        case PASSWORD_SEND:
-            password = read_string(socket, socket_receivebuffer_size(socket));
-            if(global.serverPassword != password) {
-                write_ubyte(player.socket, PASSWORD_WRONG);
-                socket_destroy(player.socket);
-                player.socket = -1;
-            } else {
-                player.authorized = true;
             }
             break;
-            
+                                                      
         case PLAYER_CHANGENAME:
             var nameLength;
             nameLength = socket_receivebuffer_size(socket);
@@ -290,15 +265,43 @@ while(true) {
             break;
             
         case INPUTSTATE:
-            if(player.object != -1 && player.authorized == true) {
-                player.object.keyState = read_ubyte(socket);
-                player.object.netAimDirection = read_ushort(socket);
-                player.object.aimDirection = player.object.netAimDirection*360/65536;
-            } else if(player.authorized == false) { //disconnect them
+            if(player.object != -1)
+            {
+                with(player.object)
+                {
+                    keyState = read_ubyte(socket);
+                    netAimDirection = read_ushort(socket);
+                    aimDirection = netAimDirection*360/65536;
+                    event_user(1);
+                }
+            }
+            break;
+        
+        case I_AM_A_HAXXY_WINNER:
+            write_ubyte(socket, HAXXY_CHALLENGE_CODE);
+            player.challenge = "";
+            repeat(16)
+                player.challenge += chr(irandom_range(1,255));
+            write_string(socket, player.challenge);
+            break;
+            
+        case HAXXY_CHALLENGE_RESPONSE:
+            var answer, i, challengeSent;
+            with(player)
+                challengeSent = variable_local_exists("challenge");
+            if(!challengeSent)
+                break;
+                
+            answer = "";
+            for(i=1;i<=16;i+=1)
+                answer += chr(read_ubyte(socket) ^ ord(string_char_at(player.challenge, i)));
+            if(HAXXY_PUBLIC_KEY==md5(answer)) {
+                player.isHaxxyWinner = true;
+            } else {
                 socket_destroy_abortive(player.socket);
                 player.socket = -1;
             }
-            break; 
+            break;
         }
         break;
     } 

@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="STEP" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">alpha += fade;
+if(alpha &gt;= 1) {
+    fade = -0.05;
+} else if(alpha &lt;= 0) {
+    fade = 0.05;
+}
+
+var arenaRoundEnd;
+arenaRoundEnd = false;
+if(mode == 2) {
+    if(ArenaHUD.endCount!=0) arenaRoundEnd=true;
+} else if (mode == 4) {  
+    if (DKothHUD.cpUnlock&gt;0) 
+        locked = true; 
+    else //bruteforce because the below code won't lock the two edge cases without causing errors in other modes.
+    {
+        if (cp == 1) { if (global.cp[2].team == TEAM_RED) locked = true else locked = false; }
+        if (cp == 2) { if (global.cp[1].team == TEAM_BLUE) locked = true else locked = false; }
+    }
+} else if (mode != 3){
+    // Locking is done externally in Arena mode and KotH
+    if(team == TEAM_BLUE) {
+        if(cp &gt; 1) {
+            if(global.cp[cp-1].team != TEAM_RED) locked = true;
+            else locked = false;
+        }
+    } else if(team == TEAM_RED) {
+        if(cp &lt; global.totalControlPoints) {
+            if(global.cp[cp+1].team != TEAM_BLUE) locked = true;
+            else locked = false;
+        }
+    }
+    
+    if(mode==1 &amp;&amp; team == TEAM_RED) locked = true;
+}
+
+//autolock if the round is over, regardless of game mode
+if (arenaRoundEnd || global.mapchanging) locked = true;
+
+if(locked) {
+    capping = 0;
+    exit;
+}
+
+var randomRedCapper, randomBlueCapper, redCappers, blueCappers, myselfOnPoint, soundx, soundy;
+var oldRedPresence, oldBluePresence;
+
+oldRedPresence = redPresence;
+oldBluePresence = bluePresence;
+redPresence = 0;
+bluePresence = 0;
+redCappers = 0;
+blueCappers = 0;
+myselfOnPoint = false;
+cappers = 0;
+
+if(not arenaRoundEnd) {
+    // At the end of an arena round players on the CP are no longer counted 
+    with(Character) {
+        if(cappingPoint==other.id) {
+            if(player == global.myself) {
+                myselfOnPoint = true;
+            }
+            
+            if(player.team == TEAM_RED) {
+                if(ubered) {
+                    other.redPresence = max(1, other.redPresence);
+                } else {
+                    other.redPresence = max(2, other.redPresence);
+                    redCappers += capStrength;
+                }
+                randomRedCapper = id;
+            } else {
+                if(ubered) {
+                    other.bluePresence = max(1, other.bluePresence);
+                } else {
+                    other.bluePresence = max(2, other.bluePresence);
+                    blueCappers += capStrength;
+                }
+                randomBlueCapper = id;
+            }
+        }
+    }
+}
+
+// If the player stands on the point all the point sounds should be centered for him.
+if(myselfOnPoint) {
+    soundx = global.myself.object.x;
+    soundy = global.myself.object.y;
+} else {
+    soundx = x;
+    soundy = y;
+}
+
+if(redPresence&gt;0 and bluePresence&gt;0) {
+    // Both teams have some players on the point...
+    if(not (oldRedPresence&gt;0 and oldBluePresence&gt;0)) {
+        // ...and the defense happened this step, with the cap meter more than half full
+        if(bluePresence&gt;0 and oldBluePresence==0 and team==TEAM_BLUE) {
+            var isMe;
+            isMe = randomBlueCapper.player == global.myself;
+            recordEventInLog(2,TEAM_BLUE, randomBlueCapper.player.name, isMe);
+            playsound(soundx, soundy, CPDefendedSnd);
+        }
+        if(redPresence&gt;0 and oldRedPresence==0 and team==TEAM_RED) {
+            var isMe;
+            isMe = randomRedCapper.player == global.myself;
+            recordEventInLog(2,TEAM_RED, randomRedCapper.player.name, isMe);
+            playsound(soundx, soundy, CPDefendedSnd);
+        }
+    }
+} else if(redPresence==0 and bluePresence==0) {
+    // Nobody on the point, slowly revert the capture
+    if(capping&gt;0) capping=max(capping-1, 0);
+} else {
+    // Some team has players on an undefended point.
+    var teamOnPoint, teamOnPointPresence;
+    if(redPresence&gt;0) {
+        teamOnPoint = TEAM_RED;
+        teamOnPointPresence = redPresence;
+        teamOnPointOldPresence = oldRedPresence;
+        teamOnPointCappers = redCappers;
+    } else {
+        teamOnPoint = TEAM_BLUE;
+        teamOnPointPresence = bluePresence;
+        teamOnPointOldPresence = oldBluePresence;
+        teamOnPointCappers = blueCappers;
+    }
+    
+    if(teamOnPointPresence==1) {
+        // Only an ubercharged player on the point
+        // He can't cap, but he will prevent the point from reverting if his team
+        // has partially capped it already
+        if(teamOnPoint != cappingTeam) {
+            capping=max(capping-1, 0);
+        }
+    } else {
+        // One team has cap-able players on an undefended point...
+        if(cappingTeam != -1 and teamOnPoint != cappingTeam) {
+            // ...but the other team has the point partially captured already, so
+            // they have to revert first.
+            capping=max(capping - (1+teamOnPointCappers*0.5), 0);
+        } else if(teamOnPoint != team) {
+            // ...and the point is not partially capped by the enemy team, and we don't own it already.
+            // So let's cap!
+            
+            if(teamOnPointOldPresence&lt;2 or cappingTeam!=teamOnPoint or (oldRedPresence&gt;0 and oldBluePresence&gt;0)) {
+                // Play the cap start sound if the team just entered the point,
+                // OR we just finished reverting the capture from the other team,
+                // OR the point was defended last step.
+                playsound(soundx, soundy, CPBeginCapSnd);
+            }
+            cappingTeam = teamOnPoint;
+            cappers = teamOnPointCappers;
+            if(cappers&lt;=2) {
+                capping += cappers;
+            } else {
+                capping += cappers/2+1
+            }
+        }
+    }
+}
+
+if(capping &lt;= 0) {
+    capping = 0;
+    cappingTeam = -1;
+} else if global.isHost {
+    if floor(capping) == floor(capTime - capTime/4) || floor(capping) == floor(capTime/4) || floor(capping) == floor(capTime/10){
+        GameServer.syncTimer = 1;
+    } else if capping &gt;= capTime {
+        pointCapture(cp);
+        if instance_exists(ControlPointHUD) {
+            if ControlPointHUD.mode == 1 ControlPointHUD.timer+=9000;
+        }
+        GameServer.syncTimer = 1; 
+    }
+}
+
+//since CPs are not perfectly in sync,the client might be ahead of the server, so stall it
+else if floor(capping) == floor(capTime - capTime/4)-10 || floor(capping) == floor(capTime/4)-10 || floor(capping) == floor(capTime/10)-10{
+    capping -= 10;
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

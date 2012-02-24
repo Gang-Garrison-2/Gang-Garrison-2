@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
   <resource name="Truefort" type="RESOURCE"/>
-  <resource name="TwodFortTwo" type="RESOURCE"/>
   <resource name="TwodFortTwoRemix" type="RESOURCE"/>
   <resource name="Conflict" type="RESOURCE"/>
   <resource name="ClassicWell" type="RESOURCE"/>
@@ -15,6 +14,8 @@
   <resource name="Valley" type="RESOURCE"/>
   <resource name="Corinth" type="RESOURCE"/>
   <resource name="Harvest" type="RESOURCE"/>
+  <resource name="Atalia" type="RESOURCE"/>
+  <resource name="Sixties" type="RESOURCE"/>
   <resource name="CustomMapRoom" type="RESOURCE"/>
   <resource name="Oldfort" type="RESOURCE"/>
 </resources>

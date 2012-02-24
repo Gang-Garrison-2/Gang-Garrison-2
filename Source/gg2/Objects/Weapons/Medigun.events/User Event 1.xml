@@ -47,17 +47,13 @@
                         healTarget.object.healer = ownerPlayer;
                     if (healTarget.object.burnDuration &gt; 0)
                         healTarget.object.burnDuration -= 1;
-                    if(healTarget.object.hp &lt; healTarget.object.maxHp/2) {
-                        healTarget.object.hp+=healAmmount;
-                        hphealed+=healAmmount;
-                        ownerPlayer.stats[HEALING] += healAmmount;
-                        ownerPlayer.roundStats[HEALING] += healAmmount;
-                    } else if(healTarget.object.hp &lt; healTarget.object.maxHp){
-                        healTarget.object.hp+=healAmmount/2;
-                        hphealed+=healAmmount/2;
-                        ownerPlayer.stats[HEALING] += healAmmount/2;
-                        ownerPlayer.roundStats[HEALING] += healAmmount/2;
-                    }
+                    var healthGained;
+                    healthGained = healAmount * calculateHealingFactor(healTarget.object.timeUnscathed);
+                    healTarget.object.hp = min(healTarget.object.hp + healthGained, healTarget.object.maxHp);
+                    hphealed += healthGained;
+                    ownerPlayer.stats[HEALING] += healthGained;
+                    ownerPlayer.roundStats[HEALING] += healthGained;
+                    
                     
                     if(ubering == false &amp;&amp; uberCharge&lt;2000){
                         uberCharge+=1;

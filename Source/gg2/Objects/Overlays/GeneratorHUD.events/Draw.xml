@@ -23,14 +23,16 @@ draw_set_alpha(1);
 
 draw_sprite_ext(GeneratorHUDS,0,xoffset+xsize/2,yoffset+550,2,2,0,c_white,1);
 if instance_exists(GeneratorRed) {
-    //draw_sprite_ext(ControlPointStatusS,60,xoffset+xsize/2-100,yoffset+560,3,3,0,c_white,1);
     draw_sprite_ext(GeneratorRedS,GeneratorRed.image_index,xoffset+xsize/2-50,yoffset+550,1,1,0,c_white,1);
-    draw_healthbar(xoffset+xsize/2-77, yoffset+530, xoffset+xsize/2-25, yoffset+537,GeneratorRed.hp*100/GeneratorRed.maxHP,c_black,barcolor,barcolor,0,true,true);
+    draw_sprite_ext(GeneratorShieldS,floor(GeneratorRed.shieldIndex),xoffset+xsize/2-50,yoffset+550,1,1,0,c_white, GeneratorRed.shieldResistance);
+    draw_healthbar(xoffset+xsize/2-77, yoffset+525, xoffset+xsize/2-25, yoffset+532,GeneratorRed.hp*100/GeneratorRed.maxHp,c_black,barcolor,barcolor,0,true,true);
+    draw_healthbar(xoffset+xsize/2-77, yoffset+570, xoffset+xsize/2-25, yoffset+577,GeneratorRed.shieldHp*100/GeneratorRed.maxShieldHp,c_black,barcolor,barcolor,0,true,true);
 }
 if instance_exists(GeneratorBlue) {
-    //draw_sprite_ext(ControlPointStatusS,90,xoffset+xsize/2+100,yoffset+560,3,3,0,c_white,1);
     draw_sprite_ext(GeneratorBlueS,GeneratorBlue.image_index,xoffset+xsize/2+50,yoffset+550,1,1,0,c_white,1);
-    draw_healthbar(xoffset+xsize/2+23, yoffset+530, xoffset+xsize/2+75, yoffset+537,GeneratorBlue.hp*100/GeneratorBlue.maxHP,c_black,barcolor,barcolor,0,true,true);
+    draw_sprite_ext(GeneratorShieldS,floor(GeneratorBlue.shieldIndex),xoffset+xsize/2+50,yoffset+550,1,1,0,c_white, GeneratorBlue.shieldResistance);
+    draw_healthbar(xoffset+xsize/2+23, yoffset+525, xoffset+xsize/2+75, yoffset+532,GeneratorBlue.hp*100/GeneratorBlue.maxHp,c_black,barcolor,barcolor,0,true,true);
+    draw_healthbar(xoffset+xsize/2+23, yoffset+570, xoffset+xsize/2+75, yoffset+577,GeneratorBlue.shieldHp*100/GeneratorBlue.maxShieldHp,c_black,barcolor,barcolor,0,true,true);
 }
 
 //timer
@@ -44,18 +46,24 @@ if instance_exists(WinBanner) exit;
 
 draw_set_color(c_white);
 draw_set_valign(fa_center);
-draw_set_halign(fa_right);
 
-draw_set_halign(fa_right);
-draw_sprite_ext(TimerHudS,teamoffset,xoffset+xsize/2 +xshift,yoffset+30+ yshift,3,3,0,c_white,1);
-draw_sprite_ext(TimerS,floor(timer/timeLimit*12),xoffset+xsize/2+39 +xshift,yoffset+30+ yshift,3,3,0,c_white,1);
-minutes=floor(timer/1800);
-secondcounter=timer-minutes*1800;
-seconds=floor(secondcounter/30);    
-draw_text_transformed((xoffset+xsize/2-1)-10+xshift,yoffset+32+ yshift,string(minutes),1.5,1.5,0);
-draw_text_transformed((xoffset+xsize/2)+xshift,yoffset+32+ yshift,":",1.5,1.5,0);
-if seconds &gt;= 10 draw_text_transformed((xoffset+xsize/2+20)+xshift,yoffset+32+ yshift,string(seconds),1.5,1.5,0);
-else if seconds &lt; 10 draw_text_transformed((xoffset+xsize/2+20)+xshift,yoffset+32+ yshift,"0"+string(seconds),1.5,1.5,0);
+if overtime == 1 {
+    draw_set_halign(fa_center);
+    draw_sprite_ext(TimerHudS,2+teamoffset,xoffset+xsize/2 +xshift,yoffset+30+ yshift,3,3,0 ,c_white,1);
+    draw_text((xoffset+xsize/2)+xshift,yoffset+30+ yshift,"OVERTIME");
+}
+else{
+    draw_set_halign(fa_right);
+    draw_sprite_ext(TimerHudS,teamoffset,xoffset+xsize/2 +xshift,yoffset+30+ yshift,3,3,0,c_white,1);
+    draw_sprite_ext(TimerS,floor(timer/timeLimit*12),xoffset+xsize/2+39 +xshift,yoffset+30+ yshift,3,3,0,c_white,1);
+    minutes=floor(timer/1800);
+    secondcounter=timer-minutes*1800;
+    seconds=floor(secondcounter/30);    
+    draw_text_transformed((xoffset+xsize/2-1)-10+xshift,yoffset+32+ yshift,string(minutes),1.5,1.5,0);
+    draw_text_transformed((xoffset+xsize/2)+xshift,yoffset+32+ yshift,":",1.5,1.5,0);
+    if seconds &gt;= 10 draw_text_transformed((xoffset+xsize/2+20)+xshift,yoffset+32+ yshift,string(seconds),1.5,1.5,0);
+    else if seconds &lt; 10 draw_text_transformed((xoffset+xsize/2+20)+xshift,yoffset+32+ yshift,"0"+string(seconds),1.5,1.5,0);
+}
 </argument>
       </arguments>
     </action>

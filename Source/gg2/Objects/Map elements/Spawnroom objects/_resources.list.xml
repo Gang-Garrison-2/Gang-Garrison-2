@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="SpawnRoom" type="RESOURCE"/>
+  <resource name="SpawnPointRed" type="GROUP"/>
+  <resource name="SpawnPointBlue" type="GROUP"/>
+  <resource name="HealingCabinet" type="RESOURCE"/>
+</resources>

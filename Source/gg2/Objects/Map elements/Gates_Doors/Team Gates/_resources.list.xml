@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="RedTeamGate" type="RESOURCE"/>
+  <resource name="RedTeamGate2" type="RESOURCE"/>
+  <resource name="BlueTeamGate" type="RESOURCE"/>
+  <resource name="BlueTeamGate2" type="RESOURCE"/>
+</resources>

@@ -13,19 +13,21 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">{
-    if(not nocreate) {
-        socket_destroy(global.serverSocket);
-        ds_list_destroy(global.players);
-        buffer_destroy(global.deserializeBuffer);    
+        <argument kind="STRING">if(not nocreate) {
+    socket_destroy(global.serverSocket);
+    ds_list_destroy(global.players);
+    buffer_destroy(global.deserializeBuffer);
+    buffer_destroy(downloadMapBuffer);
+    
+    with(Player)
+        instance_destroy();
         
-        if(playerControl != -1 and instance_exists(playerControl)) {
-            with(playerControl) {
-                instance_destroy();
-            }
-        }
-    }
+    with(PlayerControl)
+        instance_destroy();
+    
+    room_goto_fix(returnRoom);
 }
+
 </argument>
       </arguments>
     </action>

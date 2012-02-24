@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="TimerHudS" type="RESOURCE"/>
+  <resource name="RespawnTimerS" type="RESOURCE"/>
+  <resource name="TimerS" type="RESOURCE"/>
+  <resource name="infinity" type="RESOURCE"/>
+  <resource name="TimerOutlineS" type="RESOURCE"/>
+</resources>

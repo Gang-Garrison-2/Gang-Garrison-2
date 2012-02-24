@@ -2,11 +2,6 @@
     with(Client)
         instance_destroy();
         
-    maxplayers = global.playerLimit;
-    if global.dedicatedMode == 1 { 
-        global.playerLimit += 1;
-    }
-    global.joiningPlayers = ds_list_create();
     global.players = ds_list_create();
     global.tcpListener = -1;
     global.serverSocket = -1;
@@ -14,10 +9,13 @@
     global.currentMapIndex = 0;
     global.currentMapArea = 1;
     
+    var i;
+    serverId = buffer_create();
+    for(i=0;i<16;i+=1)
+        write_ubyte(serverId, irandom(255));
+    
     serverbalance=0;
     balancecounter=0;
-    randomize();
-    global.randomSeed=random_get_seed();
     frame = 0;
     updatePlayer = 1;
     impendingMapChange = -1; // timer variable used by GameServerBeginStep, when it hits 0, the server executes a map change to global.nextMap
@@ -58,17 +56,16 @@
 
     global.playerID = 0;
     global.myself = serverPlayer;
-    global.myself.authorized = true;
-    playerControl = instance_create(0,0,PlayerControl);
+    if(HAXXY_PUBLIC_KEY==md5(global.haxxyKey))
+        global.myself.isHaxxyWinner = true;
+    instance_create(0,0,PlayerControl);
         
     global.currentMap = ds_list_find_value(global.map_rotation, global.currentMapIndex);
     if(file_exists("Maps/" + global.currentMap + ".png")) { // if this is an external map
         // get the md5 and url for the map
-        global.currentMapURL = CustomMapGetMapURL(global.currentMap);
         global.currentMapMD5 = CustomMapGetMapMD5(global.currentMap);
         room_goto_fix(CustomMapRoom);
     } else { // internal map, so at the very least, MD5 must be blank
-        global.currentMapURL = "";
         global.currentMapMD5 = "";
         if(gotoInternalMapRoom(global.currentMap) != 0) {
             show_message("Error:#Map " + global.currentMap + " is not in maps folder, and it is not a valid internal map.#Exiting.");
@@ -77,17 +74,7 @@
     }
     
     global.joinedServerName = global.serverName; // so no errors of unknown variable occur when you create a server
-                    
-    global.mapchanging=0; 
-    
-    global.blu_next_map = false;
-    global.red_next_map = false;        
-    global.blu_next_map_back = false;
-    global.red_next_map_back = false;
-    global.red_next_map_temp = false;
-    global.red_next_map_temp = false;
-    global.nextmap_temp_blu_back = false;
-    global.nextmap_temp_red_back = false;
+    global.mapchanging = false; 
     
     GameServerDefineCommands();
 }

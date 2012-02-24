@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="RedIntelGate" type="RESOURCE"/>
+  <resource name="RedIntelGate2" type="RESOURCE"/>
+  <resource name="BlueIntelGate" type="RESOURCE"/>
+  <resource name="BlueIntelGate2" type="RESOURCE"/>
+  <resource name="IntelGateVertical" type="RESOURCE"/>
+  <resource name="IntelGateHorizontal" type="RESOURCE"/>
+</resources>

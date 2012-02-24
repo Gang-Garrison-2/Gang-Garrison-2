@@ -33,6 +33,7 @@
     maxHp = 100;
     weapons[0] = Scattergun;
     tauntsprite = ScoutTauntS;
+    haxxyStatue = ScoutHaxxyStatueS;
 }
 </argument>
       </arguments>

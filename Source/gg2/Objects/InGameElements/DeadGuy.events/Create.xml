@@ -29,10 +29,8 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">{
-    image_speed=0;
-    image_index=CHARACTER_ANIMATION_DEAD;
-}</argument>
+        <argument kind="STRING">image_speed=0;
+</argument>
       </arguments>
     </action>
   </actions>

@@ -110,6 +110,17 @@
         }
         blueintelstatus=1;
     }
+    
+    if blueintelstatus == 0 {
+        draw_sprite_ext(IntelReturnTimeS,max(1,floor(IntelligenceBlue.alarm[0]/900*17)),bluex-26,bluey-27,3,3,0,c_white,1);
+    } else {
+        draw_sprite_ext(IntelReturnTimeS,16,bluex-26,bluey-27,3,3,0,c_white,1);
+    }
+    if redintelstatus == 0 {
+        draw_sprite_ext(IntelReturnTimeS,max(18,floor(IntelligenceRed.alarm[0]/900*17)+17),redx-27,redy-27,3,3,0,c_white,1);
+    } else {
+        draw_sprite_ext(IntelReturnTimeS,33,redx-27,redy-27,3,3,0,c_white,1);
+    }
 
     drawred=true;
     drawblue=true;

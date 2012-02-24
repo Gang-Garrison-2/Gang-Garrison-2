@@ -13,9 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">vspeed += 0.15;
-    
-if(global.particles == PARTICLES_NORMAL) {
+        <argument kind="STRING">if(global.particles == PARTICLES_NORMAL) {
     if(random(5)&lt;1) effect_create_below(ef_smokeup,x,y-8,0,c_gray);
 } else if(global.particles == PARTICLES_ALTERNATIVE) {
     if(not variable_global_exists("flameParticleType")) {

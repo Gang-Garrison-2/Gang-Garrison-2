@@ -16,8 +16,11 @@
         <argument kind="STRING">if(owner.taunting)
     exit;
     
-var offset;
+var offset, xdrawpos, ydrawpos;
 offset = 0;
+xdrawpos = round(x+xoffset*image_xscale);
+ydrawpos = round(y+yoffset);
+
 if(instance_exists(healTarget))
 {
     if(healTarget.object != -1)
@@ -29,11 +32,11 @@ if(instance_exists(healTarget))
             color = c_blue;
             
         draw_set_alpha(0.3);
-        draw_line_width_color(x+lengthdir_x(25,owner.aimDirection),y+lengthdir_y(24,owner.aimDirection),healTarget.object.x, healTarget.object.y, 5, color, color);
+        draw_line_width_color(xdrawpos+lengthdir_x(24,owner.aimDirection),ydrawpos+lengthdir_y(24,owner.aimDirection),healTarget.object.x, healTarget.object.y, 5, color, color);
         offset = 2;
     }
 }
-draw_sprite_ext(sprite_index, owner.team+offset, round(x+xoffset*image_xscale), round(y+yoffset), image_xscale, image_yscale, image_angle, c_white, 1);
+if !owner.player.humiliated draw_sprite_ext(sprite_index, owner.team+offset, xdrawpos, ydrawpos, image_xscale, image_yscale, image_angle, c_white, 1);
 
 </argument>
       </arguments>

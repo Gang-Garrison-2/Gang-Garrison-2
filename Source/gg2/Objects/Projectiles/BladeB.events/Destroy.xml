@@ -14,7 +14,8 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">owner.currentWeapon.bladesOut -= 1;
-owner.currentWeapon.ammoCount -= ammoUsage;
+if (ammoDrained &lt; owner.currentWeapon.refireTime) 
+    owner.currentWeapon.ammoCount -= owner.currentWeapon.refireTime;
 </argument>
       </arguments>
     </action>

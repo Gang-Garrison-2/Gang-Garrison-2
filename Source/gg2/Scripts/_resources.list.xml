@@ -20,6 +20,7 @@
   <resource name="TeamSelectController" type="GROUP"/>
   <resource name="Input" type="GROUP"/>
   <resource name="Graphics" type="GROUP"/>
+  <resource name="Lobby" type="GROUP"/>
   <resource name="recordKillInLog" type="RESOURCE"/>
   <resource name="recordDestructionInLog" type="RESOURCE"/>
   <resource name="recordEventInLog" type="RESOURCE"/>
@@ -34,10 +35,15 @@
   <resource name="serverArenaRestart" type="RESOURCE"/>
   <resource name="serverArenaEndRound" type="RESOURCE"/>
   <resource name="clientArenaEndRound" type="RESOURCE"/>
-  <resource name="parseProtocolUuid" type="RESOURCE"/>
+  <resource name="parseUuid" type="RESOURCE"/>
   <resource name="pointCapture" type="RESOURCE"/>
   <resource name="calculateMonthAndDay" type="RESOURCE"/>
   <resource name="selectSpawnGroup" type="RESOURCE"/>
   <resource name="partyTime" type="RESOURCE"/>
   <resource name="characterHitObstacle" type="RESOURCE"/>
+  <resource name="calculateHealingFactor" type="RESOURCE"/>
+  <resource name="toggleZoom" type="RESOURCE"/>
+  <resource name="md5" type="RESOURCE"/>
+  <resource name="ds_list_sorted_insert" type="RESOURCE"/>
+  <resource name="isBetaVersion" type="RESOURCE"/>
 </resources>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="DESTROY" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">playsound(x,y,ExplosionSnd);
+playsound(x,y,RevolverSnd);
+playsound(x,y,CPBeginCapSnd);
+effect_create_above(ef_explosion,x+30-random(60),y+30-random(60),2,c_gray);
+effect_create_above(ef_explosion,x,y,2,c_red);
+
+with (Character) {
+    if (distance_to_object(other) &lt; other.blastRadius){
+        motion_add(point_direction(other.x,other.y,x,y),15-15*(distance_to_object(other)/other.blastRadius));
+        hp -= 999;
+        if lastDamageDealer != -1 &amp;&amp; lastDamageDealer != player{
+            lastDamageSource = FINISHED_OFF_GIB;
+        }else{
+            lastDamageDealer = -1;
+            lastDamageSource = GENERATOR_EXPLOSION;
+        }
+    }
+}
+
+with (Sentry){
+    if (distance_to_object(other) &lt; other.blastRadius) { 
+        hp -= 999;
+        lastDamageDealer = -1;
+        lastDamageSource = GENERATOR_EXPLOSION;
+    }   
+}    
+     
+       
+with (Rocket) {
+    if (distance_to_object(other) &lt; other.blastRadius){
+        characterHit=-1;
+        event_user(5);
+    }
+}
+    
+with (DeadGuy) {
+    if (distance_to_object(other) &lt; other.blastRadius){
+        motion_add(point_direction(other.x,other.y,x,y),10-10*(distance_to_object(other)/other.blastRadius));
+    }
+}
+    
+with(Mine) {
+    if (distance_to_object(other) &lt; other.blastRadius){
+        event_user(2);
+    }
+}
+with (Gib) {
+    if (distance_to_object(other) &lt; other.blastRadius){
+        motion_add(point_direction(other.x,other.y,x,y),15-15*(distance_to_object(other)/other.blastRadius));
+        rotspeed=random(151)-75;
+    }
+}
+with(Bubble) {
+    if (distance_to_object(other) &lt; other.blastRadius){
+        alarm[0]-=200;
+    }    
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

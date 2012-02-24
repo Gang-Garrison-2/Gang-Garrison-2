@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="Engineer" type="GROUP"/>
+  <resource name="Demoman" type="GROUP"/>
+  <resource name="Medic" type="GROUP"/>
+  <resource name="Sniper" type="GROUP"/>
+</resources>

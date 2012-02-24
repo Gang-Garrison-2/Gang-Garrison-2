@@ -18,7 +18,7 @@
     owner=-1;
     ownerPlayer=-1;
     hitDamage = 0.15;
-    lifetime = 390;
+    lifetime = 155;
     alarm[0] = lifetime;
 }
 </argument>

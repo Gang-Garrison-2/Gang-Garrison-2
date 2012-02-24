@@ -35,11 +35,13 @@ if(afktimer&lt;=0) &amp;&amp; global.myself.object.afk == false{
     with(TeamSelectController) afk=true;
 }
    
-if global.myself.class == CLASS_ENGINEER {
-    // Sentry HUD
-    if (global.myself.sentry != -1) &amp;&amp; !instance_exists(SentryHealthHud) instance_create(0,0,SentryHealthHud);
-    // Metal HUD
-    if global.myself.class == CLASS_ENGINEER &amp;&amp; !instance_exists(NutsNBoltsHud) instance_create(0,0,NutsNBoltsHud);
+if(global.myself.class == CLASS_ENGINEER)
+{
+    if(global.myself.sentry and !instance_exists(SentryHealthHud))
+        instance_create(0,0,SentryHealthHud);
+
+    if(!instance_exists(NutsNBoltsHud))
+        instance_create(0,0,NutsNBoltsHud);
 }
 
 // Sticky HUD. Because real men let computers count for them.

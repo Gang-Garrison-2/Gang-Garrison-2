@@ -89,7 +89,7 @@ Meet The Rocketman:
 	Strong yet graceful, he can
 	launch himself skyward with his
 	rockets as well as do damage!
-   Hit Points: 175
+   Hit Points: 160
    Weapon: Rocket Launcher
    Special abilities: 
            Rocket-Jump - Fire at your feet when you jump to reach great heights!
@@ -176,12 +176,13 @@ lobby will show the current map, number of players, and IP of servers running.
 Alternatively, you can manually join a server if you know their IP and their
 forwarded port.
 
-There are five gameplay modes: 
+There are six gameplay modes: 
 - Capture the Flag
 - Control Point
 - Arena
 - Generator
 - King of the Hill
+- Dual King of the Hill
 
 Choose a team, RED or BLU, or select AutoSelect and let us choose your team for you. 
 Press N to change your team, or to Spectate and watch the action! Keep in mind you 
@@ -227,6 +228,11 @@ King of the Hill:
 There exists a lone control point in the center of the map. Both teams compete to take
 control to start their countdown. First team to hold onto the point for 3 full minutes
 is victorious.
+
+Dual King of the Hill:
+An original mode exclusive to Gang Garrison 2. Teams must hold control of both control
+points to run their timer down. Capturing the enemy control point will secure your own
+until the enemy can take it back. First team to hold complete control for 3 minutes wins.
 
 ----------------------------------------------------------
 
@@ -311,6 +317,16 @@ A community-made arena map gone official! RED and BLU fight for control of an ab
 It is unknown what significance this location holds to both factions, but fear keeps invesigators 
 from delving any further.
 
+15. dkoth_atalia
+by Wareya
+A community-made Generator map that was converted for DKotH. It's advised to take over the central
+complex to gain the advantage for when making an assault on the enemy control point.
+
+16. dkoth_sixties
+by Ozoh
+A close quarters industrial map. Use the twists and turns to your advantage to eliminate the enemy
+team and seize their control point.
+
 B. Using Custom Maps:
 
 To run a server using custom maps, make a folder called "Maps" in the same 
@@ -327,17 +343,6 @@ ctf_orange
 
 would play ctf_2dfort, a custom map with the filename "ctf_mynewmap.png", and 
 then ctf_orange. Then it would play ctf_2dfort again. These names are case sensitive.
-
-Players on your server can download maps from the internet when they join if you 
-provide a locator file. First, upload your map to the internet, whether on your own 
-website or a filehost that allows direct linking. Do not worry if it changes the filename,
-as long as it keeps the extension .png it will be fine. Create a file in your Maps folder
-called "mapname.locator" where "mapname" is the same as in the file "mapname.png".
-
-Inside this file, simply paste the direct link to your file on the internet. Be careful that
-the link is direct and not a php redirect! Now when players join your server, they will
-download the map and your locator file so they may also host the map on their servers.
-
 
 ----------------------------------------------------------
 
@@ -446,13 +451,13 @@ Leiche, Xeyk, pach, Austin "Psychopath" Benz, L, technoviking, AJF, Alexander "W
 NAGN and RebelINS
 
 Artists:
-mrfredman, Fishmatt, BassieEnAdriaan, Timohtep, Elkondo and Waterfall
+mrfredman, Fishmatt, BassieEnAdriaan, Timohtep, Elkondo, Waterfall and Skeledude
 
 Sound & Music:
 Synnah, Scoot, and Elkondo
 
 Map Creators: 
-fishmatt, vaati, king metroid, Taters, agh, Faust, Tarzan, BassieEnAdriaan, McGenio, Wherewolf and Shawnachu
+fishmatt, vaati, king metroid, Taters, agh, Faust, Tarzan, BassieEnAdriaan, McGenio, Wherewolf, Wareya, Ozoh and Shawnachu
 
 With additional art and inspiration provided by the incredible Gang Garrison community!
 
@@ -490,3 +495,4 @@ Readme Changelog
 3/20/10 - technoviking - updated things for 2.2
 3/16/11 - Psychopath - updated things for 2.3
 3/31/11 - Medo - some more updating
+10/13/11 - Psychopath - updated things for 2.4

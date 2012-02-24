@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="DRAW" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">xoffset = view_xview[0];
+yoffset = view_yview[0];
+xsize = view_wview[0];
+ysize = view_hview[0];
+
+drawx = xoffset+xsize/2 - 48;
+
+draw_set_alpha(1);
+draw_set_color(c_white);
+
+for (i=1; i&lt;= global.totalControlPoints; i+=1) {
+    if global.cp[i].team == TEAM_RED teamoffset = 60;
+    else if global.cp[i].team == TEAM_BLUE teamoffset = 90;
+    if global.cp[i].cappingTeam == TEAM_RED &amp;&amp; global.cp[i].team == -1 teamoffset = 30;
+    else if global.cp[i].cappingTeam != TEAM_RED &amp;&amp; global.cp[i].team == -1 teamoffset = 0;    
+    if global.cp[i].capping != 0 draw_sprite_ext(ControlPointStatusS, teamoffset+floor(global.cp[i].capping/global.cp[i].capTime*30), drawx, yoffset+560, 3, 3, 0, c_white, 1);
+    else if global.cp[i].capping == 0 draw_sprite_ext(ControlPointStatusS, teamoffset, drawx, yoffset+560, 3, 3, 0, c_white, 1);
+    /*if KothRedControlPoint.locked and KothBlueControlPoint.locked {
+        draw_set_halign(fa_center);
+        draw_set_valign(fa_center);
+        if cpUnlock &gt;= 150 draw_sprite_ext(ControlPointLockS, 0, drawx, yoffset+560, 3, 3, 0, c_white, 1);
+        else if cpUnlock &gt; 0 draw_text_transformed(drawx+2, yoffset+562, ceil(cpUnlock/30), 3, 3, 0);
+    } else if global.cp[i].locked draw_sprite_ext(ControlPointLockS, 0, drawx, yoffset+560, 3, 3, 0, c_white, 1);*/
+    if (global.cp[i].locked)
+    {
+        draw_set_halign(fa_center);
+        draw_set_valign(fa_center);
+        if (cpUnlock &gt;= 150 or cpUnlock == 0)
+            draw_sprite_ext(ControlPointLockS, 0, drawx, yoffset+560, 3, 3, 0, c_white, 1);
+        else if (cpUnlock &gt; 0)
+            draw_text_transformed(drawx+2, yoffset+562, ceil(cpUnlock/30), 3, 3, 0);
+    }
+    
+    if global.cp[i].cappers &gt; 0 &amp;&amp; not global.cp[i].locked {
+        draw_sprite_ext(ControlPointCappersS, 0, drawx, yoffset+560, 3, 3, 0, c_white, 1);
+        draw_set_halign(fa_center);
+        draw_set_valign(fa_center);
+        draw_set_color(c_black);
+        draw_text_transformed(drawx+13, yoffset+562, string(global.cp[i].cappers),1.5,1.5,0);
+    }
+    drawx+=60;
+}
+
+draw_set_color(c_white);
+draw_set_valign(fa_center);
+
+//timer highlight
+if KothBlueControlPoint.team == TEAM_RED {
+    draw_sprite_ext(TimerOutlineS, 0, xoffset+xsize/2-coffset+xshift, yoffset+36, 2,2,0,c_white,1);
+}
+else if KothRedControlPoint.team == TEAM_BLUE {
+    draw_sprite_ext(TimerOutlineS, 0, xoffset+xsize/2+coffset+xshift, yoffset+36+ yshift, 2,2,0,c_white,1);
+}    
+//red timer HUD
+draw_sprite_ext(TimerHudS, 2, xoffset+xsize/2-coffset+xshift, yoffset+36, 2,2,0,c_white,1);
+if (redTimer &gt; 0) {
+    redMinutes=floor(redTimer/1800);
+    redSecondcounter=redTimer-redMinutes*1800;
+    redSeconds=floor(redSecondcounter/30);
+    draw_set_halign(fa_right);
+    draw_text_transformed(xoffset+xsize/2-10-coffset+xshift,yoffset+38,string(redMinutes),1.5,1.5,0);
+    draw_text_transformed(xoffset+xsize/2-coffset+xshift, yoffset+38,":", 1.5,1.5,0);
+    if redSeconds &gt;= 10 draw_text_transformed(xoffset+xsize/2+20-coffset+xshift,yoffset+38,string(redSeconds),1.5,1.5,0);
+        else if redSeconds &lt; 10 draw_text_transformed(xoffset+xsize/2+20-coffset+xshift,yoffset+38,"0"+string(redSeconds),1.5,1.5,0);
+}
+else
+{
+    draw_set_halign(fa_center);
+    draw_text(xoffset+xsize/2-coffset+xshift,yoffset+36,"OVERTIME");
+}
+//blue timer HUD    
+draw_sprite_ext(TimerHudS, 3, xoffset+xsize/2+coffset+xshift, yoffset+36+yshift, 2,2,0,c_white,1);
+if (blueTimer &gt;0) {
+    blueMinutes=floor(blueTimer/1800);
+    blueSecondcounter=blueTimer-blueMinutes*1800;
+    blueSeconds=floor(blueSecondcounter/30);
+    draw_set_halign(fa_right);
+    draw_text_transformed(xoffset+xsize/2-10+coffset+xshift,yoffset+38+yshift,string(blueMinutes),1.5,1.5,0);
+    draw_text_transformed(xoffset+xsize/2+coffset+xshift, yoffset+38+yshift,":", 1.5,1.5,0);
+    if blueSeconds &gt;= 10 draw_text_transformed(xoffset+xsize/2+20+coffset+xshift,yoffset+38+yshift,string(blueSeconds),1.5,1.5,0);
+        else if blueSeconds &lt; 10 draw_text_transformed(xoffset+xsize/2+20+coffset+xshift,yoffset+38+yshift,"0"+string(blueSeconds),1.5,1.5,0);
+}
+else 
+{
+    draw_set_halign(fa_center);
+    draw_text(xoffset+xsize/2+coffset+xshift,yoffset+36+yshift,"OVERTIME");
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

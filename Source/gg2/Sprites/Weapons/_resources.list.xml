@@ -14,6 +14,7 @@
   <resource name="QRlauncherS" type="RESOURCE"/>
   <resource name="BladeS" type="RESOURCE"/>
   <resource name="KnifeS" type="RESOURCE"/>
-  <resource name="BackstabRedS" type="RESOURCE"/>
-  <resource name="BackstabBlueS" type="RESOURCE"/>
+  <resource name="BackstabTorsoRedS" type="RESOURCE"/>
+  <resource name="BackstabTorsoBlueS" type="RESOURCE"/>
+  <resource name="BackstabLegsS" type="RESOURCE"/>
 </resources>

@@ -14,7 +14,7 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">// Intelligence grabbing is synced now, so it's only tested on the server
-if(global.isHost) {
+if(global.isHost and !global.mapchanging) {
     if(team == TEAM_BLUE and !place_meeting(x,y,TeamGate) and canGrabIntel == 1 and ubered == 0 and !cloak) {
         sendEventGrabIntel(player);
         doEventGrabIntel(player);
