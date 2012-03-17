@@ -128,7 +128,6 @@
   <constant name="NOTICE_NUTSNBOLTS" value="0"/>
   <constant name="NOTICE_TOOCLOSE" value="1"/>
   <constant name="NOTICE_AUTOGUNSCRAPPED" value="2"/>
-  <constant name="NOTICE_AUTOGUNEXISTS" value="3"/>
   <constant name="NOTICE_HAVEINTEL" value="4"/>
   <constant name="NOTICE_SETCHECKPOINT" value="5"/>
   <constant name="NOTICE_DESTROYCHECKPOINT" value="6"/>
