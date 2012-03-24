@@ -27,53 +27,101 @@ if (global.Server_RespawntimeSec == 0)
 else
 {
     global.Server_Respawntime = global.Server_RespawntimeSec * 30;    
-} 
+}
 
-virtualitem = -1;
-xbegin = 40;
-ybegin = 200;
-spacing = 30;
-width = 300; 
-items = 11;
-valueoffset = 200;
-editing = -1;
-canClick = false;
-alarm[0] = 15;
+menu_create(self, 40, 200, 300, 200, 30);
+menu_settimeout(self, 15);
+
+x = '
+    ini_open("gg2.ini");
+    ini_write_string("Server", "ServerName", global.serverName);
+    ini_write_real("Settings", "UseLobby", global.useLobbyServer);
+    ini_write_real("Settings", "HostingPort", global.hostingPort);
+    ini_write_real("Settings", "PlayerLimit", global.playerLimit);
+    ini_write_real("Server", "CapLimit", global.caplimit);
+    ini_write_real("Server", "AutoBalance", global.autobalance);
+    ini_write_real("Server", "Respawn Time", global.Server_RespawntimeSec);
+    ini_write_real("Server", "Time Limit", global.timeLimitMins);
+    ini_write_string("Server", "Password", global.serverPassword);
+    ini_close();
+';
+
+menu_addedit_text2(self, "Server Name:", global.serverName, '
+    global.serverName = argument0;
+    if(string_length(global.serverName)&gt;25) global.serverName = string_copy(global.serverName, 0, 25);
+    if string_count("#",global.serverName) &gt; 0 {
+        show_message("Invalid character ' + "'\#'" + ' in server name");
+        global.serverName = "I &lt;3 Bacon";
+    }
+    ini_open("gg2.ini");
+    ini_write_string("Server", "ServerName", global.serverName);
+    ini_close();
+    return global.serverName;
+');
+menu_addedit_text(self, "Password:", global.serverPassword, '
+    global.serverPassword = argument0;
+    ini_open("gg2.ini");
+    ini_write_string("Server", "Password", global.serverPassword);
+    ini_close();
+');
+menu_addedit_num(self, "Hosting Port:", global.hostingPort, '
+    global.hostingPort = argument0;
+    ini_open("gg2.ini");
+    ini_write_real("Settings", "HostingPort", global.hostingPort);
+    ini_close();
+');
+menu_addedit_num(self, "Player Limit:", global.playerLimit, '
+    global.playerLimit = argument0;
+    ini_open("gg2.ini");
+    ini_write_real("Settings", "PlayerLimit", global.playerLimit);
+    ini_close();
+');
+menu_addedit_num(self, "Time Limit (mins):", global.timeLimitMins, '
+    global.timeLimitMins = argument0;
+    ini_open("gg2.ini");
+    ini_write_real("Server", "Time Limit", global.timeLimitMins);
+    ini_close();
+');
+menu_addedit_num(self, "Capture Limit:", global.caplimit, '
+    global.caplimit = argument0;
+    ini_open("gg2.ini");
+    ini_write_real("Server", "CapLimit", global.caplimit);
+    ini_close();
+');
+menu_addedit_num(self, "Respawn Time (secs):", global.Server_RespawntimeSec, '
+    global.Server_RespawntimeSec = argument0;
+    ini_open("gg2.ini");
+    ini_write_real("Server", "Respawn Time", global.Server_RespawntimeSec);
+    ini_close();
+');
+menu_addedit_boolean(self, "Auto Balance:", global.autobalance, '
+    global.autobalance = argument0;
+    ini_open("gg2.ini");
+    ini_write_real("Server", "AutoBalance", global.autobalance);
+    ini_close();
+');
+menu_addedit_boolean(self, "Announce to Lobby:", global.useLobbyServer, '
+    global.useLobbyServer = argument0;
+    ini_open("gg2.ini");
+    ini_write_real("Settings", "UseLobby", global.useLobbyServer);
+    ini_close();
+');
+menu_addlink(self, "Start Game", '
+    //Server respawn time calculator. Converts each second to a frame. (read: multiply by 30 :hehe:)
+    if (global.Server_RespawntimeSec == 0)
+    {
+        global.Server_Respawntime = 1;
+    }    
+    else
+    {
+        global.Server_Respawntime = global.Server_RespawntimeSec * 30;    
+    }
     
-item[0] = "Server Name:";
-item[1] = "Password:";
-item[2] = "Hosting Port:";
-item[3] = "Player Limit:";
-item[4] = "Time Limit (mins):";
-item[5] = "Capture Limit:";
-item[6] = "Respawn Time (secs):";
-item[7] = "Auto Balance:";
-item[8] = "Announce to Lobby:";
-item[9] = "Start Game";
-item[10] = "Back";
-    
-value[0] = global.serverName;
-value[1] = global.serverPassword;
-value[2] = global.hostingPort;
-value[3] = global.playerLimit;
-value[4] = global.timeLimitMins;
-value[5] = global.caplimit;
-value[6] = global.Server_RespawntimeSec;
-    
-if(global.autobalance) {
-    value[7] = "On";
-} else {
-    value[7] = "Off";
-}
-    
-if(global.useLobbyServer) {
-    value[8] = "On";
-} else {
-    value[8] = "Off";
-}
-    
-value[9] = "";
-value[10] = "";
+    global.gameServer = instance_create(0,0,GameServer);
+');
+menu_addlink(self, "Back", '
+    event_user(10);
+');
 </argument>
       </arguments>
     </action>
