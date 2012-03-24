@@ -14,45 +14,107 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">{
-    xoffset = view_xview[0];
-    yoffset = view_yview[0];
-    xsize = view_wview[0];
-    ysize = view_hview[0];
-    
-    virtualitem = -1;
-    xbegin = 40;
-    ybegin = 170;
-    spacing = 30;
-    width = 300; 
-    items = 4;
-    valueoffset = 300;
-    editing = -1;
-    
-    item[0] = "Timer Position";
-    item[1] = "Kill Log Position";
-    item[2] = "KOTH Timer Orientation";
-    item[3] = "Back";
-    
-      
-    if(global.timerPos) {
-        value[0] = "Left";
-    } else {
-        value[0] = "Center";
-    }
-    
-    if(global.killLogPos) {
-        value[1] = "Just Below Timers";
-    } else {
-        value[1] = "Default";
-    }
-    
-    if(global.kothHudPos) {
-        value[2] = "Stacked";
-    } else {
-        value[2] = "Default";
-    }
-    value[3] = "";
+    menu_create(self, 40, 170, 300, 300, 30);
 
+    if room != Options {
+        menu_setdimmed(self);
+    }
+    
+    var timepos;
+    if(global.timerPos) {
+        timepos = "Left";
+    } else {
+        timepos = "Center";
+    }
+    menu_addedit_custom(self, "Timer Position", timepos, '
+        global.timerPos = not global.timerPos
+        ini_open("gg2.ini");
+        ini_write_real("Settings","Timer Position", global.timerPos);
+        ini_close();
+        if instance_exists(HUD) {
+            with(HUD) {
+                if (object_index != KothHUD) {
+                    xshift=-320*global.timerPos
+                    yshift=5
+                }else if (global.kothHudPos){
+                    xshift=-323*global.timerPos
+                    yshift=35*global.kothHudPos   
+                }
+                else{
+                    xshift=-290*global.timerPos
+                    yshift=35*global.kothHudPos
+                }
+            }
+        
+        }
+        if(global.timerPos) {
+            return "Left";
+        } else {
+            return "Center";
+        }
+    ');
+    
+    var killlog;    
+    if(global.killLogPos) {
+        killlog = "Just Below Timers";
+    } else {
+        killlog = "Default";
+    }
+    menu_addedit_custom(self, "Kill Log Position", killlog, '
+        global.killLogPos = not global.killLogPos
+        ini_open("gg2.ini");
+        ini_write_real("Settings","Kill Log Position", global.killLogPos)
+        ini_close();
+        if instance_exists(KillLog) {
+            with(KillLog) {
+               if (global.kothHudPos) {
+                    yoffset=65*global.killLogPos
+                }else if (global.kothHudPos) = false{
+                    yoffset=45*global.killLogPos
+                }
+    
+            }
+        }
+        if(global.killLogPos) {
+            return "Just Below Timers";
+        } else {
+            return "Default";
+        }
+    ');
+    
+    var kothhud;
+    if(global.kothHudPos) {
+        kothhud = "Stacked";
+    } else {
+        kothhud = "Default";
+    }
+    menu_addedit_custom(self, "KOTH Timer Orientation", kothhud, '
+        global.kothHudPos = not global.kothHudPos
+        ini_open("gg2.ini");
+        ini_write_real("Settings","KoTH HUD Position", global.kothHudPos)
+        ini_close();
+        if instance_exists(KothHUD) {
+            with(KothHUD) {
+                if (global.kothHudPos) {
+                    coffset=0
+                    xshift=-323*global.timerPos
+                    yshift=35*global.kothHudPos
+                }else {
+                    coffset=43*1.15
+                    xshift=-290*global.timerPos
+                    yshift=35*global.kothHudPos
+                }
+            }
+        }
+        if(global.kothHudPos) {
+            return "Stacked";
+        } else {
+            return "Default";
+        }
+    ');
+    menu_addlink(self, "Back", '
+        event_user(3);
+    ');
 }
 </argument>
       </arguments>
