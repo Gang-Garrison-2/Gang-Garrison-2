@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<event category="OTHER" id="10">
+<event category="ALARM" id="1">
   <actions>
     <action id="603" library="1">
       <!--action name: Code-->
@@ -13,8 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">instance_destroy();
-instance_create(0,0,OptionsController);</argument>
+        <argument kind="STRING">canEsc = true;</argument>
       </arguments>
     </action>
   </actions>
