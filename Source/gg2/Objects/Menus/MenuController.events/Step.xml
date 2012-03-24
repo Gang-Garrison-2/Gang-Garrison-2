@@ -42,7 +42,7 @@ if(mouse_x &gt; view_xview[0]+xbegin and mouse_x &lt; view_xview[0]+xbegin+width
                 case "edittext":
                 case "edittext2":
                 case "editnum":
-                    keyboard_string = item_value[virtualitem];
+                    keyboard_string = "";
                 case "editboolean":
                 case "editcustom":
                     editing = virtualitem;
