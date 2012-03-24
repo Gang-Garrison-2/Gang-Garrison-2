@@ -8,4 +8,5 @@
   <resource name="menu_addedit_boolean" type="RESOURCE"/>
   <resource name="menu_addedit_custom" type="RESOURCE"/>
   <resource name="menu_setdimmed" type="RESOURCE"/>
+  <resource name="menu_settimeout" type="RESOURCE"/>
 </resources>

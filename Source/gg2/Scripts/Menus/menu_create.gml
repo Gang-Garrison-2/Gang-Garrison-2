@@ -16,4 +16,5 @@ with (argument0)
     items = 0;
     editing = -1;
     dimmed = false;
+    canClick = true;
 }
