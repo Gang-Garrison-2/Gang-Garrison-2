@@ -14,105 +14,160 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">{
-    xoffset = view_xview[0];
-    yoffset = view_yview[0];
-    xsize = view_wview[0];
-    ysize = view_hview[0];
+    menu_create(self, 40, 140, 300, 30);
+    
+    if room != Options {
+        menu_setdimmed(self);
+    }
     
     oldName = global.playerName;
-    virtualitem = -1;
-    xbegin = 40;
-    ybegin = 140;
-    spacing = 30;
-    width = 300; 
-    items = 14;
     valueoffset = 200;
-    editing = -1;
     
-    item[0] = "Player name:";
-    item[1] = "Fullscreen:";
-    item[2] = "Ingame Music:";
-    item[3] = "Particles:";
-    item[4] = "Gibs:";
-    item[5] = "Healer Radar:";
-    item[6] = "Show Healer:";
-    item[7] = "Show Healing:";
-    item[8] = "Additional Healthbar:";
-    item[9] = "Kill Cam:";
-    item[10] = "V Sync:";
-    item[11] = "Controls";
-    item[12] = "HUD Options";
-    item[13] = "Back";
+    menu_addedit_text2(self, "Player name:", global.playerName, '
+        global.playerName = string_copy(argument0, 0, min(string_length(argument0), MAX_PLAYERNAME_LENGTH));
+        if string_count("#",global.playerName) &gt; 0 {
+            show_message("Invalid character ' + "'\#'" + ' in name");
+            global.playerName = "Player";
+        }
+        ini_open("gg2.ini");
+        ini_write_string("Settings", "PlayerName", global.playerName);
+        ini_close();
+        if(room != Options and oldName != global.playerName)
+        {
+            write_ubyte(global.serverSocket, PLAYER_CHANGENAME);
+            write_ubyte(global.serverSocket, string_length(global.playerName));
+            write_string(global.serverSocket, global.playerName);
+            socket_send(global.serverSocket);
+        }
+        oldName = global.playerName;
+        return global.playerName;
+    ');
+    menu_addedit_boolean(self, "Fullscreen:", global.fullscreen, '
+        global.fullscreen = argument0;
+        ini_open("gg2.ini");
+        ini_write_real("Settings", "Fullscreen", global.fullscreen);
+        ini_close();
+        window_set_fullscreen(global.fullscreen);
+    ');
+    menu_addedit_boolean(self, "Ingame Music:", global.ingameMusic, '
+        global.ingameMusic = argument0;
+        ini_open("gg2.ini");
+        ini_write_real("Settings", "IngameMusic", global.ingameMusic);
+        ini_close();
+        if(global.ingameMusic) {
+            if room != Options AudioControlPlaySong(global.IngameMusic, true);
+        } else {
+            if room != Options AudioControlPlaySong(-1, false);
+        }
+    ');
     
-    value[0] = global.playerName;
-      
-    if(global.fullscreen) {
-        value[1] = "On";
-    } else {
-        value[1] = "Off";
-    }
-    
-    if(global.ingameMusic) {
-        value[2] = "On";
-    } else {
-        value[2] = "Off";
-    }
+    var particles;
     
     if(global.particles == PARTICLES_NORMAL) {
-        value[3] = "Normal";
+        particles = "Normal";
     } else if(global.particles == PARTICLES_ALTERNATIVE) {
-        value[3] = "Alternative (faster)";
+        particles = "Alternative (faster)";
     } else {
-        value[3] = "Disabled";
+        particles = "Disabled";
     }
     
+    menu_addedit_custom(self, "Particles:", particles, '
+        global.particles = (global.particles+2) mod 3;
+        ini_open("gg2.ini");
+        ini_write_real("Settings", "Particles", global.particles);
+        ini_close();
+        if(global.particles == PARTICLES_NORMAL) {
+            return "Normal";
+        } else if(global.particles == PARTICLES_ALTERNATIVE) {
+            return "Alternative (faster)";
+        } else {
+            return "Disabled";
+        }
+    ');
+    
+    var gibs;
     switch (global.gibLevel){
-        case(0): value[4] = "0, Disabled"; break;
-        case(1): value[4] = "1, Blood only"; break;
-        case(2): value[4] = "2, Blood and medium gibs"; break;
-        default: value[4] = string(global.gibLevel) + ", Full blood and gibs"; break;
+        case(0): gibs = "0, Disabled"; break;
+        case(1): gibs = "1, Blood only"; break;
+        case(2): gibs = "2, Blood and medium gibs"; break;
+        default: gibs = string(global.gibLevel) + ", Full blood and gibs"; break;
     }
     
-    if(global.medicRadar == 0) {
-        value[5] = "Disabled";
-    } else {
-        value[5] = "Enabled";
-    }
-    
-    if(global.showHealer == 0) {
-        value[6] = "Disabled";
-    } else {
-        value[6] = "Enabled";
-    }
-    
-    if(global.showHealing == 0){
-        value[7] = "Disabled";
-    } else {
-        value[7] = "Enabled";
-    }
-    
-    if(global.showHealthBar == 0){
-        value[8] = "Disabled";
-    } else {
-        value[8] = "Enabled";
-    }
-    
-    if(global.killCam == 0) {
-        value[9] = "Disabled";
-    } else {
-        value[9] = "Enabled";
-    }
-    
-    if(global.monitorSync == 0) {
-        value[10] = "Disabled";
-    } else {
-        value[10] = "Enabled";
-    }
-    
-    value[11] = "";
-    value[12] = "";
-    value[13] = "";
-
+    menu_addedit_custom(self, "Gibs:", gibs, '
+        switch (global.gibLevel){
+            case(0): 
+                global.gibLevel = 1;
+                return "1, Blood only"; 
+                break;
+            case(1): 
+                global.gibLevel = 2;
+                return "2, Blood and medium gibs";
+                break;
+            case(2): 
+                global.gibLevel = 3;
+                return string(global.gibLevel) + ", Full blood and gibs";
+                break;
+            default: 
+                global.gibLevel = 0;
+                return "0, No blood or gibs";
+                break;
+                }
+        ini_open("gg2.ini");
+        ini_write_real("Settings", "Gib Level", global.gibLevel);
+        ini_close();
+    ');
+    menu_addedit_boolean(self, "Healer Radar:", global.medicRadar, '
+        global.medicRadar = argument0;
+        ini_open("gg2.ini");
+        ini_write_real("Settings", "Healer Radar", global.medicRadar);
+        ini_close();
+    ');
+    menu_addedit_boolean(self, "Show Healer:", global.showHealer, '
+        global.showHealer = argument0;
+        ini_open("gg2.ini");
+        ini_write_real("Settings", "Show Healer", global.showHealer);
+        ini_close();
+    ');
+    menu_addedit_boolean(self, "Show Healing:", global.showHealing, '
+        global.showHealing = argument0;    
+        ini_open("gg2.ini");
+        ini_write_real("Settings", "Show Healing", global.showHealing);
+        ini_close();
+    ');
+    menu_addedit_boolean(self, "Additional Healthbar:", global.showHealthBar, '
+        global.showHealthBar = argument0;
+        ini_open("gg2.ini");
+        ini_write_real("Settings", "Show Healthbar", global.showHealthBar);
+        ini_close();
+    ');
+    menu_addedit_boolean(self, "Kill Cam:", global.killCam, '
+        global.killCam = argument0;
+        ini_open("gg2.ini");
+        ini_write_real("Settings", "Kill Cam", global.killCam);
+        ini_close();
+    ');
+    menu_addedit_boolean(self, "V Sync:", global.monitorSync, '
+        global.monitorSync = argument0;
+        ini_open("gg2.ini");
+        ini_write_real("Settings", "Monitor Sync", global.monitorSync);
+        ini_close();
+        if(global.monitorSync == 0) {
+            set_synchronization(false);
+        } else {
+            set_synchronization(true);
+        }
+    ');
+    menu_addlink(self, "Controls", '
+        instance_create(x,y,ControlsController);
+        instance_destroy();
+    ');
+    menu_addlink(self, "HUD Options", '
+        instance_create(x,y,HUDOptionsController);
+        instance_destroy();
+    ');
+    menu_addlink(self, "Back", '
+        event_user(13);
+    ');
 }
 </argument>
       </arguments>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="STEP" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if editing != -1 {
+    switch (item_type[editing]) {
+        case "edittext":
+        case "edittext2":
+            item_value[editing] = keyboard_string;
+            break;
+        case "editnum":
+            item_value[editing] = real(keyboard_string);
+            break;
+        case "editcustom":
+            item_value[editing] = execute_string(item_script[editing], item_value[editing]);
+            editing = -1;
+            break;
+        case "editboolean":
+            item_value[editing] = !item_value[editing];
+            execute_string(item_script[editing], item_value[editing]);
+            editing = -1;
+            break;
+    }
+}
+if(mouse_x &gt; view_xview[0]+xbegin and mouse_x &lt; view_xview[0]+xbegin+width) {
+    virtualitem = round((mouse_y-(view_yview[0]+ybegin))/spacing);
+    if(mouse_check_button_pressed(mb_left)){
+        if(virtualitem &gt;= 0 and virtualitem &lt; items) {
+            switch (item_type[virtualitem]) {
+                case "script":
+                    execute_string(item_script[virtualitem]);
+                    break;
+                case "edittext":
+                case "edittext2":
+                case "editnum":
+                    item_value[virtualitem] = "";
+                case "editboolean":
+                case "editcustom":
+                    editing = virtualitem;
+                    break;
+            }
+        }
+    }
+} else {
+    virtualitem = -1;
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>
