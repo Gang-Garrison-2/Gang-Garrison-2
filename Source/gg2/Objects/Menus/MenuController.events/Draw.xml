@@ -55,6 +55,58 @@
                 else
                     val = "No";
                 break;
+            case "editkey":
+                if editing == i {
+                    val = "Please press a key";
+                    break;
+                }
+            case "editkeyormouse":
+                if editing == i {
+                    val = "Please press a key or mouse button";
+                    break;
+                }
+                switch (item_value[i]) {
+                    case vk_alt:
+                        val = "Alt";
+                        break;
+                    case vk_control:
+                        val = "Control";
+                        break;
+                    case vk_down:
+                        val = "Down";
+                        break;
+                    case vk_up:
+                        val = "Up";
+                        break;
+                    case vk_left:
+                        val = "Left";
+                        break;
+                    case vk_right:
+                        val = "Right";
+                        break;
+                    case vk_enter:
+                        val = "Enter";
+                        break;
+                    case vk_tab:
+                        val = "Tab";
+                        break;
+                    case vk_space:
+                        val = "Space Bar";
+                        break;
+                    case vk_shift:
+                        val = "Shift";
+                        break;
+                    case MOUSE_LEFT:
+                        val = "Left Mouse Button";
+                        break;
+                    case MOUSE_RIGHT:
+                        val = "Right Mouse Button";
+                        break;
+                    default:
+                        val = chr(item_value[i]);
+                        break;
+                }
+                break;
         }
         draw_text(view_xview[0]+xbegin+valueoffset,view_yview[0]+ybegin+i*spacing,val);
     }
