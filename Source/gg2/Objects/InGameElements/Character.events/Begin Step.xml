@@ -35,10 +35,11 @@ if (burnDuration &lt;= 0 || burnIntensity &lt;= 0)
     burnedBy = -1;
     afterburnSource = -1;
 }
-
 // Handle input
 if(!taunting and !omnomnomnom)
 {
+    if((keyState | pressedKeys) &amp; $10)
+        with(currentWeapon) event_user(1);
     if(pressedKeys &amp; $01)  {
         if (!invisible &amp;&amp; cloakAlpha == 1)
             taunting=true;
@@ -60,7 +61,7 @@ if(!taunting and !omnomnomnom)
             if(not stabbing)
             {
                 playsound(x,y,JumpSnd);
-                vspeed = -jumpStrength;
+                vspeed = min(vspeed-jumpStrength, -jumpStrength);
             }
         }
         else if(canDoublejump and !doublejumpUsed and vspeed &gt; -jumpStrength)
@@ -72,8 +73,6 @@ if(!taunting and !omnomnomnom)
         }
     }
        
-    if((keyState | pressedKeys) &amp; $10)
-        with(currentWeapon) event_user(1);
 }
         
 // Right click

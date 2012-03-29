@@ -473,8 +473,8 @@ do {
                 {
                     x = read_ushort(global.tempBuffer)/5;
                     y = read_ushort(global.tempBuffer)/5;
-                    hspeed = read_byte(global.tempBuffer)/17;
-                    vspeed = read_byte(global.tempBuffer)/17;
+                    hspeed = read_byte(global.tempBuffer)/8.5;
+                    vspeed = read_byte(global.tempBuffer)/8.5;
                     xprevious = x;
                     yprevious = y;
                 }
