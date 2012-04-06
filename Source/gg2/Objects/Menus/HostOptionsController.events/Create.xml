@@ -32,20 +32,6 @@ else
 menu_create(self, 40, 200, 300, 200, 30);
 menu_settimeout(self, 15);
 
-x = '
-    ini_open("gg2.ini");
-    ini_write_string("Server", "ServerName", global.serverName);
-    ini_write_real("Settings", "UseLobby", global.useLobbyServer);
-    ini_write_real("Settings", "HostingPort", global.hostingPort);
-    ini_write_real("Settings", "PlayerLimit", global.playerLimit);
-    ini_write_real("Server", "CapLimit", global.caplimit);
-    ini_write_real("Server", "AutoBalance", global.autobalance);
-    ini_write_real("Server", "Respawn Time", global.Server_RespawntimeSec);
-    ini_write_real("Server", "Time Limit", global.timeLimitMins);
-    ini_write_string("Server", "Password", global.serverPassword);
-    ini_close();
-';
-
 menu_addedit_text2(self, "Server Name:", global.serverName, '
     global.serverName = argument0;
     if(string_length(global.serverName)&gt;25) global.serverName = string_copy(global.serverName, 0, 25);
