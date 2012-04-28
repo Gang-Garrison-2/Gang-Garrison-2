@@ -10,5 +10,4 @@
   <resource name="menu_addedit_key" type="RESOURCE"/>
   <resource name="menu_addedit_keyormouse" type="RESOURCE"/>
   <resource name="menu_setdimmed" type="RESOURCE"/>
-  <resource name="menu_settimeout" type="RESOURCE"/>
 </resources>

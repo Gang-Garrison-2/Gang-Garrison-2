@@ -20,18 +20,18 @@
     canEsc = false;
     alarm[1] = 15;
     
-    menu_create(self, 40, 300, 200, 200, 30);
-    menu_setdimmed(self);
+    menu_create(40, 300, 200, 200, 30);
+    menu_setdimmed();
     
-    menu_addlink(self, "Options", '
+    menu_addlink("Options", '
         instance_destroy();
         instance_create(0,0,OptionsController);
     ');
-    menu_addlink(self, "Return to Game", '
+    menu_addlink("Return to Game", '
         instance_destroy();
     ');
-    menu_addlink(self, "", '');
-    menu_addlink(self, "Disconnect", '
+    menu_addlink("", '');
+    menu_addlink("Disconnect", '
         // Force dedicated mode to off so you can go to main menu instead of just restarting server
         global.dedicatedMode = 0;
         with(Client)
@@ -40,7 +40,7 @@
         with(GameServer)
             instance_destroy();
     ');
-    menu_addlink(self, "Quit Game", '
+    menu_addlink("Quit Game", '
         game_end();
     ');
 }

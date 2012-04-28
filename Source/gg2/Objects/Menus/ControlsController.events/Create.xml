@@ -14,59 +14,58 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">{
-    menu_create(self, 40, 100, 300, 200, 30);
-    menu_settimeout(self, 15);
+    menu_create(40, 100, 300, 200, 30);
     
     if room != Options {
-        menu_setdimmed(self);
+        menu_setdimmed();
     }
     
-    menu_addedit_key(self, "Jump/up:", global.jump, '
+    menu_addedit_key("Jump/up:", global.jump, '
         global.jump = argument0;
     ');
-    menu_addedit_key(self, "Down:", global.down, '
+    menu_addedit_key("Down:", global.down, '
         global.down = argument0;
     ');
-    menu_addedit_key(self, "Left:", global.left, '
+    menu_addedit_key("Left:", global.left, '
         global.left = argument0;
     ');
-    menu_addedit_key(self, "Right:", global.right, '
+    menu_addedit_key("Right:", global.right, '
         global.right = argument0;
     ');
-    menu_addedit_keyormouse(self, "Primary:", global.attack, '
+    menu_addedit_keyormouse("Primary:", global.attack, '
         global.attack = argument0;
     ');
-    menu_addedit_keyormouse(self, "Secondary:", global.special, '
+    menu_addedit_keyormouse("Secondary:", global.special, '
         global.special = argument0;
     ');
-    menu_addedit_key(self, "Taunt:", global.taunt, '
+    menu_addedit_key("Taunt:", global.taunt, '
         global.taunt = argument0;
     ');
-    menu_addedit_key(self, "Chat 1:", global.chat1, '
+    menu_addedit_key("Chat 1:", global.chat1, '
         global.chat1 = argument0;
     ');
-    menu_addedit_key(self, "Chat 2:", global.chat2, '
+    menu_addedit_key("Chat 2:", global.chat2, '
         global.chat2 = argument0;
     ');
-    menu_addedit_key(self, "Chat 3:", global.chat3, '
+    menu_addedit_key("Chat 3:", global.chat3, '
         global.chat3 = argument0;
     ');
-    menu_addedit_key(self, "Call for Healer:", global.medic, '
+    menu_addedit_key("Call for Healer:", global.medic, '
         global.medic = argument0;
     ');
-    menu_addedit_key(self, "Drop Case:", global.drop, '
+    menu_addedit_key("Drop Case:", global.drop, '
         global.drop = argument0;    
     ');
-    menu_addedit_key(self, "Change Team:", global.changeTeam, '
+    menu_addedit_key("Change Team:", global.changeTeam, '
         global.changeTeam = argument0;
     ');
-    menu_addedit_key(self, "Change Class:", global.changeClass, '
+    menu_addedit_key("Change Class:", global.changeClass, '
         global.changeClass = argument0;
     ');
-    menu_addedit_key(self, "Show Scores:", global.showScores, '
+    menu_addedit_key("Show Scores:", global.showScores, '
         global.showScores = argument0;
     ');
-    menu_addlink(self, "Back", '
+    menu_addlink("Back", '
         event_user(15);
     ');
 }

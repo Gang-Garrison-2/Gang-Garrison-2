@@ -14,10 +14,10 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">{
-    menu_create(self, 40, 170, 300, 300, 30);
+    menu_create(40, 170, 300, 300, 30);
 
     if room != Options {
-        menu_setdimmed(self);
+        menu_setdimmed();
     }
     
     var timepos;
@@ -26,7 +26,7 @@
     } else {
         timepos = "Center";
     }
-    menu_addedit_custom(self, "Timer Position", timepos, '
+    menu_addedit_custom("Timer Position", timepos, '
         global.timerPos = not global.timerPos
         ini_open("gg2.ini");
         ini_write_real("Settings","Timer Position", global.timerPos);
@@ -60,7 +60,7 @@
     } else {
         killlog = "Default";
     }
-    menu_addedit_custom(self, "Kill Log Position", killlog, '
+    menu_addedit_custom("Kill Log Position", killlog, '
         global.killLogPos = not global.killLogPos
         ini_open("gg2.ini");
         ini_write_real("Settings","Kill Log Position", global.killLogPos)
@@ -88,7 +88,7 @@
     } else {
         kothhud = "Default";
     }
-    menu_addedit_custom(self, "KOTH Timer Orientation", kothhud, '
+    menu_addedit_custom("KOTH Timer Orientation", kothhud, '
         global.kothHudPos = not global.kothHudPos
         ini_open("gg2.ini");
         ini_write_real("Settings","KoTH HUD Position", global.kothHudPos)
@@ -112,7 +112,7 @@
             return "Default";
         }
     ');
-    menu_addlink(self, "Back", '
+    menu_addlink("Back", '
         event_user(3);
     ');
 }

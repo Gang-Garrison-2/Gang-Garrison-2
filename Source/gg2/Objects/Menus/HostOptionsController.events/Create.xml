@@ -21,18 +21,12 @@ ini_close();
 
 //Server respawn time calculator. Converts each second to a frame. (read: multiply by 30 :hehe:)
 if (global.Server_RespawntimeSec == 0)
-{
     global.Server_Respawntime = 1;
-}    
 else
-{
-    global.Server_Respawntime = global.Server_RespawntimeSec * 30;    
-}
+    global.Server_Respawntime = global.Server_RespawntimeSec * 30;
 
-menu_create(self, 40, 200, 300, 200, 30);
-menu_settimeout(self, 15);
-
-menu_addedit_text2(self, "Server Name:", global.serverName, '
+menu_create(40, 200, 300, 200, 30);
+menu_addedit_text2("Server Name:", global.serverName, '
     global.serverName = argument0;
     if(string_length(global.serverName)&gt;25) global.serverName = string_copy(global.serverName, 0, 25);
     if string_count("#",global.serverName) &gt; 0 {
@@ -44,55 +38,55 @@ menu_addedit_text2(self, "Server Name:", global.serverName, '
     ini_close();
     return global.serverName;
 ');
-menu_addedit_text(self, "Password:", global.serverPassword, '
+menu_addedit_text("Password:", global.serverPassword, '
     global.serverPassword = argument0;
     ini_open("gg2.ini");
     ini_write_string("Server", "Password", global.serverPassword);
     ini_close();
 ');
-menu_addedit_num(self, "Hosting Port:", global.hostingPort, '
+menu_addedit_num("Hosting Port:", global.hostingPort, '
     global.hostingPort = argument0;
     ini_open("gg2.ini");
     ini_write_real("Settings", "HostingPort", global.hostingPort);
     ini_close();
 ');
-menu_addedit_num(self, "Player Limit:", global.playerLimit, '
+menu_addedit_num("Player Limit:", global.playerLimit, '
     global.playerLimit = argument0;
     ini_open("gg2.ini");
     ini_write_real("Settings", "PlayerLimit", global.playerLimit);
     ini_close();
 ');
-menu_addedit_num(self, "Time Limit (mins):", global.timeLimitMins, '
+menu_addedit_num("Time Limit (mins):", global.timeLimitMins, '
     global.timeLimitMins = argument0;
     ini_open("gg2.ini");
     ini_write_real("Server", "Time Limit", global.timeLimitMins);
     ini_close();
 ');
-menu_addedit_num(self, "Capture Limit:", global.caplimit, '
+menu_addedit_num("Capture Limit:", global.caplimit, '
     global.caplimit = argument0;
     ini_open("gg2.ini");
     ini_write_real("Server", "CapLimit", global.caplimit);
     ini_close();
 ');
-menu_addedit_num(self, "Respawn Time (secs):", global.Server_RespawntimeSec, '
+menu_addedit_num("Respawn Time (secs):", global.Server_RespawntimeSec, '
     global.Server_RespawntimeSec = argument0;
     ini_open("gg2.ini");
     ini_write_real("Server", "Respawn Time", global.Server_RespawntimeSec);
     ini_close();
 ');
-menu_addedit_boolean(self, "Auto Balance:", global.autobalance, '
+menu_addedit_boolean("Auto Balance:", global.autobalance, '
     global.autobalance = argument0;
     ini_open("gg2.ini");
     ini_write_real("Server", "AutoBalance", global.autobalance);
     ini_close();
 ');
-menu_addedit_boolean(self, "Announce to Lobby:", global.useLobbyServer, '
+menu_addedit_boolean("Announce to Lobby:", global.useLobbyServer, '
     global.useLobbyServer = argument0;
     ini_open("gg2.ini");
     ini_write_real("Settings", "UseLobby", global.useLobbyServer);
     ini_close();
 ');
-menu_addlink(self, "Start Game", '
+menu_addlink("Start Game", '
     //Server respawn time calculator. Converts each second to a frame. (read: multiply by 30 :hehe:)
     if (global.Server_RespawntimeSec == 0)
     {
@@ -105,7 +99,7 @@ menu_addlink(self, "Start Game", '
     
     global.gameServer = instance_create(0,0,GameServer);
 ');
-menu_addlink(self, "Back", '
+menu_addlink("Back", '
     event_user(10);
 ');
 </argument>
