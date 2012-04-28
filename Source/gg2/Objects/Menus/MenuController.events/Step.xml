@@ -13,7 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if editing != -1 {
+        <argument kind="STRING">if(editing != -1) {
     switch (item_type[editing]) {
         case "edittext":
         case "edittext2":
@@ -51,8 +51,7 @@
                 exit;
             }
     }
-}
-if(mouse_x &gt; view_xview[0]+xbegin and mouse_x &lt; view_xview[0]+xbegin+width) {
+} else if(mouse_x &gt; view_xview[0]+xbegin and mouse_x &lt; view_xview[0]+xbegin+width) {
     virtualitem = round((mouse_y-(view_yview[0]+ybegin))/spacing);
     if(mouse_check_button_pressed(mb_left)){
         mouse_clear(mb_left);
