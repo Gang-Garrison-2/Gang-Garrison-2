@@ -22,10 +22,10 @@ else
 
 write_ushort(lobbyBuffer, 7); // Number of Key/Value pairs that follow
 writeKeyValue(lobbyBuffer, "name", global.serverName);
-writeKeyValue(lobbyBuffer, "game", "Gang Garrison 2");
+writeKeyValue(lobbyBuffer, "game", "Gang Garrison 2 - Classlimits");
 writeKeyValue(lobbyBuffer, "game_short", "gg2");
-writeKeyValue(lobbyBuffer, "game_ver", GAME_VERSION_STRING);
-writeKeyValue(lobbyBuffer, "game_url", "http://www.ganggarrison.com/");
+writeKeyValue(lobbyBuffer, "game_ver", "v2.4.1b1-cl");
+writeKeyValue(lobbyBuffer, "game_url", "http://www.ganggarrison.com/forums/index.php?topic=30449.msg985377#msg985377");
 writeKeyValue(lobbyBuffer, "map", global.currentMap);
 write_ubyte(lobbyBuffer, string_length("protocol_id"));
 write_string(lobbyBuffer, "protocol_id");
