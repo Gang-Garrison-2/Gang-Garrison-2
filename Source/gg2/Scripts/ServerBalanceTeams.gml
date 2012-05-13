@@ -28,11 +28,44 @@ if global.autobalance == 1 && !instance_exists(ArenaHUD) {
     } else if(serverbalance == 1 && balancecounter >= 300) {
         points=9001;
         balanceplayer=-1;
+        var someoneIsDead;
+        someoneIsDead = false;
         for(i=0; i<ds_list_size(global.players); i+=1) {
             player = ds_list_find_value(global.players, i);
-            if(player.team == balance && player.stats[POINTS] < points) {
-                points = player.stats[POINTS];
-                balanceplayer=player;
+            if player.team == balance
+            {
+                if someoneIsDead
+                {
+                    if player.object == -1
+                    {
+                        if player.stats[POINTS] < points
+                        {
+                            points = player.stats[POINTS];
+                            balanceplayer=player;
+                        }
+                    }
+                }
+                else
+                {
+                    if player.object != -1
+                    {
+                        if player.object.intel or player.object.ubered
+                        {
+                            continue;// Skip the player if he/she has taken the intel
+                        }
+                        else if player.stats[POINTS] < points
+                        {
+                            points = player.stats[POINTS];
+                            balanceplayer=player;
+                        }
+                    }
+                    else
+                    {
+                        someoneIsDead = true;
+                        points = player.stats[POINTS];
+                        balanceplayer=player;   
+                    }
+                }
             }
         }
         
