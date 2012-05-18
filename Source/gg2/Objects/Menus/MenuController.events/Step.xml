@@ -13,7 +13,8 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if(editing != -1) {
+        <argument kind="STRING">stepHasRun = true;
+if(editing != -1) {
     switch (item_type[editing]) {
         case "edittext":
         case "edittext2":

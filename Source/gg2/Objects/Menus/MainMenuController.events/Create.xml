@@ -33,7 +33,7 @@
     menu_addlink("Credits", '
         room_goto_fix(Credits);
     ');
-    menu_addlink("Quit", '
+    menu_addback("Quit", '
         game_end();
     ');
     

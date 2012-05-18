@@ -17,9 +17,6 @@
     cursor_sprite = CrosshairS;
     global.levelchoice = 1
 
-    canEsc = false;
-    alarm[1] = 15;
-    
     menu_create(40, 300, 200, 200, 30);
     menu_setdimmed();
     
@@ -27,7 +24,7 @@
         instance_destroy();
         instance_create(0,0,OptionsController);
     ');
-    menu_addlink("Return to Game", '
+    menu_addback("Return to Game", '
         instance_destroy();
     ');
     menu_addlink("", '');

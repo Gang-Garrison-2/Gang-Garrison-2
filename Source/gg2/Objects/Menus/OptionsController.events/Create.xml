@@ -164,8 +164,12 @@
         instance_create(x,y,HUDOptionsController);
         instance_destroy();
     ');
-    menu_addlink("Back", '
-        event_user(13);
+    menu_addback("Back", '
+        instance_destroy();
+        if(room == Options)
+            instance_create(0,0,MainMenuController);
+        else
+            instance_create(0,0,InGameMenuController);
     ');
 }
 </argument>

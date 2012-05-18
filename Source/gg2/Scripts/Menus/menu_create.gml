@@ -13,3 +13,5 @@ spacing = argument4;
 items = 0;
 editing = -1;
 dimmed = false;
+stepHasRun = false;
+menu_script_back = "";

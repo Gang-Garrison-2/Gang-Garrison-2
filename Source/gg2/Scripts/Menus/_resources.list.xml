@@ -2,6 +2,7 @@
 <resources>
   <resource name="menu_create" type="RESOURCE"/>
   <resource name="menu_addlink" type="RESOURCE"/>
+  <resource name="menu_addback" type="RESOURCE"/>
   <resource name="menu_addedit_num" type="RESOURCE"/>
   <resource name="menu_addedit_text" type="RESOURCE"/>
   <resource name="menu_addedit_text2" type="RESOURCE"/>

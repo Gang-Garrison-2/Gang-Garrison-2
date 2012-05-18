@@ -18,7 +18,7 @@
 menu_addlink("Refresh", '
     event_user(0);
 ');
-menu_addlink("Back", '
+menu_addback("Back", '
     room_goto_fix(Menu);
 ');
 

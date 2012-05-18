@@ -65,8 +65,9 @@
     menu_addedit_key("Show Scores:", global.showScores, '
         global.showScores = argument0;
     ');
-    menu_addlink("Back", '
-        event_user(15);
+    menu_addback("Back", '
+        instance_destroy();
+        instance_create(x,y,OptionsController);
     ');
 }
 </argument>
