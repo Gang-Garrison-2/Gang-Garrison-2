@@ -13,16 +13,22 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if editing != -1 { 
+        <argument kind="STRING">if(editing != -1) { 
     switch (item_type[editing]) {
         case "edittext":
-            execute_string(item_script[editing], item_value[editing]);
+            execute_string(item_script[editing], menu_get_var(editing));
+            menu_set_var(editing, item_value[editing]);
             break;
         case "edittext2":
             item_value[editing] = execute_string(item_script[editing], item_value[editing]);
+            menu_set_var(editing, item_value[editing]);
             break;
         case "editnum":
-            execute_string(item_script[editing], floor(real(item_value[editing])));
+            var numval;
+            numval = real(string_digits(item_value[editing]));
+            execute_string(item_script[editing], numval);
+            menu_set_var(editing, numval);
+            item_value[editing] = string(numval);
             break;
     }
     editing = -1;

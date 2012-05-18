@@ -1,7 +1,7 @@
 // argument0 - name
-// argument1 - The global variable this is tied to
-// argument2 - GML code to run upon change (argument0 is value)
-
+// argument1 - name of the variable this setting is bound to
+// argument2 - GML code to run upon change (argument0 is new value)
+// Note that the gml code is run *before* the bound variable is updated
 item_name[items] = argument0;
 item_type[items] = "editkeyormouse";
 item_var[items] = argument1;

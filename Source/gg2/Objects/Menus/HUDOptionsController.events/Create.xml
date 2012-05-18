@@ -28,9 +28,7 @@
     }
     menu_addedit_custom("Timer Position", timepos, '
         global.timerPos = not global.timerPos
-        ini_open("gg2.ini");
-        ini_write_real("Settings","Timer Position", global.timerPos);
-        ini_close();
+        gg2_write_ini("Settings","Timer Position", global.timerPos);
         if instance_exists(HUD) {
             with(HUD) {
                 if (object_index != KothHUD) {
@@ -62,9 +60,7 @@
     }
     menu_addedit_custom("Kill Log Position", killlog, '
         global.killLogPos = not global.killLogPos
-        ini_open("gg2.ini");
-        ini_write_real("Settings","Kill Log Position", global.killLogPos)
-        ini_close();
+        gg2_write_ini("Settings","Kill Log Position", global.killLogPos)
         if instance_exists(KillLog) {
             with(KillLog) {
                if (global.kothHudPos) {
@@ -90,9 +86,7 @@
     }
     menu_addedit_custom("KOTH Timer Orientation", kothhud, '
         global.kothHudPos = not global.kothHudPos
-        ini_open("gg2.ini");
-        ini_write_real("Settings","KoTH HUD Position", global.kothHudPos)
-        ini_close();
+        gg2_write_ini("Settings","KoTH HUD Position", global.kothHudPos)
         if instance_exists(KothHUD) {
             with(KothHUD) {
                 if (global.kothHudPos) {

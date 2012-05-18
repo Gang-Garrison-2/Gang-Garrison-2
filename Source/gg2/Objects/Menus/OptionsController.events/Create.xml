@@ -20,41 +20,35 @@
         menu_setdimmed();
     }
     
-    oldName = global.playerName;
-    
-    menu_addedit_text2("Player name:", global.playerName, '
-        global.playerName = string_copy(argument0, 0, min(string_length(argument0), MAX_PLAYERNAME_LENGTH));
-        if string_count("#",global.playerName) &gt; 0 {
+    menu_addedit_text2("Player name:", "global.playerName", '
+        var newName;
+        newName = string_copy(argument0, 0, min(string_length(argument0), MAX_PLAYERNAME_LENGTH));
+        if string_count("#",newName) &gt; 0 {
             show_message("Invalid character ' + "'\#'" + ' in name");
-            global.playerName = "Player";
+            newName = "Player";
         }
-        ini_open("gg2.ini");
-        ini_write_string("Settings", "PlayerName", global.playerName);
-        ini_close();
-        if(room != Options and oldName != global.playerName)
+        gg2_write_ini("Settings", "PlayerName", newName);
+        if(room != Options and newName != global.playerName)
         {
             write_ubyte(global.serverSocket, PLAYER_CHANGENAME);
-            write_ubyte(global.serverSocket, string_length(global.playerName));
-            write_string(global.serverSocket, global.playerName);
+            write_ubyte(global.serverSocket, string_length(newName));
+            write_string(global.serverSocket, newName);
             socket_send(global.serverSocket);
         }
-        oldName = global.playerName;
-        return global.playerName;
+        return newName;
     ');
     menu_addedit_boolean("Fullscreen:", "global.fullscreen", '
-        ini_open("gg2.ini");
-        ini_write_real("Settings", "Fullscreen", global.fullscreen);
-        ini_close();
-        window_set_fullscreen(global.fullscreen);
+        gg2_write_ini("Settings", "Fullscreen", argument0);
+        window_set_fullscreen(argument0);
     ');
     menu_addedit_boolean("Ingame Music:", "global.ingameMusic", '
-        ini_open("gg2.ini");
-        ini_write_real("Settings", "IngameMusic", global.ingameMusic);
-        ini_close();
-        if(global.ingameMusic) {
-            if room != Options AudioControlPlaySong(global.IngameMusic, true);
-        } else {
-            if room != Options AudioControlPlaySong(-1, false);
+        gg2_write_ini("Settings", "IngameMusic", argument0);
+        if(room != Options)
+        {
+            if(argument0)
+                AudioControlPlaySong(global.IngameMusic, true);
+            else
+                AudioControlPlaySong(-1, false);
         }
     ');
     
@@ -70,9 +64,7 @@
     
     menu_addedit_custom("Particles:", particles, '
         global.particles = (global.particles+2) mod 3;
-        ini_open("gg2.ini");
-        ini_write_real("Settings", "Particles", global.particles);
-        ini_close();
+        gg2_write_ini("Settings", "Particles", global.particles);
         if(global.particles == PARTICLES_NORMAL) {
             return "Normal";
         } else if(global.particles == PARTICLES_ALTERNATIVE) {
@@ -109,44 +101,26 @@
                 return "0, No blood or gibs";
                 break;
                 }
-        ini_open("gg2.ini");
-        ini_write_real("Settings", "Gib Level", global.gibLevel);
-        ini_close();
+        gg2_write_ini("Settings", "Gib Level", global.gibLevel);
     ');
     menu_addedit_boolean("Healer Radar:", "global.medicRadar", '
-        ini_open("gg2.ini");
-        ini_write_real("Settings", "Healer Radar", global.medicRadar);
-        ini_close();
+        gg2_write_ini("Settings", "Healer Radar", argument0);
     ');
     menu_addedit_boolean("Show Healer:", "global.showHealer", '
-        ini_open("gg2.ini");
-        ini_write_real("Settings", "Show Healer", global.showHealer);
-        ini_close();
+        gg2_write_ini("Settings", "Show Healer", argument0);
     ');
     menu_addedit_boolean("Show Healing:", "global.showHealing", '
-        ini_open("gg2.ini");
-        ini_write_real("Settings", "Show Healing", global.showHealing);
-        ini_close();
+        gg2_write_ini("Settings", "Show Healing", argument0);
     ');
     menu_addedit_boolean("Additional Healthbar:", "global.showHealthBar", '
-        ini_open("gg2.ini");
-        ini_write_real("Settings", "Show Healthbar", global.showHealthBar);
-        ini_close();
+        gg2_write_ini("Settings", "Show Healthbar", argument0);
     ');
     menu_addedit_boolean("Kill Cam:", "global.killCam", '
-        ini_open("gg2.ini");
-        ini_write_real("Settings", "Kill Cam", global.killCam);
-        ini_close();
+        gg2_write_ini("Settings", "Kill Cam", argument0);
     ');
     menu_addedit_boolean("V Sync:", "global.monitorSync", '
-        ini_open("gg2.ini");
-        ini_write_real("Settings", "Monitor Sync", global.monitorSync);
-        ini_close();
-        if(global.monitorSync == 0) {
-            set_synchronization(false);
-        } else {
-            set_synchronization(true);
-        }
+        gg2_write_ini("Settings", "Monitor Sync", argument0);
+        set_synchronization(argument0);
     ');
     menu_addlink("Controls", '
         instance_create(x,y,ControlsController);

@@ -16,8 +16,8 @@
         <argument kind="STRING">stepHasRun = true;
 if(editing != -1) {
     switch (item_type[editing]) {
-        case "edittext":
         case "edittext2":
+        case "edittext":
         case "editnum":
             item_value[editing] = keyboard_string;
             break;

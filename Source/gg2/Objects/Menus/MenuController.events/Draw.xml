@@ -44,8 +44,8 @@
                 val = "";
                 break;
             case "editcustom":
-            case "edittext":
             case "edittext2":
+            case "edittext":
             case "editnum":
                 val = item_value[i];
                 break;
