@@ -26,28 +26,28 @@ if(editing != -1) {
             editing = -1;
             break;
         case "editboolean":
-            item_value[editing] = !item_value[editing];
-            execute_string(item_script[editing], item_value[editing]);
+            menu_set_var(editing, !menu_get_var(editing));
+            execute_string(item_script[editing], menu_get_var(editing));
             editing = -1;
             break;
         case "editkeyormouse":
             if mouse_check_button(mb_left) {
-                item_value[editing] = MOUSE_LEFT;
-                execute_string(item_script[editing], item_value[editing]);
+                menu_set_var(editing, MOUSE_LEFT);
+                execute_string(item_script[editing], MOUSE_LEFT);
                 editing = -1;
                 exit;
             }
             else if mouse_check_button(mb_right) {
-                item_value[editing] = MOUSE_RIGHT;
-                execute_string(item_script[editing], item_value[editing]);
+                menu_set_var(editing, MOUSE_RIGHT);
+                execute_string(item_script[editing], MOUSE_RIGHT);
                 editing = -1;
                 exit;
             }
         case "editkey":
             if keyboard_check_direct(vk_tab) keyboard_lastkey = vk_tab;
             if keyboard_lastkey != 0 {
-                item_value[editing] = keyboard_lastkey;
-                execute_string(item_script[editing], item_value[editing]);
+                menu_set_var(editing, keyboard_lastkey);
+                execute_string(item_script[editing], menu_get_var(editing));
                 editing = -1;
                 exit;
             }

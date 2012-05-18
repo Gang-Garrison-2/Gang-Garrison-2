@@ -50,8 +50,8 @@
                 val = item_value[i];
                 break;
             case "editboolean":
-                if item_value[i]
-                    val = "Yes"
+                if(menu_get_var(i))
+                    val = "Yes";
                 else
                     val = "No";
                 break;
@@ -65,7 +65,7 @@
                     val = "Please press a key or mouse button";
                     break;
                 }
-                switch (item_value[i]) {
+                switch (menu_get_var(i)) {
                     case vk_alt:
                         val = "Alt";
                         break;
@@ -103,7 +103,7 @@
                         val = "Right Mouse Button";
                         break;
                     default:
-                        val = chr(item_value[i]);
+                        val = chr(menu_get_var(i));
                         break;
                 }
                 break;

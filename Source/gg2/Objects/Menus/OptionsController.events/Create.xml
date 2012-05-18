@@ -15,7 +15,7 @@
       <arguments>
         <argument kind="STRING">{
     menu_create(40, 140, 300, 200, 30);
-    
+
     if room != Options {
         menu_setdimmed();
     }
@@ -41,15 +41,13 @@
         oldName = global.playerName;
         return global.playerName;
     ');
-    menu_addedit_boolean("Fullscreen:", global.fullscreen, '
-        global.fullscreen = argument0;
+    menu_addedit_boolean("Fullscreen:", "global.fullscreen", '
         ini_open("gg2.ini");
         ini_write_real("Settings", "Fullscreen", global.fullscreen);
         ini_close();
         window_set_fullscreen(global.fullscreen);
     ');
-    menu_addedit_boolean("Ingame Music:", global.ingameMusic, '
-        global.ingameMusic = argument0;
+    menu_addedit_boolean("Ingame Music:", "global.ingameMusic", '
         ini_open("gg2.ini");
         ini_write_real("Settings", "IngameMusic", global.ingameMusic);
         ini_close();
@@ -115,38 +113,32 @@
         ini_write_real("Settings", "Gib Level", global.gibLevel);
         ini_close();
     ');
-    menu_addedit_boolean("Healer Radar:", global.medicRadar, '
-        global.medicRadar = argument0;
+    menu_addedit_boolean("Healer Radar:", "global.medicRadar", '
         ini_open("gg2.ini");
         ini_write_real("Settings", "Healer Radar", global.medicRadar);
         ini_close();
     ');
-    menu_addedit_boolean("Show Healer:", global.showHealer, '
-        global.showHealer = argument0;
+    menu_addedit_boolean("Show Healer:", "global.showHealer", '
         ini_open("gg2.ini");
         ini_write_real("Settings", "Show Healer", global.showHealer);
         ini_close();
     ');
-    menu_addedit_boolean("Show Healing:", global.showHealing, '
-        global.showHealing = argument0;    
+    menu_addedit_boolean("Show Healing:", "global.showHealing", '
         ini_open("gg2.ini");
         ini_write_real("Settings", "Show Healing", global.showHealing);
         ini_close();
     ');
-    menu_addedit_boolean("Additional Healthbar:", global.showHealthBar, '
-        global.showHealthBar = argument0;
+    menu_addedit_boolean("Additional Healthbar:", "global.showHealthBar", '
         ini_open("gg2.ini");
         ini_write_real("Settings", "Show Healthbar", global.showHealthBar);
         ini_close();
     ');
-    menu_addedit_boolean("Kill Cam:", global.killCam, '
-        global.killCam = argument0;
+    menu_addedit_boolean("Kill Cam:", "global.killCam", '
         ini_open("gg2.ini");
         ini_write_real("Settings", "Kill Cam", global.killCam);
         ini_close();
     ');
-    menu_addedit_boolean("V Sync:", global.monitorSync, '
-        global.monitorSync = argument0;
+    menu_addedit_boolean("V Sync:", "global.monitorSync", '
         ini_open("gg2.ini");
         ini_write_real("Settings", "Monitor Sync", global.monitorSync);
         ini_close();

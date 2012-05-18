@@ -74,14 +74,12 @@ menu_addedit_num("Respawn Time (secs):", global.Server_RespawntimeSec, '
     ini_write_real("Server", "Respawn Time", global.Server_RespawntimeSec);
     ini_close();
 ');
-menu_addedit_boolean("Auto Balance:", global.autobalance, '
-    global.autobalance = argument0;
+menu_addedit_boolean("Auto Balance:", "global.autobalance", '
     ini_open("gg2.ini");
     ini_write_real("Server", "AutoBalance", global.autobalance);
     ini_close();
 ');
-menu_addedit_boolean("Announce to Lobby:", global.useLobbyServer, '
-    global.useLobbyServer = argument0;
+menu_addedit_boolean("Announce to Lobby:", "global.useLobbyServer", '
     ini_open("gg2.ini");
     ini_write_real("Settings", "UseLobby", global.useLobbyServer);
     ini_close();
