@@ -39,7 +39,15 @@
                 blood.direction = direction-180;
             }
         }
-        instance_destroy();
+        
+        if numKills &lt;= maxKills
+        {
+            numKills += 1
+        }
+        else
+        {
+            instance_destroy();
+        }
     }
     else
         alarm[0] = 1;
