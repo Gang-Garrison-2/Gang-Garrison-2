@@ -5,7 +5,6 @@
   <resource name="WaterwayB" type="RESOURCE"/>
   <resource name="MenuBackgroundB" type="RESOURCE"/>
   <resource name="SplashScreenB" type="RESOURCE"/>
-  <resource name="TwodFortTwoB" type="RESOURCE"/>
   <resource name="TwodFortTwoRemixB" type="RESOURCE"/>
   <resource name="zclassicwellB" type="RESOURCE"/>
   <resource name="OrangeB" type="RESOURCE"/>
@@ -22,4 +21,5 @@
   <resource name="CustomMapB" type="RESOURCE"/>
   <resource name="popupBackgroundB" type="RESOURCE"/>
   <resource name="OldfortB" type="RESOURCE"/>
+  <resource name="UpdaterB" type="RESOURCE"/>
 </resources>

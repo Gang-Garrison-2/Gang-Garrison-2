@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
   <resource name="Truefort" type="RESOURCE"/>
-  <resource name="TwodFortTwo" type="RESOURCE"/>
   <resource name="TwodFortTwoRemix" type="RESOURCE"/>
   <resource name="Conflict" type="RESOURCE"/>
   <resource name="ClassicWell" type="RESOURCE"/>

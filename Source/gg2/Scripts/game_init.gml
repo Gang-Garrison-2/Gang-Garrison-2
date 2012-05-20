@@ -64,6 +64,8 @@
     global.Server_RespawntimeSec = ini_read_real("Server", "Respawn Time", 5);
     global.haxxyKey = ini_read_string("Haxxy", "SecretHaxxyKey", "");
     global.mapdownloadLimitBps = ini_read_real("Server", "Total bandwidth limit for map downloads in bytes per second", 50000);
+    global.updaterBetaChannel = ini_read_real("General", "UpdaterBetaChannel", isBetaVersion());
+    
     global.currentMapArea=1;
     global.totalMapAreas=1;
     global.setupTimer=1800;
@@ -96,6 +98,7 @@
     ini_write_real("Server", "Time Limit", global.timeLimitMins);
     ini_write_string("Server", "Password", global.serverPassword);
     ini_write_string("Haxxy", "SecretHaxxyKey", global.haxxyKey);
+    ini_write_real("General", "UpdaterBetaChannel", global.updaterBetaChannel);
     
     //screw the 0 index we will start with 1
     //map_truefort 
@@ -314,7 +317,8 @@ global.launchMap = "";
     
     window_set_fullscreen(global.fullscreen);
     
-    draw_set_font(fnt_gg2);
+    global.gg2Font = font_add_sprite(gg2FontS,ord("!"),false,0);
+    draw_set_font(global.gg2Font);
     cursor_sprite = CrosshairS;
     
     if(!directory_exists(working_directory + "\Maps")) directory_create(working_directory + "\Maps");

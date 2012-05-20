@@ -37,6 +37,7 @@ else if instance_exists(GeneratorBlue) || instance_exists(GeneratorRed) {
 }else if instance_exists(KothControlPoint) {
     instance_create(0,0,KothHUD);
 }else if instance_exists(KothRedControlPoint) && instance_exists(KothBlueControlPoint) {
+    with ControlPoint event_user(0);
     instance_create(0,0,DKothHUD);
 } else if instance_exists(ControlPoint) {
     with ControlPoint event_user(0);

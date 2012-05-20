@@ -28,7 +28,6 @@
       <arguments>
         <argument kind="STRING">{
     write_ubyte(global.serializeBuffer, lobbed);
-    write_ubyte(global.serializeBuffer, ammoCount); 
     with(Mine) {
         if(ownerPlayer == other.ownerPlayer) {
             event_user(12);

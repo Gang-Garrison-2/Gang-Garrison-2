@@ -144,6 +144,5 @@ for(i=1; i<ds_list_size(global.players); i+=1)
     player = ds_list_find_value(global.players, i);
     write_buffer(player.socket, global.eventBuffer);
     write_buffer(player.socket, global.sendBuffer);
-    socket_send(player.socket);
 }
 buffer_clear(global.eventBuffer);

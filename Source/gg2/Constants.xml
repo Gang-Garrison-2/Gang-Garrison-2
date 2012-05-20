@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <constants>
-  <constant name="VERSION" value="24100"/>
-  <constant name="GAME_VERSION_STRING" value="&quot;v2.4.1&quot;"/>
-  <constant name="PROTOCOL_UUID" value="&quot;0e9dba12-42c6-82df-f920-900f81529210&quot;"/>
+  <constant name="VERSION" value="24200"/>
+  <constant name="GAME_VERSION_STRING" value="&quot;v2.4.2&quot;"/>
+  <constant name="PROTOCOL_UUID" value="&quot;0b4149c7-4283-81a6-0cb5-3fb68bdcdcf5&quot;"/>
   <constant name="GG2_LOBBY_UUID" value="&quot;1ccf16b1-436d-856f-504d-cc1af306aaa7&quot;"/>
   <constant name="HELLO" value="0"/>
   <constant name="PLAYER_JOIN" value="1"/>
@@ -46,10 +46,12 @@
   <constant name="INCOMPATIBLE_PROTOCOL" value="42"/>
   <constant name="JOIN_UPDATE" value="43"/>
   <constant name="DOWNLOAD_MAP" value="44"/>
+  <constant name="SENTRY_POSITION" value="45"/>
   <constant name="I_AM_A_HAXXY_WINNER" value="50"/>
   <constant name="HAXXY_CHALLENGE_CODE" value="51"/>
   <constant name="HAXXY_CHALLENGE_RESPONSE" value="52"/>
   <constant name="MESSAGE_STRING" value="53"/>
+  <constant name="WEAPON_FIRE" value="54"/>
   <constant name="HAXXY_PUBLIC_KEY" value="&quot;70095e0fd9754e5a3ce2cb32f109148e&quot;"/>
   <constant name="TEAM_RED" value="0"/>
   <constant name="TEAM_BLUE" value="1"/>
@@ -126,7 +128,6 @@
   <constant name="NOTICE_NUTSNBOLTS" value="0"/>
   <constant name="NOTICE_TOOCLOSE" value="1"/>
   <constant name="NOTICE_AUTOGUNSCRAPPED" value="2"/>
-  <constant name="NOTICE_AUTOGUNEXISTS" value="3"/>
   <constant name="NOTICE_HAVEINTEL" value="4"/>
   <constant name="NOTICE_SETCHECKPOINT" value="5"/>
   <constant name="NOTICE_DESTROYCHECKPOINT" value="6"/>

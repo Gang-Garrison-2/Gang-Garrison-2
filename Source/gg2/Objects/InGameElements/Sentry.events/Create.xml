@@ -15,6 +15,7 @@
       <arguments>
         <argument kind="STRING">image_speed = 0;
 vspeed = .001;
+oldVspeed = .001;
 maxHp = 100;
 hp = 25;
 weapons[0]=SentryTurret;

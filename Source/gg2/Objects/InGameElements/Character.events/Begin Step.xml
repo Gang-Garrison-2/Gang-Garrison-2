@@ -35,10 +35,11 @@ if (burnDuration &lt;= 0 || burnIntensity &lt;= 0)
     burnedBy = -1;
     afterburnSource = -1;
 }
-
 // Handle input
 if(!taunting and !omnomnomnom)
 {
+    if((keyState | pressedKeys) &amp; $10)
+        with(currentWeapon) event_user(1);
     if(pressedKeys &amp; $01)  {
         if (!invisible &amp;&amp; cloakAlpha == 1)
             taunting=true;
@@ -60,7 +61,7 @@ if(!taunting and !omnomnomnom)
             if(not stabbing)
             {
                 playsound(x,y,JumpSnd);
-                vspeed = -jumpStrength;
+                vspeed = min(vspeed-jumpStrength, -jumpStrength);
             }
         }
         else if(canDoublejump and !doublejumpUsed and vspeed &gt; -jumpStrength)
@@ -72,8 +73,6 @@ if(!taunting and !omnomnomnom)
         }
     }
        
-    if((keyState | pressedKeys) &amp; $10)
-        with(currentWeapon) event_user(1);
 }
         
 // Right click
@@ -83,8 +82,13 @@ if(((keyState | pressedKeys) &amp; $08) and (!taunting or player.class == CLASS_
 
 // Cloak
 if ((pressedKeys &amp; $08) &amp;&amp; canCloak &amp;&amp; ((cloakAlpha &lt;= 0.5 and cloak) || (cloakAlpha == 1 and !cloak)) &amp;&amp; !intel  &amp;&amp; taunting==false &amp;&amp; !(keyState &amp; $10))
-    if(currentWeapon.readyToStab)
+    if(currentWeapon.readyToStab) {
+        if (cloak) { // stop spies immediately picking up intel after uncloaking
+            canGrabIntel=false;
+            alarm[1]=30;
+        }
         cloak = !cloak;
+    }
 
 switch(moveStatus) // moveStatus is reset in collision with obstacles (including doors if they reject you)
 {

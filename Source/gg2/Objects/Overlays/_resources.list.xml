@@ -16,7 +16,6 @@
   <resource name="RespawnTimer" type="RESOURCE"/>
   <resource name="BubbleMenuX" type="RESOURCE"/>
   <resource name="BubbleMenuC" type="RESOURCE"/>
-  <resource name="BuildMenu" type="RESOURCE"/>
   <resource name="SentryHealthHud" type="RESOURCE"/>
   <resource name="NutsNBoltsHud" type="RESOURCE"/>
   <resource name="UberHud" type="RESOURCE"/>

@@ -10,6 +10,12 @@ if(tcp_eof(global.serverSocket)) {
     exit;
 }
 
+if(room == DownloadRoom and keyboard_check(vk_escape))
+{
+    instance_destroy();
+    exit;
+}
+
 if(downloadingMap)
 {
     while(tcp_receive(global.serverSocket, min(1024, downloadMapBytes-buffer_size(downloadMapBuffer))))
@@ -24,8 +30,6 @@ if(downloadingMap)
             exit;
         }
     }
-    if(keyboard_check(vk_escape))
-        instance_destroy();
     exit;
 }
 
@@ -68,7 +72,6 @@ do {
                     downloadMapBytes = read_uint(global.tempBuffer);
                     downloadMapBuffer = buffer_create();
                     downloadingMap = true;
-                    room_goto_fix(DownloadRoom);
                     roomchange=true;
                 }
             }
@@ -215,11 +218,9 @@ do {
             break;
              
         case BUILD_SENTRY:
-            receiveCompleteMessage(global.serverSocket,1,global.tempBuffer);
+            receiveCompleteMessage(global.serverSocket,6,global.tempBuffer);
             player = ds_list_find_value(global.players, read_ubyte(global.tempBuffer));
-            if player.sentry == -1 {
-                buildSentry(player);
-            }
+            buildSentry(player, read_ushort(global.tempBuffer)/5, read_ushort(global.tempBuffer)/5, read_byte(global.tempBuffer));
             break;
               
         case DESTROY_SENTRY:
@@ -449,6 +450,39 @@ do {
             notice.message = message;
             break;
         
+        case SENTRY_POSITION:
+            receiveCompleteMessage(global.serverSocket,5,global.tempBuffer);
+            player = ds_list_find_value(global.players, read_ubyte(global.tempBuffer));
+            if(player.sentry)
+            {
+                player.sentry.x = read_ushort(global.tempBuffer) / 5;
+                player.sentry.y = read_ushort(global.tempBuffer) / 5;
+                player.sentry.xprevious = player.sentry.x;
+                player.sentry.yprevious = player.sentry.y;
+                player.sentry.vspeed = 0;
+            }
+            break;
+          
+        case WEAPON_FIRE:
+            receiveCompleteMessage(global.serverSocket,9,global.tempBuffer);
+            player = ds_list_find_value(global.players, read_ubyte(global.tempBuffer));
+            
+            if(player.object)
+            {
+                with(player.object)
+                {
+                    x = read_ushort(global.tempBuffer)/5;
+                    y = read_ushort(global.tempBuffer)/5;
+                    hspeed = read_byte(global.tempBuffer)/8.5;
+                    vspeed = read_byte(global.tempBuffer)/8.5;
+                    xprevious = x;
+                    yprevious = y;
+                }
+                
+                doEventFireWeapon(player, read_ushort(global.tempBuffer));
+            }
+            break;
+            
         default:
             show_message("The Server sent unexpected data");
             game_end();

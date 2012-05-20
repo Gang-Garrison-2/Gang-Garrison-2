@@ -39,11 +39,11 @@ if object_index != SentryTurret {
         }
     }
 } else {             
-    if ownerPlayer.sentry != -1{
-        if ownerPlayer.sentry.image_index &gt;7 {
-            if rotating == false {
+    if(ownerPlayer.sentry) {
+        if(ownerPlayer.sentry.image_index &gt; 7) {
+            if(!rotating) {
                 draw_sprite_ext(sprite_index,ownerPlayer.team+offset,round(x+xoffset*image_xscale),round(y+yoffset),image_xscale,image_yscale,image_angle,c_white,1);
-            } else if rotating == true {
+            } else {
                 draw_sprite_ext(TurretRotateS,round(rotateindex),x,y,image_xscale,image_yscale,0,c_white,1);
             }
         }

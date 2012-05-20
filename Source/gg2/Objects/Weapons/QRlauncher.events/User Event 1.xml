@@ -13,23 +13,15 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">{
-    if(readyToShoot == true) {
-        playsound(x,y,RocketSnd);
-        var oid, newx, newy;
-        
-        oid = instance_create(x+lengthdir_x(20,owner.aimDirection),y+lengthdir_y(20,owner.aimDirection), QRocket);
-        
-        oid.direction=owner.aimDirection;
-        oid.speed=4;
-        oid.ownerPlayer=ownerPlayer;
-        oid.team=owner.team;
-        oid.weapon=WEAPON_QROCKETLAUNCHER;
-        
-        readyToShoot = false;
-        alarm[0] = reloadTime;
-    }
-}</argument>
+        <argument kind="STRING">if(readyToShoot and global.isHost)
+{
+    var seed;
+    seed = irandom(65535);
+    sendEventFireWeapon(ownerPlayer, seed);
+    doEventFireWeapon(ownerPlayer, seed);
+}
+
+</argument>
       </arguments>
     </action>
   </actions>

@@ -13,9 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">write_ubyte(global.serializeBuffer, ammoCount);
-
-if(instance_exists(healTarget))
+        <argument kind="STRING">if(instance_exists(healTarget))
     write_ubyte(global.serializeBuffer, ds_list_find_index(global.players, healTarget));
 else
     write_ubyte(global.serializeBuffer, 255);

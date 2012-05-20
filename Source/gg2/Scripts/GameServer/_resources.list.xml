@@ -8,4 +8,5 @@
   <resource name="processClientCommands" type="RESOURCE"/>
   <resource name="sendLobbyRegistration" type="RESOURCE"/>
   <resource name="sendLobbyUnreg" type="RESOURCE"/>
+  <resource name="GameServerEndStep" type="RESOURCE"/>
 </resources>

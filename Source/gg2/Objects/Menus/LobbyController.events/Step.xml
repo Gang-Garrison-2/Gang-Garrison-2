@@ -31,67 +31,71 @@
             if(serverInfoLength == -1) {
                 if(tcp_receive(lobbysocket, 4)) {
                     serverInfoLength = read_uint(lobbysocket);
+                    if(serverInfoLength&gt;100000)
+                    {
+                        show_message("Server data block from lobby is too large ("+string(serverInfoLength)+")");
+                        serverInfoLength = -1;
+                        socket_destroy(lobbysocket);
+                        lobbysocket = -1;
+                    }
                 }
             }
             if(serverInfoLength != -1)
             {
                 if(tcp_receive(lobbysocket, serverInfoLength))
                 {
-                    var protocol, port, infolen, playercount;
-                    protocol = read_ubyte(lobbysocket);
-                    port = read_ushort(lobbysocket);
-                    if(protocol==0 and port&gt;0)
+                    var infolen, playercount, sameProtocolId;
+                    sameProtocolId = false;
+                    server = instance_create(0,0,Server);
+                    server.protocol = read_ubyte(lobbysocket);
+                    server.port = read_ushort(lobbysocket);
+                    server.ip = string(read_ubyte(lobbysocket))+"."+string(read_ubyte(lobbysocket))+"."+string(read_ubyte(lobbysocket))+"."+string(read_ubyte(lobbysocket));
+                    read_string(lobbysocket, 2+16);
+                    server.slots = read_ushort(lobbysocket);
+                    server.players = read_ushort(lobbysocket);
+                    server.bots = read_ushort(lobbysocket);
+                    server.private = ((read_ushort(lobbysocket)&amp;1) != 0);
+                    infolen = read_ushort(lobbysocket);
+                    repeat(infolen)
                     {
-                        server = instance_create(0,0,Server);
-                        server.port = port;
-                        server.ip = string(read_ubyte(lobbysocket))+"."+string(read_ubyte(lobbysocket))+"."+string(read_ubyte(lobbysocket))+"."+string(read_ubyte(lobbysocket));
-                        read_string(lobbysocket, 2+16);
-                        server.slots = read_ushort(lobbysocket);
-                        server.players = read_ushort(lobbysocket);
-                        server.bots = read_ushort(lobbysocket);
-                        server.private = ((read_ushort(lobbysocket)&amp;1) != 0);
-                        server.compatible = false;
-                        infolen = read_ushort(lobbysocket);
-                        repeat(infolen)
+                        var key, val;
+                        key = read_string(lobbysocket, read_ubyte(lobbysocket));
+                        if(key=="protocol_id")
                         {
-                            var key, val;
-                            key = read_string(lobbysocket, read_ubyte(lobbysocket));
-                            if(key=="protocol_id")
-                            {
-                                buffer_set_readpos(global.protocolUuid, 0);
-                                server.compatible = true;
-                                repeat(read_ushort(lobbysocket))
-                                    if(read_ubyte(global.protocolUuid) != read_ubyte(lobbysocket))
-                                        server.compatible = false;
-                            }
-                            else
-                            {
-                                val = read_string(lobbysocket, read_ushort(lobbysocket));
-                                ds_map_add(server.infos, key, val);
-                            }
+                            buffer_set_readpos(global.protocolUuid, 0);
+                            sameProtocolId = true;
+                            repeat(read_ushort(lobbysocket))
+                                if(read_ubyte(global.protocolUuid) != read_ubyte(lobbysocket))
+                                    sameProtocolId = false;
                         }
-                        if(server.bots)
-                            playercount = string(server.players) + "+" + string(server.bots);
-                        else 
-                            playercount = string(server.players);
-                        server.playerstring =  playercount + "/" + string(server.slots);
-                        
-                        server.shortgame = "";
-                        if(ds_map_exists(server.infos, "game_short"))
-                            server.shortgame = ds_map_find_value(server.infos, "game_short");
-                        else if(ds_map_exists(server.infos, "game"))
-                            server.shortgame = ds_map_find_value(server.infos, "game");
-                        if(server.shortgame != "")
+                        else
                         {
-                            if(ds_map_exists(server.infos, "game_ver"))
-                                server.shortgame += " " + ds_map_find_value(server.infos, "game_ver");
+                            val = read_string(lobbysocket, read_ushort(lobbysocket));
+                            ds_map_add(server.infos, key, val);
                         }
-                        server.name = ds_map_find_value(server.infos, "name");
-                        server.name = string_replace(server.name, "#", "\#");
-                        ds_list_sorted_insert(servers, server, compareServersByCompatAndName);
-                        serversRead += 1;
-                        serverInfoLength = -1;
                     }
+                    server.compatible = (server.protocol==0 and server.port&gt;0 and sameProtocolId);
+                    if(server.bots)
+                        playercount = string(server.players) + "+" + string(server.bots);
+                    else 
+                        playercount = string(server.players);
+                    server.playerstring =  playercount + "/" + string(server.slots);
+                    
+                    server.shortgame = "";
+                    if(ds_map_exists(server.infos, "game_short"))
+                        server.shortgame = ds_map_find_value(server.infos, "game_short");
+                    else if(ds_map_exists(server.infos, "game"))
+                        server.shortgame = ds_map_find_value(server.infos, "game");
+                    if(server.shortgame != "")
+                    {
+                        if(ds_map_exists(server.infos, "game_ver"))
+                            server.shortgame += " " + ds_map_find_value(server.infos, "game_ver");
+                    }
+                    server.name = ds_map_find_value(server.infos, "name");
+                    server.name = string_replace(server.name, "#", "\#");
+                    ds_list_sorted_insert(servers, server, compareServersByCompatAndName);
+                    serversRead += 1;
+                    serverInfoLength = -1;
                 }
             }
         } else {
