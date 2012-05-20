@@ -17,4 +17,5 @@
   <resource name="Spectator" type="RESOURCE"/>
   <resource name="JoiningPlayer" type="RESOURCE"/>
   <resource name="Balancer" type="RESOURCE"/>
+  <resource name="Console" type="RESOURCE"/>
 </resources>

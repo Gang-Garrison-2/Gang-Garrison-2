@@ -27,7 +27,16 @@
     
     item[0] = "Options";
     item[1] = "Return to Game";
-    item[2] = "";
+    
+    switch (global.consoleOpen)
+    {
+        case 0:
+            item[2] = "Open Console";
+            break;
+        case 1:
+            item[2] = "Close Console";
+    }
+    
     item[3] = "Disconnect";
     item[4] = "Quit Game";
     xoffset = view_xview[0];
@@ -35,7 +44,10 @@
     xsize = view_wview[0];
     ysize = view_hview[0];
 
-    
+    if global.consoleOpen
+    {
+        instance_create(x, y, Console)
+    }
 }
 </argument>
       </arguments>
