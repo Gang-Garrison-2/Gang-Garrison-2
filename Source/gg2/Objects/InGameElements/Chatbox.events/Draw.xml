@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="DRAW" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">var xsize, ysize;
+
+if hidden exit;
+
+xsize = sprite_width;
+ysize = sprite_height;
+
+x = view_xview[0];
+y = view_yview[0] + view_hview[0]-sprite_height-65;
+
+draw_set_valign(fa_top);
+draw_set_halign(fa_left);
+draw_set_color(c_white);
+
+if isTyping
+{
+    image_alpha = 1;
+}
+else
+{
+    image_alpha = max(alarm[1]/30, 0.2);
+}
+
+// Draw the background
+draw_sprite(sprite_index, 0, x, y);
+
+// If we're typing something, draw that
+if isTyping
+{
+    var str;
+    if blinking_underscore
+    {
+        str = keyboard_string+"_";
+    }
+    else
+    {
+        str = keyboard_string;
+    }
+    draw_text(x+15, y+ysize-30, str);
+}
+
+// The drawing of the text
+var message, shortMessage, color, offset;
+for (i = 0; i &lt; ds_list_size(chatLog); i+=1)
+{
+        // Set the draw offset of text to 0
+        offset = 0;
+        // Read the string from the chat list
+        message = ds_list_find_value(chatLog, i);
+        // While there's a color code in the chat message
+        while string_count("||", message) &gt; 0
+        {
+            // Get the color from the prefix
+            color = execute_string('make_color_rgb('+string_copy(message, 0, 11)+')');
+            // Take away the color prefix
+            shortMessage = string_copy(message, string_pos("||", message)+2, string_length(message));
+            if string_count("||", shortMessage) &gt; 0
+            {
+                // There is another color code that will follow
+                var pos;
+                pos = string_pos("||", shortMessage)-string_length("000,000,000");
+                shortMessage = string_copy(shortMessage, 0, pos-1);
+            }
+            draw_set_color(color);
+            // Draw it
+            draw_text(x+offset+10, y+ysize-50-12*(ds_list_size(chatLog)-i), shortMessage);
+            
+            // Compensate the message write position
+            offset += string_width(shortMessage);
+            
+            // Take away the shortMessage from the long one
+            message = string_copy(message, string_length(shortMessage)+string_length("000,000,000||")+1, string_length(message));
+        }
+}
+draw_set_color(c_white);
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

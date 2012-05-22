@@ -23,6 +23,7 @@
   <resource name="Lobby" type="GROUP"/>
   <resource name="Console" type="GROUP"/>
   <resource name="Plugins" type="GROUP"/>
+  <resource name="Chat" type="GROUP"/>
   <resource name="recordKillInLog" type="RESOURCE"/>
   <resource name="recordDestructionInLog" type="RESOURCE"/>
   <resource name="recordEventInLog" type="RESOURCE"/>

@@ -21,4 +21,5 @@
   <resource name="DeathCamHealthBarS" type="RESOURCE"/>
   <resource name="BubblesS" type="RESOURCE"/>
   <resource name="ConsoleS" type="RESOURCE"/>
+  <resource name="ChatboxS" type="RESOURCE"/>
 </resources>

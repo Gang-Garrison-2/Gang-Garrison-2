@@ -18,4 +18,5 @@
   <resource name="JoiningPlayer" type="RESOURCE"/>
   <resource name="Balancer" type="RESOURCE"/>
   <resource name="Console" type="RESOURCE"/>
+  <resource name="Chatbox" type="RESOURCE"/>
 </resources>
