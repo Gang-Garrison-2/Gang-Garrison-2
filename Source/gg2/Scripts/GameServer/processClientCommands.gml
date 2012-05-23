@@ -247,7 +247,7 @@ while(commandLimitRemaining > 0) {
             {
                 with(player)
                 {
-                    if(variable_local_exists("lastNamechange")) 
+                    if(variable_local_exists("lastChatTime")) 
                         if(current_time - lastNamechange < 1000)
                             break;
                     lastNamechange = current_time;
@@ -260,6 +260,67 @@ while(commandLimitRemaining > 0) {
                     write_ubyte(global.sendBuffer, playerId);
                     write_ubyte(global.sendBuffer, string_length(name));
                     write_string(global.sendBuffer, name);
+                }
+            }
+            break;
+            
+        case CHAT_PRIV_MESSAGE:
+            var messageLength;
+            messageLength = socket_receivebuffer_size(socket);
+            if(messageLength > MAX_PLAYERNAME_LENGTH)
+            {
+                write_ubyte(player.socket, KICK);
+                write_ubyte(player.socket, KICK_NAME);
+                socket_destroy(player.socket);
+                player.socket = -1;
+            }
+            else
+            {
+                with(player)
+                {
+                    if(variable_local_exists("lastChatTime")) 
+                        if(current_time - lastChatTime < 1000)
+                            break;
+                    lastChatTime = current_time;
+                    message = read_string(socket, messageLength);
+                    if(string_count("#",message) > 0)
+                    {
+                        message = "No Hashes allowed?";
+                    }
+                    write_ubyte(global.sendBuffer, CHAT_PRIV_MESSAGE);
+                    write_ubyte(global.sendBuffer, playerId);
+                    write_ubyte(global.sendBuffer, string_length(message));
+                    write_string(global.sendBuffer, message);
+                }
+            }
+            break;
+        case CHAT_PUBLIC_MESSAGE:
+            var messageLength;
+            messageLength = socket_receivebuffer_size(socket);
+            if(messageLength > MAX_PLAYERNAME_LENGTH)
+            {
+                write_ubyte(player.socket, KICK);
+                write_ubyte(player.socket, KICK_NAME);
+                socket_destroy(player.socket);
+                player.socket = -1;
+            }
+            else
+            {
+                with(player)
+                {
+                    if(variable_local_exists("lastChatTime")) 
+                        if(current_time - lastChatTime < 1000)
+                            break;
+                    lastChatTime = current_time;
+                    message = read_string(socket, messageLength);
+                    if(string_count("#",message) > 0)
+                    {
+                        message = "No Hashes allowed?";
+                    }
+                    write_ubyte(global.sendBuffer, CHAT_PUBLIC_MESSAGE);
+                    write_ubyte(global.sendBuffer, playerId);
+                    write_ubyte(global.sendBuffer, string_length(message));
+                    write_string(global.sendBuffer, message);
                 }
             }
             break;

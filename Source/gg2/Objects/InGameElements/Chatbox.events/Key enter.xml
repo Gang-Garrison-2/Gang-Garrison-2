@@ -36,8 +36,9 @@
     // only print something if we've typed it
     if keyboard_string != ""
     {
-        var str;
-        str = "255,000,000||"+global.myself.name+": "+keyboard_string;
+        var str, temp;
+        temp = "255,000,000||"+global.myself.name+": 255,255,255||"+keyboard_string;
+        str = string_replace_all(temp,"#","\#")
         print_to_chat(str);
     }
 
@@ -51,8 +52,9 @@ else if isTyping == CHAT_PUBLIC_MESSAGE
     // only print something if we've typed it
     if keyboard_string != ""
     {
-        var str;
-        str = "255,000,000||"+global.myself.name+": 255,255,255||"+keyboard_string;
+        var str, temp;
+        temp = "255,000,000||"+global.myself.name+": 255,255,255||"+keyboard_string;
+        str = string_replace_all(temp,"#","\#")
         print_to_chat(str);
     }
 
