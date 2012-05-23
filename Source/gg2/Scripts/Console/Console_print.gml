@@ -2,13 +2,15 @@
 // Note: The name is from a plugin convention
 // argument0 == what should be printed.
 
-var input;
+var input, tmpstring;
 input = argument0
 
 while string_length(input) > 84// Basic line breaking, prevents text from leaving the console.
 {
-    ds_list_add(global.consoleLog, string_copy(input, 0, 83));
-    input = string_copy(input, 84, string_length(input));
+    tmpstring = string_copy(input, 0, 83);
+    string_
+    ds_list_add(global.consoleLog, tmpstring);
+    input = string_copy(input, string_length(tmpstring), string_length(input));
 }
 
 ds_list_add(global.consoleLog, input);

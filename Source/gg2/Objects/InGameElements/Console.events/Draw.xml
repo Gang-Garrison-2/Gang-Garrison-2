@@ -54,7 +54,7 @@ for(i=0; i&lt;ds_list_size(global.consoleLog); i+=1)
     switch string_copy(message, 0, 3)
     {
         case "/:/":// If a color-code was included.
-            draw_set_color(getColorCode(string_copy(message, 4, 1)))
+            draw_set_color(getColorCode(string_copy(message, 4, 6)))
             draw_text(window_left+12, (window_bottom-20)-i*spacing, string_copy(message, 5, string_length(message)));
             break
 
@@ -64,9 +64,6 @@ for(i=0; i&lt;ds_list_size(global.consoleLog); i+=1)
             break
     }
 }
-
-
-draw_set_font(fnt_gg2);
 </argument>
       </arguments>
     </action>

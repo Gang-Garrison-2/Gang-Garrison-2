@@ -61,17 +61,17 @@ Console_print('Current Player list:')
 for (i=0; i<ds_list_size(redteam); i+=1)
 {
     player = ds_list_find_value(redteam, i);
-    Console_print('/:/r'+player.name+':    ID='+string(ds_list_find_index(global.players, player.id)));
+    Console_print('/:/'+COLOR_RED+player.name+':    ID='+string(ds_list_find_index(global.players, player.id)));
 }
 for (i=0; i<ds_list_size(blueteam); i+=1)
 {
     player = ds_list_find_value(blueteam, i);
-    Console_print('/:/b'+player.name+':    ID='+string(ds_list_find_index(global.players, player.id)));
+    Console_print('/:/'+COLOR_BLUE+player.name+':    ID='+string(ds_list_find_index(global.players, player.id)));
 }
 for (i=0; i<ds_list_size(specteam); i+=1)
 {
     player = ds_list_find_value(specteam, i);
-    Console_print('/:/g'+player.name+':    ID='+string(ds_list_find_index(global.players, player.id)));
+    Console_print('/:/'+COLOR_GREEN+player.name+':    ID='+string(ds_list_find_index(global.players, player.id)));
 }");
 ds_map_add(global.documentationMap, "listPlayers", "
 Console_print('Syntax: listPlayers')

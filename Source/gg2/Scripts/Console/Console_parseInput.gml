@@ -2,10 +2,11 @@
 // argument0 = user input string
 
 // First step: Parse the arguments
-var numOfCommands, parseString, pos, inQuotes;
+var numOfCommands, parseString, space_pos, quote_pos, inQuotes;
 numOfCommands = 0;
 input = 0;
 parseString = argument0;
+inQuotes = 0;
 
 while string_count(" ", parseString) > 0
 {
