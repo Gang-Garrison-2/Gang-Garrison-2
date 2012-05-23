@@ -1,50 +1,10 @@
-// Returns a color indicated by a letter.
-var color;
+// Returns a color indicated by a 6-digit hex code in RGB
+var color, red, green, blue;
 
-// I have no idea how to do this with color hex stings, and I'd be happy if someone could do it.
-// So I just used this OHU code. -Orpheon
+color = string_copy(argument0, 0, 6);
 
-switch (string_copy(argument0, 0, 1))// Color code.
-{
-    case 'r':
-        color = c_red;
-        break;
+// Now because game maker is awesome, if you use hex numbers as base you need to use the format BGR instead of RGB
+// So convert from RGB to BGR
+color = string_copy(color, 4, 2) + string_copy(color, 2, 2) + string_copy(color, 0, 2);
 
-    case 'b':
-        color = make_color_rgb(0, 190, 255);// Lightblue, because c_blue looks like shit on a black background.
-        break;
-                
-    case 'g':
-        color = c_green;
-        break;
-                
-    case 'w':
-        color = c_white;
-        break;
-                
-    case 's':// Black, because b is already taken. 's' because Schwarz.
-        color = c_black;
-        break;
-                
-    case 'y':
-        color = make_color_rgb(90, 130, 180);
-        break;
-                
-    case 'p':
-        color = c_purple;
-        break;
-        
-    case 'a':// Brown, had no idea so simply took a random letter
-        color = make_color_rgb(190, 170, 100);
-        break;
-        
-    case 'o':
-        color = c_orange;
-        break;
-    
-    default:
-        color = c_white;
-        break;
-}
-
-return color;
+return "$"+color;

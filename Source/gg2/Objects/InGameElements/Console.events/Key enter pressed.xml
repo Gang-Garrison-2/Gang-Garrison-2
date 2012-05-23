@@ -20,7 +20,7 @@
 
 if keyboard_string != ""
 {
-    Console_print("/:/o"+keyboard_string);
+    Console_print("/:/"+COLOR_ORANGE+keyboard_string);
     Console_parseInput(keyboard_string);
 }
 
