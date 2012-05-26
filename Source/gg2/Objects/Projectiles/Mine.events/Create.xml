@@ -18,7 +18,7 @@
     animationState = 1;
     alarm[1] = 29;
     stickied = false;
-    blastRadius = 60;
+    blastRadius = 70;
     exploded = false;
     bubbled = false;
     reflector = noone;

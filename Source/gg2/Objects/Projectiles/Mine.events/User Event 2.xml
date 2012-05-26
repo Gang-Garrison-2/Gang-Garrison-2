@@ -28,7 +28,7 @@
             var rdir, vectorfactor;
             rdir = point_direction(other.x,other.y,x,y);
             vectorfactor = point_distance(0, 0, sin(degtorad(rdir)), cos(degtorad(rdir)));
-            if vectorfactor/other.blastRadius &lt;= 0.25
+            if 1 - distance_to_object(other)/other.blastRadius &lt;= 0.25
             {
                 continue;
             }
@@ -39,7 +39,7 @@
                 dmg = other.explosionDamage*(1-(distance_to_object(other)/other.blastRadius));
                 if id == other.ownerPlayer.object// self damage resistance
                 {
-                    dmg *= 0.75;
+                    dmg *= 5/9;
                 }
                 hp -= dmg;
                 timeUnscathed = 0;
