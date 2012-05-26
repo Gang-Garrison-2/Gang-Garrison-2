@@ -20,26 +20,36 @@ if(instance_exists(TeamSelectController) || instance_exists(ClassSelectControlle
     menuOpen = true;
 else
     menuOpen = false;
+if (global.chatbox.isTyping != 0)
+    chatting = true;
+else
+    chatting = false;
 
 //Checking for input - Mapped Keys
-if(keyboard_check_pressed(global.changeTeam)) inputChangeTeam();
-if(keyboard_check_pressed(global.changeClass)) inputChangeClass();
+if (chatting == false)
+{
+    if(keyboard_check_pressed(global.changeTeam)) inputChangeTeam();
+    if(keyboard_check_pressed(global.changeClass)) inputChangeClass();
 
-var scoreKeyDown;
-scoreKeyDown = keyboard_check_direct(global.showScores);
-if(scoreKeyDown and !oldScoreKeyDown)
-    inputShowScores();
-else if(!scoreKeyDown and oldScoreKeyDown)
-    inputCloseScores();
-oldScoreKeyDown = scoreKeyDown;
-    
+
+    var scoreKeyDown;
+    scoreKeyDown = keyboard_check_direct(global.showScores);
+        if(scoreKeyDown and !oldScoreKeyDown)
+            inputShowScores();
+        else if(!scoreKeyDown and oldScoreKeyDown)
+            inputCloseScores();
+    oldScoreKeyDown = scoreKeyDown;
+}else{
+    // Force the score key to be closed
+     inputCloseScores();
+}
 var keybyte;
 keybyte = 0;
     
 //character object exists
 if(global.myself.object != -1)
 {
-    if(!menuOpen)
+    if(!menuOpen) and (chatting == false)
     {
         if(keyboard_check(global.left)) keybyte |= $40;
         if(keyboard_check(global.right)) keybyte |= $20;

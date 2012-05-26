@@ -5,3 +5,5 @@ gg2.ini
 gg2updater.gmk
 gg2updater.gb1
 gg2b
+gg2GitToGmk.bat
+gg2GmkToGit.bat

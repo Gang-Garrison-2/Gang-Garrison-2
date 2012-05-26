@@ -1,2 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<resources/>
+<resources>
+  <resource name="fnt_consoleText" type="RESOURCE"/>
+  <resource name="fnt_consoleTitle" type="RESOURCE"/>
+</resources>

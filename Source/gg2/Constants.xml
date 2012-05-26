@@ -53,6 +53,8 @@
   <constant name="HAXXY_CHALLENGE_RESPONSE" value="52"/>
   <constant name="MESSAGE_STRING" value="53"/>
   <constant name="WEAPON_FIRE" value="54"/>
+  <constant name="CHAT_PRIV_MESSAGE" value="55"/>
+  <constant name="CHAT_PUBLIC_MESSAGE" value="56"/>
   <constant name="HAXXY_PUBLIC_KEY" value="&quot;70095e0fd9754e5a3ce2cb32f109148e&quot;"/>
   <constant name="TEAM_RED" value="0"/>
   <constant name="TEAM_BLUE" value="1"/>
@@ -141,4 +143,13 @@
   <constant name="MOUSE_LEFT" value="9001"/>
   <constant name="MOUSE_RIGHT" value="9002"/>
   <constant name="HP_PER_POINT" value="400"/>
+  <constant name="COLOR_ORANGE" value="&quot;255-102-000&quot;"/>
+  <constant name="COLOR_RED" value="&quot;ff0000&quot;"/>
+  <constant name="COLOR_GREEN" value="&quot;00ff00&quot;"/>
+  <constant name="COLOR_BLUE" value="&quot;0000ff&quot;"/>
+  <constant name="COLOR_PURPLE" value="&quot;ff00ff&quot;"/>
+  <constant name="COLOR_YELLOW" value="&quot;ffff00&quot;"/>
+  <constant name="COLOR_BROWN" value="&quot;a7721d&quot;"/>
+  <constant name="COLOR_LIGHTBLUE" value="&quot;00ccff&quot;"/>
+  <constant name="COLOR_RGB_LENGTH" value="11"/>
 </constants>

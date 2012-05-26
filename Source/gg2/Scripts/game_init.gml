@@ -1,4 +1,5 @@
 {
+    global.offset = 0
     instance_create(0,0,RoomChangeObserver);
     set_little_endian_global(true);
     if file_exists("game_errors.log") file_delete("game_errors.log");
@@ -341,6 +342,8 @@ global.launchMap = "";
     
     global.gg2Font = font_add_sprite(gg2FontS,ord("!"),false,0);
     draw_set_font(global.gg2Font);
+    
+    global.consoleFont = font_add_sprite(consoleFontS,ord("!"),false,0);
     cursor_sprite = CrosshairS;
     
     if(!directory_exists(working_directory + "\Maps")) directory_create(working_directory + "\Maps");
@@ -380,4 +383,8 @@ global.launchMap = "";
         AudioControlToggleMute();
         room_goto_fix(Menu);
     }    
+    Console_init()
+    loadPlugins()
 }
+
+
