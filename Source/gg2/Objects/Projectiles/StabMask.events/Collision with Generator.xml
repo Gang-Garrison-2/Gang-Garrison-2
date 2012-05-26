@@ -16,15 +16,17 @@
         <argument kind="STRING">if (other.team != team) {
     other.alarm[0] = other.regenerationBuffer;
     other.isShieldRegenerating = false;
-    //allow overkill to be applied directly to the target
-    if (hitDamage/2 &gt; other.shieldHp) {
-        other.hp -= hitDamage/2 - other.shieldHp;
-        other.hp -= other.shieldHp * other.shieldResistance;
-        other.shieldHp = 0;
-    } else {
-        other.hp -= hitDamage/2 * other.shieldResistance;
-        other.shieldHp -= hitDamage/2;
+    if (other.shieldHp &gt; 0)
+    {
+        other.shieldHp -= other.maxShieldHp/3;
+        if other.shieldHp &lt; 0 { other.shieldHp = 0; }
     }
+    else
+    {
+        other.hp -= 72;
+    }
+    
+    
     instance_destroy();
 }
 </argument>
