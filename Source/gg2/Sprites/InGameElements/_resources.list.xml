@@ -20,6 +20,7 @@
   <resource name="SentryTurretLogS" type="RESOURCE"/>
   <resource name="DeathCamHealthBarS" type="RESOURCE"/>
   <resource name="BubblesS" type="RESOURCE"/>
+  <resource name="Boot" type="RESOURCE"/>
   <resource name="ConsoleS" type="RESOURCE"/>
   <resource name="ChatboxS" type="RESOURCE"/>
   <resource name="ChatboxS_old" type="RESOURCE"/>

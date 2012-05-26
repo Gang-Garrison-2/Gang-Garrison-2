@@ -52,6 +52,12 @@
         else if instance_exists(DKothHUD) {
             with DKothHUD event_user(12);
         }
+        
+        // Write classlimits to all clients
+        for (a=0; a<10; a+=1)
+        {
+            write_ubyte(argument1, global.classlimits[a]);
+        }
     }
     
     if(argument0 == CAPS_UPDATE) {
