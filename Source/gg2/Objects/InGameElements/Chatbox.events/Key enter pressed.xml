@@ -29,7 +29,8 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">if(instance_exists(InGameMenuController) || instance_exists(OptionsController) || instance_exists(ControlsController) 
-|| instance_exists(HUDOptionsController)) || (instance_exists(TeamSelectController) || instance_exists(ClassSelectController))
+|| instance_exists(HUDOptionsController)) || (instance_exists(TeamSelectController) || instance_exists(ClassSelectController)) ||
+(hidden)
     exit;
     
     
@@ -58,7 +59,7 @@ else if isTyping == CHAT_PUBLIC_MESSAGE
     if keyboard_string != ""
     {
         var str;
-        str = "/:/"+COLOR_WHITE+global.myself.name+": " +keyboard_string;
+        str = global.myself.name+": " +keyboard_string;
         str = string_replace_all(str,"#","\#");
         print_to_chat(str);
     }

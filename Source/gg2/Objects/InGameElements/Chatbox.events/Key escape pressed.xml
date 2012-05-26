@@ -16,6 +16,7 @@
         <argument kind="STRING">keyboard_string = "";
 alarm[0] = -1
 blinking_underscore = false;
+isTyping = false;
 </argument>
       </arguments>
     </action>

@@ -43,18 +43,22 @@ draw_sprite(sprite_index, 0, x, y);
 // If we're typing something, draw that
 if isTyping
 {
-    var str, temp;
-    if blinking_underscore
+    var str;
+    if blinking_underscore 
     {
-        temp = keyboard_string+"_";
+        str = keyboard_string+"_";
     }
     else
     {
-        temp = keyboard_string;
+        str = keyboard_string;
     }
-    str = temp
+    str = string_replace_all(str,"#","\#")
     draw_set_alpha(1)
     draw_text(x+60, y+ysize-13, str);
+    if (isTyping = CHAT_PRIV_MESSAGE)
+        draw_text(x+10, y+ysize-13, "(TEAM)");
+    if (isTyping = CHAT_PUBLIC_MESSAGE)
+        draw_text(x+10, y+ysize-13, "(ALL)");
 }
 
 var message, shortMessage, color, offset, drawn_text;
@@ -69,7 +73,7 @@ for(i=0; i&lt;ds_list_size(chatLog); i+=1)
     {
         case "/:/":// If a color-code was included.
             draw_set_color(getColorCode(string_copy(message, 4, COLOR_RGB_LENGTH)))
-            draw_text(x+10, y+ysize-45-12*(ds_list_size(chatLog)-i), string_copy(message, prefixLength + 1, string_length(message) - prefixLength));
+            draw_text(x+10, y+ysize-45-12*(ds_list_size(chatLog)-i), string_copy(message, prefixLength + 1, string_length(message)));
             break
 
         default:

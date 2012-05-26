@@ -1,6 +1,9 @@
     var input, prefixLength;
     input = argument0
-    prefixLength = 3 + COLOR_RGB_LENGTH
+    if string_copy(input, 0, 3) == "/:/"// there's a color code here, so ew set the prefix length
+        prefixLength = 3 + COLOR_RGB_LENGTH
+    else
+        prefixLength = 0
     minimumLineLength = 35 // Minimum amount of characters a line can include
     
     while string_length(input)-(prefixLength) > 41// Actual message is too long, break it in pieces and print each on a separate line
@@ -45,7 +48,6 @@
             }
         }
         if string_count(" ", message) <= 1 or spaceNotAvailible == true {// Just break it normally if there are no spaces after cutting out the prefixes
-        
             ds_list_add(global.chatbox.chatLog, string_copy(input, 0, 40+ prefixLength));
             prefix = string_copy(input, 0, prefixLength)
             input = string_copy(input, 41+ prefixLength, string_length(input));
@@ -58,10 +60,11 @@
      
 
 // Add the entry to the chatbox log
-ds_list_add(global.chatbox.chatLog, input);
+if (string_length(input)-prefixLength > 0)
+    ds_list_add(global.chatbox.chatLog, input);
 
 // Delete the oldest entry if there are too many
-if ds_list_size(global.chatbox.chatLog) > 10
+while ds_list_size(global.chatbox.chatLog) > 10
 {
     ds_list_delete(global.chatbox.chatLog, 0);
 }

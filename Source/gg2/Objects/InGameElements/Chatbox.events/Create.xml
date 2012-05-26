@@ -15,7 +15,7 @@
       <arguments>
         <argument kind="STRING">chatLog = ds_list_create();
 isTyping = false;
-hidden = true;// For beta
+hidden = false;// For beta
 blinking_underscore = false;
 blink_speed = 10;
 </argument>
