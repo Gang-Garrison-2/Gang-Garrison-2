@@ -19,7 +19,7 @@ xsize = view_wview[0];
 ysize = view_hview[0];
 xbegin = 120;
 ybegin = 40;
-spacing = 14;
+spacing = 16;
 width = 300;
 
 x_left = xoffset + 180;
@@ -38,7 +38,7 @@ draw_set_alpha(1)
 draw_sprite(sprite_index, image_index, x_left, y_top)
 
 // Draw the console Title
-draw_set_font(fnt_consoleTitle);
+draw_set_font(global.consoleFont);
 draw_text(x_left+15, y_top+10, "Console - GG2"+string(GAME_VERSION_STRING));
 
 // Draw text in input field
@@ -48,13 +48,13 @@ draw_text(x_left+14, y_bottom-15,keyboard_string+typingChar);
 var message;
 for(i=0; i&lt;ds_list_size(global.consoleLog); i+=1)
 {
+    
     message = ds_list_find_value(global.consoleLog, ds_list_size(global.consoleLog)-1-i)
-
     switch string_copy(message, 0, 3)
     {
         case "/:/":// If a color-code was included.
-            draw_set_color(getColorCode(string_copy(message, 4, 6)))
-            draw_text(window_left+12, (window_bottom-20)-i*spacing, string_copy(message, 5, string_length(message)));
+            draw_set_color(getColorCode(string_copy(message, 4, COLOR_RGB_LENGTH)))
+            draw_text(window_left+12, (window_bottom-20)-i*spacing, string_copy(message, 4+COLOR_RGB_LENGTH, string_length(message)-(4+COLOR_RGB_LENGTH-1)));
             break
 
         default:

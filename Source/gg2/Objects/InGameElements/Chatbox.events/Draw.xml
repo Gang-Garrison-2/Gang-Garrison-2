@@ -51,12 +51,14 @@ if isTyping
     {
         temp = keyboard_string;
     }
-    str = string_replace_all(temp,"#","\#")
+    str = temp
+    draw_set_alpha(1)
     draw_text(x+60, y+ysize-13, str);
 }
 
 // The drawing of the text
 var message, shortMessage, color, offset, drawn_text;
+/*
 for (i = 0; i &lt; ds_list_size(chatLog); i+=1)
 {
         // Set the draw offset of text to 0
@@ -79,11 +81,10 @@ for (i = 0; i &lt; ds_list_size(chatLog); i+=1)
                 
             }
             draw_set_color(color);
-            draw_set_alpha(1)
-            // How many lines does the last message occupy? Is there enough space?
             // Draw it
             drawn_text = shortMessage
-            draw_text_ext(x+offset+10, y+ysize-45-12*(ds_list_size(chatLog)-i), drawn_text,1,3);
+            draw_set_alpha(1)
+            draw_text(x+offset+10, y+ysize-45-12*(ds_list_size(chatLog)-i), drawn_text);
             
             // Compensate the message write position
             offset += string_width(shortMessage);
@@ -91,6 +92,27 @@ for (i = 0; i &lt; ds_list_size(chatLog); i+=1)
             // Take away the shortMessage from the long one
             message = string_copy(message, string_length(shortMessage)+string_length("000,000,000||")+1, string_length(message));
         }
+}
+*/
+
+var message;
+for(i=0; i&lt;ds_list_size(chatLog); i+=1)
+{
+    message = ds_list_find_value(chatLog, ds_list_size(chatLog)-1-i)
+
+    switch string_copy(message, 0, 3)
+    {
+        case "/:/":// If a color-code was included.
+            draw_set_color(getColorCode(string_copy(message, 4, 6)))
+            draw_text(x+10, y+ysize-45-12*(ds_list_size(chatLog)-i), string_copy(message, 5, string_length(message)));
+            break
+
+        default:
+            draw_set_color(c_white);
+            draw_text(x+10, y+ysize-45-12*(ds_list_size(chatLog)-i), message);
+            //draw_text(x+offset+10, y+ysize-45-12*(ds_list_size(chatLog)-i), message);
+            break
+    }
 }
 draw_set_color(c_white);
 </argument>

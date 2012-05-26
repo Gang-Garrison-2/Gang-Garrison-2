@@ -320,6 +320,8 @@ global.launchMap = "";
     
     global.gg2Font = font_add_sprite(gg2FontS,ord("!"),false,0);
     draw_set_font(global.gg2Font);
+    
+    global.consoleFont = font_add_sprite(consoleFontS,ord("!"),false,0);
     cursor_sprite = CrosshairS;
     
     if(!directory_exists(working_directory + "\Maps")) directory_create(working_directory + "\Maps");

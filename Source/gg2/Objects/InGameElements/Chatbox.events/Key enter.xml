@@ -28,7 +28,12 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if isTyping == CHAT_PRIV_MESSAGE
+        <argument kind="STRING">if(instance_exists(InGameMenuController) || instance_exists(OptionsController) || instance_exists(ControlsController) 
+|| instance_exists(HUDOptionsController)) || (instance_exists(TeamSelectController) || instance_exists(ClassSelectController))
+    exit;
+    
+    
+if isTyping == CHAT_PRIV_MESSAGE
 {
     // We have written a team message
     // TODO: Send this
@@ -38,7 +43,8 @@
     {
         var str, temp;
         temp = "255,000,000||"+global.myself.name+": 255,255,255||"+keyboard_string;
-        str = string_replace_all(temp,"#","\#")
+        //str = string_replace_all(temp,"#","\#")
+        str = temp;
         print_to_chat(str);
     }
 
@@ -54,7 +60,8 @@ else if isTyping == CHAT_PUBLIC_MESSAGE
     {
         var str, temp;
         temp = "255,000,000||"+global.myself.name+": 255,255,255||"+keyboard_string;
-        str = string_replace_all(temp,"#","\#")
+        //str = string_replace_all(temp,"#","\#");
+        str = temp;
         print_to_chat(str);
     }
 
