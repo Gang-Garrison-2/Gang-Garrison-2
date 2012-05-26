@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="KEYPRESS" id="13">
+  <actions>
+    <action id="605" library="1">
+      <!--action name: Comment-->
+      <kind>NORMAL</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>false</canApplyTo>
+      <actionType>NONE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">Entering any chat string</argument>
+      </arguments>
+    </action>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if(instance_exists(InGameMenuController) || instance_exists(OptionsController) || instance_exists(ControlsController) 
+|| instance_exists(HUDOptionsController)) || (instance_exists(TeamSelectController) || instance_exists(ClassSelectController))
+    exit;
+    
+    
+if isTyping == CHAT_PRIV_MESSAGE
+{
+    // We have written a team message
+    // TODO: Send this
+
+    // only print something if we've typed it
+    if keyboard_string != ""
+    {
+        var str;
+        str = "/:/"+COLOR_WHITE+global.myself.name+": " +keyboard_string;
+        str = string_replace_all(str,"#","\#")
+        print_to_chat(str);
+    }
+
+    isTyping = false;
+}
+else if isTyping == CHAT_PUBLIC_MESSAGE
+{
+    // We have written a public message
+    // TODO: Send this
+    
+    // only print something if we've typed it
+    if keyboard_string != ""
+    {
+        var str;
+        str = "/:/"+COLOR_WHITE+global.myself.name+": " +keyboard_string;
+        str = string_replace_all(str,"#","\#");
+        print_to_chat(str);
+    }
+
+    isTyping = false;
+}
+
+keyboard_string = "";
+alarm[0] = -1
+blinking_underscore = false;
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

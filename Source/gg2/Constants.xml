@@ -143,12 +143,15 @@
   <constant name="MOUSE_RIGHT" value="9002"/>
   <constant name="HP_PER_POINT" value="400"/>
   <constant name="COLOR_ORANGE" value="&quot;255-102-000&quot;"/>
-  <constant name="COLOR_RED" value="&quot;ff0000&quot;"/>
-  <constant name="COLOR_GREEN" value="&quot;00ff00&quot;"/>
-  <constant name="COLOR_BLUE" value="&quot;0000ff&quot;"/>
+  <constant name="COLOR_RED" value="&quot;255-000-000&quot;"/>
+  <constant name="COLOR_GREEN" value="&quot;000-255-000&quot;"/>
+  <constant name="COLOR_BLUE" value="&quot;000-000-255&quot;"/>
+  <constant name="COLOR_WHITE" value="&quot;255-255-255&quot;"/>
   <constant name="COLOR_PURPLE" value="&quot;ff00ff&quot;"/>
   <constant name="COLOR_YELLOW" value="&quot;ffff00&quot;"/>
   <constant name="COLOR_BROWN" value="&quot;a7721d&quot;"/>
   <constant name="COLOR_LIGHTBLUE" value="&quot;00ccff&quot;"/>
   <constant name="COLOR_RGB_LENGTH" value="11"/>
+  <constant name="MAXIMUM_CHAT_LOG" value="32"/>
+  <constant name="MAXIMUM_CONSOLE_LOG" value="16"/>
 </constants>
