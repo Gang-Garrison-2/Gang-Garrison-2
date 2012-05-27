@@ -43,17 +43,13 @@
             case "script":
                 val = "";
                 break;
-            case "editcustom":
             case "edittext2":
             case "edittext":
             case "editnum":
                 val = item_value[i];
                 break;
-            case "editboolean":
-                if(menu_get_var(i))
-                    val = "Yes";
-                else
-                    val = "No";
+            case "editselect":
+                val = item_option_label[i, item_value[i]];
                 break;
             case "editkey":
                 if editing == i {

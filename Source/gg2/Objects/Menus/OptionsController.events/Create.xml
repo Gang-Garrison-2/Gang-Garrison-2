@@ -20,6 +20,7 @@
         menu_setdimmed();
     }
     
+    oldPlayerName = global.playerName;
     menu_addedit_text2("Player name:", "global.playerName", '
         var newName;
         newName = string_copy(argument0, 0, min(string_length(argument0), MAX_PLAYERNAME_LENGTH));
@@ -28,13 +29,14 @@
             newName = "Player";
         }
         gg2_write_ini("Settings", "PlayerName", newName);
-        if(room != Options and newName != global.playerName)
+        if(room != Options and newName != oldPlayerName)
         {
             write_ubyte(global.serverSocket, PLAYER_CHANGENAME);
             write_ubyte(global.serverSocket, string_length(newName));
             write_string(global.serverSocket, newName);
             socket_send(global.serverSocket);
         }
+        oldPlayerName = newName;
         return newName;
     ');
     menu_addedit_boolean("Fullscreen:", "global.fullscreen", '
@@ -52,57 +54,21 @@
         }
     ');
     
-    var particles;
-    
-    if(global.particles == PARTICLES_NORMAL) {
-        particles = "Normal";
-    } else if(global.particles == PARTICLES_ALTERNATIVE) {
-        particles = "Alternative (faster)";
-    } else {
-        particles = "Disabled";
-    }
-    
-    menu_addedit_custom("Particles:", particles, '
-        global.particles = (global.particles+2) mod 3;
-        gg2_write_ini("Settings", "Particles", global.particles);
-        if(global.particles == PARTICLES_NORMAL) {
-            return "Normal";
-        } else if(global.particles == PARTICLES_ALTERNATIVE) {
-            return "Alternative (faster)";
-        } else {
-            return "Disabled";
-        }
+    menu_addedit_select("Particles:", "global.particles", '
+        gg2_write_ini("Settings", "Particles", argument0);
     ');
+    menu_add_option(PARTICLES_NORMAL, "Normal");
+    menu_add_option(PARTICLES_OFF, "Disabled");
+    menu_add_option(PARTICLES_ALTERNATIVE, "Alternative (faster)");
     
-    var gibs;
-    switch (global.gibLevel){
-        case(0): gibs = "0, Disabled"; break;
-        case(1): gibs = "1, Blood only"; break;
-        case(2): gibs = "2, Blood and medium gibs"; break;
-        default: gibs = string(global.gibLevel) + ", Full blood and gibs"; break;
-    }
-    
-    menu_addedit_custom("Gibs:", gibs, '
-        switch (global.gibLevel){
-            case(0): 
-                global.gibLevel = 1;
-                return "1, Blood only"; 
-                break;
-            case(1): 
-                global.gibLevel = 2;
-                return "2, Blood and medium gibs";
-                break;
-            case(2): 
-                global.gibLevel = 3;
-                return string(global.gibLevel) + ", Full blood and gibs";
-                break;
-            default: 
-                global.gibLevel = 0;
-                return "0, No blood or gibs";
-                break;
-                }
-        gg2_write_ini("Settings", "Gib Level", global.gibLevel);
+    menu_addedit_select("Gibs:", "global.gibLevel", '
+        gg2_write_ini("Settings", "Gib Level", argument0);
     ');
+    menu_add_option(0, "Disabled");
+    menu_add_option(1, "Blood only");
+    menu_add_option(2, "Blood and medium gibs");
+    menu_add_option(3, "Full blood and gibs");
+    
     menu_addedit_boolean("Healer Radar:", "global.medicRadar", '
         gg2_write_ini("Settings", "Healer Radar", argument0);
     ');

@@ -21,15 +21,6 @@ if(editing != -1) {
         case "editnum":
             item_value[editing] = keyboard_string;
             break;
-        case "editcustom":
-            item_value[editing] = execute_string(item_script[editing], item_value[editing]);
-            editing = -1;
-            break;
-        case "editboolean":
-            menu_set_var(editing, !menu_get_var(editing));
-            execute_string(item_script[editing], menu_get_var(editing));
-            editing = -1;
-            break;
         case "editkeyormouse":
             if mouse_check_button(mb_left) {
                 menu_set_var(editing, MOUSE_LEFT);
@@ -70,9 +61,12 @@ if(editing != -1) {
                 case "edittext2":
                 case "editnum":
                     keyboard_string = "";
-                case "editboolean":
-                case "editcustom":
                     editing = virtualitem;
+                    break;
+                case "editselect":
+                    item_value[virtualitem] = (item_value[virtualitem]+1) mod item_options[virtualitem];
+                    menu_set_var(virtualitem, item_option_value[virtualitem, item_value[virtualitem]]);
+                    execute_string(item_script[virtualitem], menu_get_var(virtualitem));
                     break;
             }
         }

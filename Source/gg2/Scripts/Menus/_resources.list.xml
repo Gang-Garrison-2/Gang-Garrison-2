@@ -6,8 +6,9 @@
   <resource name="menu_addedit_num" type="RESOURCE"/>
   <resource name="menu_addedit_text" type="RESOURCE"/>
   <resource name="menu_addedit_text2" type="RESOURCE"/>
+  <resource name="menu_addedit_select" type="RESOURCE"/>
+  <resource name="menu_add_option" type="RESOURCE"/>
   <resource name="menu_addedit_boolean" type="RESOURCE"/>
-  <resource name="menu_addedit_custom" type="RESOURCE"/>
   <resource name="menu_addedit_key" type="RESOURCE"/>
   <resource name="menu_addedit_keyormouse" type="RESOURCE"/>
   <resource name="menu_setdimmed" type="RESOURCE"/>
