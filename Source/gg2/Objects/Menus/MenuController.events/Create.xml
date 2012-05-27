@@ -13,10 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">timeLimit=global.timeLimitMins*30*60;
-timer=timeLimit;
-teamoffset=0;
-overtime=0;
+        <argument kind="STRING">show_error("The Create event needs to be overridden in all child objects.", true);
 </argument>
       </arguments>
     </action>

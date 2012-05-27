@@ -14,105 +14,95 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">{
-    xoffset = view_xview[0];
-    yoffset = view_yview[0];
-    xsize = view_wview[0];
-    ysize = view_hview[0];
-    
-    oldName = global.playerName;
-    virtualitem = -1;
-    xbegin = 40;
-    ybegin = 140;
-    spacing = 30;
-    width = 300; 
-    items = 14;
-    valueoffset = 200;
-    editing = -1;
-    
-    item[0] = "Player name:";
-    item[1] = "Fullscreen:";
-    item[2] = "Ingame Music:";
-    item[3] = "Particles:";
-    item[4] = "Gibs:";
-    item[5] = "Healer Radar:";
-    item[6] = "Show Healer:";
-    item[7] = "Show Healing:";
-    item[8] = "Additional Healthbar:";
-    item[9] = "Kill Cam:";
-    item[10] = "V Sync:";
-    item[11] = "Controls";
-    item[12] = "HUD Options";
-    item[13] = "Back";
-    
-    value[0] = global.playerName;
-      
-    if(global.fullscreen) {
-        value[1] = "On";
-    } else {
-        value[1] = "Off";
-    }
-    
-    if(global.ingameMusic) {
-        value[2] = "On";
-    } else {
-        value[2] = "Off";
-    }
-    
-    if(global.particles == PARTICLES_NORMAL) {
-        value[3] = "Normal";
-    } else if(global.particles == PARTICLES_ALTERNATIVE) {
-        value[3] = "Alternative (faster)";
-    } else {
-        value[3] = "Disabled";
-    }
-    
-    switch (global.gibLevel){
-        case(0): value[4] = "0, Disabled"; break;
-        case(1): value[4] = "1, Blood only"; break;
-        case(2): value[4] = "2, Blood and medium gibs"; break;
-        default: value[4] = string(global.gibLevel) + ", Full blood and gibs"; break;
-    }
-    
-    if(global.medicRadar == 0) {
-        value[5] = "Disabled";
-    } else {
-        value[5] = "Enabled";
-    }
-    
-    if(global.showHealer == 0) {
-        value[6] = "Disabled";
-    } else {
-        value[6] = "Enabled";
-    }
-    
-    if(global.showHealing == 0){
-        value[7] = "Disabled";
-    } else {
-        value[7] = "Enabled";
-    }
-    
-    if(global.showHealthBar == 0){
-        value[8] = "Disabled";
-    } else {
-        value[8] = "Enabled";
-    }
-    
-    if(global.killCam == 0) {
-        value[9] = "Disabled";
-    } else {
-        value[9] = "Enabled";
-    }
-    
-    if(global.monitorSync == 0) {
-        value[10] = "Disabled";
-    } else {
-        value[10] = "Enabled";
-    }
-    
-    value[11] = "";
-    value[12] = "";
-    value[13] = "";
+    menu_create(40, 140, 300, 200, 30);
 
+    if room != Options {
+        menu_setdimmed();
+    }
+    
+    oldPlayerName = global.playerName;
+    menu_addedit_text2("Player name:", "global.playerName", '
+        var newName;
+        newName = string_copy(argument0, 0, min(string_length(argument0), MAX_PLAYERNAME_LENGTH));
+        if string_count("#",newName) &gt; 0 {
+            show_message("Invalid character ' + "'\#'" + ' in name");
+            newName = "Player";
+        }
+        gg2_write_ini("Settings", "PlayerName", newName);
+        if(room != Options and newName != oldPlayerName)
+        {
+            write_ubyte(global.serverSocket, PLAYER_CHANGENAME);
+            write_ubyte(global.serverSocket, string_length(newName));
+            write_string(global.serverSocket, newName);
+            socket_send(global.serverSocket);
+        }
+        oldPlayerName = newName;
+        return newName;
+    ');
+    menu_addedit_boolean("Fullscreen:", "global.fullscreen", '
+        gg2_write_ini("Settings", "Fullscreen", argument0);
+        window_set_fullscreen(argument0);
+    ');
+    menu_addedit_boolean("Ingame Music:", "global.ingameMusic", '
+        gg2_write_ini("Settings", "IngameMusic", argument0);
+        if(room != Options)
+        {
+            if(argument0)
+                AudioControlPlaySong(global.IngameMusic, true);
+            else
+                AudioControlPlaySong(-1, false);
+        }
+    ');
+    
+    menu_addedit_select("Particles:", "global.particles", '
+        gg2_write_ini("Settings", "Particles", argument0);
+    ');
+    menu_add_option(PARTICLES_NORMAL, "Normal");
+    menu_add_option(PARTICLES_OFF, "Disabled");
+    menu_add_option(PARTICLES_ALTERNATIVE, "Alternative (faster)");
+    
+    menu_addedit_select("Gibs:", "global.gibLevel", '
+        gg2_write_ini("Settings", "Gib Level", argument0);
+    ');
+    menu_add_option(0, "Disabled");
+    menu_add_option(1, "Blood only");
+    menu_add_option(2, "Blood and medium gibs");
+    menu_add_option(3, "Full blood and gibs");
+    
+    menu_addedit_boolean("Healer Radar:", "global.medicRadar", '
+        gg2_write_ini("Settings", "Healer Radar", argument0);
+    ');
+    menu_addedit_boolean("Show Healer:", "global.showHealer", '
+        gg2_write_ini("Settings", "Show Healer", argument0);
+    ');
+    menu_addedit_boolean("Show Healing:", "global.showHealing", '
+        gg2_write_ini("Settings", "Show Healing", argument0);
+    ');
+    menu_addedit_boolean("Additional Healthbar:", "global.showHealthBar", '
+        gg2_write_ini("Settings", "Show Healthbar", argument0);
+    ');
+    menu_addedit_boolean("Kill Cam:", "global.killCam", '
+        gg2_write_ini("Settings", "Kill Cam", argument0);
+    ');
+    menu_addedit_boolean("V Sync:", "global.monitorSync", '
+        gg2_write_ini("Settings", "Monitor Sync", argument0);
+        set_synchronization(argument0);
+    ');
+    menu_addlink("Controls", '
+        instance_create(x,y,ControlsController);
+        instance_destroy();
+    ');
+    menu_addlink("HUD Options", '
+        instance_create(x,y,HUDOptionsController);
+        instance_destroy();
+    ');
+    menu_addback("Back", '
+        instance_destroy();
+        if(room == Options)
+            instance_create(0,0,MainMenuController);
+        else
+            instance_create(0,0,InGameMenuController);
+    ');
 }
 </argument>
       </arguments>

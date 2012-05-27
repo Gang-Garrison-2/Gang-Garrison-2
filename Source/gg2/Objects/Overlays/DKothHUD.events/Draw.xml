@@ -13,10 +13,24 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">xoffset = view_xview[0];
+        <argument kind="STRING">var xoffset, yoffset, xsize, ysize, xshift, yshift, coffset;
+xoffset = view_xview[0];
 yoffset = view_yview[0];
 xsize = view_wview[0];
 ysize = view_hview[0];
+
+if (global.kothHudPos)
+{
+    coffset = 0;
+    xshift = -323*global.timerPos;
+    yshift = 35;
+}
+else
+{
+    coffset = 43*1.15;
+    xshift = -290*global.timerPos;
+    yshift = 0;
+}
 
 drawx = xoffset+xsize/2 - 48;
 

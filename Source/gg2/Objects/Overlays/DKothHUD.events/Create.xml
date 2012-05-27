@@ -19,16 +19,6 @@ cpUnlock = 900;
 hostTimer = global.timeLimitMins*30*60;
 global.totalControlPoints = 2;
 
-if (global.kothHudPos) {
-    coffset=0
-    xshift=-323*global.timerPos
-    yshift=35*global.kothHudPos
-}else {
-    coffset=43*1.15
-    xshift=-290*global.timerPos
-    yshift=35*global.kothHudPos
-}
-
 KothRedControlPoint.team = TEAM_RED;
 KothBlueControlPoint.team = TEAM_BLUE;
 </argument>
