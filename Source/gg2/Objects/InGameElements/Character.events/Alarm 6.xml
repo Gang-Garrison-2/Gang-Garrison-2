@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<event category="ALARM" id="1">
+<event category="ALARM" id="6">
   <actions>
     <action id="605" library="1">
       <!--action name: Comment-->
@@ -13,7 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">intel grabability</argument>
+        <argument kind="STRING">sandvich cooldown</argument>
       </arguments>
     </action>
     <action id="603" library="1">
@@ -28,7 +28,8 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">canGrabIntel=true;</argument>
+        <argument kind="STRING">canEat = true;
+</argument>
       </arguments>
     </action>
   </actions>

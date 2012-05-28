@@ -25,7 +25,7 @@ if global.autobalance == 1 && !instance_exists(ArenaHUD) {
         if !instance_exists(Balancer) instance_create(x,y,Balancer);
         with(Balancer) notice=0;
         serverbalance=1;
-    } else if(serverbalance == 1 && balancecounter >= 300) {
+    } else if(serverbalance == 1 && balancecounter >= 150) {
         points=9001;
         balanceplayer=-1;
         var someoneIsDead;

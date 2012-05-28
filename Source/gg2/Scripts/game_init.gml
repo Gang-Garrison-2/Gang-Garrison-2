@@ -16,8 +16,8 @@
         sound_volume(global.IngameMusic, 0.8);
     if(global.FaucetMusic != -1)
         sound_volume(global.FaucetMusic, 0.8);
-        
-
+    
+    
     global.sendBuffer = buffer_create();
     global.eventBuffer = buffer_create();
     global.tempBuffer = buffer_create();
@@ -66,6 +66,8 @@
     global.haxxyKey = ini_read_string("Haxxy", "SecretHaxxyKey", "");
     global.mapdownloadLimitBps = ini_read_real("Server", "Total bandwidth limit for map downloads in bytes per second", 50000);
     global.updaterBetaChannel = ini_read_real("General", "UpdaterBetaChannel", isBetaVersion());
+    global.mapdownloadLimitBps = ini_read_real("Server", "Total bandwidth limit for map downloads in bytes per second", 50000);
+    
     
     global.classlimits[CLASS_SCOUT] = ini_read_real("Classlimits", "Scout", 9999)
     global.classlimits[CLASS_PYRO] = ini_read_real("Classlimits", "Pyro", 9999)

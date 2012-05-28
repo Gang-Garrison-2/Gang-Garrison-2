@@ -13,15 +13,21 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if !fade {
-    if other.team != team {
+        <argument kind="STRING">if (!fade)
+{
+    if (other.team != team)
+    {
+        with(other)
+        {
+            cloakAlpha = max(cloakAlpha, 0.3); 
+            cloakFlicker = true;
+            alarm[7] = 3;
+        }
         characterHit=other;
-        other.cloakAlpha = min(other.cloakAlpha + 0.1, 1);
         event_user(5);
     }
-    else {
+    else
         alarm[0] = 31 - travelDistance;
-    }
 }
 </argument>
       </arguments>

@@ -210,14 +210,22 @@ while(commandLimitRemaining > 0) {
               
         case OMNOMNOMNOM:
             if(player.object != -1) {
-                if(player.humiliated == 0
-                        && player.object.taunting==false
-                        && player.object.omnomnomnom==false
-                        && player.class==CLASS_HEAVY) {                            
+                if(!player.humiliated
+                    and !player.object.taunting
+                    and !player.object.omnomnomnom
+                    and player.object.canEat
+                    and player.class==CLASS_HEAVY)
+                {                            
                     write_ubyte(global.sendBuffer, OMNOMNOMNOM);
                     write_ubyte(global.sendBuffer, playerId);
-                    with(player.object) {
-                        omnomnomnom=true;
+                    with(player.object)
+                    {
+                        omnomnomnom = true;
+                        if(hp < 200)
+                        {
+                            canEat = false;
+                            alarm[6] = eatCooldown; //10 second cooldown
+                        }
                         if player.team == TEAM_RED {
                             omnomnomnomindex=0;
                             omnomnomnomend=31;
