@@ -206,10 +206,8 @@ do {
             
         case CHAT_PUBLIC_MESSAGE:
             var message;
-            receiveCompleteMessage(global.serverSocket,1,global.tempBuffer);
-            player = ds_list_find_value(global.players, read_ubyte(global.tempBuffer));
             message = receivestring(global.serverSocket, 1);
-            show_message(message)
+            print_to_chat(message);
             break;
                  
         case PLAYER_SPAWN:

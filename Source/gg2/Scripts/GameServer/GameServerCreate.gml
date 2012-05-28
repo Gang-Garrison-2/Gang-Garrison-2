@@ -6,6 +6,10 @@
     global.tcpListener = -1;
     global.serverSocket = -1;
     
+    global.privChatRedBuffer = buffer_create();
+    global.privChatBlueBuffer = buffer_create();
+    global.publicChatBuffer = buffer_create();
+    
     global.currentMapIndex = 0;
     global.currentMapArea = 1;
     

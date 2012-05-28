@@ -144,5 +144,18 @@ for(i=1; i<ds_list_size(global.players); i+=1)
     player = ds_list_find_value(global.players, i);
     write_buffer(player.socket, global.eventBuffer);
     write_buffer(player.socket, global.sendBuffer);
+    write_buffer(player.socket, global.publicChatBuffer);
+    
+    if player.team == TEAM_RED
+    {
+        write_buffer(player.socket, global.privChatRedBuffer);
+    }
+    else if player.team == TEAM_BLUE
+    {
+        write_buffer(player.socket, global.privChatBlueBuffer);
+    }
 }
 buffer_clear(global.eventBuffer);
+buffer_clear(global.privChatRedBuffer);
+buffer_clear(global.privChatBlueBuffer);
+buffer_clear(global.publicChatBuffer);
