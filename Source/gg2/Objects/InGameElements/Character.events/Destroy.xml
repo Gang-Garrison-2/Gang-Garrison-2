@@ -30,7 +30,7 @@
             newIntel = instance_create(x,y,IntelligenceRed);
             recordEventInLog(5, TEAM_BLUE, player.name, isMe);
         }
-        newIntel.alarm[0] = 900;
+        newIntel.alarm[0] = intelRecharge;
         if (lastDamageSource == KILL_BOX || lastDamageSource == FRAG_BOX || lastDamageSource == PITFALL) {
             if (global.isHost){
                 if(team==TEAM_RED) {

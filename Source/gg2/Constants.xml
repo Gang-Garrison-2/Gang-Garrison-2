@@ -140,4 +140,5 @@
   <constant name="MOUSE_LEFT" value="9001"/>
   <constant name="MOUSE_RIGHT" value="9002"/>
   <constant name="HP_PER_POINT" value="400"/>
+  <constant name="INTEL_MAX_TIMER" value="900"/>
 </constants>

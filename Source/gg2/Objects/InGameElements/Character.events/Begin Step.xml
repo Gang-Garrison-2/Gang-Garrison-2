@@ -222,6 +222,7 @@ if (intel)
         cloak=false;
         cloakAplha=1;
     }
+    intelRecharge = min(INTEL_MAX_TIMER, intelRecharge + INTEL_MAX_TIMER/(3*30));// 3*30 == it'll take 3 seconds for this to charge
 }
  
 if (player.humiliated)

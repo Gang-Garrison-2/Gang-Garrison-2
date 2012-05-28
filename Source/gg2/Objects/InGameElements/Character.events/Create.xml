@@ -20,6 +20,7 @@
     canBuild = 0;
     jumpStrength = 8;
     capStrength = 1;
+    intelRecharge = 0;
     
     // 
     flamecount = 0;

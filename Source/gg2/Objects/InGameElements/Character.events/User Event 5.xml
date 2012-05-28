@@ -28,7 +28,7 @@
     } else if (team == TEAM_BLUE){
         newIntel = instance_create(x,y,IntelligenceRed);
     }
-    newIntel.alarm[0] = 900;     
+    newIntel.alarm[0] = intelRecharge;     
 }
 </argument>
       </arguments>
