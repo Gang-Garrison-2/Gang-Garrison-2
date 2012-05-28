@@ -143,6 +143,7 @@
   <constant name="MOUSE_LEFT" value="9001"/>
   <constant name="MOUSE_RIGHT" value="9002"/>
   <constant name="HP_PER_POINT" value="400"/>
+  <constant name="INTEL_MAX_TIMER" value="900"/>
   <constant name="COLOR_ORANGE" value="&quot;255-102-000&quot;"/>
   <constant name="COLOR_RED" value="&quot;255-000-000&quot;"/>
   <constant name="COLOR_GREEN" value="&quot;000-255-000&quot;"/>
