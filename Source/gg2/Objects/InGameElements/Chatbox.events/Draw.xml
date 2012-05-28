@@ -64,24 +64,40 @@ if isTyping
 var message, shortMessage, color, offset, drawn_text;
 draw_set_font(global.gg2Font)
 draw_set_alpha(1)
-var message;
+
+var message, x_offset;
 for(i=0; i&lt;ds_list_size(chatLog); i+=1)
 {
-    //message = ds_list_find_value(chatLog, ds_list_size(chatLog)-1-i)
     message = ds_list_find_value(chatLog, i)
-    switch string_copy(message, 0, 3)
-    {
-        case "/:/":// If a color-code was included.
-            draw_set_color(getColorCode(string_copy(message, 4, COLOR_RGB_LENGTH)))
-            draw_text(x+10, y+ysize-45-12*(ds_list_size(chatLog)-i), string_copy(message, prefixLength + 1, string_length(message)));
-            break
+    x_offset = 0;
 
-        default:
-            draw_set_color(c_white);
-            draw_text(x+10, y+ysize-45-12*(ds_list_size(chatLog)-i), message);
-            break
+    while string_count("/:/", message) &gt; 0
+    {
+        var nextpos, text;
+        // Get the color from the prefix
+        draw_set_color(getColorCode(string_copy(message, 4, COLOR_RGB_LENGTH)));
+        // Check if there's another prefix in this message
+        nextpos = string_pos("/:/", string_copy(message, 4, string_length(message))) + 3;
+        if nextpos == 3
+        {
+            // There isn't an color code in the future, we can draw everything
+            text = string_copy(message, 4+COLOR_RGB_LENGTH, string_length(message));
+            message = "";
+        }
+        else
+        {
+            // There is another, crop to it
+            // What we'll draw this time
+            text = string_copy(message, 4+COLOR_RGB_LENGTH, nextpos-COLOR_RGB_LENGTH-4);
+            // What we need to set with a new color
+            message = string_copy(message, nextpos, string_length(message));
+        }
+        draw_text(x+x_offset+10, y+ysize-45-12*(ds_list_size(chatLog)-i), text);
+        // Offset the draw pos of the next strip of text, so that it doesn't overwrite the old one
+        x_offset += string_width(text);
     }
 }
+
 draw_set_font(global.gg2Font)
 draw_set_color(c_white);
 </argument>
