@@ -32,38 +32,27 @@
 || instance_exists(HUDOptionsController)) || (instance_exists(TeamSelectController) || instance_exists(ClassSelectController)) ||
 (hidden)
     exit;
-    
-    
-if isTyping == CHAT_PRIV_MESSAGE
-{
-    // We have written a team message
-    // TODO: Send this
 
+if isTyping
+{
     // only print something if we've typed it
     if keyboard_string != ""
     {
         var str;
-        str = "/:/"+COLOR_WHITE+global.myself.name+": " +keyboard_string;
-        str = string_replace_all(str,"#","\#")
+        str = keyboard_string;
+        if string_count("#", str) &gt; 0
+        {
+            str = "No hashes allowed";
+        }
+        
+        write_ubyte(global.serverSocket, isTyping);// Will be either CHAT_PUBLIC_MESSAGE or CHAT_PRIV_MESSAGE
+        write_ubyte(global.serverSocket, string_length(str));
+        write_string(global.serverSocket, str);
+        socket_send(global.serverSocket);
+        
         print_to_chat(str);
     }
-
-    isTyping = false;
-}
-else if isTyping == CHAT_PUBLIC_MESSAGE
-{
-    // We have written a public message
-    // TODO: Send this
     
-    // only print something if we've typed it
-    if keyboard_string != ""
-    {
-        var str;
-        str = global.myself.name+": " +keyboard_string;
-        str = string_replace_all(str,"#","\#");
-        print_to_chat(str);
-    }
-
     isTyping = false;
 }
 

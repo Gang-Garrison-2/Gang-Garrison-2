@@ -304,7 +304,7 @@ while(commandLimitRemaining > 0) {
                     else if team == TEAM_BLUE
                     {
                         teambuffer = global.privChatBlueBuffer;
-                        message = "/:/"+COLOR_BLUE+name+": "+message;
+                        message = "/:/"+COLOR_LIGHTBLUE+name+": "+message;
                     }
                     else
                     {
@@ -317,8 +317,8 @@ while(commandLimitRemaining > 0) {
                 }
             }
             break;
-            
-        case CHAT_PRIV_MESSAGE:
+
+        case CHAT_PUBLIC_MESSAGE:
             var messageLength;
             messageLength = socket_receivebuffer_size(socket);
             if(messageLength > CHAT_MAX_STRING_LENGTH)
@@ -348,7 +348,7 @@ while(commandLimitRemaining > 0) {
                     }
                     else if team == TEAM_BLUE
                     {
-                        message = "/:/"+COLOR_BLUE+name+": /:/"+COLOR_WHITE+message;
+                        message = "/:/"+COLOR_LIGHTBLUE+name+": /:/"+COLOR_WHITE+message;
                     }
                     else
                     {
