@@ -68,5 +68,3 @@ while ds_list_size(global.chatbox.chatLog) > 10
 {
     ds_list_delete(global.chatbox.chatLog, 0);
 }
-
-global.chatbox.alarm[1] = 30;

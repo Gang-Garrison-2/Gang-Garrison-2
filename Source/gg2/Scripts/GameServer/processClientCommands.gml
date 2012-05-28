@@ -255,11 +255,20 @@ while(commandLimitRemaining > 0) {
             {
                 with(player)
                 {
-                    if(variable_local_exists("lastChatTime")) 
-                        if(current_time - lastNamechange < 1000)
-                            break;
+                    if(current_time - lastNamechange < 1000)
+                        break;
                     lastNamechange = current_time;
-                    name = read_string(socket, nameLength);
+                    var newname;
+                    newname = read_string(socket, nameLength);
+                    
+                    // Notify the chat
+                    var message;
+                    message = "/:/"+COLOR_WHITE+name+" is now known as "+newname;
+                    write_ubyte(global.publicChatBuffer, CHAT_PUBLIC_MESSAGE);
+                    write_ubyte(global.publicChatBuffer, string_length(message));
+                    write_string(global.publicChatBuffer, message);
+                    
+                    name = newname
                     if(string_count("#",name) > 0)
                     {
                         name = "I <3 Bacon";
@@ -314,6 +323,12 @@ while(commandLimitRemaining > 0) {
                     write_ubyte(teambuffer, CHAT_PUBLIC_MESSAGE);
                     write_ubyte(teambuffer, string_length(message));
                     write_string(teambuffer, message);
+
+                    // For the host, who never receives stuff
+                    if global.myself.team == team
+                    {
+                        print_to_chat(message);
+                    }
                 }
             }
             break;
@@ -357,6 +372,9 @@ while(commandLimitRemaining > 0) {
                     write_ubyte(global.publicChatBuffer, CHAT_PUBLIC_MESSAGE);
                     write_ubyte(global.publicChatBuffer, string_length(message));
                     write_string(global.publicChatBuffer, message);
+                    
+                    // For the host, who never receives stuff
+                    print_to_chat(message);
                 }
             }
             break;
