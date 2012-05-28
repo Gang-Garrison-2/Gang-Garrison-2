@@ -275,7 +275,7 @@ while(commandLimitRemaining > 0) {
         case CHAT_PRIV_MESSAGE:
             var messageLength;
             messageLength = socket_receivebuffer_size(socket);
-            if(messageLength > MAX_PLAYERNAME_LENGTH)
+            if(messageLength > CHAT_MAX_STRING_LENGTH)
             {
                 write_ubyte(player.socket, KICK);
                 write_ubyte(player.socket, KICK_NAME);
@@ -286,26 +286,42 @@ while(commandLimitRemaining > 0) {
             {
                 with(player)
                 {
-                    if(variable_local_exists("lastChatTime")) 
-                        if(current_time - lastChatTime < 1000)
-                            break;
+                    if(current_time - lastChatTime < 1000)
+                        break;
                     lastChatTime = current_time;
+                    var message, teambuffer;
                     message = read_string(socket, messageLength);
                     if(string_count("#",message) > 0)
                     {
                         message = "No Hashes allowed?";
                     }
-                    write_ubyte(global.sendBuffer, CHAT_PRIV_MESSAGE);
-                    write_ubyte(global.sendBuffer, playerId);
-                    write_ubyte(global.sendBuffer, string_length(message));
-                    write_string(global.sendBuffer, message);
+
+                    if team == TEAM_RED
+                    {
+                        teambuffer = global.privChatRedBuffer;
+                        message = "/:/"+COLOR_RED+name+": "+message;
+                    }
+                    else if team == TEAM_BLUE
+                    {
+                        teambuffer = global.privChatBlueBuffer;
+                        message = "/:/"+COLOR_BLUE+name+": "+message;
+                    }
+                    else
+                    {
+                        teambuffer = global.publicChatBuffer;// Specs can only global chat
+                        message = "/:/"+COLOR_GREEN+name+": /:/"+COLOR_WHITE+message;
+                    }
+                    write_ubyte(teambuffer, CHAT_PUBLIC_MESSAGE);
+                    write_ubyte(teambuffer, string_length(message));
+                    write_string(teambuffer, message);
                 }
             }
             break;
-        case CHAT_PUBLIC_MESSAGE:
+            
+        case CHAT_PRIV_MESSAGE:
             var messageLength;
             messageLength = socket_receivebuffer_size(socket);
-            if(messageLength > MAX_PLAYERNAME_LENGTH)
+            if(messageLength > CHAT_MAX_STRING_LENGTH)
             {
                 write_ubyte(player.socket, KICK);
                 write_ubyte(player.socket, KICK_NAME);
@@ -316,19 +332,31 @@ while(commandLimitRemaining > 0) {
             {
                 with(player)
                 {
-                    if(variable_local_exists("lastChatTime")) 
-                        if(current_time - lastChatTime < 1000)
-                            break;
+                    if(current_time - lastChatTime < 1000)
+                        break;
                     lastChatTime = current_time;
+                    var message;
                     message = read_string(socket, messageLength);
                     if(string_count("#",message) > 0)
                     {
                         message = "No Hashes allowed?";
                     }
-                    write_ubyte(global.sendBuffer, CHAT_PUBLIC_MESSAGE);
-                    write_ubyte(global.sendBuffer, playerId);
-                    write_ubyte(global.sendBuffer, string_length(message));
-                    write_string(global.sendBuffer, message);
+
+                    if team == TEAM_RED
+                    {
+                        message = "/:/"+COLOR_RED+name+": /:/"+COLOR_WHITE+message;
+                    }
+                    else if team == TEAM_BLUE
+                    {
+                        message = "/:/"+COLOR_BLUE+name+": /:/"+COLOR_WHITE+message;
+                    }
+                    else
+                    {
+                        message = "/:/"+COLOR_GREEN+name+": /:/"+COLOR_WHITE+message;
+                    }
+                    write_ubyte(global.publicChatBuffer, CHAT_PUBLIC_MESSAGE);
+                    write_ubyte(global.publicChatBuffer, string_length(message));
+                    write_string(global.publicChatBuffer, message);
                 }
             }
             break;

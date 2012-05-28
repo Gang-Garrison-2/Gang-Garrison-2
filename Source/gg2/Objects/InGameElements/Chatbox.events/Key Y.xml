@@ -30,6 +30,8 @@
       <arguments>
         <argument kind="STRING">if !isTyping and !(instance_exists(InGameMenuController) || instance_exists(OptionsController) || instance_exists(ControlsController) || instance_exists(HUDOptionsController))
 {
+    if (hidden)
+        exit;
     // We are now going to write a team message
     keyboard_string = "";
     isTyping = CHAT_PRIV_MESSAGE;
