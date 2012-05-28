@@ -26,7 +26,6 @@ y = view_yview[0] + view_hview[0]-sprite_height-85;
 draw_set_valign(fa_top);
 draw_set_halign(fa_left);
 draw_set_color(c_white);
-prefixLength = 3 + COLOR_RGB_LENGTH
 
 if isTyping
 {
@@ -36,6 +35,7 @@ else
 {
     image_alpha = max(alarm[1]/30, 0.2);
 }
+draw_set_alpha(image_alpha);
 
 // Draw the background
 draw_sprite(sprite_index, 0, x, y);
@@ -63,7 +63,6 @@ if isTyping
 
 var message, shortMessage, color, offset, drawn_text;
 draw_set_font(global.gg2Font)
-draw_set_alpha(1)
 
 var message, x_offset;
 for(i=0; i&lt;ds_list_size(chatLog); i+=1)
