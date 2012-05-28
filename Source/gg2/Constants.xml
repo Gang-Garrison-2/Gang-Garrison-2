@@ -152,6 +152,5 @@
   <constant name="COLOR_YELLOW" value="&quot;255-255-000&quot;"/>
   <constant name="COLOR_BROWN" value="&quot;167-114-029&quot;"/>
   <constant name="COLOR_LIGHTBLUE" value="&quot;000-204-255&quot;"/>
-  <constant name="COLOR_WHITE" value="&quot;255-255-255&quot;"/>
   <constant name="COLOR_RGB_LENGTH" value="11"/>
 </constants>

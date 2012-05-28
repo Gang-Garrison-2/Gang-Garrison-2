@@ -9,9 +9,6 @@ if ds_list_size(global.players)-1 < real(floor(input[1]))// How to check whether
     Console_print('Invalid player number, please check the correct one with listPlayers.');
     exit;
 }
-
-Console_print('DEBUG MESSAGE: YOU TYPED '+string(real(input[1])))
-
 var player;
 player = ds_list_find_value(global.players, real(input[1]))
 if player != -1 and player != ds_list_find_value(global.players, 0)
