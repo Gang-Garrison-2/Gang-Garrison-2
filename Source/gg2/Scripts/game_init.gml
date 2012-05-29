@@ -59,6 +59,7 @@
     global.mapRotationFile = customMapRotationFile;
     global.dedicatedMode = ini_read_real("Server", "Dedicated", 0);
     global.serverName = ini_read_string("Server", "ServerName", "My Server");
+    global.welcomeMessage = ini_read_string("Server", "WelcomeMessage", "");
     global.caplimit = max(1, min(255, ini_read_real("Server", "CapLimit", 5)));
     global.caplimitBkup = global.caplimit;
     global.autobalance = ini_read_real("Server", "AutoBalance",1);
@@ -92,6 +93,7 @@
     ini_write_string("Server", "MapRotation", customMapRotationFile);
     ini_write_real("Server", "Dedicated", global.dedicatedMode);
     ini_write_string("Server", "ServerName", global.serverName);
+    ini_write_string("Server", "WelcomeMessage", global.welcomeMessage);
     ini_write_real("Server", "CapLimit", global.caplimit);
     ini_write_real("Server", "AutoBalance", global.autobalance);
     ini_write_real("Server", "Respawn Time", global.Server_RespawntimeSec);

@@ -9,4 +9,5 @@
   <resource name="ServerPlayerChangeteam" type="RESOURCE"/>
   <resource name="ServerPlayerChangeclass" type="RESOURCE"/>
   <resource name="ServerChangeMap" type="RESOURCE"/>
+  <resource name="ServerMessageString" type="RESOURCE"/>
 </resources>
