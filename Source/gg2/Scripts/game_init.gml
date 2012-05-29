@@ -2,6 +2,7 @@
     instance_create(0,0,RoomChangeObserver);
     set_little_endian_global(true);
     if file_exists("game_errors.log") file_delete("game_errors.log");
+    if file_exists("last_plugin.log") file_delete("last_plugin.log");
     
     var customMapRotationFile;
 
@@ -354,6 +355,9 @@ global.launchMap = "";
     
     calculateMonthAndDay();
 
+    if(!directory_exists(working_directory + "\Plugins")) directory_create(working_directory + "\Plugins");
+    loadplugins();
+    
     if(global.dedicatedMode == 1) {
         AudioControlToggleMute();
         room_goto_fix(Menu);
