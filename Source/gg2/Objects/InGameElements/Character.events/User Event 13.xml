@@ -32,7 +32,7 @@
         currentWeapon.ammoCount = read_ubyte(global.deserializeBuffer);
         
         temp = read_ubyte(global.deserializeBuffer);
-        cloak = (temp &amp; $01 != 0);
+        cloak = (canCloak &amp;&amp; (temp &amp; $01 != 0));
         newIntel = (temp &amp; $02 != 0);
         moveStatus = (temp &gt;&gt; 2) &amp; $07;
         // Drop the intel if intel changes from true to false, destroy the intel when if changes from false to true
