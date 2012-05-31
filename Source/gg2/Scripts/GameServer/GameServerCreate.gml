@@ -2,7 +2,7 @@
     with(Client)
         instance_destroy();
     
-    global.hostSeenMOTD = 0;
+    hostSeenMOTD = false;
     global.players = ds_list_create();
     global.tcpListener = -1;
     global.serverSocket = -1;

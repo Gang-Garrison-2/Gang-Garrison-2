@@ -58,11 +58,17 @@ global.redCaps = 0;
 global.blueCaps = 0;
 global.winners = -1;
 
-if(global.isHost and !global.hostSeenMOTD and !global.dedicatedMode and global.welcomeMessage != "") {
-    with NoticeO instance_destroy();
-    var notice;
-    notice = instance_create(0, 0, NoticeO);
-    notice.notice = NOTICE_CUSTOM;
-    notice.message = global.welcomeMessage;
-    global.hostSeenMOTD = 1;
+if(instance_exists(GameServer))
+{
+    if(!GameServer.hostSeenMOTD and !global.dedicatedMode and global.welcomeMessage != "")
+    {
+        with(NoticeO)
+            instance_destroy();
+        with(instance_create(0, 0, NoticeO))
+        {
+            notice = NOTICE_CUSTOM;
+            message = global.welcomeMessage;
+        }
+        GameServer.hostSeenMOTD = true;
+    }
 }
