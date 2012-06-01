@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <constants>
-  <constant name="VERSION" value="24200"/>
-  <constant name="GAME_VERSION_STRING" value="&quot;v2.4.2&quot;"/>
-  <constant name="PROTOCOL_UUID" value="&quot;0b4149c7-4283-81a6-0cb5-3fb68bdcdcf5&quot;"/>
+  <constant name="VERSION" value="24300"/>
+  <constant name="GAME_VERSION_STRING" value="&quot;v2.4.3&quot;"/>
+  <constant name="PROTOCOL_UUID" value="&quot;02c2fbe1-4273-990e-cff6-1efb268a37f4&quot;"/>
   <constant name="GG2_LOBBY_UUID" value="&quot;1ccf16b1-436d-856f-504d-cc1af306aaa7&quot;"/>
   <constant name="HELLO" value="0"/>
   <constant name="PLAYER_JOIN" value="1"/>
