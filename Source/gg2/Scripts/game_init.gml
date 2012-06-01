@@ -68,16 +68,16 @@
     global.updaterBetaChannel = ini_read_real("General", "UpdaterBetaChannel", isBetaVersion());
     
 
-    global.classlimits[CLASS_SCOUT] = ini_read_real("Classlimits", "Scout", 9999)
-    global.classlimits[CLASS_PYRO] = ini_read_real("Classlimits", "Pyro", 9999)
-    global.classlimits[CLASS_SOLDIER] = ini_read_real("Classlimits", "Soldier", 9999)
-    global.classlimits[CLASS_HEAVY] = ini_read_real("Classlimits", "Heavy", 9999)
-    global.classlimits[CLASS_DEMOMAN] = ini_read_real("Classlimits", "Demoman", 9999)
-    global.classlimits[CLASS_MEDIC] = ini_read_real("Classlimits", "Medic", 9999)
-    global.classlimits[CLASS_ENGINEER] = ini_read_real("Classlimits", "Engineer", 9999)
-    global.classlimits[CLASS_SPY] = ini_read_real("Classlimits", "Spy", 9999)
-    global.classlimits[CLASS_SNIPER] = ini_read_real("Classlimits", "Sniper", 9999)
-    global.classlimits[CLASS_QUOTE] = ini_read_real("Classlimits", "Quote", 9999)
+    global.classlimits[CLASS_SCOUT] = ini_read_real("Classlimits", "Scout", 256)
+    global.classlimits[CLASS_PYRO] = ini_read_real("Classlimits", "Pyro", 256)
+    global.classlimits[CLASS_SOLDIER] = ini_read_real("Classlimits", "Soldier", 256)
+    global.classlimits[CLASS_HEAVY] = ini_read_real("Classlimits", "Heavy", 256)
+    global.classlimits[CLASS_DEMOMAN] = ini_read_real("Classlimits", "Demoman", 256)
+    global.classlimits[CLASS_MEDIC] = ini_read_real("Classlimits", "Medic", 256)
+    global.classlimits[CLASS_ENGINEER] = ini_read_real("Classlimits", "Engineer", 256)
+    global.classlimits[CLASS_SPY] = ini_read_real("Classlimits", "Spy", 256)
+    global.classlimits[CLASS_SNIPER] = ini_read_real("Classlimits", "Sniper", 256)
+    global.classlimits[CLASS_QUOTE] = ini_read_real("Classlimits", "Quote", 256)
 
     global.currentMapArea=1;
     global.totalMapAreas=1;

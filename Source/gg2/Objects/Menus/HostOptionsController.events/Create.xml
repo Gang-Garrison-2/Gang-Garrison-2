@@ -25,7 +25,7 @@ if (global.Server_RespawntimeSec == 0)
 else
     global.Server_Respawntime = global.Server_RespawntimeSec * 30;
 
-menu_create(40, 200, 300, 200, 30);
+menu_create(40, 160, 500, 200, 30);
 menu_addedit_text2("Server Name:", "global.serverName", '
     var newName;
     newName = string_copy(argument0, 0, 25);
@@ -41,10 +41,10 @@ menu_addedit_text("Password:", "global.serverPassword", '
 ');
 menu_addedit_num("Hosting Port:", "global.hostingPort", '
     gg2_write_ini("Settings", "HostingPort", argument0);
-');
+', 65535);
 menu_addedit_num("Player Limit:", "global.playerLimit", '
     gg2_write_ini("Settings", "PlayerLimit", argument0);
-');
+', 255);
 menu_addedit_num("Time Limit (mins):", "global.timeLimitMins", '
     gg2_write_ini("Server", "Time Limit", argument0);
 ');
@@ -59,6 +59,10 @@ menu_addedit_boolean("Auto Balance:", "global.autobalance", '
 ');
 menu_addedit_boolean("Announce to Lobby:", "global.useLobbyServer", '
     gg2_write_ini("Settings", "UseLobby", argument0);
+');
+menu_addlink("Classlimits", '
+    instance_create(x,y,ClasslimitsMenuController);
+    instance_destroy();
 ');
 menu_addlink("Start Game", '
     //Server respawn time calculator. Converts each second to a frame. (read: multiply by 30 :hehe:)
