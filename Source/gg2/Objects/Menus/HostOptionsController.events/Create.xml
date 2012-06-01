@@ -36,6 +36,13 @@ menu_addedit_text2("Server Name:", "global.serverName", '
     gg2_write_ini("Server", "ServerName", newName);
     return newName;
 ');
+menu_addedit_text2("Welcome message:", "global.welcomeMessage", '
+    var newMessage;
+    newMessage = string_copy(argument0, 0, 255);
+    gg2_write_ini("Server", "WelcomeMessage", newMessage);
+    return newMessage;
+');
+
 menu_addedit_text("Password:", "global.serverPassword", '
     gg2_write_ini("Server", "Password", argument0);
 ');
