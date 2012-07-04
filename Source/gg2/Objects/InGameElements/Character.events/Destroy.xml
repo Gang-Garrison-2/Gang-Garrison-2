@@ -33,8 +33,13 @@
         newIntel.alarm[0] = 900;
         if (lastDamageSource == KILL_BOX || lastDamageSource == FRAG_BOX || lastDamageSource == PITFALL) {
             if (global.isHost){
-                doEventReturnIntel(team);
-                sendEventReturnIntel(team);
+                if(team==TEAM_RED) {
+                    doEventReturnIntel(TEAM_BLUE);
+                    sendEventReturnIntel(TEAM_BLUE);
+                } else {
+                    doEventReturnIntel(TEAM_RED);
+                    sendEventReturnIntel(TEAM_RED);
+                }
             }
         }
         sound_play(IntelDropSnd);
