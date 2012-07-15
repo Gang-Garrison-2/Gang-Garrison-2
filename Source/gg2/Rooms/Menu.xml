@@ -9,13 +9,13 @@
   <speed>30</speed>
   <persistent>false</persistent>
   <creationCode/>
-  <backgroundColor>C0C0C0</backgroundColor>
+  <backgroundColor>2D2C24</backgroundColor>
   <drawBackgroundColor>true</drawBackgroundColor>
   <backgrounds>
     <backgroundDef>
       <visibleOnRoomStart>true</visibleOnRoomStart>
       <isForeground>false</isForeground>
-      <backgroundImage>MenuBackgroundB</backgroundImage>
+      <backgroundImage/>
       <offset x="0" y="0"/>
       <speed x="0" y="0"/>
       <tileHorizontally>false</tileHorizontally>
@@ -104,6 +104,12 @@
     <instance>
       <object>DevMessageChecker</object>
       <position x="32" y="528"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HaxxyController</object>
+      <position x="288" y="304"/>
       <creationCode/>
       <locked>false</locked>
     </instance>
