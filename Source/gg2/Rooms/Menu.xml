@@ -4,7 +4,7 @@
   <size height="600" width="600"/>
   <grid>
     <isometric>false</isometric>
-    <snap x="16" y="16"/>
+    <snap x="2" y="16"/>
   </grid>
   <speed>30</speed>
   <persistent>false</persistent>
@@ -15,7 +15,7 @@
     <backgroundDef>
       <visibleOnRoomStart>true</visibleOnRoomStart>
       <isForeground>false</isForeground>
-      <backgroundImage/>
+      <backgroundImage>MenuBackgroundB</backgroundImage>
       <offset x="0" y="0"/>
       <speed x="0" y="0"/>
       <tileHorizontally>false</tileHorizontally>
@@ -109,7 +109,7 @@
     </instance>
     <instance>
       <object>HaxxyController</object>
-      <position x="288" y="304"/>
+      <position x="38" y="48"/>
       <creationCode/>
       <locked>false</locked>
     </instance>
