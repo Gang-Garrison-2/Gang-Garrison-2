@@ -17,6 +17,7 @@
 keyboard_string = ""
 alarm[0] = 8
 clearScreenTimer = -1
+commandLogIndex = 0;
 </argument>
       </arguments>
     </action>

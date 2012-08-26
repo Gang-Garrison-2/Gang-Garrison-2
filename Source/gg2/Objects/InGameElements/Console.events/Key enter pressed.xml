@@ -20,6 +20,12 @@
 
 if keyboard_string != ""
 {
+    ds_list_add(global.commandLog, keyboard_string);
+    while ds_list_size(global.commandLog) &gt; MAX_COMMAND_LOG_SIZE
+    {
+        ds_list_delete(global.commandLog, 0);
+    }
+    commandLogIndex = ds_list_size(global.commandLog);
     Console_print("/:/"+COLOR_ORANGE+keyboard_string);
     Console_parseInput(keyboard_string);
 }

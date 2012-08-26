@@ -155,4 +155,5 @@
   <constant name="COLOR_WHITE" value="&quot;255-255-255&quot;"/>
   <constant name="COLOR_RGB_LENGTH" value="11"/>
   <constant name="CHAT_MAX_STRING_LENGTH" value="255"/>
+  <constant name="MAX_COMMAND_LOG_SIZE" value="100"/>
 </constants>

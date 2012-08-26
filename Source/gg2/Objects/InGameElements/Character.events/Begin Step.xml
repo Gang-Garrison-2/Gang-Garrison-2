@@ -40,7 +40,7 @@ if(!taunting and !omnomnomnom)
 {
     if((keyState | pressedKeys) &amp; $10)
         with(currentWeapon) event_user(1);
-    if(pressedKeys &amp; $01 !player.humiliated)  {
+    if(pressedKeys &amp; $01 and !player.humiliated)  {
         if (!invisible &amp;&amp; cloakAlpha == 1)
             taunting=true;
         if (team==TEAM_RED) {

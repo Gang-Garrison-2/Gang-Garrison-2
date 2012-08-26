@@ -34,7 +34,8 @@ window_top = y_top + 20;
 window_bottom = y_bottom - 30;
 
 // Draw the console background
-draw_set_alpha(1)
+draw_set_alpha(1);
+draw_set_color(c_white);
 draw_sprite(sprite_index, image_index, x_left, y_top)
 
 // Draw the console Title
