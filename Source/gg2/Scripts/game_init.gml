@@ -3,6 +3,7 @@
     instance_create(0,0,RoomChangeObserver);
     set_little_endian_global(true);
     if file_exists("game_errors.log") file_delete("game_errors.log");
+    if file_exists("last_plugin.log") file_delete("last_plugin.log");
     
     var customMapRotationFile;
 
@@ -16,8 +17,8 @@
         sound_volume(global.IngameMusic, 0.8);
     if(global.FaucetMusic != -1)
         sound_volume(global.FaucetMusic, 0.8);
-    
-    
+
+
     global.sendBuffer = buffer_create();
     global.eventBuffer = buffer_create();
     global.tempBuffer = buffer_create();
@@ -59,6 +60,7 @@
     global.mapRotationFile = customMapRotationFile;
     global.dedicatedMode = ini_read_real("Server", "Dedicated", 0);
     global.serverName = ini_read_string("Server", "ServerName", "My Server");
+    global.welcomeMessage = ini_read_string("Server", "WelcomeMessage", "");
     global.caplimit = max(1, min(255, ini_read_real("Server", "CapLimit", 5)));
     global.caplimitBkup = global.caplimit;
     global.autobalance = ini_read_real("Server", "AutoBalance",1);
@@ -105,6 +107,7 @@
     ini_write_string("Server", "MapRotation", customMapRotationFile);
     ini_write_real("Server", "Dedicated", global.dedicatedMode);
     ini_write_string("Server", "ServerName", global.serverName);
+    ini_write_string("Server", "WelcomeMessage", global.welcomeMessage);
     ini_write_real("Server", "CapLimit", global.caplimit);
     ini_write_real("Server", "AutoBalance", global.autobalance);
     ini_write_real("Server", "Respawn Time", global.Server_RespawntimeSec);
@@ -381,6 +384,9 @@ global.launchMap = "";
     
     calculateMonthAndDay();
 
+    if(!directory_exists(working_directory + "\Plugins")) directory_create(working_directory + "\Plugins");
+    loadplugins();
+    
     if(global.dedicatedMode == 1) {
         AudioControlToggleMute();
         room_goto_fix(Menu);

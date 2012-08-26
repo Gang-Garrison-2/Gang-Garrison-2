@@ -38,7 +38,7 @@ if (burnDuration &lt;= 0 || burnIntensity &lt;= 0)
 // Handle input
 if(!taunting and !omnomnomnom)
 {
-    if((keyState | pressedKeys) &amp; $10)
+    if(!player.humiliated and (keyState | pressedKeys) &amp; $10)
         with(currentWeapon) event_user(1);
     if(pressedKeys &amp; $01 and !player.humiliated)  {
         if (!invisible &amp;&amp; cloakAlpha == 1)
@@ -76,12 +76,18 @@ if(!taunting and !omnomnomnom)
 }
         
 // Right click
-if(((keyState | pressedKeys) &amp; $08) and (!taunting or player.class == CLASS_DEMOMAN) and !omnomnomnom and !player.humiliated)
+if (!player.humiliated and ((keyState | pressedKeys) &amp; $08)
+    and (!taunting or player.class == CLASS_DEMOMAN) and !omnomnomnom)
+{
     with(currentWeapon)
         event_user(2);
+}
 
 // Cloak
-if ((pressedKeys &amp; $08) &amp;&amp; canCloak &amp;&amp; ((cloakAlpha &lt;= 0.5 and cloak) || (cloakAlpha == 1 and !cloak)) &amp;&amp; !intel  &amp;&amp; taunting==false &amp;&amp; !(keyState &amp; $10))
+if (!player.humiliated &amp;&amp; (pressedKeys &amp; $08)
+    &amp;&amp; canCloak &amp;&amp; ((cloakAlpha &lt;= 0.5 and cloak) || (cloakAlpha == 1 and !cloak))
+    &amp;&amp; !intel  &amp;&amp; taunting==false &amp;&amp; !(keyState &amp; $10))
+{
     if(currentWeapon.readyToStab) {
         if (cloak) { // stop spies immediately picking up intel after uncloaking
             canGrabIntel=false;
@@ -91,6 +97,7 @@ if ((pressedKeys &amp; $08) and canCloak and ((cloakAlpha == 1 and !cloak) or cl
     if(currentWeapon.readyToStab)
         cloak = !cloak;
     }
+}
 
 switch(moveStatus) // moveStatus is reset in collision with obstacles (including doors if they reject you)
 {

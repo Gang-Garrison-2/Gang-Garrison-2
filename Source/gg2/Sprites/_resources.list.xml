@@ -13,4 +13,5 @@
   <resource name="Updater" type="GROUP"/>
   <resource name="SpriteFonts" type="GROUP"/>
   <resource name="DevMessagesCheckerS" type="RESOURCE"/>
+  <resource name="HaxxyS" type="RESOURCE"/>
 </resources>

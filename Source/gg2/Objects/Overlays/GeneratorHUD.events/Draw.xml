@@ -13,11 +13,14 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">var xoffset, yoffset, xsize, ysize;
+        <argument kind="STRING">var xoffset, yoffset, xsize, ysize, xshift, yshift;
 xoffset = view_xview[0];
 yoffset = view_yview[0];
 xsize = view_wview[0];
 ysize = view_hview[0];
+xshift = -320*global.timerPos;
+yshift = 5*global.timerPos;
+
 barcolor=make_color_rgb(217,217,183);
 draw_set_alpha(1);
 

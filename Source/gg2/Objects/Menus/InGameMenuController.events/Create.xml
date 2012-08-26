@@ -16,6 +16,7 @@
         <argument kind="STRING">{
     cursor_sprite = CrosshairS;
     global.levelchoice = 1
+<<<<<<< HEAD
     virtualitem = -1;
     xbegin = 40;
     ybegin = 300;
@@ -28,14 +29,7 @@
     item[0] = "Options";
     item[1] = "Return to Game";
     
-    switch (global.consoleOpen)
-    {
-        case 0:
-            item[2] = "Open Console";
-            break;
-        case 1:
-            item[2] = "Close Console";
-    }
+
     
     item[3] = "Disconnect";
     item[4] = "Quit Game";
@@ -43,11 +37,44 @@
     yoffset = view_yview[0];
     xsize = view_wview[0];
     ysize = view_hview[0];
+=======
 
-    if global.consoleOpen
+    menu_create(40, 300, 200, 200, 30);
+    menu_setdimmed();
+    
+    menu_addlink("Options", '
+        instance_destroy();
+        instance_create(0,0,OptionsController);
+    ');
+    menu_addback("Return to Game", '
+        instance_destroy();
+    ');
+    switch (global.consoleOpen)
     {
-        instance_create(x, y, Console)
+        case 0:
+            menu_addlink("Open Console", '
+                instance_create(x, y, Console)
+                menu_rename(3, "Close Console")
+            ');
+            break;
+        case 1:
+            menu_addlink("Close Console", '
+                with Console {instance_destroy()}
+                menu_rename(3, "Open Console")
+            ');
     }
+    menu_addlink("Disconnect", '
+        // Force dedicated mode to off so you can go to main menu instead of just restarting server
+        global.dedicatedMode = 0;
+        with(Client)
+            instance_destroy();
+            
+        with(GameServer)
+            instance_destroy();
+    ');
+    menu_addlink("Quit Game", '
+        game_end();
+    ');
 }
 </argument>
       </arguments>

@@ -57,3 +57,18 @@ instance_create(map_width()/2,map_height()/2,Spectator);
 global.redCaps = 0;
 global.blueCaps = 0;
 global.winners = -1;
+
+if(instance_exists(GameServer))
+{
+    if(!GameServer.hostSeenMOTD and !global.dedicatedMode and global.welcomeMessage != "")
+    {
+        with(NoticeO)
+            instance_destroy();
+        with(instance_create(0, 0, NoticeO))
+        {
+            notice = NOTICE_CUSTOM;
+            message = global.welcomeMessage;
+        }
+        GameServer.hostSeenMOTD = true;
+    }
+}

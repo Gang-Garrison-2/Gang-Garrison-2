@@ -20,7 +20,7 @@
     
     instance_create(0,0,LobbyController);
     cooleddown = false;
-    alarm[0] = 90;
+    alarm[1] = 90;
 }
 </argument>
       </arguments>
