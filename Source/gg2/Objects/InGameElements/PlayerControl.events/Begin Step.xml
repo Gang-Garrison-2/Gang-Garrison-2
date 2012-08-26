@@ -25,9 +25,12 @@ if (global.chatbox.isTyping != 0)
 else
     chatting = false;
 
-//Checking for input - Mapped Keys
-if (chatting == false)
+if chatting
 {
+    exit;
+}
+
+//Checking for input - Mapped Keys
     if(keyboard_check_pressed(global.changeTeam)) inputChangeTeam();
     if(keyboard_check_pressed(global.changeClass)) inputChangeClass();
 
@@ -39,10 +42,7 @@ if (chatting == false)
         else if(!scoreKeyDown and oldScoreKeyDown)
             inputCloseScores();
     oldScoreKeyDown = scoreKeyDown;
-}else{
-    // Force the score key to be closed
-     inputCloseScores();
-}
+
 var keybyte;
 keybyte = 0;
     

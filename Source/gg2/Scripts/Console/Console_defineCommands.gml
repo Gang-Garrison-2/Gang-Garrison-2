@@ -4,14 +4,14 @@
 
 ds_map_add(global.commandMap, "kick", "
 // Check if the player is even a valid one.
-if ds_list_size(global.players)-1 < real(floor(input[1]))// How to check whether input[1] is a number?
+if ds_list_size(global.players)-1 < floor(real(input[1]))// How to check whether input[1] is a number?
 {
     Console_print('Invalid player number, please check the correct one with listPlayers.');
     exit;
 }
 var player;
-player = ds_list_find_value(global.players, real(input[1]))
-if player != -1 and player != ds_list_find_value(global.players, 0)
+player = ds_list_find_value(global.players, floor(real(input[1])))
+if player != -1 and floor(real(input[1])) > 0
 {
     with player
     {
@@ -22,7 +22,14 @@ if player != -1 and player != ds_list_find_value(global.players, 0)
 }
 else
 {
-    Console_print('Could not find a player with that ID.');
+    if input[1] == '0'
+    {
+        Console_print('The host cannot be kicked.');
+    }
+    else
+    {
+        Console_print('Could not find a player with that ID.');
+    }
 }")
 ds_map_add(global.documentationMap, "kick", "
 Console_print('Syntax: kick playerID')
@@ -80,14 +87,14 @@ ds_map_add(global.commandMap, "help", "
 if input[1] == ''
 {
     var key;
-    // User didn't ask any specific command, just give the general command list.
-    Console_print('----------------------------------------------------------------------------------');
+    // User didn't ask any specific command, just give the general command list and infos.
     Console_print('GG2'+string(GAME_VERSION_STRING)+' console;');
     Console_print('');
     Console_print('Usage: Type in the wanted command followed by its arguments in this syntax:');
     Console_print('command arg1 arg2 arg3')
     Console_print('');
-    Console_print('Some commands require Player IDs, the command listPlayers can show them to you.')
+    Console_print('If an argument contains spaces, please surround it with '+chr(34)+' '+chr(34)+'.');
+    Console_print('Some commands require Player IDs, the command listPlayers can show them to you.');
     Console_print('');
     Console_print('The current command list:');
     key = ds_map_find_first(global.commandMap);
@@ -98,7 +105,7 @@ if input[1] == ''
         Console_print(key);
     }
     Console_print('')
-    Console_print('For more details on each command, enter |help commandName|.')
+    Console_print('For more details on each command, enter '+chr(34)+'help commandName'+chr(34)+'.')
     Console_print('----------------------------------------------------------------------------------');
 }
 else

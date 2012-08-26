@@ -16,28 +16,6 @@
         <argument kind="STRING">{
     cursor_sprite = CrosshairS;
     global.levelchoice = 1
-<<<<<<< HEAD
-    virtualitem = -1;
-    xbegin = 40;
-    ybegin = 300;
-    spacing = 30;
-    width = 200; 
-    items = 5;
-    canEsc = false;
-    alarm[0] = 15;
-    
-    item[0] = "Options";
-    item[1] = "Return to Game";
-    
-
-    
-    item[3] = "Disconnect";
-    item[4] = "Quit Game";
-    xoffset = view_xview[0];
-    yoffset = view_yview[0];
-    xsize = view_wview[0];
-    ysize = view_hview[0];
-=======
 
     menu_create(40, 300, 200, 200, 30);
     menu_setdimmed();
@@ -49,20 +27,23 @@
     menu_addback("Return to Game", '
         instance_destroy();
     ');
-    switch (global.consoleOpen)
+    
+    switch global.consoleIsOpen
     {
-        case 0:
-            menu_addlink("Open Console", '
-                instance_create(x, y, Console)
-                menu_rename(3, "Close Console")
+        case true:
+            instance_create(0, 0, Console);
+            menu_addlink("Close Console", '
+                Console_close();
             ');
             break;
-        case 1:
-            menu_addlink("Close Console", '
-                with Console {instance_destroy()}
-                menu_rename(3, "Open Console")
+            
+        case false:
+            menu_addlink("Open Console", '
+                Console_open();
             ');
+            break;
     }
+    
     menu_addlink("Disconnect", '
         // Force dedicated mode to off so you can go to main menu instead of just restarting server
         global.dedicatedMode = 0;

@@ -59,7 +59,7 @@ if ds_map_exists(global.commandMap, input[0])
 else
 {
     Console_print("Unknown command: "+input[0]);
-    Console_print("Type help for a list of available commands.");
+    Console_print('Type "help" for a list of available commands.');
 }
 
 Console_print('');

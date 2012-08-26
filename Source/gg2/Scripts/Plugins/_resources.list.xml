@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
-  <resource name="loadPlugins" type="RESOURCE"/>
   <resource name="Console_addCommand" type="RESOURCE"/>
+  <resource name="loadplugins" type="RESOURCE"/>
 </resources>

@@ -4,4 +4,6 @@
   <resource name="Console_print" type="RESOURCE"/>
   <resource name="Console_parseInput" type="RESOURCE"/>
   <resource name="Console_defineCommands" type="RESOURCE"/>
+  <resource name="Console_open" type="RESOURCE"/>
+  <resource name="Console_close" type="RESOURCE"/>
 </resources>

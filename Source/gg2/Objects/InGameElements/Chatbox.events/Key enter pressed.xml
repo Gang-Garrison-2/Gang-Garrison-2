@@ -29,9 +29,10 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">if(instance_exists(InGameMenuController) || instance_exists(OptionsController) || instance_exists(ControlsController) 
-|| instance_exists(HUDOptionsController)) || (instance_exists(TeamSelectController) || instance_exists(ClassSelectController)) ||
-(hidden)
+|| instance_exists(HUDOptionsController)) || (instance_exists(TeamSelectController) || instance_exists(ClassSelectController))
+{
     exit;
+}
 
 if isTyping
 {

@@ -384,15 +384,15 @@ global.launchMap = "";
     
     calculateMonthAndDay();
 
+    Console_init()
+    
     if(!directory_exists(working_directory + "\Plugins")) directory_create(working_directory + "\Plugins");
     loadplugins();
     
     if(global.dedicatedMode == 1) {
         AudioControlToggleMute();
         room_goto_fix(Menu);
-    }    
-    Console_init()
-    loadPlugins()
+    }
 }
 
 

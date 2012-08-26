@@ -15,4 +15,5 @@
   <resource name="menu_get_var" type="RESOURCE"/>
   <resource name="menu_set_var" type="RESOURCE"/>
   <resource name="gg2_write_ini" type="RESOURCE"/>
+  <resource name="menu_change_option" type="RESOURCE"/>
 </resources>

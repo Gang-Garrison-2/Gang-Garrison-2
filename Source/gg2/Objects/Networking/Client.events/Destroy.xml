@@ -24,6 +24,9 @@
         
     with(PlayerControl)
         instance_destroy();
+        
+    with(Chatbox)
+        instance_destroy();
     
     room_goto_fix(returnRoom);
 }
