@@ -56,7 +56,7 @@ if isTyping
 
 keyboard_string = "";
 alarm[0] = -1
-alarm[1] = 30;
+alarm[1] = 60;
 blinking_underscore = false;
 </argument>
       </arguments>

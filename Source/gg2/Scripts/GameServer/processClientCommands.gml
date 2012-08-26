@@ -310,7 +310,7 @@ while(commandLimitRemaining > 0) {
                     message = read_string(socket, messageLength);
                     if(string_count("#",message) > 0)
                     {
-                        message = "No Hashes allowed?";
+                        message = "No Hashes allowed";
                     }
 
                     if team == TEAM_RED
@@ -420,6 +420,12 @@ while(commandLimitRemaining > 0) {
                 answer += chr(read_ubyte(socket) ^ ord(string_char_at(player.challenge, i)));
             if(HAXXY_PUBLIC_KEY==md5(answer)) {
                 player.isHaxxyWinner = true;
+                // Announce haxxy winner to everyone
+                var message;
+                message = "/:/"+COLOR_WHITE+"Haxxy winner "+player.name+" has joined the server.";
+                write_ubyte(global.publicChatBuffer, CHAT_PUBLIC_MESSAGE);
+                write_ubyte(global.publicChatBuffer, string_length(message));
+                write_string(global.publicChatBuffer, message);
             } else {
                 socket_destroy_abortive(player.socket);
                 player.socket = -1;

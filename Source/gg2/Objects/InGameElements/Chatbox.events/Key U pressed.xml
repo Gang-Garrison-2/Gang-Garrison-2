@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<event category="KEYBOARD" id="89">
+<event category="KEYPRESS" id="85">
   <actions>
     <action id="605" library="1">
       <!--action name: Comment-->
@@ -30,8 +30,6 @@
       <arguments>
         <argument kind="STRING">if !isTyping and !(instance_exists(InGameMenuController) || instance_exists(OptionsController) || instance_exists(ControlsController) || instance_exists(HUDOptionsController))
 {
-    if (hidden)
-        exit;
     // We are now going to write a team message
     keyboard_string = "";
     isTyping = CHAT_PRIV_MESSAGE;

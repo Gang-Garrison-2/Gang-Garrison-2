@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<event category="KEYBOARD" id="84">
+<event category="KEYPRESS" id="84">
   <actions>
     <action id="605" library="1">
       <!--action name: Comment-->
@@ -13,7 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">Public chat</argument>
+        <argument kind="STRING">Hide chat</argument>
       </arguments>
     </action>
     <action id="603" library="1">
@@ -28,15 +28,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if !isTyping and !(instance_exists(InGameMenuController) || instance_exists(OptionsController) || instance_exists(ControlsController) || instance_exists(HUDOptionsController))
-{
-    if (hidden)
-        exit;
-    // We are not typing yet. So set it to global chat and start typing
-    isTyping = CHAT_PUBLIC_MESSAGE;
-    alarm[0] = blink_speed;
-    keyboard_string= "";
-}
+        <argument kind="STRING">hidden = not hidden;
 </argument>
       </arguments>
     </action>
