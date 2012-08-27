@@ -13,7 +13,10 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">var xsize, ysize;
+        <argument kind="STRING">if(!global.enableMetaUI)
+    exit;
+
+var xsize, ysize;
 
 xsize = sprite_width;
 ysize = sprite_height;
