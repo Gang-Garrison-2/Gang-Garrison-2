@@ -1,4 +1,7 @@
 {
+    //hardcoded enable/disable of chat AND console
+    global.enableMetaUI = 0;
+    
     global.offset = 0
     instance_create(0,0,RoomChangeObserver);
     set_little_endian_global(true);
@@ -201,10 +204,10 @@
     global.gg2lobbyId = buffer_create();
     parseUuid(GG2_LOBBY_UUID, global.gg2lobbyId);
     
-var a, IPRaw, portRaw;
-doubleCheck=0;
-global.launchMap = "";
-
+    var a, IPRaw, portRaw;
+    doubleCheck=0;
+    global.launchMap = "";
+    
     for(a = 1; a <= parameter_count(); a += 1) 
     {
         if (parameter_string(a) == "-dedicated")
@@ -347,9 +350,9 @@ global.launchMap = "";
     
     global.gg2Font = font_add_sprite(gg2FontS,ord("!"),false,0);
     draw_set_font(global.gg2Font);
+    cursor_sprite = CrosshairS;
     
     global.consoleFont = font_add_sprite(consoleFontS,ord("!"),false,0);
-    cursor_sprite = CrosshairS;
     
     if(!directory_exists(working_directory + "\Maps")) directory_create(working_directory + "\Maps");
     
@@ -384,7 +387,10 @@ global.launchMap = "";
     
     calculateMonthAndDay();
 
-    Console_init()
+    if(global.enableMetaUI)
+    {
+        Console_init()
+    }
     
     if(!directory_exists(working_directory + "\Plugins")) directory_create(working_directory + "\Plugins");
     loadplugins();

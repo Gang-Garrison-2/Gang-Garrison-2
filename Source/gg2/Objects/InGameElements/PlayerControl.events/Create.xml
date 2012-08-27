@@ -16,8 +16,10 @@
         <argument kind="STRING">afktimeout=60*30;
 afktimer=afktimeout;
 oldScoreKeyDown=false;
-
-global.chatbox = instance_create(0, 0, Chatbox);
+if(global.enableMetaUI)
+{
+    global.chatbox = instance_create(0, 0, Chatbox);
+}
 </argument>
       </arguments>
     </action>

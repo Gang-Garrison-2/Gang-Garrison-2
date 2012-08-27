@@ -20,15 +20,21 @@ if(instance_exists(TeamSelectController) || instance_exists(ClassSelectControlle
     menuOpen = true;
 else
     menuOpen = false;
-if (global.chatbox.isTyping != 0)
-    chatting = true;
+
+if(global.enableMetaUI)
+{
+    if (global.chatbox.isTyping != 0)
+        chatting = true;
+    else
+        chatting = false;
+    
+    if (chatting)
+    {
+        exit;
+    }
+}
 else
     chatting = false;
-
-if chatting
-{
-    exit;
-}
 
 //Checking for input - Mapped Keys
     if(keyboard_check_pressed(global.changeTeam)) inputChangeTeam();

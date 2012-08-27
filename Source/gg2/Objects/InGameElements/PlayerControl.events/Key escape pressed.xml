@@ -13,16 +13,26 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if (global.chatbox.isTyping)
+        <argument kind="STRING">goto = 0;
+if(global.enableMetaUI)
 {
-    isTyping = false;
-    keyboard_string = "";
-    alarm[0] = -1
-    blinking_underscore = false;
+    if (global.chatbox.isTyping)
+    {
+        isTyping = false;
+        keyboard_string = "";
+        alarm[0] = -1
+        blinking_underscore = false;
+    }
+    else
+        goto = 1;
 }
-else if(!instance_exists(InGameMenuController) &amp;&amp; !instance_exists(OptionsController) &amp;&amp; !instance_exists(ControlsController))
- &amp;&amp; !instance_exists(HUDOptionsController){
-    instance_create(x,y,InGameMenuController);
+if(goto or !global.enableMetaUI)
+{
+    if(!instance_exists(InGameMenuController) and !instance_exists(OptionsController)
+    and !instance_exists(ControlsController)) and !instance_exists(HUDOptionsController)
+    {
+        instance_create(x,y,InGameMenuController);
+    }
 }
 </argument>
       </arguments>

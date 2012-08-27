@@ -28,20 +28,23 @@
         instance_destroy();
     ');
     
-    switch global.consoleIsOpen
+    if(global.enableMetaUI)
     {
-        case true:
-            instance_create(0, 0, Console);
-            menu_addlink("Close Console", '
-                Console_close();
-            ');
-            break;
-            
-        case false:
-            menu_addlink("Open Console", '
-                Console_open();
-            ');
-            break;
+        switch global.consoleIsOpen
+        {
+            case true:
+                instance_create(0, 0, Console);
+                menu_addlink("Close Console", '
+                    Console_close();
+                ');
+                break;
+                
+            case false:
+                menu_addlink("Open Console", '
+                    Console_open();
+                ');
+                break;
+        }
     }
     
     menu_addlink("Disconnect", '
