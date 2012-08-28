@@ -1,69 +1,68 @@
-    var input, prefixLength;
-    input = argument0
-    if string_copy(input, 0, 3) == "/:/"// there's a color code here, so ew set the prefix length
-        prefixLength = 3 + COLOR_RGB_LENGTH
-    else
-        prefixLength = 0
-    minimumLineLength = 35 // Minimum amount of characters a line can include
-    
-    while string_length(input)-(prefixLength) > 41// Actual message is too long, break it in pieces and print each on a separate line
-    
+// Takes a string as argument and prints it in the chat, breaking up at lines when necessary
+// argument0 = input string
+var rawInput, partString, pos, tmpString, colorKey;
+rawInput = argument0;
+// While the input string minus the color codes is too long for the chat
+while string_length(rawInput) - string_count("/:/", rawInput)*(3+COLOR_RGB_LENGTH) > CHAT_MAX_LINE_LENGTH
+{
+    // Break it up
+    partString = string_copy(rawInput, 0, CHAT_MAX_LINE_LENGTH + string_count("/:/", rawInput)*(3+COLOR_RGB_LENGTH));
+    tmpString = partString;
+
+    while string_count(" ", tmpString) > 1
     {
-    
-        var position, message, oldPosition, prefix, colorCode, foundSpace, spaceNotAvailible;
-       
-        position = 0
-        oldPosition = 0
-        message = string_copy(input, 0, 40 + prefixLength)
-        foundSpace = false
-        spaceNotAvailible = false
-        
-        if string_count(" ", message) > 0// Break the line at spaces if possible
-        {
-            while string_count(" ", message) > 0 and spaceNotAvailible == false
-            {
-                position = 40 + prefixLength; // start at the farthest possible distance; move backwards
-                while (position > minimumLineLength + prefixLength) and foundSpace == false //while we are over...
-                {
-                    if string_char_at(message,position) == " " and  string_char_at(message,position-1) != ":" // Attempt to circumvent the fact that Player: has a space in it.
-                        foundSpace = true;
-            
-                    if (foundSpace == false)
-                        position -= 1 //move bacck a space and redo the loop
-                }
-                if (foundSpace == false) { //break and do default word wrapping if no spaces availible
-                    spaceNotAvailible = true;
-                    break; //cut the loop
-                }else{
-                    oldPosition += position //set the position forward to where space is
-                    message = string_copy(message, position+1, string_length(message)) //+1 for ahead of the space
-           
-                    ds_list_add(global.chatbox.chatLog, string_copy(input, 0, oldPosition));
-                    prefix = string_copy(input, 0, prefixLength)
-                    input = string_copy(input, oldPosition+1, string_length(input)); //set input to the rest of the string
- 
-                    if string_copy(prefix, 0, 3) == "/:/"// A color code was there, prepend this to the next line too
-                        input = prefix+input
-                }
-            }
-        }
-        if string_count(" ", message) <= 1 or spaceNotAvailible == true {// Just break it normally if there are no spaces after cutting out the prefixes
-            ds_list_add(global.chatbox.chatLog, string_copy(input, 0, 40+ prefixLength));
-            prefix = string_copy(input, 0, prefixLength)
-            input = string_copy(input, 41+ prefixLength, string_length(input));
-            if string_copy(prefix, 0, 3) == "/:/"// A color code was there, prepend this to the next line too
-            {
-                    input = prefix+input
-            }
-        }
+        // Get rid of all but the last space
+        tmpString = string_copy(tmpString, string_pos(" ", tmpString)+1, string_length(tmpString));
     }
-     
 
-// Add the entry to the chatbox log
-if (string_length(input)-prefixLength > 0)
-    ds_list_add(global.chatbox.chatLog, input);
+    // pos will be either the position of the last remaining space, or of -1 if there was no space
+    pos = string_pos(" ", tmpString) + string_length(partString)-string_length(tmpString);
+    
+    if pos >= 0
+    {
+        // Cut the string to the last space
+        partString = string_copy(partString, 0, pos-1);
+    }
+    // Else don't do anything
 
-// Delete the oldest entry if there are too many
+    // Now find the last color code in partString
+    tmpString = partString;
+    while string_count("/:/", tmpString) > 1
+    {
+        // Get rid of all but the last color code
+        tmpString = string_copy(tmpString, string_pos("/:/", tmpString)+3, string_length(tmpString));
+    }
+    // pos will be either the position of the last remaining color code, or of -1 if there was no color code
+    pos = string_pos("/:/", tmpString)
+
+    if pos >= 0
+    {
+        // Save that color key to add it to the next line later
+        colorKey = string_copy(tmpString, pos, 3+COLOR_RGB_LENGTH);
+    }
+    else
+    {
+        // No colorkey, default to white
+        colorKey = "/:/"+COLOR_WHITE;
+    }
+
+    // Add this line of the string to the chatlog
+    ds_list_add(global.chatbox.chatLog, partString);
+    // Remove the oldest message if there are too many
+    while ds_list_size(global.chatbox.chatLog) > 10
+    {
+        ds_list_delete(global.chatbox.chatLog, 0);
+    }
+
+    // Subtract this line from the rest of the message
+    rawInput = string_copy(rawInput, string_length(partString)+1, string_length(rawInput));// +1 = space that was replaced by a newline
+    // Add the color key as well
+    rawInput = colorKey + rawInput;
+}
+
+// Add the last line of the string to the chatlog
+ds_list_add(global.chatbox.chatLog, rawInput);
+// Remove the oldest message if there are too many
 while ds_list_size(global.chatbox.chatLog) > 10
 {
     ds_list_delete(global.chatbox.chatLog, 0);
