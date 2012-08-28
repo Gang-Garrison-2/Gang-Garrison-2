@@ -15,12 +15,12 @@
       <arguments>
         <argument kind="STRING">if clearScreenTimer &gt; 0// Don't just delete everything, make it zoom upwards.
 {
-    Console_print('')
-    Console_print('')
-    Console_print('')
-    Console_print('')
-    Console_print('')
-    clearScreenTimer -= 5
+    Console_print('');
+    Console_print('');
+    Console_print('');
+    Console_print('');
+    Console_print('');
+    clearScreenTimer -= 5;
 }
 
 if keyboard_check_pressed(vk_up)

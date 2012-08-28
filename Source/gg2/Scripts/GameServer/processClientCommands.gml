@@ -310,7 +310,7 @@ while(commandLimitRemaining > 0) {
                     message = read_string(socket, messageLength);
                     if(string_count("#",message) > 0)
                     {
-                        message = "No Hashes allowed";
+                        message = "No Hashes allowed.";
                     }
 
                     if team == TEAM_RED
@@ -362,7 +362,7 @@ while(commandLimitRemaining > 0) {
                     message = read_string(socket, messageLength);
                     if(string_count("#",message) > 0)
                     {
-                        message = "No Hashes allowed?";
+                        message = "No Hashes allowed.";
                     }
 
                     if team == TEAM_RED

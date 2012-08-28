@@ -3,6 +3,12 @@
 // input[1] = first argument, input[2] = second, etc...
 
 ds_map_add(global.commandMap, "kick", "
+// Check whether we are the host before anything else
+if not global.isHost
+{
+    Console_print('You are not hosting!');
+    exit;
+}
 // Check if the player is even a valid one.
 if ds_list_size(global.players)-1 < floor(real(input[1]))// How to check whether input[1] is a number?
 {

@@ -13,7 +13,12 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">var xsize, ysize;
+        <argument kind="STRING">if hidden and not isTyping
+{
+    exit;
+}
+
+var xsize, ysize;
 
 xsize = sprite_width;
 ysize = sprite_height;
@@ -25,29 +30,13 @@ draw_set_valign(fa_top);
 draw_set_halign(fa_left);
 draw_set_color(c_white);
 
-if isTyping
-{
-    image_alpha = 1;
-}
-else
-{
-    if alarm[1] &lt;= 10
-    {
-        image_alpha = alarm[1]/10;
-    }
-}
-draw_set_alpha(image_alpha);
-
 // Draw the background
 if isTyping
 {
     draw_sprite(sprite_index, 0, x, y);
 }
-else if not hidden
-{
-    draw_sprite_ext(sprite_index, 0, x, y, 1, 1, 0, c_white, 0.4);
-    draw_set_alpha(1)
-}
+
+image_alpha = 1;
 
 // If we're typing something, draw that
 if isTyping

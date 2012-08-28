@@ -18,7 +18,8 @@
     if(global.FaucetMusic != -1)
         sound_volume(global.FaucetMusic, 0.8);
 
-
+    clipboard_set_text("");
+        
     global.sendBuffer = buffer_create();
     global.eventBuffer = buffer_create();
     global.tempBuffer = buffer_create();
