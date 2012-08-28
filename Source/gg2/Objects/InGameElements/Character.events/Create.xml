@@ -94,7 +94,7 @@
     //sandvich
     omnomnomnom = false;
     canEat = true;
-    eatCooldown = 600;//20 sec cooldown
+    eatCooldown = 1200; //40 sec cooldown
     
     //sniper zoom
     zoomed = 0;
