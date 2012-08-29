@@ -5,7 +5,11 @@
 
 ds_map_add(global.commandMap, argument0, argument1)
 
-if argument2 != 0
+if argument2 != ""
 {
     ds_map_add(global.documentationMap, argument0, argument2)
+}
+else
+{
+    ds_map_add(global.documentationMap, argument0, "This command does not have a (valid) documentation.");
 }
