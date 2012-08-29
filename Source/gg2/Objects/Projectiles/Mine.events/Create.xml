@@ -19,7 +19,7 @@
     alarm[1] = 29;
     stickied = false;
     bestBlastRadius = 70;
-    blastRadius = maxBlastRadius;
+    blastRadius = bestBlastRadius;
     exploded = false;
     bubbled = false;
     reflector = noone;
