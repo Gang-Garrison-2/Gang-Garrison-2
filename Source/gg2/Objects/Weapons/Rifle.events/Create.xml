@@ -27,6 +27,18 @@
     ammoCount = maxAmmo;
     shot=false;
     t=0;
+    hasRecoil = true;
+    
+    normalSprite = RifleS;
+    recoilSprite = RifleFS;
+    reloadSprite = RifleFR;
+    sprite_index = recoilSprite
+    animationOffset = image_number/2
+    recoilImageSpeed = animationOffset/refireTime
+    sprite_index = reloadSprite
+    animationReloadOffset = image_number/2
+    reloadImageSpeed = animationReloadOffset/(refireTime+reloadTime);
+    sprite_index = normalSprite
 }
 </argument>
       </arguments>

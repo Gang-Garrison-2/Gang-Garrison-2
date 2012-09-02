@@ -30,6 +30,11 @@ justShot=true;
 readyToShoot = false;
 alarm[0] = refireTime;
 alarm[5] = reloadBuffer + reloadTime;
+//Recoil Animation
+image_index = 0
+sprite_index = recoilSprite
+image_speed = reloadImageSpeed
+alarm[6] = recoilTime;
 </argument>
       </arguments>
     </action>

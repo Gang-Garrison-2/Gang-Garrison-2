@@ -166,6 +166,12 @@
         alarm[1]=blastReloadTime;
         alarm[0]=blastNoFlameTime;
         ammoCount -= 50;
+        //Recoil Animation
+        image_index = 0
+        sprite_index = blastSprite;
+        image_speed = blastImageSpeed;
+        //we want to reset driectly back, so set alarm[7]
+        alarm[7] = blastNoFlameTime;
     }
 }
 </argument>

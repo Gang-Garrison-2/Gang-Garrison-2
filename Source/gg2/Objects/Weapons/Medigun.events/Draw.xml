@@ -17,7 +17,7 @@
     exit;
     
 var offset, xdrawpos, ydrawpos;
-offset = 0;
+offset = owner.team;
 xdrawpos = round(x+xoffset*image_xscale);
 ydrawpos = round(y+yoffset);
 
@@ -33,10 +33,30 @@ if(instance_exists(healTarget))
             
         draw_set_alpha(0.3);
         draw_line_width_color(xdrawpos+lengthdir_x(24,owner.aimDirection),ydrawpos+lengthdir_y(24,owner.aimDirection),healTarget.object.x, healTarget.object.y, 5, color, color);
-        offset = 2;
+        if (sprite_index != normalSprite) {
+            //cancel the fire animation
+            sprite_index = normalSprite;
+            alarm[6] = 0;
+            offset = owner.team+1;
+        }
+    }
+}else{
+    if (alarm[6] &lt;= 0){
+        if (alarm[7] &gt; 0) {
+            //if we are not shooting, but dropping
+            offset = image_index mod dropAnimLength + dropAnimLength*owner.team
+        }else{
+        //set the sprite to idle
+        offset = owner.team
+        }
+    }else{
+        //We are shooting, loop the shoot animation
+         offset = image_index mod recoilAnimLength + recoilAnimLength*owner.team
     }
 }
-if !owner.player.humiliated draw_sprite_ext(sprite_index, owner.team+offset, xdrawpos, ydrawpos, image_xscale, image_yscale, image_angle, c_white, 1);
+
+
+if !owner.player.humiliated draw_sprite_ext(sprite_index,offset, xdrawpos, ydrawpos, image_xscale, image_yscale, image_angle, c_white, 1);
 
 </argument>
       </arguments>

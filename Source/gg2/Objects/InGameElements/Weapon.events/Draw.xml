@@ -29,13 +29,32 @@ if distance_to_point(xviewoffset+xviewsize/2,yviewoffset+yviewsize/2) &gt; 800 e
         offset=0;
     }
 
+if (alarm[6] &lt;= 0){
+    //if we are not shooting or recoiling
+    if (object_index != SentryTurret){    
+        offset += owner.team;
+    }else{
+        offset += ownerPlayer.team
+    }
+}else{
+    //Run the gunspeed normally
+    if (object_index != Rifle) {
+        offset = image_index mod animationOffset+ animationOffset*owner.team
+    }else{
+        if (sprite_index == recoilSprite)
+            offset = image_index mod animationOffset+ animationOffset*owner.team
+        else 
+            offset = image_index mod animationReloadOffset+ animationReloadOffset*owner.team
+    }
+}
+    
 if object_index != SentryTurret {    
     if (!owner.invisible) &amp;&amp; (!owner.taunting) &amp;&amp; owner.cloakAlpha &gt; 0.5 &amp;&amp; !owner.omnomnomnom &amp;&amp; !owner.player.humiliated {
-        draw_sprite_ext(sprite_index,owner.team+offset,round(x+xoffset*image_xscale),round(y+yoffset),image_xscale,image_yscale,image_angle,c_white,owner.cloakAlpha);
+        draw_sprite_ext(sprite_index,offset,round(x+xoffset*image_xscale),round(y+yoffset),image_xscale,image_yscale,image_angle,c_white,owner.cloakAlpha);
         if owner.ubered == 1 {
             if owner.team == TEAM_RED ubercolour = c_red;
             else if owner.team == TEAM_BLUE ubercolour = c_blue;
-            draw_sprite_ext(sprite_index,owner.team+offset,round(x+xoffset*image_xscale),round(y+yoffset),image_xscale,image_yscale,image_angle,ubercolour,0.7);
+            draw_sprite_ext(sprite_index,offset,round(x+xoffset*image_xscale),round(y+yoffset),image_xscale,image_yscale,image_angle,ubercolour,0.7);
         }
     }
 } else {             

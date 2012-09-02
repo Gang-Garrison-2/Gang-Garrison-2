@@ -18,6 +18,8 @@
     yoffset = -10;
     reloadTime = 25;
     maxAmmo = 0;
+    
+    hasRecoil = false;
 }
 </argument>
       </arguments>

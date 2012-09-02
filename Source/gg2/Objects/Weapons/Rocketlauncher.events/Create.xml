@@ -21,8 +21,18 @@
     reloadBuffer = 30;
     maxAmmo = 4;
     ammoCount = maxAmmo;
-    rocketrange=501;
+    rocketrange = 501;
     idle=true;
+    
+    hasRecoil = true;
+    recoilTime = refireTime;
+    recoilSprite = RocketlauncherFS;
+    normalSprite = RocketlauncherS;
+    
+    sprite_index = recoilSprite
+    animationOffset = image_number/2
+    reloadImageSpeed = animationOffset/recoilTime
+    sprite_index = normalSprite
 }
 </argument>
       </arguments>

@@ -23,6 +23,22 @@
     reloadBuffer = 15;
     isRefilling = false;
     
+    hasRecoil = true;
+    //play at least 2 frames
+    recoilTime = 3;
+    recoilSprite = MinigunFS;
+    normalSprite = MinigunS;
+    dropSprite = MinigunDropS
+    overlaySprite = MinigunOverlayS
+    overlayDropSprite = MinigunDropOverlayS
+    dropTime = reloadBuffer
+    sprite_index = recoilSprite
+    animationOffset = image_number/2
+    reloadImageSpeed = animationOffset/recoilTime
+    sprite_index = dropSprite
+    animationDropOffset = image_number/2
+    dropImageSpeed = animationDropOffset/reloadBuffer
+    sprite_index = normalSprite
 }
 </argument>
       </arguments>

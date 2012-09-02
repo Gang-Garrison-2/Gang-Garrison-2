@@ -33,6 +33,8 @@
     highAmmoThreshold = 2/3 * maxAmmo;
     reloadTime = 55;
     reloadBuffer = 0;
+    
+    hasRecoil = false;
 }
 </argument>
       </arguments>

@@ -37,7 +37,15 @@
         ammoCount-=3;
         if ammoCount &gt; 0 alarm[0]=refireTime;
         else alarm[0]=50;
+        //Recoil Animation
+        if sprite_index != recoilSprite {
+            sprite_index = recoilSprite
+            
+        }
+        image_speed = reloadImageSpeed
+        alarm[6] = recoilTime;
     }
+    
 }
 </argument>
       </arguments>
