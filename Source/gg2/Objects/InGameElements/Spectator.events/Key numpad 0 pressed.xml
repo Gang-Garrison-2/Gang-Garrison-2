@@ -28,7 +28,8 @@
    with NoticeO notice = NOTICE_DESTROYCHECKPOINT;
 }
 
-tracking=false</argument>
+tracking=false
+</argument>
       </arguments>
     </action>
   </actions>

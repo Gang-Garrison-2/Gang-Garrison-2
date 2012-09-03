@@ -27,7 +27,7 @@ while !ds_list_empty(classlist)
 
 if global.isHost
 {
-    show_message("The classlimits were set too low on this server, lasslimits turned off.")
-    for (a=0; a<10; a+=1) global.classlimits[a] = 9999// Turn classlimits off.
+    show_message("The classlimits were set too low on this server, it is not possible for all players to spawn.#Please raise them.")
+    for (a=0; a<10; a+=1) global.classlimits[a] = 9999;// Turn classlimits off.
     return argument1
 }

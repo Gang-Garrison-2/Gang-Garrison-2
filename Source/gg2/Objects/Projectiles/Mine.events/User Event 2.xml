@@ -23,7 +23,7 @@
     playsound(x,y,ExplosionSnd);
     
     with (Character) {
-        if (distance_to_object(other) &lt; other.blastRadius and !(team == other.team and id != other.ownerPlayer.object and place_meeting(x, y+1, Obstacle)))
+        if (distance_to_object(other) &lt; other.blastRadius and !collision_line(x, y, other.x, other.y, Obstacle, true, true) and !(team == other.team and id != other.ownerPlayer.object and place_meeting(x, y+1, Obstacle)))
         {
             var rdir, vectorfactor;
             rdir = point_direction(other.x,other.y,x,y);
@@ -38,16 +38,12 @@
                 var dmg;
                 dmg = other.explosionDamage*(1-(distance_to_object(other)/other.blastRadius));
                 if id == other.ownerPlayer.object// self damage resistance
-                {
                     dmg *= 5/9;
-                }
                 hp -= dmg;
                 timeUnscathed = 0;
                 if (id == other.ownerPlayer.object and lastDamageDealer != -1 and lastDamageDealer != other.ownerPlayer and other.reflector == noone)
-                {
                     lastDamageSource = FINISHED_OFF_GIB;
-                }
-                else 
+                else
                 {
                     if (lastDamageDealer != other.ownerPlayer and lastDamageDealer != player and other.reflector != lastDamageDealer)
                     {
@@ -97,15 +93,15 @@
 
     
     with (Sentry){
-        if (distance_to_object(other) &lt; other.blastRadius) &amp;&amp; (team != other.team) { 
+        if (distance_to_object(other) &lt; other.blastRadius) &amp;&amp; (team != other.team) {
         hp -= other.explosionDamage*sqr((1-(distance_to_object(other)/other.blastRadius)));
         lastDamageDealer = other.ownerPlayer;
         lastDamageSource = WEAPON_MINEGUN;
-        }   
-    }    
+        }
+    }
      
      with (Generator){
-        if (distance_to_object(other) &lt; other.blastRadius) &amp;&amp; (team != other.team) { 
+        if (distance_to_object(other) &lt; other.blastRadius) &amp;&amp; (team != other.team) {
             alarm[0] = regenerationBuffer;
             isShieldRegenerating = false;
             //allow overkill to be applied directly to the target
@@ -119,7 +115,7 @@
                 hp -= hitDamage * shieldResistance;
                 shieldHp -= hitDamage;
             }
-        }   
+        }
     }
        
     with (Rocket) {
@@ -159,7 +155,7 @@
     with(Bubble) {
         if (distance_to_object(other) &lt; other.blastRadius*0.66){
         alarm[0]-=200;
-        }    
+        }
     }
 
     instance_destroy();

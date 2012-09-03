@@ -275,6 +275,7 @@ while(commandLimitRemaining > 0) {
                     write_ubyte(global.publicChatBuffer, CHAT_PUBLIC_MESSAGE);
                     write_ubyte(global.publicChatBuffer, string_length(message));
                     write_string(global.publicChatBuffer, message);
+                    print_to_chat(message);// For the host
                     
                     name = newname
                     if(string_count("#",name) > 0)

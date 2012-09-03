@@ -28,6 +28,9 @@
     with(Chatbox)
         instance_destroy();
     
+    with(Console)
+        instance_destroy();
+    
     room_goto_fix(returnRoom);
 }
 
