@@ -14,6 +14,7 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">chatLog = ds_list_create();
+alphaLog = ds_list_create();
 isTyping = false;
 hidden = false;
 blinking_underscore = false;

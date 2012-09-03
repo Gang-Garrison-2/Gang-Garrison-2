@@ -51,10 +51,12 @@ while string_length(rawInput) - string_count("/:/", rawInput)*(3+COLOR_RGB_LENGT
 
     // Add this line of the string to the chatlog
     ds_list_add(global.chatbox.chatLog, partString);
+    ds_list_add(global.chatbox.alphaLog, 60);
     // Remove the oldest message if there are too many
     while ds_list_size(global.chatbox.chatLog) > 10
     {
         ds_list_delete(global.chatbox.chatLog, 0);
+        ds_list_delete(global.chatbox.alphaLog, 0);
     }
 
     // Subtract this line from the rest of the message
@@ -65,8 +67,10 @@ while string_length(rawInput) - string_count("/:/", rawInput)*(3+COLOR_RGB_LENGT
 
 // Add the last line of the string to the chatlog
 ds_list_add(global.chatbox.chatLog, rawInput);
+ds_list_add(global.chatbox.alphaLog, 60);
 // Remove the oldest message if there are too many
 while ds_list_size(global.chatbox.chatLog) > 10
 {
     ds_list_delete(global.chatbox.chatLog, 0);
+    ds_list_delete(global.chatbox.alphaLog, 0);
 }
