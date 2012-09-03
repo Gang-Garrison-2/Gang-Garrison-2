@@ -13,7 +13,9 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">var finished;
+        <argument kind="STRING">if chatting exit;
+
+var finished;
 finished=false
 if instance_exists(Character) {
 {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<event category="CREATE" id="0">
+<event category="DESTROY" id="0">
   <actions>
     <action id="603" library="1">
       <!--action name: Code-->
@@ -13,21 +13,8 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">afktimeout=9000;
-afktimer=afktimeout;
-//checkpoint system for each keypad #
-//2 arrays keeps track of the x, y locations that each keypad # has saved.
-for (i=0; i&lt;=9; i+=1;) {
-    savex_view[i]=-1;
-    savey_view[i]=-1;
-}
-//variables for tracking a specific player
-tracking=false
-track_id=0;
-player = 0;
-
-
-chatting = false;
+        <argument kind="STRING">ds_list_destroy(chatLog);
+ds_list_destroy(alphaLog);
 </argument>
       </arguments>
     </action>

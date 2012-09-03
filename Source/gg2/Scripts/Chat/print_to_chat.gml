@@ -14,16 +14,19 @@ while string_length(rawInput) - string_count("/:/", rawInput)*(3+COLOR_RGB_LENGT
         // Get rid of all but the last space
         tmpString = string_copy(tmpString, string_pos(" ", tmpString)+1, string_length(tmpString));
     }
-
+    
     // pos will be either the position of the last remaining space, or of -1 if there was no space
     pos = string_pos(" ", tmpString) + string_length(partString)-string_length(tmpString);
     
-    if pos >= 0
+    if pos > 0
     {
         // Cut the string to the last space
-        partString = string_copy(partString, 0, pos-1);
+        partString = string_copy(partString, 0, pos);
     }
-    // Else don't do anything
+    else
+    {
+        // There is no space. Just let partString be what it was
+    }
 
     // Now find the last color code in partString
     tmpString = partString;
@@ -35,7 +38,7 @@ while string_length(rawInput) - string_count("/:/", rawInput)*(3+COLOR_RGB_LENGT
     // pos will be either the position of the last remaining color code, or of -1 if there was no color code
     pos = string_pos("/:/", tmpString)
 
-    if pos >= 0
+    if pos > 0
     {
         // Save that color key to add it to the next line later
         colorKey = string_copy(tmpString, pos, 3+COLOR_RGB_LENGTH);

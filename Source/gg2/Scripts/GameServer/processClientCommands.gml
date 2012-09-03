@@ -309,25 +309,33 @@ while(commandLimitRemaining > 0) {
                     lastChatTime = current_time;
                     var message, teambuffer;
                     message = read_string(socket, messageLength);
+                    // Hashes serve as newlines in GM, so prevent that
                     if(string_count("#",message) > 0)
                     {
                         message = "No Hashes allowed.";
                     }
+                    // Prevent messing with the color code as well
+                    if(string_count("/:/", message) > 0)
+                    {
+                        message = string_replace_all(message, "/:/", "/;/");
+                    }
 
+                    var color;
+                    color = getPlayerColor(player);
                     if team == TEAM_RED
                     {
                         teambuffer = global.privChatRedBuffer;
-                        message = "/:/"+COLOR_RED+name+": "+message;
+                        message = "/:/"+color+name+": "+message;
                     }
                     else if team == TEAM_BLUE
                     {
                         teambuffer = global.privChatBlueBuffer;
-                        message = "/:/"+COLOR_LIGHTBLUE+name+": "+message;
+                        message = "/:/"+color+name+": "+message;
                     }
                     else
                     {
                         teambuffer = global.publicChatBuffer;// Specs can only global chat
-                        message = "/:/"+COLOR_GREEN+name+": /:/"+COLOR_WHITE+message;
+                        message = "/:/"+color+name+": /:/"+COLOR_WHITE+message;
                     }
                     write_ubyte(teambuffer, CHAT_PUBLIC_MESSAGE);
                     write_ubyte(teambuffer, string_length(message));
@@ -361,22 +369,31 @@ while(commandLimitRemaining > 0) {
                     lastChatTime = current_time;
                     var message;
                     message = read_string(socket, messageLength);
+                    // Hashes serve as newlines in GM, so prevent that
                     if(string_count("#",message) > 0)
                     {
                         message = "No Hashes allowed.";
                     }
+                    // Prevent messing with the color code as well
+                    if(string_count("/:/", message) > 0)
+                    {
+                        message = string_replace_all(message, "/:/", "/;/");
+                    }
+                    
+                    var color;
+                    color = getPlayerColor(player);
 
                     if team == TEAM_RED
                     {
-                        message = "/:/"+COLOR_RED+name+": /:/"+COLOR_WHITE+message;
+                        message = "/:/"+color+name+": /:/"+COLOR_WHITE+message;
                     }
                     else if team == TEAM_BLUE
                     {
-                        message = "/:/"+COLOR_LIGHTBLUE+name+": /:/"+COLOR_WHITE+message;
+                        message = "/:/"+color+name+": /:/"+COLOR_WHITE+message;
                     }
                     else
                     {
-                        message = "/:/"+COLOR_GREEN+name+": /:/"+COLOR_WHITE+message;
+                        message = "/:/"+color+name+": /:/"+COLOR_WHITE+message;
                     }
                     write_ubyte(global.publicChatBuffer, CHAT_PUBLIC_MESSAGE);
                     write_ubyte(global.publicChatBuffer, string_length(message));

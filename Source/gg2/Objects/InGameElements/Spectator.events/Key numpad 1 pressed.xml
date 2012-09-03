@@ -13,7 +13,9 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if savex_view[1] == -1 {
+        <argument kind="STRING">if chatting exit;
+
+if savex_view[1] == -1 {
    savex_view[1] = x
    savey_view[1] = y
    if !instance_exists(NoticeO) instance_create(0,0,NoticeO);
