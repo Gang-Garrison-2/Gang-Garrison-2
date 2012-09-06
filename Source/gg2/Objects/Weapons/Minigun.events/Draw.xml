@@ -34,9 +34,11 @@ if (alarm[6] &lt;= 0){
 }
     draw_sprite_ext(sprite_index,offset, xdrawpos, ydrawpos, image_xscale, image_yscale, image_angle, c_white, 1);
     if (sprite_index == MinigunDropS) {
-        draw_sprite_ext(overlayDropSprite,offset, xdrawpos, ydrawpos, image_xscale, image_yscale, image_angle, c_red,min(0.7,1-(ammoCount/maxAmmo)));
-    }else{
-         draw_sprite_ext(overlaySprite,offset, xdrawpos, ydrawpos, image_xscale, image_yscale, image_angle, c_red,min(0.7,1-(ammoCount/maxAmmo)));
+        draw_sprite_ext(overlayDropSprite,offset, xdrawpos, ydrawpos, image_xscale, image_yscale, image_angle, c_red,0.5*(1-(ammoCount/maxAmmo)));
+    }else if (sprite_index == MinigunS) {
+         draw_sprite_ext(overlaySprite,offset, xdrawpos, ydrawpos, image_xscale, image_yscale, image_angle, c_red,0.5*(1-(ammoCount/maxAmmo)));
+    }else if (sprite_index == MinigunFS) {
+        draw_sprite_ext(overlayFiringSprite,offset, xdrawpos, ydrawpos, image_xscale, image_yscale, image_angle, c_red,0.5*(1-(ammoCount/maxAmmo)));
     }
 </argument>
       </arguments>

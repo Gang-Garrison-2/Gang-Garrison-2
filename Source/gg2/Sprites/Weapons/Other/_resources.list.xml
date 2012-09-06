@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
-  <resource name="FlamethrowerBlastS" type="RESOURCE"/>
   <resource name="MedigunDropS" type="RESOURCE"/>
   <resource name="MinigunDropS" type="RESOURCE"/>
   <resource name="FlamethrowerDropS" type="RESOURCE"/>
+  <resource name="FlamethrowerBlastS" type="RESOURCE"/>
   <resource name="MinigunOverlayS" type="RESOURCE"/>
+  <resource name="MinigunOverlayFS" type="RESOURCE"/>
   <resource name="MinigunDropOverlayS" type="RESOURCE"/>
 </resources>

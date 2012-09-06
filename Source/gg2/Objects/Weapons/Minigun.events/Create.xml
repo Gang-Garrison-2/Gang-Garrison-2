@@ -30,8 +30,9 @@
     normalSprite = MinigunS;
     dropSprite = MinigunDropS
     overlaySprite = MinigunOverlayS
+    overlayFiringSprite = MinigunOverlayFS
     overlayDropSprite = MinigunDropOverlayS
-    dropTime = reloadBuffer
+    dropTime = 30
     sprite_index = recoilSprite
     animationOffset = image_number/2
     reloadImageSpeed = animationOffset/recoilTime
