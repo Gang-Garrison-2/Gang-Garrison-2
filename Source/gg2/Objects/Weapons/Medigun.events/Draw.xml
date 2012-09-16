@@ -38,8 +38,8 @@ if(instance_exists(healTarget))
             //cancel the fire animation
             sprite_index = normalSprite;
             alarm[6] = 0;
-            imageOffset = owner.team+1;
         }
+        imageOffset = owner.team+2;
     }
 }else{
     if (alarm[6] &lt;= 0){
