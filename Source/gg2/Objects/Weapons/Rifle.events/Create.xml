@@ -33,11 +33,11 @@
     recoilSprite = RifleFS;
     reloadSprite = RifleFR;
     sprite_index = recoilSprite
-    animationOffset = image_number/2
-    recoilImageSpeed = animationOffset/refireTime
+    recoilAnimLength = image_number/2
+    recoilImageSpeed = recoilAnimLength/refireTime
     sprite_index = reloadSprite
-    animationReloadOffset = image_number/2
-    reloadImageSpeed = animationReloadOffset/(refireTime+reloadTime);
+    reloadAnimLength = image_number/2
+    reloadImageSpeed = reloadAnimLength/(refireTime+reloadTime);
     sprite_index = normalSprite
 }
 </argument>

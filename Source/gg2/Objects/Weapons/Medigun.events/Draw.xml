@@ -16,11 +16,12 @@
         <argument kind="STRING">if(owner.taunting)
     exit;
     
-var offset, xdrawpos, ydrawpos;
-offset = owner.team;
+var imageOffset, xdrawpos, ydrawpos;
+imageOffset = owner.team;
 xdrawpos = round(x+xoffset*image_xscale);
 ydrawpos = round(y+yoffset);
-
+if (justShot)
+    justShot = false;
 if(instance_exists(healTarget))
 {
     if(healTarget.object != -1)
@@ -37,26 +38,26 @@ if(instance_exists(healTarget))
             //cancel the fire animation
             sprite_index = normalSprite;
             alarm[6] = 0;
-            offset = owner.team+1;
+            imageOffset = owner.team+1;
         }
     }
 }else{
     if (alarm[6] &lt;= 0){
         if (alarm[7] &gt; 0) {
             //if we are not shooting, but dropping
-            offset = image_index mod dropAnimLength + dropAnimLength*owner.team
+            imageOffset = floor(image_index mod dropAnimLength) + dropAnimLength*owner.team
         }else{
         //set the sprite to idle
-        offset = owner.team
+        imageOffset = owner.team
         }
     }else{
         //We are shooting, loop the shoot animation
-         offset = image_index mod recoilAnimLength + recoilAnimLength*owner.team
+         imageOffset = floor(image_index mod recoilAnimLength) + recoilAnimLength*owner.team
     }
 }
 
 
-if !owner.player.humiliated draw_sprite_ext(sprite_index,offset, xdrawpos, ydrawpos, image_xscale, image_yscale, image_angle, c_white, 1);
+if !owner.player.humiliated draw_sprite_ext(sprite_index,imageOffset, xdrawpos, ydrawpos, image_xscale, image_yscale, image_angle, c_white, 1);
 
 </argument>
       </arguments>

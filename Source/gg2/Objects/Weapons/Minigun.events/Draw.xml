@@ -15,30 +15,32 @@
       <arguments>
         <argument kind="STRING">if(owner.taunting or owner.omnomnomnom or owner.player.humiliated)
     exit;
-    
-var offset, xdrawpos, ydrawpos;
-offset = owner.team;
+if (justShot) {
+    justShot = false
+}
+var imageOffset, xdrawpos, ydrawpos;
+imageOffset = owner.team;
 xdrawpos = round(x+xoffset*image_xscale);
 ydrawpos = round(y+yoffset);
 if (alarm[6] &lt;= 0){
         //if we are not shooting, but dropping
         if (alarm[7] &gt; 0) {
-            offset = image_index mod animationDropOffset + animationDropOffset*owner.team
+            imageOffset = floor(image_index mod dropAnimLength) + dropAnimLength*owner.team
         }else{
             //set the sprite to idle
-            offset = owner.team;
+            imageOffset = owner.team;
         }
 }else{
     //We are shooting, loop the shoot animation
-    offset = image_index mod animationOffset + animationOffset*owner.team
+    imageOffset = floor(image_index mod recoilAnimLength) + recoilAnimLength*owner.team
 }
-    draw_sprite_ext(sprite_index,offset, xdrawpos, ydrawpos, image_xscale, image_yscale, image_angle, c_white, 1);
+    draw_sprite_ext(sprite_index,imageOffset, xdrawpos, ydrawpos, image_xscale, image_yscale, image_angle, c_white, 1);
     if (sprite_index == MinigunDropS) {
-        draw_sprite_ext(overlayDropSprite,offset, xdrawpos, ydrawpos, image_xscale, image_yscale, image_angle, c_red,0.5*(1-(ammoCount/maxAmmo)));
+        draw_sprite_ext(overlayDropSprite,imageOffset, xdrawpos, ydrawpos, image_xscale, image_yscale, image_angle, c_red,0.5*(1-(ammoCount/maxAmmo)));
     }else if (sprite_index == MinigunS) {
-         draw_sprite_ext(overlaySprite,offset, xdrawpos, ydrawpos, image_xscale, image_yscale, image_angle, c_red,0.5*(1-(ammoCount/maxAmmo)));
+         draw_sprite_ext(overlaySprite,imageOffset, xdrawpos, ydrawpos, image_xscale, image_yscale, image_angle, c_red,0.5*(1-(ammoCount/maxAmmo)));
     }else if (sprite_index == MinigunFS) {
-        draw_sprite_ext(overlayFiringSprite,offset, xdrawpos, ydrawpos, image_xscale, image_yscale, image_angle, c_red,0.5*(1-(ammoCount/maxAmmo)));
+        draw_sprite_ext(overlayFiringSprite,imageOffset, xdrawpos, ydrawpos, image_xscale, image_yscale, image_angle, c_red,0.5*(1-(ammoCount/maxAmmo)));
     }
 </argument>
       </arguments>

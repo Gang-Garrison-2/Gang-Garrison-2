@@ -26,6 +26,7 @@
     blastNoFlameTime = 15;
     alarm[1] = blastReloadTime;
     readyToBlast = false;
+    justBlast = false;
     
     maxAmmo = 200
     ammoCount = maxAmmo;
@@ -44,14 +45,14 @@
     blastSprite = FlamethrowerBlastS;
     dropTime = 4
     sprite_index = recoilSprite
-    animationOffset = image_number/2
-    reloadImageSpeed = animationOffset/recoilTime
+    recoilAnimLength = image_number/2
+    recoilImageSpeed = recoilAnimLength/recoilTime
     sprite_index = blastSprite
-    animationBlastOffset = image_number/2
-    blastImageSpeed = animationBlastOffset/blastNoFlameTime
+    blastAnimLength = image_number/2
+    blastImageSpeed = blastAnimLength/blastNoFlameTime
     sprite_index = dropSprite
-    animationDropOffset = image_number/2
-    dropImageSpeed = animationDropOffset/blastNoFlameTime
+    dropAnimLength = image_number/2
+    dropImageSpeed = dropAnimLength/blastNoFlameTime
     sprite_index = normalSprite
 }
 </argument>

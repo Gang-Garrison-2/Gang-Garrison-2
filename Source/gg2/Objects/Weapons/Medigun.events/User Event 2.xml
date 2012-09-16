@@ -32,13 +32,6 @@
         readyToShoot=false;
         alarm[0]=refireTime;
         alarm[5] = reloadBuffer + reloadTime;
-        //Recoil Animation
-        if (sprite_index != recoilSprite) {
-            sprite_index = recoilSprite
-        }
-        image_speed = recoilImageSpeed
-        image_index = recoilAnimLength*owner.team
-        alarm[6] = recoilTime;
     }
     else if (uberReady &amp;&amp; (owner.keyState &amp; $10)) {
         if(global.isHost) {

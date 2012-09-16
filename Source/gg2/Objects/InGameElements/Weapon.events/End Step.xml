@@ -19,6 +19,39 @@ object_index == Minigun || object_index == Scattergun || object_index == Shotgun
 object_index == Revolver || object_index == Medigun || object_index == Minegun ||
 object_index == Blade)
 instance_create(0,0,AmmoCounter);
+if (hasRecoil) {
+    if (justShot) {
+        //Recoil Animation
+        if (object_index != Rifle) {
+            if (sprite_index != recoilSprite) {
+                sprite_index = recoilSprite
+                image_index = 0
+            }
+            image_speed = recoilImageSpeed
+            alarm[6] = recoilTime;
+        }
+        else if (object_index == Rifle) {
+            image_index = 0
+            if (owner.zoomed) {
+                sprite_index = reloadSprite;
+                image_speed = reloadImageSpeed;
+            }else{
+                sprite_index = recoilSprite;
+                image_speed = recoilImageSpeed;
+            }
+        }
+    }
+    if (object_index == Flamethrower) {
+        if (justBlast) {
+            //Airblast Recoil Animation
+            sprite_index = blastSprite;
+            image_index = 0
+            image_speed = blastImageSpeed;
+            alarm[7] = blastNoFlameTime;
+            justBlast = false;
+        }
+    }
+}
 </argument>
       </arguments>
     </action>

@@ -26,13 +26,14 @@
     idle=true;
     
     hasRecoil = true;
+    
     recoilTime = refireTime;
     recoilSprite = MinegunFS;
     normalSprite = MinegunS;
     
     sprite_index = recoilSprite
-    animationOffset = image_number/2
-    reloadImageSpeed = animationOffset/recoilTime
+    recoilAnimLength = image_number/2
+    recoilImageSpeed = animationLength/recoilTime
     sprite_index = normalSprite
 }
 </argument>

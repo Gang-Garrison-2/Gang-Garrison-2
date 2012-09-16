@@ -27,15 +27,6 @@ x1=x;
 y1=y;
 x2=x+lengthdir_x(len,owner.aimDirection);
 y2=y+lengthdir_y(len,owner.aimDirection);
-//Recoil Animation
-image_index = 0
-if (owner.zoomed) {
-    sprite_index = reloadSprite;
-    image_speed = reloadImageSpeed;
-}else{
-    sprite_index = recoilSprite;
-    image_speed = recoilImageSpeed;
-}
 
 
 alarm[6] = alarm[0];

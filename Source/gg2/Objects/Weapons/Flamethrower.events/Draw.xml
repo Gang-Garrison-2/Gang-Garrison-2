@@ -16,30 +16,31 @@
         <argument kind="STRING">if(owner.taunting)
     exit;
     
-var offset, xdrawpos, ydrawpos;
-offset = owner.team;
+var imageOffset, xdrawpos, ydrawpos;
+imageOffset = owner.team;
 xdrawpos = round(x+xoffset*image_xscale);
 ydrawpos = round(y+yoffset);
-
+if (justShot)
+    justShot = false;
 if (alarm[6] &lt;= 0){
     if (alarm[7] &gt; 0) {
         //if we are not shooting, but airblasting/dropping
         if (sprite_index == dropSprite) {
-            offset = image_index mod animationDropOffset + animationDropOffset*owner.team
+            imageOffset = floor(image_index mod dropAnimLength) + dropAnimLength*owner.team
         }else if (sprite_index == blastSprite){
-            offset = image_index mod animationBlastOffset + animationBlastOffset*owner.team
+            imageOffset = floor(image_index mod blastAnimLength) + blastAnimLength*owner.team
         }
     }else{
         //set the sprite to idle
-        offset = owner.team;
+        imageOffset = owner.team;
     }
 }else{
     //We are shooting, loop the shoot animation
-    offset = image_index mod animationOffset + animationOffset*owner.team
+    imageOffset = floor(image_index mod recoilAnimLength) + recoilAnimLength*owner.team
 }
 
 
-if !owner.player.humiliated draw_sprite_ext(sprite_index,offset, xdrawpos, ydrawpos, image_xscale, image_yscale, image_angle, c_white, 1);
+if !owner.player.humiliated draw_sprite_ext(sprite_index,imageOffset, xdrawpos, ydrawpos, image_xscale, image_yscale, image_angle, c_white, 1);
 </argument>
       </arguments>
     </action>

@@ -13,7 +13,8 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">sprite_index = dropSprite;
+        <argument kind="STRING">//Drop the sprite
+sprite_index = dropSprite;
 alarm[7] = dropTime;
 </argument>
       </arguments>
