@@ -33,7 +33,7 @@
     
     sprite_index = recoilSprite
     recoilAnimLength = image_number/2
-    recoilImageSpeed = animationLength/recoilTime
+    recoilImageSpeed = recoilAnimLength/recoilTime
     sprite_index = normalSprite
 }
 </argument>
