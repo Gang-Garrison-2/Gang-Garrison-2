@@ -13,8 +13,8 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">speed = min(speed, 15);
-timeUnscathed = min(timeUnscathed+1, 10*30);
+        <argument kind="STRING">timeUnscathed = min(timeUnscathed+1, 10*30);
+speed = min(speed, 15);
 </argument>
       </arguments>
     </action>

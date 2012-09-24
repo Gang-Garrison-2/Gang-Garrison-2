@@ -78,7 +78,7 @@ if(!taunting and !omnomnomnom)
     }
        
 }
-        
+
 // Right click
 if (!player.humiliated and ((keyState | pressedKeys) &amp; $08)
     and (!taunting or player.class == CLASS_DEMOMAN) and !omnomnomnom)
@@ -297,6 +297,9 @@ if(zone&gt;=0 &amp;&amp; !cloak) {
 } else {
     cappingPoint = noone;
 }
+
+
+
 </argument>
       </arguments>
     </action>
