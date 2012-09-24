@@ -2,6 +2,8 @@
 <constants>
   <constant name="VERSION" value="24400"/>
   <constant name="GAME_VERSION_STRING" value="&quot;v2.4.4&quot;"/>
+  <constant name="GAME_NAME_STRING" value="&quot;Gang Garrison 2&quot;"/>
+  <constant name="GAME_URL_STRING" value="&quot;http://www.ganggarrison.com/&quot;"/>
   <constant name="PROTOCOL_UUID" value="&quot;31ce5361-4852-9d95-3ac2-2b3a07219a40&quot;"/>
   <constant name="GG2_LOBBY_UUID" value="&quot;1ccf16b1-436d-856f-504d-cc1af306aaa7&quot;"/>
   <constant name="HELLO" value="0"/>
