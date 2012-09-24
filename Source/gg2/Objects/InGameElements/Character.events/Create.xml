@@ -15,8 +15,6 @@
       <arguments>
         <argument kind="STRING">{
     // Default properties of Characters (those where defaults make sense)
-    debug1 = 0;
-    debug2 = 0;
     canDoublejump = 0;
     canCloak = 0;
     canBuild = 0;

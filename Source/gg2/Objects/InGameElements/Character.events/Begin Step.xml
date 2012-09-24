@@ -76,7 +76,7 @@ if(!taunting and !omnomnomnom)
             moveStatus = 0;
         }
     }
-       
+    
 }
 
 // Right click
@@ -183,8 +183,6 @@ if(pressedKeys &amp; $04) {
 pressedKeys = 0;
 releasedKeys = 0;
 
-
-    
 // flame bubble
 if burnDuration&gt;0 &amp;&amp; player.class != CLASS_PYRO &amp;&amp; random(80) &lt;= 1 {
     setChatBubble(player, 49);
@@ -297,9 +295,6 @@ if(zone&gt;=0 &amp;&amp; !cloak) {
 } else {
     cappingPoint = noone;
 }
-
-
-
 </argument>
       </arguments>
     </action>
