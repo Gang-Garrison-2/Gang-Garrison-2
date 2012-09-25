@@ -13,11 +13,13 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">{
+        <argument kind="STRING">if (!global.mapchanging)
+{
 instance_destroy()
     // speed = 0;
        // stickied = true;
-}</argument>
+}
+</argument>
       </arguments>
     </action>
   </actions>

@@ -15,10 +15,12 @@
       <arguments>
         <argument kind="STRING">{
     if(other.id != ownerPlayer.object and other.team != team) {
-        if other.ubered == 0 { 
+        if(!other.ubered)
+        { 
             other.hp -= hitDamage;
             other.timeUnscathed = 0;
-            if (other.lastDamageDealer != ownerPlayer &amp;&amp; other.lastDamageDealer != other.player){
+            if (other.lastDamageDealer != ownerPlayer and other.lastDamageDealer != other.player)
+            {
                 other.secondToLastDamageDealer = other.lastDamageDealer;
                 other.alarm[4] = other.alarm[3]
             }
@@ -27,15 +29,18 @@
             other.lastDamageSource = weapon;
             var blood;
             if(global.gibLevel &gt; 0){
-            repeat(25) {
-                blood = instance_create(x,y,Blood);
-                blood.direction = direction-180;
+                repeat(25)
+                {
+                    blood = instance_create(x,y,Blood);
+                    blood.direction = direction-180;
                 }
             }
         }
         with(other) {
             motion_add(other.direction, other.speed*0.4);
-            cloakAlpha = min(cloakAlpha + 0.1, 1);
+            cloakAlpha = max(cloakAlpha, 0.3);
+            cloakFlicker = true;
+            alarm[7] = 3;
         }
         instance_destroy();
     }

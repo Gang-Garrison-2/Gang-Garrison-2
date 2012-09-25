@@ -22,17 +22,20 @@
     blastAngle = 75;
     blastStrength = 28;
     characterBlastStrength = 15;
-    blastReloadTime = 35;
     blastNoFlameTime = 15;
+    blastReloadTime = 40;
+    flareReloadTime = 60;
     alarm[1] = blastReloadTime;
+    alarm[2] = flareReloadTime;
     readyToBlast = false;
+    readyToFlare = false;
     
-    maxAmmo = 200
+    maxAmmo = 200;
     ammoCount = maxAmmo;
     soundLoopTime = 30;
     currentTime = 0;
     
-    reloadBuffer = 15;
+    reloadBuffer = 7;
     isRefilling = false;
     
 }

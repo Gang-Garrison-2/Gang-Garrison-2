@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<event category="STEP" id="0">
+<event category="ALARM" id="2">
   <actions>
     <action id="603" library="1">
       <!--action name: Code-->
@@ -13,14 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if(not stickied) {
-    if explosionDamage &lt; 55 explosionDamage += 1;
-    vspeed+=0.2;
-    vspeed=min(vspeed,8);
-} else {
-    explosionDamage=55;
-    if (reflector != noone and alarm[0] &lt; 0) alarm[0] = 30;
-}
+        <argument kind="STRING">readyToFlare = true;
 </argument>
       </arguments>
     </action>

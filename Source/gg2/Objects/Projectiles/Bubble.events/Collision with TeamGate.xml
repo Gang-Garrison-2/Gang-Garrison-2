@@ -1,18 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <event category="COLLISION" with="TeamGate">
   <actions>
-    <action id="203" library="1">
-      <!--action name: Kill_Object-->
-      <kind>NORMAL</kind>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
       <allowRelative>false</allowRelative>
       <question>false</question>
       <canApplyTo>true</canApplyTo>
-      <actionType>FUNCTION</actionType>
-      <functionName>action_kill_object</functionName>
+      <actionType>CODE</actionType>
+      <functionName/>
       <relative>false</relative>
       <not>false</not>
       <appliesTo>.self</appliesTo>
-      <arguments/>
+      <arguments>
+        <argument kind="STRING">if (!global.mapchanging)
+{
+    instance_destroy();
+}
+</argument>
+      </arguments>
     </action>
   </actions>
 </event>

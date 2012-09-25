@@ -13,8 +13,10 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if ammoCount &lt; 0 ammoCount = 0;
-else if (ammoCount &lt;= maxAmmo &amp;&amp; isRefilling) ammoCount +=2;
+        <argument kind="STRING">if (ammoCount &lt; 0)
+    ammoCount = 0;
+else if (ammoCount &lt;= maxAmmo and isRefilling)
+    ammoCount += 1.8;
 </argument>
       </arguments>
     </action>
