@@ -1,29 +1,27 @@
-/*
- * Grab the intel.
- * Argument 0 is the player who is grabbing it.
+/**
+ * The player given in argument0 has just recovered the intel for his team.
  */
 
-//recordEventInLog(6,argument0.team,argument0.name);
-//argument0.caps += 0.5;
-sound_play(IntelGetSnd);
+sound_play(IntelPutSnd);
 var isMe;
-isMe = (global.myself == argument0);
-recordEventInLog(6, argument0.team, argument0.name, isMe);
-if global.myself == argument0 {
-    if !instance_exists(NoticeO) instance_create(0,0,NoticeO);
-    with NoticeO notice = NOTICE_HAVEINTEL;
+isMe = (argument0 == global.myself);
+//recordEventInLog(3, argument0.team, argument0.name);
+recordEventInLog(3, argument0.team, argument0.name, isMe);
+argument0.stats[CAPS] += 1;
+argument0.roundStats[CAPS] += 1;
+argument0.stats[POINTS] += 2;
+argument0.roundStats[POINTS] += 2;
+if(argument0.team == TEAM_RED) {
+    global.redCaps += 1;
+    instance_create(IntelligenceBaseBlue.x, IntelligenceBaseBlue.y, IntelligenceBlue);
+} else if(argument0.team == TEAM_BLUE) {
+    global.blueCaps += 1;
+    instance_create(IntelligenceBaseRed.x, IntelligenceBaseRed.y, IntelligenceRed);
+} else {
+    exit;
 }
 
 if(argument0.object != -1) {
-    if(argument0.team == TEAM_RED) {
-        argument0.object.rechargeTimer = IntelligenceBlue.alarm[0]
-        with(IntelligenceBlue) instance_destroy();
-    } else if(argument0.team == TEAM_BLUE) {
-        argument0.object.rechargeTimer = IntelligenceRed.alarm[0]
-        with(IntelligenceRed) instance_destroy();
-    } else {
-        exit;
-    }
-    argument0.object.intel = true;
-    argument0.object.animationOffset = CHARACTER_ANIMATION_INTEL;
+    argument0.object.intel = false;
+    argument0.object.animationOffset = CHARACTER_ANIMATION_NORMAL;
 }

@@ -36,7 +36,7 @@
                 var dmg;
                 dmg = other.explosionDamage*(1-(distance_to_object(other)/other.blastRadius));
                 if id == other.ownerPlayer.object// self damage resistance
-                    dmg *= 0.75;
+                    dmg *= 5/9;
                 hp -= dmg;
                 timeUnscathed = 0;
                 if (id == other.ownerPlayer.object and lastDamageDealer != -1 and lastDamageDealer != other.ownerPlayer and other.reflector == noone)
