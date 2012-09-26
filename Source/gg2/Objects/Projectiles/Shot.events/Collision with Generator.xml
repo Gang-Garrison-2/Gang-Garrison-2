@@ -14,7 +14,17 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">if(other.team != team) {
-    other.hp -= damage;
+    other.alarm[0] = other.regenerationBuffer;
+    other.isShieldRegenerating = false;
+    //allow overkill to be applied directly to the target
+    if (hitDamage &gt; other.shieldHp) {
+        other.hp -= hitDamage - other.shieldHp;
+        other.hp -= other.shieldHp * other.shieldResistance;
+        other.shieldHp = 0;
+    } else {
+        other.hp -= hitDamage * other.shieldResistance;
+        other.shieldHp -= hitDamage;
+    }
     instance_destroy();
 }
 </argument>

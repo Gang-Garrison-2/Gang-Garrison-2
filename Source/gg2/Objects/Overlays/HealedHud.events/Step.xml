@@ -26,10 +26,12 @@ for(i=0; i&lt;ds_list_size(global.players); i+=1) {
                 healed = true;
                 healer = player.name;
                 healerUberCharge = player.object.currentWeapon.uberCharge;
+                healerhp = floor(player.object.hp);
             }
         }
     }
-}</argument>
+}
+</argument>
       </arguments>
     </action>
   </actions>

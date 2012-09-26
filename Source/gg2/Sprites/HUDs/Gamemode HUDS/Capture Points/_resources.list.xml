@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="ControlPointStatusS2" type="RESOURCE"/>
+  <resource name="ControlPointStatusS" type="RESOURCE"/>
+  <resource name="ControlPointCappersS" type="RESOURCE"/>
+</resources>

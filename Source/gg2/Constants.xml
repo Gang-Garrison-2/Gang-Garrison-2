@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <constants>
-  <constant name="VERSION" value="23100"/>
-  <constant name="PROTOCOL_UUID" value="&quot;f005ada7-49a5-9ff9-855b-1c2ed542a7e3&quot;"/>
+  <constant name="VERSION" value="24400"/>
+  <constant name="GAME_VERSION_STRING" value="&quot;v2.4.4&quot;"/>
+  <constant name="GAME_NAME_STRING" value="&quot;Gang Garrison 2&quot;"/>
+  <constant name="GAME_URL_STRING" value="&quot;http://www.ganggarrison.com/&quot;"/>
+  <constant name="PROTOCOL_UUID" value="&quot;31ce5361-4852-9d95-3ac2-2b3a07219a40&quot;"/>
+  <constant name="GG2_LOBBY_UUID" value="&quot;1ccf16b1-436d-856f-504d-cc1af306aaa7&quot;"/>
   <constant name="HELLO" value="0"/>
   <constant name="PLAYER_JOIN" value="1"/>
   <constant name="PLAYER_LEAVE" value="2"/>
@@ -28,7 +32,6 @@
   <constant name="UBER" value="23"/>
   <constant name="OMNOMNOMNOM" value="24"/>
   <constant name="PASSWORD_REQUEST" value="25"/>
-  <constant name="PASSWORD_SEND" value="26"/>
   <constant name="PASSWORD_WRONG" value="27"/>
   <constant name="CAPS_UPDATE" value="28"/>
   <constant name="CP_CAPTURED" value="30"/>
@@ -36,14 +39,22 @@
   <constant name="GENERATOR_DESTROY" value="32"/>
   <constant name="ARENA_ENDROUND" value="33"/>
   <constant name="ARENA_RESTART" value="34"/>
-  <constant name="ARENA_UNLOCKCP" value="35"/>
+  <constant name="UNLOCKCP" value="35"/>
   <constant name="SERVER_KICK" value="36"/>
   <constant name="KICK" value="37"/>
   <constant name="KICK_NAME" value="38"/>
-  <constant name="KICK_PASSWORDCOUNT" value="39"/>
-  <constant name="SCOPE_IN" value="40"/>
-  <constant name="SCOPE_OUT" value="41"/>
-  <constant name="KOTH_UNLOCKCP" value="42"/>
+  <constant name="TOGGLE_ZOOM" value="40"/>
+  <constant name="RETURN_INTEL" value="41"/>
+  <constant name="INCOMPATIBLE_PROTOCOL" value="42"/>
+  <constant name="JOIN_UPDATE" value="43"/>
+  <constant name="DOWNLOAD_MAP" value="44"/>
+  <constant name="SENTRY_POSITION" value="45"/>
+  <constant name="I_AM_A_HAXXY_WINNER" value="50"/>
+  <constant name="HAXXY_CHALLENGE_CODE" value="51"/>
+  <constant name="HAXXY_CHALLENGE_RESPONSE" value="52"/>
+  <constant name="MESSAGE_STRING" value="53"/>
+  <constant name="WEAPON_FIRE" value="54"/>
+  <constant name="HAXXY_PUBLIC_KEY" value="&quot;70095e0fd9754e5a3ce2cb32f109148e&quot;"/>
   <constant name="TEAM_RED" value="0"/>
   <constant name="TEAM_BLUE" value="1"/>
   <constant name="TEAM_SPECTATOR" value="2"/>
@@ -62,7 +73,7 @@
   <constant name="CHARACTER_ANIMATION_LEN" value="2"/>
   <constant name="CHARACTER_ANIMATION_DEAD" value="5"/>
   <constant name="LOBBY_SERVER_HOST" value="&quot;ganggarrison.com&quot;"/>
-  <constant name="LOBBY_SERVER_PORT" value="29942"/>
+  <constant name="LOBBY_SERVER_PORT" value="29944"/>
   <constant name="WSAEWOULDBLOCK" value="-10035"/>
   <constant name="WSAENETDOWN" value="-10050"/>
   <constant name="WSAENETRESET" value="-10052"/>
@@ -119,12 +130,12 @@
   <constant name="NOTICE_NUTSNBOLTS" value="0"/>
   <constant name="NOTICE_TOOCLOSE" value="1"/>
   <constant name="NOTICE_AUTOGUNSCRAPPED" value="2"/>
-  <constant name="NOTICE_AUTOGUNEXISTS" value="3"/>
   <constant name="NOTICE_HAVEINTEL" value="4"/>
   <constant name="NOTICE_SETCHECKPOINT" value="5"/>
   <constant name="NOTICE_DESTROYCHECKPOINT" value="6"/>
   <constant name="NOTICE_PLAYERTRACKENABLE" value="7"/>
   <constant name="NOTICE_PLAYERTRACKDISABLE" value="8"/>
+  <constant name="NOTICE_CUSTOM" value="9"/>
   <constant name="PARTICLES_NORMAL" value="0"/>
   <constant name="PARTICLES_OFF" value="1"/>
   <constant name="PARTICLES_ALTERNATIVE" value="2"/>

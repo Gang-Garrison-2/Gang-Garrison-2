@@ -32,10 +32,9 @@
             shot.hitDamage = depletedBladeDamage;
         else
             shot.hitDamage = (ammoCount-lowAmmoThreshold)/(highAmmoThreshold-lowAmmoThreshold)*(bladeDamage-depletedBladeDamage)+depletedBladeDamage;
-        shot.ammoUsage = refireTime;
         alarm[0] = refireTime;
         shot.alarm[0] = bladeLife;
-        alarm[1] = bladeLife; //this isn't for when the blade actually dies, but the longest it could live
+        alarm[5] = bladeLife; //this isn't for when the blade actually dies, but the longest it could live
         bladesOut += 1;
         shot.weapon = WEAPON_BLADE;
         with(shot)

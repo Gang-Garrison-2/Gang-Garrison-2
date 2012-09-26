@@ -19,7 +19,7 @@
     exit;
 }
 
-if(lastDamageSource == WEAPON_SENTRYTURRET and killedby.sentry != -1)
+if(lastDamageSource == WEAPON_SENTRYTURRET and killedby.sentry)
 {
     view_xview=killedby.sentry.x-400;
     view_yview=killedby.sentry.y-300;

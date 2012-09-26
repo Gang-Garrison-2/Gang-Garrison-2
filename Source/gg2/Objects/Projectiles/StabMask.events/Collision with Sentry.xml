@@ -13,12 +13,24 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if(other.team != team) {
-other.hp -= hitDamage;
-//new stuff
-other.lastDamageDealer = ownerPlayer;
-other.lastDamageSource = weapon;
-instance_destroy();
+        <argument kind="STRING">if(other.team != team)
+{
+    if(!collision_line(x,y-12,other.x,other.y,Obstacle,true,true)) and (!collision_line(x,y-12,other.x,other.y,TeamGate,true,true) and (!collision_line(x,y-12,other.x,other.y,BulletWall,true,true)))
+    {
+        other.hp -= hitDamage;
+        other.lastDamageDealer = ownerPlayer;
+        other.lastDamageSource = weapon;
+        if numKills &lt;= maxKills
+        {
+            numKills += 1
+        }
+        else
+        {
+            instance_destroy();
+        }
+    }
+    else
+        alarm[0] = 1;
 }
 </argument>
       </arguments>

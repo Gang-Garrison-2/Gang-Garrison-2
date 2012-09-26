@@ -13,27 +13,8 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">{
-    if(not place_free(x,y)) {
-        move_outside_solid(270,35);
-    }
-    
-    move_contact_solid(direction, speed);
-    if(not place_free(x,y+sign(vspeed))) {
-        vspeed=0;
-        if(not place_free(x+hspeed,y)){
-            move_contact_solid(direction, speed);
-            hspeed=0;
-        }
-    }
-    if(not place_free(x+sign(hspeed),y)){
-        hspeed=0;
-        if(not place_free(x,y+vspeed)) {
-            move_contact_solid(direction, speed);
-            vspeed=0;
-        }
-    }
-}</argument>
+        <argument kind="STRING">event_user(0);
+</argument>
       </arguments>
     </action>
   </actions>

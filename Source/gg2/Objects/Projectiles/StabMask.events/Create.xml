@@ -17,8 +17,10 @@
     hitDamage = 8;
     alarm[0]=6;
     playsound(x,y,KnifeSnd)
-   
-}</argument>
+    numKills = 0;
+    maxKills = 2;
+}
+</argument>
       </arguments>
     </action>
   </actions>

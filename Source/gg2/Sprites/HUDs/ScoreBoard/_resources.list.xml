@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="Icon" type="RESOURCE"/>
+  <resource name="RedTeamWin" type="RESOURCE"/>
+  <resource name="BlueTeamWin" type="RESOURCE"/>
+  <resource name="WinBannerS" type="RESOURCE"/>
+  <resource name="Scoreboard" type="RESOURCE"/>
+</resources>

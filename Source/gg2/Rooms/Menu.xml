@@ -4,12 +4,12 @@
   <size height="600" width="600"/>
   <grid>
     <isometric>false</isometric>
-    <snap x="16" y="16"/>
+    <snap x="2" y="16"/>
   </grid>
   <speed>30</speed>
   <persistent>false</persistent>
   <creationCode/>
-  <backgroundColor>C0C0C0</backgroundColor>
+  <backgroundColor>2D2C24</backgroundColor>
   <drawBackgroundColor>true</drawBackgroundColor>
   <backgrounds>
     <backgroundDef>
@@ -104,6 +104,12 @@
     <instance>
       <object>DevMessageChecker</object>
       <position x="32" y="528"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HaxxyController</object>
+      <position x="38" y="48"/>
       <creationCode/>
       <locked>false</locked>
     </instance>

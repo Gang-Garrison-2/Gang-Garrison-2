@@ -14,7 +14,10 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">hp=0;
-lastDamageSource = PITFALL;
+if (lastDamageDealer != -1 &amp;&amp; lastDamageDealer != player)
+    lastDamageSource = FINISHED_OFF;
+else
+    lastDamageSource = PITFALL;
 </argument>
       </arguments>
     </action>

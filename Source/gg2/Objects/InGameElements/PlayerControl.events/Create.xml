@@ -15,8 +15,7 @@
       <arguments>
         <argument kind="STRING">afktimeout=9000;
 afktimer=afktimeout;
-keybyte=0;
-
+oldScoreKeyDown=false;
 </argument>
       </arguments>
     </action>

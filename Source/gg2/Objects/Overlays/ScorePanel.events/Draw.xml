@@ -14,12 +14,13 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">
-    var xoffset, yoffset, xsize, ysize;
-    
+    var xoffset, yoffset, xsize, ysize, xshift, yshift;
     xoffset = view_xview[0];
     yoffset = view_yview[0];
     xsize = view_wview[0];
     ysize = view_hview[0];
+    xshift = -320*global.timerPos;
+    yshift = 5*global.timerPos;
     
     draw_set_alpha(1);
     
@@ -109,6 +110,17 @@
             }
         }
         blueintelstatus=1;
+    }
+    
+    if blueintelstatus == 0 {
+        draw_sprite_ext(IntelReturnTimeS,max(1,floor(IntelligenceBlue.alarm[0]/900*17)),bluex-26,bluey-27,3,3,0,c_white,1);
+    } else {
+        draw_sprite_ext(IntelReturnTimeS,16,bluex-26,bluey-27,3,3,0,c_white,1);
+    }
+    if redintelstatus == 0 {
+        draw_sprite_ext(IntelReturnTimeS,max(18,floor(IntelligenceRed.alarm[0]/900*17)+17),redx-27,redy-27,3,3,0,c_white,1);
+    } else {
+        draw_sprite_ext(IntelReturnTimeS,33,redx-27,redy-27,3,3,0,c_white,1);
     }
 
     drawred=true;

@@ -19,6 +19,7 @@
     class = CLASS_SCOUT;
     socket = -1;
     name = "";
+    kicked = false;
     
     //fuck your shit I'm making statistic arrays
     stats[KILLS] = 0;
@@ -64,21 +65,9 @@
     }
     
     //Sentries for Engies
-    //sentryBuilt = 0;
-    sentry=-1;
+    sentry = noone;
     
-    //authorization for servers with passwords
-    //clients who change the source to get around passwords will be sent
-    //garbage which will disconnect them in gameserverbeginstep
-    if global.isHost {
-        if global.serverPassword == "" authorized = true;
-        else {
-            authorized = false;
-            //counter to limit players to 30 seconds to send a password before they
-            //get das boot
-            passwordCount = 0;
-        }
-    }
+    isHaxxyWinner = false;
 }
 </argument>
       </arguments>

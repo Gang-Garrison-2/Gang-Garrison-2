@@ -23,14 +23,13 @@
                 else hitDamage = (((maxdist - distance_to_point(originx,originy))/(maxdist/2))*(0.75*baseDamage))+(0.25*baseDamage);
                 */
 
-            other.hp -= damage;
-//new stuff
+            other.hp -= hitDamage;
+            other.timeUnscathed = 0;
             if (other.lastDamageDealer != ownerPlayer &amp;&amp; other.lastDamageDealer != other.player){
                 other.secondToLastDamageDealer = other.lastDamageDealer;
                 other.alarm[4] = other.alarm[3]
             }
             other.alarm[3] = ASSIST_TIME;
-//end new stuff
             other.lastDamageDealer = ownerPlayer;
             other.lastDamageSource = weapon;
             var blood;

@@ -36,6 +36,9 @@ else if instance_exists(GeneratorBlue) || instance_exists(GeneratorRed) {
     if ArenaHUD.roundStart == 0 with Player canSpawn = 0;
 }else if instance_exists(KothControlPoint) {
     instance_create(0,0,KothHUD);
+}else if instance_exists(KothRedControlPoint) && instance_exists(KothBlueControlPoint) {
+    with ControlPoint event_user(0);
+    instance_create(0,0,DKothHUD);
 } else if instance_exists(ControlPoint) {
     with ControlPoint event_user(0);
     instance_create(0,0,ControlPointHUD);
@@ -54,3 +57,18 @@ instance_create(map_width()/2,map_height()/2,Spectator);
 global.redCaps = 0;
 global.blueCaps = 0;
 global.winners = -1;
+
+if(instance_exists(GameServer))
+{
+    if(!GameServer.hostSeenMOTD and !global.dedicatedMode and global.welcomeMessage != "")
+    {
+        with(NoticeO)
+            instance_destroy();
+        with(instance_create(0, 0, NoticeO))
+        {
+            notice = NOTICE_CUSTOM;
+            message = global.welcomeMessage;
+        }
+        GameServer.hostSeenMOTD = true;
+    }
+}

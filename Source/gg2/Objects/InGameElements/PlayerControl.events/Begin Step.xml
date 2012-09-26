@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="STEP" id="1">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if(instance_exists(InGameMenuController) || instance_exists(OptionsController) || instance_exists(ControlsController) || instance_exists(HUDOptionsController))
+    exit;
+    
+if(instance_exists(TeamSelectController) || instance_exists(ClassSelectController))
+    menuOpen = true;
+else
+    menuOpen = false;
+
+//Checking for input - Mapped Keys
+if(keyboard_check_pressed(global.changeTeam)) inputChangeTeam();
+if(keyboard_check_pressed(global.changeClass)) inputChangeClass();
+
+var scoreKeyDown;
+scoreKeyDown = keyboard_check_direct(global.showScores);
+if(scoreKeyDown and !oldScoreKeyDown)
+    inputShowScores();
+else if(!scoreKeyDown and oldScoreKeyDown)
+    inputCloseScores();
+oldScoreKeyDown = scoreKeyDown;
+    
+var keybyte;
+keybyte = 0;
+    
+//character object exists
+if(global.myself.object != -1)
+{
+    if(!menuOpen)
+    {
+        if(keyboard_check(global.left)) keybyte |= $40;
+        if(keyboard_check(global.right)) keybyte |= $20;
+        if(keyboard_check(global.jump)) keybyte |= $80;
+        if(keyboard_check_pressed(global.medic)) keybyte |= $04;
+        if(keyboard_check_pressed(global.chat1)) inputChat1();
+        if(keyboard_check_pressed(global.chat2)) inputChat2();
+        if(keyboard_check_pressed(global.chat3)) inputChat3();
+        if(keyboard_check_pressed(global.drop)) inputDrop();
+        
+        if(!global.myself.humiliated)
+        {
+            if(keyboard_check(global.attack)) keybyte |= $10;
+            if(keyboard_check(global.special)) keybyte |= $08;
+            if(keyboard_check_pressed(global.special)) inputSpecial();
+            if(keyboard_check_pressed(global.taunt))
+            {
+                keybyte |= $01;
+                inputTaunt();
+            }
+            if(mouse_check_button(mb_left))
+            {
+                if(global.attack == MOUSE_LEFT) keybyte |= $10;
+                if(global.special == MOUSE_LEFT) keybyte |= $08;
+            }
+            if(mouse_check_button_pressed(mb_left) and global.special == MOUSE_LEFT)
+                inputSpecial();
+
+            if(mouse_check_button(mb_right))
+            {
+                if(global.attack == MOUSE_RIGHT) keybyte |= $10;
+                if(global.special == MOUSE_RIGHT) keybyte |= $08;
+            }
+            if(mouse_check_button_pressed(mb_right) and global.special == MOUSE_RIGHT)
+                inputSpecial();
+        }
+    }
+    
+    ClientInputstate(global.serverSocket, keybyte);
+    socket_send(global.serverSocket);
+}
+
+if(keybyte != 0
+        or keyboard_check(global.left)
+        or keyboard_check(global.right)
+        or keyboard_check(global.jump)
+        or keyboard_check(global.down)) {
+    afktimer=afktimeout;
+}
+
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

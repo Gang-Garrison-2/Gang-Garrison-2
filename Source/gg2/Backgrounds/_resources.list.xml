@@ -5,7 +5,6 @@
   <resource name="WaterwayB" type="RESOURCE"/>
   <resource name="MenuBackgroundB" type="RESOURCE"/>
   <resource name="SplashScreenB" type="RESOURCE"/>
-  <resource name="TwodFortTwoB" type="RESOURCE"/>
   <resource name="TwodFortTwoRemixB" type="RESOURCE"/>
   <resource name="zclassicwellB" type="RESOURCE"/>
   <resource name="OrangeB" type="RESOURCE"/>
@@ -17,7 +16,10 @@
   <resource name="ValleyB" type="RESOURCE"/>
   <resource name="CorinthB" type="RESOURCE"/>
   <resource name="HarvestB" type="RESOURCE"/>
+  <resource name="AtaliaB" type="RESOURCE"/>
+  <resource name="SixtiesB" type="RESOURCE"/>
   <resource name="CustomMapB" type="RESOURCE"/>
   <resource name="popupBackgroundB" type="RESOURCE"/>
   <resource name="OldfortB" type="RESOURCE"/>
+  <resource name="UpdaterB" type="RESOURCE"/>
 </resources>

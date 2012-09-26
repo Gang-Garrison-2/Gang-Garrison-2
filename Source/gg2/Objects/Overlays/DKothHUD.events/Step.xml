@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="STEP" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">//automatically change maps if the server is empty or teams are at a standoff for too long
+if (global.isHost and hostTimer &gt; 0) {
+    if ((!KothRedControlPoint.locked and KothRedControlPoint.team == TEAM_RED and KothRedControlPoint.capping == 0 and KothRedControlPoint.bluePresence == 0) or
+        (!KothBlueControlPoint.locked and KothBlueControlPoint.team == TEAM_BLUE and KothBlueControlPoint.capping == 0 and KothBlueControlPoint.redPresence == 0))
+    {
+        hostTimer -= 1;
+        if (hostTimer == 0) {
+            if abs(redTimer - blueTimer) &lt; 30*30
+                global.winners = TEAM_SPECTATOR;
+            else if redTimer &lt; blueTimer
+                global.winners = TEAM_RED;
+            else if blueTimer &lt; redTimer
+                global.winners = TEAM_BLUE;
+        }
+    }
+    if (KothRedControlPoint.locked or KothBlueControlPoint.locked)
+        hostTimer = global.timeLimitMins*30*60;
+}
+    
+
+//both teams' countdown timers
+if (!KothRedControlPoint.locked or !KothBlueControlPoint.locked) {
+    if KothBlueControlPoint.team == TEAM_RED &amp;&amp; redTimer &gt;0 redTimer-=1;
+    if KothRedControlPoint.team == TEAM_BLUE &amp;&amp; blueTimer &gt;0 blueTimer-=1;
+}
+//endgame logic
+if (redTimer == 0 and KothBlueControlPoint.team == TEAM_RED and KothBlueControlPoint.capping == 0 and KothBlueControlPoint.bluePresence == 0) global.winners = TEAM_RED;
+if (blueTimer == 0 and KothRedControlPoint.team == TEAM_BLUE and KothRedControlPoint.capping == 0 and KothRedControlPoint.redPresence == 0) global.winners = TEAM_BLUE;
+if global.isHost and KothRedControlPoint.locked and KothBlueControlPoint.locked and !global.mapchanging {
+    if cpUnlock == 0 {
+        sendEventUnlockCP();
+        doEventUnlockCP();
+    }
+    else if cpUnlock == 150 {
+        GameServer.syncTimer = 1;
+    }
+}
+if cpUnlock &gt; 0 cpUnlock -= 1;
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

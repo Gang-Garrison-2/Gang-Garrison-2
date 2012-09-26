@@ -16,15 +16,20 @@
         <argument kind="STRING">// Apply afterburn
 if (burnDuration &gt; 0)
 {
+    if(hp&gt;0)
+    {   // Don't count if someone else already finished him off, to prevent afterburn from "stealing" sticky kills (Bug #1021989)
+        if (lastDamageDealer != burnedBy &amp;&amp; lastDamageDealer != player)
+        {
+            secondToLastDamageDealer = lastDamageDealer;
+            alarm[4] = alarm[3];
+        }
+        alarm[3] = ASSIST_TIME;
+        lastDamageDealer = burnedBy;
+        lastDamageSource = afterburnSource;
+    }
     burnDuration -= durationDecay;
     hp -= burnIntensity / 30;
-    if (lastDamageDealer != burnedBy &amp;&amp; lastDamageDealer != player) {
-        secondToLastDamageDealer = lastDamageDealer;
-        alarm[4] = alarm[3];
-    }
-    alarm[3] = ASSIST_TIME;
-    lastDamageDealer = burnedBy;
-    lastDamageSource = afterburnSource;
+    timeUnscathed = 0;
 }
 if (alarm[0] == -1 &amp;&amp; burnIntensity &gt; 0) burnIntensity -= intensityDecay;
 if (burnDuration &lt;= 0 || burnIntensity &lt;= 0)
@@ -34,11 +39,12 @@ if (burnDuration &lt;= 0 || burnIntensity &lt;= 0)
     burnedBy = -1;
     afterburnSource = -1;
 }
-
 // Handle input
 if(!taunting and !omnomnomnom)
 {
-    if(pressedKeys &amp; $01)  {
+    if(!player.humiliated and (keyState | pressedKeys) &amp; $10)
+        with(currentWeapon) event_user(1);
+    if(!player.humiliated and pressedKeys &amp; $01)  {
         if (!invisible &amp;&amp; cloakAlpha == 1)
             taunting=true;
         if (team==TEAM_RED) {
@@ -59,7 +65,7 @@ if(!taunting and !omnomnomnom)
             if(not stabbing)
             {
                 playsound(x,y,JumpSnd);
-                vspeed = -jumpStrength;
+                vspeed = min(vspeed-jumpStrength, -jumpStrength);
             }
         }
         else if(canDoublejump and !doublejumpUsed and vspeed &gt; -jumpStrength)
@@ -71,36 +77,46 @@ if(!taunting and !omnomnomnom)
         }
     }
        
-    if((keyState | pressedKeys) &amp; $10)
-        with(currentWeapon) event_user(1);
 }
         
 // Right click
-if(((keyState | pressedKeys) &amp; $08) and (!taunting or player.class == CLASS_DEMOMAN) and !omnomnomnom)
+if (!player.humiliated and ((keyState | pressedKeys) &amp; $08)
+    and (!taunting or player.class == CLASS_DEMOMAN) and !omnomnomnom)
+{
     with(currentWeapon)
         event_user(2);
+}
 
 // Cloak
-if ((pressedKeys &amp; $08) &amp;&amp; canCloak &amp;&amp; ((cloakAlpha &lt;= 0.5 and cloak) || (cloakAlpha == 1 and !cloak)) &amp;&amp; !intel  &amp;&amp; taunting==false &amp;&amp; !(keyState &amp; $10))
-    if(currentWeapon.readyToStab)
+if (!player.humiliated &amp;&amp; (pressedKeys &amp; $08)
+    &amp;&amp; canCloak &amp;&amp; ((cloakAlpha &lt;= 0.5 and cloak) || (cloakAlpha == 1 and !cloak))
+    &amp;&amp; !intel  &amp;&amp; taunting==false &amp;&amp; !(keyState &amp; $10))
+{
+    if(currentWeapon.readyToStab) {
+        if (cloak) { // stop spies immediately picking up intel after uncloaking
+            canGrabIntel=false;
+            alarm[1]=30;
+        }
         cloak = !cloak;
+    }
+}
 
 switch(moveStatus) // moveStatus is reset in collision with obstacles (including doors if they reject you)
 {
-case 1: //If I am rocketing myself
+case 1: //If I am rocketing/mining myself
     controlFactor = 0.65;
     frictionFactor = 1;
     break;
-case 2: //If I am rocketing an enemy
+case 2: //If I am rocketing/mining an enemy
     controlFactor = 0.45;
     frictionFactor = 1.05;
     break;
 case 3: //Airblast
-    controlFactor = 0.3;
-    frictionFactor = 1;
+    controlFactor = 0.35;
+    frictionFactor = 1.05;
     break;
-case 4: //If I am rocketing a teamate/mining someone (more control than 2)
-    controlFactor = 0.85;
+case 4: //If I am rocketing/mining a teamate
+    controlFactor = baseControl;
     frictionFactor = 1;
     break;
 default:
@@ -152,9 +168,11 @@ if(!taunting &amp;&amp; !omnomnomnom)
     if((keyState|pressedKeys) &amp; $20 and hspeed &lt; runPower * controlFactor / (baseFriction - 1))
         hspeed += runPower*controlFactor;
 }
-if(abs(hspeed) &gt; abs(1 * baseControl / (baseFriction - 1))*2)// divide friction as normal if going way too fast, based on normal max speed
+//divide friction as normal if going way too fast, or controlling motion, based on normal max speed
+if(abs(hspeed) &gt; abs(baseControl / (baseFriction - 1) * 2) or
+   ((keyState|pressedKeys) &amp; $60 and !(abs(hspeed) &gt; abs(baseControl / (baseFriction - 1)))) )
     hspeed /= baseFriction;
-else // otherwise divide by the moveStatus's friction
+else //otherwise divide by the moveStatus's friction
     hspeed /= frictionFactor;
 
 
@@ -200,11 +218,22 @@ if intel {
         cloakAplha=1;
     }
 }
-    
-animationImage = (animationImage+abs(hspeed)/20) mod CHARACTER_ANIMATION_LEN;
-    
-// drop intel if ubered
-if(intel) &amp;&amp; ubered {
+ 
+if (player.humiliated)
+{
+    if (!place_free(x,y+1) &amp;&amp; hspeed == 0)
+        animationImage = 0;
+    else if place_free(x,y+1)
+        animationImage = 2;
+    if (!place_free(x,y+1) &amp;&amp; hspeed != 0)
+        animationImage = 1+((animationImage-1+abs(hspeed)/20) mod CHARACTER_ANIMATION_LEN);
+}
+else
+    animationImage = (animationImage+abs(hspeed)/20) mod CHARACTER_ANIMATION_LEN;
+
+
+// drop intel if ubered or round is over
+if(intel) &amp;&amp; (ubered || global.mapchanging) {
     event_user(5);
 }
 
@@ -228,6 +257,35 @@ if ubered {
             alarm[5] = -1;
         }
     }
+}
+
+//give max ammo for players on the winning team
+var arenaRoundEnd;
+arenaRoundEnd = true;
+if instance_exists(ArenaHUD) { 
+    if(ArenaHUD.endCount!=0) 
+        arenaRoundEnd=true;
+    else arenaRoundEnd=false;
+}
+
+if (arenaRoundEnd and global.mapchanging and !player.humiliated) {
+    if instance_exists(currentWeapon) {
+        with(currentWeapon){
+            if(variable_local_exists("maxAmmo")) {
+                ammoCount = maxAmmo;
+            }
+            alarm[5] = -1;
+        }
+    }
+}
+
+//drop cloak and unscope if on losing team or stalemate
+if (player.humiliated)
+{
+    if (zoomed)
+        toggleZoom(id);
+    if (!stabbing)
+        cloak = false;
 }
 
 // Determine if the character is capturing a CP, and which

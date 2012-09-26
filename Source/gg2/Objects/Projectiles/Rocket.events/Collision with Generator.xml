@@ -15,7 +15,18 @@
       <arguments>
         <argument kind="STRING">if fade==false {
     if(team != other.team) {
-        characterHit=other;
+        other.alarm[0] = other.regenerationBuffer;
+        other.isShieldRegenerating = false;
+        //allow overkill to be applied directly to the target
+        if (hitDamage &gt; other.shieldHp) {
+            other.hp -= hitDamage - other.shieldHp;
+            other.hp -= other.shieldHp * other.shieldResistance;
+            other.shieldHp = 0;
+        } else {
+            other.hp -= hitDamage * other.shieldResistance;
+            other.shieldHp -= hitDamage;
+        }
+        characterHit = -1;
         event_user(5);
     }
 } else instance_destroy();

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="TeamSelectS" type="RESOURCE"/>
+  <resource name="ClassSelectS" type="RESOURCE"/>
+  <resource name="TeamDoorS" type="RESOURCE"/>
+  <resource name="TVLightUpS" type="RESOURCE"/>
+  <resource name="DoorTopLightUpS" type="RESOURCE"/>
+  <resource name="ClassSelectPortraitS" type="RESOURCE"/>
+  <resource name="ClassSelectSpritesS" type="RESOURCE"/>
+</resources>

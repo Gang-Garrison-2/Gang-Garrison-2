@@ -1,8 +1,22 @@
-if instance_exists(argument0) {
-    argument0.sentry = instance_create(argument0.object.x,argument0.object.y,Sentry);
-    argument0.sentry.ownerPlayer = argument0;
-    argument0.sentry.team = argument0.team;
-    argument0.sentry.startDirection = argument0.object.image_xscale;
-    argument0.sentry.image_xscale = argument0.object.image_xscale;
-    argument0.object.nutsNBolts -= 100;
+var player, xPos, yPos, startDirection;
+
+player = argument0;
+xPos = argument1;
+yPos = argument2;
+startDirection = argument3;
+
+if(!player.sentry)
+{
+    player.sentry = instance_create(xPos, yPos, Sentry);
+    player.sentry.ownerPlayer = player;
+    player.sentry.team = player.team;
 }
+else
+{
+    player.sentry.x = xPos;
+    player.sentry.y = yPos;
+}
+
+player.sentry.startDirection = startDirection;
+player.sentry.image_xscale = startDirection;
+player.object.nutsNBolts -= 100;

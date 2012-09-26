@@ -14,7 +14,6 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">global.isHost = true;
-global.map_serverName = "";
 if(global.dedicatedMode == 0) {
     instance_create(x,y,HostOptionsController);
     instance_destroy();

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="STEP" id="1">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">smokeCount += 1;
+if global.isHost {
+    if hp &lt;= 0 {
+        sendEventGeneratorDestroy(team);
+        doEventGeneratorDestroy(team);
+    }
+    else if GameServer.frame mod 1800 ==0 GameServer.syncTimer = 1;
+}
+if hp &gt;= maxHp*0.66 spriteStart = 0;
+else if hp &gt;= maxHp*0.33 &amp;&amp; hp &lt; maxHp*0.66{ 
+    spriteStart = 16;
+    if(global.particles = PARTICLES_NORMAL) {
+        if smokeCount mod 50 == 0 effect_create_above(ef_smoke,x+20-random(40),y+20-random(40),choose(0,1),c_gray);
+    }
+}
+else {
+    spriteStart = 32;
+    if(global.particles = PARTICLES_NORMAL) {
+        if smokeCount mod 25 == 0 effect_create_above(ef_smoke,x+20-random(40),y+20-random(40),choose(0,1),c_gray);
+    }
+}
+spriteEnd = spriteStart+15;
+if image_index &gt; spriteEnd image_index = spriteStart;
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>
