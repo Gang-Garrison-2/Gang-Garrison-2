@@ -27,10 +27,10 @@ if !KothControlPoint.locked {
 //endgame logic
 if (redTimer == 0 and KothControlPoint.team == TEAM_RED and KothControlPoint.capping == 0 and KothControlPoint.bluePresence == 0) global.winners = TEAM_RED;
 if (blueTimer == 0 and KothControlPoint.team == TEAM_BLUE and KothControlPoint.capping == 0 and KothControlPoint.redPresence == 0) global.winners = TEAM_BLUE;
-if global.isHost {
+if global.isHost and KothControlPoint.locked and !global.mapchanging {
     if cpUnlock == 0 {
-        sendEventKothUnlockCP();
-        doEventKothUnlockCP();
+        sendEventUnlockCP();
+        doEventUnlockCP();
     }
     else if cpUnlock == 150 {
         GameServer.syncTimer = 1;

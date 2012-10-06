@@ -19,7 +19,7 @@ redTimer=read_ushort(global.deserializeBuffer);
 blueTimer=read_ushort(global.deserializeBuffer);
 with KothControlPoint event_user(13);
 if cpUnlock == 0 &amp;&amp; KothControlPoint.locked {
-    doEventKothUnlockCP();
+    doEventUnlockCP();
 }
 </argument>
       </arguments>

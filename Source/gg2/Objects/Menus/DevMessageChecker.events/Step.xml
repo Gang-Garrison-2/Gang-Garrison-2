@@ -13,7 +13,9 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">// Read the response
+        <argument kind="STRING">image_speed = 5/room_speed;
+
+// Read the response
 response += read_string(socket, tcp_receive_available(socket));
 
 if(tcp_eof(socket)) {
@@ -30,16 +32,6 @@ if(tcp_eof(socket)) {
     CR = chr(13);
     LF = chr(10);
     CRLF = CR + LF;
-    
-    // find where the header ends, so we can chop it off
-    // and just return the important stuff
-    var headerlength;
-    headerlength = string_pos(CRLF + CRLF, response) + 2 * string_length(CRLF);
-    if(headerlength == 0) {
-        response = ""
-    } else {
-        response = string_copy(response, headerlength, string_length(response) - headerlength + 1);
-    }
       
     // split the response into multiple lines, so we can process them
     var messageArray, a, b;
@@ -56,26 +48,27 @@ if(tcp_eof(socket)) {
     a += 1;
       
     var c;
-    for(c = 0; c &lt; a; c += 1) {
-        switch(messageArray[c]) {
-            case "ShowMessage":
-                c += 1;
-                show_message(messageArray[c]);
-                break;
-            case "Version":
-                c += 1;
-                versioncheck = (messageArray[c]);
-                versionend = string_pos("!",versioncheck);
-                version = string_copy(versioncheck,1,versionend-1);
-                changeslength = string_length(versioncheck)-versionend;
-                changes=string_copy(versioncheck,versionend+1,changeslength);
-                if real(version) &gt; VERSION {
-                    update=show_message_ext("Updates have been made to Gang Garrison 2!##"+changes,"Update","Cancel","");
-                    if (update == 1){
-                        execute_shell("gg2updater.exe","");
-                        game_end();
-                    }
+    for(c = 0; c &lt; a; c += 2)
+    {
+        switch(messageArray[c])
+        {
+        case "ShowMessage":
+            show_message(messageArray[c+1]);
+            break;
+        case "Version":
+            versioncheck = (messageArray[c+1]);
+            versionend = string_pos("!",versioncheck);
+            version = string_copy(versioncheck,1,versionend-1);
+            changeslength = string_length(versioncheck)-versionend;
+            changes=string_copy(versioncheck,versionend+1,changeslength);
+            if(real(version) &gt; VERSION)
+            {
+                update = show_message_ext("Updates have been made to Gang Garrison 2!##"+changes,"Update","Cancel","");
+                if (update == 1){
+                    room_goto(UpdaterRoom);
+                    exit;
                 }
+            }
             break;
         }
     }
@@ -83,7 +76,6 @@ if(tcp_eof(socket)) {
     instance_destroy();
     exit;
 }
-image_speed = 5/room_speed;
 </argument>
       </arguments>
     </action>

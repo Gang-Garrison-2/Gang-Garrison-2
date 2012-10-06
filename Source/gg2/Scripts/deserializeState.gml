@@ -44,6 +44,9 @@ global.blueCaps = read_ubyte(global.tempBuffer);
         else if instance_exists(KothHUD) {
             with KothHUD event_user(13);
         }
+        else if instance_exists(DKothHUD) {
+            with DKothHUD event_user(13);
+        }
 }
 
 if(argument0 == CAPS_UPDATE) {
@@ -66,5 +69,8 @@ if(argument0 == CAPS_UPDATE) {
     }
     else if instance_exists(KothHUD) {
             with KothHUD event_user(13);
+    }
+    else if instance_exists(DKothHUD) {
+            with DKothHUD event_user(13);
     }
 }

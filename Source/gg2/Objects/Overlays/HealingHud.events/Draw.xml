@@ -27,9 +27,14 @@
     draw_set_alpha(.5);
     if (target.object != -1) {
         draw_sprite_stretched_ext(sprite_index, global.myself.team == TEAM_BLUE, 
-        xoffset+mid-(HUDwidth/2), yoffset+450, HUDwidth, 40, c_white, .5);
-        draw_text_color(xoffset+mid, yoffset+462, "Healing: " +target.name, c_white, c_white, c_white, c_white, .7);    
-        draw_healthbar(xoffset+mid-(HUDwidth/2)+10, yoffset+470,xoffset+mid+HUDwidth/2-10, yoffset+478,target.object.hp*100/target.object.maxHp,c_black,c_white,c_white,0,true,true);
+        xoffset+mid-(HUDwidth/2)+20, yoffset+450, HUDwidth, 36, c_white, 1);
+        draw_text_color(xoffset+mid+20, yoffset+462, "Healing: " +target.name, c_white, c_white, c_white, c_white, 1);    
+        draw_healthbar(xoffset+mid-(HUDwidth/2)-24, yoffset+452,xoffset+mid-(HUDwidth/2)+20, yoffset+484,floor(target.object.hp*100/target.object.maxHp),c_black,c_white,c_white,3,true,false);
+        draw_sprite_stretched_ext(HealedHudHPS, global.myself.team == TEAM_BLUE,
+        xoffset+mid-(HUDwidth/2)-26, yoffset+450,48,36,c_white, 1);
+        draw_sprite_stretched_ext(HealedHudCapS, global.myself.team == TEAM_BLUE,
+        xoffset+mid+(HUDwidth/2)+18, yoffset+450,6,36,c_white, 1);
+        draw_text_color(xoffset+mid-(HUDwidth/2)-2, yoffset+468, floor(target.object.hp), c_white, c_white, c_white, c_white, 1);
     }
 }
 </argument>

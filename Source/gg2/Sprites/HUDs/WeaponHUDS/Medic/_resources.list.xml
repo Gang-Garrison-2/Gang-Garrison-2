@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="MedAlert" type="RESOURCE"/>
+  <resource name="MedRadarArrow" type="RESOURCE"/>
+  <resource name="HealedHudS" type="RESOURCE"/>
+  <resource name="UberHudS" type="RESOURCE"/>
+  <resource name="HealedHudCapS" type="RESOURCE"/>
+  <resource name="HealedHudHPS" type="RESOURCE"/>
+</resources>

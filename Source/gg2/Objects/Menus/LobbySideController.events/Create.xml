@@ -13,18 +13,17 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">virtualitem = -1;
-xbegin = 20;
-ybegin = 150;
-spacing = 30;
-width = 100; 
-items = 2;
+        <argument kind="STRING">menu_create(20, 150, 100, 100, 30);
 
-item[0] = "Refresh";
-item[1] = "Back";
+menu_addlink("Refresh", '
+    event_user(0);
+');
+menu_addback("Back", '
+    room_goto_fix(Menu);
+');
 
 cooleddown = false;
-alarm[0] = 90;
+alarm[1] = 90;
 </argument>
       </arguments>
     </action>

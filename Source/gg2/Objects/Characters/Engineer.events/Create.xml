@@ -32,6 +32,7 @@
     canBuild = 1;
     weapons[0]=Shotgun;
     tauntsprite = EngiTauntS;
+    haxxyStatue = EngineerHaxxyStatueS;
 }
 </argument>
       </arguments>

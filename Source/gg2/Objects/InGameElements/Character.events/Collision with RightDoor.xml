@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="COLLISION" with="RightDoor">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">//only allow passage from the right hand side, otherwise get blocked
+{   
+    if (bbox_right - hspeed &lt;= other.bbox_left + 2 and hspeed &gt; 0)
+    {   
+        x = other.x - (bbox_right - x);
+        hspeed = 0;
+    }
+
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

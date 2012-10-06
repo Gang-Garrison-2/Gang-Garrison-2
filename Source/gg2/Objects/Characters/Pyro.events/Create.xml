@@ -31,6 +31,7 @@
     maxHp = 120;
     weapons[0] = Flamethrower;
     tauntsprite = PyroTauntS;
+    haxxyStatue = PyroHaxxyStatueS;
 }
 </argument>
       </arguments>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="QuoteHaxxyStatueS" type="RESOURCE"/>
+  <resource name="CurlyHaxxyStatueS" type="RESOURCE"/>
+  <resource name="ScoutHaxxyStatueS" type="RESOURCE"/>
+  <resource name="PyroHaxxyStatueS" type="RESOURCE"/>
+  <resource name="HeavyHaxxyStatueS" type="RESOURCE"/>
+  <resource name="MedicHaxxyStatueS" type="RESOURCE"/>
+  <resource name="EngineerHaxxyStatueS" type="RESOURCE"/>
+  <resource name="SoldierHaxxyStatueS" type="RESOURCE"/>
+  <resource name="SpyHaxxyStatueS" type="RESOURCE"/>
+  <resource name="DemomanHaxxyStatueS" type="RESOURCE"/>
+  <resource name="SniperHaxxyStatueS" type="RESOURCE"/>
+</resources>

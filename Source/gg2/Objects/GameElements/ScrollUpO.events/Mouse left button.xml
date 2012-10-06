@@ -13,11 +13,10 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if instance_exists(LobbyController) {
-    with LobbyController{
-    if offset &gt; 0 offset-=1; 
-    }
-}</argument>
+        <argument kind="STRING">with(LobbyController)
+    if(offset &gt; 0)
+        offset-=1;
+</argument>
       </arguments>
     </action>
   </actions>

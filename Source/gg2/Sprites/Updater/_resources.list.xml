@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="UpdaterProgressS" type="RESOURCE"/>
+  <resource name="UpdaterBackgroundS" type="RESOURCE"/>
+  <resource name="OffsetS" type="RESOURCE"/>
+</resources>

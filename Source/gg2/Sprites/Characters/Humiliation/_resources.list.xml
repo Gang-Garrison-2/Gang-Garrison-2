@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="QuoteRedHS" type="RESOURCE"/>
+  <resource name="CurlyBlueHS" type="RESOURCE"/>
+  <resource name="ScoutRedHS" type="RESOURCE"/>
+  <resource name="ScoutBlueHS" type="RESOURCE"/>
+  <resource name="PyroRedHS" type="RESOURCE"/>
+  <resource name="PyroBlueHS" type="RESOURCE"/>
+  <resource name="HeavyRedHS" type="RESOURCE"/>
+  <resource name="HeavyBlueHS" type="RESOURCE"/>
+  <resource name="MedicRedHS" type="RESOURCE"/>
+  <resource name="MedicBlueHS" type="RESOURCE"/>
+  <resource name="EngineerRedHS" type="RESOURCE"/>
+  <resource name="EngineerBlueHS" type="RESOURCE"/>
+  <resource name="SoldierRedHS" type="RESOURCE"/>
+  <resource name="SoldierBlueHS" type="RESOURCE"/>
+  <resource name="SpyRedHS" type="RESOURCE"/>
+  <resource name="SpyBlueHS" type="RESOURCE"/>
+  <resource name="DemomanRedHS" type="RESOURCE"/>
+  <resource name="DemomanBlueHS" type="RESOURCE"/>
+  <resource name="SniperRedHS" type="RESOURCE"/>
+  <resource name="SniperBlueHS" type="RESOURCE"/>
+</resources>

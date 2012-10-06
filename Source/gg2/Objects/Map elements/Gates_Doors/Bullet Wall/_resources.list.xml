@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="BulletWall" type="RESOURCE"/>
+  <resource name="BulletWallHorizontal" type="RESOURCE"/>
+  <resource name="RightDoor" type="RESOURCE"/>
+  <resource name="LeftDoor" type="RESOURCE"/>
+</resources>

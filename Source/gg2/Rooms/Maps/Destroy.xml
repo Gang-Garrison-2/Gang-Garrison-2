@@ -173,18 +173,6 @@ instance_create(0,0,DestroyO);
     </instance>
     <instance>
       <object>BlueTeamGate</object>
-      <position x="3306" y="552"/>
-      <creationCode/>
-      <locked>false</locked>
-    </instance>
-    <instance>
-      <object>BlueTeamGate</object>
-      <position x="3306" y="522"/>
-      <creationCode/>
-      <locked>false</locked>
-    </instance>
-    <instance>
-      <object>BlueTeamGate</object>
       <position x="3132" y="642"/>
       <creationCode/>
       <locked>false</locked>
@@ -216,30 +204,6 @@ instance_create(0,0,DestroyO);
     <instance>
       <object>BlueTeamGate</object>
       <position x="3126" y="612"/>
-      <creationCode/>
-      <locked>false</locked>
-    </instance>
-    <instance>
-      <object>BlueTeamGate</object>
-      <position x="3312" y="552"/>
-      <creationCode/>
-      <locked>false</locked>
-    </instance>
-    <instance>
-      <object>BlueTeamGate</object>
-      <position x="3312" y="522"/>
-      <creationCode/>
-      <locked>false</locked>
-    </instance>
-    <instance>
-      <object>BlueTeamGate</object>
-      <position x="3300" y="552"/>
-      <creationCode/>
-      <locked>false</locked>
-    </instance>
-    <instance>
-      <object>BlueTeamGate</object>
-      <position x="3300" y="522"/>
       <creationCode/>
       <locked>false</locked>
     </instance>
@@ -436,12 +400,6 @@ instance_create(0,0,DestroyO);
       <locked>false</locked>
     </instance>
     <instance>
-      <object>SpawnRoom</object>
-      <position x="3312" y="534"/>
-      <creationCode/>
-      <locked>false</locked>
-    </instance>
-    <instance>
       <object>SpawnPointRed</object>
       <position x="288" y="564"/>
       <creationCode/>
@@ -468,42 +426,6 @@ instance_create(0,0,DestroyO);
     <instance>
       <object>SpawnPointRed</object>
       <position x="300" y="654"/>
-      <creationCode/>
-      <locked>false</locked>
-    </instance>
-    <instance>
-      <object>RedTeamGate</object>
-      <position x="342" y="552"/>
-      <creationCode/>
-      <locked>false</locked>
-    </instance>
-    <instance>
-      <object>RedTeamGate</object>
-      <position x="342" y="522"/>
-      <creationCode/>
-      <locked>false</locked>
-    </instance>
-    <instance>
-      <object>RedTeamGate</object>
-      <position x="348" y="552"/>
-      <creationCode/>
-      <locked>false</locked>
-    </instance>
-    <instance>
-      <object>RedTeamGate</object>
-      <position x="348" y="522"/>
-      <creationCode/>
-      <locked>false</locked>
-    </instance>
-    <instance>
-      <object>RedTeamGate</object>
-      <position x="336" y="552"/>
-      <creationCode/>
-      <locked>false</locked>
-    </instance>
-    <instance>
-      <object>RedTeamGate</object>
-      <position x="336" y="522"/>
       <creationCode/>
       <locked>false</locked>
     </instance>
@@ -700,12 +622,6 @@ instance_create(0,0,DestroyO);
       <locked>false</locked>
     </instance>
     <instance>
-      <object>SpawnRoom</object>
-      <position x="300" y="570"/>
-      <creationCode/>
-      <locked>false</locked>
-    </instance>
-    <instance>
       <object>GeneratorRed</object>
       <position x="838" y="442"/>
       <creationCode/>
@@ -762,6 +678,138 @@ instance_create(0,0,DestroyO);
     <instance>
       <object>PlayerWallHorizontal</object>
       <position x="840" y="462"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>SpawnRoom</object>
+      <position x="300" y="570"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>LeftDoor</object>
+      <position x="342" y="522"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>LeftDoor</object>
+      <position x="342" y="558"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>LeftDoor</object>
+      <position x="348" y="522"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>LeftDoor</object>
+      <position x="348" y="558"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>LeftDoor</object>
+      <position x="1602" y="372"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>LeftDoor</object>
+      <position x="1596" y="372"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>LeftDoor</object>
+      <position x="1590" y="372"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>LeftDoor</object>
+      <position x="1590" y="312"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>LeftDoor</object>
+      <position x="1596" y="312"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>LeftDoor</object>
+      <position x="1602" y="312"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>RightDoor</object>
+      <position x="2046" y="312"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>RightDoor</object>
+      <position x="2052" y="312"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>RightDoor</object>
+      <position x="2058" y="312"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>RightDoor</object>
+      <position x="2046" y="372"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>RightDoor</object>
+      <position x="2052" y="372"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>RightDoor</object>
+      <position x="2058" y="372"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>RightDoor</object>
+      <position x="3306" y="522"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>RightDoor</object>
+      <position x="3306" y="558"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>RightDoor</object>
+      <position x="3300" y="522"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>RightDoor</object>
+      <position x="3300" y="558"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>SpawnRoom</object>
+      <position x="3318" y="534"/>
       <creationCode/>
       <locked>false</locked>
     </instance>

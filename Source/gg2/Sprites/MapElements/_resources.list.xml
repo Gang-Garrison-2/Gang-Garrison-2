@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
   <resource name="GeneratorBlueS" type="RESOURCE"/>
+  <resource name="GeneratorShieldS" type="RESOURCE"/>
   <resource name="GeneratorRedS" type="RESOURCE"/>
   <resource name="PreviousAreaS" type="RESOURCE"/>
   <resource name="NextAreaS" type="RESOURCE"/>

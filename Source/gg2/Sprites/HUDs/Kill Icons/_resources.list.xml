@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
   <resource name="FlareReflectKL" type="RESOURCE"/>
-  <resource name="FlareKL" type="RESOURCE"/>
+  <resource name="FlareKLold" type="RESOURCE"/>
   <resource name="RocketReflectKL" type="RESOURCE"/>
   <resource name="MineReflectKL" type="RESOURCE"/>
   <resource name="ShotgunKL" type="RESOURCE"/>
@@ -17,6 +17,8 @@
   <resource name="TurretKL" type="RESOURCE"/>
   <resource name="KnifeKL" type="RESOURCE"/>
   <resource name="ExplodeKL" type="RESOURCE"/>
+  <resource name="RedIntelSL" type="RESOURCE"/>
+  <resource name="BlueIntelSL" type="RESOURCE"/>
   <resource name="RedDefenseS" type="RESOURCE"/>
   <resource name="BlueDefenseS" type="RESOURCE"/>
   <resource name="RedCaptureS" type="RESOURCE"/>
@@ -28,4 +30,7 @@
   <resource name="DeadKL" type="RESOURCE"/>
   <resource name="DominationKL" type="RESOURCE"/>
   <resource name="sprite529" type="RESOURCE"/>
+  <resource name="FlareKL" type="RESOURCE"/>
+  <resource name="ReflectedStickyS" type="RESOURCE"/>
+  <resource name="ReflectedRocketS" type="RESOURCE"/>
 </resources>

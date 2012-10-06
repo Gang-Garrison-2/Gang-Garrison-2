@@ -30,7 +30,8 @@
     runPower = 0.8;
     maxHp = 200;
     weapons[0] = Minigun;  
-    tauntsprite = HeavyTauntS;  
+    tauntsprite = HeavyTauntS;
+    haxxyStatue = HeavyHaxxyStatueS;
 }
 </argument>
       </arguments>

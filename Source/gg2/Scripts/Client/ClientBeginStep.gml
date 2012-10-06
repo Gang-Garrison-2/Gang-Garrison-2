@@ -1,51 +1,90 @@
 // receive and interpret the server's message(s)
 var i, playerObject, playerID, player, otherPlayerID, otherPlayer, sameVersion, buffer;
 
-if(global.myself != -1) {
-    if(global.myself.object != -1) {
-            buffer_clear(global.sendBuffer);
-            ClientInputstate(playerControl.keybyte, global.myself.object.x, global.myself.object.y);
-            write_buffer(global.serverSocket, global.sendBuffer);
-        playerControl.keybyte = 0;
+if(tcp_eof(global.serverSocket)) {
+    if(gotServerHello)
+        show_message("You have been disconnected from the server.");
+    else
+        show_message("Unable to connect to the server.");
+    instance_destroy();
+    exit;
+}
+
+if(room == DownloadRoom and keyboard_check(vk_escape))
+{
+    instance_destroy();
+    exit;
+}
+
+if(downloadingMap)
+{
+    while(tcp_receive(global.serverSocket, min(1024, downloadMapBytes-buffer_size(downloadMapBuffer))))
+    {
+        write_buffer(downloadMapBuffer, global.serverSocket);
+        if(buffer_size(downloadMapBuffer) == downloadMapBytes)
+        {
+            write_buffer_to_file(downloadMapBuffer, "Maps/" + downloadMapName + ".png");
+            downloadingMap = false;
+            buffer_destroy(downloadMapBuffer);
+            downloadMapBuffer = -1;
+            exit;
+        }
     }
+    exit;
 }
 
 roomchange = false;
 do {
-    if(socket_has_error(global.serverSocket)) {
-        show_message("You have been disconnected from the server.");
-        with(all) if id != AudioControl.id instance_destroy();
-        room_goto_fix(Menu);
-        exit; 
-    }
     if(tcp_receive(global.serverSocket,1)) {
         switch(read_ubyte(global.serverSocket)) {
         case HELLO:
-            sameVersion = true;
-                  
-            receiveCompleteMessage(global.serverSocket,2,global.tempBuffer);
-            if(read_ushort(global.tempBuffer) != 128) {
-                sameVersion = false;
-            } else {
-                receiveCompleteMessage(global.serverSocket,16,global.tempBuffer);
-                for(i=0; i<16; i+=1) {
-                    if(read_ubyte(global.tempBuffer) != global.protocolUuid[i]) {
-                        sameVersion = false;
+            gotServerHello = true;
+            global.joinedServerName = receivestring(global.serverSocket, 1);
+            downloadMapName = receivestring(global.serverSocket, 1);
+            advertisedMapMd5 = receivestring(global.serverSocket, 1);
+            if(string_pos("/", downloadMapName) != 0 or string_pos("\", downloadMapName) != 0)
+            {
+                show_message("Server sent illegal map name: "+downloadMapName);
+                instance_destroy();
+                exit;
+            }
+            
+            if(advertisedMapMd5 != "")
+            {
+                var download;
+                download = not file_exists("Maps/" + downloadMapName + ".png");
+                if(!download and CustomMapGetMapMD5(downloadMapName) != advertisedMapMd5)
+                {
+                    if(show_question("The server's copy of the map (" + downloadMapName + ") differs from ours.#Would you like to download this server's version of the map?"))
+                        download = true;
+                    else
+                    {
+                        instance_destroy();
+                        exit;
                     }
                 }
+                
+                if(download)
+                {
+                    write_ubyte(global.serverSocket, DOWNLOAD_MAP);
+                    socket_send(global.serverSocket);
+                    receiveCompleteMessage(global.serverSocket,4,global.tempBuffer);
+                    downloadMapBytes = read_uint(global.tempBuffer);
+                    downloadMapBuffer = buffer_create();
+                    downloadingMap = true;
+                    roomchange=true;
+                }
             }
-
-            if(not sameVersion) {
-                show_message("Incompatible server protocol version.");
-                with(all) if id != AudioControl.id instance_destroy();
-                room_goto_fix(Menu);
-                exit;
-            } else {
-                receiveCompleteMessage(global.serverSocket,10,global.tempBuffer);
-                global.playerID = read_ubyte(global.tempBuffer);
-                global.randomSeed = read_double(global.tempBuffer);
-                global.currentMapArea = read_ubyte(global.tempBuffer);
-            }
+            ClientPlayerJoin(global.serverSocket);
+            if(global.haxxyKey != "")
+                write_byte(global.serverSocket, I_AM_A_HAXXY_WINNER);
+            socket_send(global.serverSocket);
+            break;
+            
+        case JOIN_UPDATE:
+            receiveCompleteMessage(global.serverSocket,2,global.tempBuffer);
+            global.playerID = read_ubyte(global.tempBuffer);
+            global.currentMapArea = read_ubyte(global.tempBuffer);
             break;
         
         case FULL_UPDATE:
@@ -54,7 +93,6 @@ do {
         
         case QUICK_UPDATE:
             deserializeState(QUICK_UPDATE);
-            global.serverFrame += 1;
             break;
              
         case CAPS_UPDATE:
@@ -63,7 +101,6 @@ do {
                   
         case INPUTSTATE:
             deserializeState(INPUTSTATE);
-            global.serverFrame += 1;
             break;             
         
         case PLAYER_JOIN:
@@ -73,7 +110,7 @@ do {
             ds_list_add(global.players, player);
             if(ds_list_size(global.players)-1 == global.playerID) {
                 global.myself = player;
-                playerControl = instance_create(0,0,PlayerControl);
+                instance_create(0,0,PlayerControl);
             }
             break;
             
@@ -112,27 +149,27 @@ do {
         case BALANCE:
             receiveCompleteMessage(global.serverSocket,1,global.tempBuffer);
             balanceplayer=read_ubyte(global.tempBuffer);
-                  if balanceplayer == 255 {
-                    if !instance_exists(Balancer) instance_create(x,y,Balancer);
-                    with(Balancer) notice=0;
-                  } else {
-                    player = ds_list_find_value(global.players, balanceplayer);
-                    if(player.object != -1) {
-                with(player.object) {
-                    instance_destroy();
-                }
-                player.object = -1;
-              }
-              if(player.team==TEAM_RED) {
-                        player.team = TEAM_BLUE;
-                    } else {
-                        player.team = TEAM_RED;
+            if balanceplayer == 255 {
+                if !instance_exists(Balancer) instance_create(x,y,Balancer);
+                with(Balancer) notice=0;
+            } else {
+                player = ds_list_find_value(global.players, balanceplayer);
+                if(player.object != -1) {
+                    with(player.object) {
+                        instance_destroy();
                     }
-                    if !instance_exists(Balancer) instance_create(x,y,Balancer);
-                    Balancer.name=player.name;
-                    with (Balancer) notice=1;
-                  }
-                  break;
+                    player.object = -1;
+                }
+                if(player.team==TEAM_RED) {
+                    player.team = TEAM_BLUE;
+                } else {
+                    player.team = TEAM_RED;
+                }
+                if !instance_exists(Balancer) instance_create(x,y,Balancer);
+                Balancer.name=player.name;
+                with (Balancer) notice=1;
+            }
+            break;
                   
         case PLAYER_CHANGETEAM:
             receiveCompleteMessage(global.serverSocket,2,global.tempBuffer);
@@ -163,7 +200,7 @@ do {
             player = ds_list_find_value(global.players, read_ubyte(global.tempBuffer));
             player.name = receivestring(global.serverSocket, 1);
             if player=global.myself {
-            global.playerName=player.name
+                global.playerName=player.name
             }
             break;
                  
@@ -181,11 +218,9 @@ do {
             break;
              
         case BUILD_SENTRY:
-            receiveCompleteMessage(global.serverSocket,1,global.tempBuffer);
+            receiveCompleteMessage(global.serverSocket,6,global.tempBuffer);
             player = ds_list_find_value(global.players, read_ubyte(global.tempBuffer));
-            if player.sentry == -1 {
-              buildSentry(player);
-            }
+            buildSentry(player, read_ushort(global.tempBuffer)/5, read_ushort(global.tempBuffer)/5, read_byte(global.tempBuffer));
             break;
               
         case DESTROY_SENTRY:
@@ -201,10 +236,10 @@ do {
             } else {
                 otherPlayer = ds_list_find_value(global.players, otherPlayerID);
                 if (assistantPlayerID == 255) {
-                   doEventDestruction(player, otherPlayer, -1, causeOfDeath);
+                    doEventDestruction(player, otherPlayer, -1, causeOfDeath);
                 } else {
-                   assistantPlayer = ds_list_find_value(global.players, assistantPlayerID);
-                   doEventDestruction(player, otherPlayer, assistantPlayer, causeOfDeath);
+                    assistantPlayer = ds_list_find_value(global.players, assistantPlayerID);
+                    doEventDestruction(player, otherPlayer, assistantPlayer, causeOfDeath);
                 }
             }
             break;
@@ -227,6 +262,11 @@ do {
             if player.object != -1 {
                 with player.object event_user(5); 
             }
+            break;
+            
+        case RETURN_INTEL:
+            receiveCompleteMessage(global.serverSocket,1,global.tempBuffer);
+            doEventReturnIntel(read_ubyte(global.tempBuffer));
             break;
   
         case GENERATOR_DESTROY:
@@ -251,69 +291,54 @@ do {
             receiveCompleteMessage(global.serverSocket,1,global.tempBuffer);
             player = ds_list_find_value(global.players, read_ubyte(global.tempBuffer));
             if(player.object != -1) {
-              with(player.object) {
-                  omnomnomnom=true;
-                  if(player.team == TEAM_RED) {
-                      omnomnomnomindex=0;
-                      omnomnomnomend=31;
-                  } else if(player.team==TEAM_BLUE) {
-                      omnomnomnomindex=32;
-                      omnomnomnomend=63;
-                  }
-                  xscale=image_xscale; 
-              } 
+                with(player.object) {
+                    omnomnomnom=true;
+                    if(player.team == TEAM_RED) {
+                        omnomnomnomindex=0;
+                        omnomnomnomend=31;
+                    } else if(player.team==TEAM_BLUE) {
+                        omnomnomnomindex=32;
+                        omnomnomnomend=63;
+                    }
+                    xscale=image_xscale; 
+                } 
             }
             break;
       
-        case SCOPE_IN:
+        case TOGGLE_ZOOM:
             receiveCompleteMessage(global.serverSocket,1,global.tempBuffer);
             player = ds_list_find_value(global.players, read_ubyte(global.tempBuffer));
             if player.object != -1 {
-                with player.object {
-                    zoomed = true;
-                    runPower = 0.6;
-                    jumpStrength = 6;
-                }
-            }
-            break;
-            
-        case SCOPE_OUT:
-            receiveCompleteMessage(global.serverSocket,1,global.tempBuffer);
-            player = ds_list_find_value(global.players, read_ubyte(global.tempBuffer));
-            if player.object != -1 {
-                with player.object {
-                    zoomed = false;
-                    runPower = 0.9;
-                    jumpStrength = 8;
-                }
+                toggleZoom(player.object);
             }
             break;
                                          
-        case PASSWORD_REQUEST:             
-            global.clientPassword = get_string("Enter Password:", "");
-            write_ubyte(global.serverSocket, PASSWORD_SEND);
+        case PASSWORD_REQUEST:
+            if(!usePreviousPwd)
+                global.clientPassword = get_string("Enter Password:", "");
             write_ubyte(global.serverSocket, string_length(global.clientPassword));
             write_string(global.serverSocket, global.clientPassword);
+            socket_send(global.serverSocket);
             break;
        
         case PASSWORD_WRONG:                                    
             show_message("Incorrect Password.");
-            global.clientPassword = "";
-            with(all) if id != AudioControl.id instance_destroy();
-            room_goto_fix(Lobby);
-            exit;                  
-            break;
-              
+            instance_destroy();
+            exit;
+        
+        case INCOMPATIBLE_PROTOCOL:
+            show_message("Incompatible server protocol version.");
+            instance_destroy();
+            exit;
+            
         case KICK:
             receiveCompleteMessage(global.serverSocket,1,global.tempBuffer);
             reason = read_ubyte(global.tempBuffer);
             if reason == KICK_NAME kickReason = "Name Exploit";
-            else if reason == KICK_PASSWORDCOUNT kickReason = "Timed out from not submitting a password";                                    
+            else kickReason = "";
             show_message("You have been kicked from the server. "+kickReason+".");
-            with(all) if id != AudioControl.id instance_destroy();
-            room_goto_fix(Lobby);
-            exit;                  
-            break;
+            instance_destroy();
+            exit;
               
         case ARENA_ENDROUND:
             with ArenaHUD clientArenaEndRound();
@@ -323,34 +348,50 @@ do {
             doEventArenaRestart();
             break;
             
-        case ARENA_UNLOCKCP:
-            doEventArenaUnlockCP();
+        case UNLOCKCP:
+            doEventUnlockCP();
             break;
-        case KOTH_UNLOCKCP:
-            doEventKothUnlockCP();
-            break; 
                    
         case MAP_END:
             global.nextMap=receivestring(global.serverSocket, 1);
             receiveCompleteMessage(global.serverSocket,2,global.tempBuffer);
             global.winners=read_ubyte(global.tempBuffer);
             global.currentMapArea=read_ubyte(global.tempBuffer);
+            global.mapchanging = true;
             if !instance_exists(ScoreTableController) instance_create(0,0,ScoreTableController);
             instance_create(0,0,WinBanner);
             break;
 
         case CHANGE_MAP:
             roomchange=true;
+            global.mapchanging = false;
             global.currentMap = receivestring(global.serverSocket, 1);
-            global.currentMapURL = receivestring(global.serverSocket, 1);
             global.currentMapMD5 = receivestring(global.serverSocket, 1);
             if(global.currentMapMD5 == "") { // if this is an internal map (signified by the lack of an md5)
                 if(gotoInternalMapRoom(global.currentMap) != 0) {
                     show_message("Error:#Server went to invalid internal map: " + global.currentMap + "#Exiting.");
-                    game_end();
+                    instance_destroy();
+                    exit;
                 }
             } else { // it's an external map
-                CustomMapDownload();
+                if(string_pos("/", global.currentMap) != 0 or string_pos("\", global.currentMap) != 0)
+                {
+                    show_message("Server sent illegal map name: "+global.currentMap);
+                    instance_destroy();
+                    exit;
+                }
+                if(!file_exists("Maps/" + global.currentMap + ".png") or CustomMapGetMapMD5(global.currentMap) != global.currentMapMD5)
+                {   // Reconnect to the server to download the map
+                    var oldReturnRoom;
+                    oldReturnRoom = returnRoom;
+                    returnRoom = DownloadRoom;
+                    event_perform(ev_destroy,0);
+                    ClientCreate();
+                    returnRoom = oldReturnRoom;
+                    usePreviousPwd = true;
+                    exit;
+                }
+                room_goto_fix(CustomMapRoom);
             }
                  
             for(i=0; i<ds_list_size(global.players); i+=1) {
@@ -391,16 +432,63 @@ do {
             show_message("The server is full.");
             instance_destroy();
             exit;
-                              
+        
+        case HAXXY_CHALLENGE_CODE:
+            receiveCompleteMessage(global.serverSocket,16,global.tempBuffer);
+            write_ubyte(global.serverSocket, HAXXY_CHALLENGE_RESPONSE);
+            for(i=1;i<=16;i+=1)
+                write_ubyte(global.serverSocket, read_ubyte(global.tempBuffer) ^ ord(string_char_at(global.haxxyKey, i)));
+            socket_send(global.serverSocket);
+            break;
+            
+        case MESSAGE_STRING:
+            var message, notice;
+            message = receivestring(global.serverSocket, 1);
+            with NoticeO instance_destroy();
+            notice = instance_create(0, 0, NoticeO);
+            notice.notice = NOTICE_CUSTOM;
+            notice.message = message;
+            break;
+        
+        case SENTRY_POSITION:
+            receiveCompleteMessage(global.serverSocket,5,global.tempBuffer);
+            player = ds_list_find_value(global.players, read_ubyte(global.tempBuffer));
+            if(player.sentry)
+            {
+                player.sentry.x = read_ushort(global.tempBuffer) / 5;
+                player.sentry.y = read_ushort(global.tempBuffer) / 5;
+                player.sentry.xprevious = player.sentry.x;
+                player.sentry.yprevious = player.sentry.y;
+                player.sentry.vspeed = 0;
+            }
+            break;
+          
+        case WEAPON_FIRE:
+            receiveCompleteMessage(global.serverSocket,9,global.tempBuffer);
+            player = ds_list_find_value(global.players, read_ubyte(global.tempBuffer));
+            
+            if(player.object)
+            {
+                with(player.object)
+                {
+                    x = read_ushort(global.tempBuffer)/5;
+                    y = read_ushort(global.tempBuffer)/5;
+                    hspeed = read_byte(global.tempBuffer)/8.5;
+                    vspeed = read_byte(global.tempBuffer)/8.5;
+                    xprevious = x;
+                    yprevious = y;
+                }
+                
+                doEventFireWeapon(player, read_ushort(global.tempBuffer));
+            }
+            break;
+            
         default:
             show_message("The Server sent unexpected data");
             game_end();
-            exit; 
+            exit;
         }
     } else {
         break;
     }
 } until(roomchange);
-
-socket_send(global.serverSocket);
-global.clientFrame += 1;

@@ -9,13 +9,13 @@
   <resource name="ControlPointHUD" type="RESOURCE"/>
   <resource name="ArenaHUD" type="RESOURCE"/>
   <resource name="KothHUD" type="RESOURCE"/>
+  <resource name="DKothHUD" type="RESOURCE"/>
   <resource name="GeneratorHUD" type="RESOURCE"/>
   <resource name="KillLog" type="RESOURCE"/>
   <resource name="BubbleMenuZ" type="RESOURCE"/>
   <resource name="RespawnTimer" type="RESOURCE"/>
   <resource name="BubbleMenuX" type="RESOURCE"/>
   <resource name="BubbleMenuC" type="RESOURCE"/>
-  <resource name="BuildMenu" type="RESOURCE"/>
   <resource name="SentryHealthHud" type="RESOURCE"/>
   <resource name="NutsNBoltsHud" type="RESOURCE"/>
   <resource name="UberHud" type="RESOURCE"/>

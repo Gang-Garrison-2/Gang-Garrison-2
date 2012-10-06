@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="BubbleMenuZS" type="RESOURCE"/>
+  <resource name="BubbleMenuXS" type="RESOURCE"/>
+  <resource name="BubbleMenuCS" type="RESOURCE"/>
+  <resource name="BubbleMenuX2S" type="RESOURCE"/>
+</resources>

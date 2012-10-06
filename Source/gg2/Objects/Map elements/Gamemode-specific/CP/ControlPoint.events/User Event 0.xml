@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="OTHER" id="10">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">alpha=0;
+fade=0.05;
+
+if(instance_exists(ArenaControlPoint)) {
+    mode=2;     // Arena
+    locked=true;
+} else if(instance_exists(KothControlPoint)) {
+    mode=3;     // King of the Hill
+    locked=true;
+} else if(instance_exists(KothRedControlPoint) &amp;&amp; instance_exists(KothBlueControlPoint)) {
+    mode=4;     // Dual King of the Hill
+    locked=true;
+}else if(instance_exists(ControlPointSetupGate)) {
+    mode=1;     // A/D
+    locked=false;
+} else {
+    mode=0;     // Symmetrical CP
+    locked=false;
+}
+    
+global.cp[cp] = id;
+
+team=-1;
+redPresence=0;
+bluePresence=0;
+capping=0;
+cappers=0;
+cappingTeam=-1;
+capTime=300;
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

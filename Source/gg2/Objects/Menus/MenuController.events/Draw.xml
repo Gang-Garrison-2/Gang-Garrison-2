@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="DRAW" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{
+    var i, val; 
+    
+    if dimmed {   
+        draw_set_color(c_black);
+        draw_set_alpha(0.8);
+        draw_rectangle(view_xview[0], view_yview[0], view_xview[0]+view_wview[0], view_yview[0]+view_hview[0], false);   
+    }
+    
+    draw_set_color(c_white);
+
+    draw_set_valign(fa_middle);
+    draw_set_halign(fa_left);
+    draw_set_alpha(1);
+    
+    for(i=0; i&lt;items; i+=1) {
+        if editing == i {
+            draw_set_color(c_orange);
+        }
+        else if(i == virtualitem) {
+            draw_set_color(c_red);    
+        } else {
+            draw_set_color(c_white);    
+        }
+
+        draw_text(view_xview[0]+xbegin,view_yview[0]+ybegin+i*spacing,item_name[i]);
+        switch (item_type[i]) {
+            case "script":
+                val = "";
+                break;
+            case "edittext2":
+            case "edittext":
+            case "editnum":
+                val = item_value[i];
+                break;
+            case "editselect":
+                val = item_option_label[i, item_value[i]];
+                break;
+            case "editkey":
+                if editing == i {
+                    val = "Please press a key";
+                    break;
+                }
+            case "editkeyormouse":
+                if editing == i {
+                    val = "Please press a key or mouse button";
+                    break;
+                }
+                switch (menu_get_var(i)) {
+                    case vk_alt:
+                        val = "Alt";
+                        break;
+                    case vk_control:
+                        val = "Control";
+                        break;
+                    case vk_down:
+                        val = "Down";
+                        break;
+                    case vk_up:
+                        val = "Up";
+                        break;
+                    case vk_left:
+                        val = "Left";
+                        break;
+                    case vk_right:
+                        val = "Right";
+                        break;
+                    case vk_enter:
+                        val = "Enter";
+                        break;
+                    case vk_tab:
+                        val = "Tab";
+                        break;
+                    case vk_space:
+                        val = "Space Bar";
+                        break;
+                    case vk_shift:
+                        val = "Shift";
+                        break;
+                    case MOUSE_LEFT:
+                        val = "Left Mouse Button";
+                        break;
+                    case MOUSE_RIGHT:
+                        val = "Right Mouse Button";
+                        break;
+                    default:
+                        val = chr(menu_get_var(i));
+                        break;
+                }
+                break;
+        }
+        draw_text(view_xview[0]+xbegin+valueoffset,view_yview[0]+ybegin+i*spacing,val);
+    }
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

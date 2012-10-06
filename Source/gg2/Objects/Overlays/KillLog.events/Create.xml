@@ -14,12 +14,6 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">kills = ds_list_create();
-if (global.kothHudPos) {
-    yoffset=65*global.killLogPos
-}else if (global.kothHudPos) = false{
-    yoffset=45*global.killLogPos
-}
-
 </argument>
       </arguments>
     </action>

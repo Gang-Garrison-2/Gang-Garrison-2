@@ -16,7 +16,7 @@
         <argument kind="STRING">{
     xoffset = 0;
     yoffset = -3;
-    bubbleRefireTime = 7;
+    bubbleRefireTime = 5;
     refireTime = 5;
     replenishing = 1;
     bubbleCount = 0;
@@ -25,7 +25,7 @@
     bladeLife = 15;
     maxBlades = 1;
     bladeDamage = 17;
-    depletedBladeDamage = 6.5;
+    depletedBladeDamage = 8;
     maxAmmo = 90;
     replenishingRate = 2;
     ammoCount = maxAmmo;

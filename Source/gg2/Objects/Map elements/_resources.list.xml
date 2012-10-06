@@ -1,42 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
-  <resource name="CTF" type="GROUP"/>
   <resource name="Obstacles" type="GROUP"/>
-  <resource name="Arena" type="GROUP"/>
-  <resource name="Generator" type="GROUP"/>
-  <resource name="CP" type="GROUP"/>
-  <resource name="KOTH" type="GROUP"/>
-  <resource name="MoveBoxes" type="GROUP"/>
-  <resource name="SpawnPointRed" type="RESOURCE"/>
-  <resource name="SpawnPointRed" type="GROUP"/>
-  <resource name="SpawnRoom" type="RESOURCE"/>
-  <resource name="Desensitizer" type="RESOURCE"/>
-  <resource name="SpawnPointBlue" type="RESOURCE"/>
-  <resource name="SpawnPointBlue" type="GROUP"/>
-  <resource name="On_Map_End_Trigger_Red" type="RESOURCE"/>
-  <resource name="On_Map_End_Trigger_Red_Back" type="RESOURCE"/>
-  <resource name="On_Map_End_Trigger_Blu_Back" type="RESOURCE"/>
-  <resource name="On_Map_End_Trigger_Blu" type="RESOURCE"/>
-  <resource name="KillBox" type="RESOURCE"/>
-  <resource name="PitFall" type="RESOURCE"/>
-  <resource name="FragBox" type="RESOURCE"/>
-  <resource name="RedTeamGate" type="RESOURCE"/>
-  <resource name="BulletWall" type="RESOURCE"/>
-  <resource name="PlayerWall" type="RESOURCE"/>
-  <resource name="BulletWallHorizontal" type="RESOURCE"/>
-  <resource name="PlayerWallHorizontal" type="RESOURCE"/>
-  <resource name="RedIntelGate" type="RESOURCE"/>
-  <resource name="BlueIntelGate" type="RESOURCE"/>
-  <resource name="RedTeamGate2" type="RESOURCE"/>
-  <resource name="RedIntelGate2" type="RESOURCE"/>
-  <resource name="BlueTeamGate" type="RESOURCE"/>
-  <resource name="IntelGateVertical" type="RESOURCE"/>
-  <resource name="BlueTeamGate2" type="RESOURCE"/>
-  <resource name="BlueIntelGate2" type="RESOURCE"/>
-  <resource name="IntelGateHorizontal" type="RESOURCE"/>
-  <resource name="TeamGate" type="RESOURCE"/>
-  <resource name="IntelGate" type="RESOURCE"/>
-  <resource name="HealingCabinet" type="RESOURCE"/>
+  <resource name="Gamemode-specific" type="GROUP"/>
+  <resource name="Unused" type="GROUP"/>
+  <resource name="Spawnroom objects" type="GROUP"/>
+  <resource name="Player Influencing" type="GROUP"/>
+  <resource filename="Gates_Doors" name="Gates/Doors" type="GROUP"/>
   <resource name="NextAreaO" type="RESOURCE"/>
   <resource name="PreviousAreaO" type="RESOURCE"/>
 </resources>

@@ -32,11 +32,14 @@
     subobjects=0;
     
     if(object != -1) subobjects |= $01;
-    if(sentry != -1) subobjects |= $02;
+    if(sentry) subobjects |= $02;
+    if(isHaxxyWinner) subobjects |= $04;
+    
     write_ubyte(global.serializeBuffer, subobjects);
 
     if(object != -1) with(object) event_user(12);     
-    if(sentry != -1) with(sentry) event_user(12);
+    with(sentry)
+        event_user(12);
 </argument>
       </arguments>
     </action>

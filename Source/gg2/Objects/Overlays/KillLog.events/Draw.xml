@@ -13,7 +13,12 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">var i, map, n1, t1, w1, n2, t2, in, str, color;
+        <argument kind="STRING">var i, map, n1, t1, w1, n2, t2, in, str, color,yoffset;
+
+if (global.kothHudPos)
+    yoffset = 65*global.killLogPos;
+else
+    yoffset = 45*global.killLogPos;
 
 draw_set_halign(fa_left);
 draw_set_valign(fa_center);

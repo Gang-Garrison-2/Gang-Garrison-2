@@ -13,17 +13,12 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">{
-    done = false;
-    if (global.mapchanging == 1)
-    {
-        wait = 1;
-    }
-    else
-    {
-        wait = -1;
-    }   
-}</argument>
+        <argument kind="STRING">done = false;
+if (global.mapchanging)
+    wait = 1;
+else
+    wait = -1;
+</argument>
       </arguments>
     </action>
   </actions>
