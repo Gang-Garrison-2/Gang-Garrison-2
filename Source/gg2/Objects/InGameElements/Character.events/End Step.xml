@@ -13,15 +13,18 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">//Climbing down stairs
-if(vspeed == 0) { //if we aren't falling this frame
-    if(!place_free(x,y+7)) and place_free(x,y+6){
-        y += 6
-    }else if(abs(hspeed) &gt; 6 and place_free(x,y+12) and !place_free(x,y+13)){
-        //if we skip the step, cause we're going too fast
-        y += 12
-    }
+        <argument kind="STRING">// Climbing down stairs
+if(vspeed == 0) // if we aren't falling this frame
+{ 
+    if(place_free(x,y+6))
+        if(!place_free(x,y+7))
+            y += 6;
+        else if(speed &gt; 6) if(place_free(x,y+12)) if(!place_free(x,y+13))
+            y += 12;
 }
+xprevious = x;
+yprevious = y;
+
 if(global.isHost &amp;&amp; hp&lt;=0) {
     var assistant;
     assistant = secondToLastDamageDealer;
@@ -103,18 +106,22 @@ onCabinet = place_meeting(x, y, HealingCabinet);
 player.lastKnownx=x;
 player.lastKnowny=y;
 
-//Here the view is set
-if (id == global.myself.object) {
-    if (global.myself.object.object_index == Sniper and global.myself.object.zoomed) {
+// Here the view is set
+if (player == global.myself)
+{
+    if (object_is_ancestor(object_index, Sniper) and zoomed)
+    {
         var relxmouse, relymouse;
         relxmouse = min(max(window_views_mouse_get_x()-view_xview[0], 0), view_wview);
         relymouse = min(max(window_views_mouse_get_y()-view_yview[0], 0), view_hview);
         
-        view_xview[0] = global.myself.object.x+relxmouse-view_wview[0];
-        view_yview[0] = global.myself.object.y+relymouse-view_hview[0];
-    }else{
-        view_xview[0] = global.myself.object.x-view_wview[0]/2;
-        view_yview[0] = global.myself.object.y-view_hview[0]/2;
+        view_xview[0] = x+relxmouse-view_wview[0];
+        view_yview[0] = y+relymouse-view_hview[0];
+    }
+    else
+    {
+        view_xview[0] = x-view_wview[0]/2;
+        view_yview[0] = y-view_hview[0]/2;
     }
 }
 </argument>
