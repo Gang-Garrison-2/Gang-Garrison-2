@@ -18,7 +18,11 @@ yviewoffset = view_yview[0];
 xviewsize = view_wview[0];
 yviewsize = view_hview[0];
     
-if distance_to_point(xviewoffset+xviewsize/2,yviewoffset+yviewsize/2) &gt; 800 exit;
+if (distance_to_point(xviewoffset+xviewsize/2,yviewoffset+yviewsize/2) &gt; 800) {
+    //reset the animation
+    //alarm[6] = 0;
+    exit;
+}
 
 
     var imageOffset;

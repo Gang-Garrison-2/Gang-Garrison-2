@@ -23,7 +23,7 @@
     hphealed = 0;
     maxHealDistance = 300;
     ubering = false;
-    uberCharge=0;
+    uberCharge=1999;
     uberReady=false;
     maxAmmo = 40
     ammoCount = maxAmmo;

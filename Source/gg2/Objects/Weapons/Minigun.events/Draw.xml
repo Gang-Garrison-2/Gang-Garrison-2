@@ -34,7 +34,7 @@ if (alarm[6] &lt;= 0){
     //We are shooting, loop the shoot animation
     imageOffset = floor(image_index mod recoilAnimLength) + recoilAnimLength*owner.team
 }
-    draw_sprite_ext(sprite_index,imageOffset, xdrawpos, ydrawpos, image_xscale, image_yscale, image_angle, c_white, 1);
+    draw_sprite_ext(sprite_index,imageOffset,round(x+xoffset*image_xscale),round(y+yoffset),image_xscale,image_yscale,image_angle,c_white,image_alpha);
     if (sprite_index == MinigunDropS) {
         draw_sprite_ext(overlayDropSprite,imageOffset, xdrawpos, ydrawpos, image_xscale, image_yscale, image_angle, c_red,0.5*(1-(ammoCount/maxAmmo)));
     }else if (sprite_index == MinigunS) {
@@ -42,6 +42,13 @@ if (alarm[6] &lt;= 0){
     }else if (sprite_index == MinigunFS) {
         draw_sprite_ext(overlayFiringSprite,imageOffset, xdrawpos, ydrawpos, image_xscale, image_yscale, image_angle, c_red,0.5*(1-(ammoCount/maxAmmo)));
     }
+if (owner.ubered) {
+    if owner.team == TEAM_RED
+        ubercolour = c_red;
+    else if owner.team == TEAM_BLUE
+        ubercolour = c_blue;
+    draw_sprite_ext(sprite_index,imageOffset,round(x+xoffset*image_xscale),round(y+yoffset),image_xscale,image_yscale,image_angle,ubercolour,0.7*image_alpha);
+}
 </argument>
       </arguments>
     </action>
