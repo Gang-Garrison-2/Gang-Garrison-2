@@ -29,15 +29,18 @@
     t=0;
     hasRecoil = true;
     
+    recoilTime = 15;
+    longRecoilTime = 60;
+    
     normalSprite = RifleS;
     recoilSprite = RifleFS;
     reloadSprite = RifleFR;
     sprite_index = recoilSprite
     recoilAnimLength = image_number/2
-    recoilImageSpeed = recoilAnimLength/refireTime
+    recoilImageSpeed = recoilAnimLength/recoilTime
     sprite_index = reloadSprite
     reloadAnimLength = image_number/2
-    reloadImageSpeed = reloadAnimLength/(refireTime+reloadTime);
+    reloadImageSpeed = reloadAnimLength/(longRecoilTime);
     sprite_index = normalSprite
 }
 </argument>
