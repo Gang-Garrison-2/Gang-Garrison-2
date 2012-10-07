@@ -20,7 +20,7 @@ yviewsize = view_hview[0];
     
 if (distance_to_point(xviewoffset+xviewsize/2,yviewoffset+yviewsize/2) &gt; 800) {
     //reset the animation
-    //alarm[6] = 0;
+    alarm[6] = 0;
     exit;
 }
 
