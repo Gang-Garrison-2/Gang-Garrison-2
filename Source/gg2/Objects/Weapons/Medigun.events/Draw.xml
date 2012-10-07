@@ -43,13 +43,8 @@ if(instance_exists(healTarget))
     }
 }else{
     if (alarm[6] &lt;= 0){
-        if (alarm[7] &gt; 0) {
-            //if we are not shooting, but dropping
-            imageOffset = floor(image_index mod dropAnimLength) + dropAnimLength*owner.team
-        }else{
         //set the sprite to idle
         imageOffset = owner.team
-        }
     }else{
         //We are shooting, loop the shoot animation
          imageOffset = floor(image_index mod recoilAnimLength) + recoilAnimLength*owner.team

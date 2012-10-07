@@ -23,23 +23,16 @@ imageOffset = owner.team;
 xdrawpos = round(x+xoffset*image_xscale);
 ydrawpos = round(y+yoffset);
 if (alarm[6] &lt;= 0){
-        //if we are not shooting, but dropping
-        if (alarm[7] &gt; 0) {
-            imageOffset = floor(image_index mod dropAnimLength) + dropAnimLength*owner.team
-        }else{
-            //set the sprite to idle
-            imageOffset = owner.team;
-        }
+    //set the sprite to idle
+    imageOffset = owner.team;
 }else{
     //We are shooting, loop the shoot animation
     imageOffset = floor(image_index mod recoilAnimLength) + recoilAnimLength*owner.team
 }
     draw_sprite_ext(sprite_index,imageOffset,round(x+xoffset*image_xscale),round(y+yoffset),image_xscale,image_yscale,image_angle,c_white,image_alpha);
-    if (sprite_index == MinigunDropS) {
-        draw_sprite_ext(overlayDropSprite,imageOffset, xdrawpos, ydrawpos, image_xscale, image_yscale, image_angle, c_red,0.5*(1-(ammoCount/maxAmmo)));
-    }else if (sprite_index == MinigunS) {
+    if (sprite_index == normalSprite) {
          draw_sprite_ext(overlaySprite,imageOffset, xdrawpos, ydrawpos, image_xscale, image_yscale, image_angle, c_red,0.5*(1-(ammoCount/maxAmmo)));
-    }else if (sprite_index == MinigunFS) {
+    }else if (sprite_index == recoilSprite) {
         draw_sprite_ext(overlayFiringSprite,imageOffset, xdrawpos, ydrawpos, image_xscale, image_yscale, image_angle, c_red,0.5*(1-(ammoCount/maxAmmo)));
     }
 if (owner.ubered) {

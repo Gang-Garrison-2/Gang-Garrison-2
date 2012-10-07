@@ -13,7 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">Drop Animation</argument>
+        <argument kind="STRING">Recoil Animation</argument>
       </arguments>
     </action>
     <action id="603" library="1">
@@ -28,8 +28,9 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">sprite_index = dropSprite;
-alarm[7] = dropTime;
+        <argument kind="STRING">sprite_index = normalSprite
+image_speed = 0
+image_index = owner.team
 </argument>
       </arguments>
     </action>

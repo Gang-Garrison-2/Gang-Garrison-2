@@ -13,9 +13,9 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">//Drop the sprite
-sprite_index = dropSprite;
-alarm[7] = dropTime;
+        <argument kind="STRING">//Reset the sprite
+sprite_index = normalSprite
+image_speed = 0
 </argument>
       </arguments>
     </action>

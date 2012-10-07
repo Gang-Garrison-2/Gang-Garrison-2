@@ -28,20 +28,14 @@
     recoilTime = 3;
     recoilSprite = MinigunFS;
     normalSprite = MinigunS;
-    dropSprite = MinigunDropS
-    dropTime = 30
     sprite_index = recoilSprite
     recoilAnimLength = image_number/2
     recoilImageSpeed = recoilAnimLength/recoilTime
-    sprite_index = dropSprite
-    dropAnimLength = image_number/2
-    dropImageSpeed = dropAnimLength/reloadBuffer
     sprite_index = normalSprite
     
     //Overlays for the overheat
     overlaySprite = MinigunOverlayS
     overlayFiringSprite = MinigunOverlayFS
-    overlayDropSprite = MinigunDropOverlayS
 }
 </argument>
       </arguments>

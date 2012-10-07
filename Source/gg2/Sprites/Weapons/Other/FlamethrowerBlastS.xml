@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <sprite>
-  <origin x="15" y="14"/>
+  <origin x="14" y="14"/>
   <mask>
     <separate>false</separate>
     <shape>PRECISE</shape>
