@@ -338,7 +338,7 @@ while(commandLimitRemaining > 0) {
                         message = "/:/" + color + string_replace_all(name, "/:/", "/;/") + ": /:/" + COLOR_WHITE + message;
                     }
                     write_ubyte(teambuffer, CHAT_PUBLIC_MESSAGE);
-                    write_ubyte(teambuffer, string_length(message));
+                    write_ushort(teambuffer, string_length(message));
                     write_string(teambuffer, message);
 
                     // For the host, who never receives stuff
@@ -396,7 +396,7 @@ while(commandLimitRemaining > 0) {
                         message = "/:/" + color + string_replace_all(name, "/:/", "/;/") + ": /:/" + COLOR_WHITE + message;
                     }
                     write_ubyte(global.publicChatBuffer, CHAT_PUBLIC_MESSAGE);
-                    write_ubyte(global.publicChatBuffer, string_length(message));
+                    write_ushort(global.publicChatBuffer, string_length(message));
                     write_string(global.publicChatBuffer, message);
                     
                     // For the host, who never receives stuff
