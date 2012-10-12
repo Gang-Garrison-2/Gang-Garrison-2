@@ -7,6 +7,9 @@ numOfCommands = 0;
 input = 0;
 parseString = argument0;
 
+parseString = string_replace_all(parseString, chr(10), " ");
+parseString = string_replace_all(parseString, chr(13), " ");
+
 while string_count(" ", parseString) > 0
 {
     pos = string_pos(" ", parseString)-1;

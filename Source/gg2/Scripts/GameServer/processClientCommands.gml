@@ -271,7 +271,7 @@ while(commandLimitRemaining > 0) {
                     
                     // Notify the chat
                     var message;
-                    message = "/:/"+COLOR_WHITE+name+" is now known as "+newname;
+                    message = "/:/"+COLOR_WHITE+string_replace_all(name, "/:/", "/;/")+" is now known as "+string_replace_all(newname, "/:/", "/;/");
                     write_ubyte(global.publicChatBuffer, CHAT_PUBLIC_MESSAGE);
                     write_ubyte(global.publicChatBuffer, string_length(message));
                     write_string(global.publicChatBuffer, message);
@@ -325,17 +325,17 @@ while(commandLimitRemaining > 0) {
                     if team == TEAM_RED
                     {
                         teambuffer = global.privChatRedBuffer;
-                        message = "/:/"+color+name+": "+message;
+                        message = "/:/" + color + string_replace_all(name, "/:/", "/;/") + ": " + message;
                     }
                     else if team == TEAM_BLUE
                     {
                         teambuffer = global.privChatBlueBuffer;
-                        message = "/:/"+color+name+": "+message;
+                        message = "/:/" + color + string_replace_all(name, "/:/", "/;/") + ": " + message;
                     }
                     else
                     {
                         teambuffer = global.publicChatBuffer;// Specs can only global chat
-                        message = "/:/"+color+name+": /:/"+COLOR_WHITE+message;
+                        message = "/:/" + color + string_replace_all(name, "/:/", "/;/") + ": /:/" + COLOR_WHITE + message;
                     }
                     write_ubyte(teambuffer, CHAT_PUBLIC_MESSAGE);
                     write_ubyte(teambuffer, string_length(message));
@@ -385,15 +385,15 @@ while(commandLimitRemaining > 0) {
 
                     if team == TEAM_RED
                     {
-                        message = "/:/"+color+name+": /:/"+COLOR_WHITE+message;
+                        message = "/:/" + color + string_replace_all(name, "/:/", "/;/") + ": /:/" + COLOR_WHITE + message;
                     }
                     else if team == TEAM_BLUE
                     {
-                        message = "/:/"+color+name+": /:/"+COLOR_WHITE+message;
+                        message = "/:/" + color + string_replace_all(name, "/:/", "/;/") + ": /:/" + COLOR_WHITE + message;
                     }
                     else
                     {
-                        message = "/:/"+color+name+": /:/"+COLOR_WHITE+message;
+                        message = "/:/" + color + string_replace_all(name, "/:/", "/;/") + ": /:/" + COLOR_WHITE + message;
                     }
                     write_ubyte(global.publicChatBuffer, CHAT_PUBLIC_MESSAGE);
                     write_ubyte(global.publicChatBuffer, string_length(message));

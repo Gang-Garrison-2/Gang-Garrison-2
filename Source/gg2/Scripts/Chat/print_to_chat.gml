@@ -2,6 +2,8 @@
 // argument0 = input string
 var rawInput, partString, pos, tmpString, colorKey;
 rawInput = argument0;
+rawInput = string_replace_all(rawInput, chr(10), " ");
+rawInput = string_replace_all(rawInput, chr(13), " ");
 // While the input string minus the color codes is too long for the chat
 while string_length(rawInput) - string_count("/:/", rawInput)*(3+COLOR_RGB_LENGTH) > CHAT_MAX_LINE_LENGTH
 {
