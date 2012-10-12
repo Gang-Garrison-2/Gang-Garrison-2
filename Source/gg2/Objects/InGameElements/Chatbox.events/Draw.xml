@@ -62,11 +62,20 @@ if isTyping
 var message, shortMessage, color, offset, drawn_text;
 draw_set_font(global.gg2Font);
 
-var message, x_offset;
+var message, x_offset, alpha;
 for(i=0; i&lt;ds_list_size(chatLog); i+=1)
 {
     message = ds_list_find_value(chatLog, i)
     x_offset = 0;
+    alpha = ds_list_find_value(alphaLog, i);
+    if alpha &lt; 20 and not isTyping
+    {
+        draw_set_alpha(alpha/20);
+    }
+    else
+    {
+        draw_set_alpha(1);
+    }
 
     while string_count("/:/", message) &gt; 0
     {
