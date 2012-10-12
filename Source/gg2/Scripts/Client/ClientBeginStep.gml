@@ -205,8 +205,8 @@ do {
             break;
             
         case CHAT_PUBLIC_MESSAGE:
-            var message;
-            message = receivestring(global.serverSocket, 1);
+            var message, length;
+            message = receivestring(global.serverSocket, 2);
             print_to_chat(message);
             break;
                  
