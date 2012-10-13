@@ -16,16 +16,20 @@
         <argument kind="STRING">// Apply afterburn
 if (burnDuration &gt; 0)
 {
+    if(hp&gt;0)
+    {   // Don't count if someone else already finished him off, to prevent afterburn from "stealing" sticky kills (Bug #1021989)
+        if (lastDamageDealer != burnedBy &amp;&amp; lastDamageDealer != player)
+        {
+            secondToLastDamageDealer = lastDamageDealer;
+            alarm[4] = alarm[3];
+        }
+        alarm[3] = ASSIST_TIME;
+        lastDamageDealer = burnedBy;
+        lastDamageSource = afterburnSource;
+    }
     burnDuration -= durationDecay;
     hp -= burnIntensity / 30;
     timeUnscathed = 0;
-    if (lastDamageDealer != burnedBy &amp;&amp; lastDamageDealer != player) {
-        secondToLastDamageDealer = lastDamageDealer;
-        alarm[4] = alarm[3];
-    }
-    alarm[3] = ASSIST_TIME;
-    lastDamageDealer = burnedBy;
-    lastDamageSource = afterburnSource;
 }
 if (alarm[0] == -1 &amp;&amp; burnIntensity &gt; 0) burnIntensity -= intensityDecay;
 if (burnDuration &lt;= 0 || burnIntensity &lt;= 0)
@@ -72,9 +76,9 @@ if(!taunting and !omnomnomnom)
             moveStatus = 0;
         }
     }
-       
+    
 }
-        
+
 // Right click
 if (!player.humiliated and ((keyState | pressedKeys) &amp; $08)
     and (!taunting or player.class == CLASS_DEMOMAN) and !omnomnomnom)
@@ -183,8 +187,6 @@ if(pressedKeys &amp; $04) {
 pressedKeys = 0;
 releasedKeys = 0;
 
-
-    
 // flame bubble
 if burnDuration&gt;0 &amp;&amp; player.class != CLASS_PYRO &amp;&amp; random(80) &lt;= 1 {
     setChatBubble(player, 49);
