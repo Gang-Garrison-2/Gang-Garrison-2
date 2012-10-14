@@ -56,6 +56,7 @@ if (hasRecoil) {
             image_index = 0
             image_speed = blastImageSpeed;
             alarm[7] = blastNoFlameTime;
+            alarm[6] = 0;
             justBlast = false;
         }
     }
