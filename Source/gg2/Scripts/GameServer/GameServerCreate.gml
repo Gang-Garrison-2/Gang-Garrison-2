@@ -9,6 +9,7 @@
     
     global.privChatRedBuffer = buffer_create();
     global.privChatBlueBuffer = buffer_create();
+    global.privChatSpecBuffer = buffer_create();
     global.publicChatBuffer = buffer_create();
     
     global.currentMapIndex = 0;

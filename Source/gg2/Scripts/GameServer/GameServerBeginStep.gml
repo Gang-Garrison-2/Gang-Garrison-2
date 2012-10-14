@@ -154,8 +154,13 @@ for(i=1; i<ds_list_size(global.players); i+=1)
     {
         write_buffer(player.socket, global.privChatBlueBuffer);
     }
+    else
+    {
+        write_buffer(player.socket, global.privChatSpecBuffer);
+    }
 }
 buffer_clear(global.eventBuffer);
 buffer_clear(global.privChatRedBuffer);
 buffer_clear(global.privChatBlueBuffer);
+buffer_clear(global.privChatSpecBuffer);
 buffer_clear(global.publicChatBuffer);

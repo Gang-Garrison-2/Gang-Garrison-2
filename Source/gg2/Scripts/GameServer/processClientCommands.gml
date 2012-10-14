@@ -319,7 +319,16 @@ while(commandLimitRemaining > 0) {
                     {
                         message = string_replace_all(message, "/:/", "/;/");
                     }
-
+                    // Check whether the player is muted
+                    if muted
+                    {
+                        write_ubyte(player.socket, CHAT_PUBLIC_MESSAGE);
+                        message = "/:/"+COLOR_WHITE+"You cannot chat while muted.";
+                        write_ushort(player.socket, string_length(message));
+                        write_string(player.socket, message);
+                        break;
+                    }
+                    
                     var color;
                     color = getPlayerColor(player);
                     if team == TEAM_RED
@@ -334,7 +343,7 @@ while(commandLimitRemaining > 0) {
                     }
                     else
                     {
-                        teambuffer = global.publicChatBuffer;// Specs can only global chat
+                        teambuffer = global.privChatSpecBuffer;// Specs can only global chat
                         message = "/:/" + color + string_replace_all(name, "/:/", "/;/") + ": /:/" + COLOR_WHITE + message;
                     }
                     write_ubyte(teambuffer, CHAT_PUBLIC_MESSAGE);
@@ -373,6 +382,10 @@ while(commandLimitRemaining > 0) {
                     // Check whether the player is muted
                     if muted
                     {
+                        write_ubyte(player.socket, CHAT_PUBLIC_MESSAGE);
+                        message = "/:/"+COLOR_WHITE+"You cannot chat while muted.";
+                        write_ushort(player.socket, string_length(message));
+                        write_string(player.socket, message);
                         break;
                     }
                     // Hashes serve as newlines in GM, so prevent that

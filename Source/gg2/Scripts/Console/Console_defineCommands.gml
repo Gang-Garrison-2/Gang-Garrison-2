@@ -57,10 +57,10 @@ if string_letters(input[1]) == ''
 {
     // No letters were given
     // First check whether that ID is even valid
-    player = ds_list_find_value(global.players, floor(real(string_digits(input[1]))));
-    if player != -1 and floor(real(string_digits(input[1]))) > 0
+    if floor(real(string_digits(input[1]))) < ds_list_size(global.players) and floor(real(string_digits(input[1]))) > 0;
     {
         // Valid ID, kick that player
+        player = ds_list_find_value(global.players, floor(real(string_digits(input[1]))));
         with player
         {
             socket_destroy_abortive(socket);
@@ -69,7 +69,7 @@ if string_letters(input[1]) == ''
         Console_print(string_replace_all(player.name, '/:/', '/;/')+' has been kicked successfully.');
         exit;
     }
-    else if player == global.myself
+    else if floor(real(string_digits(input[1]))) == 0
     {
         // Can't kick yourself
         Console_print('The host cannot be kicked.');
@@ -197,6 +197,7 @@ if input[1] != ''
         // Cut off starting and ending quotes
         message = string_copy(message, 1, string_length(message)-2);
     }
+    message = string_copy(message, 0, 255);
 
     // Send it to everyone
     write_ubyte(global.eventBuffer, MESSAGE_STRING);
@@ -238,8 +239,7 @@ if string_letters(input[1]) == ''
 {
     // No letters were given
     // First check whether that ID is even valid
-    player = ds_list_find_value(global.players, floor(real(string_digits(input[1]))));
-    if player != -1
+    if floor(real(string_digits(input[1]))) < ds_list_size(global.players) and floor(real(string_digits(input[1]))) >= 0;
     {
         // Valid ID, mute that player
         if player.muted
@@ -268,16 +268,16 @@ with Player
     if name == other.input[1]
     {
         // Found the name, mute that player
-        if player.muted
+        if muted
         {
             // If player was already muted
-            Console_print(string_replace_all(player.name, '/:/', '/;/')+' is already muted!');
+            Console_print(string_replace_all(name, '/:/', '/;/')+' is already muted!');
         }
         else
         {
-            Console_print('Successfully muted '+string_replace_all(player.name, '/:/', '/;/'));
+            Console_print('Successfully muted '+string_replace_all(name, '/:/', '/;/'));
         }
-        player.muted = true;
+        muted = true;
         // Notify the chat
         var message;
         message = '/:/'+COLOR_WHITE+string_replace_all(player.name, '/:/', '/;/')+' was muted';
@@ -310,13 +310,12 @@ if string_letters(input[1]) == ''
 {
     // No letters were given
     // First check whether that ID is even valid
-    player = ds_list_find_value(global.players, floor(real(string_digits(input[1]))));
-    if player != -1
+    if floor(real(string_digits(input[1]))) < ds_list_size(global.players) and floor(real(string_digits(input[1]))) >= 0;
     {
         // Valid ID, unmute that player
-        if not player.muted
+        if player.unmuted
         {
-            // If player wasn't muted
+            // If player was not muted
             Console_print(string_replace_all(player.name, '/:/', '/;/')+' is not muted!');
         }
         else
@@ -326,7 +325,7 @@ if string_letters(input[1]) == ''
         player.muted = false;
         // Notify the chat
         var message;
-        message = '/:/'+COLOR_WHITE+string_replace_all(player.name, '/:/', '/;/')+' was unmuted';
+        message = '/:/'+COLOR_WHITE+string_replace_all(string_replace_all(player.name, '/:/', '/;/'), '/:/', '/;/')+' was unmuted';
         write_ubyte(global.publicChatBuffer, CHAT_PUBLIC_MESSAGE);
         write_ushort(global.publicChatBuffer, string_length(message));
         write_string(global.publicChatBuffer, message);
@@ -340,16 +339,16 @@ with Player
     if name == other.input[1]
     {
         // Found the name, unmute that player
-        if not player.muted
+        if not muted
         {
             // If player wasn't muted
-            Console_print(string_replace_all(player.name, '/:/', '/;/')+' is not muted!');
+            Console_print(string_replace_all(name, '/:/', '/;/')+' is not muted!');
         }
         else
         {
-            Console_print('Successfully unmuted '+string_replace_all(player.name, '/:/', '/;/'));
+            Console_print('Successfully unmuted '+string_replace_all(name, '/:/', '/;/'));
         }
-        player.muted = false;
+        muted = false;
         // Notify the chat
         var message;
         message = '/:/'+COLOR_WHITE+string_replace_all(player.name, '/:/', '/;/')+' was unmuted';
