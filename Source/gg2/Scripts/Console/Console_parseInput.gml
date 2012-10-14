@@ -2,7 +2,7 @@
 // argument0 = user input string
 
 // First step: Parse the arguments
-var numOfCommands, parseString, pos, quote_pos, a;
+var numOfCommands, parseString, pos, quote_pos;
 numOfCommands = 0;
 input = 0;
 parseString = argument0;

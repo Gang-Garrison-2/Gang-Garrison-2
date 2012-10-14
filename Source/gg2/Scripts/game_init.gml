@@ -71,7 +71,6 @@
     global.updaterBetaChannel = ini_read_real("General", "UpdaterBetaChannel", isBetaVersion());
     global.mapdownloadLimitBps = ini_read_real("Server", "Total bandwidth limit for map downloads in bytes per second", 50000);
     
-    
     global.classlimits[CLASS_SCOUT] = ini_read_real("Classlimits", "Scout", 9999)
     global.classlimits[CLASS_PYRO] = ini_read_real("Classlimits", "Pyro", 9999)
     global.classlimits[CLASS_SOLDIER] = ini_read_real("Classlimits", "Soldier", 9999)
@@ -128,7 +127,7 @@
     ini_write_real("Classlimits", "Spy", global.classlimits[CLASS_SPY])
     ini_write_real("Classlimits", "Sniper", global.classlimits[CLASS_SNIPER])
     ini_write_real("Classlimits", "Quote", global.classlimits[CLASS_QUOTE])
-
+    
     //screw the 0 index we will start with 1
     //map_truefort 
     maps[1] = ini_read_real("Maps", "ctf_truefort", 1);

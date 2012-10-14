@@ -25,7 +25,7 @@ for(i=0; i<ds_list_size(global.players); i+=1)
     var player;
     player = ds_list_find_value(global.players, i);
     
-    if(socket_has_error(player.socket) or player.kicked)
+    if(socket_has_error(player.socket))
     {
         removePlayer(player);
         ServerPlayerLeave(i);

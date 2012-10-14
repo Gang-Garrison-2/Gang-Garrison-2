@@ -273,7 +273,7 @@ while(commandLimitRemaining > 0) {
                     var message;
                     message = "/:/"+COLOR_WHITE+string_replace_all(name, "/:/", "/;/")+" is now known as "+string_replace_all(newname, "/:/", "/;/");
                     write_ubyte(global.publicChatBuffer, CHAT_PUBLIC_MESSAGE);
-                    write_ubyte(global.publicChatBuffer, string_length(message));
+                    write_ushort(global.publicChatBuffer, string_length(message));
                     write_string(global.publicChatBuffer, message);
                     print_to_chat(message);// For the host
                     
@@ -369,6 +369,12 @@ while(commandLimitRemaining > 0) {
                     lastChatTime = current_time;
                     var message;
                     message = read_string(socket, messageLength);
+                    
+                    // Check whether the player is muted
+                    if muted
+                    {
+                        break;
+                    }
                     // Hashes serve as newlines in GM, so prevent that
                     if(string_count("#",message) > 0)
                     {
