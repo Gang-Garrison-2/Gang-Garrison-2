@@ -26,6 +26,7 @@
     reloadTime = 15;
     reloadBuffer = refireTime;
     idle=true;
+    goldSprite = RevolverGoldS;
 }
 </argument>
       </arguments>

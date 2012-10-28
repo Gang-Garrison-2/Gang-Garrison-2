@@ -24,6 +24,7 @@
     maxAmmo = 8;
     ammoCount = maxAmmo;
     idle=true;
+    goldSprite = MinegunGoldS;
 }
 </argument>
       </arguments>

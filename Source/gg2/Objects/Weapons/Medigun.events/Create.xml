@@ -30,6 +30,7 @@
     reloadTime = 55;
     reloadBuffer = 0;
     idle=true;
+    goldSprite = MedigunGoldS;
 }
 </argument>
       </arguments>

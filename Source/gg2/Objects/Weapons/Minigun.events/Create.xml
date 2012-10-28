@@ -22,7 +22,7 @@
     ammoCount = maxAmmo;
     reloadBuffer = 15;
     isRefilling = false;
-    
+    goldSprite = MinigunGoldS;
 }
 </argument>
       </arguments>

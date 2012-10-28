@@ -27,6 +27,7 @@
     ammoCount = maxAmmo;
     shot=false;
     t=0;
+    goldSprite = RifleGoldS;
 }
 </argument>
       </arguments>

@@ -67,7 +67,8 @@
     //Sentries for Engies
     sentry = noone;
     
-    isHaxxyWinner = false;
+    // Haxxy rewards
+    rewards = 0;
 }
 </argument>
       </arguments>

@@ -23,6 +23,7 @@
     ammoCount = maxAmmo;
     rocketrange=501;
     idle=true;
+    goldSprite = RocketlauncherGoldS;
 }
 </argument>
       </arguments>

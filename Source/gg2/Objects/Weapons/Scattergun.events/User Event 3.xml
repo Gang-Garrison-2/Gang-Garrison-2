@@ -24,6 +24,8 @@ repeat(6) {
     shot.ownerPlayer = ownerPlayer;
     shot.team = owner.team;
     shot.weapon = WEAPON_SCATTERGUN;
+    if(sprite_index == goldSprite)
+        shot.sprite_index = ShotGoldS;
     with(shot) {   
         speed += owner.hspeed*hspeed/15;
     

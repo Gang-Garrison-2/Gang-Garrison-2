@@ -27,6 +27,8 @@
             shot.ownerPlayer=ownerPlayer;
             shot.team=owner.team;
             shot.weapon=WEAPON_MINIGUN;
+            if(sprite_index == goldSprite)
+                shot.sprite_index = ShotGoldS;
             with(shot) {
                 hspeed+=owner.hspeed;
                 alarm[0]=30;

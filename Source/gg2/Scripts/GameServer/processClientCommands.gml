@@ -277,30 +277,23 @@ while(commandLimitRemaining > 0) {
             }
             break;
         
-        case I_AM_A_HAXXY_WINNER:
-            write_ubyte(socket, HAXXY_CHALLENGE_CODE);
+        case REWARD_REQUEST:
+            player.rewardName = read_string(socket, socket_receivebuffer_size(socket));
             player.challenge = "";
             repeat(16)
-                player.challenge += chr(irandom_range(1,255));
-            write_string(socket, player.challenge);
+                player.challenge += chr(irandom_range(0,255));
+            
+            write_ubyte(socket, REWARD_CHALLENGE_CODE);            write_binstring(socket, player.challenge);
             break;
             
-        case HAXXY_CHALLENGE_RESPONSE:
-            var answer, i, challengeSent;
+        case REWARD_CHALLENGE_RESPONSE:
+            var answer, i, authbuffer;
+            answer = read_binstring(socket, 16);
+            
             with(player)
-                challengeSent = variable_local_exists("challenge");
-            if(!challengeSent)
-                break;
-                
-            answer = "";
-            for(i=1;i<=16;i+=1)
-                answer += chr(read_ubyte(socket) ^ ord(string_char_at(player.challenge, i)));
-            if(HAXXY_PUBLIC_KEY==md5(answer)) {
-                player.isHaxxyWinner = true;
-            } else {
-                socket_destroy_abortive(player.socket);
-                player.socket = -1;
-            }
+                if(variable_local_exists("challenge") and variable_local_exists("rewardName"))
+                    rewardAuthStart(player, answer, challenge, true, rewardName);
+           
             break;
         }
         break;

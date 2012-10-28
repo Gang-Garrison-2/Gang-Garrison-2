@@ -6,7 +6,7 @@
 **      str     string from which to compute an MD5 hash (RFC 1321)
 **
 **  Returns:
-**      an MD5 hash (RFC 1321) computed from the given string
+**      a binary MD5 hash (RFC 1321) computed from the given string
 **
 **  Notes:
 **      This will only work with strings shorter than 512 megabytes.
@@ -78,8 +78,7 @@
     digest = "";
     for (j=0; j<4; j+=1) {
         for (i=0; i<32; i+=8) {
-            digest += string_char_at("0123456789abcdef",1+($F & h[j] >> i+4));
-            digest += string_char_at("0123456789abcdef",1+($F & h[j] >> i));
+            digest += chr($FF & h[j] >> i);
         }
     }
     return digest;

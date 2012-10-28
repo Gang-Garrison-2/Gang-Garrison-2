@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<event category="OTHER" id="10">
+<event category="DESTROY" id="0">
   <actions>
     <action id="603" library="1">
       <!--action name: Code-->
@@ -13,17 +13,16 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">{
-    // This code is run after the child's create event
-    // so it can use values set there.
-    currentWeapon = instance_create(x,y,weapons[0]);
-    currentWeapon.owner=id;
-    currentWeapon.ownerPlayer=player;
-    rewardUpdateWeapon(currentWeapon);
-
-    hp = maxHp;
-    tauntlength = sprite_get_number(tauntsprite)/2;
+        <argument kind="STRING">while(!ds_queue_empty(workQueue))
+{
+    var item;
+    item = ds_queue_dequeue(workQueue);
+    buffer_destroy(ds_list_find_value(item, 1));
+    ds_list_destroy(item);
 }
+ds_queue_destroy(workQueue);
+socket_destroy(socket);
+buffer_destroy(responseBuffer);
 </argument>
       </arguments>
     </action>

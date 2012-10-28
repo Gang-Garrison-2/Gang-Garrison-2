@@ -34,7 +34,7 @@
     
     reloadBuffer = 15;
     isRefilling = false;
-    
+    goldSprite = FlamethrowerGoldS;
 }
 </argument>
       </arguments>

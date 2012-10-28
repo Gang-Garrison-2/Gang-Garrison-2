@@ -14,7 +14,7 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">    if(global.updateType == FULL_UPDATE) {
-        receiveCompleteMessage(global.serverSocket,12,global.deserializeBuffer);
+        receiveCompleteMessage(global.serverSocket,14,global.deserializeBuffer);
         stats[KILLS] = read_ubyte(global.deserializeBuffer);
         stats[DEATHS] = read_ubyte(global.deserializeBuffer);
         stats[CAPS] = read_ubyte(global.deserializeBuffer);
@@ -26,6 +26,7 @@
         stats[INVULNS] = read_ubyte(global.deserializeBuffer);
         stats[BONUS] = read_ubyte(global.deserializeBuffer);
         stats[POINTS] = read_ubyte(global.deserializeBuffer);
+        rewards = read_ushort(global.deserializeBuffer);
     }
  
     var charObj, subobjects;
@@ -72,7 +73,6 @@
             instance_destroy();
     }
     
-    isHaxxyWinner = (subobjects &amp; $04 != 0)
 </argument>
       </arguments>
     </action>

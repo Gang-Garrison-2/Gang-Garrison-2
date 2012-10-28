@@ -25,4 +25,6 @@
   <resource name="doEventArenaRestart" type="RESOURCE"/>
   <resource name="sendEventFireWeapon" type="RESOURCE"/>
   <resource name="doEventFireWeapon" type="RESOURCE"/>
+  <resource name="sendEventUpdateRewards" type="RESOURCE"/>
+  <resource name="doEventUpdateRewards" type="RESOURCE"/>
 </resources>

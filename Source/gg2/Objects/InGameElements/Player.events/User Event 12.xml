@@ -26,14 +26,14 @@
         write_ubyte(global.serializeBuffer, stats[DEFENSES]);
         write_ubyte(global.serializeBuffer, stats[INVULNS]);
         write_ubyte(global.serializeBuffer, stats[BONUS]);
-        write_ubyte(global.serializeBuffer, stats[POINTS]); 
+        write_ubyte(global.serializeBuffer, stats[POINTS]);
+        write_ushort(global.serializeBuffer, rewards);
     } 
     
     subobjects=0;
     
     if(object != -1) subobjects |= $01;
     if(sentry) subobjects |= $02;
-    if(isHaxxyWinner) subobjects |= $04;
     
     write_ubyte(global.serializeBuffer, subobjects);
 
