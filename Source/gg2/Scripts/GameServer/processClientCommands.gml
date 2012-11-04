@@ -273,7 +273,7 @@ while(commandLimitRemaining > 0) {
                     var message;
                     message = "/:/"+COLOR_WHITE+string_replace_all(name, "/:/", "/;/")+" is now known as "+string_replace_all(newname, "/:/", "/;/");
                     write_ubyte(global.publicChatBuffer, CHAT_PUBLIC_MESSAGE);
-                    write_ushort(global.publicChatBuffer, string_length(message));
+                    write_ubyte(global.publicChatBuffer, string_length(message));
                     write_string(global.publicChatBuffer, message);
                     print_to_chat(message);// For the host
                     
@@ -319,16 +319,7 @@ while(commandLimitRemaining > 0) {
                     {
                         message = string_replace_all(message, "/:/", "/;/");
                     }
-                    // Check whether the player is muted
-                    if muted
-                    {
-                        write_ubyte(player.socket, CHAT_PUBLIC_MESSAGE);
-                        message = "/:/"+COLOR_WHITE+"You cannot chat while muted.";
-                        write_ushort(player.socket, string_length(message));
-                        write_string(player.socket, message);
-                        break;
-                    }
-                    
+
                     var color;
                     color = getPlayerColor(player, false);
                     if team == TEAM_RED
@@ -344,7 +335,7 @@ while(commandLimitRemaining > 0) {
                     else
                     {
                         teambuffer = global.privChatSpecBuffer;// Specs can only global chat
-                        message = "/:/" + color + string_replace_all(name, "/:/", "/;/") + ": /:/" + COLOR_WHITE + message;
+                        message = "/:/" + color + "(team) " + string_replace_all(name, "/:/", "/;/") + ": /:/" + COLOR_WHITE + message;
                     }
                     write_ubyte(teambuffer, CHAT_PUBLIC_MESSAGE);
                     write_ushort(teambuffer, string_length(message));
@@ -378,16 +369,6 @@ while(commandLimitRemaining > 0) {
                     lastChatTime = current_time;
                     var message;
                     message = read_string(socket, messageLength);
-                    
-                    // Check whether the player is muted
-                    if muted
-                    {
-                        write_ubyte(player.socket, CHAT_PUBLIC_MESSAGE);
-                        message = "/:/"+COLOR_WHITE+"You cannot chat while muted.";
-                        write_ushort(player.socket, string_length(message));
-                        write_string(player.socket, message);
-                        break;
-                    }
                     // Hashes serve as newlines in GM, so prevent that
                     if(string_count("#",message) > 0)
                     {
@@ -471,4 +452,5 @@ while(commandLimitRemaining > 0) {
         }
         break;
     } 
+}
 }
