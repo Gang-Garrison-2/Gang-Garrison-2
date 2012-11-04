@@ -22,6 +22,11 @@ socket_destroy(global.tcpListener);
 socket_destroy(global.serverSocket);
 buffer_destroy(serverId);
 
+buffer_destroy(global.privChatRedBuffer);
+buffer_destroy(global.privChatBlueBuffer);
+buffer_destroy(global.privChatSpecBuffer);
+buffer_destroy(global.publicChatBuffer);
+
 with(Player)
     instance_destroy();
 
