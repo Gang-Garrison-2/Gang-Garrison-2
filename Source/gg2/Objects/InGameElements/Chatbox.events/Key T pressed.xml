@@ -28,7 +28,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if not isTyping and not (instance_exists(InGameMenuController) || instance_exists(OptionsController) || instance_exists(ControlsController) || instance_exists(HUDOptionsController))
+        <argument kind="STRING">if not isTyping and not (instance_exists(InGameMenuController) or instance_exists(OptionsController) or instance_exists(ControlsController) or instance_exists(HUDOptionsController))
 
 hidden = not hidden;
 </argument>
