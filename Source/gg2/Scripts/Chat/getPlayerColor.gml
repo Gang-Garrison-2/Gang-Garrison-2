@@ -1,10 +1,10 @@
 // Decides what chat color a player should have, depending on host status, haxxy and team
-// argument0 == player
-if ds_list_find_index(global.players, argument0) == 0
+// argument0 == player, argument1 = public chat (boolean)
+if ds_list_find_index(global.players, argument0) == 0 and argument1 == 1
 {
-    return COLOR_PURPLE;
+    return COLOR_GOLD;
 }
-else if argument0.isHaxxyWinner
+else if argument0.isHaxxyWinner and argument1 == 1
 {
     return COLOR_GOLD;
 }

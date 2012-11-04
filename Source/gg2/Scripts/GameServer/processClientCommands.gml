@@ -330,7 +330,7 @@ while(commandLimitRemaining > 0) {
                     }
                     
                     var color;
-                    color = getPlayerColor(player);
+                    color = getPlayerColor(player, false);
                     if team == TEAM_RED
                     {
                         teambuffer = global.privChatRedBuffer;
@@ -400,7 +400,7 @@ while(commandLimitRemaining > 0) {
                     }
                     
                     var color;
-                    color = getPlayerColor(player);
+                    color = getPlayerColor(player, true);
 
                     if team == TEAM_RED
                     {
