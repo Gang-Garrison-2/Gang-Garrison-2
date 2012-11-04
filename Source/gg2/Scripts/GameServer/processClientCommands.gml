@@ -325,12 +325,12 @@ while(commandLimitRemaining > 0) {
                     if team == TEAM_RED
                     {
                         teambuffer = global.privChatRedBuffer;
-                        message = "/:/" + color + string_replace_all(name, "/:/", "/;/") + ": " + message;
+                        message = "/:/" + color + "(team) " + string_replace_all(name, "/:/", "/;/") + ": " + message;
                     }
                     else if team == TEAM_BLUE
                     {
                         teambuffer = global.privChatBlueBuffer;
-                        message = "/:/" + color + string_replace_all(name, "/:/", "/;/") + ": " + message;
+                        message = "/:/" + color + "(team) " + string_replace_all(name, "/:/", "/;/") + ": " + message;
                     }
                     else
                     {
