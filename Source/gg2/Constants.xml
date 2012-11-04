@@ -147,8 +147,8 @@
   <constant name="HP_PER_POINT" value="400"/>
   <constant name="INTEL_MAX_TIMER" value="900"/>
   <constant name="COLOR_ORANGE" value="&quot;255-102-000&quot;"/>
-  <constant name="COLOR_RED" value="&quot;255-000-000&quot;"/>
-  <constant name="COLOR_GREEN" value="&quot;000-255-000&quot;"/>
+  <constant name="COLOR_RED" value="&quot;250-034-034&quot;"/>
+  <constant name="COLOR_GREEN" value=" &quot;060-200-070&quot;"/>
   <constant name="COLOR_BLUE" value="&quot;000-000-255&quot;"/>
   <constant name="COLOR_PURPLE" value="&quot;255-000-255&quot;"/>
   <constant name="COLOR_YELLOW" value="&quot;255-255-000&quot;"/>
@@ -158,6 +158,9 @@
   <constant name="COLOR_GOLD" value="&quot;252-217-023&quot;"/>
   <constant name="COLOR_RGB_LENGTH" value="11"/>
   <constant name="CHAT_MAX_STRING_LENGTH" value="300"/>
+  <constant name="COLOR_RGB_LENGTH" value="11"/>
+  <constant name="CHAT_MAX_STRING_LENGTH" value="300"/>
   <constant name="MAX_COMMAND_LOG_SIZE" value="100"/>
   <constant name="CHAT_MAX_LINE_LENGTH" value="41"/>
+  <constant name="CHATLOG_SIZE" value="83"/>
 </constants>
