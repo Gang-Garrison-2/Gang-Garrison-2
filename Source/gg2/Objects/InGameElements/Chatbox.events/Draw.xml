@@ -13,75 +13,70 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if hidden and not isTyping
-{
-    exit;
-}
+        <argument kind="STRING">var xoffset, yoffset, xsize, ysize;
+xoffset = view_xview[0];
+yoffset = view_yview[0];
+xsize = view_wview[0];
+ysize = view_hview[0];
 
-var xsize, ysize;
-
-xsize = sprite_width;
-ysize = sprite_height;
-
-x = view_xview[0] + 5;
-y = view_yview[0] + view_hview[0]-sprite_height-85;
-
-draw_set_valign(fa_top);
 draw_set_halign(fa_left);
+draw_set_valign(fa_top);
 draw_set_color(c_white);
 
-// Draw the background
-if isTyping
+if (isTyping)
 {
-    draw_sprite(sprite_index, 0, x, y);
+    // Fadein
+    if (alpha &lt; 0.6)
+    {
+        alpha += 0.1;
+    }
+    if (alpha &gt;= 0.6)
+    {
+        alpha = 0.6;
+    }
+}
+else if (alpha &gt; 0)
+{
+    // Fadeout
+    alpha -= 0.2;
+    alpha = max(0, alpha);
 }
 
-image_alpha = 1;
-
-// If we're typing something, draw that
-if isTyping
+// Draw the window
+if alpha &gt; 0
 {
-    var str;
-    if blinking_underscore 
-    {
-        str = keyboard_string+"_";
-    }
-    else
-    {
-        str = keyboard_string;
-    }
-    str = string_replace_all(str,"#","\#")
-    draw_set_alpha(1)
-    draw_text(x+60, y+ysize-13, str);
-    if (isTyping = CHAT_PRIV_MESSAGE)
-        draw_text(x+10, y+ysize-13, "(TEAM)");
-    if (isTyping = CHAT_PUBLIC_MESSAGE)
-        draw_text(x+10, y+ysize-13, "(ALL)");
+    draw_sprite_ext(ChatS, 0, xoffset + 5, yoffset + 200, 1, 1, 0, c_white, alpha);
+    draw_sprite_ext(SliderS, 0, xoffset + 380, yoffset + 225 + slider_offset, 1, 1, 0, c_white, alpha);
 }
 
-var message, shortMessage, color, offset, drawn_text;
-draw_set_font(global.gg2Font);
+var size, beginpos;
+size = ds_list_size(chatLog) - numberLinesVisible;
+beginpos = floor((slider_offset / 180) * size);
 
-var message, x_offset, alpha;
-for(i=0; i&lt;ds_list_size(chatLog); i+=1)
+var message, t_alpha;
+for(i=beginpos; i&lt;beginpos+numberLinesVisible; i+=1)
 {
     message = ds_list_find_value(chatLog, i)
-    x_offset = 0;
-    alpha = ds_list_find_value(alphaLog, i);
-    if alpha &lt; 20 and not isTyping
+    message_offset = 0;
+    
+    if (isTyping)
     {
-        draw_set_alpha(alpha/20);
+        t_alpha = 1;
+    }
+    else if ((i-beginpos) &gt; 6)
+    {
+        t_alpha = ((i-beginpos) - (numberLinesVisible-6)) * 0.2;
     }
     else
     {
-        draw_set_alpha(1);
+        t_alpha = 0;
     }
 
     while string_count("/:/", message) &gt; 0
     {
-        var nextpos, text;
+        var nextpos, text, color;
         // Get the color from the prefix
-        draw_set_color(getColorCode(string_copy(message, 4, COLOR_RGB_LENGTH)));
+        color = getColorCode(string_copy(message, 4, COLOR_RGB_LENGTH));
         // Check if there's another prefix in this message
         nextpos = string_pos("/:/", string_copy(message, 4, string_length(message))) + 3;
         if nextpos == 3
@@ -98,14 +93,16 @@ for(i=0; i&lt;ds_list_size(chatLog); i+=1)
             // What we need to set with a new color
             message = string_copy(message, nextpos, string_length(message));
         }
-        draw_text(x+x_offset+10, y+ysize-45-12*(ds_list_size(chatLog)-i), text);
+        draw_text_color(xoffset + message_offset + 20, yoffset + 215 + ((i - beginpos) * 15), text, color, color, color, color, t_alpha);
         // Offset the draw pos of the next strip of text, so that it doesn't overwrite the old one
-        x_offset += string_width(text);
+        message_offset += string_width(text);
     }
 }
 
-draw_set_font(global.gg2Font)
-draw_set_color(c_white);
+if (isTyping)
+{
+    draw_text(xoffset + 20, yoffset + 480, string_copy(keyboard_string, 0, 48));
+}
 </argument>
       </arguments>
     </action>

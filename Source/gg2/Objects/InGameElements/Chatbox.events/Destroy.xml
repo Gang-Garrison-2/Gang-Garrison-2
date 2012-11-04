@@ -14,7 +14,6 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">ds_list_destroy(chatLog);
-ds_list_destroy(alphaLog);
 </argument>
       </arguments>
     </action>

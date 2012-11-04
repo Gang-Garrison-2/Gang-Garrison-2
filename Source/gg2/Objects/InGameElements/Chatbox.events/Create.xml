@@ -14,11 +14,24 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">chatLog = ds_list_create();
-alphaLog = ds_list_create();
+var i;
+for (i=0; i&lt;CHATLOG_SIZE; i+=1)
+{
+    ds_list_add(chatLog, "");
+}
+
 isTyping = false;
 hidden = false;
 blinking_underscore = false;
 blink_speed = 10;
+
+numberLinesVisible = 17;
+
+slider_offset = 180;
+slide = false;
+mPos_x = -1;
+mPos_y = -1;
+alpha = 0;
 </argument>
       </arguments>
     </action>

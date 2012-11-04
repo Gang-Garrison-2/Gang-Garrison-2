@@ -24,4 +24,6 @@
   <resource name="ConsoleS" type="RESOURCE"/>
   <resource name="ChatboxS" type="RESOURCE"/>
   <resource name="ChatboxS_old" type="RESOURCE"/>
+  <resource name="ChatS" type="RESOURCE"/>
+  <resource name="SliderS" type="RESOURCE"/>
 </resources>
