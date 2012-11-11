@@ -20,8 +20,6 @@ var imageOffset, xdrawpos, ydrawpos;
 imageOffset = owner.team;
 xdrawpos = round(x+xoffset*image_xscale);
 ydrawpos = round(y+yoffset);
-if (justShot)
-    justShot = false;
 if(instance_exists(healTarget))
 {
     if(healTarget.object != -1)

@@ -34,7 +34,10 @@
     reloadTime = 55;
     reloadBuffer = 0;
     
-    hasRecoil = false;
+    recoilTime = 1;
+    recoilSprite = BladeFS;
+    recoilAnimLength = sprite_get_number(recoilSprite)/2;
+    recoilImageSpeed = recoilAnimLength/recoilTime;
 }
 </argument>
       </arguments>

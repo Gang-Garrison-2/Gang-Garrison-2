@@ -51,9 +51,6 @@
                 case WEAPON_SHOTGUN:
                     ds_map_add(map, "weapon", ShotgunKL);
                     break;
-                case WEAPON_QROCKETLAUNCHER:
-                    ds_map_add(map, "weapon", QRlauncherS);
-                    break;
                 case WEAPON_ROCKETLAUNCHER:
                     ds_map_add(map, "weapon", RocketKL);
                     break;

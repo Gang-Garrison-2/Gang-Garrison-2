@@ -22,15 +22,11 @@
     reloadTime = 15;
     reloadBuffer = 20;
     idle=true;
-    
-    hasRecoil = true;
-    normalSprite = ShotgunS
-    recoilSprite = ShotgunFS
+
     recoilTime = refireTime;
-    sprite_index = recoilSprite
-    recoilAnimLength = image_number/2
-    recoilImageSpeed = recoilAnimLength/recoilTime
-    sprite_index = normalSprite
+    recoilSprite = ShotgunFS;
+    recoilAnimLength = sprite_get_number(recoilSprite)/2;
+    recoilImageSpeed = recoilAnimLength/recoilTime;
 }
 </argument>
       </arguments>

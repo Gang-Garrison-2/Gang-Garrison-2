@@ -9,4 +9,5 @@
   <resource name="MedigunFS" type="RESOURCE"/>
   <resource name="ScattergunFS" type="RESOURCE"/>
   <resource name="FlamethrowerFS" type="RESOURCE"/>
+  <resource name="BladeFS" type="RESOURCE"/>
 </resources>

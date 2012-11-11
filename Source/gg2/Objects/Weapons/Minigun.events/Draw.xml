@@ -15,9 +15,6 @@
       <arguments>
         <argument kind="STRING">if(owner.taunting or owner.omnomnomnom or owner.player.humiliated)
     exit;
-if (justShot) {
-    justShot = false
-}
 var imageOffset, xdrawpos, ydrawpos;
 imageOffset = owner.team;
 xdrawpos = round(x+xoffset*image_xscale);

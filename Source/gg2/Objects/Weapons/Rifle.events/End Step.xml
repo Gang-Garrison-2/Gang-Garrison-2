@@ -13,21 +13,30 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">// Ammo HUD. Because real men let computers count for them. (Rifle overrides this and doesn't create an AmmoCounter)
-if(!instance_exists(AmmoCounter))
-    instance_create(0,0,AmmoCounter);
-
-if (justShot)
+        <argument kind="STRING">if (justShot)
 {
     justShot = false;
     //Recoil Animation
-    if (sprite_index != recoilSprite)
+    if (owner.zoomed)
     {
-        sprite_index = recoilSprite
-        image_index = 0
-        image_speed = recoilImageSpeed
+        if (sprite_index != reloadSprite)
+        {
+            sprite_index = reloadSprite
+            image_index = 0
+            image_speed = reloadImageSpeed;
+        }
+        alarm[6] = longRecoilTime;
     }
-    alarm[6] = recoilTime;
+    else
+    {
+        if (sprite_index != recoilSprite)
+        {
+            sprite_index = recoilSprite
+            image_index = 0
+            image_speed = recoilImageSpeed;
+        }
+        alarm[6] = recoilTime;
+    }
 }
 </argument>
       </arguments>

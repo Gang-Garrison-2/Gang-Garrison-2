@@ -1,20 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<event category="ALARM" id="6">
+<event category="STEP" id="2">
   <actions>
-    <action id="605" library="1">
-      <!--action name: Comment-->
+    <action id="604" library="1">
+      <!--action name: Inherited-->
       <kind>NORMAL</kind>
       <allowRelative>false</allowRelative>
       <question>false</question>
       <canApplyTo>false</canApplyTo>
-      <actionType>NONE</actionType>
-      <functionName/>
+      <actionType>FUNCTION</actionType>
+      <functionName>action_inherited</functionName>
       <relative>false</relative>
       <not>false</not>
       <appliesTo>.self</appliesTo>
-      <arguments>
-        <argument kind="STRING">Recoil Expire</argument>
-      </arguments>
+      <arguments/>
     </action>
     <action id="603" library="1">
       <!--action name: Code-->
@@ -28,12 +26,15 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">//Override this if we're airblasting
-if (sprite_index != blastSprite) {
-    sprite_index = dropSprite;
-    image_speed = dropImageSpeed;
+        <argument kind="STRING">if (justBlast)
+{
+    justBlast = false;
+    //Airblast Recoil Animation
+    sprite_index = blastSprite;
     image_index = 0;
-    alarm[7] = dropTime;
+    image_speed = blastImageSpeed;
+    alarm[7] = blastNoFlameTime;
+    alarm[6] = 0;
 }
 </argument>
       </arguments>
