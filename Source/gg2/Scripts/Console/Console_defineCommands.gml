@@ -239,8 +239,9 @@ if string_letters(input[1]) == ''
 {
     // No letters were given
     // First check whether that ID is even valid
-    if floor(real(string_digits(input[1]))) < ds_list_size(global.players) and floor(real(string_digits(input[1]))) >= 0;
+    if floor(real(string_digits(input[1]))) < ds_list_size(global.players) and floor(real(string_digits(input[1]))) >= 0
     {
+        player = ds_list_find_value(global.players, floor(real(string_digits(input[1]))));
         // Valid ID, mute that player
         if player.muted
         {
@@ -280,7 +281,7 @@ with Player
         muted = true;
         // Notify the chat
         var message;
-        message = '/:/'+COLOR_WHITE+string_replace_all(player.name, '/:/', '/;/')+' was muted';
+        message = '/:/'+COLOR_WHITE+string_replace_all(name, '/:/', '/;/')+' was muted';
         write_ubyte(global.publicChatBuffer, CHAT_PUBLIC_MESSAGE);
         write_ushort(global.publicChatBuffer, string_length(message));
         write_string(global.publicChatBuffer, message);
@@ -310,10 +311,12 @@ if string_letters(input[1]) == ''
 {
     // No letters were given
     // First check whether that ID is even valid
-    if floor(real(string_digits(input[1]))) < ds_list_size(global.players) and floor(real(string_digits(input[1]))) >= 0;
+    if floor(real(string_digits(input[1]))) < ds_list_size(global.players) and floor(real(string_digits(input[1]))) >= 0
     {
+        player = ds_list_find_value(global.players, floor(real(string_digits(input[1]))));
+    
         // Valid ID, unmute that player
-        if player.unmuted
+        if not player.muted
         {
             // If player was not muted
             Console_print(string_replace_all(player.name, '/:/', '/;/')+' is not muted!');
@@ -351,7 +354,7 @@ with Player
         muted = false;
         // Notify the chat
         var message;
-        message = '/:/'+COLOR_WHITE+string_replace_all(player.name, '/:/', '/;/')+' was unmuted';
+        message = '/:/'+COLOR_WHITE+string_replace_all(name, '/:/', '/;/')+' was unmuted';
         write_ubyte(global.publicChatBuffer, CHAT_PUBLIC_MESSAGE);
         write_ushort(global.publicChatBuffer, string_length(message));
         write_string(global.publicChatBuffer, message);
