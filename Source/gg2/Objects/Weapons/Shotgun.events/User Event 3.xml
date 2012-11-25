@@ -25,7 +25,7 @@ repeat(5) {
     shot.ownerPlayer=ownerPlayer;
     shot.team=owner.team;
     shot.weapon=WEAPON_SHOTGUN;
-    if(sprite_index == goldSprite)
+    if(golden)
         shot.sprite_index = ShotGoldS;
     with(shot) {
         hspeed+=owner.hspeed;
@@ -33,7 +33,7 @@ repeat(5) {
 }
 justShot=true;
 readyToShoot=false;
-alarm[0]=refireTime;
+alarm[0] = refireTime;
 alarm[5] = reloadBuffer + reloadTime;
 </argument>
       </arguments>

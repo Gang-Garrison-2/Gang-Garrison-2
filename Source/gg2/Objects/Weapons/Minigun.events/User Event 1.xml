@@ -27,7 +27,7 @@
             shot.ownerPlayer=ownerPlayer;
             shot.team=owner.team;
             shot.weapon=WEAPON_MINIGUN;
-            if(sprite_index == goldSprite)
+            if(golden)
                 shot.sprite_index = ShotGoldS;
             with(shot) {
                 hspeed+=owner.hspeed;
@@ -40,6 +40,7 @@
         if ammoCount &gt; 0 alarm[0]=refireTime;
         else alarm[0]=50;
     }
+    
 }
 </argument>
       </arguments>

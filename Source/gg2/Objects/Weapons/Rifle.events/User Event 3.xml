@@ -28,6 +28,8 @@ y1=y;
 x2=x+lengthdir_x(len,owner.aimDirection);
 y2=y+lengthdir_y(len,owner.aimDirection);
 
+
+alarm[6] = alarm[0];
 while(len&gt;1) {
     xm=(x1+x2)/2;
     ym=(y1+y2)/2;

@@ -4,5 +4,3 @@
  */
 
 argument0.rewards = argument1;
-if(argument0.object)
-    rewardUpdateWeapon(argument0.object.currentWeapon);

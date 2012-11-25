@@ -16,11 +16,10 @@
         <argument kind="STRING">{
     // This code is run after the child's create event
     // so it can use values set there.
+    global.paramOwner = id;
     currentWeapon = instance_create(x,y,weapons[0]);
-    currentWeapon.owner=id;
-    currentWeapon.ownerPlayer=player;
-    rewardUpdateWeapon(currentWeapon);
-
+    global.paramOwner = noone;
+    
     hp = maxHp;
     tauntlength = sprite_get_number(tauntsprite)/2;
 }
