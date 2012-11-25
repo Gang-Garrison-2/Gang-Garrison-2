@@ -277,7 +277,7 @@ demise. Climb the tower to drop down on unsuspecting opponents!
 
 7. cp_dirtbowl
 by Vaati
-Somewhere in the middle of nowhere, BLU is ready to launch it's secret wewapon at
+Somewhere in the middle of nowhere, BLU is ready to launch it's secret weapon at
 RED's base within Mt. Dirtbowl. RED must push forward while BLU must hold them off
 on three map fronts in this control point attack style map.
 
