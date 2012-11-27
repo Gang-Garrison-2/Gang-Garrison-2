@@ -38,13 +38,9 @@
         if(object == -1) {
             charObj = getCharacterObject(team, class);
             if(charObj != -1) {
+                global.paramPlayer = id;
                 object = instance_create(0,0,charObj);
-                object.player = id;
-                object.team = team;
-                
-                with(object) {
-                    event_user(0);
-                }
+                global.paramPlayer = noone;
             } else {
                 show_message("Invalid player object while deserializing");
             }

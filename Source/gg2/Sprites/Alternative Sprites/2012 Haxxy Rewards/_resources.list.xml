@@ -2,4 +2,5 @@
 <resources>
   <resource name="Weapons" type="GROUP"/>
   <resource name="Projectiles" type="GROUP"/>
+  <resource name="Characters" type="GROUP"/>
 </resources>
