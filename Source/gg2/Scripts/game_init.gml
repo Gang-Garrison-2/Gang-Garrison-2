@@ -66,6 +66,7 @@
     global.haxxyKey = ini_read_string("Haxxy", "SecretHaxxyKey", "");
     global.mapdownloadLimitBps = ini_read_real("Server", "Total bandwidth limit for map downloads in bytes per second", 50000);
     global.updaterBetaChannel = ini_read_real("General", "UpdaterBetaChannel", isBetaVersion());
+    global.attemptPortForward = ini_read_real("Server", "Attempt UPnP Forwarding", 0); 
     
     global.currentMapArea=1;
     global.totalMapAreas=1;
@@ -101,6 +102,7 @@
     ini_write_string("Server", "Password", global.serverPassword);
     ini_write_string("Haxxy", "SecretHaxxyKey", global.haxxyKey);
     ini_write_real("General", "UpdaterBetaChannel", global.updaterBetaChannel);
+    ini_write_real("Server", "Attempt UPnP Forwarding", global.attemptPortForward); 
     
     //screw the 0 index we will start with 1
     //map_truefort 

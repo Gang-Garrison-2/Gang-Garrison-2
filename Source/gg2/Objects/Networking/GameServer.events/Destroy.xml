@@ -30,6 +30,9 @@ with(JoiningPlayer)
     
 with(PlayerControl)
     instance_destroy();
+    
+if (global.attemptPortForward)
+    upnp_release_port(global.hostingPort, "TCP")
 
 room_goto_fix(Menu);
 </argument>
