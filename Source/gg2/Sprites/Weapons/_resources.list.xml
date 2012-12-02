@@ -12,7 +12,6 @@
   <resource name="RocketlauncherS" type="RESOURCE"/>
   <resource name="RifleS" type="RESOURCE"/>
   <resource name="RevolverS" type="RESOURCE"/>
-  <resource name="Revolver2S" type="RESOURCE"/>
   <resource name="BladeS" type="RESOURCE"/>
   <resource name="BackstabTorsoRedS" type="RESOURCE"/>
   <resource name="BackstabTorsoBlueS" type="RESOURCE"/>
