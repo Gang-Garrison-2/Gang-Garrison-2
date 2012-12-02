@@ -4,7 +4,7 @@ if ds_list_find_index(global.players, argument0) == 0 and argument1 == 1
 {
     return COLOR_GOLD;
 }
-else if argument0.isHaxxyWinner and argument1 == 1
+else if (argument0.rewards) and argument1 == 1
 {
     return COLOR_GOLD;
 }
