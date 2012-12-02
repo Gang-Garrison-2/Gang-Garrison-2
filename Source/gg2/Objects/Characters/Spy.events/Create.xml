@@ -13,8 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">canCloak = 1;
-maxHp = 100;
+        <argument kind="STRING">maxHp = 100;
 runPower = 1.08;
 weapons[0]=Revolver;
 tauntsprite = SpyTauntS;
@@ -34,6 +33,23 @@ haxxyStatue = SpyHaxxyStatueS;
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments/>
+    </action>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">// Override defaults
+canCloak = 1;
+</argument>
+      </arguments>
     </action>
   </actions>
 </event>

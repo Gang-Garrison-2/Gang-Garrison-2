@@ -15,7 +15,6 @@
       <arguments>
         <argument kind="STRING">maxHp = 120;
 runPower = 1;
-canBuild = 1;
 weapons[0]=Shotgun;
 tauntsprite = EngiTauntS;
 haxxyStatue = EngineerHaxxyStatueS;
@@ -34,6 +33,23 @@ haxxyStatue = EngineerHaxxyStatueS;
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments/>
+    </action>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">// Override defaults
+canBuild = 1;
+</argument>
+      </arguments>
     </action>
   </actions>
 </event>
