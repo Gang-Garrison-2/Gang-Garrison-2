@@ -15,8 +15,7 @@
       <arguments>
         <argument kind="STRING">xoffset = sprite_xoffset-17;
 yoffset = sprite_yoffset-10;
-reloadTime=5;
-refireTime=5
+refireTime=5;
 readyToShoot=false;
 noticedTarget=true;
 hitDamage=8;
