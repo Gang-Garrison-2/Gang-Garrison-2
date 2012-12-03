@@ -68,7 +68,7 @@ menu_addedit_boolean("Announce to Lobby:", "global.useLobbyServer", '
     gg2_write_ini("Settings", "UseLobby", argument0);
 ');
 menu_addedit_boolean("Attempt UPnP Forwarding:", "global.attemptPortForward", '
-        gg2_write_ini("Settings", "Show Healthbar", argument0);
+        gg2_write_ini("Server", "Attempt UPnP Forwarding", argument0);
     ');
 menu_addlink("Start Game", '
     //Server respawn time calculator. Converts each second to a frame. (read: multiply by 30 :hehe:)
