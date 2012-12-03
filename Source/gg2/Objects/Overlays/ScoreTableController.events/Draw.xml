@@ -144,19 +144,49 @@
     
     specList="";
     
+    var __x, __y, __x_max, __str, __bootlen;
+    
+    __y = yoffset+370;
+    __x_min = xoffset+xsize-350;
+    __x_max = xoffset+xsize + 50;
+    __x = __x_min;
+    __bootlen = 0;
     for(i=0; ds_priority_size(spec) &gt; 0; i+=1) {
         player = ds_priority_delete_max(spec);            
         
         if (ds_priority_size(spec) == 0)
         {
-            specList=specList + player.name;
+            __str = player.name;
         }
         else
         {
-            specList=specList + player.name + ", ";
-        }   
-    }    
-    draw_text_ext(xoffset+xsize-350, yoffset+370,specList,-1,400)
+            __str = player.name + ", ";
+        }
+        
+        if (showadmin) {
+            var _x, _y;
+            _x = __x;
+            _y = __y;
+            __bootlen = 16;
+            draw_sprite_ext(Boot,0,_x,_y,1,1,0,c_white,alpha)
+            if (mouse_x &gt;= _x and mouse_x &lt; _x+16
+                and mouse_y &gt;= _y and mouse_y &lt; _y+16)
+            {
+                draw_sprite_ext(Boot,0,_x,_y,1,1,0,c_red,alpha*0.5)
+                if (mouse_check_button_pressed(mb_left)) {
+                    mouse_clear(mb_left);
+                    player.kicked = true;
+                }        
+            }
+        }
+        
+        if (__bootlen + __x + string_width(__str) &gt; __x_max) {
+            __x = __x_min;
+            __y += string_height(__str) + 2;
+        }
+        draw_text(__bootlen + __x, __y, __str);
+        __x += __bootlen + string_width(__str);
+    }
     
     draw_text(xoffset + 8, yoffset+48, "Server: " + string_copy(global.joinedServerName,1,25));
     draw_text(xoffset+xsize/2+16, yoffset+48, "    Map: " + string_copy(global.currentMap,1,25));
