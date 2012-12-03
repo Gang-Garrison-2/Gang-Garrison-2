@@ -24,15 +24,15 @@ if global.autobalance == 1 && !instance_exists(ArenaHUD) {
         exit;
     }
     
-    // Stage 1) "autobalance in 10 seconds"
+    // Stage 1) autobalance notice, start counter
     if(serverbalance==0) {
         write_ubyte(global.eventBuffer, BALANCE);
         write_ubyte(global.eventBuffer, 255);
         if !instance_exists(Balancer) instance_create(x,y,Balancer);
         with(Balancer) notice=0;
         serverbalance=1;
-    // Stage 2) balance teams
-    } else if(serverbalance == 1 && balancecounter >= 300) {
+    // Stage 2) balance teams after counter reaches respawn time + 2 seconds
+    } else if(serverbalance == 1 && balancecounter >= (global.Server_Respawntime + 30*2)) {
         points=9001;
         balanceplayer=-1;
         for(i=0; i<ds_list_size(global.players); i+=1) {
