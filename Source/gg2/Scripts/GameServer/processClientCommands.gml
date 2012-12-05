@@ -213,7 +213,7 @@ while(commandLimitRemaining > 0) {
                     with(player.object)
                     {
                         omnomnomnom = true;
-                        if(hp < 200)
+                        if(hp < maxHp)
                         {
                             canEat = false;
                             alarm[6] = eatCooldown; //10 second cooldown
