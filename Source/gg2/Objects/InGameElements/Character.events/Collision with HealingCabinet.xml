@@ -16,10 +16,7 @@
         <argument kind="STRING">if (!global.mapchanging) {
     if (hp &lt; maxHp or nutsNBolts &lt; 100 or !canEat)
     {
-        if (hp &lt; maxHp)
-            playsound(x,y,CbntHealSnd);
-        if (nutsNBolts &lt; 100 or !canEat)
-            playsound(x,y,PickupSnd)
+        playsound(x,y,CbntHealSnd);
         hp = maxHp;
         nutsNBolts = maxNutsNBolts;
         alarm[6] = 0
