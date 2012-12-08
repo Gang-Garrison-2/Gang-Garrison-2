@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
+  <resource name="stopAllSound" type="RESOURCE"/>
   <resource name="playsound" type="RESOURCE"/>
   <resource name="loopsoundstart" type="RESOURCE"/>
   <resource name="loopsoundmaintain" type="RESOURCE"/>
