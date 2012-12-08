@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="KEYPRESS" id="1">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">var i;
+for(i=0; i&lt;=9; i+=1)
+{
+    if(keyboard_check_pressed(numpadKeys[i]))
+    {
+        if(savex_view[i] == -1)
+        {
+            savex_view[i] = x;
+            savey_view[i] = y;
+            if(!instance_exists(NoticeO))
+                instance_create(0,0,NoticeO);
+            with(NoticeO)
+                notice = NOTICE_SETCHECKPOINT;
+        }
+        else if(x != savex_view[i] || y != savey_view[i])
+        {
+            x = savex_view[i];
+            y = savey_view[i];
+        }
+        else
+        {
+            savex_view[i] = -1;
+            savey_view[i] = -1;
+            if(!instance_exists(NoticeO))
+                instance_create(0,0,NoticeO);
+            with(NoticeO)
+                notice = NOTICE_DESTROYCHECKPOINT;
+        }
+        tracking=false;
+    }
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>
