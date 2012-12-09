@@ -13,19 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">{
-    explosionDamage = 45;
-    animationState = 1;
-    alarm[1] = 29;
-    stickied = false;
-    bestBlastRadius = 50;
-    blastRadius = bestBlastRadius;
-    exploded = false;
-    bubbled = false;
-    reflector = noone;
-    knockback = 10;
-}
-</argument>
+        <argument kind="STRING"/>
       </arguments>
     </action>
   </actions>

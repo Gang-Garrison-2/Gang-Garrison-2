@@ -18,6 +18,7 @@
   <resource name="BubbleMenuC" type="RESOURCE"/>
   <resource name="SentryHealthHud" type="RESOURCE"/>
   <resource name="NutsNBoltsHud" type="RESOURCE"/>
+  <resource name="SandwichHud" type="RESOURCE"/>
   <resource name="UberHud" type="RESOURCE"/>
   <resource name="StickyCounter" type="RESOURCE"/>
   <resource name="AmmoCounter" type="RESOURCE"/>
