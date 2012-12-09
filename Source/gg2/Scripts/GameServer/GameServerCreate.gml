@@ -2,6 +2,7 @@
     with(Client)
         instance_destroy();
     if (global.attemptPortForward) {
+        upnp_set_description("GG2 (TCP)")
         var discovery_error, forwarding_error;
         discovery_error = upnp_discover(2000);
         if (upnp_error_string(discovery_error) != "") {
