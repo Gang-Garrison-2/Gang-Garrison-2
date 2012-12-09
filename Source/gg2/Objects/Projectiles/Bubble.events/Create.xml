@@ -17,7 +17,7 @@
     gun=-1;
     owner=-1;
     ownerPlayer=-1;
-    hitDamage = 0.15;
+    hitDamage = 1;
     lifetime = 155;
     alarm[0] = lifetime;
 }

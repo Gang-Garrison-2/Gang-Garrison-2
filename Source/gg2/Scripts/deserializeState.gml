@@ -24,8 +24,8 @@ deserialize(IntelligenceBlue);
 
 receiveCompleteMessage(global.serverSocket,4,global.tempBuffer);
       global.caplimit = read_ubyte(global.tempBuffer);
-global.redCaps = read_ubyte(global.tempBuffer);
-global.blueCaps = read_ubyte(global.tempBuffer);
+      global.redCaps = read_ubyte(global.tempBuffer);
+      global.blueCaps = read_ubyte(global.tempBuffer);
       global.Server_RespawntimeSec = read_ubyte(global.tempBuffer);
       global.Server_Respawntime = global.Server_RespawntimeSec * 30;
          

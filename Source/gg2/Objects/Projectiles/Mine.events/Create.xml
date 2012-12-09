@@ -14,11 +14,12 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">{
-    explosionDamage = 25;
+    explosionDamage = 45;
     animationState = 1;
     alarm[1] = 29;
     stickied = false;
-    blastRadius = 60;
+    bestBlastRadius = 50;
+    blastRadius = bestBlastRadius;
     exploded = false;
     bubbled = false;
     reflector = noone;

@@ -20,6 +20,7 @@
     canBuild = 0;
     jumpStrength = 8;
     capStrength = 1;
+    intelRecharge = 0;
     
     // 
     flamecount = 0;
@@ -34,11 +35,11 @@
     
     //afterburn stuff
     burnIntensity = 0;
-    maxIntensity = 10; //maximum afterburn intensity in DPS
+    maxIntensity = 9; //maximum afterburn intensity in DPS
     burnDuration = 0;
-    maxDuration = 300; //maximum afterburn length
+    maxDuration = 210; //maximum afterburn length in frames
     decayDelay = 30; //time between burning and intensity lowering
-    decayDuration = 225; //time between intensity lowering and zeroing out
+    decayDuration = 150; //time between intensity lowering and zeroing out
     durationDecay = 1; //amount that duration lowers per step
     intensityDecay = burnIntensity / decayDuration;
     burnedBy = -1;
@@ -92,6 +93,8 @@
 
     //sandvich
     omnomnomnom = false;
+    canEat = true;
+    eatCooldown = 1200; //40 sec cooldown
     
     //sniper zoom
     zoomed = 0;
