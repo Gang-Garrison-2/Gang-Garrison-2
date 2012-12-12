@@ -26,7 +26,7 @@ repeat(5) {
     shot.team=owner.team;
     shot.weapon=WEAPON_SHOTGUN;
     with(shot) {
-        hspeed+=owner.hspeed;
+        speed += owner.hspeed*hspeed/15;
     }
 }
 justShot=true;

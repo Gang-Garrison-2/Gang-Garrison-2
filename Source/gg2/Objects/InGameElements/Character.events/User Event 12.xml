@@ -41,7 +41,7 @@ if(global.updateType == FULL_UPDATE){
         switch(player.class)
         {
         case CLASS_SPY:
-            write_byte(global.serializeBuffer, min(cloakAlpha,1)*127 + cloak*127);
+            write_ubyte(global.serializeBuffer, cloakAlpha*255);
             break;
         case CLASS_MEDIC:
             write_ubyte(global.serializeBuffer, currentWeapon.uberCharge*255/2000);

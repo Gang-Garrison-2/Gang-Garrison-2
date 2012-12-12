@@ -1,5 +1,6 @@
-//auto balance 
+// auto balance, called on Character death
 if global.autobalance == 1 && !instance_exists(ArenaHUD) {
+    // calculate team sizes
     redteam = 0;
     blueteam = 0;  
     for(i=0; i<ds_list_size(global.players); i+=1) {
@@ -11,68 +12,56 @@ if global.autobalance == 1 && !instance_exists(ArenaHUD) {
         }
     }
 
+    // figure out if imbalanced
     if(redteam >= blueteam + 2) {
         balance=TEAM_RED;
     } else if(blueteam >= redteam + 2) {
         balance=TEAM_BLUE;
+    // if balanced, reset counter
     } else {
+        serverbalance=0;
+        balancecounter=0;
         exit;
     }
     
+    // Stage 1) autobalance notice, start counter
     if(serverbalance==0) {
         write_ubyte(global.eventBuffer, BALANCE);
         write_ubyte(global.eventBuffer, 255);
         if !instance_exists(Balancer) instance_create(x,y,Balancer);
         with(Balancer) notice=0;
         serverbalance=1;
-    } else if(serverbalance == 1 && balancecounter >= 150) {
+    // Stage 2) balance teams after counter reaches respawn time + 2 seconds
+    } else if(serverbalance == 1 && balancecounter >= (global.Server_Respawntime + 30*2)) {
         points=9001;
         balanceplayer=-1;
         var someoneIsDead;
         someoneIsDead = false;
         for(i=0; i<ds_list_size(global.players); i+=1) {
             player = ds_list_find_value(global.players, i);
-            if player.team == balance
-            {
-                if someoneIsDead
-                {
-                    if player.object == -1
-                    {
-                        if player.stats[POINTS] < points
-                        {
-                            points = player.stats[POINTS];
-                            balanceplayer=player;
-                        }
+            // find lowest pointed player on larger team
+            if(player.team == balance && player.stats[POINTS] < points) {
+                // Only dead players
+                if (player.object != -1) {
+                    if (!(player.object.hp <= 0)) {
+                        continue;
                     }
                 }
-                else
-                {
-                    if player.object != -1
-                    {
-                        if player.object.intel or player.object.ubered
-                        {
-                            continue;// Skip the player if he/she has taken the intel
-                        }
-                        else if player.stats[POINTS] < points
-                        {
-                            points = player.stats[POINTS];
-                            balanceplayer=player;
-                        }
-                    }
-                    else
-                    {
-                        someoneIsDead = true;
-                        points = player.stats[POINTS];
-                        balanceplayer=player;   
-                    }
-                }
+                points = player.stats[POINTS];
+                balanceplayer=player;
             }
         }
         
+        // if no suitable player found, wait until next time
+        if (balanceplayer == -1) exit;
+
+        // clear counter
         serverbalance=0;
         balancecounter=0;
+
+        // do team switch
         
-  if(balanceplayer.team==TEAM_RED) {
+        if(balanceplayer.team==TEAM_RED) {
             balanceplayer.team = TEAM_BLUE;
         } else {
             balanceplayer.team = TEAM_RED;
@@ -91,8 +80,5 @@ if global.autobalance == 1 && !instance_exists(ArenaHUD) {
         if !instance_exists(Balancer) instance_create(x,y,Balancer);
         Balancer.name=player.name;
         with (Balancer) notice=1;
-    } else {
-        serverbalance=0;
-        balancecounter=0;
     }
 } 

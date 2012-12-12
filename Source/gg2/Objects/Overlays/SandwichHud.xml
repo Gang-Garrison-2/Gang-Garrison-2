@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<object id="119">
-  <sprite>RevolverS</sprite>
+<object id="806">
+  <sprite>SandwichHudS</sprite>
   <solid>false</solid>
   <visible>true</visible>
-  <depth>-1</depth>
+  <depth>-110000</depth>
   <persistent>false</persistent>
-  <parent>Weapon</parent>
+  <parent/>
   <mask/>
 </object>

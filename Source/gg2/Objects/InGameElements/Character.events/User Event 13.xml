@@ -61,11 +61,7 @@ if(global.updateType == FULL_UPDATE){
         switch(player.class)
         {
         case CLASS_SPY:
-            var temp;
-            temp = read_ubyte(global.deserializeBuffer);
-            cloak = floor(temp/127);
-            temp -= cloak;
-            cloakAlpha = temp;
+            cloakAlpha = read_ubyte(global.deserializeBuffer)/255;
             break;
         case CLASS_MEDIC:
             currentWeapon.uberCharge = read_ubyte(global.deserializeBuffer)*2000/255;

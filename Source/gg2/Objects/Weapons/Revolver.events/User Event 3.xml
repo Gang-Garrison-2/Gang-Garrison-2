@@ -26,7 +26,7 @@ shot.team=owner.team;
 shot.hitDamage = 28;
 shot.weapon=WEAPON_REVOLVER;
 with(shot)
-    hspeed+=owner.hspeed;
+    speed += owner.hspeed*hspeed/15;
 
 justShot=true;
 readyToShoot=false;

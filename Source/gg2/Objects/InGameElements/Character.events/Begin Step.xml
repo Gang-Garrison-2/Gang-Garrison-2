@@ -44,7 +44,7 @@ if(!taunting and !omnomnomnom)
 {
     if(!player.humiliated and (keyState | pressedKeys) &amp; $10)
         with(currentWeapon) event_user(1);
-    if(pressedKeys &amp; $01 and !player.humiliated)  {
+    if(!player.humiliated and pressedKeys &amp; $01)  {
         if (!invisible &amp;&amp; cloakAlpha == 1)
             taunting=true;
         if (team==TEAM_RED) {
@@ -89,16 +89,14 @@ if (!player.humiliated and ((keyState | pressedKeys) &amp; $08)
 
 // Cloak
 if (!player.humiliated &amp;&amp; (pressedKeys &amp; $08)
-    &amp;&amp; canCloak &amp;&amp; ((cloakAlpha &lt;= 0.5 and cloak) || (cloakAlpha == 1 and !cloak))
-    &amp;&amp; !intel  &amp;&amp; taunting==false &amp;&amp; !(keyState &amp; $10))
+    &amp;&amp; canCloak &amp;&amp; ((cloakAlpha == 1 and !cloak) or cloak)
+    &amp;&amp; !intel  &amp;&amp; !taunting)
 {
     if(currentWeapon.readyToStab) {
         if (cloak) { // stop spies immediately picking up intel after uncloaking
             canGrabIntel=false;
             alarm[1]=30;
         }
-if ((pressedKeys &amp; $08) and canCloak and ((cloakAlpha == 1 and !cloak) or cloak) and !intel  and !taunting)
-    if(currentWeapon.readyToStab)
         cloak = !cloak;
     }
 }
