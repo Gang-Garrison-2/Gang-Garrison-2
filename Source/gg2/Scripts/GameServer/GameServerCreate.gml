@@ -8,7 +8,7 @@
         discovery_error = upnp_discover(2000);
         if (upnp_error_string(discovery_error) != "") {
             show_message(upnp_error_string(discovery_error))
-            portForwardeded = false;
+            portForwarded = false;
         }else{
         forwarding_error = upnp_forward_port(string(global.hostingPort), string(global.hostingPort), "TCP", "0")
             if (upnp_error_string(forwarding_error) != "") {
