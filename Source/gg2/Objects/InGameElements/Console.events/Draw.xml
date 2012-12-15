@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="DRAW" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">xoffset = view_xview[0];
+yoffset = view_yview[0];
+xsize = view_wview[0];
+ysize = view_hview[0];
+xbegin = 120;
+ybegin = 40;
+spacing = 16;
+width = 300;
+
+x_left = xoffset + 180;
+y_top = yoffset + 8;
+x_right = xoffset + xsize - 10;
+y_bottom = yoffset + ysize - 10;
+
+// Window coordinates:
+window_left = x_left + 10;
+window_right = x_right - 10;
+window_top = y_top + 20;
+window_bottom = y_bottom - 30;
+
+// Draw the console background
+draw_set_alpha(1);
+draw_set_color(c_white);
+draw_sprite(sprite_index, image_index, x_left, y_top)
+
+// Draw the console Title
+draw_set_font(global.consoleFont);
+draw_text(x_left+15, y_top+10, "Console - GG2"+string(GAME_VERSION_STRING));
+
+// Draw text in input field
+draw_text(x_left+14, y_bottom-15,keyboard_string+typingChar);
+
+// Draw the whole log
+var message;
+for(i=0; i&lt;ds_list_size(global.consoleLog); i+=1)
+{
+    
+    message = ds_list_find_value(global.consoleLog, ds_list_size(global.consoleLog)-1-i)
+    switch string_copy(message, 0, 3)
+    {
+        case "/:/":// If a color-code was included.
+            draw_set_color(getColorCode(string_copy(message, 4, COLOR_RGB_LENGTH)))
+            draw_text(window_left+12, (window_bottom-20)-i*spacing, string_copy(message, 4+COLOR_RGB_LENGTH, string_length(message)-(4+COLOR_RGB_LENGTH-1)));
+            break
+
+        default:
+            draw_set_color(c_white);
+            draw_text(window_left+7, (window_bottom-20)-i*spacing, message);
+            break
+    }
+}
+
+draw_set_font(global.gg2Font);
+
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

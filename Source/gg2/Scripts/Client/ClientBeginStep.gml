@@ -203,6 +203,12 @@ do {
                 global.playerName=player.name
             }
             break;
+            
+        case CHAT_PUBLIC_MESSAGE:
+            var message, length;
+            message = receivestring(global.serverSocket, 2);
+            print_to_chat(message);
+            break;
                  
         case PLAYER_SPAWN:
             receiveCompleteMessage(global.serverSocket,3,global.tempBuffer);

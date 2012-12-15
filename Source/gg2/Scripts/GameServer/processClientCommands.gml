@@ -96,6 +96,7 @@ while(commandLimitRemaining > 0) {
                 }
                 else if(player.alarm[5]<=0)
                     player.alarm[5] = 1;
+                class = checkClasslimits(player.team, class);
                 player.class = class;
                 ServerPlayerChangeclass(playerId, player.class, global.sendBuffer);
             }
@@ -147,7 +148,14 @@ while(commandLimitRemaining > 0) {
                         player.alarm[5] = global.Server_Respawntime;
                     }
                     else if(player.alarm[5]<=0)
-                        player.alarm[5] = 1;
+                        player.alarm[5] = 1;                    
+                    var newClass;
+                    newClass = checkClasslimits(newTeam, player.class);
+                    if newClass != player.class
+                    {
+                        player.class = newClass;
+                        ServerPlayerChangeclass(playerId, player.class, global.sendBuffer);
+                    }
                     player.team = newTeam;
                     ServerPlayerChangeteam(playerId, player.team, global.sendBuffer);
                 }
@@ -255,11 +263,21 @@ while(commandLimitRemaining > 0) {
             {
                 with(player)
                 {
-                    if(variable_local_exists("lastNamechange")) 
-                        if(current_time - lastNamechange < 1000)
-                            break;
+                    if(current_time - lastNamechange < 1000)
+                        break;
                     lastNamechange = current_time;
-                    name = read_string(socket, nameLength);
+                    var newname;
+                    newname = read_string(socket, nameLength);
+                    
+                    // Notify the chat
+                    var message;
+                    message = "/:/"+COLOR_WHITE+string_replace_all(name, "/:/", "/;/")+" is now known as "+string_replace_all(newname, "/:/", "/;/");
+                    write_ubyte(global.publicChatBuffer, CHAT_PUBLIC_MESSAGE);
+                    write_ushort(global.publicChatBuffer, string_length(message));
+                    write_string(global.publicChatBuffer, message);
+                    print_to_chat(message);// For the host
+                    
+                    name = newname
                     if(string_count("#",name) > 0)
                     {
                         name = "I <3 Bacon";
@@ -268,6 +286,121 @@ while(commandLimitRemaining > 0) {
                     write_ubyte(global.sendBuffer, playerId);
                     write_ubyte(global.sendBuffer, string_length(name));
                     write_string(global.sendBuffer, name);
+                }
+            }
+            break;
+            
+        case CHAT_PRIV_MESSAGE:
+            var messageLength;
+            messageLength = socket_receivebuffer_size(socket);
+            if(messageLength > CHAT_MAX_STRING_LENGTH)
+            {
+                write_ubyte(player.socket, KICK);
+                write_ubyte(player.socket, KICK_NAME);
+                socket_destroy(player.socket);
+                player.socket = -1;
+            }
+            else
+            {
+                with(player)
+                {
+                    if(current_time - lastChatTime < 1000)
+                        break;
+                    lastChatTime = current_time;
+                    var message, teambuffer;
+                    message = read_string(socket, messageLength);
+                    // Hashes serve as newlines in GM, so prevent that
+                    if(string_count("#",message) > 0)
+                    {
+                        message = "No Hashes allowed.";
+                    }
+                    // Prevent messing with the color code as well
+                    if(string_count("/:/", message) > 0)
+                    {
+                        message = string_replace_all(message, "/:/", "/;/");
+                    }
+
+                    var color;
+                    color = getPlayerColor(player, false);
+                    if team == TEAM_RED
+                    {
+                        teambuffer = global.privChatRedBuffer;
+                        message = "/:/" + color + "(team) " + string_replace_all(name, "/:/", "/;/") + ": " + message;
+                    }
+                    else if team == TEAM_BLUE
+                    {
+                        teambuffer = global.privChatBlueBuffer;
+                        message = "/:/" + color + "(team) " + string_replace_all(name, "/:/", "/;/") + ": " + message;
+                    }
+                    else
+                    {
+                        teambuffer = global.privChatSpecBuffer;// Specs can only global chat
+                        message = "/:/" + color + "(team) " + string_replace_all(name, "/:/", "/;/") + ": /:/" + COLOR_WHITE + message;
+                    }
+                    write_ubyte(teambuffer, CHAT_PUBLIC_MESSAGE);
+                    write_ushort(teambuffer, string_length(message));
+                    write_string(teambuffer, message);
+
+                    // For the host, who never receives stuff
+                    if global.myself.team == team
+                    {
+                        print_to_chat(message);
+                    }
+                }
+            }
+            break;
+
+        case CHAT_PUBLIC_MESSAGE:
+            var messageLength;
+            messageLength = socket_receivebuffer_size(socket);
+            if(messageLength > CHAT_MAX_STRING_LENGTH)
+            {
+                write_ubyte(player.socket, KICK);
+                write_ubyte(player.socket, KICK_NAME);
+                socket_destroy(player.socket);
+                player.socket = -1;
+            }
+            else
+            {
+                with(player)
+                {
+                    if(current_time - lastChatTime < 1000)
+                        break;
+                    lastChatTime = current_time;
+                    var message;
+                    message = read_string(socket, messageLength);
+                    // Hashes serve as newlines in GM, so prevent that
+                    if(string_count("#",message) > 0)
+                    {
+                        message = "No Hashes allowed.";
+                    }
+                    // Prevent messing with the color code as well
+                    if(string_count("/:/", message) > 0)
+                    {
+                        message = string_replace_all(message, "/:/", "/;/");
+                    }
+                    
+                    var color;
+                    color = getPlayerColor(player, true);
+
+                    if team == TEAM_RED
+                    {
+                        message = "/:/" + color + string_replace_all(name, "/:/", "/;/") + ": /:/" + COLOR_WHITE + message;
+                    }
+                    else if team == TEAM_BLUE
+                    {
+                        message = "/:/" + color + string_replace_all(name, "/:/", "/;/") + ": /:/" + COLOR_WHITE + message;
+                    }
+                    else
+                    {
+                        message = "/:/" + color + string_replace_all(name, "/:/", "/;/") + ": /:/" + COLOR_WHITE + message;
+                    }
+                    write_ubyte(global.publicChatBuffer, CHAT_PUBLIC_MESSAGE);
+                    write_ushort(global.publicChatBuffer, string_length(message));
+                    write_string(global.publicChatBuffer, message);
+                    
+                    // For the host, who never receives stuff
+                    print_to_chat(message);
                 }
             }
             break;
@@ -305,6 +438,12 @@ while(commandLimitRemaining > 0) {
                 answer += chr(read_ubyte(socket) ^ ord(string_char_at(player.challenge, i)));
             if(HAXXY_PUBLIC_KEY==md5(answer)) {
                 player.isHaxxyWinner = true;
+                // Announce haxxy winner to everyone
+                var message;
+                message = "/:/"+COLOR_WHITE+"Haxxy winner "+player.name+" has joined the server.";
+                write_ubyte(global.publicChatBuffer, CHAT_PUBLIC_MESSAGE);
+                write_ubyte(global.publicChatBuffer, string_length(message));
+                write_string(global.publicChatBuffer, message);
             } else {
                 socket_destroy_abortive(player.socket);
                 player.socket = -1;

@@ -6,6 +6,7 @@
   <constant name="GAME_URL_STRING" value="&quot;http://www.ganggarrison.com/&quot;"/>
   <constant name="PROTOCOL_UUID" value="&quot;31ce5361-4852-9d95-3ac2-2b3a07219a40&quot;"/>
   <constant name="GG2_LOBBY_UUID" value="&quot;1ccf16b1-436d-856f-504d-cc1af306aaa7&quot;"/>
+  <constant name="LOBBY_REG_PROTOCOL" value="&quot;b5dae2e8-424f-9ed0-0fcb-8c21c7ca1352&quot;"/>
   <constant name="HELLO" value="0"/>
   <constant name="PLAYER_JOIN" value="1"/>
   <constant name="PLAYER_LEAVE" value="2"/>
@@ -54,6 +55,8 @@
   <constant name="HAXXY_CHALLENGE_RESPONSE" value="52"/>
   <constant name="MESSAGE_STRING" value="53"/>
   <constant name="WEAPON_FIRE" value="54"/>
+  <constant name="CHAT_PRIV_MESSAGE" value="55"/>
+  <constant name="CHAT_PUBLIC_MESSAGE" value="56"/>
   <constant name="HAXXY_PUBLIC_KEY" value="&quot;70095e0fd9754e5a3ce2cb32f109148e&quot;"/>
   <constant name="TEAM_RED" value="0"/>
   <constant name="TEAM_BLUE" value="1"/>
@@ -143,4 +146,21 @@
   <constant name="MOUSE_RIGHT" value="9002"/>
   <constant name="HP_PER_POINT" value="400"/>
   <constant name="INTEL_MAX_TIMER" value="900"/>
+  <constant name="COLOR_ORANGE" value="&quot;255-102-000&quot;"/>
+  <constant name="COLOR_RED" value="&quot;250-034-034&quot;"/>
+  <constant name="COLOR_GREEN" value=" &quot;060-200-070&quot;"/>
+  <constant name="COLOR_BLUE" value="&quot;000-000-255&quot;"/>
+  <constant name="COLOR_PURPLE" value="&quot;255-000-255&quot;"/>
+  <constant name="COLOR_YELLOW" value="&quot;255-255-000&quot;"/>
+  <constant name="COLOR_BROWN" value="&quot;167-114-029&quot;"/>
+  <constant name="COLOR_LIGHTBLUE" value="&quot;000-204-255&quot;"/>
+  <constant name="COLOR_WHITE" value="&quot;255-255-255&quot;"/>
+  <constant name="COLOR_GOLD" value="&quot;252-217-023&quot;"/>
+  <constant name="COLOR_RGB_LENGTH" value="11"/>
+  <constant name="CHAT_MAX_STRING_LENGTH" value="300"/>
+  <constant name="COLOR_RGB_LENGTH" value="11"/>
+  <constant name="CHAT_MAX_STRING_LENGTH" value="300"/>
+  <constant name="MAX_COMMAND_LOG_SIZE" value="100"/>
+  <constant name="CHAT_MAX_LINE_LENGTH" value="41"/>
+  <constant name="CHATLOG_SIZE" value="83"/>
 </constants>

@@ -16,7 +16,7 @@
         <argument kind="STRING">{
     xoffset = -3;
     yoffset = -2;
-    refireTime = 26;
+    refireTime = 30;
     maxMines = 8;
     lobbed = 0;
     reloadTime = 15;

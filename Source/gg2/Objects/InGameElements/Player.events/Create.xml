@@ -19,7 +19,9 @@
     class = CLASS_SCOUT;
     socket = -1;
     name = "";
-    kicked = false;
+    muted = false;
+    lastNamechange = current_time;
+    lastChatTime = current_time;
     
     //stat tracking array
     stats[KILLS] = 0;

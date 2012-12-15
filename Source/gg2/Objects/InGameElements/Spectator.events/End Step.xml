@@ -15,6 +15,16 @@
       <arguments>
         <argument kind="STRING">if(global.myself.object != -1)
     instance_destroy();
+    
+if (global.chatbox.isTyping != 0)
+    chatting = true;
+else
+    chatting = false;
+    
+if (chatting)
+{
+    exit;
+}
 
 var moved;
 moved = false;

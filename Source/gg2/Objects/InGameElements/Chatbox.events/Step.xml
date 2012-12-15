@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="STEP" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">var xoffset, yoffset, xsize, ysize;
+xoffset = view_xview[0];
+yoffset = view_yview[0];
+
+//Slider
+if (mouse_check_button_pressed(mb_left))
+{
+    //draw_rectangle(xoffset + 375,yoffset + 325,xoffset + 390 + slider_offset, yoffset + 375 + slider_offset,false);
+    if (mouse_x &gt; xoffset + 380 and mouse_x &lt; xoffset + 395)
+        if (mouse_y &gt; yoffset + 225 + slider_offset and mouse_y &lt; yoffset + 275 + slider_offset)
+        {
+            slide = true;
+            mPos_y = yoffset - mouse_y;
+            last_offset = slider_offset;
+        }
+}
+if (slide)
+{
+    if (!mouse_check_button(mb_left))
+    {
+        slide = false;
+        exit;
+    }
+    slider_offset = last_offset + (mPos_y - (yoffset - mouse_y));
+}
+// 0 &lt;= slider_offset &lt;= 180
+slider_offset = min(180, max(0, slider_offset));
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

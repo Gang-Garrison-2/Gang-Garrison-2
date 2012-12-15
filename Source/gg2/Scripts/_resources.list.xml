@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
   <resource name="game_init" type="RESOURCE"/>
-  <resource name="loadplugins" type="RESOURCE"/>
   <resource name="offloadSpawnPoints" type="RESOURCE"/>
   <resource name="removePlayer" type="RESOURCE"/>
   <resource name="ServerJoinUpdate" type="RESOURCE"/>
@@ -22,6 +21,10 @@
   <resource name="Input" type="GROUP"/>
   <resource name="Graphics" type="GROUP"/>
   <resource name="Lobby" type="GROUP"/>
+  <resource name="Classlimits" type="GROUP"/>
+  <resource name="Console" type="GROUP"/>
+  <resource name="Plugins" type="GROUP"/>
+  <resource name="Chat" type="GROUP"/>
   <resource name="Menus" type="GROUP"/>
   <resource name="recordKillInLog" type="RESOURCE"/>
   <resource name="recordDestructionInLog" type="RESOURCE"/>
@@ -47,6 +50,8 @@
   <resource name="toggleZoom" type="RESOURCE"/>
   <resource name="md5" type="RESOURCE"/>
   <resource name="ds_list_sorted_insert" type="RESOURCE"/>
+  <resource name="getColorCodeHex" type="RESOURCE"/>
+  <resource name="getColorCode" type="RESOURCE"/>
   <resource name="isBetaVersion" type="RESOURCE"/>
   <resource name="move_contact_solid_fix" type="RESOURCE"/>
 </resources>

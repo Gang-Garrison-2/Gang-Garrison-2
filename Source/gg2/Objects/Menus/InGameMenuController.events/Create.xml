@@ -27,7 +27,23 @@
     menu_addback("Return to Game", '
         instance_destroy();
     ');
-    menu_addlink("", '');
+    
+    switch global.consoleIsOpen
+    {
+        case true:
+            instance_create(0, 0, Console);
+            menu_addlink("Close Console", '
+                Console_close();
+            ');
+            break;
+            
+        case false:
+            menu_addlink("Open Console", '
+                Console_open();
+            ');
+            break;
+    }
+    
     menu_addlink("Disconnect", '
         // Force dedicated mode to off so you can go to main menu instead of just restarting server
         global.dedicatedMode = 0;

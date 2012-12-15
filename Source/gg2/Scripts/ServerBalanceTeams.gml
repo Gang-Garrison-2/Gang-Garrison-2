@@ -35,6 +35,8 @@ if global.autobalance == 1 && !instance_exists(ArenaHUD) {
     } else if(serverbalance == 1 && balancecounter >= (global.Server_Respawntime + 30*2)) {
         points=9001;
         balanceplayer=-1;
+        var someoneIsDead;
+        someoneIsDead = false;
         for(i=0; i<ds_list_size(global.players); i+=1) {
             player = ds_list_find_value(global.players, i);
             // find lowest pointed player on larger team

@@ -25,7 +25,7 @@ for(i=0; i<ds_list_size(global.players); i+=1)
     var player;
     player = ds_list_find_value(global.players, i);
     
-    if(socket_has_error(player.socket) or player.kicked)
+    if(socket_has_error(player.socket))
     {
         removePlayer(player);
         ServerPlayerLeave(i);
@@ -144,5 +144,23 @@ for(i=1; i<ds_list_size(global.players); i+=1)
     player = ds_list_find_value(global.players, i);
     write_buffer(player.socket, global.eventBuffer);
     write_buffer(player.socket, global.sendBuffer);
+    write_buffer(player.socket, global.publicChatBuffer);
+    
+    if player.team == TEAM_RED
+    {
+        write_buffer(player.socket, global.privChatRedBuffer);
+    }
+    else if player.team == TEAM_BLUE
+    {
+        write_buffer(player.socket, global.privChatBlueBuffer);
+    }
+    else
+    {
+        write_buffer(player.socket, global.privChatSpecBuffer);
+    }
 }
 buffer_clear(global.eventBuffer);
+buffer_clear(global.privChatRedBuffer);
+buffer_clear(global.privChatBlueBuffer);
+buffer_clear(global.privChatSpecBuffer);
+buffer_clear(global.publicChatBuffer);
