@@ -41,6 +41,8 @@ with(Chatbox)
     
 with(Console)
     instance_destroy();
+if (global.attemptPortForward and portForwarded)
+    upnp_release_port(string(global.hostingPort), "TCP")
 
 room_goto_fix(Menu);
 </argument>

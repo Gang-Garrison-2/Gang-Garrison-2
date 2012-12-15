@@ -70,6 +70,7 @@
     global.mapdownloadLimitBps = ini_read_real("Server", "Total bandwidth limit for map downloads in bytes per second", 50000);
     global.updaterBetaChannel = ini_read_real("General", "UpdaterBetaChannel", isBetaVersion());
     global.mapdownloadLimitBps = ini_read_real("Server", "Total bandwidth limit for map downloads in bytes per second", 50000);
+    global.attemptPortForward = ini_read_real("Server", "Attempt UPnP Forwarding", 0); 
     
     global.classlimits[CLASS_SCOUT] = ini_read_real("Classlimits", "Scout", 9999)
     global.classlimits[CLASS_PYRO] = ini_read_real("Classlimits", "Pyro", 9999)
@@ -116,6 +117,7 @@
     ini_write_string("Server", "Password", global.serverPassword);
     ini_write_string("Haxxy", "SecretHaxxyKey", global.haxxyKey);
     ini_write_real("General", "UpdaterBetaChannel", global.updaterBetaChannel);
+    ini_write_real("Server", "Attempt UPnP Forwarding", global.attemptPortForward); 
     
     ini_write_real("Classlimits", "Scout", global.classlimits[CLASS_SCOUT])
     ini_write_real("Classlimits", "Pyro", global.classlimits[CLASS_PYRO])
