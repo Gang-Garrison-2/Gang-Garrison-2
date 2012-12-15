@@ -13,18 +13,14 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if(stickied)
-{
-    if (reflector != noone and alarm[0] &lt; 0)
-        alarm[0] = 30;
-    blastRadius = bestBlastRadius
-}
-else
+        <argument kind="STRING">if(!stickied)
 {
     vspeed += 0.2;
     vspeed = min(vspeed,8);
-    blastRadius = bestBlastRadius * 0.71; //approximation of sqrt(0.5)
+    
 }
+else if (reflector != noone and alarm[0] &lt; 0) // this should probably get moved to the airblast itself later.
+    alarm[0] = 30;
 </argument>
       </arguments>
     </action>

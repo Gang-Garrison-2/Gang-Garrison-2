@@ -25,7 +25,8 @@ if(vspeed == 0) // if we aren't falling this frame
 xprevious = x;
 yprevious = y;
 
-if(global.isHost &amp;&amp; hp&lt;=0) {
+if (global.isHost and hp &lt;= 0)
+{
     var assistant;
     assistant = secondToLastDamageDealer;
     if (lastDamageDealer and instance_exists(lastDamageDealer))
@@ -41,8 +42,8 @@ if(global.isHost &amp;&amp; hp&lt;=0) {
     exit;
 }
     
-if(hp&gt;maxHp) {
-    hp=maxHp;
+if(hp &gt; maxHp) {
+    hp = maxHp;
 }
     
 if(((aimDirection+270) mod 360)&gt;180) {
@@ -93,11 +94,18 @@ if (taunting)
 if (omnomnomnom)
 {
     omnomnomnomindex += 0.25;
-    image_xscale=xscale;
-    if (hp &lt;= maxHp)
+    image_xscale = xscale;
+    if (hp &lt;= maxHp) // we want to "overheal" to keep in the stabbing glitch
+    {
+        if(hp &lt; maxHp and canEat) // but we don't want to drain the cooldown on overheal or party eating
+        {
+            canEat = false;
+            alarm[6] = eatCooldown; // 10 second cooldown
+        }
         hp += 1.6;
+    }
     if (omnomnomnomindex &gt;= omnomnomnomend)
-        omnomnomnom=false;
+        omnomnomnom = false;
 }
 
 //for things polling whether the character is on a medcabinet

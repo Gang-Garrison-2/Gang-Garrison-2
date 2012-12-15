@@ -15,10 +15,11 @@
       <arguments>
         <argument kind="STRING">{
     move_contact_solid(direction, speed);
-    speed=0;
+    speed = 0;
     stickied = true;
-    weapon=WEAPON_MINEGUN;
-}</argument>
+    weapon = WEAPON_MINEGUN;
+}
+</argument>
       </arguments>
     </action>
   </actions>

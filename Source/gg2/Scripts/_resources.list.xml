@@ -48,4 +48,5 @@
   <resource name="md5" type="RESOURCE"/>
   <resource name="ds_list_sorted_insert" type="RESOURCE"/>
   <resource name="isBetaVersion" type="RESOURCE"/>
+  <resource name="move_contact_solid_fix" type="RESOURCE"/>
 </resources>

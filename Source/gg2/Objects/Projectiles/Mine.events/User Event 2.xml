@@ -22,21 +22,33 @@
     instance_create(x,y,Explosion);
     playsound(x,y,ExplosionSnd);
     
+    if (stickied)
+    {
+        explosionDamage = baseDamage + stuckDamageBonus;
+        blastRadius = baseBlastRadius + stuckRadiusBonus;
+    }
+    else
+    {
+        explosionDamage = baseDamage;
+        blastRadius = baseBlastRadius;
+    }
+    
     with (Character) {
         if (distance_to_object(other) &lt; other.blastRadius and !collision_line(x, y, other.x, other.y, Obstacle, true, true) and !(team == other.team and id != other.ownerPlayer.object and place_meeting(x, y+1, Obstacle)))
         {
+            if (1 - distance_to_object(other)/other.blastRadius &lt;= 0.25) // skip doing any harm to this character if we're too far
+                continue;
             var rdir, vectorfactor;
             rdir = point_direction(other.x,other.y,x,y);
             vectorfactor = point_distance(0, 0, sin(degtorad(rdir)), cos(degtorad(rdir)));
-            if (1 - distance_to_object(other)/other.blastRadius &lt;= 0.25)
-                continue;
+            
             motion_add(rdir, min(15, other.knockback-other.knockback*(distance_to_object(other)/other.blastRadius)) * vectorfactor);
             if((other.team != team or id==other.ownerPlayer.object) and !ubered and hp &gt; 0)
             {
                 var dmg;
                 dmg = other.explosionDamage*(1-(distance_to_object(other)/other.blastRadius));
-                if id == other.ownerPlayer.object// self damage resistance
-                    dmg *= 5/9;
+                if (id == other.ownerPlayer.object)// self damage resistance
+                    dmg *= 2/3;
                 hp -= dmg;
                 timeUnscathed = 0;
                 if (id == other.ownerPlayer.object and lastDamageDealer != -1 and lastDamageDealer != other.ownerPlayer and other.reflector == noone)

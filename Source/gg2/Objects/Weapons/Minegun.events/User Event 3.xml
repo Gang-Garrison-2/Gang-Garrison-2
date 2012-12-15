@@ -17,16 +17,20 @@
 playsound(x,y,MinegunSnd);
 ammoCount = max(0, ammoCount-1);
 
-oid = instance_create(x+lengthdir_x(10,owner.aimDirection),y+lengthdir_y(10,owner.aimDirection), Mine);
+oid = instance_create(x, y, Mine);
+oid.direction = owner.aimDirection;
+oid.speed = 12;
 
-oid.direction=owner.aimDirection;
-oid.speed=12;
-oid.owner=owner;
-oid.ownerPlayer=ownerPlayer;
-oid.team=owner.team;
-oid.weapon=WEAPON_MINEGUN;
+// push mine to end of barrel without teleporting it inside the wall
+with(oid)
+    move_contact_solid_fix(direction, 10);
+   
+oid.owner = owner;
+oid.ownerPlayer = ownerPlayer;
+oid.team = owner.team;
+oid.weapon = WEAPON_MINEGUN;
 lobbed += 1;
-justShot=true;
+justShot = true;
 readyToShoot = false;
 alarm[0] = refireTime;
 alarm[5] = reloadBuffer + reloadTime;

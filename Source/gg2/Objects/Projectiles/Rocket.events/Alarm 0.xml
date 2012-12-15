@@ -13,8 +13,13 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">fade=true;
-alarm[3]=8;
+        <argument kind="STRING">if (distance_to_object(owner) &gt; 500)
+{
+    fade = true;
+    alarm[3] = 8;
+}
+else
+    alarm[0] = 1;
 </argument>
       </arguments>
     </action>

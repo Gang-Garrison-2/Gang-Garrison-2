@@ -16,16 +16,24 @@
         <argument kind="STRING">ammoCount = max(0, ammoCount-1);    
 playsound(x,y,RocketSnd);
 var oid, newx, newy;
-oid = instance_create(x+lengthdir_x(20,owner.aimDirection),y+lengthdir_y(20,owner.aimDirection), Rocket);
-   
-oid.direction=owner.aimDirection
-oid.speed=13;
+
+oid = instance_create(x, y, Rocket);
+oid.direction = owner.aimDirection
+oid.speed = 13;
+
+// push rocket to end of barrel without teleporting it inside the wall
+with(oid)
+    move_contact_solid_fix(direction, 20);
+
 oid.ownerPlayer=ownerPlayer;
 oid.team=owner.team;
 oid.owner=owner;
 oid.gun=id;
 oid.weapon=WEAPON_ROCKETLAUNCHER;
-if (collision_line(x,y,x+lengthdir_x(28,owner.aimDirection),y+lengthdir_y(28,owner.aimDirection),Obstacle,1,0) || place_meeting(x+lengthdir_x(25,owner.aimDirection),y+lengthdir_y(25,owner.aimDirection),TeamGate)) {
+if (collision_line(x,y,x+lengthdir_x(28,owner.aimDirection),y+lengthdir_y(28,owner.aimDirection),Obstacle,1,0)
+    or place_meeting(x+lengthdir_x(28,owner.aimDirection),y+lengthdir_y(28,owner.aimDirection),TeamGate))
+{
+    move_contact_solid(direction, 28);
     oid.characterHit = -1;
     with (oid)
         event_user(5);

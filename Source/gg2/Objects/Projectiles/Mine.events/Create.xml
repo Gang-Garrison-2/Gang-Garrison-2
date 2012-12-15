@@ -14,16 +14,21 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">{
-    explosionDamage = 45;
-    animationState = 1;
+    baseDamage = 45;
+    explosionDamage = baseDamage;
+    stuckDamageBonus = 5; // adds to base, not after splash calculations
+    baseBlastRadius = 40;
+    blastRadius = baseBlastRadius;
+    stuckRadiusBonus = 4+4/9;
+    knockback = 10;
+    
     alarm[1] = 29;
+    animationState = 1;
+    
     stickied = false;
-    bestBlastRadius = 50;
-    blastRadius = bestBlastRadius;
     exploded = false;
     bubbled = false;
     reflector = noone;
-    knockback = 10;
 }
 </argument>
       </arguments>
