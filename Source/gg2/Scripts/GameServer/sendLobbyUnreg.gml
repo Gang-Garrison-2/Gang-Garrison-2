@@ -13,6 +13,6 @@ if(ip_lookup_has_next(iplookup)) {
     lobbyIp = ip_lookup_next_result(iplookup);
 }
 ip_lookup_destroy(iplookup);
-
-udp_send(lobbyBuffer, lobbyIp, LOBBY_SERVER_PORT);
+if (variable_local_exists(lobbyIp))
+	udp_send(lobbyBuffer, lobbyIp, LOBBY_SERVER_PORT);
 buffer_destroy(lobbyBuffer);
