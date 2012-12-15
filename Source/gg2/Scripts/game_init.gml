@@ -7,19 +7,26 @@
     
     var customMapRotationFile;
 
-    //import wav files for music
-    global.MenuMusic=sound_add(choose("Music/menumusic1.wav","Music/menumusic2.wav","Music/menumusic3.wav","Music/menumusic4.wav","Music/menumusic5.wav","Music/menumusic6.wav"), 1, true);
-    global.IngameMusic=sound_add("Music/ingamemusic.wav", 1, true);
-    global.FaucetMusic=sound_add("Music/faucetmusic.wav", 1, true);
+    //import ogg files for music, wavs for victory and failure
+    global.MenuMusic = audio_create(choose("Music/menumusic1.ogg","Music/menumusic2.ogg","Music/menumusic3.ogg","Music/menumusic4.ogg","Music/menumusic5.wav","Music/menumusic6.ogg"), true);
+    global.IngameMusic=audio_create("Music/ingamemusic.ogg", true);
+    global.FaucetMusic=audio_create("Music/faucetmusic.ogg", true);
+    global.victoryMusic = audio_create("Music/Victory.wav", false)
+    global.failureMusic = audio_create("Music/Failure.wav", false)
     if(global.MenuMusic != -1)
-        sound_volume(global.MenuMusic, 0.8);
+        audio_set_volume(global.MenuMusic, 0.5)
     if(global.IngameMusic != -1)
-        sound_volume(global.IngameMusic, 0.8);
+        audio_set_volume(global.IngameMusic, 0.5)
     if(global.FaucetMusic != -1)
         sound_volume(global.FaucetMusic, 0.8);
 
     clipboard_set_text("");
         
+        audio_set_volume(global.FaucetMusic, 0.5)
+    if (global.victoryMusic != -1)
+        audio_set_volume(global.victoryMusic, 0.5)
+    if (global.failureMusic != -1)
+        audio_set_volume(global.failureMusic, 0.5)
     global.sendBuffer = buffer_create();
     global.eventBuffer = buffer_create();
     global.tempBuffer = buffer_create();

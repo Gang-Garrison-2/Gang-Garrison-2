@@ -22,10 +22,10 @@
 }
 
 if(global.myself.team != global.winners) {
-    sound=FailureSnd;
+    sound= global.failureMusic;
     global.myself.humiliated = 1;
 } else {
-    sound = VictorySnd;
+    sound = global.victoryMusic;
 }
 
 with (Player) {
