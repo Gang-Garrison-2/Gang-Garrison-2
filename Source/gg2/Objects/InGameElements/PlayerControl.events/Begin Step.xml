@@ -16,7 +16,13 @@
         <argument kind="STRING">if(instance_exists(InGameMenuController) || instance_exists(OptionsController) || instance_exists(ControlsController) || instance_exists(HUDOptionsController))
     exit;
     
-if(instance_exists(TeamSelectController) || instance_exists(ClassSelectController))
+var kickOpen;
+kickOpen = false
+if instance_exists(ScoreTableController)
+    if ScoreTableController.showadmin
+        kickOpen = true;
+    
+if(instance_exists(TeamSelectController) || instance_exists(ClassSelectController)) || kickOpen
     menuOpen = true;
 else
     menuOpen = false;
