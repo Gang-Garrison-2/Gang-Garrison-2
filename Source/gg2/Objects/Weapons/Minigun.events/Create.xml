@@ -23,6 +23,15 @@
     reloadBuffer = 10;
     isRefilling = false;
     
+    //play at least 2 frames
+    recoilTime = 3;
+    recoilSprite = MinigunFS;
+    recoilAnimLength = sprite_get_number(recoilSprite)/2;
+    recoilImageSpeed = recoilAnimLength/recoilTime;
+    
+    //Overlays for the overheat
+    overlaySprite = MinigunOverlayS;
+    overlayFiringSprite = MinigunOverlayFS;
 }
 </argument>
       </arguments>

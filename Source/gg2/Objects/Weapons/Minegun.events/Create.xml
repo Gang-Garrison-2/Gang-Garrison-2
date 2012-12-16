@@ -24,6 +24,11 @@
     maxAmmo = 8;
     ammoCount = maxAmmo;
     idle=true;
+    
+    recoilTime = refireTime;
+    recoilSprite = MinegunFS;
+    recoilAnimLength = sprite_get_number(recoilSprite)/2;
+    recoilImageSpeed = recoilAnimLength/recoilTime;
 }
 </argument>
       </arguments>

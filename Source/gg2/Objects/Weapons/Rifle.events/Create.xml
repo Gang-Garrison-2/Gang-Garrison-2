@@ -27,6 +27,16 @@
     ammoCount = maxAmmo;
     shot=false;
     t=0;
+    
+    recoilTime = 15;
+    recoilSprite = RifleFS;
+    recoilAnimLength = sprite_get_number(recoilSprite)/2
+    recoilImageSpeed = recoilAnimLength/recoilTime
+
+    longRecoilTime = 60;
+    reloadSprite = RifleFRS;
+    reloadAnimLength = sprite_get_number(reloadSprite)/2
+    reloadImageSpeed = reloadAnimLength/(longRecoilTime);
 }
 </argument>
       </arguments>

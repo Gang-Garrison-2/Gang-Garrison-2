@@ -30,6 +30,13 @@
     reloadTime = 55;
     reloadBuffer = 0;
     idle=true;
+    
+    //This makes it so that the timer will keep resetting
+    //Until Mouse1 is let go
+    recoilTime = refireTime+1;
+    recoilSprite = MedigunFS;
+    recoilAnimLength = sprite_get_number(recoilSprite)/2;
+    recoilImageSpeed = recoilAnimLength/recoilTime;
 }
 </argument>
       </arguments>

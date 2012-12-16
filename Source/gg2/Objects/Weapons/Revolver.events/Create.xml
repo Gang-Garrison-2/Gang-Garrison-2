@@ -26,6 +26,11 @@
     reloadTime = 45;
     reloadBuffer = refireTime;
     idle=true;
+    
+    recoilTime = refireTime;
+    recoilSprite = RevolverFS;
+    recoilAnimLength = sprite_get_number(recoilSprite)/2;
+    recoilImageSpeed = recoilAnimLength/recoilTime;
 }
 </argument>
       </arguments>

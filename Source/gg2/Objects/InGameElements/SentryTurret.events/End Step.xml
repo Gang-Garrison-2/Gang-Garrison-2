@@ -34,7 +34,7 @@ if(((direction+270) mod 360)&gt;180) {
     image_angle = direction+180;
 }
 
-nearestTarget = -1;
+nearestTarget = noone;
 targetQueue = ds_priority_create();
 
 // Build a queue of potential targets
@@ -52,7 +52,7 @@ with(Sentry) {
     }
 }
 
-while(nearestTarget == -1 &amp;&amp; !ds_priority_empty(targetQueue)) {
+while(!nearestTarget &amp;&amp; !ds_priority_empty(targetQueue)) {
     playercheck = ds_priority_delete_min(targetQueue);
     targetAngle = point_direction(x,y,playercheck.x,playercheck.y);
     if((targetAngle &lt;= 45 || targetAngle &gt;= 315 || (targetAngle &gt;= 135 &amp;&amp; targetAngle &lt;= 225) || place_meeting(x,y,playercheck)) 
@@ -85,7 +85,7 @@ while(nearestTarget == -1 &amp;&amp; !ds_priority_empty(targetQueue)) {
 }
 ds_priority_destroy(targetQueue);
 
-if(nearestTarget == -1) {
+if(!nearestTarget) {
     noticedTarget = true;
     if(image_xscale&gt;0)
         direction = 0;
@@ -112,7 +112,7 @@ if(nearestTarget == -1) {
     if (noticedTarget == true) {
         playsound(x,y,SentryAlert);
         readyToShoot = false;
-        alarm[0] = reloadTime*2;
+        alarm[0] = refireTime*2;
     }    
     
     noticedTarget = false;
@@ -156,9 +156,8 @@ if(nearestTarget == -1) {
             }
         }
         shooting=true;
-        justShot=true;  
         readyToShoot=false;
-        alarm[0]=reloadTime;
+        alarm[0]=refireTime;
     }
 }
 

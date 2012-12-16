@@ -106,7 +106,6 @@
   <constant name="WEAPON_ROCKETLAUNCHER" value="2"/>
   <constant name="WEAPON_SHOTGUN" value="3"/>
   <constant name="WEAPON_REVOLVER" value="4"/>
-  <constant name="WEAPON_QROCKETLAUNCHER" value="5"/>
   <constant name="WEAPON_MINEGUN" value="6"/>
   <constant name="WEAPON_NEEDLEGUN" value="7"/>
   <constant name="WEAPON_RIFLE" value="8"/>
