@@ -1,4 +1,4 @@
-var lobbyBuffer, iplookup, lobbyIp;
+var lobbyBuffer, iplookup;
 lobbyBuffer = buffer_create();
 parseUuid("488984ac-45dc-86e1-9901-98dd1c01c064", lobbyBuffer); // Message Type "unregister"
 write_buffer(lobbyBuffer, GameServer.serverId);
@@ -13,6 +13,6 @@ if(ip_lookup_has_next(iplookup)) {
     lobbyIp = ip_lookup_next_result(iplookup);
 }
 ip_lookup_destroy(iplookup);
-
-udp_send(lobbyBuffer, lobbyIp, LOBBY_SERVER_PORT);
+if (variable_local_exists("lobbyIp"))
+	udp_send(lobbyBuffer, lobbyIp, LOBBY_SERVER_PORT);
 buffer_destroy(lobbyBuffer);
