@@ -432,27 +432,11 @@ while(commandLimitRemaining > 0) {
             answer = read_binstring(socket, 16);
             
             with(player)
-                challengeSent = variable_local_exists("challenge");
-            if(!challengeSent)
-                break;
-                
-            answer = "";
-            for(i=1;i<=16;i+=1)
-                answer += chr(read_ubyte(socket) ^ ord(string_char_at(player.challenge, i)));
-            if(HAXXY_PUBLIC_KEY==md5(answer)) {
-                player.isHaxxyWinner = true;
-                // Announce haxxy winner to everyone
-                var message;
-                message = "/:/"+COLOR_WHITE+"Haxxy winner "+player.name+" has joined the server.";
-                write_ubyte(global.publicChatBuffer, CHAT_PUBLIC_MESSAGE);
-                write_ubyte(global.publicChatBuffer, string_length(message));
-                write_string(global.publicChatBuffer, message);
-            } else {
-                socket_destroy_abortive(player.socket);
-                player.socket = -1;
-            }
+                if(variable_local_exists("challenge") and variable_local_exists("rewardName"))
+                    rewardAuthStart(player, answer, challenge, true, rewardName);
+           
             break;
         }
         break;
-    } 
+    }
 }
