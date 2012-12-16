@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <constants>
-  <constant name="VERSION" value="24416"/>
-  <constant name="GAME_VERSION_STRING" value="&quot;v2.4.5.0b16&quot;"/>
+  <constant name="VERSION" value="24417"/>
+  <constant name="GAME_VERSION_STRING" value="&quot;v2.4.5.0b17&quot;"/>
   <constant name="GAME_NAME_STRING" value="&quot;Gang Garrison 2 Beta&quot;"/>
   <constant name="GAME_URL_STRING" value="&quot;http://www.ganggarrison.com/forums/index.php?topic=32759.0&quot;"/>
-  <constant name="PROTOCOL_UUID" value="&quot;2fa69c7e-41d4-966d-0d04-ad165f2d796b&quot;"/>
+  <constant name="PROTOCOL_UUID" value="&quot;15beb863-4f9a-9ef8-a31f-ea0799ad9d7c&quot;"/>
   <constant name="GG2_LOBBY_UUID" value="&quot;1ccf16b1-436d-856f-504d-cc1af306aaa7&quot;"/>
   <constant name="LOBBY_REG_PROTOCOL" value="&quot;b5dae2e8-424f-9ed0-0fcb-8c21c7ca1352&quot;"/>
   <constant name="HELLO" value="0"/>
