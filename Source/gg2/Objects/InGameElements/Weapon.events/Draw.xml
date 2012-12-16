@@ -40,14 +40,6 @@ if (!owner.invisible) &amp;&amp; (!owner.taunting) &amp;&amp; owner.cloakAlpha &
         draw_sprite_ext(sprite_index,imageOffset,round(x+xoffset*image_xscale),round(y+yoffset),image_xscale,image_yscale,image_angle,ubercolour,0.7);
     }
 }
-else if(ownerPlayer.sentry)
-    if(ownerPlayer.sentry.image_index &gt; 7)
-    {
-        if(!rotating)
-            draw_sprite_ext(sprite_index,ownerPlayer.team+offset,round(x+xoffset*image_xscale),round(y+yoffset),image_xscale,image_yscale,image_angle,c_white,1);
-        else
-            draw_sprite_ext(TurretRotateS,round(rotateindex),x,y,image_xscale,image_yscale,0,c_white,1);
-    }
 </argument>
       </arguments>
     </action>
