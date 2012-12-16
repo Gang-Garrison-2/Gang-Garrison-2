@@ -19,7 +19,9 @@ readyToShoot = false;
 justShot = false;
 alarm[0] = refireTime;
 
-normalSprite = object_get_sprite(object_index);
+owner = global.paramOwner;
+ownerPlayer = global.paramOwner.player;
+golden = hasRewardWeapon(ownerPlayer);
 </argument>
       </arguments>
     </action>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="RevolverGoldFS" type="RESOURCE"/>
+  <resource name="RocketlauncherGoldFS" type="RESOURCE"/>
+  <resource name="MinigunGoldFS" type="RESOURCE"/>
+  <resource name="RifleGoldFS" type="RESOURCE"/>
+  <resource name="MinegunGoldFS" type="RESOURCE"/>
+  <resource name="ShotgunGoldFS" type="RESOURCE"/>
+  <resource name="MedigunGoldFS" type="RESOURCE"/>
+  <resource name="ScattergunGoldFS" type="RESOURCE"/>
+  <resource name="FlamethrowerGoldFS" type="RESOURCE"/>
+</resources>

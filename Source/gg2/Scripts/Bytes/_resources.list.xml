@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="hex" type="RESOURCE"/>
+  <resource name="unhex" type="RESOURCE"/>
+  <resource name="md5" type="RESOURCE"/>
+  <resource name="md5_bin" type="RESOURCE"/>
+  <resource name="hmac_md5" type="RESOURCE"/>
+  <resource name="hmac_md5_bin" type="RESOURCE"/>
+</resources>

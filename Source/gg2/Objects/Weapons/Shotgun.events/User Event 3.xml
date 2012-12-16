@@ -25,6 +25,8 @@ repeat(5) {
     shot.ownerPlayer=ownerPlayer;
     shot.team=owner.team;
     shot.weapon=WEAPON_SHOTGUN;
+    if(golden)
+        shot.sprite_index = ShotGoldS;
     with(shot) {
         speed += owner.hspeed*hspeed/15;
     }

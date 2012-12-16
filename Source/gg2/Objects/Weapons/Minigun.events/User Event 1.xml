@@ -19,17 +19,20 @@
         playsound(x,y,ChaingunSnd);
         var shot;
         randomize();
-        
-        shot = instance_create(x+lengthdir_x(20,owner.aimDirection),y+12+lengthdir_y(20,owner.aimDirection),Shot);
-        shot.direction=owner.aimDirection+(random(14)-7);
-        shot.speed=12+random(1);
-        shot.owner=owner;
-        shot.ownerPlayer=ownerPlayer;
-        shot.team=owner.team;
-        shot.weapon=WEAPON_MINIGUN;
-        shot.hspeed += owner.hspeed;
-        shot.alarm[0] = 30;
-        
+            shot = instance_create(x+lengthdir_x(20,owner.aimDirection),y+12+lengthdir_y(20,owner.aimDirection),Shot);
+            shot.direction=owner.aimDirection+(random(14)-7);
+            shot.speed=12+random(1);
+            shot.owner=owner;
+            shot.ownerPlayer=ownerPlayer;
+            shot.team=owner.team;
+            shot.weapon=WEAPON_MINIGUN;
+            if(golden)
+                shot.sprite_index = ShotGoldS;
+            with(shot) {
+                hspeed+=owner.hspeed;
+                alarm[0]=30;
+                //motion_add(owner.direction, owner.speed);
+            }
         justShot=true;
         readyToShoot=false;
         isRefilling = false;

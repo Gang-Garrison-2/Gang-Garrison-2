@@ -418,16 +418,19 @@ while(commandLimitRemaining > 0) {
             }
             break;
         
-        case I_AM_A_HAXXY_WINNER:
-            write_ubyte(socket, HAXXY_CHALLENGE_CODE);
+        case REWARD_REQUEST:
+            player.rewardName = read_string(socket, socket_receivebuffer_size(socket));
             player.challenge = "";
             repeat(16)
-                player.challenge += chr(irandom_range(1,255));
-            write_string(socket, player.challenge);
+                player.challenge += chr(irandom_range(0,255));
+            
+            write_ubyte(socket, REWARD_CHALLENGE_CODE);            write_binstring(socket, player.challenge);
             break;
             
-        case HAXXY_CHALLENGE_RESPONSE:
-            var answer, i, challengeSent;
+        case REWARD_CHALLENGE_RESPONSE:
+            var answer, i, authbuffer;
+            answer = read_binstring(socket, 16);
+            
             with(player)
                 challengeSent = variable_local_exists("challenge");
             if(!challengeSent)
