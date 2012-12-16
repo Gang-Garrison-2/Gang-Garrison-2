@@ -7,7 +7,15 @@
     var customMapRotationFile;
 
     //import ogg files for music, wavs for victory and failure
-    global.MenuMusic = audio_create(choose("Music/menumusic1.ogg","Music/menumusic2.ogg","Music/menumusic3.ogg","Music/menumusic4.ogg","Music/menumusic5.wav","Music/menumusic6.ogg"), true);
+    global.MenuMusic = audio_create("Music/"+choose(
+        "Father of Syn - Gang Garrison II.ogg",
+        "Scoot - Rocket Jump Waltz.ogg",
+        "Elkondo - Petite Chou-Fleur.ogg",
+        "Elkondo - Right Behind You.ogg",
+        "Elkondo - A Little Heart To Heart.ogg",
+        "Elkondo - MEDIC!.ogg",
+        "Elkondo - Intruder Alert.ogg"
+    ), true);
     global.IngameMusic=audio_create("Music/ingamemusic.ogg", true);
     global.FaucetMusic=audio_create("Music/faucetmusic.ogg", true);
     global.victoryMusic = audio_create("Music/Victory.wav", false)
