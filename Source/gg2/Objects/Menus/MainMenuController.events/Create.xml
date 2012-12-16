@@ -37,7 +37,7 @@
         game_end();
     ');
     
-    if !sound_isplaying(global.MenuMusic) AudioControlPlaySong(global.MenuMusic);
+    if !audio_is_playing(global.MenuMusic) AudioControlPlaySong(global.MenuMusic);
     menuimage=choose(0,1);
     
     if(global.dedicatedMode == 1)
