@@ -16,7 +16,7 @@
         <argument kind="STRING">if(instance_exists(InGameMenuController) || instance_exists(OptionsController) || instance_exists(ControlsController) || instance_exists(HUDOptionsController))
     exit;
     
-if(instance_exists(TeamSelectController) || instance_exists(ClassSelectController))
+if(instance_exists(TeamSelectController) || instance_exists(ClassSelectController)) || instance_exists(ScoreTableController)
     menuOpen = true;
 else
     menuOpen = false;
