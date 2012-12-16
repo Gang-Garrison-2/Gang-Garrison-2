@@ -13,7 +13,19 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if(global.isHost &amp;&amp; hp&lt;=0) {
+        <argument kind="STRING">// Climbing down stairs
+if(vspeed == 0) // if we aren't falling this frame
+{ 
+    if(place_free(x,y+6))
+        if(!place_free(x,y+7))
+            y += 6;
+        else if(speed &gt; 6) if(place_free(x,y+12)) if(!place_free(x,y+13))
+            y += 12;
+}
+xprevious = x;
+yprevious = y;
+
+if(global.isHost &amp;&amp; hp&lt;=0) {
     var assistant;
     assistant = secondToLastDamageDealer;
     if (lastDamageDealer and instance_exists(lastDamageDealer))
@@ -61,15 +73,14 @@ if(y&gt;map_height()){
     y = map_height();
 }
 if(!place_free(x,y+1))
-    moveStatus=0
+    moveStatus=0;
 
     
 // Cloak
-if (cloak) {
+if (cloak and cloakAlpha &gt; 0)
     cloakAlpha = max(cloakAlpha - 0.05, 0);
-} else {
+else if (!cloak and cloakAlpha &lt; 1)
     cloakAlpha = min(cloakAlpha + 0.05, 1);
-}
     
 // Taunts
 if (taunting)
@@ -83,8 +94,10 @@ if (omnomnomnom)
 {
     omnomnomnomindex += 0.25;
     image_xscale=xscale;
-    if hp &lt;= maxHp hp += 0.4;
-    if omnomnomnomindex &gt;= omnomnomnomend omnomnomnom=false;
+    if (hp &lt;= maxHp)
+        hp += 1.6;
+    if (omnomnomnomindex &gt;= omnomnomnomend)
+        omnomnomnom=false;
 }
 
 //for things polling whether the character is on a medcabinet
@@ -93,6 +106,25 @@ onCabinet = place_meeting(x, y, HealingCabinet);
 // Last x/y position for death cam if player is dead
 player.lastKnownx=x;
 player.lastKnowny=y;
+
+// Here the view is set
+if (player == global.myself)
+{
+    if (object_is_ancestor(object_index, Sniper) and zoomed)
+    {
+        var relxmouse, relymouse;
+        relxmouse = min(max(window_views_mouse_get_x()-view_xview[0], 0), view_wview);
+        relymouse = min(max(window_views_mouse_get_y()-view_yview[0], 0), view_hview);
+        
+        view_xview[0] = x+relxmouse-view_wview[0];
+        view_yview[0] = y+relymouse-view_hview[0];
+    }
+    else
+    {
+        view_xview[0] = x-view_wview[0]/2;
+        view_yview[0] = y-view_hview[0]/2;
+    }
+}
 </argument>
       </arguments>
     </action>

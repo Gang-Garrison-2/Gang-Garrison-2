@@ -14,12 +14,15 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">if (!global.mapchanging) {
-    if hp &lt; maxHp || nutsNBolts &lt; 100 {
+    if (hp &lt; maxHp or nutsNBolts &lt; 100 or !canEat)
+    {
         playsound(x,y,CbntHealSnd);
         hp = maxHp;
         nutsNBolts = maxNutsNBolts;
+        alarm[6] = 0
+        canEat = true;
     }
-    if (burnIntensity &gt; 0 || burnDuration &gt; 0)
+    if (burnIntensity &gt; 0 or burnDuration &gt; 0)
     {
         burnIntensity = 0;
         burnDuration = 0;

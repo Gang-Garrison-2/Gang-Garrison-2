@@ -16,13 +16,18 @@
         <argument kind="STRING">// Make self invisible if behind enemy
 visible = 1;
 
+//Experimental
+visible = !owner.invisible;
+
+/*
 if (global.myself != -1) {
     if (global.myself.object != -1) {
         if ((team != global.myself.object.team) &amp;&amp; (sign(x - global.myself.object.x) == -sign(global.myself.object.image_xscale))) {
             visible = 0;
         }
     }
-}</argument>
+}*/
+</argument>
       </arguments>
     </action>
   </actions>

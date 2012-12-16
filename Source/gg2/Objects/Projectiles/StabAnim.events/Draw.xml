@@ -13,17 +13,25 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if team == TEAM_RED ubercolour = c_red;
+        <argument kind="STRING">x = owner.x;
+y = owner.y;
+
+if team == TEAM_RED ubercolour = c_red;
 if team == TEAM_BLUE ubercolour = c_blue;
 draw_sprite_ext(sprite_index,image_index,owner.x,owner.y,image_xscale,image_yscale,0,c_white,alpha);
+
 var offset;
-    if !place_meeting(owner.x,owner.y+1,Obstacle) &amp;&amp; !place_meeting(owner.x,owner.y+1,PlayerWallHorizontal)
-        offset = 2;
-    else offset = 0;
+if !place_meeting(owner.x,owner.y+1,Obstacle)
+    and!place_meeting(owner.x,owner.y+1,PlayerWallHorizontal)
+    offset = 2;
+else
+    offset = 0;
+
 draw_sprite_ext(BackstabLegsS, owner.team+offset,owner.x, owner.y,image_xscale,image_yscale,0,c_white,alpha);
 
-if owner.ubered == 1 {
-    draw_sprite_ext(sprite_index,image_index,owner.x,owner.y,image_xscale,image_yscale,image_angle,ubercolour,0.7);
+if (owner.ubered)
+{
+    draw_sprite_ext(sprite_index,image_index,owner.x,owner.y,image_xscale,image_yscale,image_angle,ubercolour,1);
     draw_sprite_ext(BackstabLegsS, owner.team+offset,owner.x,owner.y,image_xscale,image_yscale,0,ubercolour,0.7);
 }
 
