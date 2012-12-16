@@ -66,7 +66,7 @@
         player = ds_priority_delete_max(redteam);
         
         if i&lt;12{
-            if (showadmin) {
+            if (showadmin &amp;&amp; player != global.myself) {
                 var _x, _y;
                 _x = xoffset+6;
                 _y = yoffset+70+20*(i+1);
@@ -103,7 +103,7 @@
         player = ds_priority_delete_max(blueteam);
 
         if i&lt;12{
-            if (showadmin) {
+            if (showadmin &amp;&amp; player != global.myself) {
                 var _x, _y;
                 _x = xoffset+xsize/2+44;
                 _y = yoffset+70+20*(i+1);
@@ -163,7 +163,7 @@
             __str = player.name + ", ";
         }
         
-        if (showadmin) {
+        if (showadmin &amp;&amp; player != global.myself) {
             var _x, _y;
             _x = __x;
             _y = __y;
