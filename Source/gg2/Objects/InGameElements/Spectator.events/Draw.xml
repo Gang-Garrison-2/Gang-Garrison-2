@@ -18,19 +18,30 @@ yoffset = view_yview[0];
 xsize = view_wview[0];
 ysize = view_hview[0];
 
-draw_set_alpha(1);
-draw_rectangle_color(view_xview,view_yview,view_xview+800,view_yview+100,c_black,c_black,c_black,c_black,0);
-draw_rectangle_color(view_xview,view_yview+500,view_xview+800,view_yview+600,c_black,c_black,c_black,c_black,0);
-draw_set_halign(fa_center);
-draw_set_valign(fa_center);
+// special thanks to wareya for the warhud HP cross code &amp; images
+var sprite_xpos, sprite_ypos, icon_xpos, icon_ypos, hppixels;
 
-if (tracking) {   
-    draw_set_color(c_white);    
-    draw_text_transformed(view_xview+400,view_yview+80, player.name,2,2,0);
+draw_set_alpha(1);
+draw_rectangle_color(view_xview,view_yview,view_xview+800,view_yview+20,c_black,c_black,c_black,c_black,0);
+draw_rectangle_color(view_xview,view_yview+580,view_xview+800,view_yview+600,c_black,c_black,c_black,c_black,0);
+
+draw_set_valign(fa_center);
+draw_set_halign(fa_left);
+draw_set_color(c_white);
+draw_text(xoffset+10, yoffset+10, "SPECTATING");
+
+if (tracking) {
+    draw_text(xoffset+50, yoffset+590, player.name);
     if player.object != -1 {
         if player.object.maxHp != 0 {
-            draw_healthbar(xoffset+50-18, yoffset+50-18, xoffset+50+18, yoffset+50+18, player.object.hp*100/player.object.maxHp,c_black,c_red,c_green,3,true,false);
-            draw_sprite_ext(DeathCamHealthBarS,0,xoffset+50, yoffset+50,2,2,0,c_white,1);
+            sprite_xpos = -2;
+            sprite_ypos = 538;
+            icon_xpos = sprite_xpos;
+            icon_ypos = sprite_ypos + 20;
+            draw_sprite_ext(SpectatorHealthCross, 0, xoffset+sprite_xpos, yoffset+sprite_ypos, 2, 2, 0, c_white, 1);
+            hppixels = player.object.hp/player.object.maxHp*17;
+            draw_sprite_part_ext(SpectatorHealthFill,0,0,(17-hppixels)+10,43,hppixels+1,xoffset+icon_xpos, yoffset+icon_ypos+(17-hppixels)*2,2,2,c_red,1);
+            draw_sprite_part_ext(SpectatorHealthFill,0,0,(17-hppixels)+10,43,hppixels+1,xoffset+icon_xpos, yoffset+icon_ypos+(17-hppixels)*2,2,2,c_green,player.object.hp/player.object.maxHp);
         }
     }
 }
