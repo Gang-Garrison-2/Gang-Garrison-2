@@ -67,10 +67,6 @@ else if(tracking)
 if(tracking and stopTracking) 
 {
     tracking = false;
-    if(!instance_exists(NoticeO))
-        instance_create(0,0,NoticeO);
-    with(NoticeO)
-        notice = NOTICE_PLAYERTRACKDISABLE;
 }
 
 // Clip view to map area
