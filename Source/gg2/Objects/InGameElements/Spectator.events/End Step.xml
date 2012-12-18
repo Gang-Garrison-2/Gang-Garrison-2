@@ -54,8 +54,11 @@ else if(tracking)
     {
         if(player.team != TEAM_SPECTATOR)
         {
-            x = round(player.object.x);
-            y = round(player.object.y);
+            if(player.object)
+            {
+                x = round(player.object.x);
+                y = round(player.object.y);
+            }
         }
         else
             stopTracking = true;

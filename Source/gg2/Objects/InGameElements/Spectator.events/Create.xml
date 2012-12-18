@@ -24,7 +24,7 @@ for (i=0; i&lt;=9; i+=1;) {
 //variables for tracking a specific player
 tracking=false
 track_id=0;
-player = 0;
+player = noone;
 
 numpadKeys[0] = vk_numpad0;
 numpadKeys[1] = vk_numpad1;

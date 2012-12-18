@@ -13,28 +13,25 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">var finished;
-finished=false
-if instance_exists(Character) {
+        <argument kind="STRING">for(i=ds_list_size(global.players)-1; i&gt;=0; i-=1)
 {
-    if tracking == false {
-       tracking = true;
-    }
-    do {
-        track_id -= 1;
-            if track_id &lt; 0 {
-                track_id = ds_list_size(global.players) - 1;
-            }
-            player = ds_list_find_value(global.players, track_id);
-                with (player) {
-                    if (team != TEAM_SPECTATOR) { 
-                        if (object != -1) {
-                        finished=true
-                            }
-                        }
-                }
-            }until finished=true
+    var newTrackId, newPlayer;
+    newTrackId = (track_id + i) mod ds_list_size(global.players);
+    newPlayer = ds_list_find_value(global.players, newTrackId);
+    if(newPlayer.object and newPlayer != global.myself)
+    {
+        if(!tracking)
+        {
+            tracking = true;
+            if(!instance_exists(NoticeO))
+                instance_create(0,0,NoticeO);
+            with(NoticeO)
+                notice = NOTICE_PLAYERTRACKENABLE;
         }
+        track_id = newTrackId;
+        player = newPlayer;
+        break;
+    }
 }
 </argument>
       </arguments>
