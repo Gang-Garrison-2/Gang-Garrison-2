@@ -20,7 +20,7 @@
         bestTargetDist=maxHealDistance;
 
         with(Character) {
-            if(id != other.owner and team == other.owner.team and !cloak) {
+            if(id != other.owner and team == other.owner.team) {
                 if(point_distance(x,y,other.x,other.y)&lt;=bestTargetDist) {
                     if(collision_line(other.x, other.y, other.x+lengthdir_x(other.maxHealDistance, other.owner.aimDirection), other.y+lengthdir_y(other.maxHealDistance, other.owner.aimDirection), id, true, false)) {
                         if(!collision_line(other.x, other.y, x, y, Obstacle, true, true)) {
