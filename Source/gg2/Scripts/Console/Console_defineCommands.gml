@@ -57,7 +57,7 @@ if string_letters(input[1]) == ''
 {
     // No letters were given
     // First check whether that ID is even valid
-    if floor(real(string_digits(input[1]))) < ds_list_size(global.players) and floor(real(string_digits(input[1]))) > 0;
+    if floor(real(string_digits(input[1]))) < ds_list_size(global.players) and floor(real(string_digits(input[1]))) > 0
     {
         // Valid ID, kick that player
         player = ds_list_find_value(global.players, floor(real(string_digits(input[1]))));
@@ -195,10 +195,10 @@ if input[1] != ''
     if string_copy(message, 0, 1) == chr(34)
     {
         // Cut off starting and ending quotes
-        message = string_copy(message, 1, string_length(message)-2);
+        message = string_copy(message, 2, string_length(message)-2);
     }
     message = string_copy(message, 0, 255);
-
+    
     // Send it to everyone
     write_ubyte(global.eventBuffer, MESSAGE_STRING);
     write_ubyte(global.eventBuffer, string_length(message));
