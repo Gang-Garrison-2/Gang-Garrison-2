@@ -126,12 +126,13 @@ with(victim.object) {
             //Medic has specially colored hands
             if (player.class == CLASS_MEDIC){
                 if (player.team == TEAM_RED)
-                    createGib(x,y,Hand,hspeed, vspeed, random(105)-52 , 9, false);
+                    createGib(x,y,Hand, hspeed, vspeed, random(105)-52 , 9, false);
                 else
-                    createGib(x,y,Hand,hspeed, vspeed, random(105)-52 , 10, false);
+                    createGib(x,y,Hand, hspeed, vspeed, random(105)-52 , 10, false);
             }else{
-                createGib(x,y,Feet,random(5)-2,random(3),random(13)-6 , player.class, true);
+                createGib(x,y,Hand, hspeed, vspeed, random(105)-52 , player.class, true);
             }
+            createGib(x,y,Feet,random(5)-2,random(3),random(13)-6 , player.class, true);
         }
         //Class specific gibs
         switch(player.class) {
