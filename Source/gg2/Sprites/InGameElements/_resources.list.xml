@@ -26,4 +26,6 @@
   <resource name="ChatboxS_old" type="RESOURCE"/>
   <resource name="ChatS" type="RESOURCE"/>
   <resource name="SliderS" type="RESOURCE"/>
+  <resource name="SpectatorHealthCross" type="RESOURCE"/>
+  <resource name="SpectatorHealthFill" type="RESOURCE"/>
 </resources>
