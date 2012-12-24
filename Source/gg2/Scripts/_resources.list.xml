@@ -23,6 +23,7 @@
   <resource name="Graphics" type="GROUP"/>
   <resource name="Lobby" type="GROUP"/>
   <resource name="Menus" type="GROUP"/>
+  <resource name="Macro" type="GROUP"/>
   <resource name="recordKillInLog" type="RESOURCE"/>
   <resource name="recordDestructionInLog" type="RESOURCE"/>
   <resource name="recordEventInLog" type="RESOURCE"/>
