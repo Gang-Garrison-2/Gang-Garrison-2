@@ -33,4 +33,6 @@
     sprite_assign(BackstabTorsoBlueS, BackstabTorsoBlueSP);
     sprite_assign(OmnomnomnomS, OmnomnomnomSP);
     sprite_assign(BloodDropS, BloodDropSP);
+    sprite_assign(SniperCrouchRedS, SniperCrouchRedSP);
+    sprite_assign(SniperCrouchBlueS, SniperCrouchBlueSP);
 }
