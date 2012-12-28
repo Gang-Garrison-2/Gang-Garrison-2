@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
+  <resource name="Taunts" type="GROUP"/>
+  <resource name="Special" type="GROUP"/>
   <resource name="SniperCrouchBlueSP" type="RESOURCE"/>
   <resource name="SniperCrouchRedSP" type="RESOURCE"/>
   <resource name="QuoteRedSP" type="RESOURCE"/>
