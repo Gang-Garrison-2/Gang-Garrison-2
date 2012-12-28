@@ -54,8 +54,11 @@ else if(tracking)
     {
         if(player.team != TEAM_SPECTATOR)
         {
-            x = round(player.object.x);
-            y = round(player.object.y);
+            if(player.object)
+            {
+                x = round(player.object.x);
+                y = round(player.object.y);
+            }
         }
         else
             stopTracking = true;
@@ -67,10 +70,6 @@ else if(tracking)
 if(tracking and stopTracking) 
 {
     tracking = false;
-    if(!instance_exists(NoticeO))
-        instance_create(0,0,NoticeO);
-    with(NoticeO)
-        notice = NOTICE_PLAYERTRACKDISABLE;
 }
 
 // Clip view to map area

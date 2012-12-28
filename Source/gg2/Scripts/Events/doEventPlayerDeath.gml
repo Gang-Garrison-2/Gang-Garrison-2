@@ -91,31 +91,24 @@ ysize = view_hview[0];
 
 randomize();
 with(victim.object) {
-    if((damageSource == WEAPON_ROCKETLAUNCHER or damageSource == WEAPON_MINEGUN or damageSource == FRAG_BOX or damageSource == WEAPON_REFLECTED_STICKY or damageSource == WEAPON_REFLECTED_ROCKET or damageSource == FINISHED_OFF_GIB or damageSource == GENERATOR_EXPLOSION) and (player.class != CLASS_QUOTE) && (global.gibLevel>1) && distance_to_point(xoffset+xsize/2,yoffset+ysize/2) < 900) {
+    if((damageSource == WEAPON_ROCKETLAUNCHER 
+    or damageSource == WEAPON_MINEGUN or damageSource == FRAG_BOX 
+    or damageSource == WEAPON_REFLECTED_STICKY or damageSource == WEAPON_REFLECTED_ROCKET 
+    or damageSource == FINISHED_OFF_GIB or damageSource == GENERATOR_EXPLOSION) 
+    and (player.class != CLASS_QUOTE) and (global.gibLevel>1) 
+    and distance_to_point(xoffset+xsize/2,yoffset+ysize/2) < 900) {
         repeat(global.gibLevel) {
-            var gib;
-            gib = instance_create(x,y,Gib);
-            gib.hspeed=(random(17)-8);
-            gib.vspeed=(random(17)-9);
-            gib.rotspeed=(random(145)-72);
+            createGib(x,y,Gib,hspeed,vspeed,random(145)-72, 0, false)
         }
         switch(player.team) {
         case TEAM_BLUE :
             repeat(global.gibLevel - 1) {
-                var gib;
-                gib = instance_create(x,y,BlueClump);
-                gib.hspeed=(random(17)-8);
-                gib.vspeed=(random(17)-9);
-                gib.rotspeed=(random(145)-72);
+                createGib(x,y,BlueClump,hspeed,vspeed,random(145)-72, 0, false)
             }
             break;
         case TEAM_RED :
             repeat(global.gibLevel - 1) {
-                var gib;
-                gib = instance_create(x,y,RedClump);
-                gib.hspeed=(random(17)-8);
-                gib.vspeed=(random(17)-9);
-                gib.rotspeed=(random(145)-72);
+                createGib(x,y,RedClump,hspeed,vspeed,random(145)-72, 0, false)
             }
             break;
         }
@@ -126,299 +119,46 @@ with(victim.object) {
             blood.hspeed=(random(21)-10);
             blood.vspeed=(random(21)-13);
         }
-
+        //All Classes gib head, hands, and feet
+        if(global.gibLevel > 2 || choose(0,1) == 1)
+            createGib(x,y,Headgib,0,0,random(105)-52, player.class, false);
+        repeat(global.gibLevel -1){
+            //Medic has specially colored hands
+            if (player.class == CLASS_MEDIC){
+                if (player.team == TEAM_RED)
+                    createGib(x,y,Hand, hspeed, vspeed, random(105)-52 , 9, false);
+                else
+                    createGib(x,y,Hand, hspeed, vspeed, random(105)-52 , 10, false);
+            }else{
+                createGib(x,y,Hand, hspeed, vspeed, random(105)-52 , player.class, false);
+            }
+            createGib(x,y,Feet,random(5)-2,random(3),random(13)-6 , player.class, true);
+        }
+        //Class specific gibs
         switch(player.class) {
-        case CLASS_SCOUT :
-        if(global.gibLevel > 2 || choose(0,1) == 1){
-            var gib;
-            gib = instance_create(x,y,Headgib);
-            gib.hspeed=(random(17)-8);
-            gib.vspeed=(random(17)-9);
-            gib.rotspeed=(random(105)-52 );
-            gib.image_index = 6;
-            }
-            repeat(global.gibLevel -1){
-                var gib;
-                gib = instance_create(x,y,Feet);
-                gib.hspeed=(random(5)-2);
-                gib.vspeed=random(3);
-                gib.rotspeed=(random(13)-6 );
-                gib.image_index = 0;
-            }
-            repeat(global.gibLevel -1){
-                var gib;
-                gib = instance_create(x,y,Hand);
-                gib.hspeed=(random(17)-8);
-                gib.vspeed=(random(17)-9);
-                gib.rotspeed=(random(105)-52);
-                gib.image_index = 1;
-            }
-            break;
         case CLASS_PYRO :
-        if(global.gibLevel > 2 || choose(0,1) == 1){
-            var gib;
-            gib = instance_create(x,y,Headgib);
-            gib.hspeed=(random(17)-8);
-            gib.vspeed=(random(17)-9);
-            gib.rotspeed=(random(105)-52);
-            gib.image_index = 7;
-            }
-            if(global.gibLevel > 2){
-            var gib;
-            gib = instance_create(x,y,Accesory);
-            gib.hspeed=(random(17)-8);
-            gib.vspeed=(random(17)-9);
-            gib.rotspeed=(random(105)-52 );
-            gib.image_index = 4;
-            }
-            repeat(global.gibLevel -1) {
-                var gib;
-                gib = instance_create(x,y,Feet);
-                gib.hspeed=(random(5)-2);
-                gib.vspeed=random(3);
-                gib.rotspeed=(random(13)-6);
-                gib.image_index = 1;
-            }
-            repeat(global.gibLevel -1) {
-                var gib;
-                gib = instance_create(x,y,Hand);
-                gib.hspeed=(random(17)-8);
-                gib.vspeed=(random(17)-9);
-                gib.rotspeed=(random(105)-52 );
-                gib.image_index = 0;
-            }
+            if(global.gibLevel > 2 || choose(0,1) == 1)
+                createGib(x,y,Accesory,hspeed,vspeed,random(105)-52, 4, false)
             break;
         case CLASS_SOLDIER :
-        if(global.gibLevel > 2 || choose(0,1) == 1){
-            var gib;
-            gib = instance_create(x,y,Headgib);
-            gib.hspeed=(random(17)-8);
-            gib.vspeed=(random(17)-9);
-            gib.rotspeed=(random(105)-52 );
-            gib.image_index = 1;
-            }
-            repeat(global.gibLevel -1) {
-                var gib;
-                gib = instance_create(x,y,Feet);
-                gib.hspeed=(random(5)-2);
-                gib.vspeed=random(3);
-                gib.rotspeed=(random(13)-6);
-                gib.image_index = 2;
-            }
-            repeat(global.gibLevel -1) {
-                var gib;
-                gib = instance_create(x,y,Hand);
-                gib.hspeed=(random(17)-8);
-                gib.vspeed=(random(17)-9);
-                gib.rotspeed=(random(105)-52 );
-                gib.image_index = 1;
-            }
             if(global.gibLevel > 2 || choose(0,1) == 1){
-            switch(player.team) {
-            case TEAM_BLUE :
-                var gib;
-                gib = instance_create(x,y,Accesory);
-                gib.hspeed=(random(17)-8);
-                gib.vspeed=(random(17)-9);
-                gib.rotspeed=(random(105)-52 );
-                gib.image_index = 2;
-                break;
-            case TEAM_RED :
-                var gib;
-                gib = instance_create(x,y,Accesory);
-                gib.hspeed=(random(17)-8);
-                gib.vspeed=(random(17)-9);
-                gib.rotspeed=(random(105)-52 );
-                gib.image_index = 1;
-                break;
+                switch(player.team) {
+                    case TEAM_BLUE :
+                        createGib(x,y,Accesory,hspeed,vspeed,random(105)-52, 2, false);
+                        break;
+                    case TEAM_RED :
+                        createGib(x,y,Accesory,hspeed,vspeed,random(105)-52, 1, false);
+                        break;
+                    }
             }
             break;
-        }
-        case CLASS_HEAVY :
-        if(global.gibLevel > 2 || choose(0,1) == 1){
-            var gib;
-            gib = instance_create(x,y,Headgib);
-            gib.hspeed=(random(17)-8);
-            gib.vspeed=(random(17)-9);
-            gib.rotspeed=(random(105)-52 );
-            gib.image_index = 2;
-            }
-            repeat(global.gibLevel -1) {
-                var gib;
-                gib = instance_create(x,y,Feet);
-                gib.hspeed=(random(5)-2);
-                gib.vspeed=random(3);
-                gib.rotspeed=(random(13)-6);
-                gib.image_index = 3;
-            }
-            repeat(global.gibLevel -1) {
-                var gib;
-                gib = instance_create(x,y,Hand);
-                gib.hspeed=(random(17)-8);
-                gib.vspeed=(random(17)-9);
-                gib.rotspeed=(random(105)-52 );
-                gib.image_index = 1;
-            }
-            break;
-        case CLASS_DEMOMAN :
-        if(global.gibLevel > 2 || choose(0,1) == 1){
-            var gib;
-            gib = instance_create(x,y,Headgib);
-            gib.hspeed=(random(17)-8);
-            gib.vspeed=(random(17)-9);
-            gib.rotspeed=(random(105)-52 );
-            gib.image_index = 4;
-            }
-            repeat(global.gibLevel -1) {
-                var gib;
-                gib = instance_create(x,y,Feet);
-                gib.hspeed=(random(5)-2);
-                gib.vspeed=random(3);
-                gib.rotspeed=(random(13)-6);
-                gib.image_index = 4;
-            }
-            repeat(global.gibLevel -1) {
-                var gib;
-                gib = instance_create(x,y,Hand);
-                gib.hspeed=(random(17)-8);
-                gib.vspeed=(random(17)-9);
-                gib.rotspeed=(random(105)-52 );
-                gib.image_index = 0;
-            }
-            break;
-        case CLASS_MEDIC :
-        if(global.gibLevel > 2 || choose(0,1) == 1){
-            var gib;
-            gib = instance_create(x,y,Headgib);
-            gib.hspeed=(random(17)-8);
-            gib.vspeed=(random(17)-9);
-            gib.rotspeed=(random(105)-52 );
-            gib.image_index = 5;
-            }
-            repeat(global.gibLevel - 1) {
-                var gib;
-                gib = instance_create(x,y,Feet);
-                gib.hspeed=(random(5)-2);
-                gib.vspeed=random(3);
-                gib.rotspeed=(random(13)-6);
-                gib.image_index = 4;
-            }
-            if(global.gibLevel > 2 || choose(0,1) == 1){
-            switch(player.team) {
-            case TEAM_BLUE :
-                var gib;
-                gib = instance_create(x,y,Hand);
-                gib.hspeed=(random(17)-8);
-                gib.vspeed=(random(17)-9);
-                gib.rotspeed=(random(105)-52 );
-                gib.image_index = 3;
-                break;
-            case TEAM_RED :
-                var gib;
-                gib = instance_create(x,y,Hand);
-                gib.hspeed=(random(17)-8);
-                gib.vspeed=(random(17)-9);
-                gib.rotspeed=(random(105)-52 );
-                gib.image_index = 2;
-                break;     
-            }
-        }
-        break;
-
         case CLASS_ENGINEER :
-        if(global.gibLevel > 2 || choose(0,1) == 1){
-            var gib;
-            gib = instance_create(x,y,Headgib);
-            gib.hspeed=(random(17)-8);
-            gib.vspeed=(random(17)-9);
-            gib.rotspeed=(random(105)-52 );
-            gib.image_index = 8;
-            }
-            if(global.gibLevel > 2 || choose(0,1) == 1){
-            var gib;
-            gib = instance_create(x,y,Accesory);
-            gib.hspeed=(random(17)-8);
-            gib.vspeed=(random(17)-9);
-            gib.rotspeed=(random(105)-52 );
-            gib.image_index = 3;
-            }
-            repeat(global.gibLevel - 1) {
-                var gib;
-                gib = instance_create(x,y,Feet);
-                gib.hspeed=(random(5)-2);
-                gib.vspeed=random(3);
-                gib.rotspeed=(random(13)-6);
-                gib.image_index = 5;
-            }
-            repeat(global.gibLevel - 1) {
-                var gib;
-                gib = instance_create(x,y,Hand);
-                gib.hspeed=(random(17)-8);
-                gib.vspeed=(random(17)-9);
-                gib.rotspeed=(random(105)-52 );
-                gib.image_index = 0;
-            }
+            if(global.gibLevel > 2 || choose(0,1) == 1)
+                createGib(x,y,Accesory,hspeed,vspeed,random(105)-52, 3, false)
             break;
-        case CLASS_SPY :
-        if(global.gibLevel > 2 || choose(0,1) == 1){
-            var gib;
-            gib = instance_create(x,y,Headgib);
-            gib.hspeed=(random(17)-8);
-            gib.vspeed=(random(17)-9);
-            gib.rotspeed=(random(105)-52 );
-            gib.image_index = 3;
-            }
-            repeat(global.gibLevel - 1) {
-                var gib;
-                gib = instance_create(x,y,Feet);
-                gib.hspeed=(random(5)-2);
-                gib.vspeed=random(3);
-                gib.rotspeed=(random(13)-6);
-                gib.image_index = 6;
-            }
-            repeat(global.gibLevel - 1) {
-                var gib;
-                gib = instance_create(x,y,Hand);
-                gib.hspeed=(random(17)-8);
-                gib.vspeed=(random(17)-9);
-                gib.rotspeed=(random(105)-52 );
-                gib.image_index = 0;
-            }
-            break;
-            
         case CLASS_SNIPER :
-        if(global.gibLevel > 2 || choose(0,1) == 1){
-            var gib;
-            gib = instance_create(x,y,Headgib);
-            gib.hspeed=(random(17)-8);
-            gib.vspeed=(random(17)-9);
-            gib.rotspeed=(random(105)-52 );
-            gib.image_index = 0;
-            var gib;
-            }
-            if(global.gibLevel > 2 || choose(0,1) == 1){
-            gib = instance_create(x,y,Accesory);
-            gib.hspeed=(random(17)-8);
-            gib.vspeed=(random(17)-9);
-            gib.rotspeed=(random(105)-52 );
-            gib.image_index = 0;
-            }
-            repeat(global.gibLevel - 1) {
-                var gib;
-                gib = instance_create(x,y,Feet);
-                gib.hspeed=(random(5)-2);
-                gib.vspeed=random(3);
-                gib.rotspeed=(random(13)-6);
-                gib.image_index = 6;
-            }
-            repeat(global.gibLevel - 1) {
-                var gib;
-                gib = instance_create(x,y,Hand);
-                gib.hspeed=(random(17)-8);
-                gib.vspeed=(random(17)-9);
-                gib.rotspeed=(random(105)-52 );
-                gib.image_index = 0;
-            }
+            if(global.gibLevel > 2 || choose(0,1) == 1)
+                createGib(x,y,Accesory,hspeed,vspeed,random(105)-52, 0, false)
             break;
         }
         playsound(x,y,Gibbing);
@@ -444,10 +184,15 @@ with(victim.object) {
     }
 }
 
-if global.gg_birthday {
+if (global.gg_birthday){
     myHat = instance_create(victim.object.x,victim.object.y,PartyHat);
     myHat.image_index = victim.team;
 }
+if (global.xmas){
+    myHat = instance_create(victim.object.x,victim.object.y,XmasHat);
+    myHat.image_index = victim.team;
+}
+
 
 with(victim.object) {       
     instance_destroy();

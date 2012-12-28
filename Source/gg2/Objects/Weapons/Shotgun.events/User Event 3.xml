@@ -28,7 +28,7 @@ repeat(5) {
     if(golden)
         shot.sprite_index = ShotGoldS;
     with(shot) {
-        hspeed+=owner.hspeed;
+        speed += owner.hspeed*hspeed/15;
     }
 }
 justShot=true;

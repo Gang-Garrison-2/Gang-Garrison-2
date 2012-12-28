@@ -24,20 +24,20 @@
     other.lastDamageDealer = ownerPlayer;
     other.lastDamageSource = weapon;
     
-    if(!object_is_ancestor(other.object_index, Pyro)) {
-        if (other.burnDuration &lt; other.maxDuration) {
-            other.burnDuration += durationIncrease; 
-            other.burnDuration = min(other.burnDuration, other.maxDuration);
-        }
-        if (other.burnIntensity &lt; other.maxIntensity) {
-            var falloffFactor;
-            if(afterburnFalloff)
-                falloffFactor = cos((flameLife - alarm[0])/flameLife * pi / 2);
-            else
-                falloffFactor = 1;
-            other.burnIntensity += burnIncrease * falloffFactor;
-            other.burnIntensity = min(other.burnIntensity, other.maxIntensity);
-        }
+    if(!object_is_ancestor(other.object_index, Pyro))
+    {
+        other.burnDuration += durationIncrease; 
+        
+        if(afterburnFalloff)
+            falloffFactor = min((flameLife - alarm[0])/flameLife, (flameLife - alarm[0])/flameLife/2+0.25); //Lower the rampup of "meatshot" flames instead of increasing it (old system was a half cosine)
+        else
+            falloffFactor = 1;
+        other.burnIntensity += burnIncrease * falloffFactor;
+        other.burnIntensity = min(other.burnIntensity, other.maxIntensity);
+            
+        other.burnDuration = min(other.burnDuration, other.maxDuration);
+        other.burnIntensity = min(other.burnIntensity, other.maxIntensity);
+        
         other.burnedBy = ownerPlayer;
         other.afterburnSource = weapon;
         other.alarm[0] = other.decayDelay;

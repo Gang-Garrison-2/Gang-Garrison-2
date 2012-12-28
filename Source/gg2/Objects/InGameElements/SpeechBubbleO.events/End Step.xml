@@ -16,7 +16,8 @@
         <argument kind="STRING">if(visible) {
     if(fadeout) {
         bubbleAlpha -= 0.05;
-        if(bubbleAlpha &lt;= 0) {
+        if(bubbleAlpha &lt;= 0)
+        {
             bubbleAlpha = 0;
             visible = false;
             fadeout = false;
@@ -28,6 +29,7 @@
         image_alpha = (1-((1-owner.currentWeapon.stab.alpha)*(1-owner.image_alpha)))*bubbleAlpha;
     else
         image_alpha = owner.image_alpha*bubbleAlpha;
+    visible = !owner.invisible;
 }
 </argument>
       </arguments>

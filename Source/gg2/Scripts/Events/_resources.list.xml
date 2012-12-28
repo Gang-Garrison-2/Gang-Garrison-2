@@ -18,8 +18,8 @@
   <resource name="sendEventUberReady" type="RESOURCE"/>
   <resource name="doEventUber" type="RESOURCE"/>
   <resource name="sendEventUber" type="RESOURCE"/>
-  <resource name="sendEventUnlockCP" type="RESOURCE"/>
   <resource name="doEventUnlockCP" type="RESOURCE"/>
+  <resource name="sendEventUnlockCP" type="RESOURCE"/>
   <resource name="doEventArenaEndRound" type="RESOURCE"/>
   <resource name="sendEventArenaRestart" type="RESOURCE"/>
   <resource name="doEventArenaRestart" type="RESOURCE"/>

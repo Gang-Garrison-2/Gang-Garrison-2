@@ -21,7 +21,7 @@
     
     healTarget = noone;
     healedThisStep = false;
-    healAmount = 0.5;
+    healAmount = 2/3;
     hphealed = 0;
     maxHealDistance = 300;
     ubering = false;

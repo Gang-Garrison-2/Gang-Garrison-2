@@ -73,15 +73,14 @@ if(y&gt;map_height()){
     y = map_height();
 }
 if(!place_free(x,y+1))
-    moveStatus=0
+    moveStatus=0;
 
     
 // Cloak
-if (cloak) {
+if (cloak and cloakAlpha &gt; 0)
     cloakAlpha = max(cloakAlpha - 0.05, 0);
-} else {
+else if (!cloak and cloakAlpha &lt; 1)
     cloakAlpha = min(cloakAlpha + 0.05, 1);
-}
     
 // Taunts
 if (taunting)
@@ -95,8 +94,10 @@ if (omnomnomnom)
 {
     omnomnomnomindex += 0.25;
     image_xscale=xscale;
-    if hp &lt;= maxHp hp += 0.4;
-    if omnomnomnomindex &gt;= omnomnomnomend omnomnomnom=false;
+    if (hp &lt;= maxHp)
+        hp += 1.6;
+    if (omnomnomnomindex &gt;= omnomnomnomend)
+        omnomnomnom=false;
 }
 
 //for things polling whether the character is on a medcabinet

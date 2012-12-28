@@ -31,6 +31,11 @@ if(global.myself.class == CLASS_ENGINEER)
     if(!instance_exists(NutsNBoltsHud))
         instance_create(0,0,NutsNBoltsHud);
 }
+if(global.myself.class == CLASS_HEAVY)
+{
+    if(!instance_exists(SandwichHud))
+        instance_create(0,0,SandwichHud);
+}
 
 // Sticky HUD. Because real men let computers count for them.
 else if (global.myself.class == CLASS_DEMOMAN) &amp;&amp; !instance_exists(StickyCounter) instance_create(0,0,StickyCounter);

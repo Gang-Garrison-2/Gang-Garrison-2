@@ -825,6 +825,78 @@ instance_create(0,0,AtaliaO);
       <creationCode/>
       <locked>true</locked>
     </instance>
+    <instance>
+      <object>LeftDoor</object>
+      <position x="2712" y="894"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>LeftDoor</object>
+      <position x="2706" y="894"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>LeftDoor</object>
+      <position x="2718" y="894"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>LeftDoor</object>
+      <position x="2718" y="918"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>LeftDoor</object>
+      <position x="2712" y="918"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>LeftDoor</object>
+      <position x="2706" y="918"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>RightDoor</object>
+      <position x="2196" y="894"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>RightDoor</object>
+      <position x="2202" y="894"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>RightDoor</object>
+      <position x="2208" y="894"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>RightDoor</object>
+      <position x="2208" y="918"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>RightDoor</object>
+      <position x="2202" y="918"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>RightDoor</object>
+      <position x="2196" y="918"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
   </instances>
   <tiles/>
   <editorSettings remember="true">

@@ -20,14 +20,10 @@
         other.hp -= hitDamage;
         other.lastDamageDealer = ownerPlayer;
         other.lastDamageSource = weapon;
-        if numKills &lt;= maxKills
-        {
-            numKills += 1
-        }
-        else
-        {
+        
+        numKills += 1;
+        if numKills &gt;= maxKills
             instance_destroy();
-        }
     }
     else
         alarm[0] = 1;

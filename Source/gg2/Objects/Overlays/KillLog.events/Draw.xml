@@ -36,29 +36,24 @@ for (i = 0; i &lt; ds_list_size(kills); i += 1) {
     draw_set_alpha(1);
     if (in)
        color = make_color_rgb(217,217,183);
-    //else color = make_color_rgb(0,0,0);
     else color = make_color_rgb(49,45,26);
-    //draw_roundrect_color(view_xview[0] + view_wview[0] - string_width(n1 + n2 + str) - 16 /*8*/ - sprite_get_width(w1), view_yview[0] + i * 16 +8/*+ 16*/,
-//view_xview[0] + view_wview[0], view_yview[0] + i * 16 + 16 + 8, color, color, 0);
-draw_rectangle_color(view_xview[0] + view_wview[0] - string_width(n1 + n2 + str) - 8 - sprite_get_width(w1), view_yview[0] + i * 20 + 14 + yoffset,
-    view_xview[0] + view_wview[0] - 8, view_yview[0] + i * 20 + 24 + 8 + yoffset, color, color, color, color, 0);
-draw_rectangle_color(view_xview[0] + view_wview[0] - string_width(n1 + n2 + str) - 10 - sprite_get_width(w1), view_yview[0] + i * 20 + 16 + yoffset,
-    view_xview[0] + view_wview[0] - 6, view_yview[0] + i * 20 + 24 + 6+ yoffset, color, color, color, color, 0);
 
+    draw_rectangle_color(view_xview[0] + view_wview[0] - string_width(n1 + n2 + str) - 12 - sprite_get_width(w1), view_yview[0] + i * 20 + 14 + yoffset,
+        view_xview[0] + view_wview[0] - 8, view_yview[0] + i * 20 + 24 + 8 + yoffset, color, color, color, color, 0);
+    draw_rectangle_color(view_xview[0] + view_wview[0] - string_width(n1 + n2 + str) - 14 - sprite_get_width(w1), view_yview[0] + i * 20 + 16 + yoffset,
+        view_xview[0] + view_wview[0] - 6, view_yview[0] + i * 20 + 24 + 6+ yoffset, color, color, color, color, 0);
+    
     if (t1 == TEAM_RED) {
         draw_set_color(make_color_rgb(171, 78, 70));
-        //spriteoffset=0;
     } else if (t1 == TEAM_BLUE) {
         draw_set_color(make_color_rgb(100, 116, 132));
-        //spriteoffset=1;
     } else {
         draw_set_color(c_white);
     }
-    draw_text(view_xview[0] + view_wview[0] - string_width(n1 + n2 + str) - 8 - sprite_get_width(w1), view_yview[0] + i * 20 + 24 + yoffset, n1);
-    
+    draw_text(view_xview[0] + view_wview[0] - string_width(n1 + n2 + str) - 12 - sprite_get_width(w1), view_yview[0] + i * 20 + 24 + yoffset, n1);
     draw_set_halign(fa_left);
     if (w1 != -1) {
-        draw_sprite(w1, in, floor(view_xview[0] + view_wview[0] - string_width(n2 + str) - 8 - sprite_get_width(w1)/2 /*- sprite_get_xoffset(w1)*/), floor(view_yview[0] + i * 20 + 24 + yoffset));
+        draw_sprite(w1, in, floor(view_xview[0] + view_wview[0] - string_width(n2 + str) - 10 - sprite_get_width(w1)/2 /*- sprite_get_xoffset(w1)*/), floor(view_yview[0] + i * 20 + 24 + yoffset));
     }
     
     if (in)

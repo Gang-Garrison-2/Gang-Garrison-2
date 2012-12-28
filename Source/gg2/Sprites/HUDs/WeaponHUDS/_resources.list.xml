@@ -4,4 +4,5 @@
   <resource name="Demoman" type="GROUP"/>
   <resource name="Medic" type="GROUP"/>
   <resource name="Sniper" type="GROUP"/>
+  <resource name="Heavy" type="GROUP"/>
 </resources>

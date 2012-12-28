@@ -32,12 +32,20 @@ if (alarm[6] &lt;= 0){
         
     imageOffset = floor(image_index mod animLength) + animLength*owner.team;
 }
-if (!owner.invisible) &amp;&amp; (!owner.taunting) &amp;&amp; owner.cloakAlpha &gt; 0.5 &amp;&amp; !owner.omnomnomnom &amp;&amp; !owner.player.humiliated {
-    draw_sprite_ext(sprite_index,imageOffset,round(x+xoffset*image_xscale),round(y+yoffset),image_xscale,image_yscale,image_angle,c_white,owner.cloakAlpha);
-    if owner.ubered == 1 {
-        if owner.team == TEAM_RED ubercolour = c_red;
-        else if owner.team == TEAM_BLUE ubercolour = c_blue;
-        draw_sprite_ext(sprite_index,imageOffset,round(x+xoffset*image_xscale),round(y+yoffset),image_xscale,image_yscale,image_angle,ubercolour,0.7);
+if (!owner.invisible and !owner.taunting and !owner.omnomnomnom and !owner.player.humiliated)
+{
+    if (!owner.cloak)
+        image_alpha = power(owner.cloakAlpha, 0.5);
+    else
+        image_alpha = power(owner.cloakAlpha, 2);
+    draw_sprite_ext(sprite_index, imageOffset, round(x+xoffset*image_xscale), round(y+yoffset), image_xscale, image_yscale, image_angle, c_white, image_alpha);
+    if (owner.ubered)
+    {
+        if (owner.team == TEAM_RED)
+            ubercolour = c_red;
+        else if (owner.team == TEAM_BLUE)
+            ubercolour = c_blue;
+        draw_sprite_ext(sprite_index, imageOffset, round(x+xoffset*image_xscale), round(y+yoffset), image_xscale, image_yscale, image_angle, ubercolour, 0.7*image_alpha);
     }
 }
 </argument>

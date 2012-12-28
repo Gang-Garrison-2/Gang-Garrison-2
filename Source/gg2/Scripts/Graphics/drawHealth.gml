@@ -20,12 +20,11 @@ draw_set_alpha(1);
 draw_healthbar(xoffset+xpos, yoffset+ypos, xoffset+xpos+42, yoffset+ypos+37, hp*100/maxHp, c_black, c_red, c_green, 3, true, false);
 
 var hpText,hpColor;
-if(hp > (maxHp/3.5)) {
+if(hp > (maxHp/3.5))
     hpColor = c_white;
-} else  {
+else
     hpColor = c_red;
-}
 
-hpText = string(ceil(max(hp,0)));
+hpText = string(ceil(min(max(hp,0),maxHp)));
 
 draw_text_color(xoffset+xpos+24, yoffset+ypos+18, hpText, hpColor, hpColor, hpColor, hpColor, 1);
