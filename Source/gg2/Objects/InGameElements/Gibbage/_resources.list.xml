@@ -10,4 +10,5 @@
   <resource name="BloodDrop" type="RESOURCE"/>
   <resource name="Blood" type="RESOURCE"/>
   <resource name="PartyHat" type="RESOURCE"/>
+  <resource name="XmasHat" type="RESOURCE"/>
 </resources>
