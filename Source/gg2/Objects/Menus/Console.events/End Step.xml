@@ -51,6 +51,17 @@ if (lheldtime &gt; 0 &amp;&amp; seek &gt; 0) {
         cursorflash = 0;
     }
 }
+if (dheldtime &gt; 0) {
+    dheldtime += 1;
+    if (dheldtime &gt; 15) {
+        var textbgn, textend;
+        textbgn = string_copy(text, 0, seek);
+        textend = string_copy(text, seek + 2, string_length(text) - seek - 1);
+        text = textbgn + textend;
+        draw_cursor = true;
+        cursorflash = 0;
+    }
+}
 cursorflash += 1;
 if (cursorflash == 16) {
     cursorflash = 0;

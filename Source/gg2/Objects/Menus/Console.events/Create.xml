@@ -21,6 +21,7 @@ text = "";
 seek = 0;
 rheldtime = 0;
 lheldtime = 0;
+dheldtime = 0;
 prev = -1;
 old = "";
 ovr = false;
