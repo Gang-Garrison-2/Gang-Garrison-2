@@ -13,7 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">seek = string_length(text);
+        <argument kind="STRING">_ConsoleDoSeek(string_length(text));
 </argument>
       </arguments>
     </action>

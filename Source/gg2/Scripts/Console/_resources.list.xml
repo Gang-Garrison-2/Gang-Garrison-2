@@ -4,4 +4,5 @@
   <resource name="ConsoleRunCommand" type="RESOURCE"/>
   <resource name="ConsoleWrite" type="RESOURCE"/>
   <resource name="ConsoleInit" type="RESOURCE"/>
+  <resource name="_ConsoleDoSeek" type="RESOURCE"/>
 </resources>

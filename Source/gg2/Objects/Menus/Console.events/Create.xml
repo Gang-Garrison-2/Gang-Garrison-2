@@ -24,6 +24,11 @@ lheldtime = 0;
 prev = -1;
 old = "";
 ovr = false;
+console_width = 480;
+viewport_x = 0;
+
+// use a surface so we can clip off extra text
+surface = surface_create(console_width, 12);
 </argument>
       </arguments>
     </action>

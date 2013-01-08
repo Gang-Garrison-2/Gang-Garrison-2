@@ -22,13 +22,13 @@
         textend = string_copy(text, seek+1, string_length(text) - seek);
     }
     text = textbgn + string_copy(keyboard_string, 2, string_length(keyboard_string) - 1) + textend;
-    seek += string_length(keyboard_string) - 1;
+    _ConsoleDoSeek(seek + string_length(keyboard_string) - 1);
 } else if (string_length(keyboard_string) &lt; 1 &amp;&amp; seek &gt; 0) {
     var textbgn, textend;
     textbgn = string_copy(text, 0, seek - 1);
     textend = string_copy(text, seek + 1, string_length(text) - seek);
     text = textbgn + textend;
-    seek -= 1;
+    _ConsoleDoSeek(seek - 1);
 }
 if (string_length(keyboard_string) != 1) {
     keyboard_string = "_";
@@ -38,7 +38,7 @@ if (string_length(keyboard_string) != 1) {
 if (rheldtime &gt; 0 &amp;&amp; seek &lt; string_length(text)) {
     rheldtime += 1;
     if (rheldtime &gt; 15) {
-        seek += 1;
+        _ConsoleDoSeek(seek + 1);
         draw_cursor = true;
         cursorflash = 0;
     }
@@ -46,7 +46,7 @@ if (rheldtime &gt; 0 &amp;&amp; seek &lt; string_length(text)) {
 if (lheldtime &gt; 0 &amp;&amp; seek &gt; 0) {
     lheldtime += 1;
     if (lheldtime &gt; 15) {
-        seek -= 1;
+        _ConsoleDoSeek(seek - 1);
         draw_cursor = true;
         cursorflash = 0;
     }
@@ -56,6 +56,37 @@ if (cursorflash == 16) {
     cursorflash = 0;
     draw_cursor = !draw_cursor;
 }
+
+// do surface drawing at end step to avoid screwing up normal drawing
+surface_set_target(surface);
+draw_clear_alpha(c_black, 0);
+
+draw_set_alpha(0.75);
+draw_set_color(c_black);
+draw_rectangle(0, 0, console_width, 12, false);
+
+draw_set_color(c_white);
+draw_set_valign(fa_top);
+draw_set_halign(fa_left);
+draw_set_alpha(1);
+
+var visible_string, visible_string_width;
+visible_string = string_copy(text, 0, seek);
+visible_string_width = string_width(visible_string);
+
+draw_text(0 - viewport_x, 0, text);
+
+if (draw_cursor) {
+    var cx, cy, temp;
+    temp = text + " ";
+    cx = visible_string_width - viewport_x;
+    if (cx &lt; 0) cx = 0;
+    if (cx &gt;= console_width) cx = console_width - 1;
+    cy = string_height(text + " ") - string_height("_");
+    draw_line(cx, cy, cx, cy + string_height("_"));
+}
+
+surface_reset_target();
 </argument>
       </arguments>
     </action>

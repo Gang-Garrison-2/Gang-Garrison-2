@@ -37,7 +37,7 @@
     }
     text = "";
     keyboard_string = "_";
-    seek = 0;
+    _ConsoleDoSeek(0);
 }
 </argument>
       </arguments>

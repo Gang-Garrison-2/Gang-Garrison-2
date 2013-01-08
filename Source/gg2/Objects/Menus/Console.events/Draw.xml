@@ -16,28 +16,11 @@
         <argument kind="STRING">x = view_xview[0];
 y = view_yview[0] + view_hview[0] - 12;
 
-draw_set_alpha(0.75);
-draw_set_color(c_black);
-draw_rectangle(x, y, x + 480, y + 12, false);
-
 draw_set_color(c_white);
 draw_set_valign(fa_top);
 draw_set_halign(fa_left);
 draw_set_alpha(1);
-
-var visible_string_width;
-visible_string = string_copy(text,0,seek);
-visible_string_width = string_width(visible_string);
-
-draw_text(x,y,text);
-
-if (draw_cursor) {
-    var cx, cy, temp;
-    temp = text + " ";
-    cx = x + visible_string_width;
-    cy =  y+ string_height(text + " ") - string_height("_");
-    draw_line(cx, cy, cx, cy+string_height("_"));
-}
+draw_surface(surface, x, y);
 
 var listlen, listheight;
 listlen = ds_list_size(global.ConsoleLog);

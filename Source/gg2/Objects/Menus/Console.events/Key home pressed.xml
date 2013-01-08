@@ -13,7 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">seek = 0;
+        <argument kind="STRING">_ConsoleDoSeek(0);
 </argument>
       </arguments>
     </action>
