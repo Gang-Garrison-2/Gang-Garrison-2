@@ -13,18 +13,23 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">x = view_xview[0];
-y = view_yview[0] + view_hview[0] - 12;
+        <argument kind="STRING">x = view_xview[0] + 20;
+y = view_yview[0] + view_hview[0] - 112;
 
 draw_set_color(c_white);
 draw_set_valign(fa_top);
 draw_set_halign(fa_left);
-draw_set_alpha(1);
-draw_surface(surface, x, y);
 
 var listlen, listheight;
 listlen = ds_list_size(global.ConsoleLog);
 listheight = string_height("_") * listlen;
+
+draw_set_alpha(0.75);
+draw_set_color(c_black);
+draw_rectangle(x - 5, y - listheight - 5, x + console_width + 5, y + 12 + 5, false);
+
+draw_set_alpha(1);
+draw_surface(surface, x, y);
 
 var i;
 draw_set_color(c_orange);
