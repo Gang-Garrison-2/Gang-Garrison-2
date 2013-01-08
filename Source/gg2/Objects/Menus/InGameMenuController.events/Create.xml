@@ -34,6 +34,10 @@
             instance_destroy();
         ');
     }
+    menu_addlink("Open console", '
+        instance_create(x, y, Console);
+        instance_destroy();
+    ');
     menu_addlink("", '');
     menu_addlink("Disconnect", '
         // Force dedicated mode to off so you can go to main menu instead of just restarting server

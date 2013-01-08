@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="KEYPRESS" id="13">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if (text == "") {
+    instance_destroy();
+} else {
+    ConsoleWrite(text);
+    
+    var command, args;
+    if (string_pos(" ", text) != 0) {
+        command = string_copy(text, 0, string_pos(" ", text) - 1);
+        args = string_copy(text, string_pos(" ",text) + 1, string_length(text) - string_pos(" ", text));
+    } else {
+        command = text;
+        args = "";
+    }
+    
+    if (ConsoleRunCommand(command, args) == false) {
+        ConsoleWrite("Unknown command '" + command + "', try help");
+    }
+    
+    ds_list_add(global.ConsoleCmdLog, text);
+    while (ds_list_size(global.ConsoleCmdLog) &gt; 10) {
+        ds_list_delete(global.ConsoleCmdLog, 0);
+    }
+    text = "";
+    keyboard_string = "_";
+    seek = 0;
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

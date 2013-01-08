@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="ConsoleAddCommand" type="RESOURCE"/>
+  <resource name="ConsoleRunCommand" type="RESOURCE"/>
+  <resource name="ConsoleWrite" type="RESOURCE"/>
+  <resource name="ConsoleInit" type="RESOURCE"/>
+</resources>

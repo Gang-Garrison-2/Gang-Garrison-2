@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="STEP" id="2">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if (string_length(keyboard_string) &gt; 1) {
+    var textbgn, textend;
+    textbgn = string_copy(text, 0, seek);
+    if (ovr) {
+        textend = string_copy(text, seek+2, string_length(text) - seek - 1);
+    } else {
+        textend = string_copy(text, seek+1, string_length(text) - seek);
+    }
+    text = textbgn + string_copy(keyboard_string, 2, string_length(keyboard_string) - 1) + textend;
+    seek += string_length(keyboard_string) - 1;
+} else if (string_length(keyboard_string) &lt; 1 &amp;&amp; seek &gt; 0) {
+    var textbgn, textend;
+    textbgn = string_copy(text, 0, seek - 1);
+    textend = string_copy(text, seek + 1, string_length(text) - seek);
+    text = textbgn + textend;
+    seek -= 1;
+}
+if (string_length(keyboard_string) != 1) {
+    keyboard_string = "_";
+    draw_cursor = true;
+    cursorflash = 0;
+}
+if (rheldtime &gt; 0 &amp;&amp; seek &lt; string_length(text)) {
+    rheldtime += 1;
+    if (rheldtime &gt; 15) {
+        seek += 1;
+        draw_cursor = true;
+        cursorflash = 0;
+    }
+}
+if (lheldtime &gt; 0 &amp;&amp; seek &gt; 0) {
+    lheldtime += 1;
+    if (lheldtime &gt; 15) {
+        seek -= 1;
+        draw_cursor = true;
+        cursorflash = 0;
+    }
+}
+cursorflash += 1;
+if (cursorflash == 16) {
+    cursorflash = 0;
+    draw_cursor = !draw_cursor;
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

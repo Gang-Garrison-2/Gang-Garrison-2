@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<event category="KEYPRESS" id="27">
+<event category="KEYPRESS" id="36">
   <actions>
     <action id="603" library="1">
       <!--action name: Code-->
@@ -13,10 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if(!instance_exists(InGameMenuController) &amp;&amp; !instance_exists(OptionsController) &amp;&amp; !instance_exists(ControlsController))
- &amp;&amp; !instance_exists(HUDOptionsController) &amp;&amp; !instance_exists(Console) {
-    instance_create(x,y,InGameMenuController);
-}
+        <argument kind="STRING">seek = 0;
 </argument>
       </arguments>
     </action>
