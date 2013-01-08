@@ -32,7 +32,7 @@ draw_set_alpha(1);
 draw_surface(surface, x, y);
 
 var i;
-draw_set_color(c_orange);
+draw_set_color(c_white);
 for (i = 0; i &lt; listlen; i += 1) {
     draw_text(x, y - listheight + string_height("_") * i, ds_list_find_value(global.ConsoleLog, i));
 }
