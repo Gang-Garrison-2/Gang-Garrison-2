@@ -25,7 +25,7 @@ dheldtime = 0;
 prev = -1;
 old = "";
 ovr = false;
-console_width = 480;
+console_width = 400;
 viewport_x = 0;
 
 // use a surface so we can clip off extra text

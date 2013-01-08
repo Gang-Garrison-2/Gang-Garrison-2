@@ -16,7 +16,7 @@
         <argument kind="STRING">if (text == "") {
     instance_destroy();
 } else {
-    ConsoleWrite(text);
+    ConsoleWrite("&gt;" + text);
     
     var command, args;
     if (string_pos(" ", text) != 0) {

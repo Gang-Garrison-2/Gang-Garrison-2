@@ -73,7 +73,7 @@ surface_set_target(surface);
 draw_clear_alpha(c_black, 0);
 
 draw_set_alpha(0.75);
-draw_set_color(c_black);
+draw_set_color(c_gray);
 draw_rectangle(0, 0, console_width, 12, false);
 
 draw_set_color(c_white);
@@ -91,7 +91,7 @@ if (draw_cursor) {
     var cx, cy, temp;
     temp = text + " ";
     cx = visible_string_width - viewport_x;
-    if (cx &lt; 0) cx = 0;
+    if (cx &lt; 1) cx = 1;
     if (cx &gt;= console_width) cx = console_width - 1;
     cy = string_height(text + " ") - string_height("_");
     draw_line(cx, cy, cx, cy + string_height("_"));
