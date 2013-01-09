@@ -12,9 +12,17 @@ ConsoleAddCommand("help","
     ConsoleWrite('1. kick <player name> - kicks player with given name');
     ConsoleWrite('2. endround - ends the round immediately');
     ConsoleWrite('3. changemap <mapname> - changes map to the one specified');
+    ConsoleWrite('4. broadcast <message> - broadcasts message to all players');
+    ConsoleWrite('5. cls - clears the console');
+    ConsoleWrite('6. exec <gml code> - runs specified code (warning: bad code could hang up or crash server)');
 ");
 
 ConsoleAddCommand("kick","
+    if (!global.isHost) {
+        ConsoleWrite('You can only use this command when hosting');
+        exit;
+    }
+
     var found, nameneeded;
     nameneeded = argument0;
     found = false;
@@ -31,6 +39,11 @@ ConsoleAddCommand("kick","
 ");
 
 ConsoleAddCommand("endround","
+    if (!global.isHost) {
+        ConsoleWrite('You can only use this command when hosting');
+        exit;
+    }
+
     ConsoleWrite('Round ended');
     global.currentMapIndex += 1;
     global.currentMapArea = 1;
@@ -43,6 +56,11 @@ ConsoleAddCommand("endround","
 ");
 
 ConsoleAddCommand("changemap","
+    if (!global.isHost) {
+        ConsoleWrite('You can only use this command when hosting');
+        exit;
+    }
+
     global.winners = TEAM_SPECTATOR;
     global.mapchanging = 1;
     global.nextMap = argument0;
@@ -57,4 +75,34 @@ ConsoleAddCommand("changemap","
     instance_create(0,0,WinBanner);
     
     ConsoleWrite('Changing map to: ' + argument0);
+");
+
+ConsoleAddCommand("broadcast", "
+    if (!global.isHost) {
+        ConsoleWrite('You can only use this command when hosting');
+        exit;
+    }
+
+    var msg;
+    msg = string_copy(argument0, 0, 255);
+
+    // Send it to everyone
+    write_ubyte(global.eventBuffer, MESSAGE_STRING);
+    write_ubyte(global.eventBuffer, string_length(msg));
+    write_string(global.eventBuffer, msg);
+
+    // Show it for the host as well
+    var notice;
+    with NoticeO instance_destroy();
+    notice = instance_create(0, 0, NoticeO);
+    notice.notice = NOTICE_CUSTOM;
+    notice.message = msg;
+");
+
+ConsoleAddCommand("cls","
+    ConsoleClear();
+");
+
+ConsoleAddCommand("exec","
+    execute_string(argument0);
 ");

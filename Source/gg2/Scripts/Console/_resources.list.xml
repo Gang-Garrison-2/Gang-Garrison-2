@@ -3,6 +3,7 @@
   <resource name="ConsoleAddCommand" type="RESOURCE"/>
   <resource name="ConsoleRunCommand" type="RESOURCE"/>
   <resource name="ConsoleWrite" type="RESOURCE"/>
+  <resource name="ConsoleClear" type="RESOURCE"/>
   <resource name="ConsoleInit" type="RESOURCE"/>
   <resource name="_ConsoleDoSeek" type="RESOURCE"/>
 </resources>
