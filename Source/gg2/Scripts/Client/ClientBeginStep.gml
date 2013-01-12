@@ -58,12 +58,12 @@ do {
             if (string_length(plugins)) {
                 usePlugins = pluginsRequired;
                 if (pluginsRequired) {
-                    if (!show_question("This server requires the following plugins to play on it:#" + plugins + "#They are downloaded from the following trusted source:#" + PLUGIN_SOURCE + "#Do you wish to download them and continue connecting?")) {
+                    if (!show_question("This server requires the following plugins to play on it: " + plugins + '#They are downloaded from the source: "' + PLUGIN_SOURCE + '"#The source states: "' + PLUGIN_SOURCE_NOTICE + '"#Do you wish to download them and continue connecting?')) {
                         instance_destroy();
                         exit;
                     }
                 } else {
-                    if (show_question("This server suggests the following optional plugins to play on it:#" + plugins + "#They are downloaded from the following trusted source:#" + PLUGIN_SOURCE + "#Do you wish to download them and use them?")) {
+                    if (show_question("This server suggests the following optional plugins to play on it: " + plugins + '#They are downloaded from the source: "' + PLUGIN_SOURCE + '"#The source states: "' + PLUGIN_SOURCE_NOTICE + '"#Do you wish to download them and use them?')) {
                         usePlugins = true;
                     }
                 }
