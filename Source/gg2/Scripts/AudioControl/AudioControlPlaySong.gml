@@ -17,4 +17,6 @@ if(AudioControl.currentSong != -1) {
     } else {
         audio_play(AudioControl.currentSong, true);
     }
+    if (AudioControl.allAudioMuted = true)
+        audio_set_volume(AudioControl.currentSong, 0)
 }
