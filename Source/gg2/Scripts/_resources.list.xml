@@ -26,6 +26,8 @@
   <resource name="Plugins" type="GROUP"/>
   <resource name="Chat" type="GROUP"/>
   <resource name="Menus" type="GROUP"/>
+  <resource name="Holidays" type="GROUP"/>
+  <resource name="Macro" type="GROUP"/>
   <resource name="recordKillInLog" type="RESOURCE"/>
   <resource name="recordDestructionInLog" type="RESOURCE"/>
   <resource name="recordEventInLog" type="RESOURCE"/>
@@ -42,9 +44,7 @@
   <resource name="clientArenaEndRound" type="RESOURCE"/>
   <resource name="parseUuid" type="RESOURCE"/>
   <resource name="pointCapture" type="RESOURCE"/>
-  <resource name="calculateMonthAndDay" type="RESOURCE"/>
   <resource name="selectSpawnGroup" type="RESOURCE"/>
-  <resource name="partyTime" type="RESOURCE"/>
   <resource name="characterHitObstacle" type="RESOURCE"/>
   <resource name="calculateHealingFactor" type="RESOURCE"/>
   <resource name="toggleZoom" type="RESOURCE"/>
