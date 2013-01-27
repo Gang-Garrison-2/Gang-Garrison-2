@@ -76,11 +76,13 @@ do {
                 }
             }
             ClientPlayerJoin(global.serverSocket);
-            if(global.rewardKey != "" and global.rewardName != "")
+            if(global.rewardKey != "" and global.rewardId != "")
             {
+                var rewardId;
+                rewardId = string_copy
                 write_ubyte(global.serverSocket, REWARD_REQUEST);
-                write_ubyte(global.serverSocket, string_length(global.rewardName));
-                write_string(global.serverSocket, global.rewardName);
+                write_ubyte(global.serverSocket, string_length(global.rewardId));
+                write_string(global.serverSocket, global.rewardId);
             }
             socket_send(global.serverSocket);
             break;

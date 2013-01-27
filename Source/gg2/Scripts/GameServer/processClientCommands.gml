@@ -286,12 +286,11 @@ while(commandLimitRemaining > 0) {
             break;
         
         case REWARD_REQUEST:
-            player.rewardName = read_string(socket, socket_receivebuffer_size(socket));
-            player.challenge = "";
-            repeat(16)
-                player.challenge += chr(irandom_range(0,255));
+            player.rewardId = read_string(socket, socket_receivebuffer_size(socket));
+            player.challenge = rewardCreateChallenge();
             
-            write_ubyte(socket, REWARD_CHALLENGE_CODE);            write_binstring(socket, player.challenge);
+            write_ubyte(socket, REWARD_CHALLENGE_CODE);
+            write_binstring(socket, player.challenge);
             break;
             
         case REWARD_CHALLENGE_RESPONSE:
@@ -299,8 +298,8 @@ while(commandLimitRemaining > 0) {
             answer = read_binstring(socket, 16);
             
             with(player)
-                if(variable_local_exists("challenge") and variable_local_exists("rewardName"))
-                    rewardAuthStart(player, answer, challenge, true, rewardName);
+                if(variable_local_exists("challenge") and variable_local_exists("rewardId"))
+                    rewardAuthStart(player, answer, challenge, true, rewardId);
            
             break;
         }
