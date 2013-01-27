@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="Firing" type="GROUP"/>
+  <resource name="Reloading" type="GROUP"/>
+  <resource name="Other" type="GROUP"/>
+  <resource name="MedigunGoldS" type="RESOURCE"/>
+  <resource name="MinigunGoldS" type="RESOURCE"/>
+  <resource name="MinegunGoldS" type="RESOURCE"/>
+  <resource name="FlamethrowerGoldS" type="RESOURCE"/>
+  <resource name="ScattergunGoldS" type="RESOURCE"/>
+  <resource name="ShotgunGoldS" type="RESOURCE"/>
+  <resource name="RocketlauncherGoldS" type="RESOURCE"/>
+  <resource name="RifleGoldS" type="RESOURCE"/>
+  <resource name="RevolverGoldS" type="RESOURCE"/>
+</resources>

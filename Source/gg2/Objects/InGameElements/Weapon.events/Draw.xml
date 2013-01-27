@@ -13,50 +13,41 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">xviewoffset = view_xview[0];
-yviewoffset = view_yview[0];
-xviewsize = view_wview[0];
-yviewsize = view_hview[0];
-    
-if (distance_to_point(xviewoffset+xviewsize/2,yviewoffset+yviewsize/2) &gt; 800)
+        <argument kind="STRING">if (distance_to_point(view_xview + view_wview/2, view_yview + view_hview/2) &gt; 800)
     exit;
-
-var offset;
-if(justShot == true)
+    
+var imageOffset;
+if (alarm[6] &lt;= 0){
+    //if we are not shooting or recoiling
+    imageOffset = owner.team;
+} else {
+    //Play the current animation normally
+    var animLength;
+    if (object_index != Rifle)
+        animLength = recoilAnimLength;
+    else if (sprite_index == recoilSprite)
+        animLength = recoilAnimLength;
+    else
+        animLength = reloadAnimLength;
+        
+    imageOffset = floor(image_index mod animLength) + animLength*owner.team;
+}
+if (!owner.invisible and !owner.taunting and !owner.omnomnomnom and !owner.player.humiliated)
 {
-    offset=2;
-    justShot = false;
-}
-else
-    offset = 0;
-
-if (object_index != SentryTurret)
-{    
-    if (!owner.invisible and !owner.taunting and !owner.omnomnomnom and !owner.player.humiliated)
+    if (!owner.cloak)
+        image_alpha = power(owner.cloakAlpha, 0.5);
+    else
+        image_alpha = power(owner.cloakAlpha, 2);
+    draw_sprite_ext(sprite_index, imageOffset, round(x+xoffset*image_xscale), round(y+yoffset), image_xscale, image_yscale, image_angle, c_white, image_alpha);
+    if (owner.ubered)
     {
-        if (!owner.cloak)
-            image_alpha = power(owner.cloakAlpha, 0.5);
-        else
-            image_alpha = power(owner.cloakAlpha, 2);
-        draw_sprite_ext(sprite_index,owner.team+offset,round(x+xoffset*image_xscale),round(y+yoffset),image_xscale,image_yscale,image_angle,c_white,image_alpha);
-        if (owner.ubered)
-        {
-            if owner.team == TEAM_RED
-                ubercolour = c_red;
-            else if owner.team == TEAM_BLUE
-                ubercolour = c_blue;
-            draw_sprite_ext(sprite_index,owner.team+offset,round(x+xoffset*image_xscale),round(y+yoffset),image_xscale,image_yscale,image_angle,ubercolour,0.7*image_alpha);
-        }
+        if (owner.team == TEAM_RED)
+            ubercolour = c_red;
+        else if (owner.team == TEAM_BLUE)
+            ubercolour = c_blue;
+        draw_sprite_ext(sprite_index, imageOffset, round(x+xoffset*image_xscale), round(y+yoffset), image_xscale, image_yscale, image_angle, ubercolour, 0.7*image_alpha);
     }
 }
-else if(ownerPlayer.sentry)
-    if(ownerPlayer.sentry.image_index &gt; 7)
-    {
-        if(!rotating)
-            draw_sprite_ext(sprite_index,ownerPlayer.team+offset,round(x+xoffset*image_xscale),round(y+yoffset),image_xscale,image_yscale,image_angle,c_white,1);
-        else
-            draw_sprite_ext(TurretRotateS,round(rotateindex),x,y,image_xscale,image_yscale,0,c_white,1);
-    }
 </argument>
       </arguments>
     </action>

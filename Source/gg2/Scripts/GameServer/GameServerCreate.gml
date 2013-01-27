@@ -72,8 +72,8 @@
 
     global.playerID = 0;
     global.myself = serverPlayer;
-    if(HAXXY_PUBLIC_KEY==md5(global.haxxyKey))
-        global.myself.isHaxxyWinner = true;
+    if(global.rewardKey != "" and global.rewardName != "")
+        rewardAuthStart(serverPlayer, hmac_md5_bin(global.rewardKey, "0000000000000000"), "0000000000000000", false, global.rewardName);
     instance_create(0,0,PlayerControl);
         
     global.currentMap = ds_list_find_value(global.map_rotation, global.currentMapIndex);

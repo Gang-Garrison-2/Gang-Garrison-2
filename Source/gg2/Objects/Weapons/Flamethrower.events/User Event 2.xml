@@ -189,6 +189,7 @@
         }
         
         //Finish
+        justBlast = true;
         readyToBlast=false;
         readyToShoot=false;
         alarm[5]=blastReloadTime;

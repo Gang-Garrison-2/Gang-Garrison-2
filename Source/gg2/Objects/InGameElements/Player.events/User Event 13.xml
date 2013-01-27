@@ -14,7 +14,7 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">    if(global.updateType == FULL_UPDATE) {
-        receiveCompleteMessage(global.serverSocket,12,global.deserializeBuffer);
+        receiveCompleteMessage(global.serverSocket,14,global.deserializeBuffer);
         stats[KILLS] = read_ubyte(global.deserializeBuffer);
         stats[DEATHS] = read_ubyte(global.deserializeBuffer);
         stats[CAPS] = read_ubyte(global.deserializeBuffer);
@@ -26,6 +26,7 @@
         stats[INVULNS] = read_ubyte(global.deserializeBuffer);
         stats[BONUS] = read_ubyte(global.deserializeBuffer);
         stats[POINTS] = read_ubyte(global.deserializeBuffer);
+        rewards = read_ushort(global.deserializeBuffer);
     }
  
     var charObj, subobjects;
@@ -37,13 +38,9 @@
         if(object == -1) {
             charObj = getCharacterObject(team, class);
             if(charObj != -1) {
+                global.paramPlayer = id;
                 object = instance_create(0,0,charObj);
-                object.player = id;
-                object.team = team;
-                
-                with(object) {
-                    event_user(0);
-                }
+                global.paramPlayer = noone;
             } else {
                 show_message("Invalid player object while deserializing");
             }
@@ -72,7 +69,6 @@
             instance_destroy();
     }
     
-    isHaxxyWinner = (subobjects &amp; $04 != 0)
 </argument>
       </arguments>
     </action>
