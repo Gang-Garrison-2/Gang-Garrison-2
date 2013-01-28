@@ -13,9 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">//we need to call the inherited event first (in case it does more than set this attribute) and then override its attribute set
-event_inherited();
-team = TEAM_RED;
+        <argument kind="STRING">team = TEAM_RED;
 </argument>
       </arguments>
     </action>

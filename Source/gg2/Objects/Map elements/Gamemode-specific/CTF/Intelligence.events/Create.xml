@@ -13,9 +13,8 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">//we need to call the inherited event first (in case it does more than set this attribute) and then override its attribute set
-event_inherited();
-team = TEAM_SPECTATOR;
+        <argument kind="STRING">//This is an abstract class - don't instantiate it, only its child objects.
+//This event isn't called by Red/Blue's.
 </argument>
       </arguments>
     </action>
