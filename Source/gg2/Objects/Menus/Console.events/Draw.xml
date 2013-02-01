@@ -13,8 +13,8 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">x = view_xview[0] + 20;
-y = view_yview[0] + view_hview[0] - 100;
+        <argument kind="STRING">x = view_xview[0] + global.ConsoleWindowX;
+y = view_yview[0] + global.ConsoleWindowY;
 
 var listlen, listheight, i, entryheight, curheight, str;
 sep = string_height("_");
@@ -45,6 +45,8 @@ for (i = 0; i &lt; listlen; i += 1) {
     draw_text_ext(x, y - listheight - entryheight + curheight, str, -1, console_width);
     curheight += string_height_ext(str, -1, console_width);
 }
+
+console_height = entryheight + listheight;
 </argument>
       </arguments>
     </action>

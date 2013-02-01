@@ -5,6 +5,8 @@ global.ConsoleCommandNames = ds_list_create();
 global.ConsoleCommandScripts = ds_list_create();
 global.ConsoleLog = ds_list_create();
 global.ConsoleCmdLog = ds_list_create();
+global.ConsoleWindowX = 20;
+global.ConsoleWindowY = 500;
 
 // Add built-in commands
 ConsoleAddCommand("help","

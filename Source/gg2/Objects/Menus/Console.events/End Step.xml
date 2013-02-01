@@ -68,6 +68,12 @@ if (cursorflash == 16) {
     draw_cursor = !draw_cursor;
 }
 
+// dragging
+if (dragging) {
+    global.ConsoleWindowX = dragstart_winx + (mouse_x - dragstart_mousex);
+    global.ConsoleWindowY = dragstart_winy + (mouse_y - dragstart_mousey);
+}
+
 // do surface drawing at end step to avoid screwing up normal drawing
 surface_set_target(surface);
 draw_clear_alpha(c_black, 0);
