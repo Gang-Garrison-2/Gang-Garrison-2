@@ -26,30 +26,18 @@ for (i = 0; i &lt; listlen; i += 1) {
     listheight += string_height_ext(str, -1, console_width);
 }
 
-str = string_replace_all(text, '#', '\#');
-entryheight = string_height_ext(str, -1, console_width);
-if (entryheight &lt; 12) entryheight = 12;
+entryheight = 12;
 
 draw_set_alpha(0.75);
 draw_set_color(c_black);
 draw_rectangle(x - 5, y - listheight - entryheight - 5, x + console_width + 5, y + 5, false);
 
-draw_set_color(c_gray);
-draw_rectangle(x, y - entryheight, x + console_width, y, false);
-
-draw_set_color(c_orange);
-draw_set_valign(fa_top);
-draw_set_halign(fa_left);
 draw_set_alpha(1);
-
-str = text;
-if (draw_cursor) {
-    str = string_copy(str, 0, seek) + '_' + string_copy(str, seek + 2, string_length(str) - seek - 1);
-}
-str = string_replace_all(str, '#', '\#');
-draw_text_ext(x, y - entryheight, str, -1, console_width);
+draw_surface(surface, x, y - entryheight);
 
 draw_set_color(c_white);
+draw_set_valign(fa_top);
+draw_set_halign(fa_left);
 curheight = 0;
 for (i = 0; i &lt; listlen; i += 1) {
     str = ds_list_find_value(global.ConsoleLog, i);

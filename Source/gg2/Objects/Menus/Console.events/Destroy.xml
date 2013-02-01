@@ -13,7 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">
+        <argument kind="STRING">surface_free(surface);
 </argument>
       </arguments>
     </action>
