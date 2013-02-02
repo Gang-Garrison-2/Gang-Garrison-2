@@ -13,38 +13,31 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">x = 250;
-y = 50;
-
-var height;
-height = string_height_ext(msg, -1, width);
-
-draw_set_color(c_gray);
-draw_rectangle(x - 5, y - 5, x + width + 5, y + height + 5, false);
-
-draw_set_halign(fa_left);
-draw_set_valign(fa_top);
-draw_set_color(c_white);
-draw_text_ext(x, y, msg, -1, width);
-
-if (updating) {
-    var buttonheight;
-    buttonheight = 5 + string_height("Update") + 5;
-    if (button_x1 &lt;= mouse_x &amp;&amp; mouse_x &lt;= button_x2 &amp;&amp; button_y1 &lt;= mouse_y &amp;&amp; mouse_y &lt;= button_y2) {
-        draw_set_color(c_dkgray);
-    } else {
-        draw_set_color(c_black);
-    }
-    button_x1 = x - 5;
-    button_y1 = y + height + 5;
-    button_x2 = x + width + 5;
-    button_y2 = y + height + 5 + buttonheight;
-    draw_rectangle(button_x1, button_y1, button_x2, button_y2, false);
+        <argument kind="STRING">if (updating)
+{
+    draw_set_color(c_black);
+    draw_set_alpha(0.35);
+    draw_rectangle(x - 5, y - 5, x + width + 5, y + height + 5, false);
+    
+    if (button_x1 &lt;= mouse_x &amp;&amp; mouse_x &lt;= button_x2 &amp;&amp; button_y1 &lt;= mouse_y &amp;&amp; mouse_y &lt;= button_y2)
+        draw_set_alpha(0.65);
+    else
+        draw_set_alpha(0.5);
+    
+    draw_rectangle(button_x1, button_y1+1, button_x2, button_y2, false);
+    
+    draw_set_color(c_white);
+    draw_set_alpha(1);
+    
+    draw_set_halign(fa_left);
+    draw_set_valign(fa_top);
+    draw_text_ext(x, y, msg, -1, width);
     
     draw_set_halign(fa_center);
     draw_set_valign(fa_middle);
-    draw_set_color(c_white);
-    draw_text(floor(x + width / 2), floor(y + height + 5 + buttonheight / 2), "Update");
+    draw_text(floor(x + width / 2),
+              floor(y + height + button_padding + (button_padding + string_height("Update") + button_padding) / 2),
+              button_label);
 }
 </argument>
       </arguments>

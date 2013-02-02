@@ -66,9 +66,10 @@ if(tcp_eof(socket)) {
             if(real(version) &gt; VERSION)
             {
                 var popup;
-                popup = instance_create(0,0,DevMessagePopup);
+                popup = instance_create(250,50,DevMessagePopup);
                 popup.msg = "Updates have been made to Gang Garrison 2!##"+changes;
-                popup.updating = true;
+                with(popup)
+                    event_user(0);
             }
             break;
         }

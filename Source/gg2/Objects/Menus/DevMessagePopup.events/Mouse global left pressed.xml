@@ -13,10 +13,10 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if (updating) {
-    if (button_x1 &lt;= mouse_x &amp;&amp; mouse_x &lt;= button_x2 &amp;&amp; button_y1 &lt;= mouse_y &amp;&amp; mouse_y &lt;= button_y2) {
+        <argument kind="STRING">if (updating)
+{
+    if (button_x1 &lt;= mouse_x &amp;&amp; mouse_x &lt;= button_x2 &amp;&amp; button_y1 &lt;= mouse_y &amp;&amp; mouse_y &lt;= button_y2)
         room_goto(UpdaterRoom);
-    }
 }
 </argument>
       </arguments>
