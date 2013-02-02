@@ -53,7 +53,9 @@ if(tcp_eof(socket)) {
         switch(messageArray[c])
         {
         case "ShowMessage":
-            show_message(messageArray[c+1]);
+            var popup;
+            popup = instance_create(0,0,DevMessagePopup);
+            popup.msg = messageArray[c+1];
             break;
         case "Version":
             versioncheck = (messageArray[c+1]);
@@ -63,11 +65,10 @@ if(tcp_eof(socket)) {
             changes=string_copy(versioncheck,versionend+1,changeslength);
             if(real(version) &gt; VERSION)
             {
-                update = show_message_ext("Updates have been made to Gang Garrison 2!##"+changes,"Update","Cancel","");
-                if (update == 1){
-                    room_goto(UpdaterRoom);
-                    exit;
-                }
+                var popup;
+                popup = instance_create(0,0,DevMessagePopup);
+                popup.msg = "Updates have been made to Gang Garrison 2!##"+changes;
+                popup.updating = true;
             }
             break;
         }
