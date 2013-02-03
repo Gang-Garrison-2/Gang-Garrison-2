@@ -16,12 +16,24 @@
         <argument kind="STRING">x = view_xview[0] + global.ConsoleWindowX;
 y = view_yview[0] + global.ConsoleWindowY;
 
+// drag console
 if (x &lt;= mouse_x &amp;&amp; mouse_x &lt; x + console_width &amp;&amp; y - console_height &lt;= mouse_y &amp;&amp; mouse_y &lt; y) {
     dragging = true;
     dragstart_mousex = mouse_x;
     dragstart_mousey = mouse_y;
     dragstart_winx = global.ConsoleWindowX;
     dragstart_winy = global.ConsoleWindowY;
+// left border resize
+} else if (x - padding &lt;= mouse_x &amp;&amp; mouse_x &lt; x &amp;&amp; y - console_height &lt;= mouse_y &amp;&amp; mouse_y &lt; y) {
+    resizing_x1 = true;
+    resizestart_mousex = mouse_x;
+    resizestart_x = global.ConsoleWindowX;
+    resizestart_width = console_width;
+// right border resize
+} else if (x + console_width &lt;= mouse_x &amp;&amp; mouse_x &lt; x + console_width + padding &amp;&amp; y - console_height &lt;= mouse_y &amp;&amp; mouse_y &lt; y) {
+    resizing_x2 = true;
+    resizestart_mousex = mouse_x;
+    resizestart_width = console_width;
 }
 </argument>
       </arguments>

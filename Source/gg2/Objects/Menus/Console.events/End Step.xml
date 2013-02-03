@@ -72,6 +72,25 @@ if (cursorflash == 16) {
 if (dragging) {
     global.ConsoleWindowX = dragstart_winx + (mouse_x - dragstart_mousex);
     global.ConsoleWindowY = dragstart_winy + (mouse_y - dragstart_mousey);
+// resizing from left
+} else if (resizing_x1) {
+    if (resizestart_width + (resizestart_x - global.ConsoleWindowX) &gt; 0) {
+        global.ConsoleWindowX = resizestart_x + (mouse_x - resizestart_mousex);
+        console_width = resizestart_width + (resizestart_x - global.ConsoleWindowX);
+    } else {
+        console_width = 1;
+    }
+    surface_free(surface);
+    surface = surface_create(console_width, 12);
+// resizing from right
+} else if (resizing_x2) {
+    if (resizestart_width + (mouse_x - resizestart_mousex) &gt; 0) {
+        console_width = resizestart_width + (mouse_x - resizestart_mousex);
+    } else {
+        console_width = 1;
+    }
+    surface_free(surface);
+    surface = surface_create(console_width, 12);
 }
 
 // do surface drawing at end step to avoid screwing up normal drawing

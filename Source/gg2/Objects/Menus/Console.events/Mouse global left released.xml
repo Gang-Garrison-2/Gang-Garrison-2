@@ -14,6 +14,8 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">dragging = false;
+resizing_x1 = false;
+resizing_x2 = false;
 </argument>
       </arguments>
     </action>

@@ -28,11 +28,17 @@ ovr = false;
 viewport_x = 0;
 console_width = 350;
 console_height = 0;
+padding = 8;
 dragging = false;
 dragstart_mousex = 0;
 dragstart_mousey = 0;
 dragstart_winx = 0;
 dragstart_winy = 0;
+resizing_x1 = false;
+resizing_x2 = false;
+resizestart_mousex = 0;
+resizestart_x = global.ConsoleWindowX;
+resizestart_width = console_width;
 // use a surface so we can clip off extra text
 surface = surface_create(console_width, 12);
 </argument>

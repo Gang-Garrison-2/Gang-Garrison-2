@@ -28,14 +28,24 @@ for (i = 0; i &lt; listlen; i += 1) {
 
 entryheight = 12;
 
+console_height = entryheight + listheight;
+
 draw_set_alpha(0.75);
 draw_set_color(c_black);
-draw_rectangle(x - 5, y - listheight - entryheight - 5, x + console_width + 5, y + 5, false);
+draw_rectangle(x - padding, y - listheight - entryheight - padding, x + console_width + padding, y + padding, false);
+
+draw_set_color(c_white);
+// left border mouseover highlight
+if (x - padding &lt;= mouse_x &amp;&amp; mouse_x &lt; x &amp;&amp; y - console_height &lt;= mouse_y &amp;&amp; mouse_y &lt; y) {
+    draw_rectangle(x - padding, y - console_height, x, y, false);
+// right border mouseover highlight
+} else if (x + console_width &lt;= mouse_x &amp;&amp; mouse_x &lt; x + console_width + padding &amp;&amp; y - console_height &lt;= mouse_y &amp;&amp; mouse_y &lt; y) {
+    draw_rectangle(x + console_width, y - console_height, x + console_width + padding, y, false);
+}
 
 draw_set_alpha(1);
 draw_surface(surface, x, y - entryheight);
 
-draw_set_color(c_white);
 draw_set_valign(fa_top);
 draw_set_halign(fa_left);
 curheight = 0;
@@ -45,8 +55,6 @@ for (i = 0; i &lt; listlen; i += 1) {
     draw_text_ext(x, y - listheight - entryheight + curheight, str, -1, console_width);
     curheight += string_height_ext(str, -1, console_width);
 }
-
-console_height = entryheight + listheight;
 </argument>
       </arguments>
     </action>
