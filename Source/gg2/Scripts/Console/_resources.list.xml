@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
+  <resource name="ConsolePrint" type="RESOURCE"/>
+  <resource name="ConsoleClear" type="RESOURCE"/>
   <resource name="ConsoleAddCommand" type="RESOURCE"/>
   <resource name="ConsoleRunCommand" type="RESOURCE"/>
-  <resource name="ConsoleWrite" type="RESOURCE"/>
-  <resource name="ConsoleClear" type="RESOURCE"/>
-  <resource name="ConsoleInit" type="RESOURCE"/>
+  <resource name="ConsoleType" type="RESOURCE"/>
+  <resource name="ConsoleSpecVer" type="RESOURCE"/>
   <resource name="_ConsoleDoSeek" type="RESOURCE"/>
+  <resource name="_ConsoleInit" type="RESOURCE"/>
 </resources>

@@ -3,25 +3,57 @@ Initializes Console
 */
 global.ConsoleCommandNames = ds_list_create();
 global.ConsoleCommandScripts = ds_list_create();
+global.ConsoleCommandDocs = ds_list_create();
 global.ConsoleLog = ds_list_create();
 global.ConsoleCmdLog = ds_list_create();
 global.ConsoleWindowX = 20;
 global.ConsoleWindowY = 500;
 
 // Add built-in commands
+
+/*
+help command follows Standard Console API v1 spec
+http://www.ganggarrison.com/forums/index.php?topic=33394
+
+From the spec:
+
+help
+- Called without any arguments, prints a list of commands. If a command name is
+  specified, prints the help string for the command, which was given with
+  ConsoleAddCommand(). Any # characters should NOT display as new lines.
+*/
 ConsoleAddCommand("help","
-    ConsoleWrite('Type a command and press enter to run it. Press ESC or Enter to close console.');
-    ConsoleWrite('1. kick <player name> - kicks player with given name');
-    ConsoleWrite('2. endround - ends the round immediately');
-    ConsoleWrite('3. changemap <mapname> - changes map to the one specified');
-    ConsoleWrite('4. broadcast <message> - broadcasts message to all players');
-    ConsoleWrite('5. cls - clears the console');
-    ConsoleWrite('6. exec <gml code> - runs specified code (warning: bad code could hang up or crash server)');
-");
+    var i;
+    // no arguments, display list
+    if (string_length(argument0) == 0) {
+        var list;
+        
+        list = '';
+        
+        for (i = 0; i < ds_list_size(global.ConsoleCommandNames); i+=1) {
+            list = list + ds_list_find_value(global.ConsoleCommandNames, i);
+            if (i != ds_list_size(global.ConsoleCommandNames) - 1) {
+                list = list + ', ';
+            }
+        }
+
+        ConsolePrint('The following commands are available. To get help on any of them, use help <command name>:');
+        ConsolePrint(list);
+    // display help for command
+    } else {
+        i = ds_list_find_index(global.ConsoleCommandNames, argument0);
+        if (i != -1) {
+            ConsolePrint('Help for command ' + argument0 + ':');
+            ConsolePrint(ds_list_find_value(global.ConsoleCommandDocs, i));
+        } else {
+            ConsolePrint('There is no command named ' + argument0);
+        }
+    }
+", "help [command name] - without a command name specified, lists available commands. With a command name specified, displays its help info.");
 
 ConsoleAddCommand("kick","
     if (!global.isHost) {
-        ConsoleWrite('You can only use this command when hosting');
+        ConsolePrint('You can only use this command when hosting');
         exit;
     }
 
@@ -31,22 +63,22 @@ ConsoleAddCommand("kick","
     with (Player) {
         if (string_lower(name) == string_lower(nameneeded) && id != global.myself) {
             kicked = true;
-            ConsoleWrite('Kicked: ' + name);
+            ConsolePrint('Kicked: ' + name);
             found = true;
         }
     }
     if (!found) {
-        ConsoleWrite('Could not find: ' + argument0);
+        ConsolePrint('Could not find: ' + argument0);
     }
-");
+", "kick <player name> - kicks player with given name");
 
 ConsoleAddCommand("endround","
     if (!global.isHost) {
-        ConsoleWrite('You can only use this command when hosting');
+        ConsolePrint('You can only use this command when hosting');
         exit;
     }
 
-    ConsoleWrite('Round ended');
+    ConsolePrint('Round ended');
     global.currentMapIndex += 1;
     global.currentMapArea = 1;
     if (global.currentMapIndex == ds_list_size(global.map_rotation)) 
@@ -55,11 +87,11 @@ ConsoleAddCommand("endround","
     }
     global.nextMap = ds_list_find_value(global.map_rotation, global.currentMapIndex);
     ConsoleRunCommand('changemap', global.nextMap);
-");
+", "endround - ends the round immediately");
 
 ConsoleAddCommand("changemap","
     if (!global.isHost) {
-        ConsoleWrite('You can only use this command when hosting');
+        ConsolePrint('You can only use this command when hosting');
         exit;
     }
 
@@ -76,12 +108,12 @@ ConsoleAddCommand("changemap","
     if !instance_exists(ScoreTableController) instance_create(0, 0, ScoreTableController);
     instance_create(0,0,WinBanner);
     
-    ConsoleWrite('Changing map to: ' + argument0);
-");
+    ConsolePrint('Changing map to: ' + argument0);
+", "changemap <mapname> - changes map to the one specified");
 
 ConsoleAddCommand("broadcast", "
     if (!global.isHost) {
-        ConsoleWrite('You can only use this command when hosting');
+        ConsolePrint('You can only use this command when hosting');
         exit;
     }
 
@@ -99,12 +131,12 @@ ConsoleAddCommand("broadcast", "
     notice = instance_create(0, 0, NoticeO);
     notice.notice = NOTICE_CUSTOM;
     notice.message = msg;
-");
+", "broadcast <message> - broadcasts message to all players");
 
 ConsoleAddCommand("cls","
     ConsoleClear();
-");
+", "cls - clears the console");
 
 ConsoleAddCommand("exec","
     execute_string(argument0);
-");
+", "exec <gml code> - runs specified code (warning: bad code could hang up or crash server");
