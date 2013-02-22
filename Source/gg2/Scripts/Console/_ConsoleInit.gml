@@ -95,6 +95,11 @@ ConsoleAddCommand("changemap","
         exit;
     }
 
+    if(!file_exists('Maps/' + argument0 + '.png') && !gotoInternalMapRoom(argument0, true)) {
+        ConsolePrint('There is no map named: ' + argument0);
+        exit;
+    }
+    
     global.winners = TEAM_SPECTATOR;
     global.mapchanging = 1;
     global.nextMap = argument0;
