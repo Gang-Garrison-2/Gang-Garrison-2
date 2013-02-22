@@ -28,7 +28,6 @@ draw_rectangle_color(view_xview,view_yview+580,view_xview+800,view_yview+600,c_b
 draw_set_valign(fa_center);
 draw_set_halign(fa_left);
 draw_set_color(c_white);
-draw_text(xoffset+10, yoffset+10, "SPECTATING");
 
 if (tracking) {
     draw_text(xoffset+50, yoffset+590, player.name);

@@ -25,6 +25,8 @@ shot.ownerPlayer=ownerPlayer;
 shot.team=owner.team;
 shot.hitDamage = 28;
 shot.weapon=WEAPON_REVOLVER;
+if(golden)
+    shot.sprite_index = ShotGoldS;
 with(shot)
     speed += owner.hspeed*hspeed/15;
 

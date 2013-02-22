@@ -30,6 +30,7 @@ justShot=true;
 readyToShoot = false;
 alarm[0] = refireTime;
 alarm[5] = reloadBuffer + reloadTime;
+
 </argument>
       </arguments>
     </action>

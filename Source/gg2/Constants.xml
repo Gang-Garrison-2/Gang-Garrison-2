@@ -49,12 +49,12 @@
   <constant name="JOIN_UPDATE" value="43"/>
   <constant name="DOWNLOAD_MAP" value="44"/>
   <constant name="SENTRY_POSITION" value="45"/>
-  <constant name="I_AM_A_HAXXY_WINNER" value="50"/>
-  <constant name="HAXXY_CHALLENGE_CODE" value="51"/>
-  <constant name="HAXXY_CHALLENGE_RESPONSE" value="52"/>
+  <constant name="REWARD_UPDATE" value="49"/>
+  <constant name="REWARD_REQUEST" value="50"/>
+  <constant name="REWARD_CHALLENGE_CODE" value="51"/>
+  <constant name="REWARD_CHALLENGE_RESPONSE" value="52"/>
   <constant name="MESSAGE_STRING" value="53"/>
   <constant name="WEAPON_FIRE" value="54"/>
-  <constant name="HAXXY_PUBLIC_KEY" value="&quot;70095e0fd9754e5a3ce2cb32f109148e&quot;"/>
   <constant name="TEAM_RED" value="0"/>
   <constant name="TEAM_BLUE" value="1"/>
   <constant name="TEAM_SPECTATOR" value="2"/>
@@ -74,6 +74,8 @@
   <constant name="CHARACTER_ANIMATION_DEAD" value="5"/>
   <constant name="LOBBY_SERVER_HOST" value="&quot;ganggarrison.com&quot;"/>
   <constant name="LOBBY_SERVER_PORT" value="29944"/>
+  <constant name="AUTH_SERVER_HOST" value="&quot;ganggarrison.com&quot;"/>
+  <constant name="AUTH_SERVER_PORT" value="45022"/>
   <constant name="WSAEWOULDBLOCK" value="-10035"/>
   <constant name="WSAENETDOWN" value="-10050"/>
   <constant name="WSAENETRESET" value="-10052"/>
@@ -103,7 +105,6 @@
   <constant name="WEAPON_ROCKETLAUNCHER" value="2"/>
   <constant name="WEAPON_SHOTGUN" value="3"/>
   <constant name="WEAPON_REVOLVER" value="4"/>
-  <constant name="WEAPON_QROCKETLAUNCHER" value="5"/>
   <constant name="WEAPON_MINEGUN" value="6"/>
   <constant name="WEAPON_NEEDLEGUN" value="7"/>
   <constant name="WEAPON_RIFLE" value="8"/>

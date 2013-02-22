@@ -76,8 +76,14 @@ do {
                 }
             }
             ClientPlayerJoin(global.serverSocket);
-            if(global.haxxyKey != "")
-                write_byte(global.serverSocket, I_AM_A_HAXXY_WINNER);
+            if(global.rewardKey != "" and global.rewardId != "")
+            {
+                var rewardId;
+                rewardId = string_copy
+                write_ubyte(global.serverSocket, REWARD_REQUEST);
+                write_ubyte(global.serverSocket, string_length(global.rewardId));
+                write_string(global.serverSocket, global.rewardId);
+            }
             socket_send(global.serverSocket);
             break;
             
@@ -438,12 +444,21 @@ do {
             instance_destroy();
             exit;
         
-        case HAXXY_CHALLENGE_CODE:
+        case REWARD_CHALLENGE_CODE:
+            var challengeData;
             receiveCompleteMessage(global.serverSocket,16,global.tempBuffer);
-            write_ubyte(global.serverSocket, HAXXY_CHALLENGE_RESPONSE);
-            for(i=1;i<=16;i+=1)
-                write_ubyte(global.serverSocket, read_ubyte(global.tempBuffer) ^ ord(string_char_at(global.haxxyKey, i)));
+            challengeData = read_binstring(global.tempBuffer, buffer_size(global.tempBuffer));
+            challengeData += socket_remote_ip(global.serverSocket);
+
+            write_ubyte(global.serverSocket, REWARD_CHALLENGE_RESPONSE);
+            write_binstring(global.serverSocket, hmac_md5_bin(global.rewardKey, challengeData));
             socket_send(global.serverSocket);
+            break;
+
+        case REWARD_UPDATE:
+            receiveCompleteMessage(global.serverSocket,3,global.tempBuffer);
+            player = ds_list_find_value(global.players, read_ubyte(global.tempBuffer));
+            doEventUpdateRewards(player, read_ushort(global.tempBuffer));
             break;
             
         case MESSAGE_STRING:
@@ -487,7 +502,7 @@ do {
                 doEventFireWeapon(player, read_ushort(global.tempBuffer));
             }
             break;
-            
+        
         default:
             show_message("The Server sent unexpected data");
             game_end();

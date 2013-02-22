@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="ScoutGoldTauntS" type="RESOURCE"/>
+  <resource name="PyroGoldTauntS" type="RESOURCE"/>
+  <resource name="SoldierGoldTauntS" type="RESOURCE"/>
+  <resource name="HeavyGoldTauntS" type="RESOURCE"/>
+  <resource name="DemoGoldTauntS" type="RESOURCE"/>
+  <resource name="SniperGoldTauntS" type="RESOURCE"/>
+</resources>

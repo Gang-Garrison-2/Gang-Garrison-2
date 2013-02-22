@@ -27,6 +27,8 @@
         shot.ownerPlayer=ownerPlayer;
         shot.team=owner.team;
         shot.weapon=WEAPON_MINIGUN;
+        if(golden)
+            shot.sprite_index = ShotGoldS;
         shot.hspeed += owner.hspeed;
         shot.alarm[0] = 30;
         
@@ -37,6 +39,7 @@
         alarm[0] = refireTime;
         alarm[5] = reloadBuffer;
     }
+    
 }
 </argument>
       </arguments>

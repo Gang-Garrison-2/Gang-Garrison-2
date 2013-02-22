@@ -17,28 +17,37 @@
     xoffset = -11;
     yoffset = 0;
     refireTime = 2;
+    event_inherited();
+    
     sndlooping = false;
     maxAmmo = 200;
     ammoCount = maxAmmo;
     reloadBuffer = 10;
     isRefilling = false;
     
+    if(golden)
+    {
+        normalSprite = MinigunGoldS;
+        recoilSprite = MinigunGoldFS;
+    }
+    else
+    {
+        normalSprite = MinigunS;
+        recoilSprite = MinigunFS;
+    }
+    sprite_index = normalSprite;
+    
+    //play at least 2 frames
+    recoilTime = 3;
+    recoilAnimLength = sprite_get_number(recoilSprite)/2;
+    recoilImageSpeed = recoilAnimLength/recoilTime;
+    
+    //Overlays for the overheat
+    overlaySprite = MinigunOverlayS;
+    overlayFiringSprite = MinigunOverlayFS;
 }
 </argument>
       </arguments>
-    </action>
-    <action id="604" library="1">
-      <!--action name: Inherited-->
-      <kind>NORMAL</kind>
-      <allowRelative>false</allowRelative>
-      <question>false</question>
-      <canApplyTo>false</canApplyTo>
-      <actionType>FUNCTION</actionType>
-      <functionName>action_inherited</functionName>
-      <relative>false</relative>
-      <not>false</not>
-      <appliesTo>.self</appliesTo>
-      <arguments/>
     </action>
   </actions>
 </event>
