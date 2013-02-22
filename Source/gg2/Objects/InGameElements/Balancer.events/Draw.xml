@@ -31,10 +31,11 @@
     draw_set_valign(fa_center);
     draw_set_halign(fa_left);
     
-    if notice == 0 draw_text_ext_color(xoffset+50, (yoffset+ysize)-100,"Teams will be auto balanced in 10 seconds",-1,-1,c_white,c_white,c_white,c_white,alpha);
+    if notice == 0 draw_text_ext_color(xoffset+50, (yoffset+ysize)-100,"Teams are imbalanced and will be auto-balanced shortly.",-1,-1,c_white,c_white,c_white,c_white,alpha);
     if notice == 1 draw_text_ext_color(xoffset+50, (yoffset+ysize)-100,name+" has been team switched for balance",-1,-1,c_white,c_white,c_white,c_white,alpha);    
 
-}</argument>
+}
+</argument>
       </arguments>
     </action>
   </actions>

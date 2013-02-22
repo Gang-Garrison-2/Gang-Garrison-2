@@ -277,7 +277,7 @@ demise. Climb the tower to drop down on unsuspecting opponents!
 
 7. cp_dirtbowl
 by Vaati
-Somewhere in the middle of nowhere, BLU is ready to launch it's secret wewapon at
+Somewhere in the middle of nowhere, BLU is ready to launch it's secret weapon at
 RED's base within Mt. Dirtbowl. RED must push forward while BLU must hold them off
 on three map fronts in this control point attack style map.
 
@@ -489,6 +489,10 @@ You can find more information on Faucet Networking at http://gmc.yoyogames.com/i
 This game uses the Download Manager DLL, created by Hobbel.  It was wrapped into an extension by cspotcode.
 You can find more information on the Download Manager DLL at http://www.hobbl.com/gmdlls/downloadmanager
 
+This game uses the Faucet Forwarding Extension, created by NAGN, which wraps libminiupnp.
+miniupnp is availible under the BSD license: see miniupnp.license for full license.
+You can find more about Faucet Forwarding at its GitHub Page:
+https://github.com/nagn/Faucet-Forwarding
 Readme Changelog
 2/7/09 - fishmatt - cleaned everything up for 2.0
 5/3/09 - mrfredman - updated things for 2.1

@@ -1,0 +1,39 @@
+Here is a small overview of the authentication process, since it is difficult to understand from the source code (which is split over several functions and languages).
+
+There are three parties to this process: The client, the game server, and the auth server (ganggarrison.com). The objective is this: The client wants to prove his identity to the game server, and the game server wants to get extra information about the user (e.g. rewards) that is known by the auth server. A secret key which is only known to the client and the auth server is used as proof of identity.
+
+A simplified version
+
+In order to explain the process we'll first look at a simplified version: Let's assume the client tries to authenticate with the auth server directly. The easiest solution would be to just send his user ID and secret key to the auth server, which would check if the information matches that stored in a database. This is basically the same as login with username and password (though the key is stored in plaintext on the auth server).
+
+This has the drawback that the key is also transmitted in plaintext, and we don't want anyone listening in and learning the secret key that way. In order to prevent that, we will use a challenge-response mechanism instead: The auth server sends a random number to the client (the challenge), and the client will send back the result of a calculation that has the secret key and the random number as input. Since the auth server knows the secret key as well, he can perform the same calculation and check the result. If it matches, this proves that the client knows the secret key without transmitting it directly.
+
+The calculation we use is hmac_md5. It takes a key and a message as inputs, and returns a signature of the message that is practically impossible to fake without knowing the key. It is also practically impossible to calculate the key from the message and the signature. hmac_md5 is still considered secure, even though md5 is considered broken.
+
+So the auth server will send <challenge>, and the client replies with hmac_md5(<key>, <challenge>). The server can calculate this value as well, and if the result matches, the client is authenticated.
+
+Adding the game server
+
+The addition of the game server complicates things a bit, but the general idea is still the same. I'll present the process first and then explain why it works this way:
+
+The client starts the process by announcing to the game server that he wants to authenticate. In that message, he also transmits his user ID:
+
+    Client -> GameServer: REWARD_REQUEST <user_id>
+
+The game server has a user ID now, but no proof. So he creates a random challenge (see above) and sends it back to the client. The client replies with the signature of the challenge PLUS the server's IP address.
+
+    GameServer -> Client: REWARD_CHALLENGE_CODE <challenge>
+    Client -> GameServer: REWARD_CHALLENGE_RESPONSE hmac_md5(<key>, <challenge>+<gameServerIp>)
+    
+Note that the game server can choose the challenge, but he can't figure out the key by doing that. Also, the reply will only be valid for this particular game server, since the client will include his IP in the calculation. This prevents the game server from using the reply to authenticating at a different game server.
+
+Now the game server has a reply, but he can't check the result because he doesn't know the user's secret key. The authentication server does, though, so the game server forwards all the relevant information there. <response> is the client's reply here:
+
+    GameServer -> AuthServer: AUTHENTICATE <response> <challenge> <user_id>
+    AuthServer -> GameServer: OK <user_info>
+    oder
+    AuthServer -> GameServer: FAIL
+    
+The auth server knows the user's key, and also the game server's IP (since it is the game server who is asking), so it can calculate hmac_md5(<key>, <challenge>+<gameServerIp>) and compare it against the client's response. If it matches, the auth server will send back all the interesting user data - at the moment, only the Haxxy rewards. Otherwise, it will send back a failure code.
+
+There is a little snag: The game server will want to authenticate himself to get at his user info, but it might not know its own IP (e.g. if it is behind a NAT router). However, since this is a direct communication with the auth server we don't actually need the extra protection of including the IP. To allow authenticating without the IP check, there is simply a flag in the AUTHENTICATE message which I left out above for clarity. So the game server can just send hmac_md5(<key>, <challenge>) and authenticate that way. This is vulnerable to replay attacks, so if someone sniffs the message he can also authenticate as that server, but since the server can just claim anything to the clients anyway that's not too important.

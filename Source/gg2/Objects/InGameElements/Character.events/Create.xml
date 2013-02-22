@@ -14,14 +14,19 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">{
+    player = global.paramPlayer;
+    team = player.team;
+
     // Default properties of Characters (those where defaults make sense)
     canDoublejump = 0;
     canCloak = 0;
     canBuild = 0;
     jumpStrength = 8;
     capStrength = 1;
+    intelRecharge = 0;
     
     // 
+    hp = maxHp;
     flamecount = 0;
     invisible = false;
     intel = false;
@@ -34,11 +39,11 @@
     
     //afterburn stuff
     burnIntensity = 0;
-    maxIntensity = 10; //maximum afterburn intensity in DPS
+    maxIntensity = 9; //maximum afterburn intensity in DPS
     burnDuration = 0;
-    maxDuration = 300; //maximum afterburn length
+    maxDuration = 210; //maximum afterburn length in frames
     decayDelay = 30; //time between burning and intensity lowering
-    decayDuration = 225; //time between intensity lowering and zeroing out
+    decayDuration = 150; //time between intensity lowering and zeroing out
     durationDecay = 1; //amount that duration lowers per step
     intensityDecay = burnIntensity / decayDuration;
     burnedBy = -1;
@@ -61,6 +66,7 @@
 
     image_speed = 0;
     tauntspeed = 3;
+    tauntlength = sprite_get_number(tauntsprite)/2;
     
     animationOffset = CHARACTER_ANIMATION_NORMAL;
     animationImage = 0;
@@ -92,6 +98,8 @@
 
     //sandvich
     omnomnomnom = false;
+    canEat = true;
+    eatCooldown = 1200; //40 sec cooldown
     
     //sniper zoom
     zoomed = 0;
@@ -112,6 +120,10 @@
     controlFactor = baseControl;
     frictionFactor = baseFriction;
     
+    // Let's spawn our weapon
+    global.paramOwner = id;
+    currentWeapon = instance_create(x,y,weapons[0]);
+    global.paramOwner = noone;
 }
 </argument>
       </arguments>

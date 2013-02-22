@@ -16,8 +16,10 @@
         <argument kind="STRING">{
     xoffset = 0;
     yoffset = -3;
-    bubbleRefireTime = 5;
     refireTime = 5;
+    event_inherited();
+    
+    bubbleRefireTime = 5;
     replenishing = 1;
     bubbleCount = 0;
     maxBubbles = 25;
@@ -33,22 +35,16 @@
     highAmmoThreshold = 2/3 * maxAmmo;
     reloadTime = 55;
     reloadBuffer = 0;
+    
+    normalSprite = BladeS;
+    recoilSprite = BladeFS;
+    
+    recoilTime = 1;
+    recoilAnimLength = sprite_get_number(recoilSprite)/2;
+    recoilImageSpeed = recoilAnimLength/recoilTime;
 }
 </argument>
       </arguments>
-    </action>
-    <action id="604" library="1">
-      <!--action name: Inherited-->
-      <kind>NORMAL</kind>
-      <allowRelative>false</allowRelative>
-      <question>false</question>
-      <canApplyTo>false</canApplyTo>
-      <actionType>FUNCTION</actionType>
-      <functionName>action_inherited</functionName>
-      <relative>false</relative>
-      <not>false</not>
-      <appliesTo>.self</appliesTo>
-      <arguments/>
     </action>
   </actions>
 </event>

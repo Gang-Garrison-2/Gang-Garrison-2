@@ -38,10 +38,13 @@
                 blood.direction = direction-180;
                 }
             
-            with(other) {
+            with(other)
+            {
                 motion_add(other.direction, other.speed*0.03);
-                cloakAlpha = min(cloakAlpha + 0.1, 1);    
-                }
+                cloakAlpha = max(cloakAlpha, 0.3);
+                cloakFlicker = true;
+                alarm[7] = 3;
+            }
         instance_destroy();
         }
 

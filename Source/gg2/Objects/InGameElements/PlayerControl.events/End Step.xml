@@ -14,18 +14,6 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">if(global.myself.object == -1) exit;
-
-if object_is_ancestor(global.myself.object.object_index, Sniper) &amp;&amp; global.myself.object.zoomed == 1 {
-    var relxmouse, relymouse;
-    relxmouse = min(max(window_views_mouse_get_x()-view_xview[0], 0), view_wview);
-    relymouse = min(max(window_views_mouse_get_y()-view_yview[0], 0), view_hview);
-        
-    view_xview[0] = global.myself.object.x+relxmouse-view_wview[0];
-    view_yview[0] = global.myself.object.y+relymouse-view_hview[0];
-} else {
-    view_xview[0] = global.myself.object.x-view_wview[0]/2;
-    view_yview[0] = global.myself.object.y-view_hview[0]/2;
-}
     
 //AFK Check
 afktimer-=1;
@@ -42,6 +30,11 @@ if(global.myself.class == CLASS_ENGINEER)
 
     if(!instance_exists(NutsNBoltsHud))
         instance_create(0,0,NutsNBoltsHud);
+}
+if(global.myself.class == CLASS_HEAVY)
+{
+    if(!instance_exists(SandwichHud))
+        instance_create(0,0,SandwichHud);
 }
 
 // Sticky HUD. Because real men let computers count for them.

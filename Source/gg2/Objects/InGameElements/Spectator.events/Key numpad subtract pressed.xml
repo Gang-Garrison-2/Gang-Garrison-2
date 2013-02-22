@@ -13,31 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">var finished;
-finished=false
-if instance_exists(Character) {
-{
-    if tracking == false {
-       tracking = true;
-       if !instance_exists(NoticeO) instance_create(0,0,NoticeO);
-       with NoticeO notice = NOTICE_PLAYERTRACKENABLE;
-    }
-    do {
-        track_id -= 1;
-            if track_id &lt; 0 {
-                track_id = ds_list_size(global.players) - 1;
-            }
-            player = ds_list_find_value(global.players, track_id);
-                with (player) {
-                    if (team != TEAM_SPECTATOR) { 
-                        if (object != -1) {
-                        finished=true
-                            }
-                        }
-                }
-            }until finished=true
-        }
-}
+        <argument kind="STRING">event_user(8);
 </argument>
       </arguments>
     </action>

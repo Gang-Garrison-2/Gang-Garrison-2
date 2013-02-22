@@ -30,11 +30,16 @@
             newIntel = instance_create(x,y,IntelligenceRed);
             recordEventInLog(5, TEAM_BLUE, player.name, isMe);
         }
-        newIntel.alarm[0] = 900;
+        newIntel.alarm[0] = intelRecharge;
         if (lastDamageSource == KILL_BOX || lastDamageSource == FRAG_BOX || lastDamageSource == PITFALL) {
             if (global.isHost){
-                doEventReturnIntel(team);
-                sendEventReturnIntel(team);
+                if(team==TEAM_RED) {
+                    doEventReturnIntel(TEAM_BLUE);
+                    sendEventReturnIntel(TEAM_BLUE);
+                } else {
+                    doEventReturnIntel(TEAM_RED);
+                    sendEventReturnIntel(TEAM_RED);
+                }
             }
         }
         sound_play(IntelDropSnd);
@@ -45,7 +50,7 @@
     }
     
     player.object=-1;
-    if (collision_point(x,y,SpawnRoom,0,0))
+    if (collision_point(x,y,SpawnRoom,0,0) &amp;&amp; (lastDamageDealer == player || lastDamageDealer == -1))
         player.alarm[5] = 1;
     else 
         player.alarm[5] = global.Server_Respawntime;

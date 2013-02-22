@@ -1,7 +1,22 @@
 {
     with(Client)
         instance_destroy();
-    
+    portForwarded = true;
+    if (global.attemptPortForward) {
+        upnp_set_description("GG2 (TCP)")
+        var discovery_error, forwarding_error;
+        discovery_error = upnp_discover(2000);
+        if (upnp_error_string(discovery_error) != "") {
+            show_message(upnp_error_string(discovery_error))
+            portForwarded = false;
+        }else{
+        forwarding_error = upnp_forward_port(string(global.hostingPort), string(global.hostingPort), "TCP", "0")
+            if (upnp_error_string(forwarding_error) != "") {
+                show_message(upnp_error_string(forwarding_error))
+                portForwarded = false;
+            }
+        }
+    }
     hostSeenMOTD = false;
     global.players = ds_list_create();
     global.tcpListener = -1;
@@ -65,8 +80,12 @@
 
     global.playerID = 0;
     global.myself = serverPlayer;
-    if(HAXXY_PUBLIC_KEY==md5(global.haxxyKey))
-        global.myself.isHaxxyWinner = true;
+    if(global.rewardKey != "" and global.rewardId != "")
+    {
+        var challenge;
+        challenge = rewardCreateChallenge();
+        rewardAuthStart(serverPlayer, hmac_md5_bin(global.rewardKey, challenge), challenge, false, global.rewardId);
+    }
     instance_create(0,0,PlayerControl);
         
     global.currentMap = ds_list_find_value(global.map_rotation, global.currentMapIndex);

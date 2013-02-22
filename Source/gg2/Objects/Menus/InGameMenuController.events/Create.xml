@@ -27,6 +27,13 @@
     menu_addback("Return to Game", '
         instance_destroy();
     ');
+    if (global.isHost) {
+        menu_addlink("Kick players", '
+            if(!instance_exists(ScoreTableController)) instance_create(0,0,ScoreTableController);
+            ScoreTableController.showadmin = true;
+            instance_destroy();
+        ');
+    }
     menu_addlink("", '');
     menu_addlink("Disconnect", '
         // Force dedicated mode to off so you can go to main menu instead of just restarting server

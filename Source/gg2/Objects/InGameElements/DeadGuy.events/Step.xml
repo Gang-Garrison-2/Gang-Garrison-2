@@ -13,19 +13,19 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">{
-    hspeed/=1.1;
-    if(abs(hspeed)&lt;0.2) {
-        hspeed=0;
-    }    
-    
-    if(place_free(x,y+1)) {
-        vspeed += 0.6;
-        if(vspeed&gt;10) {
-            vspeed=10;
-        }
+        <argument kind="STRING">if(abs(hspeed)&lt;0.2) {
+    hspeed=0;
+}   
+if(place_free(x,y+1)) {
+    vspeed += 0.6;
+    if(vspeed&gt;10) {
+        vspeed=10;
     }
-}</argument>
+} else {
+    hspeed/=1.1;
+}
+
+</argument>
       </arguments>
     </action>
   </actions>

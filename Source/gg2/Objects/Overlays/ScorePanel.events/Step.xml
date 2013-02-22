@@ -24,14 +24,14 @@ if (!blueIsCapping)
 
 if (timer &gt; 0)
     timer -= 1;
-
-if ((global.redCaps &gt;= global.caplimit) or (global.blueCaps &gt;= global.caplimit) or (timer &lt;= 0))
-    if ((global.redCaps &gt; global.blueCaps) and (!blueIsCapping or global.redCaps &gt;= global.blueCaps + 2))
+if ((global.redCaps &gt;= global.caplimit) or (global.blueCaps &gt;= global.caplimit) or timer&lt;=0) {
+    if (global.redCaps &gt; global.blueCaps)
         global.winners = TEAM_RED;
-    else if ((global.blueCaps &gt; global.redCaps) and (!redIsCapping or global.blueCaps &gt;= global.redCaps + 2))
+    else if (global.blueCaps &gt; global.redCaps)
         global.winners = TEAM_BLUE;
     else if (!redIsCapping and !blueIsCapping and global.blueCaps == global.redCaps)
         global.winners = TEAM_SPECTATOR;
+}
     
 if (timer &lt;= 0 and global.winners == -1)
     overtime = true;

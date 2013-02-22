@@ -2,4 +2,6 @@
 <resources>
   <resource name="receiveCompleteMessage" type="RESOURCE"/>
   <resource name="receivestring" type="RESOURCE"/>
+  <resource name="read_binstring" type="RESOURCE"/>
+  <resource name="write_binstring" type="RESOURCE"/>
 </resources>

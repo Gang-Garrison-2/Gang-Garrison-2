@@ -24,6 +24,10 @@
   <resource name="Lobby" type="GROUP"/>
   <resource name="Classlimits" type="GROUP"/>
   <resource name="Menus" type="GROUP"/>
+  <resource name="Holidays" type="GROUP"/>
+  <resource name="Macro" type="GROUP"/>
+  <resource name="Bytes" type="GROUP"/>
+  <resource name="Rewards" type="GROUP"/>
   <resource name="recordKillInLog" type="RESOURCE"/>
   <resource name="recordDestructionInLog" type="RESOURCE"/>
   <resource name="recordEventInLog" type="RESOURCE"/>
@@ -40,13 +44,10 @@
   <resource name="clientArenaEndRound" type="RESOURCE"/>
   <resource name="parseUuid" type="RESOURCE"/>
   <resource name="pointCapture" type="RESOURCE"/>
-  <resource name="calculateMonthAndDay" type="RESOURCE"/>
   <resource name="selectSpawnGroup" type="RESOURCE"/>
-  <resource name="partyTime" type="RESOURCE"/>
   <resource name="characterHitObstacle" type="RESOURCE"/>
   <resource name="calculateHealingFactor" type="RESOURCE"/>
   <resource name="toggleZoom" type="RESOURCE"/>
-  <resource name="md5" type="RESOURCE"/>
   <resource name="ds_list_sorted_insert" type="RESOURCE"/>
   <resource name="isBetaVersion" type="RESOURCE"/>
 </resources>

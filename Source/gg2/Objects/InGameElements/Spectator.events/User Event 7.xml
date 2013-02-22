@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="OTHER" id="17">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">for(i=1; i&lt;=ds_list_size(global.players); i+=1)
+{
+    var newTrackId, newPlayer;
+    newTrackId = (track_id + i) mod ds_list_size(global.players);
+    newPlayer = ds_list_find_value(global.players, newTrackId);
+    if(newPlayer.object and newPlayer != global.myself)
+    {
+        if(!tracking)
+        {
+            tracking = true;
+            if(!instance_exists(NoticeO))
+                instance_create(0,0,NoticeO);
+            with(NoticeO)
+                notice = NOTICE_PLAYERTRACKENABLE;
+        }
+        track_id = newTrackId;
+        player = newPlayer;
+        break;
+    }
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

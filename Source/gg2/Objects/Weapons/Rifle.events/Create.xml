@@ -17,6 +17,8 @@
     xoffset = -5;
     yoffset = -8;
     refireTime = 40;
+    event_inherited();
+    
     reloadTime = 40;
     unscopedDamage = 35;
     baseDamage = 45;
@@ -27,22 +29,31 @@
     ammoCount = maxAmmo;
     shot=false;
     t=0;
+    
+    if(golden)
+    {
+        normalSprite = RifleGoldS;
+        recoilSprite = RifleGoldFS;
+        reloadSprite = RifleGoldFRS;
+    }
+    else
+    {
+        normalSprite = RifleS;
+        recoilSprite = RifleFS;
+        reloadSprite = RifleFRS;
+    }
+    sprite_index = normalSprite;
+    
+    recoilTime = 15;
+    recoilAnimLength = sprite_get_number(recoilSprite)/2
+    recoilImageSpeed = recoilAnimLength/recoilTime
+
+    longRecoilTime = 60;
+    reloadAnimLength = sprite_get_number(reloadSprite)/2
+    reloadImageSpeed = reloadAnimLength/(longRecoilTime);
 }
 </argument>
       </arguments>
-    </action>
-    <action id="604" library="1">
-      <!--action name: Inherited-->
-      <kind>NORMAL</kind>
-      <allowRelative>false</allowRelative>
-      <question>false</question>
-      <canApplyTo>false</canApplyTo>
-      <actionType>FUNCTION</actionType>
-      <functionName>action_inherited</functionName>
-      <relative>false</relative>
-      <not>false</not>
-      <appliesTo>.self</appliesTo>
-      <arguments/>
     </action>
   </actions>
 </event>

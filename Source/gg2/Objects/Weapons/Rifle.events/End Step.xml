@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="STEP" id="2">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if (justShot)
+{
+    justShot = false;
+    //Recoil Animation
+    if (owner.zoomed)
+    {
+        if (sprite_index != reloadSprite)
+        {
+            sprite_index = reloadSprite
+            image_index = 0
+            image_speed = reloadImageSpeed;
+        }
+        alarm[6] = longRecoilTime;
+    }
+    else
+    {
+        if (sprite_index != recoilSprite)
+        {
+            sprite_index = recoilSprite
+            image_index = 0
+            image_speed = recoilImageSpeed;
+        }
+        alarm[6] = recoilTime;
+    }
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

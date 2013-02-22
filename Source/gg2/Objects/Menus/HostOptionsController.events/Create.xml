@@ -36,6 +36,13 @@ menu_addedit_text2("Server Name:", "global.serverName", '
     gg2_write_ini("Server", "ServerName", newName);
     return newName;
 ');
+menu_addedit_text2("Welcome message:", "global.welcomeMessage", '
+    var newMessage;
+    newMessage = string_copy(argument0, 0, 255);
+    gg2_write_ini("Server", "WelcomeMessage", newMessage);
+    return newMessage;
+');
+
 menu_addedit_text("Password:", "global.serverPassword", '
     gg2_write_ini("Server", "Password", argument0);
 ');
@@ -64,6 +71,11 @@ menu_addlink("Classlimits", '
     instance_create(x,y,ClasslimitsMenuController);
     instance_destroy();
 ');
+menu_addedit_boolean("Attempt UPnP Forwarding:", "global.attemptPortForward", '
+        if (argument0 == 1)
+            show_message("Warning: UPNP support is currently experimental and enabling it may cause freezing while starting a server, but should cause no freezing ingame")
+        gg2_write_ini("Server", "Attempt UPnP Forwarding", argument0);
+    ');
 menu_addlink("Start Game", '
     //Server respawn time calculator. Converts each second to a frame. (read: multiply by 30 :hehe:)
     if (global.Server_RespawntimeSec == 0)

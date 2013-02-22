@@ -63,9 +63,11 @@
     global.caplimitBkup = global.caplimit;
     global.autobalance = ini_read_real("Server", "AutoBalance",1);
     global.Server_RespawntimeSec = ini_read_real("Server", "Respawn Time", 5);
-    global.haxxyKey = ini_read_string("Haxxy", "SecretHaxxyKey", "");
+    global.rewardKey = unhex(ini_read_string("Haxxy", "RewardKey", ""));
+    global.rewardId = ini_read_string("Haxxy", "RewardId", "");
     global.mapdownloadLimitBps = ini_read_real("Server", "Total bandwidth limit for map downloads in bytes per second", 50000);
     global.updaterBetaChannel = ini_read_real("General", "UpdaterBetaChannel", isBetaVersion());
+    global.attemptPortForward = ini_read_real("Server", "Attempt UPnP Forwarding", 0); 
     
 
     global.classlimits[CLASS_SCOUT] = ini_read_real("Classlimits", "Scout", 256)
@@ -111,8 +113,8 @@
     ini_write_real("Server", "Total bandwidth limit for map downloads in bytes per second", global.mapdownloadLimitBps);
     ini_write_real("Server", "Time Limit", global.timeLimitMins);
     ini_write_string("Server", "Password", global.serverPassword);
-    ini_write_string("Haxxy", "SecretHaxxyKey", global.haxxyKey);
     ini_write_real("General", "UpdaterBetaChannel", global.updaterBetaChannel);
+    ini_write_real("Server", "Attempt UPnP Forwarding", global.attemptPortForward); 
     
     ini_write_real("Classlimits", "Scout", global.classlimits[CLASS_SCOUT])
     ini_write_real("Classlimits", "Pyro", global.classlimits[CLASS_PYRO])

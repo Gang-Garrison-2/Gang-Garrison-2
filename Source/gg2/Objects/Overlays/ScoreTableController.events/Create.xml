@@ -17,7 +17,9 @@
     alpha=0.02;
     done = false;
     nameLen = 0;
-}</argument>
+    showadmin = false;
+}
+</argument>
       </arguments>
     </action>
   </actions>

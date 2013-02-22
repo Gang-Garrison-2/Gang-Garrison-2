@@ -1,19 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <event category="DRAW" id="0">
   <actions>
-    <action id="604" library="1">
-      <!--action name: Inherited-->
-      <kind>NORMAL</kind>
-      <allowRelative>false</allowRelative>
-      <question>false</question>
-      <canApplyTo>false</canApplyTo>
-      <actionType>FUNCTION</actionType>
-      <functionName>action_inherited</functionName>
-      <relative>false</relative>
-      <not>false</not>
-      <appliesTo>.self</appliesTo>
-      <arguments/>
-    </action>
     <action id="603" library="1">
       <!--action name: Code-->
       <kind>CODE</kind>
@@ -26,11 +13,33 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if(nearestTarget != -1 &amp;&amp; shooting == true) {
-    xshootoffset=4*image_xscale;
-    draw_set_alpha(0.6);
-    draw_line_width_color(x+lengthdir_x(10,direction)-xshootoffset,y+lengthdir_y(10,direction)-2,nearestTarget.x+random(25)-12,nearestTarget.y+random(25)-12,2,c_yellow,c_black);
+        <argument kind="STRING">if (distance_to_point(view_xview + view_wview/2, view_yview + view_hview/2) &gt; 800)
+    exit;
+    
+var imageOffset;
+if(shooting)
+{
     shooting=false;
+    imageOffset=2;
+    if(instance_exists(nearestTarget))
+    {
+        xshootoffset=4*image_xscale;
+        draw_set_alpha(0.6);
+        draw_line_width_color(x+lengthdir_x(10,direction)-xshootoffset,y+lengthdir_y(10,direction)-2,nearestTarget.x+random(25)-12,nearestTarget.y+random(25)-12,2,c_yellow,c_black);
+    }
+}
+else
+    imageOffset=0;
+    
+if(ownerPlayer.sentry)
+{
+    if(ownerPlayer.sentry.image_index &gt; 7)
+    {
+        if(rotating)
+            draw_sprite_ext(TurretRotateS,round(rotateindex),x,y,image_xscale,image_yscale,0,c_white,1);
+        else
+            draw_sprite_ext(sprite_index,ownerPlayer.team + imageOffset,round(x+xoffset*image_xscale),round(y+yoffset),image_xscale,image_yscale,image_angle,c_white,1);
+    }
 }
 </argument>
       </arguments>

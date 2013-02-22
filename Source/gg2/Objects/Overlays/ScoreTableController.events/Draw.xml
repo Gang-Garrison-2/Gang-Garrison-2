@@ -14,7 +14,7 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">{
-    var xoffset, yoffset, xsize, ysize, i, player, redteam, blueteam, spec, showadmin;
+    var xoffset, yoffset, xsize, ysize, i, player, redteam, blueteam, spec;
     
     xoffset = view_xview[0]+view_wview[0]/6-15;
     yoffset = view_yview[0]+view_hview[0]/10+50;
@@ -31,11 +31,6 @@
     redteam = ds_priority_create();
     blueteam = ds_priority_create();  
     spec = ds_priority_create();
-    
-    if (global.myself != -1)
-        showadmin = (global.isHost and global.myself.team == TEAM_SPECTATOR)
-    else
-        showadmin = false;
     
     for(i=0; i&lt;ds_list_size(global.players); i+=1) {
         player = ds_list_find_value(global.players, i);
@@ -71,11 +66,7 @@
         player = ds_priority_delete_max(redteam);
         
         if i&lt;12{
-            if (global.myself.team == player.team or global.mapchanging) {
-                draw_sprite_ext(Icon,player.class,xoffset+10,yoffset+70+20*(i+1),1,1,0,c_white,alpha)
-                draw_sprite_ext(Icon,player.class,xoffset+10,yoffset+70+20*(i+1),1,1,0,c_red,alpha*0.2)
-            }
-            if (showadmin) {
+            if (showadmin &amp;&amp; player != global.myself) {
                 var _x, _y;
                 _x = xoffset+6;
                 _y = yoffset+70+20*(i+1);
@@ -88,6 +79,11 @@
                         mouse_clear(mb_left);
                         player.kicked = true;
                     }        
+                }
+            } else {
+                if (global.myself.team == player.team or global.mapchanging) {
+                    draw_sprite_ext(Icon,player.class,xoffset+14,yoffset+70+20*(i+1),1,1,0,c_white,alpha)
+                    draw_sprite_ext(Icon,player.class,xoffset+14,yoffset+70+20*(i+1),1,1,0,c_red,alpha*0.2)
                 }
             }
         
@@ -107,11 +103,7 @@
         player = ds_priority_delete_max(blueteam);
 
         if i&lt;12{
-            if(global.myself.team == player.team) {
-                draw_sprite_ext(Icon,player.class,xoffset+xsize/2+45,yoffset+70+20*(i+1),1,1,0,c_white,alpha)
-                draw_sprite_ext(Icon,player.class,xoffset+xsize/2+45,yoffset+70+20*(i+1),1,1,0,c_blue,alpha*0.2)
-            }
-            if (showadmin) {
+            if (showadmin &amp;&amp; player != global.myself) {
                 var _x, _y;
                 _x = xoffset+xsize/2+44;
                 _y = yoffset+70+20*(i+1);
@@ -124,6 +116,11 @@
                         mouse_clear(mb_left);
                         player.kicked = true;
                     }        
+                }
+            } else {
+                if(global.myself.team == player.team) {
+                    draw_sprite_ext(Icon,player.class,xoffset+xsize/2+49,yoffset+70+20*(i+1),1,1,0,c_white,alpha)
+                    draw_sprite_ext(Icon,player.class,xoffset+xsize/2+49,yoffset+70+20*(i+1),1,1,0,c_blue,alpha*0.2)
                 }
             }
        
@@ -147,19 +144,49 @@
     
     specList="";
     
+    var __x, __y, __x_max, __str, __bootlen;
+    
+    __y = yoffset+370;
+    __x_min = xoffset+xsize-350;
+    __x_max = xoffset+xsize + 50;
+    __x = __x_min;
+    __bootlen = 0;
     for(i=0; ds_priority_size(spec) &gt; 0; i+=1) {
         player = ds_priority_delete_max(spec);            
         
         if (ds_priority_size(spec) == 0)
         {
-            specList=specList + player.name;
+            __str = player.name;
         }
         else
         {
-            specList=specList + player.name + ", ";
-        }   
-    }    
-    draw_text_ext(xoffset+xsize-350, yoffset+370,specList,-1,400)
+            __str = player.name + ", ";
+        }
+        
+        if (showadmin &amp;&amp; player != global.myself) {
+            var _x, _y;
+            _x = __x;
+            _y = __y;
+            __bootlen = 16;
+            draw_sprite_ext(Boot,0,_x,_y,1,1,0,c_white,alpha)
+            if (mouse_x &gt;= _x and mouse_x &lt; _x+16
+                and mouse_y &gt;= _y and mouse_y &lt; _y+16)
+            {
+                draw_sprite_ext(Boot,0,_x,_y,1,1,0,c_red,alpha*0.5)
+                if (mouse_check_button_pressed(mb_left)) {
+                    mouse_clear(mb_left);
+                    player.kicked = true;
+                }        
+            }
+        }
+        
+        if (__bootlen + __x + string_width(__str) &gt; __x_max) {
+            __x = __x_min;
+            __y += string_height(__str) + 2;
+        }
+        draw_text(__bootlen + __x, __y, __str);
+        __x += __bootlen + string_width(__str);
+    }
     
     draw_text(xoffset + 8, yoffset+48, "Server: " + string_copy(global.joinedServerName,1,25));
     draw_text(xoffset+xsize/2+16, yoffset+48, "    Map: " + string_copy(global.currentMap,1,25));

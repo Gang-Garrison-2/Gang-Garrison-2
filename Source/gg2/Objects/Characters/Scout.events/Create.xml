@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <event category="CREATE" id="0">
   <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">runPower = 1.4;
+maxHp = 100;
+weapons[0] = Scattergun;
+haxxyStatue = ScoutHaxxyStatueS;
+
+if(hasRewardWeapon(global.paramPlayer))
+    tauntsprite = ScoutGoldTauntS;
+else
+    tauntsprite = ScoutTauntS;
+</argument>
+      </arguments>
+    </action>
     <action id="604" library="1">
       <!--action name: Inherited-->
       <kind>NORMAL</kind>
@@ -26,15 +50,9 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">{
-    capStrength = 2;
-    canDoublejump = 1;
-    runPower = 1.4;
-    maxHp = 100;
-    weapons[0] = Scattergun;
-    tauntsprite = ScoutTauntS;
-    haxxyStatue = ScoutHaxxyStatueS;
-}
+        <argument kind="STRING">// Override defaults
+capStrength = 2;
+canDoublejump = 1;
 </argument>
       </arguments>
     </action>
