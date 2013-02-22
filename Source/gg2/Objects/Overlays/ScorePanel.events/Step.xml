@@ -30,7 +30,7 @@ if ((global.redCaps &gt;= global.caplimit) or (global.blueCaps &gt;= global.capl
     else if (global.blueCaps &gt; global.redCaps)
         global.winners = TEAM_BLUE;
     else if (!redIsCapping and !blueIsCapping and global.blueCaps == global.redCaps)
-        global.winners = TEAM_SPECTATOR
+        global.winners = TEAM_SPECTATOR;
 }
     
 if (timer &lt;= 0 and global.winners == -1)
