@@ -150,6 +150,9 @@ while(commandLimitRemaining > 0) {
                         player.alarm[5] = 1;
                     player.team = newTeam;
                     ServerPlayerChangeteam(playerId, player.team, global.sendBuffer);
+                    with(GameServer) {
+                        ServerBalanceTeams();
+                    }
                 }
             }
             break;                   
