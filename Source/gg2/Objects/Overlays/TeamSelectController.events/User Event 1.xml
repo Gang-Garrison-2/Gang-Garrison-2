@@ -13,10 +13,9 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">    if((not done) and (global.myself.team != team)) {
-        buffer_clear(global.sendBuffer);
-        ClientPlayerChangeteam(team);
-        write_buffer(global.serverSocket, global.sendBuffer);
+        <argument kind="STRING">    if((not done) and (global.myself.team != team))
+    {
+        ClientPlayerChangeteam(team, global.serverSocket);
         socket_send(global.serverSocket);
     }
     done = true;
@@ -24,7 +23,6 @@
         if instance_exists(Spectator) with(Spectator) instance_destroy();
         instance_create(map_width()/2,map_height()/2,Spectator);
     }
-    //else if instance_exists(Spectator) with(Spectator) instance_destroy();
 
     if (global.startedGame == true) 
     {

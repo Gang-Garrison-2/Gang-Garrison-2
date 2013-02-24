@@ -1,9 +1,16 @@
-var i;
-for(i=1; i<ds_list_size(global.players); i+=1)
+with(Player)
 {
-    var player;
-    player = ds_list_find_value(global.players, i);
-    write_buffer(player.socket, global.eventBuffer);
-    socket_send(player.socket);
+    write_buffer(socket, global.sendBuffer);
+    socket_send(socket);
 }
-buffer_clear(global.eventBuffer);
+buffer_clear(global.sendBuffer);
+
+global.runningMapDownloads = 0;
+global.mapBytesRemainingInStep = global.mapdownloadLimitBps/room_speed;
+with(JoiningPlayer)
+    if(state==STATE_CLIENT_DOWNLOADING)
+        global.runningMapDownloads += 1;
+
+acceptJoiningPlayer();        
+with(JoiningPlayer)
+    serviceJoiningPlayer();

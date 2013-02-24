@@ -53,8 +53,8 @@
                 balanceplayer.object = -1;
             }
         
-            write_ubyte(global.eventBuffer, BALANCE);
-            write_ubyte(global.eventBuffer, ds_list_find_index(global.players, balanceplayer));
+            write_ubyte(global.sendBuffer, BALANCE);
+            write_ubyte(global.sendBuffer, ds_list_find_index(global.players, balanceplayer));
             if !instance_exists(Balancer) instance_create(x,y,Balancer);
             Balancer.name=player.name;
             with (Balancer) notice=1;

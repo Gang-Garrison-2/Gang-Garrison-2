@@ -18,7 +18,6 @@
         sound_volume(global.FaucetMusic, 0.8);
         
     global.sendBuffer = buffer_create();
-    global.eventBuffer = buffer_create();
     global.tempBuffer = buffer_create();
     global.HudCheck = false;
     global.map_rotation = ds_list_create();
