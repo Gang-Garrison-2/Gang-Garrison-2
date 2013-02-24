@@ -79,10 +79,10 @@ do {
             if(global.rewardKey != "" and global.rewardId != "")
             {
                 var rewardId;
-                rewardId = string_copy
+                rewardId = string_copy(global.rewardId, 0, 255);
                 write_ubyte(global.serverSocket, REWARD_REQUEST);
-                write_ubyte(global.serverSocket, string_length(global.rewardId));
-                write_string(global.serverSocket, global.rewardId);
+                write_ubyte(global.serverSocket, string_length(rewardId));
+                write_string(global.serverSocket, rewardId);
             }
             socket_send(global.serverSocket);
             break;
