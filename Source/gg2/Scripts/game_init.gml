@@ -68,17 +68,7 @@
     global.updaterBetaChannel = ini_read_real("General", "UpdaterBetaChannel", isBetaVersion());
     global.attemptPortForward = ini_read_real("Server", "Attempt UPnP Forwarding", 0); 
     
-
-    global.classlimits[CLASS_SCOUT] = ini_read_real("Classlimits", "Scout", 256)
-    global.classlimits[CLASS_PYRO] = ini_read_real("Classlimits", "Pyro", 256)
-    global.classlimits[CLASS_SOLDIER] = ini_read_real("Classlimits", "Soldier", 256)
-    global.classlimits[CLASS_HEAVY] = ini_read_real("Classlimits", "Heavy", 256)
-    global.classlimits[CLASS_DEMOMAN] = ini_read_real("Classlimits", "Demoman", 256)
-    global.classlimits[CLASS_MEDIC] = ini_read_real("Classlimits", "Medic", 256)
-    global.classlimits[CLASS_ENGINEER] = ini_read_real("Classlimits", "Engineer", 256)
-    global.classlimits[CLASS_SPY] = ini_read_real("Classlimits", "Spy", 256)
-    global.classlimits[CLASS_SNIPER] = ini_read_real("Classlimits", "Sniper", 256)
-    global.classlimits[CLASS_QUOTE] = ini_read_real("Classlimits", "Quote", 256)
+    readClasslimitsFromIni();
 
     global.currentMapArea=1;
     global.totalMapAreas=1;

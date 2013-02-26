@@ -17,16 +17,7 @@
 global.timeLimitMins = ini_read_real("Server", "Time Limit", 15);
 global.caplimit = ini_read_real("Server", "CapLimit", 5);
 global.Server_RespawntimeSec = ini_read_real("Server", "Respawn Time", 5);
-global.classlimits[CLASS_SCOUT] = ini_read_real("Classlimits", "Scout", 256)
-global.classlimits[CLASS_PYRO] = ini_read_real("Classlimits", "Pyro", 256)
-global.classlimits[CLASS_SOLDIER] = ini_read_real("Classlimits", "Soldier", 256)
-global.classlimits[CLASS_HEAVY] = ini_read_real("Classlimits", "Heavy", 256)
-global.classlimits[CLASS_DEMOMAN] = ini_read_real("Classlimits", "Demoman", 256)
-global.classlimits[CLASS_MEDIC] = ini_read_real("Classlimits", "Medic", 256)
-global.classlimits[CLASS_ENGINEER] = ini_read_real("Classlimits", "Engineer", 256)
-global.classlimits[CLASS_SPY] = ini_read_real("Classlimits", "Spy", 256)
-global.classlimits[CLASS_SNIPER] = ini_read_real("Classlimits", "Sniper", 256)
-global.classlimits[CLASS_QUOTE] = ini_read_real("Classlimits", "Quote", 256)
+readClasslimitsFromIni();
 ini_close();
 
 //Server respawn time calculator. Converts each second to a frame. (read: multiply by 30 :hehe:)
@@ -77,15 +68,18 @@ menu_addedit_boolean("Auto Balance:", "global.autobalance", '
 menu_addedit_boolean("Announce to Lobby:", "global.useLobbyServer", '
     gg2_write_ini("Settings", "UseLobby", argument0);
 ');
-menu_addlink("Classlimits", '
-    instance_create(x,y,ClasslimitsMenuController);
-    instance_destroy();
-');
+
 menu_addedit_boolean("Attempt UPnP Forwarding:", "global.attemptPortForward", '
         if (argument0 == 1)
             show_message("Warning: UPNP support is currently experimental and enabling it may cause freezing while starting a server, but should cause no freezing ingame")
         gg2_write_ini("Server", "Attempt UPnP Forwarding", argument0);
     ');
+    
+menu_addlink("Classlimits", '
+    instance_create(x,y,ClasslimitsMenuController);
+    instance_destroy();
+');
+
 menu_addlink("Start Game", '
     //Server respawn time calculator. Converts each second to a frame. (read: multiply by 30 :hehe:)
     if (global.Server_RespawntimeSec == 0)

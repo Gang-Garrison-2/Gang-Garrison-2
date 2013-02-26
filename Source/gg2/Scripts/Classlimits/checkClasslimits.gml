@@ -18,16 +18,18 @@ for (a=0; a<=9; a+=1) ds_list_add(classlist, a)// Add all classes except quote t
 while !ds_list_empty(classlist)
 {
     class = ds_list_find_value(classlist, random(ds_list_size(classlist)))// Get a random class
-    if iterateThroughTeammates(argument0, class) < global.classlimits[class]
+    if (iterateThroughTeammates(argument0, class) < global.classlimits[class])
     {
-        return class
+        ds_list_destroy(classlist);
+        return class;
     }
     ds_list_delete(classlist, ds_list_find_index(classlist, class));
 }
+ds_list_destroy(classlist);
 
-if global.isHost
-{
-    show_message("The classlimits were set too low on this server, lasslimits turned off.")
-    for (a=0; a<10; a+=1) global.classlimits[a] = 9999// Turn classlimits off.
-    return argument1
-}
+// Try quote as last resort
+if (iterateThroughTeammates(argument0, CLASS_QUOTE) < global.classlimits[CLASS_QUOTE])
+    return CLASS_QUOTE;
+
+// Not enough slots, just use whatever was requested.
+return argument1;

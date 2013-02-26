@@ -2,4 +2,6 @@
 <resources>
   <resource name="checkClasslimits" type="RESOURCE"/>
   <resource name="iterateThroughTeammates" type="RESOURCE"/>
+  <resource name="readClasslimitsFromIni" type="RESOURCE"/>
+  <resource name="readClasslimitFromIni" type="RESOURCE"/>
 </resources>
