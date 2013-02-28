@@ -351,6 +351,10 @@ do {
             instance_destroy();
             exit;
               
+        case ARENA_STARTROUND:
+            doEventArenaStartRound();
+            break;
+            
         case ARENA_ENDROUND:
             with ArenaHUD clientArenaEndRound();
             break;   

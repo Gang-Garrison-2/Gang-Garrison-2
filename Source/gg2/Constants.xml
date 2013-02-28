@@ -43,6 +43,7 @@
   <constant name="SERVER_KICK" value="36"/>
   <constant name="KICK" value="37"/>
   <constant name="KICK_NAME" value="38"/>
+  <constant name="ARENA_STARTROUND" value="39"/>
   <constant name="TOGGLE_ZOOM" value="40"/>
   <constant name="RETURN_INTEL" value="41"/>
   <constant name="INCOMPATIBLE_PROTOCOL" value="42"/>
