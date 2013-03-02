@@ -3,6 +3,8 @@
   <resource name="game_init" type="RESOURCE"/>
   <resource name="loadplugins" type="RESOURCE"/>
   <resource name="loadserverplugins" type="RESOURCE"/>
+  <resource name="extractzip" type="RESOURCE"/>
+  <resource name="deletedir" type="RESOURCE"/>
   <resource name="offloadSpawnPoints" type="RESOURCE"/>
   <resource name="removePlayer" type="RESOURCE"/>
   <resource name="ServerJoinUpdate" type="RESOURCE"/>
