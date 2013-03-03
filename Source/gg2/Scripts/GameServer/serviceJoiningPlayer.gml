@@ -85,13 +85,16 @@ case STATE_CLIENT_AUTHENTICATED:
     write_string(socket, global.currentMap);
     write_ubyte(socket, string_length(global.currentMapMD5));
     write_string(socket, global.currentMapMD5);
-    if (global.serverPluginsRequired) {
-        write_ubyte(socket, 1 + string_length(global.serverPluginList));
-        write_string(socket, "*" + global.serverPluginList);
-    } else {
-        write_ubyte(socket, string_length(global.serverPluginList));
-        write_string(socket, global.serverPluginList);
-    }
+    
+    var serverPlugins;
+    if (global.serverPluginsRequired)
+        serverPlugins = "*";
+    else
+        serverPlugins = "";
+    serverPlugins += global.serverPluginList;
+    write_ubyte(socket, string_length(serverPlugins);
+    write_string(socket, serverPlugins);
+    
     advertisedMap = global.currentMap;
     advertisedMapMd5 = global.currentMapMD5;
     newState = STATE_EXPECT_COMMAND;
