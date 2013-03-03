@@ -36,7 +36,7 @@ for (i = 0; i < ds_list_size(list); i += 1) {
     file = ds_list_find_value(list, i);
     
     // we need a temporary file to download to
-    tempfile = working_directory + "\~" + file + ".tmp";
+    tempfile = temp_directory + "\~" + file + ".tmp";
     
     // construct the URL (http://ganggarrison.com/plugins/$PLUGINNAME$.zip)
     url = PLUGIN_SOURCE + file + ".zip";
@@ -56,7 +56,7 @@ for (i = 0; i < ds_list_size(list); i += 1) {
         break;
     } else {
         // let's choose a temporary directory name
-        tempdir = working_directory + "\" + tempdirprefix + file;
+        tempdir = temp_directory + "\" + tempdirprefix + file;
         
         // let's get 7-zip to extract the files
         extractzip(tempfile, tempdir, true);
@@ -74,7 +74,7 @@ if (!failed) {
     // Execute plugins
     for (i = 0; i < ds_list_size(list); i += 1) {
         file = ds_list_find_value(list, i);
-        tempdir = working_directory + "\" + tempdirprefix + file;
+        tempdir = temp_directory + "\" + tempdirprefix + file;
         
         // Debugging facility, so we know *which* plugin caused compile/execute error
         fp = file_text_open_write(working_directory + "\last_plugin.log");
@@ -99,11 +99,11 @@ for (i = 0; i < ds_list_size(list); i += 1) {
     file = ds_list_find_value(list, i);
 
     // delete the download temporary file
-    tempfile = working_directory + "\~" + file + ".tmp";
+    tempfile = temp_directory + "\~" + file + ".tmp";
     file_delete(tempfile);
     
     // delete the temporary plugin directory using rmdir
-    tempdir = working_directory + "\" + tempdirprefix + file;
+    tempdir = temp_directory + "\" + tempdirprefix + file;
     deletedir(tempdir);
 }
 ds_list_destroy(list);
