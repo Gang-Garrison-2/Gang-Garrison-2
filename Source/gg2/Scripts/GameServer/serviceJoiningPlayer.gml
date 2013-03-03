@@ -92,7 +92,7 @@ case STATE_CLIENT_AUTHENTICATED:
     else
         serverPlugins = "";
     serverPlugins += global.serverPluginList;
-    write_ubyte(socket, string_length(serverPlugins);
+    write_ubyte(socket, string_length(serverPlugins));
     write_string(socket, serverPlugins);
     
     advertisedMap = global.currentMap;

@@ -4,8 +4,9 @@
     if file_exists("game_errors.log") file_delete("game_errors.log");
     if file_exists("last_plugin.log") file_delete("last_plugin.log");
     
-    var customMapRotationFile, restart;
+    var customMapRotationFile, restart, fail;
     restart = false;
+    fail = false;
 
     //import wav files for music
     global.MenuMusic=sound_add(choose("Music/menumusic1.wav","Music/menumusic2.wav","Music/menumusic3.wav","Music/menumusic4.wav","Music/menumusic5.wav","Music/menumusic6.wav"), 1, true);
@@ -70,6 +71,10 @@
     global.attemptPortForward = ini_read_real("Server", "Attempt UPnP Forwarding", 0); 
     global.serverPluginList = ini_read_string("Server", "ServerPluginList", "");
     global.serverPluginsRequired = ini_read_real("Server", "ServerPluginsRequired", 0);
+    if (string_length(global.serverPluginList) > 254) {
+        show_message("Error: Server plugin list cannot exceed 254 characters");
+        fail = true;
+    }
     
     global.currentMapArea=1;
     global.totalMapAreas=1;
@@ -368,6 +373,12 @@ global.launchMap = "";
     
     calculateMonthAndDay();
 
+    if(fail)
+    {
+        game_end();
+        exit;
+    }
+    
     if(!directory_exists(working_directory + "\Plugins")) directory_create(working_directory + "\Plugins");
     loadplugins();
     
