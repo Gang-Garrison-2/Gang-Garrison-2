@@ -16,6 +16,21 @@ if (string_length(text) > 0) {
     ds_list_add(list, text);
 }
 
+// Check plugin names and check for duplicated
+for (i = 0; i < ds_list_size(list); i += 1) {
+    file = ds_list_find_value(list, i);
+    
+    // invalid plugin name
+    if (!checkpluginname(file)) {
+        show_message('Error loading server-sent plugins - invalid plugin name:#"' + file + '"');
+        return false;
+    // duplicate
+    } else if (ds_list_find_index(list, file) != i) {
+        show_message('Error loading server-sent plugins - duplicate plugin:#"' + file + '"');
+        return false;
+    }
+}
+
 // Download plugins
 for (i = 0; i < ds_list_size(list); i += 1) {
     file = ds_list_find_value(list, i);
