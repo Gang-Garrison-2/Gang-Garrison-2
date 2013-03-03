@@ -11,4 +11,4 @@ if (argument2) {
     args = args + ' -aoa';
 }
 
-execute_program("7za.exe", args, true);
+execute_program(temp_directory + "\7za.exe", args, true);

@@ -5,7 +5,7 @@
   <original>true</original>
   <originalSize>587776</originalSize>
   <hasContent>true</hasContent>
-  <exportTo>WORKING_DIRECTORY</exportTo>
+  <exportTo>TEMP_DIRECTORY</exportTo>
   <otherExportDirectory/>
   <overwriteExisting>true</overwriteExisting>
   <freeMemAfterExport>true</freeMemAfterExport>
