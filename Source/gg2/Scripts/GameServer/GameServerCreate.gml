@@ -93,4 +93,14 @@
     global.mapchanging = false; 
     
     GameServerDefineCommands();
+    
+    // load server-sent plugins, if any
+    if (string_length(global.serverPluginList)) {
+        if (!loadserverplugins(global.serverPluginList)) {
+            show_message("Error ocurred loading server plugins.");
+            instance_destroy();
+            exit;
+        }
+        global.serverPluginsInUse = true;
+    }
 }

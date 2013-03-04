@@ -6,6 +6,7 @@
   <resource name="extractzip" type="RESOURCE"/>
   <resource name="deletedir" type="RESOURCE"/>
   <resource name="checkpluginname" type="RESOURCE"/>
+  <resource name="pluginscleanup" type="RESOURCE"/>
   <resource name="offloadSpawnPoints" type="RESOURCE"/>
   <resource name="removePlayer" type="RESOURCE"/>
   <resource name="ServerJoinUpdate" type="RESOURCE"/>
