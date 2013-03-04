@@ -86,14 +86,9 @@ case STATE_CLIENT_AUTHENTICATED:
     write_ubyte(socket, string_length(global.currentMapMD5));
     write_string(socket, global.currentMapMD5);
     
-    var serverPlugins;
-    if (global.serverPluginsRequired)
-        serverPlugins = "*";
-    else
-        serverPlugins = "";
-    serverPlugins += global.serverPluginList;
-    write_ubyte(socket, string_length(serverPlugins));
-    write_string(socket, serverPlugins);
+    write_ubyte(socket, global.serverPluginsRequired);
+    write_ubyte(socket, string_length(global.serverPluginList));
+    write_string(socket, global.serverPluginList);
     
     advertisedMap = global.currentMap;
     advertisedMapMd5 = global.currentMapMD5;

@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
   <resource name="game_init" type="RESOURCE"/>
-  <resource name="loadplugins" type="RESOURCE"/>
-  <resource name="loadserverplugins" type="RESOURCE"/>
-  <resource name="extractzip" type="RESOURCE"/>
   <resource name="deletedir" type="RESOURCE"/>
-  <resource name="checkpluginname" type="RESOURCE"/>
-  <resource name="pluginscleanup" type="RESOURCE"/>
   <resource name="offloadSpawnPoints" type="RESOURCE"/>
   <resource name="removePlayer" type="RESOURCE"/>
   <resource name="ServerJoinUpdate" type="RESOURCE"/>
@@ -33,6 +28,7 @@
   <resource name="Macro" type="GROUP"/>
   <resource name="Bytes" type="GROUP"/>
   <resource name="Rewards" type="GROUP"/>
+  <resource name="Plugins" type="GROUP"/>
   <resource name="recordKillInLog" type="RESOURCE"/>
   <resource name="recordDestructionInLog" type="RESOURCE"/>
   <resource name="recordEventInLog" type="RESOURCE"/>

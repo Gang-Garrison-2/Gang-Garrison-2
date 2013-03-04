@@ -42,6 +42,8 @@ do {
             global.joinedServerName = receivestring(global.serverSocket, 1);
             downloadMapName = receivestring(global.serverSocket, 1);
             advertisedMapMd5 = receivestring(global.serverSocket, 1);
+            receiveCompleteMessage(global.serverSocket, 1, global.tempBuffer);
+            pluginsRequired = read_ubyte(global.tempBuffer);
             plugins = receivestring(global.serverSocket, 1);
             if(string_pos("/", downloadMapName) != 0 or string_pos("\", downloadMapName) != 0)
             {
@@ -50,25 +52,26 @@ do {
                 exit;
             }
 
-            pluginsRequired = false;
-            if (string_char_at(plugins, 0) == "*") {
-                pluginsRequired = true;
-                plugins = string_copy(plugins, 2, string_length(plugins) - 1);
-            }
-            if (string_length(plugins)) {
+            if (string_length(plugins))
+            {
                 usePlugins = pluginsRequired;
-                if (pluginsRequired) {
-                    if (!show_question("This server requires the following plugins to play on it: " + plugins + '#They are downloaded from the source: "' + PLUGIN_SOURCE + '"#The source states: "' + PLUGIN_SOURCE_NOTICE + '"#Do you wish to download them and continue connecting?')) {
+                if (pluginsRequired)
+                {
+                    if (!show_question("This server requires the following plugins to play on it: " + plugins + '#They are downloaded from the source: "' + PLUGIN_SOURCE + '"#The source states: "' + PLUGIN_SOURCE_NOTICE + '"#Do you wish to download them and continue connecting?'))
+                    {
                         instance_destroy();
                         exit;
                     }
-                } else {
-                    if (show_question("This server suggests the following optional plugins to play on it: " + plugins + '#They are downloaded from the source: "' + PLUGIN_SOURCE + '"#The source states: "' + PLUGIN_SOURCE_NOTICE + '"#Do you wish to download them and use them?')) {
-                        usePlugins = true;
-                    }
                 }
-                if (usePlugins) {
-                    if (!loadserverplugins(plugins)) {
+                else
+                {
+                    if (show_question("This server suggests the following optional plugins to play on it: " + plugins + '#They are downloaded from the source: "' + PLUGIN_SOURCE + '"#The source states: "' + PLUGIN_SOURCE_NOTICE + '"#Do you wish to download them and use them?'))
+                        usePlugins = true;
+                }
+                if (usePlugins)
+                {
+                    if (!loadserverplugins(plugins))
+                    {
                         show_message("Error ocurred loading server plugins.");
                         instance_destroy();
                         exit;
