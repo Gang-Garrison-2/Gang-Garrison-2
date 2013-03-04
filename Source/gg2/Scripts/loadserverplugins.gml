@@ -1,11 +1,12 @@
 // loads plugins from ganggarrison.com asked for by server
 // argument0 - comma separated plugin list
-var list, text, i, file, url, handle, tempdir, tempdirprefix, tempfile, failed;
+var list, text, i, pluginname, url, handle, tempfileprefix, tempdirprefix, failed;
 
 failed = false;
 list = ds_list_create();
 text = argument0;
-tempdirprefix = "~tmp-";
+tempfileprefix = temp_directory + "\tmp-";
+tempdirprefix = temp_directory + "\~tmp-";
 
 // split plugin list string
 while (string_pos(",", text) != 0) {
@@ -18,31 +19,28 @@ if (string_length(text) > 0) {
 
 // Check plugin names and check for duplicated
 for (i = 0; i < ds_list_size(list); i += 1) {
-    file = ds_list_find_value(list, i);
+    pluginname = ds_list_find_value(list, i);
     
     // invalid plugin name
-    if (!checkpluginname(file)) {
-        show_message('Error loading server-sent plugins - invalid plugin name:#"' + file + '"');
+    if (!checkpluginname(pluginname)) {
+        show_message('Error loading server-sent plugins - invalid plugin name:#"' + pluginname + '"');
         return false;
     // duplicate
-    } else if (ds_list_find_index(list, file) != i) {
-        show_message('Error loading server-sent plugins - duplicate plugin:#"' + file + '"');
+    } else if (ds_list_find_index(list, pluginname) != i) {
+        show_message('Error loading server-sent plugins - duplicate plugin:#"' + pluginname + '"');
         return false;
     }
 }
 
 // Download plugins
 for (i = 0; i < ds_list_size(list); i += 1) {
-    file = ds_list_find_value(list, i);
-    
-    // we need a temporary file to download to
-    tempfile = temp_directory + "\~" + file + ".tmp";
+    pluginname = ds_list_find_value(list, i);
     
     // construct the URL (http://ganggarrison.com/plugins/$PLUGINNAME$.zip)
-    url = PLUGIN_SOURCE + file + ".zip";
+    url = PLUGIN_SOURCE + pluginname + ".zip";
     
     // let's make the download handle
-    handle = DM_CreateDownload(url, tempfile);
+    handle = DM_CreateDownload(url, tempfileprefix + pluginname);
     
     // download it
     DM_StartDownload(handle);
@@ -51,18 +49,15 @@ for (i = 0; i < ds_list_size(list); i += 1) {
     DM_CloseDownload(handle);
 
     // if the file doesn't exist, the download presumably failed
-    if (!file_exists(tempfile)) {
+    if (!file_exists(tempfileprefix + pluginname)) {
         failed = true;
         break;
-    } else {
-        // let's choose a temporary directory name
-        tempdir = temp_directory + "\" + tempdirprefix + file;
-        
+    } else { 
         // let's get 7-zip to extract the files
-        extractzip(tempfile, tempdir, true);
+        extractzip(tempfileprefix + pluginname, tempdirprefix + pluginname, true);
         
         // if the directory doesn't exist, extracting presumably failed
-        if (!directory_exists(tempdir)) {
+        if (!directory_exists(tempdirprefix + pluginname)) {
             failed = true;
             break;
         }
@@ -73,22 +68,21 @@ for (i = 0; i < ds_list_size(list); i += 1) {
 if (!failed) {
     // Execute plugins
     for (i = 0; i < ds_list_size(list); i += 1) {
-        file = ds_list_find_value(list, i);
-        tempdir = temp_directory + "\" + tempdirprefix + file;
+        pluginname = ds_list_find_value(list, i);
         
         // Debugging facility, so we know *which* plugin caused compile/execute error
         fp = file_text_open_write(working_directory + "\last_plugin.log");
-        file_text_write_string(fp, file);
+        file_text_write_string(fp, pluginname);
         file_text_close(fp);
         
         // Execute plugin
         execute_file(
             // the plugin's main gml file must be in the root of the zip
             // it is called plugin.gml
-            tempdir + "\plugin.gml",
+            tempdirprefix + pluginname + "\plugin.gml",
             // the plugin needs to know where it is
             // so the temporary directory is passed as first argument
-            tempdir
+            tempdirprefix + pluginname
         );
     }
 }
@@ -96,15 +90,13 @@ if (!failed) {
 // Clear up
 file_delete(working_directory + "\last_plugin.log");
 for (i = 0; i < ds_list_size(list); i += 1) {
-    file = ds_list_find_value(list, i);
+    pluginname = ds_list_find_value(list, i);
 
     // delete the download temporary file
-    tempfile = temp_directory + "\~" + file + ".tmp";
-    file_delete(tempfile);
+    file_delete(tempfileprefix + pluginname);
     
     // delete the temporary plugin directory using rmdir
-    tempdir = temp_directory + "\" + tempdirprefix + file;
-    deletedir(tempdir);
+    deletedir(tempdirprefix + pluginname);
 }
 ds_list_destroy(list);
 
