@@ -75,10 +75,10 @@
     if instance_exists(IntelligenceRed)
     {
         reddir = point_direction(redsourcex,redsourcey,IntelligenceRed.x,IntelligenceRed.y);
-        if IntelligenceRed.x==IntelligenceBaseRed.x &amp;&amp; IntelligenceRed.y==IntelligenceBaseRed.y{
-            redintelstatus=2;
-        }
-        else redintelstatus=0;
+        if (IntelligenceRed.alarm[0] &lt;= 0)
+            redintelstatus = 2;
+        else
+            redintelstatus = 0;
     }
     else {
         for(i=0; i&lt;ds_list_size(global.players); i+=1) {
@@ -95,10 +95,10 @@
     if instance_exists(IntelligenceBlue)
     {
         bluedir = point_direction(bluesourcex,bluesourcey,IntelligenceBlue.x,IntelligenceBlue.y);
-        if IntelligenceBlue.x==IntelligenceBaseBlue.x &amp;&amp; IntelligenceBlue.y==IntelligenceBaseBlue.y{
+        if (IntelligenceBlue.alarm[0] &lt;= 0)
             blueintelstatus=2;
-        }
-        else blueintelstatus=0;
+        else
+            blueintelstatus=0;
     }
     else {
         for(i=0; i&lt;ds_list_size(global.players); i+=1) {

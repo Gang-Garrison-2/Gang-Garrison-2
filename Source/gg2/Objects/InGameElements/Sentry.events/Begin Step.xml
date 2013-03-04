@@ -13,24 +13,30 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if(global.isHost and (ownerPlayer.class != CLASS_ENGINEER || team != ownerPlayer.team || collision_circle(x,y+10,25,Sentry,false,true)&gt;=0))
+        <argument kind="STRING">if(global.isHost and (ownerPlayer.class != CLASS_ENGINEER or team != ownerPlayer.team or collision_circle(x,y+10,25,Sentry,false,true)&gt;=0))
 {
     sendEventDestruction(ownerPlayer, -1, -1, 0);
     doEventDestruction(ownerPlayer, -1, -1, 0);
     exit;
 }
 
-if built == 0 &amp;&amp; vspeed == 0 {
-    if hp &lt; maxHp hp+=1;
-    else built = 1;
+if (built == 0 and vspeed == 0)
+{
+    if (hp &lt; maxHp)
+        hp += 1;
+    else
+        built = 1;
     image_index = floor(hp/maxHp*10);
-    if landed == 0 {
+    if (landed == 0)
+    {
         landed = 1;
         playsound(x,y,SentryFloorSnd);
         playsound(x,y,SentryBuildSnd);
     }  
 }
-if (built == 1 &amp;&amp; currentWeapon == -1){
+
+if (built == 1 and currentWeapon == -1)
+{
     image_index=11;
     image_speed=0;
     hp=maxHp;
@@ -38,28 +44,24 @@ if (built == 1 &amp;&amp; currentWeapon == -1){
     currentWeapon.ownerPlayer=ownerPlayer;
     currentWeapon.team=team;
     currentWeapon.startDirection=startDirection;
-    with(currentWeapon) {
+    with(currentWeapon)
         event_user(0);
-    }
 }
-if (humiliated == 1 &amp;&amp; built == 1 &amp;&amp; currentWeapon != -1) {
+if (humiliated == 1 and built == 1 and currentWeapon != -1)
     event_user(1);
-}
 
-if(place_free(x,y+1)) {
+if(place_free(x,y+1))
     vspeed += 0.6;
-}
 
-if(vspeed&gt;10) {
+if(vspeed&gt;10)
     vspeed=10;
-}
 
-if(abs(oldVspeed)!=0 and vspeed==0 and global.isHost)
+if(oldVspeed!=0 and vspeed==0 and global.isHost)
 {
-    write_ubyte(global.eventBuffer, SENTRY_POSITION);
-    write_ubyte(global.eventBuffer, ds_list_find_index(global.players, ownerPlayer));
-    write_ushort(global.eventBuffer, round(x*5));
-    write_ushort(global.eventBuffer, round(y*5));
+    write_ubyte(global.sendBuffer, SENTRY_POSITION);
+    write_ubyte(global.sendBuffer, ds_list_find_index(global.players, ownerPlayer));
+    write_ushort(global.sendBuffer, round(x*5));
+    write_ushort(global.sendBuffer, round(y*5));
 }
 
 oldVspeed = vspeed;

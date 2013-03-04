@@ -153,9 +153,8 @@ case STATE_EXPECT_NAME:
     ds_list_add(global.players, player);
     ServerPlayerJoin(player.name, global.sendBuffer);
     
-    if(global.welcomeMessage != "") {
+    if(global.welcomeMessage != "")
         ServerMessageString(global.welcomeMessage, player.socket);
-    }
     
     break;
 }

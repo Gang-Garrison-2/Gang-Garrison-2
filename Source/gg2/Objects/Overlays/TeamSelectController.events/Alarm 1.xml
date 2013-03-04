@@ -13,7 +13,8 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">instance_create(0,0,ClassSelectController);</argument>
+        <argument kind="STRING">instance_create(0,0,ClassSelectController);
+</argument>
       </arguments>
     </action>
   </actions>

@@ -20,7 +20,6 @@
         sound_volume(global.FaucetMusic, 0.8);
         
     global.sendBuffer = buffer_create();
-    global.eventBuffer = buffer_create();
     global.tempBuffer = buffer_create();
     global.HudCheck = false;
     global.map_rotation = ds_list_create();
@@ -65,7 +64,8 @@
     global.caplimitBkup = global.caplimit;
     global.autobalance = ini_read_real("Server", "AutoBalance",1);
     global.Server_RespawntimeSec = ini_read_real("Server", "Respawn Time", 5);
-    global.haxxyKey = ini_read_string("Haxxy", "SecretHaxxyKey", "");
+    global.rewardKey = unhex(ini_read_string("Haxxy", "RewardKey", ""));
+    global.rewardId = ini_read_string("Haxxy", "RewardId", "");
     global.mapdownloadLimitBps = ini_read_real("Server", "Total bandwidth limit for map downloads in bytes per second", 50000);
     global.updaterBetaChannel = ini_read_real("General", "UpdaterBetaChannel", isBetaVersion());
     global.attemptPortForward = ini_read_real("Server", "Attempt UPnP Forwarding", 0); 
@@ -76,6 +76,8 @@
         fail = true;
     }
     
+    readClasslimitsFromIni();
+
     global.currentMapArea=1;
     global.totalMapAreas=1;
     global.setupTimer=1800;
@@ -109,12 +111,22 @@
     ini_write_real("Server", "Total bandwidth limit for map downloads in bytes per second", global.mapdownloadLimitBps);
     ini_write_real("Server", "Time Limit", global.timeLimitMins);
     ini_write_string("Server", "Password", global.serverPassword);
-    ini_write_string("Haxxy", "SecretHaxxyKey", global.haxxyKey);
     ini_write_real("General", "UpdaterBetaChannel", global.updaterBetaChannel);
     ini_write_real("Server", "Attempt UPnP Forwarding", global.attemptPortForward); 
     ini_write_string("Server", "ServerPluginList", global.serverPluginList); 
     ini_write_real("Server", "ServerPluginsRequired", global.serverPluginsRequired); 
     
+    ini_write_real("Classlimits", "Scout", global.classlimits[CLASS_SCOUT])
+    ini_write_real("Classlimits", "Pyro", global.classlimits[CLASS_PYRO])
+    ini_write_real("Classlimits", "Soldier", global.classlimits[CLASS_SOLDIER])
+    ini_write_real("Classlimits", "Heavy", global.classlimits[CLASS_HEAVY])
+    ini_write_real("Classlimits", "Demoman", global.classlimits[CLASS_DEMOMAN])
+    ini_write_real("Classlimits", "Medic", global.classlimits[CLASS_MEDIC])
+    ini_write_real("Classlimits", "Engineer", global.classlimits[CLASS_ENGINEER])
+    ini_write_real("Classlimits", "Spy", global.classlimits[CLASS_SPY])
+    ini_write_real("Classlimits", "Sniper", global.classlimits[CLASS_SNIPER])
+    ini_write_real("Classlimits", "Quote", global.classlimits[CLASS_QUOTE])
+
     //screw the 0 index we will start with 1
     //map_truefort 
     maps[1] = ini_read_real("Maps", "ctf_truefort", 1);

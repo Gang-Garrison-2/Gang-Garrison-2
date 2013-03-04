@@ -13,12 +13,22 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">// Ammo HUD. Because real men let computers count for them.
-if !instance_exists(AmmoCounter) &amp;&amp; (object_index == Rocketlauncher || object_index == Flamethrower ||
-object_index == Minigun || object_index == Scattergun || object_index == Shotgun ||
-object_index == Revolver || object_index == Medigun || object_index == Minegun ||
-object_index == Blade)
-instance_create(0,0,AmmoCounter);
+        <argument kind="STRING">// Ammo HUD. Because real men let computers count for them. (Rifle overrides this and doesn't create an AmmoCounter)
+if(!instance_exists(AmmoCounter))
+    instance_create(0,0,AmmoCounter);
+
+if (justShot)
+{
+    justShot = false;
+    //Recoil Animation
+    if (sprite_index != recoilSprite)
+    {
+        sprite_index = recoilSprite
+        image_index = 0
+        image_speed = recoilImageSpeed
+    }
+    alarm[6] = recoilTime;
+}
 </argument>
       </arguments>
     </action>

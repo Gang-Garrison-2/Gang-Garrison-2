@@ -42,6 +42,12 @@
     serverPlayer.name = global.playerName;
     ds_list_add(global.players, serverPlayer);
 
+    for (a=0; a<10; a+=1)
+    {
+        if (global.classlimits[a] >= global.playerLimit)
+            global.classlimits[a] = 255;
+    }
+    
     global.tcpListener = tcp_listen(global.hostingPort);
     if(socket_has_error(global.tcpListener))
     {
@@ -72,8 +78,12 @@
 
     global.playerID = 0;
     global.myself = serverPlayer;
-    if(HAXXY_PUBLIC_KEY==md5(global.haxxyKey))
-        global.myself.isHaxxyWinner = true;
+    if(global.rewardKey != "" and global.rewardId != "")
+    {
+        var challenge;
+        challenge = rewardCreateChallenge();
+        rewardAuthStart(serverPlayer, hmac_md5_bin(global.rewardKey, challenge), challenge, false, global.rewardId);
+    }
     instance_create(0,0,PlayerControl);
         
     global.currentMap = ds_list_find_value(global.map_rotation, global.currentMapIndex);

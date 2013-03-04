@@ -13,31 +13,18 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">xoffset=-17;
-yoffset=-10;
-reloadTime=5;
-refireTime=5
-readyToShoot=true;
+        <argument kind="STRING">xoffset = sprite_xoffset-17;
+yoffset = sprite_yoffset-10;
+refireTime=5;
+readyToShoot=false;
 noticedTarget=true;
 hitDamage=8;
 shooting=false;
 rotating=false;
-nearestTarget= -1;
+nearestTarget = noone;
+alarm[0] = refireTime;
 </argument>
       </arguments>
-    </action>
-    <action id="604" library="1">
-      <!--action name: Inherited-->
-      <kind>NORMAL</kind>
-      <allowRelative>false</allowRelative>
-      <question>false</question>
-      <canApplyTo>false</canApplyTo>
-      <actionType>FUNCTION</actionType>
-      <functionName>action_inherited</functionName>
-      <relative>false</relative>
-      <not>false</not>
-      <appliesTo>.self</appliesTo>
-      <arguments/>
     </action>
   </actions>
 </event>

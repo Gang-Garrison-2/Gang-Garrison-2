@@ -17,6 +17,8 @@
     xoffset = -3;
     yoffset = -2;
     refireTime = 26;
+    event_inherited();
+    
     maxMines = 8;
     lobbed = 0;
     reloadTime = 15;
@@ -24,22 +26,25 @@
     maxAmmo = 8;
     ammoCount = maxAmmo;
     idle=true;
+    
+    if(golden)
+    {
+        normalSprite = MinegunGoldS;
+        recoilSprite = MinegunGoldFS;
+    }
+    else
+    {
+        normalSprite = MinegunS;
+        recoilSprite = MinegunFS;
+    }
+    sprite_index = normalSprite;
+    
+    recoilTime = refireTime;
+    recoilAnimLength = sprite_get_number(recoilSprite)/2;
+    recoilImageSpeed = recoilAnimLength/recoilTime;
 }
 </argument>
       </arguments>
-    </action>
-    <action id="604" library="1">
-      <!--action name: Inherited-->
-      <kind>NORMAL</kind>
-      <allowRelative>false</allowRelative>
-      <question>false</question>
-      <canApplyTo>false</canApplyTo>
-      <actionType>FUNCTION</actionType>
-      <functionName>action_inherited</functionName>
-      <relative>false</relative>
-      <not>false</not>
-      <appliesTo>.self</appliesTo>
-      <arguments/>
     </action>
   </actions>
 </event>

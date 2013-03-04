@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="rewardAuthStart" type="RESOURCE"/>
+  <resource name="rewardAuthSuccess" type="RESOURCE"/>
+  <resource name="hasRewardWeapon" type="RESOURCE"/>
+  <resource name="hasRewardStatue" type="RESOURCE"/>
+  <resource name="rewardCreateChallenge" type="RESOURCE"/>
+</resources>

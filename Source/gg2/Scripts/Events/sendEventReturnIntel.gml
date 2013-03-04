@@ -1,5 +1,5 @@
 /*
 argument0: Team of the intel being returned
 */
-write_ubyte(global.eventBuffer, RETURN_INTEL);
-write_ubyte(global.eventBuffer, argument0);
+write_ubyte(global.sendBuffer, RETURN_INTEL);
+write_ubyte(global.sendBuffer, argument0);

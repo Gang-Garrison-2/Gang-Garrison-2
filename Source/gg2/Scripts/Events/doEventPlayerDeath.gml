@@ -91,7 +91,7 @@ ysize = view_hview[0];
 
 randomize();
 with(victim.object) {
-    if((damageSource == WEAPON_ROCKETLAUNCHER or damageSource == WEAPON_QROCKETLAUNCHER 
+    if((damageSource == WEAPON_ROCKETLAUNCHER 
     or damageSource == WEAPON_MINEGUN or damageSource == FRAG_BOX 
     or damageSource == WEAPON_REFLECTED_STICKY or damageSource == WEAPON_REFLECTED_ROCKET 
     or damageSource == FINISHED_OFF_GIB or damageSource == GENERATOR_EXPLOSION) 
@@ -166,7 +166,7 @@ with(victim.object) {
         var deadbody;
         if player.class != CLASS_QUOTE playsound(x,y,choose(DeathSnd1, DeathSnd2));
         deadbody = instance_create(x,y-30,DeadGuy);
-        if(player.isHaxxyWinner)
+        if(hasRewardStatue(player))
         {
             deadbody.sprite_index = haxxyStatue;
             deadbody.image_index = 0;

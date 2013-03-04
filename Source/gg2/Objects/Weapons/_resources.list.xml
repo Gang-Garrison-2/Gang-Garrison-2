@@ -9,6 +9,5 @@
   <resource name="Shotgun" type="RESOURCE"/>
   <resource name="Rocketlauncher" type="RESOURCE"/>
   <resource name="Blade" type="RESOURCE"/>
-  <resource name="QRlauncher" type="RESOURCE"/>
   <resource name="Revolver" type="RESOURCE"/>
 </resources>

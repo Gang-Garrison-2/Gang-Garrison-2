@@ -12,4 +12,5 @@
   <resource name="CreditsController" type="RESOURCE"/>
   <resource name="DevMessageChecker" type="RESOURCE"/>
   <resource name="MenuController" type="RESOURCE"/>
+  <resource name="ClasslimitsMenuController" type="RESOURCE"/>
 </resources>
