@@ -9,31 +9,38 @@ tempfileprefix = temp_directory + "\tmp-";
 tempdirprefix = temp_directory + "\~tmp-";
 
 // split plugin list string
-while (string_pos(",", text) != 0) {
+while (string_pos(",", text) != 0)
+{
     ds_list_add(list, string_copy(text,0,string_pos(",",text)-1));
     text = string_copy(text,string_pos(",",text)+1,string_length(text)-string_pos(",",text));
 }
-if (string_length(text) > 0) {
+if (string_length(text) > 0)
+{
     ds_list_add(list, text);
 }
 
-// Check plugin names and check for duplicated
-for (i = 0; i < ds_list_size(list); i += 1) {
+// Check plugin names and check for duplicates
+for (i = 0; i < ds_list_size(list); i += 1)
+{
     pluginname = ds_list_find_value(list, i);
     
     // invalid plugin name
-    if (!checkpluginname(pluginname)) {
+    if (!checkpluginname(pluginname))
+    {
         show_message('Error loading server-sent plugins - invalid plugin name:#"' + pluginname + '"');
         return false;
-    // duplicate
-    } else if (ds_list_find_index(list, pluginname) != i) {
+    }
+    // is duplicate
+    else if (ds_list_find_index(list, pluginname) != i)
+    {
         show_message('Error loading server-sent plugins - duplicate plugin:#"' + pluginname + '"');
         return false;
     }
 }
 
 // Download plugins
-for (i = 0; i < ds_list_size(list); i += 1) {
+for (i = 0; i < ds_list_size(list); i += 1)
+{
     pluginname = ds_list_find_value(list, i);
     
     // construct the URL (http://ganggarrison.com/plugins/$PLUGINNAME$.zip)
@@ -50,14 +57,19 @@ for (i = 0; i < ds_list_size(list); i += 1) {
 
     // if the file doesn't exist, the download presumably failed
     if (!file_exists(tempfileprefix + pluginname)) {
+        show_message('Error loading server-sent plugins - download failed for:#"' + pluginname + '"');
         failed = true;
         break;
-    } else { 
+    }
+    else
+    { 
         // let's get 7-zip to extract the files
-        extractzip(tempfileprefix + pluginname, tempdirprefix + pluginname, true);
+        extractzip(tempfileprefix + pluginname, tempdirprefix + pluginname);
         
         // if the directory doesn't exist, extracting presumably failed
-        if (!directory_exists(tempdirprefix + pluginname)) {
+        if (!directory_exists(tempdirprefix + pluginname))
+        {
+            show_message('Error loading server-sent plugins - extracting zip failed for:#"' + pluginname + '"');
             failed = true;
             break;
         }
@@ -65,9 +77,11 @@ for (i = 0; i < ds_list_size(list); i += 1) {
 }
 
 
-if (!failed) {
+if (!failed)
+{
     // Execute plugins
-    for (i = 0; i < ds_list_size(list); i += 1) {
+    for (i = 0; i < ds_list_size(list); i += 1)
+    {
         pluginname = ds_list_find_value(list, i);
         
         // Debugging facility, so we know *which* plugin caused compile/execute error
@@ -89,7 +103,8 @@ if (!failed) {
 
 // Clear up
 file_delete(working_directory + "\last_plugin.log");
-for (i = 0; i < ds_list_size(list); i += 1) {
+for (i = 0; i < ds_list_size(list); i += 1)
+{
     pluginname = ds_list_find_value(list, i);
 
     // delete the download temporary file

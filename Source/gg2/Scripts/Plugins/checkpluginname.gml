@@ -4,7 +4,8 @@
 
 var i, validChars;
 
-if (string_length(argument0) < 1) {
+if (string_length(argument0) < 1)
+{
     return false;
 }
 
