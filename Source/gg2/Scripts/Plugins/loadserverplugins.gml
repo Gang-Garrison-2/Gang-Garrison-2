@@ -43,17 +43,25 @@ for (i = 0; i < ds_list_size(list); i += 1)
 {
     pluginname = ds_list_find_value(list, i);
     
-    // construct the URL (http://ganggarrison.com/plugins/$PLUGINNAME$.zip)
-    url = PLUGIN_SOURCE + pluginname + ".zip";
-    
-    // let's make the download handle
-    handle = DM_CreateDownload(url, tempfileprefix + pluginname);
-    
-    // download it
-    DM_StartDownload(handle);
-    while (DM_DownloadStatus(handle) != 3) {}
-    DM_StopDownload(handle);
-    DM_CloseDownload(handle);
+    // check to see if we have a local copy for debugging
+    if (file_exists("ServerPluginsDebug\" + pluginname + ".zip")) {
+        file_copy("ServerPluginsDebug\" + pluginname + ".zip", tempfileprefix + pluginname);
+    }
+    // otherwise, download as usual
+    else
+    {
+        // construct the URL (http://ganggarrison.com/plugins/$PLUGINNAME$.zip)
+        url = PLUGIN_SOURCE + pluginname + ".zip";
+        
+        // let's make the download handle
+        handle = DM_CreateDownload(url, tempfileprefix + pluginname);
+        
+        // download it
+        DM_StartDownload(handle);
+        while (DM_DownloadStatus(handle) != 3) {}
+        DM_StopDownload(handle);
+        DM_CloseDownload(handle);
+    }
 
     // if the file doesn't exist, the download presumably failed
     if (!file_exists(tempfileprefix + pluginname)) {
