@@ -1,10 +1,12 @@
+// Returns true if the game is successfully initialized, false if there was an error and we should quit.
 {
     instance_create(0,0,RoomChangeObserver);
     set_little_endian_global(true);
     if file_exists("game_errors.log") file_delete("game_errors.log");
     if file_exists("last_plugin.log") file_delete("last_plugin.log");
     
-    var customMapRotationFile;
+    var customMapRotationFile, restart;
+    restart = false;
 
     //import wav files for music
     global.MenuMusic=sound_add(choose("Music/menumusic1.wav","Music/menumusic2.wav","Music/menumusic3.wav","Music/menumusic4.wav","Music/menumusic5.wav","Music/menumusic6.wav"), 1, true);
@@ -67,6 +69,12 @@
     global.mapdownloadLimitBps = ini_read_real("Server", "Total bandwidth limit for map downloads in bytes per second", 50000);
     global.updaterBetaChannel = ini_read_real("General", "UpdaterBetaChannel", isBetaVersion());
     global.attemptPortForward = ini_read_real("Server", "Attempt UPnP Forwarding", 0); 
+    global.serverPluginList = ini_read_string("Server", "ServerPluginList", "");
+    global.serverPluginsRequired = ini_read_real("Server", "ServerPluginsRequired", 0);
+    if (string_length(global.serverPluginList) > 254) {
+        show_message("Error: Server plugin list cannot exceed 254 characters");
+        return false;
+    }
     
     readClasslimitsFromIni();
 
@@ -74,6 +82,7 @@
     global.totalMapAreas=1;
     global.setupTimer=1800;
     global.joinedServerName="";
+    global.serverPluginsInUse=false;
         
     ini_write_string("Settings", "PlayerName", global.playerName);
     ini_write_real("Settings", "Fullscreen", global.fullscreen);
@@ -104,6 +113,8 @@
     ini_write_string("Server", "Password", global.serverPassword);
     ini_write_real("General", "UpdaterBetaChannel", global.updaterBetaChannel);
     ini_write_real("Server", "Attempt UPnP Forwarding", global.attemptPortForward); 
+    ini_write_string("Server", "ServerPluginList", global.serverPluginList); 
+    ini_write_real("Server", "ServerPluginsRequired", global.serverPluginsRequired); 
     
     ini_write_real("Classlimits", "Scout", global.classlimits[CLASS_SCOUT])
     ini_write_real("Classlimits", "Pyro", global.classlimits[CLASS_PYRO])
@@ -198,6 +209,10 @@ global.launchMap = "";
         if (parameter_string(a) == "-dedicated")
         {
             global.dedicatedMode = 1;
+        }
+        else if (parameter_string(a) == "-restart")
+        {
+            restart = true;
         }
         else if (parameter_string(a) == "-server")
         {
@@ -376,5 +391,8 @@ global.launchMap = "";
     if(global.dedicatedMode == 1) {
         AudioControlToggleMute();
         room_goto_fix(Menu);
-    }    
+    } else if(restart) {
+        room_goto_fix(Menu);
+    }
+    return true;
 }

@@ -14,12 +14,17 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">{
-    game_init();
+    if(!game_init())
+    {
+        game_end();
+        exit;
+    }
     alarm[0] = 30;
     alarm[1] = 240;
     AudioControlPlaySong(global.FaucetMusic);
     image_speed=0;
-}</argument>
+}
+</argument>
       </arguments>
     </action>
   </actions>
