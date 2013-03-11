@@ -89,6 +89,8 @@
         set_synchronization(argument0);
     ');
     menu_addedit_boolean("Prompt for server-sent plugins:", "global.serverPluginsPrompt", '
+        if (argument0 == 0)
+            show_message("Warning: Disabling server-sent plugin prompting may be dangerous, because any server-sent plugins specified by the server will be automatically downloaded from the source:#" + PLUGIN_SOURCE + "#" + PLUGIN_SOURCE_NOTICE)
         gg2_write_ini("Settings", "ServerPluginsPrompt", argument0);
     ');
     menu_addlink("Controls", '
