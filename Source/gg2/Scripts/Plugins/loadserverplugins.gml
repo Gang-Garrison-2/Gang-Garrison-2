@@ -121,36 +121,10 @@ if (!failed)
             tempdirprefix + pluginname
         );
     }
-
-    // Put plugin temporary directories into a list (so we can delete them later)
-    global.serverPluginTempDirs = ds_list_create();
-    for (i = 0; i < ds_list_size(list); i += 1)
-    {
-        pluginname = ds_list_find_value(list, i);
-        ds_list_add(global.serverPluginTempDirs, tempdirprefix + pluginname);
-    }
-}
-else
-{
-    // Delete plugin temporary directories immediately
-    for (i = 0; i < ds_list_size(list); i += 1)
-    {
-        pluginname = ds_list_find_value(list, i);
-        file_delete(tempdirprefix + pluginname);
-    }
 }
 
 // Delete last plugin log
 file_delete(working_directory + "\last_plugin.log");
-
-// Delete temporary files
-for (i = 0; i < ds_list_size(list); i += 1)
-{
-    pluginname = ds_list_find_value(list, i);
-
-    // delete the download temporary file
-    file_delete(tempfileprefix + pluginname);
-}
 
 // Get rid of plugin list
 ds_list_destroy(list);
