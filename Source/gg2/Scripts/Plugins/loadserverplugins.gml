@@ -1,6 +1,6 @@
 // loads plugins from ganggarrison.com asked for by server
 // argument0 - comma separated plugin list
-var list, text, i, pluginname, url, handle, tempfileprefix, tempdirprefix, failed;
+var list, text, i, pluginname, url, handle, filesize, tempfileprefix, tempdirprefix, failed;
 
 failed = false;
 list = ds_list_create();
@@ -57,8 +57,22 @@ for (i = 0; i < ds_list_size(list); i += 1)
         handle = DM_CreateDownload(url, tempfileprefix + pluginname);
         
         // download it
-        DM_StartDownload(handle);
-        while (DM_DownloadStatus(handle) != 3) {}
+        filesize = DM_StartDownload(handle);
+        while (DM_DownloadStatus(handle) != 3) {
+            // prevent game locking up
+            io_handle();
+
+            // draw progress bar if they're waiting a while
+            draw_background_ext(background_index[0], 0, 0, background_xscale[0], background_yscale[0], 0, c_white, 1);
+            draw_set_color(c_white);
+            draw_set_alpha(1);
+            draw_set_halign(fa_left);
+            draw_rectangle(50, 550, 300, 560, 2);
+            draw_text(50, 530, "Downloading plugin " + string(i + 1) + "/" + string(ds_list_size(list)));
+            if(DM_GetProgress(handle) > 0)
+                draw_rectangle(50, 550, 50 + DM_GetProgress(handle) / filesize * 250, 560, 0);
+            screen_refresh();
+        }
         DM_StopDownload(handle);
         DM_CloseDownload(handle);
     }

@@ -107,6 +107,7 @@
     // load server-sent plugins, if any
     if (string_length(global.serverPluginList))
     {
+        // go to download room to show progress bar
         if (!loadserverplugins(global.serverPluginList))
         {
             show_message("Error ocurred loading server plugins.");
