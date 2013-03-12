@@ -68,7 +68,7 @@ for (i = 0; i < ds_list_size(list); i += 1)
             draw_set_alpha(1);
             draw_set_halign(fa_left);
             draw_rectangle(50, 550, 300, 560, 2);
-            draw_text(50, 530, "Downloading plugin " + string(i + 1) + "/" + string(ds_list_size(list)));
+            draw_text(50, 530, "Downloading server-sent plugin " + string(i + 1) + "/" + string(ds_list_size(list)) + ' - "' + pluginname + '"');
             if(DM_GetProgress(handle) > 0)
                 draw_rectangle(50, 550, 50 + DM_GetProgress(handle) / filesize * 250, 560, 0);
             screen_refresh();
@@ -121,36 +121,10 @@ if (!failed)
             tempdirprefix + pluginname
         );
     }
-
-    // Put plugin temporary directories into a list (so we can delete them later)
-    global.serverPluginTempDirs = ds_list_create();
-    for (i = 0; i < ds_list_size(list); i += 1)
-    {
-        pluginname = ds_list_find_value(list, i);
-        ds_list_add(global.serverPluginTempDirs, tempdirprefix + pluginname);
-    }
-}
-else
-{
-    // Delete plugin temporary directories immediately
-    for (i = 0; i < ds_list_size(list); i += 1)
-    {
-        pluginname = ds_list_find_value(list, i);
-        file_delete(tempdirprefix + pluginname);
-    }
 }
 
 // Delete last plugin log
 file_delete(working_directory + "\last_plugin.log");
-
-// Delete temporary files
-for (i = 0; i < ds_list_size(list); i += 1)
-{
-    pluginname = ds_list_find_value(list, i);
-
-    // delete the download temporary file
-    file_delete(tempfileprefix + pluginname);
-}
 
 // Get rid of plugin list
 ds_list_destroy(list);
