@@ -68,7 +68,7 @@ for (i = 0; i < ds_list_size(list); i += 1)
             draw_set_alpha(1);
             draw_set_halign(fa_left);
             draw_rectangle(50, 550, 300, 560, 2);
-            draw_text(50, 530, "Downloading plugin " + string(i + 1) + "/" + string(ds_list_size(list)));
+            draw_text(50, 530, "Downloading server-sent plugin " + string(i + 1) + "/" + string(ds_list_size(list)) + ' - "' + pluginname + '"');
             if(DM_GetProgress(handle) > 0)
                 draw_rectangle(50, 550, 50 + DM_GetProgress(handle) / filesize * 250, 560, 0);
             screen_refresh();
