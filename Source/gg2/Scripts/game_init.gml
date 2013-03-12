@@ -45,8 +45,9 @@
     else set_synchronization(false);
     global.medicRadar = ini_read_real("Settings", "Healer Radar", 1);
     global.showHealer = ini_read_real("Settings", "Show Healer", 1);
-    global.showHealing = ini_read_real("Settings", "Show Healing",1);
-    global.showHealthBar = ini_read_real("Settings", "Show Healthbar",0);
+    global.showHealing = ini_read_real("Settings", "Show Healing", 1);
+    global.showHealthBar = ini_read_real("Settings", "Show Healthbar", 0);
+    global.serverPluginsPrompt = ini_read_real("Settings", "ServerPluginsPrompt", 1);
     //user HUD settings
     global.timerPos=ini_read_real("Settings","Timer Position", 0)
     global.killLogPos=ini_read_real("Settings","Kill Log Position", 0)
@@ -98,9 +99,10 @@
     ini_write_real("Settings", "Show Healer", global.showHealer);
     ini_write_real("Settings", "Show Healing", global.showHealing);
     ini_write_real("Settings", "Show Healthbar", global.showHealthBar);
-    ini_write_real("Settings","Timer Position", global.timerPos)
-    ini_write_real("Settings","Kill Log Position", global.killLogPos)
-    ini_write_real("Settings","KoTH HUD Position", global.kothHudPos)
+    ini_write_real("Settings", "Timer Position", global.timerPos);
+    ini_write_real("Settings", "Kill Log Position", global.killLogPos);
+    ini_write_real("Settings", "KoTH HUD Position", global.kothHudPos);
+    ini_write_real("Settings", "ServerPluginsPrompt", global.serverPluginsPrompt);
     ini_write_string("Server", "MapRotation", customMapRotationFile);
     ini_write_real("Server", "Dedicated", global.dedicatedMode);
     ini_write_string("Server", "ServerName", global.serverName);
