@@ -333,7 +333,10 @@ while(commandLimitRemaining > 0) {
             }
             else
             {
-                show_error("ERROR when reading plugin packet: no such plugin packet ID " + string(packetID), true);
+                write_ubyte(player.socket, KICK);
+                write_ubyte(player.socket, KICK_BAD_PLUGIN_PACKET);
+                socket_destroy(player.socket);
+                player.socket = -1;
             }
             break;
         }

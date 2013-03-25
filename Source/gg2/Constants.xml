@@ -59,6 +59,7 @@
   <constant name="MESSAGE_STRING" value="53"/>
   <constant name="WEAPON_FIRE" value="54"/>
   <constant name="PLUGIN_PACKET" value="55"/>
+  <constant name="KICK_BAD_PLUGIN_PACKET" value="56"/>
   <constant name="TEAM_RED" value="0"/>
   <constant name="TEAM_BLUE" value="1"/>
   <constant name="TEAM_SPECTATOR" value="2"/>
