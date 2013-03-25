@@ -7,7 +7,7 @@ gg2updater.gb1
 gg2b
 gmksplit.exe
 *.orig
-Maps
-Plugins
-Screenshots
-ServerPluginsDebug
+/Maps
+/Plugins
+/Screenshots
+/ServerPluginsDebug

@@ -311,6 +311,31 @@ while(commandLimitRemaining > 0) {
                     rewardAuthStart(player, answer, challenge, true, rewardId);
            
             break;
+
+        case PLUGIN_PACKET:
+            var packetID, bufLen, buf, packetBufferQueue, packetPlayerQueue;
+
+            packetID = read_ubyte(socket);
+            
+            // get full packet
+            bufLen = read_ushort(socket);
+            buf = buffer_create();
+            receiveCompleteMessage(socket, bufLen, buf);
+
+            // check this is a recognised plugin ID
+            if (ds_map_exists(global.pluginPacketBuffers, packetID))
+            {
+                // enque buffer and Player in queue
+                packetBufferQueue = ds_map_find_value(global.pluginPacketBuffers, packetID);
+                packetPlayerQueue = ds_map_find_value(global.pluginPacketPlayers, packetID);
+                ds_queue_enqueue(packetBufferQueue, buf);
+                ds_queue_enqueue(packetPlayerQueue, player);
+            }
+            else
+            {
+                show_error("ERROR when reading plugin packet: no such plugin packet ID " + string(packetID), true);
+            }
+            break;
         }
         break;
     } 

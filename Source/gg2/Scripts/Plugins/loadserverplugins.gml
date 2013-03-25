@@ -101,6 +101,10 @@ for (i = 0; i < ds_list_size(list); i += 1)
 
 if (!failed)
 {
+    // Create plugin packet maps
+    global.pluginPacketBuffers = ds_map_create();
+    global.pluginPacketPlayers = ds_map_create();
+
     // Execute plugins
     for (i = 0; i < ds_list_size(list); i += 1)
     {
@@ -110,7 +114,11 @@ if (!failed)
         fp = file_text_open_write(working_directory + "\last_plugin.log");
         file_text_write_string(fp, pluginname);
         file_text_close(fp);
-        
+
+        // packetID is (i), so make queues for it
+        ds_map_add(global.pluginPacketBuffers, i, ds_queue_create());
+        ds_map_add(global.pluginPacketPlayers, i, ds_queue_create());
+
         // Execute plugin
         execute_file(
             // the plugin's main gml file must be in the root of the zip
@@ -118,7 +126,10 @@ if (!failed)
             tempdirprefix + pluginname + "\plugin.gml",
             // the plugin needs to know where it is
             // so the temporary directory is passed as first argument
-            tempdirprefix + pluginname
+            tempdirprefix + pluginname,
+            // the plugin needs to know its packetID
+            // so it is passed as the second argument
+            i
         );
     }
 }
