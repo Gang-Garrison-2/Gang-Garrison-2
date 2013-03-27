@@ -543,7 +543,7 @@ do {
             break;
 
         case PLUGIN_PACKET:
-            var packetID, bufLen, buf, packetBufferQueue, packetPlayerQueue;
+            var packetID, bufLen, buf, success;
 
             // fetch packet header
             receiveCompleteMessage(global.serverSocket, 3, global.tempBuffer);
@@ -554,18 +554,15 @@ do {
             buf = buffer_create();
             receiveCompleteMessage(global.serverSocket, bufLen, buf);
 
-            // check this is a recognised plugin ID
-            if (ds_map_exists(global.pluginPacketBuffers, packetID))
+            // try to enqueue
+            // give "noone" value for client since received from server
+            success = _PluginPacketPush(packetID, buf, noone);
+            
+            // if it returned false, packetID was invalid
+            if (!success)
             {
-                // enque buffer and Player in queue
-                packetBufferQueue = ds_map_find_value(global.pluginPacketBuffers, packetID);
-                packetPlayerQueue = ds_map_find_value(global.pluginPacketPlayers, packetID);
-                ds_queue_enqueue(packetBufferQueue, buf);
-                // give a Player value of -1 as this was received by client
-                ds_queue_enqueue(packetPlayerQueue, -1);
-            }
-            else
-            {
+                // clear up buffer
+                buffer_destroy(buf);
                 show_error("ERROR when reading plugin packet: no such plugin packet ID " + string(packetID), true);
             }
             break;

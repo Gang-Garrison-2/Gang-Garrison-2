@@ -1,12 +1,21 @@
-// Sends a packet for a server-sent plugin to all clients
+// Sends a packet for a server-sent plugin to a specific client
 // Returns true if successful, false if not
 // argument0 - plugin packet ID, passed as argument0 to server-sent plugin upon execution
 // argument1 - data buffer to send (maximum size 65535 bytes)
+// argument2 - Player object for client to send to
 
-var packetID, buffer, packetBuffer;
+var packetID, buffer, player, packetBuffer, socket;
 
 packetID = argument0;
 dataBuffer = argument1;
+player = argument2;
+
+// error out if we're not the host
+// (this function can't be used by clients, obviously)
+if (!global.isHost) {
+    show_error("ERROR when sending plugin packet: cannot use PluginPacketSendTo as client", true);
+    return false;
+}
 
 // check to make sure the packet ID is valid
 if (!ds_map_exists(global.pluginPacketBuffers, packetID))
@@ -34,12 +43,8 @@ write_ushort(packetBuffer, buffer_size(dataBuffer));
 write_buffer(packetBuffer, dataBuffer);
 
 // write to appropriate buffer and call send if needed
-if (global.isHost) {
-    write_buffer(global.sendBuffer, packetBuffer);
-} else {
-    write_buffer(global.serverSocket, packetBuffer);
-    socket_send(global.serverSocket);
-}
+write_buffer(player.socket, packetBuffer);
+socket_send(player.socket);
 
 buffer_destroy(packetBuffer);
 return true;

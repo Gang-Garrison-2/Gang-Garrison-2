@@ -84,6 +84,9 @@
     global.setupTimer=1800;
     global.joinedServerName="";
     global.serverPluginsInUse=false;
+    // Create plugin packet maps
+    global.pluginPacketBuffers = ds_map_create();
+    global.pluginPacketPlayers = ds_map_create();
         
     ini_write_string("Settings", "PlayerName", global.playerName);
     ini_write_real("Settings", "Fullscreen", global.fullscreen);

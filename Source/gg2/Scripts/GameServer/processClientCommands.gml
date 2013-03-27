@@ -313,7 +313,7 @@ while(commandLimitRemaining > 0) {
             break;
 
         case PLUGIN_PACKET:
-            var packetID, bufLen, buf, packetBufferQueue, packetPlayerQueue;
+            var packetID, bufLen, buf, success;
 
             packetID = read_ubyte(socket);
             
@@ -322,17 +322,16 @@ while(commandLimitRemaining > 0) {
             buf = buffer_create();
             receiveCompleteMessage(socket, bufLen, buf);
 
-            // check this is a recognised plugin ID
-            if (ds_map_exists(global.pluginPacketBuffers, packetID))
+            // try to enqueue
+            success = _PluginPacketPush(packetID, buf, player);
+            
+            // if it returned false, packetID was invalid
+            if (!success)
             {
-                // enque buffer and Player in queue
-                packetBufferQueue = ds_map_find_value(global.pluginPacketBuffers, packetID);
-                packetPlayerQueue = ds_map_find_value(global.pluginPacketPlayers, packetID);
-                ds_queue_enqueue(packetBufferQueue, buf);
-                ds_queue_enqueue(packetPlayerQueue, player);
-            }
-            else
-            {
+                // clear up buffer
+                buffer_destroy(buf);
+
+                // kick player
                 write_ubyte(player.socket, KICK);
                 write_ubyte(player.socket, KICK_BAD_PLUGIN_PACKET);
                 socket_destroy(player.socket);

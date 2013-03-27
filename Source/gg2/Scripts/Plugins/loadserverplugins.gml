@@ -101,10 +101,6 @@ for (i = 0; i < ds_list_size(list); i += 1)
 
 if (!failed)
 {
-    // Create plugin packet maps
-    global.pluginPacketBuffers = ds_map_create();
-    global.pluginPacketPlayers = ds_map_create();
-
     // Execute plugins
     for (i = 0; i < ds_list_size(list); i += 1)
     {
