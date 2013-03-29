@@ -23,7 +23,7 @@
     playsound(x,y,ExplosionSnd);
     
     with (Character) {
-        if (distance_to_object(other) &lt; other.blastRadius and !collision_line(x, y, other.x, other.y, Obstacle, true, true) and !(team == other.team and id != other.ownerPlayer.object and place_meeting(x, y+1, Obstacle)))
+        if (distance_to_object(other) &lt; other.blastRadius and !(team == other.team and id != other.ownerPlayer.object and place_meeting(x, y+1, Obstacle)))
         {
             var rdir, vectorfactor;
             rdir = point_direction(other.x,other.y,x,y);
