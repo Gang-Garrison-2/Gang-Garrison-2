@@ -51,6 +51,8 @@
     longRecoilTime = 60;
     reloadAnimLength = sprite_get_number(reloadSprite)/2
     reloadImageSpeed = reloadAnimLength/(longRecoilTime);
+    
+    tracerAlpha = 0;
 }
 </argument>
       </arguments>
