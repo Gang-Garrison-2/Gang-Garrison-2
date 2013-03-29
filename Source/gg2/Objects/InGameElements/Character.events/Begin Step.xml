@@ -101,7 +101,7 @@ if (!player.humiliated &amp;&amp; (pressedKeys &amp; $08)
     }
 }
 
-switch(moveStatus) // moveStatus is reset in collision with obstacles (including doors if they reject you)
+switch(moveStatus) // moveStatus is reset in collision with ceilings (including doors if they reject you)
 {
 case 1: //If I am rocketing/mining myself
     controlFactor = 0.65;

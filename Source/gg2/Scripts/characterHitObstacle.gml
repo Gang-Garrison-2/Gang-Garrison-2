@@ -61,15 +61,17 @@
         }
 
         if(hleft != 0 && !place_free(x + sign(hleft), y)) { // we hit a wall on the left or right
-            moveStatus = 0;
-            if(place_free(x + sign(hleft), y - 6)) { // if we could just walk up the step
+            if(place_free(x + sign(hleft), y - 6)) // if we could just walk up the step
+            {
                 y -= 6; // hop up the step.
                 collisionRectified = true;
+                moveStatus = 0;
             }
             else if(place_free(x + sign(hleft), y + 6) and abs(hspeed) >= abs(vspeed)) // ceiling sloping
             {
                 y += 6;
                 collisionRectified = true;
+                moveStatus = 0;
             }
             else // it's not just a step, we've actually gotta stop
             {
