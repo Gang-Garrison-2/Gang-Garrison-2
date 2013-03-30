@@ -37,7 +37,12 @@ while(commandLimitRemaining > 0) {
             player.commandReceiveState = 1;
             player.commandReceiveExpectedBytes = 1;
             break;
-            
+
+        case commandBytesPrefixLength2:
+            player.commandReceiveState = 3;
+            player.commandReceiveExpectedBytes = 2;
+            break;
+
         default:
             player.commandReceiveState = 2;
             player.commandReceiveExpectedBytes = commandBytes[player.commandReceiveCommand];
@@ -48,6 +53,11 @@ while(commandLimitRemaining > 0) {
     case 1:
         player.commandReceiveState = 2;
         player.commandReceiveExpectedBytes = read_ubyte(socket);
+        break;
+
+    case 3:
+        player.commandReceiveState = 2;
+        player.commandReceiveExpectedBytes = read_ushort(socket);
         break;
         
     case 2:
@@ -313,14 +323,13 @@ while(commandLimitRemaining > 0) {
             break;
 
         case PLUGIN_PACKET:
-            var packetID, bufLen, buf, success;
+            var packetID, buf, success;
 
             packetID = read_ubyte(socket);
             
-            // get full packet
-            bufLen = read_ushort(socket);
+            // get packet data
             buf = buffer_create();
-            receiveCompleteMessage(socket, bufLen, buf);
+            write_buffer_part(buf, socket, socket_receivebuffer_size(socket));
 
             // try to enqueue
             success = _PluginPacketPush(packetID, buf, player);

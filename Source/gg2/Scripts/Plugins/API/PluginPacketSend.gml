@@ -15,8 +15,8 @@ if (!ds_map_exists(global.pluginPacketBuffers, packetID))
     return false;
 }
 
-// check size of buffer (limited because ushort used for length)
-if (buffer_size(dataBuffer) > 65535) {
+// check size of buffer (limited because ushort used for length of packet)
+if (buffer_size(dataBuffer) > 65534) {
     return false;
 }
 
@@ -26,11 +26,13 @@ packetBuffer = buffer_create();
 // ID of plugin packet container packet
 write_ubyte(packetBuffer, PLUGIN_PACKET);
 
+// packet remainder length
+write_ushort(packetBuffer, buffer_size(dataBuffer) + 1);
+
 // plugin packet ID
 write_ubyte(packetBuffer, packetID);
 
 // plugin packet data buffer
-write_ushort(packetBuffer, buffer_size(dataBuffer));
 write_buffer(packetBuffer, dataBuffer);
 
 // write to appropriate buffer and call send if needed

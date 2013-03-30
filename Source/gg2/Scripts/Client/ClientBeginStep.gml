@@ -543,16 +543,18 @@ do {
             break;
 
         case PLUGIN_PACKET:
-            var packetID, bufLen, buf, success;
+            var packetID, packetLen, buf, success;
 
-            // fetch packet header
-            receiveCompleteMessage(global.serverSocket, 3, global.tempBuffer);
+            // fetch full packet
+            receiveCompleteMessage(global.serverSocket, 2, global.tempBuffer);
+            packetLen = read_ushort(global.serverSocket);
+            receiveCompleteMessage(global.serverSocket, packetLen, global.tempBuffer);
+
             packetID = read_ubyte(global.serverSocket);
-            bufLen = read_ushort(global.serverSocket);
-            
-            // get full packet
+
+            // get packet data
             buf = buffer_create();
-            receiveCompleteMessage(global.serverSocket, bufLen, buf);
+            write_buffer_part(buf, global.serverSocket, packetLen - 1);
 
             // try to enqueue
             // give "noone" value for client since received from server
