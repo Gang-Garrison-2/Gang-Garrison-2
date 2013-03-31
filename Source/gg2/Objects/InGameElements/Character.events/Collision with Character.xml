@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="COLLISION" with="Character">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if (global.aFirst and speed &gt; 0) // April fools 2013 - Footpop asked for enemy bodyblocking
+{
+    if (team == other.team)
+        other.solid = false;
+    else
+        other.solid = true;
+    
+    characterHitObstacle();
+    
+    other.solid = false;
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>
