@@ -163,8 +163,7 @@ if(moveStatus == 1 or moveStatus == 2 or moveStatus == 4)
     }
 }
 
-_basemaxspeed = runPower * abs(baseControl / (baseFriction - 1));
-_maxspeed = runPower * abs(controlFactor / (frictionFactor - 1));
+_basemaxspeed = abs(runPower * baseControl / (baseFriction-1));
 
 if(!taunting &amp;&amp; !omnomnomnom)
 {
@@ -176,7 +175,7 @@ if(!taunting &amp;&amp; !omnomnomnom)
 }
 //divide friction as normal if going way too fast
 if(abs(hspeed) &gt; _basemaxspeed * 2 or
-   ((keyState|pressedKeys) &amp; $60 and abs(hspeed) &lt;= _maxspeed))
+   ((keyState|pressedKeys) &amp; $60 and abs(hspeed) &lt; _basemaxspeed))
     hspeed /= baseFriction;
 else //otherwise divide by the moveStatus's friction
     hspeed /= frictionFactor;
