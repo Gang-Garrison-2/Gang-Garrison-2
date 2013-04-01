@@ -63,6 +63,7 @@
   <constant name="TEAM_RED" value="0"/>
   <constant name="TEAM_BLUE" value="1"/>
   <constant name="TEAM_SPECTATOR" value="2"/>
+  <constant name="TEAM_ANY" value="3"/>
   <constant name="CLASS_SCOUT" value="0"/>
   <constant name="CLASS_SOLDIER" value="1"/>
   <constant name="CLASS_SNIPER" value="2"/>

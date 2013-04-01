@@ -2,6 +2,4 @@
 <resources>
   <resource name="BulletWall" type="RESOURCE"/>
   <resource name="BulletWallHorizontal" type="RESOURCE"/>
-  <resource name="RightDoor" type="RESOURCE"/>
-  <resource name="LeftDoor" type="RESOURCE"/>
 </resources>
