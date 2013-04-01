@@ -19,6 +19,9 @@ else
     other.solid = true;
 
 characterHitObstacle();
+
+other.solid = false;
+
 </argument>
       </arguments>
     </action>
