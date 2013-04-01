@@ -1,7 +1,7 @@
 // Internal function to enque Player value and buffer for packet
 // returns false if no such packetID, else true
 // argument0 - packetID
-// argument1 - buffer
+// argument1 - buffer (on success, ownership passes to the buffer queue)
 // argument2 - Player
 
 var packetID, buffer, player, packetBufferQueue, packetPlayerQueue;

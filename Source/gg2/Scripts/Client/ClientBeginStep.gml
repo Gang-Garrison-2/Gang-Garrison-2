@@ -547,14 +547,14 @@ do {
 
             // fetch full packet
             receiveCompleteMessage(global.serverSocket, 2, global.tempBuffer);
-            packetLen = read_ushort(global.serverSocket);
+            packetLen = read_ushort(global.tempBuffer);
             receiveCompleteMessage(global.serverSocket, packetLen, global.tempBuffer);
 
-            packetID = read_ubyte(global.serverSocket);
+            packetID = read_ubyte(global.tempBuffer);
 
             // get packet data
             buf = buffer_create();
-            write_buffer_part(buf, global.serverSocket, packetLen - 1);
+            write_buffer_part(buf, global.tempBuffer, packetLen - 1);
 
             // try to enqueue
             // give "noone" value for client since received from server
