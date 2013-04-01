@@ -1,12 +1,13 @@
 // loads plugins from ganggarrison.com asked for by server
 // argument0 - comma separated plugin list
-var list, text, i, pluginname, url, handle, filesize, tempfileprefix, tempdirprefix, failed;
+var list, text, i, pluginname, url, handle, filesize, tempfileprefix, tempdirprefix, failed, lastContact;
 
 failed = false;
 list = ds_list_create();
 text = argument0;
 tempfileprefix = temp_directory + "\tmp-";
 tempdirprefix = temp_directory + "\~tmp-";
+lastContact = 0;
 
 // split plugin list string
 while (string_pos(",", text) != 0)
@@ -61,6 +62,16 @@ for (i = 0; i < ds_list_size(list); i += 1)
         while (DM_DownloadStatus(handle) != 3) {
             // prevent game locking up
             io_handle();
+
+            if (!global.isHost) {
+                // send ping if we haven't contacted server in 20 seconds
+                // we need to do this to keep the connection open
+                if (current_time-lastContact > 20000) {
+                    write_byte(global.serverSocket, PING);
+                    socket_send(global.serverSocket);
+                    lastContact = current_time;
+                }
+            }
 
             // draw progress bar if they're waiting a while
             draw_background_ext(background_index[0], 0, 0, background_xscale[0], background_yscale[0], 0, c_white, 1);
