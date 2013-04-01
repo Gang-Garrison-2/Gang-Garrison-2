@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<object id="809">
-  <sprite>SandwichHudS</sprite>
+<object id="808">
+  <sprite/>
   <solid>false</solid>
   <visible>true</visible>
-  <depth>-110000</depth>
+  <depth>0</depth>
   <persistent>false</persistent>
   <parent/>
   <mask/>
