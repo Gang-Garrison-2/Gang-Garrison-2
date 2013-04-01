@@ -15,14 +15,19 @@
       <arguments>
         <argument kind="STRING">if (updating)
 {
+    button_x1 = x - button_padding;
+    button_y1 = y + height + button_padding;
+    button_x2 = x + width + button_padding;
+    button_y2 = y + height + button_padding + (button_padding + string_height(button_label) + button_padding);
+    
     draw_set_color(c_black);
     draw_set_alpha(0.35);
     draw_rectangle(x - 5, y - 5, x + width + 5, y + height + 5, false);
     
     if (button_x1 &lt;= mouse_x &amp;&amp; mouse_x &lt;= button_x2 &amp;&amp; button_y1 &lt;= mouse_y &amp;&amp; mouse_y &lt;= button_y2)
-        draw_set_alpha(0.65);
+        draw_set_alpha(0.71);
     else
-        draw_set_alpha(0.5);
+        draw_set_alpha(0.6);
     
     draw_rectangle(button_x1, button_y1+1, button_x2, button_y2, false);
     

@@ -16,11 +16,6 @@
         <argument kind="STRING">updating = true;
 
 height = string_height_ext(msg, -1, width);
-
-button_x1 = x - button_padding;
-button_y1 = y + height + button_padding;
-button_x2 = x + width + button_padding;
-button_y2 = y + height + button_padding + (button_padding + string_height(button_label) + button_padding);
 </argument>
       </arguments>
     </action>
