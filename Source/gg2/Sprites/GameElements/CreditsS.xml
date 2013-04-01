@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <sprite>
-  <origin x="0" y="0"/>
+  <origin x="100" y="244"/>
   <mask>
     <separate>false</separate>
-    <shape>PRECISE</shape>
+    <shape>RECTANGLE</shape>
     <bounds alphaTolerance="0" mode="AUTO"/>
   </mask>
   <preload>true</preload>
