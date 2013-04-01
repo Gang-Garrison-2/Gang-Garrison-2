@@ -4,7 +4,7 @@
   <mask>
     <separate>false</separate>
     <shape>PRECISE</shape>
-    <bounds alphaTolerance="0" mode="AUTO"/>
+    <bounds alphaTolerance="128" mode="AUTO"/>
   </mask>
   <preload>true</preload>
   <smoothEdges>false</smoothEdges>
