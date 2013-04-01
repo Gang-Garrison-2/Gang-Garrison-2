@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<event category="OTHER" id="22">
+<event category="CREATE" id="0">
   <actions>
     <action id="603" library="1">
       <!--action name: Code-->
@@ -13,12 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if(global.updateType == QUICK_UPDATE or global.updateType == FULL_UPDATE) {
-        write_ushort(global.serializeBuffer, round(x*5));
-        write_ushort(global.serializeBuffer, round(y*5));
-        write_ubyte(global.serializeBuffer,alarm[0]);
-        write_ubyte(global.serializeBuffer,travelDistance);
-}
+        <argument kind="STRING">team = TEAM_BLUE;
 </argument>
       </arguments>
     </action>

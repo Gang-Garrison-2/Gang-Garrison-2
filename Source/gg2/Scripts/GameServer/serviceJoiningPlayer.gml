@@ -85,6 +85,11 @@ case STATE_CLIENT_AUTHENTICATED:
     write_string(socket, global.currentMap);
     write_ubyte(socket, string_length(global.currentMapMD5));
     write_string(socket, global.currentMapMD5);
+    
+    write_ubyte(socket, global.serverPluginsRequired);
+    write_ubyte(socket, string_length(global.serverPluginList));
+    write_string(socket, global.serverPluginList);
+    
     advertisedMap = global.currentMap;
     advertisedMapMd5 = global.currentMapMD5;
     newState = STATE_EXPECT_COMMAND;
@@ -143,9 +148,8 @@ case STATE_EXPECT_NAME:
     ds_list_add(global.players, player);
     ServerPlayerJoin(player.name, global.sendBuffer);
     
-    if(global.welcomeMessage != "") {
+    if(global.welcomeMessage != "")
         ServerMessageString(global.welcomeMessage, player.socket);
-    }
     
     break;
 }

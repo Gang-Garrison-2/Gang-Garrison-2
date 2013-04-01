@@ -20,7 +20,6 @@
         x = other.x - (bbox_right - x);
         hspeed = 0;
     }
-
 }
 </argument>
       </arguments>

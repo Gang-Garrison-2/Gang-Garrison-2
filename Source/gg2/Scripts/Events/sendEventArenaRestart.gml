@@ -1,1 +1,1 @@
-write_ubyte(global.eventBuffer, ARENA_RESTART);
+write_ubyte(global.sendBuffer, ARENA_RESTART);

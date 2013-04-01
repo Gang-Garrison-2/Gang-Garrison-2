@@ -103,7 +103,7 @@
         with (Sentry) {
             if (distance_to_object(other) &lt; other.blastRadius){
                 if(other.team != team) {
-                    hp -= other.explosionDamage*sqr((1-(distance_to_object(other)/other.blastRadius)));
+                    hp -= other.explosionDamage*(1-(distance_to_object(other)/other.blastRadius));
                     lastDamageDealer = other.ownerPlayer;
                     lastDamageSource = other.weapon;
                 }
@@ -117,7 +117,7 @@
                     isShieldRegenerating = false;
                     //allow overkill to be applied directly to the target
                     var hitDamage;
-                    hitDamage = other.explosionDamage*sqr((1-(distance_to_object(other)/other.blastRadius)));
+                    hitDamage = other.explosionDamage*(1-(distance_to_object(other)/other.blastRadius));
                     if (hitDamage &gt; shieldHp) {
                         hp -= hitDamage - shieldHp;
                         hp -= shieldHp * shieldResistance;

@@ -101,7 +101,7 @@ if (!player.humiliated &amp;&amp; (pressedKeys &amp; $08)
     }
 }
 
-switch(moveStatus) // moveStatus is reset in collision with obstacles (including doors if they reject you)
+switch(moveStatus) // moveStatus is reset in collision with ceilings (including doors if they reject you)
 {
 case 1: //If I am rocketing/mining myself
     controlFactor = 0.65;
@@ -120,12 +120,12 @@ case 4: //If I am rocketing/mining a teamate
     frictionFactor = 1;
     break;
 default:
-    if(!intel &amp;&amp; !player.humiliated)
-        controlFactor = baseControl;
-    else if (!player.humiliated)
+    if (player.humiliated)
+        controlFactor = baseControl-0.2;
+    else if (intel)
         controlFactor = baseControl-0.1;
     else
-        controlFactor = baseControl-0.2;
+        controlFactor = baseControl;
     frictionFactor = baseFriction;
 }
 
@@ -162,17 +162,20 @@ if(moveStatus == 1 or moveStatus == 2 or moveStatus == 4)
         }
     }
 }
+
+_basemaxspeed = abs(runPower * baseControl / (baseFriction-1));
+
 if(!taunting &amp;&amp; !omnomnomnom)
 {
-    if((keyState|pressedKeys) &amp; $40 and hspeed &gt; -runPower * controlFactor / (baseFriction - 1))
+    if((keyState|pressedKeys) &amp; $40 and hspeed &gt; -_basemaxspeed)
         hspeed -= runPower*controlFactor;
         
-    if((keyState|pressedKeys) &amp; $20 and hspeed &lt; runPower * controlFactor / (baseFriction - 1))
+    if((keyState|pressedKeys) &amp; $20 and hspeed &lt; _basemaxspeed)
         hspeed += runPower*controlFactor;
 }
-//divide friction as normal if going way too fast, or controlling motion, based on normal max speed
-if(abs(hspeed) &gt; abs(baseControl / (baseFriction - 1) * 2) or
-   ((keyState|pressedKeys) &amp; $60 and !(abs(hspeed) &gt; abs(baseControl / (baseFriction - 1)))) )
+//divide friction as normal if going way too fast
+if(abs(hspeed) &gt; _basemaxspeed * 2 or
+   ((keyState|pressedKeys) &amp; $60 and abs(hspeed) &lt; _basemaxspeed))
     hspeed /= baseFriction;
 else //otherwise divide by the moveStatus's friction
     hspeed /= frictionFactor;
@@ -193,8 +196,8 @@ if burnDuration&gt;0 &amp;&amp; player.class != CLASS_PYRO &amp;&amp; random(80)
 if(abs(hspeed)&lt;0.195 /*and not moveStatus = 3*/) { // Overweight carrying intel and shooting will get stuck with this number much higher
     hspeed=0;
     animationImage=0;
-}    
-    
+}
+
 if(place_free(x,y+1)) {
     vspeed += 0.6;
     if(vspeed&gt;10) {

@@ -116,6 +116,7 @@
     moveStatus = 0;
     
     baseControl=0.85;
+    // warning that baseFriction cannot be equal to 0 nor 1 or div0 will occur
     baseFriction = 1.15;
     controlFactor = baseControl;
     frictionFactor = baseFriction;

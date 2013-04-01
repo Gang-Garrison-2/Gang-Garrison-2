@@ -1,10 +1,12 @@
+// Returns true if the game is successfully initialized, false if there was an error and we should quit.
 {
     instance_create(0,0,RoomChangeObserver);
     set_little_endian_global(true);
     if file_exists("game_errors.log") file_delete("game_errors.log");
     if file_exists("last_plugin.log") file_delete("last_plugin.log");
     
-    var customMapRotationFile;
+    var customMapRotationFile, restart;
+    restart = false;
 
     //import wav files for music
     global.MenuMusic=sound_add(choose("Music/menumusic1.wav","Music/menumusic2.wav","Music/menumusic3.wav","Music/menumusic4.wav","Music/menumusic5.wav","Music/menumusic6.wav"), 1, true);
@@ -18,7 +20,6 @@
         sound_volume(global.FaucetMusic, 0.8);
         
     global.sendBuffer = buffer_create();
-    global.eventBuffer = buffer_create();
     global.tempBuffer = buffer_create();
     global.HudCheck = false;
     global.map_rotation = ds_list_create();
@@ -44,8 +45,9 @@
     else set_synchronization(false);
     global.medicRadar = ini_read_real("Settings", "Healer Radar", 1);
     global.showHealer = ini_read_real("Settings", "Show Healer", 1);
-    global.showHealing = ini_read_real("Settings", "Show Healing",1);
-    global.showHealthBar = ini_read_real("Settings", "Show Healthbar",0);
+    global.showHealing = ini_read_real("Settings", "Show Healing", 1);
+    global.showHealthBar = ini_read_real("Settings", "Show Healthbar", 0);
+    global.serverPluginsPrompt = ini_read_real("Settings", "ServerPluginsPrompt", 1);
     //user HUD settings
     global.timerPos=ini_read_real("Settings","Timer Position", 0)
     global.killLogPos=ini_read_real("Settings","Kill Log Position", 0)
@@ -68,11 +70,23 @@
     global.mapdownloadLimitBps = ini_read_real("Server", "Total bandwidth limit for map downloads in bytes per second", 50000);
     global.updaterBetaChannel = ini_read_real("General", "UpdaterBetaChannel", isBetaVersion());
     global.attemptPortForward = ini_read_real("Server", "Attempt UPnP Forwarding", 0); 
+    global.serverPluginList = ini_read_string("Server", "ServerPluginList", "");
+    global.serverPluginsRequired = ini_read_real("Server", "ServerPluginsRequired", 0);
+    if (string_length(global.serverPluginList) > 254) {
+        show_message("Error: Server plugin list cannot exceed 254 characters");
+        return false;
+    }
     
+    readClasslimitsFromIni();
+
     global.currentMapArea=1;
     global.totalMapAreas=1;
     global.setupTimer=1800;
     global.joinedServerName="";
+    global.serverPluginsInUse=false;
+    // Create plugin packet maps
+    global.pluginPacketBuffers = ds_map_create();
+    global.pluginPacketPlayers = ds_map_create();
         
     ini_write_string("Settings", "PlayerName", global.playerName);
     ini_write_real("Settings", "Fullscreen", global.fullscreen);
@@ -88,9 +102,10 @@
     ini_write_real("Settings", "Show Healer", global.showHealer);
     ini_write_real("Settings", "Show Healing", global.showHealing);
     ini_write_real("Settings", "Show Healthbar", global.showHealthBar);
-    ini_write_real("Settings","Timer Position", global.timerPos)
-    ini_write_real("Settings","Kill Log Position", global.killLogPos)
-    ini_write_real("Settings","KoTH HUD Position", global.kothHudPos)
+    ini_write_real("Settings", "Timer Position", global.timerPos);
+    ini_write_real("Settings", "Kill Log Position", global.killLogPos);
+    ini_write_real("Settings", "KoTH HUD Position", global.kothHudPos);
+    ini_write_real("Settings", "ServerPluginsPrompt", global.serverPluginsPrompt);
     ini_write_string("Server", "MapRotation", customMapRotationFile);
     ini_write_real("Server", "Dedicated", global.dedicatedMode);
     ini_write_string("Server", "ServerName", global.serverName);
@@ -103,7 +118,20 @@
     ini_write_string("Server", "Password", global.serverPassword);
     ini_write_real("General", "UpdaterBetaChannel", global.updaterBetaChannel);
     ini_write_real("Server", "Attempt UPnP Forwarding", global.attemptPortForward); 
+    ini_write_string("Server", "ServerPluginList", global.serverPluginList); 
+    ini_write_real("Server", "ServerPluginsRequired", global.serverPluginsRequired); 
     
+    ini_write_real("Classlimits", "Scout", global.classlimits[CLASS_SCOUT])
+    ini_write_real("Classlimits", "Pyro", global.classlimits[CLASS_PYRO])
+    ini_write_real("Classlimits", "Soldier", global.classlimits[CLASS_SOLDIER])
+    ini_write_real("Classlimits", "Heavy", global.classlimits[CLASS_HEAVY])
+    ini_write_real("Classlimits", "Demoman", global.classlimits[CLASS_DEMOMAN])
+    ini_write_real("Classlimits", "Medic", global.classlimits[CLASS_MEDIC])
+    ini_write_real("Classlimits", "Engineer", global.classlimits[CLASS_ENGINEER])
+    ini_write_real("Classlimits", "Spy", global.classlimits[CLASS_SPY])
+    ini_write_real("Classlimits", "Sniper", global.classlimits[CLASS_SNIPER])
+    ini_write_real("Classlimits", "Quote", global.classlimits[CLASS_QUOTE])
+
     //screw the 0 index we will start with 1
     //map_truefort 
     maps[1] = ini_read_real("Maps", "ctf_truefort", 1);
@@ -186,6 +214,10 @@ global.launchMap = "";
         if (parameter_string(a) == "-dedicated")
         {
             global.dedicatedMode = 1;
+        }
+        else if (parameter_string(a) == "-restart")
+        {
+            restart = true;
         }
         else if (parameter_string(a) == "-server")
         {
@@ -364,5 +396,8 @@ global.launchMap = "";
     if(global.dedicatedMode == 1) {
         AudioControlToggleMute();
         room_goto_fix(Menu);
-    }    
+    } else if(restart) {
+        room_goto_fix(Menu);
+    }
+    return true;
 }

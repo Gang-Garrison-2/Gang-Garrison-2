@@ -13,21 +13,15 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if (!global.mapchanging)
-{
-if(team == TEAM_RED or intel == true) {
-    x=xprevious;
-    hspeed=0;
-    moveStatus = 0;
-    if(place_meeting(x,y,TeamGate)) {
-        if(not place_meeting(x+8,y,TeamGate)) {
-            move_contact_solid(0,8);
-        } else if(not place_meeting(x-8,y,TeamGate)) {
-            move_contact_solid(180,8);
-        }
-    }
-}
-}
+        <argument kind="STRING">if ((team == TEAM_BLUE and !intel) or global.mapchanging)
+    other.solid = false;
+else
+    other.solid = true;
+
+characterHitObstacle();
+
+other.solid = false;
+
 </argument>
       </arguments>
     </action>

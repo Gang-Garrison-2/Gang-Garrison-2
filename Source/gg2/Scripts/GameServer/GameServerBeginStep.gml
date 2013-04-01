@@ -6,18 +6,6 @@ if(global.useLobbyServer and (frame mod 900)==0)
     sendLobbyRegistration();
 frame += 1;
 
-buffer_clear(global.sendBuffer);
-
-global.runningMapDownloads = 0;
-global.mapBytesRemainingInStep = global.mapdownloadLimitBps/room_speed;
-with(JoiningPlayer)
-    if(state==STATE_CLIENT_DOWNLOADING)
-        global.runningMapDownloads += 1;
-
-acceptJoiningPlayer();        
-with(JoiningPlayer)
-    serviceJoiningPlayer();
-
 // Service all players
 var i;
 for(i=0; i<ds_list_size(global.players); i+=1)
@@ -28,8 +16,9 @@ for(i=0; i<ds_list_size(global.players); i+=1)
     if(socket_has_error(player.socket) or player.kicked)
     {
         removePlayer(player);
-        ServerPlayerLeave(i);
-        i-=1;
+        ServerPlayerLeave(i, global.sendBuffer);
+        ServerBalanceTeams();
+	i-=1;
     }
     else
         processClientCommands(player, i);
@@ -136,13 +125,3 @@ if(impendingMapChange == 0)
         alarm[5]=1;
     }
 }
-
-var i;
-for(i=1; i<ds_list_size(global.players); i+=1)
-{
-    var player;
-    player = ds_list_find_value(global.players, i);
-    write_buffer(player.socket, global.eventBuffer);
-    write_buffer(player.socket, global.sendBuffer);
-}
-buffer_clear(global.eventBuffer);

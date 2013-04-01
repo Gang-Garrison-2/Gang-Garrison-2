@@ -493,6 +493,10 @@ This game uses the Faucet Forwarding Extension, created by NAGN, which wraps lib
 miniupnp is availible under the BSD license: see miniupnp.license for full license.
 You can find more about Faucet Forwarding at its GitHub Page:
 https://github.com/nagn/Faucet-Forwarding
+
+This game uses the 7-zip command line version, available under the LGPL, see 7zip.license for full license.
+You can find more information on it here: http://www.7-zip.org/
+
 Readme Changelog
 2/7/09 - fishmatt - cleaned everything up for 2.0
 5/3/09 - mrfredman - updated things for 2.1

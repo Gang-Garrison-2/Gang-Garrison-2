@@ -100,39 +100,14 @@ if roundStart == 0 cpUnlock -= 1;
 //when roundStart reaches 0 players can no longer change team/class
 //and respawn
 else if roundStart &gt;0 roundStart -=1;
-if roundStart == 1 {
-    gameStarted = 1;
-    if global.isHost {
+if (roundStart == 1)
+{
+    if (global.isHost)
+    {
+        sendEventArenaStartRound();
+        doEventArenaStartRound();
         GameServer.syncTimer = 1;
-        with Player {
-            if team != TEAM_SPECTATOR {
-                if object != -1 with object instance_destroy();
-                alarm[5]=1;
-            }
-            alarm[0]=2;
-            //roundHealPoints = 0;
-            //roundHealed = 0;
-            //roundKills = 0;
-            //roundStabKills = 0;
-            roundStats[KILLS] = 0;
-            roundStats[DEATHS] = 0;
-            roundStats[ASSISTS] = 0;
-            roundStats[DESTRUCTION] = 0;
-            roundStats[STABS] = 0;
-            roundStats[HEALING] = 0;
-            roundStats[INVULNS] = 0;
-            roundStats[BONUS] = 0;
-            roundStats[CAPS] = 0;
-            roundStats[DEFENSES] = 0;
-            roundStats[DOMINATIONS] = 0;
-            roundStats[REVENGE] = 0;
-            roundStats[POINTS] = 0;
-        }
-        with Sentry instance_destroy();
-        with SentryGibs instance_destroy();
     }
-    if instance_exists(TeamSelectController) with TeamSelectController instance_destroy();
-    if instance_exists(ClassSelectController) with ClassSelectController instance_destroy();
 }
     
 //timer

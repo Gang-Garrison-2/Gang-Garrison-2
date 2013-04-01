@@ -37,7 +37,12 @@ while(commandLimitRemaining > 0) {
             player.commandReceiveState = 1;
             player.commandReceiveExpectedBytes = 1;
             break;
-            
+
+        case commandBytesPrefixLength2:
+            player.commandReceiveState = 3;
+            player.commandReceiveExpectedBytes = 2;
+            break;
+
         default:
             player.commandReceiveState = 2;
             player.commandReceiveExpectedBytes = commandBytes[player.commandReceiveCommand];
@@ -48,6 +53,11 @@ while(commandLimitRemaining > 0) {
     case 1:
         player.commandReceiveState = 2;
         player.commandReceiveExpectedBytes = read_ubyte(socket);
+        break;
+
+    case 3:
+        player.commandReceiveState = 2;
+        player.commandReceiveExpectedBytes = read_ushort(socket);
         break;
         
     case 2:
@@ -96,6 +106,7 @@ while(commandLimitRemaining > 0) {
                 }
                 else if(player.alarm[5]<=0)
                     player.alarm[5] = 1;
+                class = checkClasslimits(player.team, class);
                 player.class = class;
                 ServerPlayerChangeclass(playerId, player.class, global.sendBuffer);
             }
@@ -147,9 +158,17 @@ while(commandLimitRemaining > 0) {
                         player.alarm[5] = global.Server_Respawntime;
                     }
                     else if(player.alarm[5]<=0)
-                        player.alarm[5] = 1;
+                        player.alarm[5] = 1;                    
+                    var newClass;
+                    newClass = checkClasslimits(newTeam, player.class);
+                    if newClass != player.class
+                    {
+                        player.class = newClass;
+                        ServerPlayerChangeclass(playerId, player.class, global.sendBuffer);
+                    }
                     player.team = newTeam;
                     ServerPlayerChangeteam(playerId, player.team, global.sendBuffer);
+                    ServerBalanceTeams();
                 }
             }
             break;                   
@@ -301,6 +320,32 @@ while(commandLimitRemaining > 0) {
                 if(variable_local_exists("challenge") and variable_local_exists("rewardId"))
                     rewardAuthStart(player, answer, challenge, true, rewardId);
            
+            break;
+
+        case PLUGIN_PACKET:
+            var packetID, buf, success;
+
+            packetID = read_ubyte(socket);
+            
+            // get packet data
+            buf = buffer_create();
+            write_buffer_part(buf, socket, socket_receivebuffer_size(socket));
+
+            // try to enqueue
+            success = _PluginPacketPush(packetID, buf, player);
+            
+            // if it returned false, packetID was invalid
+            if (!success)
+            {
+                // clear up buffer
+                buffer_destroy(buf);
+
+                // kick player
+                write_ubyte(player.socket, KICK);
+                write_ubyte(player.socket, KICK_BAD_PLUGIN_PACKET);
+                socket_destroy(player.socket);
+                player.socket = -1;
+            }
             break;
         }
         break;

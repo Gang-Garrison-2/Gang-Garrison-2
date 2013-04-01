@@ -42,6 +42,12 @@
     serverPlayer.name = global.playerName;
     ds_list_add(global.players, serverPlayer);
 
+    for (a=0; a<10; a+=1)
+    {
+        if (global.classlimits[a] >= global.playerLimit)
+            global.classlimits[a] = 255;
+    }
+    
     global.tcpListener = tcp_listen(global.hostingPort);
     if(socket_has_error(global.tcpListener))
     {
@@ -97,4 +103,16 @@
     global.mapchanging = false; 
     
     GameServerDefineCommands();
+    
+    // load server-sent plugins, if any
+    if (string_length(global.serverPluginList))
+    {
+        if (!loadserverplugins(global.serverPluginList))
+        {
+            show_message("Error ocurred loading server plugins.");
+            instance_destroy();
+            exit;
+        }
+        global.serverPluginsInUse = true;
+    }
 }

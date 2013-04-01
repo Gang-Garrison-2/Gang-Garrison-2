@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<include>
+  <filename>7za.exe</filename>
+  <filepath>D:\Projects\2011\Gang Garrison 2\server plugins 7zip\7za920\7za.exe</filepath>
+  <original>true</original>
+  <originalSize>587776</originalSize>
+  <hasContent>true</hasContent>
+  <exportTo>TEMP_DIRECTORY</exportTo>
+  <otherExportDirectory/>
+  <overwriteExisting>true</overwriteExisting>
+  <freeMemAfterExport>true</freeMemAfterExport>
+  <removeAtGameEnd>false</removeAtGameEnd>
+</include>

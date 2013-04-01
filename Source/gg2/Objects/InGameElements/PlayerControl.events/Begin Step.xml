@@ -88,11 +88,16 @@ if(global.myself.object != -1)
     socket_send(global.serverSocket);
     
 // spectator controls
-} else if (instance_exists(Spectator)) {
-    if(mouse_check_button_pressed(mb_left))
-        with (Spectator) event_user(7);
-    if(mouse_check_button_pressed(mb_right))
-        with (Spectator) event_user(8);
+}
+else if (instance_exists(Spectator))
+{
+    if(!menuOpen)
+    {
+        if(mouse_check_button_pressed(mb_left))
+            with (Spectator) event_user(7);
+        if(mouse_check_button_pressed(mb_right))
+            with (Spectator) event_user(8);
+    }
 }
 
 if(keybyte != 0

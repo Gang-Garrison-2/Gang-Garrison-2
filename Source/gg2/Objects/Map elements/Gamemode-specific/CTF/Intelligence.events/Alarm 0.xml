@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<event category="OTHER" id="23">
+<event category="ALARM" id="0">
   <actions>
     <action id="603" library="1">
       <!--action name: Code-->
@@ -13,12 +13,10 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if(global.updateType == QUICK_UPDATE or global.updateType == FULL_UPDATE) {
-        receiveCompleteMessage(global.serverSocket,6,global.deserializeBuffer);
-        x = read_ushort(global.deserializeBuffer)/5;
-        y = read_ushort(global.deserializeBuffer)/5;
-        alarm[0] = read_ubyte(global.deserializeBuffer);
-        travelDistance = read_ubyte(global.deserializeBuffer);
+        <argument kind="STRING">if (global.isHost)
+{
+    doEventReturnIntel(team);
+    sendEventReturnIntel(team);
 }
 </argument>
       </arguments>
