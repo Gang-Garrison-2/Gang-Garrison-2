@@ -71,6 +71,25 @@ if global.myself.object != -1 {
             draw_sprite_ext(GasAmmoS,toffset,xoffset+728,yoffset+ysize/1.26+86,2.4,2.4,0,c_white,100);
             if (global.myself.object.currentWeapon.ammoCount &lt;= 1/4 * global.myself.object.currentWeapon.maxAmmo) { barcolor = make_color_rgb(255,0,0); }
             draw_healthbar(xoffset+689,yoffset+ysize/1.26+90,xoffset+723,yoffset+ysize/1.26+98,global.myself.object.currentWeapon.ammoCount/2,c_black,barcolor,barcolor,0,true,false);
+            offset = 0;
+            with(global.myself.object.currentWeapon)
+            {
+                var offset, flarecolor;
+                
+                if(readyToFlare)
+                    flarecolor = c_white;
+                else
+                    flarecolor = c_gray;
+                offset = 0;
+                    
+                for (i = 1; i &lt;= ammoCount/75; i += 1)
+                {
+                    draw_sprite_ext(FlareS,other.toffset,
+                                    xoffset+760+offset,yoffset+ysize/1.26+93,
+                                    1,1,0,flarecolor,100);
+                    offset -= 20;
+                }
+            }
         }
         else if global.myself.class == CLASS_HEAVY {       
             draw_sprite_ext(MinigunAmmoS,toffset,xoffset+728,yoffset+ysize/1.26+86,2.4,2.4,0,c_white,100);

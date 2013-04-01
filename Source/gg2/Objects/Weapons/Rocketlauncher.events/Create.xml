@@ -19,7 +19,7 @@
     refireTime = 30;
     event_inherited();
     
-    reloadTime = 25;
+    reloadTime = 22;
     reloadBuffer = 30;
     maxAmmo = 4;
     ammoCount = maxAmmo;

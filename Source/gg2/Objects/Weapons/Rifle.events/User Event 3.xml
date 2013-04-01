@@ -19,6 +19,11 @@ justShot=true;
 readyToShoot = false;
 alarm[0] = reloadTime + 20*owner.zoomed;
 
+// for drawing:
+tracerAlpha = 0.8;
+shotx = x;
+shoty = y;
+
 var hit;
 var x1,y1,xm,ym, len;
 var hitline;
@@ -27,7 +32,6 @@ x1=x;
 y1=y;
 x2=x+lengthdir_x(len,owner.aimDirection);
 y2=y+lengthdir_y(len,owner.aimDirection);
-
 
 alarm[6] = alarm[0];
 while(len&gt;1) {
@@ -128,6 +132,7 @@ with(Generator) {
         }
     }
 }
+
 </argument>
       </arguments>
     </action>
