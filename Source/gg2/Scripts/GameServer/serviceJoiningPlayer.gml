@@ -99,6 +99,12 @@ case STATE_CLIENT_AUTHENTICATED:
 case STATE_EXPECT_COMMAND:
     switch(read_ubyte(socket))
     {
+    // keeps connection open when downloading plugins
+    case PING:
+        newState = STATE_EXPECT_COMMAND;
+        expectedBytes = 1;
+        break;
+
     case PLAYER_JOIN:
         newState = STATE_EXPECT_MESSAGELEN;
         messageState = STATE_EXPECT_NAME;
