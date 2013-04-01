@@ -52,14 +52,14 @@
     if(socket_has_error(global.tcpListener))
     {
         show_message("Unable to host: " + socket_error(global.tcpListener));
-        game_end();
+        instance_destroy();
         exit;
     }
     global.serverSocket = tcp_connect("127.0.0.1", global.hostingPort);    
     if(socket_has_error(global.serverSocket))
     {
         show_message("Unable to connect to self. Epic fail, dude.");
-        game_end();
+        instance_destroy();
         exit;
     }
     
@@ -69,7 +69,7 @@
         if(current_time - loopbackStartTime > 500) // 0.5s should be enough to create a loopback connection...
         {
             show_message("Unable to host: Maybe the port is already in use.");
-            game_end();
+            instance_destroy();
             exit;
         }
         serverPlayer.socket = socket_accept(global.tcpListener);
