@@ -448,7 +448,7 @@ mrfredman, MedO, Synnah
 Programmers:
 MedO, Cube7 aka Chris P. Bacon, Andrew "cspotcode" Bradley, Vaati, Taimat, Findude, Juicebox360, Jebus_Chris,
 Leiche, Xeyk, pach, Austin "Psychopath" Benz, L, technoviking, AJF, Alexander "Wareya" Nadeau, Vindicator,
-NAGN and RebelINS
+NAGN, Orpheon, JaxOf7 and RebelINS
 
 Artists:
 mrfredman, Fishmatt, BassieEnAdriaan, Timohtep, Elkondo, Waterfall and Skeledude
@@ -462,7 +462,7 @@ fishmatt, vaati, king metroid, Taters, agh, Faust, Tarzan, BassieEnAdriaan, McGe
 With additional art and inspiration provided by the incredible Gang Garrison community!
 
 License:
-Copyright (C) 2008-2011 Faucet Software
+Copyright (C) 2008-2013 Faucet Software
 http://www.ganggarrison.com
 
 This program is free software; 
