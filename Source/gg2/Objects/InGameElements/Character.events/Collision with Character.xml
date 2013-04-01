@@ -13,7 +13,9 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if (global.aFirst and speed &gt; 0) // April fools 2013 - Footpop asked for enemy bodyblocking
+        <argument kind="STRING">// April fools 2013 - Footpop asked for enemy bodyblocking
+// We'll take this out again on April 2nd or so
+if (speed &gt; 0)
 {
     if (team == other.team)
         other.solid = false;

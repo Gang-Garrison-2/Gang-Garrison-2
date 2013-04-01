@@ -13,7 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">//var xoffset, yoffset, xsize, ysize; // we need to be able to access these from within with() blocks
+        <argument kind="STRING">var xoffset, yoffset, xsize, ysize;
 xoffset = view_xview[0];
 yoffset = view_yview[0];
 xsize = view_wview[0];
@@ -85,7 +85,7 @@ if global.myself.object != -1 {
                 for (i = 1; i &lt;= ammoCount/75; i += 1)
                 {
                     draw_sprite_ext(FlareS,other.toffset,
-                                    other.xoffset+760+offset,other.yoffset+other.ysize/1.26+93,
+                                    xoffset+760+offset,yoffset+ysize/1.26+93,
                                     1,1,0,flarecolor,100);
                     offset -= 20;
                 }
