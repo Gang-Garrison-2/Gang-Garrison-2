@@ -198,14 +198,7 @@ if(abs(hspeed)&lt;0.195 /*and not moveStatus = 3*/) { // Overweight carrying int
     animationImage=0;
 }
 
-with(IntelGate)
-    solid =  (team != other.team and other.intel and !global.mapchanging);
-with(TeamGate)
-    solid = ((team != other.team or other.intel) and !global.mapchanging);
-with(PlayerWall)
-    solid = true;
-with(PlayerWallHorizontal)
-    solid = true;
+charSetSolids();
 
 if(place_free(x,y+1)) {
     vspeed += 0.6;
@@ -219,12 +212,7 @@ if(place_free(x,y+1)) {
     }
 }
 
-with(Gate)
-    solid = false;
-with(PlayerWall)
-    solid = false;
-with(PlayerWallHorizontal)
-    solid = false;
+charUnsetSolids();
 
 if (intel)
 { 
