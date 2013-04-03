@@ -16,25 +16,24 @@
         <argument kind="STRING">speed = min(speed, 15);
 timeUnscathed = min(timeUnscathed+1, 10*30);
 
+with(IntelGate)
+    solid =  (team != other.team and other.intel and !global.mapchanging);
+with(TeamGate)
+    solid = ((team != other.team or other.intel) and !global.mapchanging);
+with(PlayerWall)
+    solid = true;
+with(PlayerWallHorizontal)
+    solid = true;
+
 if (!place_free(x+hspeed, y+vspeed))
-{
-    with(IntelGate)
-        solid =  (team != other.team and other.intel and !global.mapchanging);
-    with(TeamGate)
-        solid = ((team != other.team or other.intel) and !global.mapchanging);
-    with(PlayerWall)
-        solid = true;
-    with(PlayerWallHorizontal)
-        solid = true;
     characterHitObstacle();
-    with(Gate)
-        solid = false;
-    with(PlayerWall)
-        solid = false;
-    with(PlayerWallHorizontal)
-        solid = false;
-}
-colliding = false;
+    
+with(Gate)
+    solid = false;
+with(PlayerWall)
+    solid = false;
+with(PlayerWallHorizontal)
+    solid = false;
 
 // cleanup
 //x -= hspeed;

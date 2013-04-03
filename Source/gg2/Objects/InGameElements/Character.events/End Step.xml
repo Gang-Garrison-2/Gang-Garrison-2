@@ -14,6 +14,16 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">// Climbing down stairs
+
+with(IntelGate)
+    solid =  (team != other.team and other.intel and !global.mapchanging);
+with(TeamGate)
+    solid = ((team != other.team or other.intel) and !global.mapchanging);
+with(PlayerWall)
+    solid = true;
+with(PlayerWallHorizontal)
+    solid = true;
+
 if(vspeed == 0) // if we aren't falling this frame
 { 
     if(place_free(x,y+6))
@@ -24,6 +34,13 @@ if(vspeed == 0) // if we aren't falling this frame
 }
 xprevious = x;
 yprevious = y;
+    
+with(Gate)
+    solid = false;
+with(PlayerWall)
+    solid = false;
+with(PlayerWallHorizontal)
+    solid = false;
 
 if(global.isHost &amp;&amp; hp&lt;=0) {
     var assistant;
