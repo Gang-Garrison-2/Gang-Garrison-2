@@ -108,6 +108,12 @@
       <locked>false</locked>
     </instance>
     <instance>
+      <object>LobbyNameController</object>
+      <position x="176" y="80"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
       <object>ScrollDownO</object>
       <position x="552" y="520"/>
       <creationCode/>
