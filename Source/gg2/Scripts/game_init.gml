@@ -354,6 +354,7 @@ global.launchMap = "";
     window_set_fullscreen(global.fullscreen);
     
     global.gg2Font = font_add_sprite(gg2FontS,ord("!"),false,0);
+    global.countFont = font_add_sprite(countFontS, ord("0"),false,2);
     draw_set_font(global.gg2Font);
     cursor_sprite = CrosshairS;
     
