@@ -28,7 +28,7 @@
             var rdir, vectorfactor;
             rdir = point_direction(other.x,other.y,x,y);
             vectorfactor = point_distance(0, 0, sin(degtorad(rdir)), cos(degtorad(rdir)));
-            if (1 - distance_to_object(other)/other.blastRadius &lt;= 0.25 and splashThreshhold) // skip if we're out of theshhold
+            if (1 - distance_to_object(other)/other.blastRadius &lt;= 0.25 and other.splashThreshhold) // skip if we're out of theshhold
                 continue;
             motion_add(rdir, min(15, other.knockback-other.knockback*(distance_to_object(other)/other.blastRadius)) * vectorfactor);
             if((other.team != team or id==other.ownerPlayer.object) and !ubered and hp &gt; 0)
