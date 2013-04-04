@@ -148,6 +148,10 @@ case STATE_EXPECT_NAME:
     ds_list_add(global.players, player);
     ServerPlayerJoin(player.name, global.sendBuffer);
     
+    // message lobby to update playercount if we became full
+    if(noOfPlayers+1 == global.playerLimit)
+        sendLobbyRegistration();
+    
     if(global.welcomeMessage != "")
         ServerMessageString(global.welcomeMessage, player.socket);
     
