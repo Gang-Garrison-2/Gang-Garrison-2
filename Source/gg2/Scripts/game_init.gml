@@ -76,6 +76,8 @@
         show_message("Error: Server plugin list cannot exceed 254 characters");
         return false;
     }
+    xhairRI = ini_read_string("Settings", "CrosshairFilename", "");
+    xhairHasAlpha = ini_read_real("Settings", "CrosshairTransparent", 1);
     
     readClasslimitsFromIni();
 
@@ -120,6 +122,8 @@
     ini_write_real("Server", "Attempt UPnP Forwarding", global.attemptPortForward); 
     ini_write_string("Server", "ServerPluginList", global.serverPluginList); 
     ini_write_real("Server", "ServerPluginsRequired", global.serverPluginsRequired); 
+    ini_write_string("Settings", "CrosshairFilename", xhairRI);
+    ini_write_real("Settings", "CrosshairTransparent", xhairHasAlpha);
     
     ini_write_real("Classlimits", "Scout", global.classlimits[CLASS_SCOUT])
     ini_write_real("Classlimits", "Pyro", global.classlimits[CLASS_PYRO])
@@ -393,7 +397,11 @@ global.launchMap = "";
 
     if(!directory_exists(working_directory + "\Plugins")) directory_create(working_directory + "\Plugins");
     loadplugins();
-    
+    if(file_exists(xhairRI))
+    {
+        sprite_replace(CrosshairS,xhairRI,1,xhairHasAlpha,false,0,0);
+        sprite_set_offset(CrosshairS,sprite_get_width(CrosshairS)/2,sprite_get_height(CrosshairS)/2);
+    }
     if(global.dedicatedMode == 1) {
         AudioControlToggleMute();
         room_goto_fix(Menu);
