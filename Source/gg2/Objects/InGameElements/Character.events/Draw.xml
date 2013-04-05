@@ -50,7 +50,17 @@ if(distance_to_point(mouse_x, mouse_y)&lt;25) {
     } else {
         draw_set_color(c_blue);
     }
-draw_text(xr, yr-35, player.name);
+    draw_text(xr, yr-35, player.name);
+    
+    if(team == global.myself.team and global.showTeammateStats)
+    {
+        if(weapons[0] == Medigun)
+            draw_text(xr,yr+50, "Superburst: " + string(currentWeapon.uberCharge/20) + "%");
+        else if(weapons[0] == Shotgun)
+            draw_text(xr,yr+50, "Nuts 'N' Bolts: " + string(nutsNBolts));
+        else if(weapons[0] == Minegun)
+            draw_text(xr,yr+50, "Lobbed Mines: " + string(currentWeapon.lobbed));
+    }
 }  
 
 draw_set_alpha(1);
