@@ -27,6 +27,11 @@
         }
         socket_destroy_abortive(pingSocket);
         global.runningPingCount -= 1;
+        var that;
+        that = id;
+        with (LobbyController) {
+            ds_list_sorted_insert(servers, that, compareServersByCompatAndPing);
+        }
         pingSocket = -1;
         pingRunning = false;
         pingFinished = true;
