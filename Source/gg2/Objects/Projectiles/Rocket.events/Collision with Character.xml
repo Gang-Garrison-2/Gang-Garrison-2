@@ -28,7 +28,7 @@
     else if (ds_list_find_index(playersPassed, other.player) == 0 and other.player != ownerPlayer)
     {
         ds_list_add(playersPassed, other.player);
-        alarm[0] -= 15;
+        distanceToTravel -= 100;
     }
 }
 </argument>
