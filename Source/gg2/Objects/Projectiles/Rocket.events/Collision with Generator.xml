@@ -13,7 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if fade==false {
+        <argument kind="STRING">{
     if(team != other.team) {
         other.alarm[0] = other.regenerationBuffer;
         other.isShieldRegenerating = false;
@@ -29,7 +29,7 @@
         characterHit = -1;
         event_user(5);
     }
-} else instance_destroy();
+}
 </argument>
       </arguments>
     </action>
