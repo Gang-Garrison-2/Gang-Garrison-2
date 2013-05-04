@@ -1,6 +1,7 @@
 // Returns the buffer of the earliest received packet for a server-sent plugin
+// Buffer returned should not be modified or destroyed.
 // If there is no packet buffer to return, returns -1
-// argument0 - plugin packet ID, passed as argument0 to server-sent plugin upon execution
+// argument0 - plugin packet ID, passed as argument1 to server-sent plugin upon execution
 
 var packetID, packetBufferQueue;
 

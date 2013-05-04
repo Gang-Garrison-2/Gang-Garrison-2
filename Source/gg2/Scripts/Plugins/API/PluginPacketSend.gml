@@ -1,6 +1,6 @@
 // Sends a packet for a server-sent plugin to all clients
 // Returns true if successful, false if not
-// argument0 - plugin packet ID, passed as argument0 to server-sent plugin upon execution
+// argument0 - plugin packet ID, passed as argument1 to server-sent plugin upon execution
 // argument1 - data buffer to send (maximum size 65535 bytes)
 
 var packetID, buffer, packetBuffer;
