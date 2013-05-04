@@ -1,7 +1,7 @@
 // Returns the Player of the earliest received packet for a server-sent plugin
 // If this packet was received from the server, noone is returned instead
 // If there is no packet Player to return, returns -1
-// argument0 - plugin packet ID, passed as argument0 to server-sent plugin upon execution
+// argument0 - plugin packet ID, passed as argument1 to server-sent plugin upon execution
 
 var packetID, packetPlayerQueue;
 

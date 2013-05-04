@@ -1,6 +1,7 @@
 // Removes the earliest received packet for a server-sent plugin
+// This will destroy the buffer.
 // If there is packet to remove, returns false, otherwise true
-// argument0 - plugin packet ID, passed as argument0 to server-sent plugin upon execution
+// argument1 - plugin packet ID, passed as argument0 to server-sent plugin upon execution
 
 var packetID, packetBufferQueue, packetPlayerQueue;
 
