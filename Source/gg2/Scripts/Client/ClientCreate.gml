@@ -7,6 +7,8 @@
     }
     nocreate=false;
     usePreviousPwd = false;
+    noUnloadPlugins = false;
+    noReloadPlugins = false;
     
     global.players = ds_list_create();
     global.deserializeBuffer = buffer_create();
