@@ -26,7 +26,8 @@
         instance_destroy();
 
     room_goto_fix(returnRoom);
-    pluginscleanup();
+    if (global.serverPluginsInUse &amp;&amp; !noUnloadPlugins)
+        pluginscleanup();
 }
 
 </argument>
