@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
   <resource name="checkClasslimits" type="RESOURCE"/>
-  <resource name="iterateThroughTeammates" type="RESOURCE"/>
+  <resource name="countClassmembersExcept" type="RESOURCE"/>
   <resource name="readClasslimitsFromIni" type="RESOURCE"/>
   <resource name="readClasslimitFromIni" type="RESOURCE"/>
 </resources>

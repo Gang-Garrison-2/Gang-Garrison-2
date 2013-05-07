@@ -1,35 +1,35 @@
-// First checks whether the suggested class is acceptable, and if it isn't returns a random class
-// argument0 == the team
-// argument1 == the wanted class
+/// Select and return an acceptable new class for a player, based on the classlimits.
 
-if iterateThroughTeammates(argument0, argument1) < global.classlimits[argument1]
-{
-    return argument1// You're allowed to get the class you wished for.
-}
+var player, newTeam, desiredClass;
+player       = argument0;
+newTeam      = argument1;
+desiredClass = argument2;
+
+// Enough free slots for the desired class?
+if (countClassmembersExcept(player, newTeam, desiredClass) < global.classlimits[desiredClass])
+    return desiredClass;
 
 // Uh-oh, too many have that class. Randomly select another.
-
 var class, classlist;
 
-classlist = ds_list_create()
+// Make a list of all available classes except quote. Quote shouldn't be randomly assigned.
+classlist = ds_list_create();
+for (class=0; class<9; class+=1)
+    if(countClassmembersExcept(player, newTeam, class) < global.classlimits[class])
+        ds_list_add(classlist, class);
 
-for (a=0; a<=9; a+=1) ds_list_add(classlist, a)// Add all classes except quote to the list. Quote shouldn't be randomly assigned.
-
-while !ds_list_empty(classlist)
+// Found teams with a free slot? Then choose one randomly.
+if(!ds_list_empty(classlist))
 {
-    class = ds_list_find_value(classlist, random(ds_list_size(classlist)))// Get a random class
-    if (iterateThroughTeammates(argument0, class) < global.classlimits[class])
-    {
-        ds_list_destroy(classlist);
-        return class;
-    }
-    ds_list_delete(classlist, ds_list_find_index(classlist, class));
+    class = ds_list_find_value(classlist, random(ds_list_size(classlist)));
+    ds_list_destroy(classlist);
+    return class;
 }
 ds_list_destroy(classlist);
 
 // Try quote as last resort
-if (iterateThroughTeammates(argument0, CLASS_QUOTE) < global.classlimits[CLASS_QUOTE])
+if (countClassmembersExcept(player, newTeam, CLASS_QUOTE) < global.classlimits[CLASS_QUOTE])
     return CLASS_QUOTE;
 
 // Not enough slots, just use whatever was requested.
-return argument1;
+return desiredClass;
