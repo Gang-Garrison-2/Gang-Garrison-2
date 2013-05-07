@@ -36,7 +36,8 @@ if (global.attemptPortForward and portForwarded)
 
 room_goto_fix(Menu);
 
-pluginscleanup();
+if (global.serverPluginsInUse)
+    pluginscleanup();
 </argument>
       </arguments>
     </action>
