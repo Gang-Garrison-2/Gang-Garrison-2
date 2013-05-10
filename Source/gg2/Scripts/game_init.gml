@@ -397,8 +397,8 @@ global.launchMap = "";
      * We'll store the kernel version (Win8 is 6.2, Win7 is 6.1) and check it there.
      ***/
     registry_set_root(1); // HKLM
-    global.NTKernelVersion = registry_read_real_ext("\SOFTWARE\Microsoft\Windows NT\CurrentVersion\", "CurrentVersion"); // SIC
-    
+    global.NTKernelVersion = real(registry_read_string_ext("\SOFTWARE\Microsoft\Windows NT\CurrentVersion\", "CurrentVersion")); // SIC
+
     if(global.dedicatedMode == 1) {
         AudioControlToggleMute();
         room_goto_fix(Menu);
