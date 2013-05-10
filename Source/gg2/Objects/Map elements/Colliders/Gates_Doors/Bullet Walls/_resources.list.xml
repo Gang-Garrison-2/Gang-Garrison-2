@@ -2,4 +2,5 @@
 <resources>
   <resource name="BulletWall" type="RESOURCE"/>
   <resource name="BulletWallHorizontal" type="RESOURCE"/>
+  <resource name="Special" type="GROUP"/>
 </resources>

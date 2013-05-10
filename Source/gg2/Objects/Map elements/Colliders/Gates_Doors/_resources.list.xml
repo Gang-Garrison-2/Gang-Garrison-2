@@ -5,5 +5,4 @@
   <resource name="Intel Gates" type="GROUP"/>
   <resource name="Player Walls" type="GROUP"/>
   <resource name="Bullet Walls" type="GROUP"/>
-  <resource name="Special" type="GROUP"/>
 </resources>

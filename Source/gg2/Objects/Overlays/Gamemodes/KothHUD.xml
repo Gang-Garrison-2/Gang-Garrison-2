@@ -5,6 +5,6 @@
   <visible>true</visible>
   <depth>-120000</depth>
   <persistent>false</persistent>
-  <parent>HUD</parent>
+  <parent>FauxCPHUD</parent>
   <mask/>
 </object>

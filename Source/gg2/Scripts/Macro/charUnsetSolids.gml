@@ -1,7 +1,7 @@
 with(Gate)
     solid = false;
-with(PlayerWall)
+with(ControlPointSetupGate)
     solid = false;
-with(PlayerWallHorizontal)
+with(PlayerWall)
     solid = false;
 
