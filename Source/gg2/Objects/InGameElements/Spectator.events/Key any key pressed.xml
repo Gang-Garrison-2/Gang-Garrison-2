@@ -13,7 +13,10 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">var i;
+        <argument kind="STRING">if(instance_exists(InGameMenuController) || instance_exists(OptionsController) || instance_exists(ControlsController) || instance_exists(HUDOptionsController))
+    exit;
+
+var i;
 for(i=0; i&lt;=9; i+=1)
 {
     if(keyboard_check_pressed(numpadKeys[i]))

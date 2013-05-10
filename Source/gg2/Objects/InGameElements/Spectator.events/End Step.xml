@@ -21,26 +21,29 @@ moved = false;
 stopTracking = false;
 
 //moving view - mapped keys
-if keyboard_check(global.left)
+if(!(instance_exists(InGameMenuController) || instance_exists(OptionsController) || instance_exists(ControlsController) || instance_exists(HUDOptionsController)))
 {
-    if x &gt; 400 x-=20;
-    moved = true;
-}
-else if keyboard_check(global.right)
-{
-    if x &lt; map_width()-400 x+=20;
-    moved = true;
-}
-
-if keyboard_check(global.jump)
-{
-    if y &gt; 300 y-=20;
-    moved = true;
-}
-else if keyboard_check(global.down)
-{
-    if y &lt; map_height()-300 y+=20;
-    moved = true;
+    if keyboard_check(global.left)
+    {
+        if x &gt; 400 x-=20;
+        moved = true;
+    }
+    else if keyboard_check(global.right)
+    {
+        if x &lt; map_width()-400 x+=20;
+        moved = true;
+    }
+    
+    if keyboard_check(global.jump)
+    {
+        if y &gt; 300 y-=20;
+        moved = true;
+    }
+    else if keyboard_check(global.down)
+    {
+        if y &lt; map_height()-300 y+=20;
+        moved = true;
+    }
 }
 
 if(moved)
