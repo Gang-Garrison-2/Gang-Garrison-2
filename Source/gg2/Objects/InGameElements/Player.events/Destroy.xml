@@ -17,7 +17,7 @@
     socket_destroy(socket);
     
     with(Rocket) if(ownerPlayer == other.id) instance_destroy();
-    with(Flame) if(ownerPlayer == other.id) instance_destroy();
+    with(BurningProjectile) if(ownerPlayer == other.id) instance_destroy();
     with(Shot) if(ownerPlayer == other.id) instance_destroy();
     with(Needle) if(ownerPlayer == other.id) instance_destroy();
     with(Sentry) if(ownerPlayer == other.id) instance_destroy();
