@@ -211,11 +211,14 @@ while(commandLimitRemaining > 0) {
                 instance_destroy();
             break;                     
         
-        case DROP_INTEL:                                                                  
-            if(player.object != -1) {
-                write_ubyte(global.sendBuffer, DROP_INTEL);
-                write_ubyte(global.sendBuffer, playerId);
-                with player.object event_user(5);  
+        case DROP_INTEL:
+            if (player.object != -1)
+            {
+                if (player.object.intel)
+                {
+                    sendEventDropIntel(player);
+                    doEventDropIntel(player);
+                }
             }
             break;     
               

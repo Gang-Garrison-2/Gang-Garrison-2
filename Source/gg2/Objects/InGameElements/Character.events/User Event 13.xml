@@ -33,29 +33,11 @@
         
         temp = read_ubyte(global.deserializeBuffer);
         cloak = (temp &amp; $01 != 0);
-        newIntel = (temp &amp; $02 != 0);
-        moveStatus = (temp &gt;&gt; 2) &amp; $07;
-        // Drop the intel if intel changes from true to false, destroy the intel when if changes from false to true
-        // This is more of a workaround to keep 2.1.2 compatible with 2.1.1, it should be solved later by
-        // fully syncing intel drop.
-        if(newIntel and !intel) {
-            if(team == TEAM_RED) {
-                with(IntelligenceBlue) {
-                    instance_destroy();
-                }
-            } else if(team == TEAM_BLUE) {
-                with(IntelligenceRed) {
-                    instance_destroy();
-                }
-            }
-        } else if(!newIntel &amp;&amp; intel) {
-            event_user(5);
-        }
-        intel = newIntel;
+        moveStatus = (temp &gt;&gt; 1) &amp; $07;
     }
     
 if(global.updateType == FULL_UPDATE){
-        receiveCompleteMessage(global.serverSocket,4,global.deserializeBuffer);
+        receiveCompleteMessage(global.serverSocket,7,global.deserializeBuffer);
         animationOffset = read_ubyte(global.deserializeBuffer);
         //class specific syncs
         switch(player.class)
@@ -77,6 +59,8 @@ if(global.updateType == FULL_UPDATE){
         }
         alarm[1]=read_short(global.deserializeBuffer); 
         if alarm[1] != 0 canGrabIntel = false;
+        intel = read_ubyte(global.deserializeBuffer);
+        intelRecharge = read_short(global.deserializeBuffer);
         with(currentWeapon) {
             event_user(13);
         }

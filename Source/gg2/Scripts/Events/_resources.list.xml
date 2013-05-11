@@ -29,4 +29,6 @@
   <resource name="doEventUpdateRewards" type="RESOURCE"/>
   <resource name="sendEventArenaStartRound" type="RESOURCE"/>
   <resource name="doEventArenaStartRound" type="RESOURCE"/>
+  <resource name="sendEventDropIntel" type="RESOURCE"/>
+  <resource name="doEventDropIntel" type="RESOURCE"/>
 </resources>

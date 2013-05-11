@@ -238,10 +238,10 @@ if (player.humiliated)
 else
     animationImage = (animationImage+abs(hspeed)/20) mod CHARACTER_ANIMATION_LEN;
 
-
 // drop intel if ubered or round is over
-if(intel) &amp;&amp; (ubered || global.mapchanging) {
-    event_user(5);
+if (intel and (ubered or global.mapchanging) and global.isHost) {
+    sendEventDropIntel(player);
+    doEventDropIntel(player);
 }
 
 //gotta regenerate some nuts

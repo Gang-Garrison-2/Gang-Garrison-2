@@ -300,9 +300,7 @@ do {
         case DROP_INTEL:
             receiveCompleteMessage(global.serverSocket,1,global.tempBuffer);
             player = ds_list_find_value(global.players, read_ubyte(global.tempBuffer));
-            if player.object != -1 {
-                with player.object event_user(5); 
-            }
+            doEventDropIntel(player); 
             break;
             
         case RETURN_INTEL:
