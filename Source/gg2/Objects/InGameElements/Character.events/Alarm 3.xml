@@ -28,9 +28,9 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">lastDamageDealer = -1;
+        <argument kind="STRING">lastDamageDealer = noone;
 lastDamageSource = -1;
-secondToLastDamageDealer = -1;
+secondToLastDamageDealer = noone;
 </argument>
       </arguments>
     </action>

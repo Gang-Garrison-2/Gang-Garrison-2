@@ -16,11 +16,11 @@
         <argument kind="STRING">if(global.isHost and hp&lt;=0)
 {
     var healer;
-    healer = -1;
-    if (lastDamageDealer != -1)
-        if (lastDamageDealer.object != -1)
-            if (lastDamageDealer.object.healer != -1)
-                healer = lastDamageDealer.object.healer;
+    healer = noone;
+    with(lastDamageDealer)
+        if (object)
+            if (object.healer)
+                healer = object.healer;
     sendEventDestruction(ownerPlayer, lastDamageDealer, healer, lastDamageSource);
     doEventDestruction(ownerPlayer, lastDamageDealer, healer, lastDamageSource);
     exit;

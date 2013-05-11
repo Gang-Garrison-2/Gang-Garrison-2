@@ -15,8 +15,8 @@
       <arguments>
         <argument kind="STRING">if(global.isHost and (ownerPlayer.class != CLASS_ENGINEER or team != ownerPlayer.team or collision_circle(x,y+10,25,Sentry,false,true)&gt;=0))
 {
-    sendEventDestruction(ownerPlayer, -1, -1, 0);
-    doEventDestruction(ownerPlayer, -1, -1, 0);
+    sendEventDestruction(ownerPlayer, noone, noone, 0);
+    doEventDestruction(ownerPlayer, noone, noone, 0);
     exit;
 }
 

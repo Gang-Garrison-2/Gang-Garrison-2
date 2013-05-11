@@ -39,7 +39,7 @@
                     dmg *= 5/9;
                 hp -= dmg;
                 timeUnscathed = 0;
-                if (id == other.ownerPlayer.object and lastDamageDealer != -1 and lastDamageDealer != other.ownerPlayer and other.reflector == noone)
+                if (id == other.ownerPlayer.object and instance_exists(lastDamageDealer) and lastDamageDealer != other.ownerPlayer and !instance_exists(other.reflector))
                     lastDamageSource = FINISHED_OFF_GIB;
                 else 
                 {
@@ -48,11 +48,11 @@
                         secondToLastDamageDealer = lastDamageDealer;
                         alarm[4] = alarm[3]
                     }
-                    if (other.ownerPlayer != id or (other.reflector != noone and other.ownerPlayer == id))
+                    if (other.ownerPlayer != id or (instance_exists(other.reflector) and other.ownerPlayer == id))
                         alarm[3] = ASSIST_TIME;
                     lastDamageDealer = other.ownerPlayer;
                     lastDamageSource = other.weapon;
-                    if (id==other.ownerPlayer.object and other.reflector != noone)
+                    if (id==other.ownerPlayer.object and instance_exists(other.reflector))
                     {
                         lastDamageDealer = other.reflector;
                         lastDamageSource = WEAPON_REFLECTED_STICKY;

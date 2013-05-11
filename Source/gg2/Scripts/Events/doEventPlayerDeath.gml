@@ -3,8 +3,8 @@
  * destroy the character object to much splattering and so on.
  *
  * argument0: The player whose character died
- * argument1: The player who inflicted the fatal damage (or -1 for unknown)
- * argument2: The player who assisted the kill (or -1 for no assist)
+ * argument1: The player who inflicted the fatal damage (or noone for unknown)
+ * argument2: The player who assisted the kill (or noone for no assist)
  * argument3: The source of the fatal damage
  */
 var victim, killer, assistant, damageSource;
@@ -13,13 +13,11 @@ killer = argument1;
 assistant = argument2;
 damageSource = argument3;
 
-if(!(killer and instance_exists(killer))) {
+if(!instance_exists(killer))
     killer = noone;
-}
 
-if(!(assistant and instance_exists(assistant))) {
+if(!instance_exists(assistant))
     assistant = noone;
-}
 
 //*************************************
 //*      Scoring and Kill log

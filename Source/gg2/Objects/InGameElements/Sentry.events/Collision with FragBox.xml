@@ -14,7 +14,7 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">hp -= 999;
-lastDamageDealer = -1;
+lastDamageDealer = noone;
 </argument>
       </arguments>
     </action>

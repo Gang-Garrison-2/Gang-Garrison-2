@@ -28,10 +28,10 @@ yprevious = y;
 if(global.isHost &amp;&amp; hp&lt;=0) {
     var assistant;
     assistant = secondToLastDamageDealer;
-    if (lastDamageDealer and instance_exists(lastDamageDealer))
-        if (lastDamageDealer.object)
-            if (lastDamageDealer.object.healer)
-                assistant = lastDamageDealer.object.healer;
+    with(lastDamageDealer)
+        if (object)
+            if (object.healer)
+                assistant = object.healer;
                 
     sendEventPlayerDeath(player, lastDamageDealer, assistant, lastDamageSource);
     doEventPlayerDeath(player, lastDamageDealer, assistant, lastDamageSource);

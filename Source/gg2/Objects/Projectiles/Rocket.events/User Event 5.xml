@@ -52,7 +52,7 @@
                     {
                         hp -= other.explosionDamage*(1-(distance_to_object(other)/other.blastRadius));
                         timeUnscathed = 0;
-                        if(id == other.ownerPlayer.object and lastDamageDealer != -1 and lastDamageDealer != other.ownerPlayer)
+                        if(id == other.ownerPlayer.object and instance_exists(lastDamageDealer) and lastDamageDealer != other.ownerPlayer)
                         {
                             lastDamageSource = FINISHED_OFF_GIB;
                         }

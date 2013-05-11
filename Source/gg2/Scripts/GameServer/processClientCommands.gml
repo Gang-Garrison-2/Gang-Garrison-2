@@ -83,7 +83,7 @@ while(commandLimitRemaining > 0) {
                     {
                         if (collision_point(x,y,SpawnRoom,0,0) < 0)
                         {
-                            if (lastDamageDealer == -1 || lastDamageDealer == player)
+                            if (instance_exists(lastDamageDealer) || lastDamageDealer == player)
                             {
                                 sendEventPlayerDeath(player, player, noone, BID_FAREWELL);
                                 doEventPlayerDeath(player, player, noone, BID_FAREWELL);
@@ -92,8 +92,8 @@ while(commandLimitRemaining > 0) {
                             {
                                 var assistant;
                                 assistant = secondToLastDamageDealer;
-                                if (lastDamageDealer.object != -1)
-                                    if (lastDamageDealer.object.healer != -1)
+                                if (lastDamageDealer.object)
+                                    if (lastDamageDealer.object.healer)
                                         assistant = lastDamageDealer.object.healer;
                                 sendEventPlayerDeath(player, lastDamageDealer, assistant, FINISHED_OFF);
                                 doEventPlayerDeath(player, lastDamageDealer, assistant, FINISHED_OFF);
@@ -139,7 +139,7 @@ while(commandLimitRemaining > 0) {
                     {
                         with(player.object)
                         {
-                            if (lastDamageDealer == -1 || lastDamageDealer == player)
+                            if (!instance_exists(lastDamageDealer) || lastDamageDealer == player)
                             {
                                 sendEventPlayerDeath(player, player, noone, BID_FAREWELL);
                                 doEventPlayerDeath(player, player, noone, BID_FAREWELL);
@@ -148,8 +148,8 @@ while(commandLimitRemaining > 0) {
                             {
                                 var assistant;
                                 assistant = secondToLastDamageDealer;
-                                if (lastDamageDealer.object != -1)
-                                    if (lastDamageDealer.object.healer != -1)
+                                if (lastDamageDealer.object)
+                                    if (lastDamageDealer.object.healer)
                                         assistant = lastDamageDealer.object.healer;
                                 sendEventPlayerDeath(player, lastDamageDealer, assistant, FINISHED_OFF);
                                 doEventPlayerDeath(player, lastDamageDealer, assistant, FINISHED_OFF);
