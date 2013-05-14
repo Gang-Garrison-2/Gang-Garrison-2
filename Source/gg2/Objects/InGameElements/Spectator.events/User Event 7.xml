@@ -20,7 +20,7 @@
     newPlayer = ds_list_find_value(global.players, newTrackId);
     if(newPlayer.object and newPlayer != global.myself)
     {
-        if(!newPlayer.object.cloak)
+        if(!(newPlayer.object.cloak &amp;&amp; newPlayer.team != global.myself.team))
         {
             if(!tracking)
             {
