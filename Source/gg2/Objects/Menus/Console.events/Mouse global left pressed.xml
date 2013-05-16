@@ -17,7 +17,7 @@
 y = view_yview[0] + global.ConsoleWindowY;
 
 // drag console
-if (x &lt;= mouse_x &amp;&amp; mouse_x &lt; x + console_width &amp;&amp; y - console_height &lt;= mouse_y &amp;&amp; mouse_y &lt; y) {
+if (x &lt;= mouse_x &amp;&amp; mouse_x &lt; x + global.ConsoleWidth &amp;&amp; y - console_height &lt;= mouse_y &amp;&amp; mouse_y &lt; y) {
     dragging = true;
     dragstart_mousex = mouse_x;
     dragstart_mousey = mouse_y;
@@ -28,12 +28,12 @@ if (x &lt;= mouse_x &amp;&amp; mouse_x &lt; x + console_width &amp;&amp; y - con
     resizing_x1 = true;
     resizestart_mousex = mouse_x;
     resizestart_x = global.ConsoleWindowX;
-    resizestart_width = console_width;
+    resizestart_width = global.ConsoleWidth;
 // right border resize
-} else if (x + console_width &lt;= mouse_x &amp;&amp; mouse_x &lt; x + console_width + padding &amp;&amp; y - console_height &lt;= mouse_y &amp;&amp; mouse_y &lt; y) {
+} else if (x + global.ConsoleWidth &lt;= mouse_x &amp;&amp; mouse_x &lt; x + global.ConsoleWidth + padding &amp;&amp; y - console_height &lt;= mouse_y &amp;&amp; mouse_y &lt; y) {
     resizing_x2 = true;
     resizestart_mousex = mouse_x;
-    resizestart_width = console_width;
+    resizestart_width = global.ConsoleWidth;
 }
 </argument>
       </arguments>

@@ -76,21 +76,21 @@ if (dragging) {
 } else if (resizing_x1) {
     if (resizestart_width + (resizestart_x - global.ConsoleWindowX) &gt; 0) {
         global.ConsoleWindowX = resizestart_x + (mouse_x - resizestart_mousex);
-        console_width = resizestart_width + (resizestart_x - global.ConsoleWindowX);
+        global.ConsoleWidth = resizestart_width + (resizestart_x - global.ConsoleWindowX);
     } else {
-        console_width = 1;
+        global.ConsoleWidth = 1;
     }
     surface_free(surface);
-    surface = surface_create(console_width, 12);
+    surface = surface_create(global.ConsoleWidth, 12);
 // resizing from right
 } else if (resizing_x2) {
     if (resizestart_width + (mouse_x - resizestart_mousex) &gt; 0) {
-        console_width = resizestart_width + (mouse_x - resizestart_mousex);
+        global.ConsoleWidth = resizestart_width + (mouse_x - resizestart_mousex);
     } else {
-        console_width = 1;
+        global.ConsoleWidth = 1;
     }
     surface_free(surface);
-    surface = surface_create(console_width, 12);
+    surface = surface_create(global.ConsoleWidth, 12);
 }
 
 // do surface drawing at end step to avoid screwing up normal drawing
@@ -99,7 +99,7 @@ draw_clear_alpha(c_black, 0);
 
 draw_set_alpha(0.75);
 draw_set_color(c_gray);
-draw_rectangle(0, 0, console_width, 12, false);
+draw_rectangle(0, 0, global.ConsoleWidth, 12, false);
 
 draw_set_color(c_orange);
 draw_set_valign(fa_top);
@@ -119,7 +119,7 @@ if (draw_cursor) {
     temp = text + " ";
     cx = visible_string_width - viewport_x;
     if (cx &lt; 1) cx = 1;
-    if (cx &gt;= console_width) cx = console_width - 1;
+    if (cx &gt;= global.ConsoleWidth) cx = global.ConsoleWidth - 1;
     cy = string_height(text + " ") - string_height("_");
     draw_set_color(c_white);
     draw_line(cx, cy, cx, cy + string_height("_"));

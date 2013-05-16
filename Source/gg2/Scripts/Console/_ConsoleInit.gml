@@ -6,8 +6,9 @@ global.ConsoleCommandScripts = ds_list_create();
 global.ConsoleCommandDocs = ds_list_create();
 global.ConsoleLog = ds_list_create();
 global.ConsoleCmdLog = ds_list_create();
-global.ConsoleWindowX = 20;
-global.ConsoleWindowY = 500;
+global.ConsoleWindowX = 395;
+global.ConsoleWindowY = 487;
+global.ConsoleWidth = 389;
 
 // Add built-in commands
 
