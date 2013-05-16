@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<event category="KEYPRESS" id="27">
+<event category="DESTROY" id="0">
   <actions>
     <action id="603" library="1">
       <!--action name: Code-->
@@ -13,9 +13,11 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">// if not displaying console in in-game menu
-if (!global.consoleMode) {
-    instance_destroy();
+        <argument kind="STRING">// if displaying console in in-game menu
+if (global.consoleMode &amp;&amp; instance_exists(Console)) {
+    with (Console) {
+        instance_destroy();
+    }
 }
 </argument>
       </arguments>

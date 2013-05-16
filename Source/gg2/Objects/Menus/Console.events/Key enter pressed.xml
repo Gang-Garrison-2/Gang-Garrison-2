@@ -14,7 +14,10 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">if (text == "") {
-    instance_destroy();
+    // if not displaying console in in-game menu
+    if (!global.consoleMode) {
+        instance_destroy();
+    }
 } else {
     ConsolePrint("&gt;" + text);
     
