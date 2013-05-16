@@ -2,6 +2,7 @@ var i;
 
 commandBytesInvalidCommand = -1; // No such command
 commandBytesPrefixLength1 = -2;  // The length of the command is indicated by the first byte
+commandBytesPrefixLength2 = -3;  // The length of the command is indicated by the first two bytes
 
 for(i=0; i<256; i+=1) {
     // -1 indicates an invalid command byte
@@ -21,3 +22,4 @@ commandBytes[PLAYER_CHANGENAME] = commandBytesPrefixLength1;
 commandBytes[INPUTSTATE] = 3;
 commandBytes[REWARD_REQUEST] = commandBytesPrefixLength1;
 commandBytes[REWARD_CHALLENGE_RESPONSE] = 16;
+commandBytes[PLUGIN_PACKET] = commandBytesPrefixLength2;

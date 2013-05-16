@@ -1,3 +1,4 @@
-if global.myself.object.intel == false exit;
+if (!global.myself.object.intel)
+    exit;
 
 write_byte(global.serverSocket, DROP_INTEL);

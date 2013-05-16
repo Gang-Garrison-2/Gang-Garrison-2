@@ -14,7 +14,7 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">{
-    menu_create(40, 140, 300, 200, 30);
+    menu_create(40, 140, 300, 260, 30);
 
     if room != Options {
         menu_setdimmed();
@@ -87,6 +87,11 @@
     menu_addedit_boolean("V Sync:", "global.monitorSync", '
         gg2_write_ini("Settings", "Monitor Sync", argument0);
         set_synchronization(argument0);
+    ');
+    menu_addedit_boolean("Prompt for server-sent plugins:", "global.serverPluginsPrompt", '
+        if (argument0 == false)
+            show_message("Please note that plugins can be dangerous, so you should only disable the prompt if you trust all plugins hosted at the source:#" + PLUGIN_SOURCE + "#" + PLUGIN_SOURCE_NOTICE)
+        gg2_write_ini("Settings", "ServerPluginsPrompt", argument0);
     ');
     menu_addlink("Controls", '
         instance_create(x,y,ControlsController);

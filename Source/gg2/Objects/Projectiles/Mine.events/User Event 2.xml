@@ -23,7 +23,7 @@
     playsound(x,y,ExplosionSnd);
     
     with (Character) {
-        if (distance_to_object(other) &lt; other.blastRadius and !collision_line(x, y, other.x, other.y, Obstacle, true, true) and !(team == other.team and id != other.ownerPlayer.object and place_meeting(x, y+1, Obstacle)))
+        if (distance_to_object(other) &lt; other.blastRadius and !(team == other.team and id != other.ownerPlayer.object and place_meeting(x, y+1, Obstacle)))
         {
             var rdir, vectorfactor;
             rdir = point_direction(other.x,other.y,x,y);
@@ -39,7 +39,7 @@
                     dmg *= 5/9;
                 hp -= dmg;
                 timeUnscathed = 0;
-                if (id == other.ownerPlayer.object and lastDamageDealer != -1 and lastDamageDealer != other.ownerPlayer and other.reflector == noone)
+                if (id == other.ownerPlayer.object and instance_exists(lastDamageDealer) and lastDamageDealer != other.ownerPlayer and !instance_exists(other.reflector))
                     lastDamageSource = FINISHED_OFF_GIB;
                 else 
                 {
@@ -48,11 +48,11 @@
                         secondToLastDamageDealer = lastDamageDealer;
                         alarm[4] = alarm[3]
                     }
-                    if (other.ownerPlayer != id or (other.reflector != noone and other.ownerPlayer == id))
+                    if (other.ownerPlayer != id or (instance_exists(other.reflector) and other.ownerPlayer == id))
                         alarm[3] = ASSIST_TIME;
                     lastDamageDealer = other.ownerPlayer;
                     lastDamageSource = other.weapon;
-                    if (id==other.ownerPlayer.object and other.reflector != noone)
+                    if (id==other.ownerPlayer.object and instance_exists(other.reflector))
                     {
                         lastDamageDealer = other.reflector;
                         lastDamageSource = WEAPON_REFLECTED_STICKY;
@@ -92,7 +92,7 @@
     
     with (Sentry){
         if (distance_to_object(other) &lt; other.blastRadius) &amp;&amp; (team != other.team) { 
-        hp -= other.explosionDamage*sqr((1-(distance_to_object(other)/other.blastRadius)));
+        hp -= other.explosionDamage*10/9*(1-(distance_to_object(other)/other.blastRadius)); // we want sentries to take ~11% extra damage so that two stickies will do 100 instead of 90 dmg. we don't change the base damage so scouts can't be 2-hitted.
         lastDamageDealer = other.ownerPlayer;
         lastDamageSource = WEAPON_MINEGUN;
         }   
@@ -104,7 +104,7 @@
             isShieldRegenerating = false;
             //allow overkill to be applied directly to the target
             var hitDamage;
-            hitDamage = other.explosionDamage*sqr((1-(distance_to_object(other)/other.blastRadius)));
+            hitDamage = other.explosionDamage*(1-(distance_to_object(other)/other.blastRadius));
             if (hitDamage &gt; shieldHp) {
                 hp -= hitDamage - shieldHp;
                 hp -= shieldHp * shieldResistance;

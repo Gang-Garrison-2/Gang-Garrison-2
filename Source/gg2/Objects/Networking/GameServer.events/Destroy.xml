@@ -35,6 +35,9 @@ if (global.attemptPortForward and portForwarded)
     upnp_release_port(string(global.hostingPort), "TCP")
 
 room_goto_fix(Menu);
+
+if (global.serverPluginsInUse)
+    pluginscleanup();
 </argument>
       </arguments>
     </action>

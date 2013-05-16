@@ -19,8 +19,6 @@ teamoffset=0;
 overtime = 0;
 global.totalControlPoints = instance_number(ControlPoint);
 
-middlePoint = global.totalControlPoints/2;
-
 if instance_exists(ControlPointSetupGate){
     global.setupTimer=1800;
     mode=1;
@@ -84,19 +82,26 @@ else if !instance_exists(ControlPointSetupGate){
     }
 }
 
-if mode==0 &amp;&amp; global.totalControlPoints &gt; 1{
-    for (i=1; i&lt;= global.totalControlPoints; i+=1) {
-        if i&lt;=middlePoint global.cp[i].team=TEAM_RED;
-        else if i&gt;middlePoint global.cp[i].team=TEAM_BLUE;
-        if global.totalControlPoints&gt;2 &amp;&amp; ceil(middlePoint) == i global.cp[i].team=-1;
+if (mode==0)
+{
+    var middlePoint;
+    middlePoint = (global.totalControlPoints+1)/2;
+    
+    for (i=1; i&lt;= global.totalControlPoints; i+=1)
+    {
+        if (i &lt; middlePoint)
+            global.cp[i].team = TEAM_RED;
+        else if (i &gt; middlePoint)
+            global.cp[i].team = TEAM_BLUE;
+        else // middle point, if exists
+            global.cp[i].team = -1;
     }
 }
-else if mode==1{
-    for (i=1; i &lt;= global.totalControlPoints; i+=1) {
+else if (mode==1)
+{
+    for (i=1; i &lt;= global.totalControlPoints; i+=1)
         global.cp[i].team=TEAM_BLUE;
-    }
 }
-
 </argument>
       </arguments>
     </action>

@@ -20,6 +20,7 @@ var moved;
 moved = false;
 stopTracking = false;
 
+//moving view - mapped keys
 if (!(instance_exists(InGameMenuController) || instance_exists(OptionsController) || instance_exists(ControlsController) || instance_exists(HUDOptionsController) || instance_exists(Console))) {
     //moving view - mapped keys
     if keyboard_check(global.left)

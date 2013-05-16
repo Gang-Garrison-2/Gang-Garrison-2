@@ -1,19 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <event category="DRAW" id="0">
   <actions>
-    <action id="604" library="1">
-      <!--action name: Inherited-->
-      <kind>NORMAL</kind>
-      <allowRelative>false</allowRelative>
-      <question>false</question>
-      <canApplyTo>false</canApplyTo>
-      <actionType>FUNCTION</actionType>
-      <functionName>action_inherited</functionName>
-      <relative>false</relative>
-      <not>false</not>
-      <appliesTo>.self</appliesTo>
-      <arguments/>
-    </action>
     <action id="603" library="1">
       <!--action name: Code-->
       <kind>CODE</kind>
@@ -26,33 +13,42 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">{
-    if(shot) {
-        var origdepth;
-        shot=false;
-        draw_set_alpha(0.8);
-        origdepth = depth;
-        depth = -2;
-        if(owner.team==TEAM_RED) {
-            draw_line_width_color(x,y,x2,y2,2,c_red,c_red);
-        } else {
-            draw_line_width_color(x,y,x2,y2,2,c_blue,c_blue);
-        }
-        depth = origdepth;
-    }
-    //draw_text(x, y - 35, hitDamage);
-    if (owner.zoomed &amp;&amp; owner == global.myself.object) {
-        if (hitDamage &lt; maxDamage) {
-            draw_set_alpha(0.25);
-            draw_sprite_ext(ChargeS, 0, mouse_x + 15*-image_xscale, mouse_y - 10, -image_xscale, 1, 0, c_white, image_alpha);
-            draw_set_alpha(0.8);
-        } else {
-            draw_sprite_ext(FullChargeS, 0, mouse_x + 65*-image_xscale, mouse_y, 1, 1, 0, c_white, image_alpha);
-        }
-        draw_sprite_part_ext(ChargeS, 1, 0, 0, ceil((hitDamage-baseDamage)*40/(maxDamage-baseDamage)), 20, mouse_x + 15*-image_xscale, mouse_y - 10, -image_xscale, 1, c_white, image_alpha);
-    }
+        <argument kind="STRING">event_inherited();
+if (tracerAlpha &gt; 0.05)
+{
+    shot = false;
+    var origdepth;
+    origdepth = depth;
+    depth = -2;
     
+    draw_set_alpha(tracerAlpha);
+    if(owner.team == TEAM_RED)
+        draw_line_width_color(shotx,shoty,x2,y2,2,c_red,c_red);
+    else
+        draw_line_width_color(shotx,shoty,x2,y2,2,c_blue,c_blue);
+    if(global.particles != PARTICLES_OFF)
+        tracerAlpha /= 1.75;
+    else tracerAlpha = 0;
+        
+    draw_set_alpha(1);
+    depth = origdepth;
 }
+else
+    tracerAlpha = 0;
+
+if (owner.zoomed &amp;&amp; owner == global.myself.object)
+{
+    if (hitDamage &lt; maxDamage)
+    {
+        draw_set_alpha(0.25);
+        draw_sprite_ext(ChargeS, 0, mouse_x + 15*-image_xscale, mouse_y - 10, -image_xscale, 1, 0, c_white, image_alpha);
+        draw_set_alpha(0.8);
+    }
+    else
+        draw_sprite_ext(FullChargeS, 0, mouse_x + 65*-image_xscale, mouse_y, 1, 1, 0, c_white, image_alpha);
+        draw_sprite_part_ext(ChargeS, 1, 0, 0, ceil((hitDamage)*40/maxDamage), 20, mouse_x + 15*-image_xscale, mouse_y - 10, -image_xscale, 1, c_white, image_alpha);
+}
+
 </argument>
       </arguments>
     </action>

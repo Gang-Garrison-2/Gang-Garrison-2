@@ -1,1 +1,1 @@
-write_ubyte(global.eventBuffer, UNLOCKCP);
+write_ubyte(global.sendBuffer, UNLOCKCP);

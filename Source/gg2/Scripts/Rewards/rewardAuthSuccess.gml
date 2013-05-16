@@ -12,14 +12,14 @@ rewardArray[5] = "GWEn";
 rewardArray[6] = "GWHe";
 rewardArray[7] = "GWSp";
 rewardArray[8] = "GWPy";
-rewardArray[9] = "RESERVED";
+rewardArray[9] = "GWQC";
 
 // Golden statue
 rewardArray[10] = "GS";
 
 rewardValue = 0;
 for(i=0; i<11; i+=1)
-    if(string_pos(":"+rewardArray+":", rewardString))
+    if(string_pos(":"+rewardArray[i]+":", ":"+rewardString+":"))
         rewardValue |= (1<<i);
         
 sendEventUpdateRewards(player, rewardValue);

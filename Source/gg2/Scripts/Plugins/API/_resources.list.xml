@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="PluginPacketSend" type="RESOURCE"/>
+  <resource name="PluginPacketSendTo" type="RESOURCE"/>
+  <resource name="PluginPacketGetBuffer" type="RESOURCE"/>
+  <resource name="PluginPacketGetPlayer" type="RESOURCE"/>
+  <resource name="PluginPacketPop" type="RESOURCE"/>
+  <resource name="_PluginPacketPush" type="RESOURCE"/>
+</resources>

@@ -16,41 +16,40 @@
         <argument kind="STRING">{
     loopsoundstop(UberIdleSnd);
     
-    var newIntel, map;
+    var map;
     with(currentWeapon) {
         instance_destroy();
-    }
-    if(intel) {
-        var isMe;
-        isMe = (global.myself == player);
-        if(team == TEAM_RED) {
-            newIntel = instance_create(x,y,IntelligenceBlue);
-            recordEventInLog(5, TEAM_RED, player.name, isMe);
-        } else if (team == TEAM_BLUE) {
-            newIntel = instance_create(x,y,IntelligenceRed);
-            recordEventInLog(5, TEAM_BLUE, player.name, isMe);
-        }
-        newIntel.alarm[0] = intelRecharge;
-        if (lastDamageSource == KILL_BOX || lastDamageSource == FRAG_BOX || lastDamageSource == PITFALL) {
-            if (global.isHost){
-                if(team==TEAM_RED) {
-                    doEventReturnIntel(TEAM_BLUE);
-                    sendEventReturnIntel(TEAM_BLUE);
-                } else {
-                    doEventReturnIntel(TEAM_RED);
-                    sendEventReturnIntel(TEAM_RED);
-                }
-            }
-        }
-        sound_play(IntelDropSnd);
     }
     
     with(bubble) {
         instance_destroy();
     }
     
+    // Drop intel if carried. This is not done by sending an extra event because that would be a nested event, which
+    // screws up order of operations (Server: do part of player death, then drop intel, then do rest of player death. Client: Do player death, drop intel for dead player, error out)
+    if (intel)
+    {
+        doEventDropIntel(player);
+        
+        // lastDamageSource is not always synchronized on Character destruction (e.g. if the player just leaves), so we HAVE to sync here.
+        // Let's just hope it doesn't matter whether we return the intel now (Server) or after the player destruction is finished (Client).
+        if (global.isHost and (lastDamageSource == KILL_BOX || lastDamageSource == FRAG_BOX || lastDamageSource == PITFALL))
+        {
+            var intelTeam;
+            if (team == TEAM_RED)
+                intelTeam = TEAM_BLUE;
+            else if (team == TEAM_BLUE)
+                intelTeam = TEAM_RED;
+            else
+                show_error("Invalid team set for Character " + player.name, true);
+                
+            doEventReturnIntel(intelTeam);
+            sendEventReturnIntel(intelTeam);
+        }
+    }
+    
     player.object=-1;
-    if (collision_point(x,y,SpawnRoom,0,0) &amp;&amp; (lastDamageDealer == player || lastDamageDealer == -1))
+    if (collision_point(x,y,SpawnRoom,0,0) &amp;&amp; (lastDamageDealer == player || lastDamageDealer == noone))
         player.alarm[5] = 1;
     else 
         player.alarm[5] = global.Server_Respawntime;

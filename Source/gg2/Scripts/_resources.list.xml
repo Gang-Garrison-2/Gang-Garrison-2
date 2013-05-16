@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
   <resource name="game_init" type="RESOURCE"/>
-  <resource name="loadplugins" type="RESOURCE"/>
   <resource name="offloadSpawnPoints" type="RESOURCE"/>
   <resource name="removePlayer" type="RESOURCE"/>
   <resource name="ServerJoinUpdate" type="RESOURCE"/>
@@ -22,12 +21,14 @@
   <resource name="Input" type="GROUP"/>
   <resource name="Graphics" type="GROUP"/>
   <resource name="Lobby" type="GROUP"/>
+  <resource name="Classlimits" type="GROUP"/>
   <resource name="Menus" type="GROUP"/>
   <resource name="Holidays" type="GROUP"/>
   <resource name="Macro" type="GROUP"/>
   <resource name="Console" type="GROUP"/>
   <resource name="Bytes" type="GROUP"/>
   <resource name="Rewards" type="GROUP"/>
+  <resource name="Plugins" type="GROUP"/>
   <resource name="recordKillInLog" type="RESOURCE"/>
   <resource name="recordDestructionInLog" type="RESOURCE"/>
   <resource name="recordEventInLog" type="RESOURCE"/>

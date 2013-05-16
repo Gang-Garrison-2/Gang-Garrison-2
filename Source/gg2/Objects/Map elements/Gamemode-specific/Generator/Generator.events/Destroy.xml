@@ -23,10 +23,10 @@ with (Character) {
     if (distance_to_object(other) &lt; other.blastRadius){
         motion_add(point_direction(other.x,other.y,x,y),15-15*(distance_to_object(other)/other.blastRadius));
         hp -= 999;
-        if lastDamageDealer != -1 &amp;&amp; lastDamageDealer != player{
+        if(instance_exists(lastDamageDealer) &amp;&amp; lastDamageDealer != player) {
             lastDamageSource = FINISHED_OFF_GIB;
         }else{
-            lastDamageDealer = -1;
+            lastDamageDealer = noone;
             lastDamageSource = GENERATOR_EXPLOSION;
         }
     }
@@ -35,7 +35,7 @@ with (Character) {
 with (Sentry){
     if (distance_to_object(other) &lt; other.blastRadius) { 
         hp -= 999;
-        lastDamageDealer = -1;
+        lastDamageDealer = noone;
         lastDamageSource = GENERATOR_EXPLOSION;
     }   
 }    
