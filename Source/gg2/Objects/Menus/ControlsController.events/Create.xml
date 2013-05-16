@@ -14,7 +14,7 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">{
-    menu_create(40, 100, 300, 200, 30);
+    menu_create(40, 70, 300, 200, 30);
     
     if room != Options {
         menu_setdimmed();
@@ -35,6 +35,7 @@
     menu_addedit_key("Change Team:", "global.changeTeam");
     menu_addedit_key("Change Class:", "global.changeClass");
     menu_addedit_key("Show Scores:", "global.showScores");
+    menu_addedit_key("Open Console:", "global.openConsole");
     menu_addback("Back", '
         instance_destroy();
         instance_create(x,y,OptionsController);
