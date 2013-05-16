@@ -144,4 +144,40 @@ ConsoleAddCommand("cls","
 
 ConsoleAddCommand("exec","
     execute_string(argument0);
-", "exec <gml code> - runs specified code (warning: bad code could hang up or crash server");
+", "exec <gml code> - runs specified code (warning: bad code could hang up or crash server)");
+
+ConsoleAddCommand("eval","
+    ConsolePrint(string(execute_string('return (' + argument0 + ');')));
+", "eval <gml code> - evaluates specified expression and prints result(warning: bad code could hang up or crash server)");
+
+
+ConsoleAddCommand("get","
+    var name;
+
+    name = argument0;
+
+    if(variable_global_exists(name)) {
+        ConsolePrint(name + ' = ' + string(variable_global_get(name)));
+    } else {
+        ConsolePrint('There is no global variable named ' + name + '.');
+    }
+", "get <variable> - gets the value of a global variable");
+
+ConsoleAddCommand("set","
+    var name, value, pos;
+    
+    pos = string_pos(' ', argument0);
+    name = string_copy(argument0, 0, pos - 1);
+    value = string_copy(argument0, pos + 1, string_length(argument0) - pos);
+    
+    if(variable_global_exists(name)) {
+        if (is_real(variable_global_get(name))) {
+            if (!is_real(
+            value = real(value);
+        }
+        variable_global_set(name, value);
+        ConsolePrint(name + ' => ' + value);
+    } else {
+        ConsolePrint('There is no global variable named ' + name + '.');
+    }
+", "set <variable> - sets the value of a global variable using its existing type, casting as necessary. (warning: changing wrong variable could hang up or crash server)");
