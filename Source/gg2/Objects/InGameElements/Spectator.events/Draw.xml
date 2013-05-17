@@ -31,7 +31,7 @@ draw_set_color(c_white);
 
 if (tracking) {
     draw_text(xoffset+50, yoffset+590, player.name);
-    if player.object != -1 {
+    if (player.object != -1 &amp;&amp; global.myself.team == TEAM_SPECTATOR) {
         if player.object.maxHp != 0 {
             sprite_xpos = -2;
             sprite_ypos = 538;
