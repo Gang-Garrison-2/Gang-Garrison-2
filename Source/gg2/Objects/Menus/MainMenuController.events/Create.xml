@@ -38,7 +38,7 @@
     ');
     
     if !sound_isplaying(global.MenuMusic) AudioControlPlaySong(global.MenuMusic);
-    menuimage=choose(0,1);
+    menuimage = choose(MenuBackground1, MenuBackground2);
     
     if(global.dedicatedMode == 1)
         event_user(0);
