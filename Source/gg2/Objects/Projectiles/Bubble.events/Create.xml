@@ -14,9 +14,9 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">{
-    gun=-1;
-    owner=-1;
-    ownerPlayer=-1;
+    gun = noone;
+    owner = noone;
+    ownerPlayer = noone;
     hitDamage = 1;
     lifetime = 155;
     alarm[0] = lifetime;
