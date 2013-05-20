@@ -14,7 +14,7 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">{
-    draw_sprite(MenuBackgroundS,menuimage,300,300);
+    draw_background(menuimage, 0, 0);
     draw_sprite(MenuBackgroundVersionS,0,300,300);
 }
 </argument>
