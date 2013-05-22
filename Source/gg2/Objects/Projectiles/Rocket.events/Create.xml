@@ -22,8 +22,9 @@
     knockback = 8;
     bubbled = false;
     
-    fade=false;
-    travelDistance=0;
+    fade = false;
+    distanceToTravel = 800;
+    playersPassed = ds_list_create();
 }
 </argument>
       </arguments>

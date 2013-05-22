@@ -13,8 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if (!fade)
-{
+        <argument kind="STRING">{
     if (other.team != team)
     {
         with(other)
@@ -23,11 +22,14 @@
             cloakFlicker = true;
             alarm[7] = 3;
         }
-        characterHit=other;
+        characterHit = other;
         event_user(5);
     }
-    else
-        alarm[0] = 31 - travelDistance;
+    else if (ds_list_find_index(playersPassed, other.player) == -1 and other.player != ownerPlayer)
+    {
+        ds_list_add(playersPassed, other.player);
+        distanceToTravel -= 100;
+    }
 }
 </argument>
       </arguments>
