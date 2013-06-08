@@ -107,7 +107,8 @@
     // load server-sent plugins, if any
     if (string_length(global.serverPluginList))
     {
-        if (!loadserverplugins(global.serverPluginList))
+        pluginList = loadserverplugins(global.serverPluginList);
+        if (pluginList == 'failure')
         {
             show_message("Error ocurred loading server plugins.");
             game_end();

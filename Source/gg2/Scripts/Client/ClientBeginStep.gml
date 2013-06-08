@@ -73,7 +73,7 @@ do {
                 }
                 if (usePlugins)
                 {
-                    if (!loadserverplugins(plugins))
+                    if (loadserverplugins(plugins) == 'failure')
                     {
                         show_message("Error ocurred loading server plugins.");
                         instance_destroy();
