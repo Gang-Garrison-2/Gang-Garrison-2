@@ -72,8 +72,8 @@ if(y&lt;0) {
 if(y&gt;map_height()){
     y = map_height();
 }
-if(!place_free(x,y+1))
-    moveStatus=0;
+if(!place_free(x,y+1) and vspeed &gt;= 0)
+    moveStatus = 0;
 
     
 // Cloak
@@ -94,6 +94,11 @@ if (omnomnomnom)
 {
     omnomnomnomindex += 0.25;
     image_xscale=xscale;
+    if(hp &lt; maxHp) // This should prevent the "ate and got hit but didn't refresh cooldown" bug
+    { // Also, cooldown is now reset continually until fully healed or finished eating.
+        canEat = false;
+        alarm[6] = eatCooldown;
+    }
     if (hp &lt;= maxHp)
         hp += 1.6;
     if (omnomnomnomindex &gt;= omnomnomnomend)

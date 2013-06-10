@@ -22,6 +22,8 @@ draw_set_alpha(1);
 
 if global.myself.object != -1 {
     if instance_exists(global.myself.object.currentWeapon) {
+        var weapon;
+        weapon = global.myself.object.currentWeapon;
         barcolor=make_color_rgb(217,217,183);
         draw_set_color(barcolor);
     
@@ -93,8 +95,10 @@ if global.myself.object != -1 {
         }
         else if global.myself.class == CLASS_HEAVY {       
             draw_sprite_ext(MinigunAmmoS,toffset,xoffset+728,yoffset+ysize/1.26+86,2.4,2.4,0,c_white,100);
-            if (global.myself.object.currentWeapon.ammoCount &lt;= 1/4 * global.myself.object.currentWeapon.maxAmmo) { barcolor = make_color_rgb(255,0,0); }
-            draw_healthbar(xoffset+689,yoffset+ysize/1.26+90,xoffset+723,yoffset+ysize/1.26+98,global.myself.object.currentWeapon.ammoCount/2,c_black,barcolor,barcolor,0,true,false);
+            if (weapon.ammoCount &lt;= 1/4 * weapon.maxAmmo)
+                barcolor = make_color_rgb(255,0,0);
+            draw_healthbar(xoffset+689,yoffset+ysize/1.26+90,xoffset+723,yoffset+ysize/1.26+98,
+                           weapon.ammoCount/weapon.maxAmmo*100,c_black,barcolor,barcolor,0,true,false);
         }
         else if global.myself.class == CLASS_QUOTE {       
             draw_sprite_ext(BladeAmmoS,toffset,xoffset+728,yoffset+ysize/1.26+86,2.4,2.4,0,c_white,100);

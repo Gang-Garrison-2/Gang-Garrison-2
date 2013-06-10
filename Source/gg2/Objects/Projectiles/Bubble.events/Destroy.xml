@@ -13,11 +13,11 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if(instance_exists(owner) and owner != -1)
-{
-    gun.bubbleCount-=1;
-}
+        <argument kind="STRING">if(instance_exists(owner))
+    gun.bubbleCount -= 1;
+
 instance_create(x,y,Pop);
+
 </argument>
       </arguments>
     </action>

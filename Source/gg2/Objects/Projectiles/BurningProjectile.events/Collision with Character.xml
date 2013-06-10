@@ -29,7 +29,7 @@
         other.burnDuration += durationIncrease; 
         
         if(afterburnFalloff)
-            falloffFactor = min((flameLife - alarm[0])/flameLife, (flameLife - alarm[0])/flameLife/2+0.25); //Lower the rampup of "meatshot" flames instead of increasing it (old system was a half cosine)
+            falloffFactor = min((flameLife - alarm[0])/flameLife, (flameLife - alarm[0])/flameLife*0.65+0.35); //Lower the rampup of "meatshot" flames instead of increasing it
         else
             falloffFactor = 1;
         other.burnIntensity += burnIncrease * falloffFactor;

@@ -18,8 +18,8 @@
     animationState = 1;
     alarm[1] = 29;
     stickied = false;
-    bestBlastRadius = 50;
-    blastRadius = bestBlastRadius;
+    blastRadius = 40;
+    splashThreshhold = true; // whether to cap the distance at which splash has an effect
     exploded = false;
     bubbled = false;
     reflector = noone;
