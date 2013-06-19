@@ -14,11 +14,11 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">var host, path;
-host = "www.ganggarrison.com";
+host = DEVMESSAGES_HOST;
 if(global.updaterBetaChannel)
-    path = "/devmessages_beta.txt";
+    path = DEVMESSAGES_PATH_BETA;
 else
-    path = "/devmessages.txt";
+    path = DEVMESSAGES_PATH;
 
 socket = noone;
 
