@@ -71,6 +71,21 @@ if(tcp_eof(socket)) {
                 popup.updating = true;
             }
             break;
+        case "Background":
+            var versioncheck, versionend, version, titlelength, title;
+            versioncheck = (messageArray[c+1]);
+            versionend = string_pos("!",versioncheck);
+            version = string_copy(versioncheck,1,versionend-1);
+            titlelength = string_length(versioncheck)-versionend;
+            title=string_copy(versioncheck,versionend+1,titlelength);
+            if(real(version) &gt; global.backgroundVersion) 
+            {
+                var downloader;
+                downloader = instance_create(0, 0, BackgroundDownloader);
+                downloader.version = version;
+                downloader.title = title;
+            }
+            break;
         }
     }
     

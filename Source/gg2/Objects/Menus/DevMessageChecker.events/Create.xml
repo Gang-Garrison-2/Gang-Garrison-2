@@ -41,7 +41,7 @@ socket = tcp_connect(host, 80);
 response = "";
 
 // Send HTTP Request (HTTP 0.9, because we don't need no steenking headers :P)
-write_string(socket, "GET http://"+host+ path + CRLF);
+write_string(socket, "GET http://"+host+ path + CRLF + CRLF);
 socket_send(socket);
 
 image_speed = 5/room_speed;

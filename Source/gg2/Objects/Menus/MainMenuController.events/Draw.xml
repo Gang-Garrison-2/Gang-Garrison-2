@@ -14,7 +14,18 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">{
-    draw_background(menuimage, 0, 0);
+    if (variable_local_exists("loadedBackground"))
+    {
+        draw_sprite(loadedBackground, 0, 300, 300);
+        draw_set_halign(fa_right);
+        draw_set_valign(fa_bottom);
+        draw_set_color(c_white);
+        draw_text(595, 595, global.backgroundTitle);
+    }
+    else
+    {
+        draw_background(menuimage, 0, 0);
+    }
     draw_sprite(MenuBackgroundVersionS,0,300,300);
 }
 </argument>

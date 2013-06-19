@@ -76,6 +76,8 @@
         show_message("Error: Server plugin list cannot exceed 254 characters");
         return false;
     }
+    global.backgroundVersion = ini_read_real("Background", "BackgroundVersion", 0);
+    global.backgroundTitle = ini_read_string("Background", "BackgroundTitle", "");
     
     readClasslimitsFromIni();
 
@@ -120,6 +122,8 @@
     ini_write_real("Server", "Attempt UPnP Forwarding", global.attemptPortForward); 
     ini_write_string("Server", "ServerPluginList", global.serverPluginList); 
     ini_write_real("Server", "ServerPluginsRequired", global.serverPluginsRequired); 
+    ini_write_real("Background", "BackgroundVersion", global.backgroundVersion);
+    ini_write_string("Background", "BackgroundTitle", global.backgroundTitle);
     
     ini_write_real("Classlimits", "Scout", global.classlimits[CLASS_SCOUT])
     ini_write_real("Classlimits", "Pyro", global.classlimits[CLASS_PYRO])

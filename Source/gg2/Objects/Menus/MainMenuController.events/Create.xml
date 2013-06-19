@@ -40,6 +40,8 @@
     if !sound_isplaying(global.MenuMusic) AudioControlPlaySong(global.MenuMusic);
     menuimage = choose(MenuBackground1, MenuBackground2);
     
+    event_user(1);
+    
     if(global.dedicatedMode == 1)
         event_user(0);
 }
