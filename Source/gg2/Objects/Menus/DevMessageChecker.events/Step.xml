@@ -15,38 +15,36 @@
       <arguments>
         <argument kind="STRING">image_speed = 5/room_speed;
 
-// Read the response
-response += read_string(socket, tcp_receive_available(socket));
+// Download finished
+if (DM_DownloadStatus(handle) == 3)
+{
+    DM_StopDownload(handle);
+    DM_CloseDownload(handle);
 
-if(tcp_eof(socket)) {
-    if(socket_has_error(socket)) {
-        // Can't download the file? Then simply stop.
+    if (!file_exists(tmpfile))
+    {
+        // File download presumably failed. Stop.
         instance_destroy();
         exit;
     }
-    
+
     global.devMessagesChecked = true;
     
     // Process the received file
-    var CRLF, LF, CR;
-    CR = chr(13);
-    LF = chr(10);
-    CRLF = CR + LF;
-      
-    // split the response into multiple lines, so we can process them
+    var fp;
+
+    fp = file_text_open_read(tmpfile);
+
+    // read lines into array, so we can process them
     var messageArray, a, b;
-    for(a = 0; string_pos(LF, response) != 0; a += 1) {
-        b = string_pos(LF, response);
-        messageArray[a] = string_copy(response, 1, b - 1);
-        // remove a possible CR at the end, if the newline happened to be a CRLF instead of just a LF
-        if(string_char_at(messageArray[a], string_length(messageArray[a])) == CR) {
-            messageArray[a] = string_copy(messageArray[a], 1, string_length(messageArray[a]) - 1);
-        }
-        response = string_copy(response, b + string_length(LF), string_length(response) - b - string_length(LF) + 1);
+    a = 0;
+    for(fp = file_text_open_read(tmpfile); !file_text_eof(fp); file_text_readln(fp)) {
+        messageArray[a] = file_text_read_string(fp);
+        a += 1;
     }
-    messageArray[a] = response;
-    a += 1;
-      
+    file_text_close(fp);
+    file_delete(tmpfile);
+
     var c;
     for(c = 0; c &lt; a; c += 2)
     {

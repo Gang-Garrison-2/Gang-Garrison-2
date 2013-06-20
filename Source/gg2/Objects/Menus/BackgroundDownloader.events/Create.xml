@@ -16,13 +16,7 @@
         <argument kind="STRING">version = 0;
 title = "";
 
-tmpfile = "background.png.tmp";
-
-// Delete existing tempfile, if it exists
-if (file_exists(tmpfile))
-{
-    file_delete(tmpfile);
-}
+tmpfile = temp_directory + "\background.png.tmp";
 
 handle = DM_CreateDownload(BACKGROUND_SOURCE, tmpfile);
 filesize = DM_StartDownload(handle);

@@ -7,9 +7,8 @@
   <constant name="PLUGIN_SOURCE" value="&quot;http://www.ganggarrison.com/plugins/&quot;"/>
   <constant name="PLUGIN_SOURCE_NOTICE" value="&quot;While these plugins have been screened by the Gang Garrison 2 community, they cannot guarantee they are safe.&quot;"/>
   <constant name="BACKGROUND_SOURCE" value="&quot;http://www.ganggarrison.com/background.png&quot;"/>
-  <constant name="DEVMESSAGES_HOST" value="&quot;www.ganggarrison.com&quot;"/>
-  <constant name="DEVMESSAGES_PATH" value="&quot;/devmessages.txt&quot;"/>
-  <constant name="DEVMESSAGES_PATH_BETA" value="&quot;/devmessages_beta.txt&quot;"/>
+  <constant name="DEVMESSAGES_SOURCE" value="&quot;http://www.ganggarrison.com/devmessages.txt&quot;"/>
+  <constant name="DEVMESSAGES_SOURCE_BETA" value="&quot;http://www.ganggarrison.com/devmessages_beta.txt&quot;"/>
   <constant name="LOBBY_SERVER_HOST" value="&quot;ganggarrison.com&quot;"/>
   <constant name="LOBBY_SERVER_PORT" value="29944"/>
   <constant name="AUTH_SERVER_HOST" value="&quot;ganggarrison.com&quot;"/>

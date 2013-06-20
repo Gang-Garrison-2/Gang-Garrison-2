@@ -32,8 +32,9 @@ if (DM_DownloadStatus(handle) == 3)
             file_delete("background.png");
         }
 
-        // Rename tempfile
-        file_rename(tmpfile, "background.png");
+        // Move tempfile
+        file_copy(tmpfile, "background.png");
+        file_delete(tmpfile);
 
         // Update Globals &amp; INI
         global.backgroundVersion = version;
