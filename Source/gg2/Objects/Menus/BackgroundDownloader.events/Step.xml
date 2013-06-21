@@ -22,36 +22,35 @@ if (DM_DownloadStatus(handle) == 3)
     // Download failed (presumably)
     if (!file_exists(tmpfile))
     {
-        // ignore
-    }
-    else
-    {
-        // Delete existing background
-        if (file_exists("background.png"))
-        {
-            file_delete("background.png");
-        }
-
-        // Move tempfile
-        file_copy(tmpfile, "background.png");
-        file_delete(tmpfile);
-
-        // Update Globals &amp; INI
-        global.backgroundVersion = version;
-        global.backgroundTitle = title;
-        ini_open("gg2.ini");
-        ini_write_real("Background", "BackgroundVersion", global.backgroundVersion);
-        ini_write_string("Background", "BackgroundTitle", global.backgroundTitle);
-        ini_close();
-
-        // Make main menu controller reload
-        with (MainMenuController)
-        {
-            event_user(1);
-        }
-
         instance_destroy();
+        exit;
     }
+    
+    // Delete existing background
+    if (file_exists("background.png"))
+    {
+        file_delete("background.png");
+    }
+
+    // Move tempfile
+    file_copy(tmpfile, "background.png");
+    file_delete(tmpfile);
+
+    // Update Globals &amp; INI
+    global.backgroundVersion = version;
+    global.backgroundTitle = title;
+    ini_open("gg2.ini");
+    ini_write_real("Background", "BackgroundVersion", global.backgroundVersion);
+    ini_write_string("Background", "BackgroundTitle", global.backgroundTitle);
+    ini_close();
+
+    // Make main menu controller reload
+    with (MainMenuController)
+    {
+        event_user(1);
+    }
+
+    instance_destroy();
 }
 </argument>
       </arguments>

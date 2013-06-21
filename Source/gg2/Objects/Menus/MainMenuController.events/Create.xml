@@ -40,6 +40,19 @@
     if !sound_isplaying(global.MenuMusic) AudioControlPlaySong(global.MenuMusic);
 
     fade = 0;
+
+    // if background.png missing, reset values
+    if (!file_exists("background.png"))
+    {
+        global.backgroundVersion = 0;
+        global.backgroundTitle = "";
+        ini_open("gg2.ini");
+        ini_write_real("Background", "BackgroundVersion", global.backgroundVersion);
+        ini_write_string("Background", "BackgroundTitle", global.backgroundTitle);
+        ini_close();
+    }
+
+    // use downloaded background if available
     if (global.backgroundVersion &gt; 0)
     {
         menuimage = background_add("background.png", false, false);
