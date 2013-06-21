@@ -73,24 +73,33 @@ for (i = 0; i < ds_list_size(list); i += 1)
     if (!global.isHost)
     {
         pluginhash = ds_list_find_value(hashList, i);
-        isCached = file_exists("ServerPluginsCache\" + pluginname + "@" + pluginhash);
+        isCached = file_exists(working_directory + "\ServerPluginsCache\" + pluginname + "@" + pluginhash);
     }
 
     // check to see if we have a local copy for debugging
-    if (file_exists("ServerPluginsDebug\" + pluginname + ".zip"))
+    if (file_exists(working_directory + "\ServerPluginsDebug\" + pluginname + ".zip"))
     {
-        file_copy("ServerPluginsDebug\" + pluginname + ".zip", tempfileprefix + pluginname);
+        file_copy(working_directory + "\ServerPluginsDebug\" + pluginname + ".zip", tempfileprefix + pluginname);
     }
     // if client, check if we have it cached
     else if (!global.isHost && isCached)
     {
-        file_copy("ServerPluginsCache\" + pluginname + "@" + pluginhash, tempfileprefix + pluginname);
+        file_copy(working_directory + "\ServerPluginsCache\" + pluginname + "@" + pluginhash, tempfileprefix + pluginname);
     }
     // otherwise, download as usual
     else
     {
-        // construct the URL (http://www.ganggarrison.com/plugins/$PLUGINNAME$.zip)
-        url = PLUGIN_SOURCE + pluginname + ".zip";
+        // construct the URL
+        // Server: fetch latest (http://www.ganggarrison.com/plugins/$PLUGINNAME$.zip)
+        if (global.isHost)
+        {
+            url = PLUGIN_SOURCE + pluginname + ".zip";
+        }
+        // Client: fetch specific hash (http://www.ganggarrison.com/plugins/$PLUGINNAME$@$PLUGINHASH$.zip)
+        else
+        {
+            url = PLUGIN_SOURCE + pluginname + "@" + pluginhash + ".zip";
+        }
         
         // let's make the download handle
         handle = DM_CreateDownload(url, tempfileprefix + pluginname);
@@ -150,15 +159,15 @@ for (i = 0; i < ds_list_size(list); i += 1)
     else
     {
         // check if in cache
-        if (!file_exists("ServerPluginsCache\" + pluginname + "@" + pluginhash))
+        if (!file_exists(working_directory + "\ServerPluginsCache\" + pluginname + "@" + pluginhash))
         {
             // make sure directory exists
-            if (!directory_exists("ServerPluginsCache"))
+            if (!directory_exists(working_directory + "\ServerPluginsCache"))
             {
-                directory_create("ServerPluginsCache");
+                directory_create(working_directory + "\ServerPluginsCache");
             }
             // store in cache
-            file_copy(tempfileprefix + pluginname, "ServerPluginsCache\" + pluginname + "@" + pluginhash);
+            file_copy(tempfileprefix + pluginname, working_directory + "\ServerPluginsCache\" + pluginname + "@" + pluginhash);
         }
     }
 
@@ -217,15 +226,16 @@ if (!global.isHost)
     ds_list_destroy(hashList);
 }
 
-if (!failed && global.isHost)
+if (failed)
+{
+    return 'failure';
+}
+
+if (global.isHost)
 {
     return hashedList;
 }
-else if (!failed)
-{
-    return 'success';
-}
 else
 {
-    return 'failure';
+    return 'success';
 }

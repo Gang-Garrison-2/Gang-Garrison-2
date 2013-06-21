@@ -62,7 +62,7 @@ do {
                     {
                         prompt = show_question(
                             "This server requires the following plugins to play on it: "
-                            + plugins
+                            + string_replace_all(plugins, ",", "#")
                             + '#They are downloaded from the source: "'
                             + PLUGIN_SOURCE
                             + '"#The source states: "'
@@ -79,7 +79,7 @@ do {
                     {
                         prompt = show_question(
                             "This server suggests the following optional plugins to play on it: "
-                            + plugins
+                            + string_replace_all(plugins, ",", "#")
                             + '#They are downloaded from the source: "'
                             + PLUGIN_SOURCE
                             + '"#The source states: "'
