@@ -57,9 +57,19 @@ do {
                 usePlugins = pluginsRequired || !global.serverPluginsPrompt;
                 if (global.serverPluginsPrompt)
                 {
+                    var prompt;
                     if (pluginsRequired)
                     {
-                        if (!show_question("This server requires the following plugins to play on it: " + plugins + '#They are downloaded from the source: "' + PLUGIN_SOURCE + '"#The source states: "' + PLUGIN_SOURCE_NOTICE + '"#Do you wish to download them and continue connecting?'))
+                        prompt = show_question(
+                            "This server requires the following plugins to play on it: "
+                            + plugins
+                            + '#They are downloaded from the source: "'
+                            + PLUGIN_SOURCE
+                            + '"#The source states: "'
+                            + PLUGIN_SOURCE_NOTICE
+                            + '"#Do you wish to download them and continue connecting?'
+                        );
+                        if (!prompt)
                         {
                             instance_destroy();
                             exit;
@@ -67,8 +77,19 @@ do {
                     }
                     else
                     {
-                        if (show_question("This server suggests the following optional plugins to play on it: " + plugins + '#They are downloaded from the source: "' + PLUGIN_SOURCE + '"#The source states: "' + PLUGIN_SOURCE_NOTICE + '"#Do you wish to download them and use them?'))
+                        prompt = show_question(
+                            "This server suggests the following optional plugins to play on it: "
+                            + plugins
+                            + '#They are downloaded from the source: "'
+                            + PLUGIN_SOURCE
+                            + '"#The source states: "'
+                            + PLUGIN_SOURCE_NOTICE
+                            + '"#Do you wish to download them and use them?'
+                        );
+                        if (prompt)
+                        {
                             usePlugins = true;
+                        }
                     }
                 }
                 if (usePlugins)
