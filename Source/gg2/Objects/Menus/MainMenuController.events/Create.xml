@@ -36,14 +36,19 @@
     menu_addback("Quit", '
         game_end();
     ');
-    
+
     if !sound_isplaying(global.MenuMusic) AudioControlPlaySong(global.MenuMusic);
-    menuimage = choose(MenuBackground1, MenuBackground2);
-    
-    if (global.backgroundVersion &gt; 0) {
-        event_user(1);
+
+    fade = 0;
+    if (global.backgroundVersion &gt; 0)
+    {
+        menuimage = background_add("background.png", false, false);
     }
-    
+    else
+    {
+        menuimage = choose(MenuBackground1, MenuBackground2);
+    }
+
     if(global.dedicatedMode == 1)
         event_user(0);
 }

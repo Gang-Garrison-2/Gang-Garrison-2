@@ -40,7 +40,7 @@ if (DM_DownloadStatus(handle) == 3)
         global.backgroundVersion = version;
         global.backgroundTitle = title;
         ini_open("gg2.ini");
-        ini_write_string("Background", "BackgroundVersion", global.backgroundVersion);
+        ini_write_real("Background", "BackgroundVersion", global.backgroundVersion);
         ini_write_string("Background", "BackgroundTitle", global.backgroundTitle);
         ini_close();
 

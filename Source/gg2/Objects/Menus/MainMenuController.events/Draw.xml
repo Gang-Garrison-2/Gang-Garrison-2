@@ -14,18 +14,23 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">{
-    if (variable_local_exists("loadedBackground"))
+    draw_background(menuimage, 0, 0);
+
+    // display background info, if downloaded
+    if (global.backgroundVersion &gt; 0)
     {
-        draw_sprite(loadedBackground, 0, 300, 300);
         draw_set_halign(fa_right);
         draw_set_valign(fa_bottom);
         draw_set_color(c_white);
         draw_text(595, 595, global.backgroundTitle);
     }
-    else
+
+    // fade out old background
+    if (fade &gt; 0)
     {
-        draw_background(menuimage, 0, 0);
+        draw_background_ext(oldBackground, 0, 0, 1, 1, 0, c_white, fade);
     }
+
     draw_sprite(MenuBackgroundVersionS,0,300,300);
 }
 </argument>

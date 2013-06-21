@@ -13,13 +13,11 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">// (Re)load downloaded background image
+        <argument kind="STRING">// Load new background image
 
-if (variable_local_exists("loadedBackground")) {
-    sprite_delete(loadedBackground);
-}
-
-loadedBackground = sprite_add("background.png", 1, false, false, 300, 300);
+oldBackground = menuimage;
+menuimage = background_add("background.png", false, false);
+fade = 1;
 </argument>
       </arguments>
     </action>
