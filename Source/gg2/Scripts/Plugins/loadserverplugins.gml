@@ -1,48 +1,26 @@
 // loads plugins from ganggarrison.com asked for by server
-// argument0 - comma separated plugin list (with @hashes, if client)
-// for server: returns comma-separated plugin list with hashes
-// (i.e. pluginname@hash,...), or else the string 'failure'
-// for client: returns string 'success' if successful, else 'failure'
-var list, hashList, text, i, pluginname, pluginhash, url, handle, filesize, tempfileprefix, tempdirprefix, failed, lastContact, hashedList, isCached;
+// argument0 - comma separated plugin list (pluginname@md5hash)
+// returns true on success, false on failure
+var list, hashList, text, i, pluginname, pluginhash, realhash, url, handle, filesize, tempfile, tempdir, failed, lastContact, isCached;
 
 failed = false;
 list = ds_list_create();
-text = argument0;
-tempfileprefix = temp_directory + "\tmp-";
-tempdirprefix = temp_directory + "\~tmp-";
 lastContact = 0;
 isCached = false;
-if (global.isHost)
-{
-    hashedList = '';
-}
-else
-{
-    hashList = ds_list_create();
-}
+isDebug = false;
+hashList = ds_list_create();
 
 // split plugin list string
-while (string_pos(",", text) != 0)
-{
-    ds_list_add(list, string_copy(text,0,string_pos(",",text)-1));
-    text = string_copy(text,string_pos(",",text)+1,string_length(text)-string_pos(",",text));
-}
-if (string_length(text) > 0)
-{
-    ds_list_add(list, text);
-}
+list = csvtolist(argument0);
 
-// if client, split hashes from names
-if (!global.isHost)
+// Split hashes from plugin names
+for (i = 0; i < ds_list_size(list); i += 1)
 {
-    for (i = 0; i < ds_list_size(list); i += 1)
-    {
-        text = ds_list_find_value(list, i);
-        pluginname = string_copy(text, 0, string_pos("@", text) - 1);
-        pluginhash = string_copy(text, string_pos("@", text) + 1, string_length(text) - string_pos("@", text));
-        ds_list_replace(list, i, pluginname);
-        ds_list_add(hashList, pluginhash);
-    }
+    text = ds_list_find_value(list, i);
+    pluginname = string_copy(text, 0, string_pos("@", text) - 1);
+    pluginhash = string_copy(text, string_pos("@", text) + 1, string_length(text) - string_pos("@", text));
+    ds_list_replace(list, i, pluginname);
+    ds_list_add(hashList, pluginhash);
 }
 
 // Check plugin names and check for duplicates
@@ -54,13 +32,13 @@ for (i = 0; i < ds_list_size(list); i += 1)
     if (!checkpluginname(pluginname))
     {
         show_message('Error loading server-sent plugins - invalid plugin name:#"' + pluginname + '"');
-        return 'failure';
+        return false;
     }
     // is duplicate
     else if (ds_list_find_index(list, pluginname) != i)
     {
         show_message('Error loading server-sent plugins - duplicate plugin:#"' + pluginname + '"');
-        return 'failure';
+        return false;
     }
 }
 
@@ -68,41 +46,31 @@ for (i = 0; i < ds_list_size(list); i += 1)
 for (i = 0; i < ds_list_size(list); i += 1)
 {
     pluginname = ds_list_find_value(list, i);
-
-    // if client, find hash
-    if (!global.isHost)
-    {
-        pluginhash = ds_list_find_value(hashList, i);
-        isCached = file_exists(working_directory + "\ServerPluginsCache\" + pluginname + "@" + pluginhash);
-    }
+    pluginhash = ds_list_find_value(hashList, i);
+    isDebug = file_exists(working_directory + "\ServerPluginsDebug\" + pluginname + ".zip");
+    isCached = file_exists(working_directory + "\ServerPluginsCache\" + pluginname + "@" + pluginhash);
+    tempfile = temp_directory + "\" + pluginname + ".zip.tmp";
+    tempdir = temp_directory + "\" + pluginname + ".tmp";
 
     // check to see if we have a local copy for debugging
-    if (file_exists(working_directory + "\ServerPluginsDebug\" + pluginname + ".zip"))
+    if (isDebug)
     {
-        file_copy(working_directory + "\ServerPluginsDebug\" + pluginname + ".zip", tempfileprefix + pluginname);
+        file_copy(working_directory + "\ServerPluginsDebug\" + pluginname + ".zip", tempfile);
     }
-    // if client, check if we have it cached
-    else if (!global.isHost && isCached)
+    // otherwise, check if we have it cached
+    else if (isCached)
     {
-        file_copy(working_directory + "\ServerPluginsCache\" + pluginname + "@" + pluginhash, tempfileprefix + pluginname);
+        file_copy(working_directory + "\ServerPluginsCache\" + pluginname + "@" + pluginhash, tempfile);
     }
     // otherwise, download as usual
     else
     {
         // construct the URL
-        // Server: fetch latest (http://www.ganggarrison.com/plugins/$PLUGINNAME$.zip)
-        if (global.isHost)
-        {
-            url = PLUGIN_SOURCE + pluginname + ".zip";
-        }
-        // Client: fetch specific hash (http://www.ganggarrison.com/plugins/$PLUGINNAME$@$PLUGINHASH$.zip)
-        else
-        {
-            url = PLUGIN_SOURCE + pluginname + "@" + pluginhash + ".zip";
-        }
+        // http://www.ganggarrison.com/plugins/$PLUGINNAME$@$PLUGINHASH$.zip)
+        url = PLUGIN_SOURCE + pluginname + "@" + pluginhash + ".zip";
         
         // let's make the download handle
-        handle = DM_CreateDownload(url, tempfileprefix + pluginname);
+        handle = DM_CreateDownload(url, tempfile);
         
         // download it
         filesize = DM_StartDownload(handle);
@@ -136,46 +104,40 @@ for (i = 0; i < ds_list_size(list); i += 1)
     }
 
     // if the file doesn't exist, the download presumably failed
-    if (!file_exists(tempfileprefix + pluginname)) {
+    if (!file_exists(tempfile))
+    {
         show_message('Error loading server-sent plugins - download failed for:#"' + pluginname + '"');
         failed = true;
         break;
     }
 
-    pluginhash = GG2DLL_compute_MD5(tempfileprefix + pluginname);
-
-    // if server, add name@hash to list to send to client
-    if (global.isHost)
+    // check file integrity
+    realhash = GG2DLL_compute_MD5(tempfile);
+    if (realhash != pluginhash)
     {
-        // append name + hash to list
-        // (used by client to check if cache is valid)
-        if (i != 0)
-        {
-            hashedList += ',';
-        }
-        hashedList += pluginname + '@' + pluginhash;
+        show_message('Error loading server-sent plugins - download failed (integrity check failed) for:#"' + pluginname + '"');
+        failed = true;
+        break;
     }
-    // if client, add to cache if we don't already have it
-    else
+    
+    // add to cache if we don't already have it
+    // check if in cache
+    if (!file_exists(working_directory + "\ServerPluginsCache\" + pluginname + "@" + pluginhash))
     {
-        // check if in cache
-        if (!file_exists(working_directory + "\ServerPluginsCache\" + pluginname + "@" + pluginhash))
+        // make sure directory exists
+        if (!directory_exists(working_directory + "\ServerPluginsCache"))
         {
-            // make sure directory exists
-            if (!directory_exists(working_directory + "\ServerPluginsCache"))
-            {
-                directory_create(working_directory + "\ServerPluginsCache");
-            }
-            // store in cache
-            file_copy(tempfileprefix + pluginname, working_directory + "\ServerPluginsCache\" + pluginname + "@" + pluginhash);
+            directory_create(working_directory + "\ServerPluginsCache");
         }
+        // store in cache
+        file_copy(tempfile, working_directory + "\ServerPluginsCache\" + pluginname + "@" + pluginhash);
     }
 
     // let's get 7-zip to extract the files
-    extractzip(tempfileprefix + pluginname, tempdirprefix + pluginname);
+    extractzip(tempfile, tempdir);
     
     // if the directory doesn't exist, extracting presumably failed
-    if (!directory_exists(tempdirprefix + pluginname))
+    if (!directory_exists(tempdir))
     {
         show_message('Error loading server-sent plugins - extracting zip failed for:#"' + pluginname + '"');
         failed = true;
@@ -203,10 +165,10 @@ if (!failed)
         execute_file(
             // the plugin's main gml file must be in the root of the zip
             // it is called plugin.gml
-            tempdirprefix + pluginname + "\plugin.gml",
+            tempdir + "\plugin.gml",
             // the plugin needs to know where it is
             // so the temporary directory is passed as first argument
-            tempdirprefix + pluginname,
+            tempdir,
             // the plugin needs to know its packetID
             // so it is passed as the second argument
             i
@@ -220,22 +182,7 @@ file_delete(working_directory + "\last_plugin.log");
 // Get rid of plugin list
 ds_list_destroy(list);
 
-if (!global.isHost)
-{
-    // Get rid of plugin hash list
-    ds_list_destroy(hashList);
-}
+// Get rid of plugin hash list
+ds_list_destroy(hashList);
 
-if (failed)
-{
-    return 'failure';
-}
-
-if (global.isHost)
-{
-    return hashedList;
-}
-else
-{
-    return 'success';
-}
+return !failed;

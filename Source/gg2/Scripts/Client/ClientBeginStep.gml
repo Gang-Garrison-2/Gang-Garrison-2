@@ -94,9 +94,9 @@ do {
                 }
                 if (usePlugins)
                 {
-                    if (loadserverplugins(plugins) == 'failure')
+                    if (!loadserverplugins(plugins))
                     {
-                        show_message("Error ocurred loading server plugins.");
+                        show_message("Error ocurred loading server-sent plugins.");
                         instance_destroy();
                         exit;
                     }

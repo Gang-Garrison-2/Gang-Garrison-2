@@ -107,10 +107,19 @@
     // load server-sent plugins, if any
     if (string_length(global.serverPluginList))
     {
-        pluginList = loadserverplugins(global.serverPluginList);
+        // Get hashes of latest versions for plugin list
+        pluginList = getpluginhashes(global.serverPluginList);
         if (pluginList == 'failure')
         {
-            show_message("Error ocurred loading server plugins.");
+            show_message("Error ocurred getting server-sent plugin hashes.");
+            instance_destroy();
+            exit;
+        }
+
+        // Load plugins
+        if (!loadserverplugins(pluginList))
+        {
+            show_message("Error ocurred loading server-sent plugins.");
             game_end();
             exit;
         }

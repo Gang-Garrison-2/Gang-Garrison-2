@@ -2,8 +2,10 @@
 <resources>
   <resource name="API" type="GROUP"/>
   <resource name="loadplugins" type="RESOURCE"/>
+  <resource name="getpluginhashes" type="RESOURCE"/>
   <resource name="loadserverplugins" type="RESOURCE"/>
   <resource name="extractzip" type="RESOURCE"/>
   <resource name="checkpluginname" type="RESOURCE"/>
   <resource name="pluginscleanup" type="RESOURCE"/>
+  <resource name="csvtolist" type="RESOURCE"/>
 </resources>
