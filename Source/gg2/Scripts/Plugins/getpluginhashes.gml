@@ -34,41 +34,50 @@ for (i = 0; i < ds_list_size(list); i += 1)
 {
     pluginname = ds_list_find_value(list, i);
 
-    // construct the URL
-    // (http://www.ganggarrison.com/plugins/$PLUGINNAME$.md5)
-    url = PLUGIN_SOURCE + pluginname + ".md5";
-    tempfile = temp_directory + "\" + pluginname + ".md5.tmp";
-
-    // let's make the download handle
-    handle = DM_CreateDownload(url, tempfile);
-
-    // download it
-    filesize = DM_StartDownload(handle);
-    while (DM_DownloadStatus(handle) != 3)
+    // check if we have a debug version
+    if (file_exists(working_directory + "\ServerPluginsDebug\" + pluginname + ".zip"))
     {
-        // download should be quick, no need to show progress
+        // get its hash instead
+        pluginhash = GG2DLL_compute_MD5(working_directory + "\ServerPluginsDebug\" + pluginname + ".zip");
     }
-    DM_StopDownload(handle);
-    DM_CloseDownload(handle);
-
-    // if the file doesn't exist, the download presumably failed
-    if (!file_exists(tempfile)) {
-        show_message('Error loading server-sent plugins - getting hash failed for:#"' + pluginname + '"');
-        failed = true;
-        break;
-    }
-
-    fp = file_text_open_read(tempfile);
-    pluginhash = file_text_read_string(fp);
-    file_text_close(fp);
-    file_delete(tempfile);
-
-    // check it's the right length for a hex MD5
-    if (string_length(pluginhash) != 32)
-    {
-        show_message('Error loading server-sent plugins - getting hash failed (wrong length) for:#"' + pluginname + '"');
-        failed = true;
-        break;
+    else
+    {   
+        // construct the URL
+        // (http://www.ganggarrison.com/plugins/$PLUGINNAME$.md5)
+        url = PLUGIN_SOURCE + pluginname + ".md5";
+        tempfile = temp_directory + "\" + pluginname + ".md5.tmp";
+    
+        // let's make the download handle
+        handle = DM_CreateDownload(url, tempfile);
+    
+        // download it
+        filesize = DM_StartDownload(handle);
+        while (DM_DownloadStatus(handle) != 3)
+        {
+            // download should be quick, no need to show progress
+        }
+        DM_StopDownload(handle);
+        DM_CloseDownload(handle);
+    
+        // if the file doesn't exist, the download presumably failed
+        if (!file_exists(tempfile)) {
+            show_message('Error loading server-sent plugins - getting hash failed for:#"' + pluginname + '"');
+            failed = true;
+            break;
+        }
+    
+        fp = file_text_open_read(tempfile);
+        pluginhash = file_text_read_string(fp);
+        file_text_close(fp);
+        file_delete(tempfile);
+    
+        // check it's the right length for a hex MD5
+        if (string_length(pluginhash) != 32)
+        {
+            show_message('Error loading server-sent plugins - getting hash failed (wrong length) for:#"' + pluginname + '"');
+            failed = true;
+            break;
+        }
     }
 
     // append name + hash to list
