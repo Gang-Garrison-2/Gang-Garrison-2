@@ -101,36 +101,39 @@ for (i = 0; i < ds_list_size(list); i += 1)
         }
         DM_StopDownload(handle);
         DM_CloseDownload(handle);
-    }
 
-    // if the file doesn't exist, the download presumably failed
-    if (!file_exists(tempfile))
-    {
-        show_message('Error loading server-sent plugins - download failed for:#"' + pluginname + '"');
-        failed = true;
-        break;
+        // if the file doesn't exist, the download presumably failed
+        if (!file_exists(tempfile))
+        {
+            show_message('Error loading server-sent plugins - download failed for:#"' + pluginname + '"');
+            failed = true;
+            break;
+        }
     }
 
     // check file integrity
     realhash = GG2DLL_compute_MD5(tempfile);
     if (realhash != pluginhash)
     {
-        show_message('Error loading server-sent plugins - download failed (integrity check failed) for:#"' + pluginname + '"');
+        show_message('Error loading server-sent plugins - integrity check failed (MD5 hash mismatch) for:#"' + pluginname + '"');
         failed = true;
         break;
     }
     
-    // add to cache if we don't already have it
-    // check if in cache
-    if (!file_exists(working_directory + "\ServerPluginsCache\" + pluginname + "@" + pluginhash))
+    // don't try to cache debug plugins
+    if (!isDebug)
     {
-        // make sure directory exists
-        if (!directory_exists(working_directory + "\ServerPluginsCache"))
+        // add to cache if we don't already have it
+        if (!file_exists(working_directory + "\ServerPluginsCache\" + pluginname + "@" + pluginhash))
         {
-            directory_create(working_directory + "\ServerPluginsCache");
+            // make sure directory exists
+            if (!directory_exists(working_directory + "\ServerPluginsCache"))
+            {
+                directory_create(working_directory + "\ServerPluginsCache");
+            }
+            // store in cache
+            file_copy(tempfile, working_directory + "\ServerPluginsCache\" + pluginname + "@" + pluginhash);
         }
-        // store in cache
-        file_copy(tempfile, working_directory + "\ServerPluginsCache\" + pluginname + "@" + pluginhash);
     }
 
     // let's get 7-zip to extract the files
