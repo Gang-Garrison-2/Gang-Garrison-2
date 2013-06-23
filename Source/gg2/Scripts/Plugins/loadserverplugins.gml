@@ -56,6 +56,23 @@ for (i = 0; i < ds_list_size(list); i += 1)
     if (isDebug)
     {
         file_copy(working_directory + "\ServerPluginsDebug\" + pluginname + ".zip", tempfile);
+        // show warning
+        if (global.isHost)
+        {
+            show_message(
+                "Warning: server-sent plugin '"
+                + pluginname
+                + "' is being loaded from ServerPluginsDebug. Make sure clients have the same version, else they may be unable to connect."
+            );
+        }
+        else
+        {
+            show_message(
+                "Warning: server-sent plugin '"
+                + pluginname
+                + "' is being loaded from ServerPluginsDebug. Make sure the server has the same version, else you may be unable to connect."
+            );
+        }
     }
     // otherwise, check if we have it cached
     else if (isCached)
