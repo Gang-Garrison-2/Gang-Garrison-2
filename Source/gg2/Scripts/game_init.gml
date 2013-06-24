@@ -55,6 +55,7 @@
     global.clientPassword = "";
     // for admin menu
     customMapRotationFile = ini_read_string("Server", "MapRotation", "");
+    global.shuffleRotation = ini_read_real("Server", "ShuffleRotation", 1);
     global.timeLimitMins = max(1, min(255, ini_read_real("Server", "Time Limit", 15)));
     global.serverPassword = ini_read_string("Server", "Password", "");
     global.mapRotationFile = customMapRotationFile;
@@ -107,6 +108,7 @@
     ini_write_real("Settings", "KoTH HUD Position", global.kothHudPos);
     ini_write_real("Settings", "ServerPluginsPrompt", global.serverPluginsPrompt);
     ini_write_string("Server", "MapRotation", customMapRotationFile);
+    ini_write_real("Server", "ShuffleRotation", global.shuffleRotation);
     ini_write_real("Server", "Dedicated", global.dedicatedMode);
     ini_write_string("Server", "ServerName", global.serverName);
     ini_write_string("Server", "WelcomeMessage", global.welcomeMessage);
