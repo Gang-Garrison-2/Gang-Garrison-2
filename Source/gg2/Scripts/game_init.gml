@@ -47,6 +47,7 @@
     global.showHealer = ini_read_real("Settings", "Show Healer", 1);
     global.showHealing = ini_read_real("Settings", "Show Healing", 1);
     global.showHealthBar = ini_read_real("Settings", "Show Healthbar", 0);
+    global.showTeammateStats = ini_read_real("Settings", "Show Extra Teammate Stats", 0);
     global.serverPluginsPrompt = ini_read_real("Settings", "ServerPluginsPrompt", 1);
     //user HUD settings
     global.timerPos=ini_read_real("Settings","Timer Position", 0)
@@ -76,6 +77,8 @@
         show_message("Error: Server plugin list cannot exceed 254 characters");
         return false;
     }
+    xhairRI = ini_read_string("Settings", "CrosshairFilename", "");
+    xhairHasAlpha = ini_read_real("Settings", "CrosshairTransparent", 1);
     
     readClasslimitsFromIni();
 
@@ -102,6 +105,7 @@
     ini_write_real("Settings", "Show Healer", global.showHealer);
     ini_write_real("Settings", "Show Healing", global.showHealing);
     ini_write_real("Settings", "Show Healthbar", global.showHealthBar);
+    ini_write_real("Settings", "Show Extra Teammate Stats", global.showTeammateStats);
     ini_write_real("Settings", "Timer Position", global.timerPos);
     ini_write_real("Settings", "Kill Log Position", global.killLogPos);
     ini_write_real("Settings", "KoTH HUD Position", global.kothHudPos);
@@ -120,6 +124,8 @@
     ini_write_real("Server", "Attempt UPnP Forwarding", global.attemptPortForward); 
     ini_write_string("Server", "ServerPluginList", global.serverPluginList); 
     ini_write_real("Server", "ServerPluginsRequired", global.serverPluginsRequired); 
+    ini_write_string("Settings", "CrosshairFilename", xhairRI);
+    ini_write_real("Settings", "CrosshairTransparent", xhairHasAlpha);
     
     ini_write_real("Classlimits", "Scout", global.classlimits[CLASS_SCOUT])
     ini_write_real("Classlimits", "Pyro", global.classlimits[CLASS_PYRO])
@@ -354,6 +360,7 @@ global.launchMap = "";
     window_set_fullscreen(global.fullscreen);
     
     global.gg2Font = font_add_sprite(gg2FontS,ord("!"),false,0);
+    global.countFont = font_add_sprite(countFontS, ord("0"),false,2);
     draw_set_font(global.gg2Font);
     cursor_sprite = CrosshairS;
     
@@ -399,6 +406,11 @@ global.launchMap = "";
     registry_set_root(1); // HKLM
     global.NTKernelVersion = real(registry_read_string_ext("\SOFTWARE\Microsoft\Windows NT\CurrentVersion\", "CurrentVersion")); // SIC
 
+    if(file_exists(xhairRI))
+    {
+        sprite_replace(CrosshairS,xhairRI,1,xhairHasAlpha,false,0,0);
+        sprite_set_offset(CrosshairS,sprite_get_width(CrosshairS)/2,sprite_get_height(CrosshairS)/2);
+    }
     if(global.dedicatedMode == 1) {
         AudioControlToggleMute();
         room_goto_fix(Menu);
