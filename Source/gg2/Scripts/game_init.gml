@@ -78,8 +78,9 @@
         show_message("Error: Server plugin list cannot exceed 254 characters");
         return false;
     }
-    xhairRI = ini_read_string("Settings", "CrosshairFilename", "");
-    xhairHasAlpha = ini_read_real("Settings", "CrosshairTransparent", 1);
+    var CrosshairFilename, CrosshairRemoveBG;
+    CrosshairFilename = ini_read_string("Settings", "CrosshairFilename", "");
+    CrosshairRemoveBG = ini_read_real("Settings", "CrosshairRemoveBG", 1);
     
     readClasslimitsFromIni();
 
@@ -126,8 +127,8 @@
     ini_write_real("Server", "Attempt UPnP Forwarding", global.attemptPortForward); 
     ini_write_string("Server", "ServerPluginList", global.serverPluginList); 
     ini_write_real("Server", "ServerPluginsRequired", global.serverPluginsRequired); 
-    ini_write_string("Settings", "CrosshairFilename", xhairRI);
-    ini_write_real("Settings", "CrosshairTransparent", xhairHasAlpha);
+    ini_write_string("Settings", "CrosshairFilename", CrosshairFilename);
+    ini_write_real("Settings", "CrosshairRemoveBG", CrosshairRemoveBG);
     
     ini_write_real("Classlimits", "Scout", global.classlimits[CLASS_SCOUT])
     ini_write_real("Classlimits", "Pyro", global.classlimits[CLASS_PYRO])
@@ -408,10 +409,14 @@ global.launchMap = "";
     registry_set_root(1); // HKLM
     global.NTKernelVersion = real(registry_read_string_ext("\SOFTWARE\Microsoft\Windows NT\CurrentVersion\", "CurrentVersion")); // SIC
 
-    if(file_exists(xhairRI))
+    if (file_exists(CrosshairFilename))
     {
-        sprite_replace(CrosshairS,xhairRI,1,xhairHasAlpha,false,0,0);
+        sprite_replace(CrosshairS,CrosshairFilename,1,CrosshairRemoveBG,false,0,0);
         sprite_set_offset(CrosshairS,sprite_get_width(CrosshairS)/2,sprite_get_height(CrosshairS)/2);
+    }
+    else if (string_length(CrosshairFilename) > 0)
+    {
+        show_message("Error! Custom crosshair file not found: " + CrosshairFilename);
     }
     if(global.dedicatedMode == 1) {
         AudioControlToggleMute();
