@@ -414,10 +414,6 @@ global.launchMap = "";
         sprite_replace(CrosshairS,CrosshairFilename,1,CrosshairRemoveBG,false,0,0);
         sprite_set_offset(CrosshairS,sprite_get_width(CrosshairS)/2,sprite_get_height(CrosshairS)/2);
     }
-    else if (string_length(CrosshairFilename) > 0)
-    {
-        show_message("Error! Custom crosshair file not found: " + CrosshairFilename);
-    }
     if(global.dedicatedMode == 1) {
         AudioControlToggleMute();
         room_goto_fix(Menu);
