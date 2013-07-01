@@ -37,7 +37,15 @@ numpadKeys[7] = vk_numpad7;
 numpadKeys[8] = vk_numpad8;
 numpadKeys[9] = vk_numpad9;
 
-if (global.myself.team == TEAM_SPECTATOR)
+// deals with problem of global.myself not existing prior to deserialisation
+myTeam = TEAM_SPECTATOR;
+if (global.myself != -1)
+{
+    myTeam = global.myself.team;
+} 
+
+// only auto-track if not on a team
+if (myTeam == TEAM_SPECTATOR)
 {
     event_user(7);
 }

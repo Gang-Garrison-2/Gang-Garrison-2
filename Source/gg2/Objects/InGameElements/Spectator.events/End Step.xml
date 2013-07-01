@@ -13,7 +13,12 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if(global.myself.object != -1)
+        <argument kind="STRING">if (global.myself != -1)
+{
+    myTeam = global.myself.team;
+}
+
+if(global.myself.object != -1)
     instance_destroy();
 
 var moved;

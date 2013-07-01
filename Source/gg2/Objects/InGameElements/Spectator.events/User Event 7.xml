@@ -20,7 +20,7 @@
     newPlayer = ds_list_find_value(global.players, newTrackId);
     if(newPlayer.object and newPlayer != global.myself)
     {
-        if(newPlayer.team == global.myself.team || global.myself.team == TEAM_SPECTATOR)
+        if(newPlayer.team == myTeam || myTeam == TEAM_SPECTATOR)
         {
             if(!tracking)
             {
