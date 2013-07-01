@@ -76,12 +76,35 @@ if (DM_DownloadStatus(handle) == 3)
             version = real(string_copy(versioncheck,1,versionend-1));
             titlelength = string_length(versioncheck)-versionend;
             title=string_copy(versioncheck,versionend+1,titlelength);
+            // newer version available
             if(version &gt; global.backgroundVersion) 
             {
                 var downloader;
                 downloader = instance_create(0, 0, BackgroundDownloader);
                 downloader.version = version;
                 downloader.title = title;
+            }
+            // reset to default background
+            else if (version == 0 &amp;&amp; global.backgroundVersion != 0)
+            {
+                global.backgroundVersion = 0;
+                global.backgroundTitle = "";
+                ini_open("gg2.ini");
+                ini_write_real("Background", "BackgroundVersion", global.backgroundVersion);
+                ini_write_string("Background", "BackgroundTitle", global.backgroundTitle);
+                ini_close();
+
+                // Delete downloaded background if existant
+                if (file_exists("background.png"))
+                {
+                    file_delete("background.png");
+                }
+
+                // fade in
+                with (MainMenuController)
+                {
+                    event_user(1);
+                }
             }
             break;
         }

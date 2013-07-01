@@ -13,10 +13,19 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">// Load new background image
+        <argument kind="STRING">if (global.backgroundVersion &gt; 0)
+{
+    // Load new background image
+    oldBackground = menuimage;
+    menuimage = background_add("background.png", false, false);
 
-oldBackground = menuimage;
-menuimage = background_add("background.png", false, false);
+}
+else
+{
+    // Reset to default background
+    oldBackground = menuimage;
+    menuimage = choose(MenuBackground1, MenuBackground2);
+}
 fade = 1;
 </argument>
       </arguments>
