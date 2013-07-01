@@ -64,7 +64,7 @@ else if(tracking)
         {
             if(player.object)
             {
-                if(!(newPlayer.object.cloak &amp;&amp; newPlayer.team != global.myself.team))
+                if(!(player.object.cloak &amp;&amp; player.team != myTeam))
                 {
                     x = round(player.object.x);
                     y = round(player.object.y);
