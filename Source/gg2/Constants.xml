@@ -6,6 +6,13 @@
   <constant name="GAME_URL_STRING" value="&quot;http://www.ganggarrison.com/&quot;"/>
   <constant name="PLUGIN_SOURCE" value="&quot;http://www.ganggarrison.com/plugins/&quot;"/>
   <constant name="PLUGIN_SOURCE_NOTICE" value="&quot;While these plugins have been screened by the Gang Garrison 2 community, they cannot guarantee they are safe.&quot;"/>
+  <constant name="BACKGROUND_SOURCE" value="&quot;http://www.ganggarrison.com/background.png&quot;"/>
+  <constant name="DEVMESSAGES_SOURCE" value="&quot;http://www.ganggarrison.com/devmessages.txt&quot;"/>
+  <constant name="DEVMESSAGES_SOURCE_BETA" value="&quot;http://www.ganggarrison.com/devmessages_beta.txt&quot;"/>
+  <constant name="LOBBY_SERVER_HOST" value="&quot;ganggarrison.com&quot;"/>
+  <constant name="LOBBY_SERVER_PORT" value="29944"/>
+  <constant name="AUTH_SERVER_HOST" value="&quot;ganggarrison.com&quot;"/>
+  <constant name="AUTH_SERVER_PORT" value="45022"/>
   <constant name="PROTOCOL_UUID" value="&quot;bd13fa66-4bd3-b916-2559-7139fd6f9b7c&quot;"/>
   <constant name="GG2_LOBBY_UUID" value="&quot;1ccf16b1-436d-856f-504d-cc1af306aaa7&quot;"/>
   <constant name="HELLO" value="0"/>
@@ -78,10 +85,6 @@
   <constant name="CHARACTER_ANIMATION_INTEL" value="2"/>
   <constant name="CHARACTER_ANIMATION_LEN" value="2"/>
   <constant name="CHARACTER_ANIMATION_DEAD" value="5"/>
-  <constant name="LOBBY_SERVER_HOST" value="&quot;ganggarrison.com&quot;"/>
-  <constant name="LOBBY_SERVER_PORT" value="29944"/>
-  <constant name="AUTH_SERVER_HOST" value="&quot;ganggarrison.com&quot;"/>
-  <constant name="AUTH_SERVER_PORT" value="45022"/>
   <constant name="WSAEWOULDBLOCK" value="-10035"/>
   <constant name="WSAENETDOWN" value="-10050"/>
   <constant name="WSAENETRESET" value="-10052"/>
