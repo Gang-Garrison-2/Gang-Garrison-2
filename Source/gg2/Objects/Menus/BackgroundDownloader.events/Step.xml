@@ -19,8 +19,15 @@ if (DM_DownloadStatus(handle) == 3)
     DM_StopDownload(handle);
     DM_CloseDownload(handle);
 
-    // Download failed (presumably)
+    // File doesn't exist, download failed (presumably)
     if (!file_exists(tmpfile))
+    {
+        instance_destroy();
+        exit;
+    }
+
+    // Integrity check fails, download failed (presumably)
+    if (hash != GG2DLL_compute_MD5(tmpfile))
     {
         instance_destroy();
         exit;
@@ -37,10 +44,10 @@ if (DM_DownloadStatus(handle) == 3)
     file_delete(tmpfile);
 
     // Update Globals &amp; INI
-    global.backgroundVersion = version;
+    global.backgroundHash = hash;
     global.backgroundTitle = title;
     ini_open("gg2.ini");
-    ini_write_real("Background", "BackgroundVersion", global.backgroundVersion);
+    ini_write_string("Background", "BackgroundHash", global.backgroundHash);
     ini_write_string("Background", "BackgroundTitle", global.backgroundTitle);
     ini_close();
 

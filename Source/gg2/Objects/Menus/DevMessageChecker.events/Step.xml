@@ -70,27 +70,20 @@ if (DM_DownloadStatus(handle) == 3)
             }
             break;
         case "Background":
-            var versioncheck, versionend, version, titlelength, title;
-            versioncheck = (messageArray[c+1]);
-            versionend = string_pos("!",versioncheck);
-            version = real(string_copy(versioncheck,1,versionend-1));
-            titlelength = string_length(versioncheck)-versionend;
-            title=string_copy(versioncheck,versionend+1,titlelength);
-            // newer version available
-            if(version &gt; global.backgroundVersion) 
+            var hashcheck, hashend, hash, titlelength, title;
+            hashcheck = (messageArray[c+1]);
+            hashend = string_pos("!",hashcheck);
+            hash = string_copy(hashcheck,1,hashend-1);
+            titlelength = string_length(hashcheck)-hashend;
+            title=string_copy(hashcheck,hashend+1,titlelength);
+            // current background should be default
+            if (hash == "default" &amp;&amp; global.backgroundHash != "default")
             {
-                var downloader;
-                downloader = instance_create(0, 0, BackgroundDownloader);
-                downloader.version = version;
-                downloader.title = title;
-            }
-            // reset to default background
-            else if (version == 0 &amp;&amp; global.backgroundVersion != 0)
-            {
-                global.backgroundVersion = 0;
+                // reset to default background
+                global.backgroundHash = "";
                 global.backgroundTitle = "";
                 ini_open("gg2.ini");
-                ini_write_real("Background", "BackgroundVersion", global.backgroundVersion);
+                ini_write_string("Background", "BackgroundHash", global.backgroundHash);
                 ini_write_string("Background", "BackgroundTitle", global.backgroundTitle);
                 ini_close();
 
@@ -105,6 +98,15 @@ if (DM_DownloadStatus(handle) == 3)
                 {
                     event_user(1);
                 }
+            }
+            // current background different from downloaded
+            else if (hash != global.backgroundHash)
+            {
+                // download
+                var downloader;
+                downloader = instance_create(0, 0, BackgroundDownloader);
+                downloader.hash = hash;
+                downloader.title = title;
             }
             break;
         }
