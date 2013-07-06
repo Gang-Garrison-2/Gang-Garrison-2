@@ -76,36 +76,28 @@ DM_CloseDownload(downloadHandle);
 // rename existing "Gang Garrison 2.exe" to avoid conflict when extracting
 if (file_exists("Gang Garrison 2.exe"))
 {
-    var newname;
-    newname = "Gang Garrison 2-old";
+    var newName;
+    newName = "Gang Garrison 2-old";
     
     // running version of GG2 is called "Gang Garrison 2.exe"
     // hence, we know its version
     if (filename_name(parameter_string(0)) == "Gang Garrison 2.exe")
     {
-        newname += "-" + GAME_VERSION_STRING;
+        newName += "-" + GAME_VERSION_STRING;
     }
-    
-    if (!file_exists(newname + ".exe"))
-    {
-        file_rename("Gang Garrison 2.exe", newname + ".exe");
-    }
-    else
-    {
-        var n, newnewname;
-        n = 0;
 
-        // increment digit until an unused filename is found
-        do
-        {
-            n += 1;
-            newnewname = newname + "-" + string(n) + ".exe";
-        }
-        until
-        (!file_exists(newnewname))
+    var suffixedNewName, n;
+    suffixedNewName = newName;
+    n = 0;
 
-        file_rename("Gang Garrison 2.exe", newnewname);
+    // increment until unused name found
+    while (file_exists(suffixedNewName + ".exe"))
+    {
+        n += 1;
+        suffixedNewName = newName + "-" + string(n);
     }
+
+    file_rename("Gang Garrison 2.exe", suffixedNewName + ".exe");
 }
 
 if(!file_exists(tmpfile))
