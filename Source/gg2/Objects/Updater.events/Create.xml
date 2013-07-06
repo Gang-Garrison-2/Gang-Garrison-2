@@ -15,7 +15,7 @@
       <arguments>
         <argument kind="STRING">// Downloading code. 
 
-var downloadHandle, updaterSuffix, window_oldshowborder, window_oldfullscreen;
+var downloadHandle, url, tmpfile, window_oldshowborder, window_oldfullscreen;
 timeLeft = 0;
 counter = 0;
 AudioControlPlaySong(-1, false);
@@ -25,13 +25,13 @@ window_set_fullscreen(false);
 window_set_showborder(false);
 
 if(global.updaterBetaChannel)
-    updaterSuffix = "_beta";
+    url = UPDATE_SOURCE_BETA;
 else
-    updaterSuffix = "";
+    url = UPDATE_SOURCE;
 
-if(file_exists("gg2update.exe"))
-    file_delete("gg2update.exe");
-downloadHandle = DM_CreateDownload("http://www.ganggarrison.com/gg2update"+updaterSuffix+".exe", "gg2update.exe");
+tmpfile = temp_directory + "\gg2update.zip";
+    
+downloadHandle = DM_CreateDownload(url, tmpfile);
 DM_StartDownload(downloadHandle);
 
 while(DM_DownloadStatus(downloadHandle) != 3) 
@@ -44,8 +44,8 @@ while(DM_DownloadStatus(downloadHandle) != 3)
     {
         DM_StopDownload(downloadHandle);
         DM_CloseDownload(downloadHandle);
-        if(file_exists("gg2update.exe"))
-            file_delete("gg2update.exe");
+        if(file_exists(tmpfile))
+            file_delete(tmpfile);
         window_set_showborder(window_oldshowborder);
         window_set_fullscreen(window_oldfullscreen);
         room_goto_fix(Menu);
@@ -73,21 +73,50 @@ while(DM_DownloadStatus(downloadHandle) != 3)
 DM_StopDownload(downloadHandle);
 DM_CloseDownload(downloadHandle);
 
-// let's extract the downloaded file now.
-if(file_exists("gg2update.exe"))
+// rename existing "Gang Garrison 2.exe" to avoid conflict when extracting
+if (file_exists("Gang Garrison 2.exe"))
 {
-    execute_program("cmd",'/C @echo Updating Gang Garrison 2, please wait... &amp;&amp; ping 127.0.0.1 -n 5 &gt;NUL &amp;&amp; gg2update.exe &amp;&amp; del gg2update.exe &amp;&amp; start "Gang Garrison 2" "Gang Garrison 2.exe"', false);
-    game_end();
-    exit;
+    var newName;
+    newName = "Gang Garrison 2-old";
+    
+    // running version of GG2 is called "Gang Garrison 2.exe"
+    // hence, we know its version
+    if (filename_name(parameter_string(0)) == "Gang Garrison 2.exe")
+    {
+        newName += "-" + GAME_VERSION_STRING;
+    }
+
+    var suffixedNewName, n;
+    suffixedNewName = newName;
+    n = 0;
+
+    // increment until unused name found
+    while (file_exists(suffixedNewName + ".exe"))
+    {
+        n += 1;
+        suffixedNewName = newName + "-" + string(n);
+    }
+
+    file_rename("Gang Garrison 2.exe", suffixedNewName + ".exe");
 }
-else
+
+if(!file_exists(tmpfile))
 {
     window_set_showborder(window_oldshowborder);
     window_set_fullscreen(window_oldfullscreen);
-    show_message("Error updating: Missing update.bat or gg2update.exe");
+    show_message("Error updating: Missing gg2update.zip in temp directory, download failed(?)");
     room_goto_fix(Menu);
     exit;
 }
+
+// let's extract the downloaded file now.
+extractzip(tmpfile, working_directory);
+
+// run new version    
+execute_program("Gang Garrison 2.exe", "", false);
+
+// exit
+game_end();
 </argument>
       </arguments>
     </action>
