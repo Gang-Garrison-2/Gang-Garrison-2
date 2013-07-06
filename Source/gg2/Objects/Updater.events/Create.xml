@@ -92,15 +92,19 @@ if (file_exists("Gang Garrison 2.exe"))
     }
     else
     {
-        var n;
-        n = 1;
+        var n, newnewname;
+        n = 0;
 
         // increment digit until an unused filename is found
-        while (file_exists(newname + "-" + string(n) + ".exe"))
+        do
         {
             n += 1;
+            newnewname = newname + "-" + string(n) + ".exe";
         }
-        file_rename("Gang Garrison 2.exe", newname + "-" + string(n) + ".exe");
+        until
+        (!file_exists(newnewname))
+
+        file_rename("Gang Garrison 2.exe", newnewname);
     }
 }
 
