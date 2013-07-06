@@ -81,13 +81,10 @@ if (file_exists("Gang Garrison 2.exe"))
     
     // running version of GG2 is called "Gang Garrison 2.exe"
     // hence, we know its version
-    if (filename_name(parameter_string(0)) != "Gang Garrison 2.exe")
+    if (filename_name(parameter_string(0)) == "Gang Garrison 2.exe")
     {
         newname += "-" + GAME_VERSION_STRING;
     }
-
-    var n;
-    n = 1;
     
     if (!file_exists(newname + ".exe"))
     {
@@ -95,6 +92,9 @@ if (file_exists("Gang Garrison 2.exe"))
     }
     else
     {
+        var n;
+        n = 1;
+
         // increment digit until an unused filename is found
         while (file_exists(newname + "-" + string(n) + ".exe"))
         {
