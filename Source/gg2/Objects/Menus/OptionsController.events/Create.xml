@@ -81,6 +81,9 @@
     menu_addedit_boolean("Additional Healthbar:", "global.showHealthBar", '
         gg2_write_ini("Settings", "Show Healthbar", argument0);
     ');
+    menu_addedit_boolean("Additional Teammate Stats:", "global.showTeammateStats", '
+        gg2_write_ini("Settings", "Show Extra Teammate Stats", argument0);
+    ');
     menu_addedit_boolean("Kill Cam:", "global.killCam", '
         gg2_write_ini("Settings", "Kill Cam", argument0);
     ');

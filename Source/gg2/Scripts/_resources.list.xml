@@ -45,6 +45,8 @@
   <resource name="parseUuid" type="RESOURCE"/>
   <resource name="pointCapture" type="RESOURCE"/>
   <resource name="selectSpawnGroup" type="RESOURCE"/>
+  <resource name="charFixFringes" type="RESOURCE"/>
+  <resource name="charRunPhysics" type="RESOURCE"/>
   <resource name="characterHitObstacle" type="RESOURCE"/>
   <resource name="calculateHealingFactor" type="RESOURCE"/>
   <resource name="toggleZoom" type="RESOURCE"/>

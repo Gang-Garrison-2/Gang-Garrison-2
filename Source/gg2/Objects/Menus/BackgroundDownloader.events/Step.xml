@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="STEP" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">// Finished
+if (DM_DownloadStatus(handle) == 3)
+{
+    DM_StopDownload(handle);
+    DM_CloseDownload(handle);
+
+    // File doesn't exist, download failed (presumably)
+    if (!file_exists(tmpfile))
+    {
+        instance_destroy();
+        exit;
+    }
+
+    // Integrity check fails, download failed (presumably)
+    if (hash != GG2DLL_compute_MD5(tmpfile))
+    {
+        instance_destroy();
+        exit;
+    }
+    
+    // Delete existing background
+    if (file_exists("background.png"))
+    {
+        file_delete("background.png");
+    }
+
+    // Move tempfile
+    file_copy(tmpfile, "background.png");
+    file_delete(tmpfile);
+
+    // Update Globals &amp; INI
+    global.backgroundHash = hash;
+    global.backgroundTitle = title;
+    global.backgroundURL = url;
+    global.backgroundShowVersion = showVersion;
+    ini_open("gg2.ini");
+    ini_write_string("Background", "BackgroundHash", global.backgroundHash);
+    ini_write_string("Background", "BackgroundTitle", global.backgroundTitle);
+    ini_write_string("Background", "BackgroundURL", global.backgroundURL);
+    ini_write_string("Background", "BackgroundShowVersion", global.backgroundShowVersion);
+    ini_close();
+
+    // Make main menu controller reload
+    with (MainMenuController)
+    {
+        event_user(1);
+    }
+
+    instance_destroy();
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

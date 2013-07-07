@@ -17,7 +17,7 @@
 yoffset = view_yview[0];
 xsize = view_wview[0];
 ysize = view_hview[0];
-    
+
 if (distance_to_point(xoffset+xsize/2,yoffset+ysize/2) &gt; 800)
     exit;
 
@@ -36,8 +36,7 @@ if (invisible)
 if(stabbing)
     image_alpha -= power(currentWeapon.stab.alpha, 2);
 
-    
-if team == global.myself.team &amp;&amp; (id != global.myself.object.id || global.showHealthBar == 1){
+if team == global.myself.team &amp;&amp; (player != global.myself || global.showHealthBar == 1){
     draw_set_alpha(1);
     draw_healthbar(xr-10, yr-30, xr+10, yr-25,hp*100/maxHp,c_black,c_red,c_green,0,true,true);
 }    
@@ -51,7 +50,17 @@ if(distance_to_point(mouse_x, mouse_y)&lt;25) {
     } else {
         draw_set_color(c_blue);
     }
-draw_text(xr, yr-35, player.name);
+    draw_text(xr, yr-35, player.name);
+    
+    if(team == global.myself.team &amp;&amp; global.showTeammateStats)
+    {
+        if(weapons[0] == Medigun)
+            draw_text(xr,yr+50, "Superburst: " + string(currentWeapon.uberCharge/20) + "%");
+        else if(weapons[0] == Shotgun)
+            draw_text(xr,yr+50, "Nuts 'N' Bolts: " + string(nutsNBolts));
+        else if(weapons[0] == Minegun)
+            draw_text(xr,yr+50, "Lobbed Mines: " + string(currentWeapon.lobbed));
+    }
 }  
 
 draw_set_alpha(1);

@@ -47,18 +47,20 @@
     
     draw_set_color(make_color_rgb(227,226,225));
     draw_set_halign(fa_right);
-    draw_text_transformed(view_xview[0]+239,view_yview[0]+130,ds_priority_size(redteam),1.3,1.3,0);
-    draw_text_transformed(view_xview[0]+483,view_yview[0]+130,ds_priority_size(blueteam),1.3,1.3,0);
+    draw_set_font(global.countFont);
+    draw_text_transformed(view_xview[0]+239,view_yview[0]+133,ds_priority_size(redteam),1,1,0);
+    draw_text_transformed(view_xview[0]+483,view_yview[0]+133,ds_priority_size(blueteam),1,1,0);
+    draw_set_font(global.gg2Font);
     
     if instance_exists(ScorePanel){
-        draw_text_transformed(view_xview[0]+384,view_yview[0]+110,global.redCaps,3.5,3.5,0);
+        draw_text_transformed(view_xview[0]+384,view_yview[0]+110,global.redCaps,4,4,0);
         draw_set_halign(fa_left);
-        draw_text_transformed(view_xview[0]+412,view_yview[0]+110,global.blueCaps,3.5,3.5,0);
+        draw_text_transformed(view_xview[0]+412,view_yview[0]+110,global.blueCaps,4,4,0);
     }
     else if instance_exists(ArenaHUD){
-        draw_text_transformed(view_xview[0]+384,view_yview[0]+110,ArenaHUD.redWins,3.5,3.5,0);
+        draw_text_transformed(view_xview[0]+384,view_yview[0]+110,ArenaHUD.redWins,4,4,0);
         draw_set_halign(fa_left);
-        draw_text_transformed(view_xview[0]+412,view_yview[0]+110,ArenaHUD.blueWins,3.5,3.5,0);
+        draw_text_transformed(view_xview[0]+412,view_yview[0]+110,ArenaHUD.blueWins,4,4,0);
     }
     
     draw_set_color(c_red);   

@@ -13,7 +13,12 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if(global.myself.object != -1)
+        <argument kind="STRING">if (global.myself != -1)
+{
+    myTeam = global.myself.team;
+}
+
+if(global.myself.object != -1)
     instance_destroy();
 
 var moved;
@@ -59,8 +64,13 @@ else if(tracking)
         {
             if(player.object)
             {
-                x = round(player.object.x);
-                y = round(player.object.y);
+                if(!(player.object.cloak &amp;&amp; player.team != myTeam))
+                {
+                    x = round(player.object.x);
+                    y = round(player.object.y);
+                }
+                else
+                    stopTracking = true;
             }
         }
         else
