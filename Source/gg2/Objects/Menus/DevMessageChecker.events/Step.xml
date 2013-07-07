@@ -70,7 +70,7 @@ if (DM_DownloadStatus(handle) == 3)
             }
             break;
         case "Background":
-            var text, list, hash, title, url;
+            var text, list, hash, title, url, showVersion;
             text = (messageArray[c+1]);
             list = ds_list_create();
 
@@ -85,6 +85,15 @@ if (DM_DownloadStatus(handle) == 3)
             hash = ds_list_find_value(list, 0);
             title = ds_list_find_value(list, 1);
             url = ds_list_find_value(list, 2);
+            showVersion = ds_list_find_value(list, 3);
+            if (showVersion == "true")
+            {
+                showVersion = true;
+            }
+            else
+            {
+                showVersion = false;
+            }
 
             ds_list_destroy(list);
 
@@ -97,10 +106,12 @@ if (DM_DownloadStatus(handle) == 3)
                     global.backgroundHash = "default";
                     global.backgroundTitle = "";
                     global.backgroundURL = "";
+                    global.backgroundShowVersion = true;
                     ini_open("gg2.ini");
                     ini_write_string("Background", "BackgroundHash", global.backgroundHash);
                     ini_write_string("Background", "BackgroundTitle", global.backgroundTitle);
                     ini_write_string("Background", "BackgroundURL", global.backgroundURL);
+                    ini_write_real("Background", "BackgroundShowVersion", global.backgroundShowVersion);
                     ini_close();
     
                     // Delete downloaded background if existant
@@ -125,15 +136,20 @@ if (DM_DownloadStatus(handle) == 3)
                 downloader.hash = hash;
                 downloader.title = title;
                 downloader.url = url;
+                downloader.showVersion = showVersion;
             }
-            // current background same as downloaded, updated title/URL
-            else if (title != global.backgroundTitle || url != global.backgroundURL)
+            // current background same as downloaded, updated title/URL/show version flag
+            else if (title != global.backgroundTitle
+                || url != global.backgroundURL
+                || showVersion != global.backgroundShowVersion)
             {
                 global.backgroundTitle = title;
                 global.backgroundURL = url;
+                global.backgroundShowVersion = showVersion;
                 ini_open("gg2.ini");
                 ini_write_string("Background", "BackgroundTitle", global.backgroundTitle);
                 ini_write_string("Background", "BackgroundURL", global.backgroundURL);
+                ini_write_real("Background", "BackgroundShowVersion", global.backgroundShowVersion);
                 ini_close();
             }
             break;

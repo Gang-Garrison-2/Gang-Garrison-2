@@ -16,6 +16,7 @@
         <argument kind="STRING">hash = "";
 title = "";
 url = "";
+showVersion = true;
 
 tmpfile = temp_directory + "\background.png.tmp";
 

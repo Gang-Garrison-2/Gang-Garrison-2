@@ -64,10 +64,12 @@
             global.backgroundHash = "default";
             global.backgroundTitle = "";
             global.backgroundURL = "";
+            global.backgroundShowVersion = true;
             ini_open("gg2.ini");
             ini_write_string("Background", "BackgroundHash", global.backgroundHash);
             ini_write_string("Background", "BackgroundTitle", global.backgroundTitle);
             ini_write_string("Background", "BackgroundURL", global.backgroundURL);
+            ini_write_real("Background", "BackgroundShowVersion", global.backgroundShowVersion);
             ini_close();
         }
     }

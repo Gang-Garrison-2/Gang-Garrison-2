@@ -44,7 +44,10 @@
         draw_background_ext(oldBackground, 0, 0, 1, 1, 0, c_white, fade);
     }
 
-    draw_sprite(MenuBackgroundVersionS,0,300,300);
+    if (!(global.backgroundHash != "default" &amp;&amp; !global.backgroundShowVersion))
+    {
+        draw_sprite(MenuBackgroundVersionS,0,300,300);
+    }
 }
 </argument>
       </arguments>
