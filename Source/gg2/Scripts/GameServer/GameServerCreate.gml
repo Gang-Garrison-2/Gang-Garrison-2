@@ -145,4 +145,8 @@
         }
         global.serverPluginsInUse = true;
     }
+    else
+    {
+        pluginList = '';
+    }
 }
