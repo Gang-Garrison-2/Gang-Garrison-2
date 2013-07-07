@@ -147,7 +147,7 @@
                     question += "Website: " + gameurl + "##Do you want to visit this website now?";
                     if(show_question(question))
                         if(show_question("Warning: The website link is provided by the game server you selected and could lead anywhere.#Really visit '"+gameurl+"'?"))
-                            action_splash_web(ds_map_find_value(server.infos, "game_url"), 1);
+                            execute_shell(ds_map_find_value(server.infos, "game_url"), "");
 
                 }
                 else

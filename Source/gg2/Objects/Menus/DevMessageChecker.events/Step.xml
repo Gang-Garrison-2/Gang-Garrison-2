@@ -70,21 +70,38 @@ if (DM_DownloadStatus(handle) == 3)
             }
             break;
         case "Background":
-            var hashcheck, hashend, hash, titlelength, title;
-            hashcheck = (messageArray[c+1]);
-            hashend = string_pos("!",hashcheck);
-            hash = string_copy(hashcheck,1,hashend-1);
-            titlelength = string_length(hashcheck)-hashend;
-            title=string_copy(hashcheck,hashend+1,titlelength);
+            var text, list, hash, title, url;
+            text = (messageArray[c+1]);
+            list = ds_list_create();
+
+            // split string
+            while (string_pos("!", text) != 0)
+            {
+                ds_list_add(list, string_copy(text,0,string_pos("!",text)-1));
+                text = string_copy(text,string_pos("!",text)+1,string_length(text)-string_pos("!",text));
+            }
+            if (string_length(text) &gt; 0)
+            {
+                ds_list_add(list, text);
+            }
+
+            hash = ds_list_find_value(list, 0);
+            title = ds_list_find_value(list, 1);
+            url = ds_list_find_value(list, 2);
+
+            ds_list_destroy(list);
+
             // current background should be default
             if (hash == "default" &amp;&amp; global.backgroundHash != "default")
             {
                 // reset to default background
                 global.backgroundHash = "";
                 global.backgroundTitle = "";
+                global.backgroundURL = "";
                 ini_open("gg2.ini");
                 ini_write_string("Background", "BackgroundHash", global.backgroundHash);
                 ini_write_string("Background", "BackgroundTitle", global.backgroundTitle);
+                ini_write_string("Background", "BackgroundURL", global.backgroundURL);
                 ini_close();
 
                 // Delete downloaded background if existant
@@ -107,6 +124,7 @@ if (DM_DownloadStatus(handle) == 3)
                 downloader = instance_create(0, 0, BackgroundDownloader);
                 downloader.hash = hash;
                 downloader.title = title;
+                downloader.url = url;
             }
             break;
         }
