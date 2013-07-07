@@ -5,6 +5,16 @@
     if file_exists("game_errors.log") file_delete("game_errors.log");
     if file_exists("last_plugin.log") file_delete("last_plugin.log");
     
+    // Delete old left-over files created by the updater
+    var backupFilename;
+    backupFilename = file_find_first("gg2-old.delete.me.*", 0);
+    while(backupFilename != "")
+    {
+        file_delete(backupFilename);
+        backupFilename = file_find_next();
+    }
+    file_find_close();
+    
     var customMapRotationFile, restart;
     restart = false;
 
@@ -81,6 +91,9 @@
     var CrosshairFilename, CrosshairRemoveBG;
     CrosshairFilename = ini_read_string("Settings", "CrosshairFilename", "");
     CrosshairRemoveBG = ini_read_real("Settings", "CrosshairRemoveBG", 1);
+
+    global.backgroundVersion = ini_read_real("Background", "BackgroundVersion", 0);
+    global.backgroundTitle = ini_read_string("Background", "BackgroundTitle", "");
     
     readClasslimitsFromIni();
 
@@ -129,6 +142,9 @@
     ini_write_real("Server", "ServerPluginsRequired", global.serverPluginsRequired); 
     ini_write_string("Settings", "CrosshairFilename", CrosshairFilename);
     ini_write_real("Settings", "CrosshairRemoveBG", CrosshairRemoveBG);
+
+    ini_write_real("Background", "BackgroundVersion", global.backgroundVersion);
+    ini_write_string("Background", "BackgroundTitle", global.backgroundTitle);
     
     ini_write_real("Classlimits", "Scout", global.classlimits[CLASS_SCOUT])
     ini_write_real("Classlimits", "Pyro", global.classlimits[CLASS_PYRO])

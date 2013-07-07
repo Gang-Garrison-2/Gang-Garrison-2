@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<event category="DESTROY" id="0">
+<event category="OTHER" id="11">
   <actions>
     <action id="603" library="1">
       <!--action name: Code-->
@@ -13,7 +13,20 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">socket_destroy(socket);
+        <argument kind="STRING">if (global.backgroundVersion &gt; 0)
+{
+    // Load new background image
+    oldBackground = menuimage;
+    menuimage = background_add("background.png", false, false);
+
+}
+else
+{
+    // Reset to default background
+    oldBackground = menuimage;
+    menuimage = choose(MenuBackground1, MenuBackground2);
+}
+fade = 1;
 </argument>
       </arguments>
     </action>
