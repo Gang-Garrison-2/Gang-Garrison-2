@@ -17,7 +17,15 @@
 yoffset = view_yview[0];
 xsize = view_wview[0];
 ysize = view_hview[0];
-    
+
+draw_set_color(c_white)
+draw_set_alpha(1);
+draw_set_halign(fa_left);
+draw_text(xoffset+10, yoffset+10, string(hspeed))
+draw_text(xoffset+10, yoffset+20, string(x-oldx_move))
+draw_text(xoffset+10, yoffset+35, string(vspeed))
+draw_text(xoffset+10, yoffset+45, string(y-oldy_move))
+
 if (distance_to_point(xoffset+xsize/2,yoffset+ysize/2) &gt; 800)
     exit;
 

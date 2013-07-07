@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="Gate" type="RESOURCE"/>
+  <resource name="TeamGate" type="RESOURCE"/>
+  <resource name="IntelGate" type="RESOURCE"/>
+</resources>
