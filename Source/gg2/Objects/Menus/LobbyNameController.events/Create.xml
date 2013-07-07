@@ -26,9 +26,6 @@ menu_addedit_text2("Player name:", "global.playerName", '
     oldPlayerName = newName;
     return newName;
 ');
-
-cooleddown = false;
-alarm[1] = 90;
 </argument>
       </arguments>
     </action>

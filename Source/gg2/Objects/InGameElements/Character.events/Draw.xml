@@ -52,7 +52,7 @@ if(distance_to_point(mouse_x, mouse_y)&lt;25) {
     }
     draw_text(xr, yr-35, player.name);
     
-    if(team == global.myself.team and global.showTeammateStats)
+    if(team == global.myself.team &amp;&amp; global.showTeammateStats)
     {
         if(weapons[0] == Medigun)
             draw_text(xr,yr+50, "Superburst: " + string(currentWeapon.uberCharge/20) + "%");
