@@ -85,15 +85,7 @@ if (DM_DownloadStatus(handle) == 3)
             hash = ds_list_find_value(list, 0);
             title = ds_list_find_value(list, 1);
             url = ds_list_find_value(list, 2);
-            showVersion = ds_list_find_value(list, 3);
-            if (showVersion == "true")
-            {
-                showVersion = true;
-            }
-            else
-            {
-                showVersion = false;
-            }
+            showVersion = (ds_list_find_value(list, 3) == "true");
 
             ds_list_destroy(list);
 
