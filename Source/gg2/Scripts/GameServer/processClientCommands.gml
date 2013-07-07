@@ -83,7 +83,7 @@ while(commandLimitRemaining > 0) {
                     {
                         if (collision_point(x,y,SpawnRoom,0,0) < 0)
                         {
-                            if (instance_exists(lastDamageDealer) || lastDamageDealer == player)
+                            if (!instance_exists(lastDamageDealer) || lastDamageDealer == player)
                             {
                                 sendEventPlayerDeath(player, player, noone, BID_FAREWELL);
                                 doEventPlayerDeath(player, player, noone, BID_FAREWELL);
