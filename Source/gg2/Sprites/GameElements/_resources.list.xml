@@ -5,4 +5,5 @@
   <resource name="FaucetLogoS" type="RESOURCE"/>
   <resource name="CreditsS" type="RESOURCE"/>
   <resource name="gg2FontS" type="RESOURCE"/>
+  <resource name="countFontS" type="RESOURCE"/>
 </resources>
