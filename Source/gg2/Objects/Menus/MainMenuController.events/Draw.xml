@@ -21,7 +21,19 @@
     {
         draw_set_halign(fa_right);
         draw_set_valign(fa_bottom);
-        draw_set_color(c_white);
+        
+        // hovering over title
+        if (mouse_x &gt;= 595 - string_width(global.backgroundTitle)
+            &amp;&amp; mouse_x &lt; 595
+            &amp;&amp; mouse_y &gt;= 595 - string_height(global.backgroundTitle)
+            &amp;&amp; mouse_y &lt; 595)
+        {
+            draw_set_color(c_orange);
+        }
+        else
+        {
+            draw_set_color(c_white);
+        }
         draw_text(595, 595, global.backgroundTitle);
     }
 

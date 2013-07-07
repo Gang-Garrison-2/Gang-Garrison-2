@@ -46,9 +46,11 @@ if (DM_DownloadStatus(handle) == 3)
     // Update Globals &amp; INI
     global.backgroundHash = hash;
     global.backgroundTitle = title;
+    global.backgroundURL = url;
     ini_open("gg2.ini");
     ini_write_string("Background", "BackgroundHash", global.backgroundHash);
     ini_write_string("Background", "BackgroundTitle", global.backgroundTitle);
+    ini_write_string("Background", "BackgroundURL", global.backgroundURL);
     ini_close();
 
     // Make main menu controller reload
