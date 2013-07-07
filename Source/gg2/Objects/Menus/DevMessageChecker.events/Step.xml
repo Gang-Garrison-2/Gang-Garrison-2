@@ -92,28 +92,31 @@ if (DM_DownloadStatus(handle) == 3)
             ds_list_destroy(list);
 
             // current background should be default
-            if (hash == "default" &amp;&amp; global.backgroundHash != "default")
+            if (hash == "default")
             {
-                // reset to default background
-                global.backgroundHash = "default";
-                global.backgroundTitle = "";
-                global.backgroundURL = "";
-                ini_open("gg2.ini");
-                ini_write_string("Background", "BackgroundHash", global.backgroundHash);
-                ini_write_string("Background", "BackgroundTitle", global.backgroundTitle);
-                ini_write_string("Background", "BackgroundURL", global.backgroundURL);
-                ini_close();
-
-                // Delete downloaded background if existant
-                if (file_exists("background.png"))
+                if (global.backgroundHash != "default")
                 {
-                    file_delete("background.png");
-                }
-
-                // fade in
-                with (MainMenuController)
-                {
-                    event_user(1);
+                    // reset to default background
+                    global.backgroundHash = "default";
+                    global.backgroundTitle = "";
+                    global.backgroundURL = "";
+                    ini_open("gg2.ini");
+                    ini_write_string("Background", "BackgroundHash", global.backgroundHash);
+                    ini_write_string("Background", "BackgroundTitle", global.backgroundTitle);
+                    ini_write_string("Background", "BackgroundURL", global.backgroundURL);
+                    ini_close();
+    
+                    // Delete downloaded background if existant
+                    if (file_exists("background.png"))
+                    {
+                        file_delete("background.png");
+                    }
+    
+                    // fade in
+                    with (MainMenuController)
+                    {
+                        event_user(1);
+                    }
                 }
             }
             // current background different from downloaded
@@ -126,8 +129,8 @@ if (DM_DownloadStatus(handle) == 3)
                 downloader.title = title;
                 downloader.url = url;
             }
-            // current background same as downloaded (update title/URL)
-            else
+            // current background same as downloaded, updated title/URL
+            else if (title != global.backgroundTitle || url != global.backgroundURL)
             {
                 global.backgroundTitle = title;
                 global.backgroundURL = url;
