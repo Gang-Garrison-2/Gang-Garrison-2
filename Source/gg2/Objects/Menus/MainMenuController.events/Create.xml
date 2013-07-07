@@ -40,24 +40,38 @@
     if !sound_isplaying(global.MenuMusic) AudioControlPlaySong(global.MenuMusic);
 
     fade = 0;
-
-    // if background.png missing, reset values
-    if (!file_exists("background.png"))
+    
+    // ini says we have a downloaded background
+    if (global.backgroundHash != "default")
     {
-        global.backgroundVersion = 0;
-        global.backgroundTitle = "";
-        ini_open("gg2.ini");
-        ini_write_real("Background", "BackgroundVersion", global.backgroundVersion);
-        ini_write_string("Background", "BackgroundTitle", global.backgroundTitle);
-        ini_close();
+        var validBackground;
+        validBackground = false;
+
+        // background exists
+        if (file_exists("background.png"))
+        {
+            // passes integrity check
+            if (global.backgroundHash == GG2DLL_compute_MD5("background.png"))
+            {
+                // use downloaded background
+                menuimage = background_add("background.png", false, false);
+                validBackground = true;
+            }
+        }
+        // otherwise, reset values
+        if (!validBackground)
+        {
+            global.backgroundHash = "default";
+            global.backgroundTitle = "";
+            ini_open("gg2.ini");
+            ini_write_string("Background", "BackgroundHash", global.backgroundHash);
+            ini_write_string("Background", "BackgroundTitle", global.backgroundTitle);
+            ini_close();
+        }
     }
 
-    // use downloaded background if available
-    if (global.backgroundVersion &gt; 0)
-    {
-        menuimage = background_add("background.png", false, false);
-    }
-    else
+    // use default background if ini says we should
+    if (global.backgroundHash == "default")
     {
         menuimage = choose(MenuBackground1, MenuBackground2);
     }

@@ -17,7 +17,7 @@
     draw_background(menuimage, 0, 0);
 
     // display background info, if downloaded
-    if (global.backgroundVersion &gt; 0)
+    if (global.backgroundHash != "default")
     {
         draw_set_halign(fa_right);
         draw_set_valign(fa_bottom);

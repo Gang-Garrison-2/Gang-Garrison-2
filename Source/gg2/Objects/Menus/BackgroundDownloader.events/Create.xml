@@ -13,7 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">version = 0;
+        <argument kind="STRING">hash = "";
 title = "";
 
 tmpfile = temp_directory + "\background.png.tmp";
