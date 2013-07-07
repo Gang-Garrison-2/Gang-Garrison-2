@@ -20,17 +20,20 @@
     newPlayer = ds_list_find_value(global.players, newTrackId);
     if(newPlayer.object and newPlayer != global.myself)
     {
-        if(!tracking)
+        if(newPlayer.team == myTeam || myTeam == TEAM_SPECTATOR)
         {
-            tracking = true;
-            if(!instance_exists(NoticeO))
-                instance_create(0,0,NoticeO);
-            with(NoticeO)
-                notice = NOTICE_PLAYERTRACKENABLE;
+            if(!tracking)
+            {
+                tracking = true;
+                if(!instance_exists(NoticeO))
+                    instance_create(0,0,NoticeO);
+                with(NoticeO)
+                    notice = NOTICE_PLAYERTRACKENABLE;
+            }
+            track_id = newTrackId;
+            player = newPlayer;
+            break;
         }
-        track_id = newTrackId;
-        player = newPlayer;
-        break;
     }
 }
 </argument>
