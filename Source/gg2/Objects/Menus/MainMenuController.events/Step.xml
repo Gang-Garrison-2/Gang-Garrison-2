@@ -38,7 +38,8 @@ if (global.backgroundHash != "default")
     if (mouse_x &gt;= 595 - string_width(global.backgroundTitle)
         &amp;&amp; mouse_x &lt; 595
         &amp;&amp; mouse_y &gt;= 595 - string_height(global.backgroundTitle)
-        &amp;&amp; mouse_y &lt; 595)
+        &amp;&amp; mouse_y &lt; 595
+        &amp;&amp; global.backgroundURL != "")
     {
         // clicking
         if (mouse_check_button_pressed(mb_left))

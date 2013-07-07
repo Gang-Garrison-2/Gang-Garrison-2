@@ -26,7 +26,8 @@
         if (mouse_x &gt;= 595 - string_width(global.backgroundTitle)
             &amp;&amp; mouse_x &lt; 595
             &amp;&amp; mouse_y &gt;= 595 - string_height(global.backgroundTitle)
-            &amp;&amp; mouse_y &lt; 595)
+            &amp;&amp; mouse_y &lt; 595
+            &amp;&amp; global.backgroundURL != "")
         {
             draw_set_color(c_orange);
         }
@@ -43,7 +44,10 @@
         draw_background_ext(oldBackground, 0, 0, 1, 1, 0, c_white, fade);
     }
 
-    draw_sprite(MenuBackgroundVersionS,0,300,300);
+    if (!(global.backgroundHash != "default" &amp;&amp; !global.backgroundShowVersion))
+    {
+        draw_sprite(MenuBackgroundVersionS,0,300,300);
+    }
 }
 </argument>
       </arguments>

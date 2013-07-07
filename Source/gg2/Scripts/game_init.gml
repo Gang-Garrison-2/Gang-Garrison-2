@@ -95,6 +95,7 @@
     global.backgroundHash = ini_read_string("Background", "BackgroundHash", "default");
     global.backgroundTitle = ini_read_string("Background", "BackgroundTitle", "");
     global.backgroundURL = ini_read_string("Background", "BackgroundURL", "");
+    global.backgroundShowVersion = ini_read_real("Background", "BackgroundShowVersion", true);
     
     readClasslimitsFromIni();
 
@@ -147,6 +148,7 @@
     ini_write_string("Background", "BackgroundHash", global.backgroundHash);
     ini_write_string("Background", "BackgroundTitle", global.backgroundTitle);
     ini_write_string("Background", "BackgroundURL", global.backgroundURL);
+    ini_write_real("Background", "BackgroundShowVersion", global.backgroundShowVersion);
     
     ini_write_real("Classlimits", "Scout", global.classlimits[CLASS_SCOUT])
     ini_write_real("Classlimits", "Pyro", global.classlimits[CLASS_PYRO])
