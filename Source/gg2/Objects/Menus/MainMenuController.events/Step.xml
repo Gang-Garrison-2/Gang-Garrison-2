@@ -44,7 +44,7 @@ if (global.backgroundHash != "default")
         if (mouse_check_button_pressed(mb_left))
         {
             mouse_clear(mb_left);
-            execute_shell(global.backgroundURL, "");
+            action_splash_web(global.backgroundURL, 1);
         }
     }
 }

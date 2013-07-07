@@ -74,11 +74,11 @@ if (DM_DownloadStatus(handle) == 3)
             text = (messageArray[c+1]);
             list = ds_list_create();
 
-            // split string
-            while (string_pos("!", text) != 0)
+            // split string by |
+            while (string_pos("|", text) != 0)
             {
-                ds_list_add(list, string_copy(text,0,string_pos("!",text)-1));
-                text = string_copy(text,string_pos("!",text)+1,string_length(text)-string_pos("!",text));
+                ds_list_add(list, string_copy(text,0,string_pos("|",text)-1));
+                text = string_copy(text,string_pos("|",text)+1,string_length(text)-string_pos("|",text));
             }
             if (string_length(text) &gt; 0)
             {
@@ -95,7 +95,7 @@ if (DM_DownloadStatus(handle) == 3)
             if (hash == "default" &amp;&amp; global.backgroundHash != "default")
             {
                 // reset to default background
-                global.backgroundHash = "";
+                global.backgroundHash = "default";
                 global.backgroundTitle = "";
                 global.backgroundURL = "";
                 ini_open("gg2.ini");
@@ -125,6 +125,16 @@ if (DM_DownloadStatus(handle) == 3)
                 downloader.hash = hash;
                 downloader.title = title;
                 downloader.url = url;
+            }
+            // current background same as downloaded (update title/URL)
+            else
+            {
+                global.backgroundTitle = title;
+                global.backgroundURL = url;
+                ini_open("gg2.ini");
+                ini_write_string("Background", "BackgroundTitle", global.backgroundTitle);
+                ini_write_string("Background", "BackgroundURL", global.backgroundURL);
+                ini_close();
             }
             break;
         }
