@@ -132,7 +132,7 @@
         if (pluginList == 'failure')
         {
             show_message("Error ocurred getting server-sent plugin hashes.");
-            instance_destroy();
+            game_end();
             exit;
         }
 

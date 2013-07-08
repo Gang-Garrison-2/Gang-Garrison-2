@@ -171,6 +171,7 @@ if (!failed)
     for (i = 0; i < ds_list_size(list); i += 1)
     {
         pluginname = ds_list_find_value(list, i);
+        tempdir = temp_directory + "\" + pluginname + ".tmp";
         
         // Debugging facility, so we know *which* plugin caused compile/execute error
         fp = file_text_open_write(working_directory + "\last_plugin.log");
