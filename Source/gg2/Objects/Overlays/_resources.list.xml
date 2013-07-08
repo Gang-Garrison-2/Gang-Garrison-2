@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
   <resource name="ClassPortraitAnimations" type="GROUP"/>
-  <resource name="Gamemodes" type="GROUP"/>
   <resource name="TeamSelectController" type="RESOURCE"/>
   <resource name="ClassSelectController" type="RESOURCE"/>
   <resource name="ScoreTableController" type="RESOURCE"/>
   <resource name="HUD" type="RESOURCE"/>
+  <resource name="ScorePanel" type="RESOURCE"/>
+  <resource name="ControlPointHUD" type="RESOURCE"/>
+  <resource name="ArenaHUD" type="RESOURCE"/>
+  <resource name="KothHUD" type="RESOURCE"/>
+  <resource name="DKothHUD" type="RESOURCE"/>
+  <resource name="GeneratorHUD" type="RESOURCE"/>
   <resource name="KillLog" type="RESOURCE"/>
   <resource name="BubbleMenuZ" type="RESOURCE"/>
   <resource name="RespawnTimer" type="RESOURCE"/>

@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
+  <resource name="Obstacles" type="GROUP"/>
   <resource name="Gamemode-specific" type="GROUP"/>
   <resource name="Unused" type="GROUP"/>
   <resource name="Spawnroom objects" type="GROUP"/>
   <resource name="Player Influencing" type="GROUP"/>
-  <resource name="Colliders" type="GROUP"/>
+  <resource filename="Gates_Doors" name="Gates/Doors" type="GROUP"/>
   <resource name="NextAreaO" type="RESOURCE"/>
   <resource name="PreviousAreaO" type="RESOURCE"/>
 </resources>
