@@ -198,8 +198,6 @@ if(abs(hspeed)&lt;0.195 /*and not moveStatus = 3*/) { // Overweight carrying int
     animationImage=0;
 }
 
-charSetSolids();
-
 if(place_free(x,y+1)) {
     vspeed += 0.6;
     if(vspeed&gt;10) {
@@ -211,8 +209,6 @@ if(place_free(x,y+1)) {
         doublejumpUsed = 0;
     }
 }
-
-charUnsetSolids();
 
 if (intel)
 { 

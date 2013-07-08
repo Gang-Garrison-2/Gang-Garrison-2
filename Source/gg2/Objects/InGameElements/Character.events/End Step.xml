@@ -14,9 +14,6 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">// Climbing down stairs
-
-charSetSolids();
-
 if(vspeed == 0) // if we aren't falling this frame
 { 
     if(place_free(x,y+6))
@@ -27,9 +24,6 @@ if(vspeed == 0) // if we aren't falling this frame
 }
 xprevious = x;
 yprevious = y;
-    
-
-charUnsetSolids();
 
 if(global.isHost &amp;&amp; hp&lt;=0) {
     var assistant;
