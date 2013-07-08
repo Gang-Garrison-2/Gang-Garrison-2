@@ -96,7 +96,7 @@
             show_message("Please note that plugins can be dangerous, so you should only disable the prompt if you trust all plugins hosted at the source:#" + PLUGIN_SOURCE + "#" + PLUGIN_SOURCE_NOTICE)
         gg2_write_ini("Settings", "ServerPluginsPrompt", argument0);
     ');
-    menu_addedit_boolean("Prompt for for restart:", "global.restartPrompt", '
+    menu_addedit_boolean("Prompt for restart:", "global.restartPrompt", '
         gg2_write_ini("Settings", "RestartPrompt", argument0);
     ');
     menu_addlink("Controls", '
