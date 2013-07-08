@@ -43,16 +43,35 @@
         gg2_write_ini("Settings", "Fullscreen", argument0);
         window_set_fullscreen(argument0);
     ');
-    menu_addedit_boolean("Ingame Music:", "global.ingameMusic", '
-        gg2_write_ini("Settings", "IngameMusic", argument0);
+    menu_addedit_select("Music:", "global.music", '
+        gg2_write_ini("Settings", "Music", argument0);
         if(room != Options)
         {
-            if(argument0)
+            if (argument0 == MUSIC_BOTH || argument0 == MUSIC_INGAME_ONLY)
+            {
                 AudioControlPlaySong(global.IngameMusic, true);
+            }
             else
+            {
                 AudioControlPlaySong(-1, false);
+            }
+        }
+        else
+        {
+            if(argument0 == MUSIC_BOTH || argument0 == MUSIC_MENU_ONLY)
+            {
+                AudioControlPlaySong(global.MenuMusic, true);
+            }
+            else
+            {
+                AudioControlPlaySong(-1, false);
+            }
         }
     ');
+    menu_add_option(MUSIC_NONE, "None");
+    menu_add_option(MUSIC_MENU_ONLY, "Menu Only");
+    menu_add_option(MUSIC_INGAME_ONLY, "In-Game Only");
+    menu_add_option(MUSIC_BOTH, "Menu and In-Game");
     
     menu_addedit_select("Particles:", "global.particles", '
         gg2_write_ini("Settings", "Particles", argument0);
