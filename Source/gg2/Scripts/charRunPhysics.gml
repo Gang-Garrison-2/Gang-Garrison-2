@@ -16,7 +16,7 @@ if(speed < 0.195)
 
 while(spent < iterspace and iterspace != 0 and speed != 0)
 {
-    itersize = (iterspace-spent)/ceil((iterspace-spent));
+    itersize = (iterspace-spent)/ceil((iterspace-spent)) * global.collisionAccuracy;
     
     xd =  cos(degtorad(direction))*itersize;
     yd = -sin(degtorad(direction))*itersize;
