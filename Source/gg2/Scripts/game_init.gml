@@ -45,7 +45,7 @@
     global.fullscreen = ini_read_real("Settings", "Fullscreen", 0);
     global.useLobbyServer = ini_read_real("Settings", "UseLobby", 1);
     global.hostingPort = ini_read_real("Settings", "HostingPort", 8190);
-    global.ingameMusic = ini_read_real("Settings", "IngameMusic", 1);
+    global.music = ini_read_real("Settings", "Music", ini_read_real("Settings", "IngameMusic", MUSIC_BOTH));
     global.playerLimit = ini_read_real("Settings", "PlayerLimit", 10);
     global.particles =  ini_read_real("Settings", "Particles", PARTICLES_NORMAL);
     global.gibLevel = ini_read_real("Settings", "Gib Level", 3);
@@ -113,7 +113,8 @@
     ini_write_real("Settings", "Fullscreen", global.fullscreen);
     ini_write_real("Settings", "UseLobby", global.useLobbyServer);
     ini_write_real("Settings", "HostingPort", global.hostingPort);
-    ini_write_real("Settings", "IngameMusic", global.ingameMusic);
+    ini_key_delete("Settings", "IngameMusic");
+    ini_write_real("Settings", "Music", global.music);
     ini_write_real("Settings", "PlayerLimit", global.playerLimit);
     ini_write_real("Settings", "Particles", global.particles);
     ini_write_real("Settings", "Gib Level", global.gibLevel);

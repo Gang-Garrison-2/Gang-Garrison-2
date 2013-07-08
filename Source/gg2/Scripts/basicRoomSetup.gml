@@ -49,7 +49,7 @@ if !instance_exists(KillLog) instance_create(0,0,KillLog);
 
 sound_stop_all();
 
-if(global.ingameMusic) {
+if(global.music == MUSIC_BOTH || global.music == MUSIC_INGAME_ONLY) {
     AudioControlPlaySong(global.IngameMusic, true);
 }
 instance_create(map_width()/2,map_height()/2,Spectator);

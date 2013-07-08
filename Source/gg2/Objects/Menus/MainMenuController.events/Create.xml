@@ -37,7 +37,12 @@
         game_end();
     ');
 
-    if !sound_isplaying(global.MenuMusic) AudioControlPlaySong(global.MenuMusic);
+    // Music setting set to "Menu Only" or "Menu and In-Game"
+    if (!sound_isplaying(global.MenuMusic)
+        &amp;&amp; (global.music == MUSIC_MENU_ONLY || global.music == MUSIC_BOTH))
+    {
+        AudioControlPlaySong(global.MenuMusic);
+    }
 
     fade = 0;
     

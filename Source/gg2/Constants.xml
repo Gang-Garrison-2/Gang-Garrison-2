@@ -155,4 +155,8 @@
   <constant name="MOUSE_RIGHT" value="9002"/>
   <constant name="HP_PER_POINT" value="400"/>
   <constant name="INTEL_MAX_TIMER" value="900"/>
+  <constant name="MUSIC_MENU_ONLY" value="0"/>
+  <constant name="MUSIC_BOTH" value="1"/>
+  <constant name="MUSIC_INGAME_ONLY" value="2"/>
+  <constant name="MUSIC_NONE" value="3"/>
 </constants>
