@@ -595,7 +595,7 @@ do {
 
         default:
             show_message("The Server sent unexpected data");
-            game_end();
+            game_reset();
             exit;
         }
     } else {
