@@ -27,8 +27,8 @@
         {
             var rdir, vectorfactor;
             rdir = point_direction(other.x,other.y,x,y);
-            vectorfactor = point_distance(0, 0, sin(degtorad(rdir)), cos(degtorad(rdir)));
-            if (1 - distance_to_object(other)/other.blastRadius &lt;= 0.25)
+            vectorfactor = point_distance(0, 0, sin(degtorad(rdir)), cos(degtorad(rdir))*0.8);
+            if (1 - distance_to_object(other)/other.blastRadius &lt;= 0.25 and other.splashThreshhold) // skip if we're out of theshhold
                 continue;
             motion_add(rdir, min(15, other.knockback-other.knockback*(distance_to_object(other)/other.blastRadius)) * vectorfactor);
             if((other.team != team or id==other.ownerPlayer.object) and !ubered and hp &gt; 0)
@@ -68,20 +68,11 @@
                     }
                 }
                 if (id==other.ownerPlayer.object)
-                {
                     moveStatus = 1;
-                    vspeed*=0.8;
-                }
                 else if (other.team == team)
-                {
                     moveStatus = 2;
-                    vspeed*=0.8;
-                }
                 else
-                {
                     moveStatus = 4;
-                    vspeed*=0.8
-                }
             }
             cloakAlpha = max(cloakAlpha, 0.3);
             cloakFlicker = true;

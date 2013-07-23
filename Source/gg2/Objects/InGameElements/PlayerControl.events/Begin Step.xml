@@ -82,6 +82,7 @@ if(global.myself.object != -1)
             }
             if(mouse_check_button_pressed(mb_right) and global.special == MOUSE_RIGHT)
                 inputSpecial();
+            
         }
     }
     

@@ -87,8 +87,8 @@ case STATE_CLIENT_AUTHENTICATED:
     write_string(socket, global.currentMapMD5);
     
     write_ubyte(socket, global.serverPluginsRequired);
-    write_ubyte(socket, string_length(global.serverPluginList));
-    write_string(socket, global.serverPluginList);
+    write_ubyte(socket, string_length(GameServer.pluginList));
+    write_string(socket, GameServer.pluginList);
     
     advertisedMap = global.currentMap;
     advertisedMapMd5 = global.currentMapMD5;
@@ -153,6 +153,10 @@ case STATE_EXPECT_NAME:
     
     ds_list_add(global.players, player);
     ServerPlayerJoin(player.name, global.sendBuffer);
+    
+    // message lobby to update playercount if we became full
+    if(noOfPlayers+1 == global.playerLimit)
+        sendLobbyRegistration();
     
     if(global.welcomeMessage != "")
         ServerMessageString(global.welcomeMessage, player.socket);

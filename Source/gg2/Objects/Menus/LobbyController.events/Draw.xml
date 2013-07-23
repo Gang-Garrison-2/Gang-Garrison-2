@@ -19,6 +19,9 @@ draw_set_alpha(0.8);
 
 draw_rectangle(xbegin-10, ybegin-10, xbegin+width+25, 550, false);
 
+draw_set_alpha(0.45);
+draw_rectangle(xbegin-10, ybegin-45, xbegin+width+25, ybegin-26, false);
+
 draw_set_alpha(1);
 draw_set_color(c_white);
 
@@ -26,12 +29,12 @@ draw_set_valign(fa_top);
 
 /* Let the user know the servers are loading */
 if (lobbysocket != -1) {
-    isloading = "Loading...";
+    headerstring = "Loading...";
 } else {
-    isloading = "";
+    headerstring = "Servers ("+string(serversRead)+"/"+string(numServers)+") ";
 }
 
-draw_text(xbegin, ybegin-2*spacing, "Servers ("+string(serversRead)+"/"+string(numServers)+") "+string(isloading));
+draw_text(xbegin, ybegin-1.25*spacing, headerstring);
 
 for(i=offset; i&lt;ds_list_size(servers) and i&lt;offset+items; i+=1) {
     server = ds_list_find_value(servers, i);

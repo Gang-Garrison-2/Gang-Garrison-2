@@ -83,7 +83,7 @@ while(commandLimitRemaining > 0) {
                     {
                         if (collision_point(x,y,SpawnRoom,0,0) < 0)
                         {
-                            if (instance_exists(lastDamageDealer) || lastDamageDealer == player)
+                            if (!instance_exists(lastDamageDealer) || lastDamageDealer == player)
                             {
                                 sendEventPlayerDeath(player, player, noone, BID_FAREWELL);
                                 doEventPlayerDeath(player, player, noone, BID_FAREWELL);
@@ -235,11 +235,6 @@ while(commandLimitRemaining > 0) {
                     with(player.object)
                     {
                         omnomnomnom = true;
-                        if(hp < maxHp)
-                        {
-                            canEat = false;
-                            alarm[6] = eatCooldown; //10 second cooldown
-                        }
                         if player.team == TEAM_RED {
                             omnomnomnomindex=0;
                             omnomnomnomend=31;

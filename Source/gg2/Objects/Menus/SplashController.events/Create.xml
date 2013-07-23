@@ -21,7 +21,11 @@
     }
     alarm[0] = 30;
     alarm[1] = 240;
-    AudioControlPlaySong(global.FaucetMusic);
+    // Music setting set to "Menu Only" or "Menu and In-Game"
+    if (global.music == MUSIC_MENU_ONLY || global.music == MUSIC_BOTH)
+    {
+        AudioControlPlaySong(global.FaucetMusic);
+    }
     image_speed=0;
 }
 </argument>

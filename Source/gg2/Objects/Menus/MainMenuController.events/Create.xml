@@ -36,10 +36,55 @@
     menu_addback("Quit", '
         game_end();
     ');
+
+    // Music setting set to "Menu Only" or "Menu and In-Game"
+    if (!sound_isplaying(global.MenuMusic)
+        &amp;&amp; (global.music == MUSIC_MENU_ONLY || global.music == MUSIC_BOTH))
+    {
+        AudioControlPlaySong(global.MenuMusic);
+    }
+
+    fade = 0;
     
-    if !sound_isplaying(global.MenuMusic) AudioControlPlaySong(global.MenuMusic);
-    menuimage=choose(0,1);
-    
+    // ini says we have a downloaded background
+    if (global.backgroundHash != "default")
+    {
+        var validBackground;
+        validBackground = false;
+
+        // background exists
+        if (file_exists("background.png"))
+        {
+            // passes integrity check
+            if (global.backgroundHash == GG2DLL_compute_MD5("background.png"))
+            {
+                // use downloaded background
+                menuimage = background_add("background.png", false, false);
+                validBackground = true;
+            }
+        }
+        // otherwise, reset values
+        if (!validBackground)
+        {
+            global.backgroundHash = "default";
+            global.backgroundTitle = "";
+            global.backgroundURL = "";
+            global.backgroundShowVersion = true;
+            ini_open("gg2.ini");
+            ini_write_string("Background", "BackgroundHash", global.backgroundHash);
+            ini_write_string("Background", "BackgroundTitle", global.backgroundTitle);
+            ini_write_string("Background", "BackgroundURL", global.backgroundURL);
+            ini_write_real("Background", "BackgroundShowVersion", global.backgroundShowVersion);
+            ini_close();
+        }
+    }
+
+    // use default background if ini says we should
+    if (global.backgroundHash == "default")
+    {
+        menuimage = choose(MenuBackground1, MenuBackground2);
+    }
+
     if(global.dedicatedMode == 1)
         event_user(0);
 }

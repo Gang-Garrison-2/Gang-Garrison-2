@@ -26,7 +26,7 @@ if (global.Server_RespawntimeSec == 0)
 else
     global.Server_Respawntime = global.Server_RespawntimeSec * 30;
 
-menu_create(40, 160, 500, 200, 30);
+menu_create(40, 130, 500, 200, 30);
 menu_addedit_text2("Server Name:", "global.serverName", '
     var newName;
     newName = string_copy(argument0, 0, 25);
@@ -62,6 +62,13 @@ menu_addedit_num("Capture Limit:", "global.caplimit", '
 menu_addedit_num("Respawn Time (secs):", "global.Server_RespawntimeSec", '
     gg2_write_ini("Server", "Respawn Time", argument0);
 ');
+menu_addedit_select("Shuffle map rotation:", "global.shuffleRotation", '
+    gg2_write_ini("Server", "ShuffleRotation", argument0);
+');
+menu_add_option(0, "Don't shuffle");
+menu_add_option(1, "Shuffle, don't make arena map first");
+menu_add_option(2, "Shuffle without bias");
+
 menu_addedit_boolean("Auto Balance:", "global.autobalance", '
     gg2_write_ini("Server", "AutoBalance", argument0);
 ');

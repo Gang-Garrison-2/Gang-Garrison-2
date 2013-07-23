@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="TruefortB" type="RESOURCE"/>
+  <resource name="ConflictB" type="RESOURCE"/>
+  <resource name="WaterwayB" type="RESOURCE"/>
+  <resource name="TwodFortTwoRemixB" type="RESOURCE"/>
+  <resource name="zclassicwellB" type="RESOURCE"/>
+  <resource name="OrangeB" type="RESOURCE"/>
+  <resource name="DirtbowlB" type="RESOURCE"/>
+  <resource name="EgyptB" type="RESOURCE"/>
+  <resource name="MontaneB" type="RESOURCE"/>
+  <resource name="LumberyardB" type="RESOURCE"/>
+  <resource name="DestroyS" type="RESOURCE"/>
+  <resource name="ValleyB" type="RESOURCE"/>
+  <resource name="CorinthB" type="RESOURCE"/>
+  <resource name="HarvestB" type="RESOURCE"/>
+  <resource name="AtaliaB" type="RESOURCE"/>
+  <resource name="SixtiesB" type="RESOURCE"/>
+  <resource name="OldfortB" type="RESOURCE"/>
+  <resource name="CustomMapB" type="RESOURCE"/>
+</resources>

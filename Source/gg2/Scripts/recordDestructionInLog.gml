@@ -8,7 +8,7 @@
             map = ds_map_create();
             var killer;
             killer = string_copy(argument1.name, 1, 20);
-            if (argument2 != -1)
+            if (instance_exists(argument2))
                 killer += " + " + string_copy(argument2.name, 1, 20);
             ds_map_add(map, "name1", killer);
             ds_map_add(map, "team1", argument1.team);           

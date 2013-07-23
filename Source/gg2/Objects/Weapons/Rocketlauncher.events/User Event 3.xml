@@ -17,7 +17,8 @@
 playsound(x,y,RocketSnd);
 var oid, newx, newy;
 oid = instance_create(x+lengthdir_x(20,owner.aimDirection),y+lengthdir_y(20,owner.aimDirection), Rocket);
-   
+oid.lastknownx = owner.x;
+oid.lastknowny = owner.y;
 oid.direction=owner.aimDirection
 oid.speed=13;
 oid.ownerPlayer=ownerPlayer;

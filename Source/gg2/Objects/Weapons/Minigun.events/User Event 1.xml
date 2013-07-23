@@ -36,8 +36,15 @@
         readyToShoot=false;
         isRefilling = false;
         ammoCount -= 2.2;
+        
+        var reloadBufferFactor;
+        if(ammoCount &lt; 2.2)
+            reloadBufferFactor = 2.5;
+        else
+            reloadBufferFactor = 1+(cos((ammoCount+2.2)/maxAmmo*pi)+1)/2; // spline from (full ammo = 1*) to (empty ammo = 2*)
+        
         alarm[0] = refireTime;
-        alarm[5] = reloadBuffer;
+        alarm[5] = reloadBuffer*reloadBufferFactor;
     }
     
 }

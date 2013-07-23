@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="MenuBackground1" type="RESOURCE"/>
+  <resource name="MenuBackground2" type="RESOURCE"/>
+  <resource name="MenuBackground3" type="RESOURCE"/>
+  <resource name="SplashScreenB" type="RESOURCE"/>
+  <resource name="popupBackgroundB" type="RESOURCE"/>
+</resources>

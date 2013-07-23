@@ -13,36 +13,51 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">travelDistance+=1;
-if travelDistance &gt;=30 travelDistance=30;
-
-if fade image_alpha-=0.1;
-    speed += 1;
-    speed *= 0.92;
-    //if speed &gt;25 speed = 25;
-    image_angle = direction;
-if !fade {
-if(global.particles = PARTICLES_NORMAL) {
-    effect_create_below(ef_smoke,x-hspeed*1.3,y-vspeed*1.3,0,c_gray);
-} else if(global.particles == PARTICLES_ALTERNATIVE) {
-    if(not variable_local_exists("rocketblurParticleType")) {
-        rocketblurParticleType = part_type_create();
-        if team == TEAM_RED rocketParticleSprite = RedRocketS;
-        else rocketParticleSprite = BlueRocketS;
-        part_type_sprite(rocketblurParticleType,rocketParticleSprite,false,true,false);
-        part_type_alpha2(rocketblurParticleType,0.7,0.1);
-        part_type_life(rocketblurParticleType,5,5);
-    }
-    
-    if(not variable_global_exists("rocketblurParticleSystem")) {
-        global.rocketblurParticleSystem = part_system_create();
-        part_system_depth(global.rocketblurParticleSystem, 10);
-    }
-    
-    part_type_orientation(rocketblurParticleType,direction,direction,0,0,0);
-    
-    part_particles_create(global.rocketblurParticleSystem, x, y, rocketblurParticleType, 1);
+        <argument kind="STRING">if(instance_exists(owner))
+{
+    lastknownx = owner.x;
+    lastknowny = owner.y;
 }
+travelDistance = point_distance(x, y, lastknownx, lastknowny);
+
+if(travelDistance &gt;= distanceToTravel)
+{
+    fade = true;
+    alarm[3] = 8;
+}
+
+speed += 1;
+speed *= 0.92;
+image_angle = direction;
+
+if (fade)
+    image_alpha -= 0.1;
+if (image_alpha &gt; 0)
+{
+    if(global.particles = PARTICLES_NORMAL)
+        effect_create_below(ef_smoke,x-hspeed*1.3,y-vspeed*1.3,0,c_gray);
+    else if(global.particles == PARTICLES_ALTERNATIVE)
+    {
+        if (!variable_local_exists("rocketblurParticleType"))
+        {
+            rocketblurParticleType = part_type_create();
+            if team == TEAM_RED rocketParticleSprite = RedRocketS;
+            else rocketParticleSprite = BlueRocketS;
+            part_type_sprite(rocketblurParticleType,rocketParticleSprite,false,true,false);
+            part_type_alpha2(rocketblurParticleType,0.7,0.1);
+            part_type_life(rocketblurParticleType,5,5);
+        }
+        
+        if (!variable_global_exists("rocketblurParticleSystem"))
+        {
+            global.rocketblurParticleSystem = part_system_create();
+            part_system_depth(global.rocketblurParticleSystem, 10);
+        }
+        
+        part_type_orientation(rocketblurParticleType,direction,direction,0,0,0);
+        
+        part_particles_create(global.rocketblurParticleSystem, x, y, rocketblurParticleType, 1);
+    }
 }
 </argument>
       </arguments>
