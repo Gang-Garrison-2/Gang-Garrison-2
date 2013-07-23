@@ -159,4 +159,7 @@
   <constant name="MUSIC_BOTH" value="1"/>
   <constant name="MUSIC_INGAME_ONLY" value="2"/>
   <constant name="MUSIC_NONE" value="3"/>
+  <constant name="CONSOLE_INGAME" value="0"/>
+  <constant name="CONSOLE_INMENU" value="1"/>
+  <constant name="CONSOLE_DISABLED" value="2"/>
 </constants>

@@ -15,7 +15,7 @@
       <arguments>
         <argument kind="STRING">if (text == "") {
     // if not displaying console in in-game menu
-    if (!global.consoleMode) {
+    if (global.consoleMode != CONSOLE_INMENU) {
         instance_destroy();
     }
 } else {

@@ -1,9 +1,10 @@
 // if displaying console in in-game menu
-if (global.consoleMode && !instance_exists(MenuController)) {
+if (global.consoleMode == CONSOLE_INMENU && !instance_exists(MenuController)) {
     instance_create(0, 0, InGameMenuController);
 }
 
-if (!instance_exists(Console))
+// Not disabled
+if (!instance_exists(Console) && (global.consoleMode != CONSOLE_DISABLED))
 {
     instance_create(x, y, Console);
 }
