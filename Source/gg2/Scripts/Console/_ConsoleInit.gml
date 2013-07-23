@@ -84,13 +84,14 @@ ConsoleAddCommand("set","
     name = string_copy(argument0, 0, pos - 1);
     value = string_copy(argument0, pos + 1, string_length(argument0) - pos);
     
-    if(variable_global_exists(name)) {
-        if (is_real(variable_global_get(name))) {
-            if (!is_real(
+    if(variable_global_exists(name))
+    {
+        if (is_real(variable_global_get(name)))
+        {
             value = real(value);
         }
         variable_global_set(name, value);
-        ConsolePrint(name + ' => ' + value);
+        ConsolePrint(name + ' => ' + string(value));
     } else {
         ConsolePrint('There is no global variable named ' + name + '.');
     }
