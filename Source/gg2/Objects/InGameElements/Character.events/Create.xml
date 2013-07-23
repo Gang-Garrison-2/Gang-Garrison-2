@@ -35,6 +35,7 @@
     stabbing = 0;
     onCabinet = 0;
     timeUnscathed = 0;
+    syncWrongness = 0;
     
     //afterburn stuff
     burnIntensity = 0;

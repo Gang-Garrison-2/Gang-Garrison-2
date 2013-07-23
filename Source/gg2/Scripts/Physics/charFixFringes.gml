@@ -3,7 +3,7 @@
 var slopesize;
 slopesize = 6;
 
-if ((iterspace-spent) == 0)
+if (ceil(iterspace-spent) == 0)
     break;
 
 temp = (iterspace-spent)/ceil((iterspace-spent));
