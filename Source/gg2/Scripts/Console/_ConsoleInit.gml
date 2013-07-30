@@ -10,6 +10,12 @@ global.ConsoleWindowX = 395;
 global.ConsoleWindowY = 487;
 global.ConsoleWidth = 389;
 
+// Creates blank, persistent object and an instance of it
+// Used to run eval, exec console commands
+global.ConsoleEnvironmentObject = object_add();
+object_set_persistent(global.ConsoleEnvironmentObject, true);
+global.ConsoleEnvironment = instance_create(0, 0, global.ConsoleEnvironmentObject);
+
 // Add built-in commands
 
 /*
@@ -57,11 +63,17 @@ ConsoleAddCommand("cls","
 ", "cls - clears the console");
 
 ConsoleAddCommand("exec","
-    execute_string(argument0);
+    with (global.ConsoleEnvironment)
+    {
+        execute_string(argument0);
+    }
 ", "exec <gml code> - runs specified code (warning: bad code could hang up or crash server)");
 
 ConsoleAddCommand("eval","
-    ConsolePrint(string(execute_string('return (' + argument0 + ');')));
+    with (global.ConsoleEnvironment)
+    {
+        ConsolePrint(string(execute_string('return (' + argument0 + ');')));
+    }
 ", "eval <gml code> - evaluates specified expression and prints result(warning: bad code could hang up or crash server)");
 
 
