@@ -27,9 +27,9 @@
     menu_addedit_keyormouse("Primary:", "global.attack");
     menu_addedit_keyormouse("Secondary:", "global.special");
     menu_addedit_key("Taunt:", "global.taunt");
-    menu_addedit_key("Chat 1:", "global.chat1");
-    menu_addedit_key("Chat 2:", "global.chat2");
-    menu_addedit_key("Chat 3:", "global.chat3");
+    menu_addedit_key("Emoticon Menu:", "global.chat1");
+    menu_addedit_key("Gameplay Emote Menu:", "global.chat2");
+    menu_addedit_key("Direction Emote Menu:", "global.chat3");
     menu_addedit_key("Call for Healer:", "global.medic");
     menu_addedit_key("Drop Case:", "global.drop");
     menu_addedit_key("Change Team:", "global.changeTeam");
