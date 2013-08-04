@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
   <resource name="createGib" type="RESOURCE"/>
+  <resource name="charSetSolids" type="RESOURCE"/>
+  <resource name="charSetAllSolids" type="RESOURCE"/>
+  <resource name="charUnsetSolids" type="RESOURCE"/>
 </resources>
