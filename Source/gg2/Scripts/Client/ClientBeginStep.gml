@@ -594,8 +594,7 @@ do {
             break;
 
         default:
-            show_message("The Server sent unexpected data");
-            game_restart();
+            UnexpectedDataCleanup();
             exit;
         }
     } else {
