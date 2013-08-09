@@ -118,6 +118,12 @@
     menu_addedit_boolean("Prompt for restart:", "global.restartPrompt", '
         gg2_write_ini("Settings", "RestartPrompt", argument0);
     ');
+    menu_addedit_select("Enable Respawn Timer", "global.respawntimer", '
+    gg2_write_ini("Settings","Respawn Timer", argument0);
+    ');
+    menu_add_option(0, "Disabled");
+    menu_add_option(1, "Enabled");
+
     menu_addlink("Controls", '
         instance_create(x,y,ControlsController);
         instance_destroy();

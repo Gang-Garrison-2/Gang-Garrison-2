@@ -49,6 +49,8 @@ if (myTeam == TEAM_SPECTATOR)
 {
     event_user(7);
 }
+//for respawn timer
+time = 0;
 </argument>
       </arguments>
     </action>
