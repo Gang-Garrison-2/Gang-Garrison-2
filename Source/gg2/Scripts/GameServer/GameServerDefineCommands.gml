@@ -23,3 +23,4 @@ commandBytes[INPUTSTATE] = 3;
 commandBytes[REWARD_REQUEST] = commandBytesPrefixLength1;
 commandBytes[REWARD_CHALLENGE_RESPONSE] = 16;
 commandBytes[PLUGIN_PACKET] = commandBytesPrefixLength2;
+commandBytes[CLIENT_SETTINGS] = 1;
