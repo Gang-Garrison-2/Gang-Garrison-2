@@ -1,8 +1,7 @@
 //99% carbon copy of pluginscleanup but who cares
-var restart, prompt;
+var prompt;
 
-restart = false;
-if (global.unexpectedDataPrompt)
+if (global.unexpectedDataReset == 1)
 {
     prompt = show_message_ext(
         "The Server sent unexpected data",
@@ -11,17 +10,9 @@ if (global.unexpectedDataPrompt)
         "Quit"     // 3
     );
     if (prompt == 1)
-    {
-        restart = true;
-    }
+        restartGG2();
+    else 
+        game_end()
 }
 else
-{
-    restart = true;
-}    
-
-if (restart)
-{
-    execute_program(parameter_string(0), "-restart", false);
-}
-game_end();
+    restartGG2();
