@@ -56,9 +56,6 @@
         // Write classlimits to joining client
         for (a = 0; a < 10; a += 1)
             write_ubyte(argument1, global.classlimits[a]);
-        // Send player settings of all clients
-        for (a = 0; a < ds_list_size(global.players); a += 1)
-            write_ubyte(argument1, ds_list_find_value(global.players, a).queueJump);
     }
     
     if(argument0 == CAPS_UPDATE) {

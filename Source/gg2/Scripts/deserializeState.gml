@@ -51,15 +51,9 @@ receiveCompleteMessage(global.serverSocket,4,global.tempBuffer);
         // read in 
         receiveCompleteMessage(global.serverSocket, 10, global.tempBuffer);
         for (a = 0; a < 10; a +=1 )
-        {
             global.classlimits[a] = read_ubyte(global.tempBuffer);
-        }
-        receiveCompleteMessage(global.serverSocket, global.players, global.tempBuffer);
-        for (a = 0; a < ds_list_size(global.players); a += 1)
-        {
-            var temp;
-            (ds_list_find_value(global.players, a)).queueJump = read_ubyte(global.tempBuffer);
-        }
+        
+    
 }
 
 if(argument0 == CAPS_UPDATE) {
