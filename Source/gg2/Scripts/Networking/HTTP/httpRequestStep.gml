@@ -122,8 +122,8 @@ with (client)
                     return _httpClientDestroy();
                 }
             }
-            // 301/302 Moved Temporarily/Permanently
-            if (statusCode == 301 or statusCode == 302)
+            // 301 Moved Permanently/302 Found/303 See Other/307 Moved Temporarily
+            if (statusCode == 301 or statusCode == 302 or statusCode == 303 or statusCode == 307)
             {
                 if (ds_map_exists(responseHeaders, 'location'))
                 {
@@ -147,7 +147,7 @@ with (client)
                     else
                     {
                         errored = true;
-                        error = "301 or 302 response with unsupported relative Location header - can't redirect";
+                        error = "301, 302, 303 or 307 response with unsupported relative Location header - can't redirect";
                         return _httpClientDestroy();
                     }
                     exit;
@@ -155,7 +155,7 @@ with (client)
                 else
                 {
                     errored = true;
-                    error = "301 or 302 response without Location header - can't redirect";
+                    error = "301, 302, 303 or 307 response without Location header - can't redirect";
                     return _httpClientDestroy();
                 }
             }
