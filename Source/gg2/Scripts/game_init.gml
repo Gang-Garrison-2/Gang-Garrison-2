@@ -60,7 +60,6 @@
     global.showTeammateStats = ini_read_real("Settings", "Show Extra Teammate Stats", 0);
     global.serverPluginsPrompt = ini_read_real("Settings", "ServerPluginsPrompt", 1);
     global.restartPrompt = ini_read_real("Settings", "RestartPrompt", 1);
-    global.unexpectedDataReset = ini_read_real("Settings", "Show Prompt for Unexpected Data", 1);
     //user HUD settings
     global.timerPos=ini_read_real("Settings","Timer Position", 0)
     global.killLogPos=ini_read_real("Settings","Kill Log Position", 0)
@@ -131,7 +130,6 @@
     ini_write_real("Settings", "KoTH HUD Position", global.kothHudPos);
     ini_write_real("Settings", "ServerPluginsPrompt", global.serverPluginsPrompt);
     ini_write_real("Settings", "RestartPrompt", global.restartPrompt);
-    ini_write_real("Settings", "Show Prompt for Unexpected Data", global.unexpectedDataReset);
     ini_write_string("Server", "MapRotation", customMapRotationFile);
     ini_write_real("Server", "ShuffleRotation", global.shuffleRotation);
     ini_write_real("Server", "Dedicated", global.dedicatedMode);

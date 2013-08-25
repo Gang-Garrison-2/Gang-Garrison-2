@@ -594,7 +594,7 @@ do {
             break;
 
         default:
-            UnexpectedDataCleanup();
+            promptRestartOrQuit("The Server sent unexpected data.");
             exit;
         }
     } else {
