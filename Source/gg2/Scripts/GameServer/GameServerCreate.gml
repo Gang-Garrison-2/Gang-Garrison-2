@@ -84,6 +84,9 @@
         challenge = rewardCreateChallenge();
         rewardAuthStart(serverPlayer, hmac_md5_bin(global.rewardKey, challenge), challenge, false, global.rewardId);
     }
+    if(global.queueJumping)
+        serverPlayer.queueJump = global.queueJumping;
+    
     instance_create(0,0,PlayerControl);
 
     var map, i;

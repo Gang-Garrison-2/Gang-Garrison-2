@@ -48,11 +48,12 @@ receiveCompleteMessage(global.serverSocket,4,global.tempBuffer);
             with DKothHUD event_user(13);
         }
         
+        // read in 
         receiveCompleteMessage(global.serverSocket, 10, global.tempBuffer);
-        for (a=0; a<10; a+=1)
-        {
+        for (a = 0; a < 10; a +=1 )
             global.classlimits[a] = read_ubyte(global.tempBuffer);
-        }
+        
+    
 }
 
 if(argument0 == CAPS_UPDATE) {
