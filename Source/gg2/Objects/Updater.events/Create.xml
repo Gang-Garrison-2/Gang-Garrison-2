@@ -43,8 +43,6 @@ while(!httpRequestStatus(downloadHandle))
     if(keyboard_check(vk_escape)) 
     {
         httpRequestDestroy(downloadHandle);
-        if(file_exists(tmpfile))
-            file_delete(tmpfile);
         window_set_showborder(window_oldshowborder);
         window_set_fullscreen(window_oldfullscreen);
         room_goto_fix(Menu);
@@ -79,6 +77,7 @@ while(!httpRequestStatus(downloadHandle))
 if (httpRequestStatus(downloadHandle) == 2)
 {
     show_message("Downloading update failed!#" + httpRequestError(downloadHandle));
+    httpRequestDestroy(downloadHandle);
     window_set_showborder(window_oldshowborder);
     window_set_fullscreen(window_oldfullscreen);
     room_goto_fix(Menu);
@@ -88,6 +87,7 @@ if (httpRequestStatus(downloadHandle) == 2)
 if (httpRequestStatusCode(downloadHandle) != 200)
 {
     show_message("Downloading update failed!#" + string(httpRequestStatusCode(downloadHandle)) + " " + httpRequestReasonPhrase(downloadHandle));
+    httpRequestDestroy(downloadHandle);
     window_set_showborder(window_oldshowborder);
     window_set_fullscreen(window_oldfullscreen);
     room_goto_fix(Menu);
