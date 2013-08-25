@@ -13,13 +13,30 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">// Finished
-if (DM_DownloadStatus(handle) == 3)
-{
-    DM_StopDownload(handle);
-    DM_CloseDownload(handle);
+        <argument kind="STRING">httpRequestStep(handle);
 
-    // File doesn't exist, download failed (presumably)
+// Errored
+if (httpRequestStatus(handle) == 2)
+{
+    show_message(httpRequestError(handle));
+    instance_destroy();
+    exit;
+}
+// Finished
+else if (httpRequestStatus(handle) == 1)
+{
+    // Request failed
+    if (httpRequestStatusCode(handle) != 200)
+    {
+        show_message(httpRequestReasonPhrase(handle));
+        instance_destroy();
+        exit;
+    }
+
+    write_buffer_to_file(httpRequestResponseBody(handle), tmpfile);
+    httpRequestDestroy(handle);
+
+    // File doesn't exist
     if (!file_exists(tmpfile))
     {
         instance_destroy();

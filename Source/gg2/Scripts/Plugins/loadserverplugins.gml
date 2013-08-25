@@ -1,7 +1,7 @@
 // loads plugins from ganggarrison.com asked for by server
 // argument0 - comma separated plugin list (pluginname@md5hash)
 // returns true on success, false on failure
-var list, hashList, text, i, pluginname, pluginhash, realhash, url, handle, filesize, tempfile, tempdir, failed, lastContact, isCached;
+var list, hashList, text, i, pluginname, pluginhash, realhash, url, handle, filesize, progress, tempfile, tempdir, failed, lastContact, isCached;
 
 failed = false;
 list = ds_list_create();
@@ -11,7 +11,7 @@ isDebug = false;
 hashList = ds_list_create();
 
 // split plugin list string
-list = csvtolist(argument0);
+list = csvtolist(argument0, ',');
 
 // Split hashes from plugin names
 for (i = 0; i < ds_list_size(list); i += 1)
@@ -87,14 +87,15 @@ for (i = 0; i < ds_list_size(list); i += 1)
         url = PLUGIN_SOURCE + pluginname + "@" + pluginhash + ".zip";
         
         // let's make the download handle
-        handle = DM_CreateDownload(url, tempfile);
+        handle = httpGet(url, -1);
         
         // download it
-        filesize = DM_StartDownload(handle);
-        while (DM_DownloadStatus(handle) != 3) {
+        while (!httpRequestStatus(handle)) {
             // prevent game locking up
             io_handle();
 
+            httpRequestStep(handle);
+            
             if (!global.isHost) {
                 // send ping if we haven't contacted server in 20 seconds
                 // we need to do this to keep the connection open
@@ -105,27 +106,47 @@ for (i = 0; i < ds_list_size(list); i += 1)
                 }
             }
 
-            // draw progress bar if they're waiting a while
+            // draw progress bar since they may be waiting a while
+            filesize = httpRequestResponseBodySize(handle);
+            progress = httpRequestResponseBodyProgress(handle);
             draw_background_ext(background_index[0], 0, 0, background_xscale[0], background_yscale[0], 0, c_white, 1);
             draw_set_color(c_white);
             draw_set_alpha(1);
             draw_set_halign(fa_left);
             draw_rectangle(50, 550, 300, 560, 2);
             draw_text(50, 530, "Downloading server-sent plugin " + string(i + 1) + "/" + string(ds_list_size(list)) + ' - "' + pluginname + '"');
-            if(DM_GetProgress(handle) > 0)
-                draw_rectangle(50, 550, 50 + DM_GetProgress(handle) / filesize * 250, 560, 0);
+            if (filesize != -1)
+                draw_rectangle(50, 550, 50 + progress / filesize * 250, 560, 0);
             screen_refresh();
         }
-        DM_StopDownload(handle);
-        DM_CloseDownload(handle);
 
-        // if the file doesn't exist, the download presumably failed
-        if (!file_exists(tempfile))
+        // errored
+        if (httpRequestStatus(handle) == 2)
         {
-            show_message('Error loading server-sent plugins - download failed for:#"' + pluginname + '"');
+            show_message('Error loading server-sent plugins - download failed for "' + pluginname + '":#' + httpRequestError(handle));
             failed = true;
             break;
         }
+
+        // request failed
+        if (httpRequestStatusCode(handle) != 200)
+        {
+            show_message('Error loading server-sent plugins - download failed for "' + pluginname + '":#' + string(httpRequestStatusCode(handle)) + ' ' + httpRequestReasonPhrase(handle));
+            failed = true;
+            break;
+        }
+        else
+        {
+            write_buffer_to_file(httpRequestResponseBody(handle), tempfile);
+            if (!file_exists(tempfile))
+            {
+                show_message('Error loading server-sent plugins - download failed for "' + pluginname + '":# No such file?');
+                failed = true;
+                break;
+            }
+        }
+
+        httpRequestDestroy(handle);
     }
 
     // check file integrity

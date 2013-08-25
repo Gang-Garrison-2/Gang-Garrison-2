@@ -486,9 +486,6 @@ are intended as a respectful homage.
 This game uses the Faucet Networking extension by MedO, which is available under the terms of the ISC license.
 You can find more information on Faucet Networking at http://gmc.yoyogames.com/index.php?showtopic=498062.
 
-This game uses the Download Manager DLL, created by Hobbel.  It was wrapped into an extension by cspotcode.
-You can find more information on the Download Manager DLL at http://www.hobbl.com/gmdlls/downloadmanager
-
 This game uses the Faucet Forwarding Extension, created by NAGN, which wraps libminiupnp.
 miniupnp is availible under the BSD license: see miniupnp.license for full license.
 You can find more about Faucet Forwarding at its GitHub Page:

@@ -15,48 +15,56 @@
       <arguments>
         <argument kind="STRING">image_speed = 5/room_speed;
 
-// Download finished
-if (DM_DownloadStatus(handle) == 3)
-{
-    DM_StopDownload(handle);
-    DM_CloseDownload(handle);
+httpRequestStep(handle);
 
-    if (!file_exists(tmpfile))
+var status;
+status = httpRequestStatus(handle);
+
+// Request failed
+if (status == 2)
+{
+    // Just give up
+    httpRequestDestroy(handle);
+    instance_destroy();
+    exit;
+}
+// Request finished
+else if (status == 1)
+{    
+    var statusCode;
+    statusCode = httpRequestStatusCode(handle);
+
+    // Request failed
+    if (statusCode != 200)
     {
-        // File download presumably failed. Stop.
+        // Just give up
+        httpRequestDestroy(handle);
         instance_destroy();
         exit;
     }
 
+    var data;
+    data = httpRequestResponseBody(handle);
+    data = read_string(data, buffer_size(data));
+    httpRequestDestroy(handle);
+
     global.devMessagesChecked = true;
+
+    // split into lines by LF
+    data = csvtolist(data, chr(10));
     
-    // Process the received file
-    var fp;
-
-    fp = file_text_open_read(tmpfile);
-
-    // read lines into array, so we can process them
-    var messageArray, a, b;
-    a = 0;
-    for(fp = file_text_open_read(tmpfile); !file_text_eof(fp); file_text_readln(fp)) {
-        messageArray[a] = file_text_read_string(fp);
-        a += 1;
-    }
-    file_text_close(fp);
-    file_delete(tmpfile);
-
     var c;
-    for(c = 0; c &lt; a; c += 2)
+    for(c = 0; c &lt; ds_list_size(data); c += 2)
     {
-        switch(messageArray[c])
+        switch(ds_list_find_value(data, c))
         {
         case "ShowMessage":
             var popup;
             popup = instance_create(250, 471, DevMessagePopup);
-            popup.msg = messageArray[c+1];
+            popup.msg = ds_list_find_value(data, c + 1);
             break;
         case "Version":
-            versioncheck = (messageArray[c+1]);
+            versioncheck = ds_list_find_value(data, c + 1);
             versionend = string_pos("!",versioncheck);
             version = string_copy(versioncheck,1,versionend-1);
             changeslength = string_length(versioncheck)-versionend;
@@ -71,7 +79,7 @@ if (DM_DownloadStatus(handle) == 3)
             break;
         case "Background":
             var text, list, hash, title, url, showVersion;
-            text = (messageArray[c+1]);
+            text = ds_list_find_value(data, c + 1);
             list = ds_list_create();
 
             // split string by |
@@ -147,6 +155,8 @@ if (DM_DownloadStatus(handle) == 3)
             break;
         }
     }
+
+    ds_list_destroy(data);
     
     instance_destroy();
     exit;
