@@ -55,7 +55,13 @@ with (client)
     else
         write_string(socket, 'GET ' + ds_map_find_value(parsed, 'path') + ' HTTP/1.1' + CRLF);
     write_string(socket, 'Host: ' + ds_map_find_value(parsed, 'fullhost') + CRLF);
+    // "An HTTP/1.1 server MAY assume that a HTTP/1.1 client intends to
+    // maintain a persistent connection unless a Connection header including
+    // the connection-token "close" was sent in the request."
     write_string(socket, 'Connection: close' + CRLF);
+    // "If no Accept-Encoding field is present in a request, the server MAY
+    // assume that the client will accept any content coding."
+    write_string(socket, 'Accept-Encoding:' + CRLF);
     
     // If headers specified
     if (headers != -1)
