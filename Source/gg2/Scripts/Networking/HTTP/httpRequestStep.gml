@@ -31,13 +31,20 @@ with (client)
         {
             c = read_string(socket, 1);
             // Reached end of line
+            // "HTTP/1.1 defines the sequence CR LF as the end-of-line marker for all
+            // protocol elements except the entity-body (see appendix 19.3 for
+            // tolerant applications)."
             if (c == LF and string_char_at(linebuf, string_length(linebuf)) == CR)
             {
                 // Strip trailing CR
                 linebuf = string_copy(linebuf, 1, string_length(linebuf) - 1);
-                // First line - status code (of format "HTTP/X.X XXX Name"
+                // First line - status code
                 if (line == 0)
                 {
+                    // "The first line of a Response message is the Status-Line, consisting
+                    // of the protocol version followed by a numeric status code and its
+                    // associated textual phrase, with each element separated by SP
+                    // characters. No CR or LF is allowed except in the final CRLF sequence."
                     var httpVer, spacePos;
                     spacePos = string_pos(' ', linebuf);
                     if (spacePos == 0)
@@ -75,20 +82,42 @@ with (client)
                     else
                     {
                         var headerName, headerValue, colonPos;
-                        colonPos = string_pos(':', linebuf);
-                        if (colonPos == 0)
+                        // "HTTP/1.1 header field values can be folded onto multiple lines if the
+                        // continuation line begins with a space or horizontal tab."
+                        if ((string_char_at(linebuf, 1) == ' ' or ord(string_char_at(linebuf, 1)) == 9))
                         {
-                            errored = true;
-                            error = "No colon in a header line of response";
-                            return _httpClientDestroy();
+                            if (line == 1)
+                            {
+                                errored = true;
+                                error = "First header line of response can't be a continuation, right?";
+                                return _httpClientDestroy();
+                            }
+                            headerValue = ds_map_find_value(responseHeaders, string_lower(headerName))
+                                + string_copy(linebuf, 2, string_length(linebuf) - 1);
                         }
-    
-                        headerName = string_copy(linebuf, 1, colonPos - 1);
-                        headerValue = string_copy(linebuf, colonPos + 1, string_length(linebuf) - colonPos);
-    
-                        // strip leading spaces
-                        while (string_char_at(headerValue, 1) == ' ')
-                            headerValue = string_copy(headerValue, 2, string_length(headerValue) - 1);
+                        // "Each header field consists
+                        // of a name followed by a colon (":") and the field value. Field names
+                        // are case-insensitive. The field value MAY be preceded by any amount
+                        // of LWS, though a single SP is preferred."
+                        else
+                        {
+                            colonPos = string_pos(':', linebuf);
+                            if (colonPos == 0)
+                            {
+                                errored = true;
+                                error = "No colon in a header line of response";
+                                return _httpClientDestroy();
+                            }
+                            headerName = string_copy(linebuf, 1, colonPos - 1);
+                            headerValue = string_copy(linebuf, colonPos + 1, string_length(linebuf) - colonPos);
+                            // "The field-content does not include any leading or trailing LWS:
+                            // linear white space occurring before the first non-whitespace
+                            // character of the field-value or after the last non-whitespace
+                            // character of the field-value. Such leading or trailing LWS MAY be
+                            // removed without changing the semantics of the field value."
+                            while (string_char_at(headerValue, 1) == ' ' or ord(string_char_at(headerValue, 1)) == 9)
+                                headerValue = string_copy(headerValue, 2, string_length(headerValue) - 1);
+                        }
     
                         ds_map_add(responseHeaders, string_lower(headerName), headerValue);
 
@@ -132,7 +161,11 @@ with (client)
                     // Location is relative, absolute path
                     if (string_char_at(location, 1) == '/')
                     {
-                        location = 'http://' + ds_map_find_value(requestUrlParsed, 'fullhost') + location;
+                        if (ds_map_find_value(requestUrlParsed, 'port') == 80)
+                            location = 'http://' + ds_map_find_value(requestUrlParsed, 'host') + location;
+                        else
+                            location = 'http://' + ds_map_find_value(requestUrlParsed, 'host') 
+                                + ':' + ds_map_find_value(requestUrlParsed, 'port') + location;
                         // Restart request
                         _httpClientDestroy();
                         httpGet(location, requestHeaders, client);

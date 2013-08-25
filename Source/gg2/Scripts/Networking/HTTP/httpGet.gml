@@ -21,8 +21,8 @@ if (parsed == -1)
 
 if (!ds_map_exists(parsed, 'port'))
     ds_map_add(parsed, 'port', 80);
-if (!ds_map_exists(parsed, 'path'))
-    ds_map_add(parsed, 'path', '/');
+if (!ds_map_exists(parsed, 'abs_path'))
+    ds_map_add(parsed, 'abs_path', '/');
 
 var client;
 if (overwrite != 0)
@@ -48,17 +48,38 @@ client.requestUrl = url;
 client.requestUrlParts = parsed;
 client.requestHeaders = headers;
 
+//  Request       = Request-Line              ; Section 5.1
+//                  *(( general-header        ; Section 4.5
+//                   | request-header         ; Section 5.3
+//                   | entity-header ) CRLF)  ; Section 7.1
+//                  CRLF
+//                  [ message-body ]          ; Section 4.3
 with (client)
 {
+    // "The Request-Line begins with a method token, followed by the
+    // Request-URI and the protocol version, and ending with CRLF. The
+    // elements are separated by SP characters. No CR or LF is allowed
+    // except in the final CRLF sequence."
     if (ds_map_exists(parsed, 'query'))
-        write_string(socket, 'GET ' + ds_map_find_value(parsed, 'path') + '?' + ds_map_find_value(parsed, 'query') + ' HTTP/1.1' + CRLF);
+        write_string(socket, 'GET ' + ds_map_find_value(parsed, 'abs_path') + '?' + ds_map_find_value(parsed, 'query') + ' HTTP/1.1' + CRLF);
     else
-        write_string(socket, 'GET ' + ds_map_find_value(parsed, 'path') + ' HTTP/1.1' + CRLF);
-    write_string(socket, 'Host: ' + ds_map_find_value(parsed, 'fullhost') + CRLF);
+        write_string(socket, 'GET ' + ds_map_find_value(parsed, 'abs_path') + ' HTTP/1.1' + CRLF);
+
+    // "A client MUST include a Host header field in all HTTP/1.1 request
+    // messages."
+    // "A "host" without any trailing port information implies the default
+    // port for the service requested (e.g., "80" for an HTTP URL)."
+    if (ds_map_find_value(parsed, 'port') == 80)
+        write_string(socket, 'Host: ' + ds_map_find_value(parsed, 'host') + CRLF);
+    else
+        write_string(socket, 'Host: ' + ds_map_find_value(parsed, 'host')
+            + ':' + ds_map_find_value(parsed, 'port') + CRLF);
+
     // "An HTTP/1.1 server MAY assume that a HTTP/1.1 client intends to
     // maintain a persistent connection unless a Connection header including
     // the connection-token "close" was sent in the request."
     write_string(socket, 'Connection: close' + CRLF);
+
     // "If no Accept-Encoding field is present in a request, the server MAY
     // assume that the client will accept any content coding."
     write_string(socket, 'Accept-Encoding:' + CRLF);

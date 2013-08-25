@@ -6,15 +6,15 @@
 // "scheme" - the URL scheme (e.g. "http")
 // "host" - the hostname (e.g. "example.com" or "127.0.0.1")
 // "port" - the port (e.g. 8000) - this is a real, unlike the others
-// "fullhost" - the host and possibly port from the url (e.g. "example.com:8000")
-// "path" - the path (e.g. "/" or "/index.html")
+// "abs_path" - the absolute path (e.g. "/" or "/index.html")
 // "query" - the query string (e.g. "a=b&c=3")
 // Parts which are not included will not be in the map
 // e.g. http://example.com will not have the "port", "path" or "query" keys
 
 // This will *only* work properly for URLs of format:
-// scheme://host[:port][/path[?query]]
-// where [] denotes an optional component
+// "http_URL = "http:" "//" host [ ":" port ] [ abs_path [ "?" query ]]"
+// where [] denotes an optional component (from RFC2616)
+// It will not work correctly for IPv6 host values
 
 var url;
 url = argument0;
@@ -57,13 +57,11 @@ while (string_length(url) > 0)
         {
             // Find : for beginning of port
             colonPos = string_pos(':', url);
-            ds_map_add(map, 'fullhost', url);
         }
         else
         {
             // Find : for beginning of port prior to /
             colonPos = string_pos(':', string_copy(url, 1, slashPos - 1));
-            ds_map_add(map, 'fullhost', string_copy(url, 1, slashPos - 1));
         }
         // No colon - no port
         if (colonPos == 0)
@@ -110,12 +108,12 @@ while (string_length(url) > 0)
         // There's no ? - no query
         if (queryPos == 0)
         {
-            ds_map_add(map, 'path', url);
+            ds_map_add(map, 'abs_path', url);
             return map;
         }
         else
         {
-            ds_map_add(map, 'path', string_copy(url, 1, queryPos - 1));
+            ds_map_add(map, 'abs_path', string_copy(url, 1, queryPos - 1));
             ds_map_add(map, 'query', string_copy(url, queryPos + 1, string_length(url) - queryPos));
             return map;
         }
