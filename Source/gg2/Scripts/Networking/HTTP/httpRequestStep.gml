@@ -113,6 +113,15 @@ with (client)
         responseBodyProgress += available;
         if (tcp_eof(socket))
         {
+            if (responseBodySize != -1)
+            {
+                if (responseBodyProgress < responseBodySize)
+                {
+                    errored = true;
+                    error = "Unexpected EOF, response body size is less than expected";
+                    return _httpClientDestroy();
+                }
+            }
             // 301/302 Moved Temporarily/Permanently
             if (statusCode == 301 or statusCode == 302)
             {
