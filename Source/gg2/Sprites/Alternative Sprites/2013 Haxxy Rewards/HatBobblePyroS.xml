@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <sprite>
-<origin x="31" y="40"/>
-<mask>
-<separate>false</separate>
-<shape>RECTANGLE</shape>
-<bounds alphaTolerance="0" mode="AUTO">
-<left>0</left>
-<right>10</right>
-<top>0</top>
-<bottom>10</bottom>
-</bounds>
-</mask>
-<preload>true</preload>
-<smoothEdges>false</smoothEdges>
-<transparent>false</transparent>
+  <origin x="31" y="40"/>
+  <mask>
+    <separate>false</separate>
+    <shape>RECTANGLE</shape>
+    <bounds alphaTolerance="0" mode="AUTO"/>
+  </mask>
+  <preload>true</preload>
+  <smoothEdges>false</smoothEdges>
+  <transparent>false</transparent>
 </sprite>
