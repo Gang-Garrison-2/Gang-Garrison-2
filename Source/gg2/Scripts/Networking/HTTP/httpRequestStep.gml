@@ -46,9 +46,6 @@ with (client)
                         error = "No space in first line of response";
                         return _httpClientDestroy();
                     }
-                    // I did check to make sure this was HTTP/1.0 and not 1.1...
-                    // ...but that errored when talking to ganggarrison.com
-                    // So I'll assume accepting 1.1 for a 1.0 request is OK :P
                     httpVer = string_copy(linebuf, 1, spacePos);
                     linebuf = string_copy(linebuf, spacePos + 1, string_length(linebuf) - spacePos);
     

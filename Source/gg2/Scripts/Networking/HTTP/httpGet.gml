@@ -51,10 +51,11 @@ client.requestHeaders = headers;
 with (client)
 {
     if (ds_map_exists(parsed, 'query'))
-        write_string(socket, 'GET ' + ds_map_find_value(parsed, 'path') + '?' + ds_map_find_value(parsed, 'query') + ' HTTP/1.0' + CRLF);
+        write_string(socket, 'GET ' + ds_map_find_value(parsed, 'path') + '?' + ds_map_find_value(parsed, 'query') + ' HTTP/1.1' + CRLF);
     else
-        write_string(socket, 'GET ' + ds_map_find_value(parsed, 'path') + ' HTTP/1.0' + CRLF);
+        write_string(socket, 'GET ' + ds_map_find_value(parsed, 'path') + ' HTTP/1.1' + CRLF);
     write_string(socket, 'Host: ' + ds_map_find_value(parsed, 'fullhost') + CRLF);
+    write_string(socket, 'Connection: close' + CRLF);
     
     // If headers specified
     if (headers != -1)
