@@ -33,6 +33,9 @@
     menu_addlink("Credits", '
         room_goto_fix(Credits);
     ');
+    menu_addlink("Visit The Forums",'
+        splash_show_web("http://www.ganggarrison.com/forums/index.php",0)
+    ');
     menu_addback("Quit", '
         game_end();
     ');
@@ -52,14 +55,21 @@
         var validBackground;
         validBackground = false;
 
-        // background exists
-        if (file_exists("background.png"))
+        // already loaded background in a previous instance
+        if (variable_global_exists("downloadedBackground"))
+        {
+            menuimage = global.downloadedBackground;
+            validBackground = true;
+        }
+        // haven't loaded yet, background exists
+        else if (file_exists("background.png"))
         {
             // passes integrity check
             if (global.backgroundHash == GG2DLL_compute_MD5("background.png"))
             {
                 // use downloaded background
-                menuimage = background_add("background.png", false, false);
+                global.downloadedBackground = background_add("background.png", false, false);
+                menuimage = global.downloadedBackground;
                 validBackground = true;
             }
         }
