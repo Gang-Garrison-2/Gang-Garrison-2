@@ -168,14 +168,14 @@ with (client)
                                 + ':' + ds_map_find_value(requestUrlParsed, 'port') + location;
                         // Restart request
                         _httpClientDestroy();
-                        httpGet(location, requestHeaders, client);
+                        _httpPrepareRequest(client, location, requestHeaders);
                     }
                     // Location is absolute
                     else if (string_copy(location, 1, 7) == 'http://')
                     {
                         // Restart request
                         _httpClientDestroy();
-                        httpGet(location, requestHeaders, client);
+                        _httpPrepareRequest(client, location, requestHeaders);
                     }
                     else
                     {
