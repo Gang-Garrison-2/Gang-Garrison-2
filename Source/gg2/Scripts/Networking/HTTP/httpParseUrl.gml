@@ -19,106 +19,92 @@
 var url;
 url = argument0;
 
-var map, state;
+var map;
 map = ds_map_create();
 ds_map_add(map, 'url', url);
-state = 0;
 
-while (string_length(url) > 0)
+// before scheme
+var colonPos;
+// Find colon for end of scheme
+colonPos = string_pos(':', url);
+// No colon - bad URL
+if (colonPos == 0)
+    return -1;
+ds_map_add(map, 'scheme', string_copy(url, 1, colonPos - 1));
+url = string_copy(url, colonPos + 1, string_length(url) - colonPos);
+
+// before double slash
+// remove slashes (yes this will screw up file:// but who cares)
+while (string_char_at(url, 1) == '/')
+    url = string_copy(url, 2, string_length(url) - 1);
+
+// before hostname
+var slashPos, colonPos;
+// Find slash for beginning of path
+slashPos = string_pos('/', url);
+// No slash ahead - http://host format with no ending slash
+if (slashPos == 0)
 {
-    switch (state)
+    // Find : for beginning of port
+    colonPos = string_pos(':', url);
+}
+else
+{
+    // Find : for beginning of port prior to /
+    colonPos = string_pos(':', string_copy(url, 1, slashPos - 1));
+}
+// No colon - no port
+if (colonPos == 0)
+{
+    // There was no slash
+    if (slashPos == 0)
     {
-    // before scheme
-    case 0:
-        var colonPos;
-        // Find colon for end of scheme
-        colonPos = string_pos(':', url);
-        // No colon - bad URL
-        if (colonPos == 0)
-            return -1;
-        ds_map_add(map, 'scheme', string_copy(url, 1, colonPos - 1));
+        ds_map_add(map, 'host', url);
+        return map;
+    }
+    // There was a slash
+    else
+    {
+        ds_map_add(map, 'host', string_copy(url, 1, slashPos - 1));
+        url = string_copy(url, slashPos, string_length(url) - slashPos + 1);
+    }
+}
+// There's a colon - port specified
+else
+{
+    // There was no slash
+    if (slashPos == 0)
+    {
+        ds_map_add(map, 'host', string_copy(url, 1, colonPos - 1));
+        ds_map_add(map, 'port', real(string_copy(url, colonPos + 1, string_length(url) - colonPos)));
+        return map;
+    }
+    // There was a slash
+    else
+    {
+        ds_map_add(map, 'host', string_copy(url, 1, colonPos - 1));
         url = string_copy(url, colonPos + 1, string_length(url) - colonPos);
-        state = 1;
-        break;
-    // before double slash
-    case 1:
-        // remove slashes (yes this will screw up file:// but who cares)
-        while (string_char_at(url, 1) == '/')
-            url = string_copy(url, 2, string_length(url) - 1);
-        state = 2;
-        break;
-    // before hostname
-    case 2:
-        var slashPos, colonPos;
-        // Find slash for beginning of path
         slashPos = string_pos('/', url);
-        // No slash ahead - http://host format with no ending slash
-        if (slashPos == 0)
-        {
-            // Find : for beginning of port
-            colonPos = string_pos(':', url);
-        }
-        else
-        {
-            // Find : for beginning of port prior to /
-            colonPos = string_pos(':', string_copy(url, 1, slashPos - 1));
-        }
-        // No colon - no port
-        if (colonPos == 0)
-        {
-            // There was no slash
-            if (slashPos == 0)
-            {
-                ds_map_add(map, 'host', url);
-                return map;
-            }
-            // There was a slash
-            else
-            {
-                ds_map_add(map, 'host', string_copy(url, 1, slashPos - 1));
-                url = string_copy(url, slashPos, string_length(url) - slashPos + 1);
-            }
-        }
-        // There's a colon - port specified
-        else
-        {
-            // There was no slash
-            if (slashPos == 0)
-            {
-                ds_map_add(map, 'host', string_copy(url, 1, colonPos - 1));
-                ds_map_add(map, 'port', real(string_copy(url, colonPos + 1, string_length(url) - colonPos)));
-                return map;
-            }
-            // There was a slash
-            else
-            {
-                ds_map_add(map, 'host', string_copy(url, 1, colonPos - 1));
-                url = string_copy(url, colonPos + 1, string_length(url) - colonPos);
-                slashPos = string_pos('/', url);
-                ds_map_add(map, 'port', real(string_copy(url, 1, slashPos - 1)));
-                url = string_copy(url, slashPos, string_length(url) - slashPos + 1); 
-            }
-        }
-        state = 3;
-        break;
-    // before path
-    case 3:
-        var queryPos;
-        queryPos = string_pos('?', url);
-        // There's no ? - no query
-        if (queryPos == 0)
-        {
-            ds_map_add(map, 'abs_path', url);
-            return map;
-        }
-        else
-        {
-            ds_map_add(map, 'abs_path', string_copy(url, 1, queryPos - 1));
-            ds_map_add(map, 'query', string_copy(url, queryPos + 1, string_length(url) - queryPos));
-            return map;
-        }
-        break;
+        ds_map_add(map, 'port', real(string_copy(url, 1, slashPos - 1)));
+        url = string_copy(url, slashPos, string_length(url) - slashPos + 1); 
     }
 }
 
+// before path
+var queryPos;
+queryPos = string_pos('?', url);
+// There's no ? - no query
+if (queryPos == 0)
+{
+    ds_map_add(map, 'abs_path', url);
+    return map;
+}
+else
+{
+    ds_map_add(map, 'abs_path', string_copy(url, 1, queryPos - 1));
+    ds_map_add(map, 'query', string_copy(url, queryPos + 1, string_length(url) - queryPos));
+    return map;
+}
+
+// Return -1 upon unlikely error
 return -1;
