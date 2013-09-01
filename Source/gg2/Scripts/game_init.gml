@@ -389,6 +389,7 @@ global.launchMap = "";
     global.countFont = font_add_sprite(countFontS, ord("0"),false,2);
     draw_set_font(global.gg2Font);
     cursor_sprite = CrosshairS;
+    global.dealDamageFunction = ""; // executed after dealDamage, with same args
     
     if(!directory_exists(working_directory + "\Maps")) directory_create(working_directory + "\Maps");
     

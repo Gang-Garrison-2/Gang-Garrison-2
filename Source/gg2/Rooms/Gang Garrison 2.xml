@@ -8,7 +8,8 @@
   </grid>
   <speed>30</speed>
   <persistent>false</persistent>
-  <creationCode/>
+  <creationCode>
+</creationCode>
   <backgroundColor>000000</backgroundColor>
   <drawBackgroundColor>true</drawBackgroundColor>
   <backgrounds>

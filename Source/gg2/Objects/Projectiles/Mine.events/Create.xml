@@ -19,6 +19,7 @@
     alarm[1] = 29;
     stickied = false;
     blastRadius = 40;
+    affectRadius = 65;
     splashThreshhold = true; // whether to cap the distance at which splash has an effect
     exploded = false;
     bubbled = false;

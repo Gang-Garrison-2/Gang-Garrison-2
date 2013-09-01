@@ -14,7 +14,7 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">{
-    if(readyToShoot and ammoCount &gt;= 2.2)
+    if(readyToShoot and ammoCount &gt;= 2)
     {
         playsound(x,y,ChaingunSnd);
         var shot;
@@ -35,10 +35,10 @@
         justShot=true;
         readyToShoot=false;
         isRefilling = false;
-        ammoCount -= 2.2;
+        ammoCount -= 2;
         
         var reloadBufferFactor;
-        if(ammoCount &lt; 2.2)
+        if(ammoCount &lt; 2)
             reloadBufferFactor = 2.5;
         else
             reloadBufferFactor = 1+(cos((ammoCount+2.2)/maxAmmo*pi)+1)/2; // spline from (full ammo = 1*) to (empty ammo = 2*)

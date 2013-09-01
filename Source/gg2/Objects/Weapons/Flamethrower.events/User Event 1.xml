@@ -25,11 +25,13 @@
             loopsoundmaintain(x,y,FlamethrowerSnd);
         alarm[3] = 2;
         
-        var shot;
+        var shot, calculatedspread;
         randomize();
+        calculatedspread = sign(random(2)-1)*power(random(3), 1.8);
+        calculatedspread *= 1 - hspeed/owner.basemaxspeed;
         shot = instance_create(x+lengthdir_x(25,owner.aimDirection),y+lengthdir_y(25,owner.aimDirection),Flame);
-        shot.direction=owner.aimDirection+(random(10)-5);
-        shot.speed=5+random(5);
+        shot.direction = owner.aimDirection+calculatedspread; // more flames near center than away from it, ~7.2 degree outer cone, ~2.1 average moderate cone
+        shot.speed=6.5+random(3.5);
         shot.owner=owner;
         shot.ownerPlayer=ownerPlayer;
         shot.team=owner.team;
