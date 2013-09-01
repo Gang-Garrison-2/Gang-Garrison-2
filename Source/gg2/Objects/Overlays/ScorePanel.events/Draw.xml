@@ -112,19 +112,27 @@
         blueintelstatus=1;
     }
     
-    if blueintelstatus == 0 {
+    if (global.myself.object != -1) if(global.myself.object.intel)
+    {
+        if(global.myself.team == TEAM_BLUE)
+            redintelstatus = 3;
+        if(global.myself.team == TEAM_RED)
+            blueiintelstatus = 3;
+    }
+    
+    if (blueintelstatus == 0)
         draw_sprite_ext(IntelReturnTimeS,max(1,floor(IntelligenceBlue.alarm[0]/900*17)),bluex-26,bluey-27,3,3,0,c_white,1);
-    } else {
+    else
         draw_sprite_ext(IntelReturnTimeS,16,bluex-26,bluey-27,3,3,0,c_white,1);
-    }
-    if redintelstatus == 0 {
+    
+    if (redintelstatus == 0)
         draw_sprite_ext(IntelReturnTimeS,max(18,floor(IntelligenceRed.alarm[0]/900*17)+17),redx-27,redy-27,3,3,0,c_white,1);
-    } else {
+    else
         draw_sprite_ext(IntelReturnTimeS,33,redx-27,redy-27,3,3,0,c_white,1);
-    }
+    
 
-    drawred=true;
-    drawblue=true;
+    drawred = true;
+    drawblue = true;
     if global.myself.object!=-1{
         if global.myself.team==TEAM_RED &amp;&amp; global.myself.object.intel==true drawblue=false;
         if global.myself.team==TEAM_BLUE &amp;&amp; global.myself.object.intel==true drawred=false;
