@@ -50,4 +50,5 @@
   <resource name="toggleZoom" type="RESOURCE"/>
   <resource name="ds_list_sorted_insert" type="RESOURCE"/>
   <resource name="isBetaVersion" type="RESOURCE"/>
+  <resource name="draw_pinched_blackrect" type="RESOURCE"/>
 </resources>

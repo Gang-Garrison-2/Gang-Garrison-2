@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="CREATE" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">menu_create(24, 148, 72, 100, 30);
+
+menu_background(80, 24, 8, 12, 4);
+
+menu_addlink("Refresh", '
+    event_user(0);
+');
+menu_addback("Back", '
+    room_goto_fix(Menu);
+');
+
+cooleddown = false;
+alarm[1] = 90;
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>
