@@ -22,12 +22,9 @@
     global.tcpListener = -1;
     global.serverSocket = -1;
     
-    global.currentMapIndex = 0;
-    global.currentMapArea = 1;
-    
     var i;
     serverId = buffer_create();
-    for(i=0;i<16;i+=1)
+    for (i = 0; i < 16; i += 1)
         write_ubyte(serverId, irandom(255));
     
     serverbalance=0;
@@ -106,7 +103,25 @@
             }
         }
     }
-    global.currentMap = ds_list_find_value(global.map_rotation, global.currentMapIndex);
+    var i;
+    i = 0;
+    global.currentMapIndex = -1;
+    do
+    {
+        global.currentMapIndex += 1;
+        global.currentMapArea = 1;
+        if(global.currentMapIndex == ds_list_size(global.map_rotation)) 
+            global.currentMapIndex = 0;
+        global.currentMap = ds_list_find_value(global.map_rotation, global.currentMapIndex);
+        if(i > ds_list_size(global.map_rotation))
+        {
+            show_message("Error: Invalid rotation: doesn't contain any valid maps. Exiting.");
+            game_end();
+            exit;
+        }
+        i += 1;
+    } until( mapIsInternal(global.currentMap) or file_exists("Maps/" + global.currentMap + ".png") );
+    
     if(file_exists("Maps/" + global.currentMap + ".png")) { // if this is an external map
         // get the md5 and url for the map
         global.currentMapMD5 = CustomMapGetMapMD5(global.currentMap);

@@ -36,6 +36,7 @@
   <resource name="deserializeState" type="RESOURCE"/>
   <resource name="mapEnd" type="RESOURCE"/>
   <resource name="setChatBubble" type="RESOURCE"/>
+  <resource name="mapIsInternal" type="RESOURCE"/>
   <resource name="buildSentry" type="RESOURCE"/>
   <resource name="gotoInternalMapRoom" type="RESOURCE"/>
   <resource name="ServerBalanceTeams" type="RESOURCE"/>

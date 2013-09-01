@@ -40,19 +40,28 @@ if(impendingMapChange > 0)
 
 if(global.winners != -1 and !global.mapchanging)
 {
+    var i;
+    i = 0;
     if(global.winners == TEAM_RED and global.currentMapArea < global.totalMapAreas)
     {
         global.nextMap = global.currentMap;
         global.currentMapArea += 1;
     }
-    else
-    { 
+    else do
+    {
         global.currentMapIndex += 1;
         global.currentMapArea = 1;
         if(global.currentMapIndex == ds_list_size(global.map_rotation)) 
             global.currentMapIndex = 0;
         global.nextMap = ds_list_find_value(global.map_rotation, global.currentMapIndex);
-    }
+        if(i > ds_list_size(global.map_rotation))
+        {
+            show_message("Error: Invalid rotation: doesn't contain any valid maps. Exiting.");
+            game_end();
+            exit;
+        }
+        i += 1;
+    } until( mapIsInternal(global.currentMap) or file_exists("Maps/" + global.currentMap + ".png") );
     global.mapchanging = true;
     impendingMapChange = 300; // in 300 frames (ten seconds), we'll do a map change
     
@@ -72,19 +81,24 @@ if(impendingMapChange == 0)
 {
     global.mapchanging = false;
     global.currentMap = global.nextMap;
-    if(file_exists("Maps/" + global.currentMap + ".png"))
-    { // if this is an external map, get the md5 and url for the map
+    if (mapIsInternal(global.currentMap))
+    {
+        global.currentMapMD5 = "";
+        if(gotoInternalMapRoom(global.currentMap) != 0)
+        {
+            show_message("Error:#Could not change to supposedly valid internal map. Please report this.#Restarting");
+            game_restart();
+        }
+    }
+    else if(file_exists("Maps/" + global.currentMap + ".png"))
+    {
         global.currentMapMD5 = CustomMapGetMapMD5(global.currentMap);
         room_goto_fix(CustomMapRoom);
     }
     else
-    { // internal map, so at the very least, MD5 must be blank
-        global.currentMapMD5 = "";
-        if(gotoInternalMapRoom(global.currentMap) != 0)
-        {
-            show_message("Error:#Map " + global.currentMap + " is not in maps folder, and it is not a valid internal map.#Exiting.");
-            game_end();
-        }
+    {
+        show_message("Error:#Could not change to supposedly valid external map. Please report this.#Restarting.");
+        game_restart();
     }
     ServerChangeMap(global.currentMap, global.currentMapMD5, global.sendBuffer);
     impendingMapChange = -1;
