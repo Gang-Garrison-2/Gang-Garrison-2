@@ -38,7 +38,7 @@ else
 if(impendingMapChange > 0)
     impendingMapChange -= 1; // countdown until a map change
 
-if(global.winners != -1 and !global.mapchanging)
+if(global.winners != -1 and global.mapchanging)
 {
     if(global.winners == TEAM_RED and global.currentMapArea < global.totalMapAreas)
     {
@@ -122,7 +122,7 @@ if(impendingMapChange == 0)
             team = TEAM_SPECTATOR;
         }
         timesChangedCapLimit = 0;
-        alarm[5]=1;
+        alarm[5] = 1;
     }
     // message lobby to update map name
     sendLobbyRegistration();

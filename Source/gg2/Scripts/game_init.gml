@@ -387,6 +387,7 @@ global.launchMap = "";
     
     global.gg2Font = font_add_sprite(gg2FontS,ord("!"),false,0);
     global.countFont = font_add_sprite(countFontS, ord("0"),false,2);
+    global.timerFont = font_add_sprite(timerFontS, ord("0"),true,5);
     draw_set_font(global.gg2Font);
     cursor_sprite = CrosshairS;
     
