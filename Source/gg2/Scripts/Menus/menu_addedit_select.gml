@@ -1,6 +1,7 @@
 // argument0 - name
 // argument1 - name of the variable this setting is bound to
 // argument2 - GML code to run upon change (argument0 is new value)
+// argument3 - GML code to run immediately -- used to add options (if unset, back button will not automatically be fixed if adding option after back button is created)
 // Call menu_add_option right after this function to add options for the select.
 // You need to add at least one option or the menu will error out.
 
@@ -10,4 +11,11 @@ item_var[items] = argument1;
 item_value[items] = 0; // In this case, the index of the selected option
 item_script[items] = argument2;
 item_options[items] = 0;
+if(is_string(argument3))
+{
+    items += 1; // bluh stateful API
+    execute_string(argument3);
+    items -= 1;
+    menu_fixback4();
+}
 items += 1;

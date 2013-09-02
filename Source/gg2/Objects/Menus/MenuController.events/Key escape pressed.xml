@@ -13,8 +13,8 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if(stepHasRun)
-    execute_string(menu_script_back);
+        <argument kind="STRING">if(stepHasRun and menu_script_back != -1)
+    execute_string(item_script[menu_script_back]);
 </argument>
       </arguments>
     </action>

@@ -17,13 +17,11 @@
     cursor_sprite = CrosshairS;
     global.levelchoice = 1
 
-    menu_create(40, 300, 200, 200, 30);
+    menu_create(40, 300, 200, 200, 32);
+    doSwapBack = false;
+    menu_background(212, 24, 8, 12, 4);
     menu_setdimmed();
     
-    menu_addlink("Options", '
-        instance_destroy();
-        instance_create(0,0,OptionsController);
-    ');
     menu_addback("Return to Game", '
         instance_destroy();
     ');
@@ -34,7 +32,10 @@
             instance_destroy();
         ');
     }
-    menu_addlink("", '');
+    menu_addlink("Options", '
+        instance_destroy();
+        instance_create(0,0,OptionsController);
+    ');
     menu_addlink("Disconnect", '
         // Force dedicated mode to off so you can go to main menu instead of just restarting server
         global.dedicatedMode = 0;
