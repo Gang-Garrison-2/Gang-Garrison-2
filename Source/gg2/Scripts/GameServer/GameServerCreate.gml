@@ -152,4 +152,10 @@
     {
         pluginList = '';
     }
+    //vsync on makes the server really desync
+    if (global.monitorSync == 1)
+    {
+        show_message("Warning: vSync has been disabled to prevent desync on the server.")
+        global.monitorSync = 0;
+    }
 }
