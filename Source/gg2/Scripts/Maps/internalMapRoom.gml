@@ -24,7 +24,7 @@ case "gen_destroy":
     return Destroy;
 case "koth_harvest":
     return Harvest;
-case "koth_valley":internalMapRoom
+case "koth_valley":
     return Valley;
 case "koth_corinth":
     return Corinth;

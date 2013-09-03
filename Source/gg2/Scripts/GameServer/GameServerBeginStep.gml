@@ -40,8 +40,6 @@ if(impendingMapChange > 0)
 
 if(global.winners != -1 and !global.mapchanging)
 {
-    var i;
-    i = 0;
     if(global.winners == TEAM_RED and global.currentMapArea < global.totalMapAreas)
     {
         global.currentMapArea += 1;

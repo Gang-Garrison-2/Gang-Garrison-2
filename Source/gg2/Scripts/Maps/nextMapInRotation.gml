@@ -1,6 +1,8 @@
 // next map by name = nextMapInRotation()
-var desiredMapName, desiredMapIndex;
+var desiredMapName, desiredMapIndex, i;
 desiredMapIndex = global.currentMapIndex;
+i = 0;
+
 do
 {
     if(i >= ds_list_size(global.map_rotation))
