@@ -44,24 +44,15 @@ if(global.winners != -1 and !global.mapchanging)
     i = 0;
     if(global.winners == TEAM_RED and global.currentMapArea < global.totalMapAreas)
     {
-        global.nextMap = global.currentMap;
         global.currentMapArea += 1;
+        global.nextMap = global.currentMap;
     }
-    else do
+    else
     {
-        global.currentMapIndex += 1;
         global.currentMapArea = 1;
-        if(global.currentMapIndex == ds_list_size(global.map_rotation)) 
-            global.currentMapIndex = 0;
-        global.nextMap = ds_list_find_value(global.map_rotation, global.currentMapIndex);
-        if(i > ds_list_size(global.map_rotation))
-        {
-            show_message("Error: Invalid rotation: doesn't contain any valid maps. Exiting.");
-            game_end();
-            exit;
-        }
-        i += 1;
-    } until( mapIsInternal(global.currentMap) or file_exists("Maps/" + global.currentMap + ".png") );
+        global.currentMap = nextMapInRotation();
+    }
+    
     global.mapchanging = true;
     impendingMapChange = 300; // in 300 frames (ten seconds), we'll do a map change
     
@@ -81,14 +72,12 @@ if(impendingMapChange == 0)
 {
     global.mapchanging = false;
     global.currentMap = global.nextMap;
-    if (mapIsInternal(global.currentMap))
+    if (internalMapRoom(global.currentMap))
     {
         global.currentMapMD5 = "";
         if(gotoInternalMapRoom(global.currentMap) != 0)
-        {
-            show_message("Error:#Could not change to supposedly valid internal map. Please report this.#Restarting");
-            game_restart();
-        }
+            game_end();
+        
     }
     else if(file_exists("Maps/" + global.currentMap + ".png"))
     {
@@ -97,8 +86,8 @@ if(impendingMapChange == 0)
     }
     else
     {
-        show_message("Error:#Could not change to supposedly valid external map. Please report this.#Restarting.");
-        game_restart();
+        show_message("Error:#Could not change to supposedly valid external map. Please report this.#Shutting down.");
+        game_end();
     }
     ServerChangeMap(global.currentMap, global.currentMapMD5, global.sendBuffer);
     impendingMapChange = -1;

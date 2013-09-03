@@ -106,27 +106,20 @@
     var i;
     i = 0;
     global.currentMapIndex = -1;
-    do
-    {
-        global.currentMapIndex += 1;
-        global.currentMapArea = 1;
-        if(global.currentMapIndex == ds_list_size(global.map_rotation)) 
-            global.currentMapIndex = 0;
-        global.currentMap = ds_list_find_value(global.map_rotation, global.currentMapIndex);
-        if(i > ds_list_size(global.map_rotation))
-        {
-            show_message("Error: Invalid rotation: doesn't contain any valid maps. Exiting.");
-            game_end();
-            exit;
-        }
-        i += 1;
-    } until( mapIsInternal(global.currentMap) or file_exists("Maps/" + global.currentMap + ".png") );
+    global.currentMapArea = 1;
     
-    if(file_exists("Maps/" + global.currentMap + ".png")) { // if this is an external map
+    global.currentMap = nextMapInRotation();
+    
+    // external map
+    if(file_exists("Maps/" + global.currentMap + ".png"))
+    {
         // get the md5 and url for the map
         global.currentMapMD5 = CustomMapGetMapMD5(global.currentMap);
         room_goto_fix(CustomMapRoom);
-    } else { // internal map, so at the very least, MD5 must be blank
+    }
+    // internal map, so at the very least, MD5 must be blank
+    else
+    {
         global.currentMapMD5 = "";
         if(gotoInternalMapRoom(global.currentMap) != 0) {
             show_message("Error:#Map " + global.currentMap + " is not in maps folder, and it is not a valid internal map.#Exiting.");
