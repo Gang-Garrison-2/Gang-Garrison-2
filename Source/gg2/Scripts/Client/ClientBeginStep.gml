@@ -603,7 +603,12 @@ do {
             player = ds_list_find_value(global.players, read_ubyte(global.tempBuffer));
             player.queueJump = read_ubyte(global.tempBuffer);
             break;
-        
+
+        case KICK_MULTI_CLIENT:
+            show_message("There are too many connections from your IP.");
+            instance_destroy();
+            exit;
+
         default:
             promptRestartOrQuit("The Server sent unexpected data.");
             exit;
