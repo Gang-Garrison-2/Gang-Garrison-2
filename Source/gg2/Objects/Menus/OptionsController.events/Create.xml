@@ -107,8 +107,15 @@
         gg2_write_ini("Settings", "Kill Cam", argument0);
     ');
     menu_addedit_boolean("V Sync:", "global.monitorSync", '
+    if (instance_exists(GameServer) {
+            show_message("vSync may not be enabled while the server is running");
+            global.monitorSync = 0;
+    }
+    else 
+    {
         gg2_write_ini("Settings", "Monitor Sync", argument0);
         set_synchronization(argument0);
+    }
     ');
     menu_addedit_boolean("Prompt for server-sent plugins:", "global.serverPluginsPrompt", '
         if (argument0 == false)
