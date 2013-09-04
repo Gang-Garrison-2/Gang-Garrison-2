@@ -155,13 +155,15 @@
     //vsync makes the server desync
     if (global.monitorSync == 1)
     {
-        show_message("Warning: vSync has been disabled to prevent desync on the server.")
+        if (global.dedicatedMode != 1)
+            show_message("Warning: vSync has been disabled to prevent desync on the server.");
         global.monitorSync = 0;
     }
     //thy player limit shalt not exceed 48! 
     if (global.playerLimit > 48)
     {
-        show_message("Warning: Player Limit cannot exceed 48.")
+        if (global.dedicatedMode != 1)
+            show_message("Warning: Player Limit cannot exceed 48.");
         global.playerLimit = 48;
     }
 }
