@@ -1,23 +1,17 @@
 // next map by name = nextMapInRotation()
-var desiredMapName, desiredMapIndex, i;
-desiredMapIndex = global.currentMapIndex;
-i = 0;
+// Only use from GameServer
+var desiredMapName, desiredMapIndex, i, numberOfMaps;
+numberOfMaps = ds_list_size(global.map_rotation);
 
-do
+for(i = 1; i <= numberOfMaps; i += 1)
 {
-    if(i >= ds_list_size(global.map_rotation))
-    {
-        show_message("Error: Invalid rotation: doesn't contain any valid maps. Exiting.");
-        game_end();
-        exit;
-    }
-    i += 1;
-    
-    desiredMapIndex += 1;
-    if(desiredMapIndex == ds_list_size(global.map_rotation)) 
-        desiredMapIndex = 0;
+    desiredMapIndex = (GameServer.currentMapIndex + i) mod numberOfMaps;
     desiredMapName = ds_list_find_value(global.map_rotation, desiredMapIndex);
-} until( internalMapRoom(desiredMapName) or file_exists("Maps/" + desiredMapName + ".png") );
+    if(findInternalMapRoom(desiredMapName) or file_exists("Maps/" + desiredMapName + ".png"))
+    {
+        GameServer.currentMapIndex = desiredMapIndex;
+        return desiredMapName;
+    }
+}
 
-return desiredMapName;
-
+show_error("Error: Invalid rotation: doesn't contain any valid maps. Exiting.", true);

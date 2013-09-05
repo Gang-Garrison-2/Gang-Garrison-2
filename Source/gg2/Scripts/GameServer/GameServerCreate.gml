@@ -106,29 +106,11 @@
             }
         }
     }
-    var i;
-    i = 0;
-    global.currentMapIndex = -1;
+
+    currentMapIndex = -1;
     global.currentMapArea = 1;
-    
-    global.currentMap = nextMapInRotation();
-    
-    // external map
-    if(file_exists("Maps/" + global.currentMap + ".png"))
-    {
-        // get the md5 and url for the map
-        global.currentMapMD5 = CustomMapGetMapMD5(global.currentMap);
-        room_goto_fix(CustomMapRoom);
-    }
-    // internal map, so at the very least, MD5 must be blank
-    else
-    {
-        global.currentMapMD5 = "";
-        if(gotoInternalMapRoom(global.currentMap) != 0) {
-            show_message("Error:#Map " + global.currentMap + " is not in maps folder, and it is not a valid internal map.#Exiting.");
-            game_end();
-        }
-    }
+
+    serverGotoMap(nextMapInRotation());
     
     global.joinedServerName = global.serverName; // so no errors of unknown variable occur when you create a server
     global.mapchanging = false; 

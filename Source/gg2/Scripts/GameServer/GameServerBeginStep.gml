@@ -48,7 +48,7 @@ if(global.winners != -1 and !global.mapchanging)
     else
     {
         global.currentMapArea = 1;
-        global.currentMap = nextMapInRotation();
+        global.nextMap = nextMapInRotation();
     }
     
     global.mapchanging = true;
@@ -69,24 +69,7 @@ if(global.winners != -1 and !global.mapchanging)
 if(impendingMapChange == 0)
 {
     global.mapchanging = false;
-    global.currentMap = global.nextMap;
-    if (internalMapRoom(global.currentMap))
-    {
-        global.currentMapMD5 = "";
-        if(gotoInternalMapRoom(global.currentMap) != 0)
-            game_end();
-        
-    }
-    else if(file_exists("Maps/" + global.currentMap + ".png"))
-    {
-        global.currentMapMD5 = CustomMapGetMapMD5(global.currentMap);
-        room_goto_fix(CustomMapRoom);
-    }
-    else
-    {
-        show_message("Error:#Could not change to supposedly valid external map. Please report this.#Shutting down.");
-        game_end();
-    }
+    serverGotoMap(global.nextMap);
     ServerChangeMap(global.currentMap, global.currentMapMD5, global.sendBuffer);
     impendingMapChange = -1;
     
