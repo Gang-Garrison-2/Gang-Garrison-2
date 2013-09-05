@@ -28,6 +28,7 @@
         write_ubyte(global.serializeBuffer, stats[BONUS]);
         write_ubyte(global.serializeBuffer, stats[POINTS]);
         write_ushort(global.serializeBuffer, rewards);
+        write_ubyte(global.serializeBuffer, queueJump);
     } 
     
     subobjects=0;

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="charFixFringes" type="RESOURCE"/>
+  <resource name="charRunPhysics" type="RESOURCE"/>
+  <resource name="characterHitObstacle" type="RESOURCE"/>
+</resources>

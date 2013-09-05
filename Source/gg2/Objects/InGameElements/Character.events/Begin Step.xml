@@ -40,6 +40,13 @@ if (burnDuration &lt;= 0 || burnIntensity &lt;= 0)
     afterburnSource = -1;
 }
 // Handle input
+if(player.queueJump)
+{
+    if (pressedKeys &amp; $80)
+        wantToJump = true;
+    else if (releasedKeys &amp; $80)
+        wantToJump = false;
+}
 if(!taunting and !omnomnomnom)
 {
     if(!player.humiliated and (keyState | pressedKeys) &amp; $10)
@@ -58,18 +65,20 @@ if(!taunting and !omnomnomnom)
         image_speed=tauntspeed;
     } 
     
-    if(pressedKeys &amp; $80)
+    if(pressedKeys &amp; $80 or (player.queueJump and wantToJump))
     {
         if(!place_free(x,y+1) and place_free(x,y))
         {
             if(not stabbing)
             {
+                wantToJump = false;
                 playsound(x,y,JumpSnd);
                 vspeed = min(vspeed-jumpStrength, -jumpStrength);
             }
         }
         else if(canDoublejump and !doublejumpUsed and vspeed &gt; -jumpStrength)
         {
+            wantToJump = false;
             vspeed = -jumpStrength;
             playsound(x,y,JumpSnd);
             doublejumpUsed = 1;
@@ -198,6 +207,8 @@ if(abs(hspeed)&lt;0.195 /*and not moveStatus = 3*/) { // Overweight carrying int
     animationImage=0;
 }
 
+charSetSolids();
+
 if(place_free(x,y+1)) {
     vspeed += 0.6;
     if(vspeed&gt;10) {
@@ -209,6 +220,8 @@ if(place_free(x,y+1)) {
         doublejumpUsed = 0;
     }
 }
+
+charUnsetSolids();
 
 if (intel)
 { 

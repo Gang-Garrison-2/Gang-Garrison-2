@@ -345,6 +345,17 @@ while(commandLimitRemaining > 0) {
                 player.socket = -1;
             }
             break;
+            
+        case CLIENT_SETTINGS:
+            var mirror;
+            mirror = read_ubyte(player.socket);
+            player.queueJump = mirror;
+            
+            write_ubyte(global.sendBuffer, CLIENT_SETTINGS);
+            write_ubyte(global.sendBuffer, playerId);
+            write_ubyte(global.sendBuffer, mirror);
+            break;
+        
         }
         break;
     } 

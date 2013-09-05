@@ -28,7 +28,6 @@ draw_rectangle_color(view_xview,view_yview+580,view_xview+800,view_yview+600,c_b
 draw_set_valign(fa_center);
 draw_set_halign(fa_left);
 draw_set_color(c_white);
-
 if (tracking) {
     draw_text(xoffset+50, yoffset+590, player.name);
     if (player.object != -1 &amp;&amp; global.myself.team == TEAM_SPECTATOR) {
@@ -42,6 +41,17 @@ if (tracking) {
             draw_sprite_part_ext(SpectatorHealthFill,0,0,(17-hppixels)+10,43,hppixels+1,xoffset+icon_xpos, yoffset+icon_ypos+(17-hppixels)*2,2,2,c_red,1);
             draw_sprite_part_ext(SpectatorHealthFill,0,0,(17-hppixels)+10,43,hppixels+1,xoffset+icon_xpos, yoffset+icon_ypos+(17-hppixels)*2,2,2,c_green,player.object.hp/player.object.maxHp);
         }
+    }
+}
+
+if (global.myself != -1)
+{
+    if ((global.myself.alarm[5] &gt; 0) and (global.myself.team != TEAM_SPECTATOR))
+    {
+        if (!instance_exists(ArenaHUD))
+            draw_text(xoffset+10, yoffset+10,'Respawn in ' +string(ceil(global.myself.alarm[5]/30))+ ' second(s).')
+        else
+            draw_text(xoffset+10, yoffset+10,'No Respawning in Arena');
     }
 }
 </argument>

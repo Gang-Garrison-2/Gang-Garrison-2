@@ -140,6 +140,11 @@ do {
                 write_ubyte(global.serverSocket, string_length(rewardId));
                 write_string(global.serverSocket, rewardId);
             }
+            if(global.queueJumping == true)
+            {
+                write_ubyte(global.serverSocket, CLIENT_SETTINGS);
+                write_ubyte(global.serverSocket, global.queueJumping);
+            }
             socket_send(global.serverSocket);
             break;
             
@@ -592,10 +597,15 @@ do {
                 show_error("ERROR when reading plugin packet: no such plugin packet ID " + string(packetID), true);
             }
             break;
-
+        
+        case CLIENT_SETTINGS:
+            receiveCompleteMessage(global.serverSocket,2,global.tempBuffer);
+            player = ds_list_find_value(global.players, read_ubyte(global.tempBuffer));
+            player.queueJump = read_ubyte(global.tempBuffer);
+            break;
+        
         default:
-            show_message("The Server sent unexpected data");
-            game_end();
+            promptRestartOrQuit("The Server sent unexpected data.");
             exit;
         }
     } else {

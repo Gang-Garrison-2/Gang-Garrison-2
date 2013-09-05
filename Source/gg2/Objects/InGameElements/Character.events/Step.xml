@@ -15,6 +15,11 @@
       <arguments>
         <argument kind="STRING">speed = min(speed, 15);
 timeUnscathed = min(timeUnscathed+1, 10*30);
+
+charSetSolids();
+charRunPhysics();
+charUnsetSolids();
+
 </argument>
       </arguments>
     </action>

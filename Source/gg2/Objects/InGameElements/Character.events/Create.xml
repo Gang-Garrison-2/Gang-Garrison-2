@@ -34,7 +34,9 @@
     ubered = 0;
     stabbing = 0;
     onCabinet = 0;
+    wantToJump = false;
     timeUnscathed = 0;
+    syncWrongness = 0;
     
     //afterburn stuff
     burnIntensity = 0;
