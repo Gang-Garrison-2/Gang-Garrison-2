@@ -153,7 +153,7 @@
   <constant name="PARTICLES_ALTERNATIVE" value="2"/>
   <constant name="MOUSE_LEFT" value="9001"/>
   <constant name="MOUSE_RIGHT" value="9002"/>
-  <constant name="HP_PER_POINT" value="400"/>
+  <constant name="HP_PER_POINT" value="600"/>
   <constant name="INTEL_MAX_TIMER" value="900"/>
   <constant name="MUSIC_MENU_ONLY" value="0"/>
   <constant name="MUSIC_BOTH" value="1"/>
