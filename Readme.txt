@@ -505,4 +505,4 @@ Readme Changelog
 3/31/11 - Medo - some more updating
 10/13/11 - Psychopath - updated things for 2.4
 9/12/13 - Wareya - ported to html
-9/14/13 - Arctic - updated things 
+9/14/13 - Arctic - fixed inconsistencies
