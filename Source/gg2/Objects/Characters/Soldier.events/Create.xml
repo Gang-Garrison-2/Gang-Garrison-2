@@ -18,7 +18,8 @@ maxHp = 160;
 weapons[0] = Rocketlauncher;
 haxxyStatue = SoldierHaxxyStatueS;
 
-if(hasRewardWeapon(global.paramPlayer))
+// 'GW' reward - *G*olden *W*eapon
+if(hasClassReward(global.paramPlayer, 'GW'))
     tauntsprite = SoldierGoldTauntS;
 else
     tauntsprite = SoldierTauntS;

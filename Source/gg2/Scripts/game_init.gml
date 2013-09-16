@@ -235,9 +235,12 @@
     // parse the protocol version UUID for later use
     global.protocolUuid = buffer_create();
     parseUuid(PROTOCOL_UUID, global.protocolUuid);
-    
+
     global.gg2lobbyId = buffer_create();
     parseUuid(GG2_LOBBY_UUID, global.gg2lobbyId);
+
+    // Create abbreviations array for rewards use
+    initRewards()
     
 var a, IPRaw, portRaw;
 doubleCheck=0;

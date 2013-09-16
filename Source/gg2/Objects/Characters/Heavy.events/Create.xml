@@ -18,7 +18,8 @@ maxHp = 200;
 weapons[0] = Minigun;
 haxxyStatue = HeavyHaxxyStatueS;
 
-if(hasRewardWeapon(global.paramPlayer))
+// 'GW' reward - *G*olden *W*eapon
+if(hasClassReward(global.paramPlayer, 'GW'))
     tauntsprite = HeavyGoldTauntS;
 else
     tauntsprite = HeavyTauntS;
