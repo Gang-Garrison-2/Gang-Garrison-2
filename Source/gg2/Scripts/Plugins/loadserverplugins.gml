@@ -11,7 +11,7 @@ isDebug = false;
 hashList = ds_list_create();
 
 // split plugin list string
-list = csvtolist(argument0);
+list = csvtolist(argument0, ',');
 
 // Split hashes from plugin names
 for (i = 0; i < ds_list_size(list); i += 1)
