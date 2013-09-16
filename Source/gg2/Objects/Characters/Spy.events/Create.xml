@@ -48,6 +48,13 @@ haxxyStatue = SpyHaxxyStatueS;
       <arguments>
         <argument kind="STRING">// Override defaults
 canCloak = 1;
+
+// 'BH' reward - *B*obble *H*ead
+if(hasClassReward(global.paramPlayer, 'BH'))
+{
+    overlay = HatBobbleSpyS;
+    tauntOverlay = HatBobbleSpyTauntS;
+}
 </argument>
       </arguments>
     </action>

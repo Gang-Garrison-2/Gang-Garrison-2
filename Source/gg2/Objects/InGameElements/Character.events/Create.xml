@@ -122,7 +122,13 @@
     baseFriction = 1.15;
     controlFactor = baseControl;
     frictionFactor = baseFriction;
-    
+
+    // used for certain rewards
+    overlay = -1;
+    tauntOverlay = -1;
+    omnomnomnomOverlay = -1;
+    omnomnomnomSprite = OmnomnomnomS;
+
     // Let's spawn our weapon
     global.paramOwner = id;
     currentWeapon = instance_create(x,y,weapons[0]);

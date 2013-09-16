@@ -7,4 +7,5 @@
   <resource name="hasClassReward" type="RESOURCE"/>
   <resource name="hasReward" type="RESOURCE"/>
   <resource name="rewardCreateChallenge" type="RESOURCE"/>
+  <resource name="draw_sprite_ext_overlay" type="RESOURCE"/>
 </resources>

@@ -23,6 +23,12 @@ if (team == TEAM_RED)
 else
     sprite_index = BackstabTorsoBlueS;
 
+// 'BH' reward - *B*obble *H*ead
+if(hasClassReward(owner.player, 'BH'))
+{
+    overlay = HatBobbleSpyStabS;
+}
+
 if (image_index == 32)
 {
     done = 1;

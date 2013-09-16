@@ -48,6 +48,13 @@ haxxyStatue = EngineerHaxxyStatueS;
       <arguments>
         <argument kind="STRING">// Override defaults
 canBuild = 1;
+
+// 'BH' reward - *B*obble *H*ead
+if(hasClassReward(global.paramPlayer, 'BH'))
+{
+    overlay = HatBobbleEngineerS;
+    tauntOverlay = HatBobbleEngiTauntS;
+}
 </argument>
       </arguments>
     </action>

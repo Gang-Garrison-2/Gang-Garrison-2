@@ -54,6 +54,13 @@ else
         <argument kind="STRING">// Override defaults
 capStrength = 2;
 canDoublejump = 1;
+
+// 'BH' reward - *B*obble *H*ead
+if(hasClassReward(global.paramPlayer, 'BH'))
+{
+    overlay = HatBobbleScoutS;
+    tauntOverlay = HatBobbleScoutTauntS;
+}
 </argument>
       </arguments>
     </action>
