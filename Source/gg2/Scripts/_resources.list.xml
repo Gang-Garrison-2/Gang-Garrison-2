@@ -53,4 +53,5 @@
   <resource name="restartGG2" type="RESOURCE"/>
   <resource name="isBetaVersion" type="RESOURCE"/>
   <resource name="promptRestartOrQuit" type="RESOURCE"/>
+  <resource name="csvtolist" type="RESOURCE"/>
 </resources>
