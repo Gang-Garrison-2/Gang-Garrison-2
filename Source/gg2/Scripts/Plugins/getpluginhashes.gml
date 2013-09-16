@@ -8,7 +8,7 @@ failed = false;
 hashedList = '';
 
 // split plugin list string
-list = csvtolist(argument0);
+list = csvtolist(argument0, ',');
 
 // Check plugin names and check for duplicates
 for (i = 0; i < ds_list_size(list); i += 1)
