@@ -28,6 +28,7 @@
   <resource name="Bytes" type="GROUP"/>
   <resource name="Rewards" type="GROUP"/>
   <resource name="Plugins" type="GROUP"/>
+  <resource name="Maps" type="GROUP"/>
   <resource name="Math" type="GROUP"/>
   <resource name="Physics" type="GROUP"/>
   <resource name="recordKillInLog" type="RESOURCE"/>
@@ -36,10 +37,9 @@
   <resource name="recordDominationInLog" type="RESOURCE"/>
   <resource name="serializeState" type="RESOURCE"/>
   <resource name="deserializeState" type="RESOURCE"/>
-  <resource name="mapEnd" type="RESOURCE"/>
   <resource name="setChatBubble" type="RESOURCE"/>
+  <resource name="mapEnd" type="RESOURCE"/>
   <resource name="buildSentry" type="RESOURCE"/>
-  <resource name="gotoInternalMapRoom" type="RESOURCE"/>
   <resource name="ServerBalanceTeams" type="RESOURCE"/>
   <resource name="serverArenaRestart" type="RESOURCE"/>
   <resource name="serverArenaEndRound" type="RESOURCE"/>
@@ -50,6 +50,8 @@
   <resource name="calculateHealingFactor" type="RESOURCE"/>
   <resource name="toggleZoom" type="RESOURCE"/>
   <resource name="ds_list_sorted_insert" type="RESOURCE"/>
+  <resource name="restartGG2" type="RESOURCE"/>
   <resource name="isBetaVersion" type="RESOURCE"/>
+  <resource name="promptRestartOrQuit" type="RESOURCE"/>
   <resource name="csvtolist" type="RESOURCE"/>
 </resources>

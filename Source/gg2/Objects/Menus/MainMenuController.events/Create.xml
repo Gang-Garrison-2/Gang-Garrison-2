@@ -34,7 +34,7 @@
         room_goto_fix(Credits);
     ');
     menu_addlink("Visit The Forums",'
-        splash_show_web("http://www.ganggarrison.com/forums/index.php",0)
+        action_splash_web("http://www.ganggarrison.com/forums/index.php", 1)
     ');
     menu_addback("Quit", '
         game_end();
