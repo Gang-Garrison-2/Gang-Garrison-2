@@ -7,5 +7,4 @@
   <resource name="extractzip" type="RESOURCE"/>
   <resource name="checkpluginname" type="RESOURCE"/>
   <resource name="pluginscleanup" type="RESOURCE"/>
-  <resource name="csvtolist" type="RESOURCE"/>
 </resources>

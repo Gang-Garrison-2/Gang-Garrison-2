@@ -443,7 +443,10 @@ do {
             global.currentMap = receivestring(global.serverSocket, 1);
             global.currentMapMD5 = receivestring(global.serverSocket, 1);
             if(global.currentMapMD5 == "") { // if this is an internal map (signified by the lack of an md5)
-                if(gotoInternalMapRoom(global.currentMap) != 0) {
+                if(findInternalMapRoom(global.currentMap))
+                    room_goto_fix(findInternalMapRoom(global.currentMap));
+                else
+                {
                     show_message("Error:#Server went to invalid internal map: " + global.currentMap + "#Exiting.");
                     instance_destroy();
                     exit;
