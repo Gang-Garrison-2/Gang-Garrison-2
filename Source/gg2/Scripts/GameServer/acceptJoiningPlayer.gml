@@ -25,6 +25,7 @@ if(socket >= 0)
         if (clientCount > global.multiClientLimit)
         {
             // Kick instead of letting join
+            write_ubyte(socket, KICK);
             write_ubyte(socket, KICK_MULTI_CLIENT);
             socket_destroy(socket);
             exit;
