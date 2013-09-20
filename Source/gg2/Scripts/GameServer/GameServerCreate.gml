@@ -154,5 +154,8 @@
     }
     //vsync makes the server desync
     if (global.monitorSync == 1)
+    {
         global.monitorSync = 0;
+        set_synchronization(0)
+    }
 }
