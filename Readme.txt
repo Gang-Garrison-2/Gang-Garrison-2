@@ -55,7 +55,7 @@ A: Scroll Camera Left
 S: Scroll Camera Down
 D: Scroll Camera Right
 
-Numpad +/-: Scroll through the players
+Numpad +/- or Mouse buttons: Scroll through the players
 
 All controls can be remapped in Options->Controls.
 
@@ -99,17 +99,17 @@ Meet The Overweight:
 	a heavy weapon that will shred
 	enemies! He can sure eat, too!
    Hit Points: 200
-   Weapon: Chaingun
+   Weapon: Minigun
    Special abilities: 
-           Manvich - Right-Click to eat a tasty Manvich to fill your belly and recover HP! 
-                     You get infinite Manviches so make sure you eat up!
+           Manvich - Right-Click to eat a tasty Manvich to fill your belly and recover all HP! 
+                     Your Manvich has a cooldown so make sure you choose a good time to eat.
 
 Meet The Detonator:
 	A master of explosives, the
 	Detonator can shoot sticky mines
 	to any surface and set them off!
    Hit Points: 120
-   Weapon: Minebomb
+   Weapon: Minegun
    Special abilities: 
            Detonate Mines - Right-click to detonate all of your mines at once!
 
@@ -133,9 +133,9 @@ Meet The Constructor:
    Hit Points: 120
    Weapon: Shotgun
    Special abilities: 
-	   Build Tool - Right-click to open the Build menu and build or destroy
-			an autogun! Each autogun costs 100 Nuts and Bolts to make.
-           Passive Regeneration - You recover Nuts and Bolts slowly over time!
+	   Build Tool - Right-click to build or destroy an autogun! 
+			Each autogun costs 100 Nuts and Bolts to make.
+            Passive Regeneration - You recover Nuts and Bolts slowly over time!
            
 
 Meet The Infiltrator:
@@ -398,8 +398,8 @@ Overweight:
 Detonator:
 - You can detonate your mines in the air; they don't have to 'stick'
   to a surface to detonate!
-- Your mines get stronger the longer they are out, to a maximum of 50 
-  damage!
+- Your mines deal a maximum of 45 damage each to players, and 50 to
+  buildings.
 - Sticky mines can destroy other detonator's mines with an explosion!
 - Shoot a sticky and detonate it at the same time while pointing down
   to propel yourself like a Rocketman!
@@ -501,3 +501,5 @@ Readme Changelog
 3/16/11 - Psychopath - updated things for 2.3
 3/31/11 - Medo - some more updating
 10/13/11 - Psychopath - updated things for 2.4
+9/12/13 - Wareya - ported to html
+9/14/13 - Arctic - fixed inconsistencies
