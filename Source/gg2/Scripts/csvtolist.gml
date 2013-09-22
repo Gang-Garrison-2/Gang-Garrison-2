@@ -10,7 +10,7 @@ list = ds_list_create();
 
 while (string_pos(delimeter, text) != 0)
 {
-    ds_list_add(list, string_copy(text, 1, string_pos(delimeter,text) - string_length(delimeter)));
+    ds_list_add(list, string_copy(text, 1, string_pos(delimeter,text) - 1));
     text = string_copy(text, string_pos(delimeter, text) + string_length(delimeter), string_length(text) - string_pos(delimeter, text));
 }
 if (string_length(text) > 0)
