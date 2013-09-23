@@ -5,7 +5,7 @@ var rewardString;
 rewardString = argument0;
 
 var rewardList, i, rewardSet;
-rewardList = csvtolist(rewardString, ':');
+rewardList = split(rewardString, ':');
 rewardSet = ds_map_create();
 for (i = 0; i < ds_list_size(rewardList); i += 1)
 {
