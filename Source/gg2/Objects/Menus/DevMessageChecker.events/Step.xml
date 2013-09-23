@@ -51,7 +51,7 @@ else if (status == 1)
     global.devMessagesChecked = true;
 
     // split into lines by LF
-    data = csvtolist(data, chr(10));
+    data = split(data, chr(10));
     
     var c;
     for(c = 0; c &lt; ds_list_size(data); c += 2)
