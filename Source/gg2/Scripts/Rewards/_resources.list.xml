@@ -4,6 +4,7 @@
   <resource name="rewardAuthStart" type="RESOURCE"/>
   <resource name="rewardAuthSuccess" type="RESOURCE"/>
   <resource name="parseRewards" type="RESOURCE"/>
+  <resource name="unparseRewards" type="RESOURCE"/>
   <resource name="hasClassReward" type="RESOURCE"/>
   <resource name="hasReward" type="RESOURCE"/>
   <resource name="rewardCreateChallenge" type="RESOURCE"/>

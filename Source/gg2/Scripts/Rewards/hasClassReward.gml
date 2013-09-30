@@ -11,13 +11,7 @@ if (player.rewards == -1)
 {
     return false;
 }
-// Have for all classes
 else
 {
-    return (
-        // Have for all classes
-        ds_map_exists(player.rewards, rewardName + 'All')
-        // Have it for this class
-        || ds_map_exists(player.rewards, rewardName + global.classAbbreviations[player.class])
-    );
+    return ds_map_exists(player.rewards, rewardName + global.classAbbreviations[player.class]);
 }
