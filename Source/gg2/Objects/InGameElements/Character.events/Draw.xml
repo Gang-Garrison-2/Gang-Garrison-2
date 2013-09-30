@@ -94,12 +94,25 @@ else if (player.humiliated)
     draw_sprite_ext(humiliationPoses,floor(animationImage)+humiliationOffset,xr,yr,image_xscale,image_yscale,image_angle,c_white,image_alpha);
 else if (!taunting)
 {
-    if (!ubered)
-        draw_sprite_ext_overlay(sprite,overlay,floor(animationImage+animationOffset),xr,yr,image_xscale,image_yscale,image_angle,c_white,image_alpha);
-    else if (ubered)
+    if (cloak)
     {
-        draw_sprite_ext_overlay(sprite,overlay,floor(animationImage+animationOffset),xr,yr,image_xscale,image_yscale,image_angle,c_white,1);
-        draw_sprite_ext_overlay(sprite,overlay,floor(animationImage+animationOffset),xr,yr,image_xscale,image_yscale,image_angle,ubercolour,0.7);
+        if (!ubered)
+            draw_sprite_ext(sprite,floor(animationImage+animationOffset),xr,yr,image_xscale,image_yscale,image_angle,c_white,image_alpha);
+        else if (ubered)
+        {
+            draw_sprite_ext(sprite,floor(animationImage+animationOffset),xr,yr,image_xscale,image_yscale,image_angle,c_white,1);
+            draw_sprite_ext(sprite,floor(animationImage+animationOffset),xr,yr,image_xscale,image_yscale,image_angle,ubercolour,0.7);
+        }
+    }
+    else
+    {
+        if (!ubered)
+            draw_sprite_ext_overlay(sprite,overlay,floor(animationImage+animationOffset),xr,yr,image_xscale,image_yscale,image_angle,c_white,image_alpha);
+        else if (ubered)
+        {
+            draw_sprite_ext_overlay(sprite,overlay,floor(animationImage+animationOffset),xr,yr,image_xscale,image_yscale,image_angle,c_white,1);
+            draw_sprite_ext_overlay(sprite,overlay,floor(animationImage+animationOffset),xr,yr,image_xscale,image_yscale,image_angle,ubercolour,0.7);
+        }
     }
 }
 if (burnDuration &gt; 0 or burnIntensity &gt; 0) {
