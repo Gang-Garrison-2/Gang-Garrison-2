@@ -72,7 +72,6 @@
     
     // Haxxy rewards
     rewards = -1;
-    doEventUpdateRewards(id, "GS:GWSc:GWSo:GWSn:GWDe:GWMe:GWEn:GWHe:GWSp:GWPy:GWQC:BHSc:BHSo:BHSn:BHDe:BHMe:BHEn:BHHe:BHSp:BHPy:BHQC");
 }
 </argument>
       </arguments>
