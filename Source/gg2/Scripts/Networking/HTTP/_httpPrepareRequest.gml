@@ -83,7 +83,7 @@ with (client)
     {
         var key;
         // Iterate over headers map
-        for (key = ds_map_find_first(headers); key != 0; key = ds_map_find_next(headers, key))
+        for (key = ds_map_find_first(headers); is_string(key); key = ds_map_find_next(headers, key))
         {
             write_string(socket, key + ': ' + ds_map_find_value(headers, key) + CRLF);
         }
