@@ -2,7 +2,10 @@
 // Splits string into items
 // text - string comma-separated values
 // delimeter - delimeter to split by
-// limit (optional) - if specified, limits number of times text is split
+// limit (optional) - if specified, maximum times to split text
+// When limited, the remaining text will be left as the last item.
+// E.g. splitting "1,2,3,4,5" with delimeter "," and limit 2 yields this list:
+// "1", "2", "3,4,5"
 // return value - ds_list containing strings of values
 
 var text, delimeter, limit;
