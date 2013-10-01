@@ -39,26 +39,5 @@ else
       <appliesTo>.self</appliesTo>
       <arguments/>
     </action>
-    <action id="603" library="1">
-      <!--action name: Code-->
-      <kind>CODE</kind>
-      <allowRelative>false</allowRelative>
-      <question>false</question>
-      <canApplyTo>true</canApplyTo>
-      <actionType>CODE</actionType>
-      <functionName/>
-      <relative>false</relative>
-      <not>false</not>
-      <appliesTo>.self</appliesTo>
-      <arguments>
-        <argument kind="STRING">// 'BH' reward - *B*obble *H*ead
-if(hasClassReward(global.paramPlayer, 'BH'))
-{
-    overlay = HatBobblePyroS;
-    tauntOverlay = HatBobblePyroTauntS;
-}
-</argument>
-      </arguments>
-    </action>
   </actions>
 </event>

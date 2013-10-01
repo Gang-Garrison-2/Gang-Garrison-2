@@ -54,8 +54,6 @@ else
         <argument kind="STRING">// 'BH' reward - *B*obble *H*ead
 if(hasClassReward(global.paramPlayer, 'BH'))
 {
-    overlay = HatBobbleHeavyS;
-    tauntOverlay = HatBobbleHeavyTauntS;
     omnomnomnomOverlay = HatBobbleOmnomnomnomS;
 }
 
