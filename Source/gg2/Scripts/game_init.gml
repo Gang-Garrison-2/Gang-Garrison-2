@@ -47,6 +47,14 @@
     global.hostingPort = ini_read_real("Settings", "HostingPort", 8190);
     global.music = ini_read_real("Settings", "Music", ini_read_real("Settings", "IngameMusic", MUSIC_BOTH));
     global.playerLimit = ini_read_real("Settings", "PlayerLimit", 10);
+    //thy playerlimit shalt not exceed 48!
+    if (global.playerLimit > 48)
+    {
+        if (global.dedicatedMode != 1)
+            show_message("Warning: Player Limit cannot exceed 48. It has been set to 48");
+        global.playerLimit = 48;
+        ini_write_real("Settings", "PlayerLimit", 48);
+    }
     global.multiClientLimit = ini_read_real("Settings", "MultiClientLimit", 3);
     global.particles =  ini_read_real("Settings", "Particles", PARTICLES_NORMAL);
     global.gibLevel = ini_read_real("Settings", "Gib Level", 3);

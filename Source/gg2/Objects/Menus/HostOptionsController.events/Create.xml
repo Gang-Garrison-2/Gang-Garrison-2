@@ -52,7 +52,7 @@ menu_addedit_num("Hosting Port:", "global.hostingPort", '
 ', 65535);
 menu_addedit_num("Player Limit:", "global.playerLimit", '
     gg2_write_ini("Settings", "PlayerLimit", argument0);
-', 255);
+', 48);
 menu_addedit_num("Time Limit (mins):", "global.timeLimitMins", '
     gg2_write_ini("Server", "Time Limit", argument0);
 ');
