@@ -4,6 +4,9 @@
 var rewards;
 rewards = argument0;
 
+if (rewards == -1)
+    return '';
+
 var rewardString, reward;
 rewardString = '';
 
