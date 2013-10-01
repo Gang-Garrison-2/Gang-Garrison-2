@@ -3,4 +3,8 @@
  * argument1: The new rewards value
  */
 
-argument0.rewards = argument1;
+var player, rewardString;
+player = argument0;
+rewardString = argument1;
+
+player.rewards = parseRewards(rewardString);

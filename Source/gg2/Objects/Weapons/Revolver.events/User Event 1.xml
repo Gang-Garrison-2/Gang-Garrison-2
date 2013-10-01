@@ -38,6 +38,11 @@ else if(readyToStab &amp;&amp; owner.cloak)
     stab.team = owner.team;
     stab.hitDamage = 0;
     stab.weapon = WEAPON_KNIFE;
+    // 'BH' reward - *B*obble *H*ead
+    if(hasClassReward(ownerPlayer, 'BH'))
+    {
+        stab.overlay = HatBobbleSpyStabS;
+    }
     readyToStab = false;
     alarm[1] = StabreloadTime;
 }
