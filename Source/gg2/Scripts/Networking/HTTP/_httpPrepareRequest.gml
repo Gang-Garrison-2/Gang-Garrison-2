@@ -67,7 +67,7 @@ with (client)
         write_string(socket, 'Host: ' + ds_map_find_value(parsed, 'host') + CRLF);
     else
         write_string(socket, 'Host: ' + ds_map_find_value(parsed, 'host')
-            + ':' + ds_map_find_value(parsed, 'port') + CRLF);
+            + ':' + string(ds_map_find_value(parsed, 'port')) + CRLF);
 
     // "An HTTP/1.1 server MAY assume that a HTTP/1.1 client intends to
     // maintain a persistent connection unless a Connection header including
