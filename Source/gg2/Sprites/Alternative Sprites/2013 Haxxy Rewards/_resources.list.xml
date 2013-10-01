@@ -15,6 +15,7 @@
   <resource name="HatBobbleScoutTauntS" type="RESOURCE"/>
   <resource name="HatBobbleSniperS" type="RESOURCE"/>
   <resource name="HatBobbleSniperTauntS" type="RESOURCE"/>
+  <resource name="HatBobbleSniperCrouchS" type="RESOURCE"/>
   <resource name="HatBobbleSoldierS" type="RESOURCE"/>
   <resource name="HatBobbleSoldierTauntS" type="RESOURCE"/>
   <resource name="HatBobbleSpyS" type="RESOURCE"/>

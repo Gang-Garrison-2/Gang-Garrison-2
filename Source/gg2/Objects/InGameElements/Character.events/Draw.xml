@@ -67,16 +67,20 @@ draw_set_alpha(1);
 if team == TEAM_RED ubercolour = c_red;
 if team == TEAM_BLUE ubercolour = c_blue;
 
-var sprite;
+var sprite, overlaySprite;
 if zoomed
 {
-    if team == TEAM_RED
+    if (team == TEAM_RED)
         sprite = SniperCrouchRedS;
     else
         sprite = SniperCrouchBlueS;
+    overlaySprite = sniperCrouchOverlay;
 }
 else
+{
     sprite = sprite_index;
+    overlaySprite = overlay;
+}
     
 if (omnomnomnom)
 {
@@ -107,11 +111,11 @@ else if (!taunting)
     else
     {
         if (!ubered)
-            draw_sprite_ext_overlay(sprite,overlay,floor(animationImage+animationOffset),xr,yr,image_xscale,image_yscale,image_angle,c_white,image_alpha);
+            draw_sprite_ext_overlay(sprite,overlaySprite,floor(animationImage+animationOffset),xr,yr,image_xscale,image_yscale,image_angle,c_white,image_alpha);
         else if (ubered)
         {
-            draw_sprite_ext_overlay(sprite,overlay,floor(animationImage+animationOffset),xr,yr,image_xscale,image_yscale,image_angle,c_white,1);
-            draw_sprite_ext_overlay(sprite,overlay,floor(animationImage+animationOffset),xr,yr,image_xscale,image_yscale,image_angle,ubercolour,0.7);
+            draw_sprite_ext_overlay(sprite,overlaySprite,floor(animationImage+animationOffset),xr,yr,image_xscale,image_yscale,image_angle,c_white,1);
+            draw_sprite_ext_overlay(sprite,overlaySprite,floor(animationImage+animationOffset),xr,yr,image_xscale,image_yscale,image_angle,ubercolour,0.7);
         }
     }
 }
