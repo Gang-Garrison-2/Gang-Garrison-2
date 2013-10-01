@@ -1,8 +1,12 @@
 // real parseRewards(string rewardString)
 // Parses rewardString and returns a ds_map serving as a set of rewards
+// or -1 if none
 
 var rewardString;
 rewardString = argument0;
+
+if (rewardString == '')
+    return -1;
 
 var rewardList, i, rewardSet;
 rewardList = split(rewardString, ':');
