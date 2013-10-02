@@ -528,7 +528,7 @@ do {
             break;
 
         case REWARD_UPDATE:
-            receiveCompleteMessage(global.serverSocket,3,global.tempBuffer);
+            receiveCompleteMessage(global.serverSocket,1,global.tempBuffer);
             player = ds_list_find_value(global.players, read_ubyte(global.tempBuffer));
             var rewardString;
             rewardString = receivestring(global.serverSocket, 2);
