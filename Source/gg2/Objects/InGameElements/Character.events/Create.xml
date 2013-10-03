@@ -122,11 +122,25 @@
     baseFriction = 1.15;
     controlFactor = baseControl;
     frictionFactor = baseFriction;
-    
+
+    // used for certain rewards
+    overlay = -1;
+    tauntOverlay = -1;
+    omnomnomnomOverlay = -1;
+    omnomnomnomSprite = OmnomnomnomS;
+    sniperCrouchOverlay = -1;
+
     // Let's spawn our weapon
     global.paramOwner = id;
     currentWeapon = instance_create(x,y,weapons[0]);
     global.paramOwner = noone;
+
+    // 'BH' reward - *B*obble *H*ead - not available for quote
+    if(hasClassReward(player, 'BH') and player.class != CLASS_QUOTE)
+    {
+        overlay = global.HatBobbleClassOverlay[player.class];
+        tauntOverlay = global.HatBobbleClassTaunt[player.class];
+    }
 }
 </argument>
       </arguments>

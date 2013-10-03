@@ -67,39 +67,56 @@ draw_set_alpha(1);
 if team == TEAM_RED ubercolour = c_red;
 if team == TEAM_BLUE ubercolour = c_blue;
 
-var sprite;
+var sprite, overlaySprite;
 if zoomed
 {
-    if team == TEAM_RED
+    if (team == TEAM_RED)
         sprite = SniperCrouchRedS;
     else
         sprite = SniperCrouchBlueS;
+    overlaySprite = sniperCrouchOverlay;
 }
 else
+{
     sprite = sprite_index;
+    overlaySprite = overlay;
+}
     
 if (omnomnomnom)
 {
-    draw_sprite_ext(OmnomnomnomS,omnomnomnomindex,xr,yr,image_xscale,image_yscale,image_angle,c_white,1);
+    draw_sprite_ext_overlay(omnomnomnomSprite,omnomnomnomOverlay,omnomnomnomindex,xr,yr,image_xscale,image_yscale,image_angle,c_white,1);
     if (ubered)
-        draw_sprite_ext(OmnomnomnomS,omnomnomnomindex,xr,yr,image_xscale,image_yscale,image_angle,ubercolour,0.7);
+        draw_sprite_ext_overlay(omnomnomnomSprite,omnomnomnomOverlay,omnomnomnomindex,xr,yr,image_xscale,image_yscale,image_angle,ubercolour,0.7);
 }
 else if (taunting)
 {
-    draw_sprite_ext(tauntsprite,tauntindex,xr,yr,image_xscale,image_yscale,image_angle,c_white,1);
+    draw_sprite_ext_overlay(tauntsprite,tauntOverlay,tauntindex,xr,yr,image_xscale,image_yscale,image_angle,c_white,1);
     if (ubered)
-        draw_sprite_ext(tauntsprite,tauntindex,xr,yr,image_xscale,image_yscale,image_angle,ubercolour,0.7);
+        draw_sprite_ext_overlay(tauntsprite,tauntOverlay,tauntindex,xr,yr,image_xscale,image_yscale,image_angle,ubercolour,0.7);
 }
 else if (player.humiliated)
     draw_sprite_ext(humiliationPoses,floor(animationImage)+humiliationOffset,xr,yr,image_xscale,image_yscale,image_angle,c_white,image_alpha);
 else if (!taunting)
 {
-    if (!ubered)
-        draw_sprite_ext(sprite,floor(animationImage+animationOffset),xr,yr,image_xscale,image_yscale,image_angle,c_white,image_alpha);
-    else if (ubered)
+    if (cloak)
     {
-        draw_sprite_ext(sprite,floor(animationImage+animationOffset),xr,yr,image_xscale,image_yscale,image_angle,c_white,1);
-        draw_sprite_ext(sprite,floor(animationImage+animationOffset),xr,yr,image_xscale,image_yscale,image_angle,ubercolour,0.7);
+        if (!ubered)
+            draw_sprite_ext(sprite,floor(animationImage+animationOffset),xr,yr,image_xscale,image_yscale,image_angle,c_white,image_alpha);
+        else if (ubered)
+        {
+            draw_sprite_ext(sprite,floor(animationImage+animationOffset),xr,yr,image_xscale,image_yscale,image_angle,c_white,1);
+            draw_sprite_ext(sprite,floor(animationImage+animationOffset),xr,yr,image_xscale,image_yscale,image_angle,ubercolour,0.7);
+        }
+    }
+    else
+    {
+        if (!ubered)
+            draw_sprite_ext_overlay(sprite,overlaySprite,floor(animationImage+animationOffset),xr,yr,image_xscale,image_yscale,image_angle,c_white,image_alpha);
+        else if (ubered)
+        {
+            draw_sprite_ext_overlay(sprite,overlaySprite,floor(animationImage+animationOffset),xr,yr,image_xscale,image_yscale,image_angle,c_white,1);
+            draw_sprite_ext_overlay(sprite,overlaySprite,floor(animationImage+animationOffset),xr,yr,image_xscale,image_yscale,image_angle,ubercolour,0.7);
+        }
     }
 }
 if (burnDuration &gt; 0 or burnIntensity &gt; 0) {

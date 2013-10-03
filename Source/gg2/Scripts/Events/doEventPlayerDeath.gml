@@ -164,7 +164,8 @@ with(victim.object) {
         var deadbody;
         if player.class != CLASS_QUOTE playsound(x,y,choose(DeathSnd1, DeathSnd2));
         deadbody = instance_create(x,y-30,DeadGuy);
-        if(hasRewardStatue(player))
+        // 'GS' reward - *G*olden *S*tatue
+        if(hasReward(player, 'GS'))
         {
             deadbody.sprite_index = haxxyStatue;
             deadbody.image_index = 0;
