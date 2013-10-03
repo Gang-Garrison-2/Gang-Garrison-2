@@ -27,6 +27,7 @@ if(socket >= 0)
             // Kick instead of letting join
             write_ubyte(socket, KICK);
             write_ubyte(socket, KICK_MULTI_CLIENT);
+            socket_send(socket);
             socket_destroy(socket);
             exit;
         }
