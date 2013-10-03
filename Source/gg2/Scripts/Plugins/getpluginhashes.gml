@@ -2,7 +2,7 @@
 // argument0 - comma separated plugin list 
 // returns comma-separated plugin list with hashes
 // or else the string 'failure'
-var list, i, pluginname, pluginhash, url, handle, filesize, tempfile, failed, fp, hashedList;
+var list, i, pluginname, pluginhash, url, handle, filesize, failed, fp, hashedList;
 
 failed = false;
 hashedList = '';
@@ -45,39 +45,34 @@ for (i = 0; i < ds_list_size(list); i += 1)
         // construct the URL
         // (http://www.ganggarrison.com/plugins/$PLUGINNAME$.md5)
         url = PLUGIN_SOURCE + pluginname + ".md5";
-        tempfile = temp_directory + "\" + pluginname + ".md5.tmp";
     
-        // let's make the download handle
-        handle = DM_CreateDownload(url, tempfile);
-    
-        // download it
-        filesize = DM_StartDownload(handle);
-        while (DM_DownloadStatus(handle) != 3)
+        // let's make the request handle
+        handle = httpGet(url, -1);
+
+        while (!httpRequestStatus(handle))
         {
-            // download should be quick, no need to show progress
+            // finish it - should be quick, no need to show progress
+            httpRequestStep(handle);
         }
-        DM_StopDownload(handle);
-        DM_CloseDownload(handle);
-    
-        // if the file doesn't exist, the download presumably failed
-        if (!file_exists(tempfile)) {
-            show_message('Error loading server-sent plugins - getting hash failed for:#"' + pluginname + '"');
+
+        // errored
+        if (httpRequestStatus(handle) == 2)
+        {
+            show_message('Error loading server-sent plugins - getting hash failed for "' + pluginname + '":#' + httpRequestError(handle));
             failed = true;
             break;
         }
-    
-        fp = file_text_open_read(tempfile);
-        pluginhash = file_text_read_string(fp);
-        file_text_close(fp);
-        file_delete(tempfile);
-    
-        // check it's the right length for a hex MD5
-        if (string_length(pluginhash) != 32)
+
+        // request failed
+        if (httpRequestStatusCode(handle) != 200)
         {
-            show_message('Error loading server-sent plugins - getting hash failed (wrong length) for:#"' + pluginname + '"');
+            show_message('Error loading server-sent plugins - getting hash failed for "' + pluginname + '":#' + string(httpRequestStatusCode(handle)) + ' ' + httpRequestReasonPhrase(handle));
             failed = true;
             break;
         }
+
+        pluginhash = read_string(httpRequestResponseBody(handle), 32);
+        httpRequestDestroy(handle);
     }
 
     // append name + hash to list

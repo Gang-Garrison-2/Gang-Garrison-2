@@ -20,8 +20,7 @@ showVersion = true;
 
 tmpfile = temp_directory + "\background.png.tmp";
 
-handle = DM_CreateDownload(BACKGROUND_SOURCE, tmpfile);
-filesize = DM_StartDownload(handle);
+handle = httpGet(BACKGROUND_SOURCE, -1);
 </argument>
       </arguments>
     </action>

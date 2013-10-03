@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
+  <resource name="HTTP" type="GROUP"/>
   <resource name="GameServer" type="RESOURCE"/>
   <resource name="Client" type="RESOURCE"/>
   <resource name="RewardAuthChecker" type="RESOURCE"/>

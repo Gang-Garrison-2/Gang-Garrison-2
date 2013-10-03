@@ -25,16 +25,13 @@ if(variable_global_exists("devMessagesChecked")) {
 // from the developers
 // If any are found, they will be shown/executed/whatever
 
-tmpfile = temp_directory + "\devmessages.txt.tmp";
-
 var url;
 if(global.updaterBetaChannel)
     url = DEVMESSAGES_SOURCE_BETA;
 else
     url = DEVMESSAGES_SOURCE;
 
-handle = DM_CreateDownload(url, tmpfile);
-filesize = DM_StartDownload(handle);
+handle = httpGet(url, -1);
 
 image_speed = 5/room_speed;
 </argument>
