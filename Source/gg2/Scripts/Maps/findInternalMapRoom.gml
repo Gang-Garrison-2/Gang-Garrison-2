@@ -41,6 +41,8 @@ case "ctf_2dfort":
 case "ctf_2dfort2":
 case "ctf_2dfortremix":
     return TwodFortTwoRemix;
+case "gg_debug":
+    return DebugRoom;
 default:
     return false;
 }

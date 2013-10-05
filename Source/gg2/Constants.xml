@@ -162,4 +162,7 @@
   <constant name="MUSIC_BOTH" value="1"/>
   <constant name="MUSIC_INGAME_ONLY" value="2"/>
   <constant name="MUSIC_NONE" value="3"/>
+  <constant name="BOOT_BEHAVIOUR" value="0"/>
+  <constant name="BOOT_STANDARD" value="0"/>
+  <constant name="BOOT_DEBUG" value="1"/>
 </constants>
