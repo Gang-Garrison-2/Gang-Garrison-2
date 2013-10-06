@@ -107,7 +107,7 @@
         gg2_write_ini("Settings", "Kill Cam", argument0);
     ');
     menu_addedit_boolean("V Sync:", "global.monitorSync", '
-    if (instance_exists(GameServer) 
+    if (global.isHost)
     {
         show_message("vSync may not be enabled while the server is running");
         global.monitorSync = 0;
