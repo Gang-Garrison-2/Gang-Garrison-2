@@ -2,6 +2,7 @@
 <resources>
   <resource name="Gibbage" type="GROUP"/>
   <resource name="Player" type="RESOURCE"/>
+  <resource name="SpyGhost" type="RESOURCE"/>
   <resource name="Character" type="RESOURCE"/>
   <resource name="Weapon" type="RESOURCE"/>
   <resource name="PlayerControl" type="RESOURCE"/>
