@@ -14,7 +14,7 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">{
-    if(readyToShoot and bladesOut&lt;maxBlades)
+    if(readyToShoot and bladesOut &lt; maxBlades)
     {
         replenishing = 0;
         playsound(x,y,BladeSnd);

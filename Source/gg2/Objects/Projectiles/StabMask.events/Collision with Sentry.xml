@@ -17,7 +17,7 @@
 {
     if(!collision_line(x,y-12,other.x,other.y,Obstacle,true,true)) and (!collision_line(x,y-12,other.x,other.y,TeamGate,true,true) and (!collision_line(x,y-12,other.x,other.y,BulletWall,true,true)))
     {
-        other.hp -= hitDamage;
+        damageSentry(ownerPlayer, other.id, hitDamage);
         other.lastDamageDealer = ownerPlayer;
         other.lastDamageSource = weapon;
         

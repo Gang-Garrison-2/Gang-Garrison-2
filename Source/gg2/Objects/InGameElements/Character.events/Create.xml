@@ -39,17 +39,19 @@
     syncWrongness = 0;
     
     //afterburn stuff
-    burnIntensity = 0;
-    maxIntensity = 9; //maximum afterburn intensity in DPS
-    burnDuration = 0;
-    maxDuration = 210; //maximum afterburn length in frames
-    decayDelay = 30; //time between burning and intensity lowering
-    decayDuration = 150; //time between intensity lowering and zeroing out
+    burnIntensity = 0; // "heat"
+    legIntensity = 7; // afterburn intensity after which additional intsity additions are halved.
+                      // it's called a "leg" becauase of a similar concept in dynamic range compression.
+    maxIntensity = 13; //maximum afterburn intensity in DPS
+    burnDuration = 0; // "fuel"
+    maxDuration = 210; //maximum afterburn length in duration ticks (see durationDecay)
+    decayDelay = 90; //time between last ignition and intensity lowering
+    decayDuration = 90; //time between intensity lowering and zeroing out
     durationDecay = 1; //amount that duration lowers per step
     intensityDecay = burnIntensity / decayDuration;
     burnedBy = -1;
     afterburnSource = -1;
-    numFlames = 4 ; //purely cosmetic - the number of flames that someone has with max burnIntensity
+    numFlames = 5 ; //purely cosmetic - the number of flames that someone has with max burnIntensity
     for(i = 0; i &lt; numFlames; i += 1)
     {
         flameArray_x[i] = random_range(-(bbox_right-bbox_left)/2, (bbox_right-bbox_left)/2);
@@ -86,6 +88,7 @@
     // Cloak for Spies
     cloak = false;
     cloakAlpha = 1;
+    cloakFlicker = false;
 
     //healer
     healer = -1;
@@ -117,11 +120,13 @@
     //4 for friendly juggles!
     moveStatus = 0;
     
-    baseControl=0.85;
+    baseControl = 0.85;
     // warning that baseFriction cannot be equal to 0 nor 1 or div0 will occur
     baseFriction = 1.15;
     controlFactor = baseControl;
     frictionFactor = baseFriction;
+    basemaxspeed = abs(runPower * baseControl / (baseFriction-1));
+    highestbasemaxspeed = 9.735; // approximation error &lt; 0.0017 of scout's base max speed
 
     // used for certain rewards
     overlay = -1;

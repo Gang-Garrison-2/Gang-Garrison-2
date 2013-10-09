@@ -26,6 +26,7 @@ if(travelDistance &gt;= distanceToTravel)
     alarm[3] = 8;
 }
 
+// It might seem like a good idea to remove this. But it's not.
 speed += 1;
 speed *= 0.92;
 image_angle = direction;
