@@ -44,48 +44,7 @@ for (i=1; i&lt;= global.totalControlPoints; i+=1) {
     drawx+=60;
 }
 
-    
-//timer
-if instance_exists(WinBanner) exit;
-draw_set_color(c_white);
-draw_set_valign(fa_center);
-
-if global.myself != -1 {
-    if global.myself.team == TEAM_RED teamoffset=0;
-    else if global.myself.team == TEAM_BLUE teamoffset=1;
-}
-if overtime == 1 {
-    draw_set_halign(fa_center);
-    draw_sprite_ext(TimerHudS,2+teamoffset,xoffset+xsize/2+xshift,yoffset+30+ yshift,3,3,0,c_white,1);
-    draw_text(xoffset+xsize/2+xshift,yoffset+30+ yshift,"OVERTIME");
-}
-else{
-    draw_set_halign(fa_right);
-    if mode == 1 &amp;&amp; global.setupTimer &gt; 0 {
-        draw_sprite_ext(TimerHudS,teamoffset,xoffset+xsize/2+xshift,yoffset+30+ yshift,3,3,0,c_white,1);
-        draw_sprite_ext(TimerS,floor(global.setupTimer/1800*12),xoffset+xsize/2+39+xshift,yoffset+30+ yshift,3,3,0,c_white,1);
-        seconds=floor(global.setupTimer/30);
-        draw_text_transformed(xoffset+xsize/2-10+xshift,yoffset+27+ yshift,"00",1.5,1.5,0);
-        draw_text_transformed(xoffset+xsize/2+xshift,yoffset+27+ yshift,":",1.5,1.5,0);
-        if seconds &gt;= 10 draw_text_transformed(xoffset+xsize/2+20+xshift,yoffset+27+ yshift,string(seconds),1.5,1.5,0);
-        else if seconds &lt; 10 draw_text_transformed(xoffset+xsize/2+20+xshift,yoffset+27+ yshift,"0"+string(seconds),1.5,1.5,0);
-        draw_set_halign(fa_center);
-        draw_text_transformed(xoffset+xsize/2-5+xshift,yoffset+38+ yshift,"Setup",1,1,0);
-    }
-    else{
-        draw_sprite_ext(TimerHudS,teamoffset,xoffset+xsize/2 +xshift,yoffset+30+ yshift,3,3,0,c_white,1);
-        if timer &gt; timeLimit timeDraw = timeLimit-1;
-        else timeDraw = timer;
-        draw_sprite_ext(TimerS,floor(timeDraw/timeLimit*12),(xoffset+xsize/2+39)+xshift,yoffset+30+ yshift,3,3,0,c_white,1);
-        minutes=floor(timer/1800);
-        secondcounter=timer-minutes*1800;
-        seconds=floor(secondcounter/30);    
-        draw_text_transformed((xoffset+xsize/2-10)+xshift,yoffset+32+ yshift,string(minutes),1.5,1.5,0);
-        draw_text_transformed((xoffset+xsize/2)+xshift,yoffset+32+ yshift,":",1.5,1.5,0);
-        if seconds &gt;= 10 draw_text_transformed((xoffset+xsize/2+20)+xshift,yoffset+32+ yshift,string(seconds),1.5,1.5,0);
-        else if seconds &lt; 10 draw_text_transformed((xoffset+xsize/2+20)+xshift,yoffset+32+ yshift,"0"+string(seconds),1.5,1.5,0);
-    }
-}
+draw_roundtimer(xoffset, yoffset, xsize, ysize, timer);
 </argument>
       </arguments>
     </action>

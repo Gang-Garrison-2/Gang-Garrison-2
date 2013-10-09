@@ -15,12 +15,17 @@
       <arguments>
         <argument kind="STRING">if(global.myself.object == -1) exit;
     
-//AFK Check
-afktimer-=1;
-if(afktimer&lt;=0) &amp;&amp; global.myself.object.afk == false{
+//AFK Check -- double length for server host
+afktimer -= 1;
+if(global.isHost)
+    afktimer += 0.5
+if ((afktimer &lt;= 0) and !global.myself.object.afk)
+{
     global.myself.object.afk = true;
-    if !instance_exists(TeamSelectController) instance_create(0,0,TeamSelectController);
-    with(TeamSelectController) afk=true;
+    if !instance_exists(TeamSelectController)
+        instance_create(0,0,TeamSelectController);
+    with(TeamSelectController)
+        afk = true;
 }
    
 if(global.myself.class == CLASS_ENGINEER)

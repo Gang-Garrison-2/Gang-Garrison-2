@@ -21,6 +21,11 @@ ysize = view_hview[0];
 if (distance_to_point(xoffset+xsize/2,yoffset+ysize/2) &gt; 800)
     exit;
 
+if(intel)
+{
+    draw_intel_timer(intelRecharge/900, team == TEAM_RED);
+}
+
 var xr, yr;
 xr = round(x);
 yr = round(y);
