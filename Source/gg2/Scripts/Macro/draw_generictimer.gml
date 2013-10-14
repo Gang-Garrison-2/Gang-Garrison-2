@@ -82,43 +82,4 @@ else
     }
     
 }
-/*
-//red timer HUD
-draw_sprite_ext(TimerHudS, 2, xoffset+xsize/2-coffset+xshift, yoffset+36, 2,2,0,c_white,1);
-if (redTimer > 0) {
-    redMinutes=floor(redTimer/1800);
-    redSecondcounter=redTimer-redMinutes*1800;
-    redSeconds=floor(redSecondcounter/30);
-    draw_set_halign(fa_right);
-    
-    if (seconds >= 10)
-        secstring = string(seconds);
-    else
-        secstring = "0" + string(seconds);
-        
-    draw_text_transformed(xoffset+xsize/2+20,yoffset+38,string(minutes) + ":" + secstring,1,1,0);
-    draw_set_font(global.gg2Font);
-}
-else
-{
-    draw_set_halign(fa_center);
-    draw_text(xoffset+xsize/2-coffset+xshift,yoffset+36,"OVERTIME");
-}
-//blue timer HUD    
-draw_sprite_ext(TimerHudS, 3, xoffset+xsize/2+coffset+xshift, yoffset+36+yshift, 2,2,0,c_white,1);
-if (blueTimer >0) {
-    blueMinutes=floor(blueTimer/1800);
-    blueSecondcounter=blueTimer-blueMinutes*1800;
-    blueSeconds=floor(blueSecondcounter/30);
-    draw_set_halign(fa_right);
-    draw_text_transformed(xoffset+xsize/2-10+coffset+xshift,yoffset+38+yshift,string(blueMinutes),1.5,1.5,0);
-    draw_text_transformed(xoffset+xsize/2+coffset+xshift, yoffset+38+yshift,":", 1.5,1.5,0);
-    if blueSeconds >= 10 draw_text_transformed(xoffset+xsize/2+20+coffset+xshift,yoffset+38+yshift,string(blueSeconds),1.5,1.5,0);
-        else if blueSeconds < 10 draw_text_transformed(xoffset+xsize/2+20+coffset+xshift,yoffset+38+yshift,"0"+string(blueSeconds),1.5,1.5,0);
-}
-else 
-{
-    draw_set_halign(fa_center);
-    draw_text(xoffset+xsize/2+coffset+xshift,yoffset+36+yshift,"OVERTIME");
-}
-*/
+

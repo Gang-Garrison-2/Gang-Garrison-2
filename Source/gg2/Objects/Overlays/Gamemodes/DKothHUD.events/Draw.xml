@@ -13,8 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">var xoffset, yoffset, xsize, ysize, xshift, yshift, coffset;
-xoffset = view_xview[0];
+        <argument kind="STRING">xoffset = view_xview[0];
 yoffset = view_yview[0];
 xsize = view_wview[0];
 ysize = view_hview[0];
@@ -70,7 +69,7 @@ for (i=1; i&lt;= global.totalControlPoints; i+=1) {
     drawx+=60;
 }
 
-draw_kothtimer();
+draw_dkothtimer();
 </argument>
       </arguments>
     </action>
