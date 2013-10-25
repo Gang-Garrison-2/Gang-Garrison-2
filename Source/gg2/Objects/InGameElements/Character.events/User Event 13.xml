@@ -14,9 +14,10 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">{
-    receiveCompleteMessage(global.serverSocket,3,global.deserializeBuffer);
+    receiveCompleteMessage(global.serverSocket,4,global.deserializeBuffer);
     keyState = read_ubyte(global.deserializeBuffer);
     aimDirection = read_ushort(global.deserializeBuffer)*360/65536;
+    aimDistance = read_ubyte(global.deserializeBuffer)*2;
     
     var temp, newIntel;
     if(global.updateType == QUICK_UPDATE) or (global.updateType == FULL_UPDATE) {

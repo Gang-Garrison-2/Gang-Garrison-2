@@ -140,7 +140,7 @@ default:
     frictionFactor = baseFriction;
 }
 
-if(moveStatus == 1 or moveStatus == 2 or moveStatus == 4)
+if(moveStatus == 1 or moveStatus == 2 or moveStatus == 4 or spinjumping)
 {
     if !variable_local_exists("jumpFlameParticleType")
     {

@@ -61,7 +61,7 @@ else
     if (countdown <= 0)
     {
         draw_set_halign(fa_center);
-        draw_text(xoffset+xsize/2+xshift,yoffset+36,"OVERTIME");
+        draw_text(xoffset+xsize/2+xshift,yoffset+2,"OVERTIME");
     }
     else
     {

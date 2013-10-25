@@ -3,6 +3,7 @@
   <resource name="Gibs" type="GROUP"/>
   <resource name="ParachuteSentry" type="RESOURCE"/>
   <resource name="CrosshairS" type="RESOURCE"/>
+  <resource name="SpectatorCrosshairS" type="RESOURCE"/>
   <resource name="ImpactS" type="RESOURCE"/>
   <resource name="DeadS" type="RESOURCE"/>
   <resource name="SentryRed" type="RESOURCE"/>
