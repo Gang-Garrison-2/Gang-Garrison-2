@@ -1,7 +1,6 @@
 // argument0: The name of the map to switch to. Must exist (internal or external) otherwise the game will error out.
 
 global.currentMap = argument0;
-
 var mapRoom;
 mapRoom = findInternalMapRoom(global.currentMap);
 if (mapRoom)

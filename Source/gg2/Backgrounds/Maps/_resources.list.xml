@@ -18,5 +18,6 @@
   <resource name="AtaliaB" type="RESOURCE"/>
   <resource name="SixtiesB" type="RESOURCE"/>
   <resource name="OldfortB" type="RESOURCE"/>
+  <resource name="AvantiB" type="RESOURCE"/>
   <resource name="CustomMapB" type="RESOURCE"/>
 </resources>

@@ -52,6 +52,7 @@ with(Sentry) {
     }
 }
 
+gunSetSolids();
 while(!nearestTarget &amp;&amp; !ds_priority_empty(targetQueue)) {
     playercheck = ds_priority_delete_min(targetQueue);
     targetAngle = point_direction(x,y,playercheck.x,playercheck.y);
@@ -155,6 +156,7 @@ if(!nearestTarget) {
         alarm[0]=refireTime;
     }
 }
+gunUnsetSolids();
 
 if(rotating) {
     rotateindex += 0.3;

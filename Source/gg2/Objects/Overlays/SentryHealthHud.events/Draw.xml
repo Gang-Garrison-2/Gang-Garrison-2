@@ -13,20 +13,21 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if(global.myself.team == TEAM_BLUE) {
+        <argument kind="STRING">if(global.myself.team == TEAM_BLUE)
     image_index = 1;
-} else {
+else
     image_index = 0;
-}
 
-if((global.myself.object == -1) || (global.myself.class!=CLASS_ENGINEER)) {
+if(global.myself.object == -1 or global.myself.class != CLASS_ENGINEER)
+{
     instance_destroy();
     exit; 
 }
 
-if(global.myself.sentry) {
-    drawHealth(45, 477, global.myself.sentry.hp, global.myself.sentry.maxHp);
-    draw_sprite_ext(sprite_index, image_index, view_xview[0]+5, view_yview[0]+455, 2, 2, 0, c_white, 1);
+if (global.myself.sentry)
+{
+    drawHealth(45, view_hview[0]-123, global.myself.sentry.hp, global.myself.sentry.maxHp);
+    draw_sprite_ext(sprite_index, image_index, view_xview[0]+5, view_yview[0]+view_hview[0]-145, 2, 2, 0, c_white, 1);
 }
 </argument>
       </arguments>

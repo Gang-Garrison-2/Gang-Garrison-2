@@ -4,6 +4,10 @@ switch(argument0)
 {
 case "ctf_truefort":
     return Truefort;
+case "ctf_2dfort":
+case "ctf_2dfort2":
+case "ctf_2dfortremix":
+    return TwodFortTwoRemix;
 case "ctf_conflict":
     return Conflict;
 case "ctf_classicwell":
@@ -12,6 +16,8 @@ case "ctf_waterway":
     return Waterway;
 case "ctf_orange":
     return Orange;
+case "ctf_avanti":
+    return Avanti;
 case "cp_dirtbowl":
     return Dirtbowl;
 case "cp_egypt":
@@ -37,10 +43,6 @@ case "ctf_2dfort[0]":
 case "ctf_2dfort1":
 case "ctf_oldfort":
     return Oldfort;
-case "ctf_2dfort":
-case "ctf_2dfort2":
-case "ctf_2dfortremix":
-    return TwodFortTwoRemix;
 case "gg_debug":
     return DebugRoom;
 default:

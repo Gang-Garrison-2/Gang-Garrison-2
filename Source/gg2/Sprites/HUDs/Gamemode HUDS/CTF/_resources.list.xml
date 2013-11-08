@@ -2,6 +2,7 @@
 <resources>
   <resource name="IntelReturnTimeS" type="RESOURCE"/>
   <resource name="ScorePanelS" type="RESOURCE"/>
+  <resource name="InvasionHUDS" type="RESOURCE"/>
   <resource name="IntelStatusS" type="RESOURCE"/>
   <resource name="IntelArrowS" type="RESOURCE"/>
 </resources>

@@ -7,7 +7,6 @@
   <resource name="Weapon" type="RESOURCE"/>
   <resource name="PlayerControl" type="RESOURCE"/>
   <resource name="SpeechBubbleO" type="RESOURCE"/>
-  <resource name="SentryTurret" type="RESOURCE"/>
   <resource name="SentryGibs" type="RESOURCE"/>
   <resource name="Sentry" type="RESOURCE"/>
   <resource name="Explosion" type="RESOURCE"/>

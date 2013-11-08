@@ -165,16 +165,56 @@
                       ,10-10*(distance_to_object(other)/other.affectRadius));
         
     }
+    
+    // Handle bubbles
+    bubbleStack = ds_list_create();
     with(Bubble)
     {
-        if (distance_to_object(other) &lt; other.blastRadius)
+        if (team != other.team)
         {
-            if (1 - distance_to_object(other)/other.blastRadius &lt;= 0.25 and other.splashThreshhold) // skip if we're out of theshhold
-                continue;
-            alarm[0]-=200;
-        }    
+            ds_list_add(other.bubbleStack, id); // Get a list of every enemy bubble
+            if (distance_to_object(other) &lt; other.blastRadius)
+            {
+                if ((1 - distance_to_object(other)/other.blastRadius &lt;= 0.25 and other.splashThreshhold) or alarm[0] &lt; 0 or selfPop) // skip if we're out of theshhold or pointless
+                    continue;
+                selfPop = true;
+            }
+        }
     }
-
+    
+    // Go through every bubble until we know whether it's supposed to pop or not
+    working = true;
+    while(working)
+    {
+        working = false;
+        for (i = 0; i &lt; ds_list_size(bubbleStack); i += 1)
+        {
+            j = ds_list_turn(bubbleStack);
+            with(j)
+            {
+                with(Bubble)
+                {
+                    if (selfPop)
+                    {
+                        if (point_distance(x, y, other.x, other.y) &lt; selfPopRadius)
+                            other.selfPop = true;
+                            working = true;
+                    }
+                }
+            }
+        }
+    }
+    
+    // Finally cause popping
+    for (i = 0; i &lt; ds_list_size(bubbleStack); i += 1)
+    {
+        j = ds_list_turn(bubbleStack);
+        if (j.selfPop)
+        {
+            j.alarm[0] = 1;
+        }
+    }
+    
     instance_destroy();
 }
 </argument>

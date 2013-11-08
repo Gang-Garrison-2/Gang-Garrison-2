@@ -26,6 +26,7 @@ cpUnlock = 1800;
 overtime = 0;
 redteamCharacters = 0;
 blueteamCharacters = 0;
+
 </argument>
       </arguments>
     </action>

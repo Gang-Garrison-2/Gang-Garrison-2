@@ -1,6 +1,7 @@
 room_caption = global.currentMap;
-
 global.startedGame = true;
+
+window_set_position(previous_window_x+previous_window_w/2-global.ingamewidth/2, previous_window_y);
 
 global.totalMapAreas = 1+instance_number(NextAreaO);
 
@@ -11,7 +12,8 @@ if global.totalMapAreas > 1 {
         global.area[i] = instance_find(NextAreaO,i-2).y;
     }
 
-    if global.currentMapArea == 1 {
+    if (global.currentMapArea == 1)
+    {
         with all if y > global.area[2] instance_destroy();
     }
     else if global.currentMapArea < global.totalMapAreas {
@@ -28,24 +30,42 @@ with(Player) {
     humiliated = 0;
 }
 
-if instance_exists(IntelligenceBaseBlue) || instance_exists(IntelligenceBaseRed) || instance_exists(IntelligenceRed) || instance_exists(IntelligenceBlue) instance_create(0,0,ScorePanel);
-else if instance_exists(GeneratorBlue) || instance_exists(GeneratorRed) {
+if instance_exists(IntelligenceBaseBlue) || instance_exists(IntelligenceBaseRed) || instance_exists(IntelligenceRed) || instance_exists(IntelligenceBlue)
+{
+    if (instance_exists(ControlPointSetupGate))
+        instance_create(0, 0, InvasionHUD);
+    else
+        instance_create(0,0,ScorePanel);
+}
+else if instance_exists(GeneratorBlue) || instance_exists(GeneratorRed)
     instance_create(0,0,GeneratorHUD);
-} else if instance_exists(ArenaControlPoint) {
+else if instance_exists(ArenaControlPoint)
+{
     instance_create(0,0,ArenaHUD);
-    if ArenaHUD.roundStart == 0 with Player canSpawn = 0;
-}else if instance_exists(KothControlPoint) {
+    if (ArenaHUD.roundStart == 0)
+    {
+        with (Player)
+            canSpawn = 0;
+    }
+}
+else if instance_exists(KothControlPoint)
     instance_create(0,0,KothHUD);
-}else if instance_exists(KothRedControlPoint) && instance_exists(KothBlueControlPoint) {
-    with ControlPoint event_user(0);
+else if instance_exists(KothRedControlPoint) && instance_exists(KothBlueControlPoint)
+{
+    with ControlPoint
+        event_user(0);
     instance_create(0,0,DKothHUD);
-} else if instance_exists(ControlPoint) {
-    with ControlPoint event_user(0);
+}
+else if instance_exists(ControlPoint)
+{
+    with ControlPoint
+        event_user(0);
     instance_create(0,0,ControlPointHUD);
 }
 
 instance_create(0,0,TeamSelectController);
-if !instance_exists(KillLog) instance_create(0,0,KillLog);
+if (!instance_exists(KillLog))
+    instance_create(0,0,KillLog);
 
 sound_stop_all();
 

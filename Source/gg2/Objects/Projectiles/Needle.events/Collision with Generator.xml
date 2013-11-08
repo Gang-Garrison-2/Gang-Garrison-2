@@ -14,7 +14,7 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">if(other.team != team) {
-    damageSentry(ownerPlayer, other.id, hitDamage);
+    damageGenerator(ownerPlayer, other.id, hitDamage);
     instance_destroy();
 }
 </argument>

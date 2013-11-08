@@ -13,7 +13,10 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if(global.myself.team == TEAM_BLUE) {
+        <argument kind="STRING">xsize = view_wview[0];
+ysize = view_hview[0];
+
+if(global.myself.team == TEAM_BLUE) {
     image_index = global.myself.class + 10;
 } else {
     image_index = global.myself.class;
@@ -24,8 +27,8 @@ if(global.myself.object == -1) {
     exit; 
 }
 
-drawHealth(45, 547, global.myself.object.hp, global.myself.object.maxHp);
-draw_sprite_ext(sprite_index, image_index, view_xview[0]+5, view_yview[0]+525, 2, 2, 0, c_white, 1);
+drawHealth(45, ysize-53, global.myself.object.hp, global.myself.object.maxHp);
+draw_sprite_ext(sprite_index, image_index, view_xview[0]+5, view_yview[0]+ysize-75, 2, 2, 0, c_white, 1);
 </argument>
       </arguments>
     </action>

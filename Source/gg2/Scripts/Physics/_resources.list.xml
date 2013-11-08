@@ -3,4 +3,14 @@
   <resource name="charFixFringes" type="RESOURCE"/>
   <resource name="charRunPhysics" type="RESOURCE"/>
   <resource name="characterHitObstacle" type="RESOURCE"/>
+  <resource name="charSetSolids" type="RESOURCE"/>
+  <resource name="charSetAllSolids" type="RESOURCE"/>
+  <resource name="charUnsetSolids" type="RESOURCE"/>
+  <resource name="gunSetSolids" type="RESOURCE"/>
+  <resource name="gunUnsetSolids" type="RESOURCE"/>
+  <resource name="allSetSolids" type="RESOURCE"/>
+  <resource name="allUnsetSolids" type="RESOURCE"/>
+  <resource name="wallSetSolid" type="RESOURCE"/>
+  <resource name="wallUnsetSolid" type="RESOURCE"/>
+  <resource name="really_move_contact_solid" type="RESOURCE"/>
 </resources>

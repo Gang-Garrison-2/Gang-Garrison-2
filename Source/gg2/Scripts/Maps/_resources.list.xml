@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
+  <resource name="basicRoomSetup" type="RESOURCE"/>
   <resource name="findInternalMapRoom" type="RESOURCE"/>
   <resource name="nextMapInRotation" type="RESOURCE"/>
+  <resource name="rooms_fix_views" type="RESOURCE"/>
   <resource name="serverGotoMap" type="RESOURCE"/>
 </resources>

@@ -9,6 +9,7 @@
   <resource name="SentryRed" type="RESOURCE"/>
   <resource name="SentryBlue" type="RESOURCE"/>
   <resource name="SentryMaskS" type="RESOURCE"/>
+  <resource name="CorpseCollisionMask" type="RESOURCE"/>
   <resource name="SentryTurretS" type="RESOURCE"/>
   <resource name="SentryGibsS" type="RESOURCE"/>
   <resource name="TurretRotateS" type="RESOURCE"/>
@@ -23,5 +24,6 @@
   <resource name="BubblesS" type="RESOURCE"/>
   <resource name="Boot" type="RESOURCE"/>
   <resource name="SpectatorHealthCross" type="RESOURCE"/>
+  <resource name="SpeedBoostS" type="RESOURCE"/>
   <resource name="SpectatorHealthFill" type="RESOURCE"/>
 </resources>

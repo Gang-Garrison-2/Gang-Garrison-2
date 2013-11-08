@@ -22,21 +22,21 @@ ysize = view_hview[0];
 var sprite_xpos, sprite_ypos, icon_xpos, icon_ypos, hppixels;
 
 draw_set_alpha(1);
-draw_rectangle_color(view_xview,view_yview,view_xview+800,view_yview+20,c_black,c_black,c_black,c_black,0);
-draw_rectangle_color(view_xview,view_yview+580,view_xview+800,view_yview+600,c_black,c_black,c_black,c_black,0);
+draw_rectangle_color(view_xview,view_yview,view_xview+xsize,view_yview+20,c_black,c_black,c_black,c_black,0);
+draw_rectangle_color(view_xview,view_yview+ysize-20,view_xview+xsize,view_yview+ysize,c_black,c_black,c_black,c_black,0);
 
 draw_set_valign(fa_center);
 draw_set_halign(fa_left);
 draw_set_color(c_white);
 if (tracking)
 {
-    draw_text(xoffset+50, yoffset+590, player.name);
+    draw_text(xoffset+50, yoffset+ysize-10, player.name);
     if (player.object == -1)
         break;
     if (global.myself.team == TEAM_SPECTATOR and player.object.maxHp != 0)
     {
         sprite_xpos = -2;
-        sprite_ypos = 538;
+        sprite_ypos = ysize-62;
         icon_xpos = sprite_xpos;
         icon_ypos = sprite_ypos + 20;
         draw_sprite_ext(SpectatorHealthCross, 0, xoffset+sprite_xpos, yoffset+sprite_ypos, 2, 2, 0, c_white, 1);

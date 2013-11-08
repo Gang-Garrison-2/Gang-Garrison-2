@@ -14,10 +14,10 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">var xoffset, yoffset, xsize, ysize;
-xoffset = view_xview[0];
-yoffset = view_yview[0];
-xsize = view_wview[0];
-ysize = view_hview[0];
+xoffset = view_xview[0]-800+view_wview[0]; // i'm not going to fix this the proper way for EVERY SINGLE WEAPON HHNGNGH GOD
+yoffset = view_yview[0]-600+view_hview[0];
+xsize = 800;
+ysize = 600;
 draw_set_alpha(1);
 
 if global.myself.object != -1 {
