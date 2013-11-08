@@ -3,5 +3,8 @@
 // argument0 - name
 // argument1 - GML code to execute
 
-menu_addlink(argument0, argument1);
-menu_script_back = argument1;
+if(menu_script_back == -1)
+{
+    menu_script_back = items;
+    menu_addlink(argument0, argument1);
+}
