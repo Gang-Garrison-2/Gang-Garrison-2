@@ -15,6 +15,7 @@
       <arguments>
         <argument kind="STRING">with(HostWarningsController)
     instance_destroy();
+
 </argument>
       </arguments>
     </action>

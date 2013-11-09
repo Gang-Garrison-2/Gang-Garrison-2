@@ -17,7 +17,7 @@
     menu_create(48, 172, 500, 260, 32, 40, 92, 128);
     menumode = true;
 
-    if (room != Options)
+    if(room != Options)
         menu_setdimmed();
     
     menu_background(512, 24, 8, 12, 4);
@@ -75,9 +75,18 @@
         menu_add_option(2, "Blood and medium gibs");
         menu_add_option(3, "Full blood and gibs");
     ');
+    menu_addedit_boolean("Hide Infiltrator 'Ghosts':", "global.hideSpyGhosts", '
+        gg2_write_ini("Settings", "Hide Spy Ghosts", argument0);
+    ');
     
-    menu_addedit_boolean("Kill Cam:", "global.killCam", '
-        gg2_write_ini("Settings", "Kill Cam", argument0);
+    menu_addedit_select("Ingame Aspect Ratio:", "global.resolutionkind", '
+        gg2_write_ini("Settings", "Resolution", argument0);
+    ','
+        menu_add_option(0, "5:4");
+        menu_add_option(1, "4:3");
+        menu_add_option(2, "16:10");
+        menu_add_option(3, "16:9");
+        menu_add_option(4, "2:1");
     ');
     menu_addedit_boolean("V Sync:", "global.monitorSync", '
     if (instance_exists(GameServer))
@@ -101,20 +110,20 @@
     ');
     
     menu_addtablink("Ingame", '
-        instance_create(x,y,OptionsController);
         instance_destroy();
+        instance_create(x,y,OptionsController);
     ');
     menu_addtablink("Engine", '
-        instance_create(x,y,EngineOptionsController);
         instance_destroy();
+        instance_create(x,y,EngineOptionsController);
     ');
     menu_addtablink("Controls", '
-        instance_create(x,y,ControlsController);
         instance_destroy();
+        instance_create(x,y,ControlsController);
     ');
     menu_addtablink("HUD", '
-        instance_create(x,y,HUDOptionsController);
         instance_destroy();
+        instance_create(x,y,HUDOptionsController);
     ');
     
     menu_addback("Back", '

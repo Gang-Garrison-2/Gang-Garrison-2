@@ -13,8 +13,11 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">menu_create(40, 200, 300, 200, 32);
-menu_background(312, 24, 8, 12, 4);
+        <argument kind="STRING">menu_create(48, 172, 500, 260, 32, 40, 112, 128);
+menumode = true;
+
+menu_background(512, 24, 8, 12, 4);
+bgtabs = true;
 
 menu_addedit_num("Scout:", "global.classlimits[CLASS_SCOUT]", '
     gg2_write_ini("Classlimits", "Scout", argument0);
@@ -46,6 +49,19 @@ menu_addedit_num("Sniper:", "global.classlimits[CLASS_SNIPER]", '
 menu_addedit_num("Quote:", "global.classlimits[CLASS_QUOTE]", '
     gg2_write_ini("Classlimits", "Quote", argument0);
 ', 255);
+
+menu_addtablink("Main", '
+    instance_create(x,y,HostOptionsController);
+    instance_destroy();
+');
+menu_addtablink("Advanced", '
+    instance_create(x,y,AdvHostOptionsController);
+    instance_destroy();
+');
+menu_addtablink("Classlimits", '
+    instance_create(x,y,ClasslimitsMenuController);
+    instance_destroy();
+');
 
 menu_addback("Back", '
     instance_create(x,y,HostOptionsController);

@@ -13,7 +13,13 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">stepHasRun = true;
+        <argument kind="STRING">if(!variable_local_exists("baseybegin"))
+    baseybegin = ybegin;
+if(view_hview[0] &lt; 600)
+    ybegin = round(baseybegin
+                   - min(1, max(0, window_mouse_get_y()/view_hview[0]))
+                     *(600-view_hview[0]));
+stepHasRun = true;
 if(editing != -1) {
     switch (item_type[editing]) {
         case "edittext2":

@@ -21,7 +21,7 @@
     lifetime = 155;
     alarm[0] = lifetime;
     
-    selfPopRadius = 3.5;
+    selfPopRadius = 4;
     selfPop = false;
 }
 </argument>

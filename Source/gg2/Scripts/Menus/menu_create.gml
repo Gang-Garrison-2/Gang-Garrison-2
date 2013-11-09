@@ -27,4 +27,5 @@ getsHighlight = true;
 bgtabs = false;
 menumode = false;
 doSwapBack = true;
+screenheight = 600;
 

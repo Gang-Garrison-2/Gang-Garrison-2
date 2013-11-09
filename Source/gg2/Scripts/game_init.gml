@@ -102,6 +102,7 @@
     CrosshairFilename = ini_read_string("Settings", "CrosshairFilename", "");
     CrosshairRemoveBG = ini_read_real("Settings", "CrosshairRemoveBG", 1);
     global.queueJumping = ini_read_real("Settings", "Queued Jumping", 0);
+    global.hideSpyGhosts = ini_read_real("Settings", "Hide Spy Ghosts", 0);
 
     global.backgroundHash = ini_read_string("Background", "BackgroundHash", "default");
     global.backgroundTitle = ini_read_string("Background", "BackgroundTitle", "");
@@ -161,6 +162,7 @@
     ini_write_string("Settings", "CrosshairFilename", CrosshairFilename);
     ini_write_real("Settings", "CrosshairRemoveBG", CrosshairRemoveBG);
     ini_write_real("Settings", "Queued Jumping", global.queueJumping);
+    ini_write_real("Settings", "Hide Spy Ghosts", global.hideSpyGhosts);
 
     ini_write_string("Background", "BackgroundHash", global.backgroundHash);
     ini_write_string("Background", "BackgroundTitle", global.backgroundTitle);
@@ -179,6 +181,7 @@
     ini_write_real("Classlimits", "Quote", global.classlimits[CLASS_QUOTE])
 
     ini_write_real("Settings", "Resolution", global.resolutionkind);
+    global.resolutionkind = ini_read_real("Settings", "Resolution", 1);
 
     // Fix room view resolutions
     switch(global.resolutionkind)

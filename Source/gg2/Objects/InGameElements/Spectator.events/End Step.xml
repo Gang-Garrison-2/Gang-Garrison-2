@@ -14,9 +14,7 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">if (global.myself != -1)
-{
     myTeam = global.myself.team;
-}
 
 if(global.myself.object != -1)
     instance_destroy();
@@ -26,7 +24,7 @@ moved = false;
 stopTracking = false;
 
 //moving view - mapped keys
-if(!(instance_exists(InGameMenuController) || instance_exists(OptionsController) || instance_exists(ControlsController) || instance_exists(HUDOptionsController)))
+if(!instance_exists(MenuController))
 {
     if keyboard_check(global.left)
     {

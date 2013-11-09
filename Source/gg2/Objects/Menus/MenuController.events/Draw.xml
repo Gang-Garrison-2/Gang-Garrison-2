@@ -13,7 +13,13 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">{
+        <argument kind="STRING">if(!variable_local_exists("baseybegin")) // This needs to be duplicated because of code execution order issues
+    baseybegin = ybegin;
+if(view_hview[0] &lt; 600)
+    ybegin = round(baseybegin
+                   - min(1, max(0, window_mouse_get_y()/view_hview[0]))
+                     *(600-view_hview[0]));
+{
     var i, val, itemx, itemy;
     
     
@@ -23,7 +29,7 @@
         draw_set_alpha(0.71);
         draw_rectangle(view_xview[0], view_yview[0], view_xview[0]+view_wview[0], view_yview[0]+view_hview[0], false);   
     }
-    else if (menumode and drawbg)
+    if (!dimmed and menumode and drawbg)
     {
         draw_set_color(c_black);
         draw_set_alpha(0.5);
