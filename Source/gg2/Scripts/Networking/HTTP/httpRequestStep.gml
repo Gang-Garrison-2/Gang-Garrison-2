@@ -118,7 +118,7 @@ with (client)
                         chunkSize = '';
                         
                         // Read chunk size byte by byte 
-                        while (true)
+                        while (buffer_bytes_left(responseBody))
                         {
                             c = read_string(responseBody, 1);
                             if (c == CR or c == ';')
@@ -131,7 +131,7 @@ with (client)
                         if (c == ';')
                         {
                             // skip all extension stuff
-                            while (c != CR)
+                            while (buffer_bytes_left(responseBody) && c != CR)
                             {
                                 c = read_string(responseBody, 1);
                             }
@@ -202,7 +202,7 @@ with (client)
                             {
                                 var linebuf;
                                 linebuf = '';
-                                while (true)
+                                while (buffer_bytes_left(responseBody))
                                 {
                                     c = read_string(responseBody, 1);
                                     if (c != CR)
