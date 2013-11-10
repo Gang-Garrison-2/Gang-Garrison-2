@@ -81,51 +81,8 @@ with (client)
                     // Header
                     else
                     {
-                        var headerName, headerValue, colonPos;
-                        // "HTTP/1.1 header field values can be folded onto multiple lines if the
-                        // continuation line begins with a space or horizontal tab."
-                        if ((string_char_at(linebuf, 1) == ' ' or ord(string_char_at(linebuf, 1)) == 9))
-                        {
-                            if (line == 1)
-                            {
-                                errored = true;
-                                error = "First header line of response can't be a continuation, right?";
-                                return _httpClientDestroy();
-                            }
-                            headerValue = ds_map_find_value(responseHeaders, string_lower(headerName))
-                                + string_copy(linebuf, 2, string_length(linebuf) - 1);
-                        }
-                        // "Each header field consists
-                        // of a name followed by a colon (":") and the field value. Field names
-                        // are case-insensitive. The field value MAY be preceded by any amount
-                        // of LWS, though a single SP is preferred."
-                        else
-                        {
-                            colonPos = string_pos(':', linebuf);
-                            if (colonPos == 0)
-                            {
-                                errored = true;
-                                error = "No colon in a header line of response";
-                                return _httpClientDestroy();
-                            }
-                            headerName = string_copy(linebuf, 1, colonPos - 1);
-                            headerValue = string_copy(linebuf, colonPos + 1, string_length(linebuf) - colonPos);
-                            // "The field-content does not include any leading or trailing LWS:
-                            // linear white space occurring before the first non-whitespace
-                            // character of the field-value or after the last non-whitespace
-                            // character of the field-value. Such leading or trailing LWS MAY be
-                            // removed without changing the semantics of the field value."
-                            while (string_char_at(headerValue, 1) == ' ' or ord(string_char_at(headerValue, 1)) == 9)
-                                headerValue = string_copy(headerValue, 2, string_length(headerValue) - 1);
-                        }
-    
-                        ds_map_add(responseHeaders, string_lower(headerName), headerValue);
-
-                        if (string_lower(headerName) == 'content-length')
-                        {
-                            responseBodySize = real(headerValue);
-                            responseBodyProgress = 0;
-                        }
+                        if (!_httpParseHeader(linebuf, line))
+                            return _httpClientDestroy();
                     }
                 }
     
@@ -142,7 +99,142 @@ with (client)
         responseBodyProgress += available;
         if (tcp_eof(socket))
         {
-            if (responseBodySize != -1)
+            if (ds_map_exists(responseHeaders, 'transfer-encoding'))
+            {
+                if (ds_map_find_value(responseHeaders, 'transfer-encoding') == 'chunked')
+                {
+                    // Chunked transfer, let's decode it
+                    var actualResponseBody, actualResponseSize;
+                    actualResponseBody = buffer_create();
+                    actualResponseBodySize = 0;
+
+                    // Parse chunks
+                    // chunk          = chunk-size [ chunk-extension ] CRLF
+                    //                  chunk-data CRLF
+                    // chunk-size     = 1*HEX
+                    while (buffer_bytes_left(responseBody))
+                    {
+                        var chunkSize, c;
+                        chunkSize = '';
+                        
+                        // Read chunk size byte by byte 
+                        while (true)
+                        {
+                            c = read_string(responseBody, 1);
+                            if (c == CR or c == ';')
+                                break;
+                            else
+                                chunkSize += c;
+                        }
+                        
+                        // We found a semicolon - beginning of chunk-extension
+                        if (c == ';')
+                        {
+                            // skip all extension stuff
+                            while (c != CR)
+                            {
+                                c = read_string(responseBody, 1);
+                            }
+                        }
+                        // Reached end of header
+                        if (c == CR)
+                        {
+                            c += read_string(responseBody, 1);
+                            // Doesn't end in CRLF
+                            if (c != CRLF)
+                            {
+                                errored = true;
+                                error = 'header of chunk in chunked transfer did not end in CRLF';
+                                buffer_destroy(actualResponseBody);
+                                return _httpClientDestroy();
+                            }
+                            // chunk-size is empty - something's up!
+                            if (chunkSize == '')
+                            {
+                                errored = true;
+                                error = 'empty chunk-size in a chunked transfer';
+                                buffer_destroy(actualResponseBody);
+                                return _httpClientDestroy();
+                            }
+                            chunkSize = httpParseHex(chunkSize);
+                            // Parsing of size failed - not hex?
+                            if (chunkSize == -1)
+                            {
+                                errored = true;
+                                error = 'chunk-size was not hexadecimal in a chunked transfer';
+                                buffer_destroy(actualResponseBody);
+                                return _httpClientDestroy();
+                            }
+                            // Is the chunk bigger than the remaining response?
+                            if (chunkSize + 2 > buffer_bytes_left(responseBody))
+                            {
+                                errored = true;
+                                error = 'chunk-size was greater than remaining data in a chunked transfer';
+                                buffer_destroy(actualResponseBody);
+                                return _httpClientDestroy();
+                            }
+                            // OK, everything's good, read the chunk
+                            write_buffer_part(actualResponseBody, responseBody, chunkSize);
+                            actualResponseBodySize += chunkSize;
+                            // Check for CRLF
+                            if (read_string(responseBody, 2) != CRLF)
+                            {
+                                errored = true;
+                                error = 'chunk did not end in CRLF in a chunked transfer';
+                                return _httpClientDestroy();
+                            }
+                        }
+                        else
+                        {
+                            errored = true;
+                            error = 'did not find CR after reading chunk header in a chunked transfer, Faucet HTTP bug?';
+                            return _httpClientDestroy();
+                        }
+                        // if the chunk size is zero, then it was the last chunk
+                        if (chunkSize == 0
+                            // trailer headers will be present
+                            and ds_map_exists(responseHeaders, 'trailer'))
+                        {
+                            // Parse header lines
+                            var line;
+                            line = 1;
+                            while (buffer_bytes_left(responseBody))
+                            {
+                                var linebuf;
+                                linebuf = '';
+                                while (true)
+                                {
+                                    c = read_string(responseBody, 1);
+                                    if (c != CR)
+                                        linebuf += c;
+                                    else
+                                        break;
+                                }
+                                c += read_string(responseBody, 1);
+                                if (c != CRLF)
+                                {
+                                    errored = true;
+                                    error = 'trailer header did not end in CRLF in a chunked transfer';
+                                    return _httpClientDestroy();
+                                }
+                                if (!_httpParseHeader(linebuf, line))
+                                    return _httpClientDestroy();
+                                line += 1;
+                            }
+                        }
+                    }
+                    responseBodySize = actualResponseBodySize;
+                    buffer_destroy(responseBody);
+                    responseBody = actualResponseBody;
+                }
+                else
+                {
+                    errored = true;
+                    error = 'Unsupported Transfer-Encoding: "' + ds_map_find_value(responseHaders, 'transfer-encoding') + '"';
+                    return _httpClientDestroy();
+                }
+            }
+            else if (responseBodySize != -1)
             {
                 if (responseBodyProgress < responseBodySize)
                 {

@@ -3,9 +3,11 @@
   <resource name="httpParseUrl" type="RESOURCE"/>
   <resource name="httpResolveUrl" type="RESOURCE"/>
   <resource name="httpResolvePath" type="RESOURCE"/>
+  <resource name="httpParseHex" type="RESOURCE"/>
   <resource name="httpConstructUrl" type="RESOURCE"/>
   <resource name="httpGet" type="RESOURCE"/>
   <resource name="_httpPrepareRequest" type="RESOURCE"/>
+  <resource name="_httpParseHeader" type="RESOURCE"/>
   <resource name="_httpClientDestroy" type="RESOURCE"/>
   <resource name="httpRequestStep" type="RESOURCE"/>
   <resource name="httpRequestStatus" type="RESOURCE"/>
