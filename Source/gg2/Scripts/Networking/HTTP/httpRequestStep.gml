@@ -161,11 +161,11 @@ with (client)
                     // Location is relative, absolute path
                     if (string_char_at(location, 1) == '/')
                     {
-                        if (ds_map_find_value(requestUrlParsed, 'port') == 80)
-                            location = 'http://' + ds_map_find_value(requestUrlParsed, 'host') + location;
+                        if (ds_map_find_value(requestUrlParts, 'port') == 80)
+                            location = 'http://' + ds_map_find_value(requestUrlParts, 'host') + location;
                         else
-                            location = 'http://' + ds_map_find_value(requestUrlParsed, 'host') 
-                                + ':' + ds_map_find_value(requestUrlParsed, 'port') + location;
+                            location = 'http://' + ds_map_find_value(requestUrlParts, 'host') 
+                                + ':' + string(ds_map_find_value(requestUrlParts, 'port')) + location;
                         // Restart request
                         _httpClientDestroy();
                         _httpPrepareRequest(client, location, requestHeaders);
