@@ -156,31 +156,20 @@ with (client)
             {
                 if (ds_map_exists(responseHeaders, 'location'))
                 {
-                    var location;
+                    var location, resolved;
                     location = ds_map_find_value(responseHeaders, 'location');
-                    // Location is relative, absolute path
-                    if (string_char_at(location, 1) == '/')
-                    {
-                        if (ds_map_find_value(requestUrlParts, 'port') == 80)
-                            location = 'http://' + ds_map_find_value(requestUrlParts, 'host') + location;
-                        else
-                            location = 'http://' + ds_map_find_value(requestUrlParts, 'host') 
-                                + ':' + string(ds_map_find_value(requestUrlParts, 'port')) + location;
-                        // Restart request
-                        _httpClientDestroy();
-                        _httpPrepareRequest(client, location, requestHeaders);
-                    }
-                    // Location is absolute
-                    else if (string_copy(location, 1, 7) == 'http://')
+                    resolved = httpResolveUrl(requestUrl, location);
+                    // Resolving URL didn't fail and it's http://
+                    if (resolved != '' and string_copy(resolved, 1, 7) == 'http://')
                     {
                         // Restart request
                         _httpClientDestroy();
-                        _httpPrepareRequest(client, location, requestHeaders);
+                        _httpPrepareRequest(client, resolved, requestHeaders);
                     }
                     else
                     {
                         errored = true;
-                        error = "301, 302, 303 or 307 response with unsupported relative Location header - can't redirect";
+                        error = "301, 302, 303 or 307 response with invalid or unsupported Location URL ('" + location +  "') - can't redirect";
                         return _httpClientDestroy();
                     }
                     exit;

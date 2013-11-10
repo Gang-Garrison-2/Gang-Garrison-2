@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
   <resource name="httpParseUrl" type="RESOURCE"/>
+  <resource name="httpResolveUrl" type="RESOURCE"/>
+  <resource name="httpResolvePath" type="RESOURCE"/>
+  <resource name="httpConstructUrl" type="RESOURCE"/>
   <resource name="httpGet" type="RESOURCE"/>
   <resource name="_httpPrepareRequest" type="RESOURCE"/>
   <resource name="_httpClientDestroy" type="RESOURCE"/>

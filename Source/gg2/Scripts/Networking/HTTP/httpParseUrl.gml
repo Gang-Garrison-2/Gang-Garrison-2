@@ -12,8 +12,9 @@
 // e.g. http://example.com will not have the "port", "path" or "query" keys
 
 // This will *only* work properly for URLs of format:
-// "http_URL = "http:" "//" host [ ":" port ] [ abs_path [ "?" query ]]"
-// where [] denotes an optional component (from RFC2616)
+// scheme ":" "//" host [ ":" port ] [ abs_path [ "?" query ]]"
+// where [] denotes an optional component
+// file: URLs will *not* work as they lack the authority (host:port) component
 // It will not work correctly for IPv6 host values
 
 var url;
@@ -107,4 +108,5 @@ else
 }
 
 // Return -1 upon unlikely error
+ds_map_destroy(map);
 return -1;

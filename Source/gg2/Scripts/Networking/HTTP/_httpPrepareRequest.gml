@@ -24,6 +24,7 @@ if (!ds_map_exists(parsed, 'abs_path'))
 
 with (client)
 {
+    destroyed = false;
     CR = chr(13);
     LF = chr(10);
     CRLF = CR + LF;
@@ -40,7 +41,6 @@ with (client)
     responseBodyProgress = -1;
     responseHeaders = ds_map_create();
     requestUrl = url;
-    requestUrlParts = parsed;
     requestHeaders = headers;
 
     //  Request       = Request-Line              ; Section 5.1
@@ -93,4 +93,6 @@ with (client)
     write_string(socket, CRLF);
     
     socket_send(socket);
+
+    ds_map_destroy(parsed);
 }
