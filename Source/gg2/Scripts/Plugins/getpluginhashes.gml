@@ -47,32 +47,32 @@ for (i = 0; i < ds_list_size(list); i += 1)
         url = PLUGIN_SOURCE + pluginname + ".md5";
     
         // let's make the request handle
-        handle = httpGet(url, -1);
+        handle = fcthttp_get(url, -1);
 
-        while (!httpRequestStatus(handle))
+        while (!fcthttp_request_status(handle))
         {
             // finish it - should be quick, no need to show progress
-            httpRequestStep(handle);
+            fcthttp_request_step(handle);
         }
 
         // errored
-        if (httpRequestStatus(handle) == 2)
+        if (fcthttp_request_status(handle) == 2)
         {
-            show_message('Error loading server-sent plugins - getting hash failed for "' + pluginname + '":#' + httpRequestError(handle));
+            show_message('Error loading server-sent plugins - getting hash failed for "' + pluginname + '":#' + fcthttp_request_error(handle));
             failed = true;
             break;
         }
 
         // request failed
-        if (httpRequestStatusCode(handle) != 200)
+        if (fcthttp_request_status_code(handle) != 200)
         {
-            show_message('Error loading server-sent plugins - getting hash failed for "' + pluginname + '":#' + string(httpRequestStatusCode(handle)) + ' ' + httpRequestReasonPhrase(handle));
+            show_message('Error loading server-sent plugins - getting hash failed for "' + pluginname + '":#' + string(fcthttp_request_status_code(handle)) + ' ' + fcthttp_request_reason_phrase(handle));
             failed = true;
             break;
         }
 
-        pluginhash = read_string(httpRequestResponseBody(handle), 32);
-        httpRequestDestroy(handle);
+        pluginhash = read_string(fcthttp_request_response_body(handle), 32);
+        fcthttp_request_destroy(handle);
     }
 
     // append name + hash to list

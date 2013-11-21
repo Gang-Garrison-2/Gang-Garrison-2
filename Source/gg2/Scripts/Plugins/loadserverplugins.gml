@@ -87,14 +87,14 @@ for (i = 0; i < ds_list_size(list); i += 1)
         url = PLUGIN_SOURCE + pluginname + "@" + pluginhash + ".zip";
         
         // let's make the download handle
-        handle = httpGet(url, -1);
+        handle = fcthttp_get(url, -1);
         
         // download it
-        while (!httpRequestStatus(handle)) {
+        while (!fcthttp_request_status(handle)) {
             // prevent game locking up
             io_handle();
 
-            httpRequestStep(handle);
+            fcthttp_request_step(handle);
             
             if (!global.isHost) {
                 // send ping if we haven't contacted server in 20 seconds
@@ -107,8 +107,8 @@ for (i = 0; i < ds_list_size(list); i += 1)
             }
 
             // draw progress bar since they may be waiting a while
-            filesize = httpRequestResponseBodySize(handle);
-            progress = httpRequestResponseBodyProgress(handle);
+            filesize = fcthttp_request_response_body_size(handle);
+            progress = fcthttp_request_response_body_progress(handle);
             draw_background_ext(background_index[0], 0, 0, background_xscale[0], background_yscale[0], 0, c_white, 1);
             draw_set_color(c_white);
             draw_set_alpha(1);
@@ -121,23 +121,23 @@ for (i = 0; i < ds_list_size(list); i += 1)
         }
 
         // errored
-        if (httpRequestStatus(handle) == 2)
+        if (fcthttp_request_status(handle) == 2)
         {
-            show_message('Error loading server-sent plugins - download failed for "' + pluginname + '":#' + httpRequestError(handle));
+            show_message('Error loading server-sent plugins - download failed for "' + pluginname + '":#' + fcthttp_request_error(handle));
             failed = true;
             break;
         }
 
         // request failed
-        if (httpRequestStatusCode(handle) != 200)
+        if (fcthttp_request_status_code(handle) != 200)
         {
-            show_message('Error loading server-sent plugins - download failed for "' + pluginname + '":#' + string(httpRequestStatusCode(handle)) + ' ' + httpRequestReasonPhrase(handle));
+            show_message('Error loading server-sent plugins - download failed for "' + pluginname + '":#' + string(fcthttp_request_status_code(handle)) + ' ' + fcthttp_request_reason_phrase(handle));
             failed = true;
             break;
         }
         else
         {
-            write_buffer_to_file(httpRequestResponseBody(handle), tempfile);
+            write_buffer_to_file(fcthttp_request_response_body(handle), tempfile);
             if (!file_exists(tempfile))
             {
                 show_message('Error loading server-sent plugins - download failed for "' + pluginname + '":# No such file?');
@@ -146,7 +146,7 @@ for (i = 0; i < ds_list_size(list); i += 1)
             }
         }
 
-        httpRequestDestroy(handle);
+        fcthttp_request_destroy(handle);
     }
 
     // check file integrity

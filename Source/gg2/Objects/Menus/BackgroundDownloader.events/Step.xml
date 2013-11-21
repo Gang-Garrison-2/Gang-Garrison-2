@@ -13,28 +13,28 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">httpRequestStep(handle);
+        <argument kind="STRING">fcthttp_request_step(handle);
 
 // Errored
-if (httpRequestStatus(handle) == 2)
+if (fcthttp_request_status(handle) == 2)
 {
-    show_message(httpRequestError(handle));
+    show_message(fcthttp_request_error(handle));
     instance_destroy();
     exit;
 }
 // Finished
-else if (httpRequestStatus(handle) == 1)
+else if (fcthttp_request_status(handle) == 1)
 {
     // Request failed
-    if (httpRequestStatusCode(handle) != 200)
+    if (fcthttp_request_status_code(handle) != 200)
     {
-        show_message(httpRequestReasonPhrase(handle));
+        show_message(fcthttp_request_reason_phrase(handle));
         instance_destroy();
         exit;
     }
 
-    write_buffer_to_file(httpRequestResponseBody(handle), tmpfile);
-    httpRequestDestroy(handle);
+    write_buffer_to_file(fcthttp_request_response_body(handle), tmpfile);
+    fcthttp_request_destroy(handle);
 
     // File doesn't exist
     if (!file_exists(tmpfile))
