@@ -49,15 +49,17 @@
     }
     
     player.object=-1;
-    if (collision_point(x,y,SpawnRoom,0,0) &amp;&amp; (lastDamageDealer == player || lastDamageDealer == noone))
+    if (collision_point(x,y,SpawnRoom,0,0))
         player.alarm[5] = 1;
     else 
         player.alarm[5] = global.Server_Respawntime;
     
     //part type destroy
-    if(variable_local_exists("jumpFlameParticleType")) {
-            part_type_destroy(jumpFlameParticleType);
-    }
+    if(variable_local_exists("jumpFlameParticleType"))
+        part_type_destroy(jumpFlameParticleType);
+    
+    if(variable_local_exists("jumpDustParticleSystem"))
+        part_type_destroy(jumpDustParticleSystem);
 }
 </argument>
       </arguments>

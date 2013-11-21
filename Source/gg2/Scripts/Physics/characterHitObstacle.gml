@@ -10,7 +10,6 @@
     oldvspeed=vspeed;
     
     // slide in an appropriate direction to get outside of walls
-    // TODO: Change place_free to some form of collision line to avoid possible edge cases
     if(!place_free(x, y))
     {
         if(place_free(x, bbox_top))

@@ -14,11 +14,25 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">if(!variable_local_exists("baseybegin"))
+{
     baseybegin = ybegin;
+    mouse_samples = ds_list_create();
+}
 if(view_hview[0] &lt; 600)
+{
+    ds_list_add(mouse_samples, window_mouse_get_y());
+    while(ds_list_size(mouse_samples) &gt; 10)
+        ds_list_delete(mouse_samples, 0);
+    var des_y;
+    des_y = 0;
+    for(i = 0; i &lt; ds_list_size(mouse_samples); i += 1)
+        des_y += ds_list_find_value(mouse_samples, i);
+    des_y /= ds_list_size(mouse_samples);
+    
     ybegin = round(baseybegin
-                   - min(1, max(0, window_mouse_get_y()/view_hview[0]))
+                   - min(1, max(0, des_y/view_hview[0]))
                      *(600-view_hview[0]));
+}
 stepHasRun = true;
 if(editing != -1) {
     switch (item_type[editing]) {

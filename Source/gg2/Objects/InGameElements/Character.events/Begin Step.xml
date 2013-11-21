@@ -69,13 +69,14 @@ if(!taunting and !omnomnomnom)
     if(pressedKeys &amp; $80 or (player.queueJump and wantToJump))
     {
         charSetSolids();
-        if(!place_free(x,y+1) and place_free(x,y))
+        if ((!place_free(x, y+1) and place_free(x, y))
+            or (place_meeting(x, y+1, DropdownPlatform) and !place_meeting(x, y, DropdownPlatform)))
         {
             if(not stabbing)
             {
                 wantToJump = false;
                 playsound(x,y,JumpSnd);
-                vspeed = min(vspeed-jumpStrength, -jumpStrength);
+                vspeed = min(vspeed, -jumpStrength);
             }
         }
         else if(canDoublejump and !doublejumpUsed and vspeed &gt; -jumpStrength)
@@ -239,18 +240,23 @@ if (abs(hspeed) &lt; 0.195) // Overweight carrying intel and shooting will get s
 }
 
 charSetSolids();
-if(place_free(x,y+1)) {
+if(place_free(x,y+1))
+{
     vspeed += 0.6;
-    if(vspeed&gt;10) {
-        vspeed=10;
-    }
-    animationImage = 1;
-} else {
-    if(place_free(x,y)) {
+    if(vspeed &gt; 10)
+        vspeed = 10;
+    
+    if !((place_meeting(x, y+1, DropdownPlatform)and !place_meeting(x, y, DropdownPlatform) and vspeed &gt;= 0))
+        animationImage = 1;
+}
+else
+{
+    if(place_free(x,y) or (place_meeting(x, y+1, DropdownPlatform) and !place_meeting(x, y, DropdownPlatform) and vspeed &gt;= 0))
+    {
         doublejumpUsed = 0;
+        moveStatus = 0;
     }
 }
-charUnsetSolids();
 
 if (intel)
 { 
@@ -291,6 +297,7 @@ if (player.humiliated)
 }
 else
     animationImage = (animationImage+abs(hspeed)/20) mod CHARACTER_ANIMATION_LEN;
+charUnsetSolids();
 
 // drop intel if ubered or round is over
 if (intel and (ubered or global.mapchanging) and global.isHost) {
@@ -352,7 +359,7 @@ if (player.humiliated)
 var zone;
 zone = collision_point(x,y,CaptureZone,0,0);
 
-if(zone &gt;= 0 and !cloak)
+if(zone &gt;= 0 and !cloak and cloakAlpha == 1)
     cappingPoint = zone.cp;
 else
     cappingPoint = noone;

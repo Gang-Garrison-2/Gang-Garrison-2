@@ -14,6 +14,7 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">{
+    warnoptioneffect = false;
     menu_create(48, 172, 500, 260, 32, 40, 92, 128);
     menumode = true;
 
@@ -81,6 +82,7 @@
     
     menu_addedit_select("Ingame Aspect Ratio:", "global.resolutionkind", '
         gg2_write_ini("Settings", "Resolution", argument0);
+        warnoptioneffect = true;
     ','
         menu_add_option(0, "5:4");
         menu_add_option(1, "4:3");
@@ -127,6 +129,8 @@
     ');
     
     menu_addback("Back", '
+        if(warnoptioneffect)
+            show_message("An option you changed only takes effect on map change or server join.");
         instance_destroy();
         if(room == Options)
             room_goto_fix(Menu);

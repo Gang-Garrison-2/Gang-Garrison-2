@@ -256,6 +256,18 @@ instance_create(0,0,DebugRoomO);
       <creationCode/>
       <locked>false</locked>
     </instance>
+    <instance>
+      <object>DropdownPlatform</object>
+      <position x="438" y="216"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>DropdownPlatform</object>
+      <position x="498" y="216"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
   </instances>
   <tiles/>
   <editorSettings remember="false"/>

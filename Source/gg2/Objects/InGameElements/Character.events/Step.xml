@@ -23,6 +23,8 @@ timeUnscathed = min(timeUnscathed+1, 10*30);
 _last_hspeed = hspeed;
 
 // Run movement solver if necessary
+yprevious = y;
+xprevious = x;
 charSetSolids();
 if(!place_free(x+hspeed, y+vspeed))
     characterHitObstacle();
