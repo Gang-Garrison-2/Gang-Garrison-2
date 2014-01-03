@@ -125,6 +125,33 @@ if (burnDuration &gt; 0 or burnIntensity &gt; 0) {
         draw_sprite_ext(FlameS, alarm[5] + i + random(2), x + flameArray_x[i], y + flameArray_y[i], 1, 1, 0, c_white, burnDuration / maxDuration * 0.71 + 0.35);
     }  
 }
+
+// Copied from Lorgan's itemserver "angels" with slight modifications
+// All credit be upon him
+if (demon != -1)
+{
+    demonX = median(x-40,demonX,x+40);
+    demonY = median(y-40,demonY,y);
+    demonOffset += demonDir;
+    if (abs(demonOffset) &gt; 15)
+        demonDir *= -1;
+
+    var dir;
+    if (demonX &gt; x)
+        dir = -1;
+    else
+        dir = 1;
+
+    if (demonFrame &gt; sprite_get_number(demon))
+        demonFrame = 0;
+
+    if (stabbing || ubered)
+        draw_sprite_ext(demon,demonFrame+floor(animationImage)+7*player.team,demonX,demonY+demonOffset,dir*1,1,0,c_white,1);
+    else
+        draw_sprite_ext(demon,demonFrame+floor(animationImage)+7*player.team,demonX,demonY+demonOffset,dir*1,1,0,c_white,image_alpha);
+
+    demonFrame += 1;
+}
 </argument>
       </arguments>
     </action>
