@@ -20,7 +20,7 @@ showVersion = true;
 
 tmpfile = temp_directory + "\background.png.tmp";
 
-handle = fcthttp_get(BACKGROUND_SOURCE, -1);
+handle = http_get(BACKGROUND_SOURCE, -1);
 </argument>
       </arguments>
     </action>

@@ -31,7 +31,7 @@ if(global.updaterBetaChannel)
 else
     url = DEVMESSAGES_SOURCE;
 
-handle = fcthttp_get(url, -1);
+handle = http_get(url, -1);
 
 image_speed = 5/room_speed;
 </argument>

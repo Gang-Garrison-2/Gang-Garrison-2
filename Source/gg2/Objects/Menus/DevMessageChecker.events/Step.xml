@@ -15,16 +15,16 @@
       <arguments>
         <argument kind="STRING">image_speed = 5/room_speed;
 
-fcthttp_request_step(handle);
+http_request_step(handle);
 
 var status;
-status = fcthttp_request_status(handle);
+status = http_request_status(handle);
 
 // Request failed
 if (status == 2)
 {
     // Just give up
-    fcthttp_request_destroy(handle);
+    http_request_destroy(handle);
     instance_destroy();
     exit;
 }
@@ -32,21 +32,21 @@ if (status == 2)
 else if (status == 1)
 {    
     var statusCode;
-    statusCode = fcthttp_request_status_code(handle);
+    statusCode = http_request_status_code(handle);
 
     // Request failed
     if (statusCode != 200)
     {
         // Just give up
-        fcthttp_request_destroy(handle);
+        http_request_destroy(handle);
         instance_destroy();
         exit;
     }
 
     var data;
-    data = fcthttp_request_response_body(handle);
+    data = http_request_response_body(handle);
     data = read_string(data, buffer_size(data));
-    fcthttp_request_destroy(handle);
+    http_request_destroy(handle);
 
     global.devMessagesChecked = true;
 

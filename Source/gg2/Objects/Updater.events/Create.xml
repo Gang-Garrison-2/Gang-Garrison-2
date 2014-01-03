@@ -31,18 +31,18 @@ else
 
 tmpfile = temp_directory + "\gg2update.zip";
     
-downloadHandle = fcthttp_get(url, -1);
+downloadHandle = http_get(url, -1);
 
-while(!fcthttp_request_status(downloadHandle)) 
+while(!http_request_status(downloadHandle)) 
 { // while download isn't finished
     sleep(floor(1000/30)); // sleep for the equivalent of one frame
     io_handle(); // this prevents GameMaker from appearing locked-up
-    fcthttp_request_step(downloadHandle);
+    http_request_step(downloadHandle);
     
     // check if the user cancelled the download with the esc key
     if(keyboard_check(vk_escape)) 
     {
-        fcthttp_request_destroy(downloadHandle);
+        http_request_destroy(downloadHandle);
         window_set_showborder(window_oldshowborder);
         window_set_fullscreen(window_oldfullscreen);
         room_goto_fix(Menu);
@@ -60,8 +60,8 @@ while(!fcthttp_request_status(downloadHandle))
     draw_text(x,y-20,string(minutes) + " minutes " + string(seconds) + " seconds Remaining...");
     counter+=1;
     var progress, size;
-    progress = fcthttp_request_response_body_progress(downloadHandle);
-    size = fcthttp_request_response_body_size(downloadHandle);
+    progress = http_request_response_body_progress(downloadHandle);
+    size = http_request_response_body_size(downloadHandle);
     if (size != -1)
     {
         progressBar = floor((progress/size) * 20);
@@ -74,28 +74,28 @@ while(!fcthttp_request_status(downloadHandle))
     screen_refresh();
 }
 // Errored
-if (fcthttp_request_status(downloadHandle) == 2)
+if (http_request_status(downloadHandle) == 2)
 {
-    show_message("Downloading update failed!#" + fcthttp_request_error(downloadHandle));
-    fcthttp_request_destroy(downloadHandle);
+    show_message("Downloading update failed!#" + http_request_error(downloadHandle));
+    http_request_destroy(downloadHandle);
     window_set_showborder(window_oldshowborder);
     window_set_fullscreen(window_oldfullscreen);
     room_goto_fix(Menu);
     exit;
 }
 // Request failed
-if (fcthttp_request_status_code(downloadHandle) != 200)
+if (http_request_status_code(downloadHandle) != 200)
 {
-    show_message("Downloading update failed!#" + string(fcthttp_request_status_code(downloadHandle)) + " " + fcthttp_request_reason_phrase(downloadHandle));
-    fcthttp_request_destroy(downloadHandle);
+    show_message("Downloading update failed!#" + string(http_request_status_code(downloadHandle)) + " " + http_request_reason_phrase(downloadHandle));
+    http_request_destroy(downloadHandle);
     window_set_showborder(window_oldshowborder);
     window_set_fullscreen(window_oldfullscreen);
     room_goto_fix(Menu);
     exit;
 }
 
-write_buffer_to_file(fcthttp_request_response_body(downloadHandle), tmpfile);
-fcthttp_request_destroy(downloadHandle);
+write_buffer_to_file(http_request_response_body(downloadHandle), tmpfile);
+http_request_destroy(downloadHandle);
 
 if(!file_exists(tmpfile))
 {
