@@ -47,32 +47,23 @@ for (i = 0; i < ds_list_size(list); i += 1)
         url = PLUGIN_SOURCE + pluginname + ".md5";
     
         // let's make the request handle
-        handle = http_get(url, -1);
+        handle = http_new_get(url);
 
-        while (!http_request_status(handle))
+        while (!http_step(handle))
         {
-            // finish it - should be quick, no need to show progress
-            http_request_step(handle);
-        }
-
-        // errored
-        if (http_request_status(handle) == 2)
-        {
-            show_message('Error loading server-sent plugins - getting hash failed for "' + pluginname + '":#' + http_request_error(handle));
-            failed = true;
-            break;
+            // should be quick, no need to show progress
         }
 
         // request failed
-        if (http_request_status_code(handle) != 200)
+        if (http_status_code(handle) != 200)
         {
-            show_message('Error loading server-sent plugins - getting hash failed for "' + pluginname + '":#' + string(http_request_status_code(handle)) + ' ' + http_request_reason_phrase(handle));
+            show_message('Error loading server-sent plugins - getting hash failed for "' + pluginname + '":#' + string(http_status_code(handle)) + ' ' + http_reason_phrase(handle));
             failed = true;
             break;
         }
 
-        pluginhash = read_string(http_request_response_body(handle), 32);
-        http_request_destroy(handle);
+        pluginhash = read_string(http_response_body(handle), 32);
+        http_destroy(handle);
     }
 
     // append name + hash to list

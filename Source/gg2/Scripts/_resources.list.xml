@@ -54,4 +54,5 @@
   <resource name="isBetaVersion" type="RESOURCE"/>
   <resource name="promptRestartOrQuit" type="RESOURCE"/>
   <resource name="split" type="RESOURCE"/>
+  <resource name="Faucet HTTP" type="GROUP"/>
 </resources>
