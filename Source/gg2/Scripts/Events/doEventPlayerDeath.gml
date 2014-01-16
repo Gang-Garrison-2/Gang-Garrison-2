@@ -95,20 +95,31 @@ with(victim.object) {
     or damageSource == FINISHED_OFF_GIB or damageSource == GENERATOR_EXPLOSION) 
     and (player.class != CLASS_QUOTE) and (global.gibLevel>1) 
     and distance_to_point(xoffset+xsize/2,yoffset+ysize/2) < 900) {
-        repeat(global.gibLevel) {
-            createGib(x,y,Gib,hspeed,vspeed,random(145)-72, 0, false)
+        // 'PG' reward - *P*umpkin *G*ibs
+        if (hasReward(victim, 'PG'))
+        {
+            repeat(global.gibLevel * 2) {
+                createGib(x,y,PumpkinGib,hspeed,vspeed,random(145)-72, choose(0,1,2,3), false, true)
+            }
         }
-        switch(player.team) {
-        case TEAM_BLUE :
-            repeat(global.gibLevel - 1) {
-                createGib(x,y,BlueClump,hspeed,vspeed,random(145)-72, 0, false)
+        else
+        {
+            repeat(global.gibLevel) {
+                createGib(x,y,Gib,hspeed,vspeed,random(145)-72, 0, false)
             }
-            break;
-        case TEAM_RED :
-            repeat(global.gibLevel - 1) {
-                createGib(x,y,RedClump,hspeed,vspeed,random(145)-72, 0, false)
+            switch(player.team)
+            {
+            case TEAM_BLUE :
+                repeat(global.gibLevel - 1) {
+                    createGib(x,y,BlueClump,hspeed,vspeed,random(145)-72, 0, false)
+                }
+                break;
+            case TEAM_RED :
+                repeat(global.gibLevel - 1) {
+                    createGib(x,y,RedClump,hspeed,vspeed,random(145)-72, 0, false)
+                }
+                break;
             }
-            break;
         }
 
         repeat(global.gibLevel * 14) {
@@ -116,22 +127,33 @@ with(victim.object) {
             blood = instance_create(x+random(23)-11,y+random(23)-11,BloodDrop);
             blood.hspeed=(random(21)-10);
             blood.vspeed=(random(21)-13);
-        }
-        //All Classes gib head, hands, and feet
-        if(global.gibLevel > 2 || choose(0,1) == 1)
-            createGib(x,y,Headgib,0,0,random(105)-52, player.class, false);
-        repeat(global.gibLevel -1){
-            //Medic has specially colored hands
-            if (player.class == CLASS_MEDIC){
-                if (player.team == TEAM_RED)
-                    createGib(x,y,Hand, hspeed, vspeed, random(105)-52 , 9, false);
-                else
-                    createGib(x,y,Hand, hspeed, vspeed, random(105)-52 , 10, false);
-            }else{
-                createGib(x,y,Hand, hspeed, vspeed, random(105)-52 , player.class, false);
+            // 'PG' reward - *P*umpkin *G*ibs
+            if (hasReward(victim, 'PG'))
+            {
+                blood.sprite_index = PumpkinJuiceS;
             }
-            createGib(x,y,Feet,random(5)-2,random(3),random(13)-6 , player.class, true);
         }
+        // 'PG' reward - *P*umpkin *G*ibs
+        // We don't want want body parts if we're doing pumpkin gibs
+        if (!hasReward(victim, 'PG'))
+        {
+            //All Classes gib head, hands, and feet
+            if(global.gibLevel > 2 || choose(0,1) == 1)
+                createGib(x,y,Headgib,0,0,random(105)-52, player.class, false);
+            repeat(global.gibLevel -1){
+                //Medic has specially colored hands
+                if (player.class == CLASS_MEDIC){
+                    if (player.team == TEAM_RED)
+                        createGib(x,y,Hand, hspeed, vspeed, random(105)-52 , 9, false);
+                    else
+                        createGib(x,y,Hand, hspeed, vspeed, random(105)-52 , 10, false);
+                }else{
+                    createGib(x,y,Hand, hspeed, vspeed, random(105)-52 , player.class, false);
+                }
+                createGib(x,y,Feet,random(5)-2,random(3),random(13)-6 , player.class, true);
+            }
+        }
+
         //Class specific gibs
         switch(player.class) {
         case CLASS_PYRO :

@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
   <resource name="WillOWispS" type="RESOURCE"/>
+  <resource name="PumpkinGibS" type="RESOURCE"/>
+  <resource name="PumpkinJuiceS" type="RESOURCE"/>
 </resources>
