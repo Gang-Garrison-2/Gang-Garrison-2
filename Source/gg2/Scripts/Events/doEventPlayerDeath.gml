@@ -99,7 +99,7 @@ with(victim.object) {
         if (hasReward(victim, 'PG'))
         {
             repeat(global.gibLevel * 2) {
-                createGib(x,y,PumpkinGib,hspeed,vspeed,random(145)-72, choose(0,1,2,3), false, true)
+                createGib(x,y,PumpkinGib,hspeed,vspeed,random(145)-72, choose(0,1,1,2,2,3,3), false, true)
             }
         }
         else
