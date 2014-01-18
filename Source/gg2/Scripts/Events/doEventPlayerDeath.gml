@@ -95,11 +95,10 @@ with(victim.object) {
     or damageSource == FINISHED_OFF_GIB or damageSource == GENERATOR_EXPLOSION) 
     and (player.class != CLASS_QUOTE) and (global.gibLevel>1) 
     and distance_to_point(xoffset+xsize/2,yoffset+ysize/2) < 900) {
-        // 'PG' reward - *P*umpkin *G*ibs
-        if (hasReward(victim, 'PG'))
+        if (hasReward(victim, 'PumpkinGibs'))
         {
             repeat(global.gibLevel * 2) {
-                createGib(x,y,PumpkinGib,hspeed,vspeed,random(145)-72, choose(0,1,1,2,2,3,3), false, true)
+                createGib(x,y,PumpkinGib,hspeed,vspeed,random(145)-72, choose(0,1,1,2,2,3), false, true)
             }
         }
         else
@@ -127,15 +126,12 @@ with(victim.object) {
             blood = instance_create(x+random(23)-11,y+random(23)-11,BloodDrop);
             blood.hspeed=(random(21)-10);
             blood.vspeed=(random(21)-13);
-            // 'PG' reward - *P*umpkin *G*ibs
-            if (hasReward(victim, 'PG'))
+            if (hasReward(victim, 'PumpkinGibs'))
             {
                 blood.sprite_index = PumpkinJuiceS;
             }
         }
-        // 'PG' reward - *P*umpkin *G*ibs
-        // We don't want want body parts if we're doing pumpkin gibs
-        if (!hasReward(victim, 'PG'))
+        if (!hasReward(victim, 'PumpkinGibs'))
         {
             //All Classes gib head, hands, and feet
             if(global.gibLevel > 2 || choose(0,1) == 1)
