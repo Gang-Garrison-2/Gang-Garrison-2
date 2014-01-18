@@ -148,8 +148,7 @@
         tauntOverlay = global.HatBobbleClassTaunt[player.class];
     }
 
-    // 'WOW' reward - *W*ill-*O*-*W*isp
-    if (hasReward(player, 'WOW'))
+    if (hasReward(player, 'WillOWisp'))
     {
         demon = WillOWispS;
     }
