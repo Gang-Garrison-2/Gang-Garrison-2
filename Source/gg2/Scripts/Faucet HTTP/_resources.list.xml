@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="__http_init" type="RESOURCE"/>
+  <resource name="__http_split" type="RESOURCE"/>
+  <resource name="__http_parse_url" type="RESOURCE"/>
+  <resource name="__http_resolve_url" type="RESOURCE"/>
+  <resource name="__http_resolve_path" type="RESOURCE"/>
+  <resource name="__http_parse_hex" type="RESOURCE"/>
+  <resource name="__http_construct_url" type="RESOURCE"/>
+  <resource name="__http_prepare_request" type="RESOURCE"/>
+  <resource name="__http_parse_header" type="RESOURCE"/>
+  <resource name="__http_client_step" type="RESOURCE"/>
+  <resource name="__http_client_destroy" type="RESOURCE"/>
+  <resource name="http_new_get" type="RESOURCE"/>
+  <resource name="http_new_get_ex" type="RESOURCE"/>
+  <resource name="http_step" type="RESOURCE"/>
+  <resource name="http_status_code" type="RESOURCE"/>
+  <resource name="http_reason_phrase" type="RESOURCE"/>
+  <resource name="http_response_body" type="RESOURCE"/>
+  <resource name="http_response_body_size" type="RESOURCE"/>
+  <resource name="http_response_body_progress" type="RESOURCE"/>
+  <resource name="http_response_headers" type="RESOURCE"/>
+  <resource name="http_destroy" type="RESOURCE"/>
+</resources>

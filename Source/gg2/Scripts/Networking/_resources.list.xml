@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
-  <resource name="HTTP" type="GROUP"/>
   <resource name="receiveCompleteMessage" type="RESOURCE"/>
   <resource name="receivestring" type="RESOURCE"/>
   <resource name="read_binstring" type="RESOURCE"/>
