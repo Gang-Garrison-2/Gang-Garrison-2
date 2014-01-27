@@ -17,7 +17,8 @@
 timeUnscathed = min(timeUnscathed+1, 10*30);
 
 charSetSolids();
-characterHitObstacle();
+if(!place_free(x+hspeed, y+vspeed))
+    characterHitObstacle();
 charUnsetSolids();
 
 </argument>
