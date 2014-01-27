@@ -3,4 +3,8 @@
   <resource name="WillOWispS" type="RESOURCE"/>
   <resource name="PumpkinGibS" type="RESOURCE"/>
   <resource name="PumpkinJuiceS" type="RESOURCE"/>
+  <resource name="GhostIdle" type="RESOURCE"/>
+  <resource name="GhostKiss" type="RESOURCE"/>
+  <resource name="GhostFlex" type="RESOURCE"/>
+  <resource name="GhostDeath" type="RESOURCE"/>
 </resources>

@@ -72,6 +72,7 @@
     
     // Haxxy rewards
     rewards = -1;
+    ghost = -1;
 }
 </argument>
       </arguments>

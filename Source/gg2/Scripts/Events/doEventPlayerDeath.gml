@@ -210,6 +210,12 @@ if (global.xmas){
     myHat.image_index = victim.team;
 }
 
+if (hasReward(victim, 'Ghost') and victim.ghost == -1) {
+    victim.ghost = instance_create(x, y, Ghost);
+    victim.ghost.owner = victim;
+    victim.ghost.hspeed = hspeed;
+    victim.ghost.vspeed = vspeed;
+}
 
 with(victim.object) {       
     instance_destroy();
