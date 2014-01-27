@@ -6,6 +6,7 @@
 //argument 5: rotatespeed
 //argument 6: image_index
 //argument 7: override randomized hs/vspeed
+//argument 8: is pumpkin gib
 var gib;
 gib = instance_create(argument0,argument1,argument2);
 if (argument7) {
@@ -17,3 +18,4 @@ if (argument7) {
 }
 gib.rotspeed = argument5;
 gib.image_index = argument6;
+gib.pumpkin = argument8;

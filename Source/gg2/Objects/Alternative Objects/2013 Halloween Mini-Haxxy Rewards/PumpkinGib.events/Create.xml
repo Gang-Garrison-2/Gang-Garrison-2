@@ -14,18 +14,17 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">image_speed = 0;
-image_index = choose(0,1,2,3,4,5,6);
-image_xscale=2;
-image_yscale=2;
-bloodchance=1.8;
+image_index = choose(0,1,2,3);
+image_xscale=1;
+image_yscale=1;
+bloodchance=2;
+hfric=0.3;
 snd=true;
-hfric=0.4;
-rotfric=0.6;
+rotfric=0.4;
 direction = 270;
-alarm[0]=210;
+alarm[0]=250;
 rotspeed=1;
 fadeout = false;
-pumpkin = false;
 </argument>
       </arguments>
     </action>
