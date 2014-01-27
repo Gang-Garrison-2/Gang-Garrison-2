@@ -57,7 +57,7 @@ for (i = 0; i < ds_list_size(list); i += 1)
         // request failed
         if (http_status_code(handle) != 200)
         {
-            if (httpRequestStatusCode(handle) == 404)
+            if (http_status_code(handle) == 404)
                 show_message('Error loading server-sent plugins - getting hash failed for "' + pluginname + '":#404 Not Found - This most likely means there is no plugin with that name. Are you sure you spelled it correctly? Please note that plugin names are always lowercase, and you cannot have spaces between the commas in ServerPluginList.');
             else
                 show_message('Error loading server-sent plugins - getting hash failed for "' + pluginname + '":#' + string(http_status_code(handle)) + ' ' + http_reason_phrase(handle));

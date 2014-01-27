@@ -18,7 +18,8 @@ if (http_step(handle)) {
     // Request failed
     if (http_status_code(handle) != 200)
     {
-        show_message(http_reason_phrase(handle));
+        // Just give up
+        http_destroy(handle);
         instance_destroy();
         exit;
     }
