@@ -15,7 +15,7 @@
       <arguments>
         <argument kind="STRING">if (other.player == owner)
 {
-    owner.ghost = -1;
+    owner.ghost = noone;
     instance_destroy();
 }
 </argument>
