@@ -60,8 +60,7 @@
     global.gibLevel = ini_read_real("Settings", "Gib Level", 3);
     global.killCam = ini_read_real("Settings", "Kill Cam", 1);
     global.monitorSync = ini_read_real("Settings", "Monitor Sync", 0);
-    if global.monitorSync == 1 set_synchronization(true);
-    else set_synchronization(false);
+    set_synchronization(global.monitorSync);
     global.medicRadar = ini_read_real("Settings", "Healer Radar", 1);
     global.showHealer = ini_read_real("Settings", "Show Healer", 1);
     global.showHealing = ini_read_real("Settings", "Show Healing", 1);

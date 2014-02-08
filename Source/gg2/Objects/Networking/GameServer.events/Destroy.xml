@@ -38,6 +38,8 @@ room_goto_fix(Menu);
 
 if (global.serverPluginsInUse)
     pluginscleanup();
+    
+set_synchronization(global.monitorSync);
 </argument>
       </arguments>
     </action>
