@@ -52,6 +52,9 @@
         else if instance_exists(DKothHUD) {
             with DKothHUD event_user(12);
         }
+        else if instance_exists(TeamDeathmatchHUD) {
+            with DKothHUD event_user(12);
+        }
         
         // Write classlimits to joining client
         for (a = 0; a < 10; a += 1)
