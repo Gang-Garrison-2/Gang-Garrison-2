@@ -25,7 +25,6 @@ direction = 270;
 alarm[0]=250;
 rotspeed=1;
 fadeout = false;
-pumpkin = true;
 </argument>
       </arguments>
     </action>

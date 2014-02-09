@@ -23,7 +23,7 @@ if(abs(speed/bloodchance)&gt;random(16/global.gibLevel)) {
     blood = instance_create(x,y-1,BloodDrop);
     blood.ogib=self;
     blood.odir=point_direction(x,y,x+hspeed,y+vspeed);
-    if (pumpkin) {
+    if (object_index == PumpkinGib) {
         blood.sprite_index = PumpkinJuiceS;
     }
      with(blood) {
