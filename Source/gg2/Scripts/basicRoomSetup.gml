@@ -42,6 +42,8 @@ else if instance_exists(GeneratorBlue) || instance_exists(GeneratorRed) {
 } else if instance_exists(ControlPoint) {
     with ControlPoint event_user(0);
     instance_create(0,0,ControlPointHUD);
+} else {
+    instance_create(0,0,TeamDeathmatchHUD);
 }
 
 instance_create(0,0,TeamSelectController);
