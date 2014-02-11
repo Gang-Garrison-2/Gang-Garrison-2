@@ -15,7 +15,7 @@
       <arguments>
         <argument kind="STRING">if (timer &gt; 0)
     timer -= 1;
-if ((global.redCaps &gt;= global.caplimit * capLimitMultiple) or (global.blueCaps &gt;= global.caplimit * capLimitMultiple) or timer&lt;=0) {
+if ((global.redCaps &gt;= killLimit) or (global.blueCaps &gt;= killLimit) or timer&lt;=0) {
     if (global.redCaps &gt; global.blueCaps)
         global.winners = TEAM_RED;
     else if (global.blueCaps &gt; global.redCaps)

@@ -42,7 +42,7 @@ draw_text_transformed(xpos + width / 2 - width / 3.5, ypos - height / 2 + 6, str
 draw_text_transformed(xpos + width / 2 + width / 3.5, ypos - height / 2 + 6, string(global.blueCaps), 2, 2, 0);
 
 // Kill limit
-draw_text_transformed(xpos + width / 2, ypos - 14, string(global.caplimit * capLimitMultiple), 2, 2, 0);
+draw_text_transformed(xpos + width / 2, ypos - 14, string(killLimit), 2, 2, 0);
 
 //timer
 if instance_exists(WinBanner) exit;
