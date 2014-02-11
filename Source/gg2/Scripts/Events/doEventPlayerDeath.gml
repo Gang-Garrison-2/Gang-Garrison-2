@@ -235,10 +235,13 @@ if( global.killCam and victim == global.myself and killer and killer != victim a
 }
 
 // Gamemode considerations
-if (instance_exists(TeamDeathmatchHUD) and killer and killer != victim and killer.team != victim.team)
+if (instance_exists(TeamDeathmatchHUD) and killer and killer != victim)
 {
-    if (killer.team == TEAM_RED)
-        global.redCaps += 1;
-    else if (killer.team == TEAM_BLUE)
-        global.blueCaps += 1;
+    if (killer.team != victim.team)
+    {
+        if (killer.team == TEAM_RED)
+            global.redCaps += 1;
+        else if (killer.team == TEAM_BLUE)
+            global.blueCaps += 1;
+    }
 }
