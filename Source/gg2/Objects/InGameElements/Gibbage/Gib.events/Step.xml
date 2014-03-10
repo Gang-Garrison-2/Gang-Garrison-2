@@ -40,7 +40,10 @@ wallSetSolid();
 if (place_free(x, y+1))
     vspeed += my_gravity;
 else
-    vspeed = 0;
+{
+    vspeed = min(vspeed, 0);
+    hspeed = hspeed * delta_mult(0.9);
+}
 if (vspeed &gt; 11)
     vspeed = 11;
     

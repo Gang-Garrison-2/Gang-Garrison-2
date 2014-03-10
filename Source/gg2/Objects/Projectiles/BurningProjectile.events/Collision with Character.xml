@@ -29,16 +29,17 @@
     {
         other.burnDuration += durationIncrease; 
         
+        var falloffAmount;
+        falloffAmount = (flameLife - alarm[0]*global.delta_factor)/flameLife;
         if(afterburnFalloff)
-            falloffFactor = min((flameLife - alarm[0])/flameLife, (flameLife - alarm[0])/flameLife*0.65+0.35); // Reduce heat additions of "old"/distant flames
+            falloffFactor = min(falloffAmount, falloffAmount*0.65+0.35); // Reduce heat additions of "old"/distant flames -- 0.35 to 1.0 "curve"
         else
             falloffFactor = 1;
         
-        if(other.burnIntensity &gt; other.legIntensity) // reduce heat additions above the "leg" heat
+        if(other.burnIntensity &gt; other.legIntensity and afterburnFalloff) // reduce heat additions above the "leg" heat
             falloffFactor /= 2;
         
         other.burnIntensity += burnIncrease * falloffFactor;
-        other.burnIntensity = min(other.burnIntensity, other.maxIntensity);
             
         other.burnDuration = min(other.burnDuration, other.maxDuration);
         other.burnIntensity = min(other.burnIntensity, other.maxIntensity);

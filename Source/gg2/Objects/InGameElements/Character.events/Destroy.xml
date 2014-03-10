@@ -52,7 +52,7 @@
     if (collision_point(x,y,SpawnRoom,0,0))
         player.alarm[5] = 1;
     else 
-        player.alarm[5] = global.Server_Respawntime;
+        player.alarm[5] = global.Server_Respawntime / global.delta_factor;
     
     //part type destroy
     if(variable_local_exists("jumpFlameParticleType"))
