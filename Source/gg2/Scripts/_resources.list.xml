@@ -56,4 +56,5 @@
   <resource name="promptRestartOrQuit" type="RESOURCE"/>
   <resource name="split" type="RESOURCE"/>
   <resource name="draw_pinched_blackrect" type="RESOURCE"/>
+  <resource name="Faucet HTTP" type="GROUP"/>
 </resources>

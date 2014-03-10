@@ -13,28 +13,19 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">httpRequestStep(handle);
-
-// Errored
-if (httpRequestStatus(handle) == 2)
-{
-    show_message(httpRequestError(handle));
-    instance_destroy();
-    exit;
-}
-// Finished
-else if (httpRequestStatus(handle) == 1)
-{
+        <argument kind="STRING">// Finished/Errored
+if (http_step(handle)) {
     // Request failed
-    if (httpRequestStatusCode(handle) != 200)
+    if (http_status_code(handle) != 200)
     {
-        show_message(httpRequestReasonPhrase(handle));
+        // Just give up
+        http_destroy(handle);
         instance_destroy();
         exit;
     }
 
-    write_buffer_to_file(httpRequestResponseBody(handle), tmpfile);
-    httpRequestDestroy(handle);
+    write_buffer_to_file(http_response_body(handle), tmpfile);
+    http_destroy(handle);
 
     // File doesn't exist
     if (!file_exists(tmpfile))

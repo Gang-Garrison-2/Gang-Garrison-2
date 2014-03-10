@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <extensionPackages>
   <package>Faucet Forwarding</package>
-  <package>Faucet HTTP</package>
   <package>Faucet Networking</package>
   <package>GG2DLL</package>
 </extensionPackages>

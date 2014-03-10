@@ -15,38 +15,19 @@
       <arguments>
         <argument kind="STRING">image_speed = 5/room_speed;
 
-httpRequestStep(handle);
-
-var status;
-status = httpRequestStatus(handle);
-
-// Request failed
-if (status == 2)
-{
-    // Just give up
-    httpRequestDestroy(handle);
-    instance_destroy();
-    exit;
-}
-// Request finished
-else if (status == 1)
-{    
-    var statusCode;
-    statusCode = httpRequestStatusCode(handle);
-
+if (http_step(handle)) {
     // Request failed
-    if (statusCode != 200)
-    {
+    if (http_status_code(handle) != 200) {
         // Just give up
-        httpRequestDestroy(handle);
+        http_destroy(handle);
         instance_destroy();
         exit;
     }
 
     var data;
-    data = httpRequestResponseBody(handle);
+    data = http_response_body(handle);
     data = read_string(data, buffer_size(data));
-    httpRequestDestroy(handle);
+    http_destroy(handle);
 
     global.devMessagesChecked = true;
 

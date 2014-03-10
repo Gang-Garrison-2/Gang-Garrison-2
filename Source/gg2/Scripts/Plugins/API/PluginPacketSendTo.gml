@@ -4,7 +4,7 @@
 // argument1 - data buffer to send (maximum size 65535 bytes)
 // argument2 - Player object for client to send to
 
-var packetID, buffer, player, packetBuffer, socket;
+var packetID, databuffer, player, packetBuffer;
 
 packetID = argument0;
 dataBuffer = argument1;
@@ -12,7 +12,8 @@ player = argument2;
 
 // error out if we're not the host
 // (this function can't be used by clients, obviously)
-if (!global.isHost) {
+if (!global.isHost)
+{
     show_error("ERROR when sending plugin packet: cannot use PluginPacketSendTo as client", true);
     return false;
 }
@@ -25,11 +26,19 @@ if (!ds_map_exists(global.pluginPacketBuffers, packetID))
 }
 
 // check size of buffer (limited because ushort used for length of packet)
-if (buffer_size(dataBuffer) > 65534) {
+if (buffer_size(dataBuffer) > 65534)
     return false;
+
+// Short-cicuit when sending to self
+if (player == global.myself)
+{
+    packetBuffer = buffer_create();
+    write_buffer(packetBuffer, dataBuffer);
+    _PluginPacketPush(packetID, packetBuffer, global.myself);
+    return true;
 }
 
-// send packet to every client (if server), or to server (if client)
+// send packet to specified client
 packetBuffer = buffer_create();
 
 // ID of plugin packet container packet

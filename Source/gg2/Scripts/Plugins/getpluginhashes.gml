@@ -47,32 +47,26 @@ for (i = 0; i < ds_list_size(list); i += 1)
         url = PLUGIN_SOURCE + pluginname + ".md5";
     
         // let's make the request handle
-        handle = httpGet(url, -1);
+        handle = http_new_get(url);
 
-        while (!httpRequestStatus(handle))
+        while (!http_step(handle))
         {
-            // finish it - should be quick, no need to show progress
-            httpRequestStep(handle);
-        }
-
-        // errored
-        if (httpRequestStatus(handle) == 2)
-        {
-            show_message('Error loading server-sent plugins - getting hash failed for "' + pluginname + '":#' + httpRequestError(handle));
-            failed = true;
-            break;
+            // should be quick, no need to show progress
         }
 
         // request failed
-        if (httpRequestStatusCode(handle) != 200)
+        if (http_status_code(handle) != 200)
         {
-            show_message('Error loading server-sent plugins - getting hash failed for "' + pluginname + '":#' + string(httpRequestStatusCode(handle)) + ' ' + httpRequestReasonPhrase(handle));
+            if (http_status_code(handle) == 404)
+                show_message('Error loading server-sent plugins - getting hash failed for "' + pluginname + '":#404 Not Found - This most likely means there is no plugin with that name. Are you sure you spelled it correctly? Please note that plugin names are always lowercase, and you cannot have spaces between the commas in ServerPluginList.');
+            else
+                show_message('Error loading server-sent plugins - getting hash failed for "' + pluginname + '":#' + string(http_status_code(handle)) + ' ' + http_reason_phrase(handle));
             failed = true;
             break;
         }
 
-        pluginhash = read_string(httpRequestResponseBody(handle), 32);
-        httpRequestDestroy(handle);
+        pluginhash = read_string(http_response_body(handle), 32);
+        http_destroy(handle);
     }
 
     // append name + hash to list
