@@ -9,6 +9,9 @@
  * This has not been tested much and might cause problems with things like persistent rooms.
  */
 
+if(!instance_exists(RateController))
+    instance_create(0, 0, RateController);
+
 globalvar previous_window_x, previous_window_y, previous_window_w;
 previous_window_x = window_get_x();
 previous_window_y = window_get_y();

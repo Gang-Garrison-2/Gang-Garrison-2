@@ -23,9 +23,10 @@ shieldResistance = maxShieldResistance;
 isShieldRegenerating = false;
 regenerationBuffer = 3 * 30;
 smokeCount = 0;
-image_speed = 0.3;
+image_speed = 0.3 * global.delta_factor;
 blastRadius = 400;
 shieldIndex = 0;
+
 </argument>
       </arguments>
     </action>

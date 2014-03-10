@@ -27,7 +27,7 @@ if (tracerAlpha &gt; 0.05)
     else
         draw_line_width_color(shotx,shoty,x2,y2,2,c_blue,c_blue);
     if(global.particles != PARTICLES_OFF)
-        tracerAlpha /= 1.75;
+        tracerAlpha /= delta_mult(1.75);
     else tracerAlpha = 0;
         
     draw_set_alpha(1);

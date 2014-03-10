@@ -20,7 +20,7 @@
     event_inherited();
     
     sndlooping = false;
-    maxAmmo = 150;
+    maxAmmo = 200;
     ammoCount = maxAmmo;
     reloadBuffer = 10;
     isRefilling = false;

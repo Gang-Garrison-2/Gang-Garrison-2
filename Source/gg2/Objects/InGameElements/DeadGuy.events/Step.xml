@@ -23,7 +23,7 @@ sprite_set_offset(mask_index, sprite_get_xoffset(sprite_index), sprite_get_yoffs
 wallSetSolid();
 if(place_free(x,y+1))
 {
-    vspeed += 0.6;
+    vspeed += 0.6 * global.delta_factor;
     if(vspeed&gt;10)
     {
         vspeed=10;
@@ -32,12 +32,17 @@ if(place_free(x,y+1))
 else
 {
     vspeed = 0;
-    hspeed /= 1.1;
+    hspeed /= power(1.1, global.delta_factor);
 }
 
 if(!place_free(x+hspeed, y+vspeed))
     event_user(0);
 wallUnsetSolid();
+
+x += hspeed * global.delta_factor;
+y += vspeed * global.delta_factor;
+x -= hspeed;
+y -= vspeed;
 
 </argument>
       </arguments>

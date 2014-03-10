@@ -14,16 +14,17 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">if(not done) {
-    if(alpha&lt;0.99) alpha = power(alpha,0.7);
+    if(alpha&lt;0.99) alpha = power(alpha,power(0.7, global.delta_factor));
     else alpha = 0.99;
-    if x &lt; 31 x+=15;
+    if x &lt; 31 x+=15 * global.delta_factor;
     if x &gt; 31 x=31;
-}
+    }
 else {
-    if(alpha&gt;0.01) alpha = power(alpha,1/0.7);
-    x-=15;
+    if(alpha&gt;0.01) alpha = power(alpha,power(1/0.7, global.delta_factor));
+    x-=15 * global.delta_factor;
     if x &lt;=-62 instance_destroy();
-}</argument>
+    }
+</argument>
       </arguments>
     </action>
   </actions>

@@ -18,8 +18,8 @@
     
 var kickOpen;
 kickOpen = false
-if instance_exists(ScoreTableController)
-    if ScoreTableController.showadmin
+if (instance_exists(ScoreTableController))
+    if (ScoreTableController.showadmin)
         kickOpen = true;
     
 if(instance_exists(TeamSelectController) || instance_exists(ClassSelectController) || kickOpen)
@@ -28,16 +28,12 @@ else
     menuOpen = false;
 
 //Checking for input - Mapped Keys
-if(keyboard_check_pressed(global.changeTeam)) inputChangeTeam();
-if(keyboard_check_pressed(global.changeClass)) inputChangeClass();
+if(keyboard_check_pressed(global.changeTeam))
+    inputChangeTeam();
+if(keyboard_check_pressed(global.changeClass))
+    inputChangeClass();
 
-var scoreKeyDown;
-scoreKeyDown = keyboard_check_direct(global.showScores);
-if(scoreKeyDown and !oldScoreKeyDown)
-    inputShowScores();
-else if(!scoreKeyDown and oldScoreKeyDown)
-    inputCloseScores();
-oldScoreKeyDown = scoreKeyDown;
+event_user(8);
     
 var keybyte;
 keybyte = 0;
@@ -53,6 +49,7 @@ keybyte = 0;
     40 - left
     80 - up
 */
+socket_send(global.serverSocket);
 //character object exists
 if(global.myself.object != -1)
 {
@@ -97,11 +94,11 @@ if(global.myself.object != -1)
         }
     }
     
-    ClientInputstate(global.serverSocket, keybyte);
+    if(global.run_virtual_ticks)
+        ClientInputstate(global.serverSocket, keybyte);
     socket_send(global.serverSocket);
-    
-// spectator controls
 }
+// spectator controls
 else if (instance_exists(Spectator))
 {
     if(!menuOpen)
@@ -118,7 +115,7 @@ if(keybyte != 0
         or keyboard_check(global.right)
         or keyboard_check(global.jump)
         or keyboard_check(global.down)) {
-    afktimer=afktimeout;
+    afktimer = afktimeout;
 }
 
 </argument>

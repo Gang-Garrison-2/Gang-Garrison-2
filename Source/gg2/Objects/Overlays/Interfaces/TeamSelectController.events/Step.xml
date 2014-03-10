@@ -14,14 +14,14 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">if(not done) {
-    if(alpha&lt;0.99) alpha = power(alpha,0.7);
+    if(alpha&lt;0.99) alpha = power(alpha,power(0.7, global.delta_factor));
     else alpha = 0.99;
-    if y&lt;120 y+=15;
+    if y&lt;120 y+=15 * global.delta_factor;
     if y&gt;120 y=120;
 }
 else {
-    if(alpha&gt;0.01) alpha = power(alpha,1/0.7);
-    y-=15;
+    if(alpha&gt;0.01) alpha = power(alpha,power(1/0.7, global.delta_factor));
+    y-=15 * global.delta_factor;
     if y &lt; -120 instance_destroy();
 }
 
@@ -104,7 +104,8 @@ if mouse_check_button(mb_left) &amp;&amp; newteam !=-1 {
 if(afk == true){
     team = TEAM_SPECTATOR;
     event_user(1);
-}</argument>
+}
+</argument>
       </arguments>
     </action>
   </actions>

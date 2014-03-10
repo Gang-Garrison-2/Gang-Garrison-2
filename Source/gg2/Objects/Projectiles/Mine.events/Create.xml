@@ -16,7 +16,7 @@
         <argument kind="STRING">{
     explosionDamage = 45;
     animationState = 1;
-    alarm[1] = 29;
+    alarm[1] = 29 / global.delta_factor;
     stickied = false;
     blastRadius = 40;
     affectRadius = 65;

@@ -44,7 +44,7 @@ else if(readyToStab &amp;&amp; owner.cloak)
         stab.overlay = HatBobbleSpyStabS;
     }
     readyToStab = false;
-    alarm[1] = StabreloadTime;
+    alarm[1] = StabreloadTime / global.delta_factor;
 }
 </argument>
       </arguments>

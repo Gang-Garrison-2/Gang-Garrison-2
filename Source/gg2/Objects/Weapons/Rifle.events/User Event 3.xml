@@ -17,7 +17,7 @@
 shot=true;
 justShot=true;
 readyToShoot = false;
-alarm[0] = reloadTime + 20*owner.zoomed;
+alarm[0] = (reloadTime + 20*owner.zoomed) / global.delta_factor;
 
 // for drawing:
 tracerAlpha = 0.8;

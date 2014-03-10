@@ -23,7 +23,7 @@
             loopsoundstart(x,y,FlamethrowerSnd);
         else
             loopsoundmaintain(x,y,FlamethrowerSnd);
-        alarm[3] = 2;
+        alarm[3] = 2 / global.delta_factor;
         
         var shot, calculatedspread;
         randomize();
@@ -41,13 +41,14 @@
         
         justShot=true;
         readyToShoot=false;
-        alarm[5] = reloadBuffer;
         isRefilling = false;
         ammoCount -= 1.8;
+        
         if (ammoCount &gt; 0)
-            alarm[0]=refireTime;
+            alarm[0] = refireTime / global.delta_factor;
         else
-            alarm[0]=reloadBuffer*2;
+            alarm[0] = reloadBuffer*2 / global.delta_factor;
+        alarm[5] = reloadBuffer / global.delta_factor;
     }
 }
 </argument>

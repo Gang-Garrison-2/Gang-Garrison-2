@@ -21,9 +21,9 @@ if (burnDuration &gt; 0)
         if (lastDamageDealer != burnedBy and lastDamageDealer != player)
         {
             secondToLastDamageDealer = lastDamageDealer;
-            alarm[4] = alarm[3];
+            alarm[4] = alarm[3] / global.delta_factor;
         }
-        alarm[3] = ASSIST_TIME;
+        alarm[3] = ASSIST_TIME / global.delta_factor;
         lastDamageDealer = burnedBy;
         lastDamageSource = afterburnSource;
         dealDamage(lastDamageDealer, id, burnIntensity / 30);
@@ -106,8 +106,8 @@ if (!player.humiliated &amp;&amp; (pressedKeys &amp; $08)
 {
     if(currentWeapon.readyToStab) {
         if (cloak) { // stop spies immediately picking up intel after uncloaking
-            canGrabIntel=false;
-            alarm[1]=30;
+            canGrabIntel = false;
+            alarm[1] = 30 / global.delta_factor;
         }
         cloak = !cloak;
     }
@@ -141,7 +141,7 @@ default:
     frictionFactor = baseFriction;
 }
 
-if(moveStatus == 1 or moveStatus == 2 or moveStatus == 4)
+if(moveStatus == 1 or moveStatus == 2 or moveStatus == 4 and global.run_virtual_ticks)
 {
     if !variable_local_exists("jumpFlameParticleType")
     {
@@ -151,7 +151,7 @@ if(moveStatus == 1 or moveStatus == 2 or moveStatus == 4)
         part_type_life(jumpFlameParticleType,2,5);
         part_type_scale(jumpFlameParticleType,0.7,-0.65);
     }
-    vspeed -= 0.06;
+    vspeed -= 0.06 * global.delta_factor;
     
     if !variable_global_exists("jumpFlameParticleSystem")
     {
@@ -204,22 +204,24 @@ if(spinjumping)
     }
 }
 
-
-if(!taunting &amp;&amp; !omnomnomnom)
+repeat(global.frameskip)
 {
-    if((keyState|pressedKeys) &amp; $40 and hspeed &gt; -basemaxspeed)
-        hspeed -= runPower*controlFactor;
-        
-    if((keyState|pressedKeys) &amp; $20 and hspeed &lt; basemaxspeed)
-        hspeed += runPower*controlFactor;
+    // Do movement
+    if(!taunting &amp;&amp; !omnomnomnom)
+    {
+        if((keyState|pressedKeys) &amp; $40 and hspeed &gt;= -basemaxspeed)
+            hspeed -= runPower*controlFactor * global.skip_delta_factor;
+            
+        if((keyState|pressedKeys) &amp; $20 and hspeed &lt;= basemaxspeed)
+            hspeed += runPower*controlFactor * global.skip_delta_factor;
+    }
+    // divide friction as normal if going way too fast
+    if(abs(hspeed) &gt; basemaxspeed * 2 or
+       ((keyState|pressedKeys) &amp; $60 and abs(hspeed) &lt; basemaxspeed))
+        hspeed /= delta_mult_skip(baseFriction);
+    else //otherwise divide by the moveStatus's friction
+        hspeed /= delta_mult_skip(frictionFactor);
 }
-// divide friction as normal if going way too fast
-if(abs(hspeed) &gt; basemaxspeed * 2 or
-   ((keyState|pressedKeys) &amp; $60 and abs(hspeed) &lt; basemaxspeed))
-    hspeed /= baseFriction;
-else //otherwise divide by the moveStatus's friction
-    hspeed /= frictionFactor;
-
 
 if(pressedKeys &amp; $04) {
     setChatBubble(player, 45);
@@ -229,7 +231,7 @@ pressedKeys = 0;
 releasedKeys = 0;
 
 // flame bubble
-if burnDuration&gt;0 &amp;&amp; player.class != CLASS_PYRO &amp;&amp; random(80) &lt;= 1 {
+if burnDuration&gt;0 &amp;&amp; player.class != CLASS_PYRO and random(80) &lt;= 1 {
     setChatBubble(player, 49);
 }
 
@@ -242,16 +244,16 @@ if (abs(hspeed) &lt; 0.195) // Overweight carrying intel and shooting will get s
 charSetSolids();
 if(place_free(x,y+1))
 {
-    vspeed += 0.6;
+    vspeed += 0.6 * global.delta_factor;
     if(vspeed &gt; 10)
         vspeed = 10;
     
     if !((place_meeting(x, y+1, DropdownPlatform)and !place_meeting(x, y, DropdownPlatform) and vspeed &gt;= 0))
         animationImage = 1;
 }
-else
+else // !place_free(x, y+1)
 {
-    if(place_free(x,y) or (place_meeting(x, y+1, DropdownPlatform) and !place_meeting(x, y, DropdownPlatform) and vspeed &gt;= 0))
+    if(place_free(x, y) or (place_meeting(x, y+1, DropdownPlatform) and !place_meeting(x, y, DropdownPlatform)) and vspeed &gt;= 0)
     {
         doublejumpUsed = 0;
         moveStatus = 0;
@@ -282,7 +284,7 @@ if (intel)
     }
     if (!omnomnomnom) // Do not recharge intel timer if eating
         intelRecharge = min(INTEL_MAX_TIMER, // Cap timer charge at the intel timer's length (bandwidth)
-                            intelRecharge +  // ...After adding some value to it 
+                            intelRecharge + global.delta_factor * // ...After adding some value to it 
                             INTEL_MAX_TIMER/((3+abs(min(hspeed, 7))/3.5)*30)); // ...Which starts at a rate of full charge per three seconds, and reduces linearly with speed, down to full charge per five seconds with a scout's max speed
 }
  
@@ -293,10 +295,10 @@ if (player.humiliated)
     else if place_free(x,y+1)
         animationImage = 2;
     if (!place_free(x,y+1) &amp;&amp; hspeed != 0)
-        animationImage = 1+((animationImage-1+abs(hspeed)/20) mod CHARACTER_ANIMATION_LEN);
+        animationImage = 1+((animationImage-1+abs(hspeed)*global.delta_factor/20) mod CHARACTER_ANIMATION_LEN);
 }
 else
-    animationImage = (animationImage+abs(hspeed)/20) mod CHARACTER_ANIMATION_LEN;
+    animationImage = (animationImage+abs(hspeed)*global.delta_factor/20) mod CHARACTER_ANIMATION_LEN;
 charUnsetSolids();
 
 // drop intel if ubered or round is over
@@ -306,7 +308,7 @@ if (intel and (ubered or global.mapchanging) and global.isHost) {
 }
 
 //gotta regenerate some nuts
-nutsNBolts = min(nutsNBolts+0.1, maxNutsNBolts);
+nutsNBolts = min(nutsNBolts+(0.1 * global.delta_factor), maxNutsNBolts);
 
 //ubered max out ammo and extinguish flames
 if ubered {

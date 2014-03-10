@@ -14,92 +14,104 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">{
-    if(!instance_exists(healTarget) and readyToShoot) {
-        var bestTarget, bestTargetDist;
-        bestTarget=noone;
-        bestTargetDist=maxHealDistance;
-
-        with(Character) {
-            if(id != other.owner and team == other.owner.team) {
-                if(point_distance(x,y,other.x,other.y)&lt;=bestTargetDist) {
-                    if(collision_line(other.x, other.y, other.x+lengthdir_x(other.maxHealDistance, other.owner.aimDirection), other.y+lengthdir_y(other.maxHealDistance, other.owner.aimDirection), id, true, false)) {
-                        if(!collision_line(other.x, other.y, x, y, Obstacle, true, true)) {
-                            bestTargetDist = point_distance(x,y,other.x,other.y);
-                            bestTarget = player;
+    if(true)
+    {
+        if(!instance_exists(healTarget) and readyToShoot)
+        {
+            var bestTarget, bestTargetDist;
+            bestTarget=noone;
+            bestTargetDist=maxHealDistance;
+    
+            with(Character) {
+                if(id != other.owner and team == other.owner.team) {
+                    if(point_distance(x,y,other.x,other.y)&lt;=bestTargetDist) {
+                        if(collision_line(other.x, other.y,
+                                          other.x+lengthdir_x(other.maxHealDistance, other.owner.aimDirection),
+                                          other.y+lengthdir_y(other.maxHealDistance, other.owner.aimDirection), id, true, false))
+                        {
+                            if(!collision_line(other.x, other.y, x, y, Obstacle, true, true)) {
+                                bestTargetDist = point_distance(x,y,other.x,other.y);
+                                bestTarget = player;
+                            }
                         }
                     }
                 }
             }
-        }
-
-        healTarget = bestTarget;
-        readyToShoot=false;
-        alarm[0]=1;
-    }
     
-    if(instance_exists(healTarget)) {
-        if(healTarget.object != -1) {
-            if(point_distance(x,y,healTarget.object.x, healTarget.object.y)&lt;=maxHealDistance) {
-                if(collision_line(x,y, healTarget.object.x, healTarget.object.y, Obstacle, true, true)&lt;0) {
-                    healedThisStep = true;
-                    
-                    if (healTarget.object.healer == -1)
-                        healTarget.object.healer = ownerPlayer;
-                    if (healTarget.object.burnDuration &gt; 0)
-                        healTarget.object.burnDuration -= 1;
-                    var healthGained;
-                    healthGained = healAmount * calculateHealingFactor(healTarget.object.timeUnscathed);
-                    healTarget.object.hp = min(healTarget.object.hp + healthGained, healTarget.object.maxHp);
-                    hphealed += healthGained;
-                    ownerPlayer.stats[HEALING] += healthGained;
-                    ownerPlayer.roundStats[HEALING] += healthGained;
-                    
-                    
-                    if(ubering == false &amp;&amp; uberCharge&lt;2000){
-                        uberCharge+=1;
-                        var setup;
-                        setup = false;
-                        if instance_exists(ControlPointSetupGate) {
-                            if (ControlPointSetupGate.solid)
-                                setup = true;
-                        }
-                        if(healTarget.object.hp &lt; healTarget.object.maxHp or setup) uberCharge += 0.5;
-                        if(healTarget.object.hp &lt; healTarget.object.maxHp/2 or setup) uberCharge += 1;
-                        if(uberCharge &gt;= 2000) {
-                            uberCharge = 2000;
-                            if(global.isHost) {
-                                sendEventUberReady(ownerPlayer);
-                                doEventUberReady(ownerPlayer);
+            healTarget = bestTarget;
+            readyToShoot=false;
+            alarm[0] = 1 / global.delta_factor;
+        }
+        
+        if(instance_exists(healTarget)) {
+            if(healTarget.object != -1) {
+                if(point_distance(x,y,healTarget.object.x, healTarget.object.y)&lt;=maxHealDistance) {
+                    if(collision_line(x,y, healTarget.object.x, healTarget.object.y, Obstacle, true, true)&lt;0) {
+                        healedThisStep = true;
+                        
+                        if (healTarget.object.healer == -1)
+                            healTarget.object.healer = ownerPlayer;
+                        if (healTarget.object.burnDuration &gt; 0)
+                            healTarget.object.burnDuration -= 1 * global.delta_factor;
+                        var healthGained;
+                        healthGained = healAmount * calculateHealingFactor(healTarget.object.timeUnscathed);
+                        if(healTarget.object.hp &gt; healTierHealth)
+                            healthGained *= healTierAmount;
+                        healTarget.object.hp = min(healTarget.object.hp + healthGained * global.delta_factor, healTarget.object.maxHp);
+                        hphealed += healthGained * global.delta_factor;
+                        ownerPlayer.stats[HEALING] += healthGained * global.delta_factor;
+                        ownerPlayer.roundStats[HEALING] += healthGained * global.delta_factor;
+                        
+                        
+                        if(ubering == false &amp;&amp; uberCharge&lt;2000){
+                            var setup;
+                            setup = false;
+                            if instance_exists(ControlPointSetupGate) {
+                                if (ControlPointSetupGate.solid)
+                                    setup = true;
                             }
+                            if(healTarget.object.hp &lt; healTarget.object.maxHp or setup)
+                                uberCharge += 2.5 * global.delta_factor;
+                            else
+                                uberCharge += 1.75 * global.delta_factor;
+                            if(uberCharge &gt;= 2000) 
+                            {
+                                uberCharge = 2000;
+                                if(global.isHost)
+                                {
+                                    sendEventUberReady(ownerPlayer);
+                                    doEventUberReady(ownerPlayer);
+                                }
+                            }
+                        } else if(ubering == true){
+                            if healTarget.object.ubered == 0 playsound(x,y,UberStartSnd);
+                            healTarget.object.ubered = 1;
+                            healTarget.object.alarm[2] = 3 / global.delta_factor; 
                         }
-                    } else if(ubering == true){
-                        if healTarget.object.ubered == 0 playsound(x,y,UberStartSnd);
-                        healTarget.object.ubered = 1;
-                        healTarget.object.alarm[2] = 3; 
-                    }
-                                                               
-                    if hphealed &gt;= HP_PER_POINT {
-                        ownerPlayer.stats[POINTS] += 1;
-                        ownerPlayer.roundStats[POINTS] += 1;
-                        hphealed -= HP_PER_POINT;
-                    }
-
-                    if(alarm[3]&lt;=0) {
-                        loopsoundstart(x,y,MedigunSnd);
+                                                                   
+                        if hphealed &gt;= HP_PER_POINT {
+                            ownerPlayer.stats[POINTS] += 1;
+                            ownerPlayer.roundStats[POINTS] += 1;
+                            hphealed -= HP_PER_POINT;
+                        }
+    
+                        if(alarm[3] &lt;= 0) {
+                            loopsoundstart(x,y,MedigunSnd);
+                        } else {
+                            loopsoundmaintain(x,y,MedigunSnd);
+                        }
+                        alarm[3] = 2 / global.delta_factor;
                     } else {
-                        loopsoundmaintain(x,y,MedigunSnd);
+                        healTarget.object.healer = -1;
+                        healTarget = noone;
                     }
-                    alarm[3]=2;
                 } else {
                     healTarget.object.healer = -1;
                     healTarget = noone;
                 }
             } else {
-                healTarget.object.healer = -1;
                 healTarget = noone;
             }
-        } else {
-            healTarget = noone;
         }
     }
 }

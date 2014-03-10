@@ -12,4 +12,5 @@
   <resource name="Collision maps" type="GROUP"/>
   <resource name="RoomChangeObserver" type="RESOURCE"/>
   <resource name="Updater" type="RESOURCE"/>
+  <resource name="RateController" type="RESOURCE"/>
 </resources>

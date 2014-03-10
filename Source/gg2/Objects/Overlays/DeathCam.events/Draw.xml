@@ -21,7 +21,7 @@
 if DeathCamS==-1 exit;
 
 if zooming==true{
-    if zoom &lt; 2 zoom += 0.1;
+    if zoom &lt; 2 zoom += 0.1 * global.delta_factor;
 }
 draw_sprite_ext(DeathCamS,0,view_xview+400,view_yview+300,zoom,zoom,0,c_white,1);
 draw_rectangle_color(view_xview,view_yview,view_xview+800,view_yview+100,c_black,c_black,c_black,c_black,0);

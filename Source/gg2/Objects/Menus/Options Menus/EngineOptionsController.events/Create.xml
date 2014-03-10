@@ -90,6 +90,13 @@
         menu_add_option(3, "16:9");
         menu_add_option(4, "2:1");
     ');
+    menu_addedit_select("Framerate:", "global.frameratekind", '
+        gg2_write_ini("Settings", "Framerate", argument0);
+        warnoptioneffect = true;
+    ','
+        menu_add_option(0, "30");
+        menu_add_option(1, "60");
+    ');
     menu_addedit_boolean("V Sync:", "global.monitorSync", '
     if (instance_exists(GameServer))
     {

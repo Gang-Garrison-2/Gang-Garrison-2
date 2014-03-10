@@ -34,8 +34,8 @@ if (collision_line(x,y,x+lengthdir_x(28,owner.aimDirection),y+lengthdir_y(28,own
     
 justShot=true;
 readyToShoot = false;
-alarm[0] = refireTime;
-alarm[5] = reloadBuffer + reloadTime;
+alarm[0] = refireTime / global.delta_factor;
+alarm[5] = (reloadBuffer + reloadTime) / global.delta_factor;
 </argument>
       </arguments>
     </action>

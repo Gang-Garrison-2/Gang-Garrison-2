@@ -23,9 +23,10 @@
 if (built == 0 and vspeed == 0)
 {
     if (hp &lt; maxHp)
-        hp += 1;
+        hp += buildrate * global.delta_factor;
     else
         built = 1;
+    buildrate = min(buildrate, buildrate+0.6/45); // Buildrate increases from 0.5 to 1 over 1.5 seconds
     image_index = floor(hp/maxHp*10);
     if (landed == 0)
     {
@@ -52,9 +53,20 @@ if (humiliated == 1 and built == 1 and currentWeapon != -1)
     
 wallSetSolid();
 
+// Try to get outside of the wallmask if we're in it.
+if(!place_free(x, y))
+    move_outside_solid(0, 6);
+if(!place_free(x, y))
+    move_outside_solid(180, 12);
+if(!place_free(x, y))
+{
+    move_outside_solid(0, 6);
+    move_outside_solid(90, 100);
+}
+
 if(place_free(x+hspeed, y+vspeed+0.6))
-    vspeed += 0.6;
-if(!place_free(x+hspeed, y+vspeed) and vspeed &gt; 0)
+    vspeed += 0.6  * global.delta_factor;
+if(!place_free(x+hspeed, y+vspeed) and place_free(x, y))
     event_user(2);
 
 if(vspeed &gt; 10)
@@ -71,6 +83,12 @@ if(oldVspeed != 0 and vspeed == 0 and global.isHost)
 }
 
 oldVspeed = vspeed;
+
+x += hspeed * global.delta_factor;
+y += vspeed * global.delta_factor;
+x -= hspeed;
+y -= vspeed;
+
 </argument>
       </arguments>
     </action>

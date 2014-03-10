@@ -16,7 +16,7 @@
         <argument kind="STRING">// Child objects will need to define:
 // hitDamage, flameLife, burnIncrease, durationIncrease, afterburnFalloff (bool)
 // Then they need to call the inherited event (i.e. this code)
-alarm[0] = flameLife;
+alarm[0] = flameLife / global.delta_factor;
 </argument>
       </arguments>
     </action>

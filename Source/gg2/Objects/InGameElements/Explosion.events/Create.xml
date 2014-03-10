@@ -13,7 +13,9 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">alarm[0]=13</argument>
+        <argument kind="STRING">alarm[0]=13/global.delta_factor;
+image_speed = global.delta_factor;
+</argument>
       </arguments>
     </action>
     <action id="542" library="1">

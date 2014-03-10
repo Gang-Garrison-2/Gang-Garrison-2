@@ -16,9 +16,9 @@
         <argument kind="STRING">if(global.myself.object == -1) exit;
     
 //AFK Check -- double length for server host
-afktimer -= 1;
+afktimer -= 1 * global.delta_factor;
 if(global.isHost)
-    afktimer += 0.5
+    afktimer += 0.5 * global.delta_factor
 if ((afktimer &lt;= 0) and !global.myself.object.afk)
 {
     global.myself.object.afk = true;

@@ -110,6 +110,11 @@
     global.backgroundShowVersion = ini_read_real("Background", "BackgroundShowVersion", true);
     
     global.resolutionkind = ini_read_real("Settings", "Resolution", 1);
+    global.frameratekind = ini_read_real("Settings", "Framerate", 0);
+    if(global.frameratekind == 1)
+        global.game_fps = 60;
+    else
+        global.game_fps = 30;
     
     readClasslimitsFromIni();
 
@@ -181,7 +186,7 @@
     ini_write_real("Classlimits", "Quote", global.classlimits[CLASS_QUOTE])
 
     ini_write_real("Settings", "Resolution", global.resolutionkind);
-    global.resolutionkind = ini_read_real("Settings", "Resolution", 1);
+    ini_write_real("Settings", "Framerate", global.frameratekind);
 
     rooms_fix_views();
     
