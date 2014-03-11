@@ -30,9 +30,11 @@
         other.burnDuration += durationIncrease; 
         
         var falloffAmount;
-        falloffAmount = (flameLife - alarm[0]*global.delta_factor)/flameLife;
+        falloffAmount = min(1, // factor can't exceed 1
+            (flameLife - alarm[0]*global.delta_factor) // value higher when life is fresh (alarm 0 is high)
+            /flameLife); // normalize to 1
         if(afterburnFalloff)
-            falloffFactor = min(falloffAmount, falloffAmount*0.65+0.35); // Reduce heat additions of "old"/distant flames -- 0.35 to 1.0 "curve"
+            falloffFactor = falloffAmount*0.65+0.35; // Reduce heat additions of "old"/distant flames -- 0.35 to 1.0 "curve"
         else
             falloffFactor = 1;
         
