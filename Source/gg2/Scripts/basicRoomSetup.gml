@@ -28,22 +28,36 @@ with(Player) {
     humiliated = 0;
 }
 
-if instance_exists(IntelligenceBaseBlue) || instance_exists(IntelligenceBaseRed) || instance_exists(IntelligenceRed) || instance_exists(IntelligenceBlue) instance_create(0,0,ScorePanel);
-else if instance_exists(GeneratorBlue) || instance_exists(GeneratorRed) {
-    instance_create(0,0,GeneratorHUD);
-} else if instance_exists(ArenaControlPoint) {
-    instance_create(0,0,ArenaHUD);
-    if ArenaHUD.roundStart == 0 with Player canSpawn = 0;
-}else if instance_exists(KothControlPoint) {
-    instance_create(0,0,KothHUD);
-}else if instance_exists(KothRedControlPoint) && instance_exists(KothBlueControlPoint) {
-    with ControlPoint event_user(0);
-    instance_create(0,0,DKothHUD);
-} else if instance_exists(ControlPoint) {
-    with ControlPoint event_user(0);
-    instance_create(0,0,ControlPointHUD);
-} else {
-    instance_create(0,0,TeamDeathmatchHUD);
+if(instance_exists(IntelligenceBase) or instance_exists(Intelligence))
+    instance_create(0, 0, CTFHUD);
+else if(instance_exists(Generator))
+    instance_create(0, 0, GeneratorHUD);
+else if(instance_exists(ArenaControlPoint))
+{
+    instance_create(0, 0, ArenaHUD);
+    if(ArenaHUD.roundStart == 0)
+        with(Player)
+            canSpawn = 0;
+}
+else if(instance_exists(KothControlPoint))
+{
+    instance_create(0, 0, KothHUD);
+}
+else if(instance_exists(KothRedControlPoint) and instance_exists(KothBlueControlPoint))
+{
+    with(ControlPoint)
+        event_user(0);
+    instance_create(0, 0, DKothHUD);
+}
+else if instance_exists(ControlPoint)
+{
+    with(ControlPoint)
+        event_user(0);
+    instance_create(0, 0, ControlPointHUD);
+}
+else
+{
+    instance_create(0, 0, TeamDeathmatchHUD);
 }
 
 instance_create(0,0,TeamSelectController);
