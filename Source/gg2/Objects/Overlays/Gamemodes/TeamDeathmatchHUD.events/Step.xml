@@ -20,7 +20,7 @@ if ((global.redCaps &gt;= killLimit) or (global.blueCaps &gt;= killLimit) or tim
         global.winners = TEAM_RED;
     else if (global.blueCaps &gt; global.redCaps)
         global.winners = TEAM_BLUE;
-    else if (global.blueCaps == global.redCaps)
+    else
         global.winners = TEAM_SPECTATOR;
 }
 </argument>
