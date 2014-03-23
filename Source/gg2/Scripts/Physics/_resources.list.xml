@@ -12,6 +12,7 @@
   <resource name="wallUnsetSolid" type="RESOURCE"/>
   <resource name="delta_mult" type="RESOURCE"/>
   <resource name="delta_mult_skip" type="RESOURCE"/>
+  <resource name="collision_point_solid" type="RESOURCE"/>
   <resource name="really_move_contact_solid" type="RESOURCE"/>
   <resource name="good_move_contact_solid" type="RESOURCE"/>
 </resources>

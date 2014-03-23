@@ -14,7 +14,7 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">{
-    menu_create(48, 172, 500, 260, 32, 40, 92, 128);
+    menu_create(48, 172, 500, 260, 32, 40, 104, 6);
     menumode = true;
     
     if (room != Options)
@@ -23,10 +23,6 @@
     menu_background(512, 24, 8, 12, 4);
     bgtabs = true;
     
-    menu_addlink("Basic", '
-        instance_create(x,y,ControlsController);
-        instance_destroy();
-    ');
     menu_addedit_keyormouse("Primary Fire:", "global.attack");
     menu_addedit_keyormouse("Secondary Ability:", "global.special");
     menu_addedit_key("Emoticon Menu:", "global.chat1");
@@ -43,9 +39,13 @@
         instance_destroy();
         instance_create(x,y,EngineOptionsController);
     ');
-    menu_addtablink("Controls", '
+    menu_addtablink("Controls 1", '
         instance_destroy();
         instance_create(x,y,ControlsController);
+    ');
+    menu_addtablink("Controls 2", '
+        instance_destroy();
+        instance_create(x,y,AdvControlsController);
     ');
     menu_addtablink("HUD", '
         instance_destroy();

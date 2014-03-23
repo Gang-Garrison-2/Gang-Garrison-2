@@ -8,6 +8,7 @@
   <resource name="OrangeO" type="RESOURCE"/>
   <resource name="classicwellO" type="RESOURCE"/>
   <resource name="WaterwayO" type="RESOURCE"/>
+  <resource name="Point" type="RESOURCE"/>
   <resource name="DirtbowlO" type="RESOURCE"/>
   <resource name="EgyptO" type="RESOURCE"/>
   <resource name="MontaneO" type="RESOURCE"/>

@@ -14,7 +14,7 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">{
-    menu_create(48, 172, 500, 260, 32, 40, 92, 128);
+    menu_create(48, 172, 500, 260, 32, 40, 104, 6);
     menumode = true;
     
     if (room != Options)
@@ -72,9 +72,13 @@
         instance_destroy();
         instance_create(x,y,EngineOptionsController);
     ');
-    menu_addtablink("Controls", '
+    menu_addtablink("Controls 1", '
         instance_destroy();
         instance_create(x,y,ControlsController);
+    ');
+    menu_addtablink("Controls 2", '
+        instance_destroy();
+        instance_create(x,y,AdvControlsController);
     ');
     menu_addtablink("HUD", '
         instance_destroy();

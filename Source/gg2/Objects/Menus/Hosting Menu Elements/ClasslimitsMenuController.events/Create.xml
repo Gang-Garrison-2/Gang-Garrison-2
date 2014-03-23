@@ -64,7 +64,7 @@ menu_addtablink("Classlimits", '
 ');
 
 menu_addback("Back", '
-    instance_create(x,y,HostOptionsController);
+    instance_create(x,y,MainMenuController);
     instance_destroy();
 ');
 </argument>

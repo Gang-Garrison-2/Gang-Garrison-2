@@ -12,4 +12,5 @@
   <resource name="Alternative Sprites" type="GROUP"/>
   <resource name="Updater" type="GROUP"/>
   <resource name="DevMessagesCheckerS" type="RESOURCE"/>
+  <resource name="pointS" type="RESOURCE"/>
 </resources>
