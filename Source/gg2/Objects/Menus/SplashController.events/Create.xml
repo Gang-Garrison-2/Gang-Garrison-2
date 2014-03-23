@@ -13,21 +13,10 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">{
-    if(!game_init())
-    {
-        game_end();
-        exit;
-    }
-    alarm[0] = 30;
-    alarm[1] = 240;
-    // Music setting set to "Menu Only" or "Menu and In-Game"
-    if (global.music == MUSIC_MENU_ONLY || global.music == MUSIC_BOTH)
-    {
-        AudioControlPlaySong(global.FaucetMusic);
-    }
-    image_speed=0;
-}
+        <argument kind="STRING">alarm[0] = 30;
+alarm[1] = 240;
+image_speed=0;
+
 </argument>
       </arguments>
     </action>

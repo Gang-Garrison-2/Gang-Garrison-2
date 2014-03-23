@@ -1,6 +1,6 @@
 // When a Character hits a wall, box, impassable door, or anything else solid,
 // this handles movement, climbing stairs, stopping at walls, etc.
-// Should be run in the collision event.
+// Originally meant to be run in collision, but we moved it; now run in step.
 
 {
     var oldx, oldy, oldhspeed, oldvspeed, distleft, hleft, vleft;
@@ -86,7 +86,8 @@
             vleft = 0;
         }
     }
-
-    x -= hspeed; // gamemaker will += these in a moment, so we compensate for that
+    
+    // Set these backwards before the game runs step
+    x -= hspeed;
     y -= vspeed;
 }

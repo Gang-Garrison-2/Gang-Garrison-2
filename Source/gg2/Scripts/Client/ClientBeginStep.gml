@@ -406,6 +406,7 @@ do {
             reason = read_ubyte(global.tempBuffer);
             if reason == KICK_NAME kickReason = "Name Exploit";
             else if reason == KICK_BAD_PLUGIN_PACKET kickReason = "Invalid plugin packet ID";
+            else if reason == KICK_MULTI_CLIENT kickReason = "There are too many connections from your IP";
             else kickReason = "";
             show_message("You have been kicked from the server. "+kickReason+".");
             instance_destroy();
@@ -443,7 +444,10 @@ do {
             global.currentMap = receivestring(global.serverSocket, 1);
             global.currentMapMD5 = receivestring(global.serverSocket, 1);
             if(global.currentMapMD5 == "") { // if this is an internal map (signified by the lack of an md5)
-                if(gotoInternalMapRoom(global.currentMap) != 0) {
+                if(findInternalMapRoom(global.currentMap))
+                    room_goto_fix(findInternalMapRoom(global.currentMap));
+                else
+                {
                     show_message("Error:#Server went to invalid internal map: " + global.currentMap + "#Exiting.");
                     instance_destroy();
                     exit;
@@ -524,9 +528,11 @@ do {
             break;
 
         case REWARD_UPDATE:
-            receiveCompleteMessage(global.serverSocket,3,global.tempBuffer);
+            receiveCompleteMessage(global.serverSocket,1,global.tempBuffer);
             player = ds_list_find_value(global.players, read_ubyte(global.tempBuffer));
-            doEventUpdateRewards(player, read_ushort(global.tempBuffer));
+            var rewardString;
+            rewardString = receivestring(global.serverSocket, 2);
+            doEventUpdateRewards(player, rewardString);
             break;
             
         case MESSAGE_STRING:
@@ -603,7 +609,7 @@ do {
             player = ds_list_find_value(global.players, read_ubyte(global.tempBuffer));
             player.queueJump = read_ubyte(global.tempBuffer);
             break;
-        
+
         default:
             promptRestartOrQuit("The Server sent unexpected data.");
             exit;

@@ -11,9 +11,7 @@ player = argument2;
 
 // check this is a recognised plugin ID
 if (!ds_map_exists(global.pluginPacketBuffers, packetID))
-{
     return false;
-}
 
 // enque buffer and Player in queue
 packetBufferQueue = ds_map_find_value(global.pluginPacketBuffers, packetID);

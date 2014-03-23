@@ -24,7 +24,8 @@ rotfric=0.6;
 direction = 270;
 alarm[0]=210;
 rotspeed=1;
-fadeout = false;</argument>
+fadeout = false;
+</argument>
       </arguments>
     </action>
   </actions>

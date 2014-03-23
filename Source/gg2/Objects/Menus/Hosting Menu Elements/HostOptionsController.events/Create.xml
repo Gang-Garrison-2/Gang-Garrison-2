@@ -54,12 +54,15 @@ menu_addedit_text("Password:", "global.serverPassword", '
 ');
 menu_addedit_num("Player Limit:", "global.playerLimit", '
     gg2_write_ini("Settings", "PlayerLimit", argument0);
-', 255);
+', 48);
 menu_addedit_num("Time Limit (mins):", "global.timeLimitMins", '
     gg2_write_ini("Server", "Time Limit", argument0);
 ');
 menu_addedit_num("Capture Limit:", "global.caplimit", '
     gg2_write_ini("Server", "CapLimit", argument0);
+');
+menu_addedit_num("Deathmatch Kill Limit:", "global.killLimit", '
+    gg2_write_ini("Server", "Deathmatch Kill Limit", argument0);
 ');
 menu_addedit_num("Respawn Time (secs):", "global.Server_RespawntimeSec", '
     gg2_write_ini("Server", "Respawn Time", argument0);

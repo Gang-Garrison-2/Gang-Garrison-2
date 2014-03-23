@@ -79,10 +79,13 @@
     menu_addedit_boolean("Kill Cam:", "global.killCam", '
         gg2_write_ini("Settings", "Kill Cam", argument0);
     ');
-    menu_addedit_boolean("V Sync:", "global.monitorSync", '
+    menu_addedit_select("V Sync:", "global.monitorSync", '
         gg2_write_ini("Settings", "Monitor Sync", argument0);
-        set_synchronization(argument0);
+        if (!instance_exists(GameServer))
+            set_synchronization(argument0);
     ');
+    menu_add_option(0, "Off");
+    menu_add_option(1, "On unless hosting");
     menu_addedit_boolean("Prompt for server-sent plugins:", "global.serverPluginsPrompt", '
         if (argument0 == false)
             show_message("Please note that plugins can be dangerous, so you should only disable the prompt if you trust all plugins hosted at the source:#" + PLUGIN_SOURCE + "#" + PLUGIN_SOURCE_NOTICE)

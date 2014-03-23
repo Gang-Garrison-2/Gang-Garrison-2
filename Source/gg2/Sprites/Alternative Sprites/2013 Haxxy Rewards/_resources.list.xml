@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="HatBobbleDemomanS" type="RESOURCE"/>
+  <resource name="HatBobbleDemoTauntS" type="RESOURCE"/>
+  <resource name="HatBobbleEngineerS" type="RESOURCE"/>
+  <resource name="HatBobbleEngiTauntS" type="RESOURCE"/>
+  <resource name="HatBobbleHeavyS" type="RESOURCE"/>
+  <resource name="HatBobbleHeavyTauntS" type="RESOURCE"/>
+  <resource name="HatBobbleMedicS" type="RESOURCE"/>
+  <resource name="HatBobbleMedicTauntS" type="RESOURCE"/>
+  <resource name="HatBobbleOmnomnomnomS" type="RESOURCE"/>
+  <resource name="HatBobblePyroS" type="RESOURCE"/>
+  <resource name="HatBobblePyroTauntS" type="RESOURCE"/>
+  <resource name="HatBobbleScoutS" type="RESOURCE"/>
+  <resource name="HatBobbleScoutTauntS" type="RESOURCE"/>
+  <resource name="HatBobbleSniperS" type="RESOURCE"/>
+  <resource name="HatBobbleSniperTauntS" type="RESOURCE"/>
+  <resource name="HatBobbleSniperCrouchS" type="RESOURCE"/>
+  <resource name="HatBobbleSoldierS" type="RESOURCE"/>
+  <resource name="HatBobbleSoldierTauntS" type="RESOURCE"/>
+  <resource name="HatBobbleSpyS" type="RESOURCE"/>
+  <resource name="HatBobbleSpyStabS" type="RESOURCE"/>
+  <resource name="HatBobbleSpyTauntS" type="RESOURCE"/>
+</resources>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="STEP" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">steps += 1;
+
+// Die and fly towards owner
+if (owner.object != -1) {
+    sprite_index = GhostDeath;
+    move_towards_point(owner.object.x, owner.object.y, 10);
+// Chase other players but don't stray far from corpse's position
+} else {
+    var hitBoundary;
+    hitBoundary = false;
+
+    if (sprite_index == GhostDeath)
+    {
+        sprite_index = GhostIdle;
+        image_speed = 1/3;
+    }
+
+    // Cap distance from corpse
+    if (point_distance(origX, origY, x, y) &gt; 128)
+    {
+        var dir;
+        dir = point_direction(origX, origY, x, y);
+        x = origX + lengthdir_x(128, dir);
+        y = origY + lengthdir_y(128, dir);
+        hitBoundary = true;
+    }
+
+    // Play animations depending on whether we've hit or not hit boundary
+    if (hitBoundary and !hitBoundaryOnLastStep and steps - lastKiss &gt; 90)
+    {
+        sprite_index = GhostKiss;
+        lastKiss = steps;
+    }
+    if (!hitBoundary and hitBoundaryOnLastStep and steps - lastKiss &gt; 90)
+    {
+        sprite_index = GhostFlex;
+        lastKiss = steps;
+    }
+    hitBoundaryOnLastStep = hitBoundary;
+
+    // Find closest character
+    var closest, closestDist;
+    closest = -1;
+    closestDist = -1;
+    with (Character) {
+        var dist;
+        dist = point_distance(x, y, other.origX, other.origY);
+        if (dist &lt; closestDist or closestDist == -1)
+        {
+            closest = id;
+            closestDist = dist;
+        }
+    }
+
+    // Stalk them
+    if (closest != -1)
+    {
+        move_towards_point(closest.x, closest.y, 5);
+    }
+    // Random movement
+    else
+    {
+        nextMoveTicker -= 1;
+        if (nextMoveTicker &lt;= 0)
+        {
+            var randDir;
+            randDir = random(360);
+            motion_add(randDir, 5);
+            nextMoveTicker = irandom(90);
+        }
+    }
+}
+
+// "Friction"
+speed = min(speed / 1.125, 15);
+
+// Fade in effect
+if (fadeAlpha &lt; 1)
+    fadeAlpha += 0.05;
+
+// Face left/right depending on movement
+image_xscale = sign(hspeed);
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

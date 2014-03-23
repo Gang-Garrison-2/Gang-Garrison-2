@@ -22,12 +22,9 @@
     global.tcpListener = -1;
     global.serverSocket = -1;
     
-    global.currentMapIndex = 0;
-    global.currentMapArea = 1;
-    
     var i;
     serverId = buffer_create();
-    for(i=0;i<16;i+=1)
+    for (i = 0; i < 16; i += 1)
         write_ubyte(serverId, irandom(255));
     
     serverbalance=0;
@@ -109,18 +106,11 @@
             }
         }
     }
-    global.currentMap = ds_list_find_value(global.map_rotation, global.currentMapIndex);
-    if(file_exists("Maps/" + global.currentMap + ".png")) { // if this is an external map
-        // get the md5 and url for the map
-        global.currentMapMD5 = CustomMapGetMapMD5(global.currentMap);
-        room_goto_fix(CustomMapRoom);
-    } else { // internal map, so at the very least, MD5 must be blank
-        global.currentMapMD5 = "";
-        if(gotoInternalMapRoom(global.currentMap) != 0) {
-            show_message("Error:#Map " + global.currentMap + " is not in maps folder, and it is not a valid internal map.#Exiting.");
-            game_end();
-        }
-    }
+
+    currentMapIndex = -1;
+    global.currentMapArea = 1;
+
+    serverGotoMap(nextMapInRotation());
     
     global.joinedServerName = global.serverName; // so no errors of unknown variable occur when you create a server
     global.mapchanging = false; 
@@ -152,4 +142,8 @@
     {
         pluginList = '';
     }
+    
+    // Disable vsync to minimize framerate drops which would be noticed as lag issues by all players.
+    // "vsync makes the server desync" --Arctic
+    set_synchronization(false);
 }

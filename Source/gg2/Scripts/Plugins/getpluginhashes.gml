@@ -2,13 +2,13 @@
 // argument0 - comma separated plugin list 
 // returns comma-separated plugin list with hashes
 // or else the string 'failure'
-var list, i, pluginname, pluginhash, url, handle, filesize, tempfile, failed, fp, hashedList;
+var list, i, pluginname, pluginhash, url, handle, filesize, failed, fp, hashedList;
 
 failed = false;
 hashedList = '';
 
 // split plugin list string
-list = csvtolist(argument0);
+list = split(argument0, ',');
 
 // Check plugin names and check for duplicates
 for (i = 0; i < ds_list_size(list); i += 1)
@@ -45,39 +45,28 @@ for (i = 0; i < ds_list_size(list); i += 1)
         // construct the URL
         // (http://www.ganggarrison.com/plugins/$PLUGINNAME$.md5)
         url = PLUGIN_SOURCE + pluginname + ".md5";
-        tempfile = temp_directory + "\" + pluginname + ".md5.tmp";
     
-        // let's make the download handle
-        handle = DM_CreateDownload(url, tempfile);
-    
-        // download it
-        filesize = DM_StartDownload(handle);
-        while (DM_DownloadStatus(handle) != 3)
+        // let's make the request handle
+        handle = http_new_get(url);
+
+        while (!http_step(handle))
         {
-            // download should be quick, no need to show progress
+            // should be quick, no need to show progress
         }
-        DM_StopDownload(handle);
-        DM_CloseDownload(handle);
-    
-        // if the file doesn't exist, the download presumably failed
-        if (!file_exists(tempfile)) {
-            show_message('Error loading server-sent plugins - getting hash failed for:#"' + pluginname + '"');
+
+        // request failed
+        if (http_status_code(handle) != 200)
+        {
+            if (http_status_code(handle) == 404)
+                show_message('Error loading server-sent plugins - getting hash failed for "' + pluginname + '":#404 Not Found - This most likely means there is no plugin with that name. Are you sure you spelled it correctly? Please note that plugin names are always lowercase, and you cannot have spaces between the commas in ServerPluginList.');
+            else
+                show_message('Error loading server-sent plugins - getting hash failed for "' + pluginname + '":#' + string(http_status_code(handle)) + ' ' + http_reason_phrase(handle));
             failed = true;
             break;
         }
-    
-        fp = file_text_open_read(tempfile);
-        pluginhash = file_text_read_string(fp);
-        file_text_close(fp);
-        file_delete(tempfile);
-    
-        // check it's the right length for a hex MD5
-        if (string_length(pluginhash) != 32)
-        {
-            show_message('Error loading server-sent plugins - getting hash failed (wrong length) for:#"' + pluginname + '"');
-            failed = true;
-            break;
-        }
+
+        pluginhash = read_string(http_response_body(handle), 32);
+        http_destroy(handle);
     }
 
     // append name + hash to list

@@ -71,7 +71,8 @@
     sentry = noone;
     
     // Haxxy rewards
-    rewards = 0;
+    rewards = -1;
+    ghost = noone;
 }
 </argument>
       </arguments>

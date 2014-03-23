@@ -52,7 +52,7 @@
     draw_text_transformed(view_xview[0]+483,view_yview[0]+133,ds_priority_size(blueteam),1,1,0);
     draw_set_font(global.gg2Font);
     
-    if instance_exists(ScorePanel){
+    if instance_exists(CTFHUD){
         draw_text_transformed(view_xview[0]+384,view_yview[0]+110,global.redCaps,4,4,0);
         draw_set_halign(fa_left);
         draw_text_transformed(view_xview[0]+412,view_yview[0]+110,global.blueCaps,4,4,0);

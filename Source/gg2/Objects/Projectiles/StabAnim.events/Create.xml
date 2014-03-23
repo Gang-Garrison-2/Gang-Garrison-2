@@ -18,6 +18,7 @@ done = false;
 hitDamage = 0;
 image_speed = 0;
 alarm[0]=10;
+overlay = -1;
 </argument>
       </arguments>
     </action>
