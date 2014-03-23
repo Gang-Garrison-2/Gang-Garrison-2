@@ -37,20 +37,20 @@
     menu_addedit_key("Show Scores:", "global.showScores");
     
     menu_addtablink("Ingame", '
-        instance_create(x,y,OptionsController);
         instance_destroy();
+        instance_create(x,y,OptionsController);
     ');
     menu_addtablink("Engine", '
-        instance_create(x,y,EngineOptionsController);
         instance_destroy();
+        instance_create(x,y,EngineOptionsController);
     ');
     menu_addtablink("Controls", '
-        instance_create(x,y,ControlsController);
         instance_destroy();
+        instance_create(x,y,ControlsController);
     ');
     menu_addtablink("HUD", '
-        instance_create(x,y,HUDOptionsController);
         instance_destroy();
+        instance_create(x,y,HUDOptionsController);
     ');
     
     menu_addback("Back", '

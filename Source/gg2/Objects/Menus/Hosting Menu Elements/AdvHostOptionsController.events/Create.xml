@@ -28,7 +28,7 @@ menu_addedit_select("Shuffle map rotation:", "global.shuffleRotation", '
     gg2_write_ini("Server", "ShuffleRotation", argument0);
 ','
     menu_add_option(0, "Don'+apos+'t shuffle");
-    menu_add_option(1, "Shuffle, don'+apos+'t make arena map first");
+    menu_add_option(1, "Shuffle (no arena initial map)");
     menu_add_option(2, "Shuffle without bias");
 ');
 menu_addedit_boolean("Auto Balance:", "global.autobalance", '

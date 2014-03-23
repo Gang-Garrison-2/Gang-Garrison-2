@@ -17,7 +17,7 @@
     menu_create(48, 172, 500, 260, 32, 40, 92, 128);
     menumode = true;
 
-    if (room != Options)
+    if(room != Options)
         menu_setdimmed();
     
     menu_background(512, 24, 8, 12, 4);
@@ -96,20 +96,20 @@
     ');
     
     menu_addtablink("Ingame", '
-        instance_create(x,y,OptionsController);
         instance_destroy();
+        instance_create(x,y,OptionsController);
     ');
     menu_addtablink("Engine", '
-        instance_create(x,y,EngineOptionsController);
         instance_destroy();
+        instance_create(x,y,EngineOptionsController);
     ');
     menu_addtablink("Controls", '
-        instance_create(x,y,ControlsController);
         instance_destroy();
+        instance_create(x,y,ControlsController);
     ');
     menu_addtablink("HUD", '
-        instance_create(x,y,HUDOptionsController);
         instance_destroy();
+        instance_create(x,y,HUDOptionsController);
     ');
     
     menu_addback("Back", '
