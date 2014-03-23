@@ -38,6 +38,12 @@
     timeUnscathed = 0;
     syncWrongness = 0;
     
+    // animation state
+    weaponOffset = 0;
+    onground = true;
+    still = true;
+    yoffset = 0;
+    
     //afterburn stuff
     burnIntensity = 0; // "heat"
     legIntensity = 7; // afterburn intensity after which additional intsity additions are halved.

@@ -239,22 +239,35 @@ if (abs(hspeed) &lt; 0.195) // Overweight carrying intel and shooting will get s
 {
     hspeed=0;
     animationImage=0;
+    still = true;
 }
+else
+    still = false;
 
 charSetSolids();
-if(place_free(x,y+1))
+
+if(place_free(x,y+1)) // no obstacle ground below us
 {
     vspeed += 0.6 * global.delta_factor;
     if(vspeed &gt; 10)
         vspeed = 10;
     
-    if !((place_meeting(x, y+1, DropdownPlatform)and !place_meeting(x, y, DropdownPlatform) and vspeed &gt;= 0))
+    // standing on a dropdown platform
+    if (place_meeting(x, y+1, DropdownPlatform) and !place_meeting(x, y, DropdownPlatform) and vspeed &gt;= 0)
+    {
+        onground = true;
+    }
+    else // NOT standing on one
+    {
         animationImage = 1;
+        onground = false;
+    }
 }
-else // !place_free(x, y+1)
+else // obstacle ground below us
 {
     if(place_free(x, y) or (place_meeting(x, y+1, DropdownPlatform) and !place_meeting(x, y, DropdownPlatform)) and vspeed &gt;= 0)
     {
+        onground = true;
         doublejumpUsed = 0;
         moveStatus = 0;
     }
@@ -298,7 +311,11 @@ if (player.humiliated)
         animationImage = 1+((animationImage-1+abs(hspeed)*global.delta_factor/20) mod CHARACTER_ANIMATION_LEN);
 }
 else
-    animationImage = (animationImage+abs(hspeed)*global.delta_factor/20) mod CHARACTER_ANIMATION_LEN;
+    animationImage = (animationImage+(hspeed*image_xscale)*global.delta_factor/20) mod CHARACTER_ANIMATION_LEN;
+    
+// ensure positive animationImage
+animationImage = (animationImage+CHARACTER_ANIMATION_LEN) mod CHARACTER_ANIMATION_LEN;
+
 charUnsetSolids();
 
 // drop intel if ubered or round is over

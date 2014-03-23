@@ -88,7 +88,7 @@
   <constant name="CLASS_QUOTE" value="9"/>
   <constant name="CHARACTER_ANIMATION_NORMAL" value="0"/>
   <constant name="CHARACTER_ANIMATION_INTEL" value="2"/>
-  <constant name="CHARACTER_ANIMATION_LEN" value="2"/>
+  <constant name="CHARACTER_ANIMATION_LEN" value="4"/>
   <constant name="CHARACTER_ANIMATION_DEAD" value="5"/>
   <constant name="WSAEWOULDBLOCK" value="-10035"/>
   <constant name="WSAENETDOWN" value="-10050"/>
