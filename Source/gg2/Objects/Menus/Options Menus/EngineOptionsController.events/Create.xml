@@ -52,30 +52,26 @@
                 AudioControlPlaySong(-1, false);
             }
         }
-    ','
-        menu_add_option(MUSIC_NONE, "None");
-        menu_add_option(MUSIC_MENU_ONLY, "Menu Only");
-        menu_add_option(MUSIC_INGAME_ONLY, "In-Game Only");
-        menu_add_option(MUSIC_BOTH, "Menu and In-Game");
-    '
-    );
+    ');
+    menu_add_option(MUSIC_NONE, "None");
+    menu_add_option(MUSIC_MENU_ONLY, "Menu Only");
+    menu_add_option(MUSIC_INGAME_ONLY, "In-Game Only");
+    menu_add_option(MUSIC_BOTH, "Menu and In-Game");
     
     menu_addedit_select("Particles:", "global.particles", '
         gg2_write_ini("Settings", "Particles", argument0);
-    ','
-        menu_add_option(PARTICLES_NORMAL, "Normal");
-        menu_add_option(PARTICLES_OFF, "Disabled");
-        menu_add_option(PARTICLES_ALTERNATIVE, "Alternative (faster)");
     ');
+    menu_add_option(PARTICLES_NORMAL, "Normal");
+    menu_add_option(PARTICLES_OFF, "Disabled");
+    menu_add_option(PARTICLES_ALTERNATIVE, "Alternative (faster)");
     
     menu_addedit_select("Gibs:", "global.gibLevel", '
         gg2_write_ini("Settings", "Gib Level", argument0);
-    ','
-        menu_add_option(0, "Disabled");
-        menu_add_option(1, "Blood only");
-        menu_add_option(2, "Blood and medium gibs");
-        menu_add_option(3, "Full blood and gibs");
     ');
+    menu_add_option(0, "Disabled");
+    menu_add_option(1, "Blood only");
+    menu_add_option(2, "Blood and medium gibs");
+    menu_add_option(3, "Full blood and gibs");
     menu_addedit_boolean("Hide Infiltrator 'Ghosts':", "global.hideSpyGhosts", '
         gg2_write_ini("Settings", "Hide Spy Ghosts", argument0);
     ');

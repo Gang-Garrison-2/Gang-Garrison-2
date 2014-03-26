@@ -8,5 +8,4 @@ item_type[items] = "edittext2";
 item_var[items] = argument1;
 item_value[items] = menu_get_var(items);
 item_script[items] = argument2;
-menu_fixback();
 items += 1;

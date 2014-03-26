@@ -34,8 +34,9 @@ if(view_hview[0] &lt; 600)
                      *(600-view_hview[0]));
 }
 {
-    var i, val, itemx, itemy;
-    
+    var i, val, itemx, itemy, itemcount;
+    menu_hack_backbutton();
+    itemcount = menu_get_itemcount();
     
     if (dimmed)
     {   
@@ -50,7 +51,7 @@ if(view_hview[0] &lt; 600)
         
         draw_pinched_blackrect(view_xview[0] + xbegin - bgoffsetx - 8,
                                view_yview[0] + ybegin - bgoffsety - 8,
-                               bgwidth + 16, (items-1)*spacing + bgheight + 16,
+                               bgwidth + 16, (itemcount-1)*spacing + bgheight + 16,
                                bginset, 4);
         
         draw_set_alpha(1);
@@ -87,7 +88,7 @@ if(view_hview[0] &lt; 600)
     }
     
     itemx = view_xview[0]+xbegin;
-    for (i = 0; i &lt; items; i += 1)
+    for (i = 0; i &lt; itemcount; i += 1)
     {
         itemy = view_yview[0]+ybegin+i*spacing;
         if(drawbg)

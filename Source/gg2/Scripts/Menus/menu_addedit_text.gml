@@ -7,5 +7,4 @@ item_type[items] = "edittext";
 item_var[items] = argument1;
 item_value[items] = menu_get_var(items);
 item_script[items] = argument2;
-menu_fixback3();
 items += 1;

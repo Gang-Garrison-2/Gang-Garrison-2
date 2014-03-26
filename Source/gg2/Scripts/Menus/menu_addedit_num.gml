@@ -8,5 +8,4 @@ item_var[items] = argument1;
 item_value[items] = string(menu_get_var(items));
 item_script[items] = argument2;
 item_limit[items] = argument3;
-menu_fixback2();
 items += 1;

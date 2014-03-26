@@ -4,5 +4,4 @@
 item_name[items] = argument0;
 item_type[items] = "script";
 item_script[items] = argument1;
-menu_fixback();
 items += 1;

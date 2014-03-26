@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
   <resource name="menu_create" type="RESOURCE"/>
-  <resource name="menu_fixback" type="RESOURCE"/>
-  <resource name="menu_fixback2" type="RESOURCE"/>
-  <resource name="menu_fixback3" type="RESOURCE"/>
-  <resource name="menu_fixback4" type="RESOURCE"/>
-  <resource name="menu_fixback5" type="RESOURCE"/>
   <resource name="menu_addlink" type="RESOURCE"/>
   <resource name="menu_addtablink" type="RESOURCE"/>
   <resource name="menu_addback" type="RESOURCE"/>
@@ -22,4 +17,6 @@
   <resource name="menu_get_var" type="RESOURCE"/>
   <resource name="menu_set_var" type="RESOURCE"/>
   <resource name="gg2_write_ini" type="RESOURCE"/>
+  <resource name="menu_get_itemcount" type="RESOURCE"/>
+  <resource name="menu_hack_backbutton" type="RESOURCE"/>
 </resources>
