@@ -414,6 +414,8 @@ Constructor:
   destroyed autogun instantly gives you 50! Health cabinets also give
   you all your Nuts and Bolts back!
 - Autoguns can't shoot straight up, so watch out!
+- Your autogun will default to the direction you aim when you build
+  it, so be careful!
 
 Infiltrator:
 - The enemy can still hear you jump even if you are cloaked!
@@ -423,7 +425,9 @@ Infiltrator:
 
 Rifleman:
 - Stay moving in case an infiltrator is eyeing your back!
-- Scope out if you need to move around!
+- Your scope inhibits movement. Scope out if you need to move around!
+- Pick off enemies at a distance with charged shots, or "railgun"
+  them at close range without scoping for direct combat!
 
 Secret Class:
 - There is no secret class, and you can 'QQ' about it.
@@ -451,7 +455,7 @@ Leiche, Xeyk, pach, Austin "Psychopath" Benz, L, technoviking, AJF, Alexander "W
 NAGN, Orpheon, JaxOf7, Arctic and RebelINS
 
 Artists:
-mrfredman, Fishmatt, BassieEnAdriaan, Timohtep, Elkondo, Waterfall and Skeledude
+mrfredman, Fishmatt, BassieEnAdriaan, Timohtep, Elkondo, Waterfall, Skeledude, ZaSpai, Deuce, and Wareya
 
 Sound & Music:
 Synnah, Scoot, and Elkondo
