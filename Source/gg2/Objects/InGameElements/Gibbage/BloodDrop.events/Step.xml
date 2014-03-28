@@ -22,19 +22,24 @@
 }
 image_alpha -= (2/lifetime) * global.delta_factor;
 
-if(place_meeting(x, y, Obstacle))
+if (speed &gt; 0)
 {
-    wallSetSolid();
-    if(!stick)
+    if (place_meeting(x, y, Obstacle))
     {
-        move_contact_solid(point_direction(x,y,x+hspeed,y+vspeed),speed)
+        wallSetSolid();
+        if(!stick)
+        {
+            move_contact_solid(point_direction(x,y,x+hspeed,y+vspeed),speed)
+        }
+        move_outside_solid(180+point_direction(x,y,x+hspeed,y+vspeed),speed)
+        wallUnsetSolid();
+        speed *= delta_mult(0.5);
+        speed -= 0.1*global.delta_factor;
+        stick = true;
     }
-    move_outside_solid(180+point_direction(x,y,x+hspeed,y+vspeed),speed)
-    wallUnsetSolid();
-    speed *= 0.5;
-    stick = true;
 }
-
+else
+    stick = true;
 </argument>
       </arguments>
     </action>

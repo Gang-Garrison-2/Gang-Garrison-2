@@ -82,7 +82,8 @@
     
     menu_addedit_select("Ingame Aspect Ratio:", "global.resolutionkind", '
         gg2_write_ini("Settings", "Resolution", argument0);
-        warnoptioneffect = true;
+        warnoptioneffect = !global.isHost;
+        global.changed_resolution = true;
     ','
         menu_add_option(0, "5:4");
         menu_add_option(1, "4:3");
@@ -92,7 +93,7 @@
     ');
     menu_addedit_select("Framerate:", "global.frameratekind", '
         gg2_write_ini("Settings", "Framerate", argument0);
-        warnoptioneffect = true;
+        warnoptioneffect = !global.isHost;
     ','
         menu_add_option(0, "30");
         menu_add_option(1, "60");

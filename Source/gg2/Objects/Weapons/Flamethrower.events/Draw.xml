@@ -19,7 +19,7 @@
 var imageOffset, xdrawpos, ydrawpos;
 imageOffset = owner.team;
 xdrawpos = round(x+xoffset*image_xscale);
-ydrawpos = round(y+yoffset);
+ydrawpos = round(y+yoffset) + owner.equipmentOffset;
 if (alarm[6] &lt;= 0){
     if (alarm[7] &gt; 0) {
         //if we are not shooting, but airblasting/dropping

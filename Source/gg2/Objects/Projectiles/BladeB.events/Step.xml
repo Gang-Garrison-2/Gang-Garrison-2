@@ -18,6 +18,15 @@ y += vspeed * global.delta_factor;
 x -= hspeed;
 y -= vspeed;
 
+gunSetSolids();
+if (!place_free(x, y))
+{
+    imp = instance_create(x,y,Impact);
+    imp.image_angle=direction;
+    instance_destroy();
+}
+gunUnsetSolids();
+
 </argument>
       </arguments>
     </action>

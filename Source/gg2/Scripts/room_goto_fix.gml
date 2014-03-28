@@ -16,7 +16,12 @@ globalvar previous_window_x, previous_window_y, previous_window_w;
 previous_window_x = window_get_x();
 previous_window_y = window_get_y();
 previous_window_w = window_get_width();
-rooms_fix_views();
+
+if(global.changed_resolution)
+{
+    rooms_fix_views();
+    global.changed_resolution = false;
+}
 
 if(not instance_exists(RoomChangeObserver)) {
     instance_create(0,0,RoomChangeObserver);

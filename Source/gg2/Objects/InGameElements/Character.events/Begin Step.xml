@@ -77,6 +77,7 @@ if(!taunting and !omnomnomnom)
                 wantToJump = false;
                 playsound(x,y,JumpSnd);
                 vspeed = min(vspeed, -jumpStrength);
+                onground = false;
             }
         }
         else if(canDoublejump and !doublejumpUsed and vspeed &gt; -jumpStrength)
@@ -235,7 +236,7 @@ if burnDuration&gt;0 &amp;&amp; player.class != CLASS_PYRO and random(80) &lt;= 
     setChatBubble(player, 49);
 }
 
-if (abs(hspeed) &lt; 0.195) // Overweight carrying intel and shooting will get stuck with this number much higher
+if (abs(hspeed) &lt; 0.195 and ((keyState|pressedKeys) &amp; $60) == 0)
 {
     hspeed=0;
     animationImage=0;
@@ -275,20 +276,23 @@ else // obstacle ground below us
 
 if (intel)
 { 
-    if (speed &gt; 0.195)
+    if (global.run_virtual_ticks)
     {
-        if (random(1) &gt; 0.90)
+        if (speed &gt; 0.195)
+        {
+            if (random(1) &gt; 0.90)
+            {
+                var sheet;
+                sheet = instance_create(x,y-11+random(9),LooseSheet);
+                sheet.hspeed = hspeed;
+            }
+        }
+        else if (random(1) &gt; 0.975)
         {
             var sheet;
             sheet = instance_create(x,y-11+random(9),LooseSheet);
             sheet.hspeed = hspeed;
         }
-    }
-    else if (random(1) &gt; 0.975)
-    {
-        var sheet;
-        sheet = instance_create(x,y-11+random(9),LooseSheet);
-        sheet.hspeed = hspeed;
     }
     if (cloak)
     {

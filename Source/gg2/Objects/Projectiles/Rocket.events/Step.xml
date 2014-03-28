@@ -70,6 +70,17 @@ y += vspeed * global.delta_factor;
 x -= hspeed;
 y -= vspeed;
 
+gunSetSolids();
+if (!place_free(x, y))
+{
+    characterHit = -1;
+    if (!fade)
+        event_user(5);
+    else
+        instance_destroy();
+}
+gunUnsetSolids();
+
 </argument>
       </arguments>
     </action>

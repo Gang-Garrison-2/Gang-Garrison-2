@@ -5,7 +5,7 @@ with(IntelGate)
 with(TeamGate)
     solid = true;
 with(ControlPointSetupGate)
-    solid = true;
+    event_user(0);
 with(BulletWall)
     solid = true;
 

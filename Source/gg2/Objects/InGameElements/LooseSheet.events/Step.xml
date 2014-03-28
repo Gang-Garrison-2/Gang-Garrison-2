@@ -14,22 +14,29 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">if(place_free(x,y+1)) {    
-    hspeed /= (4/3);
-    hspeed += random(vspeed*4)-vspeed*2;
+    hspeed /= delta_mult(4/3);
+    hspeed += (random(vspeed*4)-vspeed*2) * global.delta_factor;
 
-    vspeed += random(0.2);
-    vspeed /= (4/3);
+    vspeed += random(0.2) * global.delta_factor;
+    vspeed /= delta_mult(4/3);
 }
 
 if(!burning) {
     image_speed = vspeed;
 } else {
-    vspeed -= 0.2;
+    vspeed -= 0.2 * global.delta_factor;
 }
 
 if(fadeout) {
-    image_alpha -= (1/30);
-}</argument>
+    image_alpha -= (1/30) * global.delta_factor;
+}
+
+x -= hspeed;
+y -= vspeed;
+x += hspeed * global.delta_factor;
+y += vspeed * global.delta_factor;
+
+</argument>
       </arguments>
     </action>
   </actions>

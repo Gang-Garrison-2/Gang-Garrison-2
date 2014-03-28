@@ -31,6 +31,9 @@ y += vspeed * global.delta_factor;
 x -= hspeed;
 y -= vspeed;
 
+if (place_meeting(x, y, ControlPointSetupGate))
+    instance_destroy();
+
 </argument>
       </arguments>
     </action>

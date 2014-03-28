@@ -54,3 +54,4 @@ for(i = 0; i < nummaps; i += 1)
                   0, 0, global.ingamewidth, global.ingameheight,
                   0, 0, 0, 0, noone);
 }
+

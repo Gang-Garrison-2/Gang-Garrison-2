@@ -189,6 +189,7 @@
     ini_write_real("Settings", "Framerate", global.frameratekind);
 
     rooms_fix_views();
+    global.changed_resolution = false;
     
     //screw the 0 index we will start with 1
     //map_truefort 

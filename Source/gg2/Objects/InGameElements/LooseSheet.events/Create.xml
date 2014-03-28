@@ -17,9 +17,10 @@
 image_speed = 1/3;
 image_xscale=2;
 image_yscale=2;
-alarm[0]=130;
+alarm[0]=130/global.delta_factor;
 burning = false;
-fadeout = false;</argument>
+fadeout = false;
+</argument>
       </arguments>
     </action>
   </actions>
