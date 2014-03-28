@@ -39,10 +39,17 @@
     syncWrongness = 0;
     
     // animation state
-    weaponOffset = 0;
+    equipmentOffset = 0;
     onground = true;
     still = true;
     yoffset = 0;
+    // class sprite vars
+    spriteRun = sprite_index;
+    spriteJump = sprite_index;
+    spriteStand = sprite_index;
+    spriteLeanR = sprite_index;
+    spriteLeanL = sprite_index;
+    spriteIntel = sprite_index; // it's an underlay
     
     //afterburn stuff
     burnIntensity = 0; // "heat"
