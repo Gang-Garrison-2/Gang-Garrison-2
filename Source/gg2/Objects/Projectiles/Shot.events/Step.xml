@@ -24,8 +24,6 @@
     
     x += hspeed * global.delta_factor;
     y += vspeed * global.delta_factor;
-    x -= hspeed;
-    y -= vspeed;
     
     gunSetSolids();
     if (!place_free(x, y))
@@ -35,6 +33,9 @@
         instance_destroy();
     }
     gunUnsetSolids();
+    
+    x -= hspeed;
+    y -= vspeed;
 }
 </argument>
       </arguments>
