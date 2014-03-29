@@ -24,9 +24,10 @@ window_oldfullscreen = window_get_fullscreen();
 window_set_fullscreen(false);
 window_set_showborder(false);
 
-if(global.updaterBetaChannel)
+// commenting this out again because april fools don't need no steenking betas - ajf
+/*if(global.updaterBetaChannel)
     url = UPDATE_SOURCE_BETA;
-else
+else*/
     url = UPDATE_SOURCE;
 
 tmpfile = temp_directory + "\gg2update.zip";

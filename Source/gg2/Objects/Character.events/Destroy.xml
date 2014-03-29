@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="DESTROY" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{
+    var newIntel, map;
+    with(currentWeapon) {
+        instance_destroy();
+    }
+    if sentry != -1 {
+    with(sentry) instance_destroy();
+    sentryBuilt =0;}
+
+    if(intel) {
+        if(team == TEAM_RED) {
+            newIntel = instance_create(x,y,IntelligenceBlue);
+        } else {
+            newIntel = instance_create(x,y,IntelligenceRed);
+        }
+        newIntel.alarm[0] = 600;
+        sound_play(IntelDropSnd);
+    }
+    
+    player.object=-1;
+    player.canRespawn = false;
+    player.alarm[5] = 150;
+}</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

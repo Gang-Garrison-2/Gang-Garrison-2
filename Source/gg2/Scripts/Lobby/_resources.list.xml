@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<resources>
-  <resource name="compareServersByCompatAndPing" type="RESOURCE"/>
-  <resource name="writeKeyValue" type="RESOURCE"/>
-</resources>

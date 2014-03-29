@@ -1,11 +1,12 @@
 {
     var i, player;
 
-    write_ubyte(argument0, JOIN_UPDATE);
-    write_ubyte(argument0, ds_list_size(global.players));
-    write_ubyte(argument0, global.currentMapArea);
+    writebyte(HELLO, argument0);
+    writeshort(PROTOCOL_VERSION, argument0);
+    writebyte(ds_list_size(global.players), argument0);
+    writedouble(global.randomSeed, argument0);
     
-    ServerChangeMap(global.currentMap, global.currentMapMD5, socket);
+    ServerChangeMap(global.currentMap, global.currentMapURL, global.currentMapMD5, argument0);
     
     for(i=0; i<ds_list_size(global.players); i+=1) {
         player = ds_list_find_value(global.players, i);

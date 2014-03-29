@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="OTHER" id="12">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{
+    if(readyToBlast) {
+        playsound(x,y,CompressionBlastSnd);
+        
+        with(Rocket) {
+            if(ownerPlayer.team != other.owner.team) {
+                var dir, dist, angle;
+                dir = point_direction(other.x, other.y, x, y);
+                dist = point_distance(other.x, other.y, x, y);
+                angle = abs((dir-other.owner.aimDirection)+720) mod 360;
+                if(angle&gt;180) {
+                    angle=360-angle;
+                }
+                if(angle&lt;(other.blastAngle/2) and dist&lt;other.blastDistance) {
+                    motion_add(other.owner.aimDirection, other.blastStrength*(1-dist/other.blastDistance) );
+                    ownerPlayer = other.ownerPlayer;
+                    team = ownerPlayer.team;
+                    team = other.owner.team;
+                    weapon = WEAPON_REFLECT;
+                }
+            }
+        }
+        
+        with(Mine) {
+            if(ownerPlayer.team != other.owner.team) {
+                var dir, dist, angle;
+                dir = point_direction(other.x, other.y, x, y);
+                dist = point_distance(other.x, other.y, x, y);
+                angle = abs((dir-other.owner.aimDirection)+720) mod 360;
+                if(angle&gt;180) {
+                    angle=360-angle;
+                }
+                if(angle&lt;(other.blastAngle/2) and dist&lt;other.blastDistance) {
+                    motion_add(other.owner.aimDirection, other.blastStrength*(1-dist/other.blastDistance)*0.8 );
+                stickied = false;
+                    }
+                 if(position_meeting(x+hspeed,y+vspeed,Obstacle)) { 
+                 motion_add(point_direction(x,y,x-hspeed,y-vspeed),speed*1.4) 
+                 stickied = false;
+                 }  
+            }
+        }
+        
+        
+        with(Character) {
+                if(team != other.owner.team) {
+                var dir, dist, angle;
+                dir = point_direction(other.x, other.y, x, y);
+                dist = point_distance(other.x, other.y, x, y);
+                angle = abs((dir-other.owner.aimDirection)+720) mod 360;
+                if(angle&gt;180) {
+                    angle=360-angle;
+                }
+                if(angle&lt;(other.blastAngle/2) and dist&lt;other.blastDistance) {
+                    motion_add(other.owner.aimDirection, other.characterBlastStrength*(1-dist/other.blastDistance) );
+                    vspeed-=other.characterBlastStrength*(1-dist/other.blastDistance)*0.3;
+                }
+            }
+        }
+        
+        with(LooseSheet) {
+            var dir, dist, angle;
+            dir = point_direction(other.x, other.y, x, y);
+            dist = point_distance(other.x, other.y, x, y);
+                angle = abs((dir-other.owner.aimDirection)+720) mod 360;
+                if(angle&gt;180) {
+                    angle=360-angle;
+                }
+            if(angle&lt;(other.blastAngle/2) and dist&lt;other.blastDistance) {
+                motion_add(other.owner.aimDirection, other.blastStrength*(1-dist/other.blastDistance) );
+            }
+        }
+        
+        with(Gib) {
+            var dir, dist, angle;
+            dir = point_direction(other.x, other.y, x, y);
+            dist = point_distance(other.x, other.y, x, y);
+                angle = abs((dir-other.owner.aimDirection)+720) mod 360;
+                if(angle&gt;180) {
+                    angle=360-angle;
+                }
+            if(angle&lt;(other.blastAngle/2) and dist&lt;other.blastDistance) {
+                motion_add(other.owner.aimDirection, other.blastStrength*(1-dist/other.blastDistance)*0.4 );
+            }
+        }
+        readyToBlast=false;
+        alarm[1]=blastReloadTime;
+        
+        readyToShoot=false;
+        alarm[0]=blastNoFlameTime;
+        }
+}</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

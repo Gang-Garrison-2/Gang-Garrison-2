@@ -1,2 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<resources/>
+<resources>
+  <resource name="fnt_Com" type="RESOURCE"/>
+  <resource name="fnt_SmlCom" type="RESOURCE"/>
+</resources>

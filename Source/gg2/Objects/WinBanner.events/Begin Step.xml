@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="STEP" id="1">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">/*
+winbannercounter+=1;
+
+if winbannercounter&lt;300 exit;
+    for(i=0; i&lt;ds_list_size(global.players); i+=1) {
+        player = ds_list_find_value(global.players, i);
+        player.kills=0;
+        player.caps=0;
+    }
+//room_goto_fix(global.nextMap);
+    global.mapchanging=0; 
+
+	            switch(global.nextMap) {
+	                case "TwodFort":
+	                    room_goto_fix(TwodFort);
+	                    break;
+	                case "TwodFortTwo":
+	                    room_goto_fix(TwodFortTwo);
+	                    break;
+	                case "HELLTRIKKY1":
+	                    room_goto_fix(HELLTRIKKY1);
+	                    break;
+                     case "ClassicWell":
+	                    room_goto_fix(ClassicWell);
+	                    break;
+                      case "Orange":
+	                    room_goto_fix(Orange);
+	                    break;
+                      case "Avanti":
+	                    room_goto_fix(Avanti);
+	                    break;
+	               case "Castle":
+	                    room_goto_fix(Castle);
+	                    break;
+                     case "Containment":
+	                    room_goto_fix(Containment);
+                          break;
+                     case "Heenok":
+	                    room_goto_fix(Heenok);
+	                    break;  
+                     default:
+	                    show_message("Server changed to unknown map: "+global.nextMap);
+                          roomchange = false;
+	                   break;
+                    }
+*/</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

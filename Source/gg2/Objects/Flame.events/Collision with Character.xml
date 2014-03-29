@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="COLLISION" with="Character">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{
+    if(sticksTo == -1 and other.id != ownerPlayer.object and other.team != team) {
+        other.hp -= hitDamage;
+        other.lastDamageDealer = ownerPlayer;
+        other.lastDamageSource = weapon;
+        if(object_is_ancestor(other.object_index, Pyro) or (other.flamecount&gt;7)) {
+            instance_destroy();
+        } else {
+            sticksTo = other.id;
+            stickRelativeX = x-other.x;
+            stickRelativeY = y-other.y;
+            speed=0;
+            alarm[0]=150;
+            other.flamecount += 1;
+        }
+    }
+}</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

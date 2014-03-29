@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="OTHER" id="11">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{
+    if(readyToShoot) {
+        playsound(x,y,ChaingunSnd);
+        var shot;
+        randomize();
+        
+        shot = instance_create(x+lengthdir_x(15,owner.aimDirection),y+lengthdir_y(15,owner.aimDirection),Shot);
+        shot.direction=owner.aimDirection+random(24)-12;
+        shot.speed=14;
+        shot.owner=owner;
+        shot.ownerPlayer=ownerPlayer;
+        shot.team=owner.team;
+        shot.hitDamage = 5;
+        shot.weapon=WEAPON_SMG;
+        readyToShoot=false;
+        alarm[0]=reloadTime;
+    }
+}</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

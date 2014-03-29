@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="CREATE" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{
+    global.levelchoice = 1
+    virtualitem = -1;
+    xbegin = 40;
+    ybegin = 300;
+    spacing = 30;
+    width = 200; 
+    items = 5;
+    
+    item[0] = "Host Game";
+    item[1] = "Join (lobby)";
+    item[2] = "Join (manual)";
+    item[3] = "Options";
+    item[4] = "Quit";
+    
+    AudioControlPlaySong(MenuMusic);
+    
+    if(global.dedicatedMode == 1)
+        event_user(0);
+}</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

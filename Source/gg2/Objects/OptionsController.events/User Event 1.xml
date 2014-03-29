@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="OTHER" id="11">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{
+    global.hostingPort = get_integer("Enter the number of the port you wnat to host your games on:", global.hostingPort);
+    ini_open("gg2.ini");
+    ini_write_real("Settings", "HostingPort", global.hostingPort);
+    ini_close();
+    value[1] = string(global.hostingPort);
+}</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

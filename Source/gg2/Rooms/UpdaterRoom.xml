@@ -15,11 +15,11 @@
     <backgroundDef>
       <visibleOnRoomStart>true</visibleOnRoomStart>
       <isForeground>false</isForeground>
-      <backgroundImage>UpdaterB</backgroundImage>
+      <backgroundImage>background44</backgroundImage>
       <offset x="0" y="0"/>
       <speed x="0" y="0"/>
-      <tileHorizontally>false</tileHorizontally>
-      <tileVertically>false</tileVertically>
+      <tileHorizontally>true</tileHorizontally>
+      <tileVertically>true</tileVertically>
       <stretch>false</stretch>
     </backgroundDef>
     <backgroundDef>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="STEP" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if direction &gt;= 95 &amp;&amp; direction &lt;=270{ 
+image_xscale=-1 ;
+}else{ image_xscale = 1} 
+
+if team==TEAM_RED sprite_index=BackstabRedS;
+else sprite_index=BackstabBlueS;
+
+owner.speed = 0;
+owner.runPower = 0;
+owner.jumpStrength = 0;
+owner.canCloak = 0
+
+//alarm[0] = 43;
+x=owner.x;
+y=owner.y;</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

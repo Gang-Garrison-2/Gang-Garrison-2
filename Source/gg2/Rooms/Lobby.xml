@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <room>
-  <caption>Lobby</caption>
+  <caption/>
   <size height="600" width="600"/>
   <grid>
     <isometric>false</isometric>
-    <snap x="4" y="4"/>
+    <snap x="16" y="16"/>
   </grid>
-  <speed>100</speed>
+  <speed>30</speed>
   <persistent>false</persistent>
   <creationCode/>
   <backgroundColor>C0C0C0</backgroundColor>
@@ -15,7 +15,7 @@
     <backgroundDef>
       <visibleOnRoomStart>true</visibleOnRoomStart>
       <isForeground>false</isForeground>
-      <backgroundImage>MenuBackground1</backgroundImage>
+      <backgroundImage>MenuBackgroundB</backgroundImage>
       <offset x="0" y="0"/>
       <speed x="0" y="0"/>
       <tileHorizontally>false</tileHorizontally>
@@ -104,24 +104,6 @@
     <instance>
       <object>LobbySideController</object>
       <position x="176" y="160"/>
-      <creationCode/>
-      <locked>false</locked>
-    </instance>
-    <instance>
-      <object>LobbyNameController</object>
-      <position x="176" y="80"/>
-      <creationCode/>
-      <locked>false</locked>
-    </instance>
-    <instance>
-      <object>ScrollDownO</object>
-      <position x="564" y="528"/>
-      <creationCode/>
-      <locked>false</locked>
-    </instance>
-    <instance>
-      <object>ScrollUpO</object>
-      <position x="564" y="152"/>
       <creationCode/>
       <locked>false</locked>
     </instance>

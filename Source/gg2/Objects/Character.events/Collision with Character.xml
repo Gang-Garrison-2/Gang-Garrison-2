@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="COLLISION" with="Character">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if (other.team != team)
+{
+    if(speed &gt; 0)
+    {
+        other.solid = true;
+        move_contact_solid(direction, speed);
+        move_outside_solid(direction+180, speed);
+        if(!place_free(x+sign(hspeed), y))
+            hspeed = 0;
+        if(!place_free(x, y+sign(vspeed)))
+            vspeed = 0;
+        if(!place_free(x+sign(hspeed), y+sign(vspeed)))
+            speed = 0;
+        other.solid = false;
+    }
+    else
+    {
+        other.solid = true;
+        move_outside_solid(point_direction(other.x, other.y, x, y), point_distance(other.x, other.y, x, y));
+        if(!place_free(x+sign(hspeed), y))
+            hspeed = 0;
+        if(!place_free(x, y+sign(vspeed)))
+            vspeed = 0;
+        if(!place_free(x+sign(hspeed), y+sign(vspeed)))
+            speed = 0;
+        other.solid = false;
+    }
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

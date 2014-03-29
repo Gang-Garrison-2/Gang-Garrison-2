@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="OTHER" id="11">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{
+    if(healTarget != -1 and instance_exists(healTarget)) {
+        if(healTarget.object != -1) {
+            if(point_distance(x,y,healTarget.object.x, healTarget.object.y)&lt;=300) {
+                if(!collision_line(x+lengthdir_x(25,owner.aimDirection),y+lengthdir_y(24,owner.aimDirection),healTarget.object.x, healTarget.object.y, Obstacle, true, true) and !collision_line(x,y,x+lengthdir_x(25,owner.aimDirection),y+lengthdir_y(24,owner.aimDirection), Obstacle, true, true)) {
+                    if healTarget.object.hp &lt; healTarget.object.maxHp hphealed +=1;
+                    if healTarget.class != CLASS_MEDIC healTarget.object.hp+=healAmmount;
+                    else healTarget.object.hp+=healAmmount/2;
+                    
+                    if hphealed == 250 {
+                        ownerPlayer.healpoints += 1;
+                        hphealed = 0;
+                        }
+                    healing=true;
+                    if(alarm[3]&lt;=0) {
+                        loopsoundstart(x,y,MedigunSnd);
+                    } else {
+                        loopsoundmaintain(x,y,MedigunSnd);
+                    }
+                    alarm[3]=2;
+                } else {
+                    healTarget = -1;
+                }
+            } else {
+                healTarget = -1;
+            }
+        } else {
+            healTarget = -1;
+        }
+    } else {
+            if(readyToShoot) {
+                var bestTarget, bestTargetDist;
+                bestTarget=-1;
+                bestTargetDist=10000;
+        
+                with(Player) {
+                    if(id != other.ownerPlayer and team == other.owner.team and object != -1) {
+                        if(collision_line(other.x, other.y, other.x+lengthdir_x(300, other.owner.aimDirection), other.y+lengthdir_y(300, other.owner.aimDirection), object, true, true)) {
+                            if(point_distance(object.x,object.y,other.x,other.y)&lt;bestTargetDist) {
+                                bestTargetDist = point_distance(object.x,object.y,other.x,other.y);
+                                bestTarget = id;
+                            }
+                        } 
+                    }
+                }
+        
+                if(bestTarget != -1) {
+                    healTarget = bestTarget;
+                }
+                readyToShoot=false;
+                alarm[0]=1;
+            }
+    }
+}</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="KEYPRESS" id="106">
+  <actions>
+    <action id="604" library="1">
+      <!--action name: Inherited-->
+      <kind>NORMAL</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>false</canApplyTo>
+      <actionType>FUNCTION</actionType>
+      <functionName>action_inherited</functionName>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments/>
+    </action>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">/*
+if((weapons[0]== Blade) and (alarm[0]&lt;1)) {
+    weapons[0] = MachineGun;
+    with(currentWeapon) {
+        instance_destroy();
+            }
+    event_user(0);
+    alarm[0]= 30;
+    exit;
+} else {
+if((weapons[0]== MachineGun) and (alarm[0]&lt;1)) {
+    weapons[0] = Blade;
+    with(currentWeapon) {
+        instance_destroy();
+            }
+    event_user(0);
+    alarm[0]= 30; 
+    exit;
+    }
+}</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

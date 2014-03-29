@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="DRAW" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{
+    var xr, yr, charAlpha;
+    xr = round(x);
+    yr = round(y);
+    
+    if (global.myself == -1) {
+        charAlpha = 1;
+        exit;
+    } else if((global.myself.object == id)/* || (global.myself.object == -1)*/) {
+        charAlpha = 1;
+    } else if (!invisible) {
+        charAlpha = cloakAlpha;
+    } else {
+        exit;
+    }
+    if global.myself.team == team and cloak and global.myself.class != CLASS_SPY {
+            cloakAlpha = 0.5;
+            charAlpha = 0.5;
+            if !currentWeapon.readyToStab {
+                cloakAlpha = 0;
+                charAlpha = 0;
+                        }            
+                    }
+    if(bubbleAlpha &gt; 0) {
+        draw_sprite_ext(BubblesS, bubbleImage, xr+10, yr-18, 1, 1, 0, c_white, charAlpha*bubbleAlpha);
+    }
+
+    draw_set_alpha(charAlpha);
+    
+     if (charge = true &amp;&amp; image_xscale =1 &amp;&amp; global.myself == player) {
+    draw_healthbar(xr+30, yr-40, xr+50, yr-35,currentWeapon.hitDamage*100/currentWeapon.maxDamage,c_black,c_yellow,c_red,0,true,true);
+    }else{
+    if (charge = true &amp;&amp; image_xscale = -1 &amp;&amp; global.myself == player) {
+    draw_healthbar(xr-30, yr-40, xr-50, yr-35,currentWeapon.hitDamage*100/currentWeapon.maxDamage,c_black,c_yellow,c_red,0,true,true);
+    }
+    }
+    if (hp&gt;maxHp) {
+    draw_healthbar(xr-10, yr-30, xr+10, yr-25,(hp-maxHp)*100/maxHp*2,c_green,c_olive,c_lime,0,true,true);
+    }else{
+    draw_healthbar(xr-10, yr-30, xr+10, yr-25,hp*100/maxHp,c_black,c_red,c_green,0,true,true);}
+    if(distance_to_point(mouse_x, mouse_y)&lt;25) {
+        draw_set_halign(fa_center);
+        draw_set_valign(fa_bottom);
+        if(team==TEAM_RED) {
+            draw_set_color(c_red);
+        } else {
+            draw_set_color(c_blue);
+        }
+        draw_text(xr, yr-35, player.name);
+    }  
+    draw_set_alpha(1);
+    draw_sprite_ext(sprite_index,floor(animationImage+animationOffset),xr,yr,image_xscale,image_yscale,image_angle,c_white,cloakAlpha);
+}</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

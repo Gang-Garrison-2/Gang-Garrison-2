@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="DESTROY" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{
+    freebuffer(receiveBuffer);
+    freebuffer(sendBuffer);
+    
+    if(object != -1) {
+        with(object) {
+            instance_destroy();
+        }
+    }
+    
+    if(socket != -1) {
+        closesocket(socket);
+    }
+    
+    with(Rocket) {
+        if(ownerPlayer == other.id) {
+            instance_destroy();
+        }
+    }
+    with(Flame) {
+        if(ownerPlayer == other.id) {
+            instance_destroy();
+        }
+    }
+    with(Shot) {
+        if(ownerPlayer == other.id) {
+            instance_destroy();
+        }
+    }
+}</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

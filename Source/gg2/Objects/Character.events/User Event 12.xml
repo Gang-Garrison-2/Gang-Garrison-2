@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="OTHER" id="22">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{
+    writeshort(netAimDirection, global.serializeBuffer);
+
+    if(global.updateType == QUICK_UPDATE or global.updateType == FULL_UPDATE) {
+        writebyte(sentryBuilt, global.serializeBuffer);
+        writeushort(round(x*5), global.serializeBuffer);
+        writeushort(round(y*5), global.serializeBuffer);
+        writebyte(round(hspeed*5), global.serializeBuffer);
+        writebyte(round(vspeed*5), global.serializeBuffer);
+        writebyte(round(hp/2), global.serializeBuffer);
+        writebyte(currentWeaponIndex, global.serializeBuffer);
+        
+        if sentryBuilt==1 {
+        with(sentry){
+        event_user(12);
+        }
+        }
+        
+    }
+        
+    if(global.updateType == FULL_UPDATE) {
+        writebyte(doublejumpUsed, global.serializeBuffer);
+        writebyte(intel, global.serializeBuffer);
+        writebyte(cloak, global.serializeBuffer);        
+        writebyte(animationOffset, global.serializeBuffer);
+        writebyte(round(cloakAlpha*255), global.serializeBuffer);
+
+        with(currentWeapon) {
+            event_user(12);
+        }
+        
+    }
+}</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
-  <resource name="GameElements" type="GROUP"/>
-  <resource name="Maps" type="GROUP"/>
-  <resource name="Updater" type="GROUP"/>
+  <resource name="background0" type="RESOURCE"/>
+  <resource name="twodfort_oldB" type="RESOURCE"/>
+  <resource name="TwodFortB" type="RESOURCE"/>
+  <resource name="MenuBackgroundB" type="RESOURCE"/>
+  <resource name="SplashScreenB" type="RESOURCE"/>
+  <resource name="TwodFortTwoB" type="RESOURCE"/>
+  <resource name="HELLTRIKKY1B" type="RESOURCE"/>
+  <resource name="classicwellB" type="RESOURCE"/>
+  <resource name="OrangeB" type="RESOURCE"/>
+  <resource name="AvantiB" type="RESOURCE"/>
+  <resource name="CastleB" type="RESOURCE"/>
+  <resource name="ContainmentB" type="RESOURCE"/>
+  <resource name="HeenokB" type="RESOURCE"/>
+  <resource name="CustomMapB" type="RESOURCE"/>
+  <resource name="background44" type="RESOURCE"/>
 </resources>

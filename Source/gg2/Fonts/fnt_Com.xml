@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<font>
+  <fontName>Fixedsys</fontName>
+  <bold>false</bold>
+  <italic>false</italic>
+  <rangeMin>0</rangeMin>
+  <rangeMax>255</rangeMax>
+  <size>10</size>
+</font>

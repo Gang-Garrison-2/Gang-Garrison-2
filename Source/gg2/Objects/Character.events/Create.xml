@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="CREATE" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{
+    image_speed = 0;
+    doublejumpUsed = 0;
+    
+    lastKeyState = 0;
+    pressedKeys = 0;
+    releasedKeys = 0;
+    keyState = 0;
+    
+    aimDirection = 0;
+    netAimDirection = 0;
+    hp = maxHp;
+    flamecount = 0;
+    intel = false;
+    lastDamageDealer = -1;
+    lastDamageSource = -1;
+    invisible = false;
+    charge = false;
+    bubbleAlpha = 0;
+    bubbleFadeout = false;
+    bubbleImage = 0;
+    currentWeaponIndex = 0;
+    
+    // Cloak for Spies
+    cloak = false;
+    cloakAlpha = 1;
+    
+    //Sentries for Engies
+    sentryBuilt = 0;
+    sentry=-1;
+    
+    animationOffset = CHARACTER_ANIMATION_NORMAL;
+    animationImage = 0;
+}</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

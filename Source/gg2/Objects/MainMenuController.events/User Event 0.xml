@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="OTHER" id="10">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{
+    global.isHost = true;
+    global.map_serverName = "";
+    if(global.dedicatedMode == 0)
+        global.serverName = get_string("Please enter a name for your server", global.defaultServerName);
+    else
+        global.serverName = global.defaultServerName;
+    if(string_length(global.serverName)&gt;25) {
+        global.serverName = string_copy(global.serverName, 0, 25);
+    }
+    //global.levelchoice = get_integer("Please choose a level to host.# #1 = 2dfort#2 = 2dfort_2#3 = helltrikky_1#4 = classicwell#5 = Orange#6 = Avanti#7 = Castle#8 = Containment#9 = Heenok#10 = Test custom level",1);
+    if(global.dedicatedMode == 0)
+        levelchoice = get_integer("Please choose a level to host.# #1 = Custom Map Rotation #2 = Test custom level",1)
+    else
+        levelchoice = 1;
+
+    if(global.dedicatedMode == 0)
+        global.caplimit = get_integer("Please enter number of captures before map change:", global.caplimit);
+
+    switch(levelchoice) {
+                case 1:
+                    global.map_serverName = "[NO MAP] " + string(global.serverName);
+                    break;
+                /*case 2:
+                    global.serverName = "[2dfort_2] " + string(global.serverName);
+                    break;
+                case 3:
+                    global.serverName = "[helltrikky_1] " + string(global.serverName);
+                    break;
+                case 4:
+                    global.serverName = "[classicwell] " + string(global.serverName);
+                    break;
+                case 5:    
+                    global.serverName = "[Orange] " + string(global.serverName); 
+                    break;
+                case 6:    
+                    global.serverName = "[Avanti] " + string(global.serverName); 
+                    break;
+                case 7:    
+                    global.serverName = "[Castle] " + string(global.serverName); 
+                    break;
+                case 8:    
+                    global.serverName = "[Containment] " + string(global.serverName); 
+                    break;
+                case 9:    
+                    global.serverName = "[Heenok] " + string(global.serverName); 
+                    break;*/
+                case 2:
+                    global.useLobbyServer = 0;
+                    global.customMapName = get_string("Name of the level file to test, not including .png.#(Must be in the maps folder.  To test maps/MyMap.png, type MyMap", "");
+                    break;
+                    default:
+                    global.serverName = "FAIL"; //aka the user put in a silly value most likely
+            }
+
+    global.gameServer = instance_create(0,0,GameServer);
+}</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

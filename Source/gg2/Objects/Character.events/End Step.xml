@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="STEP" id="2">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{
+
+    if(global.isHost) {
+        if(hp&lt;=0) {
+            if(lastDamageDealer != -1 and lastDamageDealer != player) {
+                lastDamageDealer.kills += 1;
+                player.recentlyKilledBy = lastDamageDealer;
+            } else {
+                player.recentlyKilledBy = 0;
+            }
+            player.recentlyKilledWith = lastDamageSource;
+            player.deaths += 1;
+    
+            event_user(9);
+            exit;
+        }
+    }
+    
+    if(hp&gt;maxHp) {
+        hp-=maxHp*0.0025;}
+    if(hp&gt;maxHp*1.5+maxHp*0.0025){
+    hp= maxHp*1.5}
+    
+    if(((aimDirection+270) mod 360)&gt;180) {
+        image_xscale=1;
+        currentWeapon.image_xscale=1;
+        currentWeapon.image_angle = aimDirection;
+    } else {
+        image_xscale=-1;
+        currentWeapon.image_xscale=-1;
+        currentWeapon.image_angle = aimDirection+180;
+    }
+    
+    currentWeapon.x=round(x);
+    currentWeapon.y=round(y);
+    
+    // Limit people to the area of the room to prevent the
+    // "Falling through the floors" issue.
+    {
+        if(x&lt;0) {
+            x=0;
+        }
+        
+        if(x&gt;room_width) {
+            x = room_width
+        }
+        
+        if(y&lt;0) {
+            y = 0;
+        }
+        
+        if(y&gt;room_height) {
+            y = room_height;
+        }
+    }
+    
+    // Cloak
+    if (cloak) {
+        cloakAlpha = max(cloakAlpha - 0.05, 0);
+    } else {
+        cloakAlpha = min(cloakAlpha + 0.05, 1);
+    }
+    
+    if(bubbleFadeout) {
+        bubbleAlpha -= 0.05;
+        if(bubbleAlpha &lt;= 0) {
+            bubbleAlpha = 0;
+            bubbleFadeout = false;
+        }
+    }
+}</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

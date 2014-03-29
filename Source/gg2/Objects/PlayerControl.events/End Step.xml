@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="STEP" id="2">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if(global.myself.object != -1) {
+    if(object_is_ancestor(global.myself.object.object_index, Sniper)) {
+        if(global.myself.object.currentWeapon.zoom) {
+        var relxmouse, relymouse;
+        relxmouse = min(max(window_views_mouse_get_x()-view_xview[0], 0), view_wview);
+        relymouse = min(max(window_views_mouse_get_y()-view_yview[0], 0), view_hview);
+        
+        view_xview[0] = global.myself.object.x+relxmouse-view_wview[0];
+        view_yview[0] = global.myself.object.y+relymouse-view_hview[0];
+    exit;
+    }}
+    {
+        view_xview[0] = global.myself.object.x-view_wview[0]/2;
+        view_yview[0] = global.myself.object.y-view_hview[0]/2;
+    }
+}</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

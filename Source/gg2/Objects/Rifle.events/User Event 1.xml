@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="OTHER" id="11">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{
+    if(readyToShoot == true) {
+        playsound(x,y,SniperSnd);
+        var hit;
+        var x1,y1,xm,ym, len;
+        var hitline;
+        x1=x;
+        y1=y;
+        x2=x+lengthdir_x(2000,owner.aimDirection);
+        y2=y+lengthdir_y(2000,owner.aimDirection);
+        len=point_distance(x1,y1,x2,y2);
+        while(len&gt;1) {
+            xm=(x1+x2)/2;
+            ym=(y1+y2)/2;
+            
+            hitline = false;
+            if(collision_line(x1,y1,xm,ym,Obstacle,true,true)&gt;=0) {
+                hitline = true;
+            } else if (collision_line(x1,y1,xm,ym,TeamGate,true,true)&gt;=0) {
+                hitline = true;
+            } else {
+                with(Character) {
+                    if(id != other.owner and collision_line(x1,y1,xm,ym,id,true,false)&gt;=0) {
+                        hitline = true;
+                    }
+                    }
+               with(Sentry) {
+                    if(collision_line(x1,y1,xm,ym,id,true,false)&gt;=0) {
+                        hitline = true;
+                    }
+                }
+            }
+            
+            if(hitline) {
+                x2=xm;
+                y2=ym;
+            } else {
+                x1=xm;
+                y1=ym;
+            }
+            len/=2;
+        }
+        
+        with(Player) {
+            if(id != other.ownerPlayer and team != other.owner.team and object != -1) {
+                if(collision_line(other.x,other.y,other.x2,other.y2,object,true,false)&gt;=0) {
+                    var blood;
+                    blood = instance_create(x,y,Blood);
+                    blood.direction = direction-180;
+                    object.hp -= other.hitDamage;
+                    object.lastDamageDealer = other.ownerPlayer;
+                    object.cloakAlpha = min(object.cloakAlpha + 0.3, 1);
+                    object.lastDamageSource = WEAPON_RIFLE;
+                }
+            }
+        }
+        
+        with(Sentry) {
+            if(team != other.owner.team) {
+                if(collision_line(other.x,other.y,other.x2,other.y2,Sentry,false,false)&gt;=0) {
+                    var spark;
+                    spark = instance_create(x,y,SparkHit);
+                    spark.direction = direction-180;
+                    hp -= other.hitDamage;
+                    lastDamageDealer = other.ownerPlayer;
+                    lastDamageSource = WEAPON_RIFLE;
+                }
+            }
+        }
+        
+        shot=true;
+        fired=true;
+        readyToShoot = false;
+        alarm[0] = reloadTime;
+    }
+}</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

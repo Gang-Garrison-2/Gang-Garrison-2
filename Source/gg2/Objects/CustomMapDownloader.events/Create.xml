@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="CREATE" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{
+  progressBarSprite = choose(ScoutRedS, ScoutBlueS);
+  progressBarVertPos = 400;
+
+  if(file_exists("Maps/" + global.currentMap + ".png")) {
+    event_user(0); // we already have the map, so do a validity check and launch the map
+  } else {
+    // we don't have the map, so download it
+    downloadHandle = DM_CreateDownload(global.currentMapURL, "Maps/" + global.currentMap + ".png");
+    DM_StartDownload(downloadHandle);
+  }
+}</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

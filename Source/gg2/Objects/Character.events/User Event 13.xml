@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="OTHER" id="23">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{
+    receiveCompleteMessage(global.serverSocket,2,global.deserializeBuffer);
+    aimDirection = readshort(global.deserializeBuffer)*360/65536;
+    
+    var temp;
+    if(global.updateType == QUICK_UPDATE or global.updateType == FULL_UPDATE) {
+        receiveCompleteMessage(global.serverSocket,9,global.deserializeBuffer);
+        sentryBuilt = readbyte(global.deserializeBuffer);
+        x = readushort(global.deserializeBuffer)/5;
+        y = readushort(global.deserializeBuffer)/5;
+        hspeed = readsbyte(global.deserializeBuffer)/5;
+        vspeed = readsbyte(global.deserializeBuffer)/5;
+        hp = readbyte(global.deserializeBuffer)*2;
+        currentWeaponIndex = readbyte(global.deserializeBuffer);
+        
+        
+        if sentryBuilt==1{
+            if sentry == -1 {
+            sentry = instance_create(x+7,y,Sentry);
+            sentry.owner=id;
+            sentry.ownerPlayer=player;
+            sentry.team=team;
+            sentry.image_xscale=image_xscale;
+            
+        
+        }
+        
+        with(sentry) {
+        event_user(13);
+     
+        }
+        }
+        /*if(not place_free(x,y)) {
+            move_outside_solid(45,0.707);
+            move_outside_solid(180,1);
+            move_outside_solid(270,1);
+            move_outside_solid(0,1);
+            move_outside_solid(135,0.707);
+        }*/
+    }
+    
+    if(global.updateType == FULL_UPDATE) {
+        receiveCompleteMessage(global.serverSocket,5,global.deserializeBuffer);
+        doublejumpUsed = readbyte(global.deserializeBuffer);
+        intel = readbyte(global.deserializeBuffer);
+        cloak = readbyte(global.deserializeBuffer);
+        
+        animationOffset = readbyte(global.deserializeBuffer);
+        cloakAlpha = readbyte(global.deserializeBuffer)/255;
+        with(currentWeapon) {
+            event_user(13);
+        }
+        
+
+    }
+    
+    event_user(1);
+}</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="CREATE" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{
+    receiveBuffer = createbuffer();
+    sendBuffer = createbuffer();
+    recentlyKilledBy = -1;
+    object = -1;
+    team = TEAM_SPECTATOR;
+    class = CLASS_SCOUT;
+    socket = -1;
+    name = "";
+
+    kills = 0;
+    deaths = 0;
+    caps = 0;
+    healpoints = 0;
+    
+    canRespawn = true;
+}</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

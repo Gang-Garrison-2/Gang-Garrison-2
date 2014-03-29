@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<sprite>
+  <origin x="0" y="0"/>
+  <mask>
+    <separate>true</separate>
+    <shape>PRECISE</shape>
+    <bounds alphaTolerance="0" mode="FULL"/>
+  </mask>
+  <preload>true</preload>
+  <smoothEdges>false</smoothEdges>
+  <transparent>false</transparent>
+</sprite>

@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<resources>
-  <resource name="AudioControlPlaySong" type="RESOURCE"/>
-  <resource name="AudioControlToggleMute" type="RESOURCE"/>
-</resources>

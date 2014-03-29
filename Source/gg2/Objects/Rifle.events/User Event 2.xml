@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="OTHER" id="12">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if((!zoom) and (alarm[0]&lt;1)) {
+    zoom = true;
+    owner.charge = true;
+//    hitDamage = 70;
+//    reloadTime = 60;
+    alarm[0]= 5;
+} else {
+if((zoom) and (alarm[0]&lt;1)) {
+    zoom = false;
+    owner.charge = false;
+    hitDamage = 20;
+//    hitDamage = 40;
+//    reloadTime = 50;
+    alarm[0]= 5;
+    }
+}</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

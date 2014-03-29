@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="OTHER" id="23">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{
+    if(global.updateType == FULL_UPDATE) {
+        receiveCompleteMessage(global.serverSocket,6,global.deserializeBuffer);
+        kills = readshort(global.deserializeBuffer);
+        deaths = readshort(global.deserializeBuffer);
+        caps = readshort(global.deserializeBuffer);
+    }
+
+    var keyState, charObj;
+    receiveCompleteMessage(global.serverSocket,1,global.deserializeBuffer);
+    keyState = readbyte(global.deserializeBuffer);
+    
+    if(keyState != 255) {
+        if(object == -1) {
+            charObj = getCharacterObject(team, class);
+            if(charObj != -1) {
+                object = instance_create(0,0,charObj);
+                object.player = id;
+                object.team = team;
+                object.keyState = keyState;
+                
+                with(object) {
+                    event_user(0);
+                    event_user(13);
+                }
+            } else {
+                show_message("Invalid player object while deserializing");
+            }
+        } else {
+            object.keyState = keyState;        
+            with(object) {
+                event_user(13);
+            }
+        }
+    } else {
+        if(object != -1) {
+            with(object) {
+                instance_destroy();
+            }
+            object = -1;
+        }
+    }
+}</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

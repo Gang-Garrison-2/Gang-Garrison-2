@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="CREATE" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{
+    virtualitem = -1;
+    xbegin = 40;
+    ybegin = 300;
+    spacing = 30;
+    width = 300; 
+    items = 7;
+    valueoffset = 200;
+    
+    item[0] = "Player name:";
+    item[1] = "Hosting Port:";
+    item[2] = "Player Limit:";
+    item[3] = "Announce to Lobby:";
+    item[4] = "Fullscreen:";
+    item[5] = "Ingame Music:";
+    item[6] = "Back";
+    
+    value[0] = global.playerName;
+    value[1] = string(global.hostingPort);
+    value[2] = string(global.playerLimit);
+    
+    
+    if(global.useLobbyServer) {
+        value[3] = "On";
+    } else {
+        value[3] = "Off";
+    }
+
+    if(global.fullscreen) {
+        value[4] = "On";
+    } else {
+        value[4] = "Off";
+    }
+    
+    if(global.ingameMusic) {
+        value[5] = "On";
+    } else {
+        value[5] = "Off";
+    }
+    
+    value[6] = "";
+
+}</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

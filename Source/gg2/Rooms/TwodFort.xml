@@ -1,0 +1,5443 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<room>
+  <caption>2dfort</caption>
+  <size height="1200" width="8844"/>
+  <grid>
+    <isometric>false</isometric>
+    <snap x="16" y="16"/>
+  </grid>
+  <speed>30</speed>
+  <persistent>false</persistent>
+  <creationCode>basicRoomSetup();</creationCode>
+  <backgroundColor>000000</backgroundColor>
+  <drawBackgroundColor>true</drawBackgroundColor>
+  <backgrounds>
+    <backgroundDef>
+      <visibleOnRoomStart>true</visibleOnRoomStart>
+      <isForeground>false</isForeground>
+      <backgroundImage>TwodFortB</backgroundImage>
+      <offset x="0" y="0"/>
+      <speed x="0" y="0"/>
+      <tileHorizontally>false</tileHorizontally>
+      <tileVertically>false</tileVertically>
+      <stretch>true</stretch>
+    </backgroundDef>
+    <backgroundDef>
+      <visibleOnRoomStart>false</visibleOnRoomStart>
+      <isForeground>false</isForeground>
+      <backgroundImage/>
+      <offset x="0" y="0"/>
+      <speed x="0" y="0"/>
+      <tileHorizontally>false</tileHorizontally>
+      <tileVertically>false</tileVertically>
+      <stretch>true</stretch>
+    </backgroundDef>
+    <backgroundDef>
+      <visibleOnRoomStart>false</visibleOnRoomStart>
+      <isForeground>false</isForeground>
+      <backgroundImage/>
+      <offset x="0" y="0"/>
+      <speed x="0" y="0"/>
+      <tileHorizontally>true</tileHorizontally>
+      <tileVertically>true</tileVertically>
+      <stretch>false</stretch>
+    </backgroundDef>
+    <backgroundDef>
+      <visibleOnRoomStart>false</visibleOnRoomStart>
+      <isForeground>false</isForeground>
+      <backgroundImage/>
+      <offset x="0" y="0"/>
+      <speed x="0" y="0"/>
+      <tileHorizontally>true</tileHorizontally>
+      <tileVertically>true</tileVertically>
+      <stretch>false</stretch>
+    </backgroundDef>
+    <backgroundDef>
+      <visibleOnRoomStart>false</visibleOnRoomStart>
+      <isForeground>false</isForeground>
+      <backgroundImage/>
+      <offset x="0" y="0"/>
+      <speed x="0" y="0"/>
+      <tileHorizontally>true</tileHorizontally>
+      <tileVertically>true</tileVertically>
+      <stretch>false</stretch>
+    </backgroundDef>
+    <backgroundDef>
+      <visibleOnRoomStart>false</visibleOnRoomStart>
+      <isForeground>false</isForeground>
+      <backgroundImage/>
+      <offset x="0" y="0"/>
+      <speed x="0" y="0"/>
+      <tileHorizontally>true</tileHorizontally>
+      <tileVertically>true</tileVertically>
+      <stretch>false</stretch>
+    </backgroundDef>
+    <backgroundDef>
+      <visibleOnRoomStart>false</visibleOnRoomStart>
+      <isForeground>false</isForeground>
+      <backgroundImage/>
+      <offset x="0" y="0"/>
+      <speed x="0" y="0"/>
+      <tileHorizontally>true</tileHorizontally>
+      <tileVertically>true</tileVertically>
+      <stretch>false</stretch>
+    </backgroundDef>
+    <backgroundDef>
+      <visibleOnRoomStart>false</visibleOnRoomStart>
+      <isForeground>false</isForeground>
+      <backgroundImage/>
+      <offset x="0" y="0"/>
+      <speed x="0" y="0"/>
+      <tileHorizontally>true</tileHorizontally>
+      <tileVertically>true</tileVertically>
+      <stretch>false</stretch>
+    </backgroundDef>
+  </backgrounds>
+  <enableViews>true</enableViews>
+  <views>
+    <view>
+      <visibleOnRoomStart>true</visibleOnRoomStart>
+      <viewInRoom height="600" width="800" x="0" y="0"/>
+      <portOnScreen height="600" width="800" x="0" y="0"/>
+      <objectFollowing hBorder="100" hSpeed="6" vBorder="100" vSpeed="6"/>
+    </view>
+    <view>
+      <visibleOnRoomStart>false</visibleOnRoomStart>
+      <viewInRoom height="480" width="640" x="0" y="0"/>
+      <portOnScreen height="480" width="640" x="0" y="0"/>
+      <objectFollowing hBorder="32" hSpeed="-1" vBorder="32" vSpeed="-1"/>
+    </view>
+    <view>
+      <visibleOnRoomStart>false</visibleOnRoomStart>
+      <viewInRoom height="480" width="640" x="0" y="0"/>
+      <portOnScreen height="480" width="640" x="0" y="0"/>
+      <objectFollowing hBorder="32" hSpeed="-1" vBorder="32" vSpeed="-1"/>
+    </view>
+    <view>
+      <visibleOnRoomStart>false</visibleOnRoomStart>
+      <viewInRoom height="480" width="640" x="0" y="0"/>
+      <portOnScreen height="480" width="640" x="0" y="0"/>
+      <objectFollowing hBorder="32" hSpeed="-1" vBorder="32" vSpeed="-1"/>
+    </view>
+    <view>
+      <visibleOnRoomStart>false</visibleOnRoomStart>
+      <viewInRoom height="480" width="640" x="0" y="0"/>
+      <portOnScreen height="480" width="640" x="0" y="0"/>
+      <objectFollowing hBorder="32" hSpeed="-1" vBorder="32" vSpeed="-1"/>
+    </view>
+    <view>
+      <visibleOnRoomStart>false</visibleOnRoomStart>
+      <viewInRoom height="480" width="640" x="0" y="0"/>
+      <portOnScreen height="480" width="640" x="0" y="0"/>
+      <objectFollowing hBorder="32" hSpeed="-1" vBorder="32" vSpeed="-1"/>
+    </view>
+    <view>
+      <visibleOnRoomStart>false</visibleOnRoomStart>
+      <viewInRoom height="480" width="640" x="0" y="0"/>
+      <portOnScreen height="480" width="640" x="0" y="0"/>
+      <objectFollowing hBorder="32" hSpeed="-1" vBorder="32" vSpeed="-1"/>
+    </view>
+    <view>
+      <visibleOnRoomStart>false</visibleOnRoomStart>
+      <viewInRoom height="480" width="640" x="0" y="0"/>
+      <portOnScreen height="480" width="640" x="0" y="0"/>
+      <objectFollowing hBorder="32" hSpeed="-1" vBorder="32" vSpeed="-1"/>
+    </view>
+  </views>
+  <instances>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="270" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="330" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="390" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="450" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="510" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="570" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="630" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="690" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="750" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="810" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="870" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="930" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="990" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="1050" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="1110" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="1170" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="1230" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="1290" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="1350" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="1410" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="1470" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="1530" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="1590" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="1650" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="1710" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="1770" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="1830" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="1890" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="1950" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="2010" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="2070" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="2130" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="2190" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="2250" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="2310" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="2370" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="2430" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="2490" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="2550" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="2610" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="270" y="546"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="330" y="546"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="390" y="546"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="450" y="546"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="510" y="546"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="570" y="546"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="630" y="546"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="690" y="546"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="750" y="546"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="810" y="546"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="870" y="546"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="930" y="546"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="990" y="546"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="1050" y="546"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="1110" y="546"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="1170" y="546"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="1278" y="546"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="1230" y="546"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="624" y="624"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="684" y="624"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="744" y="624"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="804" y="624"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="864" y="624"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="924" y="624"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="984" y="624"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="1044" y="624"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="1104" y="624"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="1164" y="624"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="1278" y="624"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="1224" y="624"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="1332" y="492"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="1392" y="492"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="1452" y="492"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="1512" y="492"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="1620" y="492"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="1572" y="492"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="1674" y="624"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="1734" y="624"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="1794" y="624"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="1854" y="624"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="1914" y="624"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="1974" y="624"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="2034" y="624"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="2094" y="624"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="2172" y="624"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="2154" y="624"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="2226" y="516"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="2286" y="516"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="2346" y="516"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="2406" y="516"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="2466" y="516"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="2526" y="516"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="2586" y="516"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="2646" y="516"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="2706" y="516"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="2766" y="516"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="2826" y="516"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="2886" y="516"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="2946" y="516"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3006" y="516"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3066" y="516"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3126" y="516"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="2892" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="2952" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3012" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3072" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3132" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="270" y="552"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="270" y="612"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="270" y="672"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="624" y="570"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="624" y="552"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="1332" y="498"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="1332" y="570"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="1332" y="558"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="1674" y="474"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="3690" y="534"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3474" y="936"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3534" y="936"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3594" y="936"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3654" y="936"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3714" y="936"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3774" y="936"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3834" y="936"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3894" y="936"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3954" y="936"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4014" y="936"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4074" y="936"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4134" y="936"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4194" y="936"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4254" y="936"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4314" y="936"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4374" y="936"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3492" y="846"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3552" y="846"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3612" y="846"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3672" y="846"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3732" y="846"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3792" y="846"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3852" y="846"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3912" y="846"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3972" y="846"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4056" y="846"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4032" y="846"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3696" y="534"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3756" y="534"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3864" y="534"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3816" y="534"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="3918" y="594"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="3918" y="540"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="3906" y="594"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="3906" y="540"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3186" y="516"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3300" y="516"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3246" y="516"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="1680" y="528"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="1740" y="528"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="1800" y="528"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="1860" y="528"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="1920" y="528"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="1980" y="528"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="2040" y="528"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="2100" y="528"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="2172" y="528"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="2160" y="528"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>SpawnPointRed</object>
+      <position x="324" y="672"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>SpawnPointRed</object>
+      <position x="402" y="672"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>SpawnPointRed</object>
+      <position x="606" y="672"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>SpawnPointRed</object>
+      <position x="666" y="672"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>SpawnPointBlue</object>
+      <position x="8532" y="672"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>SpawnPointBlue</object>
+      <position x="8478" y="672"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>SpawnPointBlue</object>
+      <position x="8412" y="672"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>SpawnPointBlue</object>
+      <position x="8304" y="672"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>SpawnPointBlue</object>
+      <position x="8172" y="672"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>IntelligenceBaseRed</object>
+      <position x="1421" y="664"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>IntelligenceBaseBlue</object>
+      <position x="7429" y="665"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="8514" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="8454" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="8394" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="8334" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="8274" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="8214" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="8154" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="8094" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="8034" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="7974" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="7914" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="7854" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="7794" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="7734" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="7674" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="7614" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="8214" y="552"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="8274" y="552"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="8334" y="552"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="8394" y="552"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="8454" y="552"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="8514" y="552"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="8568" y="618"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="8568" y="678"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3558" y="444"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3636" y="444"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3618" y="444"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3630" y="534"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3252" y="660"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3270" y="654"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3288" y="648"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3306" y="642"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3324" y="636"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3342" y="630"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3360" y="624"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3378" y="618"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3396" y="612"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3414" y="606"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3432" y="600"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3450" y="594"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3468" y="588"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3486" y="582"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3504" y="576"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3522" y="570"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3540" y="564"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3558" y="558"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3576" y="552"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3594" y="546"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3612" y="540"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3192" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3252" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3114" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3132" y="726"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3150" y="732"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3168" y="738"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3186" y="744"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3204" y="750"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3222" y="756"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3240" y="762"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3258" y="768"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3276" y="774"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3294" y="780"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3312" y="786"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3330" y="792"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3348" y="798"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3366" y="804"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3384" y="810"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3402" y="816"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3420" y="822"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3438" y="828"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3456" y="834"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3474" y="840"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3072" y="816"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3090" y="822"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3108" y="828"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3126" y="834"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3144" y="840"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3162" y="846"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3180" y="852"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3198" y="858"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3216" y="864"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3234" y="870"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3252" y="876"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3270" y="882"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3288" y="888"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3306" y="894"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3324" y="900"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3342" y="906"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3360" y="912"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3378" y="918"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3396" y="924"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3414" y="930"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3054" y="810"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="2994" y="810"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="2934" y="810"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="2874" y="810"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="2814" y="810"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3792" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3732" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3672" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3312" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3372" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3432" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3492" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3552" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3612" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="4110" y="786"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="4110" y="726"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3852" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4146" y="582"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4206" y="582"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4266" y="582"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4326" y="582"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4386" y="582"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4446" y="582"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4506" y="582"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4566" y="582"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4650" y="582"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4626" y="582"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3498" y="450"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3480" y="456"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3462" y="462"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3444" y="468"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3426" y="474"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3408" y="480"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3390" y="486"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3372" y="492"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3354" y="498"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3336" y="504"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3318" y="510"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="3294" y="456"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="3294" y="396"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="3294" y="336"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="3294" y="306"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3300" y="306"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3360" y="306"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3420" y="306"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3480" y="306"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3540" y="306"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3636" y="306"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3600" y="306"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="3690" y="312"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="3690" y="384"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="3690" y="372"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="210" y="546"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="150" y="546"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="90" y="546"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="30" y="546"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="0" y="546"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="3690" y="606"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="3690" y="594"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="4752" y="726"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="4752" y="786"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4752" y="846"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4812" y="846"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4872" y="846"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4932" y="846"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4434" y="936"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4494" y="936"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4554" y="936"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4614" y="936"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4674" y="936"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4734" y="936"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4794" y="936"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4854" y="936"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4914" y="936"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4974" y="936"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5034" y="936"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5094" y="936"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5154" y="936"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5214" y="936"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5274" y="936"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5334" y="936"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5382" y="930"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5400" y="924"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5418" y="918"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5436" y="912"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5454" y="906"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5472" y="900"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5490" y="894"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5508" y="888"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5526" y="882"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5544" y="876"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5562" y="870"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5580" y="864"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5598" y="858"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5616" y="852"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5634" y="846"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5652" y="840"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5670" y="834"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5688" y="828"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5706" y="822"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5724" y="816"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5742" y="810"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4992" y="846"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5052" y="846"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5112" y="846"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5172" y="846"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5232" y="846"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5304" y="846"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5292" y="846"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5322" y="840"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5340" y="834"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5358" y="828"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5376" y="822"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5394" y="816"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5412" y="810"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5430" y="804"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5448" y="798"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5466" y="792"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5484" y="786"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5502" y="780"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5520" y="774"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5538" y="768"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5556" y="762"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5574" y="756"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5592" y="750"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5610" y="744"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5628" y="738"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5646" y="732"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5664" y="726"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5682" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5802" y="810"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5862" y="810"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5922" y="810"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5700" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5760" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5820" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5640" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5580" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5520" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5460" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4950" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5010" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5070" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5130" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5190" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5250" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5310" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5400" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5370" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5544" y="660"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5526" y="654"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5508" y="648"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5490" y="642"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5472" y="636"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5454" y="630"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5436" y="624"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5418" y="618"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5400" y="612"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5382" y="606"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5364" y="600"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5346" y="594"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5328" y="588"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5310" y="582"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5292" y="576"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5274" y="570"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5256" y="564"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5238" y="558"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5220" y="552"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5202" y="546"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5184" y="540"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5106" y="534"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5046" y="534"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4986" y="534"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4932" y="534"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="4932" y="594"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="4932" y="540"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="4944" y="594"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="4944" y="540"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="6150" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="6210" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="6270" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="6330" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="6390" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="6450" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="6510" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="6570" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="6630" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="6690" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="6750" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="6810" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="6870" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="6930" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="6990" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="7050" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="7110" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="7170" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="7230" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="7290" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="7350" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="7410" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="7470" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="7530" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="7590" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="7506" y="624"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="7566" y="624"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="7626" y="624"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="7686" y="624"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="7746" y="624"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="7806" y="624"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="7866" y="624"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="7926" y="624"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="7986" y="624"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="8046" y="624"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="8160" y="624"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="8106" y="624"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="8214" y="564"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="8574" y="552"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="8634" y="552"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="8694" y="552"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="8784" y="552"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="8754" y="552"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="7506" y="552"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="7566" y="552"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="7626" y="552"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="7686" y="552"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="7746" y="552"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="7806" y="552"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="7866" y="552"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="7926" y="552"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="7986" y="552"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="8046" y="552"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="8106" y="552"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="8166" y="552"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="7164" y="498"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="7224" y="498"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="7284" y="498"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="7344" y="498"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="7452" y="498"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="7404" y="498"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="7506" y="504"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="7506" y="564"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="7110" y="534"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="7050" y="534"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="6990" y="534"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="6930" y="534"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="6870" y="534"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="6810" y="534"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="6750" y="534"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="6690" y="534"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="6630" y="534"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="6624" y="624"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="6684" y="624"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="6744" y="624"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="6804" y="624"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="6864" y="624"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="6924" y="624"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="6984" y="624"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="7044" y="624"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="7104" y="624"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="7164" y="474"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="6570" y="516"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="6510" y="516"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="6450" y="516"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="6390" y="516"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="6330" y="516"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="6270" y="516"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="6210" y="516"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="6150" y="516"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="6090" y="516"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="6030" y="516"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5970" y="516"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5910" y="516"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5850" y="516"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5790" y="516"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5730" y="516"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5670" y="516"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5610" y="516"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5550" y="516"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5490" y="516"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5430" y="516"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5256" y="456"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5274" y="462"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5292" y="468"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5310" y="474"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5328" y="480"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5346" y="486"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5364" y="492"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5382" y="498"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5400" y="504"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5418" y="510"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5208" y="450"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5148" y="450"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5166" y="534"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="5166" y="540"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="5142" y="312"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="5142" y="396"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="5142" y="372"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="5538" y="312"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="5538" y="372"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="5538" y="462"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="5538" y="432"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5148" y="312"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5208" y="312"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5268" y="312"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5328" y="312"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5388" y="312"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5478" y="312"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5448" y="312"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3312" y="660"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3372" y="660"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3432" y="660"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3492" y="660"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3552" y="660"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3636" y="660"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3612" y="660"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5484" y="660"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5424" y="660"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5364" y="660"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5304" y="660"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5244" y="660"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5184" y="660"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5172" y="660"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="5166" y="606"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4890" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4830" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4770" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3912" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4032" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3972" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4092" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4152" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4212" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4272" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4332" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4392" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4452" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4512" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4572" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4632" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4692" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4752" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4116" y="726"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4176" y="726"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4236" y="726"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4296" y="726"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4356" y="726"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4416" y="726"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4476" y="726"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4536" y="726"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4596" y="726"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4698" y="726"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4656" y="726"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>RedTeamGate</object>
+      <position x="774" y="654"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>RedTeamGate</object>
+      <position x="780" y="654"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>RedTeamGate</object>
+      <position x="774" y="630"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>RedTeamGate</object>
+      <position x="780" y="630"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>BlueTeamGate</object>
+      <position x="8058" y="654"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>BlueTeamGate</object>
+      <position x="8064" y="654"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>BlueTeamGate</object>
+      <position x="8058" y="630"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>BlueTeamGate</object>
+      <position x="8064" y="630"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>Box</object>
+      <position x="5070" y="672"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>Box</object>
+      <position x="6516" y="672"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>Box</object>
+      <position x="3744" y="672"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>Box</object>
+      <position x="2298" y="672"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5904" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5880" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="264" y="552"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="264" y="612"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="264" y="672"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="0" y="552"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="60" y="552"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="120" y="552"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="210" y="552"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="180" y="552"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="276" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="336" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="396" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="456" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="516" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="576" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="636" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="696" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="756" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="816" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="876" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="936" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="996" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="1056" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="1116" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="1176" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="1236" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="1296" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="1356" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="1416" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="1476" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="1536" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="1596" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="1656" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="1716" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="1776" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="1836" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="1896" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="1956" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="2016" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="2076" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="2136" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="2196" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="2256" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="2316" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="2376" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="2436" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="2496" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="2556" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="2616" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="2706" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="2676" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3012" y="816"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="2952" y="816"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="2892" y="816"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="2832" y="816"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3414" y="936"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3450" y="942"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3510" y="942"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3570" y="942"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3630" y="942"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3690" y="942"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3750" y="942"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3810" y="942"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3870" y="942"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3930" y="942"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="3990" y="942"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4050" y="942"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4110" y="942"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4170" y="942"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4230" y="942"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4350" y="942"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4290" y="942"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4410" y="942"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4470" y="942"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4530" y="942"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4590" y="942"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4650" y="942"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4710" y="942"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4770" y="942"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4830" y="942"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4890" y="942"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="4950" y="942"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5010" y="942"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5070" y="942"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5130" y="942"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5190" y="942"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5250" y="942"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5310" y="942"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5370" y="942"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5394" y="936"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5784" y="816"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5844" y="816"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5904" y="816"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="6090" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="6150" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="6210" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="6270" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="6330" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="6390" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="6450" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="6510" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="6570" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="6630" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="6690" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="6750" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="6810" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="6870" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="6930" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="6990" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="7050" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="7110" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="7170" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="7230" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="7290" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="7350" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="7410" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="7470" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="7530" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="7590" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="7650" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="7710" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="7770" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="7830" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="7890" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="7950" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="8010" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="8070" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="8130" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="8190" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="8250" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="8310" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="8370" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="8430" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="8508" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="8490" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="8574" y="558"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="8574" y="618"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="8574" y="678"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="8568" y="558"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="8568" y="564"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="8628" y="558"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="8688" y="558"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="8784" y="558"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="8748" y="558"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="0" y="0"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="6" y="0"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="0" y="60"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="6" y="60"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="0" y="120"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="6" y="120"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="0" y="180"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="6" y="180"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="0" y="240"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="6" y="240"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="0" y="300"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="6" y="300"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="0" y="360"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="6" y="360"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="6" y="486"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="0" y="486"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="0" y="456"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="6" y="456"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="0" y="420"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="6" y="420"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="8838" y="492"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="8832" y="492"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="8838" y="432"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="8832" y="432"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="8838" y="372"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="8832" y="372"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="8832" y="312"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="8838" y="312"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="8838" y="252"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="8832" y="252"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="8838" y="192"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="8832" y="192"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="8832" y="132"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="8838" y="132"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="8832" y="72"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="8838" y="72"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="8832" y="12"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="8838" y="12"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="276" y="552"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="336" y="552"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="396" y="552"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="456" y="552"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="564" y="552"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="516" y="552"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="8214" y="558"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="8274" y="558"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="8334" y="558"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="8394" y="558"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="8508" y="558"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="8454" y="558"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="2730" y="456"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="2730" y="396"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="2730" y="336"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="2730" y="276"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="2730" y="216"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="2730" y="156"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="2730" y="96"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="2730" y="36"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="2730" y="0"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="6102" y="456"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="6102" y="396"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="6102" y="336"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="6102" y="276"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="6102" y="216"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="6102" y="156"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="6102" y="102"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="6102" y="42"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HighObstacle</object>
+      <position x="6102" y="0"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="2796" y="804"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="2790" y="798"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="2784" y="792"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="2778" y="786"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="2772" y="780"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="2766" y="774"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="2760" y="768"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="2754" y="762"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="2748" y="756"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="2742" y="750"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="2736" y="744"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="2730" y="738"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="2724" y="732"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="2718" y="726"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="2712" y="720"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="2706" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="2664" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="6084" y="726"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="6078" y="732"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="6072" y="738"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="6066" y="744"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="6060" y="750"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="6054" y="756"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="6048" y="762"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="6042" y="768"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="6036" y="774"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="6030" y="780"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="6024" y="786"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="6018" y="792"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="6012" y="798"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="6006" y="804"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5982" y="810"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="5964" y="816"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>WideObstacle</object>
+      <position x="6096" y="714"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HealingCabinet</object>
+      <position x="8352" y="660"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>HealingCabinet</object>
+      <position x="462" y="660"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+    <instance>
+      <object>SpawnPointRed</object>
+      <position x="522" y="654"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+  </instances>
+  <tiles/>
+  <editorSettings remember="false"/>
+</room>

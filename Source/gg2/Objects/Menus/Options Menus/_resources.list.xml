@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<resources>
-  <resource name="OptionsController" type="RESOURCE"/>
-  <resource name="AdvControlsController" type="RESOURCE"/>
-  <resource name="ControlsController" type="RESOURCE"/>
-  <resource name="HUDOptionsController" type="RESOURCE"/>
-  <resource name="EngineOptionsController" type="RESOURCE"/>
-</resources>

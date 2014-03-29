@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="STEP" id="1">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if(zoom = true &amp;&amp; fired = false &amp;&amp; hitDamage &lt; maxDamage &amp;&amp; readyToShoot){
+hitDamage += 0.9;
+}
+
+if(fired=true){
+fired=false;
+hitDamage = 20}</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

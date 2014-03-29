@@ -12,42 +12,23 @@
         
     global.updateType=argument0;
     
-    write_ubyte(argument1, argument0);
-    write_ubyte(argument1, ds_list_size(global.players));
+    writebyte(argument0, argument1);
+    writebyte(ds_list_size(global.players), argument1);
     
     global.serializeBuffer = argument1;
-
-    if argument0 != CAPS_UPDATE {
-        for(i=0; i<ds_list_size(global.players); i+=1) {
-            player = ds_list_find_value(global.players, i);
-            with(player) {
-                event_user(12);
-            }
+    
+    for(i=0; i<ds_list_size(global.players); i+=1) {
+        player = ds_list_find_value(global.players, i);
+        with(player) {
+            event_user(12);
         }
     }
-
+    
     if(argument0 == FULL_UPDATE) {
         serialize(IntelligenceRed);
         serialize(IntelligenceBlue);
-        
-        write_ubyte(argument1, global.caplimit);
-        write_ubyte(argument1, global.redCaps);
-        write_ubyte(argument1, global.blueCaps);
-        write_ubyte(argument1, global.Server_RespawntimeSec);
-        with (HUD)
-            event_user(12);
-        
-        // Write classlimits to joining client
-        for (a = 0; a < 10; a += 1)
-            write_ubyte(argument1, global.classlimits[a]);
-    }
     
-    if(argument0 == CAPS_UPDATE) {
-              
-        write_ubyte(argument1, global.redCaps);
-        write_ubyte(argument1, global.blueCaps);
-        write_ubyte(argument1, global.Server_RespawntimeSec);
-        with (HUD)
-            event_user(12);
+        writeushort(global.redCaps, argument1);
+        writeushort(global.blueCaps, argument1);
     }
 }

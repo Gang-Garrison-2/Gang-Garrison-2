@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="STEP" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">    if(((direction+270) mod 360)&gt;180) {
+        image_xscale=1;
+        image_angle = direction;
+    } else {
+        image_xscale=-1;
+        image_angle = direction+180;
+    }
+
+NearestPlayer = -1;
+distance = 9001;
+totalPlayers = instance_number(Character);
+var char;
+for(i=0;i&lt;totalPlayers;i+=1){
+char = instance_find(Character,i)
+if  collision_line(x,y,char.x,char.y,Obstacle,true,true)&lt;0 &amp;&amp; !char.cloak &amp;&amp; char.team != owner.team &amp;&amp; distance_to_object(char) &lt; distance {
+    NearestPlayer=char;
+    distance=distance_to_object(char);
+    }
+}
+
+
+if NearestPlayer == -1 exit;
+//if collision_line(x,y,NearestPlayer.x,NearestPlayer.y,Obstacle,true,true)&gt;=0 exit;
+
+direction = point_direction(x,y,NearestPlayer.x,NearestPlayer.y);
+if distance_to_point(NearestPlayer.x,NearestPlayer.y) &lt; 375 {
+    if(readyToShoot) {
+        playsound(x,y,ShotgunSnd);
+        var shot;
+            shot = instance_create(x,y,Shot);
+            shot.direction=direction+(random(11)-5);
+            shot.speed=22+random(5);
+            shot.lifeTime=30;
+            shot.pushBack=0.08;
+            shot.damage=9;
+            shot.owner=owner;
+            shot.ownerPlayer=ownerPlayer;
+            shot.team=owner.team;
+            shot.weapon=WEAPON_SENTRYTURRET;
+
+        readyToShoot=false;
+        alarm[0]=reloadTime;
+}
+}</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

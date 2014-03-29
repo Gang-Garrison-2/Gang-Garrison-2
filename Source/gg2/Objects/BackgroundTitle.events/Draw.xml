@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="DRAW" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">draw_set_color(c_white);
+draw_set_halign(fa_right);
+draw_set_valign(fa_bottom);
+draw_text(x, y, '"Made by four year olds!" by Wareya');
+draw_set_halign(fa_left);
+draw_set_valign(fa_top);
+
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

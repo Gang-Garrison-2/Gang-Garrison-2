@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="DRAW" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{
+    var xoffset, yoffset, xsize, ysize, i, player, redteam, blueteam;
+    
+    xoffset = view_xview[0]+view_wview[0]/5;
+    yoffset = view_yview[0]+view_hview[0]/5;
+    xsize = view_wview[0]/5*3;
+    ysize = view_hview[0]/5*3;
+    
+    draw_set_color(c_black);
+    draw_set_alpha(alpha*0.8);
+    
+    draw_rectangle(xoffset, yoffset, xoffset+xsize, yoffset+ysize, false);
+
+    draw_set_alpha(alpha*1);
+    draw_set_color(c_white);
+    
+    draw_set_valign(fa_top);
+    draw_set_halign(fa_center);
+    
+    draw_text(xoffset+xsize/2,yoffset+5,"Scores");
+    draw_text(xoffset+xsize/4,yoffset+25,"Red Team");
+    draw_text(xoffset+xsize/4*3,yoffset+25,"Blue Team");
+    
+    
+    redteam = ds_priority_create();
+    blueteam = ds_priority_create();  
+    for(i=0; i&lt;ds_list_size(global.players); i+=1) {
+        player = ds_list_find_value(global.players, i);
+        if(player.team == TEAM_RED) {
+            ds_priority_add(redteam, player, player.kills+10*player.caps+player.healpoints);
+        } else if (player.team == TEAM_BLUE) {
+            ds_priority_add(blueteam, player, player.kills+10*player.caps+player.healpoints);
+        }
+    }
+    
+    draw_set_color(c_red);
+    for(i=0; ds_priority_size(redteam) &gt; 0; i+=1) {
+        player = ds_priority_delete_max(redteam);
+        
+        if(global.myself.team == player.team) {
+        draw_sprite_ext(Icon,player.class,xoffset+15,yoffset+26+20*(i+1),1,1,0,c_white,alpha)
+        draw_sprite_ext(Icon,player.class,xoffset+15,yoffset+26+20*(i+1),1,1,0,c_red,alpha*0.2)
+                }
+        
+        draw_set_halign(fa_left);
+        draw_text(xoffset+10, yoffset+25+20*(i+1),"    "+player.name);
+        
+        draw_set_halign(fa_right);
+        draw_text(xoffset+xsize/2-10, yoffset+25+20*(i+1), string(player.kills+10*player.caps+player.healpoints));
+    }
+    
+    draw_set_color(c_blue);
+    for(i=0; ds_priority_size(blueteam) &gt; 0; i+=1) {
+        player = ds_priority_delete_max(blueteam);
+
+        if(global.myself.team == player.team) {
+        draw_sprite_ext(Icon,player.class,xoffset+xsize/2-9,yoffset+26+20*(i+1),1,1,0,c_white,alpha)
+        draw_sprite_ext(Icon,player.class,xoffset+xsize/2-9,yoffset+26+20*(i+1),1,1,0,c_blue,alpha*0.2)
+        }
+       
+        draw_set_halign(fa_left);
+        draw_text(xoffset+xsize/2-10, yoffset+25+20*(i+1),"    "+player.name);
+        
+        draw_set_halign(fa_right);
+        draw_text(xoffset+xsize-10, yoffset+25+20*(i+1), string(player.kills+10*player.caps+player.healpoints));
+    }
+    
+    ds_priority_destroy(redteam);
+    ds_priority_destroy(blueteam);
+}</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

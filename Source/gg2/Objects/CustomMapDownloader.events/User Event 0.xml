@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="OTHER" id="10">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{
+  // check if it matches the server's copy
+  if(CustomMapGetMapMD5(global.currentMap) == global.currentMapMD5) {
+    // we already have the exact same map, so we'll jump into the game
+    room_goto_fix(CustomMapRoom);
+    exit;
+  } else {
+    // our map isn't the same as the server's copy
+    // Tell the user, and disconnect from the server
+    show_message("Server's copy of the map differs from ours. Exiting");
+    game_end();
+  }
+}</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

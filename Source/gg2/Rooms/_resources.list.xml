@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
-  <resource name="Gang Garrison 2" type="RESOURCE"/>
+  <resource name="Splash" type="RESOURCE"/>
   <resource name="Menu" type="RESOURCE"/>
-  <resource name="Credits" type="RESOURCE"/>
   <resource name="Options" type="RESOURCE"/>
   <resource name="Lobby" type="RESOURCE"/>
-  <resource name="Maps" type="GROUP"/>
-  <resource name="DownloadRoom" type="RESOURCE"/>
+  <resource name="TwodFort" type="RESOURCE"/>
+  <resource name="TwodFortTwo" type="RESOURCE"/>
+  <resource name="HELLTRIKKY1" type="RESOURCE"/>
+  <resource name="ClassicWell" type="RESOURCE"/>
+  <resource name="Orange" type="RESOURCE"/>
+  <resource name="Avanti" type="RESOURCE"/>
+  <resource name="Castle" type="RESOURCE"/>
+  <resource name="Containment" type="RESOURCE"/>
+  <resource name="Heenok" type="RESOURCE"/>
+  <resource name="CustomMapRoom" type="RESOURCE"/>
+  <resource name="CustomMapLoadingScreen" type="RESOURCE"/>
   <resource name="UpdaterRoom" type="RESOURCE"/>
 </resources>

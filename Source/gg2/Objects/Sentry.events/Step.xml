@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="STEP" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if team == TEAM_BLUE sprite_index=SentryBlue;
+if team == TEAM_RED sprite_index=SentryRed;
+if owner.sentryBuilt==0 instance_destroy();
+
+if hspeed == 0 &amp;&amp; vspeed == 0 &amp;&amp; built==0 {
+image_speed = 0.07;
+hp+=1;
+}
+if  image_index &gt;= 7 &amp;&amp; built ==0{
+image_index=8;
+image_speed = 0;
+built=1;
+hp=maxHp;
+
+    currentWeapon = instance_create(x,y+1,weapons[0]);
+    currentWeapon.owner=owner;
+    currentWeapon.ownerPlayer=ownerPlayer;
+    currentWeapon.team=team;
+    if image_xscale=1 currentWeapon.direction=0;
+    if image_xscale=-1 currentWeapon.direction=180;
+    
+}
+   
+    
+if(place_free(x,y+1)) {
+        vspeed += 0.6;
+        }
+
+if(vspeed&gt;10) {
+            vspeed=10;
+        }
+
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

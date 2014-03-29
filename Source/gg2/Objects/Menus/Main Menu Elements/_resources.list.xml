@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<resources>
-  <resource name="MainMenuController" type="RESOURCE"/>
-  <resource name="DevMessageChecker" type="RESOURCE"/>
-  <resource name="DevMessagePopup" type="RESOURCE"/>
-  <resource name="BackgroundDownloader" type="RESOURCE"/>
-  <resource name="CreditsController" type="RESOURCE"/>
-</resources>
