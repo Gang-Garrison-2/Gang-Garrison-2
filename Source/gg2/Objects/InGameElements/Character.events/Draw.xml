@@ -64,7 +64,7 @@ if (zoomed)
     overlaySprite = sniperCrouchOverlay;
 }
 // most classes, check for running jumping and standing
-else
+else if (player.class != CLASS_QUOTE)
 {
     if(!onground)
         sprite = spriteJump;
@@ -112,15 +112,26 @@ else
         else
         {
             sprite = spriteRun;
-            if (player.class == CLASS_HEAVY and abs(hspeed) &lt; 3)
-                sprite = HeavyRedWalkS;
+            if (player.class == CLASS_HEAVY and abs(hspeed) &lt; 3) // alternative sprite for extremely slow moving heavies
+            {
+                if (team == TEAM_RED)
+                    sprite = HeavyRedWalkS;
+                else
+                    sprite = HeavyBlueWalkS;
+            }
         }
     }
-    
+    overlaySprite = overlay;
+}
+else
+{
+    sprite = sprite_index;
     overlaySprite = overlay;
 }
 
-if (sprite != sprite_index and (sprite == spriteLeanR or sprite == spriteLeanL))
+if (sprite != sprite_index and (sprite == spriteLeanR or sprite == spriteLeanL)
+    and !taunting and !omnomnomnom and !stabbing // These override "sprite"
+    and player.class != CLASS_QUOTE) // Quote doesn't have new animations yet
     yoffset = 6;
 else
     yoffset = 0;
@@ -130,13 +141,16 @@ equipmentOffset = ((sprite == spriteRun) and
                and onground;
 equipmentOffset *= -2; // two pixels up for whether the sprite is bobbing(above expression gives one down)
 
-if (player.class == CLASS_HEAVY or player.class == CLASS_SOLDIER)
+if (player.class == CLASS_HEAVY or player.class == CLASS_SOLDIER or player.class == CLASS_QUOTE or taunting)
     equipmentOffset = 0; // override run bob for classes with no run bob
-else if (abs(hspeed) &lt; 3 and equipmentOffset = -2)
+else if (abs(hspeed) &lt; 3 and equipmentOffset = -2 and !taunting)
 {
     equipmentOffset += 2;
     yr += 2;
 }
+
+if(player.class != CLASS_QUOTE) // quote still uses the old anim system so animationOffset is still set, override it here for other classes
+    animationOffset = 0;
 
 
 equipmentOffset += yoffset;
@@ -159,8 +173,8 @@ else if (player.humiliated)
     draw_sprite_ext(humiliationPoses,floor(animationImage)+humiliationOffset,xr,yr,image_xscale,image_yscale,image_angle,c_white,image_alpha);
 else if (!taunting)
 {
-    if (intel)
-        draw_sprite_ext(spriteIntel,0,xr,yr-weaponOffset*2, image_xscale, image_yscale, 0, c_white, image_alpha);
+    if (intel and player.class != CLASS_QUOTE)
+        draw_sprite_ext(spriteIntel,0,xr,yr+equipmentOffset, image_xscale, image_yscale, 0, c_white, image_alpha);
     if (cloak)
     {
         if (!ubered)

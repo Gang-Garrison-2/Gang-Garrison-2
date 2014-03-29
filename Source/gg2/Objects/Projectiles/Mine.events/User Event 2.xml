@@ -214,6 +214,7 @@
             j.alarm[0] = 1;
         }
     }
+    ds_list_destroy(bubbleStack);
     
     instance_destroy();
 }

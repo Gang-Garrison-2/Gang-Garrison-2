@@ -205,16 +205,22 @@ if(spinjumping)
     }
 }
 
+controlling = false;
 repeat(global.frameskip)
 {
     // Do movement
     if(!taunting &amp;&amp; !omnomnomnom)
     {
         if((keyState|pressedKeys) &amp; $40 and hspeed &gt;= -basemaxspeed)
+        {
             hspeed -= runPower*controlFactor * global.skip_delta_factor;
-            
+            controlling = true;
+        }
         if((keyState|pressedKeys) &amp; $20 and hspeed &lt;= basemaxspeed)
+        {
             hspeed += runPower*controlFactor * global.skip_delta_factor;
+            controlling = !controlling; // cancel out 'controlling' if both buttons are pressed
+        }
     }
     // divide friction as normal if going way too fast
     if(abs(hspeed) &gt; basemaxspeed * 2 or
@@ -236,7 +242,8 @@ if burnDuration&gt;0 &amp;&amp; player.class != CLASS_PYRO and random(80) &lt;= 
     setChatBubble(player, 49);
 }
 
-if (abs(hspeed) &lt; 0.195 and ((keyState|pressedKeys) &amp; $60) == 0)
+// stop players who are moving too slowly (avoid "ice skating")
+if (abs(hspeed) &lt; 0.195 * global.delta_factor and !controlling)
 {
     hspeed=0;
     animationImage=0;
@@ -304,7 +311,12 @@ if (intel)
                             intelRecharge + global.delta_factor * // ...After adding some value to it 
                             INTEL_MAX_TIMER/((3+abs(min(hspeed, 7))/3.5)*30)); // ...Which starts at a rate of full charge per three seconds, and reduces linearly with speed, down to full charge per five seconds with a scout's max speed
 }
- 
+var sprite_length;
+if(player.class == CLASS_QUOTE)
+    sprite_length = 2;
+else
+    sprite_length = CHARACTER_ANIMATION_LEN;
+
 if (player.humiliated)
 {
     if (!place_free(x,y+1) &amp;&amp; hspeed == 0)
@@ -312,13 +324,20 @@ if (player.humiliated)
     else if place_free(x,y+1)
         animationImage = 2;
     if (!place_free(x,y+1) &amp;&amp; hspeed != 0)
-        animationImage = 1+((animationImage-1+abs(hspeed)*global.delta_factor/20) mod CHARACTER_ANIMATION_LEN);
+        animationImage = 1+
+        ((animationImage-1+
+          min(abs(hspeed), 8)*sign(hspeed)
+          *global.delta_factor/20) mod 
+         sprite_length);
 }
 else
-    animationImage = (animationImage+(hspeed*image_xscale)*global.delta_factor/20) mod CHARACTER_ANIMATION_LEN;
+    animationImage = (animationImage+
+     min(abs(hspeed)*sign(hspeed), 8)
+     *image_xscale*global.delta_factor/20)
+    mod sprite_length;
     
 // ensure positive animationImage
-animationImage = (animationImage+CHARACTER_ANIMATION_LEN) mod CHARACTER_ANIMATION_LEN;
+animationImage = (animationImage+sprite_length) mod sprite_length;
 
 charUnsetSolids();
 

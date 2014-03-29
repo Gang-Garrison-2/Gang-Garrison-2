@@ -32,7 +32,7 @@ spriteJump = PyroRedJumpS;
 spriteStand = PyroRedStandS;
 spriteLeanR = PyroRedLeanRS;
 spriteLeanL = PyroRedLeanLS;
-spriteIntel = SniperRedIntelS;
+spriteIntel = PyroRedIntelS;
 
 </argument>
       </arguments>

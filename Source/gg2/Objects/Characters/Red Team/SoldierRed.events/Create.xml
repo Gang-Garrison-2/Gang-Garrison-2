@@ -32,7 +32,7 @@ spriteJump = SoldierRedJumpS;
 spriteStand = SoldierRedStandS;
 spriteLeanR = SoldierRedLeanRS;
 spriteLeanL = SoldierRedLeanLS;
-spriteIntel = SniperRedIntelS;
+spriteIntel = SoldierRedIntelS;
 </argument>
       </arguments>
     </action>
