@@ -34,6 +34,11 @@ if(view_hview[0] &lt; 600)
                      *(600-view_hview[0]));
 }
 stepHasRun = true;
+
+var itemcount;
+menu_hack_backbutton();
+itemcount = menu_get_itemcount();
+
 if(editing != -1) {
     switch (item_type[editing]) {
         case "edittext2":
@@ -69,7 +74,7 @@ if(editing != -1) {
         virtualitem = max(0, round((mouse_y-(view_yview[0]+ybegin))/spacing));
         if(mouse_check_button_pressed(mb_left)){
             mouse_clear(mb_left);
-            if(virtualitem &lt; items) {
+            if(virtualitem &lt; itemcount) {
                 switch (item_type[virtualitem]) {
                     case "script":
                         execute_string(item_script[virtualitem]);

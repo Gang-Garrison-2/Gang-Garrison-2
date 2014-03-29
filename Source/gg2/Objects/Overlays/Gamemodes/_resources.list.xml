@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
-  <resource name="ScorePanel" type="RESOURCE"/>
+  <resource name="CTFHUD" type="RESOURCE"/>
   <resource name="InvasionHUD" type="RESOURCE"/>
   <resource name="ControlPointHUD" type="RESOURCE"/>
   <resource name="FauxCPHUD" type="RESOURCE"/>
@@ -8,4 +8,5 @@
   <resource name="KothHUD" type="RESOURCE"/>
   <resource name="GeneratorHUD" type="RESOURCE"/>
   <resource name="DKothHUD" type="RESOURCE"/>
+  <resource name="TeamDeathmatchHUD" type="RESOURCE"/>
 </resources>

@@ -6,5 +6,4 @@ item_name[items] = argument0;
 item_type[items] = "editkeyormouse";
 item_var[items] = argument1;
 item_script[items] = argument2;
-menu_fixback5();
 items += 1;

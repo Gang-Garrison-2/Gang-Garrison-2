@@ -18,11 +18,13 @@
     global.levelchoice = 1
 
     menu_create(40, 300, 200, 200, 32);
-    doSwapBack = false;
     menu_background(212, 24, 8, 12, 4);
     menu_setdimmed();
     
-    menu_addback("Return to Game", '
+    menu_addlink("Return to Game", '
+        instance_destroy();
+    ');
+    menu_addback("", '
         instance_destroy();
     ');
     if (global.isHost) {
