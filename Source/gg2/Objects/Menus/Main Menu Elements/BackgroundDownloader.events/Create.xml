@@ -13,9 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">instance_destroy();
-
-hash = "";
+        <argument kind="STRING">hash = "";
 title = "";
 url = "";
 showVersion = true;
