@@ -14,9 +14,7 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">{
-    
     warnoptioneffect = false;
-    
     menu_create(48, 172, 500, 260, 32, 40, 104, 6);
     menumode = true;
 
@@ -74,7 +72,7 @@
     menu_add_option(1, "Blood only");
     menu_add_option(2, "Blood and medium gibs");
     menu_add_option(3, "Full blood and gibs");
-    
+
     menu_addedit_boolean("Hide Infiltrator 'Ghosts':", "global.hideSpyGhosts", '
         gg2_write_ini("Settings", "Hide Spy Ghosts", argument0);
     ');

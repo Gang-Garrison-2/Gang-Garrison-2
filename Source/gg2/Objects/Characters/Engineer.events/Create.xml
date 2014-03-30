@@ -47,7 +47,6 @@ haxxyStatue = EngineerHaxxyStatueS;
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">// Override defaults
-canBuild = 1;
 numFlames = 3;
 </argument>
       </arguments>

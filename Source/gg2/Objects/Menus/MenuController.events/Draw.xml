@@ -38,7 +38,6 @@ if(view_hview[0] &lt; 600)
     menu_hack_backbutton();
     itemcount = menu_get_itemcount();
     
-    
     if (dimmed)
     {   
         draw_set_color(c_black);

@@ -232,7 +232,6 @@ if (distance_to_point(mouse_x, mouse_y) &lt; 25)
     }
 }
 
-
 // Copied from Lorgan's itemserver "angels" with slight modifications
 // All credit be upon him
 if (demon != -1)
@@ -259,7 +258,6 @@ if (demon != -1)
 
     demonFrame += 1;
 }
-
 </argument>
       </arguments>
     </action>
