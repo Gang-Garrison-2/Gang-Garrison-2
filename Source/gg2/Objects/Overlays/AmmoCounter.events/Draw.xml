@@ -24,7 +24,7 @@ if global.myself.object != -1 {
     if instance_exists(global.myself.object.currentWeapon) {
         var weapon;
         weapon = global.myself.object.currentWeapon;
-        barcolor=make_color_rgb(217,217,183);
+        barcolor = make_color_rgb(217,217,183);
         draw_set_color(barcolor);
     
         //set team offset here - but rocketmans is different because
@@ -95,8 +95,8 @@ if global.myself.object != -1 {
         }
         else if global.myself.class == CLASS_HEAVY {       
             draw_sprite_ext(MinigunAmmoS,toffset,xoffset+728,yoffset+ysize/1.26+86,2.4,2.4,0,c_white,100);
-            if (weapon.ammoCount &lt;= 1/4 * weapon.maxAmmo)
-                barcolor = make_color_rgb(255,0,0);
+            barcolor = merge_color(barcolor, make_color_rgb(255,0,0), 1-(weapon.ammoCount/weapon.maxAmmo));
+            barcolor = merge_color(barcolor, make_color_rgb(50,50,50), max(0,weapon.alarm[5])/25);
             draw_healthbar(xoffset+689,yoffset+ysize/1.26+90,xoffset+723,yoffset+ysize/1.26+98,
                            weapon.ammoCount/weapon.maxAmmo*100,c_black,barcolor,barcolor,0,true,false);
         }
