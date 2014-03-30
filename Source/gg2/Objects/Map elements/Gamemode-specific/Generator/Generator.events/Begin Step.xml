@@ -13,13 +13,16 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">smokeCount += 1;
-if global.isHost {
-    if hp &lt;= 0 {
+        <argument kind="STRING">smokeCount += 1 * global.delta_factor;
+if (global.isHost)
+{
+    if hp &lt;= 0
+    {
         sendEventGeneratorDestroy(team);
         doEventGeneratorDestroy(team);
     }
-    else if GameServer.frame mod 1800 ==0 GameServer.syncTimer = 1;
+    else if GameServer.frame mod 1800 == 0
+        GameServer.syncTimer = 1;
 }
 if hp &gt;= maxHp*0.66 spriteStart = 0;
 else if hp &gt;= maxHp*0.33 &amp;&amp; hp &lt; maxHp*0.66{ 
@@ -35,7 +38,8 @@ else {
     }
 }
 spriteEnd = spriteStart+15;
-if image_index &gt; spriteEnd image_index = spriteStart;
+if image_index &gt; spriteEnd
+    image_index = spriteStart;
 </argument>
       </arguments>
     </action>

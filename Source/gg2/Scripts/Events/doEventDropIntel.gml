@@ -14,7 +14,7 @@ with(player.object)
     // Modify the character state appropriately
     intel = false;
     canGrabIntel = false;
-    alarm[1] = 300;
+    alarm[1] = 300 / global.delta_factor;
     animationOffset = CHARACTER_ANIMATION_NORMAL;
     
     // Write log entry
@@ -31,5 +31,5 @@ with(player.object)
     else
         show_error("Invalid team in intel drop event: " + string(player.team), true);
     newIntelInstance = instance_create(x, y, newIntelObject);
-    newIntelInstance.alarm[0] = intelRecharge;
+    newIntelInstance.alarm[0] = intelRecharge / global.delta_factor;
 }

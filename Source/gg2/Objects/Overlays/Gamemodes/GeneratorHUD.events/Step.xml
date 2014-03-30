@@ -13,20 +13,27 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if timer &gt; 0 {
-    timer -=1;
-} else if (timer &lt;= 0 &amp;&amp; instance_exists(GeneratorRed) &amp;&amp; instance_exists(GeneratorBlue)) {
+        <argument kind="STRING">if timer &gt; 0
+    timer -= 1 * global.delta_factor;
+else if (timer &lt;= 0 and instance_exists(GeneratorRed) and instance_exists(GeneratorBlue))
+{
     var redStage, blueStage;
-    with (Generator) {
-        if (hp &gt;= maxHp*0.66) {
+    with (Generator)
+    {
+        if (hp &gt;= maxHp*0.66)
+        {
             if (team == TEAM_RED) 
                 redStage = 3 
             else blueStage = 3;
-        } else if (hp &gt;= maxHp*0.33 &amp;&amp; hp &lt; maxHp*0.66) {
+        }
+        else if (hp &gt;= maxHp*0.33 &amp;&amp; hp &lt; maxHp*0.66)
+        {
             if (team == TEAM_RED)
                 redStage = 2;
             else blueStage = 2;
-        } else {
+        }
+        else
+        {
             if (team == TEAM_RED)
                 redStage = 1;
             else blueStage = 1;

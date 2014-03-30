@@ -60,6 +60,9 @@
     menu_addedit_boolean("Kill Cam:", "global.killCam", '
         gg2_write_ini("Settings", "Kill Cam", argument0);
     ');
+    menu_addedit_boolean("Queued Jumping (Bunnyhopping):", "global.queueJumping", '
+        gg2_write_ini("Settings", "Queued Jumping", argument0);
+    ');
     
     menu_addtablink("Ingame", '
         instance_destroy();

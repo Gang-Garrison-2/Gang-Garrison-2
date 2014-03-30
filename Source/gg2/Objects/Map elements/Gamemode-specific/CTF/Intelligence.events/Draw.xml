@@ -19,7 +19,7 @@ if(!offset and instance_exists(InvasionHUD))
 
 draw_sprite(sprite_index,image_index,x,y);
 if (alarm[0] &gt; 0)
-    draw_intel_timer(offset, alarm[0]/900);
+    draw_intel_timer(offset, alarm[0]/900*global.delta_factor);
 </argument>
       </arguments>
     </action>

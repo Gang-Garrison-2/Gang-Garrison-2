@@ -15,9 +15,9 @@
       <arguments>
         <argument kind="STRING">alpha += fade;
 if(alpha &gt;= 1) {
-    fade = -0.05;
+    fade = -0.05 * global.delta_factor;
 } else if(alpha &lt;= 0) {
-    fade = 0.05;
+    fade = 0.05 * global.delta_factor;
 }
 
 var arenaRoundEnd;
@@ -127,7 +127,7 @@ if(redPresence&gt;0 and bluePresence&gt;0) {
     }
 } else if(redPresence==0 and bluePresence==0) {
     // Nobody on the point, slowly revert the capture
-    if(capping&gt;0) capping=max(capping-1, 0);
+    if(capping&gt;0) capping=max(capping - global.delta_factor, 0);
 } else {
     // Some team has players on an undefended point.
     var teamOnPoint, teamOnPointPresence;
@@ -150,7 +150,7 @@ if(redPresence&gt;0 and bluePresence&gt;0) {
         // has partially capped it already
         if (teamOnPoint != cappingTeam)
         {
-            capping = max(capping-1, 0);
+            capping = max(capping - global.delta_factor, 0);
         }
     }
     else
@@ -160,7 +160,7 @@ if(redPresence&gt;0 and bluePresence&gt;0) {
         {
             // ...but the other team has the point partially captured already, so
             // they have to revert first.
-            capping=max(capping - (1+teamOnPointCappers*0.5), 0);
+            capping=max(capping - (1+teamOnPointCappers*0.5)*global.delta_factor, 0);
         }
         else if(teamOnPoint != team)
         {
@@ -176,9 +176,9 @@ if(redPresence&gt;0 and bluePresence&gt;0) {
             cappingTeam = teamOnPoint;
             cappers = teamOnPointCappers;
             if(cappers&lt;=2) {
-                capping += cappers;
+                capping += cappers * global.delta_factor;
             } else {
-                capping += cappers/2+1
+                capping += (cappers/2+1) * global.delta_factor;
             }
         }
     }
@@ -216,8 +216,6 @@ if(object_index == ArenaControlPoint and cappingTeam != -1)
     if (variable_local_exists("lastCapTime"))
         capping = (capping/lastCapTime) * capTime;
     lastCapTime = capTime;
-    
-    
 }
 
 if(capping &lt;= 0) {
@@ -229,12 +227,11 @@ if(capping &lt;= 0) {
     } else if capping &gt;= capTime {
         pointCapture(cp);
         if instance_exists(ControlPointHUD) {
-            if ControlPointHUD.mode == 1 ControlPointHUD.timer+=9000;
+            if ControlPointHUD.mode == 1 ControlPointHUD.timer += 9000;
         }
         GameServer.syncTimer = 1; 
     }
 }
-
 //since CPs are not perfectly in sync,the client might be ahead of the server, so stall it
 else if floor(capping) == floor(capTime - capTime/4)-10 || floor(capping) == floor(capTime/4)-10 || floor(capping) == floor(capTime/10)-10{
     capping -= 10;

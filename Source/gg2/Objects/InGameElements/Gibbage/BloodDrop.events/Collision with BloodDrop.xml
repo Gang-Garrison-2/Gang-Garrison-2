@@ -13,11 +13,14 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if((random(16)&lt;1)) {
-        other.image_xscale+=0.1;
-        other.image_yscale+=0.1;
-        instance_destroy()
- }</argument>
+        <argument kind="STRING">if((random(16)&lt;1) and global.run_virtual_ticks and image_index &lt; 2)
+{
+    other.image_xscale = min(2, other.image_xscale + image_xscale*0.4);
+    other.image_yscale = min(2, other.image_yscale + image_yscale*0.4);
+    other.image_alpha += image_alpha;
+    instance_destroy();
+}
+</argument>
       </arguments>
     </action>
   </actions>

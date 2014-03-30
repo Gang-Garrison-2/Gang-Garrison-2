@@ -34,7 +34,7 @@ draw_set_alpha(1);
 barcolor = make_color_rgb(217,217,183);
 var sandwichScalar;
 if !(global.myself.object.canEat)
-    sandwichScalar = (1-(global.myself.object.alarm[6]/global.myself.object.eatCooldown)) * 100
+    sandwichScalar = (1-(global.myself.object.alarm[6]/(global.myself.object.eatCooldown / global.delta_factor))) * 100
 else
     sandwichScalar = 100
 draw_sprite_ext(sprite_index,offset,xoffset+xsize-70,yoffset+ysize-85,2,2,0,c_white,1);

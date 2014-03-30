@@ -14,9 +14,9 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">if (timer &gt; 0)
-    timer -= 1;
+    timer -= 1 * global.delta_factor;
 
-if (mode == 1)
+if (mode == 1 and global.run_virtual_ticks)
 {
     if (global.setupTimer &gt; 0)
         global.setupTimer -= 1;

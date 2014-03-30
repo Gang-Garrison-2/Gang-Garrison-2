@@ -208,10 +208,10 @@
         justBlast = true;
         readyToBlast=false;
         readyToShoot=false;
-        alarm[5]=blastReloadTime;
+        alarm[5]=blastReloadTime / global.delta_factor;
         isRefilling = false;
-        alarm[1]=blastReloadTime;
-        alarm[0]=blastNoFlameTime;
+        alarm[1]=blastReloadTime / global.delta_factor;
+        alarm[0]=blastNoFlameTime / global.delta_factor;
         ammoCount -= 40;
     }
 }

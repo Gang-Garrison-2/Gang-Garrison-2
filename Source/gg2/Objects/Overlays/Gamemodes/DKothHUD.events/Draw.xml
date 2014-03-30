@@ -31,7 +31,7 @@ else
     yshift = 0;
 }
 
-drawx = xoffset+xsize/2 - 60;
+drawx = xoffset+xsize/2 - 30;
 
 draw_set_alpha(1);
 draw_set_color(c_white);

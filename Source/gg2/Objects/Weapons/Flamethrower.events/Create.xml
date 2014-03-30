@@ -26,8 +26,8 @@
     blastNoFlameTime = 15;
     blastReloadTime = 40;
     flareReloadTime = 60;
-    alarm[1] = blastReloadTime;
-    alarm[2] = flareReloadTime;
+    alarm[1] = blastReloadTime / global.delta_factor;
+    alarm[2] = flareReloadTime / global.delta_factor;
     readyToBlast = false;
     readyToFlare = false;
     justBlast = false;

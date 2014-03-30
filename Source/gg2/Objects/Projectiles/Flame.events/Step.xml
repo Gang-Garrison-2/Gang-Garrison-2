@@ -13,7 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">vspeed += 0.15;
+        <argument kind="STRING">vspeed += 0.15 * global.delta_factor;
 </argument>
       </arguments>
     </action>

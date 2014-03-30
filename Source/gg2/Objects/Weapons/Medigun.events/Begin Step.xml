@@ -13,20 +13,23 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if(uberReady){
-    if(alarm[4]&lt;=0) {
+        <argument kind="STRING">if(uberReady)
+{
+    if(alarm[4] &lt;= 0)
         loopsoundstart(x,y,UberIdleSnd);
-    } else {
+    else
         loopsoundmaintain(x,y,UberIdleSnd);
-    }
-    alarm[4]=2;
+    
+    alarm[4] = 2 / global.delta_factor;
 }
 
-if(ubering) {
+if(ubering)
+{
     owner.ubered = 1;
-    owner.alarm[2]=3;
-    uberCharge -= 25/3;
-    if(uberCharge&lt;=0) {
+    owner.alarm[2] = 3 / global.delta_factor;
+    uberCharge -= 25/3 * global.delta_factor;
+    if(uberCharge &lt;= 0)
+    {
         uberCharge = 0;
         ubering = false;
     }

@@ -29,7 +29,7 @@ if(intel and intelRecharge &lt; 900)
 var xr, yr;
 xr = round(x);
 yr = round(y);
-    
+
 image_alpha = cloakAlpha;
 
 if (global.myself.team == team and canCloak)
@@ -45,7 +45,7 @@ if (team == global.myself.team and (player != global.myself or global.showHealth
 {
     draw_set_alpha(1);
     draw_healthbar(xr-10, yr-30, xr+10, yr-25,hp*100/maxHp,c_black,c_red,c_green,0,true,true);
-}   
+}
 
 draw_set_alpha(1);
 if (team == TEAM_RED)
@@ -53,6 +53,8 @@ if (team == TEAM_RED)
 else
     ubercolour = c_blue;
 
+// sprite resource selection
+intelSprite = EngineerRedIntelS;
 var sprite, overlaySprite;
 if (zoomed)
 {
@@ -62,12 +64,72 @@ if (zoomed)
         sprite = SniperCrouchBlueS;
     overlaySprite = sniperCrouchOverlay;
 }
+// most classes, check for running jumping and standing
 else
 {
-    sprite = sprite_index;
+    if(!onground)
+        sprite = EngineerRedJumpS;
+    else
+    {
+        if(still)
+        {
+            // set up vars for slope detection
+            charSetSolids();
+            if(image_xscale &gt; 0)
+            {
+                sprite_tilt_left = EngineerRedLeanLS;
+                sprite_tilt_right = EngineerRedLeanRS;
+            }
+            else
+            {
+                sprite_tilt_left = EngineerRedLeanRS;
+                sprite_tilt_right = EngineerRedLeanLS;
+            }
+            
+            // default still sprite
+            sprite = EngineerRedStandS;
+            
+            { // detect slopes
+                var openright, openleft;
+                openright = !collision_point_solid(x+6, bbox_bottom+2) and !collision_point_solid(x+2, bbox_bottom+2);
+                openleft = !collision_point_solid(x-7, bbox_bottom+2) and !collision_point_solid(x-3, bbox_bottom+2);
+                if (openright)
+                    sprite = sprite_tilt_right;
+                if (openleft)
+                    sprite = sprite_tilt_left;
+                if (openright and openleft)
+                {
+                    openright = !collision_point_solid(bbox_right, bbox_bottom+2);
+                    openleft = !collision_point_solid(bbox_left, bbox_bottom+2);
+                    if (openright)
+                        sprite = sprite_tilt_right;
+                    if (openleft)
+                        sprite = sprite_tilt_left;
+                }
+            }
+                
+            charUnsetSolids();
+        }
+        else
+            sprite = EngineerRedRunS;
+    }
+    
     overlaySprite = overlay;
 }
-    
+
+if(sprite == EngineerRedLeanLS or sprite == EngineerRedLeanRS)
+    yoffset = 6;
+else
+    yoffset = 0;
+
+equipmentOffset = ((sprite == EngineerRedRunS) and
+                (floor(animationImage) mod 2) == 0)
+               or !onground;
+equipmentOffset *= -2; // two pixels up for whether the sprite is bobbing(above expression gives one, no offset)
+equipmentOffset += yoffset;
+
+yr += yoffset;
+
 if (omnomnomnom)
 {
     draw_sprite_ext_overlay(omnomnomnomSprite,omnomnomnomOverlay,omnomnomnomindex,xr,yr,image_xscale,image_yscale,image_angle,c_white,1);
@@ -84,6 +146,8 @@ else if (player.humiliated)
     draw_sprite_ext(humiliationPoses,floor(animationImage)+humiliationOffset,xr,yr,image_xscale,image_yscale,image_angle,c_white,image_alpha);
 else if (!taunting)
 {
+    if (intel)
+        draw_sprite_ext(intelSprite,0,xr,yr-weaponOffset*2, image_xscale, image_yscale, 0, c_white, image_alpha);
     if (cloak)
     {
         if (!ubered)

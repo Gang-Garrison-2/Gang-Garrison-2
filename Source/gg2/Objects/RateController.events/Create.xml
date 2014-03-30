@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="CREATE" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">virt_speed = 30;
+
+// init cars
+global.run_virtual_ticks = false;
+global.delta_factor = 1;
+global.skip_delta_factor = 1;
+global.ticks_per_virtual = 1;
+global.frameskip = 1;
+ticks = 0;
+
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

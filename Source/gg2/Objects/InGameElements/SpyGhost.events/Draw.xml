@@ -13,7 +13,9 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">draw_sprite_ext(sprite_index, image_index, x, y, image_xscale, 1, image_angle, c_white, min(cloakAlpha, image_alpha));
+        <argument kind="STRING">if(global.hideSpyGhosts)
+    instance_destroy();
+draw_sprite_ext(sprite_index, image_index, x, y, image_xscale, 1, image_angle, c_white, min(cloakAlpha, image_alpha));
 
 </argument>
       </arguments>

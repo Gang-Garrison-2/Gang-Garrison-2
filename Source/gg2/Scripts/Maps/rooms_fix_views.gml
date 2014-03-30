@@ -1,3 +1,28 @@
+// Fix room view resolutions
+switch(global.resolutionkind)
+{
+case 0: // 5:4
+    global.ingamewidth = 780;
+    global.ingameheight = 624;
+    break;
+case 1: // 4:3
+    global.ingamewidth = 800;
+    global.ingameheight = 600;
+    break;
+case 2: // 16:10
+    global.ingamewidth = 848;
+    global.ingameheight = 530;
+    break;
+case 3: // 16:9
+    global.ingamewidth = 864;
+    global.ingameheight = 486;
+    break;
+case 4: // 2:1
+    global.ingamewidth = 888;
+    global.ingameheight = 444;
+    break;
+}
+
 var maprooms, nummaps;
 nummaps = 20;
 

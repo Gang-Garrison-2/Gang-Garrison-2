@@ -22,7 +22,7 @@ hitDamage=8;
 shooting=false;
 rotating=false;
 nearestTarget = noone;
-alarm[0] = refireTime;
+alarm[0] = refireTime / global.delta_factor;
 </argument>
       </arguments>
     </action>

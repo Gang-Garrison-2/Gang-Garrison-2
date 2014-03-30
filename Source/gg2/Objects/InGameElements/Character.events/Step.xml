@@ -23,9 +23,20 @@ timeUnscathed = min(timeUnscathed+1, 10*30);
 _last_hspeed = hspeed;
 
 // Run movement solver if necessary
+yprevious = y;
+xprevious = x;
+y_previous = y;
+x_previous = x;
 charSetSolids();
 if(!place_free(x+hspeed, y+vspeed))
     characterHitObstacle();
+else
+{
+    x += hspeed * global.delta_factor;
+    y += vspeed * global.delta_factor;
+    x -= hspeed;
+    y -= vspeed;
+}
 charUnsetSolids();
 
 // Spinjumping emulation
@@ -39,8 +50,9 @@ if (sign(_last_hspeed) &gt; 0) // See if we're "spinning", also mirror which sid
     _test = _last_xscale &gt; image_xscale;
 else
     _test = _last_xscale &lt; image_xscale;
-    
+
 charSetSolids();
+
 if(_test and !place_free(x+sign(_last_hspeed), y) // Rubbing wall and spinning
    and (place_free(x, y+1) or vspeed &lt; 0)   // In air, or jumping
    and place_free(x, y-_gravity))           // Validity check
@@ -50,6 +62,7 @@ if(_test and !place_free(x+sign(_last_hspeed), y) // Rubbing wall and spinning
 }
 else
     spinjumping = false;
+
 charUnsetSolids();
 
 _last_xscale = image_xscale;

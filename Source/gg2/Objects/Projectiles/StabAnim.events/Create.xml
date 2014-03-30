@@ -13,11 +13,11 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">alpha=0.01;
+        <argument kind="STRING">alpha = 0.01;
 done = false;
 hitDamage = 0;
 image_speed = 0;
-alarm[0]=10;
+alarm[0] = 10 / global.delta_factor;
 overlay = -1;
 </argument>
       </arguments>

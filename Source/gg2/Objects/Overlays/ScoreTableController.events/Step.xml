@@ -14,10 +14,10 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">if (!done and alpha &lt; 1)
-    alpha = min(1, power(alpha,0.5)+0.05);
+    alpha = min(1, power(alpha,power(0.5, global.delta_factor))+0.05);
 else if (done and alpha &gt; 0)
-    alpha = max(0, power(alpha,2)-0.05);
-else if (done and alpha == 0)
+    alpha = max(0, power(alpha,power(2, global.delta_factor))-0.05);
+else if (done and alpha &lt; 1/256)
     instance_destroy();
 
 </argument>

@@ -14,6 +14,7 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">{
+    warnoptioneffect = false;
     menu_create(48, 172, 500, 260, 32, 40, 104, 6);
     menumode = true;
 
@@ -71,10 +72,27 @@
     menu_add_option(1, "Blood only");
     menu_add_option(2, "Blood and medium gibs");
     menu_add_option(3, "Full blood and gibs");
-    
-    menu_addedit_boolean("Kill Cam:", "global.killCam", '
-        gg2_write_ini("Settings", "Kill Cam", argument0);
+    menu_addedit_boolean("Hide Infiltrator 'Ghosts':", "global.hideSpyGhosts", '
+        gg2_write_ini("Settings", "Hide Spy Ghosts", argument0);
     ');
+    
+    menu_addedit_select("Ingame Aspect Ratio:", "global.resolutionkind", '
+        gg2_write_ini("Settings", "Resolution", argument0);
+        warnoptioneffect = true;
+    ');
+    menu_add_option(0, "5:4");
+    menu_add_option(1, "4:3");
+    menu_add_option(2, "16:10");
+    menu_add_option(3, "16:9");
+    menu_add_option(4, "2:1");
+    
+    menu_addedit_select("Framerate:", "global.frameratekind", '
+        gg2_write_ini("Settings", "Framerate", argument0);
+        warnoptioneffect = true;
+    ');
+    menu_add_option(0, "30");
+    menu_add_option(1, "60");
+
     menu_addedit_select("V Sync:", "global.monitorSync", '
         gg2_write_ini("Settings", "Monitor Sync", argument0);
         if (!instance_exists(GameServer))
@@ -113,6 +131,8 @@
     ');
     
     menu_addback("Back", '
+        if(warnoptioneffect)
+            show_message("An option you changed only takes effect on map change or server join.");
         instance_destroy();
         if(room == Options)
             room_goto_fix(Menu);

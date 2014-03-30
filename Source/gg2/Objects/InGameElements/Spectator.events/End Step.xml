@@ -14,9 +14,7 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">if (global.myself != -1)
-{
     myTeam = global.myself.team;
-}
 
 if(global.myself.object != -1)
     instance_destroy();
@@ -26,27 +24,31 @@ moved = false;
 stopTracking = false;
 
 //moving view - mapped keys
-if(!(instance_exists(InGameMenuController) || instance_exists(OptionsController) || instance_exists(ControlsController) || instance_exists(HUDOptionsController)))
+if(!instance_exists(MenuController))
 {
     if keyboard_check(global.left)
     {
-        if x &gt; 400 x-=20;
+        if (x &gt; view_wview/2)
+            x -= 20 * global.delta_factor;
         moved = true;
     }
     else if keyboard_check(global.right)
     {
-        if x &lt; map_width()-400 x+=20;
+        if (x &lt; map_width()-view_wview/2)
+            x += 20 * global.delta_factor;
         moved = true;
     }
     
     if keyboard_check(global.jump)
     {
-        if y &gt; 300 y-=20;
+        if (y &gt; view_hview/2)
+            y -= 20 * global.delta_factor;
         moved = true;
     }
     else if keyboard_check(global.down)
     {
-        if y &lt; map_height()-300 y+=20;
+        if (y &lt; map_height()-view_hview/2)
+            y += 20 * global.delta_factor;
         moved = true;
     }
 }
@@ -100,7 +102,7 @@ else // We're tracking a player, so allow the view to show area from off of the 
 view_xview = x-view_wview/2;
 view_yview = y-view_hview/2;
 
-afktimer-=1;
+afktimer -= 1 * global.delta_factor;
 
 if((afktimer&lt;=0) and global.isHost==false)
 {

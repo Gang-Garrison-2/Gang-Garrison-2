@@ -14,7 +14,8 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">{
-    if (readyToShoot &amp;&amp; !instance_exists(healTarget) &amp;&amp; !ubering &amp;&amp; ammoCount &gt; 0) {
+    if (readyToShoot and !instance_exists(healTarget) and !ubering and ammoCount &gt; 0)
+    {
         ammoCount -= 1;
         playsound(x,y,MedichaingunSnd);
             var shot;
@@ -30,11 +31,13 @@
         with(shot)
             hspeed+=owner.hspeed;
         readyToShoot=false;
-        alarm[0]=refireTime;
-        alarm[5] = reloadBuffer + reloadTime;
+        alarm[0] = refireTime / global.delta_factor;
+        alarm[5] = (reloadBuffer + reloadTime) / global.delta_factor;
     }
-    else if (uberReady &amp;&amp; (owner.keyState &amp; $10)) {
-        if(global.isHost) {
+    else if (uberReady &amp;&amp; (owner.keyState &amp; $10))
+    {
+        if(global.isHost)
+        {
             sendEventUber(ownerPlayer);
             doEventUber(ownerPlayer);
         }

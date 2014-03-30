@@ -13,26 +13,29 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">{
-if(!stick){
-if(place_free(x,y+1)) {
-vspeed += 0.4;
-        }
-if(vspeed&gt;11) {
-vspeed=11;
-    }
-if(vspeed&lt;-11) {
-vspeed=-11;
-    }
-if(hspeed&gt;11) {
-hspeed=11;
-    }
-if(hspeed&lt;-11) {
-hspeed=-11;
-    }
+        <argument kind="STRING">if(!stick)
+{
+    if(!place_meeting(x, y+1, Obstacle))
+        vspeed += 0.4 * global.delta_factor;
+    if(speed &gt; 11)
+        speed = 11;
 }
-   image_alpha -= (2/lifetime);
-}</argument>
+image_alpha -= (2/lifetime) * global.delta_factor;
+
+if(place_meeting(x, y, Obstacle))
+{
+    wallSetSolid();
+    if(!stick)
+    {
+        move_contact_solid(point_direction(x,y,x+hspeed,y+vspeed),speed)
+    }
+    move_outside_solid(180+point_direction(x,y,x+hspeed,y+vspeed),speed)
+    wallUnsetSolid();
+    speed *= 0.5;
+    stick = true;
+}
+
+</argument>
       </arguments>
     </action>
   </actions>

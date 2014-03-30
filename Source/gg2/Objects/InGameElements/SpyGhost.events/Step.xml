@@ -13,12 +13,11 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">image_index -= 1; // stall out automatic GM animation
+        <argument kind="STRING">image_speed = 0;
 image_alpha *= 0.9;
 image_alpha -= 0.01;
 if(image_alpha &lt;= 0)
     instance_destroy();
-
 
 // make a list of all ghosts of our same spy and destroy all but the oldest one (even if one is ourself)
 var temp, array, number;

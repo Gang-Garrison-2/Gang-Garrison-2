@@ -23,11 +23,11 @@ if (justShot)
     //Recoil Animation
     if (sprite_index != recoilSprite)
     {
-        sprite_index = recoilSprite
-        image_index = 0
-        image_speed = recoilImageSpeed
+        sprite_index = recoilSprite;
+        image_index = 0;
+        image_speed = recoilImageSpeed * global.delta_factor;
     }
-    alarm[6] = recoilTime;
+    alarm[6] = recoilTime / global.delta_factor;
 }
 </argument>
       </arguments>

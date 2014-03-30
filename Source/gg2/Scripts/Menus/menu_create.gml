@@ -25,6 +25,7 @@ drawbg = false;
 getsHighlight = true;
 bgtabs = false;
 menumode = false;
+screenheight = 600;
 
 // Hack: The back button should usually appear last in the menu, even if plugins
 // add new items later, so we treat it separately.

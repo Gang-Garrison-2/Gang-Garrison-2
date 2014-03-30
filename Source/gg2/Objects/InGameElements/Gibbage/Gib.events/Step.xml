@@ -14,34 +14,39 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">if (fadeout)
-{
-    image_alpha -= 2/10;
-}
-if (global.gibLevel &gt; 0)
-{
-    if(abs(speed/bloodchance) &gt; random(16/global.gibLevel))
-    {
-        var blood;
-        blood = instance_create(x,y-1,BloodDrop);
-        blood.ogib=self;
-        blood.odir=point_direction(x,y,x+hspeed,y+vspeed);
-        if (object_index == PumpkinGib)
-            blood.sprite_index = PumpkinJuiceS;
+    image_alpha -= 2/10 * global.delta_factor;
 
-        with(blood)
+if (global.run_virtual_ticks)
+{
+    if (global.gibLevel &gt; 0)
+    {
+        if(abs(speed/bloodchance) &gt; random(16/global.gibLevel))
         {
-            motion_add(odir, ogib.speed*0.9);
-            hspeed += random(3)-1;
-            vspeed += random(3)-1;
+            var blood;
+            blood = instance_create(x,y-1,BloodDrop);
+            blood.ogib=self;
+            blood.odir=point_direction(x,y,x+hspeed,y+vspeed);
+            if (object_index == PumpkinGib)
+                blood.sprite_index = PumpkinJuiceS;
+            
+            with(blood)
+            {
+                motion_add(odir, ogib.speed*0.9);
+                hspeed += random(3)-1;
+                vspeed += random(3)-1;
+            }
         }
     }
 }
 
 wallSetSolid();
 if (place_free(x, y+1))
-    vspeed += 0.7
+    vspeed += my_gravity;
 else
-    vspeed = 0;
+{
+    vspeed = min(vspeed, 0);
+    hspeed = hspeed * delta_mult(0.9);
+}
 if (vspeed &gt; 11)
     vspeed = 11;
     
@@ -50,18 +55,24 @@ if (speed &lt; 0.2)
 if (abs(rotspeed) &lt; 0.2)
     rotspeed = 0;
 
-rotspeed *= 0.97; // "air friction"
+rotspeed *= air_friction;
 
-vis_angle += rotspeed;
+vis_angle += rotspeed * global.delta_factor;
 
 if(!place_free(x+hspeed, y+vspeed))
     event_user(0);
 
 wallUnsetSolid();
 
-if (point_distance(x,y,view_xview[0],view_yview[0]) &gt; 2000)
-    instance_destroy();
-    
+if (speed &gt; 0)
+    if (point_distance(x,y,view_xview[0],view_yview[0]) &gt; 2000)
+        instance_destroy();
+
+x += hspeed * global.delta_factor;
+y += vspeed * global.delta_factor;
+x -= hspeed;
+y -= vspeed;
+
 </argument>
       </arguments>
     </action>

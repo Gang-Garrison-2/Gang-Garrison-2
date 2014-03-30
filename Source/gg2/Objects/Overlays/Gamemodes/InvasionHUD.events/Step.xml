@@ -34,7 +34,7 @@ else if (IntelligenceBlue.alarm[0] &gt; 0)
     redIsCapping = true;
 
 if (timer &gt; 0)
-    timer -= 1;
+    timer -= 1 * global.delta_factor;
 
 if (global.redCaps &gt;= global.caplimit)
     global.winners = TEAM_RED;

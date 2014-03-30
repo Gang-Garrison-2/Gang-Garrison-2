@@ -56,7 +56,7 @@ if(global.updateType == FULL_UPDATE){
     default:
         write_ubyte(global.serializeBuffer, 0);
     }
-    write_short(global.serializeBuffer, alarm[1]);
+    write_short(global.serializeBuffer, alarm[1]*global.delta_factor);
     write_ubyte(global.serializeBuffer, intel);
     write_short(global.serializeBuffer, intelRecharge);
     

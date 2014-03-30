@@ -38,27 +38,31 @@ if(instance_exists(IntelligenceBase) or instance_exists(Intelligence))
         instance_create(0,0,CTFHUD);
 }
 else if(instance_exists(Generator))
-    instance_create(0,0,GeneratorHUD);
-else if instance_exists(ArenaControlPoint)
 {
-    instance_create(0,0,ArenaHUD);
+    instance_create(0,0,GeneratorHUD);
+}
+else if(instance_exists(ArenaControlPoint))
+{
+    instance_create(0, 0, ArenaHUD);
     if (ArenaHUD.roundStart == 0)
     {
         with (Player)
             canSpawn = 0;
     }
 }
-else if instance_exists(KothControlPoint)
-    instance_create(0,0,KothHUD);
-else if instance_exists(KothRedControlPoint) && instance_exists(KothBlueControlPoint)
+else if(instance_exists(KothControlPoint))
 {
-    with ControlPoint
+    instance_create(0,0,KothHUD);
+}
+else if(instance_exists(KothRedControlPoint) and instance_exists(KothBlueControlPoint))
+{
+    with(ControlPoint)
         event_user(0);
     instance_create(0,0,DKothHUD);
 }
 else if instance_exists(ControlPoint)
 {
-    with ControlPoint
+    with(ControlPoint)
         event_user(0);
     instance_create(0,0,ControlPointHUD);
 }

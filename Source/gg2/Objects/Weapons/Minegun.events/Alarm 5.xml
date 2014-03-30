@@ -17,7 +17,7 @@
     ammoCount+=1;
 }
 if ammoCount &lt; maxAmmo {
-    alarm[5] = reloadTime;
+    alarm[5] = reloadTime / global.delta_factor;
 }
 </argument>
       </arguments>

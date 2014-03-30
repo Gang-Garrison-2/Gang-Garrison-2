@@ -102,6 +102,7 @@
     CrosshairFilename = ini_read_string("Settings", "CrosshairFilename", "");
     CrosshairRemoveBG = ini_read_real("Settings", "CrosshairRemoveBG", 1);
     global.queueJumping = ini_read_real("Settings", "Queued Jumping", 0);
+    global.hideSpyGhosts = ini_read_real("Settings", "Hide Spy Ghosts", 0);
 
     global.backgroundHash = ini_read_string("Background", "BackgroundHash", "default");
     global.backgroundTitle = ini_read_string("Background", "BackgroundTitle", "");
@@ -109,6 +110,11 @@
     global.backgroundShowVersion = ini_read_real("Background", "BackgroundShowVersion", true);
     
     global.resolutionkind = ini_read_real("Settings", "Resolution", 1);
+    global.frameratekind = ini_read_real("Settings", "Framerate", 0);
+    if(global.frameratekind == 1)
+        global.game_fps = 60;
+    else
+        global.game_fps = 30;
     
     readClasslimitsFromIni();
 
@@ -170,6 +176,7 @@
     ini_write_string("Settings", "CrosshairFilename", CrosshairFilename);
     ini_write_real("Settings", "CrosshairRemoveBG", CrosshairRemoveBG);
     ini_write_real("Settings", "Queued Jumping", global.queueJumping);
+    ini_write_real("Settings", "Hide Spy Ghosts", global.hideSpyGhosts);
 
     ini_write_string("Background", "BackgroundHash", global.backgroundHash);
     ini_write_string("Background", "BackgroundTitle", global.backgroundTitle);
@@ -188,31 +195,8 @@
     ini_write_real("Classlimits", "Quote", global.classlimits[CLASS_QUOTE])
 
     ini_write_real("Settings", "Resolution", global.resolutionkind);
+    ini_write_real("Settings", "Framerate", global.frameratekind);
 
-    // Fix room view resolutions
-    switch(global.resolutionkind)
-    {
-    case 0: // 5:4
-        global.ingamewidth = 780;
-        global.ingameheight = 624;
-        break;
-    case 1: // 4:3
-        global.ingamewidth = 800;
-        global.ingameheight = 600;
-        break;
-    case 2: // 16:10
-        global.ingamewidth = 848;
-        global.ingameheight = 530;
-        break;
-    case 3: // 16:9
-        global.ingamewidth = 864;
-        global.ingameheight = 486;
-        break;
-    case 4: // 2:1
-        global.ingamewidth = 888;
-        global.ingameheight = 444;
-        break;
-    }
     rooms_fix_views();
     
     //screw the 0 index we will start with 1
