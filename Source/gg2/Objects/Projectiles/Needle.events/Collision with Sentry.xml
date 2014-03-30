@@ -14,12 +14,10 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">if(other.team != team) {
-other.hp -= hitDamage;
-//new stuff
-other.lastDamageDealer = ownerPlayer;
-other.lastDamageSource = weapon;
-//end new stuff
-instance_destroy();
+    damageSentry(ownerPlayer, other.id, hitDamage);
+    other.lastDamageDealer = ownerPlayer;
+    other.lastDamageSource = weapon;
+    instance_destroy();
 }
 </argument>
       </arguments>

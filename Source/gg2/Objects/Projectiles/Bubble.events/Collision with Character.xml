@@ -18,15 +18,16 @@
         exit;
 if (other.team != team and !other.ubered and other.hp &gt; 0)
 {
-    other.hp-=hitDamage;
+    damageCharacter(ownerPlayer, other.id, hitDamage);
     alarm[0]-=70;
-    //new
-    if (other.lastDamageDealer != ownerPlayer &amp;&amp; other.lastDamageDealer != other.player){
+    
+    if (other.lastDamageDealer != ownerPlayer &amp;&amp; other.lastDamageDealer != other.player)
+    {
         other.secondToLastDamageDealer = other.lastDamageDealer;
         other.alarm[4] = other.alarm[3]
     }
     other.alarm[3] = ASSIST_TIME;
-    //end new
+    
     other.lastDamageDealer = ownerPlayer;
     other.lastDamageSource = weapon;
     instance_destroy();

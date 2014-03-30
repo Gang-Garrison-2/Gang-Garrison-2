@@ -133,8 +133,7 @@ if(!nearestTarget) {
         ownerPlayer.sentry.alarm[5] = 30;
         
         if(nearestTarget.ubered == 0) {
-            nearestTarget.hp -= hitDamage;
-            nearestTarget.timeUnscathed = 0;
+            damageAuto(ownerPlayer, nearestTarget, hitDamage);
             if (nearestTarget.lastDamageDealer != ownerPlayer &amp;&amp; object_is_ancestor(nearestTarget.object_index, Character)) {
                 if (nearestTarget.lastDamageDealer != nearestTarget.player){
                     nearestTarget.secondToLastDamageDealer = nearestTarget.lastDamageDealer;
@@ -144,15 +143,11 @@ if(!nearestTarget) {
             nearestTarget.alarm[3] = ASSIST_TIME;
             nearestTarget.lastDamageDealer = ownerPlayer;
             nearestTarget.lastDamageSource = WEAPON_SENTRYTURRET;
-            if(global.gibLevel &gt; 0 &amp;&amp; object_is_ancestor(nearestTarget.object_index, Character)){
+            if(global.gibLevel &gt; 0 and object_is_ancestor(nearestTarget.object_index, Character))
+            {
                 blood = instance_create(nearestTarget.x,nearestTarget.y,Blood);
                 blood.direction = direction-180;
-                with(nearestTarget)
-                {
-                    cloakAlpha = max(cloakAlpha, 0.3);
-                    cloakFlicker = true;
-                    alarm[7] = 3;
-                }
+                dealFlicker(nearestTarget);
             }
         }
         shooting=true;

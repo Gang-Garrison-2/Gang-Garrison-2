@@ -40,9 +40,8 @@ while(len&gt;1) {
     
     hitline = false;
     with(owner) {
-        if (collision_line(x1,y1,xm,ym,Generator,true,true)&gt;=0) {
+        if (collision_line(x1,y1,xm,ym,Generator,true,true)&gt;=0) if (instance_nearest(x1,y1,Generator).team != team) {
             hitline = true;
-            if instance_nearest(x1,y1,Generator).team == team hitline = false;
         }
         if(collision_line(x1,y1,xm,ym,Obstacle,true,true)&gt;=0) {
             hitline = true;
@@ -54,9 +53,10 @@ while(len&gt;1) {
             hitline = true;
         } else if (collision_line(x1,y1,xm,ym,IntelGate,true,true)&gt;=0) {
             hitline = true;
-        } else if (collision_line(x1,y1,xm,ym,ControlPointSetupGate,true,true)&gt;=0) {
-            if ControlPointSetupGate.solid == true hitline = true;
-        } else if (collision_line(x1,y1,xm,ym,BulletWall,true,true)&gt;=0) {
+        } else if (collision_line(x1,y1,xm,ym,ControlPointSetupGate,true,true)&gt;=0) if (ControlPointSetupGate.solid) {
+            hitline = true;
+        }
+        if (collision_line(x1,y1,xm,ym,BulletWall,true,true)&gt;=0) {
             hitline = true;
         }
     }
@@ -73,10 +73,10 @@ while(len&gt;1) {
 
 with(Player) {
     if(id != other.ownerPlayer and team != other.owner.team and object != -1) {
-        if(collision_line(other.x,other.y,other.x2,other.y2,object,true,false)&gt;=0) &amp;&amp; object.ubered == 0 {
-            object.hp -= other.hitDamage;
-            object.timeUnscathed = 0;
-            if (object.lastDamageDealer != other.ownerPlayer &amp;&amp; object.lastDamageDealer != object.player){
+        if (collision_line(other.x,other.y,other.x2,other.y2,object,true,false) &gt;= 0 and !object.ubered) {
+            damageCharacter(other.ownerPlayer, object, other.hitDamage);
+            if (object.lastDamageDealer != other.ownerPlayer &amp;&amp; object.lastDamageDealer != object.player)
+            {
                 object.secondToLastDamageDealer = object.lastDamageDealer;
                 object.alarm[4] = object.alarm[3]
             }
@@ -85,7 +85,8 @@ with(Player) {
             object.cloakAlpha = max(object.cloakAlpha, 0.3);
             object.cloakFlicker = true;
             object.alarm[7] = 3;
-            if(global.gibLevel &gt; 0){
+            if(global.gibLevel &gt; 0)
+            {
                 blood = instance_create(object.x,object.y,Blood);
                 blood.direction = other.owner.aimDirection-180;
             }
@@ -101,7 +102,7 @@ with(Player) {
 with(Sentry) {
     if(team != other.owner.team) {
         if(collision_line(other.x,other.y,other.x2,other.y2,id,false,false)&gt;=0) {
-            hp -= other.hitDamage;
+            damageSentry(other.ownerPlayer, id, other.hitDamage);
             lastDamageDealer = other.ownerPlayer;
             if (!other.owner.zoomed)
                 lastDamageSource = WEAPON_RIFLE;
@@ -115,19 +116,7 @@ with(Sentry) {
 with(Generator) {
     if(team != other.owner.team) {
         if(collision_line(other.x,other.y,other.x2,other.y2,id,true,false)&gt;=0) {
-            alarm[0] = regenerationBuffer;
-            isShieldRegenerating = false;
-            //allow overkill to be applied directly to the target
-            if (other.hitDamage &gt; shieldHp) {
-                hp -= other.hitDamage - shieldHp;
-                hp -= shieldHp * shieldResistance;
-                shieldHp = 0;
-            }
-            else
-            {
-                hp -= other.hitDamage * shieldResistance;
-                shieldHp -= other.hitDamage;
-            }
+            damageGenerator(other.ownerPlayer, id, other.hitDamage);
             exit;
         }
     }

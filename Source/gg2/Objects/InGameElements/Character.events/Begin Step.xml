@@ -16,9 +16,9 @@
         <argument kind="STRING">// Apply afterburn
 if (burnDuration &gt; 0)
 {
-    if(hp&gt;0)
+    if(hp &gt; 0)
     {   // Don't count if someone else already finished him off, to prevent afterburn from "stealing" sticky kills (Bug #1021989)
-        if (lastDamageDealer != burnedBy &amp;&amp; lastDamageDealer != player)
+        if (lastDamageDealer != burnedBy and lastDamageDealer != player)
         {
             secondToLastDamageDealer = lastDamageDealer;
             alarm[4] = alarm[3];
@@ -26,9 +26,9 @@ if (burnDuration &gt; 0)
         alarm[3] = ASSIST_TIME;
         lastDamageDealer = burnedBy;
         lastDamageSource = afterburnSource;
+        dealDamage(lastDamageDealer, id, burnIntensity / 30);
     }
     burnDuration -= durationDecay;
-    hp -= burnIntensity / 30;
     timeUnscathed = 0;
 }
 if (alarm[0] == -1 &amp;&amp; burnIntensity &gt; 0) burnIntensity -= intensityDecay;
@@ -174,19 +174,18 @@ if(moveStatus == 1 or moveStatus == 2 or moveStatus == 4)
     }
 }
 
-_basemaxspeed = abs(runPower * baseControl / (baseFriction-1));
 
 if(!taunting &amp;&amp; !omnomnomnom)
 {
-    if((keyState|pressedKeys) &amp; $40 and hspeed &gt; -_basemaxspeed)
+    if((keyState|pressedKeys) &amp; $40 and hspeed &gt; -basemaxspeed)
         hspeed -= runPower*controlFactor;
         
-    if((keyState|pressedKeys) &amp; $20 and hspeed &lt; _basemaxspeed)
+    if((keyState|pressedKeys) &amp; $20 and hspeed &lt; basemaxspeed)
         hspeed += runPower*controlFactor;
 }
 //divide friction as normal if going way too fast
-if(abs(hspeed) &gt; _basemaxspeed * 2 or
-   ((keyState|pressedKeys) &amp; $60 and abs(hspeed) &lt; _basemaxspeed))
+if(abs(hspeed) &gt; basemaxspeed * 2 or
+   ((keyState|pressedKeys) &amp; $60 and abs(hspeed) &lt; basemaxspeed))
     hspeed /= baseFriction;
 else //otherwise divide by the moveStatus's friction
     hspeed /= frictionFactor;
@@ -204,7 +203,8 @@ if burnDuration&gt;0 &amp;&amp; player.class != CLASS_PYRO &amp;&amp; random(80)
     setChatBubble(player, 49);
 }
 
-if(abs(hspeed)&lt;0.195 /*and not moveStatus = 3*/) { // Overweight carrying intel and shooting will get stuck with this number much higher
+if (abs(hspeed) &lt; 0.195) // Overweight carrying intel and shooting will get stuck with this number much higher
+{
     hspeed=0;
     animationImage=0;
 }
@@ -238,7 +238,20 @@ if (intel)
         cloak=false;
         cloakAplha=1;
     }
-    intelRecharge = min(INTEL_MAX_TIMER, intelRecharge + INTEL_MAX_TIMER/(3*30));// 3*30 == it'll take 3 seconds for this to charge
+    if(intelRecharge &lt; INTEL_MAX_TIMER and omnomnomnom) // we don't want to charge intel while eating
+    {
+        // 3*30 : it'll take 3 seconds for this to charge
+        // 1-hspeed/maxspeed/2 : We want to reduce the charge rate while moving, especially for fast classes.
+        //                       hspeed/maxspeed is positive with how fast you're moving, up to 1 with scout's max speed.
+        //                       Dividing it by two means a factor of 0.5 for the fastest possible movement.
+        //                       Finally, subtracting it from 1 gives it a negative (1 -&gt; 0.5) correlation with speed --
+        //                       -- which lets us multiply it by the normal recharge for the desired effect.
+        intelRecharge = min(INTEL_MAX_TIMER, intelRecharge
+                                             + INTEL_MAX_TIMER/(3*30)
+                                               * max((1-abs(hspeed)/highestbasemaxspeed/2), 0.5));
+        
+    }
+    
 }
  
 if (player.humiliated)

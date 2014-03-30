@@ -37,7 +37,7 @@
                 dmg = other.explosionDamage*(1-(distance_to_object(other)/other.blastRadius));
                 if id == other.ownerPlayer.object// self damage resistance
                     dmg *= 5/9;
-                hp -= dmg;
+                damageAuto(other.ownerPlayer, id, dmg);
                 timeUnscathed = 0;
                 if (id == other.ownerPlayer.object and instance_exists(lastDamageDealer) and lastDamageDealer != other.ownerPlayer and !instance_exists(other.reflector))
                     lastDamageSource = FINISHED_OFF_GIB;
@@ -81,16 +81,24 @@
     }
 
     
-    with (Sentry){
-        if (distance_to_object(other) &lt; other.blastRadius) &amp;&amp; (team != other.team) { 
-        hp -= other.explosionDamage*10/9*(1-(distance_to_object(other)/other.blastRadius)); // we want sentries to take ~11% extra damage so that two stickies will do 100 instead of 90 dmg. we don't change the base damage so scouts can't be 2-hitted.
-        lastDamageDealer = other.ownerPlayer;
-        lastDamageSource = WEAPON_MINEGUN;
+    with (Sentry)
+    {
+        if (distance_to_object(other) &lt; other.blastRadius) and (team != other.team)
+        { 
+            if (1 - distance_to_object(other)/other.blastRadius &lt;= 0.25 and other.splashThreshhold) // skip if we're out of theshhold
+                continue;
+            hp -= other.explosionDamage*10/9*(1-(distance_to_object(other)/other.blastRadius)); // we want sentries to take ~11% extra damage so that two stickies will do 100 instead of 90 dmg. we don't change the base damage so scouts can't be 2-hitted.
+            lastDamageDealer = other.ownerPlayer;
+            lastDamageSource = WEAPON_MINEGUN;
         }   
     }    
      
-     with (Generator){
-        if (distance_to_object(other) &lt; other.blastRadius) &amp;&amp; (team != other.team) { 
+     with (Generator)
+     {
+        if( (distance_to_object(other) &lt; other.blastRadius) and (team != other.team) )
+        { 
+            if (1 - distance_to_object(other)/other.blastRadius &lt;= 0.25 and other.splashThreshhold) // skip if we're out of theshhold
+                continue;
             alarm[0] = regenerationBuffer;
             isShieldRegenerating = false;
             //allow overkill to be applied directly to the target
@@ -107,43 +115,63 @@
         }   
     }
        
-    with (Rocket) {
-        if (distance_to_object(other) &lt; other.blastRadius/4){
-            if(distance_to_object(other) &lt; other.blastRadius/7 and (other.team != team or other.ownerPlayer == ownerPlayer)) {
-                characterHit=-1;
+    with (Rocket)
+    {
+        if (distance_to_object(other) &lt; other.affectRadius * 0.75
+            and (other.team != team or other.ownerPlayer == ownerPlayer))
+        {
+            if(distance_to_object(other) &lt; other.affectRadius * 0.25)
+            {
+                characterHit = -1;
                 event_user(5);
-            } else {
-                motion_add(point_direction(other.x,other.y,x,y),10-10*(distance_to_object(other)/(other.blastRadius*5)));
+            }
+            else
+            {
+                motion_add(point_direction(other.x,other.y,x,y),10-10*(distance_to_object(other)/(other.affectRadius)));
             }
         }
     }
     
-    with (DeadGuy) {
-        if (distance_to_object(other) &lt; other.blastRadius){
-            motion_add(point_direction(other.x,other.y,x,y),10-10*(distance_to_object(other)/other.blastRadius));
+    with (DeadGuy)
+    {
+        if (distance_to_object(other) &lt; other.affectRadius * 0.75)
+        {
+            motion_add(point_direction(other.x,other.y,x,y),10-10*(distance_to_object(other)/other.affectRadius));
         }
     }
     
     with(Mine) {
-        if (distance_to_object(other) &lt; other.blastRadius*0.66 and (other.team != team or other.ownerPlayer == ownerPlayer)){
+        if (distance_to_object(other) &lt; other.blastRadius
+            and (other.team != team or other.ownerPlayer == ownerPlayer))
+        {
+            if (1 - distance_to_object(other)/other.blastRadius &lt;= 0.25 and other.splashThreshhold) // skip if we're out of theshhold
+                continue;
             event_user(2);
         }
     }
-    with (Gib) {
-        if (distance_to_object(other) &lt; other.blastRadius){
-            motion_add(point_direction(other.x,other.y,x,y),15-15*(distance_to_object(other)/other.blastRadius));
+    with (Gib)
+    {
+        if (distance_to_object(other) &lt; other.affectRadius * 0.75)
+        {
+            motion_add(point_direction(other.x,other.y,x,y),15-15*(distance_to_object(other)/other.affectRadius));
             rotspeed=random(151)-75;
         }
     }
     
-    with(LooseSheet) {
-        if (distance_to_object(other) &lt; other.blastRadius){
-            motion_add(point_direction(other.x,other.y,x,y),10-10*(distance_to_object(other)/other.blastRadius));
-        }
+    with(LooseSheet)
+    {
+        if (distance_to_object(other) &lt; other.affectRadius * 0.75)
+            motion_add(point_direction(other.x, other.y, x, y)
+                      ,10-10*(distance_to_object(other)/other.affectRadius));
+        
     }
-    with(Bubble) {
-        if (distance_to_object(other) &lt; other.blastRadius*0.66){
-        alarm[0]-=200;
+    with(Bubble)
+    {
+        if (distance_to_object(other) &lt; other.blastRadius)
+        {
+            if (1 - distance_to_object(other)/other.blastRadius &lt;= 0.25 and other.splashThreshhold) // skip if we're out of theshhold
+                continue;
+            alarm[0]-=200;
         }    
     }
 

@@ -57,6 +57,8 @@ if(hasClassReward(global.paramPlayer, 'BH'))
     overlay = HatBobbleSoldierS;
     tauntOverlay = HatBobbleSoldierTauntS;
 }
+
+numFlames = 4;
 </argument>
       </arguments>
     </action>
