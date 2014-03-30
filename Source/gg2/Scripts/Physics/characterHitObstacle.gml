@@ -8,10 +8,20 @@
     oldy=y;
     oldhspeed=hspeed;
     oldvspeed=vspeed;
-
-    // slide left and right to get outside of any walls
-    move_outside_solid(0, 8);
-    move_outside_solid(180, 16);
+    
+    // slide in an appropriate direction to get outside of walls
+    // TODO: Change place_free to some form of collision line to avoid possible edge cases
+    if(!place_free(x, y))
+    {
+        if(place_free(x, bbox_top))
+            move_outside_solid(90, (bbox_bottom-bbox_top)/2);
+        else if(place_free(x, bbox_bottom))
+            move_outside_solid(270, (bbox_bottom-bbox_top)/2);
+        else if(place_free(bbox_right, y))
+            move_outside_solid(0, (bbox_right-bbox_left)/2);
+        else if(place_free(bbox_left, y))
+            move_outside_solid(180, (bbox_right-bbox_left)/2);
+    }
 
     hleft = hspeed;
     vleft = vspeed;

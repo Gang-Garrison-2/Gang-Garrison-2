@@ -297,6 +297,7 @@ while(commandLimitRemaining > 0) {
                     keyState = read_ubyte(socket);
                     netAimDirection = read_ushort(socket);
                     aimDirection = netAimDirection*360/65536;
+                    aimDistance = read_ubyte(socket)*2;
                     event_user(1);
                 }
             }

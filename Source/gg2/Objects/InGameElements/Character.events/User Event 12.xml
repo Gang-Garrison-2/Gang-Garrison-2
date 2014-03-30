@@ -17,6 +17,7 @@
     var temp;
     write_ubyte(global.serializeBuffer, keyState);
     write_ushort(global.serializeBuffer, netAimDirection);
+    write_ubyte(global.serializeBuffer, aimDistance/2);
 
     if(global.updateType == QUICK_UPDATE or global.updateType == FULL_UPDATE) {
         write_ushort(global.serializeBuffer, x*5);
