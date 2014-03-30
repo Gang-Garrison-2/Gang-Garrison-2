@@ -7,5 +7,6 @@
   <resource name="draw_roundtimer" type="RESOURCE"/>
   <resource name="draw_generictimer" type="RESOURCE"/>
   <resource name="draw_kothtimer" type="RESOURCE"/>
+  <resource name="draw_dkothtimer" type="RESOURCE"/>
   <resource name="draw_intel_timer" type="RESOURCE"/>
 </resources>
