@@ -2,4 +2,5 @@
 <resources>
   <resource name="LeftDoor" type="RESOURCE"/>
   <resource name="RightDoor" type="RESOURCE"/>
+  <resource name="ControlPointSetupGate" type="RESOURCE"/>
 </resources>

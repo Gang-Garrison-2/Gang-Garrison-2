@@ -24,10 +24,10 @@
     draw_set_color(c_white);
     draw_set_alpha(.5);
     
-    drawy = yoffset+450;
+    drawy = yoffset+view_hview[0]-150;
     if(instance_exists(HealingHud))
         if(instance_exists(HealingHud.target))
-            drawy = yoffset+490;
+            drawy = yoffset+view_hview[0]-110;
         
     draw_sprite_stretched_ext(sprite_index, global.myself.team == TEAM_BLUE, 
         xoffset+mid-(HUDwidth/2)+20, drawy, HUDwidth, 36, c_white, 1);

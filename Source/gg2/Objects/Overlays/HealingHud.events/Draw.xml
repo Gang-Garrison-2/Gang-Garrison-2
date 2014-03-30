@@ -18,7 +18,7 @@
     xsize = view_wview[0];
     ysize = view_hview[0];
     xoffset = view_xview[0];
-    yoffset = view_yview[0];
+    yoffset = view_yview[0]-600+ysize;
     mid = view_wview[0]/2;
     HUDwidth = string_width("Healing: "+target.name)+20;
     

@@ -1,6 +1,7 @@
 room_caption = global.currentMap;
-
 global.startedGame = true;
+
+window_set_position(previous_window_x+previous_window_w/2-global.ingamewidth/2, previous_window_y);
 
 global.totalMapAreas = 1+instance_number(NextAreaO);
 
@@ -11,7 +12,8 @@ if global.totalMapAreas > 1 {
         global.area[i] = instance_find(NextAreaO,i-2).y;
     }
 
-    if global.currentMapArea == 1 {
+    if (global.currentMapArea == 1)
+    {
         with all if y > global.area[2] instance_destroy();
     }
     else if global.currentMapArea < global.totalMapAreas {
@@ -29,31 +31,36 @@ with(Player) {
 }
 
 if(instance_exists(IntelligenceBase) or instance_exists(Intelligence))
-    instance_create(0, 0, CTFHUD);
+{
+    if (instance_exists(ControlPointSetupGate))
+        instance_create(0, 0, InvasionHUD);
+    else
+        instance_create(0,0,CTFHUD);
+}
 else if(instance_exists(Generator))
-    instance_create(0, 0, GeneratorHUD);
-else if(instance_exists(ArenaControlPoint))
+    instance_create(0,0,GeneratorHUD);
+else if instance_exists(ArenaControlPoint)
 {
-    instance_create(0, 0, ArenaHUD);
-    if(ArenaHUD.roundStart == 0)
-        with(Player)
+    instance_create(0,0,ArenaHUD);
+    if (ArenaHUD.roundStart == 0)
+    {
+        with (Player)
             canSpawn = 0;
+    }
 }
-else if(instance_exists(KothControlPoint))
+else if instance_exists(KothControlPoint)
+    instance_create(0,0,KothHUD);
+else if instance_exists(KothRedControlPoint) && instance_exists(KothBlueControlPoint)
 {
-    instance_create(0, 0, KothHUD);
-}
-else if(instance_exists(KothRedControlPoint) and instance_exists(KothBlueControlPoint))
-{
-    with(ControlPoint)
+    with ControlPoint
         event_user(0);
-    instance_create(0, 0, DKothHUD);
+    instance_create(0,0,DKothHUD);
 }
 else if instance_exists(ControlPoint)
 {
-    with(ControlPoint)
+    with ControlPoint
         event_user(0);
-    instance_create(0, 0, ControlPointHUD);
+    instance_create(0,0,ControlPointHUD);
 }
 else
 {
@@ -61,7 +68,8 @@ else
 }
 
 instance_create(0,0,TeamSelectController);
-if !instance_exists(KillLog) instance_create(0,0,KillLog);
+if (!instance_exists(KillLog))
+    instance_create(0,0,KillLog);
 
 sound_stop_all();
 

@@ -3,7 +3,7 @@
   <sprite/>
   <solid>false</solid>
   <visible>true</visible>
-  <depth>-120000</depth>
+  <depth>-110000</depth>
   <persistent>false</persistent>
   <parent>FauxCPHUD</parent>
   <mask/>

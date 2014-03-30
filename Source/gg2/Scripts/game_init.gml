@@ -28,7 +28,7 @@
         sound_volume(global.IngameMusic, 0.8);
     if(global.FaucetMusic != -1)
         sound_volume(global.FaucetMusic, 0.8);
-        
+    
     global.sendBuffer = buffer_create();
     global.tempBuffer = buffer_create();
     global.HudCheck = false;
@@ -108,6 +108,8 @@
     global.backgroundURL = ini_read_string("Background", "BackgroundURL", "");
     global.backgroundShowVersion = ini_read_real("Background", "BackgroundShowVersion", true);
     
+    global.resolutionkind = ini_read_real("Settings", "Resolution", 1);
+    
     readClasslimitsFromIni();
 
     //thy playerlimit shalt not exceed 48!
@@ -185,6 +187,34 @@
     ini_write_real("Classlimits", "Sniper", global.classlimits[CLASS_SNIPER])
     ini_write_real("Classlimits", "Quote", global.classlimits[CLASS_QUOTE])
 
+    ini_write_real("Settings", "Resolution", global.resolutionkind);
+
+    // Fix room view resolutions
+    switch(global.resolutionkind)
+    {
+    case 0: // 5:4
+        global.ingamewidth = 780;
+        global.ingameheight = 624;
+        break;
+    case 1: // 4:3
+        global.ingamewidth = 800;
+        global.ingameheight = 600;
+        break;
+    case 2: // 16:10
+        global.ingamewidth = 848;
+        global.ingameheight = 530;
+        break;
+    case 3: // 16:9
+        global.ingamewidth = 864;
+        global.ingameheight = 486;
+        break;
+    case 4: // 2:1
+        global.ingamewidth = 888;
+        global.ingameheight = 444;
+        break;
+    }
+    rooms_fix_views();
+    
     //screw the 0 index we will start with 1
     //map_truefort 
     maps[1] = ini_read_real("Maps", "ctf_truefort", 1);

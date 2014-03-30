@@ -2,15 +2,11 @@
 <resources>
   <resource name="ClassPortraitAnimations" type="GROUP"/>
   <resource name="Gamemodes" type="GROUP"/>
-  <resource name="TeamSelectController" type="RESOURCE"/>
-  <resource name="ClassSelectController" type="RESOURCE"/>
+  <resource name="Interfaces" type="GROUP"/>
   <resource name="ScoreTableController" type="RESOURCE"/>
   <resource name="HUD" type="RESOURCE"/>
   <resource name="KillLog" type="RESOURCE"/>
-  <resource name="BubbleMenuZ" type="RESOURCE"/>
   <resource name="RespawnTimer" type="RESOURCE"/>
-  <resource name="BubbleMenuX" type="RESOURCE"/>
-  <resource name="BubbleMenuC" type="RESOURCE"/>
   <resource name="SentryHealthHud" type="RESOURCE"/>
   <resource name="NutsNBoltsHud" type="RESOURCE"/>
   <resource name="SandwichHud" type="RESOURCE"/>

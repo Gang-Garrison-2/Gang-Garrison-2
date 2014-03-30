@@ -19,7 +19,7 @@
     refireTime = 5;
     event_inherited();
     
-    bubbleRefireTime = 5;
+    bubbleRefireTime = 4;
     replenishing = 1;
     bubbleCount = 0;
     maxBubbles = 25;

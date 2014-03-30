@@ -13,26 +13,36 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">    if global.myself.object = -1 || global.myself.class!=CLASS_MEDIC exit;
-    
+        <argument kind="STRING">    if (global.myself.object = -1 or global.myself.class != CLASS_MEDIC)
+    {
+        instance_destroy();
+        exit;
+    }
     xoffset = view_xview[0];
     yoffset = view_yview[0];
-    if global.myself.team == TEAM_BLUE uberoffset=1;
-    else uberoffset=0;
+    xsize = view_wview[0];
+    ysize = view_hview[0];
+    if (global.myself.team == TEAM_BLUE)
+        uberoffset=1;
+    else
+        uberoffset = 0;
     
     draw_set_valign(fa_center);
     draw_set_halign(fa_center);
     draw_set_alpha(1);
 
     var myMedigun;
-    myMedigun=-1;
-    with(Medigun) {
-        if(ownerPlayer == global.myself) myMedigun=id;
+    myMedigun = -1;
+    with(Medigun)
+    {
+        if(ownerPlayer == global.myself)
+            myMedigun = id;
     }
-    if(myMedigun != -1) {
-        draw_healthbar(xoffset+665, yoffset+500, xoffset+785, yoffset+532,myMedigun.uberCharge*100/2000,c_black,c_white,c_white,0,true,true);
-        draw_sprite_ext(UberHudS,uberoffset,xoffset+720,yoffset+515,2,2,0,c_white,1);
-        draw_text_color(xoffset+730,yoffset+510,"SUPERBURST",c_white,c_white,c_white,c_white,1);
+    if(myMedigun != -1)
+    {
+        draw_healthbar(xoffset+xsize-135, yoffset+ysize-100, xoffset+xsize-15, yoffset+ysize-68,myMedigun.uberCharge*100/2000,c_black,c_white,c_white,0,true,true);
+        draw_sprite_ext(UberHudS,uberoffset,xoffset+xsize-80,yoffset+ysize-85,2,2,0,c_white,1);
+        draw_text_color(xoffset+xsize-70,yoffset+ysize-90,"SUPERBURST",c_white,c_white,c_white,c_white,1);
     }
 </argument>
       </arguments>

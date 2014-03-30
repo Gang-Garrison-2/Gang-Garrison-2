@@ -140,7 +140,7 @@ default:
     frictionFactor = baseFriction;
 }
 
-if(moveStatus == 1 or moveStatus == 2 or moveStatus == 4 or spinjumping)
+if(moveStatus == 1 or moveStatus == 2 or moveStatus == 4)
 {
     if !variable_local_exists("jumpFlameParticleType")
     {
@@ -173,6 +173,35 @@ if(moveStatus == 1 or moveStatus == 2 or moveStatus == 4 or spinjumping)
         }
     }
 }
+if(spinjumping)
+{
+    
+    if !variable_local_exists("jumpDustParticleType")
+    {
+        jumpDustParticleType = part_type_create();
+        part_type_sprite(jumpDustParticleType,SpeedBoostS,false,false,true);
+        part_type_alpha3(jumpDustParticleType,0.7,0.5,0);
+        part_type_life(jumpDustParticleType,15,30);
+        part_type_scale(jumpDustParticleType,1,1);
+        part_type_orientation(jumpDustParticleType, -90, -90, 0, 0, 0);
+    }
+    if !variable_global_exists("jumpDustParticleSystem")
+    {
+        global.jumpDustParticleSystem = part_system_create();
+        part_system_depth(global.jumpDustParticleSystem, 10);
+    }
+    
+    if(global.particles == PARTICLES_NORMAL or global.particles == PARTICLES_ALTERNATIVE)
+    {
+        if(random(4) &lt; 4)
+        {
+            if(sign(_last_hspeed) &gt; 0)
+                part_particles_create(global.jumpDustParticleSystem,bbox_right+1,bbox_bottom-4,jumpDustParticleType,1);
+            else
+                part_particles_create(global.jumpDustParticleSystem,bbox_left +2,bbox_bottom-4,jumpDustParticleType,1);
+        }
+    }
+}
 
 
 if(!taunting &amp;&amp; !omnomnomnom)
@@ -183,7 +212,7 @@ if(!taunting &amp;&amp; !omnomnomnom)
     if((keyState|pressedKeys) &amp; $20 and hspeed &lt; basemaxspeed)
         hspeed += runPower*controlFactor;
 }
-//divide friction as normal if going way too fast
+// divide friction as normal if going way too fast
 if(abs(hspeed) &gt; basemaxspeed * 2 or
    ((keyState|pressedKeys) &amp; $60 and abs(hspeed) &lt; basemaxspeed))
     hspeed /= baseFriction;
@@ -210,7 +239,6 @@ if (abs(hspeed) &lt; 0.195) // Overweight carrying intel and shooting will get s
 }
 
 charSetSolids();
-
 if(place_free(x,y+1)) {
     vspeed += 0.6;
     if(vspeed&gt;10) {
@@ -222,12 +250,20 @@ if(place_free(x,y+1)) {
         doublejumpUsed = 0;
     }
 }
-
 charUnsetSolids();
 
 if (intel)
 { 
-    if (random(1) &gt; 0.90 &amp;&amp; speed &gt; 0.195)
+    if (speed &gt; 0.195)
+    {
+        if (random(1) &gt; 0.90)
+        {
+            var sheet;
+            sheet = instance_create(x,y-11+random(9),LooseSheet);
+            sheet.hspeed = hspeed;
+        }
+    }
+    else if (random(1) &gt; 0.975)
     {
         var sheet;
         sheet = instance_create(x,y-11+random(9),LooseSheet);
@@ -238,7 +274,10 @@ if (intel)
         cloak=false;
         cloakAplha=1;
     }
-    intelRecharge = min(INTEL_MAX_TIMER, intelRecharge + INTEL_MAX_TIMER/(3*30));// 3*30 == it'll take 3 seconds for this to charge
+    if (!omnomnomnom) // Do not recharge intel timer if eating
+        intelRecharge = min(INTEL_MAX_TIMER, // Cap timer charge at the intel timer's length (bandwidth)
+                            intelRecharge +  // ...After adding some value to it 
+                            INTEL_MAX_TIMER/((3+abs(min(hspeed, 7))/3.5)*30)); // ...Which starts at a rate of full charge per three seconds, and reduces linearly with speed, down to full charge per five seconds with a scout's max speed
 }
  
 if (player.humiliated)

@@ -14,11 +14,7 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">if (!global.mapchanging)
-{
-instance_destroy()
-    // speed = 0;
-       // stickied = true;
-}
+    instance_destroy();
 </argument>
       </arguments>
     </action>

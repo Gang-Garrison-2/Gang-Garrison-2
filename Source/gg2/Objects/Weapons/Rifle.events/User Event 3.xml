@@ -33,6 +33,7 @@ y1=y;
 x2=x+lengthdir_x(len,owner.aimDirection);
 y2=y+lengthdir_y(len,owner.aimDirection);
 
+gunSetSolids();
 alarm[6] = alarm[0];
 while(len&gt;1) {
     xm=(x1+x2)/2;
@@ -121,6 +122,7 @@ with(Generator) {
         }
     }
 }
+gunUnsetSolids();
 
 </argument>
       </arguments>

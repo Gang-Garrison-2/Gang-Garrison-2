@@ -25,6 +25,7 @@ direction = 270;
 alarm[0]=210;
 rotspeed=1;
 fadeout = false;
+vis_angle = 0;
 </argument>
       </arguments>
     </action>

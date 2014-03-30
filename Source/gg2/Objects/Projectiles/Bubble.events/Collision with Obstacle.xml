@@ -13,7 +13,8 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if(place_meeting(x, y, Obstacle))
+        <argument kind="STRING">wallSetSolid();
+if(place_meeting(x, y, Obstacle))
 {
     move_outside_solid(direction-180, speed);
 }
@@ -38,6 +39,7 @@ if(place_meeting(x + hspeed, y + vspeed, Obstacle))
 {
     speed = 0;
 }
+wallUnsetSolid();
 </argument>
       </arguments>
     </action>

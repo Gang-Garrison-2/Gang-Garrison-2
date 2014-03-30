@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<event category="COLLISION" with="Obstacle">
+<event category="OTHER" id="23">
   <actions>
     <action id="603" library="1">
       <!--action name: Code-->
@@ -13,7 +13,12 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">event_user(0);
+        <argument kind="STRING">receiveCompleteMessage(global.serverSocket,7,global.deserializeBuffer);
+global.timeLimitMins = read_ubyte(global.deserializeBuffer);
+timeLimit=global.timeLimitMins*30*60;
+timer=read_uint(global.deserializeBuffer);
+global.setupTimer=read_ushort(global.deserializeBuffer);
+
 </argument>
       </arguments>
     </action>

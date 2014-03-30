@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
   <resource name="CTFHUD" type="RESOURCE"/>
+  <resource name="InvasionHUD" type="RESOURCE"/>
   <resource name="ControlPointHUD" type="RESOURCE"/>
   <resource name="FauxCPHUD" type="RESOURCE"/>
   <resource name="ArenaHUD" type="RESOURCE"/>

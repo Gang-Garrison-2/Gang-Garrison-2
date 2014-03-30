@@ -49,14 +49,20 @@ if (built == 1 and currentWeapon == -1)
 }
 if (humiliated == 1 and built == 1 and currentWeapon != -1)
     event_user(1);
+    
+wallSetSolid();
 
-if(place_free(x,y+1))
+if(place_free(x+hspeed, y+vspeed+0.6))
     vspeed += 0.6;
+if(!place_free(x+hspeed, y+vspeed) and vspeed &gt; 0)
+    event_user(2);
 
-if(vspeed&gt;10)
-    vspeed=10;
+if(vspeed &gt; 10)
+    vspeed = 10;
 
-if(oldVspeed!=0 and vspeed==0 and global.isHost)
+wallUnsetSolid();
+
+if(oldVspeed != 0 and vspeed == 0 and global.isHost)
 {
     write_ubyte(global.sendBuffer, SENTRY_POSITION);
     write_ubyte(global.sendBuffer, ds_list_find_index(global.players, ownerPlayer));

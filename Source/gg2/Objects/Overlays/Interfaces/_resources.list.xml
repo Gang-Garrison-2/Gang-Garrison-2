@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="TeamSelectController" type="RESOURCE"/>
+  <resource name="ClassSelectController" type="RESOURCE"/>
+  <resource name="BubbleMenuZ" type="RESOURCE"/>
+  <resource name="BubbleMenuX" type="RESOURCE"/>
+  <resource name="BubbleMenuC" type="RESOURCE"/>
+</resources>

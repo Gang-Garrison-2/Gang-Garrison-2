@@ -13,11 +13,13 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if random(25)&lt;2 {
-hspeed += 1.1*other.hspeed;
-vspeed += 0.9*other.vspeed;
-rotspeed = other.hspeed*-0.2*random(51);
-}</argument>
+        <argument kind="STRING">if (random(25) &lt; 2)
+{
+    hspeed += 1.1*other.hspeed;
+    vspeed += 0.9*other.vspeed;
+    rotspeed = other.hspeed*-0.2*random(51);
+}
+</argument>
       </arguments>
     </action>
   </actions>
