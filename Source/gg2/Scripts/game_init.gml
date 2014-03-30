@@ -231,11 +231,11 @@
     if (global.Server_RespawntimeSec == 0)
     {
         global.Server_Respawntime = 1;
-    }    
+    }
     else
     {
         global.Server_Respawntime = global.Server_RespawntimeSec * 30;    
-    }    
+    }
     
     // I have to include this, or the client'll complain about an unknown variable.
     global.mapchanging = false;
@@ -465,7 +465,12 @@ global.launchMap = "";
      ***/
     registry_set_root(1); // HKLM
     global.NTKernelVersion = real(registry_read_string_ext("\SOFTWARE\Microsoft\Windows NT\CurrentVersion\", "CurrentVersion")); // SIC
-
+    
+    globalvar previous_window_x, previous_window_y, previous_window_w;
+    previous_window_x = window_get_x();
+    previous_window_y = window_get_y();
+    previous_window_w = window_get_width();
+    
     if (file_exists(CrosshairFilename))
     {
         sprite_replace(CrosshairS,CrosshairFilename,1,CrosshairRemoveBG,false,0,0);

@@ -29,11 +29,13 @@ else
 x += hspeed * global.delta_factor;
 y += vspeed * global.delta_factor;
 
-gunSetSolids();
-if (place_meeting(x, y, ControlPointSetupGate) and ControlPointSetupGate.solid)
-    instance_destroy();
-gunUnsetSolids();
-    
+if (instance_exists(ControlPointSetupGate))
+{
+    gunSetSolids();
+    if (place_meeting(x, y, ControlPointSetupGate) and ControlPointSetupGate.solid)
+        instance_destroy();
+    gunUnsetSolids();
+}
 x -= hspeed;
 y -= vspeed;
 

@@ -13,8 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">instance_destroy();
-
+        <argument kind="STRING">
 hash = "";
 title = "";
 url = "";

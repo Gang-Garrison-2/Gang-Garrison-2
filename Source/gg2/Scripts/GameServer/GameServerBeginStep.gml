@@ -57,7 +57,7 @@ if(global.winners != -1 and !global.mapchanging)
     }
     
     global.mapchanging = true;
-    impendingMapChange = 300 / global.delta_factor; // in 300 ticks (ten seconds), we'll do a map change
+    impendingMapChange = 300; // in 300 ticks (ten seconds), we'll do a map change
     
     write_ubyte(global.sendBuffer, MAP_END);
     write_ubyte(global.sendBuffer, string_length(global.nextMap));

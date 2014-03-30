@@ -12,11 +12,12 @@
 if(!instance_exists(RateController))
     instance_create(0, 0, RateController);
 
-globalvar previous_window_x, previous_window_y, previous_window_w;
-previous_window_x = window_get_x();
-previous_window_y = window_get_y();
-previous_window_w = window_get_width();
-
+if(!global.fullscreen)
+{
+    previous_window_x = window_get_x();
+    previous_window_y = window_get_y();
+    previous_window_w = window_get_width();
+}
 if(global.changed_resolution)
 {
     rooms_fix_views();

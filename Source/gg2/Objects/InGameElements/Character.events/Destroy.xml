@@ -49,7 +49,7 @@
     }
     
     player.object=-1;
-    if (collision_point(x,y,SpawnRoom,0,0))
+    if (place_meeting(x,y,SpawnRoom))
         player.alarm[5] = 1;
     else 
         player.alarm[5] = global.Server_Respawntime / global.delta_factor;

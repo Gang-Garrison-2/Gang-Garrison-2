@@ -331,11 +331,19 @@ if (player.humiliated)
          sprite_length);
 }
 else
-    animationImage = (animationImage+
-     min(abs(hspeed)*sign(hspeed), 8)
-     *image_xscale*global.delta_factor/20)
-    mod sprite_length;
-    
+{
+    if (place_free(x,y+1) and hspeed != 0 and player.class == CLASS_QUOTE)
+    {
+        animationImage = 1;
+    }
+    else
+    {
+        animationImage = (animationImage+
+         min(abs(hspeed)*sign(hspeed), 8)
+         *image_xscale*global.delta_factor/20)
+        mod sprite_length;
+    }
+}
 // ensure positive animationImage
 animationImage = (animationImage+sprite_length) mod sprite_length;
 
