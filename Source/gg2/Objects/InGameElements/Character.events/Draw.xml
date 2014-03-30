@@ -62,6 +62,7 @@ if (zoomed)
     else
         sprite = SniperCrouchBlueS;
     overlaySprite = sniperCrouchOverlay;
+    animationImage = animationImage mod 2; // sniper crouch only has two frames, avoid overflow
 }
 // most classes, check for running jumping and standing
 else if (player.class != CLASS_QUOTE)
@@ -149,7 +150,7 @@ else if (abs(hspeed) &lt; 3 and equipmentOffset = -2 and !taunting)
     yr += 2;
 }
 
-if(player.class != CLASS_QUOTE) // quote still uses the old anim system so animationOffset is still set, override it here for other classes
+if(player.class != CLASS_QUOTE or zoomed) // quote and sniper zoon still use the old anim system so animationOffset is still set, override it here for everything else
     animationOffset = 0;
 
 
@@ -174,7 +175,7 @@ else if (player.humiliated)
 else if (!taunting)
 {
     if (intel and player.class != CLASS_QUOTE)
-        draw_sprite_ext(spriteIntel,0,xr,yr+equipmentOffset, image_xscale, image_yscale, 0, c_white, image_alpha);
+        draw_sprite_ext(spriteIntel,0,xr,round(y)+equipmentOffset, image_xscale, image_yscale, 0, c_white, image_alpha);
     if (cloak)
     {
         if (!ubered)
@@ -218,16 +219,16 @@ if (distance_to_point(mouse_x, mouse_y) &lt; 25)
     else
         draw_set_color(c_blue);
     
-    draw_text(xr, yr-35, player.name);
+    draw_text(xr, round(y)-35, player.name);
     
     if(team == global.myself.team &amp;&amp; global.showTeammateStats)
     {
         if(weapons[0] == Medigun)
-            draw_text(xr,yr+50, "Superburst: " + string(currentWeapon.uberCharge/20) + "%");
+            draw_text(xr,round(y)+50, "Superburst: " + string(currentWeapon.uberCharge/20) + "%");
         else if(weapons[0] == Shotgun)
-            draw_text(xr,yr+50, "Nuts 'N' Bolts: " + string(nutsNBolts));
+            draw_text(xr,round(y)+50, "Nuts 'N' Bolts: " + string(nutsNBolts));
         else if(weapons[0] == Minegun)
-            draw_text(xr,yr+50, "Lobbed Mines: " + string(currentWeapon.lobbed));
+            draw_text(xr,round(y)+50, "Lobbed Mines: " + string(currentWeapon.lobbed));
     }
 }
 

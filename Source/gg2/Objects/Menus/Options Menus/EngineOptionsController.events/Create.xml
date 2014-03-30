@@ -81,22 +81,24 @@
     
     menu_addedit_select("Ingame Aspect Ratio:", "global.resolutionkind", '
         gg2_write_ini("Settings", "Resolution", argument0);
-        warnoptioneffect = !global.isHost;
+        if(room != Options)
+            warnoptioneffect = !global.isHost;
         global.changed_resolution = true;
-    ','
-        menu_add_option(0, "5:4");
-        menu_add_option(1, "4:3");
-        menu_add_option(2, "16:10");
-        menu_add_option(3, "16:9");
-        menu_add_option(4, "2:1");
     ');
+    menu_add_option(0, "5:4");
+    menu_add_option(1, "4:3");
+    menu_add_option(2, "16:10");
+    menu_add_option(3, "16:9");
+    menu_add_option(4, "2:1");
+    
     menu_addedit_select("Framerate:", "global.frameratekind", '
         gg2_write_ini("Settings", "Framerate", argument0);
-        warnoptioneffect = !global.isHost;
-    ','
-        menu_add_option(0, "30");
-        menu_add_option(1, "60");
+        if(room != Options)
+            warnoptioneffect = !global.isHost;
     ');
+    menu_add_option(0, "30");
+    menu_add_option(1, "60");
+    
     menu_addedit_select("V Sync:", "global.monitorSync", '
         gg2_write_ini("Settings", "Monitor Sync", argument0);
         if (!instance_exists(GameServer))
