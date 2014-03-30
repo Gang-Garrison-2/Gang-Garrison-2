@@ -117,7 +117,7 @@
         if(global.myself.team == TEAM_BLUE)
             redintelstatus = 3;
         if(global.myself.team == TEAM_RED)
-            blueiintelstatus = 3;
+            blueintelstatus = 3;
     }
     
     if (blueintelstatus == 0)

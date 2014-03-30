@@ -127,7 +127,6 @@
     frictionFactor = baseFriction;
     basemaxspeed = abs(runPower * baseControl / (baseFriction-1));
     highestbasemaxspeed = 9.735; // approximation error &lt; 0.0017 of scout's base max speed
-    
 
     // used for certain rewards
     overlay = -1;
