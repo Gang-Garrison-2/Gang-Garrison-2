@@ -49,7 +49,7 @@ keybyte = 0;
     40 - left
     80 - up
 */
-socket_send(global.serverSocket);
+
 //character object exists
 if(global.myself.object != -1)
 {
