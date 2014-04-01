@@ -43,7 +43,7 @@
     onground = true;
     still = true;
     yoffset = 0;
-    sprite_special = global.isPartyTime or global.isXmasTime;
+    sprite_special = global.gg_birthday or global.xmas;
     
     // class sprite vars
     spriteRun = sprite_index;

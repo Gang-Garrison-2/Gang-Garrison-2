@@ -14,7 +14,7 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">// Limit speed to prevent obstacle penetration
-// (each dimension separately to avoid affecting direction)
+// (each dimension separately to avoid one vector affecting the other)
 hspeed = min(abs(hspeed), 15) * sign(hspeed);
 vspeed = min(abs(vspeed), 15) * sign(vspeed);
 
