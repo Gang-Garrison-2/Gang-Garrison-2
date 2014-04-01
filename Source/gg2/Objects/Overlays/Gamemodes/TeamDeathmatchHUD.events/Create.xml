@@ -17,6 +17,8 @@
 timer=timeLimit;
 teamoffset=0;
 killLimit = global.killLimit;
+overtime = false;
+
 </argument>
       </arguments>
     </action>
