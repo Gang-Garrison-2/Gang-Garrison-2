@@ -20,7 +20,7 @@ if (global.run_virtual_ticks)
 {
     if (global.gibLevel &gt; 0)
     {
-        if(abs(speed/bloodchance) &gt; random(16/global.gibLevel))
+        if(abs(speed/bloodchance)*bloodiness/maxBloodiness &gt; random(16/global.gibLevel))
         {
             var blood;
             blood = instance_create(x,y-1,BloodDrop);
@@ -28,6 +28,8 @@ if (global.run_virtual_ticks)
             blood.odir=point_direction(x,y,x+hspeed,y+vspeed);
             if (object_index == PumpkinGib)
                 blood.sprite_index = PumpkinJuiceS;
+            
+            bloodiness -= 0.5;
             
             with(blood)
             {

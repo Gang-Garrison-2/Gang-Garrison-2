@@ -24,6 +24,12 @@ else
     vspeed += 0.2 * global.delta_factor;
     vspeed = min(vspeed,8);
     splashThreshhold = true;
+    if (global.run_virtual_ticks)
+    {
+        particleCycle = (particleCycle + 1) mod 2;
+        if(particleCycle)
+            instance_create(x, y, MineTrail);
+    }
 }
 
 x += hspeed * global.delta_factor;
@@ -38,7 +44,6 @@ if (instance_exists(ControlPointSetupGate))
 }
 x -= hspeed;
 y -= vspeed;
-
 
 </argument>
       </arguments>

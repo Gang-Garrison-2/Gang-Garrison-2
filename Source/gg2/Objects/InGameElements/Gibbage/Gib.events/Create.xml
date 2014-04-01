@@ -28,6 +28,9 @@ fadeout = false;
 vis_angle = 0;
 air_friction = power(0.97, global.delta_factor);
 my_gravity = 0.7 * global.delta_factor;
+bloodiness = 50;
+maxBloodiness = bloodiness;
+
 </argument>
       </arguments>
     </action>

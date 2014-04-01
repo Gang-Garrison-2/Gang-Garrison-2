@@ -52,7 +52,9 @@ else
     ubercolour = c_blue;
 
 // sprite resource selection
-var sprite, overlaySprite;
+var sprite, overlaySprite, noNewAnim;
+noNewAnim = player.class == CLASS_QUOTE or sprite_special or player.humiliated;
+
 if (zoomed)
 {
     if (team == TEAM_RED)
@@ -63,7 +65,7 @@ if (zoomed)
     animationImage = animationImage mod 2; // sniper crouch only has two frames, avoid overflow
 }
 // most classes, check for running jumping and standing
-else if (player.class != CLASS_QUOTE and !sprite_special)
+else if (!noNewAnim)
 {
     if(!onground)
         sprite = spriteJump;
@@ -130,7 +132,7 @@ else
 
 if (sprite != sprite_index and (sprite == spriteLeanR or sprite == spriteLeanL)
     and !taunting and !omnomnomnom and !stabbing // These override "sprite"
-    and player.class != CLASS_QUOTE and !sprite_special) // Quote doesn't have new animations yet
+    and !noNewAnim)
     yoffset = 6;
 else
     yoffset = 0;
@@ -142,7 +144,8 @@ equipmentOffset *= -2; // two pixels up for whether the sprite is bobbing(above 
 
 overlayOffset = equipmentOffset;
 
-if (player.class == CLASS_HEAVY or player.class == CLASS_SOLDIER or player.class == CLASS_QUOTE or taunting or sprite_special)
+if (player.class == CLASS_HEAVY or player.class == CLASS_SOLDIER
+    or noNewAnim or taunting)
     equipmentOffset = 0; // override run bob for classes with no run bob
 else if (abs(hspeed) &lt; 3 and equipmentOffset = -2 and !taunting)
 {
@@ -153,7 +156,7 @@ else if (abs(hspeed) &lt; 3 and equipmentOffset = -2 and !taunting)
 else
     overlayOffset = equipmentOffset;
 
-if(player.class != CLASS_QUOTE and !zoomed and !sprite_special) // quote and sniper zoom still use the old anim system so animationOffset is still set, override it here for everything else
+if(!noNewAnim) // quote and sniper zoom still use the old anim system so animationOffset is still set, override it here for everything else
     animationOffset = 0;
 
 

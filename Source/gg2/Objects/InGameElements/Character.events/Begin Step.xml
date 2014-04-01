@@ -326,9 +326,9 @@ if (player.humiliated)
     if (!place_free(x,y+1) &amp;&amp; hspeed != 0)
         animationImage = 1+
         ((animationImage-1+
-          min(abs(hspeed), 8)*sign(hspeed)
+          min(abs(hspeed), 8)
           *global.delta_factor/20) mod 
-         sprite_length);
+         2);
 }
 else
 {
@@ -343,9 +343,9 @@ else
          *image_xscale*global.delta_factor/20)
         mod sprite_length;
     }
+    // ensure positive animationImage
+    animationImage = (animationImage+sprite_length) mod sprite_length;
 }
-// ensure positive animationImage
-animationImage = (animationImage+sprite_length) mod sprite_length;
 
 charUnsetSolids();
 
