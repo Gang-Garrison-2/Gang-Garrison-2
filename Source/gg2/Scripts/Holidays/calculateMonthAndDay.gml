@@ -19,7 +19,11 @@ if((date_get_month(currentDate) == 12 and date_get_day(currentDate) > 23) or (da
 
 if(global.aFirst)
     sprite_assign(BubblesS, BubbleFaceS);
-    
+
+global.isPartyTime = false;
+global.isXmasTime = false;
+
+
 if(global.gg_birthday)
     partyTime();
 if(global.xmas)

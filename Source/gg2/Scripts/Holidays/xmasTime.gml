@@ -35,4 +35,5 @@
     sprite_assign(BloodDropS, BloodDropSX);
     sprite_assign(SniperCrouchRedS, SniperCrouchRedSX);
     sprite_assign(SniperCrouchBlueS, SniperCrouchBlueSX);
+    global.isXmasTime = true;
 }

@@ -43,6 +43,8 @@
     onground = true;
     still = true;
     yoffset = 0;
+    sprite_special = global.isPartyTime or global.isXmasTime;
+    
     // class sprite vars
     spriteRun = sprite_index;
     spriteJump = sprite_index;

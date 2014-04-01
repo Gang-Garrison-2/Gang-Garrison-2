@@ -14,7 +14,12 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">global.isHost = true;
-if(global.dedicatedMode == 0) {
+if(global.dedicatedMode == 0)
+{
+    with(DevMessageChecker)
+        instance_destroy();
+    with(DevMessagePopup)
+        instance_destroy();
     instance_create(x,y,HostOptionsController);
     instance_destroy();
 }

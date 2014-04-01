@@ -312,7 +312,7 @@ if (intel)
                             INTEL_MAX_TIMER/((3+abs(min(hspeed, 7))/3.5)*30)); // ...Which starts at a rate of full charge per three seconds, and reduces linearly with speed, down to full charge per five seconds with a scout's max speed
 }
 var sprite_length;
-if(player.class == CLASS_QUOTE)
+if(player.class == CLASS_QUOTE or sprite_special or zoomed)
     sprite_length = 2;
 else
     sprite_length = CHARACTER_ANIMATION_LEN;

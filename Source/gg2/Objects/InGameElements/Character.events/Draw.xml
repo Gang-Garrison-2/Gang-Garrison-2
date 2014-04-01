@@ -22,9 +22,7 @@ if (distance_to_point(xoffset+xsize/2,yoffset+ysize/2) &gt; 800)
     exit;
 
 if(intel and intelRecharge &lt; 900)
-{
     draw_intel_timer(intelRecharge/900, team == TEAM_RED, -8);
-}
 
 var xr, yr;
 xr = round(x);
@@ -65,7 +63,7 @@ if (zoomed)
     animationImage = animationImage mod 2; // sniper crouch only has two frames, avoid overflow
 }
 // most classes, check for running jumping and standing
-else if (player.class != CLASS_QUOTE)
+else if (player.class != CLASS_QUOTE and !sprite_special)
 {
     if(!onground)
         sprite = spriteJump;
@@ -132,7 +130,7 @@ else
 
 if (sprite != sprite_index and (sprite == spriteLeanR or sprite == spriteLeanL)
     and !taunting and !omnomnomnom and !stabbing // These override "sprite"
-    and player.class != CLASS_QUOTE) // Quote doesn't have new animations yet
+    and player.class != CLASS_QUOTE and !sprite_special) // Quote doesn't have new animations yet
     yoffset = 6;
 else
     yoffset = 0;
@@ -142,19 +140,25 @@ equipmentOffset = ((sprite == spriteRun) and
                and onground;
 equipmentOffset *= -2; // two pixels up for whether the sprite is bobbing(above expression gives one down)
 
-if (player.class == CLASS_HEAVY or player.class == CLASS_SOLDIER or player.class == CLASS_QUOTE or taunting)
+overlayOffset = equipmentOffset;
+
+if (player.class == CLASS_HEAVY or player.class == CLASS_SOLDIER or player.class == CLASS_QUOTE or taunting or sprite_special)
     equipmentOffset = 0; // override run bob for classes with no run bob
 else if (abs(hspeed) &lt; 3 and equipmentOffset = -2 and !taunting)
 {
     equipmentOffset += 2;
     yr += 2;
+    overlayOffset = equipmentOffset-2; // mad because overlays use yr
 }
+else
+    overlayOffset = equipmentOffset;
 
-if(player.class != CLASS_QUOTE or zoomed) // quote and sniper zoon still use the old anim system so animationOffset is still set, override it here for everything else
+if(player.class != CLASS_QUOTE and !zoomed and !sprite_special) // quote and sniper zoom still use the old anim system so animationOffset is still set, override it here for everything else
     animationOffset = 0;
 
 
 equipmentOffset += yoffset;
+overlayOffset += yoffset;
 
 yr += yoffset;
 
@@ -174,7 +178,7 @@ else if (player.humiliated)
     draw_sprite_ext(humiliationPoses,floor(animationImage)+humiliationOffset,xr,yr,image_xscale,image_yscale,image_angle,c_white,image_alpha);
 else if (!taunting)
 {
-    if (intel and player.class != CLASS_QUOTE)
+    if (intel and player.class != CLASS_QUOTE and !zoomed)
         draw_sprite_ext(spriteIntel,0,xr,round(y)+equipmentOffset, image_xscale, image_yscale, 0, c_white, image_alpha);
     if (cloak)
     {
@@ -189,11 +193,11 @@ else if (!taunting)
     else
     {
         if (!ubered)
-            draw_sprite_ext_overlay(sprite,overlaySprite,floor(animationImage+animationOffset),xr,yr,image_xscale,image_yscale,image_angle,c_white,image_alpha);
+            draw_sprite_ext_overlay(sprite,overlaySprite,floor(animationImage+animationOffset),xr,yr,image_xscale,image_yscale,image_angle,c_white,image_alpha,overlayOffset);
         else if (ubered)
         {
-            draw_sprite_ext_overlay(sprite,overlaySprite,floor(animationImage+animationOffset),xr,yr,image_xscale,image_yscale,image_angle,c_white,1);
-            draw_sprite_ext_overlay(sprite,overlaySprite,floor(animationImage+animationOffset),xr,yr,image_xscale,image_yscale,image_angle,ubercolour,0.7);
+            draw_sprite_ext_overlay(sprite,overlaySprite,floor(animationImage+animationOffset),xr,yr,image_xscale,image_yscale,image_angle,c_white,1,overlayOffset);
+            draw_sprite_ext_overlay(sprite,overlaySprite,floor(animationImage+animationOffset),xr,yr,image_xscale,image_yscale,image_angle,ubercolour,0.7,overlayOffset);
         }
     }
 }

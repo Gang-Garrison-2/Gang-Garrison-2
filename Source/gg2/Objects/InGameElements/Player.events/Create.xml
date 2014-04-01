@@ -73,6 +73,7 @@
     // Haxxy rewards
     rewards = -1;
     ghost = noone;
+    rewardAuthSuccess(self, 'BHHe');
 }
 </argument>
       </arguments>

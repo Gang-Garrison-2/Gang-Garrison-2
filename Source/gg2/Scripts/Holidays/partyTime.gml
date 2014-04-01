@@ -35,4 +35,5 @@
     sprite_assign(BloodDropS, BloodDropSP);
     sprite_assign(SniperCrouchRedS, SniperCrouchRedSP);
     sprite_assign(SniperCrouchBlueS, SniperCrouchBlueSP);
+    global.isPartyTime = true;
 }
