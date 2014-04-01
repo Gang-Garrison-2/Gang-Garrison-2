@@ -41,15 +41,15 @@
   <gameInfo>
     <gameId>907152</gameId>
     <author>Faucet Software</author>
-    <version>2.7.0b10</version>
+    <version>2.7.1</version>
     <information/>
     <versionMajor>2</versionMajor>
     <versionMinor>7</versionMinor>
-    <versionRelease>0</versionRelease>
-    <versionBuild>10</versionBuild>
+    <versionRelease>1</versionRelease>
+    <versionBuild>0</versionBuild>
     <company>Faucet Software</company>
     <product>Gang Garrison 2</product>
-    <copyright>Copyright © 2008-2013 Faucet Software</copyright>
+    <copyright>Copyright © 2008-2014 Faucet Software</copyright>
     <description/>
     <directPlayGuid>62130cf64e5cf4be1f2e1c44c2427da6</directPlayGuid>
   </gameInfo>
