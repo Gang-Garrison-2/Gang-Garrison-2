@@ -14,7 +14,9 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">// Limit speed to prevent obstacle penetration
-speed = min(speed, 15);
+// (each dimension separately to avoid affecting direction)
+hspeed = min(abs(hspeed), 15) * sign(hspeed);
+vspeed = min(abs(vspeed), 15) * sign(vspeed);
 
 // Some afterburn thing, here instead of begin step to avoid code execution order mistakes
 timeUnscathed = min(timeUnscathed+1, 10*30);

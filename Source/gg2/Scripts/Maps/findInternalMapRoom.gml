@@ -39,6 +39,8 @@ case "dkoth_atalia":
 case "dkoth_sixties":
 case "dkoth_60s":
     return Sixties;
+case "tdm_mantic":
+    return Mantic;
 case "ctf_2dfort[0]":
 case "ctf_2dfort1":
 case "ctf_oldfort":

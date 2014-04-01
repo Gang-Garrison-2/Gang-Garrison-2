@@ -109,8 +109,11 @@
 
     currentMapIndex = -1;
     global.currentMapArea = 1;
-
-    serverGotoMap(nextMapInRotation());
+    
+    if(global.launchMap == "")
+        serverGotoMap(nextMapInRotation());
+    else
+        serverGotoMap(global.launchMap);
     
     global.joinedServerName = global.serverName; // so no errors of unknown variable occur when you create a server
     global.mapchanging = false; 

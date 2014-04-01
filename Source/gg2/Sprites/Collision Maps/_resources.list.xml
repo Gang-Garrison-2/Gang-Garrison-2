@@ -19,4 +19,5 @@
   <resource name="SixtiesS" type="RESOURCE"/>
   <resource name="AvantiS" type="RESOURCE"/>
   <resource name="DebugRoomS" type="RESOURCE"/>
+  <resource name="ManticS" type="RESOURCE"/>
 </resources>

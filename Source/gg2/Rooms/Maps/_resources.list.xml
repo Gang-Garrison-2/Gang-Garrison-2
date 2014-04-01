@@ -18,6 +18,7 @@
   <resource name="Atalia" type="RESOURCE"/>
   <resource name="Sixties" type="RESOURCE"/>
   <resource name="DebugRoom" type="RESOURCE"/>
+  <resource name="Mantic" type="RESOURCE"/>
   <resource name="CustomMapRoom" type="RESOURCE"/>
   <resource name="Oldfort" type="RESOURCE"/>
 </resources>

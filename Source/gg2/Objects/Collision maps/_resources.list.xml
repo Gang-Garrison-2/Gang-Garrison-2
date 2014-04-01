@@ -20,6 +20,7 @@
   <resource name="AtaliaO" type="RESOURCE"/>
   <resource name="SixtiesO" type="RESOURCE"/>
   <resource name="DebugRoomO" type="RESOURCE"/>
+  <resource name="ManticO" type="RESOURCE"/>
   <resource name="OldfortO" type="RESOURCE"/>
   <resource name="CustomMapO" type="RESOURCE"/>
 </resources>

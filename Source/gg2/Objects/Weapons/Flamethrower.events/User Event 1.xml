@@ -15,8 +15,10 @@
       <arguments>
         <argument kind="STRING">{
     if (readyToShoot and ammoCount &gt;= 1.8
-        and (!collision_line(x,y,x+lengthdir_x(25,owner.aimDirection),y+lengthdir_y(25,owner.aimDirection),Obstacle,1,0)
-         and !place_meeting(x+lengthdir_x(25,owner.aimDirection),y+lengthdir_y(25,owner.aimDirection),TeamGate)
+        and !collision_line(x,y,x+lengthdir_x(25,owner.aimDirection),y+lengthdir_y(25,owner.aimDirection),Obstacle,1,0)
+        and !collision_line(x,y,x+lengthdir_x(25,owner.aimDirection),y+lengthdir_y(25,owner.aimDirection),BulletWall,1,0)
+        and !collision_line(x,y,x+lengthdir_x(25,owner.aimDirection),y+lengthdir_y(25,owner.aimDirection),IntelGate,1,0)
+        and (!collision_line(x,y,x+lengthdir_x(25,owner.aimDirection),y+lengthdir_y(25,owner.aimDirection),TeamGate,1,0)
          or global.mapchanging))
     {
         if(alarm[3] &lt;= 0)

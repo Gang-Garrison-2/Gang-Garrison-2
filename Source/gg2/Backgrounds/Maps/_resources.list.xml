@@ -20,4 +20,5 @@
   <resource name="OldfortB" type="RESOURCE"/>
   <resource name="AvantiB" type="RESOURCE"/>
   <resource name="CustomMapB" type="RESOURCE"/>
+  <resource name="ManticB" type="RESOURCE"/>
 </resources>
