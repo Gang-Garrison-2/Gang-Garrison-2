@@ -14,7 +14,23 @@
     timestamp += string(date_get_second(currentDate));
     
     if instance_exists(PlayerControl)
-        serverMap = " " + global.joinedServerName + " " + global.currentMap;
+    {
+        //sanitize joined servername
+        //list taken from http://msdn.microsoft.com/en-us/library/aa365247%28VS.85%29
+        var sanitised;
+        sanitised = global.joinedServerName;
+        sanitised = string_replace_all(sanitised, '<', '_');
+        sanitised = string_replace_all(sanitised, '>', '_');
+        sanitised = string_replace_all(sanitised, ':', '_');
+        sanitised = string_replace_all(sanitised, '"', '_');
+        sanitised = string_replace_all(sanitised, '/', '_');
+        sanitised = string_replace_all(sanitised, '\', '_');
+        sanitised = string_replace_all(sanitised, '|', '_');
+        sanitised = string_replace_all(sanitised, '?', '_');
+        sanitised = string_replace_all(sanitised, '*', '_');
+        
+        serverMap = " " + sanitised + " " + global.currentMap;
+    }
     else
         serverMap = "";
     
