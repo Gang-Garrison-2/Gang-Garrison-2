@@ -24,8 +24,8 @@ if zooming==true{
     if zoom &lt; 2 zoom += 0.1 * global.delta_factor;
 }
 draw_sprite_ext(DeathCamS,0,view_xview+400,view_yview+300,zoom,zoom,0,c_white,1);
-draw_rectangle_color(view_xview,view_yview,view_xview+800,view_yview+100,c_black,c_black,c_black,c_black,0);
-draw_rectangle_color(view_xview,view_yview+500,view_xview+800,view_yview+600,c_black,c_black,c_black,c_black,0);
+draw_rectangle_color(view_xview,view_yview,view_xview+xsize,view_yview+100,c_black,c_black,c_black,c_black,0);
+draw_rectangle_color(view_xview,view_yview+500,view_xview+ysize,view_yview+600,c_black,c_black,c_black,c_black,0);
 draw_set_halign(fa_center);
 draw_set_valign(fa_center);
 if team == TEAM_RED draw_set_color(c_blue);
