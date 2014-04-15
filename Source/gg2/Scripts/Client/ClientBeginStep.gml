@@ -57,19 +57,37 @@ do {
                 usePlugins = pluginsRequired || !global.serverPluginsPrompt;
                 if (global.serverPluginsPrompt)
                 {
+                    // Split up plugin list
+                    var pluginList;
+                    pluginList = split(plugins, ',');
+
+                    // Iterate over list and make displayable list without hashes
+                    var displayList, i;
+                    displayList = '';
+                    for (i = 0; i < ds_list_size(pluginList); i += 1)
+                    {
+                        var pluginParts;
+                        pluginParts = split(ds_list_find_value(pluginList, i), '@');
+                        displayList += '- ' + ds_list_find_value(pluginParts, 0) + '#';
+                        ds_list_destroy(pluginParts);
+                    }
+
+                    // Destroy list
+                    ds_list_destroy(plugins);
+                    
                     var prompt;
                     if (pluginsRequired)
                     {
-                        prompt = show_question(
-                            "This server requires the following plugins to play on it: "
-                            + string_replace_all(plugins, ",", "#")
-                            + '#They are downloaded from the source: "'
-                            + PLUGIN_SOURCE
-                            + '"#The source states: "'
+                        prompt = show_message_ext(
+                            'You need these plugins to play on this server: #'
+                            + displayList
                             + PLUGIN_SOURCE_NOTICE
-                            + '"#Do you wish to download them and continue connecting?'
+                            + '#Do you want to download them and join the server?',
+                            'Download and join',
+                            '',
+                            'Disconnect'
                         );
-                        if (!prompt)
+                        if (prompt != 1)
                         {
                             instance_destroy();
                             exit;
@@ -77,16 +95,16 @@ do {
                     }
                     else
                     {
-                        prompt = show_question(
-                            "This server suggests the following optional plugins to play on it: "
-                            + string_replace_all(plugins, ",", "#")
-                            + '#They are downloaded from the source: "'
-                            + PLUGIN_SOURCE
-                            + '"#The source states: "'
+                        prompt = show_message_ext(
+                            'These optional plugins are suggested for this server: #'
+                            + displayList
                             + PLUGIN_SOURCE_NOTICE
-                            + '"#Do you wish to download them and use them?'
+                            + '#Do you want to download them?',
+                            'Download',
+                            '',
+                            'Skip'
                         );
-                        if (prompt)
+                        if (prompt == 1)
                         {
                             usePlugins = true;
                         }
