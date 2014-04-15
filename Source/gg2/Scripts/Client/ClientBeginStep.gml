@@ -90,6 +90,11 @@ do {
                         {
                             usePlugins = true;
                         }
+                        else
+                        {
+                            // We set this so that we won't prompt for plugins again if we re-connect to download a map
+                            skippedPlugins = true;
+                        }
                     }
                 }
                 if (usePlugins)
@@ -461,14 +466,15 @@ do {
                 }
                 if(!file_exists("Maps/" + global.currentMap + ".png") or CustomMapGetMapMD5(global.currentMap) != global.currentMapMD5)
                 {   // Reconnect to the server to download the map
-                    var oldReturnRoom;
+                    var oldReturnRoom, didSkipPlugins;
                     oldReturnRoom = returnRoom;
+                    didSkipPlugins = skippedPlugins;
                     returnRoom = DownloadRoom;
                     if (global.serverPluginsInUse)
                         noUnloadPlugins = true;
                     event_perform(ev_destroy,0);
                     ClientCreate();
-                    if (global.serverPluginsInUse)
+                    if (global.serverPluginsInUse or didSkipPlugins)
                         noReloadPlugins = true;
                     returnRoom = oldReturnRoom;
                     usePreviousPwd = true;

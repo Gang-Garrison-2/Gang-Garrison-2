@@ -7,6 +7,7 @@
     }
     nocreate=false;
     usePreviousPwd = false;
+    skippedPlugins = false;
     noUnloadPlugins = false;
     noReloadPlugins = false;
     
