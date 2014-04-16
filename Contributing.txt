@@ -34,17 +34,17 @@ Parens are *always* required around conditionals [and their sister blocks: with(
     if (mode == 2)
         draw_sprite_ext(TimerOutlineS, 0, xoffset+xsize/2, yoffset, 2, 2, 0, c_white, 1);
 
-Spacing between parens, if, and conditionals is so inconsistent in the codebase that we don't have a standard for it. Go with what looks good. Same with operations, go with what makes the expression easily readable. However, it must always be symmetrical.
+Spacing between parens, if, and conditionals is so inconsistent in the codebase that we don't have a standard for it. Go with what looks good. Same with operations, go with what makes the expression easily readable. However, it "should" always be symmetrical.
 
     if(variable);
     if( variable );
     if (variable);
 
-Always space out the set statement sides from eachother.
+Unless there's a good reason not to, space out the set statement sides from eachother.
 
     x = 5/7;
 
-When crossing order-of-operations boundries *without* parens, space the later operation away from the earlier operation.
+When crossing order-of-operations boundries *without* parens, usually space the later operation away from the earlier operation. However, depending on the arithmetic being performed, a different spacing may be appropriate.
 
     x = 3 + 4/8;
     y = 5*(x+2);
@@ -82,7 +82,7 @@ You may NOT skip braces on conditions with other conditions inside of them.
             . . .
     }
 
-You may skip braces with very simple series-es of single blocks, but not ones with multiple children blocks.
+You may skip braces with VERY simple series-es of single blocks, but not ones with multiple children blocks.
 
     with (BladeB)
         if (ownerPlayer == other.ownerPlayer)
@@ -102,7 +102,7 @@ You may skip braces with very simple series-es of single blocks, but not ones wi
     }
 
 
-Don't indent switch blocks; indent case blocks.
+Don't indent switch blocks; but do indent case blocks.
 
     switch(player.commandReceiveCommand)
     {
@@ -143,7 +143,7 @@ Boolean expressions should always be encased in parentheses.
     }
 
 
-Variable names should start with a lowercase letter, with subsequent words capitalized (intercapping). Shorthand words in non-state variables (that is, adhoc logic variables) can fuzz this rule a little, and so can variables which pretend to be part of a GM variable family, but there's a limit.
+Variable names should start with a lowercase letter, with subsequent words capitalized (intercapping). Shorthand words in non-state or local algorithm variables (such as adhoc logic variables) can fuzz this rule a little, and so can variables which pretend to be part of a GM variable family, but there's a limit.
 
     thisIsAVariable
     teamoffset
@@ -156,11 +156,11 @@ Object names should always start with a capital letter and be intercapped after 
 
     DeathCam
 
-Sprite names should, when applicable, be the name of their associate object with a capital S "kind" suffix. Otherwise, they still need the S.
+Sprite names should, when applicable, be the name of their associate object with a capital S "kind" suffix. Otherwise, they still need the S, unless they have an exceptional reason not to.
 
     ScoutRedS
 
-Script names should start with a lowercase letter and be intercapped after that, unless they emulate being in a "family" of GM functions.
+Script names should start with a lowercase letter and be intercapped after that, unless they're pretending to be like GM's built-in functions.
 
     setChatBubble
     gotoInternalMapRoom
