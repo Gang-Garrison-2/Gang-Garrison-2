@@ -73,7 +73,7 @@ do {
                     }
 
                     // Destroy list
-                    ds_list_destroy(plugins);
+                    ds_list_destroy(pluginList);
                     
                     var prompt;
                     if (pluginsRequired)
@@ -486,12 +486,17 @@ do {
                 {   // Reconnect to the server to download the map
                     var oldReturnRoom, didSkipPlugins;
                     oldReturnRoom = returnRoom;
+                    // We back up this value since ClientCreate() will reset it
                     didSkipPlugins = skippedPlugins;
                     returnRoom = DownloadRoom;
+                    // Normally, GG2 is restarted when we disconnect, if plugins are in use
+                    // As we're only disconnecting to download a map, we won't restart
                     if (global.serverPluginsInUse)
                         noUnloadPlugins = true;
                     event_perform(ev_destroy,0);
                     ClientCreate();
+                    // Normally, GG2 will prompt to load plugins when connecting to a server
+                    // If they're already loaded, or the user skipped them, we won't prompt again
                     if (global.serverPluginsInUse or didSkipPlugins)
                         noReloadPlugins = true;
                     returnRoom = oldReturnRoom;
