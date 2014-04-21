@@ -54,6 +54,7 @@
   <resource name="restartGG2" type="RESOURCE"/>
   <resource name="isBetaVersion" type="RESOURCE"/>
   <resource name="promptRestartOrQuit" type="RESOURCE"/>
+  <resource name="promptRestartQuitOrCancel" type="RESOURCE"/>
   <resource name="split" type="RESOURCE"/>
   <resource name="draw_pinched_blackrect" type="RESOURCE"/>
   <resource name="Faucet HTTP" type="GROUP"/>
