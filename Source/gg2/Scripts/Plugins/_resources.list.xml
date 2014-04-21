@@ -6,6 +6,5 @@
   <resource name="loadserverplugins" type="RESOURCE"/>
   <resource name="extractzip" type="RESOURCE"/>
   <resource name="checkpluginname" type="RESOURCE"/>
-  <resource name="pluginscleanupprompt" type="RESOURCE"/>
   <resource name="pluginscleanup" type="RESOURCE"/>
 </resources>
