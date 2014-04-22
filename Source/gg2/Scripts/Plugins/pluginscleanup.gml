@@ -6,19 +6,6 @@ var msg;
 msg = "Because you used this server's plugins, you will have to restart GG2 to play on another server."
 
 if (global.restartPrompt == 1)
-{
     promptRestartOrQuit(msg,argument0);
-}
 else
-{
     restartGG2();
-}
-    /*  //show cancel button
-    if (argument0 == 1)
-    {
-        promptRestartOrQuit(msg,1);
-    }
-    else
-    {
-        promptRestartOrQuit(msg)
-    }*/

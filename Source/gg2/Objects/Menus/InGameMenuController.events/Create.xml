@@ -42,7 +42,7 @@
         // Force dedicated mode to off so you can go to main menu instead of just restarting server
         if (global.serverPluginsInUse)
         {
-            pluginscleanup(1);
+            pluginscleanup(true);
         }
         else
         {

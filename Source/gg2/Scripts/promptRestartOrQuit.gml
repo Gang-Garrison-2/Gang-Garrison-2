@@ -9,7 +9,7 @@ var promptText, result, button2;
 promptText = argument0;
 button2 = ""
 
-if (argument1 == 1)
+if (argument1)
     button2 = "Cancel"
     
 result = show_message_ext(
