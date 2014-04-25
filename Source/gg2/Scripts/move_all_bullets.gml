@@ -1,6 +1,9 @@
 gunSetSolids();
 with(Shot)
 {
+    if(!variable_local_exists("firststep"))
+        firststep = true;
+    
     vspeed += 0.15 * global.delta_factor;
     if(global.particles != PARTICLES_OFF)
     {
@@ -10,8 +13,11 @@ with(Shot)
     }
     image_angle = direction;
     
-    x += hspeed * global.delta_factor;
-    y += vspeed * global.delta_factor;
+    if(!firststep and global.delta_factor != 1)
+    {
+        x += hspeed * global.delta_factor;
+        y += vspeed * global.delta_factor;
+    }
     
     if (!place_free(x, y))
     {
@@ -20,11 +26,19 @@ with(Shot)
         instance_destroy();
     }
     
-    x -= hspeed;
-    y -= vspeed;
+    if(!firststep and global.delta_factor != 1)
+    {
+        x -= hspeed;
+        y -= vspeed;
+    }
+    else
+        firststep = false;
 }
 with(Rocket)
 {
+    if(!variable_local_exists("firststep"))
+        firststep = true;
+    
     if(instance_exists(owner))
     {
         lastknownx = owner.x;
@@ -77,8 +91,11 @@ with(Rocket)
         else
             instance_destroy();
     }
-    x += hspeed * global.delta_factor;
-    y += vspeed * global.delta_factor;
+    if(!firststep and global.delta_factor != 1)
+    {
+        x += hspeed * global.delta_factor;
+        y += vspeed * global.delta_factor;
+    }
     
     if (!place_free(x, y))
     {
@@ -89,13 +106,26 @@ with(Rocket)
             instance_destroy();
     }
     
-    x -= hspeed;
-    y -= vspeed;
+    if(!firststep and global.delta_factor != 1)
+    {
+        x -= hspeed;
+        y -= vspeed;
+    }
+    else
+        firststep = false;
+    
+    firststep = false;
 }
 with(BladeB)
 {
-    x += hspeed * global.delta_factor;
-    y += vspeed * global.delta_factor;
+    if(!variable_local_exists("firststep"))
+        firststep = true;
+    
+    if(!firststep and global.delta_factor != 1)
+    {
+        x += hspeed * global.delta_factor;
+        y += vspeed * global.delta_factor;
+    }
     
     if (!place_free(x, y))
     {
@@ -104,11 +134,21 @@ with(BladeB)
         instance_destroy();
     }
     
-    x -= hspeed;
-    y -= vspeed;
+    if(!firststep and global.delta_factor != 1)
+    {
+        x -= hspeed;
+        y -= vspeed;
+    }
+    else
+        firststep = false;
+    
+    firststep = false;
 }
 with(BurningProjectile)
 {
+    if(!variable_local_exists("firststep"))
+        firststep = true;
+    
     if(object_index == Flame)
         vspeed += 0.15 * global.delta_factor;
     
@@ -136,17 +176,30 @@ with(BurningProjectile)
             part_particles_create(global.flameParticleSystem,x,y,global.flameParticleType,1);
     }
     
-    x += hspeed * global.delta_factor;
-    y += vspeed * global.delta_factor;
+    if(!firststep and global.delta_factor != 1)
+    {
+        x += hspeed * global.delta_factor;
+        y += vspeed * global.delta_factor;
+    }
     
     if (!place_free(x, y))
         instance_destroy();
     
-    x -= hspeed;
-    y -= vspeed;
+    if(!firststep and global.delta_factor != 1)
+    {
+        x -= hspeed;
+        y -= vspeed;
+    }
+    else
+        firststep = false;
+    
+    firststep = false;
 }
 with(Mine)
 {
+    if(!variable_local_exists("firststep"))
+        firststep = true;
+    
     if(stickied)
     {
         if (reflector != noone and alarm[0] < 0)
@@ -166,27 +219,44 @@ with(Mine)
         }
     }
     
-    x += hspeed * global.delta_factor;
-    y += vspeed * global.delta_factor;
+    if(!firststep and global.delta_factor != 1)
+    {
+        x += hspeed * global.delta_factor;
+        y += vspeed * global.delta_factor;
+    }
     
     if (instance_exists(ControlPointSetupGate))
     {
         if (place_meeting(x, y, ControlPointSetupGate) and ControlPointSetupGate.solid)
             instance_destroy();
     }
-    x -= hspeed;
-    y -= vspeed;
+    
+    if(!firststep and global.delta_factor != 1)
+    {
+        x -= hspeed;
+        y -= vspeed;
+    }
+    else
+        firststep = false;
+    
+    firststep = false;
 }
 with(Needle)
 {
+    if(!variable_local_exists("firststep"))
+        firststep = true;
+    
     vspeed += 0.2 * global.delta_factor;
     if(global.particles != PARTICLES_OFF)
         image_alpha = (alarm[0]/lifetime)/2+0.5;
     
     image_angle = direction;
     
-    x += hspeed * global.delta_factor;
-    y += vspeed * global.delta_factor;
+    if(!firststep and global.delta_factor != 1)
+    {
+        x += hspeed * global.delta_factor;
+        y += vspeed * global.delta_factor;
+    }
     
     if (!place_free(x, y))
     {
@@ -195,8 +265,15 @@ with(Needle)
         instance_destroy();
     }
     
-    x -= hspeed;
-    y -= vspeed;
+    if(!firststep and global.delta_factor != 1)
+    {
+        x -= hspeed;
+        y -= vspeed;
+    }
+    else
+        firststep = false;
+    
+    firststep = false;
 }
 
 gunUnsetSolids();
