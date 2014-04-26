@@ -198,6 +198,9 @@ while(string_pos(DIVIDER, argument0) != 0) { // continue until there are no more
     case "KothBlueControlPoint":
       instance_create(entityX, entityY, KothBlueControlPoint);
     break;
+    case "dropdownPlatform":
+      instance_create(entityX, entityY, DropdownPlatform);
+    break;
     
     /* 
     
