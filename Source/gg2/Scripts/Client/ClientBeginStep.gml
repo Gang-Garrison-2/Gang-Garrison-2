@@ -484,10 +484,8 @@ do {
                 }
                 if(!file_exists("Maps/" + global.currentMap + ".png") or CustomMapGetMapMD5(global.currentMap) != global.currentMapMD5)
                 {   // Reconnect to the server to download the map
-                    var oldReturnRoom, didSkipPlugins;
+                    var oldReturnRoom;
                     oldReturnRoom = returnRoom;
-                    // We back up this value since ClientCreate() will reset it
-                    didSkipPlugins = skippedPlugins;
                     returnRoom = DownloadRoom;
                     // Normally, GG2 is restarted when we disconnect, if plugins are in use
                     // As we're only disconnecting to download a map, we won't restart
@@ -497,7 +495,7 @@ do {
                     ClientCreate();
                     // Normally, GG2 will prompt to load plugins when connecting to a server
                     // If they're already loaded, or the user skipped them, we won't prompt again
-                    if (global.serverPluginsInUse or didSkipPlugins)
+                    if (global.serverPluginsInUse or skippedPlugins)
                         noReloadPlugins = true;
                     returnRoom = oldReturnRoom;
                     usePreviousPwd = true;

@@ -7,7 +7,9 @@
     }
     nocreate=false;
     usePreviousPwd = false;
-    skippedPlugins = false;
+    // Prevent overwriting
+    if (!variable_local_exists('skippedPlugins'))
+        skippedPlugins = false;
     noUnloadPlugins = false;
     noReloadPlugins = false;
     
