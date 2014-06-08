@@ -2,12 +2,9 @@
     var vol;
     vol = calculateVolume(argument0, argument1);
     if(vol==0) exit;
-    
-    // Prevent crashes on Win8 (NT Kernel 6.2)
-    if (global.NTKernelVersion >= 6.2)
-        sound_stop(argument2);
-    
-    sound_volume(argument2, vol);
-    sound_pan(argument2, calculatePan(argument0));
-    sound_play(argument2);
+    faudio_volume_generator(argument2, vol);
+    faudio_pan_generator (argument2, calculatePan(argument0));
+    faudio_fire_generator(argument2);
+    show_debug_message(faudio_get_generator_playing(argument2))
+    //show_debug_message(show_debug_message(faudio_get_generator_playing(argument2)))
 }

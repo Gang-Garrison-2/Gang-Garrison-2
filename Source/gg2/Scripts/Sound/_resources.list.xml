@@ -6,4 +6,5 @@
   <resource name="loopsoundstop" type="RESOURCE"/>
   <resource name="calculateVolume" type="RESOURCE"/>
   <resource name="calculatePan" type="RESOURCE"/>
+  <resource name="Faucet Audio" type="GROUP"/>
 </resources>

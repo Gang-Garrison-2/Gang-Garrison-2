@@ -10,6 +10,6 @@
     } else if(dist>1500) {
         return 0;
     } else {
-        return ((1500-dist)/1200);
+        return ((1500-dist)/1200)/10;
     }
 }

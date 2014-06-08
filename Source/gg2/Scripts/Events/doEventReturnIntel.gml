@@ -34,7 +34,7 @@ if(!instance_exists(intelObj))
 if(!instance_exists(intelObj))
     instance_create(intelBaseObj.x, intelBaseObj.y, intelObj);
 
-sound_play(IntelDropSnd);
+faudio_fire_generator(IntelDropSnd);
 recordEventInLog(8, argument0, "", argument0);
 intelObj.x = intelBaseObj.x;
 intelObj.y = intelBaseObj.y;

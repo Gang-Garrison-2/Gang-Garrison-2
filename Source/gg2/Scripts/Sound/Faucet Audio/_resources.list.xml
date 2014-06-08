@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="loadsounds" type="RESOURCE"/>
+  <resource name="createGenerators" type="RESOURCE"/>
+  <resource name="createSamples" type="RESOURCE"/>
+</resources>

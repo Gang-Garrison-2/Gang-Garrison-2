@@ -50,4 +50,4 @@ with point {
 if(not soundPlayed) {
     playsound(x,y,CPCapturedSnd);
 }
-sound_play(IntelPutSnd);
+faudio_fire_generator(IntelPutSnd);

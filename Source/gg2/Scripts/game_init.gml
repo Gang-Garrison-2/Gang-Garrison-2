@@ -460,11 +460,7 @@ global.launchMap = "";
     if(!directory_exists(working_directory + "\Plugins")) directory_create(working_directory + "\Plugins");
     loadplugins();
     
-    /* Windows 8 is known to crash GM when more than three (?) sounds play at once
-     * We'll store the kernel version (Win8 is 6.2, Win7 is 6.1) and check it there.
-     ***/
-    registry_set_root(1); // HKLM
-    global.NTKernelVersion = real(registry_read_string_ext("\SOFTWARE\Microsoft\Windows NT\CurrentVersion\", "CurrentVersion")); // SIC
+    loadsounds()
     
     globalvar previous_window_x, previous_window_y, previous_window_w;
     previous_window_x = window_get_x();

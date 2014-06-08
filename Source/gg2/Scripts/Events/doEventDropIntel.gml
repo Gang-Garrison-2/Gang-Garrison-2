@@ -7,7 +7,7 @@
 var player, preconditionsError;
 player = argument0;
 
-sound_play(IntelDropSnd);
+faudio_fire_generator(IntelDropSnd);
 
 with(player.object)
 {

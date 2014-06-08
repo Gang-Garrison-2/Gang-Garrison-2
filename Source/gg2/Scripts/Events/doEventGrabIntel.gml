@@ -5,7 +5,7 @@
 
 //recordEventInLog(6,argument0.team,argument0.name);
 //argument0.caps += 0.5;
-sound_play(IntelGetSnd);
+faudio_fire_generator(IntelGetSnd);
 var isMe;
 isMe = (global.myself == argument0);
 recordEventInLog(6, argument0.team, argument0.name, isMe);

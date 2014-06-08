@@ -2,8 +2,8 @@
 
 if(AudioControl.allAudioMuted) {
     AudioControl.allAudioMuted = false;
-    sound_global_volume(100);
+    createGenerators();
 } else {
     AudioControl.allAudioMuted = true;
-    sound_global_volume(0);
+    faudio_kill_all_generators();
 }
