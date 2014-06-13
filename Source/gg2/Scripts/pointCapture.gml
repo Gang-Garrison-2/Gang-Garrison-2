@@ -22,7 +22,6 @@ with(Character) {
         }
         if(player == global.myself) {
             playsound(x,y,CPCapturedSnd);
-            faudio_kill_generator(CPCapturedSnd);
             soundPlayed = true;
         }
     }
@@ -55,3 +54,4 @@ if(not soundPlayed) {
 }
 faudio_fire_generator(IntelPutSnd);
 faudio_kill_generator(IntelPutSnd);
+faudio_kill_generator(CPCapturedSnd);

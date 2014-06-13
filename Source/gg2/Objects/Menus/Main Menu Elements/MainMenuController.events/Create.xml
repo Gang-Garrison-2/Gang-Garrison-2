@@ -50,7 +50,6 @@
         {
             if(faudio_get_generator_playing(global.MenuMusic) != 1)
             {
-                show_debug_message(faudio_get_generator_playing(global.MenuMusic))
                 faudio_volume_generator(global.MenuMusic, 0.8);     
                 AudioControlPlaySong(global.MenuMusic);
             }
