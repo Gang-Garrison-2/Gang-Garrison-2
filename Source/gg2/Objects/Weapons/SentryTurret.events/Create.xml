@@ -23,6 +23,9 @@ shooting=false;
 rotating=false;
 nearestTarget = noone;
 alarm[0] = refireTime / global.delta_factor;
+
+SentryAlert = faudio_new_generator(SentryAlertS);
+ShotgunSnd = faudio_new_generator(ShotgunSndS);
 </argument>
       </arguments>
     </action>

@@ -8,7 +8,9 @@ var uberer;
 uberer = argument0;
  
 if(uberer.object != -1) {
+    UberChargedSnd = faudio_new_generator(UberChargedSndS);
     playsound(uberer.object.x,uberer.object.y,UberChargedSnd);
+    faudio_kill_generator(UberChargedSnd);
     setChatBubble(uberer, 46);
     with(Medigun) {
         if(ownerPlayer == uberer) {

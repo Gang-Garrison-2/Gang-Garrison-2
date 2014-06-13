@@ -8,7 +8,9 @@ var uberer;
 uberer = argument0;
                     
 if(uberer.object != -1) {
+    UberStartSnd = faudio_new_generator(UberStartSndS);
     playsound(uberer.object.x,uberer.object.y,UberStartSnd);
+    faudio_kill_generator(UberStartSnd);
     with(uberer.object.currentWeapon) {
         ubering = true;
         uberReady = false;

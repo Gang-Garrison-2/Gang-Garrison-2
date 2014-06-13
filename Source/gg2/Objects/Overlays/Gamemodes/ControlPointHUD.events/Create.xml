@@ -102,6 +102,10 @@ else if (mode==1)
     for (i=1; i &lt;= global.totalControlPoints; i+=1)
         global.cp[i].team=TEAM_BLUE;
 }
+
+CountDown1Snd = faudio_new_generator(CountDown1SndS);
+CountDown2Snd = faudio_new_generator(CountDown2SndS);
+SirenSnd = faudio_new_generator(SirenSndS);
 </argument>
       </arguments>
     </action>

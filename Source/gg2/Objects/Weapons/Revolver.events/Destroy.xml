@@ -24,6 +24,8 @@ with (StabMask) {
         instance_destroy();
     }
 }
+
+faudio_kill_generator(RevolverSnd);
 </argument>
       </arguments>
     </action>

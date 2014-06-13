@@ -178,6 +178,17 @@
     {
         demon = WillOWispS;
     }
+    
+    //create generators
+    DeathSnd1 = faudio_new_generator(DeathSnd1S);
+    DeathSnd2 = faudio_new_generator(DeathSnd2S);
+    JumpSnd = faudio_new_generator(JumpSndS);
+    CbntHealSnd = faudio_new_generator(CbntHealSndS);
+    PickupSnd = faudio_new_generator(PickupSndS);
+    Gibbing = faudio_new_generator(GibbingS);
+    UberEndSnd = faudio_new_generator(UberEndSndS);
+    UberIdleSnd = faudio_new_generator(UberIdleSndS);
+    ExplosionSnd = faudio_new_generator(ExplosionSndS);
 }
 </argument>
       </arguments>

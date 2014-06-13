@@ -13,7 +13,10 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">event_user(0);</argument>
+        <argument kind="STRING">event_user(0);
+CPBeginCapSnd = faudio_new_generator(CPBeginCapSndS);
+CPDefendedSnd = faudio_new_generator(CPDefendedSndS);
+</argument>
       </arguments>
     </action>
   </actions>

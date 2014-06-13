@@ -36,6 +36,11 @@ lastDamageDealer = noone;
 lastDamageSource = -1;
 
 idleTimer = true;
+
+SentryIdle = faudio_new_generator(SentryIdleS);
+SentryFloorSnd = faudio_new_generator(SentryFloorSndS);
+SentryBuildSnd = faudio_new_generator(SentryBuildSndS);
+ExplosionSnd = faudio_new_generator(ExplosionSndS);
 </argument>
       </arguments>
     </action>

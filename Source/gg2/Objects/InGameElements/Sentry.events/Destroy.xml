@@ -13,7 +13,10 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if (built==1)
+        <argument kind="STRING">faudio_kill_generator(SentryIdle);
+faudio_kill_generator(SentryFloorSnd);
+faudio_kill_generator(SentryBuildSnd);
+if (built==1)
 {
     with(currentWeapon)
         instance_destroy();
@@ -49,6 +52,7 @@ with(ownerPlayer.object)
 ownerPlayer.sentry = noone;
 instance_create(x,y,Explosion);
 playsound(x,y,ExplosionSnd);
+faudio_kill_generator(ExplosionSnd);
 sentrygibs=instance_create(x,y,SentryGibs);
 sentrygibs.image_speed = 0;
 if (team == TEAM_RED)

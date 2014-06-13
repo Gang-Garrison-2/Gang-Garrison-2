@@ -13,10 +13,15 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">alpha=0.1;
+        <argument kind="STRING">NoticeSnd = faudio_new_generator(NoticeSndS);
+
+alpha=0.1;
 done=false;
 playsound(view_xview[0]+400,view_yview[0]+300,NoticeSnd);
 message = "";
+
+// it's not really worth it to make a destroy event for this
+faudio_kill_generator(NoticeSnd);
 </argument>
       </arguments>
     </action>

@@ -2,6 +2,8 @@
 
 var soundPlayed;
 soundPlayed=false;
+CPCapturedSnd = faudio_new_generator(CPCapturedSndS);
+IntelPutSnd = faudio_new_generator(IntelPutSndS);
 
 point = global.cp[argument0];
 capList = ds_list_create();
@@ -20,6 +22,7 @@ with(Character) {
         }
         if(player == global.myself) {
             playsound(x,y,CPCapturedSnd);
+            faudio_kill_generator(CPCapturedSnd);
             soundPlayed = true;
         }
     }
@@ -51,3 +54,4 @@ if(not soundPlayed) {
     playsound(x,y,CPCapturedSnd);
 }
 faudio_fire_generator(IntelPutSnd);
+faudio_kill_generator(IntelPutSnd);

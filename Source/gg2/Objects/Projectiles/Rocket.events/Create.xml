@@ -25,6 +25,7 @@
     fade = false;
     distanceToTravel = 800;
     playersPassed = ds_list_create();
+    ExplosionSnd = faudio_new_generator(ExplosionSndS);
 }
 </argument>
       </arguments>

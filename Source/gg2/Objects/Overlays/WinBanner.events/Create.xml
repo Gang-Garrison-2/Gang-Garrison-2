@@ -22,9 +22,11 @@
 }
 
 if(global.myself.team != global.winners) {
+    FailureSnd = faudio_new_generator(FailureSndS);
     sound=FailureSnd;
     global.myself.humiliated = 1;
 } else {
+    VictorySnd = faudio_new_generator(VictorySndS);
     sound = VictorySnd;
 }
 

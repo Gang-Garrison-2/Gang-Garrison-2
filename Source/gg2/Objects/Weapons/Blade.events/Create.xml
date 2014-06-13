@@ -42,6 +42,8 @@
     recoilTime = 1;
     recoilAnimLength = sprite_get_number(recoilSprite)/2;
     recoilImageSpeed = recoilAnimLength/recoilTime;
+    
+    BladeSnd = faudio_new_generator(BladeSndS);
 }
 </argument>
       </arguments>

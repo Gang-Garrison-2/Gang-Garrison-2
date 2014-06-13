@@ -73,6 +73,7 @@
     // Haxxy rewards
     rewards = -1;
     ghost = noone;
+    RespawnSnd = faudio_new_generator(RespawnSndS);
 }
 </argument>
       </arguments>

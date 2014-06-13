@@ -16,6 +16,9 @@
         <argument kind="STRING">if (!global.mapchanging) {
     if (hp &lt; maxHp or nutsNBolts &lt; 100 or !canEat)
     {
+        //still contemplating whether this should be in create or here
+        //CbntHealSnd = faudio_new_generator(CbntHealSndS);
+        //PickupSnd = faudio_new_generator(PickupSndS);
         playsound(x,y,CbntHealSnd);
         hp = maxHp;
         nutsNBolts = maxNutsNBolts;

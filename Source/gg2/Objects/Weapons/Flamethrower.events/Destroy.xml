@@ -15,7 +15,10 @@
       <arguments>
         <argument kind="STRING">{
     loopsoundstop(FlamethrowerSnd);
-}</argument>
+    faudio_kill_generator(FlamethrowerSnd);
+    faudio_kill_generator(CompressionBlastSnd);
+}
+</argument>
       </arguments>
     </action>
   </actions>

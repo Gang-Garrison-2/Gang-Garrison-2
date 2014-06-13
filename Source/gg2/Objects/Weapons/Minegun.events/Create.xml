@@ -42,6 +42,8 @@
     recoilTime = refireTime;
     recoilAnimLength = sprite_get_number(recoilSprite)/2;
     recoilImageSpeed = recoilAnimLength/recoilTime;
+    
+    MinegunSnd = faudio_new_generator(MinegunSndS);
 }
 </argument>
       </arguments>

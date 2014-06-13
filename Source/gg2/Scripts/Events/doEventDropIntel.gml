@@ -6,9 +6,9 @@
 
 var player, preconditionsError;
 player = argument0;
-
+IntelDropSnd = faudio_new_generator(IntelDropSndS);
 faudio_fire_generator(IntelDropSnd);
-
+faudio_kill_generator(IntelDropSnd);
 with(player.object)
 {
     // Modify the character state appropriately

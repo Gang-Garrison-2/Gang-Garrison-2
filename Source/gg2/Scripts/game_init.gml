@@ -19,15 +19,21 @@
     restart = false;
 
     //import wav files for music
-    global.MenuMusic=sound_add(choose("Music/menumusic1.wav","Music/menumusic2.wav","Music/menumusic3.wav","Music/menumusic4.wav","Music/menumusic5.wav","Music/menumusic6.wav"), 1, true);
-    global.IngameMusic=sound_add("Music/ingamemusic.wav", 1, true);
-    global.FaucetMusic=sound_add("Music/faucetmusic.wav", 1, true);
-    if(global.MenuMusic != -1)
-        sound_volume(global.MenuMusic, 0.8);
-    if(global.IngameMusic != -1)
-        sound_volume(global.IngameMusic, 0.8);
+    audio_init()
+    global.MenuMusicS=faudio_new_sample("Music/"+choose(
+        "Elkondo - A Little Heart To Heart.ogg",
+        "Elkondo - Intruder Alert.ogg",
+        "Elkondo - MEDIC!.ogg",
+        "Elkondo - Petite Chou-Fleur.ogg",
+        "Elkondo - Right Behind You.ogg",
+        "Father of Syn - Gang Garrison II.ogg",
+        "Scoot - Rocket Jump Waltz.ogg"
+    ));
+    global.IngameMusicS=faudio_new_sample("Music/ingamemusic.ogg");
+    global.FaucetMusicS=faudio_new_sample("Music/faucetmusic.ogg");
+    global.FaucetMusic=faudio_new_generator(global.FaucetMusicS);
     if(global.FaucetMusic != -1)
-        sound_volume(global.FaucetMusic, 0.8);
+        faudio_volume_generator(global.FaucetMusic, 0.8);
     
     global.sendBuffer = buffer_create();
     global.tempBuffer = buffer_create();
@@ -460,7 +466,6 @@ global.launchMap = "";
     if(!directory_exists(working_directory + "\Plugins")) directory_create(working_directory + "\Plugins");
     loadplugins();
     
-    loadsounds()
     
     globalvar previous_window_x, previous_window_y, previous_window_w;
     previous_window_x = window_get_x();

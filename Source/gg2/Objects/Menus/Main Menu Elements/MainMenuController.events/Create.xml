@@ -44,12 +44,21 @@
     ');
 
     // Music setting set to "Menu Only" or "Menu and In-Game"
-    if (!sound_isplaying(global.MenuMusic)
-        &amp;&amp; (global.music == MUSIC_MENU_ONLY || global.music == MUSIC_BOTH))
+    if(global.music == MUSIC_MENU_ONLY || global.music == MUSIC_BOTH)
     {
-        AudioControlPlaySong(global.MenuMusic);
+        global.MenuMusic=faudio_new_generator(global.MenuMusicS);
+        
+        if(global.MenuMusic != -1)
+        {
+            faudio_volume_generator(global.MenuMusic, 0.8);
+            
+            if (!faudio_get_generator_playing (global.MenuMusic))
+            {       
+                AudioControlPlaySong(global.MenuMusic);
+            }
+        }
     }
-
+        
     fade = 0;
     
     // ini says we have a downloaded background

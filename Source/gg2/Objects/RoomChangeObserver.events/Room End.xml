@@ -16,6 +16,7 @@
         <argument kind="STRING">// Ensure that we notice there's a room change in progress
 // even if room_goto is used directly
 transitioning = true;
+faudio_kill_all_generators()
 </argument>
       </arguments>
     </action>

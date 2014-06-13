@@ -17,6 +17,8 @@
 view_xview=oldxview;
 view_yview=oldyview;
 if sprite_exists(DeathCamS) sprite_delete(DeathCamS);
+
+faudio_kill_generator(DeathCamSnd);
 </argument>
       </arguments>
     </action>
