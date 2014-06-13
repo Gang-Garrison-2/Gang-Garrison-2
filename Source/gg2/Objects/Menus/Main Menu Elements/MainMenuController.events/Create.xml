@@ -46,14 +46,12 @@
     // Music setting set to "Menu Only" or "Menu and In-Game"
     if(global.music == MUSIC_MENU_ONLY || global.music == MUSIC_BOTH)
     {
-        global.MenuMusic=faudio_new_generator(global.MenuMusicS);
-        
         if(global.MenuMusic != -1)
         {
-            faudio_volume_generator(global.MenuMusic, 0.8);
-            
-            if (!faudio_get_generator_playing (global.MenuMusic))
-            {       
+            if(faudio_get_generator_playing(global.MenuMusic) != 1)
+            {
+                show_debug_message(faudio_get_generator_playing(global.MenuMusic))
+                faudio_volume_generator(global.MenuMusic, 0.8);     
                 AudioControlPlaySong(global.MenuMusic);
             }
         }

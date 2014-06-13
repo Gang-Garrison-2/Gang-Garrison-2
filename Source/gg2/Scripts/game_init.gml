@@ -34,7 +34,7 @@
     global.FaucetMusic=faudio_new_generator(global.FaucetMusicS);
     if(global.FaucetMusic != -1)
         faudio_volume_generator(global.FaucetMusic, 0.8);
-    
+    global.MenuMusic=faudio_new_generator(global.MenuMusicS);
     global.sendBuffer = buffer_create();
     global.tempBuffer = buffer_create();
     global.HudCheck = false;

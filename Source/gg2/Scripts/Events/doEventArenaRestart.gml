@@ -11,7 +11,13 @@ with Player humiliated = 0;
 with Sentry instance_destroy();
 with SentryGibs instance_destroy();
     
-if((global.music == MUSIC_BOTH or global.music == MUSIC_INGAME_ONLY)
-    and (AudioControl.currentSong != global.IngameMusic)) {
-    AudioControlPlaySong(global.IngameMusic, true);
+if(global.music == MUSIC_BOTH || global.music == MUSIC_INGAME_ONLY) 
+{
+    global.IngameMusic=faudio_new_generator(global.IngameMusicS);
+    
+    if(global.IngameMusic != -1)
+    {
+        faudio_volume_generator(global.IngameMusic, 0.8);
+        AudioControlPlaySong(global.IngameMusic, true);
+    }
 }

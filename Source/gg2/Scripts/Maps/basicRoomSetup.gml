@@ -78,11 +78,15 @@ if (!instance_exists(KillLog))
 
 faudio_kill_all_generators();
 
-if(global.music == MUSIC_BOTH || global.music == MUSIC_INGAME_ONLY) {
+if(global.music == MUSIC_BOTH || global.music == MUSIC_INGAME_ONLY) 
+{
     global.IngameMusic=faudio_new_generator(global.IngameMusicS);
+    
     if(global.IngameMusic != -1)
+    {
         faudio_volume_generator(global.IngameMusic, 0.8);
-    AudioControlPlaySong(global.IngameMusic, true);
+        AudioControlPlaySong(global.IngameMusic, true);
+    }
 }
 instance_create(map_width()/2,map_height()/2,Spectator);
 
