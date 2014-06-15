@@ -40,12 +40,19 @@
     ');
     menu_addlink("Disconnect", '
         // Force dedicated mode to off so you can go to main menu instead of just restarting server
-        global.dedicatedMode = 0;
-        with(Client)
-            instance_destroy();
-            
-        with(GameServer)
-            instance_destroy();
+        if (global.serverPluginsInUse)
+        {
+            pluginscleanup(true);
+        }
+        else
+        {
+            global.dedicatedMode = 0;
+            with(Client)
+                instance_destroy();
+                
+            with(GameServer)
+                instance_destroy();
+        }
     ');
     menu_addlink("Quit Game", '
         game_end();
