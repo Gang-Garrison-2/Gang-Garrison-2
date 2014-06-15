@@ -70,6 +70,7 @@
     faudio_kill_generator(Gibbing);
     faudio_kill_generator(UberEndSnd);
     faudio_kill_generator(ExplosionSnd);
+    faudio_kill_generator(CPCapturedSnd);
 }
 </argument>
       </arguments>

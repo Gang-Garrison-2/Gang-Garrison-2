@@ -189,6 +189,7 @@
     UberEndSnd = faudio_new_generator(UberEndSndS);
     UberIdleSnd = faudio_new_generator(UberIdleSndS);
     ExplosionSnd = faudio_new_generator(ExplosionSndS);
+    CPCapturedSnd = faudio_new_generator(CPCapturedSndS);
 }
 </argument>
       </arguments>

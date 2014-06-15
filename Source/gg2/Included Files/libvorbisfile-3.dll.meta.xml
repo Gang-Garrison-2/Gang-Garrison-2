@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<include>
+  <filename>libvorbisfile-3.dll</filename>
+  <filepath>C:\MinGW\bin\libvorbisfile-3.dll</filepath>
+  <original>true</original>
+  <originalSize>62976</originalSize>
+  <hasContent>true</hasContent>
+  <exportTo>WORKING_DIRECTORY</exportTo>
+  <otherExportDirectory/>
+  <overwriteExisting>false</overwriteExisting>
+  <freeMemAfterExport>true</freeMemAfterExport>
+  <removeAtGameEnd>true</removeAtGameEnd>
+</include>

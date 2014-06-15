@@ -13,7 +13,10 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">alpha=0;
+        <argument kind="STRING">CPBeginCapSnd = faudio_new_generator(CPBeginCapSndS);
+CPDefendedSnd = faudio_new_generator(CPDefendedSndS);
+
+alpha=0;
 fade=0.05;
 
 if(instance_exists(ArenaControlPoint)) {

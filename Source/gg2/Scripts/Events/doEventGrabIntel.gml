@@ -7,7 +7,7 @@
 //argument0.caps += 0.5;
 IntelGetSnd = faudio_new_generator(IntelGetSndS);
 faudio_fire_generator(IntelGetSnd);
-faudio_kill_generator(IntelGetSnd);
+show_debug_message(faudio_get_generator_volume(IntelGetSnd));
 var isMe;
 isMe = (global.myself == argument0);
 recordEventInLog(6, argument0.team, argument0.name, isMe);
@@ -18,7 +18,7 @@ if (global.myself == argument0)
     with (NoticeO)
         notice = NOTICE_HAVEINTEL;
 }
-
+faudio_kill_generator(IntelGetSnd);
 if(argument0.object != -1)
 {
     if(argument0.team == TEAM_RED)

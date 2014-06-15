@@ -1,6 +1,5 @@
 room_caption = global.currentMap;
 global.startedGame = true;
-
 if(!global.fullscreen)
     window_set_position(previous_window_x+previous_window_w/2-global.ingamewidth/2, previous_window_y);
 
@@ -75,8 +74,6 @@ else
 instance_create(0,0,TeamSelectController);
 if (!instance_exists(KillLog))
     instance_create(0,0,KillLog);
-
-faudio_kill_all_generators();
 
 if(global.music == MUSIC_BOTH || global.music == MUSIC_INGAME_ONLY) 
 {

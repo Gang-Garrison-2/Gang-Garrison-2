@@ -1,7 +1,7 @@
 /**
  * argument0 = team of intel being returned
  */
- 
+IntelDropSnd = faudio_new_generator(IntelDropSndS); 
 var intelObj, intelBaseObj, intelInstance;
 if(argument0 == TEAM_RED)
 {
@@ -33,8 +33,8 @@ if(!instance_exists(intelObj))
 // Still not there? Make a new one.
 if(!instance_exists(intelObj))
     instance_create(intelBaseObj.x, intelBaseObj.y, intelObj);
-
 faudio_fire_generator(IntelDropSnd);
+faudio_kill_generator(IntelDropSnd);
 recordEventInLog(8, argument0, "", argument0);
 intelObj.x = intelBaseObj.x;
 intelObj.y = intelBaseObj.y;
