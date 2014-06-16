@@ -23,7 +23,6 @@ alarm[0] = (reloadTime + 20*owner.zoomed) / global.delta_factor;
 tracerAlpha = 0.8;
 shotx = x;
 shoty = y;
-
 var hit;
 var x1,y1,xm,ym, len;
 var hitline;

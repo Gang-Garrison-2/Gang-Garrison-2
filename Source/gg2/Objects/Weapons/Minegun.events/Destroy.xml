@@ -15,7 +15,6 @@
       <arguments>
         <argument kind="STRING">with(Mine) {if ownerPlayer == other.ownerPlayer instance_destroy();}
 
-faudio_kill_generator(MinegunSnd);
 </argument>
       </arguments>
     </action>

@@ -2,8 +2,8 @@
 
 if(AudioControl.allAudioMuted) {
     AudioControl.allAudioMuted = false;
-    faudio_global_volume(1);
+    faudio_set_global_volume(1);
 } else {
     AudioControl.allAudioMuted = true;
-    faudio_global_volume(0);
+    faudio_set_global_volume(0);
 }

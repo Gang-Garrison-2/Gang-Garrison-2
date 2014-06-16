@@ -14,7 +14,6 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">ammoCount = max(0, ammoCount-1);    
-playsound(x,y,RocketSnd);
 var oid, newx, newy;
 oid = instance_create(x+lengthdir_x(20,owner.aimDirection),y+lengthdir_y(20,owner.aimDirection), Rocket);
 oid.lastknownx = owner.x;

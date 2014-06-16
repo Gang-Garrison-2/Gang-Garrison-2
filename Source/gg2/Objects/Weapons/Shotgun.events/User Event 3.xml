@@ -14,6 +14,8 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">ammoCount = max(0, ammoCount-1);
+//if generator currently playing, cut out and play muzzle sound again
+faudio_stop_generator(ShotgunSnd);
 playsound(x,y,ShotgunSnd);
 var shot;
 repeat(5) {

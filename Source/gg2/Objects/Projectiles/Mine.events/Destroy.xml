@@ -15,6 +15,7 @@
       <arguments>
         <argument kind="STRING">owner.currentWeapon.lobbed -= 1;
 faudio_kill_generator(ExplosionSnd);
+faudio_kill_generator(MinegunSnd);
 </argument>
       </arguments>
     </action>

@@ -42,6 +42,7 @@ if (instance_exists(ControlPointSetupGate))
         instance_destroy();
     gunUnsetSolids();
 }
+recalculateSound(x,y, MinegunSnd);
 x -= hspeed;
 y -= vspeed;
 

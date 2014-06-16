@@ -26,7 +26,9 @@
     reflector = noone;
     knockback = 10;
     particleCycle = 0;
+    MinegunSnd = faudio_new_generator(MinegunSndS);
     ExplosionSnd = faudio_new_generator(ExplosionSndS);
+    playsound(x,y,MinegunSnd);
 }
 </argument>
       </arguments>

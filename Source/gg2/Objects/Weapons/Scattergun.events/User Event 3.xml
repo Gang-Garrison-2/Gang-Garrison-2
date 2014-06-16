@@ -14,6 +14,7 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">ammoCount = max(0, ammoCount-1);
+
 playsound(x,y,ShotgunSnd);
 var shot;
 repeat(6) {
