@@ -75,6 +75,9 @@ instance_create(0,0,TeamSelectController);
 if (!instance_exists(KillLog))
     instance_create(0,0,KillLog);
 
+// Oh hey, I don't actually need to create a dedicated stop all generators function
+faudio_stop_generator(-1);
+
 if(global.music == MUSIC_BOTH || global.music == MUSIC_INGAME_ONLY) 
 {
     global.IngameMusic=faudio_new_generator(global.IngameMusicS);
