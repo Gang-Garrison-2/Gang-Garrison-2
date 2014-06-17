@@ -18,6 +18,11 @@ if(instance_exists(healTarget))
     if(healTarget.object != -1)
         healTarget.object.healer = -1;
         
+faudio_stop_generator(MedichaingunSnd);
+faudio_stop_generator(UberStartSnd);
+faudio_stop_generator(UberIdleSnd);
+faudio_stop_generator(UberChargedSnd);
+
 faudio_kill_generator(MedigunSnd);
 faudio_kill_generator(MedichaingunSnd);
 faudio_kill_generator(UberStartSnd);
