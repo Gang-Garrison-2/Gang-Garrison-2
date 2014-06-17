@@ -17,6 +17,7 @@
     part_type_destroy(rocketblurParticleType);
 }
 ds_list_destroy(playersPassed);
+faudio_kill_generator(RocketSnd);
 faudio_kill_generator(ExplosionSnd);
 </argument>
       </arguments>

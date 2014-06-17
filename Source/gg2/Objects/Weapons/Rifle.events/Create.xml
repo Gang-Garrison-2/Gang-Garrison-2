@@ -29,7 +29,6 @@
     ammoCount = maxAmmo;
     shot=false;
     t=0;
-    
     if(golden)
     {
         normalSprite = RifleGoldS;

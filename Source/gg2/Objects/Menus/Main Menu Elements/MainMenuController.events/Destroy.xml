@@ -13,7 +13,8 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">faudio_kill_generator(RocketSnd);
+        <argument kind="STRING">faudio_stop_generator(global.MenuMusic);
+faudio_kill_generator(global.MenuMusic);
 </argument>
       </arguments>
     </action>

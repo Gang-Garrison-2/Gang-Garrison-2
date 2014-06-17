@@ -20,21 +20,21 @@
 
     //import wav files for music
     audio_init()
-    global.MenuMusicS=faudio_new_sample("Music/"+choose(
-        "Elkondo - A Little Heart To Heart.ogg",
-        "Elkondo - Intruder Alert.ogg",
-        "Elkondo - MEDIC!.ogg",
-        "Elkondo - Petite Chou-Fleur.ogg",
-        "Elkondo - Right Behind You.ogg",
-        "Father of Syn - Gang Garrison II.ogg",
-        "Scoot - Rocket Jump Waltz.ogg"
-    ));
+    global.MenuMusicS=ds_list_create();
+    ds_list_add(global.MenuMusicS, faudio_new_sample("Music/Elkondo - A Little Heart To Heart.ogg"));
+    ds_list_add(global.MenuMusicS, faudio_new_sample("Music/Elkondo - Intruder Alert.ogg"));
+    ds_list_add(global.MenuMusicS, faudio_new_sample("Music/Elkondo - MEDIC!.ogg"));
+    ds_list_add(global.MenuMusicS, faudio_new_sample("Music/Elkondo - Petite Chou-Fleur.ogg"));
+    ds_list_add(global.MenuMusicS, faudio_new_sample("Music/Elkondo - Right Behind You.ogg"));
+    ds_list_add(global.MenuMusicS, faudio_new_sample("Music/Father of Syn - Gang Garrison II.ogg"));
+    ds_list_add(global.MenuMusicS, faudio_new_sample("Music/Scoot - Rocket Jump Waltz.ogg"));
+    
     global.IngameMusicS=faudio_new_sample("Music/ingamemusic.ogg");
     global.FaucetMusicS=faudio_new_sample("Music/faucetmusic.ogg");
     global.FaucetMusic=faudio_new_generator(global.FaucetMusicS);
     if(global.FaucetMusic != -1)
         faudio_volume_generator(global.FaucetMusic, 0.8);
-    global.MenuMusic=faudio_new_generator(global.MenuMusicS);
+    
     global.sendBuffer = buffer_create();
     global.tempBuffer = buffer_create();
     global.HudCheck = false;

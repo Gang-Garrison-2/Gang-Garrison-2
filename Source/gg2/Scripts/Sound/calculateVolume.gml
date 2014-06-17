@@ -7,9 +7,9 @@
     
     if(dist<300) {
         return 1;
-    } else if(dist>1500) {
+    } else if(dist>1000) {
         return 0;
     } else {
-        return ((1500-dist)/1200);
+        return ((1000-dist)/700);
     }
 }
