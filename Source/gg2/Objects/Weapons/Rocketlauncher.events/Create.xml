@@ -41,7 +41,7 @@
     recoilTime = refireTime;
     recoilAnimLength = sprite_get_number(recoilSprite)/2;
     recoilImageSpeed = recoilAnimLength/recoilTime;
-    object_index.RocketSnd = faudio_new_generator(RocketSndS);
+    RocketSnd = faudio_new_generator(RocketSndS);
 }
 </argument>
       </arguments>
