@@ -7,7 +7,6 @@
 //argument0.caps += 0.5;
 IntelGetSnd = faudio_new_generator(IntelGetSndS);
 faudio_fire_generator(IntelGetSnd);
-show_debug_message(faudio_get_generator_volume(IntelGetSnd));
 var isMe;
 isMe = (global.myself == argument0);
 recordEventInLog(6, argument0.team, argument0.name, isMe);
