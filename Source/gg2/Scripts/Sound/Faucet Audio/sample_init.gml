@@ -11,7 +11,8 @@ globalvar MedigunSndS;
 globalvar RespawnSndS;
 globalvar RevolverSndS;
 globalvar KnifeSndS;
-globalvar RocketSndS;
+globalvar RocketFireSndS;
+globalvar RocketTravelSndS;
 globalvar ShotgunSndS;
 globalvar VictorySndS;
 globalvar FailureSndS;
@@ -41,89 +42,49 @@ globalvar SirenSndS;
 globalvar SentryFloorSndS;
 globalvar SentryBuildSndS;
 globalvar PickupSndS;
+globalvar ShotTravelSndS;
 
-ChaingunSndS = faudio_new_sample(working_directory +"/Sound/ChaingunSnd.ogg");
-DeathSnd1S = faudio_new_sample(working_directory +"/Sound/DeathSnd1.ogg");
-DeathSnd2S = faudio_new_sample(working_directory +"/Sound/DeathSnd2.ogg");
-ExplosionSndS = faudio_new_sample(working_directory +"/Sound/ExplosionSnd.ogg");
-FlamethrowerSndS = faudio_new_sample(working_directory +"/Sound/FlamethrowerSnd.ogg");
-IntelGetSndS = faudio_new_sample(working_directory +"/Sound/IntelGetSnd.ogg");
-IntelPutSndS = faudio_new_sample(working_directory +"/Sound/IntelPutSnd.ogg");
-JumpSndS = faudio_new_sample(working_directory +"/Sound/JumpSnd.ogg");
-MedigunSndS = faudio_new_sample(working_directory +"/Sound/MedigunSnd.ogg");
-RespawnSndS = faudio_new_sample(working_directory +"/Sound/RespawnSnd.ogg");
-RevolverSndS = faudio_new_sample(working_directory +"/Sound/RevolverSnd.ogg");
-KnifeSndS = faudio_new_sample(working_directory +"/Sound/KnifeSnd.ogg");
-RocketSndS = faudio_new_sample(working_directory +"/Sound/RocketSnd.ogg");
-ShotgunSndS = faudio_new_sample(working_directory +"/Sound/ShotgunSnd.ogg");
-VictorySndS = faudio_new_sample(working_directory +"/Sound/VictorySnd.ogg");
-FailureSndS = faudio_new_sample(working_directory +"/Sound/FailureSnd.ogg");
-SentryAlertS = faudio_new_sample(working_directory +"/Sound/SentryAlert.ogg");
-SentryIdleS = faudio_new_sample(working_directory +"/Sound/SentryIdle.ogg");
-SniperSndS = faudio_new_sample(working_directory +"/Sound/SniperSnd.ogg");
-MinegunSndS = faudio_new_sample(working_directory +"/Sound/MinegunSnd.ogg");
-CbntHealSndS = faudio_new_sample(working_directory +"/Sound/CbntHealSnd.ogg");
-MedichaingunSndS = faudio_new_sample(working_directory +"/Sound/MedichaingunSnd.ogg");
-IntelDropSndS = faudio_new_sample(working_directory +"/Sound/IntelDropSnd.ogg");
-SplatS = faudio_new_sample(working_directory +"/Sound/Splat.ogg");
-GibbingS = faudio_new_sample(working_directory +"/Sound/Gibbing.ogg");
-BladeSndS = faudio_new_sample(working_directory +"/Sound/BladeSnd.ogg");
-NoticeSndS = faudio_new_sample(working_directory +"/Sound/NoticeSnd.ogg");
-DeathCamSndS = faudio_new_sample(working_directory +"/Sound/DeathCamSnd.ogg");
-UberStartSndS = faudio_new_sample(working_directory +"/Sound/UberStartSnd.ogg");
-UberEndSndS = faudio_new_sample(working_directory +"/Sound/UberEndSnd.ogg");
-UberIdleSndS = faudio_new_sample(working_directory +"/Sound/UberIdleSnd.ogg");
-UberChargedSndS = faudio_new_sample(working_directory +"/Sound/UberChargedSnd.ogg");
-CPBeginCapSndS = faudio_new_sample(working_directory +"/Sound/CPBeginCapSnd.ogg");
-CPCapturedSndS = faudio_new_sample(working_directory +"/Sound/CPCapturedSnd.ogg");
-CPDefendedSndS = faudio_new_sample(working_directory +"/Sound/CPDefendedSnd.ogg");
-CountDown1SndS = faudio_new_sample(working_directory +"/Sound/CountDown1Snd.ogg");
-CountDown2SndS = faudio_new_sample(working_directory +"/Sound/CountDown2Snd.ogg");
-SirenSndS = faudio_new_sample(working_directory +"/Sound/SirenSnd.ogg");
-SentryFloorSndS = faudio_new_sample(working_directory +"/Sound/SentryFloorSnd.ogg");
-SentryBuildSndS = faudio_new_sample(working_directory +"/Sound/SentryBuildSnd.ogg");
-PickupSndS = faudio_new_sample(working_directory +"/Sound/PickupSnd.ogg");
-CompressionBlastSndS = faudio_new_sample(working_directory +"/Sound/CompressionBlastSnd.ogg");
-
-//error checking (lol more long variable lists)
-if (ChaingunSndS == -1) {show_message(faudio_get_error());}
-if (DeathSnd1S == -1) {show_message(faudio_get_error());}
-if (DeathSnd2S == -1) {show_message(faudio_get_error());}
-if (ExplosionSndS == -1) {show_message(faudio_get_error());}
-if (FlamethrowerSndS == -1) {show_message(faudio_get_error());}
-if (IntelPutSndS == -1) {show_message(faudio_get_error());}
-if (JumpSndS == -1) {show_message(faudio_get_error());}
-if (MedigunSndS == -1) {show_message(faudio_get_error());}
-if (RespawnSndS == -1) {show_message(faudio_get_error());}
-if (RevolverSndS == -1) {show_message(faudio_get_error());}
-if (KnifeSndS == -1) {show_message(faudio_get_error());}
-if (RocketSndS == -1) {show_message(faudio_get_error());}
-if (ShotgunSndS == -1) {show_message(faudio_get_error());}
-if (VictorySndS == -1) {show_message(faudio_get_error());}
-if (FailureSndS == -1) {show_message(faudio_get_error());}
-if (SentryAlertS == -1) {show_message(faudio_get_error());}
-if (SentryIdleS == -1) {show_message(faudio_get_error());}
-if (SniperSndS == -1) {show_message(faudio_get_error());}
-if (MinegunSndS == -1) {show_message(faudio_get_error());}
-if (CbntHealSndS == -1) {show_message(faudio_get_error());}
-if (MedichaingunSndS == -1) {show_message(faudio_get_error());}
-if (IntelDropSndS == -1) {show_message(faudio_get_error());}
-if (SplatS == -1) {show_message(faudio_get_error());}
-if (GibbingS == -1) {show_message(faudio_get_error());}
-if (BladeSndS == -1) {show_message(faudio_get_error());}
-if (NoticeSndS == -1) {show_message(faudio_get_error());}
-if (DeathCamSndS == -1) {show_message(faudio_get_error());}
-if (UberStartSndS == -1) {show_message(faudio_get_error());}
-if (UberEndSndS == -1) {show_message(faudio_get_error());}
-if (UberIdleSndS == -1) {show_message(faudio_get_error());}
-if (UberChargedSndS == -1) {show_message(faudio_get_error());}
-if (CPBeginCapSndS == -1) {show_message(faudio_get_error());}
-if (CPCapturedSndS == -1) {show_message(faudio_get_error());}
-if (CPDefendedSndS == -1) {show_message(faudio_get_error());}
-if (CountDown1SndS == -1) {show_message(faudio_get_error());}
-if (CountDown2SndS == -1) {show_message(faudio_get_error());}
-if (SirenSndS == -1) {show_message(faudio_get_error());}
-if (SentryFloorSndS == -1) {show_message(faudio_get_error());}
-if (SentryBuildSndS == -1) {show_message(faudio_get_error());}
-if (PickupSndS == -1) {show_message(faudio_get_error());}
-if (CompressionBlastSndS == -1) {show_message(faudio_get_error());}
+ChaingunSndS = create_sample("/Sound/ChaingunSnd.ogg");
+DeathSnd1S = create_sample("/Sound/DeathSnd1.ogg");
+DeathSnd2S = create_sample("/Sound/DeathSnd2.ogg");
+ExplosionSndS = create_sample("/Sound/ExplosionSnd.ogg");
+FlamethrowerSndS = create_sample("/Sound/FlamethrowerSnd.ogg");
+IntelGetSndS = create_sample("/Sound/IntelGetSnd.ogg");
+IntelPutSndS = create_sample("/Sound/IntelPutSnd.ogg");
+JumpSndS = create_sample("/Sound/JumpSnd.ogg");
+MedigunSndS = create_sample("/Sound/MedigunSnd.ogg");
+RespawnSndS = create_sample("/Sound/RespawnSnd.ogg");
+RevolverSndS = create_sample("/Sound/RevolverSnd.ogg");
+KnifeSndS = create_sample("/Sound/KnifeSnd.ogg");
+RocketFireSndS = create_sample("/Sound/RocketFireSnd.ogg");
+RocketTravelSndS = create_sample("/Sound/RocketTravelSnd.ogg");
+ShotgunSndS = create_sample("/Sound/ShotgunSnd.ogg");
+VictorySndS = create_sample("/Sound/VictorySnd.ogg");
+FailureSndS = create_sample("/Sound/FailureSnd.ogg");
+SentryAlertS = create_sample("/Sound/SentryAlert.ogg");
+SentryIdleS = create_sample("/Sound/SentryIdle.ogg");
+SniperSndS = create_sample("/Sound/SniperSnd.ogg");
+MinegunSndS = create_sample("/Sound/MinegunSnd.ogg");
+CbntHealSndS = create_sample("/Sound/CbntHealSnd.ogg");
+MedichaingunSndS = create_sample("/Sound/MedichaingunSnd.ogg");
+IntelDropSndS = create_sample("/Sound/IntelDropSnd.ogg");
+SplatS = create_sample("/Sound/Splat.ogg");
+GibbingS = create_sample("/Sound/Gibbing.ogg");
+BladeSndS = create_sample("/Sound/BladeSnd.ogg");
+NoticeSndS = create_sample("/Sound/NoticeSnd.ogg");
+DeathCamSndS = create_sample("/Sound/DeathCamSnd.ogg");
+UberStartSndS = create_sample("/Sound/UberStartSnd.ogg");
+UberEndSndS = create_sample("/Sound/UberEndSnd.ogg");
+UberIdleSndS = create_sample("/Sound/UberIdleSnd.ogg");
+UberChargedSndS = create_sample("/Sound/UberChargedSnd.ogg");
+CPBeginCapSndS = create_sample("/Sound/CPBeginCapSnd.ogg");
+CPCapturedSndS = create_sample("/Sound/CPCapturedSnd.ogg");
+CPDefendedSndS = create_sample("/Sound/CPDefendedSnd.ogg");
+CountDown1SndS = create_sample("/Sound/CountDown1Snd.ogg");
+CountDown2SndS = create_sample("/Sound/CountDown2Snd.ogg");
+SirenSndS = create_sample("/Sound/SirenSnd.ogg");
+SentryFloorSndS = create_sample("/Sound/SentryFloorSnd.ogg");
+SentryBuildSndS = create_sample("/Sound/SentryBuildSnd.ogg");
+PickupSndS = create_sample("/Sound/PickupSnd.ogg");
+CompressionBlastSndS = create_sample("/Sound/CompressionBlastSnd.ogg");
+ShotTravelSndS = create_sample("/Sound/ShotTravelSnd.ogg");

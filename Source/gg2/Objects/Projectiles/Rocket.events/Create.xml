@@ -26,8 +26,8 @@
     distanceToTravel = 800;
     playersPassed = ds_list_create();
     ExplosionSnd = faudio_new_generator(ExplosionSndS);
-    RocketSnd = faudio_new_generator(RocketSndS);
-    playsound(x,y, RocketSnd);
+    RocketTravelSnd = faudio_new_generator(RocketTravelSndS);
+    loopsoundstart(x,y, RocketTravelSnd);
 }
 </argument>
       </arguments>

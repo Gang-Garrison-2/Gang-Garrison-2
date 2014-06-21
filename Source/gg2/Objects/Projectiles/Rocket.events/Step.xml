@@ -79,8 +79,9 @@ if (!place_free(x, y))
 }
 gunUnsetSolids();
 
-//recalculate pan and volume
-recalculateSound(x,y, RocketSnd);
+//recalculate pan and volume for firing sound
+
+loopsoundmaintain(x,y, RocketTravelSnd)
 
 x -= hspeed;
 y -= vspeed;
