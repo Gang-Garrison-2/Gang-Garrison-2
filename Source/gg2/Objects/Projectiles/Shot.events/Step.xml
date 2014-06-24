@@ -34,11 +34,6 @@
     }
     gunUnsetSolids();
     
-    if (weapon == WEAPON_REVOLVER){
-        //Firing high caliber round
-        loopsoundmaintain(x,y, ShotTravelSnd);
-    }
-    
     x -= hspeed;
     y -= vspeed;
 }

@@ -19,7 +19,7 @@
     alarm[0] = lifetime / global.delta_factor;
     originx = x;
     originy = y;
-    
+    ShotImpactSnd = faudio_new_generator(ShotImpactSndS);
     
     // Controls whether this bullet penetrates bubbles or not
     // Also controls whether this bullet destroys friendly bubbles

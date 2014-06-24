@@ -36,7 +36,9 @@
         {
             motion_add(other.direction, other.speed*0.03);
         }
+        playsound(x,y, ShotImpactSnd);
         instance_destroy();
+        
     }
 
 </argument>
