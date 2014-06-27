@@ -32,7 +32,7 @@
         }
         justShot = true;
         readyToShoot = false;
-        alarm[0] = bubbleRefireTime;
+        alarm[0] = bubbleRefireTime / global.delta_factor;
         bubbleCount += 1;
     }
 }

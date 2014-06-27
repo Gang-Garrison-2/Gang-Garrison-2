@@ -19,22 +19,23 @@ var shot;
 repeat(5) {
     shot = instance_create(x,y,Shot);
     shot.hitDamage = 7;
-    shot.direction=owner.aimDirection+(random(11)-5);
-    shot.speed=11+random(4);
+    shot.direction = owner.aimDirection;
+    shot.speed = 13;
     shot.owner=owner;
     shot.ownerPlayer=ownerPlayer;
     shot.team=owner.team;
     shot.weapon=WEAPON_SHOTGUN;
     if(golden)
         shot.sprite_index = ShotGoldS;
-    with(shot) {
-        speed += owner.hspeed*hspeed/15;
-    }
+    
+    shot.hspeed += owner.hspeed;
+    shot.speed += random(4)-2;
+    shot.direction += random(11)-5.5;
 }
 justShot=true;
 readyToShoot=false;
-alarm[0] = refireTime;
-alarm[5] = reloadBuffer + reloadTime;
+alarm[0] = refireTime / global.delta_factor;
+alarm[5] = (reloadBuffer + reloadTime) / global.delta_factor;
 </argument>
       </arguments>
     </action>

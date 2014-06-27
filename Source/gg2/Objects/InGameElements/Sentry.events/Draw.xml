@@ -13,8 +13,20 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if team == TEAM_BLUE sprite_index=SentryBlue;
-if team == TEAM_RED sprite_index=SentryRed;
+        <argument kind="STRING">if(vspeed &gt; 0)
+{
+    var chuteIndex;
+    chuteIndex = ceil(vspeed/10*3)-1;
+    image_index = chuteIndex + (team==TEAM_BLUE)*3;
+    sprite_index = ParachuteSentry;
+}
+else
+{
+    if (team == TEAM_BLUE)
+        sprite_index = SentryBlue;
+    if (team == TEAM_RED)
+        sprite_index = SentryRed;
+}
 xr = round(x);
 yr = round(y);
 if global.myself.team == team draw_healthbar(xr-10, yr-30, xr+10, yr-25,hp*100/maxHp,c_black,c_red,c_green,0,true,true);
@@ -32,7 +44,7 @@ if(distance_to_point(mouse_x, mouse_y)&lt;25 &amp;&amp; global.myself.team == te
     }
     draw_text(xr, yr-45, ownerPlayer.name + "'s");
     draw_text(xr, yr-35, "Autogun");
-}  
+}
 </argument>
       </arguments>
     </action>

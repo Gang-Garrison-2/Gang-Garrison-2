@@ -13,13 +13,27 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">{
-    vspeed += 0.2;
-    if(global.particles != PARTICLES_OFF) {
-        image_alpha = (alarm[0]/lifetime)/2+0.5;
-    }
-    image_angle = direction;
+        <argument kind="STRING">vspeed += 0.2 * global.delta_factor;
+if(global.particles != PARTICLES_OFF)
+    image_alpha = (alarm[0]/lifetime)/2+0.5;
+
+image_angle = direction;
+
+x += hspeed * global.delta_factor;
+y += vspeed * global.delta_factor;
+
+gunSetSolids();
+if (!place_free(x, y))
+{
+    imp = instance_create(x,y,Impact);
+    imp.image_angle=direction;
+    instance_destroy();
 }
+gunUnsetSolids();
+
+x -= hspeed;
+y -= vspeed;
+
 </argument>
       </arguments>
     </action>

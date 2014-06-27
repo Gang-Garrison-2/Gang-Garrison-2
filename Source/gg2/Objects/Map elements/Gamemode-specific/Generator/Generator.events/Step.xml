@@ -14,14 +14,14 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">if (isShieldRegenerating) {
-    shieldHp = min(shieldHp+isShieldRegenerating, maxShieldHp);  
+    shieldHp = min(shieldHp+isShieldRegenerating*global.delta_factor, maxShieldHp);  
     if (shieldHp == maxShieldHp)
         isShieldRegenerating = false;
 }
 shieldResistance = minShieldResistance * (shieldHp &gt; 0) + (maxShieldResistance - minShieldResistance) * (shieldHp/maxShieldHp);
 
 if (shieldHp &gt; 0) {
-    shieldIndex += 4/30;
+    shieldIndex += 4/30 * global.delta_factor;
     if shieldIndex &gt; 4 shieldIndex = 0;
 }
 </argument>

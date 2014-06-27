@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <constants>
-  <constant name="VERSION" value="26300"/>
-  <constant name="GAME_VERSION_STRING" value="&quot;v2.6.3&quot;"/>
+  <constant name="VERSION" value="27200"/>
+  <constant name="GAME_VERSION_STRING" value="&quot;v2.7.2&quot;"/>
   <constant name="GAME_NAME_STRING" value="&quot;Gang Garrison 2&quot;"/>
-  <constant name="GAME_URL_STRING" value="&quot;http://www.ganggarrison.com/&quot;"/>
+  <constant name="GAME_URL_STRING" value="&quot;http://www.ganggarrison.com&quot;"/>
   <constant name="PLUGIN_SOURCE" value="&quot;http://www.ganggarrison.com/plugins/&quot;"/>
   <constant name="PLUGIN_SOURCE_NOTICE" value="&quot;While these plugins have been screened by the Gang Garrison 2 community, they cannot guarantee they are safe.&quot;"/>
   <constant name="BACKGROUND_SOURCE" value="&quot;http://www.ganggarrison.com/background.png&quot;"/>
@@ -15,7 +15,7 @@
   <constant name="LOBBY_SERVER_PORT" value="29944"/>
   <constant name="AUTH_SERVER_HOST" value="&quot;ganggarrison.com&quot;"/>
   <constant name="AUTH_SERVER_PORT" value="45022"/>
-  <constant name="PROTOCOL_UUID" value="&quot;fe00e374-4e05-808c-ac47-248920f03942&quot;"/>
+  <constant name="PROTOCOL_UUID" value="&quot;40606687-4a6a-bb9a-b2f9-11b8ea8b95ed&quot;"/>
   <constant name="GG2_LOBBY_UUID" value="&quot;1ccf16b1-436d-856f-504d-cc1af306aaa7&quot;"/>
   <constant name="HELLO" value="0"/>
   <constant name="PLAYER_JOIN" value="1"/>
@@ -70,9 +70,12 @@
   <constant name="PLUGIN_PACKET" value="55"/>
   <constant name="KICK_BAD_PLUGIN_PACKET" value="56"/>
   <constant name="PING" value="57"/>
+  <constant name="CLIENT_SETTINGS" value="58"/>
+  <constant name="KICK_MULTI_CLIENT" value="59"/>
   <constant name="TEAM_RED" value="0"/>
   <constant name="TEAM_BLUE" value="1"/>
   <constant name="TEAM_SPECTATOR" value="2"/>
+  <constant name="TEAM_ANY" value="3"/>
   <constant name="CLASS_SCOUT" value="0"/>
   <constant name="CLASS_SOLDIER" value="1"/>
   <constant name="CLASS_SNIPER" value="2"/>
@@ -85,7 +88,7 @@
   <constant name="CLASS_QUOTE" value="9"/>
   <constant name="CHARACTER_ANIMATION_NORMAL" value="0"/>
   <constant name="CHARACTER_ANIMATION_INTEL" value="2"/>
-  <constant name="CHARACTER_ANIMATION_LEN" value="2"/>
+  <constant name="CHARACTER_ANIMATION_LEN" value="4"/>
   <constant name="CHARACTER_ANIMATION_DEAD" value="5"/>
   <constant name="WSAEWOULDBLOCK" value="-10035"/>
   <constant name="WSAENETDOWN" value="-10050"/>
@@ -153,7 +156,7 @@
   <constant name="PARTICLES_ALTERNATIVE" value="2"/>
   <constant name="MOUSE_LEFT" value="9001"/>
   <constant name="MOUSE_RIGHT" value="9002"/>
-  <constant name="HP_PER_POINT" value="400"/>
+  <constant name="HP_PER_POINT" value="800"/>
   <constant name="INTEL_MAX_TIMER" value="900"/>
   <constant name="MUSIC_MENU_ONLY" value="0"/>
   <constant name="MUSIC_BOTH" value="1"/>
@@ -162,4 +165,7 @@
   <constant name="CONSOLE_INGAME" value="0"/>
   <constant name="CONSOLE_INMENU" value="1"/>
   <constant name="CONSOLE_DISABLED" value="2"/>
+  <constant name="BOOT_BEHAVIOUR" value="0"/>
+  <constant name="BOOT_STANDARD" value="0"/>
+  <constant name="BOOT_DEBUG" value="1"/>
 </constants>

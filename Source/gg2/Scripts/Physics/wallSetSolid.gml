@@ -1,0 +1,3 @@
+with(Obstacle)
+    solid = true;
+

@@ -16,15 +16,35 @@
         <argument kind="STRING">if(stickied)
 {
     if (reflector != noone and alarm[0] &lt; 0)
-        alarm[0] = 30;
+        alarm[0] = 30 / global.delta_factor;
     splashThreshhold = false;
 }
 else
 {
-    vspeed += 0.2;
+    vspeed += 0.2 * global.delta_factor;
     vspeed = min(vspeed,8);
     splashThreshhold = true;
+    if (global.run_virtual_ticks)
+    {
+        particleCycle = (particleCycle + 1) mod 2;
+        if(particleCycle)
+            instance_create(x, y, MineTrail);
+    }
 }
+
+x += hspeed * global.delta_factor;
+y += vspeed * global.delta_factor;
+
+if (instance_exists(ControlPointSetupGate))
+{
+    gunSetSolids();
+    if (place_meeting(x, y, ControlPointSetupGate) and ControlPointSetupGate.solid)
+        instance_destroy();
+    gunUnsetSolids();
+}
+x -= hspeed;
+y -= vspeed;
+
 </argument>
       </arguments>
     </action>

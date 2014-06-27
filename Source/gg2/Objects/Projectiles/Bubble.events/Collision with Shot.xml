@@ -13,7 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if(team != other.team)
+        <argument kind="STRING">if(team != other.team or other.perseverant)
     instance_destroy();
 </argument>
       </arguments>

@@ -14,8 +14,8 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">if instance_exists(owner.currentWeapon) {
-    owner.currentWeapon.ammoCount -= 1;
-    ammoDrained += 1;
+    owner.currentWeapon.ammoCount -= 1 * global.delta_factor;
+    ammoDrained += 1 * global.delta_factor;
 }
 </argument>
       </arguments>

@@ -14,7 +14,9 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">hp += 5;
-alarm[11] = 30;</argument>
+alarm[11] = 30 / global.delta_factor;
+
+</argument>
       </arguments>
     </action>
   </actions>

@@ -13,10 +13,12 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if(team != other.team) {
-    speed=0;
+        <argument kind="STRING">if(team != other.team)
+{
+    speed = 0;
     stickied = true;
-}</argument>
+}
+</argument>
       </arguments>
     </action>
   </actions>

@@ -16,19 +16,19 @@
         <argument kind="STRING">// Apply afterburn
 if (burnDuration &gt; 0)
 {
-    if(hp&gt;0)
+    if(hp &gt; 0)
     {   // Don't count if someone else already finished him off, to prevent afterburn from "stealing" sticky kills (Bug #1021989)
-        if (lastDamageDealer != burnedBy &amp;&amp; lastDamageDealer != player)
+        if (lastDamageDealer != burnedBy and lastDamageDealer != player)
         {
             secondToLastDamageDealer = lastDamageDealer;
-            alarm[4] = alarm[3];
+            alarm[4] = alarm[3] / global.delta_factor;
         }
-        alarm[3] = ASSIST_TIME;
+        alarm[3] = ASSIST_TIME / global.delta_factor;
         lastDamageDealer = burnedBy;
         lastDamageSource = afterburnSource;
+        dealDamage(lastDamageDealer, id, burnIntensity / 30);
     }
-    burnDuration -= durationDecay;
-    hp -= burnIntensity / 30;
+    burnDuration -= durationDecay * global.delta_factor;
     timeUnscathed = 0;
 }
 if (alarm[0] == -1 &amp;&amp; burnIntensity &gt; 0) burnIntensity -= intensityDecay;
@@ -40,6 +40,14 @@ if (burnDuration &lt;= 0 || burnIntensity &lt;= 0)
     afterburnSource = -1;
 }
 // Handle input
+if(player.queueJump)
+{
+    if (pressedKeys &amp; $80)
+        wantToJump = true;
+    else if (releasedKeys &amp; $80)
+        wantToJump = false;
+}
+
 if(!taunting and !omnomnomnom)
 {
     if(!player.humiliated and (keyState | pressedKeys) &amp; $10)
@@ -58,25 +66,30 @@ if(!taunting and !omnomnomnom)
         image_speed=tauntspeed;
     } 
     
-    if(pressedKeys &amp; $80)
+    if(pressedKeys &amp; $80 or (player.queueJump and wantToJump))
     {
-        if(!place_free(x,y+1) and place_free(x,y))
+        charSetSolids();
+        if ((!place_free(x, y+1) and place_free(x, y))
+            or (place_meeting(x, y+1, DropdownPlatform) and !place_meeting(x, y, DropdownPlatform)))
         {
             if(not stabbing)
             {
+                wantToJump = false;
                 playsound(x,y,JumpSnd);
-                vspeed = min(vspeed-jumpStrength, -jumpStrength);
+                vspeed = min(vspeed, -jumpStrength);
+                onground = false;
             }
         }
         else if(canDoublejump and !doublejumpUsed and vspeed &gt; -jumpStrength)
         {
+            wantToJump = false;
             vspeed = -jumpStrength;
             playsound(x,y,JumpSnd);
             doublejumpUsed = 1;
             moveStatus = 0;
         }
+        charUnsetSolids();
     }
-    
 }
 
 // Right click
@@ -94,8 +107,8 @@ if (!player.humiliated &amp;&amp; (pressedKeys &amp; $08)
 {
     if(currentWeapon.readyToStab) {
         if (cloak) { // stop spies immediately picking up intel after uncloaking
-            canGrabIntel=false;
-            alarm[1]=30;
+            canGrabIntel = false;
+            alarm[1] = max(alarm[1], 25 / global.delta_factor); // avoid decreasing the alarm on accident
         }
         cloak = !cloak;
     }
@@ -129,7 +142,7 @@ default:
     frictionFactor = baseFriction;
 }
 
-if(moveStatus == 1 or moveStatus == 2 or moveStatus == 4)
+if(moveStatus == 1 or moveStatus == 2 or moveStatus == 4 and global.run_virtual_ticks)
 {
     if !variable_local_exists("jumpFlameParticleType")
     {
@@ -139,7 +152,7 @@ if(moveStatus == 1 or moveStatus == 2 or moveStatus == 4)
         part_type_life(jumpFlameParticleType,2,5);
         part_type_scale(jumpFlameParticleType,0.7,-0.65);
     }
-    vspeed -= 0.06;
+    vspeed -= 0.06 * global.delta_factor;
     
     if !variable_global_exists("jumpFlameParticleSystem")
     {
@@ -162,24 +175,60 @@ if(moveStatus == 1 or moveStatus == 2 or moveStatus == 4)
         }
     }
 }
-
-_basemaxspeed = abs(runPower * baseControl / (baseFriction-1));
-
-if(!taunting &amp;&amp; !omnomnomnom)
+if(spinjumping)
 {
-    if((keyState|pressedKeys) &amp; $40 and hspeed &gt; -_basemaxspeed)
-        hspeed -= runPower*controlFactor;
-        
-    if((keyState|pressedKeys) &amp; $20 and hspeed &lt; _basemaxspeed)
-        hspeed += runPower*controlFactor;
+    
+    if !variable_local_exists("jumpDustParticleType")
+    {
+        jumpDustParticleType = part_type_create();
+        part_type_sprite(jumpDustParticleType,SpeedBoostS,false,false,true);
+        part_type_alpha3(jumpDustParticleType,0.7,0.5,0);
+        part_type_life(jumpDustParticleType,15,30);
+        part_type_scale(jumpDustParticleType,1,1);
+        part_type_orientation(jumpDustParticleType, -90, -90, 0, 0, 0);
+    }
+    if !variable_global_exists("jumpDustParticleSystem")
+    {
+        global.jumpDustParticleSystem = part_system_create();
+        part_system_depth(global.jumpDustParticleSystem, 10);
+    }
+    
+    if(global.particles == PARTICLES_NORMAL or global.particles == PARTICLES_ALTERNATIVE)
+    {
+        if(random(4) &lt; 4)
+        {
+            if(sign(_last_hspeed) &gt; 0)
+                part_particles_create(global.jumpDustParticleSystem,bbox_right+1,bbox_bottom-4,jumpDustParticleType,1);
+            else
+                part_particles_create(global.jumpDustParticleSystem,bbox_left +2,bbox_bottom-4,jumpDustParticleType,1);
+        }
+    }
 }
-//divide friction as normal if going way too fast
-if(abs(hspeed) &gt; _basemaxspeed * 2 or
-   ((keyState|pressedKeys) &amp; $60 and abs(hspeed) &lt; _basemaxspeed))
-    hspeed /= baseFriction;
-else //otherwise divide by the moveStatus's friction
-    hspeed /= frictionFactor;
 
+controlling = false;
+repeat(global.frameskip)
+{
+    // Do movement
+    if(!taunting &amp;&amp; !omnomnomnom)
+    {
+        if((keyState|pressedKeys) &amp; $40 and hspeed &gt;= -basemaxspeed)
+        {
+            hspeed -= runPower*controlFactor * global.skip_delta_factor;
+            controlling = true;
+        }
+        if((keyState|pressedKeys) &amp; $20 and hspeed &lt;= basemaxspeed)
+        {
+            hspeed += runPower*controlFactor * global.skip_delta_factor;
+            controlling = !controlling; // cancel out 'controlling' if both buttons are pressed
+        }
+    }
+    // divide friction as normal if going way too fast
+    if(abs(hspeed) &gt; basemaxspeed * 2 or
+       ((keyState|pressedKeys) &amp; $60 and abs(hspeed) &lt; basemaxspeed))
+        hspeed /= delta_mult_skip(baseFriction);
+    else //otherwise divide by the moveStatus's friction
+        hspeed /= delta_mult_skip(frictionFactor);
+}
 
 if(pressedKeys &amp; $04) {
     setChatBubble(player, 45);
@@ -189,43 +238,85 @@ pressedKeys = 0;
 releasedKeys = 0;
 
 // flame bubble
-if burnDuration&gt;0 &amp;&amp; player.class != CLASS_PYRO &amp;&amp; random(80) &lt;= 1 {
+if burnDuration&gt;0 &amp;&amp; player.class != CLASS_PYRO and random(80) &lt;= 1 {
     setChatBubble(player, 49);
 }
 
-if(abs(hspeed)&lt;0.195 /*and not moveStatus = 3*/) { // Overweight carrying intel and shooting will get stuck with this number much higher
+// stop players who are moving too slowly (avoid "ice skating")
+if (abs(hspeed) &lt; 0.195 * global.delta_factor and !controlling)
+{
     hspeed=0;
     animationImage=0;
+    still = true;
 }
+else
+    still = false;
 
-if(place_free(x,y+1)) {
-    vspeed += 0.6;
-    if(vspeed&gt;10) {
-        vspeed=10;
+charSetSolids();
+
+if(place_free(x,y+1)) // no obstacle ground below us
+{
+    vspeed += 0.6 * global.delta_factor;
+    if(vspeed &gt; 10)
+        vspeed = 10;
+    
+    // standing on a dropdown platform
+    if (place_meeting(x, y+1, DropdownPlatform) and !place_meeting(x, y, DropdownPlatform) and vspeed &gt;= 0)
+    {
+        onground = true;
     }
-    animationImage = 1;
-} else {
-    if(place_free(x,y)) {
+    else // NOT standing on one
+    {
+        animationImage = 1;
+        onground = false;
+    }
+}
+else // obstacle ground below us
+{
+    if(place_free(x, y) or (place_meeting(x, y+1, DropdownPlatform) and !place_meeting(x, y, DropdownPlatform)) and vspeed &gt;= 0)
+    {
+        onground = true;
         doublejumpUsed = 0;
+        moveStatus = 0;
     }
 }
 
 if (intel)
 { 
-    if (random(1) &gt; 0.90 &amp;&amp; speed &gt; 0.195)
+    if (global.run_virtual_ticks)
     {
-        var sheet;
-        sheet = instance_create(x,y-11+random(9),LooseSheet);
-        sheet.hspeed = hspeed;
+        if (speed &gt; 0.195)
+        {
+            if (random(1) &gt; 0.90)
+            {
+                var sheet;
+                sheet = instance_create(x,y-11+random(9),LooseSheet);
+                sheet.hspeed = hspeed;
+            }
+        }
+        else if (random(1) &gt; 0.975)
+        {
+            var sheet;
+            sheet = instance_create(x,y-11+random(9),LooseSheet);
+            sheet.hspeed = hspeed;
+        }
     }
     if (cloak)
     {
         cloak=false;
         cloakAplha=1;
     }
-    intelRecharge = min(INTEL_MAX_TIMER, intelRecharge + INTEL_MAX_TIMER/(3*30));// 3*30 == it'll take 3 seconds for this to charge
+    if (!omnomnomnom) // Do not recharge intel timer if eating
+        intelRecharge = min(INTEL_MAX_TIMER, // Cap timer charge at the intel timer's length (bandwidth)
+                            intelRecharge + global.delta_factor * // ...After adding some value to it 
+                            INTEL_MAX_TIMER/((3+abs(min(hspeed, 7))/3.5)*30)); // ...Which starts at a rate of full charge per three seconds, and reduces linearly with speed, down to full charge per five seconds with a scout's max speed
 }
- 
+var sprite_length;
+if(player.class == CLASS_QUOTE or sprite_special or zoomed)
+    sprite_length = 2;
+else
+    sprite_length = CHARACTER_ANIMATION_LEN;
+
 if (player.humiliated)
 {
     if (!place_free(x,y+1) &amp;&amp; hspeed == 0)
@@ -233,10 +324,30 @@ if (player.humiliated)
     else if place_free(x,y+1)
         animationImage = 2;
     if (!place_free(x,y+1) &amp;&amp; hspeed != 0)
-        animationImage = 1+((animationImage-1+abs(hspeed)/20) mod CHARACTER_ANIMATION_LEN);
+        animationImage = 1+
+        ((animationImage-1+
+          min(abs(hspeed), 8)
+          *global.delta_factor/20) mod 
+         2);
 }
 else
-    animationImage = (animationImage+abs(hspeed)/20) mod CHARACTER_ANIMATION_LEN;
+{
+    if (place_free(x,y+1) and hspeed != 0 and player.class == CLASS_QUOTE)
+    {
+        animationImage = 1;
+    }
+    else
+    {
+        animationImage = (animationImage+
+         min(abs(hspeed)*sign(hspeed), 8)
+         *image_xscale*global.delta_factor/20)
+        mod sprite_length;
+    }
+    // ensure positive animationImage
+    animationImage = (animationImage+sprite_length) mod sprite_length;
+}
+
+charUnsetSolids();
 
 // drop intel if ubered or round is over
 if (intel and (ubered or global.mapchanging) and global.isHost) {
@@ -245,7 +356,7 @@ if (intel and (ubered or global.mapchanging) and global.isHost) {
 }
 
 //gotta regenerate some nuts
-nutsNBolts = min(nutsNBolts+0.1, maxNutsNBolts);
+nutsNBolts = min(nutsNBolts+(0.1 * global.delta_factor), maxNutsNBolts);
 
 //ubered max out ammo and extinguish flames
 if ubered {
@@ -298,7 +409,7 @@ if (player.humiliated)
 var zone;
 zone = collision_point(x,y,CaptureZone,0,0);
 
-if(zone &gt;= 0 and !cloak)
+if(zone &gt;= 0 and !cloak and cloakAlpha == 1)
     cappingPoint = zone.cp;
 else
     cappingPoint = noone;

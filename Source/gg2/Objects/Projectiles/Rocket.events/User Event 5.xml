@@ -21,11 +21,13 @@
         else
             exploded = true;
         if(characterHit != -1) {
-            if(characterHit.team != team || characterHit.id == ownerPlayer.object  &amp;&amp; characterHit.ubered == 0 ) {
-                characterHit.hp -= hitDamage;
-                characterHit.timeUnscathed = 0;
-                if object_is_ancestor(characterHit.object_index, Character) {
-                    if (characterHit.lastDamageDealer != ownerPlayer &amp;&amp; characterHit.lastDamageDealer != characterHit.player){
+            if(characterHit.team != team || characterHit.id == ownerPlayer.object and !characterHit.ubered )
+            {
+                damageAuto( ownerPlayer, characterHit, hitDamage );
+                if object_is_ancestor(characterHit.object_index, Character)
+                {
+                    if (characterHit.lastDamageDealer != ownerPlayer and characterHit.lastDamageDealer != characterHit.player)
+                    {
                         characterHit.secondToLastDamageDealer = characterHit.lastDamageDealer;
                         characterHit.alarm[4] = characterHit.alarm[3]
                     }
@@ -41,7 +43,7 @@
         with (Character) {
             if (distance_to_object(other) &lt; other.blastRadius and !(team == other.team and id != other.ownerPlayer.object and place_meeting(x, y+1, Obstacle))){
                 var rdir, vectorfactor;
-                rdir = point_direction(other.x,other.y,x,y);
+                rdir = point_direction(other.x ,other.y, (bbox_left+bbox_right)/2, (bbox_top+bbox_bottom)/2);
                 vectorfactor = point_distance(0, 0, power(sin(degtorad(rdir)), 2), power(cos(degtorad(rdir)), 2));
                 if (1 - distance_to_object(other)/other.blastRadius &lt;= 0.25)
                     continue;
@@ -50,12 +52,10 @@
                 {
                     if (other.team != team) or (id==other.ownerPlayer.object)
                     {
-                        hp -= other.explosionDamage*(1-(distance_to_object(other)/other.blastRadius));
-                        timeUnscathed = 0;
+                        damageCharacter( other.ownerPlayer, id, other.explosionDamage*(1-(distance_to_object(other)/other.blastRadius)) );
+                        
                         if(id == other.ownerPlayer.object and instance_exists(lastDamageDealer) and lastDamageDealer != other.ownerPlayer)
-                        {
                             lastDamageSource = FINISHED_OFF_GIB;
-                        }
                         else 
                         {
                             if (lastDamageDealer != other.ownerPlayer &amp;&amp; lastDamageDealer != player){
@@ -102,8 +102,10 @@
 
         with (Sentry) {
             if (distance_to_object(other) &lt; other.blastRadius){
-                if(other.team != team) {
-                    hp -= other.explosionDamage*(1-(distance_to_object(other)/other.blastRadius));
+                if(other.team != team)
+                {
+                    damageSentry( other.ownerPlayer, id, other.explosionDamage*(1-(distance_to_object(other)/other.blastRadius)) );
+                    
                     lastDamageDealer = other.ownerPlayer;
                     lastDamageSource = other.weapon;
                 }
@@ -112,20 +114,9 @@
         
         with (Generator) {
             if (distance_to_object(other) &lt; other.blastRadius){
-                if(other.team != team) {
-                    alarm[0] = regenerationBuffer;
-                    isShieldRegenerating = false;
-                    //allow overkill to be applied directly to the target
-                    var hitDamage;
-                    hitDamage = other.explosionDamage*(1-(distance_to_object(other)/other.blastRadius));
-                    if (hitDamage &gt; shieldHp) {
-                        hp -= hitDamage - shieldHp;
-                        hp -= shieldHp * shieldResistance;
-                        shieldHp = 0;
-                    } else {
-                        hp -= hitDamage * shieldResistance;
-                        shieldHp -= hitDamage;
-                    }
+                if(other.team != team)
+                {
+                    damageGenerator( other.ownerPlayer, id, other.explosionDamage*(1-(distance_to_object(other)/other.blastRadius)) );
                     
                     lastDamageDealer = other.ownerPlayer;
                     lastDamageSource = other.weapon;

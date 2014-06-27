@@ -4,9 +4,11 @@
   <resource name="TwodFortTwoRemixO" type="RESOURCE"/>
   <resource name="TruefortO" type="RESOURCE"/>
   <resource name="ConflictO" type="RESOURCE"/>
+  <resource name="AvantiO" type="RESOURCE"/>
   <resource name="OrangeO" type="RESOURCE"/>
   <resource name="classicwellO" type="RESOURCE"/>
   <resource name="WaterwayO" type="RESOURCE"/>
+  <resource name="Point" type="RESOURCE"/>
   <resource name="DirtbowlO" type="RESOURCE"/>
   <resource name="EgyptO" type="RESOURCE"/>
   <resource name="MontaneO" type="RESOURCE"/>
@@ -17,6 +19,8 @@
   <resource name="HarvestO" type="RESOURCE"/>
   <resource name="AtaliaO" type="RESOURCE"/>
   <resource name="SixtiesO" type="RESOURCE"/>
+  <resource name="DebugRoomO" type="RESOURCE"/>
+  <resource name="ManticO" type="RESOURCE"/>
   <resource name="OldfortO" type="RESOURCE"/>
   <resource name="CustomMapO" type="RESOURCE"/>
 </resources>

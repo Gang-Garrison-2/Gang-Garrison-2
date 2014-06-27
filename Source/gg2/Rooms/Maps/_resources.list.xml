@@ -3,6 +3,7 @@
   <resource name="Truefort" type="RESOURCE"/>
   <resource name="TwodFortTwoRemix" type="RESOURCE"/>
   <resource name="Conflict" type="RESOURCE"/>
+  <resource name="Avanti" type="RESOURCE"/>
   <resource name="ClassicWell" type="RESOURCE"/>
   <resource name="Waterway" type="RESOURCE"/>
   <resource name="Orange" type="RESOURCE"/>
@@ -16,6 +17,8 @@
   <resource name="Harvest" type="RESOURCE"/>
   <resource name="Atalia" type="RESOURCE"/>
   <resource name="Sixties" type="RESOURCE"/>
+  <resource name="DebugRoom" type="RESOURCE"/>
+  <resource name="Mantic" type="RESOURCE"/>
   <resource name="CustomMapRoom" type="RESOURCE"/>
   <resource name="Oldfort" type="RESOURCE"/>
 </resources>

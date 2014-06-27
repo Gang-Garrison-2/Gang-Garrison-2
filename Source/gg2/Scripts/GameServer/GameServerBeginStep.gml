@@ -1,14 +1,16 @@
 if(serverbalance != 0)
-    balancecounter+=1;
+    balancecounter += 1;
 
 // Register with Lobby Server every 30 seconds
-if(global.useLobbyServer and (frame mod 900)==0)
+if((frame mod 900) == 0 and global.run_virtual_ticks)
     sendLobbyRegistration();
-frame += 1;
+    
+if(global.run_virtual_ticks)
+    frame += 1;
 
 // Service all players
 var i;
-for(i=0; i<ds_list_size(global.players); i+=1)
+for(i=0; i < ds_list_size(global.players); i+=1)
 {
     var player;
     player = ds_list_find_value(global.players, i);
@@ -18,43 +20,44 @@ for(i=0; i<ds_list_size(global.players); i+=1)
         removePlayer(player);
         ServerPlayerLeave(i, global.sendBuffer);
         ServerBalanceTeams();
-        i-=1;
+        i -= 1;
     }
     else
         processClientCommands(player, i);
 }
 
-if(syncTimer == 1 || ((frame mod 3600)==0) || global.setupTimer == 180)
+if(syncTimer == 1 || ((frame mod 3600)==0) || global.setupTimer == 180 and global.run_virtual_ticks)
 {
     serializeState(CAPS_UPDATE, global.sendBuffer);
     syncTimer = 0;
 }
 
-if((frame mod 7) == 0)
-    serializeState(QUICK_UPDATE, global.sendBuffer);
-else
-    serializeState(INPUTSTATE, global.sendBuffer);
+if(global.run_virtual_ticks)
+{
+    if((frame mod 7) == 0)
+        serializeState(QUICK_UPDATE, global.sendBuffer);
+    else
+        serializeState(INPUTSTATE, global.sendBuffer);
+}
 
-if(impendingMapChange > 0)
+if(impendingMapChange > 0 and global.run_virtual_ticks)
     impendingMapChange -= 1; // countdown until a map change
 
 if(global.winners != -1 and !global.mapchanging)
 {
     if(global.winners == TEAM_RED and global.currentMapArea < global.totalMapAreas)
     {
-        global.nextMap = global.currentMap;
         global.currentMapArea += 1;
+        global.nextMap = global.currentMap;
     }
     else
-    { 
-        global.currentMapIndex += 1;
+    {
         global.currentMapArea = 1;
-        if(global.currentMapIndex == ds_list_size(global.map_rotation)) 
-            global.currentMapIndex = 0;
-        global.nextMap = ds_list_find_value(global.map_rotation, global.currentMapIndex);
+        global.nextMap = nextMapInRotation();
     }
+    
     global.mapchanging = true;
-    impendingMapChange = 300; // in 300 frames (ten seconds), we'll do a map change
+    impendingMapChange = 300; // in 300 ticks (ten seconds), we'll do a map change
     
     write_ubyte(global.sendBuffer, MAP_END);
     write_ubyte(global.sendBuffer, string_length(global.nextMap));
@@ -71,21 +74,7 @@ if(global.winners != -1 and !global.mapchanging)
 if(impendingMapChange == 0)
 {
     global.mapchanging = false;
-    global.currentMap = global.nextMap;
-    if(file_exists("Maps/" + global.currentMap + ".png"))
-    { // if this is an external map, get the md5 and url for the map
-        global.currentMapMD5 = CustomMapGetMapMD5(global.currentMap);
-        room_goto_fix(CustomMapRoom);
-    }
-    else
-    { // internal map, so at the very least, MD5 must be blank
-        global.currentMapMD5 = "";
-        if(gotoInternalMapRoom(global.currentMap) != 0)
-        {
-            show_message("Error:#Map " + global.currentMap + " is not in maps folder, and it is not a valid internal map.#Exiting.");
-            game_end();
-        }
-    }
+    serverGotoMap(global.nextMap);
     ServerChangeMap(global.currentMap, global.currentMapMD5, global.sendBuffer);
     impendingMapChange = -1;
     
@@ -122,7 +111,7 @@ if(impendingMapChange == 0)
             team = TEAM_SPECTATOR;
         }
         timesChangedCapLimit = 0;
-        alarm[5]=1;
+        alarm[5] = 1;
     }
     // message lobby to update map name
     sendLobbyRegistration();

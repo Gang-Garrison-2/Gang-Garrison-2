@@ -34,20 +34,39 @@
     ubered = 0;
     stabbing = 0;
     onCabinet = 0;
+    wantToJump = false;
     timeUnscathed = 0;
+    syncWrongness = 0;
+    
+    // animation state
+    equipmentOffset = 0;
+    onground = true;
+    still = true;
+    yoffset = 0;
+    sprite_special = global.gg_birthday or global.xmas;
+    
+    // class sprite vars
+    spriteRun = sprite_index;
+    spriteJump = sprite_index;
+    spriteStand = sprite_index;
+    spriteLeanR = sprite_index;
+    spriteLeanL = sprite_index;
+    spriteIntel = sprite_index; // it's an underlay
     
     //afterburn stuff
-    burnIntensity = 0;
-    maxIntensity = 9; //maximum afterburn intensity in DPS
-    burnDuration = 0;
-    maxDuration = 210; //maximum afterburn length in frames
-    decayDelay = 30; //time between burning and intensity lowering
-    decayDuration = 150; //time between intensity lowering and zeroing out
+    burnIntensity = 0; // "heat"
+    legIntensity = 7; // afterburn intensity after which additional intsity additions are halved.
+                      // it's called a "leg" becauase of a similar concept in dynamic range compression.
+    maxIntensity = 13; //maximum afterburn intensity in DPS
+    burnDuration = 0; // "fuel"
+    maxDuration = 210; //maximum afterburn length in duration ticks (see durationDecay)
+    decayDelay = 90; //time between last ignition and intensity lowering
+    decayDuration = 90; //time between intensity lowering and zeroing out
     durationDecay = 1; //amount that duration lowers per step
     intensityDecay = burnIntensity / decayDuration;
     burnedBy = -1;
     afterburnSource = -1;
-    numFlames = 4 ; //purely cosmetic - the number of flames that someone has with max burnIntensity
+    numFlames = 5 ; //purely cosmetic - the number of flames that someone has with max burnIntensity
     for(i = 0; i &lt; numFlames; i += 1)
     {
         flameArray_x[i] = random_range(-(bbox_right-bbox_left)/2, (bbox_right-bbox_left)/2);
@@ -62,6 +81,7 @@
     releasedKeys = 0;
     aimDirection = 0;
     netAimDirection = 0;
+    aimDistance = 0;
 
     image_speed = 0;
     tauntspeed = 3;
@@ -70,6 +90,11 @@
     animationOffset = CHARACTER_ANIMATION_NORMAL;
     animationImage = 0;
     humiliationOffset = irandom(10)*3; //support for 10 different animations is more than enough
+    
+    // spinjumping state vars
+    _last_xscale = image_xscale;
+    _last_hspeed = 0;
+    spinjumping = false;
 
     //kill assist/finish off addition
     lastDamageDealer = noone;
@@ -84,6 +109,7 @@
     // Cloak for Spies
     cloak = false;
     cloakAlpha = 1;
+    cloakFlicker = false;
 
     //healer
     healer = -1;
@@ -115,16 +141,43 @@
     //4 for friendly juggles!
     moveStatus = 0;
     
-    baseControl=0.85;
+    baseControl = 0.85;
     // warning that baseFriction cannot be equal to 0 nor 1 or div0 will occur
     baseFriction = 1.15;
     controlFactor = baseControl;
     frictionFactor = baseFriction;
-    
+    basemaxspeed = abs(runPower * baseControl / (baseFriction-1));
+    highestbasemaxspeed = 9.735; // approximation error &lt; 0.0017 of scout's base max speed
+
+    // used for certain rewards
+    overlay = -1;
+    tauntOverlay = -1;
+    omnomnomnomOverlay = -1;
+    omnomnomnomSprite = OmnomnomnomS;
+    sniperCrouchOverlay = -1;
+    demon = -1;
+    demonX = 0;
+    demonY = 0;
+    demonOffset = 0;
+    demonDir = 0.5;
+    demonFrame = 0;
+
     // Let's spawn our weapon
     global.paramOwner = id;
     currentWeapon = instance_create(x,y,weapons[0]);
     global.paramOwner = noone;
+
+    // 'BH' reward - *B*obble *H*ead - not available for quote
+    if(hasClassReward(player, 'BH') and player.class != CLASS_QUOTE)
+    {
+        overlay = global.HatBobbleClassOverlay[player.class];
+        tauntOverlay = global.HatBobbleClassTaunt[player.class];
+    }
+
+    if (hasReward(player, 'WillOWisp'))
+    {
+        demon = WillOWispS;
+    }
 }
 </argument>
       </arguments>

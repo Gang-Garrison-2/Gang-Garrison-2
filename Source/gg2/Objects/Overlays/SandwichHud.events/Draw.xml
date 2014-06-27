@@ -14,25 +14,31 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">var xoffset, yoffset, xsize, ysize;    
-    xoffset = view_xview[0];
-    yoffset = view_yview[0];
-    xsize = view_wview[0];
-    ysize = view_hview[0];
-if global.myself.team == TEAM_BLUE offset=1;
-else offset = 0;
-if global.myself.object == -1 || global.myself.class!=CLASS_HEAVY exit;
+xoffset = view_xview[0];
+yoffset = view_yview[0];
+xsize = view_wview[0];
+ysize = view_hview[0];
+if (global.myself.team == TEAM_BLUE)
+    offset = 1;
+else
+    offset = 0;
 
+if (global.myself.object == -1 or global.myself.class != CLASS_HEAVY)
+{
+    instance_destroy();
+    exit;
+}
 draw_set_valign(fa_center);
 draw_set_halign(fa_right);
 draw_set_alpha(1);
-barcolor=make_color_rgb(217,217,183);
+barcolor = make_color_rgb(217,217,183);
 var sandwichScalar;
 if !(global.myself.object.canEat)
-    sandwichScalar = (1-(global.myself.object.alarm[6]/global.myself.object.eatCooldown)) * 100
+    sandwichScalar = (1-(global.myself.object.alarm[6]/(global.myself.object.eatCooldown / global.delta_factor))) * 100
 else
     sandwichScalar = 100
-draw_sprite_ext(sprite_index,offset,xoffset+730,yoffset+515,2,2,0,c_white,1);
-draw_healthbar(xoffset+715,yoffset+528,xoffset+750,yoffset+533,sandwichScalar,c_black,barcolor,barcolor,0,true,false);
+draw_sprite_ext(sprite_index,offset,xoffset+xsize-70,yoffset+ysize-85,2,2,0,c_white,1);
+draw_healthbar(xoffset+xsize-85,yoffset+ysize-72,xoffset+xsize-50,yoffset+ysize-67,sandwichScalar,c_black,barcolor,barcolor,0,true,false);
 </argument>
       </arguments>
     </action>

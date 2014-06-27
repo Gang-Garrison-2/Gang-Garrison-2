@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="HostOptionsController" type="RESOURCE"/>
+  <resource name="AdvHostOptionsController" type="RESOURCE"/>
+  <resource name="HostWarningsController" type="RESOURCE"/>
+  <resource name="ClasslimitsMenuController" type="RESOURCE"/>
+</resources>

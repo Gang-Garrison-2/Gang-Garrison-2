@@ -57,19 +57,37 @@ do {
                 usePlugins = pluginsRequired || !global.serverPluginsPrompt;
                 if (global.serverPluginsPrompt)
                 {
+                    // Split up plugin list
+                    var pluginList;
+                    pluginList = split(plugins, ',');
+
+                    // Iterate over list and make displayable list without hashes
+                    var displayList, i;
+                    displayList = '';
+                    for (i = 0; i < ds_list_size(pluginList); i += 1)
+                    {
+                        var pluginParts;
+                        pluginParts = split(ds_list_find_value(pluginList, i), '@');
+                        displayList += '- ' + ds_list_find_value(pluginParts, 0) + '#';
+                        ds_list_destroy(pluginParts);
+                    }
+
+                    // Destroy list
+                    ds_list_destroy(pluginList);
+                    
                     var prompt;
                     if (pluginsRequired)
                     {
-                        prompt = show_question(
-                            "This server requires the following plugins to play on it: "
-                            + string_replace_all(plugins, ",", "#")
-                            + '#They are downloaded from the source: "'
-                            + PLUGIN_SOURCE
-                            + '"#The source states: "'
+                        prompt = show_message_ext(
+                            'You need these plugins to play on this server: #'
+                            + displayList
                             + PLUGIN_SOURCE_NOTICE
-                            + '"#Do you wish to download them and continue connecting?'
+                            + '#Do you want to download them and join the server?',
+                            'Download and join',
+                            '',
+                            'Disconnect'
                         );
-                        if (!prompt)
+                        if (prompt != 1)
                         {
                             instance_destroy();
                             exit;
@@ -77,18 +95,23 @@ do {
                     }
                     else
                     {
-                        prompt = show_question(
-                            "This server suggests the following optional plugins to play on it: "
-                            + string_replace_all(plugins, ",", "#")
-                            + '#They are downloaded from the source: "'
-                            + PLUGIN_SOURCE
-                            + '"#The source states: "'
+                        prompt = show_message_ext(
+                            'These optional plugins are suggested for this server: #'
+                            + displayList
                             + PLUGIN_SOURCE_NOTICE
-                            + '"#Do you wish to download them and use them?'
+                            + '#Do you want to download them?',
+                            'Download',
+                            '',
+                            'Skip'
                         );
-                        if (prompt)
+                        if (prompt == 1)
                         {
                             usePlugins = true;
+                        }
+                        else
+                        {
+                            // We set this so that we won't prompt for plugins again if we re-connect to download a map
+                            skippedPlugins = true;
                         }
                     }
                 }
@@ -139,6 +162,11 @@ do {
                 write_ubyte(global.serverSocket, REWARD_REQUEST);
                 write_ubyte(global.serverSocket, string_length(rewardId));
                 write_string(global.serverSocket, rewardId);
+            }
+            if(global.queueJumping == true)
+            {
+                write_ubyte(global.serverSocket, CLIENT_SETTINGS);
+                write_ubyte(global.serverSocket, global.queueJumping);
             }
             socket_send(global.serverSocket);
             break;
@@ -401,6 +429,7 @@ do {
             reason = read_ubyte(global.tempBuffer);
             if reason == KICK_NAME kickReason = "Name Exploit";
             else if reason == KICK_BAD_PLUGIN_PACKET kickReason = "Invalid plugin packet ID";
+            else if reason == KICK_MULTI_CLIENT kickReason = "There are too many connections from your IP";
             else kickReason = "";
             show_message("You have been kicked from the server. "+kickReason+".");
             instance_destroy();
@@ -438,7 +467,10 @@ do {
             global.currentMap = receivestring(global.serverSocket, 1);
             global.currentMapMD5 = receivestring(global.serverSocket, 1);
             if(global.currentMapMD5 == "") { // if this is an internal map (signified by the lack of an md5)
-                if(gotoInternalMapRoom(global.currentMap) != 0) {
+                if(findInternalMapRoom(global.currentMap))
+                    room_goto_fix(findInternalMapRoom(global.currentMap));
+                else
+                {
                     show_message("Error:#Server went to invalid internal map: " + global.currentMap + "#Exiting.");
                     instance_destroy();
                     exit;
@@ -455,11 +487,15 @@ do {
                     var oldReturnRoom;
                     oldReturnRoom = returnRoom;
                     returnRoom = DownloadRoom;
+                    // Normally, GG2 is restarted when we disconnect, if plugins are in use
+                    // As we're only disconnecting to download a map, we won't restart
                     if (global.serverPluginsInUse)
                         noUnloadPlugins = true;
                     event_perform(ev_destroy,0);
                     ClientCreate();
-                    if (global.serverPluginsInUse)
+                    // Normally, GG2 will prompt to load plugins when connecting to a server
+                    // If they're already loaded, or the user skipped them, we won't prompt again
+                    if (global.serverPluginsInUse or skippedPlugins)
                         noReloadPlugins = true;
                     returnRoom = oldReturnRoom;
                     usePreviousPwd = true;
@@ -519,9 +555,11 @@ do {
             break;
 
         case REWARD_UPDATE:
-            receiveCompleteMessage(global.serverSocket,3,global.tempBuffer);
+            receiveCompleteMessage(global.serverSocket,1,global.tempBuffer);
             player = ds_list_find_value(global.players, read_ubyte(global.tempBuffer));
-            doEventUpdateRewards(player, read_ushort(global.tempBuffer));
+            var rewardString;
+            rewardString = receivestring(global.serverSocket, 2);
+            doEventUpdateRewards(player, rewardString);
             break;
             
         case MESSAGE_STRING:
@@ -592,10 +630,15 @@ do {
                 show_error("ERROR when reading plugin packet: no such plugin packet ID " + string(packetID), true);
             }
             break;
+        
+        case CLIENT_SETTINGS:
+            receiveCompleteMessage(global.serverSocket,2,global.tempBuffer);
+            player = ds_list_find_value(global.players, read_ubyte(global.tempBuffer));
+            player.queueJump = read_ubyte(global.tempBuffer);
+            break;
 
         default:
-            show_message("The Server sent unexpected data");
-            game_end();
+            promptRestartOrQuit("The Server sent unexpected data.");
             exit;
         }
     } else {

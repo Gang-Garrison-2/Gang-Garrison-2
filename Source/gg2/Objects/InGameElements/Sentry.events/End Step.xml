@@ -30,7 +30,7 @@ if(hp&gt;maxHp) hp=maxHp;
 if (built == 1) {
     if (idleTimer == true) {
         playsound(x,y,SentryIdle);
-        alarm[5] = 90;    
+        alarm[5] = 90 / global.delta_factor;    
     }    
     idleTimer = false;
 }

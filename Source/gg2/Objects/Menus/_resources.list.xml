@@ -1,20 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
-  <resource name="LobbySideController" type="RESOURCE"/>
-  <resource name="LobbyNameController" type="RESOURCE"/>
-  <resource name="OptionsController" type="RESOURCE"/>
-  <resource name="HUDOptionsController" type="RESOURCE"/>
-  <resource name="HostOptionsController" type="RESOURCE"/>
-  <resource name="ControlsController" type="RESOURCE"/>
   <resource name="SplashController" type="RESOURCE"/>
-  <resource name="LobbyController" type="RESOURCE"/>
-  <resource name="MainMenuController" type="RESOURCE"/>
-  <resource name="InGameMenuController" type="RESOURCE"/>
-  <resource name="CreditsController" type="RESOURCE"/>
-  <resource name="DevMessageChecker" type="RESOURCE"/>
-  <resource name="DevMessagePopup" type="RESOURCE"/>
-  <resource name="BackgroundDownloader" type="RESOURCE"/>
   <resource name="MenuController" type="RESOURCE"/>
   <resource name="ClasslimitsMenuController" type="RESOURCE"/>
   <resource name="Console" type="RESOURCE"/>
+  <resource name="Main Menu Elements" type="GROUP"/>
+  <resource name="Lobby Elements" type="GROUP"/>
+  <resource name="Hosting Menu Elements" type="GROUP"/>
+  <resource name="Options Menus" type="GROUP"/>
+  <resource name="InGameMenuController" type="RESOURCE"/>
 </resources>

@@ -14,7 +14,7 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">{
-    if(readyToShoot and ammoCount &gt;= 2.2)
+    if(readyToShoot and ammoCount &gt;= 2)
     {
         playsound(x,y,ChaingunSnd);
         var shot;
@@ -30,21 +30,21 @@
         if(golden)
             shot.sprite_index = ShotGoldS;
         shot.hspeed += owner.hspeed;
-        shot.alarm[0] = 30;
+        shot.alarm[0] = 30 / global.delta_factor;
         
         justShot=true;
         readyToShoot=false;
         isRefilling = false;
-        ammoCount -= 2.2;
+        ammoCount -= 3;
         
         var reloadBufferFactor;
-        if(ammoCount &lt; 2.2)
+        if(ammoCount &lt; 3)
             reloadBufferFactor = 2.5;
         else
             reloadBufferFactor = 1+(cos((ammoCount+2.2)/maxAmmo*pi)+1)/2; // spline from (full ammo = 1*) to (empty ammo = 2*)
         
-        alarm[0] = refireTime;
-        alarm[5] = reloadBuffer*reloadBufferFactor;
+        alarm[0] = refireTime / global.delta_factor;
+        alarm[5] = reloadBuffer*reloadBufferFactor / global.delta_factor;
     }
     
 }

@@ -16,7 +16,9 @@
         <argument kind="STRING">fadeout = false;
 bubbleAlpha = 0;
 visible = false;
-image_speed = 0;</argument>
+image_speed = 0;
+
+</argument>
       </arguments>
     </action>
   </actions>

@@ -15,8 +15,10 @@
       <arguments>
         <argument kind="STRING">if (ammoCount &lt; 0)
     ammoCount = 0;
-else if (ammoCount &lt;= maxAmmo  and isRefilling)
-    ammoCount += 1.1;
+else if (ammoCount &lt;= maxAmmo and isRefilling)
+    ammoCount += 1 * global.delta_factor;
+if(!readyToShoot and alarm[5] &lt; 25 and !isRefilling)
+    alarm[5] += 1;
 </argument>
       </arguments>
     </action>

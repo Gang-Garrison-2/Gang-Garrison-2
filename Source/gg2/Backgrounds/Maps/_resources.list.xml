@@ -4,6 +4,7 @@
   <resource name="ConflictB" type="RESOURCE"/>
   <resource name="WaterwayB" type="RESOURCE"/>
   <resource name="TwodFortTwoRemixB" type="RESOURCE"/>
+  <resource name="DebugRoomB" type="RESOURCE"/>
   <resource name="zclassicwellB" type="RESOURCE"/>
   <resource name="OrangeB" type="RESOURCE"/>
   <resource name="DirtbowlB" type="RESOURCE"/>
@@ -17,5 +18,7 @@
   <resource name="AtaliaB" type="RESOURCE"/>
   <resource name="SixtiesB" type="RESOURCE"/>
   <resource name="OldfortB" type="RESOURCE"/>
+  <resource name="AvantiB" type="RESOURCE"/>
   <resource name="CustomMapB" type="RESOURCE"/>
+  <resource name="ManticB" type="RESOURCE"/>
 </resources>

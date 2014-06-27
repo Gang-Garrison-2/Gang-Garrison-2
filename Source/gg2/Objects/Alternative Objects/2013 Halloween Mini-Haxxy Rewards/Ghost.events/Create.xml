@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="CREATE" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">origX = x;
+origY = y;
+
+newX = 0;
+newY = 0;
+
+steps = 0;
+lastKiss = -30;
+
+owner = -1;
+
+image_speed = 1/3;
+fadeAlpha = 0;
+
+hitBoundaryOnLastStep = false;
+
+nextMoveTicker = 30;
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

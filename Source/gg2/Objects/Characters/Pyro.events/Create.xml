@@ -18,7 +18,8 @@ maxHp = 120;
 weapons[0] = Flamethrower;
 haxxyStatue = PyroHaxxyStatueS;
 
-if(hasRewardWeapon(global.paramPlayer))
+// 'GW' reward - *G*olden *W*eapon
+if(hasClassReward(global.paramPlayer, 'GW'))
     tauntsprite = PyroGoldTauntS;
 else
     tauntsprite = PyroTauntS;
@@ -37,6 +38,23 @@ else
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments/>
+    </action>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">numFlames = 3;
+maxDuration = 10;
+</argument>
+      </arguments>
     </action>
   </actions>
 </event>

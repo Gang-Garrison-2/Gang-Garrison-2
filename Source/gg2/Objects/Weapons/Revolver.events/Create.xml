@@ -25,7 +25,7 @@
     stabdirection=0;
     maxAmmo = 6;
     ammoCount = maxAmmo;
-    reloadTime = 30;
+    reloadTime = 45;
     reloadBuffer = refireTime;
     idle=true;
     

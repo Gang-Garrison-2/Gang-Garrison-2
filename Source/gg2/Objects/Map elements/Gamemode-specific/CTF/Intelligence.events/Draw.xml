@@ -13,11 +13,13 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">offset = 12*(object_index == IntelligenceBlue); // +12 offset for blue intel
+        <argument kind="STRING">offset = (object_index == IntelligenceBlue); // +12 offset for blue intel
+if(!offset and instance_exists(InvasionHUD))
+    exit;
 
 draw_sprite(sprite_index,image_index,x,y);
 if (alarm[0] &gt; 0)
-    draw_sprite_ext(IntelTimerS,floor(alarm[0]/900*12)+offset,x+2,y-25,2,2,0,c_white,1);
+    draw_intel_timer(offset, alarm[0]/900*global.delta_factor);
 </argument>
       </arguments>
     </action>

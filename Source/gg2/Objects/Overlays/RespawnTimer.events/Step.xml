@@ -19,8 +19,9 @@
     
 if (wait != -1)
 {
-    alarm[4] = 305;
-}    </argument>
+    alarm[4] = 305 / global.delta_factor;
+}    
+</argument>
       </arguments>
     </action>
   </actions>

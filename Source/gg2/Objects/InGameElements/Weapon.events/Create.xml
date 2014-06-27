@@ -21,7 +21,8 @@ alarm[0] = refireTime;
 
 owner = global.paramOwner;
 ownerPlayer = global.paramOwner.player;
-golden = hasRewardWeapon(ownerPlayer);
+// 'GW' reward - *G*olden *W*eapon
+golden = hasClassReward(ownerPlayer, 'GW');
 </argument>
       </arguments>
     </action>

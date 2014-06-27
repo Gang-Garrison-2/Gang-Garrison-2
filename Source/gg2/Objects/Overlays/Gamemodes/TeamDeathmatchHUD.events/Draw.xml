@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="DRAW" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">var xoffset, yoffset, xsize, ysize, xshift, yshift;
+xoffset = view_xview[0];
+yoffset = view_yview[0];
+xsize = view_wview[0];
+ysize = view_hview[0];
+xshift = -320 * global.timerPos;
+yshift = 5 * global.timerPos;
+
+var width, height, xpos, ypos;
+width = sprite_get_width(sprite_index) * 3;
+height = sprite_get_height(sprite_index) * 3;
+xpos = xoffset + xsize / 2 - width / 2;
+ypos = yoffset + ysize;
+
+draw_set_alpha(1);
+   
+draw_sprite_ext(sprite_index, 0, xpos, ypos, 3, 3, 0, c_white, 1);
+
+draw_set_color(c_black);
+draw_set_valign(fa_middle);
+draw_set_halign(fa_center);
+
+// Red kills
+draw_text_transformed(xpos + width / 2 - width / 3.5, ypos - height / 2 + 6, string(global.redCaps), 2, 2, 0);
+
+// Blue kills
+draw_text_transformed(xpos + width / 2 + width / 3.5, ypos - height / 2 + 6, string(global.blueCaps), 2, 2, 0);
+
+// Kill limit
+draw_text_transformed(xpos + width / 2, ypos - 14, string(killLimit), 2, 2, 0);
+
+//timer
+if instance_exists(WinBanner) exit;
+draw_set_color(c_white);
+draw_set_halign(fa_center);
+draw_set_valign(fa_center);
+
+if (global.myself != -1)
+{
+    if (global.myself.team == TEAM_RED)
+        teamoffset = 0;
+    else if (global.myself.team == TEAM_BLUE)
+        teamoffset = 1;
+}
+
+draw_roundtimer(xoffset, yoffset, xsize, ysize, timer);
+
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

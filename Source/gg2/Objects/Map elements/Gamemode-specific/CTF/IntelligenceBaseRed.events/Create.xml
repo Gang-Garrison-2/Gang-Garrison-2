@@ -15,7 +15,9 @@
       <arguments>
         <argument kind="STRING">{
     instance_create(x,y,IntelligenceRed);
-}</argument>
+}
+
+</argument>
       </arguments>
     </action>
   </actions>

@@ -26,7 +26,11 @@ oid.team=owner.team;
 oid.owner=owner;
 oid.gun=id;
 oid.weapon=WEAPON_ROCKETLAUNCHER;
-if (collision_line(x,y,x+lengthdir_x(28,owner.aimDirection),y+lengthdir_y(28,owner.aimDirection),Obstacle,1,0) || place_meeting(x+lengthdir_x(25,owner.aimDirection),y+lengthdir_y(25,owner.aimDirection),TeamGate)) {
+if (collision_line(x,y,x+lengthdir_x(20,owner.aimDirection),y+lengthdir_y(20,owner.aimDirection),Obstacle,1,0) or
+     collision_line(x,y,x+lengthdir_x(20,owner.aimDirection),y+lengthdir_y(20,owner.aimDirection),TeamGate,1,0) or
+     collision_line(x,y,x+lengthdir_x(20,owner.aimDirection),y+lengthdir_y(20,owner.aimDirection),IntelGate,1,0) or
+     collision_line(x,y,x+lengthdir_x(20,owner.aimDirection),y+lengthdir_y(20,owner.aimDirection),BulletWall,1,0))
+{
     oid.characterHit = -1;
     with (oid)
         event_user(5);
@@ -34,8 +38,9 @@ if (collision_line(x,y,x+lengthdir_x(28,owner.aimDirection),y+lengthdir_y(28,own
     
 justShot=true;
 readyToShoot = false;
-alarm[0] = refireTime;
-alarm[5] = reloadBuffer + reloadTime;
+alarm[0] = refireTime / global.delta_factor;
+alarm[5] = (reloadBuffer + reloadTime) / global.delta_factor;
+
 </argument>
       </arguments>
     </action>

@@ -14,7 +14,7 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">{
-    if(readyToShoot and bladesOut&lt;maxBlades)
+    if(readyToShoot and bladesOut &lt; maxBlades)
     {
         replenishing = 0;
         playsound(x,y,BladeSnd);
@@ -32,9 +32,9 @@
             shot.hitDamage = depletedBladeDamage;
         else
             shot.hitDamage = (ammoCount-lowAmmoThreshold)/(highAmmoThreshold-lowAmmoThreshold)*(bladeDamage-depletedBladeDamage)+depletedBladeDamage;
-        alarm[0] = refireTime;
-        shot.alarm[0] = bladeLife;
-        alarm[5] = bladeLife; //this isn't for when the blade actually dies, but the longest it could live
+        alarm[0] = refireTime / global.delta_factor;
+        shot.alarm[0] = bladeLife / global.delta_factor;
+        alarm[5] = bladeLife / global.delta_factor; //this isn't for when the blade actually dies, but the longest it could live
         bladesOut += 1;
         shot.weapon = WEAPON_BLADE;
         with(shot)

@@ -13,8 +13,24 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">// Climbing down stairs
-if(vspeed == 0) // if we aren't falling this frame
+        <argument kind="STRING">charSetSolids();
+// Handle dropdown platforms
+dropdownrectify = false;
+with(DropdownPlatform)
+{
+    if(place_meeting(x, y, other) and !(other.keyState &amp; $02)
+       and (other.bbox_bottom - (other.y - other.yprevious) - 1)
+           &lt; (bbox_top - (y - yprevious)))
+    {
+        while(place_meeting(x, y, other))
+            other.y -= 0.1;
+        other.vspeed = 0;
+        dropdownrectify = true;
+    }
+}
+// Climbing down stairs
+// if we aren't falling this frame, and we're not on a dropdown platform
+if(vspeed == 0 and (!place_meeting(x, y+1, DropdownPlatform) or place_meeting(x, y, DropdownPlatform)))
 { 
     if(place_free(x,y+6))
         if(!place_free(x,y+7))
@@ -24,6 +40,11 @@ if(vspeed == 0) // if we aren't falling this frame
 }
 xprevious = x;
 yprevious = y;
+
+if(!place_free(x,y+1) and vspeed &gt;= 0)
+    moveStatus = 0;
+
+charUnsetSolids();
 
 if(global.isHost &amp;&amp; hp&lt;=0) {
     var assistant;
@@ -72,12 +93,10 @@ if(y&lt;0) {
 if(y&gt;map_height()){
     y = map_height();
 }
-if(!place_free(x,y+1) and vspeed &gt;= 0)
-    moveStatus = 0;
 
     
 // Cloak
-if (cloak and cloakAlpha &gt; 0)
+if (cloak and cloakAlpha &gt; 0 and !cloakFlicker)
     cloakAlpha = max(cloakAlpha - 0.05, 0);
 else if (!cloak and cloakAlpha &lt; 1)
     cloakAlpha = min(cloakAlpha + 0.05, 1);
@@ -85,22 +104,23 @@ else if (!cloak and cloakAlpha &lt; 1)
 // Taunts
 if (taunting)
 {
-    tauntindex += tauntspeed*0.1;
-    if tauntindex &gt;= tauntend taunting=false;
+    tauntindex += tauntspeed*0.1 * global.delta_factor;
+    if (tauntindex &gt;= tauntend)
+        taunting = false;
 }
     
 //sandvich
 if (omnomnomnom)
 {
-    omnomnomnomindex += 0.25;
+    omnomnomnomindex += 0.25 * global.delta_factor;
     image_xscale=xscale;
     if(hp &lt; maxHp) // This should prevent the "ate and got hit but didn't refresh cooldown" bug
     { // Also, cooldown is now reset continually until fully healed or finished eating.
         canEat = false;
-        alarm[6] = eatCooldown;
+        alarm[6] = eatCooldown / global.delta_factor;
     }
     if (hp &lt;= maxHp)
-        hp += 1.6;
+        hp += 1.6 * global.delta_factor;
     if (omnomnomnomindex &gt;= omnomnomnomend)
         omnomnomnom=false;
 }

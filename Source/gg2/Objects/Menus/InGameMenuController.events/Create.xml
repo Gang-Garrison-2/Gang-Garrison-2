@@ -17,14 +17,14 @@
     cursor_sprite = CrosshairS;
     global.levelchoice = 1
 
-    menu_create(40, 300, 200, 200, 30);
+    menu_create(40, 300, 200, 200, 32);
+    menu_background(212, 24, 8, 12, 4);
     menu_setdimmed();
     
-    menu_addlink("Options", '
+    menu_addlink("Return to Game", '
         instance_destroy();
-        instance_create(0,0,OptionsController);
     ');
-    menu_addback("Return to Game", '
+    menu_addback("", '
         instance_destroy();
     ');
     if (global.isHost) {
@@ -34,15 +34,25 @@
             instance_destroy();
         ');
     }
-    menu_addlink("", '');
+    menu_addlink("Options", '
+        instance_destroy();
+        instance_create(0,0,OptionsController);
+    ');
     menu_addlink("Disconnect", '
         // Force dedicated mode to off so you can go to main menu instead of just restarting server
-        global.dedicatedMode = 0;
-        with(Client)
-            instance_destroy();
-            
-        with(GameServer)
-            instance_destroy();
+        if (global.serverPluginsInUse)
+        {
+            pluginscleanup(true);
+        }
+        else
+        {
+            global.dedicatedMode = 0;
+            with(Client)
+                instance_destroy();
+                
+            with(GameServer)
+                instance_destroy();
+        }
     ');
     menu_addlink("Quit Game", '
         game_end();

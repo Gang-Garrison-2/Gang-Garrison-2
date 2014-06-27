@@ -21,13 +21,13 @@ if(argument0.object != -1)
 {
     if(argument0.team == TEAM_RED)
     {
-        argument0.object.intelRecharge = IntelligenceBlue.alarm[0];
+        argument0.object.intelRecharge = max(0, IntelligenceBlue.alarm[0]);
         with(IntelligenceBlue)
             instance_destroy();
     }
     else if(argument0.team == TEAM_BLUE)
     {
-        argument0.object.intelRecharge = IntelligenceRed.alarm[0];
+        argument0.object.intelRecharge = max(0, IntelligenceRed.alarm[0]);
         with(IntelligenceRed)
             instance_destroy();
     }

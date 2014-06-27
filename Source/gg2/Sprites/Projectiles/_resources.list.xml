@@ -10,6 +10,7 @@
   <resource name="MineS" type="RESOURCE"/>
   <resource name="NeedleS" type="RESOURCE"/>
   <resource name="BladeProjectileS" type="RESOURCE"/>
+  <resource name="MineTrailS" type="RESOURCE"/>
   <resource name="BladeMask" type="RESOURCE"/>
   <resource name="PopS" type="RESOURCE"/>
   <resource name="StabMaskS" type="RESOURCE"/>

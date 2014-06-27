@@ -13,7 +13,9 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">idleTimer = true;</argument>
+        <argument kind="STRING">idleTimer = true;
+
+</argument>
       </arguments>
     </action>
   </actions>

@@ -10,6 +10,7 @@
   <resource name="Flame" type="RESOURCE"/>
   <resource name="BurningProjectile" type="RESOURCE"/>
   <resource name="Flare" type="RESOURCE"/>
+  <resource name="MineTrail" type="RESOURCE"/>
   <resource name="Mine" type="RESOURCE"/>
   <resource name="Needle" type="RESOURCE"/>
   <resource name="AirBlastO" type="RESOURCE"/>

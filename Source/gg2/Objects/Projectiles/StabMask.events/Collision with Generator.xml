@@ -13,19 +13,9 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if (other.team != team) {
-    other.alarm[0] = other.regenerationBuffer;
-    other.isShieldRegenerating = false;
-    if (other.shieldHp &gt; 0)
-    {
-        other.shieldHp -= other.maxShieldHp/3;
-        if other.shieldHp &lt; 0 { other.shieldHp = 0; }
-    }
-    else
-    {
-        other.hp -= 72;
-    }
-    
+        <argument kind="STRING">if (other.team != team)
+{
+    damageGenerator(ownerPlayer, other.id, hitDamage*0.36);
     
     instance_destroy();
 }

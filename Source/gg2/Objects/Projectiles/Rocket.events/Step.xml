@@ -23,42 +23,65 @@ travelDistance = point_distance(x, y, lastknownx, lastknowny);
 if(travelDistance &gt;= distanceToTravel)
 {
     fade = true;
-    alarm[3] = 8;
+    alarm[3] = 8 / global.delta_factor;
 }
 
-speed += 1;
-speed *= 0.92;
+// It might seem like a good idea to remove this. But it's not.
+speed += 1 * global.delta_factor;
+speed *= delta_mult(0.92);
 image_angle = direction;
 
 if (fade)
-    image_alpha -= 0.1;
-if (image_alpha &gt; 0)
+    image_alpha -= 0.1 * global.delta_factor;
+if (global.run_virtual_ticks)
 {
-    if(global.particles = PARTICLES_NORMAL)
-        effect_create_below(ef_smoke,x-hspeed*1.3,y-vspeed*1.3,0,c_gray);
-    else if(global.particles == PARTICLES_ALTERNATIVE)
+    if (image_alpha &gt; 0)
     {
-        if (!variable_local_exists("rocketblurParticleType"))
+        if(global.particles = PARTICLES_NORMAL)
+            effect_create_below(ef_smoke,x-hspeed*1.3,y-vspeed*1.3,0,c_gray);
+        else if(global.particles == PARTICLES_ALTERNATIVE)
         {
-            rocketblurParticleType = part_type_create();
-            if team == TEAM_RED rocketParticleSprite = RedRocketS;
-            else rocketParticleSprite = BlueRocketS;
-            part_type_sprite(rocketblurParticleType,rocketParticleSprite,false,true,false);
-            part_type_alpha2(rocketblurParticleType,0.7,0.1);
-            part_type_life(rocketblurParticleType,5,5);
+            if (!variable_local_exists("rocketblurParticleType"))
+            {
+                rocketblurParticleType = part_type_create();
+                if team == TEAM_RED rocketParticleSprite = RedRocketS;
+                else rocketParticleSprite = BlueRocketS;
+                part_type_sprite(rocketblurParticleType,rocketParticleSprite,false,true,false);
+                part_type_alpha2(rocketblurParticleType,0.7,0.1);
+                part_type_life(rocketblurParticleType,5,5);
+            }
+            
+            if (!variable_global_exists("rocketblurParticleSystem"))
+            {
+                global.rocketblurParticleSystem = part_system_create();
+                part_system_depth(global.rocketblurParticleSystem, 10);
+            }
+            
+            part_type_orientation(rocketblurParticleType,direction,direction,0,0,0);
+            
+            part_particles_create(global.rocketblurParticleSystem, x, y, rocketblurParticleType, 1);
         }
-        
-        if (!variable_global_exists("rocketblurParticleSystem"))
-        {
-            global.rocketblurParticleSystem = part_system_create();
-            part_system_depth(global.rocketblurParticleSystem, 10);
-        }
-        
-        part_type_orientation(rocketblurParticleType,direction,direction,0,0,0);
-        
-        part_particles_create(global.rocketblurParticleSystem, x, y, rocketblurParticleType, 1);
     }
+    else
+        instance_destroy();
 }
+x += hspeed * global.delta_factor;
+y += vspeed * global.delta_factor;
+
+gunSetSolids();
+if (!place_free(x, y))
+{
+    characterHit = -1;
+    if (!fade)
+        event_user(5);
+    else
+        instance_destroy();
+}
+gunUnsetSolids();
+
+x -= hspeed;
+y -= vspeed;
+
 </argument>
       </arguments>
     </action>

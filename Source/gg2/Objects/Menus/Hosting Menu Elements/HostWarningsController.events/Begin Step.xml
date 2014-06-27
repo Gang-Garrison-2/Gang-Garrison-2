@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="STEP" id="1">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">// clear facade-link text
+for(i = 0; i &lt; 4; i += 1)
+    item_name[i] = "";
+
+n = 0;
+if(global.monitorSync)
+{
+    item_name[n] = "Warning: VSync appears to be enabled.#"
+                  +"         Hosting with VSync causes desync."
+    n += 1;
+}
+var classlimittotal;
+classlimittotal = 0;
+for(i = 0; i &lt; 10; i += 1)
+    classlimittotal += global.classlimits[i];
+
+if(classlimittotal &lt; floor(global.playerLimit/2))
+{
+    item_name[n] = "Warning: Player limit exceeds classlimits.#"
+                  +"         Classlimits may not work properly.#"
+    n += 1;
+}
+
+
+items = n;
+
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

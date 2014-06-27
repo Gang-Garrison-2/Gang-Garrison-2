@@ -28,7 +28,7 @@
         sound_volume(global.IngameMusic, 0.8);
     if(global.FaucetMusic != -1)
         sound_volume(global.FaucetMusic, 0.8);
-        
+    
     global.sendBuffer = buffer_create();
     global.tempBuffer = buffer_create();
     global.HudCheck = false;
@@ -47,12 +47,13 @@
     global.hostingPort = ini_read_real("Settings", "HostingPort", 8190);
     global.music = ini_read_real("Settings", "Music", ini_read_real("Settings", "IngameMusic", MUSIC_BOTH));
     global.playerLimit = ini_read_real("Settings", "PlayerLimit", 10);
+    
+    global.multiClientLimit = ini_read_real("Settings", "MultiClientLimit", 3);
     global.particles =  ini_read_real("Settings", "Particles", PARTICLES_NORMAL);
     global.gibLevel = ini_read_real("Settings", "Gib Level", 3);
     global.killCam = ini_read_real("Settings", "Kill Cam", 1);
     global.monitorSync = ini_read_real("Settings", "Monitor Sync", 0);
-    if global.monitorSync == 1 set_synchronization(true);
-    else set_synchronization(false);
+    set_synchronization(global.monitorSync);
     global.medicRadar = ini_read_real("Settings", "Healer Radar", 1);
     global.showHealer = ini_read_real("Settings", "Show Healer", 1);
     global.showHealing = ini_read_real("Settings", "Show Healing", 1);
@@ -77,6 +78,7 @@
     global.welcomeMessage = ini_read_string("Server", "WelcomeMessage", "");
     global.caplimit = max(1, min(255, ini_read_real("Server", "CapLimit", 5)));
     global.caplimitBkup = global.caplimit;
+    global.killLimit = max(1, min(65535, ini_read_real("Server", "Deathmatch Kill Limit", 30)));
     global.autobalance = ini_read_real("Server", "AutoBalance",1);
     global.Server_RespawntimeSec = ini_read_real("Server", "Respawn Time", 5);
     global.rewardKey = unhex(ini_read_string("Haxxy", "RewardKey", ""));
@@ -93,14 +95,31 @@
     var CrosshairFilename, CrosshairRemoveBG;
     CrosshairFilename = ini_read_string("Settings", "CrosshairFilename", "");
     CrosshairRemoveBG = ini_read_real("Settings", "CrosshairRemoveBG", 1);
+    global.queueJumping = ini_read_real("Settings", "Queued Jumping", 0);
+    global.hideSpyGhosts = ini_read_real("Settings", "Hide Spy Ghosts", 0);
 
     global.backgroundHash = ini_read_string("Background", "BackgroundHash", "default");
     global.backgroundTitle = ini_read_string("Background", "BackgroundTitle", "");
     global.backgroundURL = ini_read_string("Background", "BackgroundURL", "");
     global.backgroundShowVersion = ini_read_real("Background", "BackgroundShowVersion", true);
     
+    global.resolutionkind = ini_read_real("Settings", "Resolution", 1);
+    global.frameratekind = ini_read_real("Settings", "Framerate", 0);
+    if(global.frameratekind == 1)
+        global.game_fps = 60;
+    else
+        global.game_fps = 30;
+    
     readClasslimitsFromIni();
 
+    //thy playerlimit shalt not exceed 48!
+    if (global.playerLimit > 48)
+    {
+        global.playerLimit = 48;
+        if (global.dedicatedMode != 1)
+            show_message("Warning: Player Limit cannot exceed 48. It has been set to 48");
+    }
+    
     global.currentMapArea=1;
     global.totalMapAreas=1;
     global.setupTimer=1800;
@@ -117,6 +136,7 @@
     ini_key_delete("Settings", "IngameMusic");
     ini_write_real("Settings", "Music", global.music);
     ini_write_real("Settings", "PlayerLimit", global.playerLimit);
+    ini_write_real("Settings", "MultiClientLimit", global.multiClientLimit);
     ini_write_real("Settings", "Particles", global.particles);
     ini_write_real("Settings", "Gib Level", global.gibLevel);
     ini_write_real("Settings", "Kill Cam", global.killCam);
@@ -138,6 +158,7 @@
     ini_write_string("Server", "ServerName", global.serverName);
     ini_write_string("Server", "WelcomeMessage", global.welcomeMessage);
     ini_write_real("Server", "CapLimit", global.caplimit);
+    ini_write_real("Server", "Deathmatch Kill Limit", global.killLimit);
     ini_write_real("Server", "AutoBalance", global.autobalance);
     ini_write_real("Server", "Respawn Time", global.Server_RespawntimeSec);
     ini_write_real("Server", "Total bandwidth limit for map downloads in bytes per second", global.mapdownloadLimitBps);
@@ -149,6 +170,8 @@
     ini_write_real("Server", "ServerPluginsRequired", global.serverPluginsRequired); 
     ini_write_string("Settings", "CrosshairFilename", CrosshairFilename);
     ini_write_real("Settings", "CrosshairRemoveBG", CrosshairRemoveBG);
+    ini_write_real("Settings", "Queued Jumping", global.queueJumping);
+    ini_write_real("Settings", "Hide Spy Ghosts", global.hideSpyGhosts);
 
     ini_write_string("Background", "BackgroundHash", global.backgroundHash);
     ini_write_string("Background", "BackgroundTitle", global.backgroundTitle);
@@ -166,6 +189,12 @@
     ini_write_real("Classlimits", "Sniper", global.classlimits[CLASS_SNIPER])
     ini_write_real("Classlimits", "Quote", global.classlimits[CLASS_QUOTE])
 
+    ini_write_real("Settings", "Resolution", global.resolutionkind);
+    ini_write_real("Settings", "Framerate", global.frameratekind);
+
+    rooms_fix_views();
+    global.changed_resolution = false;
+    
     //screw the 0 index we will start with 1
     //map_truefort 
     maps[1] = ini_read_real("Maps", "ctf_truefort", 1);
@@ -204,11 +233,11 @@
     if (global.Server_RespawntimeSec == 0)
     {
         global.Server_Respawntime = 1;
-    }    
+    }
     else
     {
         global.Server_Respawntime = global.Server_RespawntimeSec * 30;    
-    }    
+    }
     
     // I have to include this, or the client'll complain about an unknown variable.
     global.mapchanging = false;
@@ -235,9 +264,12 @@
     // parse the protocol version UUID for later use
     global.protocolUuid = buffer_create();
     parseUuid(PROTOCOL_UUID, global.protocolUuid);
-    
+
     global.gg2lobbyId = buffer_create();
     parseUuid(GG2_LOBBY_UUID, global.gg2lobbyId);
+
+    // Create abbreviations array for rewards use
+    initRewards()
     
 var a, IPRaw, portRaw;
 doubleCheck=0;
@@ -389,8 +421,10 @@ global.launchMap = "";
     
     global.gg2Font = font_add_sprite(gg2FontS,ord("!"),false,0);
     global.countFont = font_add_sprite(countFontS, ord("0"),false,2);
+    global.timerFont = font_add_sprite(timerFontS, ord("0"),true,5);
     draw_set_font(global.gg2Font);
     cursor_sprite = CrosshairS;
+    global.dealDamageFunction = ""; // executed after dealDamage, with same args
     
     if(!directory_exists(working_directory + "\Maps")) directory_create(working_directory + "\Maps");
     
@@ -436,7 +470,12 @@ global.launchMap = "";
      ***/
     registry_set_root(1); // HKLM
     global.NTKernelVersion = real(registry_read_string_ext("\SOFTWARE\Microsoft\Windows NT\CurrentVersion\", "CurrentVersion")); // SIC
-
+    
+    globalvar previous_window_x, previous_window_y, previous_window_w;
+    previous_window_x = window_get_x();
+    previous_window_y = window_get_y();
+    previous_window_w = window_get_width();
+    
     if (file_exists(CrosshairFilename))
     {
         sprite_replace(CrosshairS,CrosshairFilename,1,CrosshairRemoveBG,false,0,0);

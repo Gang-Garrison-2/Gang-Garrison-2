@@ -36,5 +36,21 @@ alarm[11] = 30;
       <appliesTo>.self</appliesTo>
       <arguments/>
     </action>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">numFlames = 4; // 4 instead of the more mathinc 3 in order to make it seem more important that a medic is on fire
+</argument>
+      </arguments>
+    </action>
   </actions>
 </event>

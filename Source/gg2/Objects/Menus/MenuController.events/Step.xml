@@ -13,7 +13,32 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">stepHasRun = true;
+        <argument kind="STRING">if(!variable_local_exists("baseybegin"))
+{
+    baseybegin = ybegin;
+    mouse_samples = ds_list_create();
+}
+if(view_hview[0] &lt; 600)
+{
+    ds_list_add(mouse_samples, window_mouse_get_y());
+    while(ds_list_size(mouse_samples) &gt; 10)
+        ds_list_delete(mouse_samples, 0);
+    var des_y;
+    des_y = 0;
+    for(i = 0; i &lt; ds_list_size(mouse_samples); i += 1)
+        des_y += ds_list_find_value(mouse_samples, i);
+    des_y /= ds_list_size(mouse_samples);
+    
+    ybegin = round(baseybegin
+                   - min(1, max(0, des_y/view_hview[0]))
+                     *(600-view_hview[0]));
+}
+stepHasRun = true;
+
+var itemcount;
+menu_hack_backbutton();
+itemcount = menu_get_itemcount();
+
 if(editing != -1) {
     switch (item_type[editing]) {
         case "edittext2":
@@ -43,33 +68,51 @@ if(editing != -1) {
                 exit;
             }
     }
-} else if(mouse_x &gt; view_xview[0]+xbegin and mouse_x &lt; view_xview[0]+xbegin+width) {
-    virtualitem = round((mouse_y-(view_yview[0]+ybegin))/spacing);
-    if(mouse_check_button_pressed(mb_left)){
-        mouse_clear(mb_left);
-        if(virtualitem &gt;= 0 and virtualitem &lt; items) {
-            switch (item_type[virtualitem]) {
-                case "script":
-                    execute_string(item_script[virtualitem]);
-                    break;
-                case "editkey":
-                case "editkeyormouse":
-                    io_clear();
-                    editing = virtualitem;
-                    break;
-                case "edittext":
-                case "edittext2":
-                case "editnum":
-                    keyboard_string = "";
-                    editing = virtualitem;
-                    break;
-                case "editselect":
-                    item_value[virtualitem] = (item_value[virtualitem]+1) mod item_options[virtualitem];
-                    menu_set_var(virtualitem, item_option_value[virtualitem, item_value[virtualitem]]);
-                    execute_string(item_script[virtualitem], menu_get_var(virtualitem));
-                    break;
+} else if(mouse_x &gt; view_xview[0]+xbegin) {
+    if(mouse_y &gt;= view_yview[0]+ybegin-(spacing/2) and mouse_x &lt; view_xview[0]+xbegin+width)
+    {
+        virtualitem = max(0, round((mouse_y-(view_yview[0]+ybegin))/spacing));
+        if(mouse_check_button_pressed(mb_left)){
+            mouse_clear(mb_left);
+            if(virtualitem &lt; itemcount) {
+                switch (item_type[virtualitem]) {
+                    case "script":
+                        execute_string(item_script[virtualitem]);
+                        break;
+                    case "editkey":
+                    case "editkeyormouse":
+                        io_clear();
+                        editing = virtualitem;
+                        break;
+                    case "edittext":
+                    case "edittext2":
+                    case "editnum":
+                        keyboard_string = "";
+                        editing = virtualitem;
+                        break;
+                    case "editselect":
+                        item_value[virtualitem] = (item_value[virtualitem]+1) mod item_options[virtualitem];
+                        menu_set_var(virtualitem, item_option_value[virtualitem, item_value[virtualitem]]);
+                        execute_string(item_script[virtualitem], menu_get_var(virtualitem));
+                        break;
+                }
             }
         }
+    }
+    else if(mouse_y &lt; view_yview[0]+ybegin-taboffset+spacing/2 and mouse_y &gt; view_yview[0]+ybegin-taboffset-spacing/2
+            and mouse_x &gt; view_xview[0]+xbegin+tabmargin and mouse_x &lt; view_xview[0]+xbegin+tabmargin+tabspacing*tabs)
+    {
+        virtualitem = min(-2, -2-floor((mouse_x-(view_xview[0]+xbegin+tabmargin))/tabspacing));
+        if(mouse_check_button_pressed(mb_left))
+        {
+            mouse_clear(mb_left);
+            if(-2-virtualitem &lt; tabs)
+            {
+                execute_string(tab_script[-2-virtualitem]);
+            }
+        }
+    } else {
+        virtualitem = -1;
     }
 } else {
     virtualitem = -1;

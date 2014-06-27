@@ -10,4 +10,5 @@
   <resource name="Rocketlauncher" type="RESOURCE"/>
   <resource name="Blade" type="RESOURCE"/>
   <resource name="Revolver" type="RESOURCE"/>
+  <resource name="SentryTurret" type="RESOURCE"/>
 </resources>

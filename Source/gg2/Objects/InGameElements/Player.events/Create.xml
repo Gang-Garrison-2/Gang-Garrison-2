@@ -21,6 +21,9 @@
     name = "";
     kicked = false;
     
+    // client setting stuff; set to defaults
+    queueJump = false;
+    
     //stat tracking array
     stats[KILLS] = 0;
     stats[DEATHS] = 0;
@@ -68,7 +71,8 @@
     sentry = noone;
     
     // Haxxy rewards
-    rewards = 0;
+    rewards = -1;
+    ghost = noone;
 }
 </argument>
       </arguments>
