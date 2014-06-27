@@ -10,4 +10,6 @@
   <resource name="inputChangeTeam" type="RESOURCE"/>
   <resource name="inputShowScores" type="RESOURCE"/>
   <resource name="inputCloseScores" type="RESOURCE"/>
+  <resource name="inputOpenConsole" type="RESOURCE"/>
+  <resource name="inputOpenMainMenuConsole" type="RESOURCE"/>
 </resources>

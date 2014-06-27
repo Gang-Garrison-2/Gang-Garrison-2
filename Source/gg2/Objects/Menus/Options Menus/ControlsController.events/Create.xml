@@ -31,7 +31,7 @@
     menu_addedit_key("Call for Healer:", "global.medic");
     menu_addedit_key("Drop Case:", "global.drop");
     menu_addedit_key("Show Scores:", "global.showScores");
-    
+    menu_addedit_key("Open Console:", "global.openConsole");
     menu_addtablink("Ingame", '
         instance_destroy();
         instance_create(x,y,OptionsController);

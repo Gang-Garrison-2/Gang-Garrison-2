@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="CREATE" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">cursorflash = 0;
+draw_cursor = true;
+keyboard_string_len = 1;
+keyboard_string = "_";
+text = "";
+seek = 0;
+rheldtime = 0;
+lheldtime = 0;
+dheldtime = 0;
+prev = -1;
+old = "";
+ovr = false;
+viewport_x = 0;
+console_height = 0;
+padding = 8;
+dragging = false;
+dragstart_mousex = 0;
+dragstart_mousey = 0;
+dragstart_winx = 0;
+dragstart_winy = 0;
+resizing_x1 = false;
+resizing_x2 = false;
+resizestart_mousex = 0;
+resizestart_x = global.ConsoleWindowX;
+resizestart_width = global.ConsoleWidth;
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

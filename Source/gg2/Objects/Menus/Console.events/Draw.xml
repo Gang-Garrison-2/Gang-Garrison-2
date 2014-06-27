@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="DRAW" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">x = view_xview[0] + global.ConsoleWindowX;
+y = view_yview[0] + global.ConsoleWindowY;
+
+var listlen, listheight, i, entryheight, curheight, str;
+
+
+
+sep = string_height("_");
+listlen = ds_list_size(global.ConsoleLog);
+listheight = 0;
+for (i = 0; i &lt; listlen; i += 1) {
+    str = ds_list_find_value(global.ConsoleLog, i);
+    str = string_replace_all(str, '#', '\#');
+    listheight += string_height_ext(str, -1, global.ConsoleWidth);
+}
+
+entryheight = 12;
+
+console_height = entryheight + listheight;
+
+draw_set_alpha(0.75);
+draw_set_color(c_black);
+draw_rectangle(x - padding, y - listheight - entryheight - padding, x + global.ConsoleWidth + padding, y + padding, false);
+
+draw_set_alpha(0.75);
+draw_set_color(c_gray);
+
+draw_rectangle(x, y, x + global.ConsoleWidth, y-12, false);
+
+draw_set_color(c_orange);
+draw_set_valign(fa_top);
+draw_set_halign(fa_left);
+draw_set_alpha(1);
+
+
+var visible_string, visible_string_width;
+visible_string = string_copy(text, 1, seek);
+visible_string_width = string_width(visible_string);
+var str;
+str = string_replace_all(text, '#', '\#');
+draw_text_ext(x, y-12, str, -1, global.ConsoleWidth);
+
+if (draw_cursor) {
+    var cx, cy, temp;
+    temp = text + " ";
+    cx = global.ConsoleWindowX + visible_string_width - viewport_x;
+    if (cx &lt; global.ConsoleWindowX) cx = global.ConsoleWindowX;
+    if (cx &gt;= global.ConsoleWindowX + global.ConsoleWidth) cx = global.ConsoleWindowX+ global.ConsoleWidth - 1;
+    cy = global.ConsoleWindowY + string_height(text + " ") - string_height("_") -12;
+    draw_set_color(c_white);
+    draw_line(cx, cy, cx, cy + string_height("_"));
+}
+
+draw_set_color(c_white);
+// left border mouseover highlight
+if (x - padding &lt;= mouse_x &amp;&amp; mouse_x &lt; x &amp;&amp; y - console_height &lt;= mouse_y &amp;&amp; mouse_y &lt; y) {
+    draw_rectangle(x - padding, y - console_height, x, y, false);
+// right border mouseover highlight
+} else if (x + global.ConsoleWidth &lt;= mouse_x &amp;&amp; mouse_x &lt; x + global.ConsoleWidth + padding &amp;&amp; y - console_height &lt;= mouse_y &amp;&amp; mouse_y &lt; y) {
+    draw_rectangle(x + global.ConsoleWidth, y - console_height, x + global.ConsoleWidth + padding, y, false);
+}
+
+draw_set_valign(fa_top);
+draw_set_halign(fa_left);
+curheight = 0;
+for (i = 0; i &lt; listlen; i += 1) {
+    str = ds_list_find_value(global.ConsoleLog, i);
+    str = string_replace_all(str, '#', '\#');
+    draw_text_ext(x, y - listheight - entryheight + curheight, str, -1, global.ConsoleWidth);
+    curheight += string_height_ext(str, -1, global.ConsoleWidth);
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

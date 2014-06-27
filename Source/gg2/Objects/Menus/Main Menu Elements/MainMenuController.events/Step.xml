@@ -47,7 +47,11 @@ if (global.backgroundHash != "default")
             mouse_clear(mb_left);
             action_splash_web(global.backgroundURL, 1);
         }
+        
+
     }
+    // open console
+    if(keyboard_check_pressed(global.openConsole)) inputOpenMainMenuConsole();
 }
 </argument>
       </arguments>

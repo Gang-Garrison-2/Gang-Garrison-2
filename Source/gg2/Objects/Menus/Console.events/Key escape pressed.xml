@@ -13,9 +13,10 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if(!instance_exists(MenuController) and !instance_exists(Console))
-    instance_create(x,y,InGameMenuController);
-
+        <argument kind="STRING">// if not displaying console in in-game menu
+if (!global.consoleMode) {
+    instance_destroy();
+}
 </argument>
       </arguments>
     </action>

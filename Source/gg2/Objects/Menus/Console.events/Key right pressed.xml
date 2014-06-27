@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<event category="KEYPRESS" id="27">
+<event category="KEYPRESS" id="39">
   <actions>
     <action id="603" library="1">
       <!--action name: Code-->
@@ -13,9 +13,12 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if(!instance_exists(MenuController) and !instance_exists(Console))
-    instance_create(x,y,InGameMenuController);
-
+        <argument kind="STRING">if (seek &lt; string_length(text)) {
+    _ConsoleDoSeek(seek + 1);
+    draw_cursor = true;
+    cursorflash = 0;
+}
+rheldtime = 1;
 </argument>
       </arguments>
     </action>
