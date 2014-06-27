@@ -10,6 +10,12 @@ global.ConsoleWindowX = 395;
 global.ConsoleWindowY = 487;
 global.ConsoleWidth = 389;
 
+
+if (global.ConsoleWindowX + global.ConsoleWidth > view_xview[0] + view_wview[0]){
+    //reduce the size to fit the edge
+    global.ConsoleWidth = view_wview[0] - (global.ConsoleWindowX-view_xview[0]);
+}
+
 // Creates blank, persistent object and an instance of it
 // Used to run eval, exec console commands
 global.ConsoleEnvironmentObject = object_add();

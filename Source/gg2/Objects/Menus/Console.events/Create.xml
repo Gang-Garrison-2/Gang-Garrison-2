@@ -38,8 +38,6 @@ resizing_x2 = false;
 resizestart_mousex = 0;
 resizestart_x = global.ConsoleWindowX;
 resizestart_width = global.ConsoleWidth;
-// use a surface so we can clip off extra text
-surface = surface_create(global.ConsoleWidth, 12);
 </argument>
       </arguments>
     </action>
