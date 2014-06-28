@@ -90,6 +90,7 @@ with(Player) {
                 blood = instance_create(object.x,object.y,Blood);
                 blood.direction = other.owner.aimDirection-180;
             }
+            playsound(object.x, object.y, other.ImpactSnd);
             if (!other.owner.zoomed)
                 object.lastDamageSource = WEAPON_RIFLE;
             else

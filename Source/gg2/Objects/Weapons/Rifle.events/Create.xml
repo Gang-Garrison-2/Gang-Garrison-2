@@ -54,6 +54,7 @@
     tracerAlpha = 0;
     
     SniperSnd = faudio_new_generator(SniperSndS);
+    ImpactSnd = faudio_new_generator(RifleShotImpactSndS);
 }
 </argument>
       </arguments>

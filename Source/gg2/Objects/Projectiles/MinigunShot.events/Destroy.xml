@@ -13,8 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">faudio_kill_generator(SniperSnd);
-faudio_kill_generator(ImpactSnd);
+        <argument kind="STRING">faudio_kill_generator(ImpactSnd);
 </argument>
       </arguments>
     </action>

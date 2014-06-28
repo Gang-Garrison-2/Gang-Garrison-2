@@ -46,6 +46,8 @@ globalvar ShotTravelSndS;
 globalvar RevolverShotImpactSndS;
 globalvar ShotgunShotImpactSndS;
 globalvar BurningSndS;
+globalvar RifleShotImpactSndS;
+globalvar MinigunShotImpactSndS;
 
 ChaingunSndS = create_sample("/Sound/ChaingunSnd.ogg");
 DeathSnd1S = create_sample("/Sound/DeathSnd1.ogg");
@@ -94,3 +96,5 @@ ShotTravelSndS = create_sample("/Sound/ShotTravelSnd.ogg");
 RevolverShotImpactSndS = create_sample("/Sound/RevolverShotImpactSnd.ogg");
 BurningSndS = create_sample("/Sound/BurningSnd.ogg");
 ShotgunShotImpactSndS = create_sample("/Sound/ShotgunShotImpactSnd.ogg");
+RifleShotImpactSndS = create_sample("/Sound/RifleShotImpactSnd.ogg");
+MinigunShotImpactSndS = create_sample("/Sound/MinigunShotImpactSnd.ogg");
