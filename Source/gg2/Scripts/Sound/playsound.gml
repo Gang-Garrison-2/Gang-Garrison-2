@@ -11,4 +11,5 @@
     pan = calculatePan(argument0);
     faudio_pan_generator (argument2, pan);
     faudio_fire_generator(argument2);
+    show_debug_message(vol)
 }

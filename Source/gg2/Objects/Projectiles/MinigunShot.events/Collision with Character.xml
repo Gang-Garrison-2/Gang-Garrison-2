@@ -13,8 +13,14 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if(other.id != ownerPlayer.object and other.team != team  &amp;&amp; other.hp &gt; 0 &amp;&amp; other.ubered == 0) {
-    playsound(x,y, ImpactSnd);
+        <argument kind="STRING">if(other.id != ownerPlayer.object and other.team != team  &amp;&amp; other.hp &gt; 0 ) 
+{
+    if (other.ubered == 0) 
+    {
+        playsound(x,y, ImpactSnd);
+    }else if (other.ubered == 1){
+        playsound(x,y, ShotReflectSnd);
+    }
 }
 </argument>
       </arguments>

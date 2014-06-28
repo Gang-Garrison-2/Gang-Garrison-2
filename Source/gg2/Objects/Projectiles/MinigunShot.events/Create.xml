@@ -27,6 +27,7 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">ImpactSnd = faudio_new_generator(MinigunShotImpactSndS);
+ShotReflectSnd = faudio_new_generator(ShotReflectSndS);
 </argument>
       </arguments>
     </action>

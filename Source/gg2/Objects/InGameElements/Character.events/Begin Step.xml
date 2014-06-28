@@ -31,7 +31,7 @@ if (burnDuration &gt; 0)
     if (!faudio_get_generator_playing(BurningSnd)){
         loopsoundstart(x,y,BurningSnd);
     }else{
-        loopsoundmaintainext(x,y, burnDuration/210,BurningSnd);
+        loopsoundmaintainext(x,y, max(0.8, (burnDuration/210)),BurningSnd);
     }
     burnDuration -= durationDecay * global.delta_factor;
     timeUnscathed = 0;
