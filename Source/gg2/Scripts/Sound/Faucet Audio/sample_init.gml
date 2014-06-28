@@ -44,6 +44,7 @@ globalvar SentryBuildSndS;
 globalvar PickupSndS;
 globalvar ShotTravelSndS;
 globalvar ShotImpactSndS;
+globalvar BurningSndS;
 
 ChaingunSndS = create_sample("/Sound/ChaingunSnd.ogg");
 DeathSnd1S = create_sample("/Sound/DeathSnd1.ogg");
@@ -90,3 +91,4 @@ PickupSndS = create_sample("/Sound/PickupSnd.ogg");
 CompressionBlastSndS = create_sample("/Sound/CompressionBlastSnd.ogg");
 ShotTravelSndS = create_sample("/Sound/ShotTravelSnd.ogg");
 ShotImpactSndS = create_sample("/Sound/ShotImpactSnd.ogg");
+BurningSndS = create_sample("/Sound/BurningSnd.ogg");

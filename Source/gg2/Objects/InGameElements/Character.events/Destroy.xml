@@ -61,6 +61,7 @@
     if(variable_local_exists("jumpDustParticleSystem"))
         part_type_destroy(jumpDustParticleSystem);
         
+    loopsoundstop(BurningSnd);
     // deallocate generators
     faudio_kill_generator(DeathSnd1);
     faudio_kill_generator(DeathSnd2);
@@ -71,6 +72,7 @@
     faudio_kill_generator(UberEndSnd);
     faudio_kill_generator(ExplosionSnd);
     faudio_kill_generator(CPCapturedSnd);
+    faudio_kill_generator(BurningSnd);
 }
 </argument>
       </arguments>
