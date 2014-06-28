@@ -2,6 +2,7 @@
 <resources>
   <resource name="Rocket" type="RESOURCE"/>
   <resource name="RevolverShot" type="RESOURCE"/>
+  <resource name="ShotgunShot" type="RESOURCE"/>
   <resource name="Shot" type="RESOURCE"/>
   <resource name="StabMask" type="RESOURCE"/>
   <resource name="StabAnim" type="RESOURCE"/>

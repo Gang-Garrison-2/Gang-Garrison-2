@@ -420,6 +420,11 @@ if(zone &gt;= 0 and !cloak and cloakAlpha == 1)
 else
     cappingPoint = noone;
 
+    
+//Reset shotguned timer if the sound effect is no longer playing
+if (!faudio_get_generator_playing(ShotgunShotImpactSnd) and beingShotGunned) {
+    beingShotGunned = false;
+    }
 </argument>
       </arguments>
     </action>

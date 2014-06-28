@@ -73,6 +73,7 @@
     faudio_kill_generator(ExplosionSnd);
     faudio_kill_generator(CPCapturedSnd);
     faudio_kill_generator(BurningSnd);
+    faudio_kill_generator(ShotgunShotImpactSnd);
 }
 </argument>
       </arguments>

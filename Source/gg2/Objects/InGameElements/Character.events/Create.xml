@@ -179,6 +179,9 @@
         demon = WillOWispS;
     }
     
+    //This prevents the shotgun sound effects from stacking on top of eachother
+    beingShotGunned = false
+    
     //create generators
     DeathSnd1 = faudio_new_generator(DeathSnd1S);
     DeathSnd2 = faudio_new_generator(DeathSnd2S);
@@ -191,6 +194,7 @@
     ExplosionSnd = faudio_new_generator(ExplosionSndS);
     CPCapturedSnd = faudio_new_generator(CPCapturedSndS);
     BurningSnd = faudio_new_generator(BurningSndS);
+    ShotgunShotImpactSnd = faudio_new_generator(ShotgunShotImpactSndS);
 }
 </argument>
       </arguments>

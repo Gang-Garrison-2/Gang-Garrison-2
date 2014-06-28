@@ -18,7 +18,7 @@
 playsound(x,y,ShotgunSnd);
 var shot;
 repeat(6) {
-    shot = instance_create(x,y,Shot);
+    shot = instance_create(x,y,ShotgunShot);
     shot.direction = owner.aimDirection;
     shot.speed = 13;
     shot.owner = owner;
