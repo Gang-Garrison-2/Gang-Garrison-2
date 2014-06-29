@@ -14,4 +14,5 @@
   <resource name="RoomChangeObserver" type="RESOURCE"/>
   <resource name="Updater" type="RESOURCE"/>
   <resource name="RateController" type="RESOURCE"/>
+  <resource name="PluginEnvironment" type="RESOURCE"/>
 </resources>
