@@ -13,16 +13,23 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if y&lt;= -1125 done=true;
-if done==false y-=2;
-else {
-    if(alpha&gt;0.01) alpha -=0.01 //power(alpha,1/0.7);
-    if alpha&lt;=0.01 
+        <argument kind="STRING">if (y &lt;= -1125)
+    done=true;
+if (!done)
+    y -= 2 * global.delta_factor;
+else
+{
+    if (alpha &gt; 0.01) 
     {
-    instance_destroy();
-    room_goto_fix(Menu);
+        alpha -= 0.01 * global.delta_factor;
     }
-    }</argument>
+    if (alpha &lt;= 0.01)
+    {
+        instance_destroy();
+        room_goto_fix(Menu);
+    }
+}
+</argument>
       </arguments>
     </action>
   </actions>

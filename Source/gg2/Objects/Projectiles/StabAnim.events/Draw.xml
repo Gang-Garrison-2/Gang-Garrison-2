@@ -13,7 +13,10 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">x = owner.x;
+        <argument kind="STRING">if(owner.invisible)
+    break;
+
+x = owner.x;
 y = owner.y;
 
 if team == TEAM_RED ubercolour = c_red;
