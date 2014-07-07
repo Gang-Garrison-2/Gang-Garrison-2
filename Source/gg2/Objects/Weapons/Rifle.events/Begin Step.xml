@@ -15,8 +15,9 @@
       <arguments>
         <argument kind="STRING">if(owner.zoomed and readyToShoot)
 {
-    t += 1;
-    if t &gt; chargeTime t = chargeTime;
+    t += 1 * global.delta_factor;
+    if (t &gt; chargeTime)
+        t = chargeTime;
 }
 else
     t = 0;

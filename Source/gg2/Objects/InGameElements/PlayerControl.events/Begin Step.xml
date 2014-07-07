@@ -94,7 +94,7 @@ if(global.myself.object != -1)
         }
     }
     
-    if(global.run_virtual_ticks)
+    if(global.run_virtual_ticks or keyboard_check_pressed(global.taunt))
         ClientInputstate(global.serverSocket, keybyte);
     socket_send(global.serverSocket);
 }

@@ -74,6 +74,7 @@ if(!taunting and !omnomnomnom)
         {
             if(not stabbing)
             {
+                doublejumpUsed = 0;
                 wantToJump = false;
                 playsound(x,y,JumpSnd);
                 vspeed = min(vspeed, -jumpStrength);
