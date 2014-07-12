@@ -47,6 +47,10 @@ menu_add_option(0, "Don't shuffle");
 menu_add_option(1, "Shuffle (no arena initial map)");
 menu_add_option(2, "Shuffle without bias");
 
+menu_addedit_text("Server Sent Plugins:", "global.serverPluginList", '
+    gg2_write_ini("Server", "ServerPluginList", argument0);
+');
+
 menu_addedit_boolean("Auto Balance:", "global.autobalance", '
     gg2_write_ini("Server", "AutoBalance", argument0);
 ');
