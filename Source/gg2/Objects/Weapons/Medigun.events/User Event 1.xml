@@ -96,7 +96,7 @@
                     if(alarm[3] &lt;= 0) {
                         loopsoundstart(x,y,MedigunSnd);
                     } else {
-                        loopsoundmaintain(x,y,MedigunSnd);
+                        loopsoundmaintainext(x,y,0.5, MedigunSnd);
                     }
                     alarm[3] = 2 / global.delta_factor;
                 } else {
