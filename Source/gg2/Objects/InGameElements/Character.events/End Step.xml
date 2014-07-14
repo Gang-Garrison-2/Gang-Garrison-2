@@ -150,6 +150,9 @@ if (player == global.myself)
         view_yview[0] = y-view_hview[0]/2;
     }
 }
+
+realnumflames = numFlames * burnDuration / maxDuration;
+
 </argument>
       </arguments>
     </action>

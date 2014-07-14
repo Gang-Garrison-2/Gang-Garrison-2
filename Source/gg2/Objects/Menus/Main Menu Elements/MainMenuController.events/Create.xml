@@ -33,6 +33,14 @@
     menu_addlink("Options", '
         room_goto_fix(Options);
     ');
+    if (global.rewardId != '')
+    {
+        menu_addlink("Manage Haxxy Rewards", '
+            splash_set_main(false);
+            splash_set_interrupt(false);
+            splash_show_web("http://www.ganggarrison.com/forums/rewards/frame.php?gg2_login=yes&amp;reward_id=" + global.rewardId + "&amp;reward_key=" + hex(global.rewardKey), 0);
+        ');
+    }
     menu_addlink("Credits", '
         room_goto_fix(Credits);
     ');

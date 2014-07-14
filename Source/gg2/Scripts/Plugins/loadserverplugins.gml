@@ -1,7 +1,7 @@
 // loads plugins from ganggarrison.com asked for by server
 // argument0 - comma separated plugin list (pluginname@md5hash)
 // returns true on success, false on failure
-var list, hashList, text, i, pluginname, pluginhash, realhash, url, handle, filesize, progress, tempfile, tempdir, failed, lastContact, isCached;
+var list, hashList, text, i, pluginname, pluginhash, realhash, url, handle, filesize, progress, tempfile, tempdir, failed, lastContact, isCached, env;
 
 failed = false;
 list = ds_list_create();
@@ -193,18 +193,26 @@ if (!failed)
         ds_map_add(global.pluginPacketBuffers, i, ds_queue_create());
         ds_map_add(global.pluginPacketPlayers, i, ds_queue_create());
 
+        // Create persistent environment for plugin (so its variables won't collide)
+        env = instance_create(0, 0, PluginEnvironment);
+        // Allows plugins to detect which mode they're running in
+        env.isServerSentPlugin = true;
+        env.isLocalPlugin = false;
+        // So the plugin can locate its resources
+        env.directory = tempdir;
+        // The packet ID needed for the PluginPacket* functions
+        env.packetID = i;
+
         // Execute plugin
-        execute_file(
-            // the plugin's main gml file must be in the root of the zip
-            // it is called plugin.gml
-            tempdir + "\plugin.gml",
-            // the plugin needs to know where it is
-            // so the temporary directory is passed as first argument
-            tempdir,
-            // the plugin needs to know its packetID
-            // so it is passed as the second argument
-            i
-        );
+        with (env)
+            execute_file(
+                // the plugin's main gml file must be in the root of the zip
+                // it is called plugin.gml
+                tempdir + "\plugin.gml",
+                // For backwards-compatibility, we continue to pass these as arguments
+                tempdir,
+                i
+            );
     }
 }
 

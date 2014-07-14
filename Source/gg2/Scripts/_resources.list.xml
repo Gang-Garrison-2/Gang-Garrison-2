@@ -58,4 +58,6 @@
   <resource name="split" type="RESOURCE"/>
   <resource name="draw_pinched_blackrect" type="RESOURCE"/>
   <resource name="Faucet HTTP" type="GROUP"/>
+  <resource name="move_all_bullets" type="RESOURCE"/>
+  <resource name="move_all_gore" type="RESOURCE"/>
 </resources>

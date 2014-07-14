@@ -14,8 +14,8 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">cursor_sprite = -1;
-alarm[0] = 60;
-alarm[2] = max(1, min(150, global.myself.alarm[5]));
+alarm[0] = 60 / global.delta_factor;
+alarm[2] = max(1, min(150/global.delta_factor, global.myself.alarm[5]));
 
 zoom=1;
 zooming=false;
