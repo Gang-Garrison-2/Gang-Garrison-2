@@ -25,12 +25,10 @@ draw_set_alpha(1);
 draw_rectangle_color(view_xview,view_yview,view_xview+xsize,view_yview+20,c_black,c_black,c_black,c_black,0);
 draw_rectangle_color(view_xview,view_yview+ysize-20,view_xview+xsize,view_yview+ysize,c_black,c_black,c_black,c_black,0);
 
-draw_set_valign(fa_center);
-draw_set_halign(fa_left);
 draw_set_color(c_white);
 if (tracking)
 {
-    draw_text(xoffset+50, yoffset+ysize-10, player.name);
+    draw_name_badges(xoffset+50, yoffset+ysize-16, player);
     if (player.object == -1)
         break;
     if (global.myself.team == TEAM_SPECTATOR and player.object.maxHp != 0)
