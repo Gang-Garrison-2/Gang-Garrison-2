@@ -228,6 +228,8 @@ if (distance_to_point(mouse_x, mouse_y) &lt; 25)
     height = string_height(player.name);
     
     draw_name_badges(round(xr - width / 2), round(y) - 35 - height, player);
+    draw_set_halign(fa_center);
+    draw_set_valign(fa_bottom);
     
     if(team == global.myself.team &amp;&amp; global.showTeammateStats)
     {
