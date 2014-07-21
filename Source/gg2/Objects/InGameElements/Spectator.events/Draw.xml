@@ -52,6 +52,8 @@ if (global.myself != -1)
 {
     if ((global.myself.alarm[5] &gt; 0) and (global.myself.team != TEAM_SPECTATOR))
     {
+        draw_set_valign(fa_center);
+        draw_set_halign(fa_left);
         if (!instance_exists(ArenaHUD))
             draw_text(xoffset+10, yoffset+10,'Respawn in ' +string(ceil(global.myself.alarm[5]/30*global.delta_factor))+ ' second(s).')
         else
