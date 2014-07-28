@@ -18,7 +18,7 @@
     if (shieldHp == maxShieldHp)
         isShieldRegenerating = false;
 }
-shieldResistance = minShieldResistance * (shieldHp &gt; 0) + (maxShieldResistance - minShieldResistance) * (shieldHp/maxShieldHp);
+//shieldResistance = 1 - (minShieldResistance * (shieldHp &gt; 0) + (maxShieldResistance - minShieldResistance) * (shieldHp/maxShieldHp));
 
 if (shieldHp &gt; 0) {
     shieldIndex += 4/30 * global.delta_factor;
