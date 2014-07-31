@@ -5,7 +5,8 @@ var params,a;
 params = "-restart";
 for(a = 1; a <= parameter_count(); a += 1)
 {
-  var p = parameter_string(a)
+  var p;
+  p = parameter_string(a);
   if (p != "-restart")
   {
     params += " "+p;
