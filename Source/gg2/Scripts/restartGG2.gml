@@ -3,7 +3,10 @@
 //Append each parameter
 var params,a;
 params = "-restart";
-for(a = 1; a <= parameter_count(); a += 1) params += " "+parameter_string(a);
+for(a = 1; a <= parameter_count(); a += 1)
+{
+  if (parameter_string(a) != "-restart") params += " "+parameter_string(a);
+}
 
 //Restart
 execute_program(parameter_string(0), params, false);
