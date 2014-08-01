@@ -181,7 +181,7 @@ with(victim.object) {
     } else {
         var deadbody;
         if (player.class != CLASS_QUOTE)
-            playsound(x,y,choose(DeathSnd1, DeathSnd2));
+            playsound(x,y,choose(DeathSnd1, DeathSnd2, DeathSnd3, DeathSnd4, DeathSnd5, DeathSnd6));
         deadbody = instance_create(x,y-30,DeadGuy);
         // 'GS' reward - *G*olden *S*tatue
         if(hasReward(player, 'GS'))
