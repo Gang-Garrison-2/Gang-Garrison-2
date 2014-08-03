@@ -15,7 +15,7 @@
       <arguments>
         <argument kind="STRING">image_speed = 0;
 alarm[0] = 300/global.delta_factor;
-
+hitground = false;
 </argument>
       </arguments>
     </action>

@@ -28,9 +28,15 @@ if(place_free(x,y+1))
     {
         vspeed=10;
     }
+    hitground = false;
 }
 else
 {
+    if (!hitground)
+    {
+        playsound(x,y,ImpactSnd);
+        hitground = true;
+    }
     vspeed = 0;
     hspeed /= power(1.1, global.delta_factor);
 }
