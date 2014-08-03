@@ -7,5 +7,5 @@ var player, rewardString;
 player = argument0;
 rewardString = argument1;
 
-player.rewards = parseRewards(rewardString);
-player.badges = parseBadges(player.rewards);
+parseRewards(rewardString, player.rewards);
+parseBadges(player.rewards, player.badges);

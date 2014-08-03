@@ -1,11 +1,12 @@
-// real parseBadges(real rewards)
-// Takes a reward map and returns a list of numerical badge IDs
+// real parseBadges(real rewards, [out] real badges)
+// Takes a reward ds_map and uses it to fill the badges ds_list with the numerical IDs of all the badges.
+// The old content of the badges list will be replaced.
 
-var rewards;
+var rewards, badges;
 rewards = argument0;
+badges = argument1;
 
-var badges;
-badges = ds_list_create();
+ds_list_clear(badges);
 
 var i;
 for (i = 0; i < global.HaxxyBadgesLength; i += 1)
@@ -14,5 +15,3 @@ for (i = 0; i < global.HaxxyBadgesLength; i += 1)
         ds_list_add(badges, i);
     }
 }
-
-return badges;

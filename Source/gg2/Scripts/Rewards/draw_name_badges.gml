@@ -10,14 +10,11 @@ player = argument2;
 draw_set_valign(fa_top);
 draw_set_halign(fa_left);
 
-if (player.badges != -1)
+var i;
+for (i = 0; i < ds_list_size(player.badges); i += 1)
 {
-    var i;
-    for (i = 0; i < ds_list_size(player.badges); i += 1)
-    {
-        draw_sprite(HaxxyBadgeS, ds_list_find_value(player.badges, i), _x, _y - 1);
-        _x += sprite_get_width(HaxxyBadgeS);
-    }
+    draw_sprite(HaxxyBadgeS, ds_list_find_value(player.badges, i), _x, _y - 1);
+    _x += sprite_get_width(HaxxyBadgeS);
 }
 
 draw_text(_x, _y, player.name);

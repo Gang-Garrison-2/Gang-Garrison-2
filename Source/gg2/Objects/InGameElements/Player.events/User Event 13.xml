@@ -27,7 +27,8 @@
         stats[BONUS] = read_ubyte(global.deserializeBuffer);
         stats[POINTS] = read_ubyte(global.deserializeBuffer);
         queueJump = read_ubyte(global.deserializeBuffer);
-        rewards = parseRewards(receivestring(global.serverSocket, 2));
+        parseRewards(receivestring(global.serverSocket, 2), rewards);
+        parseBadges(rewards, badges);
     }
  
     var charObj, subobjects;
