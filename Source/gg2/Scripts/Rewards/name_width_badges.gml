@@ -5,13 +5,10 @@ var player;
 player = argument0;
 
 var width, i;
-width = 0;
-for (i = 0; i < global.HaxxyBadgesLength; i += 1)
-{
-    if (hasReward(player, global.HaxxyBadges[i])) {
-        width += sprite_get_width(HaxxyBadgeS);
-    }
-}
+if (player.badges != -1)
+    width = sprite_get_width(HaxxyBadgeS) * ds_list_size(player.badges);
+else
+    width = 0;
 
 width += string_width(player.name);
 

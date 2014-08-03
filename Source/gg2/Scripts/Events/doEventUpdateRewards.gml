@@ -8,3 +8,4 @@ player = argument0;
 rewardString = argument1;
 
 player.rewards = parseRewards(rewardString);
+player.badges = parseBadges(player.rewards);
