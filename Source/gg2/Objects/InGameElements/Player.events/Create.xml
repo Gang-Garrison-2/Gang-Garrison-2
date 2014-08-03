@@ -71,7 +71,8 @@
     sentry = noone;
     
     // Haxxy rewards
-    rewards = -1;
+    rewards = ds_map_create();
+    badges = ds_list_create();
     ghost = noone;
 }
 </argument>
