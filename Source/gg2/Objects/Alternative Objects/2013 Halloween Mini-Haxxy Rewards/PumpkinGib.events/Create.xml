@@ -22,9 +22,15 @@ hfric=0.3;
 snd=true;
 rotfric=0.4;
 direction = 270;
-alarm[0]=250;
+vis_angle = 0;
+air_friction = power(0.97, global.delta_factor);
+my_gravity = 0.7 * global.delta_factor;
+alarm[0]=250/global.delta_factor;
+bloodiness = 50;
+maxBloodiness = bloodiness;
 rotspeed=1;
 fadeout = false;
+
 </argument>
       </arguments>
     </action>
