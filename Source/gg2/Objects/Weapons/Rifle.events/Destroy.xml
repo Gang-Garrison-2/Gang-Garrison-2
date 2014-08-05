@@ -14,7 +14,8 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">faudio_kill_generator(SniperSnd);
-faudio_kill_generator(ImpactSnd);
+faudio_kill_generator(RifleWorldSndS);
+faudio_kill_generator(RifleMetalSndS);
 </argument>
       </arguments>
     </action>

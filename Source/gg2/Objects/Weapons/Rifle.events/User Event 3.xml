@@ -39,12 +39,14 @@ while(len&gt;1) {
     ym=(y1+y2)/2;
     
     hitline = false;
+    
     with(owner) {
         if (collision_line(x1,y1,xm,ym,Generator,true,true)&gt;=0) if (instance_nearest(x1,y1,Generator).team != team) {
             hitline = true;
         }
         if(collision_line(x1,y1,xm,ym,Obstacle,true,true)&gt;=0) {
             hitline = true;
+            other.hitworld = true;
         } else if (collision_line(x1,y1,xm,ym,Character,true,true)&gt;=0) {
             hitline = true;
         } else if (collision_line(x1,y1,xm,ym,Sentry,true,false)&gt;=0) {
@@ -71,6 +73,7 @@ while(len&gt;1) {
     len/=2;
 }
 
+
 with(Player) {
     if(id != other.ownerPlayer and team != other.owner.team and object != -1) {
         if (collision_line(other.x,other.y,other.x2,other.y2,object,true,false) &gt;= 0 and !object.ubered) {
@@ -90,7 +93,7 @@ with(Player) {
                 blood = instance_create(object.x,object.y,Blood);
                 blood.direction = other.owner.aimDirection-180;
             }
-            playsound(object.x, object.y, other.ImpactSnd);
+            playsound(object.x, object.y, other.PowerShotSnd);
             if (!other.owner.zoomed)
                 object.lastDamageSource = WEAPON_RIFLE;
             else
@@ -104,6 +107,7 @@ with(Sentry) {
     if(team != other.owner.team) {
         if(collision_line(other.x,other.y,other.x2,other.y2,id,false,false)&gt;=0) {
             damageSentry(other.ownerPlayer, id, other.hitDamage);
+            playsound(x, y, other.ImpactMetalSnd);
             lastDamageDealer = other.ownerPlayer;
             if (!other.owner.zoomed)
                 lastDamageSource = WEAPON_RIFLE;
@@ -118,10 +122,14 @@ with(Generator) {
     if(team != other.owner.team) {
         if(collision_line(other.x,other.y,other.x2,other.y2,id,true,false)&gt;=0) {
             damageGenerator(other.ownerPlayer, id, other.hitDamage);
+            playsound(x, y, other.ImpactMetalSnd);
             exit;
         }
     }
 }
+//if we made it this far, then we hit the world
+playsound(x2, y2, ImpactWorldSnd)
+
 gunUnsetSolids();
 
 </argument>
