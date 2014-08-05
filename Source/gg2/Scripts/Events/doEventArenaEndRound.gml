@@ -17,13 +17,11 @@ with Sentry if team != ArenaHUD.winners event_user(1);
 
 if (global.myself.team == ArenaHUD.winners or global.myself.team == TEAM_SPECTATOR)
 {
-    VictorySnd = faudio_new_generator(VictorySndS);
-    sound = VictorySnd;
+    sound = global.VictoryMusic;
 }
 else 
 {
-    FailureSnd = faudio_new_generator(FailureSndS);
-    sound = FailureSnd;
+    sound = global.FailureMusic;
 }
 AudioControlPlaySong(sound, false);
 

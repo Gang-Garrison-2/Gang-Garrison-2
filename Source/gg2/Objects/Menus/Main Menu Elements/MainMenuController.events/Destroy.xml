@@ -13,8 +13,12 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">faudio_stop_generator(global.MenuMusic);
-faudio_kill_generator(global.MenuMusic);
+        <argument kind="STRING">if(global.music == MUSIC_MENU_ONLY || global.music == MUSIC_BOTH) {
+    faudio_stop_generator(global.MenuMusic);
+    faudio_kill_generator(global.MenuMusic);
+}
+        
+
 </argument>
       </arguments>
     </action>

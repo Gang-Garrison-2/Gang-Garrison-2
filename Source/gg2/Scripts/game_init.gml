@@ -466,6 +466,8 @@ global.launchMap = "";
     global.IngameMusicS=faudio_new_sample("Music/ingamemusic.ogg");
     global.FaucetMusicS=faudio_new_sample("Music/faucetmusic.ogg");
     global.FaucetMusic=faudio_new_generator(global.FaucetMusicS);
+    global.VictoryMusic = faudio_new_sample("Music/Victory.ogg");
+    global.FailureMusic = faudio_new_sample("Music/Failure.ogg");
     if(global.FaucetMusic != -1)
         faudio_volume_generator(global.FaucetMusic, 0.8);
     if(!directory_exists(working_directory + "\Plugins")) directory_create(working_directory + "\Plugins");

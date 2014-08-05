@@ -1,9 +1,7 @@
 /**
  * The player given in argument0 has just recovered the intel for his team.
  */
-IntelPutSnd = faudio_new_generator(IntelPutSndS);
-faudio_fire_generator(IntelPutSnd);
-faudio_kill_generator(IntelPutSnd);
+playsoundglobal(global.IntelPutSndS);
 var isMe;
 isMe = (argument0 == global.myself);
 //recordEventInLog(3, argument0.team, argument0.name);

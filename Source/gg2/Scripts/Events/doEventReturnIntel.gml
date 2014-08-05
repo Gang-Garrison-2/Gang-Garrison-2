@@ -33,8 +33,7 @@ if(!instance_exists(intelObj))
 // Still not there? Make a new one.
 if(!instance_exists(intelObj))
     instance_create(intelBaseObj.x, intelBaseObj.y, intelObj);
-faudio_fire_generator(IntelDropSnd);
-faudio_kill_generator(IntelDropSnd);
+playsoundglobal(global.IntelDropSndS);
 recordEventInLog(8, argument0, "", argument0);
 intelObj.x = intelBaseObj.x;
 intelObj.y = intelBaseObj.y;
