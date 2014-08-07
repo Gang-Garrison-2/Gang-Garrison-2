@@ -10,10 +10,10 @@ ArenaControlPoint.locked = 1;
 with Player humiliated = 0;
 with Sentry instance_destroy();
 with SentryGibs instance_destroy();
-    
+faudio_kill_all_generators(); //kill all generators
+global.IngameMusic = faudio_new_generator(global.IngameMusicS);
 if(global.music == MUSIC_BOTH || global.music == MUSIC_INGAME_ONLY) 
 {
-    global.IngameMusic=faudio_new_generator(global.IngameMusicS);
     
     if(global.IngameMusic != -1)
     {

@@ -4,6 +4,7 @@
   <resource name="playsoundglobal" type="RESOURCE"/>
   <resource name="playsoundext" type="RESOURCE"/>
   <resource name="recalculateSound" type="RESOURCE"/>
+  <resource name="recalculateSoundExt" type="RESOURCE"/>
   <resource name="loopsoundstart" type="RESOURCE"/>
   <resource name="loopsoundmaintain" type="RESOURCE"/>
   <resource name="loopsoundmaintainext" type="RESOURCE"/>

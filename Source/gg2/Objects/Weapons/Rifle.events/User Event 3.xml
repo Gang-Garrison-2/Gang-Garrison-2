@@ -13,12 +13,11 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">playsound(x,y,SniperSnd);
-shot=true;
+        <argument kind="STRING">shot=true;
 justShot=true;
 readyToShoot = false;
 alarm[0] = (reloadTime + 20*owner.zoomed) / global.delta_factor;
-
+playsoundext(x,y,0.8,SniperSnd);
 // for drawing:
 tracerAlpha = 0.8;
 shotx = x;

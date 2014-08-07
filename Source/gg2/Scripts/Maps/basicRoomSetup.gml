@@ -77,10 +77,9 @@ if (!instance_exists(KillLog))
 
 // Oh hey, I don't actually need to create a dedicated stop all generators function
 faudio_stop_generator(-1);
-
+global.IngameMusic = faudio_new_generator(global.IngameMusicS);
 if(global.music == MUSIC_BOTH || global.music == MUSIC_INGAME_ONLY) 
 {
-    global.IngameMusic=faudio_new_generator(global.IngameMusicS);
     
     if(global.IngameMusic != -1)
     {

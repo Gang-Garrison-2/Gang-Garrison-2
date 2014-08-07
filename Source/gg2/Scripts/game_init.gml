@@ -464,6 +464,7 @@ global.launchMap = "";
     ds_list_add(global.MenuMusicS, faudio_new_sample("Music/Scoot - Rocket Jump Waltz.ogg"));
     
     global.IngameMusicS=faudio_new_sample("Music/ingamemusic.ogg");
+    
     global.FaucetMusicS=faudio_new_sample("Music/faucetmusic.ogg");
     global.FaucetMusic=faudio_new_generator(global.FaucetMusicS);
     global.VictoryMusic = faudio_new_sample("Music/Victory.ogg");

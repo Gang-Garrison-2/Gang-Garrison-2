@@ -26,7 +26,7 @@ if(!owner.zoomed)
 else
     hitDamage = baseDamage + floor(sqrt(t/chargeTime)*(maxDamage-baseDamage));
     
-recalculateSound(x,y,SniperSnd);
+recalculateSoundExt(x,y,0.8,SniperSnd);
 </argument>
       </arguments>
     </action>
