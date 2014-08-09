@@ -476,6 +476,10 @@ global.launchMap = "";
         sprite_replace(CrosshairS,CrosshairFilename,1,CrosshairRemoveBG,false,0,0);
         sprite_set_offset(CrosshairS,sprite_get_width(CrosshairS)/2,sprite_get_height(CrosshairS)/2);
     }
+    
+    // Initialize the Kill Log API
+    global.customDamageMap = ds_map_create();
+    
     if(global.dedicatedMode == 1) {
         AudioControlToggleMute();
         room_goto_fix(Menu);

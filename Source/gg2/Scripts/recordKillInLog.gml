@@ -111,8 +111,11 @@
                     ds_map_add(map, "weapon", ExplodeKL);
                     break;                
                 default:
-                    ds_map_add(map, "weapon", DeadKL);
-                    break;            
+                    if(ds_map_exists(global.customDamageMap, argument3))
+                        ds_map_add(map, "weapon", ds_map_find_value(global.customDamageMap,argument3));
+                    else
+                        ds_map_add(map, "weapon", DeadKL);
+                    break;
             }
             
             ds_list_add(kills, map);
