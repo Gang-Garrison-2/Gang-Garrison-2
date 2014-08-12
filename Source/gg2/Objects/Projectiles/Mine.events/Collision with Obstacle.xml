@@ -19,7 +19,6 @@
     wallUnsetSolid();
     speed = 0;
     stickied = true;
-    weapon = WEAPON_MINEGUN;
 }
 </argument>
       </arguments>
