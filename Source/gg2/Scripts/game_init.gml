@@ -18,6 +18,8 @@
     var customMapRotationFile, restart;
     restart = false;
 
+    initializeDamageSources();
+    
     //import wav files for music
     global.MenuMusic=sound_add(choose("Music/menumusic1.wav","Music/menumusic2.wav","Music/menumusic3.wav","Music/menumusic4.wav","Music/menumusic5.wav","Music/menumusic6.wav"), 1, true);
     global.IngameMusic=sound_add("Music/ingamemusic.wav", 1, true);
@@ -476,9 +478,6 @@ global.launchMap = "";
         sprite_replace(CrosshairS,CrosshairFilename,1,CrosshairRemoveBG,false,0,0);
         sprite_set_offset(CrosshairS,sprite_get_width(CrosshairS)/2,sprite_get_height(CrosshairS)/2);
     }
-    
-    // Initialize the Kill Log API
-    global.customDamageMap = ds_map_create();
     
     if(global.dedicatedMode == 1) {
         AudioControlToggleMute();

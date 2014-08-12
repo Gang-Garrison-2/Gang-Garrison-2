@@ -26,7 +26,7 @@
     reflector = noone;
     knockback = 10;
     particleCycle = 0;
-    weapon = WEAPON_MINEGUN;
+    weapon = global.DAMAGE_SOURCE_MINEGUN;
 }
 </argument>
       </arguments>

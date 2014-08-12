@@ -115,32 +115,6 @@
   <constant name="DOMINATIONS" value="10"/>
   <constant name="REVENGE" value="11"/>
   <constant name="POINTS" value="12"/>
-  <constant name="WEAPON_SCATTERGUN" value="1"/>
-  <constant name="WEAPON_ROCKETLAUNCHER" value="2"/>
-  <constant name="WEAPON_SHOTGUN" value="3"/>
-  <constant name="WEAPON_REVOLVER" value="4"/>
-  <constant name="WEAPON_MINEGUN" value="6"/>
-  <constant name="WEAPON_NEEDLEGUN" value="7"/>
-  <constant name="WEAPON_RIFLE" value="8"/>
-  <constant name="WEAPON_MINIGUN" value="9"/>
-  <constant name="WEAPON_FLAMETHROWER" value="10"/>
-  <constant name="WEAPON_SENTRYTURRET" value="11"/>
-  <constant name="WEAPON_BLADE" value="12"/>
-  <constant name="WEAPON_KNIFE" value="13"/>
-  <constant name="WEAPON_REFLECTED_ROCKET" value="14"/>
-  <constant name="WEAPON_REFLECTED_STICKY" value="15"/>
-  <constant name="FRAG_BOX" value="16"/>
-  <constant name="KILL_BOX" value="17"/>
-  <constant name="FINISHED_OFF" value="18"/>
-  <constant name="FINISHED_OFF_GIB" value="19"/>
-  <constant name="BID_FAREWELL" value="20"/>
-  <constant name="WEAPON_BUBBLE" value="21"/>
-  <constant name="GENERATOR_EXPLOSION" value="22"/>
-  <constant name="WEAPON_RIFLE_CHARGED" value="23"/>
-  <constant name="WEAPON_BACKSTAB" value="24"/>
-  <constant name="WEAPON_FLARE" value="25"/>
-  <constant name="WEAPON_REFLECTED_FLARE" value="26"/>
-  <constant name="PITFALL" value="27"/>
   <constant name="ASSIST_TIME" value="120"/>
   <constant name="NOTICE_NUTSNBOLTS" value="0"/>
   <constant name="NOTICE_TOOCLOSE" value="1"/>

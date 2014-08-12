@@ -24,7 +24,7 @@ shot.owner=owner;
 shot.ownerPlayer=ownerPlayer;
 shot.team=owner.team;
 shot.hitDamage = 28;
-shot.weapon=WEAPON_REVOLVER;
+shot.weapon=global.DAMAGE_SOURCE_REVOLVER;
 if(golden)
     shot.sprite_index = ShotGoldS;
 with(shot)

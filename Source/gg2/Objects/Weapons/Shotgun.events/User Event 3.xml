@@ -24,7 +24,7 @@ repeat(5) {
     shot.owner=owner;
     shot.ownerPlayer=ownerPlayer;
     shot.team=owner.team;
-    shot.weapon=WEAPON_SHOTGUN;
+    shot.weapon=global.DAMAGE_SOURCE_SHOTGUN;
     if(golden)
         shot.sprite_index = ShotGoldS;
     

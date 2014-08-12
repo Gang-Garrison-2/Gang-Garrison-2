@@ -31,12 +31,8 @@
   <resource name="Math" type="GROUP"/>
   <resource name="Physics" type="GROUP"/>
   <resource name="Damage API" type="GROUP"/>
-  <resource name="Kill Log API" type="GROUP"/>
+  <resource name="Kill Log" type="GROUP"/>
   <resource name="ds_list_turn" type="RESOURCE"/>
-  <resource name="recordKillInLog" type="RESOURCE"/>
-  <resource name="recordDestructionInLog" type="RESOURCE"/>
-  <resource name="recordEventInLog" type="RESOURCE"/>
-  <resource name="recordDominationInLog" type="RESOURCE"/>
   <resource name="serializeState" type="RESOURCE"/>
   <resource name="deserializeState" type="RESOURCE"/>
   <resource name="setChatBubble" type="RESOURCE"/>
