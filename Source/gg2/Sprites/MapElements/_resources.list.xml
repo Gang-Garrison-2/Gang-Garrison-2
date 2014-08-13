@@ -14,4 +14,5 @@
   <resource name="IntelligenceBlueS" type="RESOURCE"/>
   <resource name="IntelligenceBaseS" type="RESOURCE"/>
   <resource name="sprite74" type="RESOURCE"/>
+  <resource name="spawnS" type="RESOURCE"/>
 </resources>

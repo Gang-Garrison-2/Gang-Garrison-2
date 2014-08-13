@@ -7,4 +7,5 @@
   <resource name="Hosting Menu Elements" type="GROUP"/>
   <resource name="Options Menus" type="GROUP"/>
   <resource name="InGameMenuController" type="RESOURCE"/>
+  <resource name="BuilderMenuController" type="RESOURCE"/>
 </resources>

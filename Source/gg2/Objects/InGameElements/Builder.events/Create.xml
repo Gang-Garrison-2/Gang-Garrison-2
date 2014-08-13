@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="CREATE" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">entityButtonSize = 28;
+vItems = 4;
+entityButtonCount = 0;
+selected = -1;
+tooltipIdx = -1;
+selectedSprite = -1;
+selectedImage = -1;
+canClick = true;
+
+buttonWidth = 108;
+buttonHeight = 17;
+buttonSpriteWidth = 17;
+headerWidth = 115;
+
+expanded = 1;
+expandIdx = 1;
+
+items = 5;
+oldItems = items;
+height = items*buttonHeight;
+dragHeight = 0;
+scrollIndex = 0;
+
+holdHeader = false;
+holdHeader2 = false;
+holdX = -1;
+holdY = -1;
+
+startX = 0;
+startX2 = headerWidth+2;
+startY2 = 0;
+
+moveSpeed = 32;
+
+mapBG = "";
+mapWM = "";
+wmString = "";
+
+scaling = false;
+scaleX = -1;
+scaleY = -1;
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

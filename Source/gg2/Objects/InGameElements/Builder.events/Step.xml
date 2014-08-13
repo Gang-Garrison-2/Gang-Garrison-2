@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="STEP" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if (!visible) exit;
+
+var i, button, xOfsset, yOffset, ySize, xSize;
+xOffset = view_xview[0] + startX;
+ySize = view_hview[0];
+yOffset = view_yview[0] + ySize;
+xSize = view_wview[0];
+canClick = true;
+tooltipIdx = -1;
+
+if (instance_exists(MenuController) || mouse_x &gt; view_xview[0]+view_wview[0] || mouse_x &lt; view_xview[0] || mouse_y &gt; view_yview[0]+view_hview[0] || mouse_y &lt; view_yview[0]) canClick = false;
+else {
+    if (keyboard_check(vk_left)) {
+        view_xview[0] -= moveSpeed;
+        event_user(1);
+    } else if (keyboard_check(vk_right)) {
+        view_xview[0] += moveSpeed;
+        event_user(1);
+    } 
+    if (keyboard_check(vk_up)) {
+        view_yview[0] -= moveSpeed;
+        event_user(1);
+    } else if (keyboard_check(vk_down)) {
+        view_yview[0] += moveSpeed;
+        event_user(1);
+    }
+}
+
+if (expanded) {
+    expandIdx = max(0, expandIdx - 0.05);
+    
+    if (expandIdx != 0 &amp;&amp; expanded) {
+        height = items*buttonHeight * sqrt(1-expandIdx*0.93);
+        dragHeight = height;
+    } else height = items*buttonHeight;
+    
+    if (holdHeader) {
+        if (toggleHeader &amp;&amp; (abs(holdX-mouse_x) &gt; 3 || abs(holdY-mouse_y) &gt; 3)) toggleHeader = false;
+        else if (!toggleHeader) {
+            startX += mouse_x-holdX;
+            startX = min(xSize-headerWidth, max(0, startX));
+            holdX = mouse_x;
+            
+            dragHeight -= mouse_y-holdY;
+            holdY = mouse_y;
+            dragHeight = min(ySize, max(buttonHeight, dragHeight));
+            items = min(ceil(dragHeight/buttonHeight), ds_list_size(global.buttons));
+            height = items*buttonHeight;
+        }
+        
+        if (!mouse_check_button(mb_left)) {
+            holdHeader = false;
+            if (toggleHeader) {
+                expanded = !expanded;
+                oldItems = items;
+            }
+        }
+    } else if (!holdHeader2) {
+        dragHeight = max(height, dragHeight - max(2, (dragHeight-height)/16));
+    
+        if (mouse_x &gt; xOffset &amp;&amp; mouse_x &lt; xOffset+buttonWidth) {
+            if (mouse_y &gt; yOffset-dragHeight-buttonHeight &amp;&amp; mouse_y &lt; yOffset-dragHeight) {
+                canClick = false;
+                if (mouse_check_button_pressed(mb_left)) {
+                    holdHeader = true;
+                    toggleHeader = true;
+                    holdX = mouse_x;
+                    holdY = mouse_y;
+                    canClick = false;
+                }
+            } else if (mouse_y &gt; yOffset-height) {
+                canClick = false;
+                if (mouse_check_button_pressed(mb_left)) {
+                    button = items - 1 - floor((yOffset-mouse_y)/height*items) + scrollIndex;
+                    if (!buttons[button, TOGGLE]) {
+                        execute_string(ds_map_find_value(ds_list_find_value(global.buttons, button), "code"), true);
+                    } else {
+                        buttons[button, TOGGLED] = !buttons[button, TOGGLED];
+                        execute_string(ds_map_find_value(ds_list_find_value(global.buttons, button), "code"), buttons[button, TOGGLED]);
+                    }
+                }
+            }
+        } else if (mouse_x &gt; xOffset+buttonWidth &amp;&amp; mouse_x &lt; xOffset+headerWidth) {
+            if (mouse_y &gt; yOffset-height) {
+                if (mouse_check_button(mb_left)) scrollIndex = floor((1-(yOffset-mouse_y)/height)*(ds_list_size(global.buttons)-items));
+                canClick = false;
+            }
+        }
+    }
+    
+    if (!canClick) {
+        if (mouse_wheel_up()) scrollIndex -= 1;
+        else if (mouse_wheel_down()) scrollIndex += 1;
+    }
+    scrollIndex = max(0, min(ds_list_size(global.buttons)-floor(height/buttonHeight), scrollIndex));
+} else {
+    expandIdx = min(1, expandIdx + 0.05);
+    height *= sqrt(1-expandIdx*0.93);
+    dragHeight = height;
+    items = min(ds_list_size(global.buttons), ceil(height/buttonHeight));
+    
+    if (mouse_x &gt; xOffset &amp;&amp; mouse_x &lt; xOffset+buttonWidth) {
+        if (mouse_y &gt; yOffset-dragHeight-buttonHeight &amp;&amp; mouse_y &lt; yOffset-dragHeight) {
+            if (mouse_check_button_pressed(mb_left)) {
+                expanded = true;
+                items = oldItems;
+                canClick = false;
+            }
+        }
+    }
+}
+
+// Not hovering over the button menu
+if (canClick) {
+    xOffset = view_xview[0] + startX2;
+    yOffset = view_yview[0] + startY2;
+    
+    if (holdHeader2) {
+        startX2 += mouse_x-holdX;
+        startX2 = min(xSize-entityButtonSize*vItems, max(0, startX2));
+        holdX = mouse_x;
+        
+        startY2 += mouse_y-holdY;
+        startY2 = min(ySize-ceil(entityButtonCount/vItems)*entityButtonSize, max(0, startY2));
+        holdY = mouse_y;
+        
+        if (!mouse_check_button(mb_left)) holdHeader2 = false;
+    } else if (mouse_x &gt; xOffset &amp;&amp; mouse_x &lt; xOffset+entityButtonSize*vItems) {
+        if (mouse_y &gt; yOffset+buttonHeight &amp;&amp; mouse_y &lt; yOffset+buttonHeight+entityButtonSize*ceil(entityButtonCount/vItems)) {
+            i = floor((mouse_x-xOffset)/entityButtonSize) + floor((mouse_y-yOffset-buttonHeight)/entityButtonSize)*vItems;
+            canClick = false;
+            if (i &lt; entityButtonCount) {
+                tooltipIdx = i;
+                if (mouse_check_button_pressed(mb_left)) {
+                    selected = i;
+                    button = ds_list_find_value(global.entityData, entityButtons[i, INDEX]);
+                    selectedSprite = ds_map_find_value(button, "entity_sprite");
+                    selectedImage = ds_map_find_value(button, "entity_image");
+                }
+            }
+        } else if (mouse_y &gt; yOffset &amp;&amp; mouse_y &lt; yOffset+buttonHeight) {
+            canClick = false;
+            if (mouse_check_button_pressed(mb_left)) {
+                holdHeader2 = true;
+                holdX = mouse_x;
+                holdY = mouse_y;
+            }
+        }
+    }
+}
+
+// Not hovering over any menus
+if (canClick) {
+    if (mouse_check_button_pressed(mb_left) &amp;&amp; selected != -1) {
+        scaling = true;
+        scaleX = round(mouse_x/6)*6;
+        scaleY = round(mouse_y/6)*6;
+    } else if (mouse_check_button_pressed(mb_right)) {
+        with(LevelEntity) {
+            if (collision_point(mouse_x, mouse_y, id, true, false) &gt; 0) instance_destroy();
+        }
+    } else if (mouse_check_button_pressed(mb_middle)) {
+        with(LevelEntity) {
+            if (collision_point(mouse_x, mouse_y, id, true, false) &gt; 0) {
+                other.selectedSprite = sprite_index;
+                other.selectedImage = image_index;
+                other.selected = ds_list_find_index(global.entities, type);
+            }
+        }
+    }
+}
+
+// Fill in the selected area if the users stops scaling.
+if ((mouse_check_button_released(mb_left) || !scale) &amp;&amp; scaling) {
+    scaling = false;
+    var _x, _y, oldScaleX;
+    _x = max(sprite_get_width(selectedSprite)+scaleX, round(mouse_x/6)*6);
+    _y = max(sprite_get_height(selectedSprite)+scaleY, round(mouse_y/6)*6);
+    oldScaleX = scaleX;
+    
+    // Mirror entities and invert their behaviour if possible
+    if (symmetry) {
+        var tmpTool, offset, sprite, data, entity2;
+        tmpTool = ds_list_find_value(global.entities, entityButtons[selected, INDEX]);
+        if (string_count("red", tmpTool) &gt; 0 || string_count("Red", tmpTool) &gt; 0) tmpTool = string_replace_all(string_replace_all(tmpTool, "red", "blue"), "Red", "Blue");
+        else if (string_count("blue", tmpTool) &gt; 0 || string_count("Blue", tmpTool) &gt; 0) tmpTool = string_replace_all(string_replace_all(tmpTool, "blue", "red"), "Blue", "Red");
+        
+        if (string_count("left", tmpTool) &gt; 0 || string_count("Left", tmpTool) &gt; 0) tmpTool = string_replace_all(string_replace_all(tmpTool, "left", "right"), "Left", "Right");
+        else if (string_count("right", tmpTool) &gt; 0 || string_count("Right", tmpTool) &gt; 0) tmpTool = string_replace_all(string_replace_all(tmpTool, "right", "left"), "Right", "Left");
+        
+        data = getEntityData(tmpTool);
+    }
+          
+    while(true) {
+        while(true) {                
+            var entity;
+            entity = instance_create(scaleX, scaleY, LevelEntity);
+            entity.sprite_index = selectedSprite;
+            entity.image_index = selectedImage;
+            entity.type = ds_list_find_value(global.entities, entityButtons[selected, INDEX]);
+            
+            // Mirror entities and invert their behaviour if possible
+            if (symmetry) {
+                if (data != -1) {
+                    sprite = ds_map_find_value(data, "entity_sprite");
+                    offset = map_width()/2-scaleX+sprite_get_xoffset(sprite);
+                                    
+                    entity2 = instance_create(map_width()/2 + offset-(sprite_get_width(sprite)-sprite_get_xoffset(sprite)), scaleY, LevelEntity);
+                    entity2.sprite_index = sprite;
+                    entity2.image_index = ds_map_find_value(data, "entity_image");
+                    entity2.type = tmpTool;
+                }
+            }
+            
+            execute_string(global.placeEntityFunction, entity);
+            
+            scaleX += sprite_get_width(selectedSprite);
+            if (scaleX == _x) break;
+            else if (scaleX + sprite_get_width(selectedSprite) &gt; _x) scaleX = _x - sprite_get_width(selectedSprite);
+        }
+        scaleY += sprite_get_height(selectedSprite);
+        scaleX = oldScaleX;
+        if (scaleY == _y) break;
+        else if (scaleY + sprite_get_height(selectedSprite) &gt; _y) scaleY = _y - sprite_get_height(selectedSprite);
+    }
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

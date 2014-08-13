@@ -456,6 +456,8 @@ global.launchMap = "";
     ini_close();
     
     calculateMonthAndDay();
+    
+    builder_init();
 
     if(!directory_exists(working_directory + "\Plugins")) directory_create(working_directory + "\Plugins");
     loadplugins();

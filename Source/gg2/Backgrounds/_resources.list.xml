@@ -3,4 +3,6 @@
   <resource name="GameElements" type="GROUP"/>
   <resource name="Maps" type="GROUP"/>
   <resource name="Updater" type="GROUP"/>
+  <resource name="BuilderWMB" type="RESOURCE"/>
+  <resource name="BuilderBGB" type="RESOURCE"/>
 </resources>

@@ -24,7 +24,7 @@ case 4: // 2:1
 }
 
 var maprooms, nummaps;
-nummaps = 20;
+nummaps = 21;
 
 maprooms[0] = Truefort
 maprooms[1] = TwodFortTwoRemix
@@ -46,6 +46,7 @@ maprooms[16] = Sixties
 maprooms[17] = DebugRoom
 maprooms[18] = CustomMapRoom
 maprooms[19] = Oldfort
+maprooms[20] = BuilderRoom
 
 for(i = 0; i < nummaps; i += 1)
 {

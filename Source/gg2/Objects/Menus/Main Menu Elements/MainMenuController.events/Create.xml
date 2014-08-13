@@ -30,6 +30,9 @@
         instance_create(0,0,Client);
         Client.returnRoom = Menu;
     ');
+    menu_addlink("Garrison Builder", '
+        room_goto_fix(BuilderOptions);
+    ');
     menu_addlink("Options", '
         room_goto_fix(Options);
     ');

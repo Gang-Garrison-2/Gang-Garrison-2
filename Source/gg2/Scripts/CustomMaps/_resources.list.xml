@@ -6,4 +6,8 @@
   <resource name="CustomMapGetMapMD5" type="RESOURCE"/>
   <resource name="map_width" type="RESOURCE"/>
   <resource name="map_height" type="RESOURCE"/>
+  <resource name="compressWalkmask" type="RESOURCE"/>
+  <resource name="compressEntities" type="RESOURCE"/>
+  <resource name="loadEntities" type="RESOURCE"/>
+  <resource name="saveEntities" type="RESOURCE"/>
 </resources>

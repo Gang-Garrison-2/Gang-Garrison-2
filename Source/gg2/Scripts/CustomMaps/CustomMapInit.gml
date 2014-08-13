@@ -10,12 +10,15 @@
 
   if(leveldata == "") {
     show_message("Error: this file does not contain level data.");
-    break;
+    return false;
   }
   // handle the leveldata
-  CustomMapProcessLevelData(leveldata, tempfile);
+  if (!CustomMapProcessLevelData(leveldata, tempfile)) return false;
   
-  background_replace(CustomMapB, argument0, false, false);
+  if (room == BuilderRoom) background_replace(BuilderBGB, argument0, false, false);
+  else background_replace(CustomMapB, argument0, false, false);
+
   background_xscale[0] = 6;
   background_yscale[0] = 6;
+  return true;
 }

@@ -17,4 +17,6 @@
   <resource name="Spectator" type="RESOURCE"/>
   <resource name="JoiningPlayer" type="RESOURCE"/>
   <resource name="Balancer" type="RESOURCE"/>
+  <resource name="Builder" type="RESOURCE"/>
+  <resource name="CollisionDummy" type="RESOURCE"/>
 </resources>

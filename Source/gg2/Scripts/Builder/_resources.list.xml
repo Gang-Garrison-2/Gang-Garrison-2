@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="builder_init" type="RESOURCE"/>
+  <resource name="addGamemode" type="RESOURCE"/>
+  <resource name="addEntity" type="RESOURCE"/>
+  <resource name="getEntityData" type="RESOURCE"/>
+  <resource name="addButton" type="RESOURCE"/>
+  <resource name="resetToggles" type="RESOURCE"/>
+</resources>
