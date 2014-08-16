@@ -2,5 +2,6 @@
     // Argument 0: Team
     // Argument 1: Class
     
-   return ds_map_find_value(global.characterObjectMap,argument0 * 16 + argument1);
+    teamMap = ds_map_find_value(global.teamMap, argument0);
+    return ds_map_find_value(teamMap, argument1);
 }
