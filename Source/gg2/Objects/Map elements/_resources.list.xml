@@ -8,5 +8,4 @@
   <resource name="NextAreaO" type="RESOURCE"/>
   <resource name="PreviousAreaO" type="RESOURCE"/>
   <resource name="LevelEntity" type="RESOURCE"/>
-  <resource name="MultiEntity" type="RESOURCE"/>
 </resources>

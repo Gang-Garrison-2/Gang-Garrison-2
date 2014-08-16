@@ -21,11 +21,11 @@
     if (room == BuilderRoom) menu_setdimmed();
     
     for(i=0;i&lt;ds_list_size(global.gamemodes); i+=1) {
-        menu_addlink(ds_map_find_value(ds_list_find_value(global.gamemodes, i), "name"), '
-            with(Builder) instance_destroy();
-            
+        menu_addlink(ds_map_find_value(ds_list_find_value(global.gamemodes, i), "name"), '            
             var builder;
-            builder = instance_create(0,0, Builder);
+            if (!instance_exists(Builder)) builder = instance_create(0,0, Builder);
+            else builder = Builder.id;
+            
             builder.gamemode = power(2, virtualitem);
             builder.name = item_name[virtualitem];
 
@@ -43,7 +43,8 @@
             with(Builder) instance_destroy();
         ');
         menu_addback("Back", '
-            instance_destroy();
+            // Wait 1 frame or the Builder will reopen the menu in the same step.
+            alarm[0] = 1;
         ');
     } else {
         menu_addback("Back", '

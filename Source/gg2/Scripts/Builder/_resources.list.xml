@@ -6,4 +6,5 @@
   <resource name="getEntityData" type="RESOURCE"/>
   <resource name="addButton" type="RESOURCE"/>
   <resource name="resetToggles" type="RESOURCE"/>
+  <resource name="mirrorEntity" type="RESOURCE"/>
 </resources>

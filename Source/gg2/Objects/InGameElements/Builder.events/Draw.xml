@@ -13,16 +13,75 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">var i, j, button, xOfsset, yOffset, _y, scrollHeight, sectionHeight;
+        <argument kind="STRING">var i, j, button, xOfsset, yOffset, _y, scrollHeight, sectionHeight, xr, yr;
 xOffset = view_xview[0] + startX;
 yOffset = view_yview[0] + view_hview[0];
+xr = round(mouse_x/6)*6;
+yr = round(mouse_y/6)*6
 draw_set_alpha(1);
 draw_set_valign(fa_left);
 draw_set_halign(fa_top);
 draw_set_font(gbFont);
 
 // SELECTED ENTITY
-if (canClick &amp;&amp; selected != -1 &amp;&amp; !scaling) draw_sprite_ext(selectedSprite, selectedImage, mouse_x, mouse_y, 1, 1, 0, c_white, 0.8); 
+if (canClick &amp;&amp; selected != -1) {
+    var i, _x, _y, xscale, yscale;
+    if (!scaling) {
+        scaleX = xr;
+        scaleY = yr;
+    }
+    if (!snap || !scaling) {
+        _x = max(sprite_get_width(selectedSprite)+scaleX, xr+spriteCenterX);
+        _y = max(sprite_get_height(selectedSprite)+scaleY, yr+spriteCenterY);
+    } else {
+        _x = scaleX + max(sprite_get_width(selectedSprite), round((mouse_x-scaleX)/sprite_get_width(selectedSprite))*sprite_get_width(selectedSprite));
+        _y = scaleY + max(sprite_get_height(selectedSprite), round((mouse_y-scaleY)/sprite_get_height(selectedSprite))*sprite_get_height(selectedSprite));
+    }
+    xscale = (_x-scaleX) / sprite_get_width(selectedSprite);
+    yscale = (_y-scaleY) / sprite_get_height(selectedSprite);
+        
+    draw_sprite_ext(selectedSprite, selectedImage, scaleX-spriteCenterX+spriteOffsetX*xscale, scaleY-spriteCenterY+spriteOffsetY*yscale, xscale, yscale, 0, c_white, 0.8);
+    draw_set_color(c_green);
+    draw_rectangle(scaleX-spriteCenterX, scaleY-spriteCenterY, _x-spriteCenterX, _y-spriteCenterY, true);
+    
+    if (!scale) {
+        for(i=scaleX-spriteCenterX+sprite_get_width(selectedSprite); i+spriteCenterX&lt;_x; i+=sprite_get_width(selectedSprite)) {
+            draw_line(i, scaleY-spriteCenterY, i, _y-spriteCenterY);
+        }
+        for(i=scaleY-spriteCenterY+sprite_get_height(selectedSprite); i+spriteCenterY&lt;_y; i+=sprite_get_height(selectedSprite)) {
+            draw_line(scaleX-spriteCenterX, i, _x-spriteCenterX, i);
+        }
+    }
+    
+    if (symmetry &amp;&amp; mirrored != -1) {
+        draw_sprite_ext(mirroredSprite, mirroredImage, map_width()-scaleX-mirroredCenterX+spriteOffsetX*xscale-(_x-scaleX), scaleY-spriteCenterY+spriteOffsetY*yscale, xscale, yscale, 0, c_white, 0.4);
+        draw_set_color(c_red);
+        draw_rectangle(map_width()-scaleX-mirroredCenterX, scaleY-spriteCenterY, map_width()-_x-mirroredCenterX, _y-spriteCenterY, true);
+        
+        if (!scale) {
+            for(i=scaleX-spriteCenterX+sprite_get_width(selectedSprite); i+spriteCenterX&lt;_x; i+=sprite_get_width(selectedSprite)) {
+                draw_line(map_width()-i, scaleY-spriteCenterY, map_width()-i, _y-spriteCenterY);
+            }
+            for(i=scaleY-spriteCenterY+sprite_get_height(selectedSprite); i+spriteCenterY&lt;_y; i+=sprite_get_height(selectedSprite)) {
+                draw_line(map_width()-scaleX-mirroredCenterX, i,  map_width()-_x-mirroredCenterX, i);
+            }
+        }
+    }
+} else if (canClick &amp;&amp; erasing) {
+    draw_set_color(c_green);
+    draw_rectangle(scaleX, scaleY, max(scaleX+6, xr), max(scaleY+6, yr), true);
+    draw_set_alpha(0.2);
+    draw_rectangle(scaleX, scaleY, max(scaleX+6, xr), max(scaleY+6, yr), false);
+    
+    if (symmetry) {
+        draw_set_color(c_red);
+        draw_set_alpha(0.5);
+        draw_rectangle(map_width()-scaleX, scaleY, map_width()-max(scaleX+6, xr), max(scaleY+6, yr), true);
+        draw_set_alpha(0.1);
+        draw_rectangle(map_width()-scaleX, scaleY, map_width()-max(scaleX+6, xr), max(scaleY+6, yr), false);
+    }
+    draw_set_alpha(1);
+}
 
 // BUTTON MENU
 if (expanded || expandIdx &lt; 1) {
@@ -74,6 +133,7 @@ for(j=0; j&lt;entityButtonCount/vItems; j+=1) {
     }
 }
 
+// Tooltip
 if (tooltipIdx &gt;= 0) {
     if (is_string(entityButtons[tooltipIdx, TOOLTIP])) {
         var x2, y2;
@@ -84,31 +144,6 @@ if (tooltipIdx &gt;= 0) {
         draw_set_color(c_white);
         draw_text(x2, y2, entityButtons[tooltipIdx, TOOLTIP]);
     }
-}
-
-if (scaling) {
-    var _x, _y, oldScaleX, _scaleX, _scaleY;
-    _x = max(sprite_get_width(selectedSprite)+scaleX, round(mouse_x/6)*6);
-    _y = max(sprite_get_height(selectedSprite)+scaleY, round(mouse_y/6)*6);
-    oldScaleX = scaleX;
-    _scaleX = scaleX;
-    _scaleY = scaleY;
-    
-    while(true) {
-        while(true) {                
-            draw_sprite_ext(selectedSprite, selectedImage, _scaleX, _scaleY, 1, 1, 0, c_white, 0.8); 
-            _scaleX += sprite_get_width(selectedSprite);
-            if (_scaleX == _x) break;
-            else if (_scaleX + sprite_get_width(selectedSprite) &gt; _x) _scaleX = _x - sprite_get_width(selectedSprite);
-        }
-        _scaleY += sprite_get_height(selectedSprite);
-        _scaleX = oldScaleX;
-        if (_scaleY == _y) break;
-        else if (_scaleY + sprite_get_height(selectedSprite) &gt; _y) _scaleY = _y - sprite_get_height(selectedSprite);
-    }
-    
-    draw_set_color(c_green);
-    draw_rectangle(scaleX, scaleY, max(sprite_get_width(selectedSprite)+scaleX, round(mouse_x/6)*6), max(sprite_get_height(selectedSprite)+scaleY, round(mouse_y/6)*6), true);
 }
 
 draw_set_font(global.gg2Font);

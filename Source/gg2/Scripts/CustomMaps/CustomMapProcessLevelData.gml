@@ -14,7 +14,6 @@
     
     // Load the walkmask into a sprite
     if (room == BuilderRoom) {
-        Builder.wmString = argument1;
         background_replace(BuilderWMB, argument1, true, false);
         background_xscale[1] = 6;
         background_yscale[1] = 6;

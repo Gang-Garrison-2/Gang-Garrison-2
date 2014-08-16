@@ -9,9 +9,10 @@ addButton("Load map", '
     var map;
     map = get_open_filename("PNG|*.png","");
     if (map == "") break;
+    with(LevelEntity) instance_destroy();
     CustomMapInit(map)
-    Builder.mapWM = map;  
-    Builder.mapBG = " ";
+    Builder.mapBG = map;  
+    Builder.mapWM = " ";
     Builder.wmString = compressWalkmask();
 ');
 addButton("Load BG", '
@@ -20,7 +21,6 @@ addButton("Load BG", '
     if(bg == "") break;
     Builder.mapBG = bg;
     background_replace(BuilderBGB, bg, false, false);
-    room_set_background(BuilderRoom, 0, true, false, BuilderBGB, 0, 0, false, false, 0, 0, 1);
     background_xscale[0] = 6;
     background_yscale[0] = 6;
 '); 
@@ -30,24 +30,42 @@ addButton("Load WM", '
     if(wm == "") break;
     Builder.mapWM = wm;
     background_replace(BuilderWMB, wm, true, false);
-    room_set_background(BuilderRoom, 1, true, false, BuilderWMB, 0, 0, false, false, 0, 0, 0.8);
     background_xscale[1] = 6;
     background_yscale[1] = 6;
     Builder.wmString = compressWalkmask();
 '); 
 addButton("Show BG", 'background_visible[0] = argument0;', 1, 1); 
-addButton("Show WM", 'background_visible[1] = argument0;', 1); 
+addButton("Show WM", '
+    room_set_background(BuilderRoom, 1, true, false, BuilderWMB, 0, 0, false, false, 0, 0, 0.7);
+    background_visible[1] = argument0;
+', 1); 
 addButton("Show grid", 'background_visible[2] = argument0;', 1);
 addButton("Compile map", '
     if (Builder.mapWM == "") show_message("Select a walkmask first.");
     else if (Builder.mapBG == "") show_message("Select a background first");
     else {
+        // Validate the gamemode
+        var gmMap, code, error;
+        gmMap = ds_list_find_value(global.gamemodes, log2(Builder.gamemode));
+        if (gmMap != -1) {
+            code = ds_map_find_value(gmMap, "code");
+            if (is_string(code)) {
+                error = ds_map_find_value(gmMap, "error");
+                if (!is_string(error)) error = "Your setup is not valid.";
+                else error = "Your setup is not valid:#" + error;
+                
+                if (!execute_string(ds_map_find_value(gmMap, "code"))) {
+                    if (show_message_ext(error, "Continue", "Cancel", "") != 1) return false;
+                }
+            }
+        }
+        
         var leveldata;
         leveldata = compressEntities() + chr(10) + Builder.wmString;
-        GG2DLL_embed_PNG_leveldata(Builder.mapWM, leveldata);
-        if (show_message_ext("Compilation completed", "Ok", "PlayTest", "") == 2) {
+        GG2DLL_embed_PNG_leveldata(Builder.mapBG, leveldata);
+        if (show_message_ext("Compilation completed", "Ok", "Playtest", "") == 2) {
             // Get the mapname
-            global.currentMap = Builder.mapWM;
+            global.currentMap = Builder.mapBG;
             while (string_count("\", global.currentMap) != 0) global.currentMap = string_delete(global.currentMap, 1, 1);
             var fileNameCh, fileLen;
             fileNameCh = string_pos(".png", global.currentMap);
@@ -56,34 +74,134 @@ addButton("Compile map", '
             global.currentMap = string_copy(global.currentMap, 0, fileLen - (fileLen - fileNameCh) - 1);
                 
             // Place a copy in the maps folder if needed
-            if (Builder.mapWM != working_directory + "\Maps\"+global.currentMap+".png") {
+            if (Builder.mapBG != working_directory + "\Maps\"+global.currentMap+".png") {
                 if (file_exists("Maps\"+global.currentMap+".png")) file_delete("Maps\"+global.currentMap+".png");
-                file_copy(Builder.mapWM, "Maps\"+global.currentMap+".png");
+                file_copy(Builder.mapBG, "Maps\"+global.currentMap+".png");
             }
 
             Builder.visible = false;
-            //instance_destroy();
             global.launchMap = global.currentMap;
             global.isHost = true;
             global.gameServer = instance_create(0,0,GameServer); 
         }
     }
 '); 
-addButton("Symmetry mode", 'Builder.symmetry = argument0;', 1); 
-addButton("Scale mode", 'Builder.scale = argument0;', 1, 1); 
+addButton("Symmetry mode", '
+    Builder.symmetry = argument0;
+    return argument0;
+', 1); 
+addButton("Tile mode", '
+    Builder.tile = argument0;
+    return argument0;
+', 1, 1); 
+addButton("Snap tiles", '
+    Builder.snap = argument0;
+    return argument0;
+', 1, 1);
+addButton("Scale mode", '
+    if (argument0 && !Builder.ggon) {
+        if (show_message_ext("This map will be compiled with GGON if you use scale mode. This means that < v2.7.4 won'+chr(39)+'t be able to decompile this map.", "Ok", "Cancel", "") == 1) {
+            Builder.scale = argument0;
+            Builder.ggon = true;
+        } else return false;
+    } else Builder.scale = argument0;
+    return argument0;
+', 1);
+addButton("Fast scrolling",'
+    Builder.moveSpeed = 32 + 32*argument0;
+    return argument0;
+', 1);
 addButton("Load entities", 'loadEntities()'); 
 addButton("Save entities", 'saveEntities()');
-addButton("Clear entities", 'if (show_question("Are you sure you want to scrap your entities?")) with (LevelEntity) instance_destroy();'); 
+addButton("Clear entities", '
+    if (show_question("Are you sure you want to scrap your entities?")) {
+        with (LevelEntity) instance_destroy();
+    }
+'); 
 
 var ctf, cp, adcp, koth, dkoth, arena, gen;
 addGamemode("Free mode");
-ctf = addGamemode("Capture the flag (ctf)");
-cp = addGamemode("Control points (cp)");
-adcp = addGamemode("A/D control points (adcp)");
-koth = addGamemode("King of the hill (koth)");
-dkoth = addGamemode("Dual king of the hill (dkoth)");
-arena = addGamemode("Arena (arena)");
-gen = addGamemode("Generator (gen)");
+ctf = addGamemode("Capture the flag (ctf)", '
+    var redCount, blueCount;
+    redCount = 0;
+    blueCount = 0;
+    with(LevelEntity) {
+        if (type == "redintel") redCount += 1;
+        else if (type == "blueintel") blueCount += 1;
+    }
+    if (redCount != 1 || blueCount != 1) return false;
+    return true;
+', "Ctf or invasion mode needs 1 red and 1 blue intelligence.");
+cp = addGamemode("Control points (cp)", '
+    var controlpoints, zones;
+    controlpoints = 0;
+    zones = 0;
+    with(LevelEntity) {
+        if (type == "controlPoint1" || type == "controlPoint2" || type == "controlPoint3" || type == "controlPoint4" || type == "controlPoint5") controlpoints += 1;
+        else if (type == "CapturePoint") zones += 1;
+    }
+    if (controlpoints == 0 || controlpoints > 5 || zones == 0) return false;
+    return true;
+', "CP needs 1-5 control points and capturezones.");
+adcp = addGamemode("A/D control points (adcp)", '
+    var controlpoints, zones, gates;
+    controlpoints = 0;
+    zones = 0;
+    gates = 0;
+    with(LevelEntity) {
+        if (type == "controlPoint1" || type == "controlPoint2" || type == "controlPoint3" || type == "controlPoint4" || type == "controlPoint5") controlpoints += 1;
+        else if (type == "CapturePoint") zones += 1;
+        else if (type == "SetupGate") gates += 1;
+    }
+    if (controlpoints == 0 || controlpoints >= 5 || zones == 0 || gates == 0) return false;
+    return true;
+', "A/D CP needs 1-5 control points, capturezones and setup gates.");
+koth = addGamemode("King of the hill (koth)", '
+    var controlpoints, zones;
+    controlpoints = 0;
+    zones = 0;
+    with(LevelEntity) {
+        if (type == "KothControlPoint") controlpoints += 1;
+        else if (type == "CapturePoint") zones += 1;
+    }
+    if (controlpoints != 1 || zones == 0) return false;
+    return true;
+', "KOTH needs 1 control point and capturezones.");
+dkoth = addGamemode("Dual king of the hill (dkoth)" ,'
+    var redcontrolpoints, bluecontrolpoints, zones;
+    redcontrolpoints = 0;
+    bluecontrolpoints = 0;
+    zones = 0;
+    with(LevelEntity) {
+        if (type == "KothRedControlPoint") redcontrolpoints += 1;
+        else if (type == "KothBlueControlPoint") bluecontrolpoints += 1;
+        else if (type == "CapturePoint") zones += 1;
+    }
+    if (redcontrolpoints != 1 || bluecontrolpoints || zones == 0) return false;
+    return true;
+', "DKOTH needs 1 red control point, 1 blue control point and capturezones.");
+arena = addGamemode("Arena (arena)", '
+    var controlpoints, zones;
+    controlpoints = 0;
+    zones = 0;
+    with(LevelEntity) {
+        if (type == "ArenaControlPoint") controlpoints += 1;
+        else if (type == "CapturePoint") zones += 1;
+    }
+    if (controlpoints != 1 || zones == 0) return false;
+    return true;
+', "Arena needs 1 control point and capturezones.");
+gen = addGamemode("Generator (gen)", '
+    var redgen, bluegen;
+    redgen = 0;
+    bluegen = 0;
+    with(LevelEntity) {
+        if (type == "GeneratorRed") redgen += 1;
+        else if (type == "GeneratorBlue") bluegen += 1;
+    }
+    if (redgen != 1 || bluegen != 0) return false;
+    return true;
+', "Gen needs 1 red and 1 blue generator.");
 
 addEntity("spawnroom", -1, SpawnRoom, sprite64, 1, entityButtonS, 74, "Players can instantly respawn in this area.");
 addEntity("redspawn", -1, SpawnPointRed, spawnS, 0, entityButtonS, 30, "Default spawn locator for the red team.");
@@ -116,8 +234,8 @@ addEntity("playerwall", -1, PlayerWall, sprite45, 3, entityButtonS, 50, "A wall 
 addEntity("playerwall_horizontal", -1, PlayerWallHorizontal, sprite44, 3, entityButtonS, 54, "A floor that blocks player but not bullets.");
 addEntity("bulletwall", -1, BulletWall, sprite45, 4, entityButtonS, 52, "A wall that blocks bullets but not players.");
 addEntity("bulletwall_horizontal", -1, BulletWallHorizontal, sprite44, 4, entityButtonS, 56, "A floor that blocks bullets but not players.");
-addEntity("rightdoor", -1, RightDoor, sprite45, 5, entityButtonS, 102, "Blocks players trying to go left");
-addEntity("leftdoor", -1, LeftDoor, sprite45, 6, entityButtonS, 104, "Blocks players trying to go right.");
+addEntity("leftdoor", -1, LeftDoor, sprite45, 5, entityButtonS, 102, "Blocks players trying to go left");
+addEntity("rightdoor", -1, RightDoor, sprite45, 6, entityButtonS, 104, "Blocks players trying to go right.");
 addEntity("controlPoint1", cp | adcp, ControlPoint1, ControlPointNeutralS, 0, entityButtonS, 12, "Control point \#1");
 addEntity("controlPoint2", cp | adcp, ControlPoint2, ControlPointNeutralS, 2, entityButtonS, 14, "Control point \#2");
 addEntity("controlPoint3", cp | adcp, ControlPoint3, ControlPointNeutralS, 3, entityButtonS, 16, "Control point \#3");

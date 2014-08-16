@@ -13,23 +13,27 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">entityButtonSize = 28;
-vItems = 4;
-entityButtonCount = 0;
-selected = -1;
-tooltipIdx = -1;
-selectedSprite = -1;
-selectedImage = -1;
-canClick = true;
-
-buttonWidth = 108;
-buttonHeight = 17;
-buttonSpriteWidth = 17;
-headerWidth = 115;
-
+        <argument kind="STRING">tooltipIdx = -1;
 expanded = 1;
 expandIdx = 1;
+canClick = true;
+ggon = false;
 
+selected = -1;
+selectedSprite = -1;
+selectedImage = -1;
+mirrored = -1;
+mirroredSprite = -1;
+mirroredImage = -1;
+
+entityButtonSize = 28;
+buttonWidth = 108;
+headerWidth = 115;
+buttonHeight = 17;
+buttonSpriteWidth = 17;
+
+vItems = 4;
+entityButtonCount = 0;
 items = 5;
 oldItems = items;
 height = items*buttonHeight;
@@ -51,9 +55,18 @@ mapBG = "";
 mapWM = "";
 wmString = "";
 
+erasing = false;
 scaling = false;
+snapScaling = false;
 scaleX = -1;
 scaleY = -1;
+
+spriteCenterX = -1;
+spriteCenterY = -1;
+spriteOffsetX = -1;
+spriteOffsetY = -1;
+mirroredCenterX = -1;
+mirroredOffsetX = -1;
 </argument>
       </arguments>
     </action>
