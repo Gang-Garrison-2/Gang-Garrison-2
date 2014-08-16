@@ -1,5 +1,7 @@
 // Initialize character and team maps along with default classes and teams
 
+var redCharacterMap, blueCharacterMap;
+
 redCharacterMap = ds_map_create();
 blueCharacterMap = ds_map_create();
 global.teamMap = ds_map_create();
