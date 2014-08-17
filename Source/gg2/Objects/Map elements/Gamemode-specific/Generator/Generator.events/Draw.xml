@@ -21,7 +21,7 @@ yviewsize = view_hview[0];
 if distance_to_point(xviewoffset+xviewsize/2,yviewoffset+yviewsize/2) &gt; 800 exit;
 
 draw_sprite_ext(sprite_index,image_index,x,y,1,1,0,c_white,1);
-draw_sprite_ext(GeneratorShieldS,floor(shieldIndex),x,y,1,1,0,c_white, shieldResistance);
+draw_sprite_ext(GeneratorShieldS,floor(shieldIndex),x,y,1,1,0,c_white, (shieldHp &gt; 0)*0.25 + 0.5*shieldHp/maxShieldHp);
 </argument>
       </arguments>
     </action>
