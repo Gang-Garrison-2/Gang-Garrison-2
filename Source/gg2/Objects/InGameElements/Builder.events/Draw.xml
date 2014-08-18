@@ -24,49 +24,42 @@ draw_set_halign(fa_top);
 draw_set_font(gbFont);
 
 // SELECTED ENTITY
-if (canClick &amp;&amp; selected != -1) {
-    var i, _x, _y, xscale, yscale;
-    if (!scaling) {
-        scaleX = xr;
-        scaleY = yr;
-    }
-    if (!snap || !scaling) {
-        _x = max(sprite_get_width(selectedSprite)+scaleX, xr+spriteCenterX);
-        _y = max(sprite_get_height(selectedSprite)+scaleY, yr+spriteCenterY);
-    } else {
-        _x = scaleX + max(sprite_get_width(selectedSprite), round((mouse_x-scaleX)/sprite_get_width(selectedSprite))*sprite_get_width(selectedSprite));
-        _y = scaleY + max(sprite_get_height(selectedSprite), round((mouse_y-scaleY)/sprite_get_height(selectedSprite))*sprite_get_height(selectedSprite));
-    }
-    xscale = (_x-scaleX) / sprite_get_width(selectedSprite);
-    yscale = (_y-scaleY) / sprite_get_height(selectedSprite);
+if (canClick &amp;&amp; selected != -1) {   
+    if (!scaling || entityButtons[selected, SCALE]) {
+        // Scaled preview
+        var _x, _y, xscale, yscale;
+        if (!scaling) {
+            scaleX = xr;
+            scaleY = yr;
+            _x = xr + sprite_get_width(selectedSprite);
+            _y = yr + sprite_get_height(selectedSprite);
+        } else {
+            _x = max(scaleX+6, xr+spriteCenterX);
+            _y = max(scaleY+6, yr+spriteCenterY);
+        }
+        xscale = (_x-scaleX) / sprite_get_width(selectedSprite);
+        yscale = (_y-scaleY) / sprite_get_height(selectedSprite);
         
-    draw_sprite_ext(selectedSprite, selectedImage, scaleX-spriteCenterX+spriteOffsetX*xscale, scaleY-spriteCenterY+spriteOffsetY*yscale, xscale, yscale, 0, c_white, 0.8);
+        draw_sprite_ext(selectedSprite, selectedImage, scaleX-spriteCenterX+spriteOffsetX*xscale, scaleY-spriteCenterY+spriteOffsetY*yscale, xscale, yscale, 0, c_white, 0.8);
+        if (symmetry &amp;&amp; mirrored != -1) draw_sprite_ext(mirroredSprite, mirroredImage, map_width()-scaleX-mirroredCenterX+spriteOffsetX*xscale-(_x-scaleX), scaleY-spriteCenterY+spriteOffsetY*yscale, xscale, yscale, 0, c_white, 0.4);
+    } else {
+        // Tiled preview 
+        var _x, _y, i, j; 
+        _x = scaleX + max(sprite_get_width(selectedSprite), ceil((mouse_x-scaleX)/sprite_get_width(selectedSprite))*sprite_get_width(selectedSprite));
+        _y = scaleY + max(sprite_get_height(selectedSprite), ceil((mouse_y-scaleY)/sprite_get_height(selectedSprite))*sprite_get_height(selectedSprite));
+        for(i=scaleX-spriteCenterX; i+spriteCenterX&lt;_x; i+=sprite_get_width(selectedSprite)) {      
+            for(j=scaleY-spriteCenterY; j+spriteCenterY&lt;_y; j+=sprite_get_height(selectedSprite)) {
+                draw_sprite_ext(selectedSprite, selectedImage, i+spriteOffsetX, j+spriteOffsetY, 1, 1, 0, c_white, 0.8);
+                if (symmetry &amp;&amp; mirrored != -1) draw_sprite_ext(mirroredSprite, mirroredImage, map_width()-i+mirroredOffsetX, j+spriteOffsetY, 1, 1, 0, c_white, 0.4);
+            }
+        }
+    }
+    
+    // Rectangle showing the selected area
     draw_set_color(c_green);
     draw_rectangle(scaleX-spriteCenterX, scaleY-spriteCenterY, _x-spriteCenterX, _y-spriteCenterY, true);
-    
-    if (!scale) {
-        for(i=scaleX-spriteCenterX+sprite_get_width(selectedSprite); i+spriteCenterX&lt;_x; i+=sprite_get_width(selectedSprite)) {
-            draw_line(i, scaleY-spriteCenterY, i, _y-spriteCenterY);
-        }
-        for(i=scaleY-spriteCenterY+sprite_get_height(selectedSprite); i+spriteCenterY&lt;_y; i+=sprite_get_height(selectedSprite)) {
-            draw_line(scaleX-spriteCenterX, i, _x-spriteCenterX, i);
-        }
-    }
-    
-    if (symmetry &amp;&amp; mirrored != -1) {
-        draw_sprite_ext(mirroredSprite, mirroredImage, map_width()-scaleX-mirroredCenterX+spriteOffsetX*xscale-(_x-scaleX), scaleY-spriteCenterY+spriteOffsetY*yscale, xscale, yscale, 0, c_white, 0.4);
-        draw_set_color(c_red);
-        draw_rectangle(map_width()-scaleX-mirroredCenterX, scaleY-spriteCenterY, map_width()-_x-mirroredCenterX, _y-spriteCenterY, true);
-        
-        if (!scale) {
-            for(i=scaleX-spriteCenterX+sprite_get_width(selectedSprite); i+spriteCenterX&lt;_x; i+=sprite_get_width(selectedSprite)) {
-                draw_line(map_width()-i, scaleY-spriteCenterY, map_width()-i, _y-spriteCenterY);
-            }
-            for(i=scaleY-spriteCenterY+sprite_get_height(selectedSprite); i+spriteCenterY&lt;_y; i+=sprite_get_height(selectedSprite)) {
-                draw_line(map_width()-scaleX-mirroredCenterX, i,  map_width()-_x-mirroredCenterX, i);
-            }
-        }
-    }
+    draw_set_color(c_red);
+    if (symmetry &amp;&amp; mirrored != -1) draw_rectangle(map_width()-scaleX-mirroredCenterX, scaleY-spriteCenterY, map_width()-_x-mirroredCenterX, _y-spriteCenterY, true);
 } else if (canClick &amp;&amp; erasing) {
     draw_set_color(c_green);
     draw_rectangle(scaleX, scaleY, max(scaleX+6, xr), max(scaleY+6, yr), true);

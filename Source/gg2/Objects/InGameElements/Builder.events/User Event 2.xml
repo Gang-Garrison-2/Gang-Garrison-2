@@ -18,6 +18,8 @@
 button = ds_list_find_value(global.entityData, entityButtons[selected, INDEX]);
 selectedSprite = ds_map_find_value(button, "entity_sprite");
 selectedImage = ds_map_find_value(button, "entity_image");
+selectedProperties = ds_map_find_value(button, "properties");
+ds_map_clear(newProperties);
 
 spriteCenterX = round(sprite_get_width(selectedSprite)/12)*6;
 spriteCenterY = round(sprite_get_height(selectedSprite)/12)*6;

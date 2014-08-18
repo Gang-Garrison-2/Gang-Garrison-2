@@ -146,8 +146,16 @@ if (canClick) {
             if (i &lt; entityButtonCount) {
                 tooltipIdx = i;
                 if (mouse_check_button_pressed(mb_left)) {
-                    selected = i;
-                    event_user(2);
+                    if (selected != i) {
+                        selected = i;
+                        event_user(2);
+                    }
+                } else if (mouse_check_button_pressed(mb_right)) {
+                    if (selected != i) {
+                        selected = i;
+                        event_user(2);
+                    }
+                    showPropertyMenu(selected, selectedProperties, newProperties);
                 }
             }
         } else if (mouse_y &gt; yOffset &amp;&amp; mouse_y &lt; yOffset+buttonHeight) {
@@ -185,56 +193,23 @@ if (canClick) {
 }
 
 // Fill in the selected area if the users stops scaling.
-if ((mouse_check_button_released(mb_left) || (!tile &amp;&amp; !scale)) &amp;&amp; scaling) {
+if ((mouse_check_button_released(mb_left) || !scale) &amp;&amp; scaling) {
     scaling = false;
-    var _x, _y, oldScaleX;
-    oldScaleX = scaleX;
-    if (!snap) {
-        _x = max(sprite_get_width(selectedSprite)+scaleX, round(mouse_x/6)*6+spriteCenterX);
-        _y = max(sprite_get_height(selectedSprite)+scaleY, round(mouse_y/6)*6+spriteCenterY);
-    } else {
-        _x = max(sprite_get_width(selectedSprite)+scaleX, scaleX+round((mouse_x-scaleX)/sprite_get_width(selectedSprite))*sprite_get_width(selectedSprite));
-        _y = max(sprite_get_height(selectedSprite)+scaleY, scaleY+round((mouse_y-scaleY)/sprite_get_height(selectedSprite))*sprite_get_height(selectedSprite));
-    }
-    if (!scale) {
-        while(true) {
-            while(true) {                
-                var entity;
-                entity = instance_create(scaleX-spriteCenterX+spriteOffsetX, scaleY-spriteCenterY+spriteOffsetY, LevelEntity);
-                entity.sprite_index = selectedSprite;
-                entity.image_index = selectedImage;
-                entity.type = ds_list_find_value(global.entities, entityButtons[selected, INDEX]);
-    
-                if (symmetry) {
-                    if (mirrored != -1) {                                  
-                        entity2 = instance_create(map_width()-scaleX-mirroredCenterX+mirroredOffsetX, scaleY-spriteCenterY+spriteOffsetY, LevelEntity);
-                        entity2.sprite_index = mirroredSprite;
-                        entity2.image_index = mirroredImage;
-                        entity2.type = ds_list_find_value(global.entities, mirrored);
-                    }
-                }
-                execute_string(global.placeEntityFunction, entity);
-                
-                scaleX += sprite_get_width(selectedSprite);
-                if (scaleX == _x) break;
-                else if (scaleX + sprite_get_width(selectedSprite) &gt; _x) scaleX = _x - sprite_get_width(selectedSprite);
-            }
-            scaleY += sprite_get_height(selectedSprite);
-            scaleX = oldScaleX;
-            if (scaleY == _y) break;
-            else if (scaleY + sprite_get_height(selectedSprite) &gt; _y) scaleY = _y - sprite_get_height(selectedSprite);
-        }
-    } else {
-        var entity, entity2 xscale, yscale;
+    if (scale &amp;&amp; entityButtons[selected, SCALE]) {
+        var entity, entity2 xscale, yscale, _x, _y;
+        _x = max(scaleX+6, round(mouse_x/6)*6+spriteCenterX);
+        _y = max(scaleY+6, round(mouse_y/6)*6+spriteCenterY);
         xscale = (_x-scaleX) / sprite_get_width(selectedSprite);
         yscale = (_y-scaleY) / sprite_get_height(selectedSprite);
+        
         entity = instance_create(scaleX-spriteCenterX+spriteOffsetX*xscale, scaleY-spriteCenterY+spriteOffsetY*yscale, LevelEntity);
         entity.sprite_index = selectedSprite;
         entity.image_index = selectedImage;
         entity.type = ds_list_find_value(global.entities, entityButtons[selected, INDEX]);
         entity.image_xscale = xscale;
         entity.image_yscale = yscale;
-        
+        if (ds_map_size(newProperties) &gt; 0) entity.properties = ggon_encode(newProperties);
+
         if (symmetry) {
             entity2 = instance_create(map_width()-scaleX+spriteCenterX+spriteOffsetX*xscale-(_x-scaleX), scaleY-spriteCenterY+spriteOffsetY*yscale, LevelEntity);
             entity2.sprite_index = mirroredSprite;
@@ -242,12 +217,41 @@ if ((mouse_check_button_released(mb_left) || (!tile &amp;&amp; !scale)) &amp;&am
             entity2.type = ds_list_find_value(global.entities, mirrored);
             entity2.image_xscale = xscale;
             entity2.image_yscale = yscale;
+            if (ds_map_size(newProperties) &gt; 0) entity.properties = ggon_encode(newProperties);
         }
         execute_string(global.placeEntityFunction, entity);
+    } else {
+        var _x, _y, i, j, entity, entity2;
+        _x = max(sprite_get_width(selectedSprite)+scaleX, scaleX+ceil((mouse_x-scaleX)/sprite_get_width(selectedSprite))*sprite_get_width(selectedSprite));
+        _y = max(sprite_get_height(selectedSprite)+scaleY, scaleY+ceil((mouse_y-scaleY)/sprite_get_height(selectedSprite))*sprite_get_height(selectedSprite));
+
+        for(i=scaleX-spriteCenterX; i+spriteCenterX&lt;_x; i+=sprite_get_width(selectedSprite)) {      
+            for(j=scaleY-spriteCenterY; j+spriteCenterY&lt;_y; j+=sprite_get_height(selectedSprite)) {
+                entity = instance_create(i+spriteOffsetX, j+spriteOffsetY, LevelEntity);
+                entity.sprite_index = selectedSprite;
+                entity.image_index = selectedImage;
+                entity.type = ds_list_find_value(global.entities, entityButtons[selected, INDEX]);
+                if (ds_map_size(newProperties) &gt; 0) entity.properties = ggon_encode(newProperties);
+    
+                if (symmetry) {
+                    if (mirrored != -1) {                                  
+                        entity2 = instance_create(map_width()-i+mirroredOffsetX, j+spriteOffsetY, LevelEntity);
+                        entity2.sprite_index = mirroredSprite;
+                        entity2.image_index = mirroredImage;
+                        entity2.type = ds_list_find_value(global.entities, mirrored);
+                        if (ds_map_size(newProperties) &gt; 0) entity.properties = ggon_encode(newProperties);
+                    }
+                }
+                execute_string(global.placeEntityFunction, entity);
+            }
+        }
     }
-} else if ((mouse_check_button_released(mb_right) || (!scale &amp;&amp; !tile)) &amp;&amp; erasing) {
+} else if ((mouse_check_button_released(mb_right)) &amp;&amp; erasing) {
+    var area;
+    area = (mouse_x-6 &gt;= scaleX || mouse_y-6 &gt;= scaleY);
     erasing = false;
-    if (scale || tile) {
+    
+    if (area) {
         with(LevelEntity) if (x &gt;= other.scaleX &amp;&amp; x &lt;= mouse_x &amp;&amp; y &gt;= other.scaleY &amp;&amp; y &lt;= mouse_y) instance_destroy();
     } else {
         with(LevelEntity) if (collision_point(mouse_x, mouse_y, id, true, false) &gt; 0) instance_destroy();
@@ -258,7 +262,7 @@ if ((mouse_check_button_released(mb_left) || (!tile &amp;&amp; !scale)) &amp;&am
         scaleX = map_width() - scaleX;
         _x = map_width() - mouse_x;
         
-        if (scale || tile) {
+        if (area) {
             with(LevelEntity) if (x &lt;= other.scaleX &amp;&amp; x &gt;= _x &amp;&amp; y &gt;= other.scaleY &amp;&amp; y &lt;= mouse_y) instance_destroy();
         } else {
             with(LevelEntity) if (collision_point(_x, mouse_y, id, true, false) &gt; 0) instance_destroy();

@@ -17,11 +17,12 @@
 expanded = 1;
 expandIdx = 1;
 canClick = true;
-ggon = false;
 
 selected = -1;
 selectedSprite = -1;
 selectedImage = -1;
+selectedProperties = -1;
+newProperties = ds_map_create();
 mirrored = -1;
 mirroredSprite = -1;
 mirroredImage = -1;

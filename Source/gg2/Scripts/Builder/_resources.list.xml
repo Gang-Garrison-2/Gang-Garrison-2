@@ -7,4 +7,6 @@
   <resource name="addButton" type="RESOURCE"/>
   <resource name="resetToggles" type="RESOURCE"/>
   <resource name="mirrorEntity" type="RESOURCE"/>
+  <resource name="showPropertyMenu" type="RESOURCE"/>
+  <resource name="readProperty" type="RESOURCE"/>
 </resources>

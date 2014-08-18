@@ -165,4 +165,7 @@
   <constant name="BOOT_BEHAVIOUR" value="0"/>
   <constant name="BOOT_STANDARD" value="0"/>
   <constant name="BOOT_DEBUG" value="1"/>
+  <constant name="STRING" value="0"/>
+  <constant name="REAL" value="1"/>
+  <constant name="BOOL" value="2"/>
 </constants>

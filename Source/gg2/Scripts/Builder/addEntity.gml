@@ -2,12 +2,13 @@
  * Adds an entity button to the GUI
  * Argument0: The name
  * Argument1: The gamemodes that this entity can be used on (uses bitmasks to select multiple gamemodes)
- * Argument2: The object that gets created ingame. If it's a child of 'MultiEntity' it will also run it's event_user(0) with the variable 'name' as the entityname.
- * Argument3: The sprite of the entity
- * Argument4: The image index of the entity sprite
- * Argument5: The sprite of the button
- * Argument6: The image index of the button sprite
- * [Argument7]: Tooltip
+ * Argument2: A ggon string with all properties that can be editted.
+ * Argument3: The object that gets created ingame. If it's a child of 'MultiEntity' it will also run it's event_user(0) with the variable 'name' as the entityname.
+ * Argument4: The sprite of the entity
+ * Argument5: The image index of the entity sprite
+ * Argument6: The sprite of the button
+ * Argument7: The image index of the button sprite
+ * [Argument8]: Tooltip
  * Returns: And identifier for the entity button
 */
 
@@ -24,12 +25,13 @@ ds_list_add(global.entities, argument0);
 
 map = ds_map_create();
 ds_map_add(map, "gamemode", argument1);
-ds_map_add(map, "object", argument2);
-ds_map_add(map, "entity_sprite", argument3);
-ds_map_add(map, "entity_image", argument4);
-ds_map_add(map, "button_sprite", argument5);
-ds_map_add(map, "button_image", argument6);
-ds_map_add(map, "tooltip", argument7);
+ds_map_add(map, "object", argument3);
+ds_map_add(map, "entity_sprite", argument4);
+ds_map_add(map, "entity_image", argument5);
+ds_map_add(map, "button_sprite", argument6);
+ds_map_add(map, "button_image", argument7);
+ds_map_add(map, "tooltip", argument8);
+ds_map_add(map, "properties", ggon_decode(argument2));
 
 ds_list_add(global.entityData, map);
 
