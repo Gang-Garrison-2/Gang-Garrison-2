@@ -14,7 +14,7 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">moveStatus = 0;
-vspeed += 5;
+if (global.run_virtual_ticks) vspeed += other.pushPower;
 </argument>
       </arguments>
     </action>

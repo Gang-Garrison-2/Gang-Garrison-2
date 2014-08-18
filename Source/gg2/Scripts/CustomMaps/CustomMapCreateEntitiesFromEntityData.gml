@@ -4,7 +4,7 @@
 if (string_copy(argument0, 1, 1) == "{") {
     // Read the entities that are compiled using the GGON format.
     // x, y, image_xscale and image_yscale are set by default, 
-    // if the object has extra properties these should be read in its event_user(0) using the map 'other.properties'.
+    // if the object has extra properties these should be read in its event_user(1) using the map 'other.properties'.
     
     var map, list, i;
     map = ggon_decode(argument0);
@@ -21,11 +21,12 @@ if (string_copy(argument0, 1, 1) == "{") {
                 entity.sprite_index = ds_map_find_value(data, "entity_sprite");
                 entity.image_index = ds_map_find_value(data, "entity_image");
                 entity.type = ds_map_find_value(properties, "type");
+                entity.data = ggon_encode(properties);
             } else {
                 entity = instance_create(real(ds_map_find_value(properties, "x")), real(ds_map_find_value(properties, "y")), ds_map_find_value(data, "object"));
                 
                 // Entities have access to their properties in this event.
-                with(entity) event_user(0);
+                with(entity) event_user(1);
             }
             
             if (ds_map_exists(properties, "xscale")) entity.image_xscale = real(ds_map_find_value(properties, "xscale"));
@@ -35,7 +36,6 @@ if (string_copy(argument0, 1, 1) == "{") {
     }
     ds_map_destroy(map);
     ds_list_destroy(list);
-    with(Builder) ggon = true;
 } else {
     // Read entities that are compiled in the old format.
         

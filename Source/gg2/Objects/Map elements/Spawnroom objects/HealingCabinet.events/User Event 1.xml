@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<event category="COLLISION" with="MoveBoxUp">
+<event category="OTHER" id="11">
   <actions>
     <action id="603" library="1">
       <!--action name: Code-->
@@ -13,8 +13,9 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">moveStatus = 0;
-if (global.run_virtual_ticks) vspeed -= other.pushPower;
+        <argument kind="STRING">heal = readProperty(other.properties, "heal", BOOL, heal);
+refill = readProperty(other.properties, "refill", BOOL, refill);
+uber = readProperty(other.properties, "uber", BOOL, uber);
 </argument>
       </arguments>
     </action>
