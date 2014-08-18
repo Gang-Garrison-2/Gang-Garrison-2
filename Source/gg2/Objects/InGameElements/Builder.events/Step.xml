@@ -208,7 +208,7 @@ if ((mouse_check_button_released(mb_left) || !scale) &amp;&amp; scaling) {
         entity.type = ds_list_find_value(global.entities, entityButtons[selected, INDEX]);
         entity.image_xscale = xscale;
         entity.image_yscale = yscale;
-        if (ds_map_size(newProperties) &gt; 0) entity.properties = ggon_encode(newProperties);
+        if (ds_map_size(newProperties) &gt; 0) entity.properties = duplicateMap(newProperties);
 
         if (symmetry) {
             entity2 = instance_create(map_width()-scaleX+spriteCenterX+spriteOffsetX*xscale-(_x-scaleX), scaleY-spriteCenterY+spriteOffsetY*yscale, LevelEntity);
@@ -217,7 +217,7 @@ if ((mouse_check_button_released(mb_left) || !scale) &amp;&amp; scaling) {
             entity2.type = ds_list_find_value(global.entities, mirrored);
             entity2.image_xscale = xscale;
             entity2.image_yscale = yscale;
-            if (ds_map_size(newProperties) &gt; 0) entity.properties = ggon_encode(newProperties);
+            if (ds_map_size(newProperties) &gt; 0) entity.properties = duplicateMap(newProperties);
         }
         execute_string(global.placeEntityFunction, entity);
     } else {
@@ -231,7 +231,7 @@ if ((mouse_check_button_released(mb_left) || !scale) &amp;&amp; scaling) {
                 entity.sprite_index = selectedSprite;
                 entity.image_index = selectedImage;
                 entity.type = ds_list_find_value(global.entities, entityButtons[selected, INDEX]);
-                if (ds_map_size(newProperties) &gt; 0) entity.properties = ggon_encode(newProperties);
+                if (ds_map_size(newProperties) &gt; 0) entity.properties = duplicateMap(newProperties);
     
                 if (symmetry) {
                     if (mirrored != -1) {                                  
@@ -239,7 +239,7 @@ if ((mouse_check_button_released(mb_left) || !scale) &amp;&amp; scaling) {
                         entity2.sprite_index = mirroredSprite;
                         entity2.image_index = mirroredImage;
                         entity2.type = ds_list_find_value(global.entities, mirrored);
-                        if (ds_map_size(newProperties) &gt; 0) entity.properties = ggon_encode(newProperties);
+                        if (ds_map_size(newProperties) &gt; 0) entity.properties = duplicateMap(newProperties);
                     }
                 }
                 execute_string(global.placeEntityFunction, entity);

@@ -15,7 +15,7 @@ switch(argument2) {
         return string(argument3);
     break;
     case REAL:
-        if (is_string(prop) && string_letters(prop) == "" && string_lettersdigits(prop) != "") return real(prop);
+        if (is_string(prop) && stringIsReal(prop)) return real(prop);
         return real(argument3);
     break;
     case BOOL:

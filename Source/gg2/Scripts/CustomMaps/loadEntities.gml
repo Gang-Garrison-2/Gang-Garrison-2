@@ -18,7 +18,7 @@ while(!file_text_eof(ent_file)){
 
     //Check for end of entities.
     if(ent_name == "{END ENTITIES}") break;
-    else if (string_copy(ent_name, 1, 1) == "{") {
+    else if (string_char_at(ent_name, 1) == "{") {
         // Must be a GGON string
         var map, submap, list, i;
         map = ggon_decode(ent_name);
@@ -35,8 +35,7 @@ while(!file_text_eof(ent_file)){
             entity.sprite_index = ds_map_find_value(data, "entity_sprite");
             entity.image_index = ds_map_find_value(data, "entity_image");
             entity.type = ds_map_find_value(submap, "type");
-            
-            ds_map_destroy(submap);
+            entity.data = submap;
         }
         ds_map_destroy(map);
         ds_list_destroy(list);
