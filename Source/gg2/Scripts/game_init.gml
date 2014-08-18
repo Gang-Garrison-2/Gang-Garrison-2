@@ -459,6 +459,8 @@ global.launchMap = "";
     
     calculateMonthAndDay();
 
+    character_init();
+    
     if(!directory_exists(working_directory + "\Plugins")) directory_create(working_directory + "\Plugins");
     loadplugins();
     
