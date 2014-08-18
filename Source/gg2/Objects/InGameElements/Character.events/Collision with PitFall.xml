@@ -15,9 +15,9 @@
       <arguments>
         <argument kind="STRING">hp=0;
 if (instance_exists(lastDamageDealer) &amp;&amp; lastDamageDealer != player)
-    lastDamageSource = FINISHED_OFF;
+    lastDamageSource = DAMAGE_SOURCE_FINISHED_OFF;
 else
-    lastDamageSource = PITFALL;
+    lastDamageSource = DAMAGE_SOURCE_PITFALL;
 </argument>
       </arguments>
     </action>

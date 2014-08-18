@@ -25,7 +25,7 @@ oid.ownerPlayer=ownerPlayer;
 oid.team=owner.team;
 oid.owner=owner;
 oid.gun=id;
-oid.weapon=WEAPON_ROCKETLAUNCHER;
+oid.weapon=DAMAGE_SOURCE_ROCKETLAUNCHER;
 if (collision_line(x,y,x+lengthdir_x(20,owner.aimDirection),y+lengthdir_y(20,owner.aimDirection),Obstacle,1,0) or
      collision_line(x,y,x+lengthdir_x(20,owner.aimDirection),y+lengthdir_y(20,owner.aimDirection),TeamGate,1,0) or
      collision_line(x,y,x+lengthdir_x(20,owner.aimDirection),y+lengthdir_y(20,owner.aimDirection),IntelGate,1,0) or

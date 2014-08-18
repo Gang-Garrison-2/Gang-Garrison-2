@@ -26,9 +26,9 @@
         other.alarm[3] = ASSIST_TIME;
         other.lastDamageDealer = ownerPlayer;
         if sign(other.image_xscale) == sign(image_xscale)
-            other.lastDamageSource = WEAPON_BACKSTAB;
+            other.lastDamageSource = DAMAGE_SOURCE_BACKSTAB;
         else
-            other.lastDamageSource = WEAPON_KNIFE;
+            other.lastDamageSource = DAMAGE_SOURCE_KNIFE;
         var blood;
         if(global.gibLevel &gt; 0)
         {

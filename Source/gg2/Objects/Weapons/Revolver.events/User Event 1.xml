@@ -37,7 +37,7 @@ else if(readyToStab &amp;&amp; owner.cloak)
     stab.ownerPlayer = ownerPlayer;
     stab.team = owner.team;
     stab.hitDamage = 0;
-    stab.weapon = WEAPON_KNIFE;
+    stab.weapon = DAMAGE_SOURCE_KNIFE;
     // 'BH' reward - *B*obble *H*ead
     if(hasClassReward(ownerPlayer, 'BH'))
     {

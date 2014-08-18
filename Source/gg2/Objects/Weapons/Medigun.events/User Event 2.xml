@@ -26,7 +26,7 @@
         shot.ownerPlayer=ownerPlayer;
         shot.team=owner.team;
         shot.hitDamage = 4;
-        shot.weapon=WEAPON_NEEDLEGUN;
+        shot.weapon = DAMAGE_SOURCE_NEEDLEGUN;
         justShot=true;
         with(shot)
             hspeed+=owner.hspeed;

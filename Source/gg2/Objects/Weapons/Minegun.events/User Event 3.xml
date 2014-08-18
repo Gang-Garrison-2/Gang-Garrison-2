@@ -24,7 +24,6 @@ oid.speed=12;
 oid.owner=owner;
 oid.ownerPlayer=ownerPlayer;
 oid.team=owner.team;
-oid.weapon=WEAPON_MINEGUN;
 lobbed += 1;
 justShot=true;
 readyToShoot = false;

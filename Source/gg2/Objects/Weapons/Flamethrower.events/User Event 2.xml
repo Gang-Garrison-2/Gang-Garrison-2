@@ -46,7 +46,7 @@
                 shot.owner=owner;
                 shot.ownerPlayer=ownerPlayer;
                 shot.team=owner.team;
-                shot.weapon=WEAPON_FLARE;
+                shot.weapon=DAMAGE_SOURCE_FLARE;
                 
                 justShot=true;
                 readyToFlare=false;
@@ -67,7 +67,7 @@
                 {
                     ownerPlayer = other.ownerPlayer;
                     team = other.owner.team;
-                    weapon = WEAPON_REFLECTED_ROCKET;
+                    weapon = DAMAGE_SOURCE_REFLECTED_ROCKET;
                     hitDamage = 25;
                     explosionDamage = 30;
                     knockback = 8;
@@ -89,7 +89,7 @@
                 {
                     ownerPlayer = other.ownerPlayer;
                     team = other.owner.team;
-                    weapon = WEAPON_REFLECTED_FLARE;
+                    weapon = DAMAGE_SOURCE_REFLECTED_FLARE;
                     alarm[0]=40;
                     
                     motion_set(other.owner.aimDirection, speed);
@@ -170,7 +170,7 @@
                         f.owner = other.owner;
                         f.ownerPlayer = other.ownerPlayer;
                         f.team = other.owner.team;
-                        f.weapon = WEAPON_FLAMETHROWER;
+                        f.weapon = DAMAGE_SOURCE_FLAMETHROWER;
                         with(f)
                             motion_add(direction, speed);
                     }

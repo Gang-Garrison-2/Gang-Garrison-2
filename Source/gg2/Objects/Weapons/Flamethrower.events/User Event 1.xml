@@ -37,7 +37,7 @@
         shot.owner=owner;
         shot.ownerPlayer=ownerPlayer;
         shot.team=owner.team;
-        shot.weapon=WEAPON_FLAMETHROWER;
+        shot.weapon=DAMAGE_SOURCE_FLAMETHROWER;
         with(shot)
             motion_add(owner.direction, owner.speed);
         
