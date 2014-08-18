@@ -23,7 +23,7 @@ repeat(6) {
     shot.owner = owner;
     shot.ownerPlayer = ownerPlayer;
     shot.team = owner.team;
-    shot.weapon = global.DAMAGE_SOURCE_SCATTERGUN;
+    shot.weapon = DAMAGE_SOURCE_SCATTERGUN;
     if(golden)
         shot.sprite_index = ShotGoldS;
     

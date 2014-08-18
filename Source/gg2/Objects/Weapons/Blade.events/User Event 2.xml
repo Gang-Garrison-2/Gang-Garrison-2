@@ -36,7 +36,7 @@
         shot.alarm[0] = bladeLife / global.delta_factor;
         alarm[5] = bladeLife / global.delta_factor; //this isn't for when the blade actually dies, but the longest it could live
         bladesOut += 1;
-        shot.weapon = global.DAMAGE_SOURCE_BLADE;
+        shot.weapon = DAMAGE_SOURCE_BLADE;
         with(shot)
             hspeed += owner.hspeed;
         justShot = true;

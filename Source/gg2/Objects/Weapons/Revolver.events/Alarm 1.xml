@@ -21,7 +21,7 @@
         shot.ownerPlayer=ownerPlayer;
         shot.team=owner.team;
         shot.hitDamage = 200;
-        shot.weapon=global.DAMAGE_SOURCE_KNIFE;
+        shot.weapon=DAMAGE_SOURCE_KNIFE;
 }
 </argument>
       </arguments>
