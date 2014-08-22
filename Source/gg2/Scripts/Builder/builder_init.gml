@@ -167,7 +167,7 @@ dkoth = addGamemode("Dual king of the hill (dkoth)" ,'
         else if (type == "KothBlueControlPoint") bluecontrolpoints += 1;
         else if (type == "CapturePoint") zones += 1;
     }
-    if (redcontrolpoints != 1 || bluecontrolpoints || zones == 0) return false;
+    if (redcontrolpoints != 1 || bluecontrolpoints != 1 || zones == 0) return false;
     return true;
 ', "DKOTH needs 1 red control point, 1 blue control point and capturezones.");
 arena = addGamemode("Arena (arena)", '
@@ -189,7 +189,7 @@ gen = addGamemode("Generator (gen)", '
         if (type == "GeneratorRed") redgen += 1;
         else if (type == "GeneratorBlue") bluegen += 1;
     }
-    if (redgen != 1 || bluegen != 0) return false;
+    if (redgen != 1 || bluegen != 1) return false;
     return true;
 ', "Gen needs 1 red and 1 blue generator.");
 
