@@ -42,52 +42,36 @@ addButton("Show WM", '
     background_visible[1] = argument0;
 ', 1); 
 addButton("Show grid", 'background_visible[2] = argument0;', 1);
-addButton("Compile map", '
+addButton("Save & test", '
     if (Builder.mapWM == "") show_message("Select a walkmask first.");
     else if (Builder.mapBG == "") show_message("Select a background first");
-    else {
-        // Validate the gamemode
-        var gmMap, code, error;
-        gmMap = ds_list_find_value(global.gamemodes, log2(Builder.gamemode));
-        if (gmMap != -1) {
-            code = ds_map_find_value(gmMap, "code");
-            if (is_string(code)) {
-                error = ds_map_find_value(gmMap, "error");
-                if (!is_string(error)) error = "Your setup is not valid.";
-                else error = "Your setup is not valid:#" + error;
-                
-                if (!execute_string(ds_map_find_value(gmMap, "code"))) {
-                    if (show_message_ext(error, "Continue", "Cancel", "") != 1) return false;
-                }
-            }
-        }
-        
+    else if (validateMap(log2(gamemode))) {    
         var leveldata;
         leveldata = compressEntities() + chr(10) + Builder.wmString;
         GG2DLL_embed_PNG_leveldata(Builder.mapBG, leveldata);
-        if (show_message_ext("Compilation completed", "Ok", "Playtest", "") == 2) {
-            // Get the mapname
-            global.currentMap = Builder.mapBG;
-            while (string_count("\", global.currentMap) != 0) global.currentMap = string_delete(global.currentMap, 1, 1);
-            var fileNameCh, fileLen;
-            fileNameCh = string_pos(".png", global.currentMap);
-            if (fileNameCh == 0) fileNameCh = string_pos(".PNG", global.currentMap);
-            fileLen = string_length(global.currentMap);
-            global.currentMap = string_copy(global.currentMap, 0, fileLen - (fileLen - fileNameCh) - 1);
-                
-            // Place a copy in the maps folder if needed
-            if (Builder.mapBG != working_directory + "\Maps\"+global.currentMap+".png") {
-                if (file_exists("Maps\"+global.currentMap+".png")) file_delete("Maps\"+global.currentMap+".png");
-                file_copy(Builder.mapBG, "Maps\"+global.currentMap+".png");
-            }
-
-            Builder.visible = false;
-            global.launchMap = global.currentMap;
-            global.isHost = true;
-            global.gameServer = instance_create(0,0,GameServer); 
+        
+        if (show_message_ext("Compilation completed", "Ok", "Playtest", "") == 2) {                
+            // Place a copy in the maps folder
+            if (file_exists("Maps\ggb2_tmp_map.png")) file_delete("Maps\ggb2_tmp_map.png");
+            file_copy(Builder.mapBG, "Maps\ggb2_tmp_map.png");
+            startGG2("-map ggb2_tmp_map");            
         }
     }
 '); 
+addButton("Test w/o save", '
+    if (Builder.mapWM == "") show_message("Select a walkmask first.");
+    else if (Builder.mapBG == "") show_message("Select a background first");
+    else if (validateMap(log2(gamemode))) {
+        // Save to a temporary file
+        if (file_exists("Maps\ggb2_tmp_map.png")) file_delete("Maps\ggb2_tmp_map.png");
+        file_copy(Builder.mapBG, "Maps\ggb2_tmp_map.png");
+        
+        var leveldata;
+        leveldata = compressEntities() + chr(10) + Builder.wmString;
+        GG2DLL_embed_PNG_leveldata("Maps/ggb2_tmp_map.png", leveldata);               
+        startGG2("-map ggb2_tmp_map");           
+    }
+');
 addButton("Symmetry mode", '
     Builder.symmetry = argument0;
     return argument0;

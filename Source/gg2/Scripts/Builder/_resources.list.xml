@@ -9,4 +9,5 @@
   <resource name="mirrorEntity" type="RESOURCE"/>
   <resource name="showPropertyMenu" type="RESOURCE"/>
   <resource name="readProperty" type="RESOURCE"/>
+  <resource name="validateMap" type="RESOURCE"/>
 </resources>

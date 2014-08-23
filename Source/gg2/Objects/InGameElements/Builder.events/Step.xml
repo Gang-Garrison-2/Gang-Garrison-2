@@ -13,9 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if (!visible) exit;
-
-var i, button, xOfsset, yOffset, ySize, xSize;
+        <argument kind="STRING">var i, button, xOfsset, yOffset, ySize, xSize;
 xOffset = view_xview[0] + startX;
 ySize = view_hview[0];
 yOffset = view_yview[0] + ySize;
