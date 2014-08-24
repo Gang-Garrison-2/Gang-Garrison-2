@@ -19,6 +19,7 @@ var shot;
 
 shot = instance_create(x,y + yoffset + 1,Shot);
 shot.direction=owner.aimDirection;
+shot.image_angle = shot.direction;
 shot.speed=21;
 shot.owner=owner;
 shot.ownerPlayer=ownerPlayer;

@@ -19,7 +19,8 @@ var oid, newx, newy;
 oid = instance_create(x+lengthdir_x(20,owner.aimDirection),y+lengthdir_y(20,owner.aimDirection), Rocket);
 oid.lastknownx = owner.x;
 oid.lastknowny = owner.y;
-oid.direction=owner.aimDirection
+oid.direction=owner.aimDirection;
+oid.image_angle = oid.direction;
 oid.speed=13;
 oid.ownerPlayer=ownerPlayer;
 oid.team=owner.team;
@@ -40,7 +41,6 @@ justShot=true;
 readyToShoot = false;
 alarm[0] = refireTime / global.delta_factor;
 alarm[5] = (reloadBuffer + reloadTime) / global.delta_factor;
-
 </argument>
       </arguments>
     </action>

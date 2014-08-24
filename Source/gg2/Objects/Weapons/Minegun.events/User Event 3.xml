@@ -20,6 +20,7 @@ ammoCount = max(0, ammoCount-1);
 oid = instance_create(x+lengthdir_x(10,owner.aimDirection),y+lengthdir_y(10,owner.aimDirection), Mine);
 
 oid.direction=owner.aimDirection;
+oid.image_angle = oid.direction;
 oid.speed=12;
 oid.owner=owner;
 oid.ownerPlayer=ownerPlayer;
