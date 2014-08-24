@@ -13,7 +13,16 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">    if(other.id != ownerPlayer.object and other.team != team  &amp;&amp; other.hp &gt; 0 &amp;&amp; other.ubered == 0)
+        <argument kind="STRING">    gunSetSolids();
+    if (!place_free(x, y)) 
+    {
+        instance_destroy();
+        gunUnsetSolids();
+        exit;
+    }
+    gunUnsetSolids();
+
+    if(other.id != ownerPlayer.object and other.team != team  &amp;&amp; other.hp &gt; 0 &amp;&amp; other.ubered == 0)
     {
         damageCharacter(ownerPlayer, other.id, hitDamage);
         if (other.lastDamageDealer != ownerPlayer and other.lastDamageDealer != other.player)
