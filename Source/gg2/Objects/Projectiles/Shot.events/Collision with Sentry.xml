@@ -13,7 +13,16 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if(other.team != team)
+        <argument kind="STRING">gunSetSolids();
+if (!place_free(x, y)) 
+{
+    instance_destroy();
+    gunUnsetSolids();
+    exit;
+}
+gunUnsetSolids();
+
+if(other.team != team)
 {
     damageSentry(ownerPlayer, other.id, hitDamage);
     other.lastDamageDealer = ownerPlayer;
