@@ -33,17 +33,22 @@
     {
         normalSprite = RevolverGoldS;
         recoilSprite = RevolverGoldFS;
+        reloadSprite = -1;
     }
     else
     {
         normalSprite = RevolverS;
         recoilSprite = RevolverFS;
+        reloadSprite = RevolverFRS;
     }
     sprite_index = normalSprite;
     
     recoilTime = refireTime;
     recoilAnimLength = sprite_get_number(recoilSprite)/2;
     recoilImageSpeed = recoilAnimLength/recoilTime;
+    
+    reloadAnimLength = sprite_get_number(reloadSprite)/2;
+    reloadImageSpeed = reloadAnimLength/reloadTime;
 }
 </argument>
       </arguments>

@@ -41,11 +41,13 @@
     {
         normalSprite = MedigunGoldS;
         recoilSprite = MedigunGoldFS;
+        reloadSprite = -1;
     }
     else
     {
         normalSprite = MedigunS;
         recoilSprite = MedigunFS;
+        reloadSprite = -1;
     }
     sprite_index = normalSprite;
         
