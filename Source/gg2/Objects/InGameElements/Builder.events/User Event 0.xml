@@ -14,10 +14,12 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">TOGGLE = 0;
+TOGGLED = 1;
+TEXT = 2;
+
 TOOLTIP = 0;
 TOGGLED = 1;
 SPRITE = 2;
-TEXT = 2;
 IMAGE = 3;
 INDEX = 4;
 SCALE = 5;

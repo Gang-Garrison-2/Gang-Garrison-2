@@ -1,4 +1,6 @@
 //Append each parameter
+//void startGG2([string parameters])
+
 var params,a;
 params = "-restart";
 for(a = 1; a <= parameter_count(); a += 1)

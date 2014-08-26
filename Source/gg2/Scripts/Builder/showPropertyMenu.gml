@@ -26,7 +26,7 @@ do {
     if (i == 0) return false;
     else if (i == 1) res = 0;
     else {
-        // If ther'es more than 1 property, show a list of them
+        // If there's more than 1 property, show a list of them
         menu = string_copy(menu, 1, string_length(menu));
         res = show_menu_pos(_x, _y, menu, -1);
     }

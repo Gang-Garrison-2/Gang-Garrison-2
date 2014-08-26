@@ -26,4 +26,6 @@ switch(argument2) {
         if (string(argument3) == "true") return true;
         else return false;
     break;
+    default: 
+        show_error("Unknown property type in readProperty script for '" + string(argument1) + "'.", false);
 }

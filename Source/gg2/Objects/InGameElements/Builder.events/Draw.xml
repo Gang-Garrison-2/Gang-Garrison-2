@@ -21,7 +21,6 @@ yr = round(mouse_y/6)*6
 draw_set_alpha(1);
 draw_set_valign(fa_left);
 draw_set_halign(fa_top);
-draw_set_font(gbFont);
 
 // SELECTED ENTITY
 if (canClick &amp;&amp; selected != -1) {   
@@ -138,8 +137,6 @@ if (tooltipIdx &gt;= 0) {
         draw_text(x2, y2, entityButtons[tooltipIdx, TOOLTIP]);
     }
 }
-
-draw_set_font(global.gg2Font);
 </argument>
       </arguments>
     </action>

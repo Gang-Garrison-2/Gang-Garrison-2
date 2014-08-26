@@ -21,7 +21,7 @@ if (string_copy(argument0, 1, 1) == "{") {
                 entity.sprite_index = ds_map_find_value(data, "entity_sprite");
                 entity.image_index = ds_map_find_value(data, "entity_image");
                 entity.type = ds_map_find_value(properties, "type");
-                entity.data = duplicateMap(properties);
+                entity.data = ggon_duplicate_map(properties);
             } else {
                 entity = instance_create(real(ds_map_find_value(properties, "x")), real(ds_map_find_value(properties, "y")), ds_map_find_value(data, "object"));
                 

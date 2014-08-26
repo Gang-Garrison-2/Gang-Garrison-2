@@ -1,4 +1,4 @@
-/** Dupes a map
+/** Dupes a map. This does NOT work for maps with non-string keys
  * Argument0: The map you want to duplictate.
  * [Argument1]: A 2nd map to duplicate the previous one into. An empty one will be create if this parameter is left empty.
  * Returns a duplicated map.

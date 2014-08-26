@@ -28,8 +28,8 @@ mirroredSprite = -1;
 mirroredImage = -1;
 
 entityButtonSize = 28;
-buttonWidth = 108;
-headerWidth = 115;
+buttonWidth = 115;
+headerWidth = 122;
 buttonHeight = 17;
 buttonSpriteWidth = 17;
 

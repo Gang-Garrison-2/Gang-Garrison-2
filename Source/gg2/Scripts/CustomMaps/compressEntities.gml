@@ -15,7 +15,7 @@ with(LevelEntity) {
         if (image_yscale != 1) ds_map_add(submap, "yscale", string(image_yscale));
         
         // Copy extra properties
-        if (properties != -1) duplicateMap(properties, submap);
+        if (properties != -1) ggon_duplicate_map(properties, submap);
         ds_list_add(list, submap);
     } else {
         // This is a precompiled enitity (when loading a compiled map for example)

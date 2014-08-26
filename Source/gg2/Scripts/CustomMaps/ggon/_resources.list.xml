@@ -7,4 +7,5 @@
   <resource name="ggon_list_to_map" type="RESOURCE"/>
   <resource name="ggon_map_to_list" type="RESOURCE"/>
   <resource name="ggon_destroy_map" type="RESOURCE"/>
+  <resource name="ggon_duplicate_map" type="RESOURCE"/>
 </resources>
