@@ -57,6 +57,7 @@ if(moved)
 {
     afktimer = afktimeout;
     stopTracking = true;
+    trackingCorpse = false;
 }
 else if(tracking)
 {
@@ -109,6 +110,17 @@ if((afktimer&lt;=0) and global.isHost==false)
     show_message("You have been disconnected from the server. Reason: AFK");
     with(Client)
         instance_destroy();
+}
+if (trackingCorpse)
+{
+    with(DeadGuy)
+    {
+        if(owner == global.myself)
+        {
+            view_xview[0] = x-view_wview[0]/2;
+            view_yview[0] = y-view_hview[0]/2;
+        }
+    }
 }
 </argument>
       </arguments>

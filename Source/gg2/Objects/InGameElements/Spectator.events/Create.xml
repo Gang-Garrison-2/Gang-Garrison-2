@@ -22,9 +22,11 @@ for (i=0; i&lt;=9; i+=1;) {
     savey_view[i]=-1;
 }
 //variables for tracking a specific player
-tracking=false
+tracking=false;
 track_id=0;
 player = noone;
+
+trackingCorpse=true;
 
 numpadKeys[0] = vk_numpad0;
 numpadKeys[1] = vk_numpad1;
@@ -49,6 +51,8 @@ if (myTeam == TEAM_SPECTATOR)
 {
     event_user(7);
 }
+// so you can actually see the initial tracking
+io_clear();
 </argument>
       </arguments>
     </action>

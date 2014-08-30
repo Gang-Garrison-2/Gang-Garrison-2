@@ -199,6 +199,7 @@ with(victim.object) {
         if(hspeed>0) {
             deadbody.image_xscale = -1;  
         }
+        deadbody.owner = player;
     }
 }
 
