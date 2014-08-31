@@ -31,6 +31,11 @@ if (string_copy(argument0, 1, 1) == "{") {
             
             if (ds_map_exists(properties, "xscale")) entity.image_xscale = real(ds_map_find_value(properties, "xscale"));
             if (ds_map_exists(properties, "yscale")) entity.image_yscale = real(ds_map_find_value(properties, "yscale"));
+        } else if (ds_map_find_value(properties, "type") == "meta") {
+            if (room == BuilderRoom)
+                Builder.metadata = ggon_duplicate_map(properties);
+            else
+                execute_string(global.metadataFunction, properties);
         }
         ds_map_destroy(properties);
     }

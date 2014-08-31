@@ -5,6 +5,8 @@ ret = "{ENTITIES}" + chr(10);
 // Compress using GGON
 var map, submap, list, key;
 list = ds_list_create();
+if (Builder.metadata != -1) ds_list_add(list, ggon_duplicate_map(Builder.metadata));
+
 with(LevelEntity) {
     if (data == -1) {
         submap = ds_map_create();
@@ -19,8 +21,7 @@ with(LevelEntity) {
         ds_list_add(list, submap);
     } else {
         // This is a precompiled enitity (when loading a compiled map for example)
-        ds_list_add(list, data);
-        data = -1;
+        ds_list_add(list, ggon_duplicate_map(data));
     }
 }
 

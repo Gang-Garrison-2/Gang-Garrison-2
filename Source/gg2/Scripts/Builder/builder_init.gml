@@ -5,6 +5,7 @@ global.gamemodes = ds_list_create();
 global.buttons = ds_list_create();
 
 global.placeEntityFunction = "";
+global.metadataFunction = "";
 
 // Add buttons
 addButton("Load map", '
@@ -50,11 +51,20 @@ addButton("Save & test", '
         leveldata = compressEntities() + chr(10) + Builder.wmString;
         GG2DLL_embed_PNG_leveldata(Builder.mapBG, leveldata);
         
-        if (show_message_ext("Compilation completed", "Ok", "Playtest", "") == 2) {                
-            // Place a copy in the maps folder
-            if (file_exists("Maps\ggb2_tmp_map.png")) file_delete("Maps\ggb2_tmp_map.png");
-            file_copy(Builder.mapBG, "Maps\ggb2_tmp_map.png");
-            startGG2("-map ggb2_tmp_map");            
+        // Place a copy in the maps folder
+        if (file_exists("Maps\ggb2_tmp_map.png")) file_delete("Maps\ggb2_tmp_map.png");
+        file_copy(Builder.mapBG, "Maps\ggb2_tmp_map.png");
+        
+        switch(show_message_ext("Compilation completed", "Ok", "Test separately", "Test here")) {
+            case 2:             
+                startGG2("-map ggb2_tmp_map");
+            break;       
+            case 3:
+                Builder.visible = false;
+                global.launchMap = "ggb2_tmp_map";
+                global.isHost = true;
+                global.gameServer = instance_create(0,0,GameServer); 
+            break; 
         }
     }
 '); 
@@ -69,7 +79,18 @@ addButton("Test w/o save", '
         var leveldata;
         leveldata = compressEntities() + chr(10) + Builder.wmString;
         GG2DLL_embed_PNG_leveldata("Maps/ggb2_tmp_map.png", leveldata);               
-        startGG2("-map ggb2_tmp_map");           
+        
+        switch(show_message_ext("Where do you want to playtest?", "Test separately", "Test here", "Cancel")) {
+            case 1:             
+                startGG2("-map ggb2_tmp_map");
+            break;       
+            case 2:
+                Builder.visible = false;
+                global.launchMap = "ggb2_tmp_map";
+                global.isHost = true;
+                global.gameServer = instance_create(0,0,GameServer); 
+            break; 
+        }          
     }
 ');
 addButton("Symmetry mode", '
@@ -84,6 +105,13 @@ addButton("Fast scrolling",'
     Builder.moveSpeed = 32 + 32*argument0;
     return argument0;
 ', 1);
+addButton("Edit metadata", '
+    if (Builder.metadata == -1) {
+        Builder.metadata = ds_map_create();
+        ds_map_add(Builder.metadata, "type", "meta");
+    }
+    showPropertyMenu(Builder.metadata, Builder.metadata, true);
+');
 addButton("Load entities", 'loadEntities()'); 
 addButton("Save entities", 'saveEntities()');
 addButton("Clear entities", '

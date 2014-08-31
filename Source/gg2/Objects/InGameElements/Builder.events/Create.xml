@@ -26,6 +26,7 @@ newProperties = ds_map_create();
 mirrored = -1;
 mirroredSprite = -1;
 mirroredImage = -1;
+metadata = -1;
 
 entityButtonSize = 28;
 buttonWidth = 115;

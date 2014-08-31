@@ -13,7 +13,7 @@
     else {
         visible = true;
         resetToggles();
-        if (mapBG != "") CustomMapInit(mapBG);
+        CustomMapInit("Maps/ggb2_tmp_map.png");
     }
 }
 </creationCode>
