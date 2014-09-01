@@ -13,12 +13,11 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if (reloadSprite != -1 &amp;&amp; object_index != Rifle)
+        <argument kind="STRING">if (reloadSprite != -1 &amp;&amp; object_index != Rifle &amp;&amp; alarm[5] &gt; 0)
 {
     sprite_index = reloadSprite;
     image_index = 0;
     image_speed = reloadImageSpeed * global.delta_factor;
-    alarm[7] = reloadTime / global.delta_factor;
 } 
 else
 {

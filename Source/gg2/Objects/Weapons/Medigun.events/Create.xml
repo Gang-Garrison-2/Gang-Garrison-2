@@ -47,7 +47,7 @@
     {
         normalSprite = MedigunS;
         recoilSprite = MedigunFS;
-        reloadSprite = -1;
+        reloadSprite = MedigunFRS;
     }
     sprite_index = normalSprite;
         
@@ -56,6 +56,9 @@
     recoilTime = refireTime+1;
     recoilAnimLength = sprite_get_number(recoilSprite)/2;
     recoilImageSpeed = recoilAnimLength/recoilTime;
+    
+    reloadAnimLength = sprite_get_number(reloadSprite)/2;
+    reloadImageSpeed = reloadAnimLength/reloadTime;
 }
 </argument>
       </arguments>

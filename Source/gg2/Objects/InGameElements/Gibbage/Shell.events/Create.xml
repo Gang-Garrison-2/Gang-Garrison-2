@@ -14,11 +14,13 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">fade = false;
+stuck = false;
+
 image_speed = (0.3 + random(0.4)) * global.delta_factor;
-image_xscale = 2;
-image_yscale = 2;
-speed = (2 + random(3)) * global.delta_factor;
-alarm[0] = 20 / global.delta_factor;
+speed = 2 + random(3);
+image_xscale = choose(-1, 1);
+
+alarm[0] = 45 / global.delta_factor;
 </argument>
       </arguments>
     </action>

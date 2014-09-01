@@ -16,9 +16,33 @@
         <argument kind="STRING">if (ammoCount &lt; maxAmmo)
 {
     ammoCount = maxAmmo;
+    if (global.particles == PARTICLES_NORMAL &amp;&amp; image_alpha &gt; 0.1)
+    {
+        repeat(6)
+        {
+            var shell;
+            shell = instance_create(x + lengthdir_x(13, owner.aimDirection), y + lengthdir_y(13, owner.aimDirection), Shell);
+            shell.direction = owner.aimDirection + (70 - random(80)) * image_xscale;
+            shell.speed *= 0.7;
+            shell.sprite_index = MinigunShellS;
+        }
+    }
 }
 </argument>
       </arguments>
+    </action>
+    <action id="604" library="1">
+      <!--action name: Inherited-->
+      <kind>NORMAL</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>false</canApplyTo>
+      <actionType>FUNCTION</actionType>
+      <functionName>action_inherited</functionName>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments/>
     </action>
   </actions>
 </event>

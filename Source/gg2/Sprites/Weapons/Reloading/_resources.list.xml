@@ -6,4 +6,5 @@
   <resource name="ScattergunFRS" type="RESOURCE"/>
   <resource name="ShotgunFRS" type="RESOURCE"/>
   <resource name="MinegunFRS" type="RESOURCE"/>
+  <resource name="MedigunFRS" type="RESOURCE"/>
 </resources>

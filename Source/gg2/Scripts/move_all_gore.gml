@@ -89,4 +89,58 @@ with(Gib)
     x -= hspeed;
     y -= vspeed;
 }
+with(Shell)
+{
+    if (fade)
+        image_alpha -= 0.1*global.delta_factor;
+        
+    if (image_alpha < 0.3)
+        instance_destroy();
+        
+    if (!stuck) {
+        hspeed *= global.delta_factor;
+        vspeed *= global.delta_factor;
+        
+        var collided;
+        collided = false;
+        
+        if (!place_free(x, y + vspeed))
+        {
+            image_index = 0;
+            y -= vspeed;
+            vspeed *= -0.7;
+            vspeed = max(-4 * global.delta_factor, vspeed);
+            hspeed *= 0.7;
+            image_speed *= 0.8;
+            collided = true;
+        }
+        
+        if (!place_free(x + hspeed, y))
+        {
+            image_index = 2;
+            x -= hspeed;
+            hspeed *= -0.6;
+            image_speed *= 0.8;
+            collided = true;
+        }
+        
+        if (abs(vspeed) < 1 and collided) 
+        {
+            y -= vspeed;
+            speed = 0;
+            stuck = true;
+            image_index = 0;
+            image_speed = 0;
+        } 
+
+        x += hspeed;
+        y += vspeed;
+        hspeed /= global.delta_factor;
+        vspeed /= global.delta_factor;   
+        x -= hspeed;
+        y -= vspeed;   
+        
+        if (!stuck) vspeed += 0.7 * global.delta_factor;
+    }  
+}
 wallUnsetSolid();

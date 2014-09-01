@@ -40,12 +40,15 @@ if(instance_exists(healTarget))
         imageOffset = owner.team+2;
     }
 }else{
-    if (alarm[6] &lt;= 0){
+    if (alarm[6] &lt;= 0 and alarm[5] &lt;= 0){
         //set the sprite to idle
         imageOffset = owner.team
     }else{
         //We are shooting, loop the shoot animation
-         imageOffset = floor(image_index mod recoilAnimLength) + recoilAnimLength*owner.team
+        if (alarm[6] &lt;= 0)
+            imageOffset = floor(image_index mod reloadAnimLength) + reloadAnimLength*owner.team
+        else
+            imageOffset = floor(image_index mod recoilAnimLength) + recoilAnimLength*owner.team        
     }
 }
 
