@@ -24,29 +24,10 @@ case 4: // 2:1
 }
 
 var maprooms, nummaps;
-nummaps = 21;
+nummaps = 2;
 
-maprooms[0] = Truefort
-maprooms[1] = TwodFortTwoRemix
-maprooms[2] = Conflict
-maprooms[3] = Avanti
-maprooms[4] = ClassicWell
-maprooms[5] = Waterway
-maprooms[6] = Orange
-maprooms[7] = Dirtbowl
-maprooms[8] = Egypt
-maprooms[9] = Montane
-maprooms[10] = Lumberyard
-maprooms[11] = Destroy
-maprooms[12] = Valley
-maprooms[13] = Corinth
-maprooms[14] = Harvest
-maprooms[15] = Atalia
-maprooms[16] = Sixties
-maprooms[17] = DebugRoom
-maprooms[18] = CustomMapRoom
-maprooms[19] = Oldfort
-maprooms[20] = BuilderRoom
+maprooms[0] = CustomMapRoom
+maprooms[1] = BuilderRoom
 
 for(i = 0; i < nummaps; i += 1)
 {

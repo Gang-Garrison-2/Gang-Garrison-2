@@ -11,7 +11,6 @@
   <resource name="Message Builders" type="GROUP"/>
   <resource name="Sound" type="GROUP"/>
   <resource name="Networking" type="GROUP"/>
-  <resource name="CustomMaps" type="GROUP"/>
   <resource name="Client" type="GROUP"/>
   <resource name="GameServer" type="GROUP"/>
   <resource name="AudioControl" type="GROUP"/>
@@ -60,5 +59,4 @@
   <resource name="Faucet HTTP" type="GROUP"/>
   <resource name="move_all_bullets" type="RESOURCE"/>
   <resource name="move_all_gore" type="RESOURCE"/>
-  <resource name="Builder" type="GROUP"/>
 </resources>

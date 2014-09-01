@@ -470,8 +470,8 @@ do {
             global.currentMap = receivestring(global.serverSocket, 1);
             global.currentMapMD5 = receivestring(global.serverSocket, 1);
             if(global.currentMapMD5 == "") { // if this is an internal map (signified by the lack of an md5)
-                if(findInternalMapRoom(global.currentMap))
-                    room_goto_fix(findInternalMapRoom(global.currentMap));
+                if(findInternalMapName(global.currentMap) != "")
+                    room_goto_fix(CustomMapRoom);
                 else
                 {
                     show_message("Error:#Server went to invalid internal map: " + global.currentMap + "#Exiting.");
