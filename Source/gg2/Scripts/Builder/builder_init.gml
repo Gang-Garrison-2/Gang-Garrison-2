@@ -55,7 +55,7 @@ addButton("Save & test", '
         if (file_exists("Maps\ggb2_tmp_map.png")) file_delete("Maps\ggb2_tmp_map.png");
         file_copy(Builder.mapBG, "Maps\ggb2_tmp_map.png");
         
-        switch(show_message_ext("Compilation completed", "Ok", "Test separately", "Test here")) {
+        switch(show_message_ext("Compilation completed. The map is saved to " + string(Builder.mapBG) + ".", "Ok", "Test separately", "Test here")) {
             case 2:             
                 startGG2("-map ggb2_tmp_map");
             break;       
