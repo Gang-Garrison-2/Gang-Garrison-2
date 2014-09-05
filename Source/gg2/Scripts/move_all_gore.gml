@@ -107,9 +107,8 @@ with(Shell)
         if (!place_free(x, y + vspeed))
         {
             image_index = 0;
-            y -= vspeed;
             vspeed *= -0.7;
-            vspeed = max(-4 * global.delta_factor, vspeed);
+            vspeed = max(-2.5, vspeed);
             hspeed *= 0.7;
             image_speed *= 0.8;
             collided = true;
@@ -118,7 +117,6 @@ with(Shell)
         if (!place_free(x + hspeed, y))
         {
             image_index = 2;
-            x -= hspeed;
             hspeed *= -0.6;
             image_speed *= 0.8;
             collided = true;
@@ -126,7 +124,6 @@ with(Shell)
         
         if (abs(vspeed) < 1 and collided) 
         {
-            y -= vspeed;
             speed = 0;
             stuck = true;
             image_index = 0;

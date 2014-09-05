@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<event category="ALARM" id="6">
+<event category="ALARM" id="7">
   <actions>
     <action id="603" library="1">
       <!--action name: Code-->
@@ -21,19 +21,6 @@
 }
 </argument>
       </arguments>
-    </action>
-    <action id="604" library="1">
-      <!--action name: Inherited-->
-      <kind>NORMAL</kind>
-      <allowRelative>false</allowRelative>
-      <question>false</question>
-      <canApplyTo>false</canApplyTo>
-      <actionType>FUNCTION</actionType>
-      <functionName>action_inherited</functionName>
-      <relative>false</relative>
-      <not>false</not>
-      <appliesTo>.self</appliesTo>
-      <arguments/>
     </action>
   </actions>
 </event>

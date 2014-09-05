@@ -16,17 +16,7 @@
         <argument kind="STRING">if (ammoCount &lt; maxAmmo)
 {
     ammoCount = maxAmmo;
-    if (global.particles == PARTICLES_NORMAL &amp;&amp; image_alpha &gt; 0.1)
-    {
-        repeat(6)
-        {
-            var shell;
-            shell = instance_create(x + lengthdir_x(13, owner.aimDirection), y + lengthdir_y(13, owner.aimDirection), Shell);
-            shell.direction = owner.aimDirection + (70 - random(80)) * image_xscale;
-            shell.speed *= 0.7;
-            shell.sprite_index = MinigunShellS;
-        }
-    }
+    ejected = 0;
 }
 </argument>
       </arguments>

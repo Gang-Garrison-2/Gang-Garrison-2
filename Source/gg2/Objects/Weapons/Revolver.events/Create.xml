@@ -25,6 +25,7 @@
     stabdirection=0;
     maxAmmo = 6;
     ammoCount = maxAmmo;
+    ejected = 0;
     reloadTime = 45;
     reloadBuffer = refireTime;
     idle=true;

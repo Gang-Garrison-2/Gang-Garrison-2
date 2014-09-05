@@ -37,6 +37,7 @@ justShot=true;
 readyToShoot=false;
 alarm[0] = refireTime / global.delta_factor;
 alarm[5] = (reloadBuffer + reloadTime) / global.delta_factor;
+alarm[7] = alarm[0] / 2;
 </argument>
       </arguments>
     </action>
