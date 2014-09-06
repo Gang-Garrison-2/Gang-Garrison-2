@@ -4,7 +4,5 @@
   <resource name="FlamethrowerBlastS" type="RESOURCE"/>
   <resource name="MinigunOverlayS" type="RESOURCE"/>
   <resource name="MinigunOverlayFS" type="RESOURCE"/>
-  <resource name="ShotgunShellS" type="RESOURCE"/>
-  <resource name="MinigunShellS" type="RESOURCE"/>
-  <resource name="RifleShellS" type="RESOURCE"/>
+  <resource name="ShellS" type="RESOURCE"/>
 </resources>

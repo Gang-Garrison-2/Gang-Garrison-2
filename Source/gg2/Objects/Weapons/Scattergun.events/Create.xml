@@ -29,7 +29,7 @@
     {
         normalSprite = ScattergunGoldS;
         recoilSprite = ScattergunGoldFS;
-        reloadSprite = -1;
+        reloadSprite = ScattergunGoldFRS;
     }
     else
     {

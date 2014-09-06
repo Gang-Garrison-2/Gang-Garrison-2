@@ -51,7 +51,6 @@
         {
             var shell;
             shell = instance_create(x, y+4, Shell);
-            shell.sprite_index = MinigunShellS;
             shell.direction = owner.aimDirection + (140 - random(40)) * image_xscale;
         }
     }

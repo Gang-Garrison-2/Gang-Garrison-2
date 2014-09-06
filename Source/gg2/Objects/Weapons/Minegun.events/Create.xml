@@ -31,7 +31,7 @@
     {
         normalSprite = MinegunGoldS;
         recoilSprite = MinegunGoldFS;
-        reloadSprite = -1;
+        reloadSprite = MinegunGoldFRS;
     }
     else
     {

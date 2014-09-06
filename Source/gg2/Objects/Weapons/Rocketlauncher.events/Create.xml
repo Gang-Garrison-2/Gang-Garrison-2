@@ -30,7 +30,7 @@
     {
         normalSprite = RocketlauncherGoldS;
         recoilSprite = RocketlauncherGoldFS;
-        reloadSprite = -1;
+        reloadSprite = RocketlauncherGoldFRS;
     }
     else
     {

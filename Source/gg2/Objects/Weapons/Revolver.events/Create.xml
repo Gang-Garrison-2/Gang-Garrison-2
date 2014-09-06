@@ -34,7 +34,7 @@
     {
         normalSprite = RevolverGoldS;
         recoilSprite = RevolverGoldFS;
-        reloadSprite = -1;
+        reloadSprite = RevolverGoldFRS;
     }
     else
     {

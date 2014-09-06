@@ -21,7 +21,6 @@
         shell = instance_create(x + lengthdir_x(8, owner.aimDirection), y + lengthdir_y(8, owner.aimDirection) - 5, Shell);
         shell.direction = 180 + owner.aimDirection + (70 - random(80)) * image_xscale;
         shell.speed *= 0.7;
-        shell.sprite_index = MinigunShellS;
         ejected +=1;
     }
 }

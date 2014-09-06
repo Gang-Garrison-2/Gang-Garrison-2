@@ -20,7 +20,7 @@
     shell.direction = owner.aimDirection + (100 + random(30)) * image_xscale;
     shell.hspeed -= 1 * image_xscale;
     shell.vspeed -= 1;
-    shell.sprite_index = RifleShellS;
+    shell.image_index = 2;
 }
 </argument>
       </arguments>

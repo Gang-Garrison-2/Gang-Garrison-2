@@ -98,38 +98,44 @@ with(Shell)
         instance_destroy();
         
     if (!stuck) {
+        angle += rotspeed;
         hspeed *= global.delta_factor;
         vspeed *= global.delta_factor;
         
-        var collided;
-        collided = false;
+        if (!place_free(x + hspeed, y))
+        {
+            angle = (angle+360) mod 360;
+            if (angle > 0 && angle < 180)
+                angle = 90;
+            else
+                angle = 270;
+                
+            hspeed *= -0.6;
+            rotspeed *= 0.8;
+        }
         
         if (!place_free(x, y + vspeed))
         {
-            image_index = 0;
             vspeed *= -0.7;
             vspeed = max(-2.5, vspeed);
             hspeed *= 0.7;
-            image_speed *= 0.8;
-            collided = true;
+            rotspeed *= 0.8;
+            
+            // ADVANCED rotation mechanics *fireworks*
+            angle = (angle+360) mod 360;
+            if (angle > 90 && angle < 270)
+                angle = 180;
+            else
+                angle = 0;
+            
+            if (abs(vspeed) < 1)
+            {
+                speed = 0;
+                stuck = true;
+                rotspeed = 0;
+            }
         }
         
-        if (!place_free(x + hspeed, y))
-        {
-            image_index = 2;
-            hspeed *= -0.6;
-            image_speed *= 0.8;
-            collided = true;
-        }
-        
-        if (abs(vspeed) < 1 and collided) 
-        {
-            speed = 0;
-            stuck = true;
-            image_index = 0;
-            image_speed = 0;
-        } 
-
         x += hspeed;
         y += vspeed;
         hspeed /= global.delta_factor;
