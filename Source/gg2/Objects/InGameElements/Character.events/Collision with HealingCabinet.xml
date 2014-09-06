@@ -56,8 +56,7 @@
                     if (alarm[5] &gt; 0)
                     {
                         // Stop the animation
-                        sprite_index = normalSprite;
-                        image_speed = 0;
+                        event_perform(ev_alarm, 5);
                     }
                     alarm[5] = -1;
                 }

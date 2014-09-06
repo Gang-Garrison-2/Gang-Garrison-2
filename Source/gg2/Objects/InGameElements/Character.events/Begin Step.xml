@@ -376,8 +376,7 @@ if ubered {
             if (alarm[5] &gt; 0)
             {
                 // Stop the animation
-                sprite_index = normalSprite;
-                image_speed = 0;
+                event_perform(ev_alarm, 5);
             }
             alarm[5] = -1;
         }
@@ -398,6 +397,11 @@ if (arenaRoundEnd and global.mapchanging and !player.humiliated) {
         with(currentWeapon){
             if(variable_local_exists("maxAmmo")) {
                 ammoCount = maxAmmo;
+            }
+            if (alarm[5] &gt; 0)
+            {
+                // Stop the animation
+                event_perform(ev_alarm, 5);
             }
             alarm[5] = -1;
         }
