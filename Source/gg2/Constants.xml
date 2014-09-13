@@ -90,16 +90,6 @@
   <constant name="CHARACTER_ANIMATION_INTEL" value="2"/>
   <constant name="CHARACTER_ANIMATION_LEN" value="4"/>
   <constant name="CHARACTER_ANIMATION_DEAD" value="5"/>
-  <constant name="WSAEWOULDBLOCK" value="-10035"/>
-  <constant name="WSAENETDOWN" value="-10050"/>
-  <constant name="WSAENETRESET" value="-10052"/>
-  <constant name="WSAECONNABORTED" value="-10053"/>
-  <constant name="WSAECONNRESET" value="-10054"/>
-  <constant name="WSAENOBUFS" value="-10055"/>
-  <constant name="WSAENOTCONN" value="-10057"/>
-  <constant name="WSAESHUTDOWN" value="-10058"/>
-  <constant name="WSAETIMEDOUT" value="-10060"/>
-  <constant name="WSAEHOSTUNREACH" value="-10065"/>
   <constant name="MAX_PLAYERNAME_LENGTH" value="20"/>
   <constant name="STATE_UPDATE" value="8"/>
   <constant name="KILLS" value="0"/>
