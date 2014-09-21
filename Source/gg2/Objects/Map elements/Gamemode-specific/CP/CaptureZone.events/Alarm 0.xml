@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<event category="CREATE" id="0">
+<event category="ALARM" id="0">
   <actions>
     <action id="603" library="1">
       <!--action name: Code-->
@@ -13,9 +13,10 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">// execute CP detection in a step's time
-// this means capture zones are not order-sensitive for custom maps
-alarm[0] = 1;
+        <argument kind="STRING">if (instance_exists(ArenaControlPoint))
+    cp = ArenaControlPoint.id;
+else
+    cp = instance_nearest(x,y,ControlPoint);
 </argument>
       </arguments>
     </action>
