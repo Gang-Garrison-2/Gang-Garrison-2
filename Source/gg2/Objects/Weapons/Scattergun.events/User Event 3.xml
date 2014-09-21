@@ -19,11 +19,12 @@ var shot;
 repeat(6) {
     shot = instance_create(x,y,Shot);
     shot.direction = owner.aimDirection;
+    shot.image_angle = shot.direction;
     shot.speed = 13;
     shot.owner = owner;
     shot.ownerPlayer = ownerPlayer;
     shot.team = owner.team;
-    shot.weapon = WEAPON_SCATTERGUN;
+    shot.weapon = DAMAGE_SOURCE_SCATTERGUN;
     if(golden)
         shot.sprite_index = ShotGoldS;
     

@@ -16,9 +16,9 @@
         <argument kind="STRING">playsound(x,y,ExplosionSnd);
 hp=0;
 if (instance_exists(lastDamageDealer) &amp;&amp; lastDamageDealer != player)
-    lastDamageSource = FINISHED_OFF_GIB;
+    lastDamageSource = DAMAGE_SOURCE_FINISHED_OFF_GIB;
 else
-    lastDamageSource = FRAG_BOX;
+    lastDamageSource = DAMAGE_SOURCE_FRAG_BOX;
 </argument>
       </arguments>
     </action>

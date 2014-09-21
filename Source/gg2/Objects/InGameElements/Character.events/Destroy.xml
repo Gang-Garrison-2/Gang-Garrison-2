@@ -33,7 +33,7 @@
         
         // lastDamageSource is not always synchronized on Character destruction (e.g. if the player just leaves), so we HAVE to sync here.
         // Let's just hope it doesn't matter whether we return the intel now (Server) or after the player destruction is finished (Client).
-        if (global.isHost and (lastDamageSource == KILL_BOX || lastDamageSource == FRAG_BOX || lastDamageSource == PITFALL))
+        if (global.isHost and (lastDamageSource == DAMAGE_SOURCE_KILL_BOX || lastDamageSource == DAMAGE_SOURCE_FRAG_BOX || lastDamageSource == DAMAGE_SOURCE_PITFALL))
         {
             var intelTeam;
             if (team == TEAM_RED)

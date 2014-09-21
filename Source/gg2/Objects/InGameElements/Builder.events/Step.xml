@@ -175,20 +175,14 @@ if (canClick) {
         scaling = true;
         scaleX = round(mouse_x/6)*6;
         scaleY = round(mouse_y/6)*6;
+        if (scale)
+            window_mouse_set(scaleX + sprite_get_width(selectedSprite) - spriteCenterX, scaleY + sprite_get_height(selectedSprite) - spriteCenterY);
     } else if (mouse_check_button_pressed(mb_right)) {
         erasing = true;
         scaleX = round(mouse_x/6)*6;
         scaleY = round(mouse_y/6)*6;
         selected = -1;
         mirrored = -1;
-    } else if (mouse_check_button_pressed(mb_middle)) {
-        with(LevelEntity) {
-            if (collision_point(mouse_x, mouse_y, id, true, false) &gt; 0) {
-                other.selected = ds_list_find_index(global.entities, type);
-                with(other) event_user(2);
-                break;
-            }
-        }
     }
 }
 

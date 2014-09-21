@@ -92,9 +92,9 @@ with(Player) {
                 blood.direction = other.owner.aimDirection-180;
             }
             if (!other.owner.zoomed)
-                object.lastDamageSource = WEAPON_RIFLE;
+                object.lastDamageSource = DAMAGE_SOURCE_RIFLE;
             else
-                object.lastDamageSource = WEAPON_RIFLE_CHARGED;
+                object.lastDamageSource = DAMAGE_SOURCE_RIFLE_CHARGED;
             exit;
         }
     }
@@ -106,9 +106,9 @@ with(Sentry) {
             damageSentry(other.ownerPlayer, id, other.hitDamage);
             lastDamageDealer = other.ownerPlayer;
             if (!other.owner.zoomed)
-                lastDamageSource = WEAPON_RIFLE;
+                lastDamageSource = DAMAGE_SOURCE_RIFLE;
             else
-                lastDamageSource = WEAPON_RIFLE_CHARGED;
+                lastDamageSource = DAMAGE_SOURCE_RIFLE_CHARGED;
             exit;
         }
     }

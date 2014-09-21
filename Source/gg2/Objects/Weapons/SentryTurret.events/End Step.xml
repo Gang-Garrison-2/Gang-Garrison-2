@@ -143,7 +143,7 @@ if(!nearestTarget) {
             }
             nearestTarget.alarm[3] = ASSIST_TIME;
             nearestTarget.lastDamageDealer = ownerPlayer;
-            nearestTarget.lastDamageSource = WEAPON_SENTRYTURRET;
+            nearestTarget.lastDamageSource = DAMAGE_SOURCE_SENTRYTURRET;
             if(global.gibLevel &gt; 0 and object_is_ancestor(nearestTarget.object_index, Character))
             {
                 blood = instance_create(nearestTarget.x,nearestTarget.y,Blood);

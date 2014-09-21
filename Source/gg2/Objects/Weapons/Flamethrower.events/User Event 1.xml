@@ -33,11 +33,12 @@
         calculatedspread *= 1 - hspeed/owner.basemaxspeed;
         shot = instance_create(x+lengthdir_x(25,owner.aimDirection)+owner.equipmentOffset,y+lengthdir_y(25,owner.aimDirection),Flame);
         shot.direction = owner.aimDirection+calculatedspread; // more flames near center than away from it, ~7.2 degree outer cone, ~2.1 average moderate cone
+        shot.image_angle = shot.direction;
         shot.speed=6.5+random(3.5);
         shot.owner=owner;
         shot.ownerPlayer=ownerPlayer;
         shot.team=owner.team;
-        shot.weapon=WEAPON_FLAMETHROWER;
+        shot.weapon=DAMAGE_SOURCE_FLAMETHROWER;
         with(shot)
             motion_add(owner.direction, owner.speed);
         

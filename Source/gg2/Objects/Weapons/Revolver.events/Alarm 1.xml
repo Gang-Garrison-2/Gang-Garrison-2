@@ -21,8 +21,9 @@
         shot.ownerPlayer=ownerPlayer;
         shot.team=owner.team;
         shot.hitDamage = 200;
-        shot.weapon=WEAPON_KNIFE;
-}</argument>
+        shot.weapon=DAMAGE_SOURCE_KNIFE;
+}
+</argument>
       </arguments>
     </action>
     <action id="301" library="1">

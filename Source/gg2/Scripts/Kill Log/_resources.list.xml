@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="initializeDamageSources" type="RESOURCE"/>
+  <resource name="createDamageSource" type="RESOURCE"/>
+  <resource name="createGlobalDamageSource" type="RESOURCE"/>
+  <resource name="findDamageSourceIcon" type="RESOURCE"/>
+  <resource name="recordKillInLog" type="RESOURCE"/>
+  <resource name="recordDestructionInLog" type="RESOURCE"/>
+  <resource name="recordEventInLog" type="RESOURCE"/>
+  <resource name="recordDominationInLog" type="RESOURCE"/>
+</resources>

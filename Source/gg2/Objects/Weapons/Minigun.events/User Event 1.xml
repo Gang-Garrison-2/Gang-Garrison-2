@@ -22,11 +22,12 @@
         
         shot = instance_create(x+lengthdir_x(20,owner.aimDirection),y+12+lengthdir_y(20,owner.aimDirection),Shot);
         shot.direction=owner.aimDirection+(random(14)-7);
+        shot.image_angle = shot.direction;
         shot.speed=12+random(1);
         shot.owner=owner;
         shot.ownerPlayer=ownerPlayer;
         shot.team=owner.team;
-        shot.weapon=WEAPON_MINIGUN;
+        shot.weapon=DAMAGE_SOURCE_MINIGUN;
         if(golden)
             shot.sprite_index = ShotGoldS;
         shot.hspeed += owner.hspeed;

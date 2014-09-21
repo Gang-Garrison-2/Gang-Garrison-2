@@ -55,7 +55,7 @@
                         damageCharacter( other.ownerPlayer, id, other.explosionDamage*(1-(distance_to_object(other)/other.blastRadius)) );
                         
                         if(id == other.ownerPlayer.object and instance_exists(lastDamageDealer) and lastDamageDealer != other.ownerPlayer)
-                            lastDamageSource = FINISHED_OFF_GIB;
+                            lastDamageSource = DAMAGE_SOURCE_FINISHED_OFF_GIB;
                         else 
                         {
                             if (lastDamageDealer != other.ownerPlayer &amp;&amp; lastDamageDealer != player){
@@ -117,9 +117,6 @@
                 if(other.team != team)
                 {
                     damageGenerator( other.ownerPlayer, id, other.explosionDamage*(1-(distance_to_object(other)/other.blastRadius)) );
-                    
-                    lastDamageDealer = other.ownerPlayer;
-                    lastDamageSource = other.weapon;
                 }
             }
         }

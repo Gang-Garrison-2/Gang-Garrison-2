@@ -37,10 +37,10 @@
                 dmg = other.explosionDamage*(1-(distance_to_object(other)/other.blastRadius));
                 if id == other.ownerPlayer.object// self damage resistance
                     dmg *= 5/9;
-                damageAuto(other.ownerPlayer, id, dmg);
+                damageCharacter(other.ownerPlayer, id, dmg);
                 timeUnscathed = 0;
                 if (id == other.ownerPlayer.object and instance_exists(lastDamageDealer) and lastDamageDealer != other.ownerPlayer and !instance_exists(other.reflector))
-                    lastDamageSource = FINISHED_OFF_GIB;
+                    lastDamageSource = DAMAGE_SOURCE_FINISHED_OFF_GIB;
                 else 
                 {
                     if (lastDamageDealer != other.ownerPlayer and lastDamageDealer != player and other.reflector != lastDamageDealer)
@@ -55,7 +55,7 @@
                     if (id==other.ownerPlayer.object and instance_exists(other.reflector))
                     {
                         lastDamageDealer = other.reflector;
-                        lastDamageSource = WEAPON_REFLECTED_STICKY;
+                        lastDamageSource = DAMAGE_SOURCE_REFLECTED_STICKY;
                     }
                 }
                 if(global.gibLevel &gt; 0)
@@ -87,9 +87,9 @@
         { 
             if (1 - distance_to_object(other)/other.blastRadius &lt;= 0.25 and other.splashThreshhold) // skip if we're out of theshhold
                 continue;
-            hp -= other.explosionDamage*3/2*(1-(distance_to_object(other)/other.blastRadius)); // we want sentries to take ~11% extra damage so that two stickies will do 100 instead of 90 dmg. we don't change the base damage so scouts can't be 2-hitted.
+            damageSentry(other.ownerPlayer, id, other.explosionDamage*3/2*(1-(distance_to_object(other)/other.blastRadius))); // we want sentries to take ~11% extra damage so that two stickies will do 100 instead of 90 dmg. we don't change the base damage so scouts can't be 2-hitted. 
             lastDamageDealer = other.ownerPlayer;
-            lastDamageSource = WEAPON_MINEGUN;
+            lastDamageSource = DAMAGE_SOURCE_MINEGUN;
         }   
     }    
      
@@ -99,19 +99,7 @@
         { 
             if (1 - distance_to_object(other)/other.blastRadius &lt;= 0.25 and other.splashThreshhold) // skip if we're out of theshhold
                 continue;
-            alarm[0] = regenerationBuffer;
-            isShieldRegenerating = false;
-            //allow overkill to be applied directly to the target
-            var hitDamage;
-            hitDamage = other.explosionDamage*(1-(distance_to_object(other)/other.blastRadius));
-            if (hitDamage &gt; shieldHp) {
-                hp -= hitDamage - shieldHp;
-                hp -= shieldHp * shieldResistance;
-                shieldHp = 0;
-            } else {
-                hp -= hitDamage * shieldResistance;
-                shieldHp -= hitDamage;
-            }
+            damageGenerator(other.ownerPlayer, id, other.explosionDamage*(1-(distance_to_object(other)/other.blastRadius)));
         }   
     }
        

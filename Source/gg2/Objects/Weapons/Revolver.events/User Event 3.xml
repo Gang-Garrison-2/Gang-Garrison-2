@@ -19,12 +19,13 @@ var shot;
 
 shot = instance_create(x,y + yoffset + 1,Shot);
 shot.direction=owner.aimDirection;
+shot.image_angle = shot.direction;
 shot.speed=21;
 shot.owner=owner;
 shot.ownerPlayer=ownerPlayer;
 shot.team=owner.team;
 shot.hitDamage = 28;
-shot.weapon=WEAPON_REVOLVER;
+shot.weapon=DAMAGE_SOURCE_REVOLVER;
 if(golden)
     shot.sprite_index = ShotGoldS;
 with(shot)

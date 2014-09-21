@@ -46,7 +46,6 @@
             action = " Intel has returned to base!";
             //icon = "intel"; Commented out until a suitable sprite is found
         }
-        
         if icon == "capture" {
             if argument1==TEAM_RED sprite = RedCaptureS;
             else if argument1==TEAM_BLUE sprite = BlueCaptureS;

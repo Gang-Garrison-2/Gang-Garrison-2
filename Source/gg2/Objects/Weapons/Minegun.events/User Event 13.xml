@@ -42,7 +42,6 @@
         mine.owner = owner;
         mine.ownerPlayer = ownerPlayer;
         mine.team = owner.team;
-        mine.weapon = WEAPON_MINEGUN;
         with(mine) {
             event_user(13);
         }
