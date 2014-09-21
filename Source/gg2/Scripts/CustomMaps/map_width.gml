@@ -2,7 +2,7 @@
 // This is the scaled width, so on non-custom maps, it's equal to the width of the room
 
 {
-  if(room == CustomMapRoom) {
+  if(room == CustomMapRoom || room == BuilderRoom) {
     return background_width[0] * 6;
   } else {
     return room_width;

@@ -7,4 +7,5 @@
   <resource name="Colliders" type="GROUP"/>
   <resource name="NextAreaO" type="RESOURCE"/>
   <resource name="PreviousAreaO" type="RESOURCE"/>
+  <resource name="LevelEntity" type="RESOURCE"/>
 </resources>

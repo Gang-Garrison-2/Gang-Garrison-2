@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="ggon_decode" type="RESOURCE"/>
+  <resource name="ggon_encode" type="RESOURCE"/>
+  <resource name="ggon_tokenise" type="RESOURCE"/>
+  <resource name="ggon_parse_tokens" type="RESOURCE"/>
+  <resource name="ggon_list_to_map" type="RESOURCE"/>
+  <resource name="ggon_map_to_list" type="RESOURCE"/>
+  <resource name="ggon_destroy_map" type="RESOURCE"/>
+  <resource name="ggon_duplicate_map" type="RESOURCE"/>
+</resources>

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="DRAW" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">var i, j, button, xOfsset, yOffset, _y, scrollHeight, sectionHeight, xr, yr;
+xOffset = view_xview[0] + startX;
+yOffset = view_yview[0] + view_hview[0];
+xr = round(mouse_x/6)*6;
+yr = round(mouse_y/6)*6
+draw_set_alpha(1);
+draw_set_valign(fa_left);
+draw_set_halign(fa_top);
+
+// SELECTED ENTITY
+if (canClick &amp;&amp; selected != -1) {   
+    if (!scaling || entityButtons[selected, SCALE]) {
+        // Scaled preview
+        var _x, _y, xscale, yscale;
+        if (!scaling) {
+            scaleX = xr;
+            scaleY = yr;
+            _x = xr + sprite_get_width(selectedSprite);
+            _y = yr + sprite_get_height(selectedSprite);
+        } else {
+            _x = max(scaleX+6, xr+spriteCenterX);
+            _y = max(scaleY+6, yr+spriteCenterY);
+        }
+        xscale = (_x-scaleX) / sprite_get_width(selectedSprite);
+        yscale = (_y-scaleY) / sprite_get_height(selectedSprite);
+        
+        draw_sprite_ext(selectedSprite, selectedImage, scaleX-spriteCenterX+spriteOffsetX*xscale, scaleY-spriteCenterY+spriteOffsetY*yscale, xscale, yscale, 0, c_white, 0.8);
+        if (symmetry &amp;&amp; mirrored != -1) draw_sprite_ext(mirroredSprite, mirroredImage, map_width()-scaleX-mirroredCenterX+spriteOffsetX*xscale-(_x-scaleX), scaleY-spriteCenterY+spriteOffsetY*yscale, xscale, yscale, 0, c_white, 0.4);
+    } else {
+        // Tiled preview 
+        var _x, _y, i, j; 
+        _x = scaleX + max(sprite_get_width(selectedSprite), ceil((mouse_x-scaleX)/sprite_get_width(selectedSprite))*sprite_get_width(selectedSprite));
+        _y = scaleY + max(sprite_get_height(selectedSprite), ceil((mouse_y-scaleY)/sprite_get_height(selectedSprite))*sprite_get_height(selectedSprite));
+        for(i=scaleX-spriteCenterX; i+spriteCenterX&lt;_x; i+=sprite_get_width(selectedSprite)) {      
+            for(j=scaleY-spriteCenterY; j+spriteCenterY&lt;_y; j+=sprite_get_height(selectedSprite)) {
+                draw_sprite_ext(selectedSprite, selectedImage, i+spriteOffsetX, j+spriteOffsetY, 1, 1, 0, c_white, 0.8);
+                if (symmetry &amp;&amp; mirrored != -1) draw_sprite_ext(mirroredSprite, mirroredImage, map_width()-i+mirroredOffsetX, j+spriteOffsetY, 1, 1, 0, c_white, 0.4);
+            }
+        }
+    }
+    
+    // Rectangle showing the selected area
+    draw_set_color(c_green);
+    draw_rectangle(scaleX-spriteCenterX, scaleY-spriteCenterY, _x-spriteCenterX, _y-spriteCenterY, true);
+    draw_set_color(c_red);
+    if (symmetry &amp;&amp; mirrored != -1) draw_rectangle(map_width()-scaleX-mirroredCenterX, scaleY-spriteCenterY, map_width()-_x-mirroredCenterX, _y-spriteCenterY, true);
+} else if (canClick &amp;&amp; erasing) {
+    draw_set_color(c_green);
+    draw_rectangle(scaleX, scaleY, max(scaleX+6, xr), max(scaleY+6, yr), true);
+    draw_set_alpha(0.2);
+    draw_rectangle(scaleX, scaleY, max(scaleX+6, xr), max(scaleY+6, yr), false);
+    
+    if (symmetry) {
+        draw_set_color(c_red);
+        draw_set_alpha(0.5);
+        draw_rectangle(map_width()-scaleX, scaleY, map_width()-max(scaleX+6, xr), max(scaleY+6, yr), true);
+        draw_set_alpha(0.1);
+        draw_rectangle(map_width()-scaleX, scaleY, map_width()-max(scaleX+6, xr), max(scaleY+6, yr), false);
+    }
+    draw_set_alpha(1);
+}
+
+// BUTTON MENU
+if (expanded || expandIdx &lt; 1) {
+    // Background
+    draw_set_color(make_color_rgb(159, 159, 159));
+    draw_rectangle(xOffset, yOffset-dragHeight, xOffset+headerWidth, yOffset, false);
+    draw_set_color(make_color_rgb(63, 63, 63));
+    draw_rectangle(xOffset, yOffset-dragHeight, xOffset+headerWidth, yOffset, true);
+    
+    // Scrollbar
+    sectionHeight = max(2, items / ds_list_size(global.buttons) * (height-5));
+    if (ds_list_size(global.buttons) == items) scrollHeight = 0;
+    else scrollHeight = ((height-5) - sectionHeight) / (ds_list_size(global.buttons)-items);
+    draw_rectangle(xOffset+buttonWidth+1, yOffset-height+2+scrollHeight*scrollIndex, xOffset+headerWidth-2, yOffset-height+2+sectionHeight+scrollHeight*scrollIndex, false);
+    
+    // Buttons
+    for(i=0; i&lt;items; i+=1) {
+        if (expandIdx != 0 &amp;&amp; expanded) _y = yOffset-i*buttonHeight*sqrt(1-expandIdx*0.93);
+        else _y = yOffset-i*buttonHeight;
+        button = items - 1 - i + scrollIndex;
+        draw_sprite_ext(gbButtonS, 0+buttons[button, TOGGLED]*3, xOffset, _y-buttonHeight, 1, 1, 0, c_white, 1);
+        draw_sprite_ext(gbButtonS, 1+buttons[button, TOGGLED]*3, xOffset+buttonSpriteWidth, _y-buttonHeight, buttonWidth/buttonSpriteWidth-2, 1, 0, c_white, 1);
+        draw_sprite_ext(gbButtonS, 2+buttons[button, TOGGLED]*3, xOffset-buttonSpriteWidth+buttonWidth, _y-buttonHeight, 1, 1, 0, c_white, 1);
+        draw_text(xOffset+2, _y-buttonHeight+3, string(buttons[button, TEXT]));
+    }
+}
+draw_sprite_ext(gbMenuLayoutS, 0, xOffset, yOffset - (dragHeight+buttonHeight), 1, 1, 0, c_white, 1);
+draw_sprite_ext(gbMenuLayoutS, 1, xOffset+buttonSpriteWidth, yOffset - (dragHeight+buttonHeight), headerWidth/(buttonSpriteWidth-1)-2, 1, 0, c_white, 1);
+draw_sprite_ext(gbMenuLayoutS, 2, xOffset-buttonSpriteWidth+headerWidth+1, yOffset - (dragHeight+buttonHeight), 1, 1, 0, c_white, 1);
+
+// ENITITY MENU
+xOffset = view_xview[0] + startX2;
+yOffset = view_yview[0] + startY2;
+
+draw_sprite_ext(gbMenuLayoutS, 0, xOffset, yOffset, 1, 1, 0, c_white, 1);
+draw_sprite_ext(gbMenuLayoutS, 1, xOffset+buttonSpriteWidth, yOffset, entityButtonSize*vItems/(buttonSpriteWidth-1)-2, 1, 0, c_white, 1);
+draw_sprite_ext(gbMenuLayoutS, 2, xOffset-buttonSpriteWidth+entityButtonSize*vItems+1, yOffset, 1, 1, 0, c_white, 1);
+
+// Background
+draw_set_color(make_color_rgb(159, 159, 159));
+draw_rectangle(xOffset, yOffset+buttonHeight, xOffset+vItems*entityButtonSize, yOffset+buttonHeight+ceil(entityButtonCount/vItems)*entityButtonSize, false);
+draw_set_color(make_color_rgb(63, 63, 63));
+draw_rectangle(xOffset, yOffset+buttonHeight, xOffset+vItems*entityButtonSize, yOffset+buttonHeight+ceil(entityButtonCount/vItems)*entityButtonSize, true);
+
+// Buttons
+for(j=0; j&lt;entityButtonCount/vItems; j+=1) {
+    for(i=0; i&lt;vItems &amp;&amp; j*vItems + i &lt; entityButtonCount; i+=1) {
+        draw_sprite(entityButtons[j*vItems+i, SPRITE], entityButtons[j*vItems+i, IMAGE] + (selected != j*vItems+i), xOffset+i*entityButtonSize, yOffset+buttonHeight+j*entityButtonSize);
+    }
+}
+
+// Tooltip
+if (tooltipIdx &gt;= 0) {
+    if (is_string(entityButtons[tooltipIdx, TOOLTIP])) {
+        var x2, y2;
+        if (mouse_x-view_xview[0]+string_width(entityButtons[tooltipIdx, TOOLTIP])+14 &gt; view_wview[0]) x2 = mouse_x - string_width(entityButtons[tooltipIdx, TOOLTIP]) - 12;
+        else x2 = mouse_x+12;
+        y2 = round(mouse_y-string_height(entityButtons[tooltipIdx, TOOLTIP])/2);    // round to prevent gm from squishing the text
+        draw_rectangle(x2-2, y2-2, x2+string_width(entityButtons[tooltipIdx, TOOLTIP])+2, y2+string_height(entityButtons[tooltipIdx, TOOLTIP])+2, false);
+        draw_set_color(c_white);
+        draw_text(x2, y2, entityButtons[tooltipIdx, TOOLTIP]);
+    }
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

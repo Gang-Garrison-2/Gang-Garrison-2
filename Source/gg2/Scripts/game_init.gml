@@ -458,6 +458,8 @@ global.launchMap = "";
     ini_close();
     
     calculateMonthAndDay();
+    
+    builder_init();
 
     character_init();
     

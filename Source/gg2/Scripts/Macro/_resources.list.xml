@@ -6,4 +6,5 @@
   <resource name="draw_kothtimer" type="RESOURCE"/>
   <resource name="draw_dkothtimer" type="RESOURCE"/>
   <resource name="draw_intel_timer" type="RESOURCE"/>
+  <resource name="stringIsReal" type="RESOURCE"/>
 </resources>

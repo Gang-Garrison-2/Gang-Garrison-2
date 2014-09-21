@@ -10,6 +10,7 @@
   <resource name="WeaponHUDS" type="GROUP"/>
   <resource name="Timer" type="GROUP"/>
   <resource name="Lobby" type="GROUP"/>
+  <resource name="Builder" type="GROUP"/>
   <resource name="CharacterHUD" type="RESOURCE"/>
   <resource name="GameNoticeS" type="RESOURCE"/>
   <resource name="NemesisS" type="RESOURCE"/>

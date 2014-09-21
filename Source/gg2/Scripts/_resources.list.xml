@@ -49,6 +49,7 @@
   <resource name="calculateHealingFactor" type="RESOURCE"/>
   <resource name="toggleZoom" type="RESOURCE"/>
   <resource name="ds_list_sorted_insert" type="RESOURCE"/>
+  <resource name="startGG2" type="RESOURCE"/>
   <resource name="restartGG2" type="RESOURCE"/>
   <resource name="isBetaVersion" type="RESOURCE"/>
   <resource name="promptRestartOrQuit" type="RESOURCE"/>
@@ -57,4 +58,5 @@
   <resource name="Faucet HTTP" type="GROUP"/>
   <resource name="move_all_bullets" type="RESOURCE"/>
   <resource name="move_all_gore" type="RESOURCE"/>
+  <resource name="Builder" type="GROUP"/>
 </resources>

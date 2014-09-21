@@ -8,4 +8,6 @@
   <resource name="Maps" type="GROUP"/>
   <resource name="DownloadRoom" type="RESOURCE"/>
   <resource name="UpdaterRoom" type="RESOURCE"/>
+  <resource name="BuilderOptions" type="RESOURCE"/>
+  <resource name="BuilderRoom" type="RESOURCE"/>
 </resources>

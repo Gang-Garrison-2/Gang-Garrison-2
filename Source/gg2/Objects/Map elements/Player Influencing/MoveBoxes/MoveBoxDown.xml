@@ -5,6 +5,6 @@
   <visible>false</visible>
   <depth>0</depth>
   <persistent>false</persistent>
-  <parent/>
+  <parent>MoveBox</parent>
   <mask/>
 </object>
