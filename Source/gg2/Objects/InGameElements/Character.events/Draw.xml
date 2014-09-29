@@ -159,10 +159,12 @@ else
 if(!noNewAnim) // quote and sniper zoom still use the old anim system so animationOffset is still set, override it here for everything else
     animationOffset = 0;
 
-
 equipmentOffset += yoffset;
 overlayOffset += yoffset;
 
+if (sprite == spriteLeanL or sprite == spriteLeanR)
+    overlayOffset -= 6;
+    
 yr += yoffset;
 
 if (omnomnomnom)
@@ -227,7 +229,7 @@ if (distance_to_point(mouse_x, mouse_y) &lt; 25)
     width = name_width_badges(player);
     height = string_height(player.name);
     
-    draw_name_badges(round(xr - width / 2), round(y) - 35 - height, player);
+    draw_name_badges(round(xr - width / 2), round(y) - 35 - height, player, 1);
     draw_set_halign(fa_center);
     draw_set_valign(fa_bottom);
     
