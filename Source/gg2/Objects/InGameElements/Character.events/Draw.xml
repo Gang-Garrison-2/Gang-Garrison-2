@@ -159,6 +159,7 @@ else
 if(!noNewAnim) // quote and sniper zoom still use the old anim system so animationOffset is still set, override it here for everything else
     animationOffset = 0;
 
+
 equipmentOffset += yoffset;
 overlayOffset += yoffset;
 
