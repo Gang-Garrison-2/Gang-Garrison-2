@@ -1,4 +1,4 @@
-// void draw_name_badges(real x, real y, real player)
+// void draw_name_badges(real x, real y, real player, alpha)
 // Draws a player's name with badges, if any
 // player is the ID of the Player object
 
@@ -7,6 +7,7 @@ _x = argument0;
 _y = argument1;
 player = argument2;
 alpha = argument3
+
 draw_set_valign(fa_top);
 draw_set_halign(fa_left);
 
