@@ -2,7 +2,7 @@
 // Draws a player's name with badges, if any
 // player is the ID of the Player object
 
-var _x, _y, player;
+var _x, _y, player, alpha;
 _x = argument0;
 _y = argument1;
 player = argument2;
