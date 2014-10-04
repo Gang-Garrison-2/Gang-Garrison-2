@@ -210,9 +210,19 @@ if(object_index == ArenaControlPoint and cappingTeam != -1)
     }
     
     if(cappingTeam == TEAM_BLUE)
-        capTime = baseCapTime * livereds/reds;
+    {
+        if (reds == 0)
+            capTime = 0;
+        else
+            capTime = baseCapTime * livereds/reds;
+    }
     else
-        capTime = baseCapTime * liveblues/blues;
+    {
+        if (blues == 0)
+            capTime = 0;
+        else
+            capTime = baseCapTime * liveblues/blues;
+    }
     if(capTime == 0)
         capTime = 1;
     if (variable_local_exists("lastCapTime"))
