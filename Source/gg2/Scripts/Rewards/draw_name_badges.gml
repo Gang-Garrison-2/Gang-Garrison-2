@@ -19,4 +19,6 @@ for (i = 0; i < ds_list_size(player.badges); i += 1)
     _x += sprite_get_width(HaxxyBadgeS);
 }
 
+draw_set_alpha(alpha);
 draw_text(_x, _y, player.name);
+draw_set_alpha(0);
