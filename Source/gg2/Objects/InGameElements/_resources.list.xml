@@ -19,4 +19,6 @@
   <resource name="Balancer" type="RESOURCE"/>
   <resource name="Builder" type="RESOURCE"/>
   <resource name="CollisionDummy" type="RESOURCE"/>
+  <resource name="Foreground" type="RESOURCE"/>
+  <resource name="ParallaxController" type="RESOURCE"/>
 </resources>
