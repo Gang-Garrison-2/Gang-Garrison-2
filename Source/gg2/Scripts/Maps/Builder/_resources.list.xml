@@ -10,4 +10,8 @@
   <resource name="showPropertyMenu" type="RESOURCE"/>
   <resource name="readProperty" type="RESOURCE"/>
   <resource name="validateMap" type="RESOURCE"/>
+  <resource name="resourceToString" type="RESOURCE"/>
+  <resource name="stringToResource" type="RESOURCE"/>
+  <resource name="loadMetadata" type="RESOURCE"/>
+  <resource name="placeEntity" type="RESOURCE"/>
 </resources>
