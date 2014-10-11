@@ -3,6 +3,7 @@ global.entityData = ds_list_create();
 global.properties = ds_map_create();
 global.gamemodes = ds_list_create();
 global.buttons = ds_list_create();
+global.resources = ds_map_create();
 
 global.placeEntityFunction = "";
 global.metadataFunction = "";
@@ -101,11 +102,18 @@ addButton("Fast scrolling",'
     return argument0;
 ', 1);
 addButton("Edit metadata", '
-    if (Builder.metadata == -1) {
-        Builder.metadata = ds_map_create();
-        ds_map_add(Builder.metadata, "type", "meta");
-    }
     showPropertyMenu(Builder.metadata, Builder.metadata, true);
+');
+addButton("Add resource", '
+    var prop;
+    prop = get_string("Resource name:", "");
+    if (prop != "")
+    {
+        resource = get_open_filename("Resource (PNG, GIF)|*.png;*.gif;","");
+        if (resource == "")
+            break;
+        ds_map_add(Builder.metadata, prop, resourceToString(resource));
+    }
 ');
 addButton("Load entities", 'loadEntities()'); 
 addButton("Save entities", 'saveEntities()');
@@ -253,3 +261,5 @@ addEntity("KothControlPoint", koth, "{}", KothControlPoint, ControlPointNeutralS
 addEntity("KothRedControlPoint", dkoth, "{}", KothRedControlPoint, ControlPointRedS, 0, entityButtonS, 98, "Red KOTH control point");
 addEntity("KothBlueControlPoint", dkoth, "{}", KothBlueControlPoint, ControlPointBlueS, 0, entityButtonS, 100, "Blue KOTH control point");
 addEntity("dropdownPlatform", -1, "{xscale:1,yscale:1}", DropdownPlatform, sprite44, 5, entityButtonS, 80, "Dropdown platform");
+addEntity("foreground", -1, "{xscale:1,yscale:1,depth:-2,fade:true,animationspeed:0,resource:''}", Foreground, sprite64, 0, entityButtonS, 0, "Resizable foreground.");
+addEntity("foreground_scale", -1, "{scale:1,depth:-2,fade:true,animationspeed:0,resource:''}", Foreground, sprite64, 0, entityButtonS, 0, "Scalable foreground.");

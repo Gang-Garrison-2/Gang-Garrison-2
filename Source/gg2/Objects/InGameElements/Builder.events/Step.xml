@@ -156,6 +156,7 @@ if (canClick) {
                         event_user(2);
                     }
                     showPropertyMenu(selectedProperties, newProperties);
+                    event_user(3);
                 }
             }
         } else if (mouse_y &gt; yOffset &amp;&amp; mouse_y &lt; yOffset+buttonHeight) {
@@ -175,8 +176,7 @@ if (canClick) {
         scaling = true;
         scaleX = round(mouse_x/6)*6;
         scaleY = round(mouse_y/6)*6;
-        if (scale)
-            window_mouse_set(scaleX + sprite_get_width(selectedSprite) - spriteCenterX, scaleY + sprite_get_height(selectedSprite) - spriteCenterY);
+        scaleLock = true;
     } else if (mouse_check_button_pressed(mb_right)) {
         erasing = true;
         scaleX = round(mouse_x/6)*6;
@@ -189,78 +189,43 @@ if (canClick) {
 // Fill in the selected area if the users stops scaling.
 if ((mouse_check_button_released(mb_left) || !scale) &amp;&amp; scaling) {
     scaling = false;
-    if (scale &amp;&amp; entityButtons[selected, SCALE]) {
+    if (scale &amp;&amp; entityButtons[selected, SCALE] &amp;&amp; !scaleLock) {
         var entity, entity2 xscale, yscale, _x, _y;
         _x = max(scaleX+6, round(mouse_x/6)*6+spriteCenterX);
         _y = max(scaleY+6, round(mouse_y/6)*6+spriteCenterY);
-        xscale = (_x-scaleX) / sprite_get_width(selectedSprite);
-        yscale = (_y-scaleY) / sprite_get_height(selectedSprite);
-        
-        entity = instance_create(scaleX-spriteCenterX+spriteOffsetX*xscale, scaleY-spriteCenterY+spriteOffsetY*yscale, LevelEntity);
-        entity.sprite_index = selectedSprite;
-        entity.image_index = selectedImage;
-        entity.type = ds_list_find_value(global.entities, entityButtons[selected, INDEX]);
-        entity.image_xscale = xscale;
-        entity.image_yscale = yscale;
-        if (ds_map_size(newProperties) &gt; 0) entity.properties = ggon_duplicate_map(newProperties);
-
-        if (symmetry) {
-            entity2 = instance_create(map_width()-scaleX+spriteCenterX+spriteOffsetX*xscale-(_x-scaleX), scaleY-spriteCenterY+spriteOffsetY*yscale, LevelEntity);
-            entity2.sprite_index = mirroredSprite;
-            entity2.image_index = mirroredImage;
-            entity2.type = ds_list_find_value(global.entities, mirrored);
-            entity2.image_xscale = xscale;
-            entity2.image_yscale = yscale;
-            if (ds_map_size(newProperties) &gt; 0) entity.properties = ggon_duplicate_map(newProperties);
-        }
-        execute_string(global.placeEntityFunction, entity);
+        xscale = (_x-scaleX) / spriteWidth;
+        yscale = (_y-scaleY) / spriteHeight;
+        placeEntity(scaleX-spriteCenterX+spriteOffsetX*xscale, scaleY-spriteCenterY+spriteOffsetY*yscale, xscale, yscale);        
+        if (symmetry) 
+            placeEntity(map_width()-scaleX+spriteCenterX+spriteOffsetX*xscale-(_x-scaleX), scaleY-spriteCenterY+spriteOffsetY*yscale, xscale, yscale, true);
     } else {
         var _x, _y, i, j, entity, entity2;
-        _x = max(sprite_get_width(selectedSprite)+scaleX, scaleX+ceil((mouse_x-scaleX)/sprite_get_width(selectedSprite))*sprite_get_width(selectedSprite));
-        _y = max(sprite_get_height(selectedSprite)+scaleY, scaleY+ceil((mouse_y-scaleY)/sprite_get_height(selectedSprite))*sprite_get_height(selectedSprite));
+        _x = max(spriteWidth+scaleX, scaleX+ceil((mouse_x-scaleX)/spriteWidth)*spriteWidth);
+        _y = max(spriteHeight+scaleY, scaleY+ceil((mouse_y-scaleY)/spriteHeight)*spriteHeight);
 
-        for(i=scaleX-spriteCenterX; i+spriteCenterX&lt;_x; i+=sprite_get_width(selectedSprite)) {      
-            for(j=scaleY-spriteCenterY; j+spriteCenterY&lt;_y; j+=sprite_get_height(selectedSprite)) {
-                entity = instance_create(i+spriteOffsetX, j+spriteOffsetY, LevelEntity);
-                entity.sprite_index = selectedSprite;
-                entity.image_index = selectedImage;
-                entity.type = ds_list_find_value(global.entities, entityButtons[selected, INDEX]);
-                if (ds_map_size(newProperties) &gt; 0) entity.properties = ggon_duplicate_map(newProperties);
-    
-                if (symmetry) {
-                    if (mirrored != -1) {                                  
-                        entity2 = instance_create(map_width()-i+mirroredOffsetX, j+spriteOffsetY, LevelEntity);
-                        entity2.sprite_index = mirroredSprite;
-                        entity2.image_index = mirroredImage;
-                        entity2.type = ds_list_find_value(global.entities, mirrored);
-                        if (ds_map_size(newProperties) &gt; 0) entity.properties = ggon_duplicate_map(newProperties);
-                    }
-                }
-                execute_string(global.placeEntityFunction, entity);
+        for(i=scaleX-spriteCenterX; i+spriteCenterX&lt;_x; i+=spriteWidth) {      
+            for(j=scaleY-spriteCenterY; j+spriteCenterY&lt;_y; j+=spriteHeight) {
+                placeEntity(i+spriteOffsetX, j+spriteOffsetY, entityScale, entityScale);    
+                if (symmetry)    
+                    placeEntity(map_width()-i+mirroredOffsetX, j+spriteOffsetY, entityScale, entityScale, true);               
             }
         }
     }
 } else if ((mouse_check_button_released(mb_right)) &amp;&amp; erasing) {
-    var area;
-    area = (mouse_x-6 &gt;= scaleX || mouse_y-6 &gt;= scaleY);
     erasing = false;
-    
-    if (area) {
-        with(LevelEntity) if (x &gt;= other.scaleX &amp;&amp; x &lt;= mouse_x &amp;&amp; y &gt;= other.scaleY &amp;&amp; y &lt;= mouse_y) instance_destroy();
-    } else {
-        with(LevelEntity) if (collision_point(mouse_x, mouse_y, id, true, false) &gt; 0) instance_destroy();
-    }
+
+    with(LevelEntity)
+        if (collision_rectangle(other.scaleX, other.scaleY, mouse_x, mouse_y, id, false, false))
+            instance_destroy();
     
     if (symmetry) {
         var _x;
         scaleX = map_width() - scaleX;
         _x = map_width() - mouse_x;
-        
-        if (area) {
-            with(LevelEntity) if (x &lt;= other.scaleX &amp;&amp; x &gt;= _x &amp;&amp; y &gt;= other.scaleY &amp;&amp; y &lt;= mouse_y) instance_destroy();
-        } else {
-            with(LevelEntity) if (collision_point(_x, mouse_y, id, true, false) &gt; 0) instance_destroy();
-        }
+
+        with(LevelEntity)
+            if (collision_rectangle(other.scaleX, other.scaleY, _x, mouse_y, id, false, false))
+                instance_destroy();
     } 
 }
 </argument>

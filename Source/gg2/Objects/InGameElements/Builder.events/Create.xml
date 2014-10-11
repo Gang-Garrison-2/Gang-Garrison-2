@@ -13,7 +13,15 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">tooltipIdx = -1;
+        <argument kind="STRING">// Presets
+metadata = ds_map_create();
+ds_map_add(metadata, "type", "meta");
+ds_map_add(metadata, "background", "ffffff");
+
+ds_map_clear(global.resources);
+newProperties = ds_map_create();
+
+tooltipIdx = -1;
 expanded = 1;
 expandIdx = 1;
 canClick = true;
@@ -22,11 +30,9 @@ selected = -1;
 selectedSprite = -1;
 selectedImage = -1;
 selectedProperties = -1;
-newProperties = ds_map_create();
 mirrored = -1;
 mirroredSprite = -1;
 mirroredImage = -1;
-metadata = -1;
 
 entityButtonSize = 28;
 buttonWidth = 115;
@@ -56,13 +62,18 @@ moveSpeed = 32;
 mapBG = "";
 mapWM = "";
 wmString = "";
+showWM = false;
 
 erasing = false;
 scaling = false;
 snapScaling = false;
 scaleX = -1;
 scaleY = -1;
+scaleLock = true;
+entityScale = 1;
 
+spriteWidth = -1;
+spriteHeight = -1;
 spriteCenterX = -1;
 spriteCenterY = -1;
 spriteOffsetX = -1;
