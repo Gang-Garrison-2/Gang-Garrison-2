@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="DRAW" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">// pointS used as dummy sprite
+if (sprite_index == pointS)
+{
+    switch (ownerClass)
+    {
+        case CLASS_SCOUT:
+            sprite_index = TombstoneScoutS;
+        break;
+        case CLASS_SOLDIER:
+            sprite_index = TombstoneSlodierS;
+        break;
+        case CLASS_SNIPER:
+            sprite_index = TombstoneSniperS;
+        break;
+        case CLASS_DEMOMAN:
+            sprite_index = TombstoneDemomanS;
+        break;
+        case CLASS_MEDIC:
+            sprite_index = TombstoneMedicS;
+        break;
+        case CLASS_ENGINEER:
+            sprite_index = TombstoneEngineerS;
+        break;
+        case CLASS_HEAVY:
+            sprite_index = TombstoneHeavyS;
+        break;
+        case CLASS_SPY:
+            sprite_index = TombstoneSpyS;
+        break;
+        case CLASS_PYRO:
+            sprite_index = TombstonePyroS;
+        break;
+        default: // not all classes supported
+            show_message("Unsupported class: " + string(ownerClass));
+            instance_destroy();
+        exit; // drawing would be silly
+    }
+}
+
+draw_sprite_ext(sprite_index, image_index, x, y, 2, 2, 0, c_white, image_alpha);
+
+draw_point(x, y);
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>
