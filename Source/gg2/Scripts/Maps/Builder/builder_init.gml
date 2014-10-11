@@ -24,8 +24,8 @@ addButton("Load BG", '
     if(bg == "") break;
     Builder.mapBG = bg;
     background_replace(BuilderBGB, bg, false, false);
-    background_xscale[0] = 6;
-    background_yscale[0] = 6;
+    background_xscale[7] = 6;
+    background_yscale[7] = 6;
 '); 
 addButton("Load WM", '
     var wm;
@@ -33,16 +33,11 @@ addButton("Load WM", '
     if(wm == "") break;
     Builder.mapWM = wm;
     background_replace(BuilderWMB, wm, true, false);
-    background_xscale[1] = 6;
-    background_yscale[1] = 6;
     Builder.wmString = compressWalkmask();
 '); 
-addButton("Show BG", 'background_visible[0] = argument0;', 1, 1); 
-addButton("Show WM", '
-    room_set_background(BuilderRoom, 1, true, false, BuilderWMB, 0, 0, false, false, 0, 0, 0.7);
-    background_visible[1] = argument0;
-', 1); 
-addButton("Show grid", 'background_visible[2] = argument0;', 1);
+addButton("Show BG", 'background_visible[7] = argument0;', 1, 1); 
+addButton("Show WM", 'Builder.showWM = argument0;', 1); 
+addButton("Show grid", 'background_visible[6] = argument0;', 1);
 addButton("Save & test", '
     if (Builder.mapWM == "") show_message("Select a walkmask first.");
     else if (Builder.mapBG == "") show_message("Select a background first");
