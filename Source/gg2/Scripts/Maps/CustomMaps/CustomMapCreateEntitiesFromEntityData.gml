@@ -62,7 +62,7 @@ if (string_copy(argument0, 1, 1) == "{")
     ds_list_destroy(list);
     
     // Add embedded sprites now (to make sure the metadata is loaded)
-    ds_map_clear(global.resources);
+    unloadResources();
     var sprite, obj, resourceString;
     for(i=0; i<ds_list_size(specialEntities); i+=1)
     {
