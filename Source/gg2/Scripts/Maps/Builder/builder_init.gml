@@ -18,6 +18,7 @@ addButton("Load map", '
     Builder.mapBG = map;  
     Builder.mapWM = " ";
     Builder.wmString = compressWalkmask();
+    loadMetadata(Builder.metadata, true);
 ');
 addButton("Load BG", '
     var bg;
@@ -39,6 +40,7 @@ addButton("Load WM", '
 addButton("Show BG", 'background_visible[7] = argument0;', 1, 1); 
 addButton("Show WM", 'Builder.showWM = argument0;', 1); 
 addButton("Show grid", 'background_visible[6] = argument0;', 1);
+addButton("Show FG",'ParallaxController.visible = argument0;', 1, 1); 
 addButton("Save & test", '
     if (Builder.mapWM == "") show_message("Select a walkmask first.");
     else if (Builder.mapBG == "") show_message("Select a background first");
@@ -113,6 +115,7 @@ addButton("Add resource", '
         if (resource == "")
             break;
         ds_map_add(Builder.metadata, prop, resourceToString(resource));
+        loadMetadata(Builder.metadata, true);
     }
 ');
 

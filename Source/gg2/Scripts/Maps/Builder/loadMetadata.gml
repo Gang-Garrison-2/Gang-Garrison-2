@@ -1,11 +1,13 @@
 /**
  * Script that checks the extra added data, plugins can load their own metadata using global.metadataFunction
  * Argument0: The metadata
+ * [Argument1]: true if the script is executed in the builderroom.
 */
 
 var background, i, controller;
-
-controller = instance_create(0, 0, ParallaxController);
+controller = noone;
+with(ParallaxController)
+    controller = id;    // Use an existing parallax controller if possible.
 
 // The map background color
 background = readProperty(argument0, "background", HEX, $000000);
@@ -17,18 +19,37 @@ for(i=0;i<6;i += 1)
     background = readProperty(argument0, "layer" + string(i), STRING, "");
     if (background != "")
     {
+        if (controller == noone)
+            controller = instance_create(0, 0, ParallaxController);
+            
         controller.num_bgs = i+1;
-        background_index[i] = stringToResource(background, true);
+        
+        if (ds_map_find_value(global.resources, "layer" + string(i)) > 0)
+            background_delete(ds_map_find_value(global.resources, "layer" + string(i)));
+        ds_map_add(global.resources, "layer" + string(i), stringToResource(background, true));
+        
+        background_index[i] = ds_map_find_value(global.resources, "layer" + string(i))
         background_xscale[i] = 6;
         background_yscale[i] = 6;
         background_htiled[i] = 6;
         background_visible[i] = true;
+    }
+    else
+    {
+        background_visible[i] = false;
     }
 }
 
 // Load a foreground
 background = readProperty(argument0, "foreground", STRING, "");
 if (background != "")
+{
+    if (controller == noone)
+            controller = instance_create(0, 0, ParallaxController);
+            
+    if (controller.foreground != -1)
+        background_delete(controller.foreground);
     controller.foreground = stringToResource(background, true);
+}
 
-execute_string(global.metadataFunction, argument0);
+execute_string(global.metadataFunction, argument0, argument1);
