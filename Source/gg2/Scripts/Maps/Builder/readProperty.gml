@@ -1,4 +1,5 @@
-/** Reads a property with error checking
+/** 
+ * Reads a property with error checking
  * Argument0: A map of properties
  * Argument1: The property name
  * Argument2: The type of the property {STRING, REAL, BOOL}

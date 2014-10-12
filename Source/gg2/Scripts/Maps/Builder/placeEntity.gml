@@ -1,4 +1,5 @@
-/** Places an entity at the given x/y position with given x/y scales
+/** 
+ * Places an entity at the given x/y position with given x/y scales
  * Argument0: X position
  * Argument1: Y position
  * Argument2: X scale
