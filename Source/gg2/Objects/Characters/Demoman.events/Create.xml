@@ -17,12 +17,7 @@
 runPower = 1;
 weapons[0] = Minegun;
 haxxyStatue = DemomanHaxxyStatueS;
-
-// 'GW' reward - *G*olden *W*eapon
-if(hasClassReward(global.paramPlayer, 'GW'))
-    tauntsprite = DemoGoldTauntS;
-else
-    tauntsprite = DemoTauntS;
+tauntsprite = DemoTauntS;
 </argument>
       </arguments>
     </action>
@@ -52,6 +47,21 @@ else
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">numFlames = 3;
+
+// 'GW' reward - *G*olden *W*eapon
+if(hasClassReward(global.paramPlayer, 'GW'))
+{
+    if(tauntOverlays == -1)
+        tauntOverlays = ds_list_create();
+    ds_list_add(tauntOverlays, DemoGoldWeaponTauntS)
+}
+// 'GA' reward - *G*olden *A*ttire
+if(hasClassReward(global.paramPlayer, 'GA'))
+{
+    if(tauntOverlays == -1)
+        tauntOverlays = ds_list_create();
+    ds_list_add(tauntOverlays, DemomanGoldAttireTauntS)
+}
 </argument>
       </arguments>
     </action>

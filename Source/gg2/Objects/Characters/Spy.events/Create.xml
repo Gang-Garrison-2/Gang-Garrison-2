@@ -49,6 +49,14 @@ haxxyStatue = SpyHaxxyStatueS;
         <argument kind="STRING">// Override defaults
 canCloak = 1;
 numFlames = 4;
+
+// 'GA' reward - *G*olden *A*ttire
+if(hasClassReward(global.paramPlayer, 'GA'))
+{
+    if(tauntOverlays == -1)
+        tauntOverlays = ds_list_create();
+    ds_list_add(tauntOverlays, SpyGoldAttireTauntS)
+}
 </argument>
       </arguments>
     </action>

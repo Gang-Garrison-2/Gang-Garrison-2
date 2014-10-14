@@ -60,6 +60,22 @@
     
     if(variable_local_exists("jumpDustParticleSystem"))
         part_type_destroy(jumpDustParticleSystem);
+        
+    // destroy overlay lists
+    if (stillOverlays != -1)
+    {
+        ds_list_destroy(stillOverlays);
+        ds_list_destroy(leanROverlays);
+        ds_list_destroy(leanLOverlays);
+        ds_list_destroy(jumpOverlays);
+        ds_list_destroy(runOverlays);
+        ds_list_destroy(walkOverlays);
+        ds_list_destroy(crouchOverlays);
+    }
+    if (tauntOverlays != -1)
+        ds_list_destroy(tauntOverlays);
+    if (omnomnomnomOverlays != -1)
+        ds_list_destroy(omnomnomnomOverlays);
 }
 </argument>
       </arguments>

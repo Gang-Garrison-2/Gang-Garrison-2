@@ -17,12 +17,7 @@
 runPower = 0.9;
 weapons[0]=Rifle;
 haxxyStatue = SniperHaxxyStatueS;
-
-// 'GW' reward - *G*olden *W*eapon
-if(hasClassReward(global.paramPlayer, 'GW'))
-    tauntsprite = SniperGoldTauntS;
-else
-    tauntsprite = SniperTauntS;
+tauntsprite = SniperTauntS;
 </argument>
       </arguments>
     </action>
@@ -51,13 +46,23 @@ else
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">// 'BH' reward - *B*obble *H*ead
-if(hasClassReward(global.paramPlayer, 'BH'))
+        <argument kind="STRING">numFlames = 4;
+
+// 'GW' reward - *G*olden *W*eapon
+if(hasClassReward(global.paramPlayer, 'GW'))
 {
-    sniperCrouchOverlay = HatBobbleSniperCrouchS;
+    if(tauntOverlays == -1)
+        tauntOverlays = ds_list_create();
+    ds_list_add(tauntOverlays, SniperGoldWeaponTauntS)
+}
+// 'GA' reward - *G*olden *A*ttire
+if(hasClassReward(global.paramPlayer, 'GA'))
+{
+    if(tauntOverlays == -1)
+        tauntOverlays = ds_list_create();
+    ds_list_add(tauntOverlays, SniperGoldAttireTauntS)
 }
 
-numFlames = 4;
 </argument>
       </arguments>
     </action>

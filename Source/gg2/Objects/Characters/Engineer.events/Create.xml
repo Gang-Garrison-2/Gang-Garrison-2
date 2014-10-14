@@ -48,6 +48,14 @@ haxxyStatue = EngineerHaxxyStatueS;
       <arguments>
         <argument kind="STRING">// Override defaults
 numFlames = 3;
+
+// 'GA' reward - *G*olden *A*ttire
+if(hasClassReward(global.paramPlayer, 'GA'))
+{
+    if(tauntOverlays == -1)
+        tauntOverlays = ds_list_create();
+    ds_list_add(tauntOverlays, EngineerGoldAttireTauntS)
+}
 </argument>
       </arguments>
     </action>

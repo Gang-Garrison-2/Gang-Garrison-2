@@ -17,12 +17,7 @@
 maxHp = 120;
 weapons[0] = Flamethrower;
 haxxyStatue = PyroHaxxyStatueS;
-
-// 'GW' reward - *G*olden *W*eapon
-if(hasClassReward(global.paramPlayer, 'GW'))
-    tauntsprite = PyroGoldTauntS;
-else
-    tauntsprite = PyroTauntS;
+tauntsprite = PyroTauntS;
 </argument>
       </arguments>
     </action>
@@ -53,6 +48,21 @@ else
       <arguments>
         <argument kind="STRING">numFlames = 3;
 maxDuration = 10;
+
+// 'GW' reward - *G*olden *W*eapon
+if(hasClassReward(global.paramPlayer, 'GW'))
+{
+    if(tauntOverlays == -1)
+        tauntOverlays = ds_list_create();
+    ds_list_add(tauntOverlays, PyroGoldWeaponTauntS)
+}
+// 'GA' reward - *G*olden *A*ttire
+if(hasClassReward(global.paramPlayer, 'GA'))
+{
+    if(tauntOverlays == -1)
+        tauntOverlays = ds_list_create();
+    ds_list_add(tauntOverlays, PyroGoldAttireTauntS)
+}
 </argument>
       </arguments>
     </action>

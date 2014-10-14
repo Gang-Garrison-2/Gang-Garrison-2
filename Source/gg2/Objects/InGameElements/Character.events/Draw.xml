@@ -52,7 +52,7 @@ else
     ubercolour = c_blue;
 
 // sprite resource selection
-var sprite, overlaySprite, noNewAnim;
+var sprite, overlayList, noNewAnim;
 noNewAnim = player.class == CLASS_QUOTE or sprite_special or player.humiliated;
 
 if (zoomed)
@@ -61,14 +61,17 @@ if (zoomed)
         sprite = SniperCrouchRedS;
     else
         sprite = SniperCrouchBlueS;
-    overlaySprite = sniperCrouchOverlay;
+    overlayList = crouchOverlays;
     animationImage = animationImage mod 2; // sniper crouch only has two frames, avoid overflow
 }
 // most classes, check for running jumping and standing
 else if (!noNewAnim)
 {
     if(!onground)
+    {
         sprite = spriteJump;
+        overlayList = jumpOverlays;
+    }
     else
     {
         if(still)
@@ -88,15 +91,28 @@ else if (!noNewAnim)
             
             // default still sprite
             sprite = spriteStand;
+            overlayList = stillOverlays;
             
             { // detect slopes
                 var openright, openleft;
                 openright = !collision_point_solid(x+6, bbox_bottom+2) and !collision_point_solid(x+2, bbox_bottom+2);
                 openleft = !collision_point_solid(x-7, bbox_bottom+2) and !collision_point_solid(x-3, bbox_bottom+2);
                 if (openright)
+                {
                     sprite = sprite_tilt_right;
+                    if(image_xscale &gt; 0)
+                        overlayList = leanROverlays;
+                    else
+                        overlayList = leanLOverlays;
+                }
                 if (openleft)
+                {
                     sprite = sprite_tilt_left;
+                    if(image_xscale &gt; 0)
+                        overlayList = leanLOverlays;
+                    else
+                        overlayList = leanROverlays;
+                }
                 if (openright and openleft)
                 {
                     openright = !collision_point_solid(bbox_right, bbox_bottom+2);
@@ -113,21 +129,27 @@ else if (!noNewAnim)
         else
         {
             sprite = spriteRun;
+            overlayList = runOverlays;
             if (player.class == CLASS_HEAVY and abs(hspeed) &lt; 3) // alternative sprite for extremely slow moving heavies
             {
                 if (team == TEAM_RED)
+                {
                     sprite = HeavyRedWalkS;
+                    overlayList = walkOverlays;
+                }
                 else
+                {
                     sprite = HeavyBlueWalkS;
+                    overlayList = walkOverlays;
+                }
             }
         }
     }
-    overlaySprite = overlay;
 }
 else
 {
     sprite = sprite_index;
-    overlaySprite = overlay;
+    overlayList = stillOverlays;
 }
 
 if (sprite != sprite_index and (sprite == spriteLeanR or sprite == spriteLeanL)
@@ -142,7 +164,6 @@ equipmentOffset = ((sprite == spriteRun) and
                and onground;
 equipmentOffset *= -2; // two pixels up for whether the sprite is bobbing(above expression gives one down)
 
-overlayOffset = equipmentOffset;
 
 if (player.class == CLASS_HEAVY or player.class == CLASS_SOLDIER
     or noNewAnim or taunting)
@@ -151,31 +172,27 @@ else if (abs(hspeed) &lt; 3 and equipmentOffset = -2 and !taunting)
 {
     equipmentOffset += 2;
     yr += 2;
-    overlayOffset = equipmentOffset-2; // mad because overlays use yr
 }
-else
-    overlayOffset = equipmentOffset;
 
 if(!noNewAnim) // quote and sniper zoom still use the old anim system so animationOffset is still set, override it here for everything else
     animationOffset = 0;
 
 
 equipmentOffset += yoffset;
-overlayOffset += yoffset;
 
 yr += yoffset;
 
 if (omnomnomnom)
 {
-    draw_sprite_ext_overlay(omnomnomnomSprite,omnomnomnomOverlay,omnomnomnomindex,xr,yr,image_xscale,image_yscale,image_angle,c_white,1);
+    draw_sprite_ext_overlay(omnomnomnomSprite,omnomnomnomOverlays,omnomnomnomindex,xr,yr,image_xscale,image_yscale,image_angle,c_white,1);
     if (ubered)
-        draw_sprite_ext_overlay(omnomnomnomSprite,omnomnomnomOverlay,omnomnomnomindex,xr,yr,image_xscale,image_yscale,image_angle,ubercolour,0.7);
+        draw_sprite_ext_overlay(omnomnomnomSprite,omnomnomnomOverlays,omnomnomnomindex,xr,yr,image_xscale,image_yscale,image_angle,ubercolour,0.7);
 }
 else if (taunting)
 {
-    draw_sprite_ext_overlay(tauntsprite,tauntOverlay,tauntindex,xr,yr,image_xscale,image_yscale,image_angle,c_white,1);
+    draw_sprite_ext_overlay(tauntsprite,tauntOverlays,tauntindex,xr,yr,image_xscale,image_yscale,image_angle,c_white,1);
     if (ubered)
-        draw_sprite_ext_overlay(tauntsprite,tauntOverlay,tauntindex,xr,yr,image_xscale,image_yscale,image_angle,ubercolour,0.7);
+        draw_sprite_ext_overlay(tauntsprite,tauntOverlays,tauntindex,xr,yr,image_xscale,image_yscale,image_angle,ubercolour,0.7);
 }
 else if (player.humiliated)
     draw_sprite_ext(humiliationPoses,floor(animationImage)+humiliationOffset,xr,yr,image_xscale,image_yscale,image_angle,c_white,image_alpha);
@@ -196,11 +213,11 @@ else if (!taunting)
     else
     {
         if (!ubered)
-            draw_sprite_ext_overlay(sprite,overlaySprite,floor(animationImage+animationOffset),xr,yr,image_xscale,image_yscale,image_angle,c_white,image_alpha,overlayOffset);
+            draw_sprite_ext_overlay(sprite,overlayList,floor(animationImage+animationOffset),xr,yr,image_xscale,image_yscale,image_angle,c_white,image_alpha);
         else if (ubered)
         {
-            draw_sprite_ext_overlay(sprite,overlaySprite,floor(animationImage+animationOffset),xr,yr,image_xscale,image_yscale,image_angle,c_white,1,overlayOffset);
-            draw_sprite_ext_overlay(sprite,overlaySprite,floor(animationImage+animationOffset),xr,yr,image_xscale,image_yscale,image_angle,ubercolour,0.7,overlayOffset);
+            draw_sprite_ext_overlay(sprite,overlayList,floor(animationImage+animationOffset),xr,yr,image_xscale,image_yscale,image_angle,c_white,1);
+            draw_sprite_ext_overlay(sprite,overlayList,floor(animationImage+animationOffset),xr,yr,image_xscale,image_yscale,image_angle,ubercolour,0.7);
         }
     }
 }
