@@ -15,6 +15,13 @@
       <arguments>
         <argument kind="STRING">num_bgs=0;
 foreground = -1;
+
+var i;
+for(i=0; i&lt;7; i+=1)
+{
+    background_xfactor[i] = 10-i;
+    background_yfactor[i] = 10-i;
+}
 </argument>
       </arguments>
     </action>

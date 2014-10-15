@@ -13,7 +13,13 @@ addButton("Load map", '
     var map;
     map = get_open_filename("PNG|*.png","");
     if (map == "") break;
+    
     with(LevelEntity) instance_destroy();
+    unloadResources();
+    ds_map_clear(Builder.metadata);
+    ds_map_add(Builder.metadata, "type", "meta");
+    ds_map_add(Builder.metadata, "background", "ffffff");
+    
     CustomMapInit(map)
     Builder.mapBG = map;  
     Builder.mapWM = " ";
@@ -146,10 +152,20 @@ addButton("Get resources", '
         show_message("The map has been decompiled to " + working_directory + "/Maps/Decompiled/ .");
     }
 ');
-addButton("Load entities", 'loadEntities()'); 
-addButton("Save entities", 'saveEntities()');
+addButton("Load entities", '
+    unloadResources();
+    ds_map_clear(Builder.metadata);
+    ds_map_add(Builder.metadata, "type", "meta");
+    ds_map_add(Builder.metadata, "background", "ffffff");
+    loadEntities();
+'); 
+addButton("Save entities", 'saveEntities();');
 addButton("Clear entities", '
     if (show_question("Are you sure you want to scrap your entities?")) {
+        unloadResources();
+        ds_map_clear(Builder.metadata);
+        ds_map_add(Builder.metadata, "type", "meta");
+        ds_map_add(Builder.metadata, "background", "ffffff");
         with (LevelEntity) instance_destroy();
     }
 '); 
@@ -292,5 +308,5 @@ addEntity("KothControlPoint", koth, "{}", KothControlPoint, ControlPointNeutralS
 addEntity("KothRedControlPoint", dkoth, "{}", KothRedControlPoint, ControlPointRedS, 0, entityButtonS, 98, "Red KOTH control point");
 addEntity("KothBlueControlPoint", dkoth, "{}", KothBlueControlPoint, ControlPointBlueS, 0, entityButtonS, 100, "Blue KOTH control point");
 addEntity("dropdownPlatform", -1, "{xscale:1,yscale:1}", DropdownPlatform, sprite44, 5, entityButtonS, 80, "Dropdown platform");
-addEntity("foreground", -1, "{xscale:1,yscale:1,depth:-2,fade:true,animationspeed:0,resource:''}", SpriteObject, sprite64, 0, entityButtonS, 0, "Resizable foreground.");
-addEntity("foreground_scale", -1, "{scale:1,depth:-2,fade:true,animationspeed:0,resource:''}", SpriteObject, sprite64, 0, entityButtonS, 0, "Scalable foreground.");
+addEntity("foreground", -1, "{xscale:1,yscale:1,depth:-2,fade:true,animationspeed:0,resource:''}", SpriteObject, sprite64, 0, entityButtonS, 108, "Resizable foreground.");
+addEntity("foreground_scale", -1, "{scale:1,depth:-2,fade:true,animationspeed:0,resource:''}", SpriteObject, sprite64, 0, entityButtonS, 110, "Scalable foreground.");
