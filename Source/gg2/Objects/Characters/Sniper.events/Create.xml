@@ -55,14 +55,6 @@ if(hasClassReward(global.paramPlayer, 'GW'))
         tauntOverlays = ds_list_create();
     ds_list_add(tauntOverlays, SniperGoldWeaponTauntS)
 }
-// 'GA' reward - *G*olden *A*ttire
-if(hasClassReward(global.paramPlayer, 'GA'))
-{
-    if(tauntOverlays == -1)
-        tauntOverlays = ds_list_create();
-    ds_list_add(tauntOverlays, SniperGoldAttireTauntS)
-}
-
 </argument>
       </arguments>
     </action>

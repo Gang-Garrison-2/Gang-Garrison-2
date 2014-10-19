@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="DemomanGoldAttireStandS" type="RESOURCE"/>
+  <resource name="DemomanGoldAttireJumpS" type="RESOURCE"/>
+  <resource name="DemomanGoldAttireLeanLS" type="RESOURCE"/>
+  <resource name="DemomanGoldAttireLeanRS" type="RESOURCE"/>
+  <resource name="DemomanGoldAttireRunS" type="RESOURCE"/>
+  <resource name="DemomanGoldAttireTauntS" type="RESOURCE"/>
+</resources>

@@ -103,7 +103,6 @@ global.HaxxyBadges[32] = 'Badge_ChessWhite';
 global.HaxxyBadges[33] = 'Badge_ChessBlack';
 
 // Makes array of Golden Accessory overlay sprites
-// TODO: import taunt sprites and raybanns sprites (ughhhh another set...)
 // CLASS_SCOUT
 global.GoldenAttireOverlay[0] = ScoutGoldAttireStandS;
 global.GoldenAttireRunOverlay[0] = ScoutGoldAttireRunS;
@@ -169,4 +168,72 @@ global.GoldenAttireJumpOverlay[8] = PyroGoldAttireJumpS;
 global.GoldenAttireLeanROverlay[8] = PyroGoldAttireLeanRS;
 global.GoldenAttireLeanLOverlay[8] = PyroGoldAttireLeanLS;
 global.GoldenAttireTaunt[8] = PyroGoldAttireTauntS;
+// None for CLASS_QUOTE
+
+// Array of Canadium accessories
+// CLASS_SCOUT
+global.SilverAttireOverlay[0] = ScoutSilverAttireStandS;
+global.SilverAttireRunOverlay[0] = ScoutSilverAttireRunS;
+global.SilverAttireJumpOverlay[0] = ScoutSilverAttireJumpS;
+global.SilverAttireLeanROverlay[0] = ScoutSilverAttireLeanRS;
+global.SilverAttireLeanLOverlay[0] = ScoutSilverAttireLeanLS;
+global.SilverAttireTaunt[0] = ScoutSilverAttireTauntS;
+// CLASS_SOLDIER
+global.SilverAttireOverlay[1] = SoldierSilverAttireStandS;
+global.SilverAttireRunOverlay[1] = SoldierSilverAttireRunS;
+global.SilverAttireJumpOverlay[1] = SoldierSilverAttireJumpS;
+global.SilverAttireLeanROverlay[1] = SoldierSilverAttireLeanRS;
+global.SilverAttireLeanLOverlay[1] = SoldierSilverAttireLeanLS;
+global.SilverAttireTaunt[1] = SoldierSilverAttireTauntS;
+// CLASS_SNIPER
+global.SilverAttireOverlay[2] = SniperSilverAttireStandS;
+global.SilverAttireRunOverlay[2] = SniperSilverAttireRunS;
+global.SilverAttireJumpOverlay[2] = SniperSilverAttireJumpS;
+global.SilverAttireLeanROverlay[2] = SniperSilverAttireLeanRS;
+global.SilverAttireLeanLOverlay[2] = SniperSilverAttireLeanLS;
+global.SilverAttireCrouchOverlay[2] = SniperSilverAttireCrouchS;
+global.SilverAttireTaunt[2] = SniperSilverAttireTauntS;
+// CLASS_DEMOMAN
+global.SilverAttireOverlay[3] = DemomanSilverAttireStandS;
+global.SilverAttireRunOverlay[3] = DemomanSilverAttireRunS;
+global.SilverAttireJumpOverlay[3] = DemomanSilverAttireJumpS;
+global.SilverAttireLeanROverlay[3] = DemomanSilverAttireLeanRS;
+global.SilverAttireLeanLOverlay[3] = DemomanSilverAttireLeanLS;
+global.SilverAttireTaunt[3] = DemomanSilverAttireTauntS;
+// CLASS_MEDIC
+global.SilverAttireOverlay[4] = MedicSilverAttireStandS;
+global.SilverAttireRunOverlay[4] = MedicSilverAttireRunS;
+global.SilverAttireJumpOverlay[4] = MedicSilverAttireJumpS;
+global.SilverAttireLeanROverlay[4] = MedicSilverAttireLeanRS;
+global.SilverAttireLeanLOverlay[4] = MedicSilverAttireLeanLS;
+global.SilverAttireTaunt[4] = MedicSilverAttireTauntS;
+// CLASS_ENGINEER
+global.SilverAttireOverlay[5] = EngineerSilverAttireStandS;
+global.SilverAttireRunOverlay[5] = EngineerSilverAttireRunS;
+global.SilverAttireJumpOverlay[5] = EngineerSilverAttireJumpS;
+global.SilverAttireLeanROverlay[5] = EngineerSilverAttireLeanRS;
+global.SilverAttireLeanLOverlay[5] = EngineerSilverAttireLeanLS;
+global.SilverAttireTaunt[5] = EngineerSilverAttireTauntS;
+// CLASS_HEAVY
+global.SilverAttireOverlay[6] = HeavySilverAttireStandS;
+global.SilverAttireRunOverlay[6] = HeavySilverAttireRunS;
+global.SilverAttireJumpOverlay[6] = HeavySilverAttireJumpS;
+global.SilverAttireLeanROverlay[6] = HeavySilverAttireLeanRS;
+global.SilverAttireLeanLOverlay[6] = HeavySilverAttireLeanLS;
+global.SilverAttireWalkOverlay[6] = HeavySilverAttireWalkS;
+global.SilverAttireTaunt[6] = HeavySilverAttireTauntS;
+// CLASS_SPY
+global.SilverAttireOverlay[7] = SpySilverAttireStandS;
+global.SilverAttireRunOverlay[7] = SpySilverAttireRunS;
+global.SilverAttireJumpOverlay[7] = SpySilverAttireJumpS;
+global.SilverAttireLeanROverlay[7] = SpySilverAttireLeanRS;
+global.SilverAttireLeanLOverlay[7] = SpySilverAttireLeanLS;
+global.SilverAttireTaunt[7] = SpySilverAttireTauntS;
+// CLASS_PYRO
+global.SilverAttireOverlay[8] = PyroSilverAttireStandS;
+global.SilverAttireRunOverlay[8] = PyroSilverAttireRunS;
+global.SilverAttireJumpOverlay[8] = PyroSilverAttireJumpS;
+global.SilverAttireLeanROverlay[8] = PyroSilverAttireLeanRS;
+global.SilverAttireLeanLOverlay[8] = PyroSilverAttireLeanLS;
+global.SilverAttireTaunt[8] = PyroSilverAttireTauntS;
 // None for CLASS_QUOTE

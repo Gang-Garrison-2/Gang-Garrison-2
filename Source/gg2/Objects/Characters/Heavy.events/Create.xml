@@ -56,15 +56,7 @@ if(hasClassReward(global.paramPlayer, 'GW'))
     ds_list_add(omnomnomnomOverlays, OmnomnomnomGoldWeaponS);
     
 }
-// 'GA' reward - *G*olden *A*ttire
-if(hasClassReward(global.paramPlayer, 'GA'))
-{
-    if(tauntOverlays == -1)
-        tauntOverlays = ds_list_create();
-    ds_list_add(tauntOverlays, HeavyGoldAttireTauntS);
-    ds_list_add(omnomnomnomOverlays, OmnomnomnomGoldAttireS);
-}
-// this obviously has to go last
+
 // 'BH' reward - *B*obble *H*ead
 if(hasClassReward(global.paramPlayer, 'BH'))
     ds_list_add(omnomnomnomOverlays, HatBobbleOmnomnomnomS);

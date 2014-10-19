@@ -173,7 +173,35 @@
     global.paramOwner = id;
     currentWeapon = instance_create(x,y,weapons[0]);
     global.paramOwner = noone;
-
+    
+    if(hasClassReward(player, 'Silver_Attire') and player.class != CLASS_QUOTE)
+    {
+        ds_list_add(stillOverlays, global.SilverAttireOverlay[player.class]);
+        ds_list_add(leanROverlays, global.SilverAttireLeanROverlay[player.class]);
+        ds_list_add(leanLOverlays, global.SilverAttireLeanLOverlay[player.class]);
+        ds_list_add(jumpOverlays, global.SilverAttireJumpOverlay[player.class]);
+        ds_list_add(runOverlays, global.SilverAttireRunOverlay[player.class]);
+        ds_list_add(tauntOverlays, global.SilverAttireTaunt[player.class]);
+        if (player.class == CLASS_HEAVY)
+            ds_list_add(walkOverlays, global.SilverAttireWalkOverlay[player.class]);
+        if (player.class == CLASS_SNIPER)
+            ds_list_add(crouchOverlays, global.SilverAttireCrouchOverlay[player.class]);
+    }
+    
+    if(hasClassReward(player, 'Golden_Attire') and player.class != CLASS_QUOTE)
+    {
+        ds_list_add(stillOverlays, global.GoldenAttireOverlay[player.class]);
+        ds_list_add(leanROverlays, global.GoldenAttireLeanROverlay[player.class]);
+        ds_list_add(leanLOverlays, global.GoldenAttireLeanLOverlay[player.class]);
+        ds_list_add(jumpOverlays, global.GoldenAttireJumpOverlay[player.class]);
+        ds_list_add(runOverlays, global.GoldenAttireRunOverlay[player.class]);
+        ds_list_add(tauntOverlays, global.GoldenAttireTaunt[player.class]);
+        if (player.class == CLASS_HEAVY)
+            ds_list_add(walkOverlays, global.GoldenAttireWalkOverlay[player.class]);
+        if (player.class == CLASS_SNIPER)
+            ds_list_add(crouchOverlays, global.GoldenAttireCrouchOverlay[player.class]);
+    }
+    // Bobble heads should always go last unless a larger sprite exists
     // 'BH' reward - *B*obble *H*ead - not available for quote
     if(hasClassReward(player, 'BH') and player.class != CLASS_QUOTE)
     {
@@ -188,19 +216,6 @@
             ds_list_add(walkOverlays, HatBobbleHeavyWalkS);
         if (player.class == CLASS_SNIPER)
             ds_list_add(crouchOverlays, global.HatBobbleClassOverlay[player.class]);
-    }
-    if(hasClassReward(player, 'GA') and player.class != CLASS_QUOTE)
-    {
-        ds_list_add(stillOverlays, global.GoldenAttireOverlay[player.class]);
-        ds_list_add(leanROverlays, global.GoldenAttireLeanROverlay[player.class]);
-        ds_list_add(leanLOverlays, global.GoldenAttireLeanLOverlay[player.class]);
-        ds_list_add(jumpOverlays, global.GoldenAttireJumpOverlay[player.class]);
-        ds_list_add(runOverlays, global.GoldenAttireRunOverlay[player.class]);
-        ds_list_add(tauntOverlays, global.GoldenAttireTaunt[player.class]);
-        if (player.class == CLASS_HEAVY)
-            ds_list_add(walkOverlays, global.GoldenAttireWalkOverlay[player.class]);
-        if (player.class == CLASS_SNIPER)
-            ds_list_add(crouchOverlays, global.GoldenAttireCrouchOverlay[player.class]);
     }
     // player has no rewards, destroy the lists
     if (ds_list_empty(stillOverlays))

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="HeavyGoldAttireStandS" type="RESOURCE"/>
+  <resource name="HeavyGoldAttireJumpS" type="RESOURCE"/>
+  <resource name="HeavyGoldAttireLeanLS" type="RESOURCE"/>
+  <resource name="HeavyGoldAttireLeanRS" type="RESOURCE"/>
+  <resource name="HeavyGoldAttireWalkS" type="RESOURCE"/>
+  <resource name="HeavyGoldAttireRunS" type="RESOURCE"/>
+  <resource name="HeavyGoldAttireTauntS" type="RESOURCE"/>
+  <resource name="OmnomnomnomGoldAttireS" type="RESOURCE"/>
+</resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="PyroGoldAttireStandS" type="RESOURCE"/>
+  <resource name="PyroGoldAttireJumpS" type="RESOURCE"/>
+  <resource name="PyroGoldAttireLeanLS" type="RESOURCE"/>
+  <resource name="PyroGoldAttireLeanRS" type="RESOURCE"/>
+  <resource name="PyroGoldAttireRunS" type="RESOURCE"/>
+  <resource name="PyroGoldAttireTauntS" type="RESOURCE"/>
+</resources>

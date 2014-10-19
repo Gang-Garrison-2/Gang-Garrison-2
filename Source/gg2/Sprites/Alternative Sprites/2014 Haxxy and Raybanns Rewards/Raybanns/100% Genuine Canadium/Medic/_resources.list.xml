@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="MedicSilverAttireStandS" type="RESOURCE"/>
+  <resource name="MedicSilverAttireJumpS" type="RESOURCE"/>
+  <resource name="MedicSilverAttireLeanLS" type="RESOURCE"/>
+  <resource name="MedicSilverAttireLeanRS" type="RESOURCE"/>
+  <resource name="MedicSilverAttireRunS" type="RESOURCE"/>
+  <resource name="MedicSilverAttireTauntS" type="RESOURCE"/>
+</resources>

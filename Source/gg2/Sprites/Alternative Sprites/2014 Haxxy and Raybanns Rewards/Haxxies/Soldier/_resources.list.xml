@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="SoldierGoldAttireStandS" type="RESOURCE"/>
+  <resource name="SoldierGoldAttireJumpS" type="RESOURCE"/>
+  <resource name="SoldierGoldAttireLeanLS" type="RESOURCE"/>
+  <resource name="SoldierGoldAttireLeanRS" type="RESOURCE"/>
+  <resource name="SoldierGoldAttireRunS" type="RESOURCE"/>
+  <resource name="SoldierGoldAttireTauntS" type="RESOURCE"/>
+</resources>

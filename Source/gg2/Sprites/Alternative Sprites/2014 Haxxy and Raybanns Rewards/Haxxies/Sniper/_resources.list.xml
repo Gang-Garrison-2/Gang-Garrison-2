@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="SniperGoldAttireStandS" type="RESOURCE"/>
+  <resource name="SniperGoldAttireJumpS" type="RESOURCE"/>
+  <resource name="SniperGoldAttireLeanLS" type="RESOURCE"/>
+  <resource name="SniperGoldAttireLeanRS" type="RESOURCE"/>
+  <resource name="SniperGoldAttireRunS" type="RESOURCE"/>
+  <resource name="SniperGoldAttireCrouchS" type="RESOURCE"/>
+  <resource name="SniperGoldAttireTauntS" type="RESOURCE"/>
+</resources>
