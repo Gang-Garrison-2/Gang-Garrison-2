@@ -59,7 +59,7 @@ if (background != "")
         background_delete(controller.foreground);
     controller.foreground = stringToResource(background, true);
 }
-else {
+else if (controller != noone) {
     if (controller.foreground != -1)
         background_delete(controller.foreground);
     controller.foreground = -1;
