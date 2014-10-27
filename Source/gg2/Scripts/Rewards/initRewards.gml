@@ -237,3 +237,6 @@ global.SilverAttireLeanROverlay[8] = PyroSilverAttireLeanRS;
 global.SilverAttireLeanLOverlay[8] = PyroSilverAttireLeanLS;
 global.SilverAttireTaunt[8] = PyroSilverAttireTauntS;
 // None for CLASS_QUOTE
+
+for(i = 0; i <= 9; i += 1)
+    global.MakeItRainTauntOverlay[i] = MoneyS;

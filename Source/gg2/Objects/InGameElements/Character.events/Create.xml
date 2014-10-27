@@ -159,15 +159,16 @@
     walkOverlays = ds_list_create();
     tauntOverlays = ds_list_create();
     crouchOverlays = ds_list_create();
-    omnomnomnomOverlays = -1;
+    omnomnomnomOverlays = ds_list_create();
     omnomnomnomSprite = OmnomnomnomS;
-    sniperCrouchOverlay = -1;
+    sniperCrouchOverlay = ds_list_create();
     demon = -1;
     demonX = 0;
     demonY = 0;
     demonOffset = 0;
     demonDir = 0.5;
     demonFrame = 0;
+    hasMoney = false;
 
     // Let's spawn our weapon
     global.paramOwner = id;
@@ -183,7 +184,10 @@
         ds_list_add(runOverlays, global.SilverAttireRunOverlay[player.class]);
         ds_list_add(tauntOverlays, global.SilverAttireTaunt[player.class]);
         if (player.class == CLASS_HEAVY)
+        {
             ds_list_add(walkOverlays, global.SilverAttireWalkOverlay[player.class]);
+            ds_list_add(omnomnomnomOverlays, OmnomnomnomSilverAttireS);
+        }
         if (player.class == CLASS_SNIPER)
             ds_list_add(crouchOverlays, global.SilverAttireCrouchOverlay[player.class]);
     }
@@ -197,7 +201,10 @@
         ds_list_add(runOverlays, global.GoldenAttireRunOverlay[player.class]);
         ds_list_add(tauntOverlays, global.GoldenAttireTaunt[player.class]);
         if (player.class == CLASS_HEAVY)
+        {
             ds_list_add(walkOverlays, global.GoldenAttireWalkOverlay[player.class]);
+            ds_list_add(omnomnomnomOverlays, OmnomnomnomGoldAttireS);
+        }
         if (player.class == CLASS_SNIPER)
             ds_list_add(crouchOverlays, global.GoldenAttireCrouchOverlay[player.class]);
     }
@@ -217,6 +224,12 @@
         if (player.class == CLASS_SNIPER)
             ds_list_add(crouchOverlays, global.HatBobbleClassOverlay[player.class]);
     }
+    if(hasClassReward(player, 'MakeItRain'))
+        hasMoney = true;
+        
+    //DEBUG
+    hasMoney = true;
+        
     // player has no rewards, destroy the lists
     if (ds_list_empty(stillOverlays))
     {
@@ -227,6 +240,7 @@
         ds_list_destroy(runOverlays);
         ds_list_destroy(walkOverlays);
         ds_list_destroy(crouchOverlays);
+        ds_list_destroy(omnomnomnomOverlays);
         stillOverlays = -1;
         leanROverlays = -1;
         leanLOverlays = -1;
@@ -234,6 +248,7 @@
         runOverlays = -1;
         walkOverlays = -1;
         crouchOverlays = -1;
+        omnomnomnomOverlays = -1;
     }
     // this is grouped seperately
     if (ds_list_empty(tauntOverlays))
