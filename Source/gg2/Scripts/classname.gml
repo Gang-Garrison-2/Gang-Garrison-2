@@ -17,7 +17,7 @@ switch (class)
     case CLASS_HEAVY: classStr = "Overweight"; break;
     case CLASS_SPY: classStr = "Infiltrator"; break;
     case CLASS_PYRO: classStr = "Firebug"; break;
-    case CLASS_QUOTE: classStr = "Quote"; break;
+    case CLASS_QUOTE: classStr = "Querly"; break;
 }
 
 return classStr;
