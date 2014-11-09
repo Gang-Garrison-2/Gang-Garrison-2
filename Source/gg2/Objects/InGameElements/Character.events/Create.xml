@@ -208,7 +208,8 @@
         if (player.class == CLASS_SNIPER)
             ds_list_add(crouchOverlays, global.GoldenAttireCrouchOverlay[player.class]);
     }
-    // Bobble heads should always go last unless a larger sprite exists
+    // You cannot wear more than one hat at once you dingdong
+    // Bobble heads supercede Ray Bann hats because haxton is manlier
     // 'BH' reward - *B*obble *H*ead - not available for quote
     if(hasClassReward(player, 'BH') and player.class != CLASS_QUOTE)
     {
@@ -220,15 +221,25 @@
         ds_list_add(runOverlays, global.HatBobbleClassRunOverlay[player.class]);
         ds_list_add(tauntOverlays, global.HatBobbleClassTaunt[player.class]);
         if (player.class == CLASS_HEAVY)
-            ds_list_add(walkOverlays, HatBobbleHeavyWalkS);
+            ds_list_add(walkOverlays, global.HatBobbleClassWalkOverlay[player.class]);
         if (player.class == CLASS_SNIPER)
             ds_list_add(crouchOverlays, global.HatBobbleClassOverlay[player.class]);
     }
+    else if(hasClassReward(player, 'TopHatMonocle'))
+    {
+        ds_list_add(stillOverlays, global.TopHatMonocleOverlay[player.class]);
+        ds_list_add(leanROverlays, global.TopHatMonocleOverlay[player.class]);
+        ds_list_add(leanLOverlays, global.TopHatMonocleOverlay[player.class]);
+        ds_list_add(jumpOverlays, global.TopHatMonocleOverlay[player.class]);
+        ds_list_add(runOverlays, global.TopHatMonocleRunOverlay[player.class]);
+        ds_list_add(tauntOverlays, global.TopHatMonocleTaunt[player.class]);
+        /*if (player.class == CLASS_HEAVY)
+            ds_list_add(walkOverlays, global.TopHatMonocleWalkOverlay[player.class]);
+        if (player.class == CLASS_SNIPER)
+            ds_list_add(crouchOverlays, global.TopHatMonocleOverlay[player.class]);*/
+    }
     if(hasClassReward(player, 'MakeItRain'))
         hasMoney = true;
-        
-    //DEBUG
-    hasMoney = true;
         
     // player has no rewards, destroy the lists
     if (ds_list_empty(stillOverlays))
@@ -250,7 +261,7 @@
         crouchOverlays = -1;
         omnomnomnomOverlays = -1;
     }
-    // this is grouped seperately
+    // this is grouped seperately for rewards that don't have taunts ie: certain gold weapon taunts
     if (ds_list_empty(tauntOverlays))
     {
         ds_list_destroy(tauntOverlays);

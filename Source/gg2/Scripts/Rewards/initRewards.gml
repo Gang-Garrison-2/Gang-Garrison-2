@@ -238,5 +238,47 @@ global.SilverAttireLeanLOverlay[8] = PyroSilverAttireLeanLS;
 global.SilverAttireTaunt[8] = PyroSilverAttireTauntS;
 // None for CLASS_QUOTE
 
-for(i = 0; i <= 9; i += 1)
-    global.MakeItRainTauntOverlay[i] = MoneyS;
+// Array of Top Hat + Monocle Package Deals
+// CLASS_SCOUT
+global.TopHatMonocleOverlay[0] = ScoutMonocleHatStandS;
+global.TopHatMonocleRunOverlay[0] = ScoutMonocleHatRunS;
+global.TopHatMonocleTaunt[0] = ScoutMonocleHatTauntS;
+// CLASS_SOLDIER
+global.TopHatMonocleOverlay[1] = SoldierMonocleHatStandS;
+global.TopHatMonocleRunOverlay[1] = SoldierMonocleHatRunS;
+global.TopHatMonocleTaunt[1] = SoldierMonocleHatTauntS;
+// CLASS_SNIPER
+global.TopHatMonocleOverlay[2] = SniperMonocleHatStandS;
+global.TopHatMonocleRunOverlay[2] = SniperMonocleHatRunS;
+global.TopHatMonocleCrouchOverlay[2] = SniperMonocleHatCrouchS;
+global.TopHatMonocleTaunt[2] = SniperMonocleHatTauntS;
+// CLASS_DEMOMAN
+global.TopHatMonocleOverlay[3] = DemomanMonocleHatStandS;
+global.TopHatMonocleRunOverlay[3] = DemomanMonocleHatRunS;
+global.TopHatMonocleTaunt[3] = DemomanMonocleHatTauntS;
+// CLASS_MEDIC
+global.TopHatMonocleOverlay[4] = MedicMonocleHatStandS;
+global.TopHatMonocleRunOverlay[4] = MedicMonocleHatRunS;
+global.TopHatMonocleTaunt[4] = MedicMonocleHatTauntS;
+// CLASS_ENGINEER
+global.TopHatMonocleOverlay[5] = EngineerMonocleHatStandS;
+global.TopHatMonocleRunOverlay[5] = EngineerMonocleHatRunS;
+global.TopHatMonocleTaunt[5] = EngineerMonocleHatTauntS;
+// CLASS_HEAVY
+global.TopHatMonocleOverlay[6] = HeavyMonocleHatStandS;
+global.TopHatMonocleRunOverlay[6] = HeavyMonocleHatRunS;
+global.TopHatMonocleWalkOverlay[6] = HeavyMonocleHatWalkS;
+global.TopHatMonocleTaunt[6] = HeavyMonocleHatTauntS;
+// CLASS_SPY
+global.TopHatMonocleOverlay[7] = SpyMonocleHatStandS;
+global.TopHatMonocleRunOverlay[7] = SpyMonocleHatRunS;
+global.TopHatMonocleTaunt[7] = SpyMonocleHatTauntS;
+// CLASS_PYRO
+global.TopHatMonocleOverlay[8] = PyroMonocleHatStandS;
+global.TopHatMonocleRunOverlay[8] = PyroMonocleHatRunS;
+global.TopHatMonocleTaunt[8] = PyroMonocleHatTauntS;
+// Introducing the first ever Quote/Curly class reward
+// CLASS_QUOTE
+/*global.TopHatMonocleOverlay[0] = QuoteMonocleHatStandS;
+global.TopHatMonocleRunOverlay[0] = QuoteMonocleHatRunS;
+global.TopHatMonocleTaunt[0] = QuoteMonocleHatTauntS;*/

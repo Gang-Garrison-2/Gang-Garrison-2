@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="HeavyMonocleHatStandS" type="RESOURCE"/>
+  <resource name="HeavyMonocleHatRunS" type="RESOURCE"/>
+  <resource name="HeavyMonocleHatTauntS" type="RESOURCE"/>
+  <resource name="HeavyMonocleHatWalkS" type="RESOURCE"/>
+  <resource name="OmnomnomnomMonocleHatS" type="RESOURCE"/>
+</resources>

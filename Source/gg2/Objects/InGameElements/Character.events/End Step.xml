@@ -113,7 +113,6 @@ if (taunting)
             instance_create(x, y, MakeItRain);
         if (team == TEAM_BLUE and tauntindex == 9.30)
             instance_create(x, y, MakeItRain);
-        show_debug_message(tauntindex)
 }
     
 //sandvich
