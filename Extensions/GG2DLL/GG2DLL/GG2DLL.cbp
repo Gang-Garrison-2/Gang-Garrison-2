@@ -64,11 +64,13 @@
 		</Linker>
 		<Unit filename="GG2DLL.cpp" />
 		<Unit filename="GG2DLL.h" />
+		<Unit filename="dllmain.cpp" />
 		<Unit filename="md5.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="md5.h" />
 		<Unit filename="raii.hpp" />
+		<Unit filename="stdafx.cpp" />
 		<Unit filename="stdafx.h" />
 		<Extensions>
 			<code_completion />
