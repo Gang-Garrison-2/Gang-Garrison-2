@@ -163,9 +163,7 @@ if(!noNewAnim) // quote and sniper zoom still use the old anim system so animati
 equipmentOffset += yoffset;
 overlayOffset += yoffset;
 
-if (sprite == spriteLeanL or sprite == spriteLeanR)
-    overlayOffset -= 6;
-    
+
 yr += yoffset;
 
 if (omnomnomnom)
