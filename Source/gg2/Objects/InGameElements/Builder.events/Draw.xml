@@ -22,34 +22,48 @@ draw_set_alpha(1);
 draw_set_valign(fa_left);
 draw_set_halign(fa_top);
 
+// Draw the wallmask
+if (showWM)
+    draw_background_ext(BuilderWMB, 0, 0, 6, 6, 0, c_white, 1);
+
 // SELECTED ENTITY
 if (canClick &amp;&amp; selected != -1) {   
     if (!scaling || entityButtons[selected, SCALE]) {
         // Scaled preview
         var _x, _y, xscale, yscale;
-        if (!scaling) {
+        
+        // Unlock scaling if the user moves their mouse
+        if (scaleLock &amp;&amp; (abs(mouse_x-scaleX) &gt; 3 || abs(mouse_y-scaleY) &gt; 3))
+            scaleLock = false;
+            
+        if (!scaling || scaleLock) {
             scaleX = xr;
             scaleY = yr;
-            _x = xr + sprite_get_width(selectedSprite);
-            _y = yr + sprite_get_height(selectedSprite);
+            _x = xr + spriteWidth;
+            _y = yr + spriteHeight;
         } else {
             _x = max(scaleX+6, xr+spriteCenterX);
             _y = max(scaleY+6, yr+spriteCenterY);
         }
-        xscale = (_x-scaleX) / sprite_get_width(selectedSprite);
-        yscale = (_y-scaleY) / sprite_get_height(selectedSprite);
+        if (entityScale == 1) {
+            xscale = (_x-scaleX) / spriteWidth;
+            yscale = (_y-scaleY) / spriteHeight;
+        } else {
+            xscale = entityScale;
+            yscale = entityScale;
+        }
         
         draw_sprite_ext(selectedSprite, selectedImage, scaleX-spriteCenterX+spriteOffsetX*xscale, scaleY-spriteCenterY+spriteOffsetY*yscale, xscale, yscale, 0, c_white, 0.8);
         if (symmetry &amp;&amp; mirrored != -1) draw_sprite_ext(mirroredSprite, mirroredImage, map_width()-scaleX-mirroredCenterX+spriteOffsetX*xscale-(_x-scaleX), scaleY-spriteCenterY+spriteOffsetY*yscale, xscale, yscale, 0, c_white, 0.4);
     } else {
         // Tiled preview 
         var _x, _y, i, j; 
-        _x = scaleX + max(sprite_get_width(selectedSprite), ceil((mouse_x-scaleX)/sprite_get_width(selectedSprite))*sprite_get_width(selectedSprite));
-        _y = scaleY + max(sprite_get_height(selectedSprite), ceil((mouse_y-scaleY)/sprite_get_height(selectedSprite))*sprite_get_height(selectedSprite));
-        for(i=scaleX-spriteCenterX; i+spriteCenterX&lt;_x; i+=sprite_get_width(selectedSprite)) {      
-            for(j=scaleY-spriteCenterY; j+spriteCenterY&lt;_y; j+=sprite_get_height(selectedSprite)) {
-                draw_sprite_ext(selectedSprite, selectedImage, i+spriteOffsetX, j+spriteOffsetY, 1, 1, 0, c_white, 0.8);
-                if (symmetry &amp;&amp; mirrored != -1) draw_sprite_ext(mirroredSprite, mirroredImage, map_width()-i+mirroredOffsetX, j+spriteOffsetY, 1, 1, 0, c_white, 0.4);
+        _x = scaleX + max(spriteWidth, ceil((mouse_x-scaleX)/spriteWidth)*spriteWidth);
+        _y = scaleY + max(spriteHeight, ceil((mouse_y-scaleY)/spriteHeight)*spriteHeight);
+        for(i=scaleX-spriteCenterX; i+spriteCenterX&lt;_x; i+=spriteWidth) {      
+            for(j=scaleY-spriteCenterY; j+spriteCenterY&lt;_y; j+=spriteHeight) {
+                draw_sprite_ext(selectedSprite, selectedImage, i+spriteOffsetX, j+spriteOffsetY, entityScale, entityScale, 0, c_white, 0.8);
+                if (symmetry &amp;&amp; mirrored != -1) draw_sprite_ext(mirroredSprite, mirroredImage, map_width()-i+mirroredOffsetX, j+spriteOffsetY, entityScale, entityScale, 0, c_white, 0.4);
             }
         }
     }
@@ -61,16 +75,16 @@ if (canClick &amp;&amp; selected != -1) {
     if (symmetry &amp;&amp; mirrored != -1) draw_rectangle(map_width()-scaleX-mirroredCenterX, scaleY-spriteCenterY, map_width()-_x-mirroredCenterX, _y-spriteCenterY, true);
 } else if (canClick &amp;&amp; erasing) {
     draw_set_color(c_green);
-    draw_rectangle(scaleX, scaleY, max(scaleX+6, xr), max(scaleY+6, yr), true);
+    draw_rectangle(scaleX, scaleY, xr, yr, true);
     draw_set_alpha(0.2);
-    draw_rectangle(scaleX, scaleY, max(scaleX+6, xr), max(scaleY+6, yr), false);
+    draw_rectangle(scaleX, scaleY, xr, yr, false);
     
     if (symmetry) {
         draw_set_color(c_red);
         draw_set_alpha(0.5);
-        draw_rectangle(map_width()-scaleX, scaleY, map_width()-max(scaleX+6, xr), max(scaleY+6, yr), true);
+        draw_rectangle(map_width()-scaleX, scaleY, map_width()-xr, yr, true);
         draw_set_alpha(0.1);
-        draw_rectangle(map_width()-scaleX, scaleY, map_width()-max(scaleX+6, xr), max(scaleY+6, yr), false);
+        draw_rectangle(map_width()-scaleX, scaleY, map_width()-xr, yr, false);
     }
     draw_set_alpha(1);
 }

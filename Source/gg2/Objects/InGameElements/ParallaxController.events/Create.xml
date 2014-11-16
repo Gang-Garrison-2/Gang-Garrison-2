@@ -13,12 +13,15 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">// execute CP detection in a step's time
-// this means capture zones are not order-sensitive for custom maps
-alarm[0] = 1;
+        <argument kind="STRING">num_bgs=0;
+foreground = -1;
 
-// It still needs a cp right away though.
-event_perform(ev_alarm, 0);
+var i;
+for(i=0; i&lt;7; i+=1)
+{
+    background_xfactor[i] = 10-i;
+    background_yfactor[i] = 10-i;
+}
 </argument>
       </arguments>
     </action>

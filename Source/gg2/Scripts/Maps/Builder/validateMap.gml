@@ -1,4 +1,5 @@
-/** Validates the gamemode
+/** 
+ * Validates the gamemode
  * Argument0: the gamemode that should be validated
  * Returns true if the map is valid
 */

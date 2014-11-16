@@ -18,7 +18,8 @@
   if (room == BuilderRoom) background_replace(BuilderBGB, argument0, false, false);
   else background_replace(CustomMapB, argument0, false, false);
 
-  background_xscale[0] = 6;
-  background_yscale[0] = 6;
+  // Maps are now on bg 7 for parallax
+  background_xscale[7] = 6;
+  background_yscale[7] = 6;
   return true;
 }

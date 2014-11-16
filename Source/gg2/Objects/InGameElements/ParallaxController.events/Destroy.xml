@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<event category="CREATE" id="0">
+<event category="DESTROY" id="0">
   <actions>
     <action id="603" library="1">
       <!--action name: Code-->
@@ -13,12 +13,8 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">// execute CP detection in a step's time
-// this means capture zones are not order-sensitive for custom maps
-alarm[0] = 1;
-
-// It still needs a cp right away though.
-event_perform(ev_alarm, 0);
+        <argument kind="STRING">if (foreground != -1)
+    background_delete(foreground);
 </argument>
       </arguments>
     </action>
