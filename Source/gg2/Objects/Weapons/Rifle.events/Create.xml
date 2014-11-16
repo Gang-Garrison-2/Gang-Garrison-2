@@ -28,7 +28,6 @@
     maxAmmo = 0;
     ammoCount = maxAmmo;
     shot=false;
-    passedTeammates = 0;
     t=0;
     
     if(golden)

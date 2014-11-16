@@ -25,13 +25,14 @@ shotx = x;
 shoty = y;
 
 var hit;
-var x1,y1,xm,ym, len;
+var x1,y1,xm,ym, len, passedTeammates;
 var hitline;
 len=2000;
 x1=x;
 y1=y;
 x2=x+lengthdir_x(len,owner.aimDirection);
 y2=y+lengthdir_y(len,owner.aimDirection);
+passedTeammates = 0;
 
 gunSetSolids();
 alarm[6] = alarm[0];
@@ -40,7 +41,6 @@ while(len&gt;1) {
     ym=(y1+y2)/2;
     
     hitline = false;
-    passedTeammates = 0;
     with(owner) {
         if (collision_line(x1,y1,xm,ym,Generator,true,true)&gt;=0) if (instance_nearest(x1,y1,Generator).team != team) {
             hitline = true;
@@ -48,7 +48,7 @@ while(len&gt;1) {
         if(collision_line(x1,y1,xm,ym,Obstacle,true,true)&gt;=0) {
             hitline = true;
         } else if (collision_line(x1,y1,xm,ym,Character,true,true)&gt;=0) {
-            if (passedTeammates &gt;= 1)
+            if (passedTeammates &gt; 1)
                 hitline = true;
             if (collision_line(x1,y1,xm,ym,Character,true,true).team != team) {
                 hitline = true;
