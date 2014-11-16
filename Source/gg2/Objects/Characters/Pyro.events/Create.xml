@@ -14,7 +14,7 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">runPower = 1.1;
-maxHp = 120;
+maxHp = 140;
 weapons[0] = Flamethrower;
 haxxyStatue = PyroHaxxyStatueS;
 

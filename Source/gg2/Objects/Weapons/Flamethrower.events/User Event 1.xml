@@ -14,6 +14,8 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">{
+    if (ammoCount &lt; 1.8)
+        ammoCount -= 1.8;
     if (readyToShoot and ammoCount &gt;= 1.8
         and !collision_line(x,y,x+lengthdir_x(25,owner.aimDirection),y+lengthdir_y(25,owner.aimDirection),Obstacle,1,0)
         and !collision_line(x,y,x+lengthdir_x(25,owner.aimDirection),y+lengthdir_y(25,owner.aimDirection),BulletWall,1,0)

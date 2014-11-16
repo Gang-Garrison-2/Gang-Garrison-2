@@ -14,6 +14,9 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">{
+    // prevent sputtering
+    if (ammoCount &lt; 2)
+        ammoCount -= 2;
     if(readyToShoot and ammoCount &gt;= 2)
     {
         playsound(x,y,ChaingunSnd);
@@ -42,7 +45,8 @@
         if(ammoCount &lt; 3)
             reloadBufferFactor = 2.5;
         else
-            reloadBufferFactor = 1+(cos((ammoCount+2.2)/maxAmmo*pi)+1)/2; // spline from (full ammo = 1*) to (empty ammo = 2*)
+            //reloadBufferFactor = 1+(cos((ammoCount+2.2)/maxAmmo*pi)+1)/2; // spline from (full ammo = 1*) to (empty ammo = 2*)
+            reloadBufferFactor = 1;
         
         alarm[0] = refireTime / global.delta_factor;
         alarm[5] = reloadBuffer*reloadBufferFactor / global.delta_factor;

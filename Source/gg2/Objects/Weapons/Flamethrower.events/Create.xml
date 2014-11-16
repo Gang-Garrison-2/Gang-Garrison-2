@@ -25,7 +25,7 @@
     characterBlastStrength = 15;
     blastNoFlameTime = 15;
     blastReloadTime = 40;
-    flareReloadTime = 60;
+    flareReloadTime = 55;
     alarm[1] = blastReloadTime / global.delta_factor;
     alarm[2] = flareReloadTime / global.delta_factor;
     readyToBlast = false;

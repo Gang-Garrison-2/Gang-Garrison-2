@@ -20,7 +20,7 @@
     event_inherited();
     
     reloadTime = 40;
-    unscopedDamage = 35;
+    unscopedDamage = 40;
     baseDamage = 45;
     maxDamage = 75;
     chargeTime = 105;
@@ -28,6 +28,7 @@
     maxAmmo = 0;
     ammoCount = maxAmmo;
     shot=false;
+    passedTeammates = 0;
     t=0;
     
     if(golden)
