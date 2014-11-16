@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
   <resource name="RifleFRS" type="RESOURCE"/>
+  <resource name="RevolverFRS" type="RESOURCE"/>
+  <resource name="RocketlauncherFRS" type="RESOURCE"/>
+  <resource name="ScattergunFRS" type="RESOURCE"/>
+  <resource name="ShotgunFRS" type="RESOURCE"/>
+  <resource name="MinegunFRS" type="RESOURCE"/>
+  <resource name="MedigunFRS" type="RESOURCE"/>
 </resources>

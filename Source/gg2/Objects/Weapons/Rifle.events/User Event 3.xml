@@ -18,6 +18,7 @@ shot=true;
 justShot=true;
 readyToShoot = false;
 alarm[0] = (reloadTime + 20*owner.zoomed) / global.delta_factor;
+alarm[7] = (reloadTime/4 + 10*owner.zoomed) / global.delta_factor;  // Eject a shell during the animation
 
 // for drawing:
 tracerAlpha = 0.8;

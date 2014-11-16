@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <event category="ALARM" id="5">
   <actions>
+    <action id="604" library="1">
+      <!--action name: Inherited-->
+      <kind>NORMAL</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>false</canApplyTo>
+      <actionType>FUNCTION</actionType>
+      <functionName>action_inherited</functionName>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments/>
+    </action>
     <action id="603" library="1">
       <!--action name: Code-->
       <kind>CODE</kind>
@@ -15,9 +28,20 @@
       <arguments>
         <argument kind="STRING">if ammoCount &lt; maxAmmo {
     ammoCount += 1;
+    
+    if (global.particles == PARTICLES_NORMAL)
+    {
+        var shell;
+        shell = instance_create(x, y, Shell);
+        shell.direction = owner.aimDirection + (140 - random(40)) * image_xscale;
+        shell.image_index = 1;
+    }
 }
 if ammoCount &lt; maxAmmo {
     alarm[5] = reloadTime / global.delta_factor;
+    sprite_index = reloadSprite;
+    image_index = 0;
+    image_speed = reloadImageSpeed * global.delta_factor;
 }
 </argument>
       </arguments>

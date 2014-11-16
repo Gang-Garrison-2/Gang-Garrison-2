@@ -89,4 +89,61 @@ with(Gib)
     x -= hspeed;
     y -= vspeed;
 }
+with(Shell)
+{
+    if (fade)
+        image_alpha -= 0.1*global.delta_factor;
+        
+    if (image_alpha < 0.3)
+        instance_destroy();
+        
+    if (!stuck) {
+        angle += rotspeed;
+        hspeed *= global.delta_factor;
+        vspeed *= global.delta_factor;
+        
+        if (!place_free(x + hspeed, y))
+        {
+            angle = (angle+360) mod 360;
+            if (angle > 0 && angle < 180)
+                angle = 90;
+            else
+                angle = 270;
+                
+            hspeed *= -0.6;
+            rotspeed *= 0.8;
+        }
+        
+        if (!place_free(x, y + vspeed))
+        {
+            vspeed *= -0.7;
+            vspeed = max(-2.5, vspeed);
+            hspeed *= 0.7;
+            rotspeed *= 0.8;
+            
+            // ADVANCED rotation mechanics *fireworks*
+            angle = (angle+360) mod 360;
+            if (angle > 90 && angle < 270)
+                angle = 180;
+            else
+                angle = 0;
+            
+            if (abs(vspeed) < 1)
+            {
+                speed = 0;
+                stuck = true;
+                rotspeed = 0;
+            }
+        }
+        
+        x += hspeed;
+        y += vspeed;
+        hspeed /= global.delta_factor;
+        vspeed /= global.delta_factor;   
+        x -= hspeed;
+        y -= vspeed;   
+        
+        if (!stuck) vspeed += 0.7 * global.delta_factor;
+    }  
+}
 wallUnsetSolid();
