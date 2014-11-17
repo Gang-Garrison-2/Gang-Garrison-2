@@ -18,14 +18,8 @@
     {
         var shot;
         randomize();
-        shot = instance_create(x+lengthdir_x(8, owner.aimDirection), y+lengthdir_y(8, owner.aimDirection), Bubble);
-        shot.direction = owner.aimDirection;
-        shot.speed = 10;
-        shot.owner = owner;
-        shot.ownerPlayer = ownerPlayer;
-        shot.team = owner.team;
+        shot = createShot(x+lengthdir_x(8, owner.aimDirection), y+lengthdir_y(8, owner.aimDirection), Bubble, DAMAGE_SOURCE_BUBBLE, owner.aimDirection, 10);
         shot.gun = id;
-        shot.weapon = DAMAGE_SOURCE_BUBBLE;
         with(shot)
         {
             motion_add(owner.direction, owner.speed);

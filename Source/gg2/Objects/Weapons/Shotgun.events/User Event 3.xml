@@ -17,15 +17,8 @@
 playsound(x,y,ShotgunSnd);
 var shot;
 repeat(5) {
-    shot = instance_create(x,y,Shot);
+    shot = createShot(x, y, Shot, DAMAGE_SOURCE_SHOTGUN, owner.aimDirection, 13);
     shot.hitDamage = 7;
-    shot.direction = owner.aimDirection;
-    shot.image_angle = shot.direction;
-    shot.speed = 13;
-    shot.owner=owner;
-    shot.ownerPlayer=ownerPlayer;
-    shot.team=owner.team;
-    shot.weapon=DAMAGE_SOURCE_SHOTGUN;
     if(golden)
         shot.sprite_index = ShotGoldS;
     
