@@ -138,7 +138,7 @@
                 //Shoves
                 if (team != other.owner.team)
                 {
-                    motion_add(other.owner.aimDirection,
+                    motion_set(other.owner.aimDirection,
                                other.characterBlastStrength*(1-dist/other.blastDistance));
                     vspeed -= 2;
                     moveStatus = 3;
@@ -165,7 +165,7 @@
                         f.team = other.owner.team;
                         f.weapon = DAMAGE_SOURCE_FLAMETHROWER;
                         with(f)
-                            motion_add(direction, speed);
+                            motion_set(direction, speed);
                     }
                     burnIntensity = 0;
                     burnDuration = 0;

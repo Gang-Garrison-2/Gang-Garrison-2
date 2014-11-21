@@ -20,7 +20,7 @@
     event_inherited();
     
     reloadTime = 40;
-    unscopedDamage = 40;
+    unscopedDamage = 35;
     baseDamage = 45;
     maxDamage = 75;
     chargeTime = 105;
