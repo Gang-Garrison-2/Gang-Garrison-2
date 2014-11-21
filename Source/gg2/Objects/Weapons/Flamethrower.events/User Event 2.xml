@@ -165,7 +165,7 @@
                         f.team = other.owner.team;
                         f.weapon = DAMAGE_SOURCE_FLAMETHROWER;
                         with(f)
-                            motion_set(direction, speed);
+                            motion_add(direction, speed);
                     }
                     burnIntensity = 0;
                     burnDuration = 0;
