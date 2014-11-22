@@ -16,11 +16,4 @@ shot.owner=owner;
 shot.ownerPlayer=ownerPlayer;
 shot.team=owner.team;
 shot.weapon=damageSource;
-with (shot)
-{
-    gunSetSolids();
-    if (!place_free(x,y))
-        speed = 0;
-    gunUnsetSolids();
-}
 return shot;

@@ -15,7 +15,7 @@
       <arguments>
         <argument kind="STRING">ammoCount = max(0, ammoCount-1);    
 playsound(x,y,RocketSnd);
-var oid;
+var oid, newx, newy;
 oid = createShot(x+lengthdir_x(20,owner.aimDirection),y+lengthdir_y(20,owner.aimDirection), Rocket, DAMAGE_SOURCE_ROCKETLAUNCHER, owner.aimDirection, 13);
 oid.gun=id;
 if (collision_line(x,y,x+lengthdir_x(20,owner.aimDirection),y+lengthdir_y(20,owner.aimDirection),Obstacle,1,0) or
@@ -26,8 +26,16 @@ if (collision_line(x,y,x+lengthdir_x(20,owner.aimDirection),y+lengthdir_y(20,own
     oid.characterHit = -1;
     with (oid)
         event_user(5);
-} 
-
+}
+oid.lastknownx = owner.x;
+oid.lastknowny = owner.y;
+with (oid)
+{
+    gunSetSolids();
+    if (!place_free(x,y))
+        speed = 0;
+    gunUnsetSolids();
+}
 justShot=true;
 readyToShoot = false;
 alarm[0] = refireTime / global.delta_factor;
