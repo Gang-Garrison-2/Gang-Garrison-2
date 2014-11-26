@@ -29,19 +29,6 @@ readyToShoot=false;
 alarm[0] = refireTime / global.delta_factor;
 alarm[5] = (reloadBuffer + reloadTime) / global.delta_factor;
 alarm[7] = alarm[5] * 3 / 5;
-
-    
-if (global.myself != -1) if (global.myself.object != -1)
-{
-    with (ownerPlayer.object)
-    {
-        if (team != global.myself.object.team and !intel and cloakAlpha &gt; 0)
-        {
-            if (!invisible)
-                event_user(7);
-        }
-    }
-}
 </argument>
       </arguments>
     </action>

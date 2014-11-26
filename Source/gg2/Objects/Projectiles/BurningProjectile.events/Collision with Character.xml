@@ -52,6 +52,8 @@
     }
     
     dealFlicker(other.id);
+    
+    instance_destroy();
 }
 </argument>
       </arguments>
