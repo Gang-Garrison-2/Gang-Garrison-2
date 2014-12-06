@@ -1,2 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<resources/>
+<resources>
+  <resource name="QuoteMonocleHat" type="RESOURCE"/>
+  <resource name="QuoteMonocleHatTaunt" type="RESOURCE"/>
+</resources>

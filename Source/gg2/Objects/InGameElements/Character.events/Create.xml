@@ -175,7 +175,7 @@
     currentWeapon = instance_create(x,y,weapons[0]);
     global.paramOwner = noone;
     
-    if(hasClassReward(player, 'Silver_Attire') and player.class != CLASS_QUOTE)
+    if(hasClassReward(player, 'Silver_Accessories') and player.class != CLASS_QUOTE)
     {
         ds_list_add(stillOverlays, global.SilverAttireOverlay[player.class]);
         ds_list_add(leanROverlays, global.SilverAttireLeanROverlay[player.class]);
@@ -192,7 +192,7 @@
             ds_list_add(crouchOverlays, global.SilverAttireCrouchOverlay[player.class]);
     }
     
-    if(hasClassReward(player, 'Golden_Attire') and player.class != CLASS_QUOTE)
+    if(hasClassReward(player, 'Gold_Accessories_') and player.class != CLASS_QUOTE)
     {
         ds_list_add(stillOverlays, global.GoldenAttireOverlay[player.class]);
         ds_list_add(leanROverlays, global.GoldenAttireLeanROverlay[player.class]);
