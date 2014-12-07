@@ -15,7 +15,13 @@
       <arguments>
         <argument kind="STRING">if(other.id != ownerPlayer.object and other.team != team and other.ubered == 0  and other.hp &gt; 0)
 {
+    if (enemiesHit != -1)
+    {
+        if (ds_list_find_index(enemiesHit,other.id) != -1)
+            exit;
+    }
     damageCharacter(ownerPlayer, other.id, hitDamage);
+        
     if (other.lastDamageDealer != ownerPlayer and other.lastDamageDealer != other.player)
     {
         other.secondToLastDamageDealer = other.lastDamageDealer;
@@ -50,10 +56,12 @@
         other.afterburnSource = weapon;
         other.alarm[0] = other.decayDelay;
     }
-    
     dealFlicker(other.id);
     
-    instance_destroy();
+    if (enemiesHit == -1)
+        instance_destroy();
+    else
+        ds_list_add(enemiesHit, other.id);
 }
 </argument>
       </arguments>
