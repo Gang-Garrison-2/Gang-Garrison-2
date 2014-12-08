@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="HeavyBlueHS" type="RESOURCE"/>
+  <resource name="HeavyBlueIntelS" type="RESOURCE"/>
+  <resource name="HeavyBlueJumpS" type="RESOURCE"/>
+  <resource name="HeavyBlueLeanLS" type="RESOURCE"/>
+  <resource name="HeavyBlueLeanRS" type="RESOURCE"/>
+  <resource name="HeavyBlueRunS" type="RESOURCE"/>
+  <resource name="HeavyBlueS" type="RESOURCE"/>
+  <resource name="HeavyBlueStandS" type="RESOURCE"/>
+  <resource name="HeavyBlueWalkS" type="RESOURCE"/>
+  <resource name="HeavyRedHS" type="RESOURCE"/>
+  <resource name="HeavyRedIntelS" type="RESOURCE"/>
+  <resource name="HeavyRedJumpS" type="RESOURCE"/>
+  <resource name="HeavyRedLeanLS" type="RESOURCE"/>
+  <resource name="HeavyRedLeanRS" type="RESOURCE"/>
+  <resource name="HeavyRedRunS" type="RESOURCE"/>
+  <resource name="HeavyRedS" type="RESOURCE"/>
+  <resource name="HeavyRedStandS" type="RESOURCE"/>
+  <resource name="HeavyRedWalkS" type="RESOURCE"/>
+  <resource name="HeavyTauntS" type="RESOURCE"/>
+  <resource name="OmnomnomnomS" type="RESOURCE"/>
+</resources>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="ScoutBlueHS" type="RESOURCE"/>
+  <resource name="ScoutBlueIntelS" type="RESOURCE"/>
+  <resource name="ScoutBlueJumpS" type="RESOURCE"/>
+  <resource name="ScoutBlueLeanLS" type="RESOURCE"/>
+  <resource name="ScoutBlueLeanRS" type="RESOURCE"/>
+  <resource name="ScoutBlueRunS" type="RESOURCE"/>
+  <resource name="ScoutBlueS" type="RESOURCE"/>
+  <resource name="ScoutBlueStandS" type="RESOURCE"/>
+  <resource name="ScoutRedHS" type="RESOURCE"/>
+  <resource name="ScoutRedIntelS" type="RESOURCE"/>
+  <resource name="ScoutRedJumpS" type="RESOURCE"/>
+  <resource name="ScoutRedLeanLS" type="RESOURCE"/>
+  <resource name="ScoutRedLeanRS" type="RESOURCE"/>
+  <resource name="ScoutRedRunS" type="RESOURCE"/>
+  <resource name="ScoutRedS" type="RESOURCE"/>
+  <resource name="ScoutRedStandS" type="RESOURCE"/>
+  <resource name="ScoutTauntS" type="RESOURCE"/>
+</resources>
