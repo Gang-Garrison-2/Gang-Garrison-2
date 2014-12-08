@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <sprite>
-  <origin x="25" y="40"/>
+  <origin x="26" y="40"/>
   <mask>
     <separate>false</separate>
     <shape>RECTANGLE</shape>
