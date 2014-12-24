@@ -26,8 +26,6 @@ tracking=false;
 track_id=0;
 player = noone;
 
-trackingCorpse=true;
-
 numpadKeys[0] = vk_numpad0;
 numpadKeys[1] = vk_numpad1;
 numpadKeys[2] = vk_numpad2;
@@ -50,6 +48,11 @@ if (global.myself != -1)
 if (myTeam == TEAM_SPECTATOR)
 {
     event_user(7);
+}
+else
+{
+    tracking=true;
+    player = global.myself;
 }
 // so you can actually see the initial tracking
 io_clear();
