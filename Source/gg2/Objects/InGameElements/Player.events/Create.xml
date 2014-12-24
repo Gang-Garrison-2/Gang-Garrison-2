@@ -75,7 +75,7 @@
     badges = ds_list_create();
     ghost = noone;
     
-    corpse = -1;
+    corpse = noone;
 }
 </argument>
       </arguments>
