@@ -17,6 +17,7 @@
 metadata = ds_map_create();
 ds_map_add(metadata, "type", "meta");
 ds_map_add(metadata, "background", "ffffff");
+ds_map_add(metadata, "void", "000000");
 
 unloadResources();
 newProperties = ds_map_create();

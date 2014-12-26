@@ -4,7 +4,7 @@
  * [Argument1]: true if the script is executed in the builderroom.
 */
 
-var background, i, controller;
+var background, voidColor, i, controller;
 controller = noone;
 with(ParallaxController)
     controller = id;    // Use an existing parallax controller if possible.
@@ -12,6 +12,17 @@ with(ParallaxController)
 // The map background color
 background = readProperty(argument0, "background", HEX, $000000);
 background_color = make_color_rgb((background&$ff0000)>>16, (background&$00ff00)>>8, background&$0000ff);
+
+voidColor = readProperty(argument0, "void", HEX, $000000);
+voidColor = make_color_rgb((voidColor&$ff0000)>>16, (voidColor&$00ff00)>>8, voidColor&$0000ff);
+
+if (voidColor != background)
+{
+    if (controller == noone)
+        controller = instance_create(0, 0, ParallaxController);
+    
+    controller.voidColor = voidColor;
+}
 
 // Load parallax backgrounds
 for(i=0;i<7;i += 1)

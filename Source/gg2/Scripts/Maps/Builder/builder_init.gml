@@ -156,8 +156,6 @@ addButton("Get resources", '
 addButton("Load entities", '
     unloadResources();
     ds_map_clear(Builder.metadata);
-    ds_map_add(Builder.metadata, "type", "meta");
-    ds_map_add(Builder.metadata, "background", "ffffff");
     loadEntities();
 '); 
 addButton("Save entities", 'saveEntities();');
@@ -167,6 +165,7 @@ addButton("Clear entities", '
         ds_map_clear(Builder.metadata);
         ds_map_add(Builder.metadata, "type", "meta");
         ds_map_add(Builder.metadata, "background", "ffffff");
+        ds_map_add(Builder.metadata, "void", "000000");
         with (LevelEntity) instance_destroy();
     }
 '); 

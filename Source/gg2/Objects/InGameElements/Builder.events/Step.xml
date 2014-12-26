@@ -282,7 +282,7 @@ if (canClick &amp;&amp; !holdHeader[0] &amp;&amp; !holdHeader[1]) {
                     background_xscale[7] = 6;
                     background_yscale[7] = 6;
                 } else {
-                    ds_map_delete(builder.metadata, "bg_layer" + string(layerIndex));
+                    ds_map_delete(Builder.metadata, "bg_layer" + string(layerIndex));
                     ds_map_add(Builder.metadata, "bg_layer"+string(layerIndex), resourceToString(resource));
                 }
                 loadMetadata(Builder.metadata, true);

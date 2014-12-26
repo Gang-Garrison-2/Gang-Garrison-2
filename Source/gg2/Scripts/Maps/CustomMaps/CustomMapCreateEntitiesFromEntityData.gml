@@ -86,8 +86,10 @@ if (string_copy(argument0, 1, 1) == "{")
     // Execute the metadata function last
     if (metadata != -1)
     {
-        if (room == BuilderRoom)
+        if (room == BuilderRoom) {
+            ds_map_destroy(Builder.metadata);
             Builder.metadata = metadata;
+        }
         else
         {
             loadMetadata(metadata);
