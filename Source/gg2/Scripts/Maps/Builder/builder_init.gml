@@ -45,7 +45,7 @@ addButton("Load WM", '
 '); 
 addButton("Show BG", 'background_visible[7] = argument0;', 1, 1); 
 addButton("Show WM", 'Builder.showWM = argument0;', 1); 
-addButton("Show grid", 'background_visible[6] = argument0;', 1);
+addButton("Show grid", 'Builder.showGrid = argument0;', 1);
 addButton("Show FG",'ParallaxController.visible = argument0;', 1, 1); 
 addButton("Save & test", '
     if (Builder.mapWM == "") show_message("Select a walkmask first.");
@@ -111,6 +111,7 @@ addButton("Fast scrolling",'
 ', 1);
 addButton("Edit metadata", '
     showPropertyMenu(Builder.metadata, Builder.metadata, true);
+    loadMetadata(Builder.metadata, true);   // Reload
 ');
 addButton("Add resource", '
     var prop;
@@ -308,5 +309,5 @@ addEntity("KothControlPoint", koth, "{}", KothControlPoint, ControlPointNeutralS
 addEntity("KothRedControlPoint", dkoth, "{}", KothRedControlPoint, ControlPointRedS, 0, entityButtonS, 98, "Red KOTH control point");
 addEntity("KothBlueControlPoint", dkoth, "{}", KothBlueControlPoint, ControlPointBlueS, 0, entityButtonS, 100, "Blue KOTH control point");
 addEntity("dropdownPlatform", -1, "{xscale:1,yscale:1}", DropdownPlatform, sprite44, 5, entityButtonS, 80, "Dropdown platform");
-addEntity("foreground", -1, "{xscale:1,yscale:1,depth:-2,fade:true,animationspeed:0,resource:''}", SpriteObject, sprite64, 0, entityButtonS, 108, "Resizable foreground.");
-addEntity("foreground_scale", -1, "{scale:1,depth:-2,fade:true,animationspeed:0,resource:''}", SpriteObject, sprite64, 0, entityButtonS, 110, "Scalable foreground.");
+addEntity("foreground", -1, "{xscale:1,yscale:1,depth:-2,fade:true,opacity:1,animationspeed:0,resource:''}", SpriteObject, sprite64, 0, entityButtonS, 108, "Resizable foreground.");
+addEntity("foreground_scale", -1, "{scale:1,depth:-2,fade:true,opacity:1,animationspeed:0,resource:''}", SpriteObject, sprite64, 0, entityButtonS, 110, "Scalable foreground.");

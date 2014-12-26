@@ -14,6 +14,7 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">image_speed = 0;
+opacity = 1;
 fade = true;
 </argument>
       </arguments>
