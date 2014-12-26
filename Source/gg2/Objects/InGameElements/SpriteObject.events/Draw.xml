@@ -25,9 +25,9 @@ if (dist &gt; 800)
     exit;
     
 if (dist &lt;= 0 &amp;&amp; fade)
-    image_alpha = max(0.4, image_alpha - 0.1*global.delta_factor);
+    image_alpha = max(0.4*opacity, image_alpha - 0.1*global.delta_factor);
 else
-    image_alpha = min(1, image_alpha + 0.1*global.delta_factor);
+    image_alpha = min(opacity, image_alpha + 0.1*global.delta_factor);
     
 draw_sprite_ext(sprite_index, image_index, x, y, image_xscale, image_yscale, image_angle, c_white, image_alpha);
 </argument>

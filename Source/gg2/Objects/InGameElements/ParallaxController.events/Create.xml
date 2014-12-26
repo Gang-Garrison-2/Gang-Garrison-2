@@ -13,8 +13,9 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">num_bgs=0;
+        <argument kind="STRING">num_bgs = 0;
 foreground = -1;
+voidColor = c_black;
 
 var i;
 for(i=0; i&lt;7; i+=1)

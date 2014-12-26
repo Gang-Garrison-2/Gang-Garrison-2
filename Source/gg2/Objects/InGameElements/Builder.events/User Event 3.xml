@@ -28,8 +28,6 @@ if (is_string(resource) &amp;&amp; Builder.metadata != -1)
         resourceString = ds_map_find_value(Builder.metadata, resource);
         if (is_string(resourceString))
         {
-            /*stringToResource(resourceString, temp_directory + '\TmpResource.res');
-            sprite = sprite_add(temp_directory + '\TmpResource.res', 1, 0, 0, 0, 0);*/
             sprite = stringToResource(resourceString);
             ds_map_add(global.resources, resource, sprite);
         }
@@ -49,7 +47,7 @@ if (is_string(resource) &amp;&amp; Builder.metadata != -1)
         spriteOffsetX = sprite_get_xoffset(selectedSprite)*entityScale;
         spriteOffsetY = sprite_get_yoffset(selectedSprite)*entityScale;
         
-        //Mirrored offsets, they have to be used because the ones above are rounded
+        // Mirrored offsets, they have to be used because the ones above are rounded
         mirroredCenterX = -spriteCenterX;
         mirroredOffsetX = spriteOffsetX - sprite_get_width(selectedSprite)*entityScale;
         

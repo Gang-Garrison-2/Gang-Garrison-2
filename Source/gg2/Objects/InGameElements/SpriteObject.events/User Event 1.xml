@@ -27,6 +27,8 @@ if (scale != 1)
 fade = readProperty(other.properties, "fade", BOOL, fade);
 image_speed = readProperty(other.properties, "animationspeed", REAL, image_speed);
 depth = readProperty(other.properties, "depth", REAL, depth);
+opacity = readProperty(other.properties, "opacity", REAL, opacity);
+image_alpha = opacity;
 </argument>
       </arguments>
     </action>
