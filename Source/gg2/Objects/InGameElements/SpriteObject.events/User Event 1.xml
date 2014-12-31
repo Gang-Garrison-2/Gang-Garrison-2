@@ -25,10 +25,15 @@ if (scale != 1)
 }
 
 fade = readProperty(other.properties, "fade", BOOL, fade);
-image_speed = readProperty(other.properties, "animationspeed", REAL, image_speed);
+animationSpeed = readProperty(other.properties, "animationspeed", REAL, animationSpeed);
 depth = readProperty(other.properties, "depth", REAL, depth);
 opacity = readProperty(other.properties, "opacity", REAL, opacity);
+trigger = readProperty(other.properties, "trigger", REAL, trigger);
+triggerDistance = readProperty(other.properties, "distance", REAL, triggerDistance);
+
 image_alpha = opacity;
+if (trigger == 0)
+    image_speed = animationSpeed;
 </argument>
       </arguments>
     </action>

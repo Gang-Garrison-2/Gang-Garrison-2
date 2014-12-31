@@ -3,7 +3,7 @@
 
 {
   if(room == CustomMapRoom || room == BuilderRoom) {
-    return background_width[7] * 6;
+    return background_width[7] * background_xscale[7];
   } else {
     return room_width;
   }

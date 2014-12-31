@@ -4,7 +4,7 @@
  * [Argument1]: true if the script is executed in the builderroom.
 */
 
-var background, voidColor, i, controller;
+var background, voidColor, i, controller, scale;
 controller = noone;
 with(ParallaxController)
     controller = id;    // Use an existing parallax controller if possible.
@@ -23,6 +23,11 @@ if (voidColor != background)
     
     controller.voidColor = voidColor;
 }
+
+// Set the map scale (for hd maps)
+scale = readProperty(argument0, "scale", REAL, 6);
+background_xscale[7] = scale;
+background_yscale[7] = scale;
 
 // Load parallax backgrounds
 for(i=0;i<7;i += 1)
@@ -48,8 +53,8 @@ for(i=0;i<7;i += 1)
         ds_map_add(global.resources, "bg_layer" + string(i), stringToResource(background, true));
         
         background_index[i] = ds_map_find_value(global.resources, "bg_layer" + string(i))
-        background_xscale[i] = 6;
-        background_yscale[i] = 6;
+        background_xscale[i] = background_xscale[7];
+        background_yscale[i] = background_yscale[7];
         background_htiled[i] = true;
         background_visible[i] = true;
     }

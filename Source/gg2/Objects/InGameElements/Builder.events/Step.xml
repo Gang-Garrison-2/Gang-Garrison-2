@@ -266,7 +266,7 @@ if (canClick &amp;&amp; !holdHeader[0] &amp;&amp; !holdHeader[1]) {
                 holdX = mouse_x;
                 holdY = mouse_y;
             }
-        } else if (mouse_y &lt; yOffset+buttonHeight+layerHeight){
+        } else if (mouse_y &lt; yOffset+buttonHeight+layerHeight &amp;&amp; mouse_y &gt; yOffset+buttonHeight) {
             canClick = false;
             if (mouse_check_button_pressed(mb_left)) { // new resource
                 var resource;

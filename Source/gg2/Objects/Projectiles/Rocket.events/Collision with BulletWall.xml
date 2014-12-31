@@ -13,14 +13,15 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">{
-    gunSetSolids();
+        <argument kind="STRING">gunSetSolids();
+if (other.solid)
+{
     really_move_contact_solid(direction, speed);
-    gunUnsetSolids();
     characterHit=-1;
     if fade==false event_user(5);
     else instance_destroy();
 }
+gunUnsetSolids();
 </argument>
       </arguments>
     </action>

@@ -177,7 +177,7 @@ draw_text(xOffset+40, yOffset+buttonHeight-18+layerHeight, "Clear");
 if (!setOffsets)
     draw_text(xOffset+100, yOffset+buttonHeight-18+layerHeight, "Offsets");
 else
-    draw_text(xOffset+115, yOffset+buttonHeight-18+layerHeight, "Save");
+    draw_text(xOffset+110, yOffset+buttonHeight-18+layerHeight, "Save");
 draw_text(xOffset+6, yOffset+buttonHeight + 35, layerName);
 
 // Layer preview

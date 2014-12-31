@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<event category="COLLISION" with="BulletWall">
+<event category="OTHER" id="11">
   <actions>
     <action id="603" library="1">
       <!--action name: Code-->
@@ -13,9 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if (!other.open)
-    instance_destroy();
-
+        <argument kind="STRING">triggerDistance = readProperty(other.properties, "distance", REAL, triggerDistance);
 </argument>
       </arguments>
     </action>
