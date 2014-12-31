@@ -18,14 +18,8 @@ if (is_real(a) == is_real(b))
 
 var message;
 message = "Assertion " + string(global.testAssertions) + " failed: ";
-if (is_string(a))
-    message += '"' + a + '"';
-else
-    message += string(a);
+message += value_to_string(a);
 message += " should be equal to ";
-if (is_string(b))
-    message += '"' + b + '"';
-else
-    message += string(b);
+message += value_to_string(b);
 
 show_message(message);
