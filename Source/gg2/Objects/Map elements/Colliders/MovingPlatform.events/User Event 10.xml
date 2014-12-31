@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<event category="COLLISION" with="BulletWall">
+<event category="OTHER" id="20">
   <actions>
     <action id="603" library="1">
       <!--action name: Code-->
@@ -13,12 +13,10 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if (!other.open) {
-    var imp;
-    move_contact_solid(direction, speed);
-    imp = instance_create(x,y,Impact);
-    imp.image_angle=direction;
-    instance_destroy();
+        <argument kind="STRING">if(global.updateType == QUICK_UPDATE or global.updateType == FULL_UPDATE) {
+    write_ushort(global.serializeBuffer, x*5);
+    write_ushort(global.serializeBuffer, y*5);
+    write_byte(global.serializeBuffer, speed == upSpeed);
 }
 </argument>
       </arguments>

@@ -64,6 +64,7 @@ addButton("Save & test", '
                 startGG2("-map ggb2_tmp_map");
             break;       
             case 3:
+                Builder.selected = -1;
                 Builder.visible = false;
                 global.launchMap = "ggb2_tmp_map";
                 global.isHost = true;
@@ -89,6 +90,7 @@ addButton("Test w/o save", '
                 startGG2("-map ggb2_tmp_map");
             break;       
             case 2:
+                Builder.selected = -1;
                 Builder.visible = false;
                 global.launchMap = "ggb2_tmp_map";
                 global.isHost = true;
@@ -310,3 +312,4 @@ addEntity("KothBlueControlPoint", dkoth, "{}", KothBlueControlPoint, ControlPoin
 addEntity("dropdownPlatform", -1, "{xscale:1,yscale:1}", DropdownPlatform, sprite44, 5, entityButtonS, 80, "Dropdown platform");
 addEntity("foreground", -1, "{xscale:1,yscale:1,depth:-2,fade:true,opacity:1,animationspeed:0,trigger:0,distance:0,resource:''}", SpriteObject, sprite64, 0, entityButtonS, 108, "Resizable foreground.");
 addEntity("foreground_scale", -1, "{scale:1,depth:-2,fade:true,opacity:1,animationspeed:0,trigger:0,distance:0,resource:''}", SpriteObject, sprite64, 0, entityButtonS, 110, "Scalable foreground.");
+addEntity("moving_platform", -1, "{scale:1,animationspeed:0,trigger:0,resource:'',top:60,left:0,upspeed:3,downspeed:3}", MovingPlatform, sprite64, 0, entityButtonS, 112, "A moving platform.");
