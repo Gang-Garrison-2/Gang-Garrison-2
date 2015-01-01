@@ -14,7 +14,7 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">if (foreground &gt; 0)
-    draw_background_ext(foreground, 0, 0 ,6, 6, 0, c_white, 1);
+    draw_background_ext(foreground, 0, 0 ,background_xscale[7], background_yscale[7], 0, c_white, 1);
     
 // Draw map borders
 draw_set_alpha(1);

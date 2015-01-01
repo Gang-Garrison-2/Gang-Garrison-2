@@ -24,7 +24,7 @@ if (scale != 1)
     image_yscale = scale;
 }
 
-animationSpeed = readProperty(other.properties, "animationspeed", REAL, animationSpeed);
+animationSpeed = readProperty(other.properties, "animationspeed", REAL, animationSpeed) * global.delta_factor;
 trigger = readProperty(other.properties, "trigger", REAL, trigger);
 top = readProperty(other.properties, "top", REAL, top);
 left = readProperty(other.properties, "left", REAL, left);
