@@ -64,6 +64,7 @@ addButton("Save & test", '
                 startGG2("-map ggb2_tmp_map");
             break;       
             case 3:
+                Builder.selected = -1;
                 Builder.visible = false;
                 global.launchMap = "ggb2_tmp_map";
                 global.isHost = true;
@@ -89,6 +90,7 @@ addButton("Test w/o save", '
                 startGG2("-map ggb2_tmp_map");
             break;       
             case 2:
+                Builder.selected = -1;
                 Builder.visible = false;
                 global.launchMap = "ggb2_tmp_map";
                 global.isHost = true;
@@ -285,7 +287,7 @@ addEntity("pitfall", -1, "{xscale:1,yscale:1}", PitFall, sprite64, 3, entityButt
 addEntity("fragbox", -1, "{xscale:1,yscale:1}", FragBox, sprite64, 4, entityButtonS, 60, "Gibs a player.");
 addEntity("playerwall", -1, "{xscale:1,yscale:1}", PlayerWall, sprite45, 3, entityButtonS, 50, "A wall that blocks players but not bullets.");
 addEntity("playerwall_horizontal", 0, "{xscale:1,yscale:1}", PlayerWallHorizontal, sprite44, 3, entityButtonS, 54, "A floor that blocks player but not bullets.");
-addEntity("bulletwall", -1, "{xscale:1,yscale:1}", BulletWall, sprite45, 4, entityButtonS, 52, "A wall that blocks bullets but not players.");
+addEntity("bulletwall", -1, "{xscale:1,yscale:1, distance:-1}", BulletWall, sprite45, 4, entityButtonS, 52, "A wall that blocks bullets but not players.");
 addEntity("bulletwall_horizontal", 0, "{xscale:1,yscale:1}", BulletWallHorizontal, sprite44, 4, entityButtonS, 56, "A floor that blocks bullets but not players.");
 addEntity("leftdoor", -1, "{xscale:1,yscale:1}", LeftDoor, sprite45, 5, entityButtonS, 102, "Blocks players trying to go left");
 addEntity("rightdoor", -1, "{xscale:1,yscale:1}", RightDoor, sprite45, 6, entityButtonS, 104, "Blocks players trying to go right.");
@@ -308,5 +310,6 @@ addEntity("KothControlPoint", koth, "{}", KothControlPoint, ControlPointNeutralS
 addEntity("KothRedControlPoint", dkoth, "{}", KothRedControlPoint, ControlPointRedS, 0, entityButtonS, 98, "Red KOTH control point");
 addEntity("KothBlueControlPoint", dkoth, "{}", KothBlueControlPoint, ControlPointBlueS, 0, entityButtonS, 100, "Blue KOTH control point");
 addEntity("dropdownPlatform", -1, "{xscale:1,yscale:1}", DropdownPlatform, sprite44, 5, entityButtonS, 80, "Dropdown platform");
-addEntity("foreground", -1, "{xscale:1,yscale:1,depth:-2,fade:true,opacity:1,animationspeed:0,resource:''}", SpriteObject, sprite64, 0, entityButtonS, 108, "Resizable foreground.");
-addEntity("foreground_scale", -1, "{scale:1,depth:-2,fade:true,opacity:1,animationspeed:0,resource:''}", SpriteObject, sprite64, 0, entityButtonS, 110, "Scalable foreground.");
+addEntity("foreground", -1, "{xscale:1,yscale:1,depth:-2,fade:true,opacity:1,animationspeed:0,trigger:0,distance:0,resource:''}", SpriteObject, sprite64, 0, entityButtonS, 108, "Resizable foreground.");
+addEntity("foreground_scale", -1, "{scale:1,depth:-2,fade:true,opacity:1,animationspeed:0,trigger:0,distance:0,resource:''}", SpriteObject, sprite64, 0, entityButtonS, 110, "Scalable foreground.");
+addEntity("moving_platform", -1, "{scale:1,animationspeed:0,trigger:0,resource:'',top:60,left:0,upspeed:3,downspeed:3}", MovingPlatform, sprite64, 0, entityButtonS, 112, "A moving platform.");

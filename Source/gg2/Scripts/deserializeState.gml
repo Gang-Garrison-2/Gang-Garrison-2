@@ -14,6 +14,9 @@ if(argument0 != CAPS_UPDATE) {
             event_user(13);
         }
     }
+    
+    with(MovingPlatform)
+        event_user(11);
 }
 
 if(argument0 == FULL_UPDATE) {

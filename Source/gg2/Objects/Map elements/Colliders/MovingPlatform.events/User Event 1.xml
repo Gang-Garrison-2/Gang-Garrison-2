@@ -24,16 +24,24 @@ if (scale != 1)
     image_yscale = scale;
 }
 
-fade = readProperty(other.properties, "fade", BOOL, fade);
 animationSpeed = readProperty(other.properties, "animationspeed", REAL, animationSpeed);
-depth = readProperty(other.properties, "depth", REAL, depth);
-opacity = readProperty(other.properties, "opacity", REAL, opacity);
 trigger = readProperty(other.properties, "trigger", REAL, trigger);
-triggerDistance = readProperty(other.properties, "distance", REAL, triggerDistance);
-
-image_alpha = opacity;
-if (trigger == 0)
-    image_speed = animationSpeed;
+top = readProperty(other.properties, "top", REAL, top);
+left = readProperty(other.properties, "left", REAL, left);
+upSpeed = readProperty(other.properties, "upspeed", REAL, upSpeed);
+downSpeed = readProperty(other.properties, "downspeed", REAL, downSpeed);
+    
+if (abs(left) &gt; abs(top))
+    checkdir = 0;
+    
+if (top == 0)
+    direction = 90 - sign(left)*90;
+else if (left == 0)
+    direction = sign(top)*90;
+else
+    direction = arctan(top/left) * 180 / pi;
+    
+speed = upSpeed;
 </argument>
       </arguments>
     </action>

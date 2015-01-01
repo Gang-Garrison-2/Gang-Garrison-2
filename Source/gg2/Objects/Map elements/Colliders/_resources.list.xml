@@ -3,4 +3,5 @@
   <resource name="Obstacles" type="GROUP"/>
   <resource filename="Gates_Doors" name="Gates/Doors" type="GROUP"/>
   <resource name="CharacterCollider" type="RESOURCE"/>
+  <resource name="MovingPlatform" type="RESOURCE"/>
 </resources>

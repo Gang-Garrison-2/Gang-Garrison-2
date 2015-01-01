@@ -13,7 +13,8 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">instance_destroy()
+        <argument kind="STRING">if (!other.open)
+    instance_destroy()
 </argument>
       </arguments>
     </action>

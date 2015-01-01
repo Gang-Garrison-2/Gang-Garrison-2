@@ -96,9 +96,19 @@ if (string_copy(argument0, 1, 1) == "{")
             ds_map_destroy(metadata);
         }
     }
+    else
+    {
+        // Make sure the scale is correct when there is no metadata.
+        background_xscale[7] = 6;
+        background_yscale[7] = 6;
+    }
 }
 else
 {
+    // The old map format doesn't have metadata so make sure the scale is right
+    background_xscale[7] = 6;
+    background_yscale[7] = 6;
+
     // Read entities that are compiled in the old format.    
     var currentPos, entityType, entityX, entityY, wordLength, DIVIDER, DIVREPLACEMENT;
     DIVIDER = chr(10);
