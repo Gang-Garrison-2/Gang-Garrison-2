@@ -18,7 +18,7 @@ flameLife = 40;
 burnIncrease = 8;
 durationIncrease = 35;
 afterburnFalloff = false;
-penetrateEnemies = false;
+penetrateCap = 0;
 </argument>
       </arguments>
     </action>

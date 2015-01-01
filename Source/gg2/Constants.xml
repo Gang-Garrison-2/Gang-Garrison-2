@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <constants>
-  <constant name="VERSION" value="27400"/>
-  <constant name="GAME_VERSION_STRING" value="&quot;v2.7.5b6&quot;"/>
+  <constant name="VERSION" value="27409"/>
+  <constant name="GAME_VERSION_STRING" value="&quot;v2.8.0b9&quot;"/>
   <constant name="GAME_NAME_STRING" value="&quot;Gang Garrison 2 Beta&quot;"/>
   <constant name="GAME_URL_STRING" value="&quot;http://www.ganggarrison.com/forums/index.php?topic=36209.0&quot;"/>
   <constant name="PLUGIN_SOURCE" value="&quot;http://www.ganggarrison.com/plugins/&quot;"/>

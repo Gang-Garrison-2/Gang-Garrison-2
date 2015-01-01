@@ -14,14 +14,13 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">// Child objects will need to define:
-// hitDamage, flameLife, burnIncrease, durationIncrease, afterburnFalloff (bool), penetrateEnemies (bool)
+// hitDamage, flameLife, burnIncrease, durationIncrease, afterburnFalloff (bool), penetrateCap
 // Then they need to call the inherited event (i.e. this code)
 alarm[0] = flameLife / global.delta_factor;
 
-if (!penetrateEnemies)
-    enemiesHit = -1;
-else
-    enemiesHit = ds_list_create();
+enemiesHit = ds_list_create();
+    
+perseverant = choose(0, 0, 0, 1); // 1/4 chance
 </argument>
       </arguments>
     </action>

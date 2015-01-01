@@ -13,8 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if (enemiesHit != -1)
-    ds_list_destroy(enemiesHit);
+        <argument kind="STRING">ds_list_destroy(enemiesHit);
 </argument>
       </arguments>
     </action>
