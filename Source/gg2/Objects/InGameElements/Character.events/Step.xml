@@ -72,7 +72,6 @@ if (spinjumping and
     vspeed -= _gravity * global.delta_factor;
 
 charUnsetSolids();
-
 </argument>
       </arguments>
     </action>
