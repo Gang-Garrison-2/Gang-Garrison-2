@@ -21,10 +21,13 @@ selectedImage = ds_map_find_value(button, "entity_image");
 selectedProperties = ds_map_find_value(button, "properties");
 ds_map_clear(newProperties);
 
+spriteWidth = sprite_get_width(selectedSprite);
+spriteHeight = sprite_get_height(selectedSprite)
 spriteCenterX = round(sprite_get_width(selectedSprite)/12)*6;
 spriteCenterY = round(sprite_get_height(selectedSprite)/12)*6;
 spriteOffsetX = sprite_get_xoffset(selectedSprite);
 spriteOffsetY = sprite_get_yoffset(selectedSprite);
+entityScale = 1;
 
 //Mirrored offsets, they have to be used because the ones above are rounded
 mirroredCenterX = -spriteCenterX;

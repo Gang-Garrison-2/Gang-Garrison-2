@@ -24,6 +24,9 @@
                 event_user(12);
             }
         }
+        
+        with(MovingPlatform)
+            event_user(10);
     }
 
     if(argument0 == FULL_UPDATE) {

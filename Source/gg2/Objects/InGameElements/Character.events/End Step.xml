@@ -22,6 +22,22 @@ with(DropdownPlatform)
        and (other.bbox_bottom - (other.y - other.yprevious) - 1)
            &lt; (bbox_top - (y - yprevious)))
     {
+        // Move with the platform if we're standing on one.
+        if (object_index == MovingPlatform)
+        {
+            if (trigger == 1 || (trigger == 2 &amp;&amp; other.intel))
+            {
+                alarm[0] = 3;
+                moving = true;
+            }
+            
+            if (moving || trigger == 0)
+            {
+                other.x += hspeed * global.delta_factor;
+                other.y += vspeed * global.delta_factor;
+            }
+        }
+    
         while(place_meeting(x, y, other))
             other.y -= 0.1;
         other.vspeed = 0;

@@ -14,12 +14,83 @@
         visible = true;
         resetToggles();
         CustomMapInit("Maps/ggb2_tmp_map.png");
+        loadMetadata(Builder.metadata, true);
     }
 }
 </creationCode>
   <backgroundColor>C0C0C0</backgroundColor>
   <drawBackgroundColor>true</drawBackgroundColor>
   <backgrounds>
+    <backgroundDef>
+      <visibleOnRoomStart>false</visibleOnRoomStart>
+      <isForeground>false</isForeground>
+      <backgroundImage/>
+      <offset x="0" y="0"/>
+      <speed x="0" y="0"/>
+      <tileHorizontally>false</tileHorizontally>
+      <tileVertically>false</tileVertically>
+      <stretch>false</stretch>
+    </backgroundDef>
+    <backgroundDef>
+      <visibleOnRoomStart>false</visibleOnRoomStart>
+      <isForeground>false</isForeground>
+      <backgroundImage/>
+      <offset x="0" y="0"/>
+      <speed x="0" y="0"/>
+      <tileHorizontally>false</tileHorizontally>
+      <tileVertically>false</tileVertically>
+      <stretch>false</stretch>
+    </backgroundDef>
+    <backgroundDef>
+      <visibleOnRoomStart>false</visibleOnRoomStart>
+      <isForeground>false</isForeground>
+      <backgroundImage/>
+      <offset x="0" y="0"/>
+      <speed x="0" y="0"/>
+      <tileHorizontally>false</tileHorizontally>
+      <tileVertically>false</tileVertically>
+      <stretch>false</stretch>
+    </backgroundDef>
+    <backgroundDef>
+      <visibleOnRoomStart>false</visibleOnRoomStart>
+      <isForeground>false</isForeground>
+      <backgroundImage/>
+      <offset x="0" y="0"/>
+      <speed x="0" y="0"/>
+      <tileHorizontally>false</tileHorizontally>
+      <tileVertically>false</tileVertically>
+      <stretch>false</stretch>
+    </backgroundDef>
+    <backgroundDef>
+      <visibleOnRoomStart>false</visibleOnRoomStart>
+      <isForeground>false</isForeground>
+      <backgroundImage/>
+      <offset x="0" y="0"/>
+      <speed x="0" y="0"/>
+      <tileHorizontally>false</tileHorizontally>
+      <tileVertically>false</tileVertically>
+      <stretch>false</stretch>
+    </backgroundDef>
+    <backgroundDef>
+      <visibleOnRoomStart>false</visibleOnRoomStart>
+      <isForeground>false</isForeground>
+      <backgroundImage/>
+      <offset x="0" y="0"/>
+      <speed x="0" y="0"/>
+      <tileHorizontally>false</tileHorizontally>
+      <tileVertically>false</tileVertically>
+      <stretch>false</stretch>
+    </backgroundDef>
+    <backgroundDef>
+      <visibleOnRoomStart>false</visibleOnRoomStart>
+      <isForeground>false</isForeground>
+      <backgroundImage/>
+      <offset x="0" y="0"/>
+      <speed x="0" y="0"/>
+      <tileHorizontally>false</tileHorizontally>
+      <tileVertically>false</tileVertically>
+      <stretch>false</stretch>
+    </backgroundDef>
     <backgroundDef>
       <visibleOnRoomStart>true</visibleOnRoomStart>
       <isForeground>false</isForeground>
@@ -28,76 +99,6 @@
       <speed x="0" y="0"/>
       <tileHorizontally>false</tileHorizontally>
       <tileVertically>false</tileVertically>
-      <stretch>false</stretch>
-    </backgroundDef>
-    <backgroundDef>
-      <visibleOnRoomStart>false</visibleOnRoomStart>
-      <isForeground>false</isForeground>
-      <backgroundImage>BuilderWMB</backgroundImage>
-      <offset x="0" y="0"/>
-      <speed x="0" y="0"/>
-      <tileHorizontally>false</tileHorizontally>
-      <tileVertically>false</tileVertically>
-      <stretch>false</stretch>
-    </backgroundDef>
-    <backgroundDef>
-      <visibleOnRoomStart>true</visibleOnRoomStart>
-      <isForeground>false</isForeground>
-      <backgroundImage>GridB</backgroundImage>
-      <offset x="0" y="0"/>
-      <speed x="0" y="0"/>
-      <tileHorizontally>true</tileHorizontally>
-      <tileVertically>true</tileVertically>
-      <stretch>false</stretch>
-    </backgroundDef>
-    <backgroundDef>
-      <visibleOnRoomStart>false</visibleOnRoomStart>
-      <isForeground>false</isForeground>
-      <backgroundImage/>
-      <offset x="0" y="0"/>
-      <speed x="0" y="0"/>
-      <tileHorizontally>true</tileHorizontally>
-      <tileVertically>true</tileVertically>
-      <stretch>false</stretch>
-    </backgroundDef>
-    <backgroundDef>
-      <visibleOnRoomStart>false</visibleOnRoomStart>
-      <isForeground>false</isForeground>
-      <backgroundImage/>
-      <offset x="0" y="0"/>
-      <speed x="0" y="0"/>
-      <tileHorizontally>true</tileHorizontally>
-      <tileVertically>true</tileVertically>
-      <stretch>false</stretch>
-    </backgroundDef>
-    <backgroundDef>
-      <visibleOnRoomStart>false</visibleOnRoomStart>
-      <isForeground>false</isForeground>
-      <backgroundImage/>
-      <offset x="0" y="0"/>
-      <speed x="0" y="0"/>
-      <tileHorizontally>true</tileHorizontally>
-      <tileVertically>true</tileVertically>
-      <stretch>false</stretch>
-    </backgroundDef>
-    <backgroundDef>
-      <visibleOnRoomStart>false</visibleOnRoomStart>
-      <isForeground>false</isForeground>
-      <backgroundImage/>
-      <offset x="0" y="0"/>
-      <speed x="0" y="0"/>
-      <tileHorizontally>true</tileHorizontally>
-      <tileVertically>true</tileVertically>
-      <stretch>false</stretch>
-    </backgroundDef>
-    <backgroundDef>
-      <visibleOnRoomStart>false</visibleOnRoomStart>
-      <isForeground>false</isForeground>
-      <backgroundImage/>
-      <offset x="0" y="0"/>
-      <speed x="0" y="0"/>
-      <tileHorizontally>true</tileHorizontally>
-      <tileVertically>true</tileVertically>
       <stretch>false</stretch>
     </backgroundDef>
   </backgrounds>

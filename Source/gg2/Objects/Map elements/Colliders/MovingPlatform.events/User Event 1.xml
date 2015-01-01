@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="OTHER" id="11">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">resource = readProperty(other.properties, "resource", STRING, "");
+ds_list_add(other.specialEntities, id);
+
+var scale;
+scale = readProperty(other.properties, "scale", REAL, 1);
+if (scale != 1)
+{
+    image_xscale = scale;
+    image_yscale = scale;
+}
+
+animationSpeed = readProperty(other.properties, "animationspeed", REAL, animationSpeed);
+trigger = readProperty(other.properties, "trigger", REAL, trigger);
+top = readProperty(other.properties, "top", REAL, top);
+left = readProperty(other.properties, "left", REAL, left);
+upSpeed = readProperty(other.properties, "upspeed", REAL, upSpeed);
+downSpeed = readProperty(other.properties, "downspeed", REAL, downSpeed);
+    
+if (abs(left) &gt; abs(top))
+    checkdir = 0;
+    
+if (top == 0)
+    direction = 90 - sign(left)*90;
+else if (left == 0)
+    direction = sign(top)*90;
+else
+    direction = arctan(top/left) * 180 / pi;
+    
+speed = upSpeed;
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

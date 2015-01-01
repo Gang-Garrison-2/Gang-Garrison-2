@@ -3,6 +3,7 @@ global.entityData = ds_list_create();
 global.properties = ds_map_create();
 global.gamemodes = ds_list_create();
 global.buttons = ds_list_create();
+global.resources = ds_map_create();
 
 global.placeEntityFunction = "";
 global.metadataFunction = "";
@@ -12,11 +13,18 @@ addButton("Load map", '
     var map;
     map = get_open_filename("PNG|*.png","");
     if (map == "") break;
+    
     with(LevelEntity) instance_destroy();
+    unloadResources();
+    ds_map_clear(Builder.metadata);
+    ds_map_add(Builder.metadata, "type", "meta");
+    ds_map_add(Builder.metadata, "background", "ffffff");
+    
     CustomMapInit(map)
     Builder.mapBG = map;  
     Builder.mapWM = " ";
     Builder.wmString = compressWalkmask();
+    loadMetadata(Builder.metadata, true);
 ');
 addButton("Load BG", '
     var bg;
@@ -24,8 +32,8 @@ addButton("Load BG", '
     if(bg == "") break;
     Builder.mapBG = bg;
     background_replace(BuilderBGB, bg, false, false);
-    background_xscale[0] = 6;
-    background_yscale[0] = 6;
+    background_xscale[7] = 6;
+    background_yscale[7] = 6;
 '); 
 addButton("Load WM", '
     var wm;
@@ -33,16 +41,12 @@ addButton("Load WM", '
     if(wm == "") break;
     Builder.mapWM = wm;
     background_replace(BuilderWMB, wm, true, false);
-    background_xscale[1] = 6;
-    background_yscale[1] = 6;
     Builder.wmString = compressWalkmask();
 '); 
-addButton("Show BG", 'background_visible[0] = argument0;', 1, 1); 
-addButton("Show WM", '
-    room_set_background(BuilderRoom, 1, true, false, BuilderWMB, 0, 0, false, false, 0, 0, 0.7);
-    background_visible[1] = argument0;
-', 1); 
-addButton("Show grid", 'background_visible[2] = argument0;', 1);
+addButton("Show BG", 'background_visible[7] = argument0;', 1, 1); 
+addButton("Show WM", 'Builder.showWM = argument0;', 1); 
+addButton("Show grid", 'Builder.showGrid = argument0;', 1);
+addButton("Show FG",'ParallaxController.visible = argument0;', 1, 1); 
 addButton("Save & test", '
     if (Builder.mapWM == "") show_message("Select a walkmask first.");
     else if (Builder.mapBG == "") show_message("Select a background first");
@@ -60,6 +64,7 @@ addButton("Save & test", '
                 startGG2("-map ggb2_tmp_map");
             break;       
             case 3:
+                Builder.selected = -1;
                 Builder.visible = false;
                 global.launchMap = "ggb2_tmp_map";
                 global.isHost = true;
@@ -85,6 +90,7 @@ addButton("Test w/o save", '
                 startGG2("-map ggb2_tmp_map");
             break;       
             case 2:
+                Builder.selected = -1;
                 Builder.visible = false;
                 global.launchMap = "ggb2_tmp_map";
                 global.isHost = true;
@@ -106,16 +112,62 @@ addButton("Fast scrolling",'
     return argument0;
 ', 1);
 addButton("Edit metadata", '
-    if (Builder.metadata == -1) {
-        Builder.metadata = ds_map_create();
-        ds_map_add(Builder.metadata, "type", "meta");
-    }
     showPropertyMenu(Builder.metadata, Builder.metadata, true);
+    loadMetadata(Builder.metadata, true);   // Reload
 ');
-addButton("Load entities", 'loadEntities()'); 
-addButton("Save entities", 'saveEntities()');
+addButton("Add resource", '
+    var prop;
+    prop = get_string("Resource name:", "");
+    if (prop != "")
+    {
+        resource = get_open_filename("Resource (PNG, GIF)|*.png;*.gif;","");
+        if (resource == "")
+            break;
+        ds_map_add(Builder.metadata, prop, resourceToString(resource));
+        loadMetadata(Builder.metadata, true);
+    }
+');
+
+addButton("Get resources", '
+    if (Builder.mapBG == "")
+        show_message("Load a map first");
+    else
+    {
+        if (!directory_exists(working_directory + "/Maps/Decompiled"))
+            directory_create(working_directory + "/Maps/Decompiled");
+        
+        // Walkmask
+        if (file_exists(temp_directory+"\custommap_walkmask.png"))
+            file_copy(temp_directory+"\custommap_walkmask.png", working_directory + "/Maps/Decompiled/walkmask.png");    
+       
+        // External sprites     
+        var resource;
+        for(resource=ds_map_find_first(Builder.metadata); is_string(resource); resource = ds_map_find_next(Builder.metadata, resource))
+        {   
+            var bg;
+            if (string_copy(resource,1, 3) == "bg_")
+                bg = true;
+            else
+                bg = false;
+                
+            stringToResource(ds_map_find_value(Builder.metadata, resource), bg, working_directory + "/Maps/Decompiled/" + resource);
+        }  
+        show_message("The map has been decompiled to " + working_directory + "/Maps/Decompiled/ .");
+    }
+');
+addButton("Load entities", '
+    unloadResources();
+    ds_map_clear(Builder.metadata);
+    loadEntities();
+'); 
+addButton("Save entities", 'saveEntities();');
 addButton("Clear entities", '
     if (show_question("Are you sure you want to scrap your entities?")) {
+        unloadResources();
+        ds_map_clear(Builder.metadata);
+        ds_map_add(Builder.metadata, "type", "meta");
+        ds_map_add(Builder.metadata, "background", "ffffff");
+        ds_map_add(Builder.metadata, "void", "000000");
         with (LevelEntity) instance_destroy();
     }
 '); 
@@ -235,7 +287,7 @@ addEntity("pitfall", -1, "{xscale:1,yscale:1}", PitFall, sprite64, 3, entityButt
 addEntity("fragbox", -1, "{xscale:1,yscale:1}", FragBox, sprite64, 4, entityButtonS, 60, "Gibs a player.");
 addEntity("playerwall", -1, "{xscale:1,yscale:1}", PlayerWall, sprite45, 3, entityButtonS, 50, "A wall that blocks players but not bullets.");
 addEntity("playerwall_horizontal", 0, "{xscale:1,yscale:1}", PlayerWallHorizontal, sprite44, 3, entityButtonS, 54, "A floor that blocks player but not bullets.");
-addEntity("bulletwall", -1, "{xscale:1,yscale:1}", BulletWall, sprite45, 4, entityButtonS, 52, "A wall that blocks bullets but not players.");
+addEntity("bulletwall", -1, "{xscale:1,yscale:1, distance:-1}", BulletWall, sprite45, 4, entityButtonS, 52, "A wall that blocks bullets but not players.");
 addEntity("bulletwall_horizontal", 0, "{xscale:1,yscale:1}", BulletWallHorizontal, sprite44, 4, entityButtonS, 56, "A floor that blocks bullets but not players.");
 addEntity("leftdoor", -1, "{xscale:1,yscale:1}", LeftDoor, sprite45, 5, entityButtonS, 102, "Blocks players trying to go left");
 addEntity("rightdoor", -1, "{xscale:1,yscale:1}", RightDoor, sprite45, 6, entityButtonS, 104, "Blocks players trying to go right.");
@@ -258,3 +310,6 @@ addEntity("KothControlPoint", koth, "{}", KothControlPoint, ControlPointNeutralS
 addEntity("KothRedControlPoint", dkoth, "{}", KothRedControlPoint, ControlPointRedS, 0, entityButtonS, 98, "Red KOTH control point");
 addEntity("KothBlueControlPoint", dkoth, "{}", KothBlueControlPoint, ControlPointBlueS, 0, entityButtonS, 100, "Blue KOTH control point");
 addEntity("dropdownPlatform", -1, "{xscale:1,yscale:1}", DropdownPlatform, sprite44, 5, entityButtonS, 80, "Dropdown platform");
+addEntity("foreground", -1, "{xscale:1,yscale:1,depth:-2,fade:true,opacity:1,animationspeed:0,trigger:0,distance:0,resource:''}", SpriteObject, sprite64, 0, entityButtonS, 108, "Resizable foreground.");
+addEntity("foreground_scale", -1, "{scale:1,depth:-2,fade:true,opacity:1,animationspeed:0,trigger:0,distance:0,resource:''}", SpriteObject, sprite64, 0, entityButtonS, 110, "Scalable foreground.");
+addEntity("moving_platform", -1, "{scale:1,animationspeed:0,trigger:0,resource:'',top:60,left:0,upspeed:3,downspeed:3}", MovingPlatform, sprite64, 0, entityButtonS, 112, "A moving platform.");

@@ -13,15 +13,16 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">{
-    var imp;
-    gunSetSolids();
+        <argument kind="STRING">var imp;
+gunSetSolids();
+if (other.solid)
+{
     really_move_contact_solid(direction, speed);
-    gunUnsetSolids();
     imp = instance_create(x,y,Impact);
     imp.image_angle=direction;
     instance_destroy();
 }
+gunUnsetSolids();
 </argument>
       </arguments>
     </action>

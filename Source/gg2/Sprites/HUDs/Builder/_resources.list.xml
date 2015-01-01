@@ -3,4 +3,5 @@
   <resource name="gbMenuLayoutS" type="RESOURCE"/>
   <resource name="gbButtonS" type="RESOURCE"/>
   <resource name="entityButtonS" type="RESOURCE"/>
+  <resource name="GridS" type="RESOURCE"/>
 </resources>
