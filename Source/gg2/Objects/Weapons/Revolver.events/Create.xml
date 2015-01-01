@@ -25,6 +25,7 @@
     stabdirection=0;
     maxAmmo = 6;
     ammoCount = maxAmmo;
+    ejected = 0;
     reloadTime = 45;
     reloadBuffer = refireTime;
     idle=true;
@@ -33,17 +34,22 @@
     {
         normalSprite = RevolverGoldS;
         recoilSprite = RevolverGoldFS;
+        reloadSprite = RevolverGoldFRS;
     }
     else
     {
         normalSprite = RevolverS;
         recoilSprite = RevolverFS;
+        reloadSprite = RevolverFRS;
     }
     sprite_index = normalSprite;
     
     recoilTime = refireTime;
     recoilAnimLength = sprite_get_number(recoilSprite)/2;
     recoilImageSpeed = recoilAnimLength/recoilTime;
+    
+    reloadAnimLength = sprite_get_number(reloadSprite)/2;
+    reloadImageSpeed = reloadAnimLength/reloadTime;
 }
 </argument>
       </arguments>

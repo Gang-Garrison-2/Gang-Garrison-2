@@ -38,6 +38,7 @@
     
     normalSprite = BladeS;
     recoilSprite = BladeFS;
+    reloadSprite = -1;
     
     recoilTime = 1;
     recoilAnimLength = sprite_get_number(recoilSprite)/2;

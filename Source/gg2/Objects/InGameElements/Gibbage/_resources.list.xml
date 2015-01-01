@@ -11,4 +11,5 @@
   <resource name="Blood" type="RESOURCE"/>
   <resource name="PartyHat" type="RESOURCE"/>
   <resource name="XmasHat" type="RESOURCE"/>
+  <resource name="Shell" type="RESOURCE"/>
 </resources>

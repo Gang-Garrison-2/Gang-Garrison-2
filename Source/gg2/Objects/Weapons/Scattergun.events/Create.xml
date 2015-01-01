@@ -29,17 +29,22 @@
     {
         normalSprite = ScattergunGoldS;
         recoilSprite = ScattergunGoldFS;
+        reloadSprite = ScattergunGoldFRS;
     }
     else
     {
         normalSprite = ScattergunS;
         recoilSprite = ScattergunFS;
+        reloadSprite = ScattergunFRS;
     }
     sprite_index = normalSprite;
     
     recoilTime = refireTime;
     recoilAnimLength = sprite_get_number(recoilSprite)/2;
     recoilImageSpeed = recoilAnimLength/recoilTime;
+    
+    reloadAnimLength = sprite_get_number(reloadSprite)/2;
+    reloadImageSpeed = reloadAnimLength/reloadTime;
 }
 </argument>
       </arguments>

@@ -17,13 +17,13 @@
     exit;
     
 var imageOffset;
-if (alarm[6] &lt;= 0){
+if ((alarm[6] &lt;= 0 and alarm[5] &lt;= 0) or object_index == Blade) {
     //if we are not shooting or recoiling
     imageOffset = owner.team;
 } else {
     //Play the current animation normally
     var animLength;
-    if (object_index != Rifle)
+    if (object_index != Rifle &amp;&amp; alarm[5] &lt;= 0)
         animLength = recoilAnimLength;
     else if (sprite_index == recoilSprite)
         animLength = recoilAnimLength;

@@ -29,11 +29,13 @@
     {
         normalSprite = MinigunGoldS;
         recoilSprite = MinigunGoldFS;
+        reloadSprite = -1;
     }
     else
     {
         normalSprite = MinigunS;
         recoilSprite = MinigunFS;
+        reloadSprite = -1;
     }
     sprite_index = normalSprite;
     

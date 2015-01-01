@@ -30,17 +30,22 @@
     {
         normalSprite = RocketlauncherGoldS;
         recoilSprite = RocketlauncherGoldFS;
+        reloadSprite = RocketlauncherGoldFRS;
     }
     else
     {
         normalSprite = RocketlauncherS;
         recoilSprite = RocketlauncherFS;
+        reloadSprite = RocketlauncherFRS;
     }
     sprite_index = normalSprite;
     
     recoilTime = refireTime;
     recoilAnimLength = sprite_get_number(recoilSprite)/2;
     recoilImageSpeed = recoilAnimLength/recoilTime;
+    
+    reloadAnimLength = sprite_get_number(reloadSprite)/2;
+    reloadImageSpeed = reloadAnimLength/reloadTime;
 }
 </argument>
       </arguments>

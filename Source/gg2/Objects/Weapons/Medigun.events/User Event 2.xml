@@ -34,6 +34,7 @@
         readyToShoot=false;
         alarm[0] = refireTime / global.delta_factor;
         alarm[5] = (reloadBuffer + reloadTime) / global.delta_factor;
+        alarm[7] = alarm[5] / 4;
     }
     else if (uberReady &amp;&amp; (owner.keyState &amp; $10))
     {
