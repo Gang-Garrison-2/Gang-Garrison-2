@@ -3,7 +3,7 @@
 
 {
   if(room == CustomMapRoom || room == BuilderRoom) {
-    return background_height[0] * 6;
+    return background_height[7] * background_yscale[7];
   } else {
     return room_height;
   }

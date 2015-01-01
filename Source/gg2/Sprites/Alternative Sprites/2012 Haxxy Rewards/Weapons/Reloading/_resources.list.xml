@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
   <resource name="RifleGoldFRS" type="RESOURCE"/>
+  <resource name="RevolverGoldFRS" type="RESOURCE"/>
+  <resource name="RocketlauncherGoldFRS" type="RESOURCE"/>
+  <resource name="ScattergunGoldFRS" type="RESOURCE"/>
+  <resource name="ShotgunGoldFRS" type="RESOURCE"/>
+  <resource name="MinegunGoldFRS" type="RESOURCE"/>
+  <resource name="MedigunGoldFRS" type="RESOURCE"/>
 </resources>

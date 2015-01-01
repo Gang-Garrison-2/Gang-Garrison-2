@@ -132,4 +132,5 @@
   <constant name="STRING" value="0"/>
   <constant name="REAL" value="1"/>
   <constant name="BOOL" value="2"/>
+  <constant name="HEX" value="3"/>
 </constants>

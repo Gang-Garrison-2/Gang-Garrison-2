@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="DRAW" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">var xoffset, yoffset, xsize, ysize, dist;
+
+xoffset = view_xview[0];
+yoffset = view_yview[0];
+xsize = view_wview[0];
+ysize = view_hview[0];
+dist = distance_to_point(xoffset+xsize/2,yoffset+ysize/2);
+
+if (dist &gt; 800)
+    exit;
+    
+if (dist &lt;= triggerDistance &amp;&amp; fade)
+    image_alpha = max(0.4*opacity, image_alpha - 0.1*global.delta_factor);
+else
+    image_alpha = min(opacity, image_alpha + 0.1*global.delta_factor);
+
+if (trigger &gt; 0)
+{
+    dist = distance_to_object(Character);
+        
+    if (triggering == 0 &amp;&amp; dist &lt;= triggerDistance)
+        triggering = 1;
+    else if (image_index &gt;= image_number-1 &amp;&amp; dist &gt; triggerDistance &amp;&amp; triggering == 1)
+    {
+        if (trigger == 2)
+            triggering = -1;
+        else {
+            triggering = 0;
+            image_index = 0;
+        }
+    }
+}
+    
+switch(triggering)
+{
+    case 1:
+        image_index = min(image_number-1, image_index + animationSpeed);
+        break;
+    case -1:
+        image_index = max(0, image_index - animationSpeed);
+        if (image_index == 0)
+            triggering = 0;
+}
+
+    
+draw_sprite_ext(sprite_index, image_index, x, y, image_xscale, image_yscale, image_angle, c_white, image_alpha);
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

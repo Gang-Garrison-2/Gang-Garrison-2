@@ -18,6 +18,7 @@ shot=true;
 justShot=true;
 readyToShoot = false;
 alarm[0] = (reloadTime + 20*owner.zoomed) / global.delta_factor;
+alarm[7] = (reloadTime/4 + 10*owner.zoomed) / global.delta_factor;  // Eject a shell during the animation
 
 // for drawing:
 tracerAlpha = 0.8;
@@ -25,7 +26,7 @@ shotx = x;
 shoty = y;
 
 var hit;
-var x1,y1,xm,ym, len;
+var x1,y1,xm,ym, len, bulletWall;
 var hitline;
 len=2000;
 x1=x;
@@ -57,9 +58,10 @@ while(len&gt;1) {
         } else if (collision_line(x1,y1,xm,ym,ControlPointSetupGate,true,true)&gt;=0) if (ControlPointSetupGate.solid) {
             hitline = true;
         }
-        if (collision_line(x1,y1,xm,ym,BulletWall,true,true)&gt;=0) {
-            hitline = true;
-        }
+        bulletWall = collision_line(x1,y1,xm,ym,BulletWall,true,true);
+        if (bulletWall&gt;=0)
+            if (bulletWall.solid)
+                hitline = true;
     }
     
     if(hitline) {

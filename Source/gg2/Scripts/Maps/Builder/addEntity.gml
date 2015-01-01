@@ -3,13 +3,13 @@
  * Argument0: The name
  * Argument1: The gamemodes that this entity can be used on (uses bitmasks to select multiple gamemodes)
  * Argument2: A ggon string with all properties that can be editted.
- * Argument3: The object that gets created ingame. If it's a child of 'MultiEntity' it will also run it's event_user(0) with the variable 'name' as the entityname.
- * Argument4: The sprite of the entity
- * Argument5: The image index of the entity sprite
- * Argument6: The sprite of the button
- * Argument7: The image index of the button sprite
+ * Argument3: The object that gets created ingame.
+ * Argument4: The sprite of the entity.
+ * Argument5: The image index of the entity sprite.
+ * Argument6: The sprite of the button.
+ * Argument7: The image index of the button sprite.
  * [Argument8]: Tooltip
- * Returns: And identifier for the entity button
+ * Returns: An identifier for the entity button
 */
 
 var index, map;

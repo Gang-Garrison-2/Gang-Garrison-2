@@ -28,7 +28,7 @@ draw_rectangle_color(view_xview,view_yview+ysize-20,view_xview+xsize,view_yview+
 draw_set_color(c_white);
 if (tracking)
 {
-    draw_name_badges(xoffset+50, yoffset+ysize-16, player);
+    draw_name_badges(xoffset+50, yoffset+ysize-16, player, 1);
     if (player.object == -1)
         break;
     if (global.myself.team == TEAM_SPECTATOR and player.object.maxHp != 0)

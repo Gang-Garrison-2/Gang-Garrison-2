@@ -51,7 +51,15 @@
             case Shotgun:
             case Revolver:
             case Medigun:
-                currentWeapon.alarm[5] = -1;
+                with(currentWeapon)
+                {
+                    if (alarm[5] &gt; 0)
+                    {
+                        // Stop the animation
+                        event_perform(ev_alarm, 5);
+                    }
+                    alarm[5] = -1;
+                }
                 break;
             }
         }

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="STEP" id="2">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if (checkdir)
+{
+    if (vspeed &lt; 0 &amp;&amp; y &lt; min(startY-top, startY))
+        speed = -downSpeed;
+    else if (vspeed &gt; 0 &amp;&amp; y &gt; max(startY-top, startY))
+    {
+        speed = upSpeed;
+        moving = false;
+    }
+}
+else
+{
+    if (hspeed &gt; 0 &amp;&amp; x &gt; max(startX+left, startX))
+        speed = -downSpeed;
+    else if (hspeed &lt; 0 &amp;&amp; x &lt; min(startX+left, startX))
+    {
+        speed = upSpeed;
+        moving = false;
+    }
+}
+
+// Player gets moved in his end step event
+
+x -= hspeed;
+y -= vspeed;
+
+if (moving || trigger == 0)
+{
+    x += hspeed * global.delta_factor;
+    y += vspeed * global.delta_factor;
+    image_index += animationSpeed;
+} 
+else
+   image_index = 0;
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

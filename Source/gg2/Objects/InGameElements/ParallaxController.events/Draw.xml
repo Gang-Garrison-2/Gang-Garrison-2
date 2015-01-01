@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="DRAW" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if (foreground &gt; 0)
+    draw_background_ext(foreground, 0, 0 ,6, 6, 0, c_white, 1);
+    
+// Draw map borders
+draw_set_alpha(1);
+draw_set_color(voidColor);
+
+if (view_yview[0] &lt; 0)
+    draw_rectangle(view_xview[0], view_yview[0], view_xview[0]+view_wview[0], 0, false);
+if (view_yview[0]+view_hview[0] &gt; map_height())
+    draw_rectangle(view_xview[0], view_yview[0]+view_hview[], view_xview[0]+view_wview[0], map_height(), false);
+if (view_xview[0] &lt; 0)
+    draw_rectangle(view_xview[0], view_yview[0], 0, view_yview[0]+view_hview[0], false);
+if (view_xview[0]+view_wview[0] &gt; map_width())
+    draw_rectangle(view_xview[0]+view_wview[0], view_yview[0], map_width(), view_yview[0]+view_hview[0], false);
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

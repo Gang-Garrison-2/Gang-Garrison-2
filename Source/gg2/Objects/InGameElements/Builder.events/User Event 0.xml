@@ -50,7 +50,9 @@ for(i=0; i&lt;ds_list_size(global.entities); i+=1) {
 
 entityButtonCount = j;
 resetToggles();
-startX2 = view_wview[0] - vItems*entityButtonSize - 1;
+startX[1] = view_wview[0] - vItems*entityButtonSize - 1;
+startX[2] = view_wview[0] - layerWidth - 1;
+startY[2] = view_hview[0] - layerHeight - buttonHeight - 1;
 </argument>
       </arguments>
     </action>

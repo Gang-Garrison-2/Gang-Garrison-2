@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="CREATE" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">fade = false;
+stuck = false;
+
+image_speed = 0;
+rotspeed = (14 + random(18)) * choose(1, -1) * global.delta_factor;
+angle = random(360);
+speed = 2 + random(3);
+
+alarm[0] = 45 / global.delta_factor;
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

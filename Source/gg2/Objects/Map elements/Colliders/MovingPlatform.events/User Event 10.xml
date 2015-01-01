@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="OTHER" id="20">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if(global.updateType == QUICK_UPDATE or global.updateType == FULL_UPDATE) {
+    write_ushort(global.serializeBuffer, x*5);
+    write_ushort(global.serializeBuffer, y*5);
+    write_byte(global.serializeBuffer, speed == upSpeed);
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>
