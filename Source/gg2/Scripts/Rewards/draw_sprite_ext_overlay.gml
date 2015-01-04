@@ -1,7 +1,7 @@
 // void draw_sprite_ext_overlay(real sprite, real overlay, real subimg, real x, real y, real xscale, real yscale, real rot, real color, real alpha, real voffset)
 // The same as draw_sprite_ext, except when overlay is not equal to -1,
 // the overlay will be drawn on top of the sprite with the same parameters
-var sprite,
+var _sprite,
     overlay,
     _subimg,
     _x,
