@@ -201,8 +201,6 @@ with(victim.object) {
         }
         if(hasClassReward(victim,"MakeItRain"))
             deadbody.hasMoney = true;
-        // DEBUG
-        deadbody.hasMoney = true;
     }
 }
 

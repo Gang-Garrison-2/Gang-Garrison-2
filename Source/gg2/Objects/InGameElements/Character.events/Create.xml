@@ -175,6 +175,8 @@
     currentWeapon = instance_create(x,y,weapons[0]);
     global.paramOwner = noone;
     
+    // THIS IS A TRUCK LOAD OF GARBAGE CODE THAT SHOULD BE REPLACED ASAP
+    
     if(hasClassReward(player, 'Silver_Accessories') and player.class != CLASS_QUOTE)
     {
         ds_list_add(stillOverlays, global.SilverAttireOverlay[player.class]);
@@ -240,34 +242,6 @@
     }
     if(hasClassReward(player, 'MakeItRain'))
         hasMoney = true;
-        
-    // player has no rewards, destroy the lists
-    if (ds_list_empty(stillOverlays))
-    {
-        ds_list_destroy(stillOverlays);
-        ds_list_destroy(leanROverlays);
-        ds_list_destroy(leanLOverlays);
-        ds_list_destroy(jumpOverlays);
-        ds_list_destroy(runOverlays);
-        ds_list_destroy(walkOverlays);
-        ds_list_destroy(crouchOverlays);
-        ds_list_destroy(omnomnomnomOverlays);
-        stillOverlays = -1;
-        leanROverlays = -1;
-        leanLOverlays = -1;
-        jumpOverlays = -1;
-        runOverlays = -1;
-        walkOverlays = -1;
-        crouchOverlays = -1;
-        omnomnomnomOverlays = -1;
-    }
-    // this is grouped seperately for rewards that don't have taunts ie: certain gold weapon taunts
-    if (ds_list_empty(tauntOverlays))
-    {
-        ds_list_destroy(tauntOverlays);
-        tauntOverlays = -1;
-    }
-    
     if (hasReward(player, 'WillOWisp'))
     {
         demon = WillOWispS;
