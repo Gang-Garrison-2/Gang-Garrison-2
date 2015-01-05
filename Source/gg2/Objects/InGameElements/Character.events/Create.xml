@@ -160,8 +160,8 @@
     tauntOverlays = ds_list_create();
     crouchOverlays = ds_list_create();
     omnomnomnomOverlays = ds_list_create();
-    omnomnomnomSprite = OmnomnomnomS;
     sniperCrouchOverlay = ds_list_create();
+    omnomnomnomSprite = OmnomnomnomS;
     demon = -1;
     demonX = 0;
     demonY = 0;
@@ -186,15 +186,13 @@
         ds_list_add(runOverlays, global.SilverAttireRunOverlay[player.class]);
         ds_list_add(tauntOverlays, global.SilverAttireTaunt[player.class]);
         if (player.class == CLASS_HEAVY)
-        {
-            ds_list_add(walkOverlays, global.SilverAttireWalkOverlay[player.class]);
             ds_list_add(omnomnomnomOverlays, OmnomnomnomSilverAttireS);
-        }
         if (player.class == CLASS_SNIPER)
             ds_list_add(crouchOverlays, global.SilverAttireCrouchOverlay[player.class]);
     }
     
-    if(hasClassReward(player, 'Gold_Accessories_') and player.class != CLASS_QUOTE)
+    //if(hasClassReward(player, 'Gold_Accessories_') and player.class != CLASS_QUOTE)
+    if 1 == 1
     {
         ds_list_add(stillOverlays, global.GoldenAttireOverlay[player.class]);
         ds_list_add(leanROverlays, global.GoldenAttireLeanROverlay[player.class]);
@@ -204,8 +202,8 @@
         ds_list_add(tauntOverlays, global.GoldenAttireTaunt[player.class]);
         if (player.class == CLASS_HEAVY)
         {
-            ds_list_add(walkOverlays, global.GoldenAttireWalkOverlay[player.class]);
-            ds_list_add(omnomnomnomOverlays, OmnomnomnomGoldAttireS);
+            ds_list_add(omnomnomnomOverlays, global.GoldenSandwichOverlay[player.class]);
+            ds_list_add(walkOverlays, global.GoldenAttireOverlay[player.class]);
         }
         if (player.class == CLASS_SNIPER)
             ds_list_add(crouchOverlays, global.GoldenAttireCrouchOverlay[player.class]);
@@ -213,17 +211,19 @@
     // You cannot wear more than one hat at once you dingdong
     // Bobble heads supercede Ray Bann hats because haxton is manlier
     // 'BH' reward - *B*obble *H*ead - not available for quote
-    if(hasClassReward(player, 'BH') and player.class != CLASS_QUOTE)
+    //if(hasClassReward(player, 'BH') and player.class != CLASS_QUOTE)
+    if 1 == 1
     {
-        // haxton heads use the same sprite for all anims but walk
-        ds_list_add(stillOverlays, global.HatBobbleClassOverlay[player.class]);
-        ds_list_add(leanROverlays, global.HatBobbleClassOverlay[player.class]);
-        ds_list_add(leanLOverlays, global.HatBobbleClassOverlay[player.class]);
-        ds_list_add(jumpOverlays, global.HatBobbleClassOverlay[player.class]);
-        ds_list_add(runOverlays, global.HatBobbleClassRunOverlay[player.class]);
+        // hats use the same sprite for most animations 
+        for (i = stillOverlays; i &lt;= runOverlays; i+= 1)
+            ds_list_add(i, global.HatBobbleClassOverlay[player.class]);
+            
         ds_list_add(tauntOverlays, global.HatBobbleClassTaunt[player.class]);
         if (player.class == CLASS_HEAVY)
-            ds_list_add(walkOverlays, global.HatBobbleClassWalkOverlay[player.class]);
+        {
+            ds_list_add(walkOverlays, global.HatBobbleClassOverlay[player.class]);
+            ds_list_add(omnomnomnomOverlays, global.HatBobbleOverlay[player.class]);
+        }
         if (player.class == CLASS_SNIPER)
             ds_list_add(crouchOverlays, global.HatBobbleClassOverlay[player.class]);
     }

@@ -164,6 +164,7 @@ equipmentOffset = ((sprite == spriteRun) and
                and onground;
 equipmentOffset *= -2; // two pixels up for whether the sprite is bobbing(above expression gives one down)
 
+overlayOffset = equipmentOffset;
 
 if (player.class == CLASS_HEAVY or player.class == CLASS_SOLDIER
     or noNewAnim or taunting)
@@ -173,6 +174,8 @@ else if (abs(hspeed) &lt; 3 and equipmentOffset = -2 and !taunting)
     equipmentOffset += 2;
     yr += 2;
 }
+else
+    overlayOffset = equipmentOffset;
 
 if(!noNewAnim) // quote and sniper zoom still use the old anim system so animationOffset is still set, override it here for everything else
     animationOffset = 0;
@@ -213,11 +216,11 @@ else if (!taunting)
     else
     {
         if (!ubered)
-            draw_sprite_ext_overlay(sprite,overlayList,floor(animationImage+animationOffset),xr,yr,image_xscale,image_yscale,image_angle,c_white,image_alpha);
+            draw_sprite_ext_overlay(sprite,overlayList,floor(animationImage+animationOffset),xr,yr,image_xscale,image_yscale,image_angle,c_white,image_alpha,overlayOffset);
         else if (ubered)
         {
-            draw_sprite_ext_overlay(sprite,overlayList,floor(animationImage+animationOffset),xr,yr,image_xscale,image_yscale,image_angle,c_white,1);
-            draw_sprite_ext_overlay(sprite,overlayList,floor(animationImage+animationOffset),xr,yr,image_xscale,image_yscale,image_angle,ubercolour,0.7);
+            draw_sprite_ext_overlay(sprite,overlayList,floor(animationImage+animationOffset),xr,yr,image_xscale,image_yscale,image_angle,c_white,1,overlayOffset);
+            draw_sprite_ext_overlay(sprite,overlayList,floor(animationImage+animationOffset),xr,yr,image_xscale,image_yscale,image_angle,ubercolour,0.7,overlayOffset);
         }
     }
 }

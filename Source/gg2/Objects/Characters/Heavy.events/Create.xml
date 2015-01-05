@@ -46,8 +46,7 @@ tauntsprite = HeavyTauntS;
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">omnomnomnomOverlays = ds_list_create();
-// 'GW' reward - *G*olden *W*eapon
+        <argument kind="STRING">// 'GW' reward - *G*olden *W*eapon
 if(hasClassReward(global.paramPlayer, 'GW'))
 {
     if(tauntOverlays == -1)
@@ -60,11 +59,6 @@ if(hasClassReward(global.paramPlayer, 'GW'))
 // 'BH' reward - *B*obble *H*ead
 if(hasClassReward(global.paramPlayer, 'BH'))
     ds_list_add(omnomnomnomOverlays, HatBobbleOmnomnomnomS);
-else
-{
-    ds_list_destroy(omnomnomnomOverlays);
-    omnomnomnomOverlays = -1;
-}
 
 numFlames = 5;
 </argument>

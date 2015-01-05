@@ -27,41 +27,31 @@ global.classAbbreviations[9] = "QC";
 // Makes array of CLASS_ constants to BobbleHead overlay sprites
 // CLASS_SCOUT
 global.HatBobbleClassOverlay[0] = HatBobbleScoutS;
-global.HatBobbleClassRunOverlay[0] = HatBobbleScoutRunS;
 global.HatBobbleClassTaunt[0] = HatBobbleScoutTauntS;
 // CLASS_SOLDIER
 global.HatBobbleClassOverlay[1] = HatBobbleSoldierS;
-global.HatBobbleClassRunOverlay[1] = HatBobbleSoldierRunS;
 global.HatBobbleClassTaunt[1] = HatBobbleSoldierTauntS;
 // CLASS_SNIPER
 global.HatBobbleClassOverlay[2] = HatBobbleSniperS;
-global.HatBobbleClassRunOverlay[2] = HatBobbleSniperRunS;
-global.HatBobbleClassCrouchOverlay[2] = HatBobbleSniperCrouchS;
 global.HatBobbleClassTaunt[2] = HatBobbleSniperTauntS;
 // CLASS_DEMOMAN
 global.HatBobbleClassOverlay[3] = HatBobbleDemomanS;
-global.HatBobbleClassRunOverlay[3] = HatBobbleDemomanRunS;
 global.HatBobbleClassTaunt[3] = HatBobbleDemoTauntS;
 // CLASS_MEDIC
 global.HatBobbleClassOverlay[4] = HatBobbleMedicS;
-global.HatBobbleClassRunOverlay[4] = HatBobbleMedicRunS;
 global.HatBobbleClassTaunt[4] = HatBobbleMedicTauntS;
 // CLASS_ENGINEER
 global.HatBobbleClassOverlay[5] = HatBobbleEngineerS;
-global.HatBobbleClassRunOverlay[5] = HatBobbleEngineerRunS;
 global.HatBobbleClassTaunt[5] = HatBobbleEngiTauntS;
 // CLASS_HEAVY
 global.HatBobbleClassOverlay[6] = HatBobbleHeavyS;
-global.HatBobbleClassRunOverlay[6] = HatBobbleHeavyRunS;
-global.HatBobbleClassWalkOverlay[6] = HatBobbleHeavyWalkS;
 global.HatBobbleClassTaunt[6] = HatBobbleHeavyTauntS;
+global.HatBobbleOverlay[6] = HatBobbleOmnomnomnomS;
 // CLASS_SPY
 global.HatBobbleClassOverlay[7] = HatBobbleSpyS;
-global.HatBobbleClassRunOverlay[7] = HatBobbleSpyRunS;
 global.HatBobbleClassTaunt[7] = HatBobbleSpyTauntS;
 // CLASS_PYRO
 global.HatBobbleClassOverlay[8] = HatBobblePyroS;
-global.HatBobbleClassRunOverlay[8] = HatBobblePyroRunS;
 global.HatBobbleClassTaunt[8] = HatBobblePyroTauntS;
 // None for CLASS_QUOTE
 
@@ -112,33 +102,33 @@ global.GoldenAttireLeanROverlay[0] = ScoutGoldAttireLeanRS;
 global.GoldenAttireLeanLOverlay[0] = ScoutGoldAttireLeanLS;
 global.GoldenAttireTaunt[0] = ScoutGoldAttireTauntS;
 // CLASS_SOLDIER
-global.GoldenAttireOverlay[1] = SoldierGoldAttireStandS;
-global.GoldenAttireRunOverlay[1] = SoldierGoldAttireRunS;
-global.GoldenAttireJumpOverlay[1] = SoldierGoldAttireJumpS;
-global.GoldenAttireLeanROverlay[1] = SoldierGoldAttireLeanRS;
-global.GoldenAttireLeanLOverlay[1] = SoldierGoldAttireLeanLS;
+global.GoldenAttireOverlay[1] = SoldierGoldAttireS;
+global.GoldenAttireRunOverlay[1] = SoldierGoldAttireS;
+global.GoldenAttireJumpOverlay[1] = SoldierGoldAttireS;
+global.GoldenAttireLeanROverlay[1] = SoldierGoldAttireS;
+global.GoldenAttireLeanLOverlay[1] = SoldierGoldAttireS;
 global.GoldenAttireTaunt[1] = SoldierGoldAttireTauntS;
 // CLASS_SNIPER
-global.GoldenAttireOverlay[2] = SniperGoldAttireStandS;
-global.GoldenAttireRunOverlay[2] = SniperGoldAttireRunS;
-global.GoldenAttireJumpOverlay[2] = SniperGoldAttireJumpS;
-global.GoldenAttireLeanROverlay[2] = SniperGoldAttireLeanRS;
-global.GoldenAttireLeanLOverlay[2] = SniperGoldAttireLeanLS;
-global.GoldenAttireCrouchOverlay[2] = SniperGoldAttireCrouchS;
+global.GoldenAttireOverlay[2] = SniperGoldAttireS;
+global.GoldenAttireRunOverlay[2] = SniperGoldAttireS;
+global.GoldenAttireJumpOverlay[2] = SniperGoldAttireS;
+global.GoldenAttireLeanROverlay[2] = SniperGoldAttireS;
+global.GoldenAttireLeanLOverlay[2] = SniperGoldAttireS;
+global.GoldenAttireCrouchOverlay[2] = SniperGoldAttireS;
 global.GoldenAttireTaunt[2] = SniperGoldAttireTauntS;
 // CLASS_DEMOMAN
-global.GoldenAttireOverlay[3] = DemomanGoldAttireStandS;
-global.GoldenAttireRunOverlay[3] = DemomanGoldAttireRunS;
-global.GoldenAttireJumpOverlay[3] = DemomanGoldAttireJumpS;
-global.GoldenAttireLeanROverlay[3] = DemomanGoldAttireLeanRS;
-global.GoldenAttireLeanLOverlay[3] = DemomanGoldAttireLeanLS;
+global.GoldenAttireOverlay[3] = DemomanGoldAttireS;
+global.GoldenAttireRunOverlay[3] = DemomanGoldAttireS;
+global.GoldenAttireJumpOverlay[3] = DemomanGoldAttireS;
+global.GoldenAttireLeanROverlay[3] = DemomanGoldAttireS;
+global.GoldenAttireLeanLOverlay[3] = DemomanGoldAttireS;
 global.GoldenAttireTaunt[3] = DemomanGoldAttireTauntS;
 // CLASS_MEDIC
-global.GoldenAttireOverlay[4] = MedicGoldAttireStandS;
-global.GoldenAttireRunOverlay[4] = MedicGoldAttireRunS;
-global.GoldenAttireJumpOverlay[4] = MedicGoldAttireJumpS;
-global.GoldenAttireLeanROverlay[4] = MedicGoldAttireLeanRS;
-global.GoldenAttireLeanLOverlay[4] = MedicGoldAttireLeanLS;
+global.GoldenAttireOverlay[4] = MedicGoldAttireS;
+global.GoldenAttireRunOverlay[4] = MedicGoldAttireS;
+global.GoldenAttireJumpOverlay[4] = MedicGoldAttireS;
+global.GoldenAttireLeanROverlay[4] = MedicGoldAttireS;
+global.GoldenAttireLeanLOverlay[4] = MedicGoldAttireS;
 global.GoldenAttireTaunt[4] = MedicGoldAttireTauntS;
 // CLASS_ENGINEER
 global.GoldenAttireOverlay[5] = EngineerGoldAttireStandS;
@@ -148,13 +138,13 @@ global.GoldenAttireLeanROverlay[5] = EngineerGoldAttireLeanRS;
 global.GoldenAttireLeanLOverlay[5] = EngineerGoldAttireLeanLS;
 global.GoldenAttireTaunt[5] = EngineerGoldAttireTauntS;
 // CLASS_HEAVY
-global.GoldenAttireOverlay[6] = HeavyGoldAttireStandS;
-global.GoldenAttireRunOverlay[6] = HeavyGoldAttireRunS;
-global.GoldenAttireJumpOverlay[6] = HeavyGoldAttireJumpS;
-global.GoldenAttireLeanROverlay[6] = HeavyGoldAttireLeanRS;
-global.GoldenAttireLeanLOverlay[6] = HeavyGoldAttireLeanLS;
-global.GoldenAttireWalkOverlay[6] = HeavyGoldAttireWalkS;
+global.GoldenAttireOverlay[6] = HeavyGoldAttireS;
+global.GoldenAttireRunOverlay[6] = HeavyGoldAttireS;
+global.GoldenAttireJumpOverlay[6] = HeavyGoldAttireS;
+global.GoldenAttireLeanROverlay[6] = HeavyGoldAttireS;
+global.GoldenAttireLeanLOverlay[6] = HeavyGoldAttireS;
 global.GoldenAttireTaunt[6] = HeavyGoldAttireTauntS;
+global.GoldenSandwichOverlay[6] = OmnomnomnomGoldAttireS;
 // CLASS_SPY
 global.GoldenAttireOverlay[7] = SpyGoldAttireStandS;
 global.GoldenAttireRunOverlay[7] = SpyGoldAttireRunS;
@@ -163,11 +153,11 @@ global.GoldenAttireLeanROverlay[7] = SpyGoldAttireLeanRS;
 global.GoldenAttireLeanLOverlay[7] = SpyGoldAttireLeanLS;
 global.GoldenAttireTaunt[7] = SpyGoldAttireTauntS;
 // CLASS_PYRO
-global.GoldenAttireOverlay[8] = PyroGoldAttireStandS;
-global.GoldenAttireRunOverlay[8] = PyroGoldAttireRunS;
-global.GoldenAttireJumpOverlay[8] = PyroGoldAttireJumpS;
-global.GoldenAttireLeanROverlay[8] = PyroGoldAttireLeanRS;
-global.GoldenAttireLeanLOverlay[8] = PyroGoldAttireLeanLS;
+global.GoldenAttireOverlay[8] = PyroGoldAttireS;
+global.GoldenAttireRunOverlay[8] = PyroGoldAttireS;
+global.GoldenAttireJumpOverlay[8] = PyroGoldAttireS;
+global.GoldenAttireLeanROverlay[8] = PyroGoldAttireS;
+global.GoldenAttireLeanLOverlay[8] = PyroGoldAttireS;
 global.GoldenAttireTaunt[8] = PyroGoldAttireTauntS;
 // None for CLASS_QUOTE
 
@@ -242,41 +232,30 @@ global.SilverAttireTaunt[8] = PyroSilverAttireTauntS;
 // Array of Top Hat + Monocle Package Deals
 // CLASS_SCOUT
 global.TopHatMonocleOverlay[0] = ScoutMonocleHatStandS;
-global.TopHatMonocleRunOverlay[0] = ScoutMonocleHatRunS;
 global.TopHatMonocleTaunt[0] = ScoutMonocleHatTauntS;
 // CLASS_SOLDIER
 global.TopHatMonocleOverlay[1] = SoldierMonocleHatStandS;
-global.TopHatMonocleRunOverlay[1] = SoldierMonocleHatRunS;
 global.TopHatMonocleTaunt[1] = SoldierMonocleHatTauntS;
 // CLASS_SNIPER
 global.TopHatMonocleOverlay[2] = SniperMonocleHatStandS;
-global.TopHatMonocleRunOverlay[2] = SniperMonocleHatRunS;
-global.TopHatMonocleCrouchOverlay[2] = SniperMonocleHatCrouchS;
 global.TopHatMonocleTaunt[2] = SniperMonocleHatTauntS;
 // CLASS_DEMOMAN
 global.TopHatMonocleOverlay[3] = DemomanMonocleHatStandS;
-global.TopHatMonocleRunOverlay[3] = DemomanMonocleHatRunS;
 global.TopHatMonocleTaunt[3] = DemomanMonocleHatTauntS;
 // CLASS_MEDIC
 global.TopHatMonocleOverlay[4] = MedicMonocleHatStandS;
-global.TopHatMonocleRunOverlay[4] = MedicMonocleHatRunS;
 global.TopHatMonocleTaunt[4] = MedicMonocleHatTauntS;
 // CLASS_ENGINEER
 global.TopHatMonocleOverlay[5] = EngineerMonocleHatStandS;
-global.TopHatMonocleRunOverlay[5] = EngineerMonocleHatRunS;
 global.TopHatMonocleTaunt[5] = EngineerMonocleHatTauntS;
 // CLASS_HEAVY
 global.TopHatMonocleOverlay[6] = HeavyMonocleHatStandS;
-global.TopHatMonocleRunOverlay[6] = HeavyMonocleHatRunS;
-global.TopHatMonocleWalkOverlay[6] = HeavyMonocleHatWalkS;
 global.TopHatMonocleTaunt[6] = HeavyMonocleHatTauntS;
 // CLASS_SPY
 global.TopHatMonocleOverlay[7] = SpyMonocleHatStandS;
-global.TopHatMonocleRunOverlay[7] = SpyMonocleHatRunS;
 global.TopHatMonocleTaunt[7] = SpyMonocleHatTauntS;
 // CLASS_PYRO
 global.TopHatMonocleOverlay[8] = PyroMonocleHatStandS;
-global.TopHatMonocleRunOverlay[8] = PyroMonocleHatRunS;
 global.TopHatMonocleTaunt[8] = PyroMonocleHatTauntS;
 // Introducing the first ever Quote/Curly class reward
 // CLASS_QUOTE

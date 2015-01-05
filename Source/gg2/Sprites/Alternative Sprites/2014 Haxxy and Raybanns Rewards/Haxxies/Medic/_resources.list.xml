@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
-  <resource name="MedicGoldAttireStandS" type="RESOURCE"/>
-  <resource name="MedicGoldAttireJumpS" type="RESOURCE"/>
-  <resource name="MedicGoldAttireLeanLS" type="RESOURCE"/>
-  <resource name="MedicGoldAttireLeanRS" type="RESOURCE"/>
-  <resource name="MedicGoldAttireRunS" type="RESOURCE"/>
+  <resource name="MedicGoldAttireS" type="RESOURCE"/>
   <resource name="MedicGoldAttireTauntS" type="RESOURCE"/>
 </resources>
