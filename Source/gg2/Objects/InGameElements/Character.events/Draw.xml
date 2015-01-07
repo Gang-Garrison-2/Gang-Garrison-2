@@ -166,13 +166,16 @@ equipmentOffset *= -2; // two pixels up for whether the sprite is bobbing(above 
 
 overlayOffset = equipmentOffset;
 
-if (player.class == CLASS_HEAVY or player.class == CLASS_SOLDIER
-    or noNewAnim or taunting)
+if ((player.class == CLASS_HEAVY and abs(hspeed) &lt; 3) or player.class == CLASS_SOLDIER or noNewAnim or taunting)
+{
     equipmentOffset = 0; // override run bob for classes with no run bob
+    overlayOffset = 0;
+}
 else if (abs(hspeed) &lt; 3 and equipmentOffset = -2 and !taunting)
 {
     equipmentOffset += 2;
     yr += 2;
+    overlayOffset = equipmentOffset-2; // mad because overlays use yr
 }
 else
     overlayOffset = equipmentOffset;
@@ -203,6 +206,8 @@ else if (!taunting)
 {
     if (intel and player.class != CLASS_QUOTE and !zoomed)
         draw_sprite_ext(spriteIntel,0,xr,round(y)+equipmentOffset, image_xscale, image_yscale, 0, c_white, image_alpha);
+    if (zoomed)
+        overlayOffset += 4;
     if (cloak)
     {
         if (!ubered)

@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
-  <resource name="HeavySilverAttireStandS" type="RESOURCE"/>
-  <resource name="HeavySilverAttireJumpS" type="RESOURCE"/>
-  <resource name="HeavySilverAttireLeanLS" type="RESOURCE"/>
-  <resource name="HeavySilverAttireLeanRS" type="RESOURCE"/>
-  <resource name="HeavySilverAttireWalkS" type="RESOURCE"/>
-  <resource name="HeavySilverAttireRunS" type="RESOURCE"/>
+  <resource name="HeavySilverAttireS" type="RESOURCE"/>
   <resource name="HeavySilverAttireTauntS" type="RESOURCE"/>
   <resource name="OmnomnomnomSilverAttireS" type="RESOURCE"/>
 </resources>

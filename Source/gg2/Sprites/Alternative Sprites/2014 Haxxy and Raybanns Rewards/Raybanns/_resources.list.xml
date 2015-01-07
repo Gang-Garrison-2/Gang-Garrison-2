@@ -2,6 +2,7 @@
 <resources>
   <resource name="100% Genuine Canadium" type="GROUP"/>
   <resource name="Top Hat + Monocles" type="GROUP"/>
+  <resource name="Monocles" type="GROUP"/>
   <resource name="MoneyS" type="RESOURCE"/>
   <resource name="HaxxyBadgeS" type="RESOURCE"/>
 </resources>
