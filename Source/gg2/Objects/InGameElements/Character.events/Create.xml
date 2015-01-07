@@ -177,8 +177,7 @@
     
     // THIS IS A TRUCK LOAD OF GARBAGE CODE THAT SHOULD BE REPLACED ASAP
     
-    //if(hasClassReward(player, 'Silver_Accessories_') and player.class != CLASS_QUOTE)
-    if 1==1
+    if(hasClassReward(player, 'Silver_Accessories_') and player.class != CLASS_QUOTE)
     {
         ds_list_add(stillOverlays, global.SilverAttireOverlay[player.class]);
         ds_list_add(leanROverlays, global.SilverAttireLeanROverlay[player.class]);
