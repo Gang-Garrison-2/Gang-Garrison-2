@@ -3,10 +3,6 @@
   <resource name="ChaingunSnd" type="RESOURCE"/>
   <resource name="DeathSnd1" type="RESOURCE"/>
   <resource name="DeathSnd2" type="RESOURCE"/>
-  <resource name="DeathSnd3" type="RESOURCE"/>
-  <resource name="DeathSnd4" type="RESOURCE"/>
-  <resource name="DeathSnd5" type="RESOURCE"/>
-  <resource name="DeathSnd6" type="RESOURCE"/>
   <resource name="ExplosionSnd" type="RESOURCE"/>
   <resource name="FlamethrowerSnd" type="RESOURCE"/>
   <resource name="IntelGetSnd" type="RESOURCE"/>
