@@ -62,8 +62,11 @@ if (owner.object != -1) {
         dist = point_distance(x, y, other.origX, other.origY);
         if (dist &lt; closestDist or closestDist == -1)
         {
-            closest = id;
-            closestDist = dist;
+            if (!cloak)
+            {
+                closest = id;
+                closestDist = dist;
+            }
         }
     }
 

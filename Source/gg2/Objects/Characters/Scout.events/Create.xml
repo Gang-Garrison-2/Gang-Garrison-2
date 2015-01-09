@@ -17,12 +17,7 @@
 maxHp = 100;
 weapons[0] = Scattergun;
 haxxyStatue = ScoutHaxxyStatueS;
-
-// 'GW' reward - *G*olden *W*eapon
-if(hasClassReward(global.paramPlayer, 'GW'))
-    tauntsprite = ScoutGoldTauntS;
-else
-    tauntsprite = ScoutTauntS;
+tauntsprite = ScoutTauntS;
 </argument>
       </arguments>
     </action>
@@ -55,6 +50,14 @@ else
 capStrength = 2;
 canDoublejump = 1;
 numFlames = 3;
+
+// 'GW' reward - *G*olden *W*eapon
+if(hasClassReward(global.paramPlayer, 'GW'))
+{
+    if(tauntOverlays == -1)
+        tauntOverlays = ds_list_create();
+    ds_list_add(tauntOverlays, ScoutGoldWeaponTauntS)
+}
 </argument>
       </arguments>
     </action>

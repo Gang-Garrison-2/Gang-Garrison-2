@@ -96,7 +96,7 @@
                 }
             }
         
-            draw_name_badges(xoffset+28, yoffset+70+20*(i+1), player);
+            draw_name_badges(xoffset+28, yoffset+70+20*(i+1), player, alpha);
         
             draw_set_halign(fa_right);
             draw_text(xoffset+xsize/2-15, yoffset+70+20*(i+1), string(floor(player.stats[POINTS])));
@@ -132,7 +132,7 @@
                 }
             }
        
-            draw_name_badges(xoffset+xsize/2+60, yoffset+70+20*(i+1), player);
+            draw_name_badges(xoffset+xsize/2+60, yoffset+70+20*(i+1), player, alpha);
         
             draw_set_halign(fa_right);
             draw_text(xoffset+xsize+25, yoffset+70+20*(i+1), string(floor(player.stats[POINTS])));
@@ -191,7 +191,7 @@
             __x = __x_min;
             __y += string_height(__str) + 2;
         }
-        draw_name_badges(__bootlen + __x, __y, player);
+        draw_name_badges(__bootlen + __x, __y, player, alpha);
         __x += __bootlen + name_width_badges(player);
         draw_text(__x, __y, __str);
         __x += string_width(__str);

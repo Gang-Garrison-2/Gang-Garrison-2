@@ -52,7 +52,7 @@ else
     ubercolour = c_blue;
 
 // sprite resource selection
-var sprite, overlaySprite, noNewAnim;
+var sprite, overlayList, noNewAnim;
 noNewAnim = player.class == CLASS_QUOTE or sprite_special or player.humiliated;
 
 if (zoomed)
@@ -61,14 +61,17 @@ if (zoomed)
         sprite = SniperCrouchRedS;
     else
         sprite = SniperCrouchBlueS;
-    overlaySprite = sniperCrouchOverlay;
+    overlayList = crouchOverlays;
     animationImage = animationImage mod 2; // sniper crouch only has two frames, avoid overflow
 }
 // most classes, check for running jumping and standing
 else if (!noNewAnim)
 {
     if(!onground)
+    {
         sprite = spriteJump;
+        overlayList = jumpOverlays;
+    }
     else
     {
         if(still)
@@ -88,15 +91,28 @@ else if (!noNewAnim)
             
             // default still sprite
             sprite = spriteStand;
+            overlayList = stillOverlays;
             
             { // detect slopes
                 var openright, openleft;
                 openright = !collision_point_solid(x+6, bbox_bottom+2) and !collision_point_solid(x+2, bbox_bottom+2);
                 openleft = !collision_point_solid(x-7, bbox_bottom+2) and !collision_point_solid(x-3, bbox_bottom+2);
                 if (openright)
+                {
                     sprite = sprite_tilt_right;
+                    if(image_xscale &gt; 0)
+                        overlayList = leanROverlays;
+                    else
+                        overlayList = leanLOverlays;
+                }
                 if (openleft)
+                {
                     sprite = sprite_tilt_left;
+                    if(image_xscale &gt; 0)
+                        overlayList = leanLOverlays;
+                    else
+                        overlayList = leanROverlays;
+                }
                 if (openright and openleft)
                 {
                     openright = !collision_point_solid(bbox_right, bbox_bottom+2);
@@ -113,21 +129,27 @@ else if (!noNewAnim)
         else
         {
             sprite = spriteRun;
+            overlayList = runOverlays;
             if (player.class == CLASS_HEAVY and abs(hspeed) &lt; 3) // alternative sprite for extremely slow moving heavies
             {
                 if (team == TEAM_RED)
+                {
                     sprite = HeavyRedWalkS;
+                    overlayList = walkOverlays;
+                }
                 else
+                {
                     sprite = HeavyBlueWalkS;
+                    overlayList = walkOverlays;
+                }
             }
         }
     }
-    overlaySprite = overlay;
 }
 else
 {
     sprite = sprite_index;
-    overlaySprite = overlay;
+    overlayList = stillOverlays;
 }
 
 if (sprite != sprite_index and (sprite == spriteLeanR or sprite == spriteLeanL)
@@ -144,9 +166,11 @@ equipmentOffset *= -2; // two pixels up for whether the sprite is bobbing(above 
 
 overlayOffset = equipmentOffset;
 
-if (player.class == CLASS_HEAVY or player.class == CLASS_SOLDIER
-    or noNewAnim or taunting)
+if ((player.class == CLASS_HEAVY and abs(hspeed) &lt; 3) or player.class == CLASS_SOLDIER or noNewAnim or taunting)
+{
     equipmentOffset = 0; // override run bob for classes with no run bob
+    overlayOffset = 0;
+}
 else if (abs(hspeed) &lt; 3 and equipmentOffset = -2 and !taunting)
 {
     equipmentOffset += 2;
@@ -166,15 +190,15 @@ yr += yoffset;
 
 if (omnomnomnom)
 {
-    draw_sprite_ext_overlay(omnomnomnomSprite,omnomnomnomOverlay,omnomnomnomindex,xr,yr,image_xscale,image_yscale,image_angle,c_white,1);
+    draw_sprite_ext_overlay(omnomnomnomSprite,omnomnomnomOverlays,omnomnomnomindex,xr,yr,image_xscale,image_yscale,image_angle,c_white,1);
     if (ubered)
-        draw_sprite_ext_overlay(omnomnomnomSprite,omnomnomnomOverlay,omnomnomnomindex,xr,yr,image_xscale,image_yscale,image_angle,ubercolour,0.7);
+        draw_sprite_ext_overlay(omnomnomnomSprite,omnomnomnomOverlays,omnomnomnomindex,xr,yr,image_xscale,image_yscale,image_angle,ubercolour,0.7);
 }
 else if (taunting)
 {
-    draw_sprite_ext_overlay(tauntsprite,tauntOverlay,tauntindex,xr,yr,image_xscale,image_yscale,image_angle,c_white,1);
+    draw_sprite_ext_overlay(tauntsprite,tauntOverlays,tauntindex,xr,yr,image_xscale,image_yscale,image_angle,c_white,1);
     if (ubered)
-        draw_sprite_ext_overlay(tauntsprite,tauntOverlay,tauntindex,xr,yr,image_xscale,image_yscale,image_angle,ubercolour,0.7);
+        draw_sprite_ext_overlay(tauntsprite,tauntOverlays,tauntindex,xr,yr,image_xscale,image_yscale,image_angle,ubercolour,0.7);
 }
 else if (player.humiliated)
     draw_sprite_ext(humiliationPoses,floor(animationImage)+humiliationOffset,xr,yr,image_xscale,image_yscale,image_angle,c_white,image_alpha);
@@ -182,6 +206,8 @@ else if (!taunting)
 {
     if (intel and player.class != CLASS_QUOTE and !zoomed)
         draw_sprite_ext(spriteIntel,0,xr,round(y)+equipmentOffset, image_xscale, image_yscale, 0, c_white, image_alpha);
+    if (zoomed)
+        overlayOffset += 4;
     if (cloak)
     {
         if (!ubered)
@@ -195,11 +221,11 @@ else if (!taunting)
     else
     {
         if (!ubered)
-            draw_sprite_ext_overlay(sprite,overlaySprite,floor(animationImage+animationOffset),xr,yr,image_xscale,image_yscale,image_angle,c_white,image_alpha,overlayOffset);
+            draw_sprite_ext_overlay(sprite,overlayList,floor(animationImage+animationOffset),xr,yr,image_xscale,image_yscale,image_angle,c_white,image_alpha,overlayOffset);
         else if (ubered)
         {
-            draw_sprite_ext_overlay(sprite,overlaySprite,floor(animationImage+animationOffset),xr,yr,image_xscale,image_yscale,image_angle,c_white,1,overlayOffset);
-            draw_sprite_ext_overlay(sprite,overlaySprite,floor(animationImage+animationOffset),xr,yr,image_xscale,image_yscale,image_angle,ubercolour,0.7,overlayOffset);
+            draw_sprite_ext_overlay(sprite,overlayList,floor(animationImage+animationOffset),xr,yr,image_xscale,image_yscale,image_angle,c_white,1,overlayOffset);
+            draw_sprite_ext_overlay(sprite,overlayList,floor(animationImage+animationOffset),xr,yr,image_xscale,image_yscale,image_angle,ubercolour,0.7,overlayOffset);
         }
     }
 }
@@ -226,7 +252,7 @@ if (distance_to_point(mouse_x, mouse_y) &lt; 25)
     width = name_width_badges(player);
     height = string_height(player.name);
     
-    draw_name_badges(round(xr - width / 2), round(y) - 35 - height, player);
+    draw_name_badges(round(xr - width / 2), round(y) - 35 - height, player, 1);
     draw_set_halign(fa_center);
     draw_set_valign(fa_bottom);
     

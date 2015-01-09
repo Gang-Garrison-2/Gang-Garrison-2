@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="SpyBlueHS" type="RESOURCE"/>
+  <resource name="SpyBlueIntelS" type="RESOURCE"/>
+  <resource name="SpyBlueJumpS" type="RESOURCE"/>
+  <resource name="SpyBlueLeanLS" type="RESOURCE"/>
+  <resource name="SpyBlueLeanRS" type="RESOURCE"/>
+  <resource name="SpyBlueRunS" type="RESOURCE"/>
+  <resource name="SpyBlueS" type="RESOURCE"/>
+  <resource name="SpyBlueStandS" type="RESOURCE"/>
+  <resource name="SpyGhostS" type="RESOURCE"/>
+  <resource name="SpyRedHS" type="RESOURCE"/>
+  <resource name="SpyRedIntelS" type="RESOURCE"/>
+  <resource name="SpyRedJumpS" type="RESOURCE"/>
+  <resource name="SpyRedLeanLS" type="RESOURCE"/>
+  <resource name="SpyRedLeanRS" type="RESOURCE"/>
+  <resource name="SpyRedRunS" type="RESOURCE"/>
+  <resource name="SpyRedS" type="RESOURCE"/>
+  <resource name="SpyRedStandS" type="RESOURCE"/>
+  <resource name="SpyTauntS" type="RESOURCE"/>
+</resources>

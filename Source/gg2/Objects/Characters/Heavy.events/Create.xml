@@ -17,12 +17,7 @@
 maxHp = 200;
 weapons[0] = Minigun;
 haxxyStatue = HeavyHaxxyStatueS;
-
-// 'GW' reward - *G*olden *W*eapon
-if(hasClassReward(global.paramPlayer, 'GW'))
-    tauntsprite = HeavyGoldTauntS;
-else
-    tauntsprite = HeavyTauntS;
+tauntsprite = HeavyTauntS;
 </argument>
       </arguments>
     </action>
@@ -51,17 +46,19 @@ else
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">// 'BH' reward - *B*obble *H*ead
-if(hasClassReward(global.paramPlayer, 'BH'))
-{
-    omnomnomnomOverlay = HatBobbleOmnomnomnomS;
-}
-
-// 'GW' reward - *G*olden *W*eapon
+        <argument kind="STRING">// 'GW' reward - *G*olden *W*eapon
 if(hasClassReward(global.paramPlayer, 'GW'))
 {
-    omnomnomnomSprite = OmnomnomnomGoldS;
+    if(tauntOverlays == -1)
+        tauntOverlays = ds_list_create();
+    ds_list_add(tauntOverlays, HeavyGoldWeaponTauntS);
+    ds_list_add(omnomnomnomOverlays, OmnomnomnomGoldWeaponS);
+    
 }
+
+// 'BH' reward - *B*obble *H*ead
+if(hasClassReward(global.paramPlayer, 'BH'))
+    ds_list_add(omnomnomnomOverlays, HatBobbleOmnomnomnomS);
 
 numFlames = 5;
 </argument>
