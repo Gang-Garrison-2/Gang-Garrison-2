@@ -221,7 +221,7 @@
         ds_list_add(tauntOverlays, global.HatBobbleClassTaunt[player.class]);
         if (player.class == CLASS_HEAVY)
         {
-            ds_list_add(walkOverlays, global.TopHatSandwich[player.class]);
+            ds_list_add(walkOverlays, global.HatBobbleClassOverlay[player.class]);
             ds_list_add(omnomnomnomOverlays, global.HatBobbleSandwich[player.class]);
         }
         if (player.class == CLASS_SNIPER)
