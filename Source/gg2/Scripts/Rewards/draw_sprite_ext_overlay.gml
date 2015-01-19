@@ -25,10 +25,13 @@ _alpha = argument9;
 _voffset = argument10;
 
 draw_sprite_ext(_sprite, _subimg, _x, _y, _xscale, _yscale, _rot, _color, _alpha);
-if (!ds_list_empty(overlay))
+if (overlay != -1)
 {
-    for(i = 0; i < ds_list_size(overlay); i+=1)
+    if (!ds_list_empty(overlay))
     {
-        draw_sprite_ext(ds_list_find_value(overlay,i), _subimg, _x, _y+_voffset, _xscale, _yscale, _rot, _color, _alpha);
+        for(i = 0; i < ds_list_size(overlay); i+=1)
+        {
+            draw_sprite_ext(ds_list_find_value(overlay,i), _subimg, _x, _y+_voffset, _xscale, _yscale, _rot, _color, _alpha);
+        }
     }
 }
