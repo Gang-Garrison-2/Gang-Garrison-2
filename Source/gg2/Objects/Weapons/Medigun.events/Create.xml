@@ -41,7 +41,7 @@
     {
         normalSprite = MedigunGoldS;
         recoilSprite = MedigunGoldFS;
-        reloadSprite = MedigunFRS;
+        reloadSprite = MedigunGoldFRS;
     }
     else
     {
