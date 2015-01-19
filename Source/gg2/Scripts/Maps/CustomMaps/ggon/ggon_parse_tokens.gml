@@ -5,50 +5,56 @@
 var tokens;
 tokens = argument0;
 
-var token;
+var tokenType, tokenValue;
 while (!ds_queue_empty(tokens))
 {
-    token = ds_queue_dequeue(tokens);
+    tokenType = ds_queue_dequeue(tokens);
+    tokenValue = ds_queue_dequeue(tokens);
     
-    // String
-    if (string_char_at(token, 1) == '%')
-        return string_copy(token, 2, string_length(token) - 1);
+    if (tokenType == 'string')
+        return tokenValue;
     
-    // GGON has only three primitives - it could only be string, opening { or opening [
-    if (token != '{' and token != '[')
-        show_error('Error when parsing GGON: unexpected token "' + token + '"', true);
-    
-    // Either way it decodes to a map
-    var map;
-    map = ds_map_create();
-        
-    // GGON map
-    if (token == '{')
+    if (tokenType == 'punctuation')
     {
-        token = ds_queue_head(tokens);
-        if (token == '}')
+        // GGON has only two primitives - it could only be string or opening {
+        if (tokenValue != '{')
+            show_error('Error when parsing GGON: unexpected token "' + tokenValue + '"', true);
+        
+        var map;
+        map = ds_map_create();
+        
+        tokenType = ds_queue_head(tokens);
+        if (tokenType == 'punctuation')
         {
-            ds_queue_dequeue(tokens);
+            tokenType = ds_queue_dequeue(tokens);
+            tokenValue = ds_queue_dequeue(tokens);
+            
+            // { can only be followed by } or a key
+            if (tokenValue != '}')
+                show_error('Error when parsing GGON: unexpected token "' + tokenValue + '" after opening {', true);
             
             // It's {} so we can just return our empty map
             return map;
         }
-        // string
-        else if (string_char_at(token, 1) == '%')
+        else if (tokenType == 'string')
         {
             // Parse each key of our map
             while (!ds_queue_empty(tokens))
             {
-                token = ds_queue_dequeue(tokens);
+                tokenType = ds_queue_dequeue(tokens);
+                tokenValue = ds_queue_dequeue(tokens);
                 
                 var key;
-                key = string_copy(token, 2, string_length(token) - 1);
+                key = tokenValue;
                 
-                token = ds_queue_dequeue(tokens);
+                tokenType = ds_queue_dequeue(tokens);
+                tokenValue = ds_queue_dequeue(tokens);
                 
                 // Following token must be a : as we have a key
-                if (token != ':')
-                    show_error('Error when parsing GGON: unexpected token "' + token + '" after key', true);
+                if (tokenType != 'punctuation')
+                    show_error('Error when parsing GGON: unexpected ' + tokenType + ' after key', true);
+                if (tokenValue != ':')
+                    show_error('Error when parsing GGON: unexpected token "' + tokenValue + '" after key', true);
                     
                 // Now we recurse to parse our value!
                 var value;
@@ -56,61 +62,23 @@ while (!ds_queue_empty(tokens))
                 
                 ds_map_add(map, key, value);
                 
-                token = ds_queue_dequeue(tokens);
+                tokenType = ds_queue_dequeue(tokens);
+                tokenValue = ds_queue_dequeue(tokens);
                 
                 // After key, colon and value, next token must be , or }
-                if (token == ',')
+                if (tokenType != 'punctuation')
+                    show_error('Error when parsing GGON: unexpected ' + tokenType + ' after value', true);
+                if (tokenValue == ',')
                     continue;
-                else if (token == '}')
+                else if (tokenValue == '}')
                     return map;
                 else
-                    show_error('Error when parsing GGON: unexpected token "' + token + '" after value', true);
+                    show_error('Error when parsing GGON: unexpected token "' + tokenValue + '" after value', true);
             }
         }
         else
-            show_error('Error when parsing GGON: unexpected token "' + token + '"', true);
+            show_error('Error when parsing GGON: unknown token type "' + tokenType + '"', true);
     }
-    // GGON list
-    else
-    {
-        token = ds_queue_head(tokens);
-
-        if (token == ']')
-        {
-            ds_queue_dequeue(tokens);
-        
-            // It's an empty list
-            ds_map_add(map, "length", "0");
-            return map;
-        }
-        else
-        {
-            var length;
-            length = 0;
-            
-            // Parse each value in our list
-            while (!ds_queue_empty(tokens))
-            { 
-                // Now we recurse to parse our value!
-                var value;
-                value = ggon_parse_tokens(tokens);
-                
-                ds_map_add(map, string(length), value);
-                length += 1;
-                
-                token = ds_queue_dequeue(tokens);
-                
-                // After value, next token must be , or ]
-                if (token == ',')
-                    continue;
-                else if (token == ']')
-                {
-                    ds_map_add(map, "length", string(length));
-                    return map;
-                }
-                else
-                    show_error('Error when parsing GGON: unexpected token "' + token + '" after value', true);
-            }
-        }
-    }
+    
+    show_error('Error when parsing GGON: unknown token type "' + tokenType + '"', true);
 }

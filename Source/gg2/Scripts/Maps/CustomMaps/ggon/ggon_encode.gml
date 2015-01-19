@@ -61,64 +61,6 @@ if (is_string(value))
     return out;
 // not string, therefore real, therefore ds_map representing map value
 } else {
-    // If it has a length, try to encode as list
-    if (ds_map_exists(value, "length")) {
-        var lengthString, i, validLength;
-        lengthString = ds_map_find_value(value, "length");
-        validLength = true;
-        
-        // Ensure that the length is numeric, since real() errors otherwise
-        for (i = 1; i <= string_length(lengthString); i += 1) {
-            if (!('0' <= string_char_at(lengthString, i) and string_char_at(lengthString, i) <= '9'))
-            {
-                validLength = false;
-                break;
-            }
-        }
-        
-        if (validLength)
-        {
-            var length;
-            length = real(lengthString);
-            
-            // GGON lists aren't sparse
-            // There should be a key for each element, plus the length key
-            if (ds_map_size(value) == length + 1)
-            {
-                var validList;
-            
-                validList = true;
-                
-                for (i = 0; i < length; i += 1)
-                {
-                    if (!ds_map_exists(value, string(i)))
-                    {
-                        validList = false;
-                        break;
-                    }
-                }
-                
-                // Finally, we know this is a valid list and can encode it!
-                if (validList)
-                {
-                    out = "[";
-                    
-                    for (i = 0; i < length; i += 1)
-                    {
-                        if (i != 0)
-                            out += ',';
-                        out += ggon_encode(ds_map_find_value(value, string(i)));
-                    }
-                    
-                    out += "]";
-                    
-                    return out;
-                }
-            }
-        }
-    }
-    
-    // Failing that, encode as a map
     out = "{";
     
     var key, first;

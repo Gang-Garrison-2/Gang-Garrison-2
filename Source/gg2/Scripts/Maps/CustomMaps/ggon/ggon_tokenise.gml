@@ -1,34 +1,33 @@
 // real ggon_tokenise(string text)
 // Tokenises a GGON (Gang Garrison Object Notation) text
 // Returns a ds_queue of tokens
-// Punctuation is unprefixed, so {} becomes ["{", "}"]
-// Strings are prefixed with %, so {'foo': bar} becomes ["%foo", ":", "%bar"]
+// For each token, list has type ("punctuation" or "string") and value
+// Thus you must iterate over the list two elements at a time
 
 var text;
 text = argument0;
 
-var i, len, tokens;
-i = 1;
-len = string_length(text);
+var tokens;
 tokens = ds_queue_create();
 
-while (i <= len)
+while (string_length(text) > 0)
 {
     var char;
-    char = string_char_at(text, i);
+    char = string_char_at(text, 1);
 
-    // basic punctuation: '{', '}', ':', '[', ']', and ','
-    if (char == '{' or char == '}' or char == ':' or char == '[' or char == ']' or char == ',')
+    // basic punctuation: '{', '}', ':' and ','
+    if (char == '{' or char == '}' or char == ':' or char == ',')
     {
+        ds_queue_enqueue(tokens, 'punctuation');
         ds_queue_enqueue(tokens, char);
-        i += 1;
+        text = string_copy(text, 2, string_length(text) - 1);
         continue;
     }
     
     // skip whitespace (space, tab, new line or carriage return)
     if (char == ' ' or char == chr(9) or char == chr(10) or char == chr(13))
     {
-        i += 1;
+        text = string_copy(text, 2, string_length(text) - 1);
         continue;
     }
     
@@ -39,13 +38,14 @@ while (i <= len)
         identifier = '';
         while (('a' <= char and char <= 'z') or ('A' <= char and char <= 'Z') or ('0' <= char and char <= '9') or char == '_' or char == '.' or char == '+' or char == '-')
         {
-            if (i > len)
+            if (string_length(text) == 0)
                 show_error('Error when tokenising GGON: unexpected end of text while parsing string', true);
             identifier += char;
-            i += 1;
-            char = string_char_at(text, i);
+            text = string_copy(text, 2, string_length(text) - 1);
+            char = string_char_at(text, 1);
         }
-        ds_queue_enqueue(tokens, '%' + identifier);
+        ds_queue_enqueue(tokens, 'string');
+        ds_queue_enqueue(tokens, identifier);
         continue;
     }
     
@@ -54,8 +54,8 @@ while (i <= len)
     {
         var str;
         str = '';
-        i += 1;
-        char = string_char_at(text, i);
+        text = string_copy(text, 2, string_length(text) - 1);
+        char = string_char_at(text, 1);
         while (char != "'")
         {
             if (string_length(text) == 0)
@@ -63,8 +63,8 @@ while (i <= len)
             // escaping
             if (char == '\')
             {
-                i += 1;
-                char = string_char_at(text, i);
+                text = string_copy(text, 2, string_length(text) - 1);
+                char = string_char_at(text, 1);
                 if (char == "'" or char == '\')
                     str += char;
                 // new line escape
@@ -86,15 +86,16 @@ while (i <= len)
             {
                 str += char;
             }
-            i += 1;
-            char = string_char_at(text, i);
+            text = string_copy(text, 2, string_length(text) - 1);
+            char = string_char_at(text, 1);
         }
         if (char != "'")
             show_error('Error when tokenising GGON: unexpected character "' + char + '" while parsing string, expected "' + "'" + '"', true);
-        i += 1;
-        char = string_char_at(text, i);
+        text = string_copy(text, 2, string_length(text) - 1);
+        char = string_char_at(text, 1);
         
-        ds_queue_enqueue(tokens, '%' + str);
+        ds_queue_enqueue(tokens, 'string');
+        ds_queue_enqueue(tokens, str);
         continue;
     }
     

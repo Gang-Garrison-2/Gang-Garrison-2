@@ -1,8 +1,8 @@
 // real ggon_map_to_list(real map)
 // Takes a ds_map which has a "length" key and string indexes up to length
 // Returns a ds_list which has the values of those indexes in order
-// This is to make dealing with GGON easier, as GGON doesn't understand ds_list
-// This works with what decoding GGON lists, or ggon_list_to_map, produce
+// This is a function to make dealing with GGON easier, as GGON lacks lists
+// This is designed to work with the map ggon_list_to_map would produce
 
 var map;
 map = argument0;

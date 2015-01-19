@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<resources>
-  <resource name="test_unit_begin" type="RESOURCE"/>
-  <resource name="test_unit_end" type="RESOURCE"/>
-  <resource name="value_to_string" type="RESOURCE"/>
-  <resource name="test_assert_equals" type="RESOURCE"/>
-  <resource name="test_assert_map_key_value" type="RESOURCE"/>
-  <resource name="ggon" type="GROUP"/>
-</resources>

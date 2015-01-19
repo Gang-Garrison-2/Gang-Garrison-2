@@ -9,7 +9,6 @@
   <resource name="character_init" type="RESOURCE"/>
   <resource name="getCharacterObject" type="RESOURCE"/>
   <resource name="room_goto_fix" type="RESOURCE"/>
-  <resource name="Unit tests" type="GROUP"/>
   <resource name="Message Builders" type="GROUP"/>
   <resource name="Sound" type="GROUP"/>
   <resource name="Networking" type="GROUP"/>
