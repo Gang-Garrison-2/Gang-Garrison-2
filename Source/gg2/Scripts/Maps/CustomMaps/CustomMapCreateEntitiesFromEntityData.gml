@@ -1,7 +1,11 @@
 // creates game objects per the list in the entity data
 // argument0: entity data
 
-if (string_copy(argument0, 1, 1) == "{")
+var firstChar;
+firstChar = string_copy(argument0, 1, 1);
+
+// It begins with a { or [ so it's a GGON map or list
+if (firstChar == "{" or firstChar == "[")
 {
     // Read the entities that are compiled using the GGON format.
     // x, y, image_xscale and image_yscale are set by default, 
