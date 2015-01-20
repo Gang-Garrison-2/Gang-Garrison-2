@@ -58,7 +58,7 @@ while (i <= len)
         char = string_char_at(text, i);
         while (char != "'")
         {
-            if (string_length(text) == 0)
+            if (i > len)
                 show_error('Error when tokenising GGON: unexpected end of text while parsing string', true);
             // escaping
             if (char == '\')
