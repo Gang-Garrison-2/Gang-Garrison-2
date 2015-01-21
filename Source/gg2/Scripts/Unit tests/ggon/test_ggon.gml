@@ -38,7 +38,48 @@ test_assert_map_key_value(map, "0", "a");
 test_assert_map_key_value(map, "1", "b");
 ggon_destroy_map(map);
 
+// contrived, but probably semi-representative sample
+map = ggon_decode("{
+    items: [
+        {
+            type: foo,
+            x: 12.0,
+            y: 13.5
+        },
+        {
+            type: bar,
+            x: 12.0,
+            y: 13.5,
+            'sub items': []
+        }
+    ]
+}");
+test_assert_equals(1, ds_map_size(map));
+var items;
+items = ds_map_find_value(map, 'items');
+test_assert_equals(3, ds_map_size(items));
+test_assert_map_key_value(items, 'length', '2');
+var item;
+item = ds_map_find_value(items, '0');
+test_assert_equals(3, ds_map_size(item));
+test_assert_map_key_value(item, 'type', 'foo');
+test_assert_map_key_value(item, 'x', '12.0');
+test_assert_map_key_value(item, 'y', '13.5');
+item = ds_map_find_value(items, '1');
+test_assert_equals(4, ds_map_size(item));
+test_assert_map_key_value(item, 'type', 'bar');
+test_assert_map_key_value(item, 'x', '12.0');
+test_assert_map_key_value(item, 'y', '13.5');
+var sub_items;
+sub_items = ds_map_find_value(item, 'sub items');
+test_assert_equals(1, ds_map_size(sub_items));
+test_assert_map_key_value(sub_items, 'length', '0');
+
 var out;
+out = ggon_encode(map);
+test_assert_equals(out, "{items:[{type:foo,x:12.0,y:13.5},{'sub items':[],type:bar,x:12.0,y:13.5}]}");
+
+ggon_destroy_map(map);
 
 // valid empty GGON list
 map = ds_map_create();
