@@ -23,6 +23,8 @@ for(i=0; i&lt;7; i+=1)
     background_xfactor[i] = 10-i;
     background_yfactor[i] = 10-i;
 }
+
+event_user(0)
 </argument>
       </arguments>
     </action>
