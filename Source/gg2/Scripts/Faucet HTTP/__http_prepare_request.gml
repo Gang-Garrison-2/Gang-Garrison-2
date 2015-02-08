@@ -1,8 +1,8 @@
 // ***
-// This function forms part of Faucet HTTP v1.0
+// This function forms part of Faucet HTTP v1.1
 // https://github.com/TazeTSchnitzel/Faucet-HTTP-Extension
 // 
-// Copyright (c) 2013-2014, Andrea Faulds <ajf@ajf.me>
+// Copyright (c) 2013-2015, Andrea Faulds <ajf@ajf.me>
 // 
 // Permission to use, copy, modify, and/or distribute this software for any
 // purpose with or without fee is hereby granted, provided that the above
@@ -21,13 +21,19 @@
 // void __http_prepare_request(real client, string url, real headers)
 
 // client - HttpClient object to prepare
+// method - method of request ('GET' or 'POST')
 // url - URL to send GET request to
 // headers - ds_map of extra headers to send, -1 if none
+// requestBody - buffer of request body to send, 0 if none
+// requestMimeType - content type of request body, '' if no request body
 
-var client, url, headers;
+var client, method, url, headers, _requestBody, _requestBodyMimeType;
 client = argument0;
-url = argument1;
-headers = argument2;
+method = argument1;
+url = argument2;
+headers = argument3;
+_requestBody = argument4;
+_requestBodyMimeType = argument5;
 
 var parsed;
 parsed = __http_parse_url(url);
@@ -59,7 +65,10 @@ with (client)
     responseBodyProgress = -1;
     responseHeaders = ds_map_create();
     requestUrl = url;
+    requestMethod = method;
     requestHeaders = headers;
+    requestBody = _requestBody;
+    requestBodyMimeType = _requestBodyMimeType;
 
     //  Request       = Request-Line              ; Section 5.1
     //                  *(( general-header        ; Section 4.5
@@ -73,9 +82,9 @@ with (client)
     // elements are separated by SP characters. No CR or LF is allowed
     // except in the final CRLF sequence."
     if (ds_map_exists(parsed, 'query'))
-        write_string(socket, 'GET ' + ds_map_find_value(parsed, 'abs_path') + '?' + ds_map_find_value(parsed, 'query') + ' HTTP/1.1' + CRLF);
+        write_string(socket, requestMethod + ' ' + ds_map_find_value(parsed, 'abs_path') + '?' + ds_map_find_value(parsed, 'query') + ' HTTP/1.1' + CRLF);
     else
-        write_string(socket, 'GET ' + ds_map_find_value(parsed, 'abs_path') + ' HTTP/1.1' + CRLF);
+        write_string(socket, requestMethod + ' ' + ds_map_find_value(parsed, 'abs_path') + ' HTTP/1.1' + CRLF);
 
     // "A client MUST include a Host header field in all HTTP/1.1 request
     // messages."
@@ -95,7 +104,15 @@ with (client)
     // "If no Accept-Encoding field is present in a request, the server MAY
     // assume that the client will accept any content coding."
     write_string(socket, 'Accept-Encoding:' + CRLF);
+
+    // Request body meta data
+    if (requestBody)
+    {
+        write_string(socket, 'Content-Length: ' + string(buffer_size(requestBody)) + CRLF);
+        write_string(socket, 'Content-Type: ' + requestBodyMimeType + CRLF);
     
+    }
+        
     // If headers specified
     if (headers != -1)
     {
@@ -109,6 +126,10 @@ with (client)
     
     // Send extra CRLF to terminate request
     write_string(socket, CRLF);
+    
+    // Request body itself
+    if (requestBody)
+        write_buffer(socket, requestBody);
     
     socket_send(socket);
 

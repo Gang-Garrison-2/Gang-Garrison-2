@@ -13,6 +13,8 @@
   <resource name="__http_client_destroy" type="RESOURCE"/>
   <resource name="http_new_get" type="RESOURCE"/>
   <resource name="http_new_get_ex" type="RESOURCE"/>
+  <resource name="http_new_post" type="RESOURCE"/>
+  <resource name="http_new_post_ex" type="RESOURCE"/>
   <resource name="http_step" type="RESOURCE"/>
   <resource name="http_status_code" type="RESOURCE"/>
   <resource name="http_reason_phrase" type="RESOURCE"/>
