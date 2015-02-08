@@ -1,8 +1,8 @@
 // ***
-// This function forms part of Faucet HTTP v1.0
+// This function forms part of Faucet HTTP v1.1
 // https://github.com/TazeTSchnitzel/Faucet-HTTP-Extension
 // 
-// Copyright (c) 2013-2014, Andrea Faulds <ajf@ajf.me>
+// Copyright (c) 2013-2015, Andrea Faulds <ajf@ajf.me>
 // 
 // Permission to use, copy, modify, and/or distribute this software for any
 // purpose with or without fee is hereby granted, provided that the above
@@ -29,7 +29,7 @@
 
 // Example usage:
 // req = http_new_get("http://example.com/x.txt");
-// while (http_step(req)) {}
+// while (!http_step(req)) {}
 // if (http_status_code(req) != 200) {
 //     // Errored!
 // } else {
