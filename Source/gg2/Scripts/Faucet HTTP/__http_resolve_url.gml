@@ -1,8 +1,8 @@
 // ***
-// This function forms part of Faucet HTTP v1.0
+// This function forms part of Faucet HTTP v1.1
 // https://github.com/TazeTSchnitzel/Faucet-HTTP-Extension
 // 
-// Copyright (c) 2013-2014, Andrea Faulds <ajf@ajf.me>
+// Copyright (c) 2013-2015, Andrea Faulds <ajf@ajf.me>
 // 
 // Permission to use, copy, modify, and/or distribute this software for any
 // purpose with or without fee is hereby granted, provided that the above
@@ -89,7 +89,7 @@ else if (((string_char_at(refUrl, 1) == '/' and string_length(refUrl) > 1) or re
     {
         var path, query;
         path = string_copy(refUrl, 1, queryPos - 1);
-        query = string_copy(refUrl, queryPos + 1, string_length(relUrl) - queryPos);
+        query = string_copy(refUrl, queryPos + 1, string_length(refUrl) - queryPos);
         path = __http_resolve_path(ds_map_find_value(urlParts, 'abs_path'), path);
         ds_map_replace(urlParts, 'abs_path', path);
         if (ds_map_exists(urlParts, 'query'))
