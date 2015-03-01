@@ -215,8 +215,11 @@
     if(hasClassReward(player, 'BH') and player.class != CLASS_QUOTE)
     {
         // hats use the same sprite for most animations 
-        for (i = stillOverlays; i &lt;= runOverlays; i+= 1)
-            ds_list_add(i, global.HatBobbleClassOverlay[player.class]);
+        ds_list_add(stillOverlays, global.HatBobbleClassOverlay[player.class]);
+        ds_list_add(leanROverlays, global.HatBobbleClassOverlay[player.class]);
+        ds_list_add(leanLOverlays, global.HatBobbleClassOverlay[player.class]);
+        ds_list_add(jumpOverlays, global.HatBobbleClassOverlay[player.class]);
+        ds_list_add(runOverlays, global.HatBobbleClassOverlay[player.class]);
             
         ds_list_add(tauntOverlays, global.HatBobbleClassTaunt[player.class]);
         if (player.class == CLASS_HEAVY)
@@ -227,10 +230,13 @@
         if (player.class == CLASS_SNIPER)
             ds_list_add(crouchOverlays, global.HatBobbleClassOverlay[player.class]);
     }
-    else if(hasClassReward(player, 'TopHatMonocle'))
+    else if(hasClassReward(player, 'TopHatMonocle_'))
     {
-        for (i = stillOverlays; i &lt;= runOverlays; i+= 1)
-            ds_list_add(i, global.TopHatMonocleOverlay[player.class]);
+        ds_list_add(stillOverlays, global.TopHatMonocleOverlay[player.class]);
+        ds_list_add(leanROverlays, global.TopHatMonocleOverlay[player.class]);
+        ds_list_add(leanLOverlays, global.TopHatMonocleOverlay[player.class]);
+        ds_list_add(jumpOverlays, global.TopHatMonocleOverlay[player.class]);
+        ds_list_add(runOverlays, global.TopHatMonocleOverlay[player.class]);
             
         ds_list_add(tauntOverlays, global.TopHatMonocleTaunt[player.class]);
         if (player.class == CLASS_HEAVY)
@@ -241,10 +247,13 @@
         if (player.class == CLASS_SNIPER)
             ds_list_add(crouchOverlays, global.TopHatMonocleOverlay[player.class]);
     }
-    else if(hasClassReward(player, 'TopHat'))
+    else if(hasClassReward(player, 'TopHat_'))
     {
-        for (i = stillOverlays; i &lt;= runOverlays; i+= 1)
-            ds_list_add(i, global.TopHatOverlay[player.class]);
+        ds_list_add(stillOverlays, global.TopHatOverlay[player.class]);
+        ds_list_add(leanROverlays, global.TopHatOverlay[player.class]);
+        ds_list_add(leanLOverlays, global.TopHatOverlay[player.class]);
+        ds_list_add(jumpOverlays, global.TopHatOverlay[player.class]);
+        ds_list_add(runOverlays, global.TopHatOverlay[player.class]);
             
         ds_list_add(tauntOverlays, global.TopHatTaunt[player.class]);
         if (player.class == CLASS_HEAVY)
