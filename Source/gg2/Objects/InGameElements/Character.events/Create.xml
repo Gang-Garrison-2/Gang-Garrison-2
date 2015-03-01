@@ -264,7 +264,7 @@
         if (player.class == CLASS_SNIPER)
             ds_list_add(crouchOverlays, global.TopHatOverlay[player.class]);
     }
-    if(hasClassReward(player, 'MakeItRain'))
+    if(hasClassReward(player, 'MakeItRain_'))
         hasMoney = true;
     if (hasReward(player, 'WillOWisp'))
     {

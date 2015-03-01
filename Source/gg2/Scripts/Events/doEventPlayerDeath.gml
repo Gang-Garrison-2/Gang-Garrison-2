@@ -199,7 +199,7 @@ with(victim.object) {
         if(hspeed>0) {
             deadbody.image_xscale = -1;  
         }
-        if(hasClassReward(victim,"MakeItRain"))
+        if(hasClassReward(victim,"MakeItRain_"))
             deadbody.hasMoney = true;
     }
 }
