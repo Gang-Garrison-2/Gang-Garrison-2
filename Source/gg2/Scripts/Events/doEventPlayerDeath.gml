@@ -227,6 +227,7 @@ with(victim.object) {
         {
             deadbody.image_xscale = -1;  
         }
+        player.corpse = deadbody;
     }
     
     if(hasTombstone)
