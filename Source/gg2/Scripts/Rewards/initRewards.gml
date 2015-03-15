@@ -92,6 +92,7 @@ global.HaxxyBadges[31] = 'Badge_Moneybag';
 global.HaxxyBadges[32] = 'Badge_ChessWhite';
 global.HaxxyBadges[33] = 'Badge_ChessBlack';
 global.HaxxyBadges[34] = 'Badge_BasketBall';
+global.HaxxyBadges[34] = 'Badge_RocketJump';
 
 // Makes array of Golden Accessory overlay sprites
 // Pre-initialize array to detect if sprites should be reused
