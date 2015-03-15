@@ -13,17 +13,8 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">var mapHeight;
-mapHeight = map_height();
-
-if (floor(image_index) == (image_number - 1))
+        <argument kind="STRING">if (floor(image_index) == (image_number - 1))
     image_speed = 0;
-
-wallSetSolid();
-
-while (place_free(x,y+1) and y &lt; mapHeight)
-    y += 1;
-wallUnsetSolid();
 </argument>
       </arguments>
     </action>
