@@ -218,6 +218,12 @@ if (hasReward(victim, 'Ghost') and victim.ghost == noone) {
     victim.ghost.vspeed = vspeed;
 }
 
+if (hasClassReward(victim, 'Tombstone'))
+{
+    global.paramOwnerClass = victim.class;
+    instance_create(victim.object.x, victim.object.y, Tombstone);
+}
+
 with(victim.object) {       
     instance_destroy();
 }
