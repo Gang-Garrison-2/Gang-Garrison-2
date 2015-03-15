@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<event category="CREATE" id="0">
+<event category="OTHER" id="10">
   <actions>
     <action id="603" library="1">
       <!--action name: Code-->
@@ -13,18 +13,14 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">num_bgs = 0;
-foreground = -1;
-voidColor = c_black;
-
-var i;
-for(i=0; i&lt;7; i+=1)
-{
-    background_xfactor[i] = 10-i;
-    background_yfactor[i] = 10-i;
+        <argument kind="STRING">// Take multistage maps into account.
+yCenter = map_height()/2;
+if global.totalMapAreas &gt; 1 {
+    if (global.currentMapArea &gt;= global.totalMapAreas)
+        yCenter = global.area[global.totalMapAreas] + (map_height() - global.area[global.totalMapAreas]) / 2;
+    else
+        yCenter = global.area[global.currentMapArea] + (global.area[global.currentMapArea+1] - global.area[global.currentMapArea]) / 2;
 }
-
-event_user(0)
 </argument>
       </arguments>
     </action>
