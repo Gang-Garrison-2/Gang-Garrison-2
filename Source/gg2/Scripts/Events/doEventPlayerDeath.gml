@@ -89,99 +89,126 @@ ysize = view_hview[0];
 
 randomize();
 with(victim.object) {
-    if((damageSource == DAMAGE_SOURCE_ROCKETLAUNCHER 
-    or damageSource == DAMAGE_SOURCE_MINEGUN or damageSource == DAMAGE_SOURCE_FRAG_BOX 
-    or damageSource == DAMAGE_SOURCE_REFLECTED_STICKY or damageSource == DAMAGE_SOURCE_REFLECTED_ROCKET 
-    or damageSource == DAMAGE_SOURCE_FINISHED_OFF_GIB or damageSource == DAMAGE_SOURCE_GENERATOR_EXPLOSION) 
-    and (player.class != CLASS_QUOTE) and (global.gibLevel>1) 
-    and distance_to_point(xoffset+xsize/2,yoffset+ysize/2) < 900) {
-        if (hasReward(victim, 'PumpkinGibs'))
+    var hasTombstone, diedOfExplosion, gibsWhenExploded, isCloseBy;
+    hasTombstone = (victim.class != CLASS_QUOTE) and hasClassReward(victim, 'Tombstone');
+    diedOfExplosion = damageSource == DAMAGE_SOURCE_ROCKETLAUNCHER
+        or damageSource == DAMAGE_SOURCE_MINEGUN
+        or damageSource == DAMAGE_SOURCE_FRAG_BOX
+        or damageSource == DAMAGE_SOURCE_REFLECTED_STICKY
+        or damageSource == DAMAGE_SOURCE_REFLECTED_ROCKET
+        or damageSource == DAMAGE_SOURCE_FINISHED_OFF_GIB
+        or damageSource == DAMAGE_SOURCE_GENERATOR_EXPLOSION;
+    gibsWhenExploded = (player.class != CLASS_QUOTE) and (global.gibLevel>1);
+    isCloseBy = distance_to_point(xoffset+xsize/2,yoffset+ysize/2) < 900;
+    
+    if(diedOfExplosion and gibsWhenExploded)
+    {
+        playsound(x,y,Gibbing);
+        if(isCloseBy) // Performance optimization, since gibs are somewhat expensive
         {
-            repeat(global.gibLevel * 2) {
-                createGib(x,y,PumpkinGib,hspeed,vspeed,random(145)-72, choose(0,1,1,2,2,3), false)
-            }
-        }
-        else
-        {
-            repeat(global.gibLevel) {
-                createGib(x,y,Gib,hspeed,vspeed,random(145)-72, 0, false)
-            }
-            switch(player.team)
-            {
-            case TEAM_BLUE :
-                repeat(global.gibLevel - 1) {
-                    createGib(x,y,BlueClump,hspeed,vspeed,random(145)-72, 0, false)
-                }
-                break;
-            case TEAM_RED :
-                repeat(global.gibLevel - 1) {
-                    createGib(x,y,RedClump,hspeed,vspeed,random(145)-72, 0, false)
-                }
-                break;
-            }
-        }
-
-        repeat(global.gibLevel * 14) {
-            var blood;
-            blood = instance_create(x+random(23)-11,y+random(23)-11,BloodDrop);
-            blood.hspeed=(random(21)-10);
-            blood.vspeed=(random(21)-13);
             if (hasReward(victim, 'PumpkinGibs'))
             {
-                blood.sprite_index = PumpkinJuiceS;
-            }
-        }
-        if (!hasReward(victim, 'PumpkinGibs'))
-        {
-            //All Classes gib head, hands, and feet
-            if(global.gibLevel > 2 || choose(0,1) == 1)
-                createGib(x,y,Headgib,0,0,random(105)-52, player.class, false);
-            repeat(global.gibLevel -1){
-                //Medic has specially colored hands
-                if (player.class == CLASS_MEDIC){
-                    if (player.team == TEAM_RED)
-                        createGib(x,y,Hand, hspeed, vspeed, random(105)-52 , 9, false);
-                    else
-                        createGib(x,y,Hand, hspeed, vspeed, random(105)-52 , 10, false);
-                }else{
-                    createGib(x,y,Hand, hspeed, vspeed, random(105)-52 , player.class, false);
+                repeat(global.gibLevel * 2)
+                {
+                    createGib(x,y,PumpkinGib,hspeed,vspeed,random(145)-72, choose(0,1,1,2,2,3), false)
                 }
-                createGib(x,y,Feet,random(5)-2,random(3),random(13)-6 , player.class, true);
             }
-        }
-
-        //Class specific gibs
-        switch(player.class) {
-        case CLASS_PYRO :
-            if(global.gibLevel > 2 || choose(0,1) == 1)
-                createGib(x,y,Accesory,hspeed,vspeed,random(105)-52, 4, false)
-            break;
-        case CLASS_SOLDIER :
-            if(global.gibLevel > 2 || choose(0,1) == 1){
-                switch(player.team) {
-                    case TEAM_BLUE :
-                        createGib(x,y,Accesory,hspeed,vspeed,random(105)-52, 2, false);
-                        break;
-                    case TEAM_RED :
-                        createGib(x,y,Accesory,hspeed,vspeed,random(105)-52, 1, false);
-                        break;
+            else
+            {
+                repeat(global.gibLevel)
+                {
+                    createGib(x,y,Gib,hspeed,vspeed,random(145)-72, 0, false)
+                }
+                switch(player.team)
+                {
+                case TEAM_BLUE :
+                    repeat(global.gibLevel - 1)
+                    {
+                        createGib(x,y,BlueClump,hspeed,vspeed,random(145)-72, 0, false)
                     }
+                    break;
+                case TEAM_RED :
+                    repeat(global.gibLevel - 1)
+                    {
+                        createGib(x,y,RedClump,hspeed,vspeed,random(145)-72, 0, false)
+                    }
+                    break;
+                }
             }
-            break;
-        case CLASS_ENGINEER :
-            if(global.gibLevel > 2 || choose(0,1) == 1)
-                createGib(x,y,Accesory,hspeed,vspeed,random(105)-52, 3, false)
-            break;
-        case CLASS_SNIPER :
-            if(global.gibLevel > 2 || choose(0,1) == 1)
-                createGib(x,y,Accesory,hspeed,vspeed,random(105)-52, 0, false)
-            break;
+    
+            repeat(global.gibLevel * 14)
+            {
+                var blood;
+                blood = instance_create(x+random(23)-11,y+random(23)-11,BloodDrop);
+                blood.hspeed=(random(21)-10);
+                blood.vspeed=(random(21)-13);
+                if (hasReward(victim, 'PumpkinGibs'))
+                {
+                    blood.sprite_index = PumpkinJuiceS;
+                }
+            }
+            
+            if (!hasReward(victim, 'PumpkinGibs'))
+            {
+                //All Classes gib head, hands, and feet
+                if(global.gibLevel > 2 || choose(0,1) == 1)
+                    createGib(x,y,Headgib,0,0,random(105)-52, player.class, false);
+                    
+                repeat(global.gibLevel -1)
+                {
+                    //Medic has specially colored hands
+                    if (player.class == CLASS_MEDIC)
+                    {
+                        if (player.team == TEAM_RED)
+                            createGib(x,y,Hand, hspeed, vspeed, random(105)-52 , 9, false);
+                        else
+                            createGib(x,y,Hand, hspeed, vspeed, random(105)-52 , 10, false);
+                    }
+                    else
+                    {
+                        createGib(x,y,Hand, hspeed, vspeed, random(105)-52 , player.class, false);
+                    }
+                    createGib(x,y,Feet,random(5)-2,random(3),random(13)-6 , player.class, true);
+                }
+            }
+    
+            //Class specific gibs
+            switch(player.class) {
+            case CLASS_PYRO :
+                if(global.gibLevel > 2 || choose(0,1) == 1)
+                    createGib(x,y,Accesory,hspeed,vspeed,random(105)-52, 4, false)
+                break;
+            case CLASS_SOLDIER :
+                if(global.gibLevel > 2 || choose(0,1) == 1)
+                {
+                    switch(player.team)
+                    {
+                        case TEAM_BLUE :
+                            createGib(x,y,Accesory,hspeed,vspeed,random(105)-52, 2, false);
+                            break;
+                        case TEAM_RED :
+                            createGib(x,y,Accesory,hspeed,vspeed,random(105)-52, 1, false);
+                            break;
+                    }
+                }
+                break;
+            case CLASS_ENGINEER :
+                if(global.gibLevel > 2 || choose(0,1) == 1)
+                    createGib(x,y,Accesory,hspeed,vspeed,random(105)-52, 3, false)
+                break;
+            case CLASS_SNIPER :
+                if(global.gibLevel > 2 || choose(0,1) == 1)
+                    createGib(x,y,Accesory,hspeed,vspeed,random(105)-52, 0, false)
+                break;
+            }
         }
-        playsound(x,y,Gibbing);
-    } else {
+    }
+    else
+    {
         var deadbody;
         if (player.class != CLASS_QUOTE)
             playsound(x,y,choose(DeathSnd1, DeathSnd2));
+            
         deadbody = instance_create(x,y-30,DeadGuy);
         // 'GS' reward - *G*olden *S*tatue
         if(hasReward(player, 'GS'))
@@ -196,11 +223,19 @@ with(victim.object) {
         }
         deadbody.hspeed=hspeed;
         deadbody.vspeed=vspeed;
-        if(hspeed>0) {
+        if(hspeed>0)
+        {
             deadbody.image_xscale = -1;  
         }
         if(hasClassReward(victim,"MakeItRain_"))
             deadbody.hasMoney = true;
+        player.corpse = deadbody;
+    }
+    
+    if(hasTombstone)
+    {
+        global.paramCharacter = id;
+        instance_create(x, y, Tombstone);
     }
 }
 

@@ -245,7 +245,7 @@ if (canClick &amp;&amp; !holdHeader[0] &amp;&amp; !holdHeader[1]) {
                     if (setOffsets &amp;&amp; instance_exists(ParallaxController)) {
                         for(i=0;i&lt;7;i+=1){
                             if (background_visible[i]) {
-                                if (is_string(ds_map_find_value(Builder.metadata, "layer" + string(i+1) + "_xfactor")))
+                                if (is_string(ds_map_find_value(Builder.metadata, "layer" + string(i) + "xfactor")))
                                     ds_map_replace(Builder.metadata, "layer" + string(i) + "xfactor", string(ParallaxController.background_xfactor[i]));
                                 else
                                     ds_map_add(Builder.metadata, "layer" + string(i) + "xfactor", string(ParallaxController.background_xfactor[i]));

@@ -25,6 +25,9 @@ if global.totalMapAreas > 1 {
     }
 }
 
+with(ParallaxController)
+    event_user(0);
+
 offloadSpawnPoints();
 with(Player) {
     canSpawn = 1;

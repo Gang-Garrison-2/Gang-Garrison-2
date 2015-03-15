@@ -2,5 +2,6 @@
 <resources>
   <resource name="Raybanns" type="GROUP"/>
   <resource name="Haxxies" type="GROUP"/>
+  <resource name="Tombstones" type="GROUP"/>
   <resource name="HaxxyBadgeS" type="RESOURCE"/>
 </resources>

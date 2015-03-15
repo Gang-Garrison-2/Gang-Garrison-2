@@ -9,6 +9,7 @@
   <resource name="character_init" type="RESOURCE"/>
   <resource name="getCharacterObject" type="RESOURCE"/>
   <resource name="room_goto_fix" type="RESOURCE"/>
+  <resource name="Unit tests" type="GROUP"/>
   <resource name="Message Builders" type="GROUP"/>
   <resource name="Sound" type="GROUP"/>
   <resource name="Networking" type="GROUP"/>
@@ -54,8 +55,8 @@
   <resource name="promptRestartOrQuit" type="RESOURCE"/>
   <resource name="split" type="RESOURCE"/>
   <resource name="draw_pinched_blackrect" type="RESOURCE"/>
-  <resource name="Faucet HTTP" type="GROUP"/>
   <resource name="move_all_bullets" type="RESOURCE"/>
   <resource name="move_all_gore" type="RESOURCE"/>
   <resource name="classname" type="RESOURCE"/>
+  <resource name="Faucet HTTP" type="GROUP"/>
 </resources>

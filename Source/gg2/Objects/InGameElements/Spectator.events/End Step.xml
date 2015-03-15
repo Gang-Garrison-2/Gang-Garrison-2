@@ -60,7 +60,7 @@ if(moved)
 }
 else if(tracking)
 {
-    if(instance_exists(player))
+    if (instance_exists(player))
     {
         if(player.team != TEAM_SPECTATOR)
         {
@@ -77,6 +77,11 @@ else if(tracking)
         }
         else
             stopTracking = true;
+        if (instance_exists(player.corpse) and !player.object and tracking)
+        {
+            x = round(player.corpse.x);
+            y = round(player.corpse.y);
+        }
     }
     else
         stopTracking = true;

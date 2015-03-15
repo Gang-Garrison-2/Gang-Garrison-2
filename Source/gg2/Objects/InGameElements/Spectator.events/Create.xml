@@ -22,7 +22,7 @@ for (i=0; i&lt;=9; i+=1;) {
     savey_view[i]=-1;
 }
 //variables for tracking a specific player
-tracking=false
+tracking=false;
 track_id=0;
 player = noone;
 
@@ -49,6 +49,13 @@ if (myTeam == TEAM_SPECTATOR)
 {
     event_user(7);
 }
+else
+{
+    tracking=true;
+    player = global.myself;
+}
+// so you can actually see the initial tracking
+io_clear();
 </argument>
       </arguments>
     </action>
