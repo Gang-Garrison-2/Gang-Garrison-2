@@ -77,7 +77,7 @@ else if(tracking)
         }
         else
             stopTracking = true;
-        if (player.corpse and !player.object and tracking)
+        if (instance_exists(player.corpse) and !player.object and tracking)
         {
             x = round(player.corpse.x);
             y = round(player.corpse.y);
