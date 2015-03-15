@@ -178,7 +178,7 @@ with(victim.object) {
             break;
         }
         playsound(x,y,Gibbing);
-    } else if (!hasClassReward(victim, 'Tombstone')) {
+    } else {
         var deadbody;
         if (player.class != CLASS_QUOTE)
             playsound(x,y,choose(DeathSnd1, DeathSnd2, DeathSnd3, DeathSnd4, DeathSnd5, DeathSnd6));
@@ -220,9 +220,8 @@ if (hasReward(victim, 'Ghost') and victim.ghost == noone) {
 
 if (hasClassReward(victim, 'Tombstone'))
 {
-    var tombstone;
-    tombstone = instance_create(victim.object.x, victim.object.y, Tombstone);
-    tombstone.ownerClass = victim.class;
+    global.paramOwnerClass = victim.class;
+    instance_create(victim.object.x, victim.object.y, Tombstone);
 }
 
 with(victim.object) {       

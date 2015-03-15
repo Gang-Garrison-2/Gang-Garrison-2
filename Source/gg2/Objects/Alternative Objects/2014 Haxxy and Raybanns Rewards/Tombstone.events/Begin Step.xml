@@ -19,20 +19,11 @@ mapHeight = map_height();
 if (floor(image_index) == (image_number - 1))
     image_speed = 0;
 
-
-// Move down to meet the ground
-// We use two different loops for efficiency
-
 wallSetSolid();
-//while (place_free(x,y-(y mod 6)+6) and y &lt; mapHeight)
-//    y += 6;
 
 while (place_free(x,y+1) and y &lt; mapHeight)
     y += 1;
 wallUnsetSolid();
-
-//if (place_free(x, y + 1))
-//    move_contact_solid(270, mapHeight - y);
 </argument>
       </arguments>
     </action>

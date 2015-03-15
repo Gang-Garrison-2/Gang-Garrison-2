@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
   <resource name="TombstoneScoutS" type="RESOURCE"/>
-  <resource name="TombstoneSlodierS" type="RESOURCE"/>
+  <resource name="TombstoneSoldierS" type="RESOURCE"/>
   <resource name="TombstoneSniperS" type="RESOURCE"/>
   <resource name="TombstoneDemomanS" type="RESOURCE"/>
   <resource name="TombstoneMedicS" type="RESOURCE"/>
