@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="SoldierBlueHS" type="RESOURCE"/>
+  <resource name="SoldierBlueIntelS" type="RESOURCE"/>
+  <resource name="SoldierBlueJumpS" type="RESOURCE"/>
+  <resource name="SoldierBlueLeanLS" type="RESOURCE"/>
+  <resource name="SoldierBlueLeanRS" type="RESOURCE"/>
+  <resource name="SoldierBlueRunS" type="RESOURCE"/>
+  <resource name="SoldierBlueS" type="RESOURCE"/>
+  <resource name="SoldierBlueStandS" type="RESOURCE"/>
+  <resource name="SoldierRedHS" type="RESOURCE"/>
+  <resource name="SoldierRedIntelS" type="RESOURCE"/>
+  <resource name="SoldierRedJumpS" type="RESOURCE"/>
+  <resource name="SoldierRedLeanLS" type="RESOURCE"/>
+  <resource name="SoldierRedLeanRS" type="RESOURCE"/>
+  <resource name="SoldierRedRunS" type="RESOURCE"/>
+  <resource name="SoldierRedS" type="RESOURCE"/>
+  <resource name="SoldierRedStandS" type="RESOURCE"/>
+  <resource name="SoldierTauntS" type="RESOURCE"/>
+</resources>

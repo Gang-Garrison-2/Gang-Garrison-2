@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="PyroBlueHS" type="RESOURCE"/>
+  <resource name="PyroBlueIntelS" type="RESOURCE"/>
+  <resource name="PyroBlueJumpS" type="RESOURCE"/>
+  <resource name="PyroBlueLeanLS" type="RESOURCE"/>
+  <resource name="PyroBlueLeanRS" type="RESOURCE"/>
+  <resource name="PyroBlueRunS" type="RESOURCE"/>
+  <resource name="PyroBlueS" type="RESOURCE"/>
+  <resource name="PyroBlueStandS" type="RESOURCE"/>
+  <resource name="PyroRedHS" type="RESOURCE"/>
+  <resource name="PyroRedIntelS" type="RESOURCE"/>
+  <resource name="PyroRedJumpS" type="RESOURCE"/>
+  <resource name="PyroRedLeanLS" type="RESOURCE"/>
+  <resource name="PyroRedLeanRS" type="RESOURCE"/>
+  <resource name="PyroRedRunS" type="RESOURCE"/>
+  <resource name="PyroRedS" type="RESOURCE"/>
+  <resource name="PyroRedStandS" type="RESOURCE"/>
+  <resource name="PyroTauntS" type="RESOURCE"/>
+</resources>

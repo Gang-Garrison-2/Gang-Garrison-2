@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="EngineerBlueHS" type="RESOURCE"/>
+  <resource name="EngineerBlueIntelS" type="RESOURCE"/>
+  <resource name="EngineerBlueJumpS" type="RESOURCE"/>
+  <resource name="EngineerBlueLeanLS" type="RESOURCE"/>
+  <resource name="EngineerBlueLeanRS" type="RESOURCE"/>
+  <resource name="EngineerBlueRunS" type="RESOURCE"/>
+  <resource name="EngineerBlueS" type="RESOURCE"/>
+  <resource name="EngineerBlueStandS" type="RESOURCE"/>
+  <resource name="EngineerRedHS" type="RESOURCE"/>
+  <resource name="EngineerRedIntelS" type="RESOURCE"/>
+  <resource name="EngineerRedJumpS" type="RESOURCE"/>
+  <resource name="EngineerRedLeanLS" type="RESOURCE"/>
+  <resource name="EngineerRedLeanRS" type="RESOURCE"/>
+  <resource name="EngineerRedRunS" type="RESOURCE"/>
+  <resource name="EngineerRedS" type="RESOURCE"/>
+  <resource name="EngineerRedStandS" type="RESOURCE"/>
+  <resource name="EngiTauntS" type="RESOURCE"/>
+</resources>

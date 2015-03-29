@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="SpySilverAttireStandS" type="RESOURCE"/>
+  <resource name="SpySilverAttireJumpS" type="RESOURCE"/>
+  <resource name="SpySilverAttireLeanLS" type="RESOURCE"/>
+  <resource name="SpySilverAttireLeanRS" type="RESOURCE"/>
+  <resource name="SpySilverAttireRunS" type="RESOURCE"/>
+  <resource name="SpySilverAttireTauntS" type="RESOURCE"/>
+</resources>

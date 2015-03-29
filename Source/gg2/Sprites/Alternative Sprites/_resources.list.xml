@@ -8,4 +8,5 @@
   <resource name="2013 Haxxy Rewards" type="GROUP"/>
   <resource name="2013 Halloween Mini-Haxxy Rewards" type="GROUP"/>
   <resource name="2014 Haxxy and Raybanns Rewards" type="GROUP"/>
+  <resource name="HaxxyBadgeS" type="RESOURCE"/>
 </resources>

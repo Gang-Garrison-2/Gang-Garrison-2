@@ -2,5 +2,5 @@
 <resources>
   <resource name="FlamethrowerGoldDropS" type="RESOURCE"/>
   <resource name="FlamethrowerGoldBlastS" type="RESOURCE"/>
-  <resource name="OmnomnomnomGoldS" type="RESOURCE"/>
+  <resource name="OmnomnomnomGoldWeaponS" type="RESOURCE"/>
 </resources>

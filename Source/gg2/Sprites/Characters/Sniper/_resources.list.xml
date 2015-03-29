@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="SniperBlueHS" type="RESOURCE"/>
+  <resource name="SniperBlueIntelS" type="RESOURCE"/>
+  <resource name="SniperBlueJumpS" type="RESOURCE"/>
+  <resource name="SniperBlueLeanLS" type="RESOURCE"/>
+  <resource name="SniperBlueLeanRS" type="RESOURCE"/>
+  <resource name="SniperBlueRunS" type="RESOURCE"/>
+  <resource name="SniperBlueS" type="RESOURCE"/>
+  <resource name="SniperBlueStandS" type="RESOURCE"/>
+  <resource name="SniperCrouchBlueS" type="RESOURCE"/>
+  <resource name="SniperCrouchRedS" type="RESOURCE"/>
+  <resource name="SniperRedHS" type="RESOURCE"/>
+  <resource name="SniperRedIntelS" type="RESOURCE"/>
+  <resource name="SniperRedJumpS" type="RESOURCE"/>
+  <resource name="SniperRedLeanLS" type="RESOURCE"/>
+  <resource name="SniperRedLeanRS" type="RESOURCE"/>
+  <resource name="SniperRedRunS" type="RESOURCE"/>
+  <resource name="SniperRedS" type="RESOURCE"/>
+  <resource name="SniperRedStandS" type="RESOURCE"/>
+  <resource name="SniperTauntS" type="RESOURCE"/>
+</resources>

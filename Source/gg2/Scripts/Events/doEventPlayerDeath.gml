@@ -227,6 +227,8 @@ with(victim.object) {
         {
             deadbody.image_xscale = -1;  
         }
+        if(hasClassReward(victim,"MakeItRain_"))
+            deadbody.hasMoney = true;
         player.corpse = deadbody;
     }
     

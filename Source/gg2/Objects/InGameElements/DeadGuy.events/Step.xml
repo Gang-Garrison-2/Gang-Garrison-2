@@ -43,6 +43,12 @@ else
 
 if(!place_free(x+hspeed, y+vspeed))
     event_user(0);
+    
+if (hitground == true and hasMoney == true)
+{
+    instance_create(x,y,MakeItRain);
+    hasMoney = false;
+}
 wallUnsetSolid();
 
 x += hspeed * global.delta_factor;
