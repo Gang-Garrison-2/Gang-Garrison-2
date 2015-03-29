@@ -52,7 +52,7 @@ else
     ubercolour = c_blue;
 
 // sprite resource selection
-var sprite, overlayList, noNewAnim;
+var sprite, overlayList, noNewAnim, sprite_tilt_left, sprite_tilt_right, overlays_tilt_left, overlays_tilt_right;
 noNewAnim = player.class == CLASS_QUOTE or sprite_special or player.humiliated;
 
 if (zoomed)
@@ -82,11 +82,15 @@ else if (!noNewAnim)
             {
                 sprite_tilt_left = spriteLeanL;
                 sprite_tilt_right = spriteLeanR;
+                overlays_tilt_left = leanLOverlays;
+                overlays_tilt_right = leanROverlays;
             }
             else
             {
                 sprite_tilt_left = spriteLeanR;
                 sprite_tilt_right = spriteLeanL;
+                overlays_tilt_left = leanROverlays;
+                overlays_tilt_right = leanLOverlays;
             }
             
             // default still sprite
@@ -100,27 +104,27 @@ else if (!noNewAnim)
                 if (openright)
                 {
                     sprite = sprite_tilt_right;
-                    if(image_xscale &gt; 0)
-                        overlayList = leanROverlays;
-                    else
-                        overlayList = leanLOverlays;
+                    overlayList = overlays_tilt_right;
                 }
                 if (openleft)
                 {
                     sprite = sprite_tilt_left;
-                    if(image_xscale &gt; 0)
-                        overlayList = leanLOverlays;
-                    else
-                        overlayList = leanROverlays;
+                    overlayList = overlays_tilt_left;
                 }
                 if (openright and openleft)
                 {
                     openright = !collision_point_solid(bbox_right, bbox_bottom+2);
                     openleft = !collision_point_solid(bbox_left, bbox_bottom+2);
                     if (openright)
+                    {
                         sprite = sprite_tilt_right;
+                        overlayList = overlays_tilt_right;
+                    }
                     if (openleft)
+                    {
                         sprite = sprite_tilt_left;
+                        overlayList = overlays_tilt_left;
+                    }
                 }
             }
                 
