@@ -49,7 +49,8 @@ tauntsprite = SoldierTauntS;
         <argument kind="STRING">// 'GW' reward - *G*olden *W*eapon
 if(hasClassReward(global.paramPlayer, 'GW'))
 {
-    ds_list_add(tauntOverlays, SoldierGoldWeaponTauntS)
+    // Prepend to the start of the overlay list, so that it gets drawn first (it's a full sprite replacement)
+    ds_list_insert(tauntOverlays, 0, SoldierGoldWeaponTauntS);
 }
 
 numFlames = 4;

@@ -49,8 +49,9 @@ tauntsprite = HeavyTauntS;
         <argument kind="STRING">// 'GW' reward - *G*olden *W*eapon
 if(hasClassReward(global.paramPlayer, 'GW'))
 {
-    ds_list_add(tauntOverlays, HeavyGoldWeaponTauntS);
-    ds_list_add(omnomnomnomOverlays, OmnomnomnomGoldWeaponS);
+    // Prepend to the start of the overlay list, so that it gets drawn first (it's a full sprite replacement)
+    ds_list_insert(tauntOverlays, 0, HeavyGoldWeaponTauntS);
+    ds_list_insert(omnomnomnomOverlays, 0, OmnomnomnomGoldWeaponS);
 }
 
 // 'BH' reward - *B*obble *H*ead

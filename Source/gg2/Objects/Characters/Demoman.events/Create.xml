@@ -51,7 +51,8 @@ tauntsprite = DemoTauntS;
 // 'GW' reward - *G*olden *W*eapon
 if(hasClassReward(global.paramPlayer, 'GW'))
 {
-    ds_list_add(tauntOverlays, DemoGoldWeaponTauntS)
+    // Prepend to the start of the overlay list, so that it gets drawn first (it's a full sprite replacement)
+    ds_list_insert(tauntOverlays, 0, DemoGoldWeaponTauntS);
 }
 </argument>
       </arguments>
