@@ -160,7 +160,6 @@
     tauntOverlays = ds_list_create();
     crouchOverlays = ds_list_create();
     omnomnomnomOverlays = ds_list_create();
-    sniperCrouchOverlay = ds_list_create();
     omnomnomnomSprite = OmnomnomnomS;
     demon = -1;
     demonX = 0;
