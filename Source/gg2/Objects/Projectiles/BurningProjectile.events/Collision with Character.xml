@@ -15,11 +15,9 @@
       <arguments>
         <argument kind="STRING">if(other.id != ownerPlayer.object and other.team != team and other.ubered == 0  and other.hp &gt; 0)
 {
-    if (enemiesHit != -1)
-    {
-        if (ds_list_find_index(enemiesHit,other.id) != -1)
-            exit;
-    }
+    if (ds_list_find_index(enemiesHit,other.id) != -1)
+        exit;
+        
     damageCharacter(ownerPlayer, other.id, hitDamage);
         
     if (other.lastDamageDealer != ownerPlayer and other.lastDamageDealer != other.player)
