@@ -20,7 +20,7 @@ alarm[0] = flameLife / global.delta_factor;
 
 enemiesHit = ds_list_create();
     
-perseverant = choose(0, 0, 0, 0, 0 ,0 ,0 , 1); // 1/8 chance
+perseverant = random(1) &lt; (1/8); // 1/8 chance
 
 </argument>
       </arguments>
