@@ -2,5 +2,5 @@
 <resources>
   <resource name="PumpkinGib" type="RESOURCE"/>
   <resource name="Ghost" type="RESOURCE"/>
-  <resource name="MakeItRain" type="RESOURCE"/>
+  <resource name="Money" type="RESOURCE"/>
 </resources>

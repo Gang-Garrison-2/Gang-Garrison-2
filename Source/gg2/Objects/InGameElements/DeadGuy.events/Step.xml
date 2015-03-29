@@ -46,7 +46,7 @@ if(!place_free(x+hspeed, y+vspeed))
     
 if (hitground == true and hasMoney == true)
 {
-    instance_create(x,y,MakeItRain);
+    instance_create(x,y,Money);
     hasMoney = false;
 }
 wallUnsetSolid();

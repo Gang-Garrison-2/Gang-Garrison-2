@@ -168,7 +168,6 @@
     demonOffset = 0;
     demonDir = 0.5;
     demonFrame = 0;
-    hasMoney = false;
 
     // Let's spawn our weapon
     global.paramOwner = id;
@@ -263,8 +262,6 @@
         if (player.class == CLASS_SNIPER)
             ds_list_add(crouchOverlays, global.TopHatOverlay[player.class]);
     }
-    if(hasClassReward(player, 'MakeItRain_'))
-        hasMoney = true;
     if (hasReward(player, 'WillOWisp'))
     {
         demon = WillOWispS;
