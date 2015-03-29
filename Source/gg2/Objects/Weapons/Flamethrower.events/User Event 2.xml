@@ -40,14 +40,7 @@
             if !collision_line(x,y,x+lengthdir_x(28,owner.aimDirection),y+lengthdir_y(28,owner.aimDirection),Obstacle,1,0)
                 and !place_meeting(x+lengthdir_x(25,owner.aimDirection),y+lengthdir_y(25,owner.aimDirection),TeamGate)
             {
-                shot = instance_create(x+lengthdir_x(25,owner.aimDirection),y+lengthdir_y(25,owner.aimDirection),Flare);
-                shot.direction=owner.aimDirection;
-                shot.speed=15;
-                shot.owner=owner;
-                shot.ownerPlayer=ownerPlayer;
-                shot.team=owner.team;
-                shot.weapon=DAMAGE_SOURCE_FLARE;
-                
+                shot = createShot(x+lengthdir_x(25,owner.aimDirection),y+lengthdir_y(25,owner.aimDirection),Flare, DAMAGE_SOURCE_FLARE, owner.aimDirection, 15);                
                 justShot=true;
                 readyToFlare=false;
                 ammoCount -= 35;
@@ -145,7 +138,7 @@
                 //Shoves
                 if (team != other.owner.team)
                 {
-                    motion_add(other.owner.aimDirection,
+                    motion_set(other.owner.aimDirection,
                                other.characterBlastStrength*(1-dist/other.blastDistance));
                     vspeed -= 2;
                     moveStatus = 3;

@@ -33,6 +33,7 @@ x1=x;
 y1=y;
 x2=x+lengthdir_x(len,owner.aimDirection);
 y2=y+lengthdir_y(len,owner.aimDirection);
+passedTeammates = 0;
 
 gunSetSolids();
 alarm[6] = alarm[0];

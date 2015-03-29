@@ -13,12 +13,12 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">hitDamage = 20;
+        <argument kind="STRING">hitDamage = 30;
 flameLife = 40;
 burnIncrease = 8;
 durationIncrease = 35;
 afterburnFalloff = false;
-
+penetrateCap = 0;
 </argument>
       </arguments>
     </action>

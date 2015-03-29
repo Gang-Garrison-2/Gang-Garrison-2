@@ -57,6 +57,7 @@
   <resource name="draw_pinched_blackrect" type="RESOURCE"/>
   <resource name="move_all_bullets" type="RESOURCE"/>
   <resource name="move_all_gore" type="RESOURCE"/>
+  <resource name="createShot" type="RESOURCE"/>
   <resource name="classname" type="RESOURCE"/>
   <resource name="Faucet HTTP" type="GROUP"/>
 </resources>

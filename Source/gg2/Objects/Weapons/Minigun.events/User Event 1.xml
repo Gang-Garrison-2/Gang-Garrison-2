@@ -14,20 +14,18 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">{
+    // prevent sputtering
+    if (ammoCount &lt; 2)
+        ammoCount -= 2;
     if(readyToShoot and ammoCount &gt;= 2)
     {
         playsound(x,y,ChaingunSnd);
-        var shot;
+        var shot, shotx, shoty;
         randomize();
         
-        shot = instance_create(x+lengthdir_x(20,owner.aimDirection),y+12+lengthdir_y(20,owner.aimDirection),Shot);
-        shot.direction=owner.aimDirection+(random(14)-7);
-        shot.image_angle = shot.direction;
-        shot.speed=12+random(1);
-        shot.owner=owner;
-        shot.ownerPlayer=ownerPlayer;
-        shot.team=owner.team;
-        shot.weapon=DAMAGE_SOURCE_MINIGUN;
+        shotx = x+lengthdir_x(20,owner.aimDirection);
+        shoty = y+12+lengthdir_y(20,owner.aimDirection)
+        shot = createShot(shotx, shoty, Shot, DAMAGE_SOURCE_MINIGUN, owner.aimDirection+(random(14)-7), 12+random(1))
         if(golden)
             shot.sprite_index = ShotGoldS;
         shot.hspeed += owner.hspeed;
@@ -42,7 +40,8 @@
         if(ammoCount &lt; 3)
             reloadBufferFactor = 2.5;
         else
-            reloadBufferFactor = 1+(cos((ammoCount+2.2)/maxAmmo*pi)+1)/2; // spline from (full ammo = 1*) to (empty ammo = 2*)
+            //reloadBufferFactor = 1+(cos((ammoCount+2.2)/maxAmmo*pi)+1)/2; // spline from (full ammo = 1*) to (empty ammo = 2*)
+            reloadBufferFactor = 1;
         
         alarm[0] = refireTime / global.delta_factor;
         alarm[5] = reloadBuffer*reloadBufferFactor / global.delta_factor;

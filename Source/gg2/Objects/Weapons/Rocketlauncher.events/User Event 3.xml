@@ -16,26 +16,8 @@
         <argument kind="STRING">ammoCount = max(0, ammoCount-1);    
 playsound(x,y,RocketSnd);
 var oid, newx, newy;
-oid = instance_create(x+lengthdir_x(20,owner.aimDirection),y+lengthdir_y(20,owner.aimDirection), Rocket);
-oid.lastknownx = owner.x;
-oid.lastknowny = owner.y;
-oid.direction=owner.aimDirection;
-oid.image_angle = oid.direction;
-oid.speed = 13;
-with (oid)
-{
-    gunSetSolids();
-    if (!place_free(x,y))
-    {
-        oid.speed = 0;
-    }
-    gunUnsetSolids();
-}
-oid.ownerPlayer=ownerPlayer;
-oid.team=owner.team;
-oid.owner=owner;
+oid = createShot(x+lengthdir_x(20,owner.aimDirection),y+lengthdir_y(20,owner.aimDirection), Rocket, DAMAGE_SOURCE_ROCKETLAUNCHER, owner.aimDirection, 13);
 oid.gun=id;
-oid.weapon=DAMAGE_SOURCE_ROCKETLAUNCHER;
 if (collision_line(x,y,x+lengthdir_x(20,owner.aimDirection),y+lengthdir_y(20,owner.aimDirection),Obstacle,1,0) or
      collision_line(x,y,x+lengthdir_x(20,owner.aimDirection),y+lengthdir_y(20,owner.aimDirection),TeamGate,1,0) or
      collision_line(x,y,x+lengthdir_x(20,owner.aimDirection),y+lengthdir_y(20,owner.aimDirection),IntelGate,1,0) or
@@ -44,8 +26,16 @@ if (collision_line(x,y,x+lengthdir_x(20,owner.aimDirection),y+lengthdir_y(20,own
     oid.characterHit = -1;
     with (oid)
         event_user(5);
-} 
-
+}
+oid.lastknownx = owner.x;
+oid.lastknowny = owner.y;
+with (oid)
+{
+    gunSetSolids();
+    if (!place_free(x,y))
+        speed = 0;
+    gunUnsetSolids();
+}
 justShot=true;
 readyToShoot = false;
 alarm[0] = refireTime / global.delta_factor;

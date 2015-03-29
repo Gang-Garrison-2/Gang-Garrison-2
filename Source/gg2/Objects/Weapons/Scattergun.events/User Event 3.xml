@@ -17,17 +17,9 @@
 playsound(x,y,ShotgunSnd);
 var shot;
 repeat(6) {
-    shot = instance_create(x,y,Shot);
-    shot.direction = owner.aimDirection;
-    shot.image_angle = shot.direction;
-    shot.speed = 13;
-    shot.owner = owner;
-    shot.ownerPlayer = ownerPlayer;
-    shot.team = owner.team;
-    shot.weapon = DAMAGE_SOURCE_SCATTERGUN;
+    shot = createShot(x, y, Shot, DAMAGE_SOURCE_SCATTERGUN, owner.aimDirection, 13);
     if(golden)
         shot.sprite_index = ShotGoldS;
-    
     shot.hspeed += owner.hspeed;
     shot.speed += random(4)-2;
     shot.direction += random(15)-7.5;

@@ -17,23 +17,8 @@
 playsound(x,y,MinegunSnd);
 ammoCount = max(0, ammoCount-1);
 
-oid = instance_create(x+lengthdir_x(10,owner.aimDirection),y+lengthdir_y(10,owner.aimDirection), Mine);
-
-oid.direction=owner.aimDirection;
-oid.image_angle = oid.direction;
-oid.speed=12;
-with (oid)
-{
-    gunSetSolids();
-    if (!place_free(x,y))
-    {
-        oid.speed = 0;
-    }
-    gunUnsetSolids();
-}
-oid.owner=owner;
-oid.ownerPlayer=ownerPlayer;
-oid.team=owner.team;
+oid = createShot(x+lengthdir_x(10,owner.aimDirection),y+lengthdir_y(10,owner.aimDirection), Mine, DAMAGE_SOURCE_MINEGUN, owner.aimDirection, 12);
+oid.image_angle = 0;
 lobbed += 1;
 justShot=true;
 readyToShoot = false;
