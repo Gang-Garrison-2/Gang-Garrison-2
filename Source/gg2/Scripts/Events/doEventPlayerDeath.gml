@@ -90,7 +90,7 @@ ysize = view_hview[0];
 randomize();
 with(victim.object) {
     var hasTombstone, diedOfExplosion, gibsWhenExploded, isCloseBy;
-    hasTombstone = (victim.class != CLASS_QUOTE) and hasClassReward(victim, 'Tombstone');
+    hasTombstone = (victim.class != CLASS_QUOTE) and hasClassReward(victim, 'Tombstone_');
     diedOfExplosion = damageSource == DAMAGE_SOURCE_ROCKETLAUNCHER
         or damageSource == DAMAGE_SOURCE_MINEGUN
         or damageSource == DAMAGE_SOURCE_FRAG_BOX
