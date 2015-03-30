@@ -18,7 +18,7 @@ done = false;
 hitDamage = 0;
 image_speed = 0;
 alarm[0] = 10 / global.delta_factor;
-overlay = -1;
+overlays = ds_list_create();
 </argument>
       </arguments>
     </action>

@@ -41,7 +41,7 @@ else if(readyToStab &amp;&amp; owner.cloak)
     // 'BH' reward - *B*obble *H*ead
     if(hasClassReward(ownerPlayer, 'BH'))
     {
-        stab.overlay = HatBobbleSpyStabS;
+        ds_list_add(stab.overlays, HatBobbleSpyStabS);
     }
     readyToStab = false;
     alarm[1] = StabreloadTime / global.delta_factor;
