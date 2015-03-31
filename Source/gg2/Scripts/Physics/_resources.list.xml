@@ -15,4 +15,5 @@
   <resource name="collision_point_solid" type="RESOURCE"/>
   <resource name="really_move_contact_solid" type="RESOURCE"/>
   <resource name="good_move_contact_solid" type="RESOURCE"/>
+  <resource name="System" type="GROUP"/>
 </resources>
