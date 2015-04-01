@@ -309,6 +309,7 @@ if (canClick) {
         scaleY = round(mouse_y/6)*6;
         scaleLock = true;
     } else if (mouse_check_button_pressed(mb_right)) {
+        scaling = false;
         erasing = true;
         scaleX = round(mouse_x/6)*6;
         scaleY = round(mouse_y/6)*6;
