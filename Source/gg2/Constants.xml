@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <constants>
-  <constant name="VERSION" value="27414"/>
-  <constant name="GAME_VERSION_STRING" value="&quot;v2.8.0rc2&quot;"/>
-  <constant name="GAME_NAME_STRING" value="&quot;Gang Garrison 2 Beta&quot;"/>
-  <constant name="GAME_URL_STRING" value="&quot;http://www.ganggarrison.com/forums/index.php?topic=36209.0&quot;"/>
+  <constant name="VERSION" value="28000"/>
+  <constant name="GAME_VERSION_STRING" value="&quot;v2.8.0&quot;"/>
+  <constant name="GAME_NAME_STRING" value="&quot;Gang Garrison 2&quot;"/>
+  <constant name="GAME_URL_STRING" value="&quot;http://www.ganggarrison.com&quot;"/>
   <constant name="PLUGIN_SOURCE" value="&quot;http://www.ganggarrison.com/plugins/&quot;"/>
   <constant name="PLUGIN_SOURCE_NOTICE" value="&quot;While these plugins have been screened by the Gang Garrison 2 community, they cannot guarantee they are safe.&quot;"/>
   <constant name="BACKGROUND_SOURCE" value="&quot;http://www.ganggarrison.com/background.png&quot;"/>
@@ -15,7 +15,7 @@
   <constant name="LOBBY_SERVER_PORT" value="29944"/>
   <constant name="AUTH_SERVER_HOST" value="&quot;ganggarrison.com&quot;"/>
   <constant name="AUTH_SERVER_PORT" value="45022"/>
-  <constant name="PROTOCOL_UUID" value="&quot;9de6b816-41be-9f56-19a2-48256c1b677c&quot;"/>
+  <constant name="PROTOCOL_UUID" value="&quot;b28bf813-4705-8b11-ed4c-d92a06b8ec35&quot;"/>
   <constant name="GG2_LOBBY_UUID" value="&quot;1ccf16b1-436d-856f-504d-cc1af306aaa7&quot;"/>
   <constant name="HELLO" value="0"/>
   <constant name="PLAYER_JOIN" value="1"/>
