@@ -22,7 +22,7 @@
     ysize = 600/5*3;
     xcenter = view_xview[0]+view_wview[0]/2;
     
-    draw_sprite_ext(Scoreboard, 0, xoffset, yoffset, 1, 1, 0, c_white, alpha*0.8);    
+    draw_sprite_ext(Scoreboard, 0, xoffset, yoffset, 1, 1, 0, c_white, alpha*0.8);
 
     draw_set_alpha(alpha);
     draw_set_color(c_white);
@@ -76,11 +76,11 @@
                 var _x, _y;
                 _x = xoffset+6;
                 _y = yoffset+70+20*(i+1);
-                draw_sprite_ext(Boot,0,_x,_y,1,1,0,c_white,alpha)
+                draw_sprite_ext(Boot,0,_x,_y,1,1,0,c_white,alpha);
                 if (mouse_x &gt;= _x and mouse_x &lt; _x+16
                     and mouse_y &gt;= _y and mouse_y &lt; _y+16)
                 {
-                    draw_sprite_ext(Boot,0,_x,_y,1,1,0,c_red,alpha*0.5)
+                    draw_sprite_ext(Boot,0,_x,_y,1,1,0,c_red,alpha*0.5);
                     if (mouse_check_button_pressed(mb_left)) {
                         mouse_clear(mb_left);
                         player.kicked = true;
@@ -91,8 +91,8 @@
             {
                 if (global.myself.team == player.team or global.mapchanging)
                 {
-                    draw_sprite_ext(Icon,player.class,xoffset+14,yoffset+70+20*(i+1),1,1,0,c_white,alpha)
-                    draw_sprite_ext(Icon,player.class,xoffset+14,yoffset+70+20*(i+1),1,1,0,c_red,alpha*0.2)
+                    draw_sprite_ext(Icon,player.class,xoffset+14,yoffset+70+20*(i+1),1,1,0,c_white,alpha);
+                    draw_sprite_ext(Icon,player.class,xoffset+14,yoffset+70+20*(i+1),1,1,0,c_red,alpha*0.2);
                 }
             }
         
@@ -101,8 +101,8 @@
             draw_set_halign(fa_right);
             draw_text(xoffset+xsize/2-15, yoffset+70+20*(i+1), string(floor(player.stats[POINTS])));
             
-            if(player.object==-1) draw_sprite_ext(DeadS,0,xoffset+195,yoffset+75+20*(i+1),1,1,0,c_white,alpha);    
-            
+            if(player.object==-1)
+                draw_sprite_ext(DeadS,0,xoffset+195,yoffset+75+20*(i+1),1,1,0,c_white,alpha);
         }          
     }
     
@@ -115,11 +115,11 @@
                 var _x, _y;
                 _x = xoffset+xsize/2+44;
                 _y = yoffset+70+20*(i+1);
-                draw_sprite_ext(Boot,0,_x,_y,1,1,0,c_white,alpha)
+                draw_sprite_ext(Boot,0,_x,_y,1,1,0,c_white,alpha);
                 if (mouse_x &gt;= _x and mouse_x &lt; _x+16
                     and mouse_y &gt;= _y and mouse_y &lt; _y+16)
                 {
-                    draw_sprite_ext(Boot,0,_x,_y,1,1,0,c_red,alpha*0.5)
+                    draw_sprite_ext(Boot,0,_x,_y,1,1,0,c_red,alpha*0.5);
                     if (mouse_check_button_pressed(mb_left)) {
                         mouse_clear(mb_left);
                         player.kicked = true;
@@ -127,8 +127,8 @@
                 }
             } else {
                 if(global.myself.team == player.team) {
-                    draw_sprite_ext(Icon,player.class,xoffset+xsize/2+49,yoffset+70+20*(i+1),1,1,0,c_white,alpha)
-                    draw_sprite_ext(Icon,player.class,xoffset+xsize/2+49,yoffset+70+20*(i+1),1,1,0,c_blue,alpha*0.2)
+                    draw_sprite_ext(Icon,player.class,xoffset+xsize/2+49,yoffset+70+20*(i+1),1,1,0,c_white,alpha);
+                    draw_sprite_ext(Icon,player.class,xoffset+xsize/2+49,yoffset+70+20*(i+1),1,1,0,c_blue,alpha*0.2);
                 }
             }
        
@@ -137,7 +137,8 @@
             draw_set_halign(fa_right);
             draw_text(xoffset+xsize+25, yoffset+70+20*(i+1), string(floor(player.stats[POINTS])));
             
-            if (player.object==-1) draw_sprite_ext(DeadS,0,xoffset+472,yoffset+75+20*(i+1),1,1,0,c_white,alpha);    
+            if (player.object==-1)
+                draw_sprite_ext(DeadS,0,xoffset+472,yoffset+75+20*(i+1),1,1,0,c_white,alpha);
         
         }
     }
@@ -166,11 +167,11 @@
             _x = __x;
             _y = __y;
             __bootlen = 16;
-            draw_sprite_ext(Boot,0,_x,_y,1,1,0,c_white,alpha)
+            draw_sprite_ext(Boot,0,_x,_y,1,1,0,c_white,alpha);
             if (mouse_x &gt;= _x and mouse_x &lt; _x+16
                 and mouse_y &gt;= _y and mouse_y &lt; _y+16)
             {
-                draw_sprite_ext(Boot,0,_x,_y,1,1,0,c_red,alpha*0.5)
+                draw_sprite_ext(Boot,0,_x,_y,1,1,0,c_red,alpha*0.5);
                 if (mouse_check_button_pressed(mb_left)) {
                     mouse_clear(mb_left);
                     player.kicked = true;
