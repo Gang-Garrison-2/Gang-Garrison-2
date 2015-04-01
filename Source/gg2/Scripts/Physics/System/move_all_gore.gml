@@ -1,6 +1,8 @@
 wallSetSolid();
 with(BloodDrop)
 {
+    image_alpha -= (2/lifetime) * global.delta_factor;
+    
     if(!stick)
     {
         if(!place_meeting(x, y+1, Obstacle))
@@ -8,8 +10,6 @@ with(BloodDrop)
         if(speed > 11)
             speed = 11;
     }
-    image_alpha -= (2/lifetime) * global.delta_factor;
-    
     if (speed > 0)
     {
         if (place_meeting(x, y, Obstacle))
@@ -21,12 +21,24 @@ with(BloodDrop)
             move_outside_solid(180+point_direction(x,y,x+hspeed,y+vspeed),speed)
             
             speed *= delta_mult(0.5);
-            speed -= 0.1*global.delta_factor;
+            speed = max(0,speed-0.1*global.delta_factor);
             stick = true;
         }
     }
     else
         stick = true;
+    
+    _asdf_xvkleolw_id = collision_circle(x, y, image_xscale/1.7, BloodDrop, false, true);
+    with(_asdf_xvkleolw_id)
+    {
+        if((random(16)<1) and global.run_virtual_ticks and image_index < 2)
+        {
+            other.image_xscale = min(2, other.image_xscale + image_xscale*0.4);
+            other.image_yscale = min(2, other.image_yscale + image_yscale*0.4);
+            other.image_alpha += image_alpha;
+            instance_destroy();
+        }
+    }
 }
 with(Gib)
 {
