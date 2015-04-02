@@ -16,22 +16,26 @@ while (i <= len)
 {
     var char;
     char = string_char_at(text, i);
-
-    // basic punctuation: '{', '}', ':', '[', ']', and ','
-    if (char == '{' or char == '}' or char == ':' or char == '[' or char == ']' or char == ',')
+    switch (char)
     {
-        ds_queue_enqueue(tokens, char);
-        i += 1;
-        continue;
+        // basic punctuation: '{', '}', ':', '[', ']', and ','
+        case '{':
+        case '}':
+        case ':':
+        case '[':
+        case ']':
+        case ',':
+            ds_queue_enqueue(tokens, char);
+            i += 1;
+            continue;
+        // skip whitespace (space, tab, new line or carriage return)
+        case ' ':
+        case chr(9):
+        case chr(10):
+        case chr(13):
+            i += 1;
+            continue;
     }
-    
-    // skip whitespace (space, tab, new line or carriage return)
-    if (char == ' ' or char == chr(9) or char == chr(10) or char == chr(13))
-    {
-        i += 1;
-        continue;
-    }
-    
     // "identifiers" (bare word strings, really) of format [a-zA-Z0-9_]+
     if (('a' <= char and char <= 'z') or ('A' <= char and char <= 'Z') or ('0' <= char and char <= '9') or char == '_' or char == '.' or char == '+' or char == '-')
     {
