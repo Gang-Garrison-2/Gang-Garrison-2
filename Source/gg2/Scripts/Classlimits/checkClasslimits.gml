@@ -21,7 +21,7 @@ for (class=0; class<9; class+=1)
 // Found teams with a free slot? Then choose one randomly.
 if(!ds_list_empty(classlist))
 {
-    class = ds_list_find_value(classlist, random(ds_list_size(classlist)));
+    class = ds_list_find_value(classlist, irandom(ds_list_size(classlist)-1));
     ds_list_destroy(classlist);
     return class;
 }
