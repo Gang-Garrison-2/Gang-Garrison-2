@@ -466,7 +466,7 @@ fishmatt, vaati, king metroid, Taters, agh, Faust, Tarzan, BassieEnAdriaan, McGe
 With additional art and inspiration provided by the incredible Gang Garrison community!
 
 License:
-Copyright (C) 2008-2014 Faucet Software
+Copyright (C) 2008-2015 Faucet Software
 http://www.ganggarrison.com
 
 This game is open source under the terms of the Mozilla Public License, v. 2.0. If the source code has not been included along with the game, you can download it at http://www.ganggarrison.com.
