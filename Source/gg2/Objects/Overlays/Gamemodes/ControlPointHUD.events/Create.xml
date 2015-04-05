@@ -19,7 +19,8 @@ teamoffset=0;
 overtime = 0;
 global.totalControlPoints = instance_number(ControlPoint);
 
-if instance_exists(ControlPointSetupGate){
+if instance_exists(ControlPointSetupGate)
+{
     global.setupTimer=1800;
     mode=1;
     basetime=6*30;
@@ -50,7 +51,8 @@ if instance_exists(ControlPointSetupGate){
         ControlPoint1.capTime = basetime*15;
     }
 }
-else if !instance_exists(ControlPointSetupGate){
+else
+{
     global.setupTimer=0;
     mode=0;
     basetime=7*30;
