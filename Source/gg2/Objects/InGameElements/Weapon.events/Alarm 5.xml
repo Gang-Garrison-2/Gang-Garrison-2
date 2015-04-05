@@ -15,6 +15,7 @@
       <arguments>
         <argument kind="STRING">sprite_index = normalSprite;
 image_speed = 0;
+alarm[6] = -1;
 </argument>
       </arguments>
     </action>
