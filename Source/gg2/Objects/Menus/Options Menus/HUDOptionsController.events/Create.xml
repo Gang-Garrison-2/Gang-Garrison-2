@@ -57,6 +57,9 @@
         instance_destroy();
         instance_create(x,y,AdvControlsController);
     ');
+    menu_addedit_boolean("Fade Scoreboard:", "global.fadeScoreboard", '
+        gg2_write_ini("Settings", "Fade Scoreboard", argument0);
+    ');
     menu_addtablink("HUD", '
         instance_destroy();
         instance_create(x,y,HUDOptionsController);
