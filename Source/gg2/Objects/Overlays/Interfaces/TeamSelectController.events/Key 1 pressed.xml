@@ -13,9 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if balance == TEAM_RED team = TEAM_BLUE;
-else if balance == TEAM_BLUE team = TEAM_RED;
-else if balance == -1 team = choose(TEAM_RED,TEAM_BLUE);
+        <argument kind="STRING">team = choose(TEAM_ANY);
 event_user(1);
 </argument>
       </arguments>

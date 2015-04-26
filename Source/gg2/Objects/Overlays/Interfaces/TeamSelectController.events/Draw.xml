@@ -37,20 +37,26 @@ draw_rectangle_color(xoffset,yoffset,xoffset+xsize,yoffset+ysize,c_black,c_black
 draw_sprite_ext(TeamSelectBS, 0, xoffset+800, yoffset+y, max(0, xsize-800), 1, 0, c_white, alpha);
 draw_sprite_ext(sprite_index, image_index, xoffset+400, yoffset+y, 1, 1, 0, c_white, alpha);
 
-if newteam != -1 &amp;&amp; y==120 {
-    if door != -1 &amp;&amp; door != 3 &amp;&amp; door != 4{
+if(newteam != -1 &amp;&amp; y==120)
+{
+    if(door != -1 &amp;&amp; door != 3 &amp;&amp; door != 4)
+    {
         draw_sprite_ext(TeamDoorS,door,xoffset+drawx,yoffset+48,1,1,0,c_white, 1);
         draw_sprite_ext(DoorTopLightUpS,door,xoffset+drawx+16,yoffset,1,1,0,c_white, 1);
     }
-    if newteam == 1 draw_sprite_ext(TVLightUpS,0,xoffset+drawx,yoffset+118,1,1,0,c_white, 1);
-        draw_set_color(c_white);
-        draw_text(xoffset+495,yoffset+80,text[0]);
-        draw_text(xoffset+495,yoffset+100,text[1]);
-        draw_text(xoffset+495,yoffset+120,text[2]);
-        draw_text(xoffset+495,yoffset+130,text[3]);
-        draw_text(xoffset+495,yoffset+140,text[4]);
+    
+    if(newteam == TEAM_SPECTATOR)
+        draw_sprite_ext(TVLightUpS,0,xoffset+drawx,yoffset+118,1,1,0,c_white, 1);
+        
+    draw_set_color(c_white);
+    draw_text(xoffset+495,yoffset+80,text[0]);
+    draw_text(xoffset+495,yoffset+100,text[1]);
+    draw_text(xoffset+495,yoffset+120,text[2]);
+    draw_text(xoffset+495,yoffset+130,text[3]);
+    draw_text(xoffset+495,yoffset+140,text[4]);
 }
-else { 
+else
+{ 
     draw_set_color(c_white);
     draw_set_halign(fa_center);
     draw_text(xoffset+625,yoffset+y,global.currentMap);
