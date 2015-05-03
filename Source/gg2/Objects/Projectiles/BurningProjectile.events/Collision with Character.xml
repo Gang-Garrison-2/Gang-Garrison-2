@@ -56,7 +56,7 @@
     }
     dealFlicker(other.id);
     
-    if (ds_list_size(enemiesHit) &gt; penetrateCap and !perseverant)
+    if (ds_list_size(enemiesHit) &gt;= penetrateCap and !perseverant)
         instance_destroy();
     else
         ds_list_add(enemiesHit, other.id);
