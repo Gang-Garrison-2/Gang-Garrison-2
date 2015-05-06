@@ -10,4 +10,5 @@
   <resource name="inputChangeTeam" type="RESOURCE"/>
   <resource name="inputShowScores" type="RESOURCE"/>
   <resource name="inputCloseScores" type="RESOURCE"/>
+  <resource name="inputCallMedic" type="RESOURCE"/>
 </resources>

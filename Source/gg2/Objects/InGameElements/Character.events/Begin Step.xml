@@ -230,10 +230,6 @@ repeat(global.frameskip)
     else //otherwise divide by the moveStatus's friction
         hspeed /= delta_mult_skip(frictionFactor);
 }
-
-if(pressedKeys &amp; $04) {
-    setChatBubble(player, 45);
-}
     
 pressedKeys = 0;
 releasedKeys = 0;

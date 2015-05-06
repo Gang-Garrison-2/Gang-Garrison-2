@@ -189,7 +189,8 @@ while(commandLimitRemaining > 0) {
         case CHAT_BUBBLE:
             var bubbleImage;
             bubbleImage = read_ubyte(socket);
-            if(global.aFirst) {
+            if(global.aFirst and bubbleImage != 45)
+            {
                 bubbleImage = 0;
             }
             write_ubyte(global.sendBuffer, CHAT_BUBBLE);
