@@ -138,7 +138,7 @@
                 //Shoves
                 if (team != other.owner.team)
                 {
-                    motion_set(other.owner.aimDirection,
+                    motion_add(other.owner.aimDirection,
                                other.characterBlastStrength*(1-dist/other.blastDistance));
                     vspeed -= 2;
                     moveStatus = 3;
