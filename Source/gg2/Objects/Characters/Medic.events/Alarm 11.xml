@@ -14,7 +14,7 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">if(global.isHost) {
-    hp += 3;
+    hp += 5;
     alarm[11] = 30 / global.delta_factor;
 }
 </argument>
