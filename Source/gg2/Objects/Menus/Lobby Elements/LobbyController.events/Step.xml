@@ -92,7 +92,6 @@
                             server.shortgame += " " + ds_map_find_value(server.infos, "game_ver");
                     }
                     server.name = ds_map_find_value(server.infos, "name");
-                    server.name = string_replace(server.name, "#", "\#");
                     serversRead += 1;
                     serverInfoLength = -1;
                 }
@@ -135,20 +134,19 @@
             {
                 var question;
                 question = "The selected game is not compatible with this client.##";
-                question += "Server: " + string_replace(ds_map_find_value(server.infos, "name"), "#", "\#")+"#";
+                question += "Server: " + sanitiseNewlines(ds_map_find_value(server.infos, "name")) + "#";
                 if(ds_map_exists(server.infos, "game"))
-                    question += "Game/Mod: " + string_replace(ds_map_find_value(server.infos, "game"), "#", "\#")+"#";
+                    question += "Game/Mod: " + sanitiseNewlines(ds_map_find_value(server.infos, "game")) + "#";
                 if(ds_map_exists(server.infos, "game_ver"))
-                    question += "Version: " + string_replace(ds_map_find_value(server.infos, "game_ver"), "#", "\#")+"#";
+                    question += "Version: " + sanitiseNewlines(ds_map_find_value(server.infos, "game_ver")) + "#";
                 if(ds_map_exists(server.infos, "game_url"))
                 {
                     var gameurl, reallyvisit;
-                    gameurl = string_replace(ds_map_find_value(server.infos, "game_url"), "#", "\#");
+                    gameurl = sanitiseNewlines(ds_map_find_value(server.infos, "game_url"));
                     question += "Website: " + gameurl + "##Do you want to visit this website now?";
                     if(show_question(question))
                         if(show_question("Warning: The website link is provided by the game server you selected and could lead anywhere.#Really visit '"+gameurl+"'?"))
                             action_splash_web(ds_map_find_value(server.infos, "game_url"), 1);
-
                 }
                 else
                 {

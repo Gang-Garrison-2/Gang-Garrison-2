@@ -198,8 +198,8 @@
         __x += string_width(__str);
     }
     
-    draw_text(xoffset + 8, yoffset+48, "Server: " + string_copy(global.joinedServerName,1,25));
-    draw_text(xoffset+xsize/2+16, yoffset+48, "    Map: " + string_copy(global.currentMap,1,25));
+    draw_text(xoffset + 8, yoffset+48, "Server: " + sanitiseNewlines(string_copy(global.joinedServerName,1,25)));
+    draw_text(xoffset+xsize/2+16, yoffset+48, "    Map: " + sanitiseNewlines(string_copy(global.currentMap,1,25)));
     
     ds_priority_destroy(redteam);
     ds_priority_destroy(blueteam);

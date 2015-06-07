@@ -54,13 +54,13 @@ for(i=offset; i&lt;ds_list_size(servers) and i&lt;offset+items; i+=1)
     draw_set_halign(fa_left);
     if(server.private)
         draw_sprite(ControlPointLockS,0,xbegin,ybegin+pixeloffset+5);
-    draw_text(xbegin+10, ybegin+pixeloffset,"["+server.playerstring+"]");
-    draw_text(xbegin+95, ybegin+pixeloffset,server.name);
+    draw_text(xbegin+10, ybegin+pixeloffset,"["+sanitiseNewlines(server.playerstring)+"]");
+    draw_text(xbegin+95, ybegin+pixeloffset,sanitiseNewlines(server.name));
     if(ds_map_exists(server.infos, "map"))
-        draw_text(xbegin+95,  ybegin+pixeloffset,"#"+ds_map_find_value(server.infos, "map"));
+        draw_text(xbegin+95,  ybegin+pixeloffset,'#'+sanitiseNewlines(ds_map_find_value(server.infos, "map")));
     
     draw_set_halign(fa_right);
-    draw_text(xbegin+425, ybegin+pixeloffset,server.shortgame);
+    draw_text(xbegin+425, ybegin+pixeloffset,sanitiseNewlines(server.shortgame));
     
     /* Draw latency and color indicators */
     if(server.pingFinished) {

@@ -42,7 +42,7 @@ if(distance_to_point(mouse_x, mouse_y)&lt;25 &amp;&amp; global.myself.team == te
     } else {
         draw_set_color(c_blue);
     }
-    draw_text(xr, yr-45, ownerPlayer.name + "'s");
+    draw_text(xr, yr-45, sanitiseNewlines(ownerPlayer.name) + "'s");
     draw_text(xr, yr-35, "Autogun");
 }
 </argument>
