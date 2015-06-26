@@ -78,7 +78,7 @@ else if (mode == 1)
     // limit time to 5 minute as heenok suggests
     if (timer &gt; 9000)
     {
-        timer = 9000
+        timer = 9000;
         GameServer.syncTimer = 1;
     }
 }
