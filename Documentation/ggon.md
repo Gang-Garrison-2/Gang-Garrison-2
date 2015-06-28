@@ -76,7 +76,7 @@ GGON has three primitives:
 
 GGON ignores whitespace, so you can format things how you like.
 
-If you're wondering what encoding scheme GGON uses, its core syntax is ASCII. You can put whatever you want in your strings. UTF-8 would obviously be compatible, but Gang Garrison 2 doesn't really understand that.
+All the GGON syntax elements are ASCII, so any ASCII superset (e.g. Latin-1, Windows-1252 or UTF-8) will work with GGON. In practice however, Game Maker 8.0 (and thus Gang Garrison 2) only uses Windows-1252, an 8-bit fixed-length encoding. In Windows-1252, any sequence of bytes is a legal string of characters, unlike in UTF-8. This is exploited by GG2's GGON map entity data format, which stores binary image data in GGON strings.
 
 Usage
 -----
