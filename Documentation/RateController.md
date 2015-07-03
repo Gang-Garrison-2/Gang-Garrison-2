@@ -12,7 +12,9 @@ When used on alarms, we can't alter the rate at which they decrease (it's always
 
     alarm[0] = alarm_initial_countdown_value/delta_factor
 
-However, delta_factor is only accurate when used to scale individual operations; a set of additions/subtractions each frame, or a set of multiplications/divisions. When you do both, accuracy breaks down. That leads us to:
+However, delta_factor is only accurate when used to scale individual operations; a set of additions/subtractions each frame, or a set of multiplications/divisions. When you do both, accuracy breaks down.
+
+delta_factor is relative to 30fps.
 
 global.frameskip =
 ==================
@@ -25,6 +27,8 @@ It's used like this:
         speed += acceleration;
         speed *= friction;
     }
+    
+frameskip is (currently) relative to 60fps.
 
 global.skip_delta_factor =
 ==========================
@@ -40,6 +44,10 @@ It's used like this:
 
 ...Where skip_delta_factor is a function that returns a value based on friction and skip_delta_factor; in GG2's case, it returns a friction which will always result in a stable maximum speed when running acceleration and friction in one self-dependent continuous function like this.
 
+skip_delta_factor is (currently) relative to 60fps.
+
 global.ticks_per_virtual =
 ==========================
 This is the number of actual frames that execute for a "virtual" frame -- that is, it's the deviation from the game's internal framerate (ticks) to the actual framerate. It's the opposite of frameskip. It's used along with a frame counter to tell certain functions whether or not to execute during a given frame.
+
+ticks_per_virtual is (currently) relative to 30fps.
