@@ -12,7 +12,7 @@ When used on alarms, we can't alter the rate at which they decrease (it's always
 
     alarm[0] = alarm_initial_countdown_value/delta_factor
 
-However, delta_factor is only accurate when used to scale individual operations; a set of additions/subtractions each frame, or a set of multiplications/divisions. When you do both, accuracy breaks down. That leads us to:
+However, delta_factor is only accurate when used to scale individual operations; a set of additions/subtractions each frame, or a set of multiplications/divisions. When you do both, accuracy breaks down.
 
 delta_factor is relative to 30fps.
 
