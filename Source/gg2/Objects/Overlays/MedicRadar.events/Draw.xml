@@ -46,9 +46,9 @@ with(Character) {
                 draw_sprite_ext(MedAlert, (player.team * 10) + player.class + 2, xOffset + width - cos(theta)*38, yOffset+ height/2 -unknown, 1, 1, 0, c_white, bubbleAlpha);
                 draw_set_halign(fa_right);
                 if(theta&lt; pi) {
-                    draw_text(xOffset + width, yOffset+ height/2 -unknown + 20, player.name);
+                    draw_text(xOffset + width, yOffset+ height/2 -unknown + 20, sanitiseNewlines(player.name));
                 } else {
-                    draw_text(xOffset + width, yOffset+ height/2 -unknown - 20, player.name);
+                    draw_text(xOffset + width, yOffset+ height/2 -unknown - 20, sanitiseNewlines(player.name));
                 }
             } else {
                 draw_sprite_ext(MedAlert, bubbleImage == 49, xOffset + width - cos(theta)*38, yOffset+ height/2 -unknown, 1, 1, 0, c_white, bubbleAlpha);
@@ -58,7 +58,7 @@ with(Character) {
             draw_sprite_ext(MedRadarArrow, floor(hp/maxHp * 19), xOffset + unknown+width/2, yOffset+38*sin(theta), 1,1,theta*180/pi, c_white, bubbleAlpha);
             if(mouse_x &gt; xOffset + unknown+width/2 -15&amp;&amp; mouse_x &lt; xOffset + unknown+width/2 + 15 &amp;&amp; mouse_y &lt; yOffset+38*sin(theta) + 15){
                 draw_sprite_ext(MedAlert, (player.team * 10) + player.class + 2, xOffset + unknown+width/2, yOffset+38*sin(theta), 1,1,0, c_white, bubbleAlpha);
-                draw_text(xOffset + unknown+width/2, yOffset+38*sin(theta) + 20, player.name);
+                draw_text(xOffset + unknown+width/2, yOffset+38*sin(theta) + 20, sanitiseNewlines(player.name));
             } else {
                 draw_sprite_ext(MedAlert, bubbleImage == 49, xOffset + unknown+width/2, yOffset+38*sin(theta), 1,1,0, c_white, bubbleAlpha);
             }
@@ -69,9 +69,9 @@ with(Character) {
                 draw_sprite_ext(MedAlert, (player.team * 10) + player.class + 2, xOffset - 38*cos(theta), yOffset + unknown +height/2, 1,1,0, c_white, bubbleAlpha);
                 draw_set_halign(fa_left);
                 if(theta &lt; pi) {
-                    draw_text(xOffset, yOffset + unknown +height/2 +20, player.name);
+                    draw_text(xOffset, yOffset + unknown +height/2 +20, sanitiseNewlines(player.name));
                 } else {
-                    draw_text(xOffset, yOffset + unknown +height/2 -20, player.name);
+                    draw_text(xOffset, yOffset + unknown +height/2 -20, sanitiseNewlines(player.name));
                 }
             } else {
                 draw_sprite_ext(MedAlert, bubbleImage == 49, xOffset - 38*cos(theta), yOffset + unknown +height/2, 1,1,0, c_white, bubbleAlpha);
@@ -81,7 +81,7 @@ with(Character) {
             draw_sprite_ext(MedRadarArrow, floor(hp/maxHp * 19), xOffset +width/2 - unknown, yOffset + height+38*sin(theta), 1,1,theta*180/pi, c_white, bubbleAlpha);
             if(mouse_x &gt; xOffset +width/2 - unknown - 13 &amp;&amp; mouse_x &lt; xOffset +width/2 - unknown + 13 &amp;&amp; mouse_y &gt; yOffset + height+38*sin(theta) - 13){
                 draw_sprite_ext(MedAlert, (player.team * 10) + player.class + 2, xOffset +width/2 - unknown, yOffset + height+38*sin(theta), 1,1,0, c_white, bubbleAlpha);
-                draw_text(xOffset +width/2 - unknown, yOffset + height+38*sin(theta) - 20, player.name);
+                draw_text(xOffset +width/2 - unknown, yOffset + height+38*sin(theta) - 20, sanitiseNewlines(player.name));
             } else {
                 draw_sprite_ext(MedAlert, bubbleImage == 49, xOffset +width/2 - unknown, yOffset + height+38*sin(theta), 1,1,0, c_white, bubbleAlpha);
             }
@@ -89,7 +89,8 @@ with(Character) {
     }
 }
 
-draw_set_alpha(1);</argument>
+draw_set_alpha(1);
+</argument>
       </arguments>
     </action>
   </actions>

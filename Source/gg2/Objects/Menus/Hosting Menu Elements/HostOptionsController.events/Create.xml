@@ -35,10 +35,6 @@ bgtabs = true;
 menu_addedit_text2("Server Name:", "global.serverName", '
     var newName;
     newName = string_copy(argument0, 0, 25);
-    if string_count("#",newName) &gt; 0 {
-        show_message("Invalid character ' + "'\#'" + ' in server name");
-        newName = "I &lt;3 Bacon";
-    }
     gg2_write_ini("Server", "ServerName", newName);
     return newName;
 ');

@@ -33,7 +33,7 @@ else draw_set_color(c_red);
 
 
 draw_text_transformed(view_xview+xsize/2,view_yview+30, killmessage,2,2,0);
-draw_text_transformed(view_xview+xsize/2,view_yview+60, name,2,2,0);
+draw_text_transformed(view_xview+xsize/2,view_yview+60, sanitiseNewlines(name),2,2,0);
 if maxHp != 0 {
     if killedby.object!=-1  {
         draw_healthbar(xoffset+xsize/2-18, yoffset+ysize-50-18, xoffset+xsize/2+18, yoffset+ysize-50+18, hp*100/maxHp,c_black,c_red,c_green,3,true,false);

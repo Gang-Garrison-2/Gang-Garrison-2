@@ -182,7 +182,7 @@ if(view_hview[0] &lt; 600)
             }
             break;
         }
-        draw_text(view_xview[0]+xbegin+valueoffset,view_yview[0]+ybegin+i*spacing,val);
+        draw_text(view_xview[0]+xbegin+valueoffset,view_yview[0]+ybegin+i*spacing,sanitiseNewlines(val));
     }
 }
 </argument>

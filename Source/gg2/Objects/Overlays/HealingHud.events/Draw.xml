@@ -20,7 +20,7 @@
     xoffset = view_xview[0];
     yoffset = view_yview[0]-600+ysize;
     mid = view_wview[0]/2;
-    HUDwidth = string_width("Healing: "+target.name)+20;
+    HUDwidth = string_width("Healing: " + sanitiseNewlines(target.name))+20;
     
     draw_set_halign(fa_center);
     draw_set_color(c_white);
@@ -28,7 +28,7 @@
     if (target.object != -1) {
         draw_sprite_stretched_ext(sprite_index, global.myself.team == TEAM_BLUE, 
         xoffset+mid-(HUDwidth/2)+20, yoffset+450, HUDwidth, 36, c_white, 1);
-        draw_text_color(xoffset+mid+20, yoffset+462, "Healing: " +target.name, c_white, c_white, c_white, c_white, 1);    
+        draw_text_color(xoffset+mid+20, yoffset+462, "Healing: " + sanitiseNewlines(target.name), c_white, c_white, c_white, c_white, 1);    
         draw_healthbar(xoffset+mid-(HUDwidth/2)-24, yoffset+452,xoffset+mid-(HUDwidth/2)+20, yoffset+484,floor(target.object.hp*100/target.object.maxHp),c_black,c_white,c_white,3,true,false);
         draw_sprite_stretched_ext(HealedHudHPS, global.myself.team == TEAM_BLUE,
         xoffset+mid-(HUDwidth/2)-26, yoffset+450,48,36,c_white, 1);

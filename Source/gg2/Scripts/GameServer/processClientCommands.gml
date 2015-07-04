@@ -291,10 +291,6 @@ while(commandLimitRemaining > 0) {
                             break;
                     lastNamechange = current_time;
                     name = read_string(socket, nameLength);
-                    if(string_count("#",name) > 0)
-                    {
-                        name = "I <3 Bacon";
-                    }
                     write_ubyte(global.sendBuffer, PLAYER_CHANGENAME);
                     write_ubyte(global.sendBuffer, playerId);
                     write_ubyte(global.sendBuffer, string_length(name));

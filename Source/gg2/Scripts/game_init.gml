@@ -42,7 +42,6 @@
     
     ini_open("gg2.ini");
     global.playerName = ini_read_string("Settings", "PlayerName", "Player");
-    if string_count("#",global.playerName) > 0 global.playerName = "Player";
     global.playerName = string_copy(global.playerName, 0, min(string_length(global.playerName), MAX_PLAYERNAME_LENGTH));
     global.fullscreen = ini_read_real("Settings", "Fullscreen", 0);
     global.useLobbyServer = ini_read_real("Settings", "UseLobby", 1);

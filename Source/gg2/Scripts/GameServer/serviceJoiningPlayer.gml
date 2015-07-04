@@ -149,7 +149,6 @@ case STATE_EXPECT_NAME:
     
     player.name = read_string(player.socket, expectedBytes);
     player.name = string_copy(player.name, 0, MAX_PLAYERNAME_LENGTH);
-    player.name = string_replace_all(player.name, "#", " ");
     
     ds_list_add(global.players, player);
     ServerPlayerJoin(player.name, global.sendBuffer);
