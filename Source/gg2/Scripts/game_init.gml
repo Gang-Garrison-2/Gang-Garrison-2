@@ -443,9 +443,13 @@ global.launchMap = "";
     //Key Mapping
     ini_open("controls.gg2");
     global.jump = ini_read_real("Controls", "jump", ord("W"));
+    global.jump2 = ini_read_real("Controls", "jump alt", vk_up);
     global.down = ini_read_real("Controls", "down", ord("S"));
+    global.down2 = ini_read_real("Controls", "down alt", vk_down);
     global.left = ini_read_real("Controls", "left", ord("A"));
+    global.left2 = ini_read_real("Controls", "left alt", vk_left);
     global.right = ini_read_real("Controls", "right", ord("D"));
+    global.right2 = ini_read_real("Controls", "right alt", vk_right);
     global.attack = ini_read_real("Controls", "attack", MOUSE_LEFT);
     global.special = ini_read_real("Controls", "special", MOUSE_RIGHT);
     global.taunt = ini_read_real("Controls", "taunt", ord("F"));

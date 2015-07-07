@@ -27,6 +27,10 @@
     menu_addedit_key("Down:", "global.down");
     menu_addedit_key("Left:", "global.left");
     menu_addedit_key("Right:", "global.right");
+    menu_addedit_key("Jump/up (Alternate):", "global.jump2");
+    menu_addedit_key("Down (Alternate):", "global.down2");
+    menu_addedit_key("Left (Alternate):", "global.left2");
+    menu_addedit_key("Right (Alternate):", "global.right2");
     menu_addedit_key("Taunt:", "global.taunt");
     menu_addedit_key("Call for Healer:", "global.medic");
     menu_addedit_key("Drop Case:", "global.drop");

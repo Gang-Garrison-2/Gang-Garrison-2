@@ -26,26 +26,26 @@ stopTracking = false;
 //moving view - mapped keys
 if(!instance_exists(MenuController))
 {
-    if keyboard_check(global.left)
+    if keyboard_check(global.left) || keyboard_check(global.left2)
     {
         if (x &gt; view_wview/2)
             x -= 20 * global.delta_factor;
         moved = true;
     }
-    else if keyboard_check(global.right)
+    else if keyboard_check(global.right) || keyboard_check(global.right2)
     {
         if (x &lt; map_width()-view_wview/2)
             x += 20 * global.delta_factor;
         moved = true;
     }
     
-    if keyboard_check(global.jump)
+    if keyboard_check(global.jump) || keyboard_check(global.jump2)
     {
         if (y &gt; view_hview/2)
             y -= 20 * global.delta_factor;
         moved = true;
     }
-    else if keyboard_check(global.down)
+    else if keyboard_check(global.down) || keyboard_check(global.down2)
     {
         if (y &lt; map_height()-view_hview/2)
             y += 20 * global.delta_factor;
