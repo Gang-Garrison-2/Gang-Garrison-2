@@ -153,7 +153,14 @@
       <objectFollowing hBorder="32" hSpeed="-1" vBorder="32" vSpeed="-1"/>
     </view>
   </views>
-  <instances/>
+  <instances>
+    <instance>
+      <object>GarrisonBuilderCursorController</object>
+      <position x="0" y="0"/>
+      <creationCode/>
+      <locked>false</locked>
+    </instance>
+  </instances>
   <tiles/>
   <editorSettings remember="false"/>
 </room>
