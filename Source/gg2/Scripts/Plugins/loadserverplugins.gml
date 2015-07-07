@@ -113,7 +113,9 @@ for (i = 0; i < ds_list_size(list); i += 1)
             draw_set_halign(fa_left);
             draw_rectangle(50, 550, 300, 560, 2);
             draw_text(50, 530, "Downloading server-sent plugin " + string(i + 1) + "/" + string(ds_list_size(list)) + ' - "' + pluginname + '"');
-            if (filesize != -1)
+            // If the URL we fetch is a redirect with no body, size might briefly be 0
+            // Also, Faucet HTTP reports an unknown size as -1
+            if (filesize > 0)
                 draw_rectangle(50, 550, 50 + progress / filesize * 250, 560, 0);
             screen_refresh();
         }
