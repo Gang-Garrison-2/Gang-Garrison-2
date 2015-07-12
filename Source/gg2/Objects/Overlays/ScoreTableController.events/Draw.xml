@@ -101,7 +101,13 @@
                     draw_sprite_ext(Icon,player.class,xoffset+14,yoffset+70+20*(i+1),1,1,0,c_red,alpha*0.2);
                 }
             }
-        
+            
+            //Highlight self
+            if (player == global.myself)
+                draw_set_color(make_color_rgb(255,101,0));
+            else
+                draw_set_color(c_red);
+            
             draw_name_badges(xoffset+28, yoffset+70+20*(i+1), player, alpha);
         
             draw_set_halign(fa_right);
@@ -151,9 +157,15 @@
                     draw_sprite_ext(Icon,player.class,xoffset+xsize/2+49,yoffset+70+20*(i+1),1,1,0,c_blue,alpha*0.2);
                 }
             }
-       
+            
+            //Highlight self
+            if (player == global.myself)
+                draw_set_color(make_color_rgb(0,113,255));
+            else
+                draw_set_color(c_blue);
+            
             draw_name_badges(xoffset+xsize/2+60, yoffset+70+20*(i+1), player, alpha);
-        
+            
             draw_set_halign(fa_right);
             draw_text(xoffset+xsize+25, yoffset+70+20*(i+1), string(floor(player.stats[POINTS])));
             
