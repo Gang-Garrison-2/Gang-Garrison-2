@@ -131,6 +131,12 @@
             game_end();
             exit;
         }
+        if (string_length(pluginList) > 65535)
+        {
+            show_message("Error: you are requiring too many server-sent plugins.");
+            game_end();
+            exit;
+        }
 
         // Load plugins
         if (!loadserverplugins(pluginList))
