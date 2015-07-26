@@ -55,7 +55,11 @@ else
     player = global.myself;
 }
 // so you can actually see the initial tracking
+// back up keyboard string because io_clear clears it
+var _keyboard_string;
+_keyboard_string = keyboard_string;
 io_clear();
+keyboard_string = _keyboard_string;
 </argument>
       </arguments>
     </action>
