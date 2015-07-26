@@ -59,6 +59,29 @@ if(hasClassReward(global.paramPlayer, 'BH'))
     ds_list_add(omnomnomnomOverlays, HatBobbleOmnomnomnomS);
 
 numFlames = 5;
+
+if (player.team == TEAM_RED)
+{
+    sprite_index = HeavyRedS;
+    humiliationPoses = HeavyRedHS;
+    spriteRun = HeavyRedRunS;
+    spriteJump = HeavyRedJumpS;
+    spriteStand = HeavyRedStandS;
+    spriteLeanR = HeavyRedLeanRS;
+    spriteLeanL = HeavyRedLeanLS;
+    spriteIntel = HeavyRedIntelS;
+}
+else if (player.team == TEAM_BLUE)
+{
+    sprite_index = HeavyBlueS;
+    humiliationPoses = HeavyBlueHS;
+    spriteRun = HeavyBlueRunS;
+    spriteJump = HeavyBlueJumpS;
+    spriteStand = HeavyBlueStandS;
+    spriteLeanR = HeavyBlueLeanRS;
+    spriteLeanL = HeavyBlueLeanLS;
+    spriteIntel = HeavyBlueIntelS;
+}
 </argument>
       </arguments>
     </action>

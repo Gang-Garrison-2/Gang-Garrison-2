@@ -75,7 +75,7 @@ while(commandLimitRemaining > 0) {
         case PLAYER_CHANGECLASS:
             var class;
             class = read_ubyte(socket);
-            if(getCharacterObject(player.team, class) != -1)
+            if(getCharacterObject(class) != -1)
             {
                 if(player.object != -1)
                 {
@@ -146,7 +146,7 @@ while(commandLimitRemaining > 0) {
                 
             if(balance != newTeam and newTeam != player.team)
             {
-                if(getCharacterObject(newTeam, player.class) != -1 or newTeam==TEAM_SPECTATOR)
+                if(getCharacterObject(player.class) != -1 or newTeam==TEAM_SPECTATOR)
                 {  
                     if(player.object != -1)
                     {

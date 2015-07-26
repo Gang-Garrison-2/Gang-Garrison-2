@@ -156,7 +156,7 @@ player.lastKnowny=y;
 // Here the view is set
 if (player == global.myself)
 {
-    if (object_is_ancestor(object_index, Sniper) and zoomed)
+    if (global.myself.class == CLASS_SNIPER and zoomed)
     {
         var relxmouse, relymouse;
         relxmouse = min(max(window_views_mouse_get_x()-view_xview[0], 0), view_wview);
