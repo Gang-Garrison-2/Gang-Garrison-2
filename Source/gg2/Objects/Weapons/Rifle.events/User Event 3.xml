@@ -28,7 +28,7 @@ shoty = y;
 var hit;
 var x1,y1,xm,ym, len, bulletWall;
 var hitline;
-len=2000;
+len = 1500*(((hitDamage*100)/maxDamage)/100)
 x1=x;
 y1=y;
 x2=x+lengthdir_x(len,owner.aimDirection);
