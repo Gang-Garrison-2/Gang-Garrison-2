@@ -68,7 +68,6 @@
     global.killLogPos=ini_read_real("Settings","Kill Log Position", 0)
     global.kothHudPos=ini_read_real("Settings","KoTH HUD Position", 0)
     global.fadeScoreboard = ini_read_real("Settings", "Fade Scoreboard", 1);
-    global.corpseTrack = ini_read_real("Settings", "Corpse Tracking", 1);
     global.clientPassword = "";
     // for admin menu
     customMapRotationFile = ini_read_string("Server", "MapRotation", "");
@@ -175,7 +174,6 @@
     ini_write_real("Settings", "CrosshairRemoveBG", CrosshairRemoveBG);
     ini_write_real("Settings", "Queued Jumping", global.queueJumping);
     ini_write_real("Settings", "Hide Spy Ghosts", global.hideSpyGhosts);
-    ini_write_real("Settings", "Corpse Tracking", global.corpseTrack);
 
     ini_write_string("Background", "BackgroundHash", global.backgroundHash);
     ini_write_string("Background", "BackgroundTitle", global.backgroundTitle);

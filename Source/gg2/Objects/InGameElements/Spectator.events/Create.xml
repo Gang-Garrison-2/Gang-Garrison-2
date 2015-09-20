@@ -49,13 +49,13 @@ if (myTeam == TEAM_SPECTATOR)
 {
     event_user(7);
 }
-else if (global.corpseTrack)
+else
 {
     tracking=true;
     player = global.myself;
 }
 // so you can actually see the initial tracking *without breaking plugins that read keyboard_string while this happens*
-keyboard_clear(keyboard_key);
+io_clear();
 </argument>
       </arguments>
     </action>
