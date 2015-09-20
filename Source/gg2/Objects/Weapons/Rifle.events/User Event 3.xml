@@ -48,7 +48,8 @@ while(len&gt;1) {
         if(collision_line(x1,y1,xm,ym,Obstacle,true,true)&gt;=0) {
             hitline = true;
         } else if (collision_line(x1,y1,xm,ym,Character,true,true)&gt;=0) {
-            hitline = true;
+            if (collision_line(x1,y1,xm,ym,Character,true,true).team != team)
+                hitline = true;
         } else if (collision_line(x1,y1,xm,ym,Sentry,true,false)&gt;=0) {
             hitline = true;
         } else if (collision_line(x1,y1,xm,ym,TeamGate,true,true)&gt;=0) {
