@@ -116,6 +116,10 @@ while(commandLimitRemaining > 0) {
             var newTeam, balance, redSuperiority;
             newTeam = read_ubyte(socket);
             
+            // Invalid team was requested, treat it as a random team
+            if (newTeam < TEAM_RED or newTeam > TEAM_ANY)
+                newTeam = TEAM_ANY;
+
             redSuperiority = 0   //calculate which team is bigger
             with(Player)
             {
