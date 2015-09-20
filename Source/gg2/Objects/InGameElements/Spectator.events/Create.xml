@@ -54,7 +54,7 @@ else
     tracking=true;
     player = global.myself;
 }
-// so you can actually see the initial tracking *without breaking plugins that read keyboard_string while this happens*
+// so you can actually see the initial tracking
 io_clear();
 </argument>
       </arguments>
