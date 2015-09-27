@@ -309,7 +309,7 @@ addEntity("MoveBoxRight", -1, "{xscale:1,yscale:1,speed:5}", MoveBoxRight, sprit
 addEntity("KothControlPoint", koth, "{}", KothControlPoint, ControlPointNeutralS, 0, entityButtonS, 24, "KOTH control point");
 addEntity("KothRedControlPoint", dkoth, "{}", KothRedControlPoint, ControlPointRedS, 0, entityButtonS, 98, "Red KOTH control point");
 addEntity("KothBlueControlPoint", dkoth, "{}", KothBlueControlPoint, ControlPointBlueS, 0, entityButtonS, 100, "Blue KOTH control point");
-addEntity("dropdownPlatform", -1, "{xscale:1,yscale:1}", DropdownPlatform, sprite44, 5, entityButtonS, 80, "Dropdown platform");
+addEntity("dropdownPlatform", -1, "{xscale:1,yscale:1,resetMoveStatus:0}", DropdownPlatform, sprite44, 5, entityButtonS, 80, "Dropdown platform");
 addEntity("foreground", -1, "{xscale:1,yscale:1,depth:-2,fade:true,opacity:1,animationspeed:0,trigger:0,distance:0,resource:''}", SpriteObject, sprite64, 0, entityButtonS, 108, "Resizable foreground.");
 addEntity("foreground_scale", -1, "{scale:1,depth:-2,fade:true,opacity:1,animationspeed:0,trigger:0,distance:0,resource:''}", SpriteObject, sprite64, 0, entityButtonS, 110, "Scalable foreground.");
-addEntity("moving_platform", -1, "{scale:1,animationspeed:0,trigger:0,resource:'',top:60,left:0,upspeed:3,downspeed:3}", MovingPlatform, sprite64, 0, entityButtonS, 112, "A moving platform.");
+addEntity("moving_platform", -1, "{scale:1,animationspeed:0,trigger:0,resource:'',top:60,left:0,upspeed:3,downspeed:3,resetMoveStatus:0}", MovingPlatform, sprite64, 0, entityButtonS, 112, "A moving platform.");

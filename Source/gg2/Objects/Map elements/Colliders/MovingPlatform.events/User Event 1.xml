@@ -30,6 +30,7 @@ top = readProperty(other.properties, "top", REAL, top);
 left = readProperty(other.properties, "left", REAL, left);
 upSpeed = readProperty(other.properties, "upspeed", REAL, upSpeed);
 downSpeed = readProperty(other.properties, "downspeed", REAL, downSpeed);
+resetMoveStatus = readProperty(other.properties, "resetMoveStatus", REAL, resetMoveStatus);
     
 if (abs(left) &gt; abs(top))
     checkdir = 0;
