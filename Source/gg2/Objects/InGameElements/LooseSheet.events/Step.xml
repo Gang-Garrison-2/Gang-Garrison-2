@@ -22,7 +22,7 @@
 }
 
 if(!burning) {
-    image_speed = vspeed;
+    image_speed = vspeed * global.delta_factor;
 } else {
     vspeed -= 0.2 * global.delta_factor;
 }

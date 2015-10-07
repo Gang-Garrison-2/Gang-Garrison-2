@@ -17,8 +17,8 @@
     sprite_index = SheetBurning;
     burning = true;
     image_index = 0;
-    image_speed = (1/4);
-    alarm[1] = 24;
+    image_speed = global.delta_factor / 4;
+    alarm[1] = 24 / global.delta_factor;
 }</argument>
       </arguments>
     </action>
