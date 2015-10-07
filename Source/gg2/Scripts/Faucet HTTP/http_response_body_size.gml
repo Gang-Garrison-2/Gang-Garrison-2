@@ -1,5 +1,5 @@
 // ***
-// This function forms part of Faucet HTTP v1.1
+// This function forms part of Faucet HTTP v1.1.1
 // https://github.com/TazeTSchnitzel/Faucet-HTTP-Extension
 // 
 // Copyright (c) 2013-2015, Andrea Faulds <ajf@ajf.me>
@@ -25,6 +25,9 @@
 // Return value is the size in bytes, or -1 if we don't know or don't know yet
 
 // Call this each time you use the size - it may have changed in the case of redirect
+// BEWARE! The return value may briefly be 0 when downloading a non-empty file
+// This is because redirects usually have no response body
+// Check that the value is > 0 if to avoid division by zero with a progress bar
 
 var client;
 client = argument0;

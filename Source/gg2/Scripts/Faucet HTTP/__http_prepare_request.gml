@@ -1,5 +1,5 @@
 // ***
-// This function forms part of Faucet HTTP v1.1
+// This function forms part of Faucet HTTP v1.1.1
 // https://github.com/TazeTSchnitzel/Faucet-HTTP-Extension
 // 
 // Copyright (c) 2013-2015, Andrea Faulds <ajf@ajf.me>
@@ -18,7 +18,7 @@
 // ***
 
 // Internal function - prepares request
-// void __http_prepare_request(real client, string url, real headers)
+// void __http_prepare_request(real client, string method, string url, real headers, [real requestBody, string requestMimeType])
 
 // client - HttpClient object to prepare
 // method - method of request ('GET' or 'POST')
@@ -110,7 +110,6 @@ with (client)
     {
         write_string(socket, 'Content-Length: ' + string(buffer_size(requestBody)) + CRLF);
         write_string(socket, 'Content-Type: ' + requestBodyMimeType + CRLF);
-    
     }
         
     // If headers specified
