@@ -24,6 +24,7 @@
     healAmount = 2/3;
     hphealed = 0;
     maxHealDistance = 300;
+    maxMouseSelectDistance = 150; // Heal target selection will favor the character closest to the mouse, as long as it is within this distance of the mouse cursor.
     ubering = false;
     uberCharge=0;
     uberReady=false;
