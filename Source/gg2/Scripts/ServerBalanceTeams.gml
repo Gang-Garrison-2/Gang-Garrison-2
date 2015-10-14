@@ -1,5 +1,5 @@
 // auto balance, called on Character death
-if global.autobalance == 1 && !instance_exists(ArenaHUD) {
+if (global.autobalance == 1 && !instance_exists(ArenaHUD) && global.winners == -1) {
     // calculate team sizes
     redteam = 0;
     blueteam = 0;  
