@@ -41,6 +41,10 @@
     menu_add_option(0, "Default");
     menu_add_option(1, "Stacked");
     
+    menu_addedit_boolean("Fade Scoreboard:", "global.fadeScoreboard", '
+        gg2_write_ini("Settings", "Fade Scoreboard", argument0);
+    ');
+    
     menu_addtablink("Ingame", '
         instance_destroy();
         instance_create(x,y,OptionsController);
@@ -57,6 +61,7 @@
         instance_destroy();
         instance_create(x,y,AdvControlsController);
     ');
+
     menu_addtablink("HUD", '
         instance_destroy();
         instance_create(x,y,HUDOptionsController);

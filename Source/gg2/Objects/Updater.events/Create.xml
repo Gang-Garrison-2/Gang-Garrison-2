@@ -61,7 +61,9 @@ while(!http_step(downloadHandle))
     var progress, size;
     progress = http_response_body_progress(downloadHandle);
     size = http_response_body_size(downloadHandle);
-    if (size != -1)
+    // If the URL we fetch is a redirect with no body, size might briefly be 0
+    // Also, Faucet HTTP reports an unknown size as -1
+    if (size &gt; 0)
     {
         progressBar = floor((progress/size) * 20);
         offset = 3;

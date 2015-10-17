@@ -11,7 +11,7 @@ GGON has three primitives:
     
             foo
     
-      Strings don't need quotes if they fit the format `[a-zA-Z0-9\.\-\+]+`
+      Strings don't need quotes if they fit the format `[a-zA-Z0-9_\.\-\+]+`
     
       This means all of the following are valid unquoted strings:
     

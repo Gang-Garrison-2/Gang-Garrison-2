@@ -229,7 +229,7 @@ if(capping &lt;= 0) {
     } else if capping &gt;= capTime {
         pointCapture(cp);
         if instance_exists(ControlPointHUD) {
-            if ControlPointHUD.mode == 1 ControlPointHUD.timer += 9000;
+            if ControlPointHUD.mode == 1 ControlPointHUD.timer += 5400;
         }
         GameServer.syncTimer = 1; 
     }

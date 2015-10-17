@@ -72,6 +72,15 @@ else if (mode == 1)
     {
         global.winners = TEAM_BLUE;
     }
+    
+    // prevent timer overflow
+    // credits go to nagn
+    // limit time to 5 minute as heenok suggests
+    if (timer &gt; 9000)
+    {
+        timer = 9000;
+        GameServer.syncTimer = 1;
+    }
 }
 </argument>
       </arguments>

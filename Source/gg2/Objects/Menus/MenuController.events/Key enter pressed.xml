@@ -30,7 +30,7 @@
                 newval = min(newval, item_limit[editing]);
             menu_set_var(editing, newval);
             execute_string(item_script[editing], menu_get_var(editing));
-            item_value[editing] = menu_get_var(editing);
+            item_value[editing] = string(menu_get_var(editing));
             break;
     }
     editing = -1;

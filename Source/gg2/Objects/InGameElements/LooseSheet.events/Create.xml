@@ -14,7 +14,7 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">sprite_index = choose(SheetFalling1, SheetFalling2, SheetFalling3);
-image_speed = 1/3;
+image_speed = global.delta_factor / 3;
 image_xscale=2;
 image_yscale=2;
 alarm[0]=130/global.delta_factor;

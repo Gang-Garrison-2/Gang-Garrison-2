@@ -16,28 +16,57 @@
         <argument kind="STRING">{
     if(!instance_exists(healTarget) and readyToShoot)
     {
-        var bestTarget, bestTargetDist;
-        bestTarget=noone;
-        bestTargetDist=maxHealDistance;
+        var bestTarget, bestScore, mouseX, mouseY, aimRayEndX, aimRayEndY;
+        bestTarget = noone;
+        bestScore = 0;
+        
+        // Reconstructed mouse position of owner
+        mouseX = owner.x + lengthdir_x(owner.aimDistance, owner.aimDirection);
+        mouseY = owner.y + lengthdir_y(owner.aimDistance, owner.aimDirection);
+        
+        // The healer must be aiming at the new heal target to connect. This means
+        // the heal target must touch the line from the medigun to the aimRayEnd.
+        aimRayEndX = owner.x + lengthdir_x(maxHealDistance, owner.aimDirection);
+        aimRayEndY = owner.y + lengthdir_y(maxHealDistance, owner.aimDirection);
 
-        with(Character) {
-            if(id != other.owner and team == other.owner.team) {
-                if(point_distance(x,y,other.x,other.y)&lt;=bestTargetDist) {
-                    if(collision_line(other.x, other.y,
-                                      other.x+lengthdir_x(other.maxHealDistance, other.owner.aimDirection),
-                                      other.y+lengthdir_y(other.maxHealDistance, other.owner.aimDirection), id, true, false))
-                    {
-                        if(!collision_line(other.x, other.y, x, y, Obstacle, true, true)) {
-                            bestTargetDist = point_distance(x,y,other.x,other.y);
-                            bestTarget = player;
-                        }
-                    }
-                }
+        with(Character)
+        {
+            if(id == other.owner or team != other.owner.team)
+                continue;
+                
+            var healDistance, mouseDistance, targetScore;
+            healDistance = point_distance(x, y, other.x, other.y);
+            mouseDistance = point_distance(x, y, mouseX, mouseY);
+            
+            if(healDistance &gt; other.maxHealDistance)
+                continue;
+                
+            if(mouseDistance &lt;= other.maxMouseSelectDistance)
+            {
+                // Character is in mouse range, so we give it a high score (between 2 and 3). Closer to mouse -&gt; higher score.
+                targetScore = 3 - mouseDistance / other.maxMouseSelectDistance; // Mouse distance 0: score 3. Max mouse distance: score 2.
             }
+            else
+            {
+                // Character is not in mouse range, so we give it a low score (between 0 and 1). Closer to healer -&gt; higher score.
+                targetScore = 1 - healDistance / other.maxHealDistance; // Heal distance 0: score 1. Heal distance maxHealDistance: score 0.
+            }
+            
+            if(targetScore &lt; bestScore)
+                continue;   // We already found a better match
+            
+            if(!collision_line(other.x, other.y, aimRayEndX, aimRayEndY, id, true, false))
+                continue;   // We are not aiming at this character
+            
+            if(collision_line(other.x, other.y, x, y, Obstacle, true, true))
+                continue;   // There is something in the way
+            
+            bestTarget = player;
+            bestScore = targetScore;
         }
 
         healTarget = bestTarget;
-        readyToShoot=false;
+        readyToShoot = false;
         alarm[0] = 1 / global.delta_factor;
     }
     

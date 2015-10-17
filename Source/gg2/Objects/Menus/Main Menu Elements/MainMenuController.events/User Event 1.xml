@@ -18,6 +18,7 @@
     // Load new background image
     oldBackground = menuimage;
     menuimage = background_add("background.png", false, false);
+    global.downloadedBackground = menuimage;
 
 }
 else

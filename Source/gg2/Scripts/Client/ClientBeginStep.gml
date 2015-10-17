@@ -47,7 +47,7 @@ do {
             advertisedMapMd5 = receivestring(global.serverSocket, 1);
             receiveCompleteMessage(global.serverSocket, 1, global.tempBuffer);
             pluginsRequired = read_ubyte(global.tempBuffer);
-            plugins = receivestring(global.serverSocket, 1);
+            plugins = receivestring(global.serverSocket, 2);
             if(string_pos("/", downloadMapName) != 0 or string_pos("\", downloadMapName) != 0)
             {
                 show_message("Server sent illegal map name: "+downloadMapName);
