@@ -64,7 +64,7 @@ if (global.autobalance == 1 && !instance_exists(ArenaHUD) && global.winners == -
         } else {
             balanceplayer.team = TEAM_RED;
         }
-        
+        balanceplayer.class = checkClasslimits(balanceplayer,balanceplayer.team,balanceplayer.class);
         if(balanceplayer.object != -1) {
             with(balanceplayer.object) {
                 instance_destroy();
