@@ -25,49 +25,96 @@ tracerAlpha = 0.8;
 shotx = x;
 shoty = y;
 
-var hit;
-var x1,y1,xm,ym, len, bulletWall;
-var hitline;
+var x1, y1, xm, ym, leftmostX, len;
 len = 1500*(((hitDamage*100)/maxDamage)/100)
-x1=x;
-y1=y;
-x2=x+lengthdir_x(len,owner.aimDirection);
-y2=y+lengthdir_y(len,owner.aimDirection);
+x1 = x;
+y1 = y;
+x2 = x+lengthdir_x(len, owner.aimDirection);
+y2 = y+lengthdir_y(len, owner.aimDirection);
+leftmostX = min(x1, x2);
 
 gunSetSolids();
 alarm[6] = alarm[0];
+
+// We do a hitscan test here to figure out how far the rifle shot actually goes before it hits something.
+// This works by binary search through collision_line tests on ever smaller segments of our ray.
+//
+// Unfortunately, collision_line can only check for collision against either *all* instances, or instances of one
+// object, or just a single instance. What we need however is to check against *some* instances of *some* objects.
+// 
+// We could make a list of all instances that should stop the bullet and check each of them individually, but that
+// could be slow.
+// 
+// So here is how we do this instead: We do several collision_line checks, but only on an object basis.
+// Those instances which are instances of those objects, but should not stop the bullets are moved out of the way,
+// and then moved back after we are done checking.
+
+var bulletStoppingObjects, originalX, hitInstance;
+bulletStoppingObjects = ds_list_create();
+originalX = ds_map_create();
+hitInstance = noone;
+
+ds_list_add(bulletStoppingObjects, Obstacle);
+ds_list_add(bulletStoppingObjects, Generator);
+ds_list_add(bulletStoppingObjects, Character);
+ds_list_add(bulletStoppingObjects, Sentry);
+ds_list_add(bulletStoppingObjects, TeamGate);
+ds_list_add(bulletStoppingObjects, IntelGate);
+ds_list_add(bulletStoppingObjects, ControlPointSetupGate);
+ds_list_add(bulletStoppingObjects, BulletWall);
+
+// Move all instances which should not collide so far to the left that their bounding boxes do not
+// intersect the x-range of the rifle shot
+with(Generator) {
+    if(team == other.owner.team) {
+        ds_map_add(originalX, id, x);
+        x += leftmostX - bbox_right - 10;
+    }
+}
+
+with(Character) {
+    if(team == other.owner.team) {
+        ds_map_add(originalX, id, x);
+        x += leftmostX - bbox_right - 10;
+    }
+}
+
+with(Sentry) {
+    if(team == other.owner.team) {
+        ds_map_add(originalX, id, x);
+        x += leftmostX - bbox_right - 10;
+    }
+}
+
+with(ControlPointSetupGate) {
+    if(!solid) {
+        ds_map_add(originalX, id, x);
+        x += leftmostX - bbox_right - 10;
+    }
+}
+
+with(BulletWall) {
+    if(!solid) {
+        ds_map_add(originalX, id, x);
+        x += leftmostX - bbox_right - 10;
+    }
+}
+
+// Find the first instance the ray collides with
+var hit, i;
 while(len&gt;1) {
     xm=(x1+x2)/2;
     ym=(y1+y2)/2;
     
-    hitline = false;
-    with(owner) {
-        if (collision_line(x1,y1,xm,ym,Generator,true,true)&gt;=0) if (instance_nearest(x1,y1,Generator).team != team) {
-            hitline = true;
-        }
-        if(collision_line(x1,y1,xm,ym,Obstacle,true,true)&gt;=0) {
-            hitline = true;
-        } else if (collision_line(x1,y1,xm,ym,Character,true,true)&gt;=0) {
-            if (collision_line(x1,y1,xm,ym,Character,true,true).team != team)
-                hitline = true;
-        } else if (collision_line(x1,y1,xm,ym,Sentry,true,false)&gt;=0) {
-            hitline = true;
-        } else if (collision_line(x1,y1,xm,ym,TeamGate,true,true)&gt;=0) {
-            hitline = true;
-        } else if (collision_line(x1,y1,xm,ym,IntelGate,true,true)&gt;=0) {
-            hitline = true;
-        } else if (collision_line(x1,y1,xm,ym,ControlPointSetupGate,true,true)&gt;=0) if (ControlPointSetupGate.solid) {
-            hitline = true;
-        }
-        bulletWall = collision_line(x1,y1,xm,ym,BulletWall,true,true);
-        if (bulletWall&gt;=0)
-            if (bulletWall.solid)
-                hitline = true;
+    hit = noone;
+    for(i = 0; (i &lt; ds_list_size(bulletStoppingObjects)) and !hit; i += 1) {
+        hit = collision_line(x1, y1, xm, ym, ds_list_find_value(bulletStoppingObjects, i), true, true);
     }
     
-    if(hitline) {
+    if(hit) {
         x2=xm;
         y2=ym;
+        hitInstance = hit;
     } else {
         x1=xm;
         y1=ym;
@@ -75,56 +122,56 @@ while(len&gt;1) {
     len/=2;
 }
 
-with(Player) {
-    if(id != other.ownerPlayer and team != other.owner.team and object != -1) {
-        if (collision_line(other.x,other.y,other.x2,other.y2,object,true,false) &gt;= 0 and !object.ubered) {
-            damageCharacter(other.ownerPlayer, object, other.hitDamage);
-            if (object.lastDamageDealer != other.ownerPlayer &amp;&amp; object.lastDamageDealer != object.player)
+// Move everything back to its previous x position
+var key, origX;
+for(key = ds_map_find_first(originalX); key; key = ds_map_find_next(originalX, key)) {
+    origX = ds_map_find_value(originalX, key);
+    with(key) {
+        x = origX;
+    }
+}
+
+ds_map_destroy(originalX);
+ds_list_destroy(bulletStoppingObjects);
+
+// Apply dramatic effect
+with(hitInstance) {
+    if(object_is_ancestor(object_index, Character)) {
+        if(!ubered) {
+            damageCharacter(other.ownerPlayer, id, other.hitDamage);
+            if (lastDamageDealer != other.ownerPlayer and lastDamageDealer != player)
             {
-                object.secondToLastDamageDealer = object.lastDamageDealer;
-                object.alarm[4] = object.alarm[3]
+                secondToLastDamageDealer = lastDamageDealer;
+                alarm[4] = alarm[3]
             }
-            object.alarm[3] = ASSIST_TIME;
-            object.lastDamageDealer = other.ownerPlayer;
-            object.cloakAlpha = max(object.cloakAlpha, 0.3);
-            object.cloakFlicker = true;
-            object.alarm[7] = 3;
+            alarm[3] = ASSIST_TIME;
+            lastDamageDealer = other.ownerPlayer;
+            cloakAlpha = max(cloakAlpha, 0.3);
+            cloakFlicker = true;
+            alarm[7] = 3;
             if(global.gibLevel &gt; 0)
             {
-                blood = instance_create(object.x,object.y,Blood);
-                blood.direction = other.owner.aimDirection-180;
+                blood = instance_create(x, y, Blood);
+                blood.direction = other.owner.aimDirection - 180;
             }
-            if (!other.owner.zoomed)
-                object.lastDamageSource = DAMAGE_SOURCE_RIFLE;
-            else
-                object.lastDamageSource = DAMAGE_SOURCE_RIFLE_CHARGED;
-            exit;
-        }
-    }
-}
-
-with(Sentry) {
-    if(team != other.owner.team) {
-        if(collision_line(other.x,other.y,other.x2,other.y2,id,false,false)&gt;=0) {
-            damageSentry(other.ownerPlayer, id, other.hitDamage);
-            lastDamageDealer = other.ownerPlayer;
-            if (!other.owner.zoomed)
+            if (!other.owner.zoomed) {
                 lastDamageSource = DAMAGE_SOURCE_RIFLE;
-            else
+            } else {
                 lastDamageSource = DAMAGE_SOURCE_RIFLE_CHARGED;
-            exit;
+            }
         }
+    } else if(object_is_ancestor(object_index, Sentry)) {
+        damageSentry(other.ownerPlayer, id, other.hitDamage);
+        lastDamageDealer = other.ownerPlayer;
+        if (!other.owner.zoomed)
+            lastDamageSource = DAMAGE_SOURCE_RIFLE;
+        else
+            lastDamageSource = DAMAGE_SOURCE_RIFLE_CHARGED;
+    } else if(object_is_ancestor(object_index, Generator)) {
+        damageGenerator(other.ownerPlayer, id, other.hitDamage);
     }
 }
 
-with(Generator) {
-    if(team != other.owner.team) {
-        if(collision_line(other.x,other.y,other.x2,other.y2,id,true,false)&gt;=0) {
-            damageGenerator(other.ownerPlayer, id, other.hitDamage);
-            exit;
-        }
-    }
-}
 gunUnsetSolids();
 
 </argument>
