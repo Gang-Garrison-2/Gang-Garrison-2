@@ -136,7 +136,7 @@ ds_list_destroy(bulletStoppingObjects);
 
 // Apply dramatic effect
 with(hitInstance) {
-    if(object_is_ancestor(object_index, Character)) {
+    if(object_index == Character or object_is_ancestor(object_index, Character)) {
         if(!ubered) {
             damageCharacter(other.ownerPlayer, id, other.hitDamage);
             if (lastDamageDealer != other.ownerPlayer and lastDamageDealer != player)
@@ -160,14 +160,14 @@ with(hitInstance) {
                 lastDamageSource = DAMAGE_SOURCE_RIFLE_CHARGED;
             }
         }
-    } else if(object_is_ancestor(object_index, Sentry)) {
+    } else if(object_index == Sentry or object_is_ancestor(object_index, Sentry)) {
         damageSentry(other.ownerPlayer, id, other.hitDamage);
         lastDamageDealer = other.ownerPlayer;
         if (!other.owner.zoomed)
             lastDamageSource = DAMAGE_SOURCE_RIFLE;
         else
             lastDamageSource = DAMAGE_SOURCE_RIFLE_CHARGED;
-    } else if(object_is_ancestor(object_index, Generator)) {
+    } else if(object_index == Generator or object_is_ancestor(object_index, Generator)) {
         damageGenerator(other.ownerPlayer, id, other.hitDamage);
     }
 }
