@@ -74,7 +74,10 @@ with(Rocket)
                     else rocketParticleSprite = BlueRocketS;
                     part_type_sprite(rocketblurParticleType,rocketParticleSprite,false,true,false);
                     part_type_alpha2(rocketblurParticleType,0.7,0.1);
-                    part_type_life(rocketblurParticleType,5,5);
+                    
+                    var rocketpartlife;
+                    rocketpartlife = 5 / global.delta_factor;
+                    part_type_life(rocketblurParticleType, rocketpartlife, rocketpartlife);
                 }
                 
                 if (!variable_global_exists("rocketblurParticleSystem"))
