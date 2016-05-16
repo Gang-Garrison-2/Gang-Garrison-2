@@ -254,7 +254,7 @@ if (distance_to_point(mouse_x, mouse_y) &lt; 25)
     
     var width, height;
     width = name_width_badges(player);
-    height = string_height(player.name);
+    height = string_height(sanitiseNewlines(player.name));
     
     draw_name_badges(round(xr - width / 2), round(y) - 35 - height, player, 1);
     draw_set_halign(fa_center);

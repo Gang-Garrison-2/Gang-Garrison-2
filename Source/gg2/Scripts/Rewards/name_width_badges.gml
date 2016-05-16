@@ -4,4 +4,4 @@
 var player;
 player = argument0;
 
-return string_width(player.name) + (sprite_get_width(HaxxyBadgeS) * ds_list_size(player.badges));
+return string_width(sanitiseNewlines(player.name)) + (sprite_get_width(HaxxyBadgeS) * ds_list_size(player.badges));
