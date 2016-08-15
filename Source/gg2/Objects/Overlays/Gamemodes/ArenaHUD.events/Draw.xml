@@ -59,7 +59,7 @@ draw_roundtimer(xoffset, yoffset, xsize, ysize, timer);
 draw_set_halign(fa_center); 
 if (roundStart &gt; 0)
 {
-    draw_text(xoffset+xsize/2,yoffset+ysize/2,"Game will start in "+string(floor(roundStart/30))+" seconds")
+    draw_text(xoffset+xsize/2,yoffset+ysize/2,"Game will start in "+string(ceil(roundStart/30))+" seconds")
 }
 
 if (global.myself != -1)
