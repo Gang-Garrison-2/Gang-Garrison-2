@@ -42,9 +42,9 @@ if (mode == 0)
         {
             draw_sprite_ext(TimerS,floor(countdown/timeLimit*12),xoffset+xsize/2+39,yoffset+30,3,3,0,c_white,1);
             var time, minutes, secondcounter, seconds, secstring;
-            minutes = floor(countdown/1800);
-            secondcounter = countdown-minutes*1800;
-            seconds = ceil(secondcounter/30);
+            secondcounter = ceil(countdown/30);
+            minutes = secondcounter div 60;
+            seconds = secondcounter mod 60;
             
             if (seconds >= 10)
                 secstring = string(seconds);
@@ -70,9 +70,9 @@ else
     {
         draw_set_halign(fa_right);
         var time, minutes, secondcounter, seconds, secstring;
-        minutes = floor(countdown/1800);
-        secondcounter = countdown-minutes*1800;
-        seconds = ceil(secondcounter/30);
+        secondcounter = ceil(countdown/30);
+        minutes = secondcounter div 60;
+        seconds = secondcounter mod 60;
         draw_set_font(global.timerFont);
         
         if (seconds >= 10)
