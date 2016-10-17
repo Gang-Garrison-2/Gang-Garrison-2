@@ -7,4 +7,5 @@
   <resource name="draw_dkothtimer" type="RESOURCE"/>
   <resource name="draw_intel_timer" type="RESOURCE"/>
   <resource name="stringIsReal" type="RESOURCE"/>
+  <resource name="format_timer_value" type="RESOURCE"/>
 </resources>
