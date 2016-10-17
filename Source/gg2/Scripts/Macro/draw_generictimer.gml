@@ -24,36 +24,38 @@ if (mode == 0)
         draw_set_halign(fa_right);
         draw_set_font(global.timerFont);
         
-        if(global.setupTimer > 0 and instance_exists(ControlPointSetupGate))
+        var isControlPointSetup, ticks, ticklimit, timeYOff, totalSeconds, minutes, seconds, secstring;
+        isControlPointSetup = global.setupTimer > 0 and instance_exists(ControlPointSetupGate);
+        if(isControlPointSetup)
         {
-            draw_sprite_ext(TimerS,floor(global.setupTimer/1800*12),xoffset+xsize/2+39,yoffset+30,3,3,0,c_white,1);
-            var seconds, secstring;
-            seconds = ceil(global.setupTimer/30);
-            if (seconds >= 10)
-                secstring = string(seconds);
-            else
-                secstring = "0" + string(seconds);
-            draw_text_transformed(xoffset+xsize/2+20,yoffset+27,"0:" + secstring,1,1,0);
-            draw_set_font(global.gg2Font);
-            draw_set_halign(fa_center);
-            draw_text_transformed(xoffset+xsize/2-3, yoffset+40,"Setup",         1,1,0);
+            ticks = global.setupTimer;
+            ticklimit = 1800;
+            timeYOff = 27;
         }
         else
         {
-            draw_sprite_ext(TimerS,floor(countdown/timeLimit*12),xoffset+xsize/2+39,yoffset+30,3,3,0,c_white,1);
-            var time, minutes, secondcounter, seconds, secstring;
-            secondcounter = ceil(countdown/30);
-            minutes = secondcounter div 60;
-            seconds = secondcounter mod 60;
-            
-            if (seconds >= 10)
-                secstring = string(seconds);
-            else
-                secstring = "0" + string(seconds);
-                
-            draw_text_transformed(xoffset+xsize/2+20,yoffset+32,string(minutes) + ":" + secstring,1,1,0);
+            ticks = countdown;
+            ticklimit = timeLimit;
+            timeYOff = 32;
         }
+        draw_sprite_ext(TimerS,floor(12*ticks/ticklimit),xoffset+xsize/2+39,yoffset+30,3,3,0,c_white,1);
+        totalSeconds = ceil(ticks/30);
+        minutes = totalSeconds div 60;
+        seconds = totalSeconds mod 60;
+        if (seconds >= 10)
+            secstring = string(seconds);
+        else
+            secstring = "0" + string(seconds);
+        
+        draw_text_transformed(xoffset+xsize/2+20,yoffset+timeYOff,string(minutes) + ":" + secstring,1,1,0);
+        
         draw_set_font(global.gg2Font);
+        
+        if(isControlPointSetup)
+        {
+            draw_set_halign(fa_center);
+            draw_text_transformed(xoffset+xsize/2-3, yoffset+40,"Setup",1,1,0);
+        }
     }
 }
 else
