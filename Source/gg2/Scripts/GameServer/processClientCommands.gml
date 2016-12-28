@@ -117,7 +117,7 @@ while(commandLimitRemaining > 0) {
             newTeam = read_ubyte(socket);
             
             // Invalid team was requested, treat it as a random team
-            if (newTeam < TEAM_RED or newTeam > TEAM_ANY)
+            if(newTeam != TEAM_RED and newTeam != TEAM_BLUE and newTeam != TEAM_SPECTATOR)
                 newTeam = TEAM_ANY;
 
             redSuperiority = 0   //calculate which team is bigger
