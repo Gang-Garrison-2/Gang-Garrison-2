@@ -75,7 +75,7 @@ while(commandLimitRemaining > 0) {
         case PLAYER_CHANGECLASS:
             var class;
             class = read_ubyte(socket);
-            if(getCharacterObject(player.team, class) != -1)
+            if(getCharacterObject(class) != -1)
             {
                 if(player.object != -1)
                 {
@@ -116,6 +116,10 @@ while(commandLimitRemaining > 0) {
             var newTeam, balance, redSuperiority;
             newTeam = read_ubyte(socket);
             
+            // Invalid team was requested, treat it as a random team
+            if(newTeam != TEAM_RED and newTeam != TEAM_BLUE and newTeam != TEAM_SPECTATOR)
+                newTeam = TEAM_ANY;
+
             redSuperiority = 0   //calculate which team is bigger
             with(Player)
             {
@@ -146,7 +150,7 @@ while(commandLimitRemaining > 0) {
                 
             if(balance != newTeam and newTeam != player.team)
             {
-                if(getCharacterObject(newTeam, player.class) != -1 or newTeam==TEAM_SPECTATOR)
+                if(getCharacterObject(player.class) != -1 or newTeam==TEAM_SPECTATOR)
                 {  
                     if(player.object != -1)
                     {

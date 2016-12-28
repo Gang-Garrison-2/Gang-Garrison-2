@@ -49,6 +49,29 @@ haxxyStatue = SpyHaxxyStatueS;
         <argument kind="STRING">// Override defaults
 canCloak = 1;
 numFlames = 4;
+
+if (player.team == TEAM_RED)
+{
+    sprite_index = SpyRedS;
+    humiliationPoses = SpyRedHS;
+    spriteRun = SpyRedRunS;
+    spriteJump = SpyRedJumpS;
+    spriteStand = SpyRedStandS;
+    spriteLeanR = SpyRedLeanRS;
+    spriteLeanL = SpyRedLeanLS;
+    spriteIntel = SpyRedIntelS;
+}
+else if (player.team == TEAM_BLUE)
+{
+    sprite_index = SpyBlueS;
+    humiliationPoses = SpyBlueHS;
+    spriteRun = SpyBlueRunS;
+    spriteJump = SpyBlueJumpS;
+    spriteStand = SpyBlueStandS;
+    spriteLeanR = SpyBlueLeanRS;
+    spriteLeanL = SpyBlueLeanLS;
+    spriteIntel = SpyBlueIntelS;
+}
 </argument>
       </arguments>
     </action>

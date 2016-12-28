@@ -38,7 +38,7 @@
     // If the player has a character object on the server
     if(subobjects &amp; $01 != 0) {
         if(object == -1) {
-            charObj = getCharacterObject(team, class);
+            charObj = getCharacterObject(class);
             if(charObj != -1) {
                 global.paramPlayer = id;
                 object = instance_create(0,0,charObj);

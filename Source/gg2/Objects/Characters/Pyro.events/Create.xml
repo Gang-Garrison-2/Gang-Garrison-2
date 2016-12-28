@@ -55,6 +55,29 @@ if(hasClassReward(global.paramPlayer, 'GW'))
     // Prepend to the start of the overlay list, so that it gets drawn first (it's a full sprite replacement)
     ds_list_insert(tauntOverlays, 0, PyroGoldWeaponTauntS);
 }
+
+if (player.team == TEAM_RED)
+{
+    sprite_index = PyroRedS;
+    humiliationPoses = PyroRedHS;
+    spriteRun = PyroRedRunS;
+    spriteJump = PyroRedJumpS;
+    spriteStand = PyroRedStandS;
+    spriteLeanR = PyroRedLeanRS;
+    spriteLeanL = PyroRedLeanLS;
+    spriteIntel = PyroRedIntelS;
+}
+else if (player.team == TEAM_BLUE)
+{
+    sprite_index = PyroBlueS;
+    humiliationPoses = PyroBlueHS;
+    spriteRun = PyroBlueRunS;
+    spriteJump = PyroBlueJumpS;
+    spriteStand = PyroBlueStandS;
+    spriteLeanR = PyroBlueLeanRS;
+    spriteLeanL = PyroBlueLeanLS;
+    spriteIntel = PyroBlueIntelS;
+}
 </argument>
       </arguments>
     </action>

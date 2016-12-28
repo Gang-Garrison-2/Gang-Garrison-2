@@ -15,7 +15,6 @@
       <arguments>
         <argument kind="STRING">{
     alpha=0.01;
-    characters = ds_list_create();
     done = false;
     newclass=-1;
     mousedclass=-1
@@ -42,33 +41,6 @@
     portraitAnimations[7]=SpyPortraitAnimation;
     portraitAnimations[8]=SniperPortraitAnimation;
     portraitAnimations[9]=RandomPortraitAnimation;
-    switch(global.myself.team) {
-        case TEAM_RED:
-            ds_list_add(characters, ScoutRed);
-            ds_list_add(characters, PyroRed);
-            ds_list_add(characters, SoldierRed);
-            ds_list_add(characters, HeavyRed);
-            ds_list_add(characters, DemomanRed);
-            ds_list_add(characters, MedicRed);
-            ds_list_add(characters, EngineerRed);
-            ds_list_add(characters, SpyRed);
-            ds_list_add(characters, SniperRed);
-            break;
-        case TEAM_BLUE:
-            ds_list_add(characters, ScoutBlue);
-            ds_list_add(characters, PyroBlue);
-            ds_list_add(characters, SoldierBlue);
-            ds_list_add(characters, HeavyBlue);
-            ds_list_add(characters, DemomanBlue);
-            ds_list_add(characters, MedicBlue);
-            ds_list_add(characters, EngineerBlue);
-            ds_list_add(characters, SpyBlue);
-            ds_list_add(characters, SniperBlue);
-            break;
-        default:
-            instance_destroy();
-            exit;
-    }
 }
 </argument>
       </arguments>
