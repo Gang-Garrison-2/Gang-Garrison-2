@@ -58,24 +58,10 @@ numFlames = 4;
 if (player.team == TEAM_RED)
 {
     sprite_index = SoldierRedS;
-    humiliationPoses = SoldierRedHS;
-    spriteRun = SoldierRedRunS;
-    spriteJump = SoldierRedJumpS;
-    spriteStand = SoldierRedStandS;
-    spriteLeanR = SoldierRedLeanRS;
-    spriteLeanL = SoldierRedLeanLS;
-    spriteIntel = SoldierRedIntelS;
 }
 else if (player.team == TEAM_BLUE)
 {
     sprite_index = SoldierBlueS;
-    humiliationPoses = SoldierBlueHS;
-    spriteRun = SoldierBlueRunS;
-    spriteJump = SoldierBlueJumpS;
-    spriteStand = SoldierBlueStandS;
-    spriteLeanR = SoldierBlueLeanRS;
-    spriteLeanL = SoldierBlueLeanLS;
-    spriteIntel = SoldierBlueIntelS;
 }
 </argument>
       </arguments>

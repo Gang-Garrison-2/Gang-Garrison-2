@@ -58,24 +58,10 @@ if(hasClassReward(global.paramPlayer, 'GW'))
 if (player.team == TEAM_RED)
 {
     sprite_index = DemomanRedS;
-    humiliationPoses = DemomanRedHS;
-    spriteRun = DemomanRedRunS;
-    spriteJump = DemomanRedJumpS;
-    spriteStand = DemomanRedStandS;
-    spriteLeanR = DemomanRedLeanRS;
-    spriteLeanL = DemomanRedLeanLS;
-    spriteIntel = DemomanRedIntelS;
 }
 else if (player.team == TEAM_BLUE)
 {
     sprite_index = DemomanBlueS;
-    humiliationPoses = DemomanBlueHS;
-    spriteRun = DemomanBlueRunS;
-    spriteJump = DemomanBlueJumpS;
-    spriteStand = DemomanBlueStandS;
-    spriteLeanR = DemomanBlueLeanRS;
-    spriteLeanL = DemomanBlueLeanLS;
-    spriteIntel = DemomanBlueIntelS;
 }
 </argument>
       </arguments>

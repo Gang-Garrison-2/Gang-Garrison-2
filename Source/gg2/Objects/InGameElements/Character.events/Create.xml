@@ -46,12 +46,26 @@
     sprite_special = global.gg_birthday or global.xmas;
     
     // class sprite vars
-    spriteRun = sprite_index;
-    spriteJump = sprite_index;
-    spriteStand = sprite_index;
-    spriteLeanR = sprite_index;
-    spriteLeanL = sprite_index;
-    spriteIntel = sprite_index; // it's an underlay
+    if(player.class == CLASS_QUOTE)
+    {
+        spriteRun = sprite_index;
+        spriteJump = sprite_index;
+        spriteStand = sprite_index;
+        spriteLeanR = sprite_index;
+        spriteLeanL = sprite_index;
+        spriteIntel = sprite_index; // it's an underlay
+    }
+    else
+    {
+        spriteRun = getCharacterSpriteId(player.class, player.team, "Run");
+        spriteJump = getCharacterSpriteId(player.class, player.team, "Jump");
+        spriteStand = getCharacterSpriteId(player.class, player.team, "Stand");
+        spriteLeanR = getCharacterSpriteId(player.class, player.team, "LeanR");
+        spriteLeanL = getCharacterSpriteId(player.class, player.team, "LeanL");
+        spriteIntel = getCharacterSpriteId(player.class, player.team, "Intel");
+    }
+
+    humiliationPoses = getCharacterSpriteId(player.class, player.team, "H");
     
     //afterburn stuff
     burnIntensity = 0; // "heat"

@@ -50,13 +50,11 @@ tauntsprite = QuoteTauntS;
 if (player.team == TEAM_RED)
 {
     sprite_index = QuoteRedS;
-    humiliationPoses = QuoteRedHS;
     haxxyStatue = QuoteHaxxyStatueS;
 }
 else if (player.team == TEAM_BLUE)
 {
     sprite_index = CurlyBlueS;
-    humiliationPoses = CurlyBlueHS;
     haxxyStatue = CurlyHaxxyStatueS;
 }
 </argument>

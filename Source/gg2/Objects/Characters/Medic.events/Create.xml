@@ -53,24 +53,10 @@ alarm[11] = 30;
 if (player.team == TEAM_RED)
 {
     sprite_index = MedicRedS;
-    humiliationPoses = MedicRedHS;
-    spriteRun = MedicRedRunS;
-    spriteJump = MedicRedJumpS;
-    spriteStand = MedicRedStandS;
-    spriteLeanR = MedicRedLeanRS;
-    spriteLeanL = MedicRedLeanLS;
-    spriteIntel = MedicRedIntelS;
 }
 else if (player.team == TEAM_BLUE)
 {
     sprite_index = MedicBlueS;
-    humiliationPoses = MedicBlueHS;
-    spriteRun = MedicBlueRunS;
-    spriteJump = MedicBlueJumpS;
-    spriteStand = MedicBlueStandS;
-    spriteLeanR = MedicBlueLeanRS;
-    spriteLeanL = MedicBlueLeanLS;
-    spriteIntel = MedicBlueIntelS;
 }
 </argument>
       </arguments>

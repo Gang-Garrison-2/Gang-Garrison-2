@@ -3,4 +3,6 @@
   <resource name="drawHealth" type="RESOURCE"/>
   <resource name="takeScreenshot" type="RESOURCE"/>
   <resource name="drawProgressBar" type="RESOURCE"/>
+  <resource name="initCharacterSpritePrefixes" type="RESOURCE"/>
+  <resource name="getCharacterSpriteId" type="RESOURCE"/>
 </resources>

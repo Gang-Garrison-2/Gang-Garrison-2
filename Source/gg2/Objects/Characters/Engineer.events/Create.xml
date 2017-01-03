@@ -52,24 +52,10 @@ numFlames = 3;
 if (player.team == TEAM_RED)
 {
     sprite_index = EngineerRedS;
-    humiliationPoses = EngineerRedHS;
-    spriteRun = EngineerRedRunS;
-    spriteJump = EngineerRedJumpS;
-    spriteStand = EngineerRedStandS;
-    spriteLeanR = EngineerRedLeanRS;
-    spriteLeanL = EngineerRedLeanLS;
-    spriteIntel = EngineerRedIntelS;
 }
 else if (player.team == TEAM_BLUE)
 {
     sprite_index = EngineerBlueS;
-    humiliationPoses = EngineerBlueHS;
-    spriteRun = EngineerBlueRunS;
-    spriteJump = EngineerBlueJumpS;
-    spriteStand = EngineerBlueStandS;
-    spriteLeanR = EngineerBlueLeanRS;
-    spriteLeanL = EngineerBlueLeanLS;
-    spriteIntel = EngineerBlueIntelS;
 }
 </argument>
       </arguments>

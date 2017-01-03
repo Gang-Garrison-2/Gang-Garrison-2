@@ -58,24 +58,10 @@ if(hasClassReward(global.paramPlayer, 'GW'))
 if (player.team == TEAM_RED)
 {
     sprite_index = SniperRedS;
-    humiliationPoses = SniperRedHS;
-    spriteRun = SniperRedRunS;
-    spriteJump = SniperRedJumpS;
-    spriteStand = SniperRedStandS;
-    spriteLeanR = SniperRedLeanRS;
-    spriteLeanL = SniperRedLeanLS;
-    spriteIntel = SniperRedIntelS;
 }
 else if (player.team == TEAM_BLUE)
 {
     sprite_index = SniperBlueS;
-    humiliationPoses = SniperBlueHS;
-    spriteRun = SniperBlueRunS;
-    spriteJump = SniperBlueJumpS;
-    spriteStand = SniperBlueStandS;
-    spriteLeanR = SniperBlueLeanRS;
-    spriteLeanL = SniperBlueLeanLS;
-    spriteIntel = SniperBlueIntelS;
 }
 </argument>
       </arguments>
