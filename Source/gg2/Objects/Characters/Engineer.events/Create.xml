@@ -16,7 +16,6 @@
         <argument kind="STRING">maxHp = 120;
 runPower = 1;
 weapons[0]=Shotgun;
-tauntsprite = EngiTauntS;
 haxxyStatue = EngineerHaxxyStatueS;
 </argument>
       </arguments>

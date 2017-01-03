@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
-  <resource name="ScoutGoldWeaponTauntS" type="RESOURCE"/>
-  <resource name="PyroGoldWeaponTauntS" type="RESOURCE"/>
-  <resource name="SoldierGoldWeaponTauntS" type="RESOURCE"/>
-  <resource name="HeavyGoldWeaponTauntS" type="RESOURCE"/>
-  <resource name="DemoGoldWeaponTauntS" type="RESOURCE"/>
-  <resource name="SniperGoldWeaponTauntS" type="RESOURCE"/>
+  <resource name="ScoutRedGoldWeaponTauntS" type="RESOURCE"/>
+  <resource name="ScoutBlueGoldWeaponTauntS" type="RESOURCE"/>
+  <resource name="PyroRedGoldWeaponTauntS" type="RESOURCE"/>
+  <resource name="PyroBlueGoldWeaponTauntS" type="RESOURCE"/>
+  <resource name="SoldierRedGoldWeaponTauntS" type="RESOURCE"/>
+  <resource name="SoldierBlueGoldWeaponTauntS" type="RESOURCE"/>
+  <resource name="HeavyRedGoldWeaponTauntS" type="RESOURCE"/>
+  <resource name="HeavyBlueGoldWeaponTauntS" type="RESOURCE"/>
+  <resource name="DemomanRedGoldWeaponTauntS" type="RESOURCE"/>
+  <resource name="DemomanBlueGoldWeaponTauntS" type="RESOURCE"/>
+  <resource name="SniperRedGoldWeaponTauntS" type="RESOURCE"/>
+  <resource name="SniperBlueGoldWeaponTauntS" type="RESOURCE"/>
 </resources>

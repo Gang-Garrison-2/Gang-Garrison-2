@@ -49,7 +49,7 @@ global.HatBobbleClassTaunt[6] = HatBobbleHeavyTauntS;
 global.HatBobbleSandwich[6] = HatBobbleOmnomnomnomS;
 // CLASS_SPY
 global.HatBobbleClassOverlay[7] = HatBobbleSpyS;
-global.HatBobbleClassTaunt[7] = HatBobbleSpyTauntS;
+global.HatBobbleClassTaunt[7] = HatBobbleSpyRedTauntS; // Blue overlay will be substituted in code. I don't want to do this properly now because this will be removed anyway.
 // CLASS_PYRO
 global.HatBobbleClassOverlay[8] = HatBobblePyroS;
 global.HatBobbleClassTaunt[8] = HatBobblePyroTauntS;
@@ -265,8 +265,8 @@ global.TopHatMonocleOverlay[8] = PyroMonocleHatS;
 global.TopHatMonocleTaunt[8] = PyroMonocleHatTauntS;
 // Introducing the first ever Quote/Curly class reward
 // CLASS_QUOTE
-global.TopHatMonocleOverlay[9] = QuoteMonocleHatS;
-global.TopHatMonocleTaunt[9] = QuoteMonocleHatTauntS;
+global.TopHatMonocleOverlay[9] = QuerlyMonocleHatS;
+global.TopHatMonocleTaunt[9] = QuerlyRedMonocleHatTauntS; // Curly overlay will be substituted in code. I don't want to do this properly now because this will be removed anyway.
 
 // CLASS_SCOUT
 global.TopHatOverlay[0] = ScoutTopHatS;
@@ -297,5 +297,5 @@ global.TopHatTaunt[7] = SpyTopHatS;
 global.TopHatOverlay[8] = PyroTopHatS;
 global.TopHatTaunt[8] = PyroTopHatTauntS;
 // CLASS_QUOTE
-global.TopHatOverlay[9] = QuoteTopHatS;
-global.TopHatTaunt[9] = QuoteTopHatTauntS;
+global.TopHatOverlay[9] = QuerlyTopHatS;
+global.TopHatTaunt[9] = QuerlyRedTopHatTauntS; // Curly overlay will be substituted in code. I don't want to do this properly now because this will be removed anyway.

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
-  <resource name="QuoteTopHatS" type="RESOURCE"/>
-  <resource name="QuoteTopHatTauntS" type="RESOURCE"/>
+  <resource name="QuerlyTopHatS" type="RESOURCE"/>
+  <resource name="QuerlyRedTopHatTauntS" type="RESOURCE"/>
+  <resource name="QuerlyBlueTopHatTauntS" type="RESOURCE"/>
 </resources>

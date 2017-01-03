@@ -121,11 +121,11 @@ else if (!cloak and cloakAlpha &lt; 1)
 if (taunting)
 {
     tauntindex += tauntspeed*0.1 * global.delta_factor;
-    if (tauntindex &gt;= tauntend)
+    if (tauntindex &gt;= sprite_get_number(tauntsprite))
         taunting = false;
     if (hasClassReward(player, "TauntMoney_"))
     {
-        if ((team == TEAM_RED and tauntindex == 0.30) or (team == TEAM_BLUE and tauntindex == tauntlength + 0.30))
+        if (tauntindex == 0.30)
             instance_create(x, y, Money);
     }
 }

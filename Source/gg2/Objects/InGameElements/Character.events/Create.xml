@@ -66,6 +66,7 @@
     }
 
     humiliationPoses = getCharacterSpriteId(player.class, player.team, "H");
+    tauntsprite = getCharacterSpriteId(player.class, player.team, "Taunt");
     
     //afterburn stuff
     burnIntensity = 0; // "heat"
@@ -100,7 +101,6 @@
 
     image_speed = 0;
     tauntspeed = 3;
-    tauntlength = sprite_get_number(tauntsprite)/2;
     
     animationOffset = CHARACTER_ANIMATION_NORMAL;
     animationImage = 0;
@@ -232,7 +232,6 @@
         ds_list_add(jumpOverlays, global.HatBobbleClassOverlay[player.class]);
         ds_list_add(runOverlays, global.HatBobbleClassOverlay[player.class]);
             
-        ds_list_add(tauntOverlays, global.HatBobbleClassTaunt[player.class]);
         if (player.class == CLASS_HEAVY)
         {
             ds_list_add(walkOverlays, global.HatBobbleClassOverlay[player.class]);
@@ -240,6 +239,15 @@
         }
         if (player.class == CLASS_SNIPER)
             ds_list_add(crouchOverlays, global.HatBobbleClassOverlay[player.class]);
+            
+        if (player.class == CLASS_SPY and player.team == TEAM_BLUE)
+        {
+            ds_list_add(tauntOverlays, HatBobbleSpyBlueTauntS);
+        }
+        else
+        {
+            ds_list_add(tauntOverlays, global.HatBobbleClassTaunt[player.class]);        
+        }
     }
     else if(hasClassReward(player, 'TopHatMonocle_'))
     {
@@ -249,7 +257,6 @@
         ds_list_add(jumpOverlays, global.TopHatMonocleOverlay[player.class]);
         ds_list_add(runOverlays, global.TopHatMonocleOverlay[player.class]);
             
-        ds_list_add(tauntOverlays, global.TopHatMonocleTaunt[player.class]);
         if (player.class == CLASS_HEAVY)
         {
             ds_list_add(walkOverlays, global.TopHatMonocleOverlay[player.class]);
@@ -257,6 +264,15 @@
         }
         if (player.class == CLASS_SNIPER)
             ds_list_add(crouchOverlays, global.TopHatMonocleOverlay[player.class]);
+            
+        if (player.class == CLASS_QUOTE and player.team == TEAM_BLUE)
+        {
+            ds_list_add(tauntOverlays, QuerlyBlueMonocleHatTauntS);
+        }
+        else
+        {
+            ds_list_add(tauntOverlays, global.TopHatMonocleTaunt[player.class]);        
+        }
     }
     else if(hasClassReward(player, 'TopHat_'))
     {
@@ -266,7 +282,6 @@
         ds_list_add(jumpOverlays, global.TopHatOverlay[player.class]);
         ds_list_add(runOverlays, global.TopHatOverlay[player.class]);
             
-        ds_list_add(tauntOverlays, global.TopHatTaunt[player.class]);
         if (player.class == CLASS_HEAVY)
         {
             ds_list_add(walkOverlays, global.TopHatOverlay[player.class]);
@@ -274,10 +289,34 @@
         }
         if (player.class == CLASS_SNIPER)
             ds_list_add(crouchOverlays, global.TopHatOverlay[player.class]);
+            
+        if (player.class == CLASS_QUOTE and player.team == TEAM_BLUE)
+        {
+            ds_list_add(tauntOverlays, QuerlyBlueTopHatTauntS);
+        }
+        else
+        {
+            ds_list_add(tauntOverlays, global.TopHatTaunt[player.class]);        
+        }
     }
     if (hasReward(player, 'WillOWisp'))
     {
         demon = WillOWispS;
+    }
+    if(hasClassReward(player, 'GW'))
+    {
+        // 'GW' reward - *G*olden *W*eapon
+        // Prepend to the start of the overlay list, so that it gets drawn first (it's a full sprite replacement)
+        switch(player.class) {
+            case CLASS_SCOUT:
+            case CLASS_SOLDIER:
+            case CLASS_SNIPER:
+            case CLASS_DEMOMAN:
+            case CLASS_HEAVY:
+            case CLASS_PYRO:
+                ds_list_insert(tauntOverlays, 0, getCharacterSpriteId(player.class, player.team, "GoldWeaponTaunt"));
+                break;
+        }
     }
 }
 </argument>

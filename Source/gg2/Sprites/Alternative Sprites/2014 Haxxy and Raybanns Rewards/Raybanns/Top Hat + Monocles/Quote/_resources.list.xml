@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
-  <resource name="QuoteMonocleHatS" type="RESOURCE"/>
-  <resource name="QuoteMonocleHatTauntS" type="RESOURCE"/>
+  <resource name="QuerlyMonocleHatS" type="RESOURCE"/>
+  <resource name="QuerlyRedMonocleHatTauntS" type="RESOURCE"/>
+  <resource name="QuerlyBlueMonocleHatTauntS" type="RESOURCE"/>
 </resources>

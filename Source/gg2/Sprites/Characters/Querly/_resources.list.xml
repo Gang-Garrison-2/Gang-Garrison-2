@@ -2,7 +2,8 @@
 <resources>
   <resource name="QuerlyBlueHS" type="RESOURCE"/>
   <resource name="CurlyBlueS" type="RESOURCE"/>
+  <resource name="QuerlyBlueTauntS" type="RESOURCE"/>
   <resource name="QuerlyRedHS" type="RESOURCE"/>
   <resource name="QuoteRedS" type="RESOURCE"/>
-  <resource name="QuoteTauntS" type="RESOURCE"/>
+  <resource name="QuerlyRedTauntS" type="RESOURCE"/>
 </resources>

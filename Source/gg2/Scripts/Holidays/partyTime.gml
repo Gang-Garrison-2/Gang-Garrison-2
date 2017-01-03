@@ -1,14 +1,26 @@
 {
-    sprite_assign(ScoutTauntS, ScoutTauntSP);
-    sprite_assign(PyroTauntS, PyroTauntSP);
-    sprite_assign(SoldierTauntS, SoldierTauntSP);
-    sprite_assign(HeavyTauntS, HeavyTauntSP);
-    sprite_assign(DemoTauntS, DemoTauntSP);
-    sprite_assign(MedicTauntS, MedicTauntSP);
-    sprite_assign(EngiTauntS, EngiTauntSP);
-    sprite_assign(SpyTauntS, SpyTauntSP);
-    sprite_assign(SniperTauntS, SniperTauntSP);
-    sprite_assign(QuoteTauntS, QuoteTauntSP);
+    sprite_assign(ScoutRedTauntS, ScoutRedTauntSP);
+    sprite_assign(PyroRedTauntS, PyroRedTauntSP);
+    sprite_assign(SoldierRedTauntS, SoldierRedTauntSP);
+    sprite_assign(HeavyRedTauntS, HeavyRedTauntSP);
+    sprite_assign(DemomanRedTauntS, DemomanRedTauntSP);
+    sprite_assign(MedicRedTauntS, MedicRedTauntSP);
+    sprite_assign(EngineerRedTauntS, EngineerRedTauntSP);
+    sprite_assign(SpyRedTauntS, SpyRedTauntSP);
+    sprite_assign(SniperRedTauntS, SniperRedTauntSP);
+    sprite_assign(QuerlyRedTauntS, QuerlyRedTauntSP);
+    
+    sprite_assign(ScoutBlueTauntS, ScoutBlueTauntSP);
+    sprite_assign(PyroBlueTauntS, PyroBlueTauntSP);
+    sprite_assign(SoldierBlueTauntS, SoldierBlueTauntSP);
+    sprite_assign(HeavyBlueTauntS, HeavyBlueTauntSP);
+    sprite_assign(DemomanBlueTauntS, DemomanBlueTauntSP);
+    sprite_assign(MedicBlueTauntS, MedicBlueTauntSP);
+    sprite_assign(EngineerBlueTauntS, EngineerBlueTauntSP);
+    sprite_assign(SpyBlueTauntS, SpyBlueTauntSP);
+    sprite_assign(SniperBlueTauntS, SniperBlueTauntSP);
+    sprite_assign(QuerlyBlueTauntS, QuerlyBlueTauntSP);
+    
     sprite_assign(QuoteRedS, QuoteRedSP);
     sprite_assign(ScoutRedS, ScoutRedSP);
     sprite_assign(PyroRedS, PyroRedSP);

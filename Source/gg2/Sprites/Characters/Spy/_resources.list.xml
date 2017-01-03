@@ -8,6 +8,7 @@
   <resource name="SpyBlueRunS" type="RESOURCE"/>
   <resource name="SpyBlueS" type="RESOURCE"/>
   <resource name="SpyBlueStandS" type="RESOURCE"/>
+  <resource name="SpyBlueTauntS" type="RESOURCE"/>
   <resource name="SpyGhostS" type="RESOURCE"/>
   <resource name="SpyRedHS" type="RESOURCE"/>
   <resource name="SpyRedIntelS" type="RESOURCE"/>
@@ -17,5 +18,5 @@
   <resource name="SpyRedRunS" type="RESOURCE"/>
   <resource name="SpyRedS" type="RESOURCE"/>
   <resource name="SpyRedStandS" type="RESOURCE"/>
-  <resource name="SpyTauntS" type="RESOURCE"/>
+  <resource name="SpyRedTauntS" type="RESOURCE"/>
 </resources>

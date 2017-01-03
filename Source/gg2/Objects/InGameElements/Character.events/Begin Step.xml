@@ -55,14 +55,7 @@ if(!taunting and !omnomnomnom)
     if(!player.humiliated and pressedKeys &amp; $01)  {
         if (!invisible &amp;&amp; cloakAlpha == 1)
             taunting=true;
-        if (team==TEAM_RED) {
-            tauntindex=0;
-            tauntend=tauntlength-1;
-        }
-        else if (team==TEAM_BLUE) {
-            tauntindex=tauntlength;
-            tauntend=tauntlength*2-1;
-        }
+        tauntindex=0;
         image_speed=tauntspeed;
     } 
     

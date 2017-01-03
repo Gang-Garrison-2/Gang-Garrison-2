@@ -17,7 +17,6 @@
 maxHp = 160;
 weapons[0] = Rocketlauncher;
 haxxyStatue = SoldierHaxxyStatueS;
-tauntsprite = SoldierTauntS;
 </argument>
       </arguments>
     </action>
@@ -46,14 +45,7 @@ tauntsprite = SoldierTauntS;
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">// 'GW' reward - *G*olden *W*eapon
-if(hasClassReward(global.paramPlayer, 'GW'))
-{
-    // Prepend to the start of the overlay list, so that it gets drawn first (it's a full sprite replacement)
-    ds_list_insert(tauntOverlays, 0, SoldierGoldWeaponTauntS);
-}
-
-numFlames = 4;
+        <argument kind="STRING">numFlames = 4;
 
 if (player.team == TEAM_RED)
 {

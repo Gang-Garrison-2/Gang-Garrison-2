@@ -8,6 +8,7 @@
   <resource name="DemomanBlueRunS" type="RESOURCE"/>
   <resource name="DemomanBlueS" type="RESOURCE"/>
   <resource name="DemomanBlueStandS" type="RESOURCE"/>
+  <resource name="DemomanBlueTauntS" type="RESOURCE"/>
   <resource name="DemomanRedHS" type="RESOURCE"/>
   <resource name="DemomanRedIntelS" type="RESOURCE"/>
   <resource name="DemomanRedJumpS" type="RESOURCE"/>
@@ -16,5 +17,5 @@
   <resource name="DemomanRedRunS" type="RESOURCE"/>
   <resource name="DemomanRedS" type="RESOURCE"/>
   <resource name="DemomanRedStandS" type="RESOURCE"/>
-  <resource name="DemoTauntS" type="RESOURCE"/>
+  <resource name="DemomanRedTauntS" type="RESOURCE"/>
 </resources>

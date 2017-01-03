@@ -8,6 +8,7 @@
   <resource name="HeavyBlueRunS" type="RESOURCE"/>
   <resource name="HeavyBlueS" type="RESOURCE"/>
   <resource name="HeavyBlueStandS" type="RESOURCE"/>
+  <resource name="HeavyBlueTauntS" type="RESOURCE"/>
   <resource name="HeavyBlueWalkS" type="RESOURCE"/>
   <resource name="HeavyRedHS" type="RESOURCE"/>
   <resource name="HeavyRedIntelS" type="RESOURCE"/>
@@ -18,6 +19,6 @@
   <resource name="HeavyRedS" type="RESOURCE"/>
   <resource name="HeavyRedStandS" type="RESOURCE"/>
   <resource name="HeavyRedWalkS" type="RESOURCE"/>
-  <resource name="HeavyTauntS" type="RESOURCE"/>
+  <resource name="HeavyRedTauntS" type="RESOURCE"/>
   <resource name="OmnomnomnomS" type="RESOURCE"/>
 </resources>

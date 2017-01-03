@@ -17,7 +17,6 @@
 runPower = 1;
 weapons[0] = Minegun;
 haxxyStatue = DemomanHaxxyStatueS;
-tauntsprite = DemoTauntS;
 </argument>
       </arguments>
     </action>
@@ -47,13 +46,6 @@ tauntsprite = DemoTauntS;
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">numFlames = 3;
-
-// 'GW' reward - *G*olden *W*eapon
-if(hasClassReward(global.paramPlayer, 'GW'))
-{
-    // Prepend to the start of the overlay list, so that it gets drawn first (it's a full sprite replacement)
-    ds_list_insert(tauntOverlays, 0, DemoGoldWeaponTauntS);
-}
 
 if (player.team == TEAM_RED)
 {

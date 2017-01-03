@@ -17,7 +17,6 @@
 maxHp = 200;
 weapons[0] = Minigun;
 haxxyStatue = HeavyHaxxyStatueS;
-tauntsprite = HeavyTauntS;
 </argument>
       </arguments>
     </action>
@@ -50,13 +49,14 @@ tauntsprite = HeavyTauntS;
 if(hasClassReward(global.paramPlayer, 'GW'))
 {
     // Prepend to the start of the overlay list, so that it gets drawn first (it's a full sprite replacement)
-    ds_list_insert(tauntOverlays, 0, HeavyGoldWeaponTauntS);
     ds_list_insert(omnomnomnomOverlays, 0, OmnomnomnomGoldWeaponS);
 }
 
 // 'BH' reward - *B*obble *H*ead
 if(hasClassReward(global.paramPlayer, 'BH'))
+{
     ds_list_add(omnomnomnomOverlays, HatBobbleOmnomnomnomS);
+}
 
 numFlames = 5;
 

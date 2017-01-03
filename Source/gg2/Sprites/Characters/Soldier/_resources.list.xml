@@ -8,6 +8,7 @@
   <resource name="SoldierBlueRunS" type="RESOURCE"/>
   <resource name="SoldierBlueS" type="RESOURCE"/>
   <resource name="SoldierBlueStandS" type="RESOURCE"/>
+  <resource name="SoldierBlueTauntS" type="RESOURCE"/>
   <resource name="SoldierRedHS" type="RESOURCE"/>
   <resource name="SoldierRedIntelS" type="RESOURCE"/>
   <resource name="SoldierRedJumpS" type="RESOURCE"/>
@@ -16,5 +17,5 @@
   <resource name="SoldierRedRunS" type="RESOURCE"/>
   <resource name="SoldierRedS" type="RESOURCE"/>
   <resource name="SoldierRedStandS" type="RESOURCE"/>
-  <resource name="SoldierTauntS" type="RESOURCE"/>
+  <resource name="SoldierRedTauntS" type="RESOURCE"/>
 </resources>
