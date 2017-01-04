@@ -65,6 +65,7 @@
         spriteIntel = getCharacterSpriteId(player.class, player.team, "Intel");
     }
 
+    spriteDead = getCharacterSpriteId(player.class, player.team, "Dead");
     humiliationPoses = getCharacterSpriteId(player.class, player.team, "H");
     tauntsprite = getCharacterSpriteId(player.class, player.team, "Taunt");
     

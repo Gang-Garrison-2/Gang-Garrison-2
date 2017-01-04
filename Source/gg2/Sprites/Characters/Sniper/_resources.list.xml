@@ -8,6 +8,7 @@
   <resource name="SniperBlueLeanRS" type="RESOURCE"/>
   <resource name="SniperBlueRunS" type="RESOURCE"/>
   <resource name="SniperBlueS" type="RESOURCE"/>
+  <resource name="SniperBlueDeadS" type="RESOURCE"/>
   <resource name="SniperBlueStandS" type="RESOURCE"/>
   <resource name="SniperBlueTauntS" type="RESOURCE"/>
   <resource name="SniperRedCrouchS" type="RESOURCE"/>
@@ -18,6 +19,7 @@
   <resource name="SniperRedLeanRS" type="RESOURCE"/>
   <resource name="SniperRedRunS" type="RESOURCE"/>
   <resource name="SniperRedS" type="RESOURCE"/>
+  <resource name="SniperRedDeadS" type="RESOURCE"/>
   <resource name="SniperRedStandS" type="RESOURCE"/>
   <resource name="SniperRedTauntS" type="RESOURCE"/>
 </resources>

@@ -7,6 +7,7 @@
   <resource name="PyroBlueLeanRS" type="RESOURCE"/>
   <resource name="PyroBlueRunS" type="RESOURCE"/>
   <resource name="PyroBlueS" type="RESOURCE"/>
+  <resource name="PyroBlueDeadS" type="RESOURCE"/>
   <resource name="PyroBlueStandS" type="RESOURCE"/>
   <resource name="PyroBlueTauntS" type="RESOURCE"/>
   <resource name="PyroRedHS" type="RESOURCE"/>
@@ -16,6 +17,7 @@
   <resource name="PyroRedLeanRS" type="RESOURCE"/>
   <resource name="PyroRedRunS" type="RESOURCE"/>
   <resource name="PyroRedS" type="RESOURCE"/>
+  <resource name="PyroRedDeadS" type="RESOURCE"/>
   <resource name="PyroRedStandS" type="RESOURCE"/>
   <resource name="PyroRedTauntS" type="RESOURCE"/>
 </resources>

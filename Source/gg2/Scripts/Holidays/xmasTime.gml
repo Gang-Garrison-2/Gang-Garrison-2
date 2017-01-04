@@ -48,4 +48,16 @@
     sprite_assign(BloodDropS, BloodDropSX);
     sprite_assign(SniperRedCrouchS, SniperRedCrouchSX);
     sprite_assign(SniperBlueCrouchS, SniperBlueCrouchSX);
+    
+    sprite_assign(ScoutRedDeadS, ScoutRedDeadSX);
+    sprite_assign(HeavyRedDeadS, HeavyRedDeadSX);
+    sprite_assign(EngineerRedDeadS, EngineerRedDeadSX);
+    sprite_assign(SoldierRedDeadS, SoldierRedDeadSX);
+    sprite_assign(SniperRedDeadS, SniperRedDeadSX);
+    
+    sprite_assign(ScoutBlueDeadS, ScoutBlueDeadSX);
+    sprite_assign(HeavyBlueDeadS, HeavyBlueDeadSX);
+    sprite_assign(EngineerBlueDeadS, EngineerBlueDeadSX);
+    sprite_assign(SoldierBlueDeadS, SoldierBlueDeadSX);
+    sprite_assign(SniperBlueDeadS, SniperBlueDeadSX);
 }

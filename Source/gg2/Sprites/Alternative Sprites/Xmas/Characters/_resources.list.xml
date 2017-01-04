@@ -6,22 +6,32 @@
   <resource name="SniperBlueCrouchSX" type="RESOURCE"/>
   <resource name="QuerlyRedSX" type="RESOURCE"/>
   <resource name="ScoutRedSX" type="RESOURCE"/>
+  <resource name="ScoutRedDeadSX" type="RESOURCE"/>
   <resource name="PyroRedSX" type="RESOURCE"/>
   <resource name="HeavyRedSX" type="RESOURCE"/>
+  <resource name="HeavyRedDeadSX" type="RESOURCE"/>
   <resource name="MedicRedSX" type="RESOURCE"/>
   <resource name="EngineerRedSX" type="RESOURCE"/>
+  <resource name="EngineerRedDeadSX" type="RESOURCE"/>
   <resource name="SoldierRedSX" type="RESOURCE"/>
+  <resource name="SoldierRedDeadSX" type="RESOURCE"/>
   <resource name="SpyRedSX" type="RESOURCE"/>
   <resource name="DemomanRedSX" type="RESOURCE"/>
   <resource name="SniperRedSX" type="RESOURCE"/>
+  <resource name="SniperRedDeadSX" type="RESOURCE"/>
   <resource name="EngineerBlueSX" type="RESOURCE"/>
+  <resource name="EngineerBlueDeadSX" type="RESOURCE"/>
   <resource name="HeavyBlueSX" type="RESOURCE"/>
+  <resource name="HeavyBlueDeadSX" type="RESOURCE"/>
   <resource name="MedicBlueSX" type="RESOURCE"/>
   <resource name="PyroBlueSX" type="RESOURCE"/>
   <resource name="ScoutBlueSX" type="RESOURCE"/>
+  <resource name="ScoutBlueDeadSX" type="RESOURCE"/>
   <resource name="SoldierBlueSX" type="RESOURCE"/>
+  <resource name="SoldierBlueDeadSX" type="RESOURCE"/>
   <resource name="SpyBlueSX" type="RESOURCE"/>
   <resource name="DemomanBlueSX" type="RESOURCE"/>
   <resource name="SniperBlueSX" type="RESOURCE"/>
+  <resource name="SniperBlueDeadSX" type="RESOURCE"/>
   <resource name="QuerlyBlueSX" type="RESOURCE"/>
 </resources>

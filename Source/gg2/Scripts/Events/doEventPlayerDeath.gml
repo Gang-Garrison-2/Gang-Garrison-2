@@ -218,8 +218,8 @@ with(victim.object) {
         }
         else
         { 
-            deadbody.sprite_index = sprite_index;
-            deadbody.image_index = CHARACTER_ANIMATION_DEAD;
+            deadbody.sprite_index = spriteDead;
+            deadbody.image_index = 0;
         }
         deadbody.hspeed=hspeed;
         deadbody.vspeed=vspeed;

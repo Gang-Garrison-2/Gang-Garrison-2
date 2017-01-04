@@ -89,7 +89,6 @@
   <constant name="CHARACTER_ANIMATION_NORMAL" value="0"/>
   <constant name="CHARACTER_ANIMATION_INTEL" value="2"/>
   <constant name="CHARACTER_ANIMATION_LEN" value="4"/>
-  <constant name="CHARACTER_ANIMATION_DEAD" value="5"/>
   <constant name="MAX_PLAYERNAME_LENGTH" value="20"/>
   <constant name="STATE_UPDATE" value="8"/>
   <constant name="KILLS" value="0"/>

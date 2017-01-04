@@ -7,6 +7,7 @@
   <resource name="MedicBlueLeanRS" type="RESOURCE"/>
   <resource name="MedicBlueRunS" type="RESOURCE"/>
   <resource name="MedicBlueS" type="RESOURCE"/>
+  <resource name="MedicBlueDeadS" type="RESOURCE"/>
   <resource name="MedicBlueStandS" type="RESOURCE"/>
   <resource name="MedicBlueTauntS" type="RESOURCE"/>
   <resource name="MedicRedHS" type="RESOURCE"/>
@@ -16,6 +17,7 @@
   <resource name="MedicRedLeanRS" type="RESOURCE"/>
   <resource name="MedicRedRunS" type="RESOURCE"/>
   <resource name="MedicRedS" type="RESOURCE"/>
+  <resource name="MedicRedDeadS" type="RESOURCE"/>
   <resource name="MedicRedStandS" type="RESOURCE"/>
   <resource name="MedicRedTauntS" type="RESOURCE"/>
 </resources>

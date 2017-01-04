@@ -2,8 +2,10 @@
 <resources>
   <resource name="QuerlyBlueHS" type="RESOURCE"/>
   <resource name="QuerlyBlueS" type="RESOURCE"/>
+  <resource name="QuerlyBlueDeadS" type="RESOURCE"/>
   <resource name="QuerlyBlueTauntS" type="RESOURCE"/>
   <resource name="QuerlyRedHS" type="RESOURCE"/>
   <resource name="QuerlyRedS" type="RESOURCE"/>
+  <resource name="QuerlyRedDeadS" type="RESOURCE"/>
   <resource name="QuerlyRedTauntS" type="RESOURCE"/>
 </resources>
