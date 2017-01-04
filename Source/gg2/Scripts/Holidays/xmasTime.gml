@@ -21,7 +21,7 @@
     sprite_assign(SniperBlueTauntS, SniperBlueTauntSX);
     sprite_assign(QuerlyBlueTauntS, QuerlyBlueTauntSX);
     
-    sprite_assign(QuoteRedS, QuoteRedSX);
+    sprite_assign(QuerlyRedS, QuerlyRedSX);
     sprite_assign(ScoutRedS, ScoutRedSX);
     sprite_assign(PyroRedS, PyroRedSX);
     sprite_assign(HeavyRedS, HeavyRedSX);
@@ -40,7 +40,7 @@
     sprite_assign(SpyBlueS, SpyBlueSX);
     sprite_assign(DemomanBlueS, DemomanBlueSX);
     sprite_assign(SniperBlueS, SniperBlueSX);
-    sprite_assign(CurlyBlueS, CurlyBlueSX);
+    sprite_assign(QuerlyBlueS, QuerlyBlueSX);
     sprite_assign(BackstabTorsoRedS, BackstabTorsoRedSX);
     sprite_assign(BackstabTorsoBlueS, BackstabTorsoBlueSX);
     sprite_assign(HeavyRedOmnomnomnomS, HeavyRedOmnomnomnomSX);

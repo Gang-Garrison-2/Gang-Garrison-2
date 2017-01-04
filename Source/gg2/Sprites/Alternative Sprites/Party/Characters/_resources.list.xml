@@ -4,7 +4,7 @@
   <resource name="Special" type="GROUP"/>
   <resource name="SniperBlueCrouchSP" type="RESOURCE"/>
   <resource name="SniperRedCrouchSP" type="RESOURCE"/>
-  <resource name="QuoteRedSP" type="RESOURCE"/>
+  <resource name="QuerlyRedSP" type="RESOURCE"/>
   <resource name="ScoutRedSP" type="RESOURCE"/>
   <resource name="PyroRedSP" type="RESOURCE"/>
   <resource name="HeavyRedSP" type="RESOURCE"/>
@@ -23,5 +23,5 @@
   <resource name="SpyBlueSP" type="RESOURCE"/>
   <resource name="DemomanBlueSP" type="RESOURCE"/>
   <resource name="SniperBlueSP" type="RESOURCE"/>
-  <resource name="CurlyBlueSP" type="RESOURCE"/>
+  <resource name="QuerlyBlueSP" type="RESOURCE"/>
 </resources>
