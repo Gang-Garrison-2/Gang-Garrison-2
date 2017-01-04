@@ -9,5 +9,5 @@
   <resource name="Engineer" type="GROUP"/>
   <resource name="Spy" type="GROUP"/>
   <resource name="Sniper" type="GROUP"/>
-  <resource name="Quote" type="GROUP"/>
+  <resource name="Querly" type="GROUP"/>
 </resources>
