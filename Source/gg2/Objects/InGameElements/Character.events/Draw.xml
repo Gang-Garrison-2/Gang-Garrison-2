@@ -58,9 +58,9 @@ noNewAnim = player.class == CLASS_QUOTE or sprite_special or player.humiliated;
 if (zoomed)
 {
     if (team == TEAM_RED)
-        sprite = SniperCrouchRedS;
+        sprite = SniperRedCrouchS;
     else
-        sprite = SniperCrouchBlueS;
+        sprite = SniperBlueCrouchS;
     overlayList = crouchOverlays;
     animationImage = animationImage mod 2; // sniper crouch only has two frames, avoid overflow
 }

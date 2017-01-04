@@ -2,8 +2,8 @@
 <resources>
   <resource name="Taunts" type="GROUP"/>
   <resource name="Special" type="GROUP"/>
-  <resource name="SniperCrouchRedSX" type="RESOURCE"/>
-  <resource name="SniperCrouchBlueSX" type="RESOURCE"/>
+  <resource name="SniperRedCrouchSX" type="RESOURCE"/>
+  <resource name="SniperBlueCrouchSX" type="RESOURCE"/>
   <resource name="QuoteRedSX" type="RESOURCE"/>
   <resource name="ScoutRedSX" type="RESOURCE"/>
   <resource name="PyroRedSX" type="RESOURCE"/>

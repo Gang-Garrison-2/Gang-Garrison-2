@@ -46,6 +46,6 @@
     sprite_assign(HeavyRedOmnomnomnomS, HeavyRedOmnomnomnomSP);
     sprite_assign(HeavyBlueOmnomnomnomS, HeavyBlueOmnomnomnomSP);
     sprite_assign(BloodDropS, BloodDropSP);
-    sprite_assign(SniperCrouchRedS, SniperCrouchRedSP);
-    sprite_assign(SniperCrouchBlueS, SniperCrouchBlueSP);
+    sprite_assign(SniperRedCrouchS, SniperRedCrouchSP);
+    sprite_assign(SniperBlueCrouchS, SniperBlueCrouchSP);
 }
