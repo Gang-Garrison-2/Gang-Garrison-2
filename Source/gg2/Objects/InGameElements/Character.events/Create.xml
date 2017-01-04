@@ -174,7 +174,7 @@
     tauntOverlays = ds_list_create();
     crouchOverlays = ds_list_create();
     omnomnomnomOverlays = ds_list_create();
-    omnomnomnomSprite = OmnomnomnomS;
+    omnomnomnomSprite = getCharacterSpriteId(CLASS_HEAVY, player.team, "Omnomnomnom");
     demon = -1;
     demonX = 0;
     demonY = 0;
@@ -307,7 +307,8 @@
     {
         // 'GW' reward - *G*olden *W*eapon
         // Prepend to the start of the overlay list, so that it gets drawn first (it's a full sprite replacement)
-        switch(player.class) {
+        switch(player.class)
+        {
             case CLASS_SCOUT:
             case CLASS_SOLDIER:
             case CLASS_SNIPER:
@@ -316,6 +317,11 @@
             case CLASS_PYRO:
                 ds_list_insert(tauntOverlays, 0, getCharacterSpriteId(player.class, player.team, "GoldWeaponTaunt"));
                 break;
+        }
+        
+        if(player.class == CLASS_HEAVY)
+        {
+            ds_list_insert(omnomnomnomOverlays, 0, getCharacterSpriteId(global.paramPlayer.class, global.paramPlayer.team, "OmnomnomnomGoldWeapon"));
         }
     }
 }

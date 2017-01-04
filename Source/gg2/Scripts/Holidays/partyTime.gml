@@ -43,7 +43,8 @@
     sprite_assign(CurlyBlueS, CurlyBlueSP);
     sprite_assign(BackstabTorsoRedS, BackstabTorsoRedSP);
     sprite_assign(BackstabTorsoBlueS, BackstabTorsoBlueSP);
-    sprite_assign(OmnomnomnomS, OmnomnomnomSP);
+    sprite_assign(HeavyRedOmnomnomnomS, HeavyRedOmnomnomnomSP);
+    sprite_assign(HeavyBlueOmnomnomnomS, HeavyBlueOmnomnomnomSP);
     sprite_assign(BloodDropS, BloodDropSP);
     sprite_assign(SniperCrouchRedS, SniperCrouchRedSP);
     sprite_assign(SniperCrouchBlueS, SniperCrouchBlueSP);

@@ -45,20 +45,7 @@ haxxyStatue = HeavyHaxxyStatueS;
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">// 'GW' reward - *G*olden *W*eapon
-if(hasClassReward(global.paramPlayer, 'GW'))
-{
-    // Prepend to the start of the overlay list, so that it gets drawn first (it's a full sprite replacement)
-    ds_list_insert(omnomnomnomOverlays, 0, OmnomnomnomGoldWeaponS);
-}
-
-// 'BH' reward - *B*obble *H*ead
-if(hasClassReward(global.paramPlayer, 'BH'))
-{
-    ds_list_add(omnomnomnomOverlays, HatBobbleOmnomnomnomS);
-}
-
-numFlames = 5;
+        <argument kind="STRING">numFlames = 5;
 
 if (player.team == TEAM_RED)
 {
