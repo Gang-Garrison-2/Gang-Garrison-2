@@ -194,15 +194,15 @@ yr += yoffset;
 
 if (omnomnomnom)
 {
-    draw_sprite_ext_overlay(omnomnomnomSprite,omnomnomnomOverlays,floor(omnomnomnomindex),xr,yr,image_xscale,image_yscale,image_angle,c_white,1);
+    draw_sprite_ext_overlay(omnomnomnomSprite,omnomnomnomOverlays,gearList,omnomnomnomindex,xr,yr,image_xscale,image_yscale,image_angle,c_white,1);
     if (ubered)
-        draw_sprite_ext_overlay(omnomnomnomSprite,omnomnomnomOverlays,floor(omnomnomnomindex),xr,yr,image_xscale,image_yscale,image_angle,ubercolour,0.7);
+        draw_sprite_ext_overlay(omnomnomnomSprite,omnomnomnomOverlays,gearList,omnomnomnomindex,xr,yr,image_xscale,image_yscale,image_angle,ubercolour,0.7);
 }
 else if (taunting)
 {
-    draw_sprite_ext_overlay(tauntsprite,tauntOverlays,floor(tauntindex),xr,yr,image_xscale,image_yscale,image_angle,c_white,1);
+    draw_sprite_ext_overlay(tauntsprite,tauntOverlays,gearList,tauntindex,xr,yr,image_xscale,image_yscale,image_angle,c_white,1);
     if (ubered)
-        draw_sprite_ext_overlay(tauntsprite,tauntOverlays,floor(tauntindex),xr,yr,image_xscale,image_yscale,image_angle,ubercolour,0.7);
+        draw_sprite_ext_overlay(tauntsprite,tauntOverlays,gearList,tauntindex,xr,yr,image_xscale,image_yscale,image_angle,ubercolour,0.7);
 }
 else if (player.humiliated)
     draw_sprite_ext(humiliationPoses,floor(animationImage)+humiliationOffset,xr,yr,image_xscale,image_yscale,image_angle,c_white,image_alpha);
@@ -215,21 +215,21 @@ else if (!taunting)
     if (cloak)
     {
         if (!ubered)
-            draw_sprite_ext(sprite,floor(animationImage+animationOffset),xr,yr,image_xscale,image_yscale,image_angle,c_white,image_alpha);
+            draw_sprite_ext_overlay(sprite,-1,gearList,animationImage+animationOffset,xr,yr,image_xscale,image_yscale,image_angle,c_white,image_alpha);
         else if (ubered)
         {
-            draw_sprite_ext(sprite,floor(animationImage+animationOffset),xr,yr,image_xscale,image_yscale,image_angle,c_white,1);
-            draw_sprite_ext(sprite,floor(animationImage+animationOffset),xr,yr,image_xscale,image_yscale,image_angle,ubercolour,0.7);
+            draw_sprite_ext_overlay(sprite,-1,gearList,animationImage+animationOffset,xr,yr,image_xscale,image_yscale,image_angle,c_white,1);
+            draw_sprite_ext_overlay(sprite,-1,gearList,animationImage+animationOffset,xr,yr,image_xscale,image_yscale,image_angle,ubercolour,0.7);
         }
     }
     else
     {
         if (!ubered)
-            draw_sprite_ext_overlay(sprite,overlayList,floor(animationImage+animationOffset),xr,yr,image_xscale,image_yscale,image_angle,c_white,image_alpha,overlayOffset);
+            draw_sprite_ext_overlay(sprite,overlayList,gearList,animationImage+animationOffset,xr,yr,image_xscale,image_yscale,image_angle,c_white,image_alpha,overlayOffset);
         else if (ubered)
         {
-            draw_sprite_ext_overlay(sprite,overlayList,floor(animationImage+animationOffset),xr,yr,image_xscale,image_yscale,image_angle,c_white,1,overlayOffset);
-            draw_sprite_ext_overlay(sprite,overlayList,floor(animationImage+animationOffset),xr,yr,image_xscale,image_yscale,image_angle,ubercolour,0.7,overlayOffset);
+            draw_sprite_ext_overlay(sprite,overlayList,gearList,animationImage+animationOffset,xr,yr,image_xscale,image_yscale,image_angle,c_white,1,overlayOffset);
+            draw_sprite_ext_overlay(sprite,overlayList,gearList,animationImage+animationOffset,xr,yr,image_xscale,image_yscale,image_angle,ubercolour,0.7,overlayOffset);
         }
     }
 }

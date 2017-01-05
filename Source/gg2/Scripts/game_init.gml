@@ -1,6 +1,9 @@
 // Returns true if the game is successfully initialized, false if there was an error and we should quit.
 {
     initCharacterSpritePrefixes();
+    initAllHeadPoses();
+    initGear();
+    
     instance_create(0,0,RoomChangeObserver);
     set_little_endian_global(true);
     if file_exists("game_errors.log") file_delete("game_errors.log");

@@ -1,23 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
-  <resource name="ScoutRedTauntSP" type="RESOURCE"/>
-  <resource name="ScoutBlueTauntSP" type="RESOURCE"/>
-  <resource name="PyroRedTauntSP" type="RESOURCE"/>
-  <resource name="PyroBlueTauntSP" type="RESOURCE"/>
-  <resource name="SoldierRedTauntSP" type="RESOURCE"/>
-  <resource name="SoldierBlueTauntSP" type="RESOURCE"/>
-  <resource name="HeavyRedTauntSP" type="RESOURCE"/>
-  <resource name="HeavyBlueTauntSP" type="RESOURCE"/>
-  <resource name="DemomanRedTauntSP" type="RESOURCE"/>
-  <resource name="DemomanBlueTauntSP" type="RESOURCE"/>
-  <resource name="MedicRedTauntSP" type="RESOURCE"/>
-  <resource name="MedicBlueTauntSP" type="RESOURCE"/>
-  <resource name="EngineerRedTauntSP" type="RESOURCE"/>
-  <resource name="EngineerBlueTauntSP" type="RESOURCE"/>
-  <resource name="SpyRedTauntSP" type="RESOURCE"/>
-  <resource name="SpyBlueTauntSP" type="RESOURCE"/>
-  <resource name="SniperRedTauntSP" type="RESOURCE"/>
-  <resource name="SniperBlueTauntSP" type="RESOURCE"/>
-  <resource name="QuerlyRedTauntSP" type="RESOURCE"/>
-  <resource name="QuerlyBlueTauntSP" type="RESOURCE"/>
+  <resource name="PyroRedTauntPartyHatS" type="RESOURCE"/>
+  <resource name="PyroBlueTauntPartyHatS" type="RESOURCE"/>
 </resources>

@@ -43,7 +43,7 @@
     onground = true;
     still = true;
     yoffset = 0;
-    sprite_special = global.gg_birthday or global.xmas;
+    sprite_special = global.xmas;
     
     // class sprite vars
     if(player.class == CLASS_QUOTE)
@@ -183,6 +183,8 @@
     demonDir = 0.5;
     demonFrame = 0;
 
+    gearList = ds_list_create();
+    
     // Let's spawn our weapon
     global.paramOwner = id;
     currentWeapon = instance_create(x,y,weapons[0]);
@@ -299,6 +301,10 @@
         {
             ds_list_add(tauntOverlays, global.TopHatTaunt[player.class]);        
         }
+    }
+    else if(global.gg_birthday)
+    {
+        ds_list_add(gearList, GEAR_PARTY_HAT);
     }
     if (hasReward(player, 'WillOWisp'))
     {

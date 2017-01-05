@@ -71,6 +71,7 @@
     ds_list_destroy(crouchOverlays);
     ds_list_destroy(tauntOverlays);
     ds_list_destroy(omnomnomnomOverlays);
+    ds_list_destroy(gearList);
 }
 </argument>
       </arguments>

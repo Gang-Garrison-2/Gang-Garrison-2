@@ -59,4 +59,5 @@
   <resource name="classname" type="RESOURCE"/>
   <resource name="sanitiseNewlines" type="RESOURCE"/>
   <resource name="Faucet HTTP" type="GROUP"/>
+  <resource name="Gear" type="GROUP"/>
 </resources>

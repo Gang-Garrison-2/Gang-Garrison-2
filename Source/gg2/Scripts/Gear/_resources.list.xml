@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="initAllHeadPoses" type="RESOURCE"/>
+  <resource name="setBasicHeadPoses" type="RESOURCE"/>
+  <resource name="setHeadPose" type="RESOURCE"/>
+  <resource name="setHeadPosesFromString" type="RESOURCE"/>
+  <resource name="initGear" type="RESOURCE"/>
+  <resource name="setGearOverlayInfo" type="RESOURCE"/>
+  <resource name="gearSpecCreate" type="RESOURCE"/>
+  <resource name="gearSpecDestroy" type="RESOURCE"/>
+  <resource name="gearSpecDefaultOverlay" type="RESOURCE"/>
+  <resource name="gearSpecClassOverlayOffset" type="RESOURCE"/>
+  <resource name="gearSpecClassOverlay" type="RESOURCE"/>
+  <resource name="gearSpecFrameOverlay" type="RESOURCE"/>
+  <resource name="gearSpecApply" type="RESOURCE"/>
+  <resource name="_gearSpecGetWithDefaults" type="RESOURCE"/>
+  <resource name="_gearSpecClassTeamContext" type="RESOURCE"/>
+  <resource name="_gearSpecFrameContext" type="RESOURCE"/>
+  <resource name="_gearSpecDefaultTeamContext" type="RESOURCE"/>
+  <resource name="_gearSpecSet" type="RESOURCE"/>
+</resources>

@@ -1,27 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
   <resource name="Taunts" type="GROUP"/>
-  <resource name="Special" type="GROUP"/>
-  <resource name="SniperBlueCrouchSP" type="RESOURCE"/>
-  <resource name="SniperRedCrouchSP" type="RESOURCE"/>
-  <resource name="QuerlyRedSP" type="RESOURCE"/>
-  <resource name="ScoutRedSP" type="RESOURCE"/>
-  <resource name="PyroRedSP" type="RESOURCE"/>
-  <resource name="HeavyRedSP" type="RESOURCE"/>
-  <resource name="MedicRedSP" type="RESOURCE"/>
-  <resource name="EngineerRedSP" type="RESOURCE"/>
-  <resource name="SoldierRedSP" type="RESOURCE"/>
-  <resource name="SpyRedSP" type="RESOURCE"/>
-  <resource name="DemomanRedSP" type="RESOURCE"/>
-  <resource name="SniperRedSP" type="RESOURCE"/>
-  <resource name="EngineerBlueSP" type="RESOURCE"/>
-  <resource name="HeavyBlueSP" type="RESOURCE"/>
-  <resource name="MedicBlueSP" type="RESOURCE"/>
-  <resource name="PyroBlueSP" type="RESOURCE"/>
-  <resource name="ScoutBlueSP" type="RESOURCE"/>
-  <resource name="SoldierBlueSP" type="RESOURCE"/>
-  <resource name="SpyBlueSP" type="RESOURCE"/>
-  <resource name="DemomanBlueSP" type="RESOURCE"/>
-  <resource name="SniperBlueSP" type="RESOURCE"/>
-  <resource name="QuerlyBlueSP" type="RESOURCE"/>
+  <resource name="RedPartyHatS" type="RESOURCE"/>
+  <resource name="QuerlyRedPartyHatS" type="RESOURCE"/>
+  <resource name="BluePartyHatS" type="RESOURCE"/>
+  <resource name="QuerlyBluePartyHatS" type="RESOURCE"/>
 </resources>

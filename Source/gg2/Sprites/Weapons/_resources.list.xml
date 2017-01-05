@@ -13,7 +13,7 @@
   <resource name="RifleS" type="RESOURCE"/>
   <resource name="RevolverS" type="RESOURCE"/>
   <resource name="BladeS" type="RESOURCE"/>
-  <resource name="BackstabTorsoRedS" type="RESOURCE"/>
-  <resource name="BackstabTorsoBlueS" type="RESOURCE"/>
+  <resource name="SpyRedBackstabTorsoS" type="RESOURCE"/>
+  <resource name="SpyBlueBackstabTorsoS" type="RESOURCE"/>
   <resource name="BackstabLegsS" type="RESOURCE"/>
 </resources>

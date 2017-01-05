@@ -19,9 +19,9 @@ else
     image_xscale = 1;
 
 if (team == TEAM_RED)
-    sprite_index = BackstabTorsoRedS;
+    sprite_index = SpyRedBackstabTorsoS;
 else
-    sprite_index = BackstabTorsoBlueS;
+    sprite_index = SpyBlueBackstabTorsoS;
 
 if (image_index == 32)
 {
