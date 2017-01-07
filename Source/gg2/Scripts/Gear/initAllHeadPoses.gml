@@ -1,11 +1,14 @@
 // Sets all head poses for all classes.
-
+// The poses track a fixed "rigging point" on a character through all animations that should support rigging.
+// This is typically the center of a pixel which is easy to find on all animation frames.
+// It is also possible to define flipping and rotation, if attached gear should be drawn flipped or rotated.
+// An example for rotation is the medic taunt, where the medic bows and any hat needs to be drawn rotated by -90 degrees.
 
 // Scout: Tracking the hair pixel
 setBasicHeadPoses("Scout", -2, -14, 2, "0,0|-2,-2|-2,-2|0,-2|0,0|4,-2|4,-2|6,-2|2,-2");
 
 // Soldier: Tracking the second-to-highest helmet pixel at the back of the head
-setBasicHeadPoses("Soldier", -4, -16, 0, "0,0|-2,0|-4,2|-4,2|-4,2|-4,2|2,2,0,-1|2,2,0,-1|4,2,0,-1|-4,2|-2,4|-4,2|-2,4|-4,2|-2,0|0,0");
+setBasicHeadPoses("Soldier", -4, -16, 0, "0,0|-2,0|-4,2|-4,2|-4,2|-4,2|3,2,0,-1|3,2,0,-1|3,2,0,-1|-4,2|-2,4|-4,2|-2,4|-4,2|-2,0|0,0");
 
 // Sniper: Tracking the pixel at the back of the head just below the hat
 setBasicHeadPoses("Sniper", -4, -12, 2, "0,0|2,0|2,0|2,0|2,0|2,0|2,0|2,0|6,-2|6,-2|6,-2|2,0|0,0");
