@@ -58,13 +58,15 @@ for(class = 0; class < 10; class += 1)
                     
                     overlaySprite = _gearSpecGetWithDefaults(gearSpec, class, team, animation, subimage, "overlay", -1);
                     overlaySubimage = _gearSpecGetWithDefaults(gearSpec, class, team, animation, subimage, "overlaySubimage", -1);
-                    xoff = _gearSpecGetWithDefaults(gearSpec, class, team, animation, subimage, "xoff", 0);
+                    xoff = _gearSpecGetWithDefaults(gearSpec, class, team, animation, subimage, "xoff", 0) * xscale;
                     yoff = _gearSpecGetWithDefaults(gearSpec, class, team, animation, subimage, "yoff", 0);
                     
                     if(overlaySprite >= 0 and overlaySubimage >= 0)
                     {
-                        // TODO check rotation correctness
-                        setGearOverlayInfo(spriteId, subimage, gearName, overlaySprite, overlaySubimage, dx + xoff, dy + yoff, angle, xscale);
+                        var c, s;
+                        c = cos(degtorad(angle));
+                        s = sin(degtorad(angle));
+                        setGearOverlayInfo(spriteId, subimage, gearName, overlaySprite, overlaySubimage, dx + c*xoff + s*yoff, dy + c*yoff - s*xoff, angle, xscale);
                     }
                 }
             }
