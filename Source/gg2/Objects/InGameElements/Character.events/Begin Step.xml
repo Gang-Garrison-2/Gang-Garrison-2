@@ -13,7 +13,9 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">// Apply afterburn
+        <argument kind="STRING">applied_gravity = 0;
+
+// Apply afterburn
 if (burnDuration &gt; 0)
 {
     if(hp &gt; 0)
@@ -153,7 +155,7 @@ if(moveStatus == 1 or moveStatus == 2 or moveStatus == 4 and global.run_virtual_
         part_type_life(jumpFlameParticleType,2,5);
         part_type_scale(jumpFlameParticleType,0.7,-0.65);
     }
-    vspeed -= 0.06 * global.delta_factor;
+    applied_gravity -= 0.06*global.delta_factor/2;
     
     if !variable_global_exists("jumpFlameParticleSystem")
     {
@@ -251,12 +253,9 @@ else
 
 charSetSolids();
 
+// apply gravity
 if(place_free(x,y+1)) // no obstacle ground below us
 {
-    vspeed += 0.6 * global.delta_factor;
-    if(vspeed &gt; 10)
-        vspeed = 10;
-    
     // standing on a dropdown platform
     if (place_meeting(x, y+1, DropdownPlatform) and !place_meeting(x, y, DropdownPlatform) and vspeed &gt;= 0)
     {
@@ -265,6 +264,16 @@ if(place_free(x,y+1)) // no obstacle ground below us
     }
     else // NOT standing on one
     {
+        // In order to make the gravity truly framerate-independent, we need to apply half of it before, and half of it after, each motion.
+        // The math concept is, the period of a frame starts with a vertical velocity of N, and ends with N+gravity. This ends up being equivalent to the above idea.
+        // Old gg2 gravity "skipped" arcs, and behaved very slightly differently on 60fps and 30fps.
+        // Using truly framerate-indepent gravity means that the strength of jumping has to change to create the same arc.
+        // The change in the strength of jumping corresponds to the change in the strength of the initial frame of gravity.
+        // Since the inital frame of gravity is half what it used to be, the strength of jumping needs to change the same amount, which I did elsewhere.
+        // I used the 30fps value of "initial frame of gravity", since that represents gg2's canonical jump arc.
+        // This change PROBABLY makes explosive jumping slightly more powerful, because the initial strength of that cannot be tweaked without also altering mid-air arcs.
+        applied_gravity += 0.6*global.delta_factor/2;
+        
         animationImage = 1;
         onground = false;
     }

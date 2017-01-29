@@ -13,7 +13,9 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">// Limit speed to prevent obstacle penetration
+        <argument kind="STRING">charSetSolids();
+
+// Limit speed to prevent obstacle penetration
 // (each dimension separately to avoid one vector affecting the other)
 hspeed = min(abs(hspeed), 15) * sign(hspeed);
 vspeed = min(abs(vspeed), 15) * sign(vspeed);
@@ -22,15 +24,48 @@ vspeed = min(abs(vspeed), 15) * sign(vspeed);
 // Done here instead of begin step to avoid code execution order mistakes
 timeUnscathed = min(timeUnscathed+1*global.delta_factor, 10*30);
 
-// Store some state for spinjumping
-_last_hspeed = hspeed;
+// Spinjumping emulation
+if(global.run_virtual_ticks)
+{
+
+    if (sign(hspeed) &gt; 0) // See if we're "spinning", also mirror which side gets the boost so that the effect of spinjumping is perfectly symmetric
+        _test = _last_xscale &gt; image_xscale;
+    else
+        _test = _last_xscale &lt; image_xscale;
+
+
+    if (_test and !place_free(x+sign(hspeed), y)) // Rubbing wall and spinning
+        spinjumping = true;
+    else
+        spinjumping = false;
+
+
+    _last_xscale = image_xscale;
+}
+
+if(moveStatus == 1 or moveStatus == 2 or moveStatus == 4) // Make an anti-gravity for what our physics gravity should be (at 30fps)
+    _gravity = 0.54;
+else
+    _gravity = 0.6;
+
+if (spinjumping and
+    place_free(x, y-_gravity) // validity check
+    and (place_free(x, y+1) or vspeed &lt; 0) // In air, or jumping
+   )
+    applied_gravity -= _gravity*global.delta_factor/2;
+else
+    spinjumping = false; // prevent phantom spinjump dust
+
+vspeed += applied_gravity;
+if(vspeed &gt; 10)
+    vspeed = 10;
 
 // Run movement solver if necessary
 yprevious = y;
 xprevious = x;
 y_previous = y;
 x_previous = x;
-charSetSolids();
+
 if(!place_free(x+hspeed, y+vspeed))
     characterHitObstacle();
 else
@@ -40,36 +75,6 @@ else
     x -= hspeed;
     y -= vspeed;
 }
-
-// Spinjumping emulation
-if(global.run_virtual_ticks)
-{
-
-    if (sign(_last_hspeed) &gt; 0) // See if we're "spinning", also mirror which side gets the boost so that the effect of spinjumping is perfectly symmetric
-        _test = _last_xscale &gt; image_xscale;
-    else
-        _test = _last_xscale &lt; image_xscale;
-
-
-    if (_test and !place_free(x+sign(_last_hspeed), y)) // Rubbing wall and spinning
-        spinjumping = true;
-    else
-        spinjumping = false;
-
-
-    _last_xscale = image_xscale;
-}
-
-if(moveStatus == 1 or moveStatus == 2 or moveStatus == 4) // Make an anti-gravity for what our physics gravity should be
-    _gravity = 0.54;
-else
-    _gravity = 0.6;
-
-if (spinjumping and
-    place_free(x, y-_gravity) // validity check
-    and (place_free(x, y+1) or vspeed &lt; 0) // In air, or jumping
-   )
-    vspeed -= _gravity * global.delta_factor;
 
 charUnsetSolids();
 </argument>

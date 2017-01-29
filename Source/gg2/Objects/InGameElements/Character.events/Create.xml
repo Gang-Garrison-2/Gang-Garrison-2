@@ -21,8 +21,11 @@
     canDoublejump = 0;
     canCloak = 0;
     canBuild = 0;
-    jumpStrength = 8;
+    jumpStrength = 8-(0.6/2); // reduce the part of the initial frame of gravity that we don't apply anymore (not framerate dependent, meant to match old 30fps arc)
     capStrength = 1;
+    
+    // for true framerate-independent jumping arcs
+    applied_gravity = 0;
     
     // 
     hp = maxHp;

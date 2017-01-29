@@ -57,8 +57,16 @@ if(vspeed == 0 and (!place_meeting(x, y+1, DropdownPlatform) or place_meeting(x,
 xprevious = x;
 yprevious = y;
 
-if(!place_free(x,y+1) and vspeed &gt;= 0)
-    moveStatus = 0;
+// things to do if we're on the ground
+if(!place_free(x,y+1))
+{
+    if(vspeed &gt;= 0) // only if we have no vertical inertia, reset to walking-type state
+        moveStatus = 0;
+}
+else
+{
+    vspeed += applied_gravity; // We apply gravity twice: once before, and once after, moving. See comments before "begin step"'s gravity for the rationale.
+}
 
 charUnsetSolids();
 
