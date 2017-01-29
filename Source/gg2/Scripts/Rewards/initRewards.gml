@@ -56,7 +56,7 @@ global.HatBobbleClassTaunt[8] = HatBobblePyroTauntS;
 // None for CLASS_QUOTE
 
 // Array of haxxy badge indexes (into the sprite) to reward names
-global.HaxxyBadgesLength = 41;
+global.HaxxyBadgesLength = 46;
 global.HaxxyBadges[0] = 'Badge_Trn1Orng';
 global.HaxxyBadges[1] = 'Badge_Trn1Gold';
 global.HaxxyBadges[2] = 'Badge_Trn2Orng';
@@ -98,6 +98,11 @@ global.HaxxyBadges[37] = 'Badge_Rebel-ution';
 global.HaxxyBadges[38] = 'Badge_GloryDays';
 global.HaxxyBadges[39] = 'Badge_DynamicDuo';
 global.HaxxyBadges[40] = 'Badge_ArmyOfOne';
+global.HaxxyBadges[41] = 'Badge_ThreeMajor';
+global.HaxxyBadges[42] = 'Badge_ThreeMinor';
+global.HaxxyBadges[43] = 'Badge_ThreeCTF';
+global.HaxxyBadges[44] = 'Badge_ThreeEtc';
+global.HaxxyBadges[45] = 'Badge_ThreeKoTH';
 
 // Makes array of Golden Accessory overlay sprites
 // Pre-initialize array to detect if sprites should be reused

@@ -283,6 +283,8 @@ if (intel)
                 var sheet;
                 sheet = instance_create(x,y-11+random(9),LooseSheet);
                 sheet.hspeed = hspeed;
+                if (hasReward(player, "GoldTrail"))
+                    sheet.sprite_index = choose(SheetFallingGold1, SheetFallingGold2, SheetFallingGold3);
             }
         }
         else if (random(1) &gt; 0.975)
@@ -290,6 +292,8 @@ if (intel)
             var sheet;
             sheet = instance_create(x,y-11+random(9),LooseSheet);
             sheet.hspeed = hspeed;
+            if (hasReward(player, "GoldTrail"))
+                sheet.sprite_index = choose(SheetFallingGold1, SheetFallingGold2, SheetFallingGold3);
         }
     }
     if (cloak)

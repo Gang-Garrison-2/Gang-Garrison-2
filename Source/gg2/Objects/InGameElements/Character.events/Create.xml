@@ -16,7 +16,7 @@
         <argument kind="STRING">{
     player = global.paramPlayer;
     team = player.team;
-
+    
     // Default properties of Characters (those where defaults make sense)
     canDoublejump = 0;
     canCloak = 0;
@@ -190,6 +190,11 @@
     currentWeapon = instance_create(x,y,weapons[0]);
     global.paramOwner = noone;
     
+    // Gear that drops with gibs
+    has_partyhat     = false;
+    has_crown        = false;
+    has_navigatorhat = false;
+    
     // THIS IS A TRUCK LOAD OF GARBAGE CODE THAT SHOULD BE REPLACED ASAP
     
     if(hasClassReward(player, 'Grey_Accessories_') and player.class != CLASS_QUOTE)
@@ -302,9 +307,20 @@
             ds_list_add(tauntOverlays, global.TopHatTaunt[player.class]);        
         }
     }
-    else if(global.gg_birthday)
+    else if (hasReward(player, 'Crown'))
+    {
+        ds_list_add(gearList, GEAR_CROWN);
+        has_crown = true;
+    }
+    else if (hasReward(player, 'Navigator'))
+    {
+        ds_list_add(gearList, GEAR_NAVIGATORHAT);
+        has_navigatorhat = true;
+    }
+    else if (global.gg_birthday)
     {
         ds_list_add(gearList, GEAR_PARTY_HAT);
+        has_partyhat = true;
     }
     if (hasReward(player, 'WillOWisp'))
     {

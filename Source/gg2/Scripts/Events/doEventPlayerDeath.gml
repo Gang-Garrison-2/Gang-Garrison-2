@@ -239,7 +239,15 @@ with(victim.object) {
     }
 }
 
-if (global.gg_birthday){
+if (has_crown) {
+    myHat = instance_create(victim.object.x,victim.object.y,CrownGib);
+    myHat.image_index = victim.team;
+}
+if (has_navigatorhat) {
+    myHat = instance_create(victim.object.x,victim.object.y,NavigatorHatGib);
+    myHat.image_index = victim.team;
+}
+if (has_partyhat){
     myHat = instance_create(victim.object.x,victim.object.y,PartyHat);
     myHat.image_index = victim.team;
 }
