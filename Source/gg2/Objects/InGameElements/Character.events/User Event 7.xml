@@ -17,10 +17,13 @@
 // For Infiltrators only.
 var ghost;
 ghost = instance_create(x, y, SpyGhost);
-ghost.image_index = floor(animationImage);
+ghost.image_index = 0;//floor(animationImage);
 ghost.image_xscale = image_xscale;
 ghost.associatedCharacter = id;
-ghost.cloakAlpha = cloakAlpha;
+if(stabbing)
+    ghost.cloakAlpha = 1;
+else
+    ghost.cloakAlpha = cloakAlpha;
 
 </argument>
       </arguments>
