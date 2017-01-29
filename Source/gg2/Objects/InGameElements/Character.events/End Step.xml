@@ -180,8 +180,8 @@ realnumflames = numFlames * burnDuration / maxDuration;
 
 // Decay deathmatch invulnerability if needed
 if(deathmatch_invulnerable &gt; 0)
-    deathmatch_invulnerable -= global.delta_factor;
-if(deathmatch_invulnerable &lt;= 0 and deathmatch_invulnerable != -256)
+    deathmatch_invulnerable -= global.delta_factor * deathmatch_invuln_decay;;
+if(deathmatch_invulnerable &lt;= 0)
     deathmatch_invulnerable = 0;
 
 

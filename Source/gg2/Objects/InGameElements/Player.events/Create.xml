@@ -61,6 +61,8 @@
     
     humiliated=0;
     
+    deathmatch_respawn_bypass = 0;
+    
     //Arena mode - used by server to check if the player can spawn
     canSpawn = 1;
     if instance_exists(ArenaHUD) {

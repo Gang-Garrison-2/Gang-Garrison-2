@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <include>
   <filename>tdm_mantic.png</filename>
-  <filepath>C:\Users\wareya\dev\gg2-tic\Source\gg2\Included Files\tdm_mantic.png</filepath>
+  <filepath>C:\Users\wareya\dev\gg2-tic\Source\Maps\tdm_mantic.png</filepath>
   <original>true</original>
-  <originalSize>112175</originalSize>
+  <originalSize>104747</originalSize>
   <hasContent>true</hasContent>
   <exportTo>NO_AUTO_EXPORT</exportTo>
   <otherExportDirectory/>

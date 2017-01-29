@@ -75,8 +75,7 @@ if(!taunting and !omnomnomnom)
         if ((!place_free(x, y+1) and place_free(x, y))
             or (place_meeting(x, y+1, DropdownPlatform) and !place_meeting(x, y, DropdownPlatform)))
         {
-            if(deathmatch_invulnerable == -256)
-                deathmatch_invulnerable = 30;
+            deathmatch_invuln_decay = 1;
             if(not stabbing)
             {
                 doublejumpUsed = 0;
@@ -88,8 +87,7 @@ if(!taunting and !omnomnomnom)
         }
         else if(canDoublejump and !doublejumpUsed and vspeed &gt; -jumpStrength)
         {
-            if(deathmatch_invulnerable == -256)
-                deathmatch_invulnerable = 30;
+            deathmatch_invuln_decay = 1;
             wantToJump = false;
             vspeed = -jumpStrength;
             playsound(x,y,JumpSnd);
@@ -210,7 +208,7 @@ if(spinjumping)
     {
         if(random(4) &lt; 4)
         {
-            if(sign(_last_hspeed) &gt; 0)
+            if(sign(_last_xscale) &lt; 0)
                 part_particles_create(global.jumpDustParticleSystem,bbox_right+1,bbox_bottom-4,jumpDustParticleType,1);
             else
                 part_particles_create(global.jumpDustParticleSystem,bbox_left +2,bbox_bottom-4,jumpDustParticleType,1);
@@ -242,8 +240,8 @@ repeat(global.frameskip)
     else //otherwise divide by the moveStatus's friction
         hspeed /= delta_mult_skip(frictionFactor);
 }
-if(controlling and deathmatch_invulnerable == -256)
-    deathmatch_invulnerable = 30;
+if(controlling)
+    deathmatch_invuln_decay = 1;
     
 pressedKeys = 0;
 releasedKeys = 0;
