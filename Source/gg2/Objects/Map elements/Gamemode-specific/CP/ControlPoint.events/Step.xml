@@ -234,10 +234,7 @@ if(capping &lt;= 0) {
         GameServer.syncTimer = 1; 
     }
 }
-//since CPs are not perfectly in sync,the client might be ahead of the server, so stall it
-else if floor(capping) == floor(capTime - capTime/4)-10 || floor(capping) == floor(capTime/4)-10 || floor(capping) == floor(capTime/10)-10{
-    capping -= 10;
-}
+
 </argument>
       </arguments>
     </action>
