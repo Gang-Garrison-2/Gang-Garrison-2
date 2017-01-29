@@ -27,7 +27,6 @@ timeUnscathed = min(timeUnscathed+1*global.delta_factor, 10*30);
 // Spinjumping emulation
 if(global.run_virtual_ticks)
 {
-
     if (sign(hspeed) &gt; 0) // See if we're "spinning", also mirror which side gets the boost so that the effect of spinjumping is perfectly symmetric
         _test = _last_xscale &gt; image_xscale;
     else
@@ -52,11 +51,13 @@ if (spinjumping and
     place_free(x, y-_gravity) // validity check
     and (place_free(x, y+1) or vspeed &lt; 0) // In air, or jumping
    )
-    applied_gravity -= _gravity*global.delta_factor/2;
+    applied_gravity -= _gravity;
 else
     spinjumping = false; // prevent phantom spinjump dust
 
-vspeed += applied_gravity;
+// The change in vspeed for gravity for DURATION of this frame (not the end of it!) is half the change there is by the end of it (see?)
+// See gravity comments in Begin Step for rationale.
+vspeed += applied_gravity*global.delta_factor/2;
 if(vspeed &gt; 10)
     vspeed = 10;
 
@@ -66,7 +67,8 @@ xprevious = x;
 y_previous = y;
 x_previous = x;
 
-if(!place_free(x+hspeed, y+vspeed))
+// accurate test and fallback for precision error
+if(!place_free(x+hspeed*global.delta_factor, y+vspeed*global.delta_factor) or !place_free(x+hspeed, y+vspeed))
     characterHitObstacle();
 else
 {
@@ -75,6 +77,14 @@ else
     x -= hspeed;
     y -= vspeed;
 }
+
+// Fallback
+if(place_free(x, y+1))
+    vspeed += applied_gravity*global.delta_factor/2;
+if(vspeed &gt; 10)
+    vspeed = 10;
+applied_gravity = 0;
+
 
 charUnsetSolids();
 </argument>

@@ -24,6 +24,18 @@ if (distance_to_point(xoffset+xsize/2,yoffset+ysize/2) &gt; 800)
 if(intel and intelRecharge &lt; 900)
     draw_intel_timer(intelRecharge/900, team == TEAM_RED, -8);
 
+draw_set_alpha(0.3);
+// backing halo for deathmatch-invulnerable players
+if(deathmatch_invulnerable != 0) // must be != 0
+{
+    draw_circle_color(x, y, 50, c_white, c_white, false);
+    if(deathmatch_invulnerable &gt; 0)
+        draw_circle_color(x, y, deathmatch_invulnerable/30*50.5, c_white, c_white, false);
+    else
+        draw_circle_color(x, y, 50.5, c_white, c_white, false);
+}
+draw_set_alpha(1);
+
 var xr, yr;
 xr = round(x);
 yr = round(y);

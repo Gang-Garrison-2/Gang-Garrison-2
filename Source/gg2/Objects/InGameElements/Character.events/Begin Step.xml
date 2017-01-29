@@ -13,9 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">applied_gravity = 0;
-
-// Apply afterburn
+        <argument kind="STRING">// Apply afterburn
 if (burnDuration &gt; 0)
 {
     if(hp &gt; 0)
@@ -53,7 +51,10 @@ if(player.queueJump)
 if(!taunting and !omnomnomnom)
 {
     if(!player.humiliated and (keyState | pressedKeys) &amp; $10)
+    {
         with(currentWeapon) event_user(1);
+        deathmatch_invulnerable = 0;
+    }
     if(!player.humiliated and pressedKeys &amp; $01)  {
         if (!invisible &amp;&amp; cloakAlpha == 1)
             taunting=true;
@@ -74,6 +75,8 @@ if(!taunting and !omnomnomnom)
         if ((!place_free(x, y+1) and place_free(x, y))
             or (place_meeting(x, y+1, DropdownPlatform) and !place_meeting(x, y, DropdownPlatform)))
         {
+            if(deathmatch_invulnerable == -256)
+                deathmatch_invulnerable = 30;
             if(not stabbing)
             {
                 doublejumpUsed = 0;
@@ -85,6 +88,8 @@ if(!taunting and !omnomnomnom)
         }
         else if(canDoublejump and !doublejumpUsed and vspeed &gt; -jumpStrength)
         {
+            if(deathmatch_invulnerable == -256)
+                deathmatch_invulnerable = 30;
             wantToJump = false;
             vspeed = -jumpStrength;
             playsound(x,y,JumpSnd);
@@ -99,6 +104,7 @@ if(!taunting and !omnomnomnom)
 if (!player.humiliated and ((keyState | pressedKeys) &amp; $08)
     and (!taunting or player.class == CLASS_DEMOMAN) and !omnomnomnom)
 {
+    deathmatch_invulnerable = 0;
     with(currentWeapon)
         event_user(2);
 }
@@ -108,6 +114,7 @@ if (!player.humiliated &amp;&amp; (pressedKeys &amp; $08)
     &amp;&amp; canCloak &amp;&amp; ((cloakAlpha == 1 and !cloak) or cloak)
     &amp;&amp; !intel  &amp;&amp; !taunting)
 {
+    deathmatch_invulnerable = 0;
     if(currentWeapon.readyToStab) {
         if (cloak) { // stop spies immediately picking up intel after uncloaking
             canGrabIntel = false;
@@ -145,36 +152,39 @@ default:
     frictionFactor = baseFriction;
 }
 
-if(moveStatus == 1 or moveStatus == 2 or moveStatus == 4 and global.run_virtual_ticks)
+if(moveStatus == 1 or moveStatus == 2 or moveStatus == 4)
 {
-    if !variable_local_exists("jumpFlameParticleType")
+    applied_gravity -= 0.06;
+    if(global.run_virtual_ticks)
     {
-        jumpFlameParticleType = part_type_create();
-        part_type_sprite(jumpFlameParticleType,FlameS,true,false,true);
-        part_type_alpha2(jumpFlameParticleType,1,0.3);
-        part_type_life(jumpFlameParticleType,2,5);
-        part_type_scale(jumpFlameParticleType,0.7,-0.65);
-    }
-    applied_gravity -= 0.06*global.delta_factor/2;
-    
-    if !variable_global_exists("jumpFlameParticleSystem")
-    {
-        global.jumpFlameParticleSystem = part_system_create();
-        part_system_depth(global.jumpFlameParticleSystem, 10);
-    }
-    
-    if(global.particles == PARTICLES_NORMAL)
-    {
-        if(random(1) &gt; (controlFactor+frictionFactor)/2)
+        if !variable_local_exists("jumpFlameParticleType")
         {
-            effect_create_below(ef_smoke,x-hspeed*1.2,y-vspeed*1.2+20,0,c_gray);
+            jumpFlameParticleType = part_type_create();
+            part_type_sprite(jumpFlameParticleType,FlameS,true,false,true);
+            part_type_alpha2(jumpFlameParticleType,1,0.3);
+            part_type_life(jumpFlameParticleType,2,5);
+            part_type_scale(jumpFlameParticleType,0.7,-0.65);
         }
-    }
-    if(global.particles == PARTICLES_NORMAL or global.particles == PARTICLES_ALTERNATIVE)
-    {
-        if(random(7) &lt; 5)
+        
+        if !variable_global_exists("jumpFlameParticleSystem")
         {
-            part_particles_create(global.jumpFlameParticleSystem,x,y+19,jumpFlameParticleType,1);
+            global.jumpFlameParticleSystem = part_system_create();
+            part_system_depth(global.jumpFlameParticleSystem, 10);
+        }
+        
+        if(global.particles == PARTICLES_NORMAL)
+        {
+            if(random(1) &gt; (controlFactor+frictionFactor)/2)
+            {
+                effect_create_below(ef_smoke,x-hspeed*1.2,y-vspeed*1.2+20,0,c_gray);
+            }
+        }
+        if(global.particles == PARTICLES_NORMAL or global.particles == PARTICLES_ALTERNATIVE)
+        {
+            if(random(7) &lt; 5)
+            {
+                part_particles_create(global.jumpFlameParticleSystem,x,y+19,jumpFlameParticleType,1);
+            }
         }
     }
 }
@@ -232,6 +242,8 @@ repeat(global.frameskip)
     else //otherwise divide by the moveStatus's friction
         hspeed /= delta_mult_skip(frictionFactor);
 }
+if(controlling and deathmatch_invulnerable == -256)
+    deathmatch_invulnerable = 30;
     
 pressedKeys = 0;
 releasedKeys = 0;
@@ -242,7 +254,7 @@ if burnDuration&gt;0 &amp;&amp; player.class != CLASS_PYRO and random(80) &lt;= 
 }
 
 // stop players who are moving too slowly (avoid "ice skating")
-if (abs(hspeed) &lt; 0.195 * global.delta_factor and !controlling)
+if (abs(hspeed) &lt; 0.195 * global.delta_factor and !controlling) // FIXME: why is delta factor here?
 {
     hspeed=0;
     animationImage=0;
@@ -254,10 +266,10 @@ else
 charSetSolids();
 
 // apply gravity
-if(place_free(x,y+1)) // no obstacle ground below us
+if(place_free(x,y+1) or vspeed &lt; 0) // no obstacle ground below us OR we're bound upwards
 {
     // standing on a dropdown platform
-    if (place_meeting(x, y+1, DropdownPlatform) and !place_meeting(x, y, DropdownPlatform) and vspeed &gt;= 0)
+    if ((place_meeting(x, y+1, DropdownPlatform) and !place_meeting(x, y, DropdownPlatform)) and !(keyState &amp; $02) and vspeed &gt;= 0)
     {
         onground = true;
         moveStatus = 0;
@@ -272,7 +284,8 @@ if(place_free(x,y+1)) // no obstacle ground below us
         // Since the inital frame of gravity is half what it used to be, the strength of jumping needs to change the same amount, which I did elsewhere.
         // I used the 30fps value of "initial frame of gravity", since that represents gg2's canonical jump arc.
         // This change PROBABLY makes explosive jumping slightly more powerful, because the initial strength of that cannot be tweaked without also altering mid-air arcs.
-        applied_gravity += 0.6*global.delta_factor/2;
+        // Actually, because GG2 used to not apply on the first frame after jumping, jumping velocity is slightly larger, not smaller.
+        applied_gravity += 0.6;
         
         animationImage = 1;
         onground = false;
@@ -289,7 +302,8 @@ else // obstacle ground below us
 }
 
 if (intel)
-{ 
+{
+    deathmatch_invulnerable = 0; // in case anyone ever applies this code to another gamemode
     if (global.run_virtual_ticks)
     {
         if (speed &gt; 0.195)
@@ -311,7 +325,7 @@ if (intel)
     if (cloak)
     {
         cloak=false;
-        cloakAplha=1;
+        cloakAplha=1; // FIXME: Is this typo causing a bug? Will fixing the typo cause a bug?
     }
     if (!omnomnomnom) // Do not recharge intel timer if eating
         intelRecharge = min(INTEL_MAX_TIMER, // Cap timer charge at the intel timer's length (bandwidth)
@@ -326,6 +340,7 @@ else
 
 if (player.humiliated)
 {
+    deathmatch_invulnerable = 0;
     if (!place_free(x,y+1) &amp;&amp; hspeed == 0)
         animationImage = 0;
     else if place_free(x,y+1)
@@ -427,7 +442,10 @@ var zone;
 zone = collision_point(x,y,CaptureZone,0,0);
 
 if(zone &gt;= 0 and !cloak and cloakAlpha == 1)
+{
     cappingPoint = zone.cp;
+    deathmatch_invulnerable = 0; // in case anyone ever applies this code to another gamemode
+}
 else
     cappingPoint = noone;
 

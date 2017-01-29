@@ -57,15 +57,11 @@ if(vspeed == 0 and (!place_meeting(x, y+1, DropdownPlatform) or place_meeting(x,
 xprevious = x;
 yprevious = y;
 
-// things to do if we're on the ground
-if(!place_free(x,y+1))
+// things to do if we're on the ground (or a dropdown platform)
+if(!place_free(x,y+1) or (place_meeting(x, y+1, DropdownPlatform) and !place_meeting(x, y, DropdownPlatform)) and !(keyState &amp; $02))
 {
     if(vspeed &gt;= 0) // only if we have no vertical inertia, reset to walking-type state
         moveStatus = 0;
-}
-else
-{
-    vspeed += applied_gravity; // We apply gravity twice: once before, and once after, moving. See comments before "begin step"'s gravity for the rationale.
 }
 
 charUnsetSolids();
@@ -181,6 +177,13 @@ if (player == global.myself)
 }
 
 realnumflames = numFlames * burnDuration / maxDuration;
+
+// Decay deathmatch invulnerability if needed
+if(deathmatch_invulnerable &gt; 0)
+    deathmatch_invulnerable -= global.delta_factor;
+if(deathmatch_invulnerable &lt;= 0 and deathmatch_invulnerable != -256)
+    deathmatch_invulnerable = 0;
+
 
 </argument>
       </arguments>
