@@ -29,7 +29,6 @@ else // 30fps
     global.frameskip = 2;
     room_speed = 30;
 }
-//room_speed = 10;
 
 </argument>
       </arguments>
