@@ -14,4 +14,5 @@
   <resource name="NavigatorHatGib" type="RESOURCE"/>
   <resource name="XmasHat" type="RESOURCE"/>
   <resource name="Shell" type="RESOURCE"/>
+  <resource name="HatGibBase" type="RESOURCE"/>
 </resources>
