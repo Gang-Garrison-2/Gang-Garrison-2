@@ -239,15 +239,15 @@ with(victim.object) {
     }
 }
 
-if (has_crown) {
+if (victim.object.has_crown) {
     myHat = instance_create(victim.object.x,victim.object.y,CrownGib);
     myHat.image_index = victim.team;
 }
-if (has_navigatorhat) {
+if (victim.object.has_navigatorhat) {
     myHat = instance_create(victim.object.x,victim.object.y,NavigatorHatGib);
     myHat.image_index = victim.team;
 }
-if (has_partyhat){
+if (victim.object.has_partyhat){
     myHat = instance_create(victim.object.x,victim.object.y,PartyHat);
     myHat.image_index = victim.team;
 }
