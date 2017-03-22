@@ -54,12 +54,14 @@ if(global.updateType == FULL_UPDATE){
             break;
         case CLASS_SNIPER:
             currentWeapon.t = read_ubyte(global.deserializeBuffer);
+            if(currentWeapon.t) zoomed = true; // Quick hack
             break;
         default:
             read_ubyte(global.deserializeBuffer)
         }
-        alarm[1]=read_short(global.deserializeBuffer)/global.delta_factor; 
-        if alarm[1] != 0 canGrabIntel = false;
+        alarm[1] = read_short(global.deserializeBuffer)/global.delta_factor; 
+        if (alarm[1] != 0)
+            canGrabIntel = false;
         intel = read_ubyte(global.deserializeBuffer);
         intelRecharge = read_short(global.deserializeBuffer);
         with(currentWeapon) {

@@ -57,8 +57,12 @@ if(vspeed == 0 and (!place_meeting(x, y+1, DropdownPlatform) or place_meeting(x,
 xprevious = x;
 yprevious = y;
 
-if(!place_free(x,y+1) and vspeed &gt;= 0)
-    moveStatus = 0;
+// things to do if we're on the ground (or a dropdown platform)
+if(!place_free(x,y+1) or (place_meeting(x, y+1, DropdownPlatform) and !place_meeting(x, y, DropdownPlatform)) and !(keyState &amp; $02))
+{
+    if(vspeed &gt;= 0) // only if we have no vertical inertia, reset to walking-type state
+        moveStatus = 0;
+}
 
 charUnsetSolids();
 
@@ -173,6 +177,13 @@ if (player == global.myself)
 }
 
 realnumflames = numFlames * burnDuration / maxDuration;
+
+// Decay deathmatch invulnerability if needed
+if(deathmatch_invulnerable &gt; 0)
+    deathmatch_invulnerable -= global.delta_factor * deathmatch_invuln_decay;;
+if(deathmatch_invulnerable &lt;= 0)
+    deathmatch_invulnerable = 0;
+
 
 </argument>
       </arguments>

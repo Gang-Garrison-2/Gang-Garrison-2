@@ -49,10 +49,16 @@
     }
     
     player.object=-1;
-    if (place_meeting(x,y,SpawnRoom))
+    if (place_meeting(x,y,SpawnRoom) or deathmatch_invulnerable != 0)
+    {
         player.alarm[5] = 1;
-    else 
+        player.deathmatch_respawn_bypass = deathmatch_invulnerable;
+    }
+    else
+    {
         player.alarm[5] = global.Server_Respawntime / global.delta_factor;
+        player.deathmatch_respawn_bypass = 0;
+    }
     
     //part type destroy
     if(variable_local_exists("jumpFlameParticleType"))

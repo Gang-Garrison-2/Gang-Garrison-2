@@ -21,6 +21,10 @@
 if(global.updateType == QUICK_UPDATE or global.updateType == FULL_UPDATE) {
     write_ubyte(global.serializeBuffer, (built != false)*$80 + min(127,hp));
 }
+if(!built and global.updateType == FULL_UPDATE)
+    write_ubyte(global.serializeBuffer, vspeed);
+
+
 </argument>
       </arguments>
     </action>

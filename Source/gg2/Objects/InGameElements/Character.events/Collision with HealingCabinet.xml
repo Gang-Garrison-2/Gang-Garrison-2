@@ -16,11 +16,16 @@
         <argument kind="STRING">if (!global.mapchanging) {
     if ((hp &lt; maxHp or nutsNBolts &lt; 100 or !canEat) and other.heal)
     {
-        playsound(x,y,CbntHealSnd);
-        hp = maxHp;
-        nutsNBolts = maxNutsNBolts;
-        alarm[6] = 0
-        canEat = true;
+        if(instance_exists(TeamDeathmatchHUD))
+            hp += global.delta_factor/30*10; // 10 hp per second
+        else
+        {
+            playsound(x,y,CbntHealSnd);
+            hp = maxHp;
+            nutsNBolts = maxNutsNBolts;
+            alarm[6] = 0;
+            canEat = true; // FIXME: redundant with resetting alarm 6?
+        }
     }
     if (burnIntensity &gt; 0 or burnDuration &gt; 0)
     {

@@ -21,8 +21,11 @@
     canDoublejump = 0;
     canCloak = 0;
     canBuild = 0;
-    jumpStrength = 8;
+    jumpStrength = 8+(0.6/2); // reduce the part of the initial frame of gravity that we don't apply anymore (not framerate dependent, meant to match old 30fps arc)
     capStrength = 1;
+    
+    // for true framerate-independent jumping arcs
+    applied_gravity = 0;
     
     // 
     hp = maxHp;
@@ -109,7 +112,6 @@
     
     // spinjumping state vars
     _last_xscale = image_xscale;
-    _last_hspeed = 0;
     spinjumping = false;
 
     //kill assist/finish off addition
@@ -194,6 +196,21 @@
     has_partyhat     = false;
     has_crown        = false;
     has_navigatorhat = false;
+
+    // Temporary invuln on spawn for deathmatch players
+    if(instance_exists(TeamDeathmatchHUD))
+    {
+        if(player.deathmatch_respawn_bypass != 0)
+            deathmatch_invulnerable = player.deathmatch_respawn_bypass;
+        else
+            deathmatch_invulnerable = 30; // invulnerable indefinitely until they do something
+        deathmatch_invuln_decay = 0.2; // 5x the normal invuln period when you first spawn
+    }
+    else
+    {
+        deathmatch_invulnerable = 0;
+        deathmatch_invuln_decay = 0;
+    }
     
     // THIS IS A TRUCK LOAD OF GARBAGE CODE THAT SHOULD BE REPLACED ASAP
     

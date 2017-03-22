@@ -27,6 +27,13 @@ if(global.updateType == QUICK_UPDATE or global.updateType == FULL_UPDATE) {
     tbyte = read_ubyte(global.deserializeBuffer);
     built = (tbyte &amp; $80) != false;
     hp = tbyte &amp; $7F;
+    if(!built and global.updateType == FULL_UPDATE)
+    {
+        receiveCompleteMessage(global.serverSocket, 1, global.deserializeBuffer);
+        vspeed = read_ubyte(global.deserializeBuffer);
+    }
+    else
+        vspeed = 0;
 }
 </argument>
       </arguments>
