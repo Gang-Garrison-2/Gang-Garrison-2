@@ -11,6 +11,7 @@ with Player humiliated = 0;
 with Sentry instance_destroy();
 with SentryGibs instance_destroy();
     
-if(global.ingameMusic and (AudioControl.currentSong != global.IngameMusic)) {
+if((global.music == MUSIC_BOTH or global.music == MUSIC_INGAME_ONLY)
+    and (AudioControl.currentSong != global.IngameMusic)) {
     AudioControlPlaySong(global.IngameMusic, true);
 }

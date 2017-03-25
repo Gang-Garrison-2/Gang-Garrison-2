@@ -13,18 +13,22 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if(other.team != team) {
-    /* FALL OFF
-    if (distance_to_point(originx,originy)&lt;=(maxdist/2)){
-                hitDamage = ((0.25*baseDamage)*((0.5*maxdist - distance_to_point(originx,originy))/(0.5*maxdist)))+baseDamage;
-                }
-                else hitDamage = (((maxdist - distance_to_point(originx,originy))/(maxdist/2))*(0.75*baseDamage))+(0.25*baseDamage);
-                */
-    other.hp -= hitDamage;
+        <argument kind="STRING">gunSetSolids();
+if (!place_free(x, y)) 
+{
+    instance_destroy();
+    gunUnsetSolids();
+    exit;
+}
+gunUnsetSolids();
+
+if(other.team != team)
+{
+    damageSentry(ownerPlayer, other.id, hitDamage);
     other.lastDamageDealer = ownerPlayer;
     other.lastDamageSource = weapon;
     instance_destroy();
-    }
+}
 </argument>
       </arguments>
     </action>

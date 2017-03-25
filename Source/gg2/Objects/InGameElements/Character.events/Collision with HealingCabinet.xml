@@ -14,7 +14,7 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">if (!global.mapchanging) {
-    if (hp &lt; maxHp or nutsNBolts &lt; 100 or !canEat)
+    if ((hp &lt; maxHp or nutsNBolts &lt; 100 or !canEat) and other.heal)
     {
         playsound(x,y,CbntHealSnd);
         hp = maxHp;
@@ -30,7 +30,7 @@
         afterburnSource = -1;
     }
     //ammo stuffs
-    if instance_exists(currentWeapon) {
+    if (other.refill) {
         if(currentWeapon.ammoCount &lt; currentWeapon.maxAmmo) {
             switch(currentWeapon.object_index) {
             case Medigun:
@@ -51,9 +51,23 @@
             case Shotgun:
             case Revolver:
             case Medigun:
-                currentWeapon.alarm[5] = -1;
+                with(currentWeapon)
+                {
+                    if (alarm[5] &gt; 0)
+                    {
+                        // Stop the animation
+                        event_perform(ev_alarm, 5);
+                    }
+                    alarm[5] = -1;
+                }
                 break;
             }
+        }
+    }
+    if (other.uber and currentWeapon.object_index == Medigun) {
+        if (global.isHost and !currentWeapon.uberReady and !currentWeapon.ubering) {
+            sendEventUberReady(player);
+            doEventUberReady(player);
         }
     }
 }

@@ -15,16 +15,16 @@
       <arguments>
         <argument kind="STRING">if(owner.zoomed and readyToShoot)
 {
-    t += 1;
-    if t &gt; chargeTime t = chargeTime;
+    t += 1 * global.delta_factor;
+    if (t &gt; chargeTime)
+        t = chargeTime;
 }
 else
     t = 0;
 if(!owner.zoomed)
-    hitDamage = unscopedDamage
+    hitDamage = unscopedDamage;
 else
-    hitDamage = baseDamage + owner.zoomed*floor(sqrt(t*(sqr(maxDamage-baseDamage)/chargeTime)));
-//hitDamage = 35 + owner.zoomed*floor(sqrt(t*125/6));  
+    hitDamage = baseDamage + floor(sqrt(t/chargeTime)*(maxDamage-baseDamage));
 </argument>
       </arguments>
     </action>

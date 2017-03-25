@@ -1,15 +1,27 @@
 {
-    sprite_assign(ScoutTauntS, ScoutTauntSX);
-    sprite_assign(PyroTauntS, PyroTauntSX);
-    sprite_assign(SoldierTauntS, SoldierTauntSX);
-    sprite_assign(HeavyTauntS, HeavyTauntSX);
-    sprite_assign(DemoTauntS, DemoTauntSX);
-    sprite_assign(MedicTauntS, MedicTauntSX);
-    sprite_assign(EngiTauntS, EngiTauntSX);
-    sprite_assign(SpyTauntS, SpyTauntSX);
-    sprite_assign(SniperTauntS, SniperTauntSX);
-    sprite_assign(QuoteTauntS, QuoteTauntSX);
-    sprite_assign(QuoteRedS, QuoteRedSX);
+    sprite_assign(ScoutRedTauntS, ScoutRedTauntSX);
+    sprite_assign(PyroRedTauntS, PyroRedTauntSX);
+    sprite_assign(SoldierRedTauntS, SoldierRedTauntSX);
+    sprite_assign(HeavyRedTauntS, HeavyRedTauntSX);
+    sprite_assign(DemomanRedTauntS, DemomanRedTauntSX);
+    sprite_assign(MedicRedTauntS, MedicRedTauntSX);
+    sprite_assign(EngineerRedTauntS, EngineerRedTauntSX);
+    sprite_assign(SpyRedTauntS, SpyRedTauntSX);
+    sprite_assign(SniperRedTauntS, SniperRedTauntSX);
+    sprite_assign(QuerlyRedTauntS, QuerlyRedTauntSX);
+    
+    sprite_assign(ScoutBlueTauntS, ScoutBlueTauntSX);
+    sprite_assign(PyroBlueTauntS, PyroBlueTauntSX);
+    sprite_assign(SoldierBlueTauntS, SoldierBlueTauntSX);
+    sprite_assign(HeavyBlueTauntS, HeavyBlueTauntSX);
+    sprite_assign(DemomanBlueTauntS, DemomanBlueTauntSX);
+    sprite_assign(MedicBlueTauntS, MedicBlueTauntSX);
+    sprite_assign(EngineerBlueTauntS, EngineerBlueTauntSX);
+    sprite_assign(SpyBlueTauntS, SpyBlueTauntSX);
+    sprite_assign(SniperBlueTauntS, SniperBlueTauntSX);
+    sprite_assign(QuerlyBlueTauntS, QuerlyBlueTauntSX);
+    
+    sprite_assign(QuerlyRedS, QuerlyRedSX);
     sprite_assign(ScoutRedS, ScoutRedSX);
     sprite_assign(PyroRedS, PyroRedSX);
     sprite_assign(HeavyRedS, HeavyRedSX);
@@ -28,11 +40,24 @@
     sprite_assign(SpyBlueS, SpyBlueSX);
     sprite_assign(DemomanBlueS, DemomanBlueSX);
     sprite_assign(SniperBlueS, SniperBlueSX);
-    sprite_assign(CurlyBlueS, CurlyBlueSX);
+    sprite_assign(QuerlyBlueS, QuerlyBlueSX);
     sprite_assign(BackstabTorsoRedS, BackstabTorsoRedSX);
     sprite_assign(BackstabTorsoBlueS, BackstabTorsoBlueSX);
-    sprite_assign(OmnomnomnomS, OmnomnomnomSX);
+    sprite_assign(HeavyRedOmnomnomnomS, HeavyRedOmnomnomnomSX);
+    sprite_assign(HeavyBlueOmnomnomnomS, HeavyBlueOmnomnomnomSX);
     sprite_assign(BloodDropS, BloodDropSX);
-    sprite_assign(SniperCrouchRedS, SniperCrouchRedSX);
-    sprite_assign(SniperCrouchBlueS, SniperCrouchBlueSX);
+    sprite_assign(SniperRedCrouchS, SniperRedCrouchSX);
+    sprite_assign(SniperBlueCrouchS, SniperBlueCrouchSX);
+    
+    sprite_assign(ScoutRedDeadS, ScoutRedDeadSX);
+    sprite_assign(HeavyRedDeadS, HeavyRedDeadSX);
+    sprite_assign(EngineerRedDeadS, EngineerRedDeadSX);
+    sprite_assign(SoldierRedDeadS, SoldierRedDeadSX);
+    sprite_assign(SniperRedDeadS, SniperRedDeadSX);
+    
+    sprite_assign(ScoutBlueDeadS, ScoutBlueDeadSX);
+    sprite_assign(HeavyBlueDeadS, HeavyBlueDeadSX);
+    sprite_assign(EngineerBlueDeadS, EngineerBlueDeadSX);
+    sprite_assign(SoldierBlueDeadS, SoldierBlueDeadSX);
+    sprite_assign(SniperBlueDeadS, SniperBlueDeadSX);
 }

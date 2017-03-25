@@ -13,13 +13,16 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">{
-    xoffset += sprite_xoffset;
-    yoffset += sprite_yoffset;
-    readyToShoot = false;
-    justShot = false;
-    alarm[0] = refireTime;
-}
+        <argument kind="STRING">xoffset += sprite_xoffset;
+yoffset += sprite_yoffset;
+readyToShoot = false;
+justShot = false;
+alarm[0] = refireTime;
+
+owner = global.paramOwner;
+ownerPlayer = global.paramOwner.player;
+// 'GW' reward - *G*olden *W*eapon
+golden = hasClassReward(ownerPlayer, 'GW');
 </argument>
       </arguments>
     </action>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="initRewards" type="RESOURCE"/>
+  <resource name="rewardAuthStart" type="RESOURCE"/>
+  <resource name="rewardAuthSuccess" type="RESOURCE"/>
+  <resource name="parseRewards" type="RESOURCE"/>
+  <resource name="unparseRewards" type="RESOURCE"/>
+  <resource name="hasClassReward" type="RESOURCE"/>
+  <resource name="hasReward" type="RESOURCE"/>
+  <resource name="parseBadges" type="RESOURCE"/>
+  <resource name="rewardCreateChallenge" type="RESOURCE"/>
+  <resource name="draw_sprite_ext_overlay" type="RESOURCE"/>
+  <resource name="draw_name_badges" type="RESOURCE"/>
+  <resource name="name_width_badges" type="RESOURCE"/>
+</resources>

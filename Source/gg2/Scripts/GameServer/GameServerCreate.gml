@@ -22,12 +22,9 @@
     global.tcpListener = -1;
     global.serverSocket = -1;
     
-    global.currentMapIndex = 0;
-    global.currentMapArea = 1;
-    
     var i;
     serverId = buffer_create();
-    for(i=0;i<16;i+=1)
+    for (i = 0; i < 16; i += 1)
         write_ubyte(serverId, irandom(255));
     
     serverbalance=0;
@@ -42,6 +39,12 @@
     serverPlayer.name = global.playerName;
     ds_list_add(global.players, serverPlayer);
 
+    for (a=0; a<10; a+=1)
+    {
+        if (global.classlimits[a] >= global.playerLimit)
+            global.classlimits[a] = 255;
+    }
+    
     global.tcpListener = tcp_listen(global.hostingPort);
     if(socket_has_error(global.tcpListener))
     {
@@ -72,25 +75,84 @@
 
     global.playerID = 0;
     global.myself = serverPlayer;
-    if(HAXXY_PUBLIC_KEY==md5(global.haxxyKey))
-        global.myself.isHaxxyWinner = true;
+    if(global.rewardKey != "" and global.rewardId != "")
+    {
+        var challenge;
+        challenge = rewardCreateChallenge();
+        rewardAuthStart(serverPlayer, hmac_md5_bin(global.rewardKey, challenge), challenge, false, global.rewardId);
+    }
+    if(global.queueJumping)
+        serverPlayer.queueJump = global.queueJumping;
+    
     instance_create(0,0,PlayerControl);
-        
-    global.currentMap = ds_list_find_value(global.map_rotation, global.currentMapIndex);
-    if(file_exists("Maps/" + global.currentMap + ".png")) { // if this is an external map
-        // get the md5 and url for the map
-        global.currentMapMD5 = CustomMapGetMapMD5(global.currentMap);
-        room_goto_fix(CustomMapRoom);
-    } else { // internal map, so at the very least, MD5 must be blank
-        global.currentMapMD5 = "";
-        if(gotoInternalMapRoom(global.currentMap) != 0) {
-            show_message("Error:#Map " + global.currentMap + " is not in maps folder, and it is not a valid internal map.#Exiting.");
-            game_end();
+
+    var map, i;
+    if (global.shuffleRotation) {
+        ds_list_shuffle(global.map_rotation);
+        map = ds_list_find_value(global.map_rotation, 0);
+        // "Shuffle, don't make arena map first" chosen
+        if (global.shuffleRotation == 1) {
+            // if first map is arena
+            if (string_copy(map, 0, 6) == 'arena_') {
+                // try to find something else
+                for (i = 0; i < ds_list_size(global.map_rotation); i += 1) {
+                    map = ds_list_find_value(global.map_rotation, i);
+                    // swap with first map
+                    if (string_copy(map, 0, 6) != 'arena_') {
+                        ds_list_replace(global.map_rotation, i, ds_list_find_value(global.map_rotation, 0));
+                        ds_list_replace(global.map_rotation, 0, map);
+                    }
+                }
+            }
         }
     }
+
+    currentMapIndex = -1;
+    global.currentMapArea = 1;
+    
+    if(global.launchMap == "")
+        serverGotoMap(nextMapInRotation());
+    else
+        serverGotoMap(global.launchMap);
     
     global.joinedServerName = global.serverName; // so no errors of unknown variable occur when you create a server
     global.mapchanging = false; 
     
     GameServerDefineCommands();
+    
+    // load server-sent plugins, if any
+    if (string_length(global.serverPluginList))
+    {
+        // Get hashes of latest versions for plugin list
+        pluginList = getpluginhashes(global.serverPluginList);
+        if (pluginList == 'failure')
+        {
+            show_message("Error ocurred getting server-sent plugin hashes.");
+            game_end();
+            exit;
+        }
+        if (string_length(pluginList) > 65535)
+        {
+            show_message("Error: you are requiring too many server-sent plugins.");
+            game_end();
+            exit;
+        }
+
+        // Load plugins
+        if (!loadserverplugins(pluginList))
+        {
+            show_message("Error ocurred loading server-sent plugins.");
+            game_end();
+            exit;
+        }
+        global.serverPluginsInUse = true;
+    }
+    else
+    {
+        pluginList = '';
+    }
+    
+    // Disable vsync to minimize framerate drops which would be noticed as lag issues by all players.
+    // "vsync makes the server desync" --Arctic
+    set_synchronization(false);
 }

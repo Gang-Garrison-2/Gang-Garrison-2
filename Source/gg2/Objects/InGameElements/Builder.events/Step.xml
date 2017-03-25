@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="STEP" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if (!visible) exit;
+
+var i, button, xOfsset, yOffset, ySize, xSize;
+xOffset = view_xview[0] + startX[0];
+ySize = view_hview[0];
+yOffset = view_yview[0] + ySize;
+xSize = view_wview[0];
+canClick = true;
+tooltipIdx = -1;
+
+if (instance_exists(MenuController) || mouse_x &gt; view_xview[0]+view_wview[0] || mouse_x &lt; view_xview[0] || mouse_y &gt; view_yview[0]+view_hview[0] || mouse_y &lt; view_yview[0]) canClick = false;
+else {
+    if (keyboard_check(vk_left)) {
+        view_xview[0] -= moveSpeed*global.delta_factor;
+        event_user(1);
+    } else if (keyboard_check(vk_right)) {
+        view_xview[0] += moveSpeed*global.delta_factor;
+        event_user(1);
+    } 
+    if (keyboard_check(vk_up)) {
+        view_yview[0] -= moveSpeed*global.delta_factor;
+        event_user(1);
+    } else if (keyboard_check(vk_down)) {
+        view_yview[0] += moveSpeed*global.delta_factor;
+        event_user(1);
+    }
+    
+    if (setOffsets &amp;&amp; layerIndex &lt; 7) {
+        if (background_visible[layerIndex]) {
+            selected = -1;
+            mirrored = -1;
+            if (dragging) {
+                ParallaxController.background_xfactor[layerIndex] = max(0, min(10, ParallaxController.background_xfactor[layerIndex]-(holdX-mouse_x)/100));
+                ParallaxController.background_yfactor[layerIndex] = max(0, min(10, ParallaxController.background_yfactor[layerIndex]+(holdY-mouse_y)/100));
+                holdX = mouse_x;
+                holdY = mouse_y;
+                if (!mouse_check_button(mb_left))
+                    dragging = false;
+            } else if (mouse_check_button_pressed(mb_left)) {
+                holdX = mouse_x;
+                holdY = mouse_y;
+                dragging = true;
+            } else if (mouse_check_button_pressed(mb_right)) {
+                dragging = false;
+                setOffsets = false;
+            }
+        } else
+            dragging = false;
+    } else
+        dragging = false;
+}
+
+if (expanded) {
+    expandIdx = max(0, expandIdx - 0.05*global.delta_factor);
+    
+    if (expandIdx != 0 &amp;&amp; expanded) {
+        height = items*buttonHeight * sqrt(1-expandIdx*0.93);
+        dragHeight = height;
+    } else height = items*buttonHeight;
+    
+    if (holdHeader[0]) {
+        if (toggleHeader &amp;&amp; (abs(holdX-mouse_x) &gt; 3 || abs(holdY-mouse_y) &gt; 3)) toggleHeader = false;
+        else if (!toggleHeader) {
+            startX[0] += mouse_x-holdX;
+            startX[0] = min(xSize-headerWidth, max(0, startX[0]));
+            holdX = mouse_x;
+            
+            dragHeight -= mouse_y-holdY;
+            holdY = mouse_y;
+            dragHeight = min(ySize, max(buttonHeight, dragHeight));
+            items = min(ceil(dragHeight/buttonHeight), ds_list_size(global.buttons));
+            height = items*buttonHeight;
+        }
+        
+        if (!mouse_check_button(mb_left)) {
+            holdHeader[0] = false;
+            if (toggleHeader) {
+                expanded = !expanded;
+                oldItems = items;
+            }
+        }
+    } else if (!holdHeader[1] &amp;&amp; !holdHeader[2]) {
+        dragHeight = max(height, dragHeight - max(2, (dragHeight-height)/16)*global.delta_factor);
+    
+        if (mouse_x &gt; xOffset &amp;&amp; mouse_x &lt; xOffset+buttonWidth) {
+            if (mouse_y &gt; yOffset-dragHeight-buttonHeight &amp;&amp; mouse_y &lt; yOffset-dragHeight) {
+                canClick = false;
+                if (mouse_check_button_pressed(mb_left)) {
+                    holdHeader[0] = true;
+                    toggleHeader = true;
+                    holdX = mouse_x;
+                    holdY = mouse_y;
+                    canClick = false;
+                }
+            } else if (mouse_y &gt; yOffset-height) {
+                canClick = false;
+                if (mouse_check_button_pressed(mb_left)) {
+                    button = items - 1 - floor((yOffset-mouse_y)/height*items) + scrollIndex;
+                    if (!buttons[button, TOGGLE]) {
+                        execute_string(ds_map_find_value(ds_list_find_value(global.buttons, button), "code"), true);
+                    } else {
+                        buttons[button, TOGGLED] = execute_string(ds_map_find_value(ds_list_find_value(global.buttons, button), "code"), !buttons[button, TOGGLED]);
+                    }
+                }
+            }
+        } else if (mouse_x &gt; xOffset+buttonWidth &amp;&amp; mouse_x &lt; xOffset+headerWidth) {
+            if (mouse_y &gt; yOffset-height) {
+                if (mouse_check_button(mb_left)) scrollIndex = floor((1-(yOffset-mouse_y)/height)*(ds_list_size(global.buttons)-items));
+                canClick = false;
+            }
+        }
+    }
+    
+    if (!canClick) {
+        if (mouse_wheel_up()) scrollIndex -= 1;
+        else if (mouse_wheel_down()) scrollIndex += 1;
+    }
+    scrollIndex = max(0, min(ds_list_size(global.buttons)-floor(height/buttonHeight), scrollIndex));
+} else {
+    expandIdx = min(1, expandIdx + 0.05*global.delta_factor);
+    height *= sqrt(1-expandIdx*0.93);
+    dragHeight = height;
+    items = min(ds_list_size(global.buttons), ceil(height/buttonHeight));
+    
+    if (mouse_x &gt; xOffset &amp;&amp; mouse_x &lt; xOffset+buttonWidth) {
+        if (mouse_y &gt; yOffset-dragHeight-buttonHeight &amp;&amp; mouse_y &lt; yOffset-dragHeight) {
+            if (mouse_check_button_pressed(mb_left)) {
+                expanded = true;
+                items = oldItems;
+                canClick = false;
+            }
+        }
+    }
+}
+
+// Not hovering over the button menu
+if (canClick &amp;&amp; !holdHeader[0] &amp;&amp; !holdHeader[2]) {
+    xOffset = view_xview[0] + startX[1];
+    yOffset = view_yview[0] + startY[1];
+    
+    if (holdHeader[1]) {
+        startX[1] += mouse_x-holdX;
+        startX[1] = min(xSize-entityButtonSize*vItems-1, max(1, startX[1]));
+        holdX = mouse_x;
+        
+        startY[1] += mouse_y-holdY;
+        startY[1] = min(ySize-2*entityButtonSize-1, max(0, startY[1]));
+        holdY = mouse_y;
+        
+        if (!mouse_check_button(mb_left)) holdHeader[1] = false;
+    } else if (mouse_x &gt; xOffset &amp;&amp; mouse_x &lt; xOffset+entityButtonSize*vItems) {
+        if (mouse_y &gt; yOffset+buttonHeight &amp;&amp; mouse_y &lt; yOffset+buttonHeight+entityButtonSize*ceil(entityButtonCount/vItems)) {
+            i = floor((mouse_x-xOffset)/entityButtonSize) + floor((mouse_y-yOffset-buttonHeight)/entityButtonSize)*vItems;
+            canClick = false;
+            if (i &lt; entityButtonCount) {
+                tooltipIdx = i;
+                if (mouse_check_button_pressed(mb_left)) {
+                    if (selected != i) {
+                        selected = i;
+                        event_user(2);
+                    }
+                } else if (mouse_check_button_pressed(mb_right)) {
+                    if (selected != i) {
+                        selected = i;
+                        event_user(2);
+                    }
+                    showPropertyMenu(selectedProperties, newProperties);
+                    event_user(3);
+                }
+            }
+        } else if (mouse_y &gt; yOffset &amp;&amp; mouse_y &lt; yOffset+buttonHeight) {
+            canClick = false;
+            if (mouse_check_button_pressed(mb_left)) {
+                holdHeader[1] = true;
+                holdX = mouse_x;
+                holdY = mouse_y;
+            }
+        }
+    }
+}
+
+// Not hovering above the button menu or the entity menu
+if (canClick &amp;&amp; !holdHeader[0] &amp;&amp; !holdHeader[1]) {
+    xOffset = view_xview[0] + startX[2];
+    yOffset = view_yview[0] + startY[2];
+    
+    if (holdHeader[2]) {
+        canClick = false;
+        startX[2] += mouse_x-holdX;
+        startX[2] = min(xSize-layerWidth-1, max(1, startX[2]));
+        holdX = mouse_x;
+        
+        startY[2] += mouse_y-holdY;
+        startY[2] = min(ySize-layerHeight-buttonHeight-1, max(0, startY[2]));
+        holdY = mouse_y;
+        
+        if (!mouse_check_button(mb_left)) holdHeader[2] = false;
+    } else if (mouse_x &gt; xOffset &amp;&amp; mouse_x &lt; xOffset+layerWidth) {
+        if (mouse_x &lt; xOffset+23) {
+            if (mouse_y &gt; yOffset+buttonHeight+3 &amp;&amp;  mouse_y &lt; yOffset+buttonHeight+23) {
+                canClick = false;
+                if (mouse_check_button_pressed(mb_left) &amp;&amp; layerIndex&gt;0) // up
+                    layerIndex-=1;
+            } else if (mouse_y &gt; yOffset+buttonHeight-23+layerHeight &amp;&amp; mouse_y &lt; yOffset+buttonHeight-3+layerHeight) {
+                canClick = false;
+                if (mouse_check_button_pressed(mb_left) &amp;&amp; layerIndex&lt;8) // down
+                    layerIndex+=1;
+            }          
+        } else if (mouse_y &gt; yOffset+buttonHeight-23+layerHeight &amp;&amp; mouse_y &lt; yOffset+buttonHeight-3+layerHeight) {
+             if (mouse_x &gt; xOffset+27 &amp;&amp; mouse_x &lt; xOffset+90) {
+                canClick = false;
+                if (mouse_check_button_pressed(mb_left)) {  // Clear
+                    if (layerIndex == 8 &amp;&amp; instance_exists(ParallaxController)) {
+                        if (ParallaxController.foreground != -1) {
+                            background_delete(ParallaxController.foreground);
+                            ds_map_delete(Builder.metadata, "bg_foreground");
+                            ParallaxController.foreground = -1;
+                        }
+                    } else if (layerIndex != 7 &amp;&amp; ds_map_find_value(global.resources, "bg_layer" + string(layerIndex)) &gt; 0) {
+                        background_delete(ds_map_find_value(global.resources, "bg_layer" + string(layerIndex)));
+                        ds_map_delete(global.resources, "bg_layer" + string(layerIndex));
+                        ds_map_delete(Builder.metadata, "bg_layer" + string(layerIndex));
+                        background_visible[layerIndex] = 0;
+                    }
+                }
+             } else if (mouse_x &gt; xOffset+97 &amp;&amp; mouse_x &lt; xOffset+157) {
+                canClick = false;
+                if (mouse_check_button_pressed(mb_left)) { // Offsets
+                    // Save all offsets if we were editting them
+                    if (setOffsets &amp;&amp; instance_exists(ParallaxController)) {
+                        for(i=0;i&lt;7;i+=1){
+                            if (background_visible[i]) {
+                                if (is_string(ds_map_find_value(Builder.metadata, "layer" + string(i) + "xfactor")))
+                                    ds_map_replace(Builder.metadata, "layer" + string(i) + "xfactor", string(ParallaxController.background_xfactor[i]));
+                                else
+                                    ds_map_add(Builder.metadata, "layer" + string(i) + "xfactor", string(ParallaxController.background_xfactor[i]));
+                                if (is_string(ds_map_find_value(Builder.metadata, "layer" + string(i) + "yfactor")))
+                                    ds_map_replace(Builder.metadata, "layer" + string(i) + "yfactor", string(ParallaxController.background_yfactor[i]));
+                                else
+                                    ds_map_add(Builder.metadata, "layer" + string(i) + "yfactor", string(ParallaxController.background_yfactor[i]));
+                            }
+                        }                        
+                    }
+                    setOffsets = !setOffsets;
+                }
+             }
+        } else if (mouse_y &gt; yOffset &amp;&amp; mouse_y &lt; yOffset+buttonHeight) {
+            canClick = false;
+            if (mouse_check_button_pressed(mb_left)) {
+                holdHeader[2] = true;
+                holdX = mouse_x;
+                holdY = mouse_y;
+            }
+        } else if (mouse_y &lt; yOffset+buttonHeight+layerHeight &amp;&amp; mouse_y &gt; yOffset+buttonHeight) {
+            canClick = false;
+            if (mouse_check_button_pressed(mb_left)) { // new resource
+                var resource;
+                resource = get_open_filename("Resource (PNG, GIF)|*.png;*.gif;","");
+                if (resource == "")
+                    break;
+                if (layerIndex == 8) {
+                    ds_map_delete(Builder.metadata, "bg_foreground");
+                    ds_map_add(Builder.metadata, "bg_foreground", resourceToString(resource));
+                } else if (layerIndex == 7) {
+                    Builder.mapBG = resource;
+                    background_replace(BuilderBGB, resource, false, false);
+                    background_xscale[7] = 6;
+                    background_yscale[7] = 6;
+                } else {
+                    ds_map_delete(Builder.metadata, "bg_layer" + string(layerIndex));
+                    ds_map_add(Builder.metadata, "bg_layer"+string(layerIndex), resourceToString(resource));
+                }
+                loadMetadata(Builder.metadata, true);
+            }
+            
+            if (mouse_wheel_up() &amp;&amp; layerIndex&gt;0) layerIndex -= 1;
+            else if (mouse_wheel_down() &amp;&amp; layerIndex&lt;8) layerIndex += 1;
+        }
+    }
+    
+    // Update the layername
+    switch(layerIndex) {
+        case 8: layerName = "FG"; break;
+        case 7: layerName = "BG"; break;
+        default: layerName = "L" + string(layerIndex+1);                
+    }
+}
+
+// Not hovering over any menus
+if (canClick) {
+    if (mouse_check_button_pressed(mb_left) &amp;&amp; selected != -1) {
+        scaling = true;
+        scaleX = round(mouse_x/6)*6;
+        scaleY = round(mouse_y/6)*6;
+        scaleLock = true;
+    } else if (mouse_check_button_pressed(mb_right)) {
+        scaling = false;
+        erasing = true;
+        scaleX = round(mouse_x/6)*6;
+        scaleY = round(mouse_y/6)*6;
+        selected = -1;
+        mirrored = -1;
+    }
+}
+
+// Fill in the selected area if the users stops scaling.
+if ((mouse_check_button_released(mb_left) || !scale) &amp;&amp; scaling) {
+    scaling = false;
+    if (scale &amp;&amp; entityButtons[selected, SCALE] &amp;&amp; !scaleLock) {
+        var entity, entity2 xscale, yscale, _x, _y;
+        _x = max(scaleX+6, round(mouse_x/6)*6+spriteCenterX);
+        _y = max(scaleY+6, round(mouse_y/6)*6+spriteCenterY);
+        xscale = (_x-scaleX) / spriteWidth;
+        yscale = (_y-scaleY) / spriteHeight;
+        placeEntity(scaleX-spriteCenterX+spriteOffsetX*xscale, scaleY-spriteCenterY+spriteOffsetY*yscale, xscale, yscale);        
+        if (symmetry) 
+            placeEntity(map_width()-scaleX+spriteCenterX+spriteOffsetX*xscale-(_x-scaleX), scaleY-spriteCenterY+spriteOffsetY*yscale, xscale, yscale, true);
+    } else {
+        var _x, _y, i, j, entity, entity2;
+        _x = max(spriteWidth+scaleX, scaleX+ceil((mouse_x-scaleX)/spriteWidth)*spriteWidth);
+        _y = max(spriteHeight+scaleY, scaleY+ceil((mouse_y-scaleY)/spriteHeight)*spriteHeight);
+
+        for(i=scaleX-spriteCenterX; i+spriteCenterX&lt;_x; i+=spriteWidth) {      
+            for(j=scaleY-spriteCenterY; j+spriteCenterY&lt;_y; j+=spriteHeight) {
+                placeEntity(i+spriteOffsetX, j+spriteOffsetY, entityScale, entityScale);    
+                if (symmetry)    
+                    placeEntity(map_width()-i+mirroredOffsetX, j+spriteOffsetY, entityScale, entityScale, true);               
+            }
+        }
+    }
+} else if ((mouse_check_button_released(mb_right)) &amp;&amp; erasing) {
+    erasing = false;
+
+    with(LevelEntity)
+        if (collision_rectangle(other.scaleX, other.scaleY, mouse_x, mouse_y, id, false, false))
+            instance_destroy();
+    
+    if (symmetry) {
+        var _x;
+        scaleX = map_width() - scaleX;
+        _x = map_width() - mouse_x;
+
+        with(LevelEntity)
+            if (collision_rectangle(other.scaleX, other.scaleY, _x, mouse_y, id, false, false))
+                instance_destroy();
+    } 
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

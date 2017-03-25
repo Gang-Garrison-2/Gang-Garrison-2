@@ -13,8 +13,16 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">hp += 5;
-alarm[11] = 30;</argument>
+        <argument kind="STRING">if(global.isHost) {
+    if (timeUnscathed &lt; 7 * 30)
+        hp += 3;
+    else if (timeUnscathed &lt; 14 * 30)
+        hp += 4;
+    else
+        hp += 5;
+    alarm[11] = 30 / global.delta_factor;
+}
+</argument>
       </arguments>
     </action>
   </actions>

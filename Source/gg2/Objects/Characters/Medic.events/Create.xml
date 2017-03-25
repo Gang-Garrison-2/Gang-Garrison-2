@@ -1,6 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <event category="CREATE" id="0">
   <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">maxHp = 120;
+runPower = 1.09;
+weapons[0]=Medigun;
+haxxyStatue = MedicHaxxyStatueS;
+
+alarm[11] = 30;
+</argument>
+      </arguments>
+    </action>
     <action id="604" library="1">
       <!--action name: Inherited-->
       <kind>NORMAL</kind>
@@ -26,14 +47,15 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">{
-    maxHp = 120;
-    runPower = 1.09;
-    weapons[0]=Medigun;
-    tauntsprite = MedicTauntS;
-    haxxyStatue = MedicHaxxyStatueS;
-    
-    alarm[11] = 30;
+        <argument kind="STRING">numFlames = 4; // 4 instead of the more mathinc 3 in order to make it seem more important that a medic is on fire
+
+if (player.team == TEAM_RED)
+{
+    sprite_index = MedicRedS;
+}
+else if (player.team == TEAM_BLUE)
+{
+    sprite_index = MedicBlueS;
 }
 </argument>
       </arguments>

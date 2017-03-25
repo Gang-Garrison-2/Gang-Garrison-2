@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<include>
+  <filename>dkoth_atalia.png</filename>
+  <filepath>Z:\Users\ajf\Projects\2011\Gang Garrison 2\Gang-Garrison-2\Source\Maps\dkoth_atalia.png</filepath>
+  <original>true</original>
+  <originalSize>26980</originalSize>
+  <hasContent>true</hasContent>
+  <exportTo>NO_AUTO_EXPORT</exportTo>
+  <otherExportDirectory/>
+  <overwriteExisting>false</overwriteExisting>
+  <freeMemAfterExport>true</freeMemAfterExport>
+  <removeAtGameEnd>true</removeAtGameEnd>
+</include>

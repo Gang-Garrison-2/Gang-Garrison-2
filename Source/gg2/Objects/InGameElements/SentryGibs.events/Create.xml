@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <event category="CREATE" id="0">
   <actions>
-    <action id="301" library="1">
-      <!--action name: Set_Alarm-->
-      <kind>NORMAL</kind>
-      <allowRelative>true</allowRelative>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
       <question>false</question>
       <canApplyTo>true</canApplyTo>
-      <actionType>FUNCTION</actionType>
-      <functionName>action_set_alarm</functionName>
+      <actionType>CODE</actionType>
+      <functionName/>
       <relative>false</relative>
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="EXPRESSION">150</argument>
-        <argument kind="MENU">0</argument>
+        <argument kind="STRING">alarm[0] = 150/global.delta_factor;
+
+</argument>
       </arguments>
     </action>
   </actions>

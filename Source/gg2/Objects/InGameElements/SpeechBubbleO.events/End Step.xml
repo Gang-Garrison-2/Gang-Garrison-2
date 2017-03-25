@@ -15,7 +15,7 @@
       <arguments>
         <argument kind="STRING">if(visible) {
     if(fadeout) {
-        bubbleAlpha -= 0.05;
+        bubbleAlpha -= 0.05 * global.delta_factor;
         if(bubbleAlpha &lt;= 0)
         {
             bubbleAlpha = 0;

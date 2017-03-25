@@ -7,6 +7,11 @@
     }
     nocreate=false;
     usePreviousPwd = false;
+    // Prevent overwriting
+    if (!variable_local_exists('skippedPlugins'))
+        skippedPlugins = false;
+    noUnloadPlugins = false;
+    noReloadPlugins = false;
     
     global.players = ds_list_create();
     global.deserializeBuffer = buffer_create();

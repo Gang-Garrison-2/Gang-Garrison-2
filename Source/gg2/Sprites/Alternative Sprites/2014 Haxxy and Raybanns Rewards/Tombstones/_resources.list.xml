@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="TombstoneScoutS" type="RESOURCE"/>
+  <resource name="TombstoneSoldierS" type="RESOURCE"/>
+  <resource name="TombstoneSniperS" type="RESOURCE"/>
+  <resource name="TombstoneDemomanS" type="RESOURCE"/>
+  <resource name="TombstoneMedicS" type="RESOURCE"/>
+  <resource name="TombstoneEngineerS" type="RESOURCE"/>
+  <resource name="TombstoneHeavyS" type="RESOURCE"/>
+  <resource name="TombstoneSpyS" type="RESOURCE"/>
+  <resource name="TombstonePyroS" type="RESOURCE"/>
+</resources>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="QuerlyMonocleHatS" type="RESOURCE"/>
+  <resource name="QuerlyRedMonocleHatTauntS" type="RESOURCE"/>
+  <resource name="QuerlyBlueMonocleHatTauntS" type="RESOURCE"/>
+</resources>

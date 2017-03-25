@@ -24,8 +24,10 @@
         
     with(PlayerControl)
         instance_destroy();
-    
+
     room_goto_fix(returnRoom);
+    if (global.serverPluginsInUse &amp;&amp; !noUnloadPlugins)
+        pluginscleanup();
 }
 
 </argument>

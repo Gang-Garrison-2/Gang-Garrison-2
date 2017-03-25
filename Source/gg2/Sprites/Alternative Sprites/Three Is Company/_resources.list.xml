@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="SheetFallingGold1" type="RESOURCE"/>
+  <resource name="SheetFallingGold2" type="RESOURCE"/>
+  <resource name="SheetFallingGold3" type="RESOURCE"/>
+  <resource name="CrownS" type="RESOURCE"/>
+  <resource name="CrownQuerlyS" type="RESOURCE"/>
+  <resource name="CrownSmallS" type="RESOURCE"/>
+  <resource name="CrownBehindPyroTauntS" type="RESOURCE"/>
+  <resource name="CrownGibS" type="RESOURCE"/>
+  <resource name="NavigatorHatGibS" type="RESOURCE"/>
+  <resource name="NavigatorHatS" type="RESOURCE"/>
+  <resource name="NavigatorHatBehindPyroTauntS" type="RESOURCE"/>
+  <resource name="NavigatorHatQuerlyS" type="RESOURCE"/>
+</resources>

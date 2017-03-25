@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="OTHER" id="10">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">TOGGLE = 0;
+TOGGLED = 1;
+TEXT = 2;
+
+TOOLTIP = 0;
+TOGGLED = 1;
+SPRITE = 2;
+IMAGE = 3;
+INDEX = 4;
+SCALE = 5;
+
+var i, button, j, properties;
+for(i=0; i&lt;ds_list_size(global.buttons); i+=1) {
+    button = ds_list_find_value(global.buttons, i);
+    buttons[i, TOGGLE] = ds_map_find_value(button, "toggle");
+    buttons[i, TOGGLED] = ds_map_find_value(button, "active");
+    buttons[i, TEXT] = ds_map_find_value(button, "name");
+}
+
+j=0;
+for(i=0; i&lt;ds_list_size(global.entities); i+=1) {
+    button = ds_list_find_value(global.entityData, i);
+    if (ds_map_find_value(button, "gamemode") != 0 &amp;&amp; (ds_map_find_value(button, "gamemode") == -1 || (ds_map_find_value(button, "gamemode") &amp; gamemode) &gt; 0 || gamemode == 1)) {
+        entityButtons[j, TOGGLED] = false;
+        entityButtons[j, SPRITE] = ds_map_find_value(button, "button_sprite");
+        entityButtons[j, IMAGE] = ds_map_find_value(button, "button_image");
+        entityButtons[j, TOOLTIP] = ds_map_find_value(button, "tooltip");
+        entityButtons[j, INDEX] = i;
+        
+        properties = ds_map_find_value(button, "properties");
+        entityButtons[j, SCALE] = (is_string(ds_map_find_value(properties, "xscale")) &amp;&amp; is_string(ds_map_find_value(properties, "yscale")));
+        j+=1;
+    }
+}
+
+entityButtonCount = j;
+resetToggles();
+startX[1] = view_wview[0] - vItems*entityButtonSize - 1;
+startX[2] = view_wview[0] - layerWidth - 1;
+startY[2] = view_hview[0] - layerHeight - buttonHeight - 1;
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <event category="CREATE" id="0">
   <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">runPower = .9;
+maxHp = 160;
+weapons[0] = Rocketlauncher;
+haxxyStatue = SoldierHaxxyStatueS;
+</argument>
+      </arguments>
+    </action>
     <action id="604" library="1">
       <!--action name: Inherited-->
       <kind>NORMAL</kind>
@@ -26,12 +45,15 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">{
-    runPower = .9;
-    maxHp = 160;
-    weapons[0] = Rocketlauncher;
-    tauntsprite = SoldierTauntS;
-    haxxyStatue = SoldierHaxxyStatueS;
+        <argument kind="STRING">numFlames = 4;
+
+if (player.team == TEAM_RED)
+{
+    sprite_index = SoldierRedS;
+}
+else if (player.team == TEAM_BLUE)
+{
+    sprite_index = SoldierBlueS;
 }
 </argument>
       </arguments>

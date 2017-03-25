@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
-  <resource name="BackstabTorsoRedSX" type="RESOURCE"/>
-  <resource name="BackstabTorsoBlueSX" type="RESOURCE"/>
+  <resource name="SpyRedBackstabTorsoSX" type="RESOURCE"/>
+  <resource name="SpyBlueBackstabTorsoSX" type="RESOURCE"/>
 </resources>

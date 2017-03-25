@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="builder_init" type="RESOURCE"/>
+  <resource name="addGamemode" type="RESOURCE"/>
+  <resource name="addEntity" type="RESOURCE"/>
+  <resource name="getEntityData" type="RESOURCE"/>
+  <resource name="addButton" type="RESOURCE"/>
+  <resource name="resetToggles" type="RESOURCE"/>
+  <resource name="mirrorEntity" type="RESOURCE"/>
+  <resource name="showPropertyMenu" type="RESOURCE"/>
+  <resource name="readProperty" type="RESOURCE"/>
+  <resource name="validateMap" type="RESOURCE"/>
+  <resource name="resourceToString" type="RESOURCE"/>
+  <resource name="stringToResource" type="RESOURCE"/>
+  <resource name="loadMetadata" type="RESOURCE"/>
+  <resource name="placeEntity" type="RESOURCE"/>
+  <resource name="unloadResources" type="RESOURCE"/>
+</resources>

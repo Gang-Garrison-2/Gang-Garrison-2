@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <event category="CREATE" id="0">
   <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">maxHp = 120;
+runPower = 1;
+weapons[0] = Minegun;
+haxxyStatue = DemomanHaxxyStatueS;
+</argument>
+      </arguments>
+    </action>
     <action id="604" library="1">
       <!--action name: Inherited-->
       <kind>NORMAL</kind>
@@ -26,12 +45,15 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">{
-    maxHp = 120;
-    runPower = 1;
-    weapons[0] = Minegun;
-    tauntsprite = DemoTauntS;
-    haxxyStatue = DemomanHaxxyStatueS;
+        <argument kind="STRING">numFlames = 3;
+
+if (player.team == TEAM_RED)
+{
+    sprite_index = DemomanRedS;
+}
+else if (player.team == TEAM_BLUE)
+{
+    sprite_index = DemomanBlueS;
 }
 </argument>
       </arguments>

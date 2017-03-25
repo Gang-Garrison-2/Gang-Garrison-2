@@ -1,5 +1,8 @@
+move_all_bullets();
+move_all_gore();
+
 // receive and interpret the server's message(s)
-var i, playerObject, playerID, player, otherPlayerID, otherPlayer, sameVersion, buffer;
+var i, playerObject, playerID, player, otherPlayerID, otherPlayer, sameVersion, buffer, plugins, pluginsRequired, usePlugins;
 
 if(tcp_eof(global.serverSocket)) {
     if(gotServerHello)
@@ -42,12 +45,91 @@ do {
             global.joinedServerName = receivestring(global.serverSocket, 1);
             downloadMapName = receivestring(global.serverSocket, 1);
             advertisedMapMd5 = receivestring(global.serverSocket, 1);
+            receiveCompleteMessage(global.serverSocket, 1, global.tempBuffer);
+            pluginsRequired = read_ubyte(global.tempBuffer);
+            plugins = receivestring(global.serverSocket, 2);
             if(string_pos("/", downloadMapName) != 0 or string_pos("\", downloadMapName) != 0)
             {
                 show_message("Server sent illegal map name: "+downloadMapName);
                 instance_destroy();
                 exit;
             }
+
+            if (!noReloadPlugins && string_length(plugins))
+            {
+                usePlugins = pluginsRequired || !global.serverPluginsPrompt;
+                if (global.serverPluginsPrompt)
+                {
+                    // Split up plugin list
+                    var pluginList;
+                    pluginList = split(plugins, ',');
+
+                    // Iterate over list and make displayable list without hashes
+                    var displayList, i;
+                    displayList = '';
+                    for (i = 0; i < ds_list_size(pluginList); i += 1)
+                    {
+                        var pluginParts;
+                        pluginParts = split(ds_list_find_value(pluginList, i), '@');
+                        displayList += '- ' + ds_list_find_value(pluginParts, 0) + '#';
+                        ds_list_destroy(pluginParts);
+                    }
+
+                    // Destroy list
+                    ds_list_destroy(pluginList);
+                    
+                    var prompt;
+                    if (pluginsRequired)
+                    {
+                        prompt = show_message_ext(
+                            'You need these plugins to play on this server: #'
+                            + displayList
+                            + PLUGIN_SOURCE_NOTICE
+                            + '#Do you want to download them and join the server?',
+                            'Download and join',
+                            '',
+                            'Disconnect'
+                        );
+                        if (prompt != 1)
+                        {
+                            instance_destroy();
+                            exit;
+                        }
+                    }
+                    else
+                    {
+                        prompt = show_message_ext(
+                            'These optional plugins are suggested for this server: #'
+                            + displayList
+                            + PLUGIN_SOURCE_NOTICE
+                            + '#Do you want to download them?',
+                            'Download',
+                            '',
+                            'Skip'
+                        );
+                        if (prompt == 1)
+                        {
+                            usePlugins = true;
+                        }
+                        else
+                        {
+                            // We set this so that we won't prompt for plugins again if we re-connect to download a map
+                            skippedPlugins = true;
+                        }
+                    }
+                }
+                if (usePlugins)
+                {
+                    if (!loadserverplugins(plugins))
+                    {
+                        show_message("Error ocurred loading server-sent plugins.");
+                        instance_destroy();
+                        exit;
+                    }
+                    global.serverPluginsInUse = true;
+                }
+            }
+            noReloadPlugins = false;
             
             if(advertisedMapMd5 != "")
             {
@@ -76,8 +158,19 @@ do {
                 }
             }
             ClientPlayerJoin(global.serverSocket);
-            if(global.haxxyKey != "")
-                write_byte(global.serverSocket, I_AM_A_HAXXY_WINNER);
+            if(global.rewardKey != "" and global.rewardId != "")
+            {
+                var rewardId;
+                rewardId = string_copy(global.rewardId, 0, 255);
+                write_ubyte(global.serverSocket, REWARD_REQUEST);
+                write_ubyte(global.serverSocket, string_length(rewardId));
+                write_string(global.serverSocket, rewardId);
+            }
+            if(global.queueJumping == true)
+            {
+                write_ubyte(global.serverSocket, CLIENT_SETTINGS);
+                write_ubyte(global.serverSocket, global.queueJumping);
+            }
             socket_send(global.serverSocket);
             break;
             
@@ -232,11 +325,11 @@ do {
             
             player = ds_list_find_value(global.players, playerID);
             if(otherPlayerID == 255) {
-                doEventDestruction(player, -1, -1, causeOfDeath);
+                doEventDestruction(player, noone, noone, causeOfDeath);
             } else {
                 otherPlayer = ds_list_find_value(global.players, otherPlayerID);
                 if (assistantPlayerID == 255) {
-                    doEventDestruction(player, otherPlayer, -1, causeOfDeath);
+                    doEventDestruction(player, otherPlayer, noone, causeOfDeath);
                 } else {
                     assistantPlayer = ds_list_find_value(global.players, assistantPlayerID);
                     doEventDestruction(player, otherPlayer, assistantPlayer, causeOfDeath);
@@ -259,9 +352,7 @@ do {
         case DROP_INTEL:
             receiveCompleteMessage(global.serverSocket,1,global.tempBuffer);
             player = ds_list_find_value(global.players, read_ubyte(global.tempBuffer));
-            if player.object != -1 {
-                with player.object event_user(5); 
-            }
+            doEventDropIntel(player); 
             break;
             
         case RETURN_INTEL:
@@ -298,13 +389,8 @@ do {
                         canEat = false;
                         alarm[6] = eatCooldown; //10 second cooldown
                     }
-                    if(player.team == TEAM_RED) {
-                        omnomnomnomindex=0;
-                        omnomnomnomend=31;
-                    } else if(player.team==TEAM_BLUE) {
-                        omnomnomnomindex=32;
-                        omnomnomnomend=63;
-                    }
+                    omnomnomnomindex=0;
+                    omnomnomnomend=32;
                     xscale=image_xscale; 
                 } 
             }
@@ -340,11 +426,17 @@ do {
             receiveCompleteMessage(global.serverSocket,1,global.tempBuffer);
             reason = read_ubyte(global.tempBuffer);
             if reason == KICK_NAME kickReason = "Name Exploit";
+            else if reason == KICK_BAD_PLUGIN_PACKET kickReason = "Invalid plugin packet ID";
+            else if reason == KICK_MULTI_CLIENT kickReason = "There are too many connections from your IP";
             else kickReason = "";
             show_message("You have been kicked from the server. "+kickReason+".");
             instance_destroy();
             exit;
               
+        case ARENA_STARTROUND:
+            doEventArenaStartRound();
+            break;
+            
         case ARENA_ENDROUND:
             with ArenaHUD clientArenaEndRound();
             break;   
@@ -373,7 +465,10 @@ do {
             global.currentMap = receivestring(global.serverSocket, 1);
             global.currentMapMD5 = receivestring(global.serverSocket, 1);
             if(global.currentMapMD5 == "") { // if this is an internal map (signified by the lack of an md5)
-                if(gotoInternalMapRoom(global.currentMap) != 0) {
+                if(findInternalMapName(global.currentMap) != "")
+                    room_goto_fix(CustomMapRoom);
+                else
+                {
                     show_message("Error:#Server went to invalid internal map: " + global.currentMap + "#Exiting.");
                     instance_destroy();
                     exit;
@@ -390,8 +485,16 @@ do {
                     var oldReturnRoom;
                     oldReturnRoom = returnRoom;
                     returnRoom = DownloadRoom;
+                    // Normally, GG2 is restarted when we disconnect, if plugins are in use
+                    // As we're only disconnecting to download a map, we won't restart
+                    if (global.serverPluginsInUse)
+                        noUnloadPlugins = true;
                     event_perform(ev_destroy,0);
                     ClientCreate();
+                    // Normally, GG2 will prompt to load plugins when connecting to a server
+                    // If they're already loaded, or the user skipped them, we won't prompt again
+                    if (global.serverPluginsInUse or skippedPlugins)
+                        noReloadPlugins = true;
                     returnRoom = oldReturnRoom;
                     usePreviousPwd = true;
                     exit;
@@ -438,12 +541,23 @@ do {
             instance_destroy();
             exit;
         
-        case HAXXY_CHALLENGE_CODE:
+        case REWARD_CHALLENGE_CODE:
+            var challengeData;
             receiveCompleteMessage(global.serverSocket,16,global.tempBuffer);
-            write_ubyte(global.serverSocket, HAXXY_CHALLENGE_RESPONSE);
-            for(i=1;i<=16;i+=1)
-                write_ubyte(global.serverSocket, read_ubyte(global.tempBuffer) ^ ord(string_char_at(global.haxxyKey, i)));
+            challengeData = read_binstring(global.tempBuffer, buffer_size(global.tempBuffer));
+            challengeData += socket_remote_ip(global.serverSocket);
+
+            write_ubyte(global.serverSocket, REWARD_CHALLENGE_RESPONSE);
+            write_binstring(global.serverSocket, hmac_md5_bin(global.rewardKey, challengeData));
             socket_send(global.serverSocket);
+            break;
+
+        case REWARD_UPDATE:
+            receiveCompleteMessage(global.serverSocket,1,global.tempBuffer);
+            player = ds_list_find_value(global.players, read_ubyte(global.tempBuffer));
+            var rewardString;
+            rewardString = receivestring(global.serverSocket, 2);
+            doEventUpdateRewards(player, rewardString);
             break;
             
         case MESSAGE_STRING:
@@ -487,10 +601,42 @@ do {
                 doEventFireWeapon(player, read_ushort(global.tempBuffer));
             }
             break;
+
+        case PLUGIN_PACKET:
+            var packetID, packetLen, buf, success;
+
+            // fetch full packet
+            receiveCompleteMessage(global.serverSocket, 2, global.tempBuffer);
+            packetLen = read_ushort(global.tempBuffer);
+            receiveCompleteMessage(global.serverSocket, packetLen, global.tempBuffer);
+
+            packetID = read_ubyte(global.tempBuffer);
+
+            // get packet data
+            buf = buffer_create();
+            write_buffer_part(buf, global.tempBuffer, packetLen - 1);
+
+            // try to enqueue
+            // give "noone" value for client since received from server
+            success = _PluginPacketPush(packetID, buf, noone);
             
+            // if it returned false, packetID was invalid
+            if (!success)
+            {
+                // clear up buffer
+                buffer_destroy(buf);
+                show_error("ERROR when reading plugin packet: no such plugin packet ID " + string(packetID), true);
+            }
+            break;
+        
+        case CLIENT_SETTINGS:
+            receiveCompleteMessage(global.serverSocket,2,global.tempBuffer);
+            player = ds_list_find_value(global.players, read_ubyte(global.tempBuffer));
+            player.queueJump = read_ubyte(global.tempBuffer);
+            break;
+
         default:
-            show_message("The Server sent unexpected data");
-            game_end();
+            promptRestartOrQuit("The Server sent unexpected data.");
             exit;
         }
     } else {

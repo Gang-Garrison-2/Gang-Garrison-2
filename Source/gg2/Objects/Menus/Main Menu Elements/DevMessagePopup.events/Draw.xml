@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="DRAW" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">height = string_height_ext(msg, -1, width);
+
+if (updating)
+{
+    button_x1 = x - button_padding;
+    button_y1 = y + button_padding;
+    button_x2 = x + width + button_padding;
+    button_y2 = y + button_padding + (button_padding + string_height(button_label) + button_padding);
+}
+
+draw_set_color(c_black);
+draw_set_alpha(0.35);
+draw_rectangle(x - 5, y - height - 5, x + width + 5, y + 5, false);
+
+draw_set_color(c_white);
+draw_set_alpha(1);
+draw_set_halign(fa_left);
+draw_set_valign(fa_top);
+draw_text_ext(x, y - height, msg, -1, width);
+
+if (updating)
+{
+    if (button_x1 &lt;= mouse_x &amp;&amp; mouse_x &lt;= button_x2 &amp;&amp; button_y1 &lt;= mouse_y &amp;&amp; mouse_y &lt;= button_y2)
+    {
+        draw_set_alpha(0.71);
+    }
+    else
+    {
+        draw_set_alpha(0.6);
+    }
+    draw_set_color(c_black);
+    draw_rectangle(button_x1, button_y1+1, button_x2, button_y2, false);
+    
+    draw_set_color(c_white);
+    draw_set_alpha(1);
+    draw_set_halign(fa_center);
+    draw_set_valign(fa_middle);
+    draw_text(floor(x + width / 2),
+              floor(y + button_padding + (button_padding + string_height("Update") + button_padding) / 2),
+              button_label);
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

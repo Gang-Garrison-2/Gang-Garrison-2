@@ -85,6 +85,11 @@ case STATE_CLIENT_AUTHENTICATED:
     write_string(socket, global.currentMap);
     write_ubyte(socket, string_length(global.currentMapMD5));
     write_string(socket, global.currentMapMD5);
+    
+    write_ubyte(socket, global.serverPluginsRequired);
+    write_ushort(socket, string_length(GameServer.pluginList));
+    write_string(socket, GameServer.pluginList);
+    
     advertisedMap = global.currentMap;
     advertisedMapMd5 = global.currentMapMD5;
     newState = STATE_EXPECT_COMMAND;
@@ -94,6 +99,12 @@ case STATE_CLIENT_AUTHENTICATED:
 case STATE_EXPECT_COMMAND:
     switch(read_ubyte(socket))
     {
+    // keeps connection open when downloading plugins
+    case PING:
+        newState = STATE_EXPECT_COMMAND;
+        expectedBytes = 1;
+        break;
+
     case PLAYER_JOIN:
         newState = STATE_EXPECT_MESSAGELEN;
         messageState = STATE_EXPECT_NAME;
@@ -138,14 +149,16 @@ case STATE_EXPECT_NAME:
     
     player.name = read_string(player.socket, expectedBytes);
     player.name = string_copy(player.name, 0, MAX_PLAYERNAME_LENGTH);
-    player.name = string_replace_all(player.name, "#", " ");
     
     ds_list_add(global.players, player);
     ServerPlayerJoin(player.name, global.sendBuffer);
     
-    if(global.welcomeMessage != "") {
+    // message lobby to update playercount if we became full
+    if(noOfPlayers+1 == global.playerLimit)
+        sendLobbyRegistration();
+    
+    if(global.welcomeMessage != "")
         ServerMessageString(global.welcomeMessage, player.socket);
-    }
     
     break;
 }

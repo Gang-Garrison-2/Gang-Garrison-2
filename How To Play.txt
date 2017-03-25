@@ -1,0 +1,212 @@
+----------------------------------------------------------
+GANG GARRISON 2
+----------------------------------------------------------
+created by
+mrfredman, MedO, and Synnah
+
+A Team Fortress 2 Demake
+
+HOW TO PLAY
+----------------------------------------------------------
+
+Gang Garrison 2 is an online, multiplayer, PvP shoot-em-up with several classes
+ and gamemodes to choose from. Play online through our lobby, or hook up with
+ your friends on LAN.
+
+----------------------------------------------------------
+
+Controls:
+
+
+Gang Garrison 2 uses a control scheme similar to a dual stick shooter, with
+ binds all around the keyboard for various functions. All controls listed are
+ defaults, and all keys can be changed to different buttons.
+ 
+The WASD keys (default) control your character's movement, while the mouse aims.
+
+Left click to use your weapon's primary fire, or right click for its secondary
+ fire -- or your class's special ability, if the ability works like that.
+
+Press N to change your team, or M to change your class.
+
+Press E to call for a medic. Press Z, X, or C to open up a speech bubble menu.
+
+Press F to taunt. Press B to drop the intelligence. Hold shift to view the
+ scoreboard.
+
+Press ESC to open the in-game menu, including options.
+
+Press F9 to take a screenshot.
+Press F12 to mute the game.
+
+----------------------------------------------------------
+
+Classes:
+
+
+The game has nine classes based on the ones from Team Fortress 2. Each team has
+ access to the same classes, which are identical between teams. Each class has
+ its own special ability, and they all have different stats and weapons.
+
+The Runner: Quick as the wind, this flagrunner and scout packs a punch, both
+ with his weapon and with completing objectives -- but only if he doesn't die
+ before he does!
+Weapon: Scattergun
+Special ability: Double Jump, Double Cap Rate
+* Jump while in the air to get a Double Jump! Only works once per air.
+
+The Firebug: Fastest bar the scout, the Firebug specializes in close ranged
+ combat and area denial. If an enemy player comes into the Firebug's turf,
+ they're in for an ambush!
+Weapon: Flamethrower
+Special ability: Airblast, Flareblast
+* Press M1, then M2 while shooting to fire a Flareblast!
+
+The Rocketman: Strong yet graceful, the rocketman is the epitome of a jack of
+ all trades. Deny passage through chokepoints, soar through the skies while
+ raining down pain, and take enemies head-on -- he can do it all, at a cost.
+Weapon: Rocket Launcher
+Special ability: Rocketjump
+* Jump, and shoot the ground beneath your feet to soar to great heights!
+
+The Overweight: A mammoth of a man, carrying a heavy weapon that can shred even
+ the strongest of shields to shreds! Perfect at drawing in enemy attacks, and
+ locking down chokepoints too!
+Weapon: Minigun
+Special ability: Eat Manvich
+* If you eat a Manvich while at full health, you can't be backstabbed!
+
+The Detonator: A master of explosives, the Detonator is equipped with remote-
+ detonated mines that stick to almost anything they touch -- as long as it's not
+ flesh. Beware: It takes a true master to use such dangerous bombs.
+Weapon: Minegun
+Special ability: Detonate Mines, Aerial Detonation, Minejump
+* Press M1, then M2 while your mine is airborne to perform an aerial detonation!
+
+The Healer: This medicine man revolutionized the job of a combat medic. Leashing
+ himself to his healing target, he keeps his team in top shape at all times, and
+ can even turn them into super men, temporarily!
+Weapon: Needlegun
+Special ability: Healing, Superburst, Passive Health Regeneration
+* When your charge bar is full, hold M1 and press M2 to activate Superburst!
+
+The Constructor: A brilliant inventor that created self-building, self-deploying
+ automatic turret guns, capable of identifying targets and shooting them too!
+ Not one to settle for a single gun, he carries around a trusty shotgun, too.
+Weapon: Shotgun
+Special ability: Build Autogun, Passive Nuts'N'Bolts Regeneration
+
+The Infiltrator: A master assassin, capable of blending in to even the most
+ unreasonable of scenery, can deal fatal blows with their implement of choice
+ -- in this case, a knife -- as long as their target doesn't see it coming.
+Weapon: Revolver
+Special ability: Shoot People In The Back, Passive Invisibility, Cloak, Backstab
+
+The Rifleman: A sniper armed with a trusty rifle, whose scope allows them to aim
+ at double the distance of the naked eye. His rifle has a strange ability,
+ causing it to deal more damage the longer he's been scoped in.
+Weapon: Rifle
+Special ability: Zoom, Charge
+
+----------------------------------------------------------
+
+Gamemodes:
+
+Capture The Flag:
+ Steal the enemy briefcase, and prevent them from doing the the same to you! The
+ team with the most captures at the end of the round, or the first to the limit,
+ wins.
+
+Control Point (Push):
+ A symmetrical gamemode. Capture every control point for your team to win!
+ Points are "locked" unless one close to them belongs to the enemy team.
+
+Control Point (Attack/Defense)
+ An asymmetrical gamemode. Capture every control point, or defend them until
+ time runs out! Points "lock" when the attacking team captures them, and the
+ next one becomes available for capture.
+ 
+Arena:
+ No respawning in this deathmatch gamemode. Defeat every enemy player to score a
+ point and start a new round. The first team whose points reach the limit wins!
+
+Generator:
+ Destroy the enemy's generator before they can kill theirs! Those shielded
+ generators take more damage while the shield is down, so shoot while you can!
+
+King of the Hill:
+ A control point gamemode with only one point. Hold the point for three total
+ minutes to win!
+
+Dual King of the Hill:
+ It's King of the Hill, but with two points. Hold both points to run your timer.
+ When you have theirs, yours locks, so don't worry about back caps!
+
+Invasion (A/D CTF):
+ Bring the briefcase to the enemy base and plant it there; or, prevent the
+ attacking team from doing so. Hit the cap limit or time out the match to win!
+
+Team Deathmatch:
+ Kill enemy players to rack up your team's points. The first team to hit the
+ limit wins!
+
+----------------------------------------------------------
+
+Gameplay Tips:
+
+Runner:
+- Use paths that no other class can use!
+- Your scattergun does a surprising amount of damage!
+- Keep some ammo saved up in case you need to fight an infiltrator!
+
+Firebug:
+- Use your airblast to push your enemies around!
+- Extinguish your teammates with the airblast if they're on fire!
+- Set a foe on fire and let the afterburn take care of the rest!
+
+Rocketman:
+- Your rockets can go through teammates!
+- Rocketjump up to high platforms or to rain rockets from above!
+- Rockets can destroy the detonator's mines with an explosion!
+
+Overweight:
+- Eat a manvich when it's safe, not when there are enemies around!
+- Don't eat a manvich if a healer is waiting to heal you!
+- Remember to retreat if you're taking too much damage!
+
+Detonator:
+- You can detonate your mines in the air; they don't have to 'stick'
+  to a surface to detonate!
+- Your mines deal a maximum of 45 damage each to players, and 50 to
+  buildings.
+- Sticky mines can destroy other detonator's mines with an explosion!
+- Shoot a sticky and detonate it at the same time while pointing down
+  to propel yourself like a Rocketman!
+
+Healer:
+- You slowly regenerate your health! Dodge well to maximize it!
+- Use your medigun to rapidly heal off afterburn!
+- Use your superburst to get past tight chokepoints!
+
+Constructor:
+- You regenerate Nuts and Bolts slowly, but picking up metal from a
+  destroyed autogun instantly gives you 50! Health cabinets also give
+  you all your Nuts and Bolts back!
+- Autoguns can't shoot straight up, so watch out!
+- Your autogun will default to the direction you aim when you build
+  it, so be careful!
+
+Infiltrator:
+- The enemy can still hear you jump even if you are cloaked!
+- Your revolver is a lot stronger than it looks! It has a lot of
+  range too!
+- Passive invisibility is always useful!
+
+Rifleman:
+- Stay moving in case an infiltrator is eyeing your back!
+- Your scope inhibits movement. Scope out if you need to move around!
+- Pick off enemies at a distance with charged shots, or "railgun"
+  them at close range without scoping for direct combat!
+
+Secret Class:
+- There is no secret class, and you can 'QQ' about it.

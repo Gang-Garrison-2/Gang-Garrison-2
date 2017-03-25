@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="ALARM" id="6">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if (reloadSprite != -1 &amp;&amp; object_index != Rifle &amp;&amp; alarm[5] &gt; 0)
+{
+    sprite_index = reloadSprite;
+    image_index = 0;
+    image_speed = reloadImageSpeed * global.delta_factor;
+} 
+else
+{
+    sprite_index = normalSprite;
+    image_speed = 0;
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

@@ -15,7 +15,9 @@
       <arguments>
         <argument kind="STRING">{
     readyToShoot=true;
-}</argument>
+    
+}
+</argument>
       </arguments>
     </action>
   </actions>

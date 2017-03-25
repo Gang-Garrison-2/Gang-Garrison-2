@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="DRAW" id="0">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">{
+    draw_background(menuimage, 0, 0);
+
+    // display background info, if downloaded
+    if (global.backgroundHash != "default")
+    {
+        draw_set_halign(fa_right);
+        draw_set_valign(fa_bottom);
+        
+        // hovering over title
+        if (mouse_x &gt;= 595 - string_width(global.backgroundTitle)
+            &amp;&amp; mouse_x &lt; 595
+            &amp;&amp; mouse_y &gt;= 595 - string_height(global.backgroundTitle)
+            &amp;&amp; mouse_y &lt; 595
+            &amp;&amp; global.backgroundURL != "")
+        {
+            draw_set_color(c_orange);
+        }
+        else
+        {
+            draw_set_color(c_white);
+        }
+        draw_text(595, 595, global.backgroundTitle);
+    }
+
+    // fade out old background
+    if (fade &gt; 0)
+    {
+        draw_background_ext(oldBackground, 0, 0, 1, 1, 0, c_white, fade);
+    }
+
+    if (!(global.backgroundHash != "default" &amp;&amp; !global.backgroundShowVersion))
+    {
+        draw_sprite(MenuBackgroundVersionS,0,300,300);
+    }
+}
+</argument>
+      </arguments>
+    </action>
+    <action id="604" library="1">
+      <!--action name: Inherited-->
+      <kind>NORMAL</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>false</canApplyTo>
+      <actionType>FUNCTION</actionType>
+      <functionName>action_inherited</functionName>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments/>
+    </action>
+  </actions>
+</event>

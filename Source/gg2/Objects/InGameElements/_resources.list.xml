@@ -2,11 +2,11 @@
 <resources>
   <resource name="Gibbage" type="GROUP"/>
   <resource name="Player" type="RESOURCE"/>
+  <resource name="SpyGhost" type="RESOURCE"/>
   <resource name="Character" type="RESOURCE"/>
   <resource name="Weapon" type="RESOURCE"/>
   <resource name="PlayerControl" type="RESOURCE"/>
   <resource name="SpeechBubbleO" type="RESOURCE"/>
-  <resource name="SentryTurret" type="RESOURCE"/>
   <resource name="SentryGibs" type="RESOURCE"/>
   <resource name="Sentry" type="RESOURCE"/>
   <resource name="Explosion" type="RESOURCE"/>
@@ -17,4 +17,8 @@
   <resource name="Spectator" type="RESOURCE"/>
   <resource name="JoiningPlayer" type="RESOURCE"/>
   <resource name="Balancer" type="RESOURCE"/>
+  <resource name="Builder" type="RESOURCE"/>
+  <resource name="CollisionDummy" type="RESOURCE"/>
+  <resource name="SpriteObject" type="RESOURCE"/>
+  <resource name="ParallaxController" type="RESOURCE"/>
 </resources>

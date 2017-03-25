@@ -21,6 +21,9 @@
     name = "";
     kicked = false;
     
+    // client setting stuff; set to defaults
+    queueJump = false;
+    
     //stat tracking array
     stats[KILLS] = 0;
     stats[DEATHS] = 0;
@@ -67,7 +70,12 @@
     //Sentries for Engies
     sentry = noone;
     
-    isHaxxyWinner = false;
+    // Haxxy rewards
+    rewards = ds_map_create();
+    badges = ds_list_create();
+    ghost = noone;
+    
+    corpse = noone;
 }
 </argument>
       </arguments>

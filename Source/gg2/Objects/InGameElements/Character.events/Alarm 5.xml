@@ -28,7 +28,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">for(i = 0; i &lt; numFlames * floor(burnIntensity/maxIntensity); i += 1)
+        <argument kind="STRING">for(i = 0; i &lt; numFlames; i += 1)
 {
     flameArray_x[i] = random_range(-(bbox_right-bbox_left)/2, (bbox_right-bbox_left)/2);
     flameArray_y[i] = random_range(-(bbox_top-bbox_bottom)/2, (bbox_top-bbox_bottom)/2);

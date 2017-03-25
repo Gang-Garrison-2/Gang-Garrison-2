@@ -3,8 +3,8 @@
  * destroy the character object to much splattering and so on.
  *
  * argument0: The player whose character died
- * argument1: The player who inflicted the fatal damage (or -1 for unknown)
- * argument2: The player who assisted the kill (or -1 for no assist)
+ * argument1: The player who inflicted the fatal damage (or noone for unknown)
+ * argument2: The player who assisted the kill (or noone for no assist)
  * argument3: The source of the fatal damage
  */
 var victim, killer, assistant, damageSource;
@@ -13,13 +13,11 @@ killer = argument1;
 assistant = argument2;
 damageSource = argument3;
 
-if(!(killer and instance_exists(killer))) {
+if(!instance_exists(killer))
     killer = noone;
-}
 
-if(!(assistant and instance_exists(assistant))) {
+if(!instance_exists(assistant))
     assistant = noone;
-}
 
 //*************************************
 //*      Scoring and Kill log
@@ -31,7 +29,7 @@ recordKillInLog(victim, killer, assistant, damageSource);
 victim.stats[DEATHS] += 1;
 if(killer)
 {
-    if(damageSource == WEAPON_KNIFE || damageSource == WEAPON_BACKSTAB)
+    if(damageSource == DAMAGE_SOURCE_KNIFE || damageSource == DAMAGE_SOURCE_BACKSTAB)
     {
         killer.stats[STABS] += 1;
         killer.roundStats[STABS] += 1;
@@ -91,100 +89,165 @@ ysize = view_hview[0];
 
 randomize();
 with(victim.object) {
-    if((damageSource == WEAPON_ROCKETLAUNCHER or damageSource == WEAPON_QROCKETLAUNCHER 
-    or damageSource == WEAPON_MINEGUN or damageSource == FRAG_BOX 
-    or damageSource == WEAPON_REFLECTED_STICKY or damageSource == WEAPON_REFLECTED_ROCKET 
-    or damageSource == FINISHED_OFF_GIB or damageSource == GENERATOR_EXPLOSION) 
-    and (player.class != CLASS_QUOTE) and (global.gibLevel>1) 
-    and distance_to_point(xoffset+xsize/2,yoffset+ysize/2) < 900) {
-        repeat(global.gibLevel) {
-            createGib(x,y,Gib,hspeed,vspeed,random(145)-72, 0, false)
-        }
-        switch(player.team) {
-        case TEAM_BLUE :
-            repeat(global.gibLevel - 1) {
-                createGib(x,y,BlueClump,hspeed,vspeed,random(145)-72, 0, false)
-            }
-            break;
-        case TEAM_RED :
-            repeat(global.gibLevel - 1) {
-                createGib(x,y,RedClump,hspeed,vspeed,random(145)-72, 0, false)
-            }
-            break;
-        }
-
-        repeat(global.gibLevel * 14) {
-            var blood;
-            blood = instance_create(x+random(23)-11,y+random(23)-11,BloodDrop);
-            blood.hspeed=(random(21)-10);
-            blood.vspeed=(random(21)-13);
-        }
-        //All Classes gib head, hands, and feet
-        if(global.gibLevel > 2 || choose(0,1) == 1)
-            createGib(x,y,Headgib,0,0,random(105)-52, player.class, false);
-        repeat(global.gibLevel -1){
-            //Medic has specially colored hands
-            if (player.class == CLASS_MEDIC){
-                if (player.team == TEAM_RED)
-                    createGib(x,y,Hand, hspeed, vspeed, random(105)-52 , 9, false);
-                else
-                    createGib(x,y,Hand, hspeed, vspeed, random(105)-52 , 10, false);
-            }else{
-                createGib(x,y,Hand, hspeed, vspeed, random(105)-52 , player.class, false);
-            }
-            createGib(x,y,Feet,random(5)-2,random(3),random(13)-6 , player.class, true);
-        }
-        //Class specific gibs
-        switch(player.class) {
-        case CLASS_PYRO :
-            if(global.gibLevel > 2 || choose(0,1) == 1)
-                createGib(x,y,Accesory,hspeed,vspeed,random(105)-52, 4, false)
-            break;
-        case CLASS_SOLDIER :
-            if(global.gibLevel > 2 || choose(0,1) == 1){
-                switch(player.team) {
-                    case TEAM_BLUE :
-                        createGib(x,y,Accesory,hspeed,vspeed,random(105)-52, 2, false);
-                        break;
-                    case TEAM_RED :
-                        createGib(x,y,Accesory,hspeed,vspeed,random(105)-52, 1, false);
-                        break;
-                    }
-            }
-            break;
-        case CLASS_ENGINEER :
-            if(global.gibLevel > 2 || choose(0,1) == 1)
-                createGib(x,y,Accesory,hspeed,vspeed,random(105)-52, 3, false)
-            break;
-        case CLASS_SNIPER :
-            if(global.gibLevel > 2 || choose(0,1) == 1)
-                createGib(x,y,Accesory,hspeed,vspeed,random(105)-52, 0, false)
-            break;
-        }
+    var hasTombstone, diedOfExplosion, gibsWhenExploded, isCloseBy;
+    hasTombstone = (victim.class != CLASS_QUOTE) and hasClassReward(victim, 'Tombstone_');
+    diedOfExplosion = damageSource == DAMAGE_SOURCE_ROCKETLAUNCHER
+        or damageSource == DAMAGE_SOURCE_MINEGUN
+        or damageSource == DAMAGE_SOURCE_FRAG_BOX
+        or damageSource == DAMAGE_SOURCE_REFLECTED_STICKY
+        or damageSource == DAMAGE_SOURCE_REFLECTED_ROCKET
+        or damageSource == DAMAGE_SOURCE_FINISHED_OFF_GIB
+        or damageSource == DAMAGE_SOURCE_GENERATOR_EXPLOSION;
+    gibsWhenExploded = (player.class != CLASS_QUOTE) and (global.gibLevel>1);
+    isCloseBy = distance_to_point(xoffset+xsize/2,yoffset+ysize/2) < 900;
+    
+    if(diedOfExplosion and gibsWhenExploded)
+    {
         playsound(x,y,Gibbing);
-    } else {
+        if(isCloseBy) // Performance optimization, since gibs are somewhat expensive
+        {
+            if (hasReward(victim, 'PumpkinGibs'))
+            {
+                repeat(global.gibLevel * 2)
+                {
+                    createGib(x,y,PumpkinGib,hspeed,vspeed,random(145)-72, choose(0,1,1,2,2,3), false)
+                }
+            }
+            else
+            {
+                repeat(global.gibLevel)
+                {
+                    createGib(x,y,Gib,hspeed,vspeed,random(145)-72, 0, false)
+                }
+                switch(player.team)
+                {
+                case TEAM_BLUE :
+                    repeat(global.gibLevel - 1)
+                    {
+                        createGib(x,y,BlueClump,hspeed,vspeed,random(145)-72, 0, false)
+                    }
+                    break;
+                case TEAM_RED :
+                    repeat(global.gibLevel - 1)
+                    {
+                        createGib(x,y,RedClump,hspeed,vspeed,random(145)-72, 0, false)
+                    }
+                    break;
+                }
+            }
+    
+            repeat(global.gibLevel * 14)
+            {
+                var blood;
+                blood = instance_create(x+random(23)-11,y+random(23)-11,BloodDrop);
+                blood.hspeed=(random(21)-10);
+                blood.vspeed=(random(21)-13);
+                if (hasReward(victim, 'PumpkinGibs'))
+                {
+                    blood.sprite_index = PumpkinJuiceS;
+                }
+            }
+            
+            if (!hasReward(victim, 'PumpkinGibs'))
+            {
+                //All Classes gib head, hands, and feet
+                if(global.gibLevel > 2 || choose(0,1) == 1)
+                    createGib(x,y,Headgib,0,0,random(105)-52, player.class, false);
+                    
+                repeat(global.gibLevel -1)
+                {
+                    //Medic has specially colored hands
+                    if (player.class == CLASS_MEDIC)
+                    {
+                        if (player.team == TEAM_RED)
+                            createGib(x,y,Hand, hspeed, vspeed, random(105)-52 , 9, false);
+                        else
+                            createGib(x,y,Hand, hspeed, vspeed, random(105)-52 , 10, false);
+                    }
+                    else
+                    {
+                        createGib(x,y,Hand, hspeed, vspeed, random(105)-52 , player.class, false);
+                    }
+                    createGib(x,y,Feet,random(5)-2,random(3),random(13)-6 , player.class, true);
+                }
+            }
+    
+            //Class specific gibs
+            switch(player.class) {
+            case CLASS_PYRO :
+                if(global.gibLevel > 2 || choose(0,1) == 1)
+                    createGib(x,y,Accesory,hspeed,vspeed,random(105)-52, 4, false)
+                break;
+            case CLASS_SOLDIER :
+                if(global.gibLevel > 2 || choose(0,1) == 1)
+                {
+                    switch(player.team)
+                    {
+                        case TEAM_BLUE :
+                            createGib(x,y,Accesory,hspeed,vspeed,random(105)-52, 2, false);
+                            break;
+                        case TEAM_RED :
+                            createGib(x,y,Accesory,hspeed,vspeed,random(105)-52, 1, false);
+                            break;
+                    }
+                }
+                break;
+            case CLASS_ENGINEER :
+                if(global.gibLevel > 2 || choose(0,1) == 1)
+                    createGib(x,y,Accesory,hspeed,vspeed,random(105)-52, 3, false)
+                break;
+            case CLASS_SNIPER :
+                if(global.gibLevel > 2 || choose(0,1) == 1)
+                    createGib(x,y,Accesory,hspeed,vspeed,random(105)-52, 0, false)
+                break;
+            }
+        }
+    }
+    else
+    {
         var deadbody;
-        if player.class != CLASS_QUOTE playsound(x,y,choose(DeathSnd1, DeathSnd2));
+        if (player.class != CLASS_QUOTE)
+            playsound(x,y,choose(DeathSnd1, DeathSnd2));
+            
         deadbody = instance_create(x,y-30,DeadGuy);
-        if(player.isHaxxyWinner)
+        // 'GS' reward - *G*olden *S*tatue
+        if(hasReward(player, 'GS'))
         {
             deadbody.sprite_index = haxxyStatue;
             deadbody.image_index = 0;
         }
         else
         { 
-            deadbody.sprite_index = sprite_index;
-            deadbody.image_index = CHARACTER_ANIMATION_DEAD;
+            deadbody.sprite_index = spriteDead;
+            deadbody.image_index = 0;
         }
         deadbody.hspeed=hspeed;
         deadbody.vspeed=vspeed;
-        if(hspeed>0) {
+        if(hspeed>0)
+        {
             deadbody.image_xscale = -1;  
         }
+        if(hasClassReward(victim, "DeathMoney_"))
+            deadbody.hasMoney = true;
+        player.corpse = deadbody;
+    }
+    
+    if(hasTombstone)
+    {
+        global.paramCharacter = id;
+        instance_create(x, y, Tombstone);
     }
 }
 
-if (global.gg_birthday){
+if (victim.object.has_crown) {
+    myHat = instance_create(victim.object.x,victim.object.y,CrownGib);
+    myHat.image_index = victim.team;
+}
+if (victim.object.has_navigatorhat) {
+    myHat = instance_create(victim.object.x,victim.object.y,NavigatorHatGib);
+    myHat.image_index = victim.team;
+}
+if (victim.object.has_partyhat){
     myHat = instance_create(victim.object.x,victim.object.y,PartyHat);
     myHat.image_index = victim.team;
 }
@@ -193,6 +256,12 @@ if (global.xmas){
     myHat.image_index = victim.team;
 }
 
+if (hasReward(victim, 'Ghost') and victim.ghost == noone) {
+    victim.ghost = instance_create(victim.object.x, victim.object.y, Ghost);
+    victim.ghost.owner = victim;
+    victim.ghost.hspeed = hspeed;
+    victim.ghost.vspeed = vspeed;
+}
 
 with(victim.object) {       
     instance_destroy();
@@ -201,7 +270,7 @@ with(victim.object) {
 //*************************************
 //*         Deathcam
 //*************************************
-if( global.killCam and victim == global.myself and killer and killer != victim and !(damageSource == KILL_BOX || damageSource == FRAG_BOX || damageSource == FINISHED_OFF || damageSource == FINISHED_OFF_GIB || damageSource == GENERATOR_EXPLOSION)) {
+if( global.killCam and victim == global.myself and killer and killer != victim and !(damageSource == DAMAGE_SOURCE_KILL_BOX || damageSource == DAMAGE_SOURCE_FRAG_BOX || damageSource == DAMAGE_SOURCE_FINISHED_OFF || damageSource == DAMAGE_SOURCE_FINISHED_OFF_GIB || damageSource == DAMAGE_SOURCE_GENERATOR_EXPLOSION)) {
     instance_create(0,0,DeathCam);
     DeathCam.killedby=killer;
     DeathCam.name=killer.name;
@@ -209,4 +278,16 @@ if( global.killCam and victim == global.myself and killer and killer != victim a
     DeathCam.oldyview=view_yview[0];
     DeathCam.lastDamageSource=damageSource;
     DeathCam.team = global.myself.team;
+}
+
+// Gamemode considerations
+if (instance_exists(TeamDeathmatchHUD) and killer and killer != victim)
+{
+    if (killer.team != victim.team)
+    {
+        if (killer.team == TEAM_RED)
+            global.redCaps += 1;
+        else if (killer.team == TEAM_BLUE)
+            global.blueCaps += 1;
+    }
 }

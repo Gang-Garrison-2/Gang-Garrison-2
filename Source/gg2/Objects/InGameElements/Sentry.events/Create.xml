@@ -26,10 +26,14 @@ ubered=0;
 image_speed = 0;
 landed=0;
 humiliated = 0;
+buildrate = 1.2;
+
+// For self-knockback when destroyed
+blastRadius = 65;
+knockback = 4;
        
-lastDamageDealer = -1;
+lastDamageDealer = noone;
 lastDamageSource = -1;
-secondToLastDamageDealer = -1;
 
 idleTimer = true;
 </argument>

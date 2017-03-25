@@ -1,10 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <constants>
-  <constant name="VERSION" value="24500"/>
-  <constant name="GAME_VERSION_STRING" value="&quot;v2.4.5&quot;"/>
+  <constant name="VERSION" value="28300"/>
+  <constant name="GAME_VERSION_STRING" value="&quot;v2.8.3&quot;"/>
   <constant name="GAME_NAME_STRING" value="&quot;Gang Garrison 2&quot;"/>
-  <constant name="GAME_URL_STRING" value="&quot;http://www.ganggarrison.com/&quot;"/>
-  <constant name="PROTOCOL_UUID" value="&quot;31ce5361-4852-9d95-3ac2-2b3a07219a40&quot;"/>
+  <constant name="GAME_URL_STRING" value="&quot;http://www.ganggarrison.com&quot;"/>
+  <constant name="PLUGIN_SOURCE" value="&quot;http://www.ganggarrison.com/plugins/&quot;"/>
+  <constant name="PLUGIN_SOURCE_NOTICE" value="&quot;While these plugins have been screened by the Gang Garrison 2 community, they cannot guarantee they are safe.&quot;"/>
+  <constant name="BACKGROUND_SOURCE" value="&quot;http://www.ganggarrison.com/background.png&quot;"/>
+  <constant name="DEVMESSAGES_SOURCE" value="&quot;http://www.ganggarrison.com/devmessages.txt&quot;"/>
+  <constant name="DEVMESSAGES_SOURCE_BETA" value="&quot;http://www.ganggarrison.com/devmessages_beta.txt&quot;"/>
+  <constant name="UPDATE_SOURCE" value="&quot;http://www.ganggarrison.com/gg2update.zip&quot;"/>
+  <constant name="UPDATE_SOURCE_BETA" value="&quot;http://www.ganggarrison.com/gg2update_beta.zip&quot;"/>
+  <constant name="LOBBY_SERVER_HOST" value="&quot;ganggarrison.com&quot;"/>
+  <constant name="LOBBY_SERVER_PORT" value="29944"/>
+  <constant name="AUTH_SERVER_HOST" value="&quot;ganggarrison.com&quot;"/>
+  <constant name="AUTH_SERVER_PORT" value="45022"/>
+  <constant name="PROTOCOL_UUID" value="&quot;afbe5e94-4db9-a97e-3a26-63ab3cb2a618&quot;"/>
   <constant name="GG2_LOBBY_UUID" value="&quot;1ccf16b1-436d-856f-504d-cc1af306aaa7&quot;"/>
   <constant name="HELLO" value="0"/>
   <constant name="PLAYER_JOIN" value="1"/>
@@ -43,21 +54,28 @@
   <constant name="SERVER_KICK" value="36"/>
   <constant name="KICK" value="37"/>
   <constant name="KICK_NAME" value="38"/>
+  <constant name="ARENA_STARTROUND" value="39"/>
   <constant name="TOGGLE_ZOOM" value="40"/>
   <constant name="RETURN_INTEL" value="41"/>
   <constant name="INCOMPATIBLE_PROTOCOL" value="42"/>
   <constant name="JOIN_UPDATE" value="43"/>
   <constant name="DOWNLOAD_MAP" value="44"/>
   <constant name="SENTRY_POSITION" value="45"/>
-  <constant name="I_AM_A_HAXXY_WINNER" value="50"/>
-  <constant name="HAXXY_CHALLENGE_CODE" value="51"/>
-  <constant name="HAXXY_CHALLENGE_RESPONSE" value="52"/>
+  <constant name="REWARD_UPDATE" value="49"/>
+  <constant name="REWARD_REQUEST" value="50"/>
+  <constant name="REWARD_CHALLENGE_CODE" value="51"/>
+  <constant name="REWARD_CHALLENGE_RESPONSE" value="52"/>
   <constant name="MESSAGE_STRING" value="53"/>
   <constant name="WEAPON_FIRE" value="54"/>
-  <constant name="HAXXY_PUBLIC_KEY" value="&quot;70095e0fd9754e5a3ce2cb32f109148e&quot;"/>
+  <constant name="PLUGIN_PACKET" value="55"/>
+  <constant name="KICK_BAD_PLUGIN_PACKET" value="56"/>
+  <constant name="PING" value="57"/>
+  <constant name="CLIENT_SETTINGS" value="58"/>
+  <constant name="KICK_MULTI_CLIENT" value="59"/>
   <constant name="TEAM_RED" value="0"/>
   <constant name="TEAM_BLUE" value="1"/>
   <constant name="TEAM_SPECTATOR" value="2"/>
+  <constant name="TEAM_ANY" value="3"/>
   <constant name="CLASS_SCOUT" value="0"/>
   <constant name="CLASS_SOLDIER" value="1"/>
   <constant name="CLASS_SNIPER" value="2"/>
@@ -70,20 +88,7 @@
   <constant name="CLASS_QUOTE" value="9"/>
   <constant name="CHARACTER_ANIMATION_NORMAL" value="0"/>
   <constant name="CHARACTER_ANIMATION_INTEL" value="2"/>
-  <constant name="CHARACTER_ANIMATION_LEN" value="2"/>
-  <constant name="CHARACTER_ANIMATION_DEAD" value="5"/>
-  <constant name="LOBBY_SERVER_HOST" value="&quot;ganggarrison.com&quot;"/>
-  <constant name="LOBBY_SERVER_PORT" value="29944"/>
-  <constant name="WSAEWOULDBLOCK" value="-10035"/>
-  <constant name="WSAENETDOWN" value="-10050"/>
-  <constant name="WSAENETRESET" value="-10052"/>
-  <constant name="WSAECONNABORTED" value="-10053"/>
-  <constant name="WSAECONNRESET" value="-10054"/>
-  <constant name="WSAENOBUFS" value="-10055"/>
-  <constant name="WSAENOTCONN" value="-10057"/>
-  <constant name="WSAESHUTDOWN" value="-10058"/>
-  <constant name="WSAETIMEDOUT" value="-10060"/>
-  <constant name="WSAEHOSTUNREACH" value="-10065"/>
+  <constant name="CHARACTER_ANIMATION_LEN" value="4"/>
   <constant name="MAX_PLAYERNAME_LENGTH" value="20"/>
   <constant name="STATE_UPDATE" value="8"/>
   <constant name="KILLS" value="0"/>
@@ -99,33 +104,6 @@
   <constant name="DOMINATIONS" value="10"/>
   <constant name="REVENGE" value="11"/>
   <constant name="POINTS" value="12"/>
-  <constant name="WEAPON_SCATTERGUN" value="1"/>
-  <constant name="WEAPON_ROCKETLAUNCHER" value="2"/>
-  <constant name="WEAPON_SHOTGUN" value="3"/>
-  <constant name="WEAPON_REVOLVER" value="4"/>
-  <constant name="WEAPON_QROCKETLAUNCHER" value="5"/>
-  <constant name="WEAPON_MINEGUN" value="6"/>
-  <constant name="WEAPON_NEEDLEGUN" value="7"/>
-  <constant name="WEAPON_RIFLE" value="8"/>
-  <constant name="WEAPON_MINIGUN" value="9"/>
-  <constant name="WEAPON_FLAMETHROWER" value="10"/>
-  <constant name="WEAPON_SENTRYTURRET" value="11"/>
-  <constant name="WEAPON_BLADE" value="12"/>
-  <constant name="WEAPON_KNIFE" value="13"/>
-  <constant name="WEAPON_REFLECTED_ROCKET" value="14"/>
-  <constant name="WEAPON_REFLECTED_STICKY" value="15"/>
-  <constant name="FRAG_BOX" value="16"/>
-  <constant name="KILL_BOX" value="17"/>
-  <constant name="FINISHED_OFF" value="18"/>
-  <constant name="FINISHED_OFF_GIB" value="19"/>
-  <constant name="BID_FAREWELL" value="20"/>
-  <constant name="WEAPON_BUBBLE" value="21"/>
-  <constant name="GENERATOR_EXPLOSION" value="22"/>
-  <constant name="WEAPON_RIFLE_CHARGED" value="23"/>
-  <constant name="WEAPON_BACKSTAB" value="24"/>
-  <constant name="WEAPON_FLARE" value="25"/>
-  <constant name="WEAPON_REFLECTED_FLARE" value="26"/>
-  <constant name="PITFALL" value="27"/>
   <constant name="ASSIST_TIME" value="120"/>
   <constant name="NOTICE_NUTSNBOLTS" value="0"/>
   <constant name="NOTICE_TOOCLOSE" value="1"/>
@@ -141,6 +119,20 @@
   <constant name="PARTICLES_ALTERNATIVE" value="2"/>
   <constant name="MOUSE_LEFT" value="9001"/>
   <constant name="MOUSE_RIGHT" value="9002"/>
-  <constant name="HP_PER_POINT" value="400"/>
+  <constant name="HP_PER_POINT" value="800"/>
   <constant name="INTEL_MAX_TIMER" value="900"/>
+  <constant name="MUSIC_MENU_ONLY" value="0"/>
+  <constant name="MUSIC_BOTH" value="1"/>
+  <constant name="MUSIC_INGAME_ONLY" value="2"/>
+  <constant name="MUSIC_NONE" value="3"/>
+  <constant name="BOOT_BEHAVIOUR" value="0"/>
+  <constant name="BOOT_STANDARD" value="0"/>
+  <constant name="BOOT_DEBUG" value="1"/>
+  <constant name="STRING" value="0"/>
+  <constant name="REAL" value="1"/>
+  <constant name="BOOL" value="2"/>
+  <constant name="HEX" value="3"/>
+  <constant name="GEAR_PARTY_HAT" value="&quot;PartyHat&quot;"/>
+  <constant name="GEAR_CROWN" value="&quot;Crown&quot;"/>
+  <constant name="GEAR_NAVIGATORHAT" value="&quot;NavigatorHat&quot;"/>
 </constants>

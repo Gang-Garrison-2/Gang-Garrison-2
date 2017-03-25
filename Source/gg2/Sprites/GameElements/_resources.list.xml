@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
-  <resource name="MenuBackgroundS" type="RESOURCE"/>
   <resource name="MenuBackgroundVersionS" type="RESOURCE"/>
   <resource name="popupButtonS" type="RESOURCE"/>
   <resource name="FaucetLogoS" type="RESOURCE"/>
   <resource name="CreditsS" type="RESOURCE"/>
   <resource name="gg2FontS" type="RESOURCE"/>
+  <resource name="timerFontS" type="RESOURCE"/>
+  <resource name="countFontS" type="RESOURCE"/>
 </resources>

@@ -13,12 +13,11 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if(other.id != ownerPlayer.object and other.team != team  &amp;&amp; other.hp &gt; 0 &amp;&amp; other.ubered == 0)
+        <argument kind="STRING">if(other.id != ownerPlayer.object and other.team != team  and other.hp &gt; 0 and !other.ubered)
 {
     if(!collision_line(x,y-12,other.x,other.y,Obstacle,true,true)) and (!collision_line(x,y-12,other.x,other.y,TeamGate,true,true) and (!collision_line(x,y-12,other.x,other.y,BulletWall,true,true)))
     {
-        other.hp -= hitDamage;
-        other.timeUnscathed = 0;
+        damageCharacter(ownerPlayer, other.id, hitDamage);
         if (other.lastDamageDealer != ownerPlayer &amp;&amp; other.lastDamageDealer != other.player)
         {
             other.secondToLastDamageDealer = other.lastDamageDealer;
@@ -27,9 +26,9 @@
         other.alarm[3] = ASSIST_TIME;
         other.lastDamageDealer = ownerPlayer;
         if sign(other.image_xscale) == sign(image_xscale)
-            other.lastDamageSource = WEAPON_BACKSTAB;
+            other.lastDamageSource = DAMAGE_SOURCE_BACKSTAB;
         else
-            other.lastDamageSource = WEAPON_KNIFE;
+            other.lastDamageSource = DAMAGE_SOURCE_KNIFE;
         var blood;
         if(global.gibLevel &gt; 0)
         {
@@ -41,7 +40,7 @@
         }
         
         numKills += 1;
-        if numKills &gt;= maxKills
+        if (numKills &gt;= maxKills)
             instance_destroy();
     }
     else

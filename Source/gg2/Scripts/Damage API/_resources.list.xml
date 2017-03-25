@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="dealDamage" type="RESOURCE"/>
+  <resource name="damageCharacter" type="RESOURCE"/>
+  <resource name="damageSentry" type="RESOURCE"/>
+  <resource name="damageAuto" type="RESOURCE"/>
+  <resource name="damageGenerator" type="RESOURCE"/>
+  <resource name="dealFlicker" type="RESOURCE"/>
+</resources>

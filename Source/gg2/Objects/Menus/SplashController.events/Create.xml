@@ -13,13 +13,11 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">{
-    game_init();
-    alarm[0] = 30;
-    alarm[1] = 240;
-    AudioControlPlaySong(global.FaucetMusic);
-    image_speed=0;
-}</argument>
+        <argument kind="STRING">alarm[0] = 30;
+alarm[1] = 240;
+image_speed=0;
+
+</argument>
       </arguments>
     </action>
   </actions>

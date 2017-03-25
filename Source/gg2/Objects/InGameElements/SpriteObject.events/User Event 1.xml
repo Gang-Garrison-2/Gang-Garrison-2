@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="OTHER" id="11">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">resource = readProperty(other.properties, "resource", STRING, "");
+ds_list_add(other.specialEntities, id);
+
+var scale;
+scale = readProperty(other.properties, "scale", REAL, 1);
+if (scale != 1)
+{
+    image_xscale = scale;
+    image_yscale = scale;
+}
+
+fade = readProperty(other.properties, "fade", BOOL, fade);
+animationSpeed = readProperty(other.properties, "animationspeed", REAL, animationSpeed) * global.delta_factor;
+depth = readProperty(other.properties, "depth", REAL, depth);
+opacity = readProperty(other.properties, "opacity", REAL, opacity);
+trigger = readProperty(other.properties, "trigger", REAL, trigger);
+triggerDistance = readProperty(other.properties, "distance", REAL, triggerDistance);
+
+image_alpha = opacity;
+if (trigger == 0)
+    image_speed = animationSpeed;
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

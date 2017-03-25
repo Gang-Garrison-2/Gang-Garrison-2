@@ -14,18 +14,30 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">{
-    hspeed/=1.1;
-    if(abs(hspeed)&lt;0.2) {
+    hspeed /= 1.1;
+    if(abs(hspeed)&lt;0.2)
         hspeed=0;
-    }    
     
-    if(place_free(x,y+1)) {
-        vspeed += 0.6;
-        if(vspeed&gt;10) {
-            vspeed=10;
-        }
+    wallSetSolid();
+    if(place_free(x, y+1))
+    {
+        vspeed += 0.6 * global.delta_factor;
+        if(vspeed &gt; 10)
+            vspeed = 10;
     }
-}</argument>
+    else
+    {
+        vspeed = 0;
+        move_outside_solid(90, 10);
+    }
+    wallUnsetSolid();
+    
+    x += hspeed * global.delta_factor;
+    y += vspeed * global.delta_factor;
+    x -= hspeed;
+    y -= vspeed;
+}
+</argument>
       </arguments>
     </action>
   </actions>

@@ -34,7 +34,15 @@ with(PlayerControl)
 if (global.attemptPortForward and portForwarded)
     upnp_release_port(string(global.hostingPort), "TCP")
 
-room_goto_fix(Menu);
+if (instance_exists(Builder))
+    room_goto_fix(BuilderRoom);
+else
+    room_goto_fix(Menu);
+
+if (global.serverPluginsInUse)
+    pluginscleanup();
+    
+set_synchronization(global.monitorSync);
 </argument>
       </arguments>
     </action>

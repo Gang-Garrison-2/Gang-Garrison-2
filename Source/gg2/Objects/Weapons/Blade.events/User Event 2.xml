@@ -14,29 +14,23 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">{
-    if(readyToShoot and bladesOut&lt;maxBlades)
+    if(readyToShoot and bladesOut &lt; maxBlades)
     {
         replenishing = 0;
         playsound(x,y,BladeSnd);
         var shot;
         randomize();
-        shot = instance_create(x+lengthdir_x(5, owner.aimDirection), y+lengthdir_y(5, owner.aimDirection), BladeB);
-        shot.direction = owner.aimDirection;
-        shot.speed = 12;
-        shot.owner = owner;
-        shot.ownerPlayer = ownerPlayer;
-        shot.team = owner.team;
+        shot = createShot(x+lengthdir_x(5, owner.aimDirection), y+lengthdir_y(5, owner.aimDirection), BladeB, DAMAGE_SOURCE_BLADE, owner.aimDirection, 12);
         if(ammoCount &gt; highAmmoThreshold)
             shot.hitDamage = bladeDamage;
         else if(ammoCount &lt; lowAmmoThreshold)
             shot.hitDamage = depletedBladeDamage;
         else
             shot.hitDamage = (ammoCount-lowAmmoThreshold)/(highAmmoThreshold-lowAmmoThreshold)*(bladeDamage-depletedBladeDamage)+depletedBladeDamage;
-        alarm[0] = refireTime;
-        shot.alarm[0] = bladeLife;
-        alarm[5] = bladeLife; //this isn't for when the blade actually dies, but the longest it could live
+        alarm[0] = refireTime / global.delta_factor;
+        shot.alarm[0] = bladeLife / global.delta_factor;
+        alarm[5] = bladeLife / global.delta_factor; //this isn't for when the blade actually dies, but the longest it could live
         bladesOut += 1;
-        shot.weapon = WEAPON_BLADE;
         with(shot)
             hspeed += owner.hspeed;
         justShot = true;

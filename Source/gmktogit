@@ -1,0 +1,3 @@
+#!/bin/sh
+rm -r gg2
+java -jar gmksplit.jar gg2.gmk gg2

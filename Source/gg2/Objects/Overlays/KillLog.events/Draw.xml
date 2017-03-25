@@ -25,13 +25,13 @@ draw_set_valign(fa_center);
 
 for (i = 0; i &lt; ds_list_size(kills); i += 1) {
     map = ds_list_find_value(kills, i);
-    n1 = ds_map_find_value(map, "name1"); // Name of the Player who killed
+    n1 = sanitiseNewlines(ds_map_find_value(map, "name1")); // Name of the Player who killed
     t1 = ds_map_find_value(map, "team1"); // Their team
     w1 = ds_map_find_value(map, "weapon"); // Their weapon sprite
-    n2 = ds_map_find_value(map, "name2"); // Name of the Player who died
+    n2 = sanitiseNewlines(ds_map_find_value(map, "name2")); // Name of the Player who died
     t2 = ds_map_find_value(map, "team2"); // Their team
     in = ds_map_find_value(map, "inthis"); // Am I involved in this event?
-    str = ds_map_find_value(map, "string"); // Special text: Finish off, bid farewell, domination, revenge
+    str = sanitiseNewlines(ds_map_find_value(map, "string")); // Special text: Finish off, bid farewell, domination, revenge
     
     draw_set_alpha(1);
     if (in)

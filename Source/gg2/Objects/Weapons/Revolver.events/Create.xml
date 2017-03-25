@@ -14,34 +14,45 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">{
-    xoffset=-3;
-    yoffset=-6;
-    refireTime=18;
+    xoffset = -3;
+    yoffset = -6;
+    refireTime = 18;
+    event_inherited();
+    
     StabreloadTime = 32;
     readyToStab = true;
 
     stabdirection=0;
     maxAmmo = 6;
     ammoCount = maxAmmo;
-    reloadTime = 30;
+    ejected = 0;
+    reloadTime = 45;
     reloadBuffer = refireTime;
     idle=true;
+    
+    if(golden)
+    {
+        normalSprite = RevolverGoldS;
+        recoilSprite = RevolverGoldFS;
+        reloadSprite = RevolverGoldFRS;
+    }
+    else
+    {
+        normalSprite = RevolverS;
+        recoilSprite = RevolverFS;
+        reloadSprite = RevolverFRS;
+    }
+    sprite_index = normalSprite;
+    
+    recoilTime = refireTime;
+    recoilAnimLength = sprite_get_number(recoilSprite)/2;
+    recoilImageSpeed = recoilAnimLength/recoilTime;
+    
+    reloadAnimLength = sprite_get_number(reloadSprite)/2;
+    reloadImageSpeed = reloadAnimLength/reloadTime;
 }
 </argument>
       </arguments>
-    </action>
-    <action id="604" library="1">
-      <!--action name: Inherited-->
-      <kind>NORMAL</kind>
-      <allowRelative>false</allowRelative>
-      <question>false</question>
-      <canApplyTo>false</canApplyTo>
-      <actionType>FUNCTION</actionType>
-      <functionName>action_inherited</functionName>
-      <relative>false</relative>
-      <not>false</not>
-      <appliesTo>.self</appliesTo>
-      <arguments/>
     </action>
   </actions>
 </event>

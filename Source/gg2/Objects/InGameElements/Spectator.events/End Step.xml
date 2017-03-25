@@ -13,7 +13,10 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if(global.myself.object != -1)
+        <argument kind="STRING">if (global.myself != -1)
+    myTeam = global.myself.team;
+
+if(global.myself.object != -1)
     instance_destroy();
 
 var moved;
@@ -21,26 +24,33 @@ moved = false;
 stopTracking = false;
 
 //moving view - mapped keys
-if keyboard_check(global.left)
+if(!instance_exists(MenuController))
 {
-    if x &gt; 400 x-=20;
-    moved = true;
-}
-else if keyboard_check(global.right)
-{
-    if x &lt; map_width()-400 x+=20;
-    moved = true;
-}
-
-if keyboard_check(global.jump)
-{
-    if y &gt; 300 y-=20;
-    moved = true;
-}
-else if keyboard_check(global.down)
-{
-    if y &lt; map_height()-300 y+=20;
-    moved = true;
+    if keyboard_check(global.left)
+    {
+        if (x &gt; view_wview/2)
+            x -= 20 * global.delta_factor;
+        moved = true;
+    }
+    else if keyboard_check(global.right)
+    {
+        if (x &lt; map_width()-view_wview/2)
+            x += 20 * global.delta_factor;
+        moved = true;
+    }
+    
+    if keyboard_check(global.jump)
+    {
+        if (y &gt; view_hview/2)
+            y -= 20 * global.delta_factor;
+        moved = true;
+    }
+    else if keyboard_check(global.down)
+    {
+        if (y &lt; map_height()-view_hview/2)
+            y += 20 * global.delta_factor;
+        moved = true;
+    }
 }
 
 if(moved)
@@ -50,18 +60,28 @@ if(moved)
 }
 else if(tracking)
 {
-    if(instance_exists(player))
+    if (instance_exists(player))
     {
         if(player.team != TEAM_SPECTATOR)
         {
             if(player.object)
             {
-                x = round(player.object.x);
-                y = round(player.object.y);
+                if(!(player.object.cloak &amp;&amp; player.team != myTeam))
+                {
+                    x = round(player.object.x);
+                    y = round(player.object.y);
+                }
+                else
+                    stopTracking = true;
             }
         }
         else
             stopTracking = true;
+        if (instance_exists(player.corpse) and !player.object and tracking)
+        {
+            x = round(player.corpse.x);
+            y = round(player.corpse.y);
+        }
     }
     else
         stopTracking = true;
@@ -73,13 +93,21 @@ if(tracking and stopTracking)
 }
 
 // Clip view to map area
-x = max(view_wview/2, min(map_width()-view_wview/2, x));
-y = max(view_hview/2, min(map_height()-view_hview/2, y));
-
+// We want a different area depending on whether we're tracking a player or not.
+if(!tracking)
+{
+    x = max(view_wview/2, min(map_width()-view_wview/2, x));
+    y = max(view_hview/2, min(map_height()-view_hview/2, y));
+}
+else // We're tracking a player, so allow the view to show area from off of the map
+{
+    x = max(0, min(map_width(), x));
+    y = max(0, min(map_height(), y));
+}
 view_xview = x-view_wview/2;
 view_yview = y-view_hview/2;
 
-afktimer-=1;
+afktimer -= 1 * global.delta_factor;
 
 if((afktimer&lt;=0) and global.isHost==false)
 {

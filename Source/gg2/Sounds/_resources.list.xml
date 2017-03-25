@@ -42,4 +42,5 @@
   <resource name="SentryFloorSnd" type="RESOURCE"/>
   <resource name="SentryBuildSnd" type="RESOURCE"/>
   <resource name="PickupSnd" type="RESOURCE"/>
+  <resource name="ImpactSnd" type="RESOURCE"/>
 </resources>

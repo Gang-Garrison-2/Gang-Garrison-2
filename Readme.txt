@@ -55,7 +55,7 @@ A: Scroll Camera Left
 S: Scroll Camera Down
 D: Scroll Camera Right
 
-Numpad +/-: Scroll through the players
+Numpad +/- or Mouse buttons: Scroll through the players
 
 All controls can be remapped in Options->Controls.
 
@@ -99,17 +99,17 @@ Meet The Overweight:
 	a heavy weapon that will shred
 	enemies! He can sure eat, too!
    Hit Points: 200
-   Weapon: Chaingun
+   Weapon: Minigun
    Special abilities: 
-           Manvich - Right-Click to eat a tasty Manvich to fill your belly and recover HP! 
-                     You get infinite Manviches so make sure you eat up!
+           Manvich - Right-Click to eat a tasty Manvich to fill your belly and recover all HP! 
+                     Your Manvich has a cooldown so make sure you choose a good time to eat.
 
 Meet The Detonator:
 	A master of explosives, the
 	Detonator can shoot sticky mines
 	to any surface and set them off!
    Hit Points: 120
-   Weapon: Minebomb
+   Weapon: Minegun
    Special abilities: 
            Detonate Mines - Right-click to detonate all of your mines at once!
 
@@ -133,9 +133,9 @@ Meet The Constructor:
    Hit Points: 120
    Weapon: Shotgun
    Special abilities: 
-	   Build Tool - Right-click to open the Build menu and build or destroy
-			an autogun! Each autogun costs 100 Nuts and Bolts to make.
-           Passive Regeneration - You recover Nuts and Bolts slowly over time!
+	   Build Tool - Right-click to build or destroy an autogun! 
+			Each autogun costs 100 Nuts and Bolts to make.
+            Passive Regeneration - You recover Nuts and Bolts slowly over time!
            
 
 Meet The Infiltrator:
@@ -398,8 +398,8 @@ Overweight:
 Detonator:
 - You can detonate your mines in the air; they don't have to 'stick'
   to a surface to detonate!
-- Your mines get stronger the longer they are out, to a maximum of 50 
-  damage!
+- Your mines deal a maximum of 45 damage each to players, and 50 to
+  buildings.
 - Sticky mines can destroy other detonator's mines with an explosion!
 - Shoot a sticky and detonate it at the same time while pointing down
   to propel yourself like a Rocketman!
@@ -414,6 +414,8 @@ Constructor:
   destroyed autogun instantly gives you 50! Health cabinets also give
   you all your Nuts and Bolts back!
 - Autoguns can't shoot straight up, so watch out!
+- Your autogun will default to the direction you aim when you build
+  it, so be careful!
 
 Infiltrator:
 - The enemy can still hear you jump even if you are cloaked!
@@ -423,7 +425,9 @@ Infiltrator:
 
 Rifleman:
 - Stay moving in case an infiltrator is eyeing your back!
-- Scope out if you need to move around!
+- Your scope inhibits movement. Scope out if you need to move around!
+- Pick off enemies at a distance with charged shots, or "railgun"
+  them at close range without scoping for direct combat!
 
 Secret Class:
 - There is no secret class, and you can 'QQ' about it.
@@ -448,10 +452,10 @@ mrfredman, MedO, Synnah
 Programmers:
 MedO, Cube7 aka Chris P. Bacon, Andrew "cspotcode" Bradley, Vaati, Taimat, Findude, Juicebox360, Jebus_Chris,
 Leiche, Xeyk, pach, Austin "Psychopath" Benz, L, technoviking, AJF, Alexander "Wareya" Nadeau, Vindicator,
-NAGN and RebelINS
+NAGN, Orpheon, JaxOf7, Arctic and RebelINS
 
 Artists:
-mrfredman, Fishmatt, BassieEnAdriaan, Timohtep, Elkondo, Waterfall and Skeledude
+mrfredman, Fishmatt, BassieEnAdriaan, Timohtep, Elkondo, Waterfall, Skeledude, ZaSpai, Deuce, and Wareya
 
 Sound & Music:
 Synnah, Scoot, and Elkondo
@@ -462,23 +466,10 @@ fishmatt, vaati, king metroid, Taters, agh, Faust, Tarzan, BassieEnAdriaan, McGe
 With additional art and inspiration provided by the incredible Gang Garrison community!
 
 License:
-Copyright (C) 2008-2011 Faucet Software
+Copyright (C) 2008-2015 Faucet Software
 http://www.ganggarrison.com
 
-This program is free software; 
-you can redistribute it and/or modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; either version 3 of the License, or (at your option)
-any later version.
-This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; 
-without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
-See the GNU General Public License for more details.
-You should have received a copy of the GNU General Public License along with this program; if not,
-see <http://www.gnu.org/licenses>.
-
-Additional permission under GNU GPL version 3 section 7
-If you modify this Program, or any covered work, by linking or combining it with the Game Maker runtime library, 
-the 39dll library/extension, Hobbel's Download Manager DLL, or modified versions of these libraries,
-the licensors of this Program grant you additional permission to convey the resulting work.
+This game is open source under the terms of the Mozilla Public License, v. 2.0. If the source code has not been included along with the game, you can download it at http://www.ganggarrison.com.
 
 This is a demake of Team Fortress 2 by Valve Software. All likenesses and similarities 
 are intended as a respectful homage.
@@ -486,13 +477,17 @@ are intended as a respectful homage.
 This game uses the Faucet Networking extension by MedO, which is available under the terms of the ISC license.
 You can find more information on Faucet Networking at http://gmc.yoyogames.com/index.php?showtopic=498062.
 
-This game uses the Download Manager DLL, created by Hobbel.  It was wrapped into an extension by cspotcode.
-You can find more information on the Download Manager DLL at http://www.hobbl.com/gmdlls/downloadmanager
+This game uses the Faucet HTTP extension by ajf, which is available under the terms of the ISC license.
+You can find more information on Faucet HTTP at https://github.com/TazeTSchnitzel/Faucet-HTTP-Extension
 
 This game uses the Faucet Forwarding Extension, created by NAGN, which wraps libminiupnp.
 miniupnp is availible under the BSD license: see miniupnp.license for full license.
 You can find more about Faucet Forwarding at its GitHub Page:
 https://github.com/nagn/Faucet-Forwarding
+
+This game uses the 7-zip command line version, available under the LGPL, see 7zip.license for full license.
+You can find more information on it here: http://www.7-zip.org/
+
 Readme Changelog
 2/7/09 - fishmatt - cleaned everything up for 2.0
 5/3/09 - mrfredman - updated things for 2.1
@@ -500,3 +495,5 @@ Readme Changelog
 3/16/11 - Psychopath - updated things for 2.3
 3/31/11 - Medo - some more updating
 10/13/11 - Psychopath - updated things for 2.4
+9/12/13 - Wareya - ported to html
+9/14/13 - Arctic - fixed inconsistencies

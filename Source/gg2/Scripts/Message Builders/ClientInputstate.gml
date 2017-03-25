@@ -4,4 +4,6 @@
 
 write_ubyte(argument0, INPUTSTATE);
 write_ubyte(argument0, argument1);
-write_ushort(argument0, point_direction(global.myself.object.x, global.myself.object.y, mouse_x, mouse_y)*65536/360);
+write_ushort(argument0, point_direction(view_xview[0]+view_wview[0]/2, view_yview[0]+view_hview[0]/2, mouse_x, mouse_y)*65536/360);
+write_ubyte(argument0, min(255, point_distance(view_xview[0]+view_wview[0]/2, view_yview[0]+view_hview[0]/2, mouse_x, mouse_y)/2));
+

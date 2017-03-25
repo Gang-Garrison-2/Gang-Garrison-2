@@ -13,8 +13,8 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if(replenishing)
-    ammoCount = min(max(ammoCount + replenishingRate, 0), maxAmmo);
+        <argument kind="STRING">if (replenishing)
+    ammoCount = min(max(ammoCount + replenishingRate*global.delta_factor, 0), maxAmmo);
 </argument>
       </arguments>
     </action>

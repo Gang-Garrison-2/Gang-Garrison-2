@@ -21,7 +21,7 @@ if(spawner.team == TEAM_RED) {
     spawnY = ds_list_find_value(global.spawnPointsBlue[1,spawnGroup], spawnpointId);
 }
 
-character = getCharacterObject(spawner.team, spawner.class);
+character = getCharacterObject(spawner.class);
 if(character == -1) {
     show_message("Spawning a player did not succeed because his class and/or team were invalid.");
     exit;
@@ -34,12 +34,9 @@ if(spawner.object != -1) {
     spawner.object=-1;
 }
 
+global.paramPlayer = spawner;
 spawner.object = instance_create(spawnX,spawnY,character);
-spawner.object.player = spawner;
-spawner.object.team = spawner.team;
-with(spawner.object) {
-    event_user(0);
-}
+global.paramPlayer = noone;
 
 if (instance_exists(RespawnTimer)) {
     with(RespawnTimer) {

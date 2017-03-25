@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="STEP" id="2">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if (num_bgs == 0)
+    exit;   // Nothing to do here
+
+var i, xorigin, yorigin, xparallax, yparallax;
+for (i = 0; i &lt; num_bgs; i += 1)
+{
+    // origin of parallax happens to be the same as the screen shift
+    xorigin = view_xview + view_wview/2 - (background_width[i]*background_xscale[i])/2;
+    yorigin = view_yview + view_hview/2 - (background_height[i]*background_yscale[i])/2;
+    
+    // amount of parallax
+    if (background_xfactor[i] != 0)
+        xparallax = 1/power(background_xfactor[i], 2) * xorigin;
+    else
+        xparallax = xorigin;
+        
+    if (background_yfactor[i] != 0)
+        yparallax = 1/power(background_yfactor[i], 2) * yorigin;
+    else 
+        yparallax = yorigin;
+        
+    background_x[i] = xorigin - xparallax;
+    background_y[i] = yorigin - yparallax;
+}
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

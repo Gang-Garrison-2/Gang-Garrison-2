@@ -14,10 +14,11 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">{
-    if(other.id != ownerPlayer.object and other.team != team) {
+    if(other.id != ownerPlayer.object and other.team != team)
+    {
         if(!other.ubered)
         { 
-            other.hp -= hitDamage;
+            damageCharacter(ownerPlayer, other.id, hitDamage);
             other.timeUnscathed = 0;
             if (other.lastDamageDealer != ownerPlayer and other.lastDamageDealer != other.player)
             {
@@ -28,7 +29,8 @@
             other.lastDamageDealer = ownerPlayer;
             other.lastDamageSource = weapon;
             var blood;
-            if(global.gibLevel &gt; 0){
+            if(global.gibLevel &gt; 0)
+            {
                 repeat(25)
                 {
                     blood = instance_create(x,y,Blood);
@@ -36,12 +38,10 @@
                 }
             }
         }
-        with(other) {
+        with(other)
             motion_add(other.direction, other.speed*0.4);
-            cloakAlpha = max(cloakAlpha, 0.3);
-            cloakFlicker = true;
-            alarm[7] = 3;
-        }
+        dealFlicker(other.id);
+        
         instance_destroy();
     }
 }

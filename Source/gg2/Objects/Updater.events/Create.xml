@@ -15,7 +15,7 @@
       <arguments>
         <argument kind="STRING">// Downloading code. 
 
-var downloadHandle, updaterSuffix, window_oldshowborder, window_oldfullscreen;
+var downloadHandle, url, tmpfile, window_oldshowborder, window_oldfullscreen;
 timeLeft = 0;
 counter = 0;
 AudioControlPlaySong(-1, false);
@@ -25,16 +25,15 @@ window_set_fullscreen(false);
 window_set_showborder(false);
 
 if(global.updaterBetaChannel)
-    updaterSuffix = "_beta";
+    url = UPDATE_SOURCE_BETA;
 else
-    updaterSuffix = "";
+    url = UPDATE_SOURCE;
 
-if(file_exists("gg2update.exe"))
-    file_delete("gg2update.exe");
-downloadHandle = DM_CreateDownload("http://www.ganggarrison.com/gg2update"+updaterSuffix+".exe", "gg2update.exe");
-DM_StartDownload(downloadHandle);
+tmpfile = temp_directory + "\gg2update.zip";
+    
+downloadHandle = http_new_get(url);
 
-while(DM_DownloadStatus(downloadHandle) != 3) 
+while(!http_step(downloadHandle)) 
 { // while download isn't finished
     sleep(floor(1000/30)); // sleep for the equivalent of one frame
     io_handle(); // this prevents GameMaker from appearing locked-up
@@ -42,10 +41,7 @@ while(DM_DownloadStatus(downloadHandle) != 3)
     // check if the user cancelled the download with the esc key
     if(keyboard_check(vk_escape)) 
     {
-        DM_StopDownload(downloadHandle);
-        DM_CloseDownload(downloadHandle);
-        if(file_exists("gg2update.exe"))
-            file_delete("gg2update.exe");
+        http_destroy(downloadHandle);
         window_set_showborder(window_oldshowborder);
         window_set_fullscreen(window_oldfullscreen);
         room_goto_fix(Menu);
@@ -62,32 +58,72 @@ while(DM_DownloadStatus(downloadHandle) != 3)
     seconds=floor(timer-minutes*60);
     draw_text(x,y-20,string(minutes) + " minutes " + string(seconds) + " seconds Remaining...");
     counter+=1;
-    progressBar = floor(DM_GetCompleted(downloadHandle)/5);
-    offset = 3;
-    for(i=0;i&lt;progressBar;i+=1){
-        draw_sprite(UpdaterProgressS,0,x+offset,y);
-        offset+=12;
+    var progress, size;
+    progress = http_response_body_progress(downloadHandle);
+    size = http_response_body_size(downloadHandle);
+    // If the URL we fetch is a redirect with no body, size might briefly be 0
+    // Also, Faucet HTTP reports an unknown size as -1
+    if (size &gt; 0)
+    {
+        progressBar = floor((progress/size) * 20);
+        offset = 3;
+        for(i=0;i&lt;progressBar;i+=1){
+            draw_sprite(UpdaterProgressS,0,x+offset,y);
+            offset+=12;
+        }
     }
     screen_refresh();
 }
-DM_StopDownload(downloadHandle);
-DM_CloseDownload(downloadHandle);
-
-// let's extract the downloaded file now.
-if(file_exists("gg2update.exe"))
+// Errored
+if (http_status_code(downloadHandle) != 200)
 {
-    execute_program("cmd",'/C @echo Updating Gang Garrison 2, please wait... &amp;&amp; ping 127.0.0.1 -n 5 &gt;NUL &amp;&amp; gg2update.exe &amp;&amp; del gg2update.exe &amp;&amp; start "Gang Garrison 2" "Gang Garrison 2.exe"', false);
-    game_end();
-    exit;
-}
-else
-{
+    show_message("Downloading update failed!#" + string(http_status_code(downloadHandle)) + " " + http_reason_phrase(downloadHandle));
+    http_destroy(downloadHandle);
     window_set_showborder(window_oldshowborder);
     window_set_fullscreen(window_oldfullscreen);
-    show_message("Error updating: Missing update.bat or gg2update.exe");
     room_goto_fix(Menu);
     exit;
 }
+
+write_buffer_to_file(http_response_body(downloadHandle), tmpfile);
+http_destroy(downloadHandle);
+
+if(!file_exists(tmpfile))
+{
+    window_set_showborder(window_oldshowborder);
+    window_set_fullscreen(window_oldfullscreen);
+    show_message("Error updating: Missing gg2update.zip in temp directory, download failed(?)");
+    room_goto_fix(Menu);
+    exit;
+}
+
+// rename existing "Gang Garrison 2.exe" to avoid conflict when extracting
+if (file_exists("Gang Garrison 2.exe"))
+{
+    var newName, n;
+    n = 1;
+    
+    // increment until unused name found
+    do
+    {
+        newName = "gg2-old.delete.me." + string(n);
+        n += 1;
+    }
+    until(!file_exists(newName));
+
+    file_rename("Gang Garrison 2.exe", newName);
+}
+
+
+
+// let's extract the downloaded file now.
+extractzip(tmpfile, working_directory);
+
+// run new version    
+execute_program("Gang Garrison 2.exe", "", false);
+
+// exit
+game_end();
 </argument>
       </arguments>
     </action>
