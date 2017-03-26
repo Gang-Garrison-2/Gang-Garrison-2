@@ -387,7 +387,7 @@ do {
                     if(hp < 200)
                     {
                         canEat = false;
-                        alarm[6] = eatCooldown; //10 second cooldown
+                        alarm[6] = eatCooldown / global.delta_factor; //10 second cooldown
                     }
                     omnomnomnomindex=0;
                     omnomnomnomend=32;

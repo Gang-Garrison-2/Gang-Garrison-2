@@ -52,7 +52,7 @@
         
         other.burnedBy = ownerPlayer;
         other.afterburnSource = weapon;
-        other.alarm[0] = other.decayDelay;
+        other.alarm[0] = other.decayDelay / global.delta_factor;
     }
     dealFlicker(other.id);
     

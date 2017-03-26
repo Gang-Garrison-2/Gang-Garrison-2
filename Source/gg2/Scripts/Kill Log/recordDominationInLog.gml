@@ -33,5 +33,5 @@
                 ds_list_delete(kills, 0);
             }
             
-            alarm[0] = 30*5;
+            alarm[0] = 30*5 / global.delta_factor;
         }

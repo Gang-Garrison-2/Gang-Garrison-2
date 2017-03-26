@@ -172,7 +172,7 @@ while(commandLimitRemaining > 0) {
                                 doEventPlayerDeath(player, lastDamageDealer, assistant, DAMAGE_SOURCE_FINISHED_OFF);
                             }
                         }
-                        player.alarm[5] = global.Server_Respawntime;
+                        player.alarm[5] = global.Server_Respawntime / global.delta_factor;
                     }
                     else if(player.alarm[5]<=0)
                         player.alarm[5] = 1;                    
