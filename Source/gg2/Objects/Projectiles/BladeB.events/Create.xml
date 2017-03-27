@@ -17,7 +17,7 @@
     hitDamage = 5;
     alarm[0] = 15;
     ammoDrained = 0;
-	image_speed = 0;
+	image_speed = global.delta_factor;
 }
 </argument>
       </arguments>

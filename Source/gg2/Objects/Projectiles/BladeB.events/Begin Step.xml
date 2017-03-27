@@ -18,9 +18,6 @@
 else
     image_xscale = 1;
 
-if(global.run_virtual_ticks)
-    image_index+=1
-
 </argument>
       </arguments>
     </action>
