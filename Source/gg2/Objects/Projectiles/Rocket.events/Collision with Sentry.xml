@@ -14,7 +14,7 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">if(team != other.team) {
-    characterHit=other;
+    characterHit=other.id;
     event_user(5);
 }
 

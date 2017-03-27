@@ -20,7 +20,7 @@
         {
             dealFlicker(id);
         }
-        characterHit = other;
+        characterHit = other.id;
         other.solid = true;
         really_move_contact_solid(direction, speed);
         other.solid = false;
