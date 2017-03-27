@@ -70,7 +70,7 @@ if (global.autobalance == 1 && !instance_exists(ArenaHUD) && global.winners == -
                 instance_destroy();
             }
             balanceplayer.object = -1;
-            balanceplayer.alarm[5] = global.Server_Respawntime;
+            balanceplayer.alarm[5] = global.Server_Respawntime / global.delta_factor;
         }
         
         write_ubyte(global.sendBuffer, BALANCE);
