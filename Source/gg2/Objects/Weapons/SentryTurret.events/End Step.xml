@@ -141,7 +141,7 @@ if(!nearestTarget) {
                     nearestTarget.alarm[4] = nearestTarget.alarm[3];
                 }
             }
-            nearestTarget.alarm[3] = ASSIST_TIME;
+            nearestTarget.alarm[3] = ASSIST_TIME / global.delta_factor;
             nearestTarget.lastDamageDealer = ownerPlayer;
             nearestTarget.lastDamageSource = DAMAGE_SOURCE_SENTRYTURRET;
             if(global.gibLevel &gt; 0 and object_is_ancestor(nearestTarget.object_index, Character))

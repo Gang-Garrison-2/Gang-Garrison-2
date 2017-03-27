@@ -49,7 +49,7 @@
                         alarm[4] = alarm[3]
                     }
                     if (other.ownerPlayer != id or (instance_exists(other.reflector) and other.ownerPlayer == id))
-                        alarm[3] = ASSIST_TIME;
+                        alarm[3] = ASSIST_TIME / global.delta_factor;
                     lastDamageDealer = other.ownerPlayer;
                     lastDamageSource = other.weapon;
                     if (id==other.ownerPlayer.object and instance_exists(other.reflector))

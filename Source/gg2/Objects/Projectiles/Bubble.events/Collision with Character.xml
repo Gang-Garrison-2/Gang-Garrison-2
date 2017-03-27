@@ -26,7 +26,7 @@ if (other.team != team and !other.ubered and other.hp &gt; 0)
         other.secondToLastDamageDealer = other.lastDamageDealer;
         other.alarm[4] = other.alarm[3]
     }
-    other.alarm[3] = ASSIST_TIME;
+    other.alarm[3] = ASSIST_TIME / global.delta_factor;
     
     other.lastDamageDealer = ownerPlayer;
     other.lastDamageSource = weapon;

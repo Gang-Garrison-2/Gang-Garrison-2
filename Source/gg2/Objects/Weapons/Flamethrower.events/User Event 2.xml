@@ -147,7 +147,7 @@
                         secondToLastDamageDealer = lastDamageDealer;
                         alarm[4] = alarm[3];
                     }
-                    alarm[3] = ASSIST_TIME;
+                    alarm[3] = ASSIST_TIME / global.delta_factor;
                     lastDamageDealer = other.ownerPlayer;
                     lastDamageSource = -1;
                 } 

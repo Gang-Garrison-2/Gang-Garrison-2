@@ -31,7 +31,7 @@
                         characterHit.secondToLastDamageDealer = characterHit.lastDamageDealer;
                         characterHit.alarm[4] = characterHit.alarm[3]
                     }
-                    characterHit.alarm[3] = ASSIST_TIME;
+                    characterHit.alarm[3] = ASSIST_TIME / global.delta_factor;
                 }
                 characterHit.lastDamageDealer = ownerPlayer;
                 characterHit.lastDamageSource = weapon;
@@ -63,7 +63,7 @@
                                 alarm[4] = alarm[3]
                             }
                             if (other.ownerPlayer != id)
-                                alarm[3] = ASSIST_TIME;
+                                alarm[3] = ASSIST_TIME / global.delta_factor;
                             lastDamageDealer = other.ownerPlayer;
                             lastDamageSource = other.weapon;
                         }

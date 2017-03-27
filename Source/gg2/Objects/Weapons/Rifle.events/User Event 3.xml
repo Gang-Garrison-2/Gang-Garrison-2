@@ -144,7 +144,7 @@ with(hitInstance) {
                 secondToLastDamageDealer = lastDamageDealer;
                 alarm[4] = alarm[3]
             }
-            alarm[3] = ASSIST_TIME;
+            alarm[3] = ASSIST_TIME / global.delta_factor;
             lastDamageDealer = other.ownerPlayer;
             dealFlicker(id);
             if(global.gibLevel &gt; 0)
