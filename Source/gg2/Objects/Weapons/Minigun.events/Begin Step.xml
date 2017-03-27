@@ -18,7 +18,6 @@
 else if (ammoCount &lt;= maxAmmo and isRefilling)
     ammoCount += 1 * global.delta_factor;
 if(!readyToShoot and alarm[5] &lt; 25 and !isRefilling)
-    if(global.run_virtual_ticks)
         alarm[5] += 1;
 </argument>
       </arguments>
