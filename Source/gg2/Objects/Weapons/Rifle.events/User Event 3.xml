@@ -146,9 +146,7 @@ with(hitInstance) {
             }
             alarm[3] = ASSIST_TIME;
             lastDamageDealer = other.ownerPlayer;
-            cloakAlpha = max(cloakAlpha, 0.3);
-            cloakFlicker = true;
-            alarm[7] = 3;
+            dealFlicker(id);
             if(global.gibLevel &gt; 0)
             {
                 blood = instance_create(x, y, Blood);

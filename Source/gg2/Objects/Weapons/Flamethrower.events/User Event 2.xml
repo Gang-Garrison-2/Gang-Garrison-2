@@ -44,7 +44,7 @@
                 justShot=true;
                 readyToFlare=false;
                 ammoCount -= 35;
-                alarm[2] = flareReloadTime;
+                alarm[2] = flareReloadTime / global.delta_factor;
             }
         }
             
@@ -64,9 +64,9 @@
                     hitDamage = 25;
                     explosionDamage = 30;
                     knockback = 8;
-                    alarm[0] = 200;
-                    alarm[1] = 40;
-                    alarm[2] = 80;
+                    alarm[0] = 200 / global.delta_factor;
+                    alarm[1] = 40 / global.delta_factor;
+                    alarm[2] = 80 / global.delta_factor;
                     motion_set(other.owner.aimDirection, speed);
                 }
             }
@@ -83,7 +83,7 @@
                     ownerPlayer = other.ownerPlayer;
                     team = other.owner.team;
                     weapon = DAMAGE_SOURCE_REFLECTED_FLARE;
-                    alarm[0]=40;
+                    alarm[0]=40 / global.delta_factor;
                     
                     motion_set(other.owner.aimDirection, speed);
                 }

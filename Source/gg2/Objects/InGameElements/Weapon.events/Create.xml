@@ -17,7 +17,7 @@
 yoffset += sprite_yoffset;
 readyToShoot = false;
 justShot = false;
-alarm[0] = refireTime;
+alarm[0] = refireTime / global.delta_factor;
 
 owner = global.paramOwner;
 ownerPlayer = global.paramOwner.player;

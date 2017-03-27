@@ -74,9 +74,7 @@
                 else
                     moveStatus = 4;
             }
-            cloakAlpha = max(cloakAlpha, 0.3);
-            cloakFlicker = true;
-            alarm[7] = 3;
+            dealFlicker(id);
         }
     }
 

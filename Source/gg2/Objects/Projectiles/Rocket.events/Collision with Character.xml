@@ -18,9 +18,7 @@
     {
         with(other)
         {
-            cloakAlpha = max(cloakAlpha, 0.3); 
-            cloakFlicker = true;
-            alarm[7] = 3;
+            dealFlicker(id);
         }
         characterHit = other;
         other.solid = true;
