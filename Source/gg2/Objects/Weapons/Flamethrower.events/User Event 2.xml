@@ -64,7 +64,6 @@
                     hitDamage = 25;
                     explosionDamage = 30;
                     knockback = 8;
-                    alarm[0] = 200 / global.delta_factor;
                     alarm[1] = 40 / global.delta_factor;
                     alarm[2] = 80 / global.delta_factor;
                     motion_set(other.owner.aimDirection, speed);
