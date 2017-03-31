@@ -245,7 +245,7 @@ if burnDuration&gt;0 &amp;&amp; player.class != CLASS_PYRO and random(80) &lt;= 
 }
 
 // stop players who are moving too slowly (avoid "ice skating")
-if (abs(hspeed) &lt; 0.195 * global.delta_factor and !controlling) // FIXME: why is delta factor here?
+if (abs(hspeed) &lt; 0.195 and !controlling)
 {
     hspeed=0;
     animationImage=0;
