@@ -72,18 +72,16 @@ with(Generator) {
     }
 }
 
-with(Character) {
+with(Sentry) {
     if(team == other.owner.team) {
         ds_map_add(originalX, id, x);
         x += leftmostX - bbox_right - 10;
     }
 }
 
-with(Sentry) {
-    if(team == other.owner.team) {
-        ds_map_add(originalX, id, x);
-        x += leftmostX - bbox_right - 10;
-    }
+with(owner) {
+    ds_map_add(originalX, id, x);
+    x += leftmostX - bbox_right - 10;
 }
 
 with(ControlPointSetupGate) {
@@ -137,7 +135,7 @@ ds_list_destroy(bulletStoppingObjects);
 // Apply dramatic effect
 with(hitInstance) {
     if(object_index == Character or object_is_ancestor(object_index, Character)) {
-        if(!ubered) {
+        if(!ubered and team != other.owner.team) {
             damageCharacter(other.ownerPlayer, id, other.hitDamage);
             if (lastDamageDealer != other.ownerPlayer and lastDamageDealer != player)
             {
