@@ -203,7 +203,7 @@
         if(player.deathmatch_respawn_bypass != 0)
             deathmatch_invulnerable = player.deathmatch_respawn_bypass;
         else
-            deathmatch_invulnerable = 30; // invulnerable indefinitely until they do something
+            deathmatch_invulnerable = 30;
         deathmatch_invuln_decay = 0.2; // 5x the normal invuln period when you first spawn
     }
     else
