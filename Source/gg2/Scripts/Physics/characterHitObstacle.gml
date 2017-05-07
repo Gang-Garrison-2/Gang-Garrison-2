@@ -6,23 +6,53 @@
     hspeed *= global.delta_factor;
     vspeed *= global.delta_factor;
     
-    var oldx, oldy, oldhspeed, oldvspeed, distleft, hleft, vleft;
+    var oldx, oldy, oldhspeed, oldvspeed, distleft, hleft, vleft, bboxheight, bboxwidth;
     oldx=x;
     oldy=y;
     oldhspeed=hspeed;
     oldvspeed=vspeed;
+    bboxheight = bbox_bottom-bbox_top;
+    bboxwidth = bbox_right-bbox_left;
     
     // slide in an appropriate direction to get outside of walls
     if(!place_free(x, y))
     {
-        if(place_free(x, bbox_top))
-            move_outside_solid(90, (bbox_bottom-bbox_top)/2);
-        else if(place_free(x, bbox_bottom))
-            move_outside_solid(270, (bbox_bottom-bbox_top)/2);
-        else if(place_free(bbox_right, y))
-            move_outside_solid(0, (bbox_right-bbox_left)/2);
-        else if(place_free(bbox_left, y))
-            move_outside_solid(180, (bbox_right-bbox_left)/2);
+        var uy, dy, lx, rx, distu, distd, distl, distr;
+        
+        move_outside_solid(90, bboxheight/2);
+        distu = oldy - y;
+        uy = y;
+        y = oldy;
+        
+        move_outside_solid(270, bboxheight/2);
+        distd = y - oldy;
+        dy = y;
+        y = oldy;
+        
+        move_outside_solid(0, bboxwidth/2);
+        distr = x - oldx;
+        rx = x;
+        x = oldx;
+        
+        move_outside_solid(180, bboxwidth/2);
+        distl = oldx - x;
+        lx = x;
+        x = oldx;
+        
+        if(distu < distd and distu < distr and distu < distl)
+            y = uy;
+        else if(distd < distr and distd < distl)
+            y = dy;
+        else if(distr < distl)
+            x = rx;
+        else
+            x = lx;
+        
+        if(!place_free(x, y))
+        {
+            x = oldx;
+            y = oldy;
+        }
     }
 
     hleft = hspeed;
