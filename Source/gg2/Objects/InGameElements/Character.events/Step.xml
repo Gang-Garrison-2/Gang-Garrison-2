@@ -88,11 +88,8 @@ if(vspeed &gt; 10)
     vspeed = 10;
 applied_gravity = 0;
 
-if(!doHit)
-{
-    x -= hspeed;
-    y -= vspeed;
-}
+x -= hspeed;
+y -= vspeed;
 
 charUnsetSolids();
 </argument>
