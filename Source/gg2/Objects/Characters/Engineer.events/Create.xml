@@ -14,7 +14,7 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">maxHp = 120;
-runPower = 1;
+baseRunPower = 1;
 weapons[0]=Shotgun;
 haxxyStatue = EngineerHaxxyStatueS;
 </argument>

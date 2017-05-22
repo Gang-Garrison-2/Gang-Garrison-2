@@ -14,7 +14,7 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">maxHp = 140;
-runPower = 1.07;
+baseRunPower = 1.07;
 weapons[0] = Blade;
 </argument>
       </arguments>

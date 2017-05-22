@@ -20,8 +20,8 @@ with(StabAnim)
 
 ds_list_destroy(overlays);
         
-owner.runPower = 1.07;
-owner.jumpStrength = 8;
+owner.runPower = owner.baseRunPower;
+owner.jumpStrength = owner.baseJumpStrength;
 owner.stabbing = 0;
 </argument>
       </arguments>

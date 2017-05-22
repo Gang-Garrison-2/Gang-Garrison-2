@@ -13,7 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">runPower = 1.1;
+        <argument kind="STRING">baseRunPower = 1.1;
 maxHp = 120;
 weapons[0] = Flamethrower;
 haxxyStatue = PyroHaxxyStatueS;
