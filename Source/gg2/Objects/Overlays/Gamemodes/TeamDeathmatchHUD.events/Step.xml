@@ -13,7 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if (timer &gt; 0)
+        <argument kind="STRING">if ((timer &gt; 0) and global.run_virtual_ticks)
     timer -= 1;
 if ((global.redCaps &gt;= killLimit) or (global.blueCaps &gt;= killLimit) or timer&lt;=0) {
     if (global.redCaps &gt; global.blueCaps)
