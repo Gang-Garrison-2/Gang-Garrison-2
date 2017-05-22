@@ -132,8 +132,4 @@
     
     hspeed /= global.delta_factor;
     vspeed /= global.delta_factor;
-    
-    // Set these backwards before the game runs step
-    x -= hspeed;
-    y -= vspeed;
 }
