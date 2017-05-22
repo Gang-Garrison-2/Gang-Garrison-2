@@ -190,7 +190,7 @@
         
         if (__bootlen + __x + name_width_badges(player) + string_length(__str) &gt; __x_max) {
             __x = __x_min;
-            __y += string_height(__str) + 2;
+            __y += string_height("/|ijgyA[") + 2;
         }
         draw_name_badges(__bootlen + __x, __y, player, alpha);
         __x += __bootlen + name_width_badges(player);
