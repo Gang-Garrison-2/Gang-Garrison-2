@@ -29,9 +29,7 @@
             balanceplayer=-1;
             for(i=0; i<ds_list_size(global.players); i+=1) {
                 player = ds_list_find_value(global.players, i);
-                //if(player.team == balance && player.kills+(player.caps*2)+player.healpoints < points) {
                 if (player.team == balance && player.stats[POINTS] < points) {
-                    //points=player.kills+(player.caps*2)+player.healpoints;
                     points=player.stats[POINTS];
                     balanceplayer=player;
                 }
@@ -45,7 +43,7 @@
             } else {
                 balanceplayer.team = TEAM_RED;
             }
-        
+            balanceplayer.class = checkClasslimits(balanceplayer,balanceplayer.team,balanceplayer.class);
             if(balanceplayer.object != -1) {
                 with(balanceplayer.object) {
                     instance_destroy();
@@ -55,6 +53,7 @@
         
             write_ubyte(global.sendBuffer, BALANCE);
             write_ubyte(global.sendBuffer, ds_list_find_index(global.players, balanceplayer));
+            write_ubyte(global.sendBuffer, balanceplayer.class);
             if !instance_exists(Balancer) instance_create(x,y,Balancer);
             Balancer.name=player.name;
             with (Balancer) notice=1;

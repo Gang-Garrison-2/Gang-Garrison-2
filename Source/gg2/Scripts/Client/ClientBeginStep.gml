@@ -246,7 +246,9 @@ do {
                 if !instance_exists(Balancer) instance_create(x,y,Balancer);
                 with(Balancer) notice=0;
             } else {
+                receiveCompleteMessage(global.serverSocket,1,global.tempBuffer);
                 player = ds_list_find_value(global.players, balanceplayer);
+                player.class = read_ubyte(global.tempBuffer);
                 if(player.object != -1) {
                     with(player.object) {
                         instance_destroy();
