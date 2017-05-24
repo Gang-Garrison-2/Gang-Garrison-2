@@ -35,36 +35,36 @@ if global.myself.object != -1 {
         if global.myself.class==CLASS_SOLDIER {
             if global.myself.team == TEAM_BLUE toffset = 5;
             else toffset = 0;
-            reloadscalar = 100-global.myself.object.currentWeapon.alarm[5]/global.myself.object.currentWeapon.reloadTime*100;
+            reloadscalar = 100-global.myself.object.currentWeapon.alarm[5]*global.delta_factor/global.myself.object.currentWeapon.reloadTime*100;
             draw_sprite_ext(Rocketclip,global.myself.object.currentWeapon.ammoCount+toffset,xoffset+728,yoffset+ysize/1.26+86,2.4,2.4,0,c_white,100);
             draw_healthbar(xoffset+689,yoffset+ysize/1.26+90,xoffset+723,yoffset+ysize/1.26+98,reloadscalar,c_black,barcolor,barcolor,0,true,false);
         }
         else if global.myself.class==CLASS_DEMOMAN{        
-            reloadscalar = 100-global.myself.object.currentWeapon.alarm[5]/global.myself.object.currentWeapon.reloadTime*100;
+            reloadscalar = 100-global.myself.object.currentWeapon.alarm[5]*global.delta_factor/global.myself.object.currentWeapon.reloadTime*100;
             draw_sprite_ext(MinegunAmmoS,toffset,xoffset+728,yoffset+ysize/1.26+86,2.4,2.4,0,c_white,100);
             draw_text(xoffset+765,yoffset+ysize/1.26+95,global.myself.object.currentWeapon.ammoCount);
             draw_healthbar(xoffset+700,yoffset+ysize/1.26+90,xoffset+750,yoffset+ysize/1.26+98,reloadscalar,c_black,barcolor,barcolor,0,true,false);
         }
         else if global.myself.class==CLASS_SCOUT {
-            reloadscalar = 100-global.myself.object.currentWeapon.alarm[5]/global.myself.object.currentWeapon.reloadTime*100;
+            reloadscalar = 100-global.myself.object.currentWeapon.alarm[5]*global.delta_factor/global.myself.object.currentWeapon.reloadTime*100;
             draw_sprite_ext(ScattergunAmmoS,toffset,xoffset+728,yoffset+ysize/1.26+86,2.4,2.4,0,c_white,100);
             draw_text(xoffset+765,yoffset+ysize/1.26+95,global.myself.object.currentWeapon.ammoCount);
             draw_healthbar(xoffset+700,yoffset+ysize/1.26+90,xoffset+750,yoffset+ysize/1.26+98,reloadscalar,c_black,barcolor,barcolor,0,true,false);
         }
         else if global.myself.class==CLASS_ENGINEER {
-            reloadscalar = 100-global.myself.object.currentWeapon.alarm[5]/global.myself.object.currentWeapon.reloadTime*100;
+            reloadscalar = 100-global.myself.object.currentWeapon.alarm[5]*global.delta_factor/global.myself.object.currentWeapon.reloadTime*100;
             draw_sprite_ext(ShotgunAmmoS,toffset,xoffset+728,yoffset+ysize/1.26+86,2.4,2.4,0,c_white,100);
             draw_text(xoffset+765,yoffset+ysize/1.26+95,global.myself.object.currentWeapon.ammoCount);
             draw_healthbar(xoffset+700,yoffset+ysize/1.26+90,xoffset+750,yoffset+ysize/1.26+98,reloadscalar,c_black,barcolor,barcolor,0,true,false);
         }
         else if global.myself.class == CLASS_SPY {
-            reloadscalar = 100-global.myself.object.currentWeapon.alarm[5]/global.myself.object.currentWeapon.reloadTime*100;
+            reloadscalar = 100-global.myself.object.currentWeapon.alarm[5]*global.delta_factor/global.myself.object.currentWeapon.reloadTime*100;
             draw_sprite_ext(RevolverAmmoS,toffset,xoffset+728,yoffset+ysize/1.26+86,2.4,2.4,0,c_white,100);
             draw_text(xoffset+765,yoffset+ysize/1.26+95,global.myself.object.currentWeapon.ammoCount);
             draw_healthbar(xoffset+700,yoffset+ysize/1.26+90,xoffset+750,yoffset+ysize/1.26+98,reloadscalar,c_black,barcolor,barcolor,0,true,false);
         }
         else if global.myself.class == CLASS_MEDIC {
-            reloadscalar = 100-global.myself.object.currentWeapon.alarm[5]/global.myself.object.currentWeapon.reloadTime*100;
+            reloadscalar = 100-global.myself.object.currentWeapon.alarm[5]*global.delta_factor/global.myself.object.currentWeapon.reloadTime*100;
             draw_sprite_ext(NeedleAmmoS,toffset,xoffset+728,yoffset+ysize/1.26+86,2.4,2.4,0,c_white,100);
             draw_text(xoffset+765,yoffset+ysize/1.26+95,global.myself.object.currentWeapon.ammoCount);
             draw_healthbar(xoffset+700,yoffset+ysize/1.26+90,xoffset+750,yoffset+ysize/1.26+98,reloadscalar,c_black,barcolor,barcolor,0,true,false);
@@ -96,7 +96,7 @@ if global.myself.object != -1 {
         else if global.myself.class == CLASS_HEAVY {       
             draw_sprite_ext(MinigunAmmoS,toffset,xoffset+728,yoffset+ysize/1.26+86,2.4,2.4,0,c_white,100);
             barcolor = merge_color(barcolor, make_color_rgb(255,0,0), 1-(weapon.ammoCount/weapon.maxAmmo));
-            barcolor = merge_color(barcolor, make_color_rgb(50,50,50), max(0,weapon.alarm[5])/25);
+            barcolor = merge_color(barcolor, make_color_rgb(50,50,50), max(0,weapon.alarm[5]*global.delta_factor)/25);
             draw_healthbar(xoffset+689,yoffset+ysize/1.26+90,xoffset+723,yoffset+ysize/1.26+98,
                            weapon.ammoCount/weapon.maxAmmo*100,c_black,barcolor,barcolor,0,true,false);
         }
