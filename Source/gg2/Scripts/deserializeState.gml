@@ -3,6 +3,11 @@
 
 global.updateType = argument0;
 
+if(argument0 == FULL_UPDATE) {
+    receiveCompleteMessage(global.serverSocket,2,global.tempBuffer);
+    global.tdmInvulnerabilityTicks = read_ushort(global.tempBuffer);
+}
+
 receiveCompleteMessage(global.serverSocket,1,global.tempBuffer);
 if(read_ubyte(global.tempBuffer) != ds_list_size(global.players))
     show_message("Wrong number of players while deserializing state");

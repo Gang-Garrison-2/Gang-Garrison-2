@@ -29,8 +29,8 @@ draw_set_alpha(0.3);
 if(deathmatch_invulnerable != 0) // must be != 0
 {
     draw_circle_color(x, y, 50, c_white, c_white, false);
-    if(deathmatch_invulnerable &gt; 0)
-        draw_circle_color(x, y, deathmatch_invulnerable/30*50.5, c_white, c_white, false);
+    if((deathmatch_invulnerable &gt; 0) and global.tdmInvulnerabilityTicks != 0)
+        draw_circle_color(x, y, deathmatch_invulnerable/global.tdmInvulnerabilityTicks*50.5, c_white, c_white, false);
     else
         draw_circle_color(x, y, 50.5, c_white, c_white, false);
 }

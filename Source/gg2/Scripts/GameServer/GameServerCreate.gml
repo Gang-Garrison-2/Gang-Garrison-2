@@ -83,6 +83,8 @@
     }
     if(global.queueJumping)
         serverPlayer.queueJump = global.queueJumping;
+        
+    global.tdmInvulnerabilityTicks = global.tdmInvulnerabilitySeconds * 30 * 0.2;
     
     instance_create(0,0,PlayerControl);
 

@@ -13,6 +13,11 @@
     global.updateType=argument0;
     
     write_ubyte(argument1, argument0);
+    
+    if(argument0 == FULL_UPDATE) {
+        write_ushort(argument1, global.tdmInvulnerabilityTicks);
+    }
+    
     write_ubyte(argument1, ds_list_size(global.players));
     
     global.serializeBuffer = argument1;

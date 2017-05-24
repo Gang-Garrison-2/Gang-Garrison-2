@@ -84,6 +84,7 @@
     global.caplimit = max(1, min(255, ini_read_real("Server", "CapLimit", 5)));
     global.caplimitBkup = global.caplimit;
     global.killLimit = max(1, min(65535, ini_read_real("Server", "Deathmatch Kill Limit", 30)));
+    global.tdmInvulnerabilitySeconds = max(0, min(3600, ini_read_real("Server", "Team Deathmatch Invulnerability Seconds", 5)));
     global.autobalance = ini_read_real("Server", "AutoBalance",1);
     global.Server_RespawntimeSec = ini_read_real("Server", "Respawn Time", 5);
     global.rewardKey = unhex(ini_read_string("Haxxy", "RewardKey", ""));
@@ -164,6 +165,7 @@
     ini_write_string("Server", "WelcomeMessage", global.welcomeMessage);
     ini_write_real("Server", "CapLimit", global.caplimit);
     ini_write_real("Server", "Deathmatch Kill Limit", global.killLimit);
+    ini_write_real("Server", "Team Deathmatch Invulnerability Seconds", global.tdmInvulnerabilitySeconds);
     ini_write_real("Server", "AutoBalance", global.autobalance);
     ini_write_real("Server", "Respawn Time", global.Server_RespawntimeSec);
     ini_write_real("Server", "Total bandwidth limit for map downloads in bytes per second", global.mapdownloadLimitBps);
