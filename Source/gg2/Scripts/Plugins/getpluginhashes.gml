@@ -10,6 +10,11 @@ hashedList = '';
 // split plugin list string
 list = split(argument0, ',');
 
+for (i = 0; i < ds_list_size(list); i += 1)
+{
+    ds_list_replace(list, i, trim(ds_list_find_value(list, i)));
+}
+
 // Check plugin names and check for duplicates
 for (i = 0; i < ds_list_size(list); i += 1)
 {
