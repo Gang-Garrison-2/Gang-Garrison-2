@@ -25,10 +25,6 @@
             if(!tracking)
             {
                 tracking = true;
-                if(!instance_exists(NoticeO))
-                    instance_create(0,0,NoticeO);
-                with(NoticeO)
-                    notice = NOTICE_PLAYERTRACKENABLE;
             }
             track_id = newTrackId;
             player = newPlayer;
