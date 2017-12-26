@@ -32,23 +32,26 @@ if(instance_exists(healTarget))
             
         draw_set_alpha(0.3);
         draw_line_width_color(xdrawpos+lengthdir_x(24,owner.aimDirection),ydrawpos+lengthdir_y(24,owner.aimDirection),healTarget.object.x, healTarget.object.y, 5, color, color);
-        if (sprite_index != normalSprite) {
-            //cancel the fire animation
-            sprite_index = normalSprite;
-            alarm[6] = 0;
-        }
+
+        sprite_index = normalSprite;
         imageOffset = owner.team+2;
     }
-}else{
-    if (alarm[6] &lt;= 0 and alarm[5] &lt;= 0){
-        //set the sprite to idle
-        imageOffset = owner.team
-    }else{
-        //We are shooting, loop the shoot animation
-        if (alarm[6] &lt;= 0)
-            imageOffset = floor(image_index mod reloadAnimLength) + reloadAnimLength*owner.team
-        else
-            imageOffset = floor(image_index mod recoilAnimLength) + recoilAnimLength*owner.team        
+} else {
+    var recoilAlarmStart, reloadAlarmStart;
+    recoilAlarmStart = round(recoilTime / global.delta_factor);
+    reloadAlarmStart = round(reloadTime / global.delta_factor);
+            
+    if(alarm[6] &gt; 0) {
+        // We are shooting, loop the shoot animation
+        sprite_index = recoilSprite;
+        imageOffset = floor(recoilAnimLength*(recoilAlarmStart-alarm[6])/recoilAlarmStart) + owner.team*recoilAnimLength;
+    } else if (alarm[5] &gt; 0 &amp;&amp; alarm[5] &lt;= reloadAlarmStart) {
+        sprite_index = reloadSprite;
+        imageOffset = floor(reloadAnimLength*(reloadAlarmStart-alarm[5])/reloadAlarmStart) + owner.team*reloadAnimLength;;
+    } else {
+        // set the sprite to idle
+        sprite_index = normalSprite;
+        imageOffset = owner.team;
     }
 }
 
