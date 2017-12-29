@@ -53,11 +53,11 @@ else
 {
     if (mode == 2)
         draw_sprite_ext(TimerOutlineS, 0, xoffset+xsize/2, yoffset, 2, 2, 0, c_white, 1);
-    draw_sprite_ext(TimerHudS, 2+teamoffset, xoffset+xsize/2+xshift, yoffset, 2,2,0,c_white,1);
+    draw_sprite_ext(TimerHudS, 2+teamoffset, xoffset+xsize/2, yoffset, 2,2,0,c_white,1);
     if (countdown <= 0)
     {
         draw_set_halign(fa_center);
-        draw_text(xoffset+xsize/2+xshift,yoffset+2,"OVERTIME");
+        draw_text(xoffset+xsize/2,yoffset+2,"OVERTIME");
     }
     else
     {
