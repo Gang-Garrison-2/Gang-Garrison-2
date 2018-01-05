@@ -17,6 +17,15 @@
 maxHp = 160;
 weapons[0] = Rocketlauncher;
 haxxyStatue = SoldierHaxxyStatueS;
+
+if (global.paramPlayer.team == TEAM_RED)
+{
+    sprite_index = SoldierRedS;
+}
+else if (global.paramPlayer.team == TEAM_BLUE)
+{
+    sprite_index = SoldierBlueS;
+}
 </argument>
       </arguments>
     </action>
@@ -46,15 +55,6 @@ haxxyStatue = SoldierHaxxyStatueS;
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">numFlames = 4;
-
-if (player.team == TEAM_RED)
-{
-    sprite_index = SoldierRedS;
-}
-else if (player.team == TEAM_BLUE)
-{
-    sprite_index = SoldierBlueS;
-}
 </argument>
       </arguments>
     </action>

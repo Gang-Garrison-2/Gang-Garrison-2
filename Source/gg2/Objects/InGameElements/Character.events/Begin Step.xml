@@ -202,9 +202,9 @@ if(spinjumping)
         if(random(4) &lt; 4)
         {
             if(sign(_last_xscale) &lt; 0)
-                part_particles_create(global.jumpDustParticleSystem,bbox_right+1,bbox_bottom-4,jumpDustParticleType,1);
+                part_particles_create(global.jumpDustParticleSystem,x+right_bound_offset+1,y+bottom_bound_offset-4,jumpDustParticleType,1);
             else
-                part_particles_create(global.jumpDustParticleSystem,bbox_left +2,bbox_bottom-4,jumpDustParticleType,1);
+                part_particles_create(global.jumpDustParticleSystem,x+left_bound_offset +2,y+bottom_bound_offset-4,jumpDustParticleType,1);
         }
     }
 }

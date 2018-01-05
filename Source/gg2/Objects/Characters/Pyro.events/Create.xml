@@ -17,6 +17,15 @@
 maxHp = 120;
 weapons[0] = Flamethrower;
 haxxyStatue = PyroHaxxyStatueS;
+
+if (global.paramPlayer.team == TEAM_RED)
+{
+    sprite_index = PyroRedS;
+}
+else if (global.paramPlayer.team == TEAM_BLUE)
+{
+    sprite_index = PyroBlueS;
+}
 </argument>
       </arguments>
     </action>
@@ -47,15 +56,6 @@ haxxyStatue = PyroHaxxyStatueS;
       <arguments>
         <argument kind="STRING">numFlames = 3;
 maxDuration = 10;
-
-if (player.team == TEAM_RED)
-{
-    sprite_index = PyroRedS;
-}
-else if (player.team == TEAM_BLUE)
-{
-    sprite_index = PyroBlueS;
-}
 </argument>
       </arguments>
     </action>

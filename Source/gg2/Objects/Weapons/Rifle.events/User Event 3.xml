@@ -46,12 +46,12 @@ alarm[6] = alarm[0];
 // could be slow.
 // 
 // So here is how we do this instead: We do several collision_line checks, but only on an object basis.
-// Those instances which are instances of those objects, but should not stop the bullets are moved out of the way,
-// and then moved back after we are done checking.
+// Those instances which are instances of those objects, but should not stop the bullets are set to an empty
+// collision mask, and that is reverted after we are done.
 
-var bulletStoppingObjects, originalX, hitInstance;
+var bulletStoppingObjects, originalMask, hitInstance;
 bulletStoppingObjects = ds_list_create();
-originalX = ds_map_create();
+originalMask = ds_map_create();
 hitInstance = noone;
 
 ds_list_add(bulletStoppingObjects, Obstacle);
@@ -63,38 +63,37 @@ ds_list_add(bulletStoppingObjects, IntelGate);
 ds_list_add(bulletStoppingObjects, ControlPointSetupGate);
 ds_list_add(bulletStoppingObjects, BulletWall);
 
-// Move all instances which should not collide so far to the left that their bounding boxes do not
-// intersect the x-range of the rifle shot
+// Set the collision mask of all instances which should not collide to an empty one
 with(Generator) {
     if(team == other.owner.team) {
-        ds_map_add(originalX, id, x);
-        x += leftmostX - bbox_right - 10;
+        ds_map_add(originalMask, id, mask_index);
+        mask_index = emptyMaskS;
     }
 }
 
 with(Sentry) {
     if(team == other.owner.team) {
-        ds_map_add(originalX, id, x);
-        x += leftmostX - bbox_right - 10;
+        ds_map_add(originalMask, id, mask_index);
+        mask_index = emptyMaskS;
     }
 }
 
 with(owner) {
-    ds_map_add(originalX, id, x);
-    x += leftmostX - bbox_right - 10;
+    ds_map_add(originalMask, id, mask_index);
+    mask_index = emptyMaskS;
 }
 
 with(ControlPointSetupGate) {
     if(!solid) {
-        ds_map_add(originalX, id, x);
-        x += leftmostX - bbox_right - 10;
+        ds_map_add(originalMask, id, mask_index);
+        mask_index = emptyMaskS;
     }
 }
 
 with(BulletWall) {
     if(!solid) {
-        ds_map_add(originalX, id, x);
-        x += leftmostX - bbox_right - 10;
+        ds_map_add(originalMask, id, mask_index);
+        mask_index = emptyMaskS;
     }
 }
 
@@ -120,16 +119,16 @@ while(len&gt;1) {
     len/=2;
 }
 
-// Move everything back to its previous x position
-var key, origX;
-for(key = ds_map_find_first(originalX); key; key = ds_map_find_next(originalX, key)) {
-    origX = ds_map_find_value(originalX, key);
+// Re-assign the original collision masks
+var key, origMask;
+for(key = ds_map_find_first(originalMask); key; key = ds_map_find_next(originalMask, key)) {
+    origMask = ds_map_find_value(originalMask, key);
     with(key) {
-        x = origX;
+        mask_index = origMask;
     }
 }
 
-ds_map_destroy(originalX);
+ds_map_destroy(originalMask);
 ds_list_destroy(bulletStoppingObjects);
 
 // Apply dramatic effect

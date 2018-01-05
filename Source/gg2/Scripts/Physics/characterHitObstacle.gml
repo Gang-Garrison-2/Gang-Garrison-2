@@ -11,8 +11,8 @@
     oldy=y;
     oldhspeed=hspeed;
     oldvspeed=vspeed;
-    bboxheight = bbox_bottom-bbox_top;
-    bboxwidth = bbox_right-bbox_left;
+    bboxheight = bottom_bound_offset-top_bound_offset;
+    bboxwidth = right_bound_offset-left_bound_offset;
     
     // slide in an appropriate direction to get outside of walls
     if(!place_free(x, y))

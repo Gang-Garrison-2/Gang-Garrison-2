@@ -64,7 +64,7 @@ with(global.paramCharacter)
         really_move_contact_solid(270, -1);
     
     other.x = x;
-    other.y = bbox_bottom-1;
+    other.y = y+bottom_bound_offset-1;
         
     x = oldx;
     y = oldy;

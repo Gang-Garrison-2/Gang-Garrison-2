@@ -17,6 +17,15 @@
 maxHp = 100;
 weapons[0] = Scattergun;
 haxxyStatue = ScoutHaxxyStatueS;
+
+if (global.paramPlayer.team == TEAM_RED)
+{
+    sprite_index = ScoutRedS;
+}
+else if (global.paramPlayer.team == TEAM_BLUE)
+{
+    sprite_index = ScoutBlueS;
+}
 </argument>
       </arguments>
     </action>
@@ -49,15 +58,6 @@ haxxyStatue = ScoutHaxxyStatueS;
 capStrength = 2;
 canDoublejump = 1;
 numFlames = 3;
-
-if (player.team == TEAM_RED)
-{
-    sprite_index = ScoutRedS;
-}
-else if (player.team == TEAM_BLUE)
-{
-    sprite_index = ScoutBlueS;
-}
 </argument>
       </arguments>
     </action>

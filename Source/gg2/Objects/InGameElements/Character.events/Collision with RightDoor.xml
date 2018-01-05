@@ -14,10 +14,11 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">//only allow passage from the right hand side, otherwise get blocked
+if(hspeed &gt; 0)
 {   
-    if (bbox_right - hspeed &lt;= other.bbox_left + 2 and hspeed &gt; 0)
-    {   
-        x = other.x - (bbox_right - x);
+    if (x+right_bound_offset - hspeed &lt;= other.bbox_left + 2)
+    {
+        x = other.x - right_bound_offset;
         hspeed = 0;
     }
 }
