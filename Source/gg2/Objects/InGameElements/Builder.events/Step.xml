@@ -25,17 +25,17 @@ tooltipIdx = -1;
 
 if (instance_exists(MenuController) || mouse_x &gt; view_xview[0]+view_wview[0] || mouse_x &lt; view_xview[0] || mouse_y &gt; view_yview[0]+view_hview[0] || mouse_y &lt; view_yview[0]) canClick = false;
 else {
-    if (keyboard_check(vk_left)) {
+    if (keyboard_check(global.left) || keyboard_check(global.left2)) {
         view_xview[0] -= moveSpeed*global.delta_factor;
         event_user(1);
-    } else if (keyboard_check(vk_right)) {
+    } else if (keyboard_check(global.right) || keyboard_check(global.right2)) {
         view_xview[0] += moveSpeed*global.delta_factor;
         event_user(1);
     } 
-    if (keyboard_check(vk_up)) {
+    if (keyboard_check(global.jump) || keyboard_check(global.jump2)) {
         view_yview[0] -= moveSpeed*global.delta_factor;
         event_user(1);
-    } else if (keyboard_check(vk_down)) {
+    } else if (keyboard_check(global.down) || keyboard_check(global.down2)) {
         view_yview[0] += moveSpeed*global.delta_factor;
         event_user(1);
     }
