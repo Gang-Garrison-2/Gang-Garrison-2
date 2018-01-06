@@ -19,6 +19,15 @@ weapons[0]=Medigun;
 haxxyStatue = MedicHaxxyStatueS;
 
 alarm[11] = 30 / global.delta_factor;
+
+if (global.paramPlayer.team == TEAM_RED)
+{
+    sprite_index = MedicRedS;
+}
+else if (global.paramPlayer.team == TEAM_BLUE)
+{
+    sprite_index = MedicBlueS;
+}
 </argument>
       </arguments>
     </action>
@@ -48,15 +57,6 @@ alarm[11] = 30 / global.delta_factor;
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">numFlames = 4; // 4 instead of the more mathinc 3 in order to make it seem more important that a medic is on fire
-
-if (player.team == TEAM_RED)
-{
-    sprite_index = MedicRedS;
-}
-else if (player.team == TEAM_BLUE)
-{
-    sprite_index = MedicBlueS;
-}
 </argument>
       </arguments>
     </action>

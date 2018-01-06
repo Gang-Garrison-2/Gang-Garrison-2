@@ -31,16 +31,8 @@ left = readProperty(other.properties, "left", REAL, left);
 upSpeed = readProperty(other.properties, "upspeed", REAL, upSpeed);
 downSpeed = readProperty(other.properties, "downspeed", REAL, downSpeed);
     
-if (abs(left) &gt; abs(top))
-    checkdir = 0;
-    
-if (top == 0)
-    direction = 90 - sign(left)*90;
-else if (left == 0)
-    direction = sign(top)*90;
-else
-    direction = arctan(top/left) * 180 / pi;
-    
+direction = point_direction(0, 0, left, -top);
+totalDist = point_distance(0, 0, left, -top);
 speed = upSpeed;
 </argument>
       </arguments>

@@ -17,6 +17,15 @@
 maxHp = 200;
 weapons[0] = Minigun;
 haxxyStatue = HeavyHaxxyStatueS;
+
+if (global.paramPlayer.team == TEAM_RED)
+{
+    sprite_index = HeavyRedS;
+}
+else if (global.paramPlayer.team == TEAM_BLUE)
+{
+    sprite_index = HeavyBlueS;
+}
 </argument>
       </arguments>
     </action>
@@ -46,15 +55,6 @@ haxxyStatue = HeavyHaxxyStatueS;
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">numFlames = 5;
-
-if (player.team == TEAM_RED)
-{
-    sprite_index = HeavyRedS;
-}
-else if (player.team == TEAM_BLUE)
-{
-    sprite_index = HeavyBlueS;
-}
 </argument>
       </arguments>
     </action>

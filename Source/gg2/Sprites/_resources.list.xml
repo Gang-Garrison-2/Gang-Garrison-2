@@ -12,4 +12,5 @@
   <resource name="Updater" type="GROUP"/>
   <resource name="DevMessagesCheckerS" type="RESOURCE"/>
   <resource name="pointS" type="RESOURCE"/>
+  <resource name="emptyMaskS" type="RESOURCE"/>
 </resources>

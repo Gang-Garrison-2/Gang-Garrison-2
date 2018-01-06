@@ -48,6 +48,7 @@ do {
             receiveCompleteMessage(global.serverSocket, 1, global.tempBuffer);
             pluginsRequired = read_ubyte(global.tempBuffer);
             plugins = receivestring(global.serverSocket, 2);
+            pluginsToLoadOnNextJoinUpdate = "";
             if(string_pos("/", downloadMapName) != 0 or string_pos("\", downloadMapName) != 0)
             {
                 show_message("Server sent illegal map name: "+downloadMapName);
@@ -120,13 +121,9 @@ do {
                 }
                 if (usePlugins)
                 {
-                    if (!loadserverplugins(plugins))
-                    {
-                        show_message("Error ocurred loading server-sent plugins.");
-                        instance_destroy();
-                        exit;
-                    }
-                    global.serverPluginsInUse = true;
+                    // Only actually load the plugins once the server confirms that we joined.
+                    // This way, people won't have to restart the game if it turns out that the server is full.
+                    pluginsToLoadOnNextJoinUpdate = plugins;
                 }
             }
             noReloadPlugins = false;
@@ -175,9 +172,25 @@ do {
             break;
             
         case JOIN_UPDATE:
+            // Load the plugins as early as possible once we have a confirmation of the join.
+            // The plugins used to be loaded when processing the HELLO message. Moving that point forward as little as possible
+            // should result in the greatest compatibility.
+            if(string_length(pluginsToLoadOnNextJoinUpdate))
+            {
+                if (!loadserverplugins(pluginsToLoadOnNextJoinUpdate))
+                {
+                    show_message("Error ocurred loading server-sent plugins.");
+                    instance_destroy();
+                    exit;
+                }
+                global.serverPluginsInUse = true;
+                pluginsToLoadOnNextJoinUpdate = "";
+            }
+            
             receiveCompleteMessage(global.serverSocket,2,global.tempBuffer);
             global.playerID = read_ubyte(global.tempBuffer);
             global.currentMapArea = read_ubyte(global.tempBuffer);
+            
             break;
         
         case FULL_UPDATE:

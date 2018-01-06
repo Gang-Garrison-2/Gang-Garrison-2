@@ -17,6 +17,15 @@
 baseRunPower = 0.9;
 weapons[0]=Rifle;
 haxxyStatue = SniperHaxxyStatueS;
+
+if (global.paramPlayer.team == TEAM_RED)
+{
+    sprite_index = SniperRedS;
+}
+else if (global.paramPlayer.team == TEAM_BLUE)
+{
+    sprite_index = SniperBlueS;
+}
 </argument>
       </arguments>
     </action>
@@ -46,15 +55,6 @@ haxxyStatue = SniperHaxxyStatueS;
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">numFlames = 4;
-
-if (player.team == TEAM_RED)
-{
-    sprite_index = SniperRedS;
-}
-else if (player.team == TEAM_BLUE)
-{
-    sprite_index = SniperBlueS;
-}
 </argument>
       </arguments>
     </action>

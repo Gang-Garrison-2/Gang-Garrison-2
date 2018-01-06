@@ -26,7 +26,7 @@
         if (distance_to_object(other) &lt; other.blastRadius and !(team == other.team and id != other.ownerPlayer.object and place_meeting(x, y+1, Obstacle)))
         {
             var rdir, vectorfactor;
-            rdir = point_direction(other.x ,other.y, (bbox_left+bbox_right)/2, (bbox_top+bbox_bottom)/2);
+            rdir = point_direction(other.x, other.y, x+(left_bound_offset+right_bound_offset)/2, y+(top_bound_offset+bottom_bound_offset)/2);
             vectorfactor = point_distance(0, 0, sin(degtorad(rdir)), cos(degtorad(rdir))*0.8);
             if (1 - distance_to_object(other)/other.blastRadius &lt;= 0.25 and other.splashThreshhold) // skip if we're out of theshhold
                 continue;

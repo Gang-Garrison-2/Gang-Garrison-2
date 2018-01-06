@@ -14,10 +14,13 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">//only allow passage from the left hand side, otherwise get blocked
+if(hspeed &lt; 0)
 {
-    if (bbox_left-hspeed &gt;= other.bbox_right-2-(image_xscale&lt;0) and hspeed &lt; 0)//hacks because game maker dubm
+    var door_bbox_right;
+    door_bbox_right = other.bbox_right;
+    if(x+left_bound_offset-hspeed &gt;= door_bbox_right-2)
     {
-        x = other.x+(other.bbox_right-other.x)+(x-bbox_left)-(image_xscale&lt;0);
+        x = door_bbox_right - left_bound_offset;
         hspeed = 0;
     }
 }

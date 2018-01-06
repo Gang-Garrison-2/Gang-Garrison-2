@@ -17,6 +17,15 @@
 baseRunPower = 1;
 weapons[0]=Shotgun;
 haxxyStatue = EngineerHaxxyStatueS;
+
+if (global.paramPlayer.team == TEAM_RED)
+{
+    sprite_index = EngineerRedS;
+}
+else if (global.paramPlayer.team == TEAM_BLUE)
+{
+    sprite_index = EngineerBlueS;
+}
 </argument>
       </arguments>
     </action>
@@ -47,15 +56,6 @@ haxxyStatue = EngineerHaxxyStatueS;
       <arguments>
         <argument kind="STRING">// Override defaults
 numFlames = 3;
-
-if (player.team == TEAM_RED)
-{
-    sprite_index = EngineerRedS;
-}
-else if (player.team == TEAM_BLUE)
-{
-    sprite_index = EngineerBlueS;
-}
 </argument>
       </arguments>
     </action>

@@ -17,6 +17,15 @@
 baseRunPower = 1;
 weapons[0] = Minegun;
 haxxyStatue = DemomanHaxxyStatueS;
+
+if (global.paramPlayer.team == TEAM_RED)
+{
+    sprite_index = DemomanRedS;
+}
+else if (global.paramPlayer.team == TEAM_BLUE)
+{
+    sprite_index = DemomanBlueS;
+}
 </argument>
       </arguments>
     </action>
@@ -46,15 +55,6 @@ haxxyStatue = DemomanHaxxyStatueS;
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">numFlames = 3;
-
-if (player.team == TEAM_RED)
-{
-    sprite_index = DemomanRedS;
-}
-else if (player.team == TEAM_BLUE)
-{
-    sprite_index = DemomanBlueS;
-}
 </argument>
       </arguments>
     </action>

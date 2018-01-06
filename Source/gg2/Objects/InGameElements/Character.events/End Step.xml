@@ -16,12 +16,13 @@
         <argument kind="STRING">charSetSolids();
 // Handle dropdown platforms
 dropdownrectify = false;
-with(DropdownPlatform)
+if(!(keyState &amp; $02))
 {
-    if(place_meeting(x, y, other) and !(other.keyState &amp; $02)
-       and (other.bbox_bottom - (other.y - other.yprevious) - 1)
-           &lt; (bbox_top - (y - yprevious)))
+    with(DropdownPlatform)
     {
+        if(!place_meeting(x, y, other)) continue;
+        if((other.bottom_bound_offset + other.yprevious - 1) &gt;= (bbox_top - (y - yprevious))) continue;
+
         // Move with the platform if we're standing on one.
         if (object_index == MovingPlatform)
         {
@@ -44,6 +45,7 @@ with(DropdownPlatform)
         dropdownrectify = true;
     }
 }
+
 // Climbing down stairs
 // if we aren't falling this frame, and we're not on a dropdown platform
 if(vspeed == 0 and (!place_meeting(x, y+1, DropdownPlatform) or place_meeting(x, y, DropdownPlatform)))

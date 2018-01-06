@@ -111,8 +111,8 @@ else if (!noNewAnim)
             
             { // detect slopes
                 var openright, openleft;
-                openright = !collision_point_solid(x+6, bbox_bottom+2) and !collision_point_solid(x+2, bbox_bottom+2);
-                openleft = !collision_point_solid(x-7, bbox_bottom+2) and !collision_point_solid(x-3, bbox_bottom+2);
+                openright = !collision_point_solid(x+6, y+bottom_bound_offset+2) and !collision_point_solid(x+2, y+bottom_bound_offset+2);
+                openleft = !collision_point_solid(x-7, y+bottom_bound_offset+2) and !collision_point_solid(x-3, y+bottom_bound_offset+2);
                 if (openright)
                 {
                     sprite = sprite_tilt_right;
@@ -125,8 +125,8 @@ else if (!noNewAnim)
                 }
                 if (openright and openleft)
                 {
-                    openright = !collision_point_solid(bbox_right, bbox_bottom+2);
-                    openleft = !collision_point_solid(bbox_left, bbox_bottom+2);
+                    openright = !collision_point_solid(x+right_bound_offset, y+bottom_bound_offset+2);
+                    openleft = !collision_point_solid(x-left_bound_offset, y+bottom_bound_offset+2);
                     if (openright)
                     {
                         sprite = sprite_tilt_right;

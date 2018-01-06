@@ -54,10 +54,10 @@ if(global.myself.object != -1)
 {
     if(!menuOpen)
     {
-        if(keyboard_check(global.left)) keybyte |= $40;
-        if(keyboard_check(global.right)) keybyte |= $20;
-        if(keyboard_check(global.jump)) keybyte |= $80;
-        if(keyboard_check(global.down)) keybyte |= $02;
+        if(keyboard_check(global.left) || keyboard_check(global.left2)) keybyte |= $40;
+        if(keyboard_check(global.right) || keyboard_check(global.right2)) keybyte |= $20;
+        if(keyboard_check(global.jump) || keyboard_check(global.jump2)) keybyte |= $80;
+        if(keyboard_check(global.down) || keyboard_check(global.down2)) keybyte |= $02;
         if(keyboard_check(global.taunt)) keybyte |= $01;
         if(keyboard_check_pressed(global.chat1)) inputChat1();
         if(keyboard_check_pressed(global.chat2)) inputChat2();
@@ -112,10 +112,10 @@ else if (instance_exists(Spectator))
 }
 
 if(keybyte != 0
-        or keyboard_check(global.left)
-        or keyboard_check(global.right)
-        or keyboard_check(global.jump)
-        or keyboard_check(global.down)) {
+        or keyboard_check(global.left) or keyboard_check(global.left2)
+        or keyboard_check(global.right) or keyboard_check(global.right2)
+        or keyboard_check(global.jump) or keyboard_check(global.jump2)
+        or keyboard_check(global.down) or keyboard_check(global.down2)) {
     afktimer = afktimeout;
 }
 
