@@ -19,6 +19,7 @@ trigger = 0;
 
 top = 60;
 left = 0;
+totalDist = point_distance(0, 0, left, -top);
 upSpeed = 3;
 downSpeed = 3;
 moving = false;
