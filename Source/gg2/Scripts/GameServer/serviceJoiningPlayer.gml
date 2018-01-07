@@ -131,9 +131,7 @@ case STATE_EXPECT_COMMAND:
 
 case STATE_EXPECT_NAME:
     var noOfPlayers, player;
-    noOfPlayers = ds_list_size(global.players);
-    if(global.dedicatedMode)
-        noOfPlayers -= 1;
+    noOfPlayers = getNumberOfPlayers();
         
     if(noOfPlayers >= global.playerLimit)
     {

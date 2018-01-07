@@ -15,15 +15,24 @@ if(global.run_virtual_ticks)
 var i;
 for(i=0; i < ds_list_size(global.players); i+=1)
 {
-    var player;
+    var player, noOfPlayers;
     player = ds_list_find_value(global.players, i);
     
     if(socket_has_error(player.socket) or player.kicked)
     {
+        var noOfPlayers, player;
+        noOfPlayers = getNumberOfPlayers();
+        
         removePlayer(player);
         ServerPlayerLeave(i, global.sendBuffer);
         ServerBalanceTeams();
         i -= 1;
+        
+        // message lobby to update playercount if we were full before
+        if(noOfPlayers == global.playerLimit)
+        {
+            sendLobbyRegistration();
+        }
     }
     else
         processClientCommands(player, i);
