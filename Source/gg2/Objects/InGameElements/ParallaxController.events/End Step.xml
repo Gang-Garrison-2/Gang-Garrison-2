@@ -27,12 +27,12 @@ for (i = 0; i &lt; num_bgs; i += 1)
     if (background_xfactor[i] != 0)
         xparallax = 1/power(background_xfactor[i], 2) * xorigin;
     else
-        xparallax = xorigin;
+        xparallax = 0;
         
     if (background_yfactor[i] != 0)
         yparallax = 1/power(background_yfactor[i], 2) * yorigin;
     else 
-        yparallax = yorigin;
+        yparallax = 0;
         
     background_x[i] = xorigin - xparallax;
     background_y[i] = yorigin - yparallax;
