@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="sanitiseNewlines" type="RESOURCE"/>
+  <resource name="stringIsReal" type="RESOURCE"/>
+  <resource name="trim" type="RESOURCE"/>
+  <resource name="split" type="RESOURCE"/>
+</resources>

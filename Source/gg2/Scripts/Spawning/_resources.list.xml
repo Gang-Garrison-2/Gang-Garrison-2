@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="selectSpawnGroup" type="RESOURCE"/>
+  <resource name="getCharacterObject" type="RESOURCE"/>
+  <resource name="offloadSpawnPoints" type="RESOURCE"/>
+</resources>

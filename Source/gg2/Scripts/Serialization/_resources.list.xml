@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="serializeState" type="RESOURCE"/>
+  <resource name="deserializeState" type="RESOURCE"/>
+  <resource name="serialize" type="RESOURCE"/>
+  <resource name="deserialize" type="RESOURCE"/>
+</resources>

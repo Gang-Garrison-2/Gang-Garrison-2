@@ -2,9 +2,13 @@
 <resources>
   <resource name="CustomMaps" type="GROUP"/>
   <resource name="Builder" type="GROUP"/>
+  <resource name="Arena" type="GROUP"/>
   <resource name="basicRoomSetup" type="RESOURCE"/>
   <resource name="findInternalMapName" type="RESOURCE"/>
   <resource name="nextMapInRotation" type="RESOURCE"/>
   <resource name="rooms_fix_views" type="RESOURCE"/>
   <resource name="serverGotoMap" type="RESOURCE"/>
+  <resource name="room_goto_fix" type="RESOURCE"/>
+  <resource name="mapEnd" type="RESOURCE"/>
+  <resource name="pointCapture" type="RESOURCE"/>
 </resources>

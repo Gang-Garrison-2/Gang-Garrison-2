@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="game_init" type="RESOURCE"/>
+  <resource name="character_init" type="RESOURCE"/>
+  <resource name="startGG2" type="RESOURCE"/>
+  <resource name="restartGG2" type="RESOURCE"/>
+  <resource name="promptRestartOrQuit" type="RESOURCE"/>
+</resources>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="Lists" type="GROUP"/>
+  <resource name="Strings" type="GROUP"/>
+  <resource name="toggleZoom" type="RESOURCE"/>
+  <resource name="calculateHealingFactor" type="RESOURCE"/>
+  <resource name="classname" type="RESOURCE"/>
+  <resource name="removePlayer" type="RESOURCE"/>
+  <resource name="setChatBubble" type="RESOURCE"/>
+  <resource name="takeScreenshot" type="RESOURCE"/>
+  <resource name="initCharacterSpritePrefixes" type="RESOURCE"/>
+  <resource name="getCharacterSpriteId" type="RESOURCE"/>
+  <resource name="format_timer_value" type="RESOURCE"/>
+</resources>

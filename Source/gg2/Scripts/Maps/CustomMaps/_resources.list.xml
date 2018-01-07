@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
-  <resource name="ggon" type="GROUP"/>
   <resource name="CustomMapProcessLevelData" type="RESOURCE"/>
   <resource name="CustomMapCreateEntitiesFromEntityData" type="RESOURCE"/>
   <resource name="CustomMapInit" type="RESOURCE"/>

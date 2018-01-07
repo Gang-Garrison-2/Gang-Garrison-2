@@ -1,14 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
-  <resource name="game_init" type="RESOURCE"/>
-  <resource name="offloadSpawnPoints" type="RESOURCE"/>
-  <resource name="removePlayer" type="RESOURCE"/>
-  <resource name="ServerJoinUpdate" type="RESOURCE"/>
-  <resource name="serialize" type="RESOURCE"/>
-  <resource name="deserialize" type="RESOURCE"/>
-  <resource name="character_init" type="RESOURCE"/>
-  <resource name="getCharacterObject" type="RESOURCE"/>
-  <resource name="room_goto_fix" type="RESOURCE"/>
+  <resource name="Game" type="GROUP"/>
   <resource name="Unit tests" type="GROUP"/>
   <resource name="Message Builders" type="GROUP"/>
   <resource name="Sound" type="GROUP"/>
@@ -17,47 +9,26 @@
   <resource name="GameServer" type="GROUP"/>
   <resource name="AudioControl" type="GROUP"/>
   <resource name="Events" type="GROUP"/>
-  <resource name="TeamSelectController" type="GROUP"/>
+  <resource name="Team Balance" type="GROUP"/>
   <resource name="Input" type="GROUP"/>
-  <resource name="Graphics" type="GROUP"/>
   <resource name="Lobby" type="GROUP"/>
   <resource name="Classlimits" type="GROUP"/>
   <resource name="Menus" type="GROUP"/>
   <resource name="Holidays" type="GROUP"/>
-  <resource name="Macro" type="GROUP"/>
   <resource name="Bytes" type="GROUP"/>
   <resource name="Rewards" type="GROUP"/>
   <resource name="Plugins" type="GROUP"/>
   <resource name="Maps" type="GROUP"/>
-  <resource name="Math" type="GROUP"/>
   <resource name="Physics" type="GROUP"/>
   <resource name="Damage API" type="GROUP"/>
   <resource name="Kill Log" type="GROUP"/>
-  <resource name="ds_list_turn" type="RESOURCE"/>
-  <resource name="serializeState" type="RESOURCE"/>
-  <resource name="deserializeState" type="RESOURCE"/>
-  <resource name="setChatBubble" type="RESOURCE"/>
-  <resource name="mapEnd" type="RESOURCE"/>
-  <resource name="buildSentry" type="RESOURCE"/>
-  <resource name="ServerBalanceTeams" type="RESOURCE"/>
-  <resource name="serverArenaRestart" type="RESOURCE"/>
-  <resource name="serverArenaEndRound" type="RESOURCE"/>
-  <resource name="clientArenaEndRound" type="RESOURCE"/>
-  <resource name="parseUuid" type="RESOURCE"/>
-  <resource name="pointCapture" type="RESOURCE"/>
-  <resource name="selectSpawnGroup" type="RESOURCE"/>
-  <resource name="calculateHealingFactor" type="RESOURCE"/>
-  <resource name="toggleZoom" type="RESOURCE"/>
-  <resource name="ds_list_sorted_insert" type="RESOURCE"/>
-  <resource name="startGG2" type="RESOURCE"/>
-  <resource name="restartGG2" type="RESOURCE"/>
-  <resource name="isBetaVersion" type="RESOURCE"/>
-  <resource name="promptRestartOrQuit" type="RESOURCE"/>
-  <resource name="split" type="RESOURCE"/>
-  <resource name="draw_pinched_blackrect" type="RESOURCE"/>
-  <resource name="createShot" type="RESOURCE"/>
-  <resource name="classname" type="RESOURCE"/>
-  <resource name="sanitiseNewlines" type="RESOURCE"/>
-  <resource name="Faucet HTTP" type="GROUP"/>
   <resource name="Gear" type="GROUP"/>
+  <resource name="Object Creation" type="GROUP"/>
+  <resource name="Versioning" type="GROUP"/>
+  <resource name="Spawning" type="GROUP"/>
+  <resource name="Serialization" type="GROUP"/>
+  <resource name="Drawing" type="GROUP"/>
+  <resource name="Faucet HTTP" type="GROUP"/>
+  <resource name="Misc" type="GROUP"/>
+  <resource name="ggon" type="GROUP"/>
 </resources>

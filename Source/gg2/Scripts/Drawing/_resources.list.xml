@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="Timers" type="GROUP"/>
+  <resource name="draw_pinched_blackrect" type="RESOURCE"/>
+  <resource name="draw_sprite_ext_overlay" type="RESOURCE"/>
+  <resource name="draw_name_badges" type="RESOURCE"/>
+  <resource name="drawHealth" type="RESOURCE"/>
+  <resource name="drawProgressBar" type="RESOURCE"/>
+</resources>
