@@ -23,7 +23,7 @@
         doEventFireWeapon(ownerPlayer, seed);
     }
 }
-else if(readyToStab &amp;&amp; owner.cloak)
+else if(readyToStab &amp;&amp; owner.cloak &amp;&amp; !(owner.keyState &amp; $08))
 {
     owner.runPower = 0;
     owner.jumpStrength = 0;
