@@ -32,13 +32,18 @@ if (!instance_exists(IntelligenceBlue))
     redIsCapping = true;
 else if (IntelligenceBlue.alarm[0] &gt; 0)
     redIsCapping = true;
+else
+    redIsCapping = false;
 
 if (timer &gt; 0)
     timer -= 1 * global.delta_factor;
 
 if (global.redCaps &gt;= global.caplimit)
     global.winners = TEAM_RED;
-else if (timer &lt;= 0)
+else if(timer &lt;= 0 and (!redIsCapping or global.redCaps+1 &lt; global.caplimit))
+    global.winners = TEAM_BLUE;
+
+if (timer &lt;= 0 and global.winners == -1)
     overtime = true;
 
 </argument>
