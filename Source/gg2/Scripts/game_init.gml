@@ -103,6 +103,8 @@
     CrosshairRemoveBG = ini_read_real("Settings", "CrosshairRemoveBG", 1);
     global.queueJumping = ini_read_real("Settings", "Queued Jumping", 0);
     global.hideSpyGhosts = ini_read_real("Settings", "Hide Spy Ghosts", 0);
+    //Hidden setting
+    global.forceAudioFix = ini_read_real("Settings", "forceAudioFix", 0);
 
     global.backgroundHash = ini_read_string("Background", "BackgroundHash", "default");
     global.backgroundTitle = ini_read_string("Background", "BackgroundTitle", "");
