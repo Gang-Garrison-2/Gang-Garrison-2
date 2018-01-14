@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<event category="CREATE" id="0">
+<event category="OTHER" id="11">
   <actions>
     <action id="603" library="1">
       <!--action name: Code-->
@@ -13,22 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">image_speed = 0;
-animationSpeed = 0;
-trigger = 0;
-
-top = 60;
-left = 0;
-totalDist = point_distance(0, 0, left, -top);
-upSpeed = 3;
-downSpeed = 3;
-moving = false;
-
-startX = x;
-startY = y;
-checkdir = 1;
-
-resetMoveStatus = 0;
+        <argument kind="STRING">resetMoveStatus = readProperty(other.properties, "resetMoveStatus", REAL, resetMoveStatus);
 </argument>
       </arguments>
     </action>

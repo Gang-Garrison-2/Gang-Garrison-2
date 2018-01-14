@@ -13,22 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">image_speed = 0;
-animationSpeed = 0;
-trigger = 0;
-
-top = 60;
-left = 0;
-totalDist = point_distance(0, 0, left, -top);
-upSpeed = 3;
-downSpeed = 3;
-moving = false;
-
-startX = x;
-startY = y;
-checkdir = 1;
-
-resetMoveStatus = 0;
+        <argument kind="STRING">resetMoveStatus = 0;
 </argument>
       </arguments>
     </action>

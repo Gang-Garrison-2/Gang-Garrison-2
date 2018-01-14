@@ -263,7 +263,6 @@ if(place_free(x,y+1) or vspeed &lt; 0) // no obstacle ground below us OR we're b
     if ((place_meeting(x, y+1, DropdownPlatform) and !place_meeting(x, y, DropdownPlatform)) and !(keyState &amp; $02) and vspeed &gt;= 0)
     {
         onground = true;
-        moveStatus = 0;
     }
     else // NOT standing on one
     {
