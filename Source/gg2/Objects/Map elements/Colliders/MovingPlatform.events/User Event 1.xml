@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <event category="OTHER" id="11">
   <actions>
+    <action id="604" library="1">
+      <!--action name: Inherited-->
+      <kind>NORMAL</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>false</canApplyTo>
+      <actionType>FUNCTION</actionType>
+      <functionName>action_inherited</functionName>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments/>
+    </action>
     <action id="603" library="1">
       <!--action name: Code-->
       <kind>CODE</kind>
@@ -30,7 +43,6 @@ top = readProperty(other.properties, "top", REAL, top);
 left = readProperty(other.properties, "left", REAL, left);
 upSpeed = readProperty(other.properties, "upspeed", REAL, upSpeed);
 downSpeed = readProperty(other.properties, "downspeed", REAL, downSpeed);
-resetMoveStatus = readProperty(other.properties, "resetMoveStatus", REAL, resetMoveStatus);
     
 direction = point_direction(0, 0, left, -top);
 totalDist = point_distance(0, 0, left, -top);

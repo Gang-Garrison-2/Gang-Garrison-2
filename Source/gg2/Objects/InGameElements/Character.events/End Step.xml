@@ -15,7 +15,6 @@
       <arguments>
         <argument kind="STRING">charSetSolids();
 // Handle dropdown platforms
-dropdownrectify = false;
 if(!(keyState &amp; $02))
 {
     with(DropdownPlatform)
@@ -42,7 +41,6 @@ if(!(keyState &amp; $02))
         while(place_meeting(x, y, other))
             other.y -= 0.1;
         other.vspeed = 0;
-        dropdownrectify = true;
     }
 }
 
@@ -58,13 +56,6 @@ if(vspeed == 0 and (!place_meeting(x, y+1, DropdownPlatform) or place_meeting(x,
 }
 xprevious = x;
 yprevious = y;
-
-// things to do if we're on the ground (or a dropdown platform)
-if(!place_free(x,y+1) or (place_meeting(x, y+1, DropdownPlatform) and !place_meeting(x, y, DropdownPlatform)) and !(keyState &amp; $02))
-{
-    if(vspeed &gt;= 0) // only if we have no vertical inertia, reset to walking-type state
-        moveStatus = 0;
-}
 
 charUnsetSolids();
 

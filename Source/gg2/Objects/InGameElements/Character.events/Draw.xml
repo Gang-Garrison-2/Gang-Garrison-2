@@ -86,7 +86,7 @@ else if (!noNewAnim)
     }
     else
     {
-        if(still)
+        if(hspeed==0)
         {
             // set up vars for slope detection
             charSetSolids();

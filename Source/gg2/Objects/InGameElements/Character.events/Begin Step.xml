@@ -13,7 +13,49 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">// Apply afterburn
+        <argument kind="STRING">var stuckInWall, standingOnObstacle, onNonSurfingGround;
+charSetSolids();
+stuckInWall = !place_free(x,y);
+obstacleBelow = !place_free(x,y+1);
+charUnsetSolids();
+if(obstacleBelow and vspeed &gt;= 0)
+{
+    onground = true;
+    onNonSurfingGround = true;
+}
+else
+{
+    onground = false;
+    onNonSurfingGround = false;
+    
+    // Check whether we're potentially standing on any platform before checking each one
+    if(!(keyState &amp; $02))
+    {
+        if(place_meeting(x, y+1, DropdownPlatform))
+        {
+            with(DropdownPlatform)
+            {
+                if(vspeed &gt; other.vspeed) continue;         // We can't stand on a dropdown if we move up faster than it does itself (MovingPlatform)
+                if(!place_meeting(x, y-1, other)) continue; // We can only stand on platforms immediately below us
+                if(place_meeting(x, y, other)) continue;    // We can't stand on platforms we already collide with
+                other.onground = true;
+                if(resetMoveStatus)
+                    onNonSurfingGround = true;
+                // If we didn't find a nonsurfing dropdown yet, we have to keep looking
+                // because there may still be one overlapping the surfing dropdown we found
+                if(onNonSurfingGround) break;
+            }
+        }
+    }
+}
+
+if(onNonSurfingGround)
+    moveStatus = 0;
+    
+if(onground)
+    doublejumpUsed = 0;
+
+// Apply afterburn
 if (burnDuration &gt; 0)
 {
     if(hp &gt; 0)
@@ -62,32 +104,29 @@ if(!taunting and !omnomnomnom)
         image_speed=tauntspeed;
     } 
     
-    if(pressedKeys &amp; $80 or (player.queueJump and wantToJump))
+    if(((pressedKeys &amp; $80) or (player.queueJump and wantToJump)) and vspeed &gt; -jumpStrength)
     {
-        charSetSolids();
-        if ((!place_free(x, y+1) and place_free(x, y))
-            or (place_meeting(x, y+1, DropdownPlatform) and !place_meeting(x, y, DropdownPlatform)))
+        if (onground and !stuckInWall)
         {
             deathmatch_invuln_decay = 1;
             if(not stabbing)
             {
-                doublejumpUsed = 0;
                 wantToJump = false;
                 playsound(x,y,JumpSnd);
-                vspeed = min(vspeed, -jumpStrength);
-                onground = false;
+                vspeed = -jumpStrength;
+                onground = false; // Correct unless you are standing on a platform which moves up faster than jumpStrength
             }
         }
-        else if(canDoublejump and !doublejumpUsed and vspeed &gt; -jumpStrength)
+        else if(canDoublejump and !doublejumpUsed)
         {
             deathmatch_invuln_decay = 1;
             wantToJump = false;
             vspeed = -jumpStrength;
+            onground = false; // Correct unless you are standing on a platform which moves up faster than jumpStrength
             playsound(x,y,JumpSnd);
             doublejumpUsed = 1;
             moveStatus = 0;
         }
-        charUnsetSolids();
     }
 }
 
@@ -143,9 +182,10 @@ default:
     frictionFactor = baseFriction;
 }
 
-if(moveStatus == 1 or moveStatus == 2 or moveStatus == 4)
+var rocketJumping;
+rocketJumping = moveStatus == 1 or moveStatus == 2 or moveStatus == 4;
+if(rocketJumping)
 {
-    applied_gravity -= 0.06;
     if(global.run_virtual_ticks)
     {
         if !variable_local_exists("jumpFlameParticleType")
@@ -179,6 +219,7 @@ if(moveStatus == 1 or moveStatus == 2 or moveStatus == 4)
         }
     }
 }
+
 if(spinjumping)
 {
     
@@ -248,47 +289,23 @@ if burnDuration&gt;0 &amp;&amp; player.class != CLASS_PYRO and random(80) &lt;= 
 if (abs(hspeed) &lt; 0.195 and !controlling)
 {
     hspeed=0;
-    animationImage=0;
-    still = true;
 }
-else
-    still = false;
 
-charSetSolids();
-
-// apply gravity
-if(place_free(x,y+1) or vspeed &lt; 0) // no obstacle ground below us OR we're bound upwards
+// In order to make the gravity truly framerate-independent, we need to apply half of it before, and half of it after, each motion.
+// The math concept is, the period of a frame starts with a vertical velocity of N, and ends with N+gravity. This ends up being equivalent to the above idea.
+// Old gg2 gravity "skipped" arcs, and behaved very slightly differently on 60fps and 30fps.
+// Using truly framerate-indepent gravity means that the strength of jumping has to change to create the same arc.
+// The change in the strength of jumping corresponds to the change in the strength of the initial frame of gravity.
+// Since the inital frame of gravity is half what it used to be, the strength of jumping needs to change the same amount, which I did elsewhere.
+// I used the 30fps value of "initial frame of gravity", since that represents gg2's canonical jump arc.
+// This change PROBABLY makes explosive jumping slightly more powerful, because the initial strength of that cannot be tweaked without also altering mid-air arcs.
+// Actually, because GG2 used to not apply on the first frame after jumping, jumping velocity is slightly larger, not smaller.
+if(!onground and !stuckInWall)
 {
-    // standing on a dropdown platform
-    if ((place_meeting(x, y+1, DropdownPlatform) and !place_meeting(x, y, DropdownPlatform)) and !(keyState &amp; $02) and vspeed &gt;= 0)
-    {
-        onground = true;
-    }
-    else // NOT standing on one
-    {
-        // In order to make the gravity truly framerate-independent, we need to apply half of it before, and half of it after, each motion.
-        // The math concept is, the period of a frame starts with a vertical velocity of N, and ends with N+gravity. This ends up being equivalent to the above idea.
-        // Old gg2 gravity "skipped" arcs, and behaved very slightly differently on 60fps and 30fps.
-        // Using truly framerate-indepent gravity means that the strength of jumping has to change to create the same arc.
-        // The change in the strength of jumping corresponds to the change in the strength of the initial frame of gravity.
-        // Since the inital frame of gravity is half what it used to be, the strength of jumping needs to change the same amount, which I did elsewhere.
-        // I used the 30fps value of "initial frame of gravity", since that represents gg2's canonical jump arc.
-        // This change PROBABLY makes explosive jumping slightly more powerful, because the initial strength of that cannot be tweaked without also altering mid-air arcs.
-        // Actually, because GG2 used to not apply on the first frame after jumping, jumping velocity is slightly larger, not smaller.
-        applied_gravity += 0.6;
-        
-        animationImage = 1;
-        onground = false;
-    }
-}
-else // obstacle ground below us
-{
-    if(place_free(x, y) or (place_meeting(x, y+1, DropdownPlatform) and !place_meeting(x, y, DropdownPlatform)) and vspeed &gt;= 0)
-    {
-        onground = true;
-        doublejumpUsed = 0;
-        moveStatus = 0;
-    }
+    if(rocketJumping)
+        applied_gravity += 0.54;
+    else
+        applied_gravity += 0.6;        
 }
 
 if (intel)
@@ -326,44 +343,32 @@ if (intel)
                             intelRecharge + global.delta_factor * // ...After adding some value to it 
                             INTEL_MAX_TIMER/((3+abs(min(hspeed, 7))/3.5)*30)); // ...Which starts at a rate of full charge per three seconds, and reduces linearly with speed, down to full charge per five seconds with a scout's max speed
 }
+
+if(player.humiliated)
+    deathmatch_invulnerable = 0;
+
 var sprite_length;
-if(player.class == CLASS_QUOTE or sprite_special or zoomed)
+if(player.class == CLASS_QUOTE or sprite_special or zoomed or player.humiliated)
     sprite_length = 2;
 else
     sprite_length = CHARACTER_ANIMATION_LEN;
 
-if (player.humiliated)
-{
-    deathmatch_invulnerable = 0;
-    if (!place_free(x,y+1) &amp;&amp; hspeed == 0)
-        animationImage = 0;
-    else if place_free(x,y+1)
-        animationImage = 2;
-    if (!place_free(x,y+1) &amp;&amp; hspeed != 0)
-        animationImage = 1+
-        ((animationImage-1+
-          min(abs(hspeed), 8)
-          *global.delta_factor/20) mod 
-         2);
-}
+var jumpAnimationImage;
+if(player.humiliated)
+    jumpAnimationImage = 2;
+else
+    jumpAnimationImage = 1;
+
+if (onground and hspeed == 0)
+    animationImage = 0;
+else if(!onground)
+    animationImage = jumpAnimationImage;
 else
 {
-    if (place_free(x,y+1) and hspeed != 0 and player.class == CLASS_QUOTE)
-    {
-        animationImage = 1;
-    }
-    else
-    {
-        animationImage = (animationImage+
-         min(abs(hspeed)*sign(hspeed), 8)
-         *image_xscale*global.delta_factor/20)
-        mod sprite_length;
-    }
-    // ensure positive animationImage
+    // onground and not still
+    animationImage += min(abs(hspeed), 8)*sign(hspeed)*image_xscale*global.delta_factor/20;
     animationImage = (animationImage+sprite_length) mod sprite_length;
 }
-
-charUnsetSolids();
 
 // drop intel if ubered or round is over
 if (intel and (ubered or global.mapchanging) and global.isHost) {

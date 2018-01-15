@@ -13,7 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">resetMoveStatus = 0;
+        <argument kind="STRING">resetMoveStatus = 1;
 </argument>
       </arguments>
     </action>
