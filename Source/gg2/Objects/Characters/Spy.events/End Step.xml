@@ -21,7 +21,8 @@ if (global.myself != -1) if (global.myself.object != -1)
 {
     if (team != global.myself.object.team
         and sign(x - global.myself.object.x) == -sign(global.myself.object.image_xscale)
-        and !intel)
+        and !intel
+        and global.winners == -1)
     {
         // trigger spy ghost copy if not cloaked
         if (!invisible and (cloakAlpha &gt; 0))
