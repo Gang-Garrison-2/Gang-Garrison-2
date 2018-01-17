@@ -28,7 +28,7 @@ draw_set_valign(fa_top);
 if (lobbysocket != -1)
     headerstring = "Loading...";
 else
-    headerstring = "Servers ("+string(serversRead)+"/"+string(numServers)+") ";
+    headerstring = "Servers ("+string(ds_list_size(servers))+"/"+string(numServers)+") ";
 
 draw_text(xbegin, ybegin-41, headerstring);
 

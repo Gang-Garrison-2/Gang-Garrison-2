@@ -19,11 +19,16 @@
     pingStartTime = current_time;
     pingRunning = true;
 } else if(pingRunning and !pingFinished) {
-    if(not socket_connecting(pingSocket)) {
+    var timeSinceStart, timeout;
+    timeSinceStart = current_time - pingStartTime;
+    timeout = timeSinceStart &gt; 2000;
+    if((not socket_connecting(pingSocket)) or timeout) {
         if(socket_has_error(pingSocket)) {
             ping = -1;
+        } else if(timeout) {
+            ping = 1999;
         } else {
-            ping = current_time - pingStartTime;
+            ping = timeSinceStart;
         }
         socket_destroy_abortive(pingSocket);
         global.runningPingCount -= 1;
