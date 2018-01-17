@@ -14,7 +14,7 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">with(LobbyController)
-    if(offset &lt; numServers-items)
+    if(offset &lt; ds_list_size(servers)-items)
         offset+=1;
 </argument>
       </arguments>

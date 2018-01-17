@@ -18,7 +18,7 @@ xbegin = 112;
 ybegin = 152;
 spacing = 40;
 width = 440; 
-items = 12;
+items = 10;
 offset = 0;
 
 servers = ds_list_create();
