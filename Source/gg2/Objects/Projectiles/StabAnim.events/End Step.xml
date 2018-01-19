@@ -14,9 +14,6 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">// Make self invisible if behind enemy
-visible = 1;
-
-//Experimental
 visible = !owner.invisible;
 </argument>
       </arguments>
