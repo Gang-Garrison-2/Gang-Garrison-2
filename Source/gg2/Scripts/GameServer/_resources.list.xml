@@ -9,5 +9,5 @@
   <resource name="sendLobbyRegistration" type="RESOURCE"/>
   <resource name="sendLobbyUnreg" type="RESOURCE"/>
   <resource name="GameServerEndStep" type="RESOURCE"/>
-  <resource name="getNumberOfPlayers" type="RESOURCE"/>
+  <resource name="getNumberOfOccupiedSlots" type="RESOURCE"/>
 </resources>

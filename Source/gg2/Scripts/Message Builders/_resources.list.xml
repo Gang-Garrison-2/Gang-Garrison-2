@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
   <resource name="ClientPlayerJoin" type="RESOURCE"/>
+  <resource name="ClientReserveSlot" type="RESOURCE"/>
   <resource name="ClientPlayerChangeteam" type="RESOURCE"/>
   <resource name="ClientPlayerChangeclass" type="RESOURCE"/>
   <resource name="ClientInputstate" type="RESOURCE"/>

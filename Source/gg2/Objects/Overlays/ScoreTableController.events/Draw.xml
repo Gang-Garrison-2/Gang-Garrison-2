@@ -42,7 +42,13 @@
         else if (player.team == TEAM_BLUE)
             ds_priority_add(blueteam, player, player.stats[POINTS]);
         else if (player.team == TEAM_SPECTATOR)
-            ds_priority_add(spec, player, 0);
+            ds_priority_add(spec, player, 1);
+    }
+    
+    with(JoiningPlayer)
+    {
+        if(occupiesSlot)
+            ds_priority_add(spec, id, 0);
     }
     
     draw_set_color(make_color_rgb(227,226,225));
@@ -152,7 +158,7 @@
     
     specList="";
     
-    var __x, __y, __x_max, __bootlen, __str;
+    var __x, __y, __x_max, __bootlen, __str, nameWidth;
     
     __y = yoffset+370;
     __x_min = xoffset+xsize-350;
@@ -175,7 +181,7 @@
                 if (mouse_check_button_pressed(mb_left)) {
                     mouse_clear(mb_left);
                     player.kicked = true;
-                }        
+                }
             }
         }
         
@@ -188,12 +194,22 @@
             __str = ', ';
         }
         
-        if (__bootlen + __x + name_width_badges(player) + string_length(__str) &gt; __x_max) {
+        if(player.object_index == JoiningPlayer)
+            nameWidth = string_width('['+sanitiseNewlines(player.name)+']');
+        else
+            nameWidth = name_width_badges(player);
+        
+        if (__bootlen + __x + nameWidth + string_length(__str) &gt; __x_max) {
             __x = __x_min;
             __y += string_height("/|ijgyA[") + 2;
         }
-        draw_name_badges(__bootlen + __x, __y, player, alpha);
-        __x += __bootlen + name_width_badges(player);
+        
+        if(player.object_index == JoiningPlayer)
+            draw_text(__bootlen + __x, __y, '['+sanitiseNewlines(player.name)+']');
+        else
+            draw_name_badges(__bootlen + __x, __y, player, alpha);
+                        
+        __x += __bootlen + nameWidth;
         draw_text(__x, __y, __str);
         __x += string_width(__str);
     }

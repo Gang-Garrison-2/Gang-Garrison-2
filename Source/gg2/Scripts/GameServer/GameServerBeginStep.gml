@@ -20,8 +20,8 @@ for(i=0; i < ds_list_size(global.players); i+=1)
     
     if(socket_has_error(player.socket) or player.kicked)
     {
-        var noOfPlayers, player;
-        noOfPlayers = getNumberOfPlayers();
+        var noOfOccupiedSlots, player;
+        noOfOccupiedSlots = getNumberOfOccupiedSlots();
         
         removePlayer(player);
         ServerPlayerLeave(i, global.sendBuffer);
@@ -29,7 +29,7 @@ for(i=0; i < ds_list_size(global.players); i+=1)
         i -= 1;
         
         // message lobby to update playercount if we were full before
-        if(noOfPlayers == global.playerLimit)
+        if(noOfOccupiedSlots == global.playerLimit)
         {
             sendLobbyRegistration();
         }

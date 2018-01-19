@@ -2,7 +2,7 @@ move_all_bullets();
 move_all_gore();
 
 // receive and interpret the server's message(s)
-var i, playerObject, playerID, player, otherPlayerID, otherPlayer, sameVersion, buffer, plugins, pluginsRequired, usePlugins;
+var i, playerObject, playerID, player, otherPlayerID, otherPlayer, sameVersion, buffer, usePlugins;
 
 if(tcp_eof(global.serverSocket)) {
     if(gotServerHello)
@@ -48,14 +48,18 @@ do {
             receiveCompleteMessage(global.serverSocket, 1, global.tempBuffer);
             pluginsRequired = read_ubyte(global.tempBuffer);
             plugins = receivestring(global.serverSocket, 2);
-            pluginsToLoadOnNextJoinUpdate = "";
+
             if(string_pos("/", downloadMapName) != 0 or string_pos("\", downloadMapName) != 0)
             {
                 show_message("Server sent illegal map name: "+downloadMapName);
                 instance_destroy();
                 exit;
             }
+            ClientReserveSlot(global.serverSocket)
+            socket_send(global.serverSocket);
+            break;
 
+        case RESERVE_SLOT:
             if (!noReloadPlugins && string_length(plugins))
             {
                 usePlugins = pluginsRequired || !global.serverPluginsPrompt;
@@ -121,9 +125,13 @@ do {
                 }
                 if (usePlugins)
                 {
-                    // Only actually load the plugins once the server confirms that we joined.
-                    // This way, people won't have to restart the game if it turns out that the server is full.
-                    pluginsToLoadOnNextJoinUpdate = plugins;
+                    if (!loadserverplugins(plugins))
+                    {
+                        show_message("Error ocurred loading server-sent plugins.");
+                        instance_destroy();
+                        exit;
+                    }
+                    global.serverPluginsInUse = true;
                 }
             }
             noReloadPlugins = false;
@@ -172,25 +180,9 @@ do {
             break;
             
         case JOIN_UPDATE:
-            // Load the plugins as early as possible once we have a confirmation of the join.
-            // The plugins used to be loaded when processing the HELLO message. Moving that point forward as little as possible
-            // should result in the greatest compatibility.
-            if(string_length(pluginsToLoadOnNextJoinUpdate))
-            {
-                if (!loadserverplugins(pluginsToLoadOnNextJoinUpdate))
-                {
-                    show_message("Error ocurred loading server-sent plugins.");
-                    instance_destroy();
-                    exit;
-                }
-                global.serverPluginsInUse = true;
-                pluginsToLoadOnNextJoinUpdate = "";
-            }
-            
             receiveCompleteMessage(global.serverSocket,2,global.tempBuffer);
             global.playerID = read_ubyte(global.tempBuffer);
             global.currentMapArea = read_ubyte(global.tempBuffer);
-            
             break;
         
         case FULL_UPDATE:

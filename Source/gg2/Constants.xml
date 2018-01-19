@@ -72,6 +72,7 @@
   <constant name="PING" value="57"/>
   <constant name="CLIENT_SETTINGS" value="58"/>
   <constant name="KICK_MULTI_CLIENT" value="59"/>
+  <constant name="RESERVE_SLOT" value="60"/>
   <constant name="TEAM_RED" value="0"/>
   <constant name="TEAM_BLUE" value="1"/>
   <constant name="TEAM_SPECTATOR" value="2"/>

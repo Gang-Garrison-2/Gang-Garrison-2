@@ -15,6 +15,8 @@
       <arguments>
         <argument kind="STRING">socket = -1;
 mapDownloadBuffer = -1;
+occupiesSlot = false;
+kicked = false;
 
 STATE_EXPECT_HELLO = 1; // Hello message: 17 bytes (HELLO+UUID)
 STATE_EXPECT_MESSAGELEN = 2; // 1 byte Message length header 
