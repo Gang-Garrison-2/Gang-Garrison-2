@@ -36,9 +36,18 @@
     reloadTime = 55;
     reloadBuffer = 0;
     
-    normalSprite = BladeS;
-    recoilSprite = BladeFS;
+    if(golden)
+    {
+        normalSprite = BladeGoldS;
+        recoilSprite = BladeGoldFS;
+    }
+    else
+    {
+        normalSprite = BladeS;
+        recoilSprite = BladeFS;
+    }
     reloadSprite = -1;
+    sprite_index = normalSprite;
     
     recoilTime = 1;
     recoilAnimLength = sprite_get_number(recoilSprite)/2;

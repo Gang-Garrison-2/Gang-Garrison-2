@@ -12,4 +12,7 @@
   <resource name="RocketlauncherGoldS" type="RESOURCE"/>
   <resource name="RifleGoldS" type="RESOURCE"/>
   <resource name="RevolverGoldS" type="RESOURCE"/>
+  <resource name="BladeGoldS" type="RESOURCE"/>
+  <resource name="SpyRedBackstabTorsoGoldS" type="RESOURCE"/>
+  <resource name="SpyBlueBackstabTorsoGoldS" type="RESOURCE"/>
 </resources>

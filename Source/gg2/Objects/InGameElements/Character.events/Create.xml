@@ -366,6 +366,7 @@
             case CLASS_DEMOMAN:
             case CLASS_HEAVY:
             case CLASS_PYRO:
+            case CLASS_MEDIC:
                 ds_list_insert(tauntOverlays, 0, getCharacterSpriteId(player.class, player.team, "GoldWeaponTaunt"));
                 break;
         }

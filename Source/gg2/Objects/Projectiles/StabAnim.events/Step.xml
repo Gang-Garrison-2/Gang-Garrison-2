@@ -18,11 +18,21 @@
 else
     image_xscale = 1;
 
-if (team == TEAM_RED)
-    sprite_index = SpyRedBackstabTorsoS;
+if(golden)
+{
+    if (team == TEAM_RED)
+        sprite_index = SpyRedBackstabTorsoGoldS;
+    else
+        sprite_index = SpyBlueBackstabTorsoGoldS;
+}
 else
-    sprite_index = SpyBlueBackstabTorsoS;
-
+{
+    if (team == TEAM_RED)
+        sprite_index = SpyRedBackstabTorsoS;
+    else
+        sprite_index = SpyBlueBackstabTorsoS;
+}
+    
 if (image_index == 32)
 {
     done = 1;

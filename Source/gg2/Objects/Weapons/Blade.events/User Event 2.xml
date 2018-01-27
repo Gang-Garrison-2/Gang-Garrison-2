@@ -21,6 +21,8 @@
         var shot;
         randomize();
         shot = createShot(x+lengthdir_x(5, owner.aimDirection), y+lengthdir_y(5, owner.aimDirection), BladeB, DAMAGE_SOURCE_BLADE, owner.aimDirection, 12);
+        if(golden)
+            shot.sprite_index = BladeProjectileGoldS;
         if(ammoCount &gt; highAmmoThreshold)
             shot.hitDamage = bladeDamage;
         else if(ammoCount &lt; lowAmmoThreshold)

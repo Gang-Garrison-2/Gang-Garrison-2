@@ -38,6 +38,8 @@ else if(readyToStab &amp;&amp; owner.cloak &amp;&amp; !(owner.keyState &amp; $08
     stab.team = owner.team;
     stab.hitDamage = 0;
     stab.weapon = DAMAGE_SOURCE_KNIFE;
+    stab.golden = golden;
+    
     // 'BH' reward - *B*obble *H*ead
     if(hasClassReward(ownerPlayer, 'BH'))
     {

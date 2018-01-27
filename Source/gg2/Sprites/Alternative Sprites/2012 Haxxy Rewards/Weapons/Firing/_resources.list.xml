@@ -9,4 +9,5 @@
   <resource name="MedigunGoldFS" type="RESOURCE"/>
   <resource name="ScattergunGoldFS" type="RESOURCE"/>
   <resource name="FlamethrowerGoldFS" type="RESOURCE"/>
+  <resource name="BladeGoldFS" type="RESOURCE"/>
 </resources>
