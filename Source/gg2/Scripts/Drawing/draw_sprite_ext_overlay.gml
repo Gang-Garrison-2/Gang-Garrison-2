@@ -1,9 +1,11 @@
 // void draw_sprite_ext_overlay(real sprite, real overlayList, real gearList, real subimg, real x, real y, real xscale, real yscale, real rot, real color, real alpha, real voffset)
 // The same as draw_sprite_ext, except when overlay is not equal to -1 or gearList is not equal to -1
-// the overlays will be drawn in-order on top of the sprite, using the same parameters
-// then the gear will be drawn in-order on top of all that
+// All drawing is done in z-order (lower z = more in front), with the main sprite having an assumed z=0 and the overlays z=-10.
+// Among themselves, the overlays are drawn in list order, using the same parameters as the sprite.
+// Gear brings its own z-value.
 // Having both overlay and gear in here is silly because gear is supposed to replace the overlay stuff, but someone still needs to actually do that.
 // So supporting both is just a temporary cludge, which means it will probably remain here forever.
+// The script is run in the context of the object the overlay should be drawn for. This is used in some overlays to get at extra state like current speed.
 var _sprite,
     overlayList,
     gearList,
@@ -33,14 +35,38 @@ _subimg = floor(_subimg) mod sprite_get_number(_sprite);
 if(_subimg < 0)
     _subimg += sprite_get_number(_sprite);
 
-draw_sprite_ext(_sprite, _subimg, _x, _y, _xscale, _yscale, _rot, _color, _alpha);
+var drawCommands, drawCommand;
+drawCommands = ds_priority_create();
+
+drawCommand = ds_list_create();
+ds_list_add(drawCommand, _sprite);
+ds_list_add(drawCommand, _subimg);
+ds_list_add(drawCommand, _x);
+ds_list_add(drawCommand, _y);
+ds_list_add(drawCommand, _xscale);
+ds_list_add(drawCommand, _yscale);
+ds_list_add(drawCommand, _rot);
+ds_list_add(drawCommand, _color);
+ds_list_add(drawCommand, _alpha);
+ds_priority_add(drawCommands, drawCommand, 0);
+
 if (overlayList != -1)
 {
     if (!ds_list_empty(overlayList))
     {
         for(i = 0; i < ds_list_size(overlayList); i+=1)
         {
-            draw_sprite_ext(ds_list_find_value(overlayList,i), _subimg, _x, _y+_voffset, _xscale, _yscale, _rot, _color, _alpha);
+            drawCommand = ds_list_create();
+            ds_list_add(drawCommand, ds_list_find_value(overlayList,i));
+            ds_list_add(drawCommand, _subimg);
+            ds_list_add(drawCommand, _x);
+            ds_list_add(drawCommand, _y+_voffset);
+            ds_list_add(drawCommand, _xscale);
+            ds_list_add(drawCommand, _yscale);
+            ds_list_add(drawCommand, _rot);
+            ds_list_add(drawCommand, _color);
+            ds_list_add(drawCommand, _alpha);
+            ds_priority_add(drawCommands, drawCommand, 10); // Yes, 10, not -10. The priority queue goes by negative z-index so that insertion order equals draw order for the same z.
         }
     }
 }
@@ -86,7 +112,7 @@ if(gearList != -1)
                 continue;
             gearSpriteSubimageInfo = ds_map_find_value(gearSpriteInfo, round(_subimg));
             
-            var overlaySprite, overlaySubimage, dx, dy, overlayAngle, overlayxscale, co, so, cg, sg, drawXScale, drawYScale, drawAngle, overlayScaleOffX, overlayScaleOffY, overlayCenterOffX, overlayCenterOffY;
+            var overlaySprite, overlaySubimage, dx, dy, overlayAngle, overlayxscale, co, so, cg, sg, drawXScale, drawYScale, drawAngle, overlayScaleOffX, overlayScaleOffY, overlayCenterOffX, overlayCenterOffY, subimageScript, zindex;
             
             overlaySprite = ds_list_find_value(gearSpriteSubimageInfo, 0);
             overlaySubimage = ds_list_find_value(gearSpriteSubimageInfo, 1);
@@ -94,6 +120,12 @@ if(gearList != -1)
             dy = ds_list_find_value(gearSpriteSubimageInfo, 3) * _yscale;
             overlayAngle = ds_list_find_value(gearSpriteSubimageInfo, 4);
             overlayxscale = ds_list_find_value(gearSpriteSubimageInfo, 5);
+            subimageScript = ds_list_find_value(gearSpriteSubimageInfo, 6);
+            zindex = ds_list_find_value(gearSpriteSubimageInfo, 6);
+            
+            if(subimageScript != 0) {
+                overlaySubimage = script_execute(subimageScript);
+            }
             
             // GM does not allow arbitrary linear transforms, so we cannot correctly draw the overlay
             // if it is at an oblique angle to the base sprite and there is arbitrary scaling involved.
@@ -113,7 +145,36 @@ if(gearList != -1)
             overlayCenterOffX = cg*overlayScaleOffX + sg*overlayScaleOffY;
             overlayCenterOffY = cg*overlayScaleOffY - sg*overlayScaleOffX;
             
-            draw_sprite_ext(overlaySprite, overlaySubimage, baseCenterPointX + c*dx + s*dy - overlayCenterOffX, baseCenterPointY - s*dx + c*dy - overlayCenterOffY, drawXScale, drawYScale, drawAngle, _color, _alpha);
+            drawCommand = ds_list_create();
+            ds_list_add(drawCommand, overlaySprite);
+            ds_list_add(drawCommand, overlaySubimage);
+            ds_list_add(drawCommand, baseCenterPointX + c*dx + s*dy - overlayCenterOffX);
+            ds_list_add(drawCommand, baseCenterPointY - s*dx + c*dy - overlayCenterOffY);
+            ds_list_add(drawCommand, drawXScale);
+            ds_list_add(drawCommand, drawYScale);
+            ds_list_add(drawCommand, drawAngle);
+            ds_list_add(drawCommand, _color);
+            ds_list_add(drawCommand, _alpha);
+            ds_priority_add(drawCommands, drawCommand, -zindex);
         }
     }
 }
+
+while(!ds_priority_empty(drawCommands))
+{
+    drawCommand = ds_priority_delete_min(drawCommands);
+    draw_sprite_ext(
+        ds_list_find_value(drawCommand, 0),
+        ds_list_find_value(drawCommand, 1),
+        ds_list_find_value(drawCommand, 2),
+        ds_list_find_value(drawCommand, 3),
+        ds_list_find_value(drawCommand, 4),
+        ds_list_find_value(drawCommand, 5),
+        ds_list_find_value(drawCommand, 6),
+        ds_list_find_value(drawCommand, 7),
+        ds_list_find_value(drawCommand, 8));
+        
+    ds_list_destroy(drawCommand);
+}
+
+ds_priority_destroy(drawCommands);

@@ -350,6 +350,10 @@
     {
         demon = WillOWispS;
     }
+    if (hasClassReward(player, 'Cape_'))
+    {
+        ds_list_add(gearList, GEAR_RAYBANN_CAPE);
+    }
     if(hasClassReward(player, 'GW'))
     {
         // 'GW' reward - *G*olden *W*eapon

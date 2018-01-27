@@ -10,4 +10,5 @@
   <resource name="parseBadges" type="RESOURCE"/>
   <resource name="rewardCreateChallenge" type="RESOURCE"/>
   <resource name="name_width_badges" type="RESOURCE"/>
+  <resource name="getCapeSubimage" type="RESOURCE"/>
 </resources>

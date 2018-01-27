@@ -12,10 +12,13 @@
   <resource name="gearSpecClassOverlayOffset" type="RESOURCE"/>
   <resource name="gearSpecClassOverlay" type="RESOURCE"/>
   <resource name="gearSpecFrameOverlay" type="RESOURCE"/>
+  <resource name="gearSpecDefaultSubimageScript" type="RESOURCE"/>
+  <resource name="gearSpecDefaultZindex" type="RESOURCE"/>
   <resource name="gearSpecApply" type="RESOURCE"/>
   <resource name="_gearSpecGetWithDefaults" type="RESOURCE"/>
   <resource name="_gearSpecClassTeamContext" type="RESOURCE"/>
   <resource name="_gearSpecFrameContext" type="RESOURCE"/>
   <resource name="_gearSpecDefaultTeamContext" type="RESOURCE"/>
   <resource name="_gearSpecSet" type="RESOURCE"/>
+  <resource name="gearSpecFrameOverlayOffset" type="RESOURCE"/>
 </resources>

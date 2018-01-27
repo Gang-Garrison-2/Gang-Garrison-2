@@ -49,7 +49,7 @@ for(class = 0; class < 10; class += 1)
             {
                 if(ds_map_exists(headPoses, subimage))
                 {
-                    var headPose, dx, dy, angle, xscale, overlaySprite, overlaySubimage, xoff, yoff;
+                    var headPose, dx, dy, angle, xscale, overlaySprite, overlaySubimage, xoff, yoff, subimageScript, zindex;
                     headPose = ds_map_find_value(headPoses, subimage);
                     dx = ds_list_find_value(headPose, 0);
                     dy = ds_list_find_value(headPose, 1);
@@ -60,13 +60,15 @@ for(class = 0; class < 10; class += 1)
                     overlaySubimage = _gearSpecGetWithDefaults(gearSpec, class, team, animation, subimage, "overlaySubimage", -1);
                     xoff = _gearSpecGetWithDefaults(gearSpec, class, team, animation, subimage, "xoff", 0) * xscale;
                     yoff = _gearSpecGetWithDefaults(gearSpec, class, team, animation, subimage, "yoff", 0);
+                    subimageScript = _gearSpecGetWithDefaults(gearSpec, class, team, animation, subimage, "subimageScript", 0);
+                    zindex = _gearSpecGetWithDefaults(gearSpec, class, team, animation, subimage, "zindex", -20);
                     
                     if(overlaySprite >= 0 and overlaySubimage >= 0)
                     {
                         var c, s;
                         c = cos(degtorad(angle));
                         s = sin(degtorad(angle));
-                        setGearOverlayInfo(spriteId, subimage, gearName, overlaySprite, overlaySubimage, dx + c*xoff + s*yoff, dy + c*yoff - s*xoff, angle, xscale);
+                        setGearOverlayInfo(spriteId, subimage, gearName, overlaySprite, overlaySubimage, dx + c*xoff + s*yoff, dy + c*yoff - s*xoff, angle, xscale, subimageScript, zindex);
                     }
                 }
             }

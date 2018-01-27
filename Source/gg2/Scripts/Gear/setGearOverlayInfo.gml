@@ -12,6 +12,8 @@ dx = argument5;
 dy = argument6;
 angle = argument7;
 xscale = argument8;
+subimageSelectionScript = argument9;
+zindex = argument10;
 
 if(!variable_global_exists("gearOverlayInfo"))
     global.gearOverlayInfo = ds_map_create();
@@ -56,4 +58,5 @@ ds_list_add(frameInfo, dx);
 ds_list_add(frameInfo, dy);
 ds_list_add(frameInfo, angle);
 ds_list_add(frameInfo, xscale);
-
+ds_list_add(frameInfo, subimageSelectionScript);
+ds_list_add(frameInfo, zindex);
