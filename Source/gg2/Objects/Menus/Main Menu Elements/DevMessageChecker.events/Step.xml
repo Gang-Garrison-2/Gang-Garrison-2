@@ -19,7 +19,6 @@ if (http_step(handle)) {
     // Request failed
     if (http_status_code(handle) != 200) {
         // Just give up
-        http_destroy(handle);
         instance_destroy();
         exit;
     }
@@ -27,7 +26,6 @@ if (http_step(handle)) {
     var data;
     data = http_response_body(handle);
     data = read_string(data, buffer_size(data));
-    http_destroy(handle);
 
     global.devMessagesChecked = true;
 

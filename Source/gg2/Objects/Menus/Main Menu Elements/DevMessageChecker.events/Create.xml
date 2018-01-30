@@ -13,7 +13,9 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">// We only want to check for messages once per run
+        <argument kind="STRING">handleCreated = false;
+
+// We only want to check for messages once per run
 if(variable_global_exists("devMessagesChecked")) {
     if(global.devMessagesChecked) {
         instance_destroy();
@@ -32,6 +34,7 @@ else
     url = DEVMESSAGES_SOURCE;
 
 handle = http_new_get(url);
+handleCreated = true;
 
 image_speed = 5/room_speed;
 </argument>
