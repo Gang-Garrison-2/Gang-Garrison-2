@@ -350,7 +350,11 @@
     {
         demon = WillOWispS;
     }
-    if (hasClassReward(player, 'Cape_'))
+    if (hasClassReward(player, 'HaxxyCape_'))
+    {
+        ds_list_add(gearList, GEAR_HAXXY_CAPE);
+    }
+    else if (hasClassReward(player, 'RaybannCape_'))
     {
         ds_list_add(gearList, GEAR_RAYBANN_CAPE);
     }

@@ -135,4 +135,5 @@
   <constant name="GEAR_CROWN" value="&quot;Crown&quot;"/>
   <constant name="GEAR_NAVIGATORHAT" value="&quot;NavigatorHat&quot;"/>
   <constant name="GEAR_RAYBANN_CAPE" value="&quot;RaybannCape&quot;"/>
+  <constant name="GEAR_HAXXY_CAPE" value="&quot;HaxxyCape&quot;"/>
 </constants>

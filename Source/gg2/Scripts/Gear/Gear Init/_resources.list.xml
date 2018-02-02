@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="initPartyHat" type="RESOURCE"/>
+  <resource name="initCrown" type="RESOURCE"/>
+  <resource name="initNavigatorHat" type="RESOURCE"/>
+  <resource name="initCape" type="RESOURCE"/>
+</resources>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
+  <resource name="Gear Init" type="GROUP"/>
   <resource name="initAllHeadPoses" type="RESOURCE"/>
   <resource name="setBasicHeadPoses" type="RESOURCE"/>
   <resource name="setHeadPose" type="RESOURCE"/>
