@@ -190,6 +190,10 @@ if(view_hview[0] &lt; 600)
                 else if (gotVar &gt;= 112 &amp;&amp; gotVar &lt;= 123) {
                     val = "F" + string(gotVar - 111);
                 }
+                //Comma, dot, minus
+                else if (gotVar &gt;= 188 &amp;&amp; gotVar &lt;= 190) {
+                    val = gotVar - 144;
+                }
                 else val = chr(menu_get_var(i));
                 break;
             }
