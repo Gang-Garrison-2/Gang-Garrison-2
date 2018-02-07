@@ -34,7 +34,7 @@ if(view_hview[0] &lt; 600)
                      *(600-view_hview[0]));
 }
 {
-    var i, val, itemx, itemy, itemcount;
+    var i, val, gotVar, itemx, itemy, itemcount;
     menu_hack_backbutton();
     itemcount = menu_get_itemcount();
     
@@ -177,7 +177,24 @@ if(view_hview[0] &lt; 600)
                 val = "Right Mouse Button";
                 break;
             default:
-                val = chr(menu_get_var(i));
+                gotVar = menu_get_var(i);
+                //Numpad number buttons
+                if (gotVar &gt;= 96 &amp;&amp; gotVar &lt;=  105){
+                    val = "NUMPAD " + chr(gotVar - 48);
+                }
+                //Numpad other buttons
+                else if (gotVar &gt;= 106 &amp;&amp; gotVar &lt;=  111){
+                    val = "NUMPAD " + chr(gotVar - 64);
+                }
+                //Function buttons
+                else if (gotVar &gt;= 112 &amp;&amp; gotVar &lt;= 123) {
+                    val = "F" + string(gotVar - 111);
+                }
+                //Comma, dot, minus
+                else if (gotVar &gt;= 188 &amp;&amp; gotVar &lt;= 190) {
+                    val = chr(gotVar - 144);
+                }
+                else val = chr(menu_get_var(i));
                 break;
             }
             break;
