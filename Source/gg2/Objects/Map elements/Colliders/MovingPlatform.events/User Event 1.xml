@@ -37,16 +37,17 @@ if (scale != 1)
     image_yscale = scale;
 }
 
-animationSpeed = readProperty(other.properties, "animationspeed", REAL, animationSpeed) * global.delta_factor;
+animationSpeed = readProperty(other.properties, "animationspeed", REAL, animationSpeed);
 trigger = readProperty(other.properties, "trigger", REAL, trigger);
+if(trigger != 0)
+    movementState = 0;
+else
+    movementState = 1;
+
 top = readProperty(other.properties, "top", REAL, top);
 left = readProperty(other.properties, "left", REAL, left);
 upSpeed = readProperty(other.properties, "upspeed", REAL, upSpeed);
 downSpeed = readProperty(other.properties, "downspeed", REAL, downSpeed);
-    
-direction = point_direction(0, 0, left, -top);
-totalDist = point_distance(0, 0, left, -top);
-speed = upSpeed;
 </argument>
       </arguments>
     </action>

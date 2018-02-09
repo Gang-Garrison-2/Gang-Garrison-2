@@ -2,6 +2,7 @@
 <resources>
   <resource name="characterHitObstacle" type="RESOURCE"/>
   <resource name="charSetSolids" type="RESOURCE"/>
+  <resource name="charSetSolidsWithDropdowns" type="RESOURCE"/>
   <resource name="charSetAllSolids" type="RESOURCE"/>
   <resource name="charUnsetSolids" type="RESOURCE"/>
   <resource name="gunSetSolids" type="RESOURCE"/>

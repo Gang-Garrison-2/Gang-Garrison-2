@@ -13,7 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">charSetSolids();
+        <argument kind="STRING">charSetSolidsWithDropdowns();
 
 // Limit speed to prevent obstacle penetration
 // (each dimension separately to avoid one vector affecting the other)
@@ -67,9 +67,8 @@ xprevious = x;
 y_previous = y;
 x_previous = x;
 
-// accurate test and fallback for precision error
 var doHit;
-doHit = !place_free(x+hspeed*global.delta_factor, y+vspeed*global.delta_factor) or !place_free(x+hspeed, y+vspeed);
+doHit = !place_free(x+hspeed*global.delta_factor, y+vspeed*global.delta_factor);
 
 if(doHit)
 {

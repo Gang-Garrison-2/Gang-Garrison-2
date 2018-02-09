@@ -32,14 +32,16 @@ trigger = 0;
 
 top = 60;
 left = 0;
-totalDist = point_distance(0, 0, left, -top);
 upSpeed = 3;
 downSpeed = 3;
-moving = false;
+movementState = 1; // 0=stopped, 1=up, 2=down
 
 startX = x;
 startY = y;
-checkdir = 1;
+x_ = x;
+y_ = y;
+x = round(x_);
+y = round(y_);
 </argument>
       </arguments>
     </action>

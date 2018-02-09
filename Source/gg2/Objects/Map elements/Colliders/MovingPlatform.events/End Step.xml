@@ -13,33 +13,107 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">var dist;
+        <argument kind="STRING">var dx, dy, direction_, speed_;
+
+if(movementState == 1)
+{
+    speed_ = upSpeed;
+    direction_ = point_direction(0, 0, left, -top);
+    image_index += animationSpeed * global.delta_factor;
+}
+else if(movementState == 2)
+{
+    speed_ = downSpeed;
+    direction_ = point_direction(left, -top, 0, 0);
+    image_index += animationSpeed * global.delta_factor;
+}
+else
+{
+    speed_ = 0;
+    direction_ = 0;
+    image_index = 0;
+}
+
+dx = cos(degtorad(direction_)) * speed_ * global.delta_factor;
+dy = -sin(degtorad(direction_)) * speed_ * global.delta_factor;
+
+x_ += dx;
+y_ += dy;
+
+var totalDist, dist;
 // Distance of the platform from (startX, startY) in the "topwards" direction
 // (which is the vector (left, -top))
-dist = ((x-startX)*left + (y-startY)*(-top))/totalDist;
-if(dist &lt; 0)
+totalDist = point_distance(0, 0, left, -top);
+dist = ((x_-startX)*left + (y_-startY)*(-top)) / totalDist;
+if((movementState == 2) and (dist &lt;= 0))
 {
-    speed = upSpeed;
-    moving = false;
+    x_ = startX;
+    y_ = startY;
+    if(trigger == 0)
+        movementState = 1;
+    else
+        movementState = 0;
 }
-else if(dist &gt; totalDist)
+else if((movementState == 1) and (dist &gt;= totalDist))
 {
-    speed = -downSpeed;
+    movementState = 2;
 }
 
-// Player gets moved in his end step event
+var colldx, colldy;
+colldy = round(y_) - round(y);
+colldx = round(x_) - round(x);
 
-x -= hspeed;
-y -= vspeed;
-
-if (moving || trigger == 0)
+if(colldx != 0 or colldy != 0 or (movementState == 0 and trigger &gt; 0))
 {
-    x += hspeed * global.delta_factor;
-    y += vspeed * global.delta_factor;
-    image_index += animationSpeed;
-} 
-else
-   image_index = 0;
+    var charColBottom;
+    with(Character)
+    {
+        if(keyState &amp; $02) continue; // Cannot collide or move along if they hold "down"
+        
+        charColBottom = bottom_bound_offset + y;
+        if(frac(charColBottom) == 0.5)
+            charColBottom = floor(charColBottom);
+        else
+            charColBottom = round(charColBottom);
+        // Cannot collide or move along if they are below the collision horizon
+        if(charColBottom &gt;= round(other.y)) continue;
+
+        if(place_meeting(x, y+1, other))
+        {
+            // Character is standing on this dropdown, move them accordingly unless they would get stuck
+            charSetSolids();
+            if(place_free(x+colldx, y+colldy))
+            {
+                x += colldx;
+                y += colldy;
+            }
+            charUnsetSolids();
+            
+            if (other.movementState == 0 and (other.trigger == 1 or (other.trigger == 2 and intel)))
+            {
+                other.movementState = 1;
+            }
+        }
+        else if(charColBottom &gt;= round(other.y_)) // Do we move up enough to potentially collide with them?
+        {
+            // Not standing on the platform, but a candidate for being picked up on the way
+            if(place_meeting(x-colldx, y-colldy, other.id))
+            {
+                // I'm tired of this, so let's just move the character up in this case and be done
+                var requireddy;
+                requireddy = round(other.y_) - charColBottom - 1;
+                charSetSolids();
+                if(place_free(x, y+requireddy))
+                {
+                    y += requireddy;
+                }
+                charUnsetSolids();
+            }
+        }
+    }
+    x = round(x_);
+    y = round(y_);
+}
 </argument>
       </arguments>
     </action>

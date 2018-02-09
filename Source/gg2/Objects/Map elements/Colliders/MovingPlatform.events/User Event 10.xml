@@ -14,9 +14,9 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">if(global.updateType == QUICK_UPDATE or global.updateType == FULL_UPDATE) {
-    write_ushort(global.serializeBuffer, x*5);
-    write_ushort(global.serializeBuffer, y*5);
-    write_byte(global.serializeBuffer, speed == upSpeed);
+    write_ushort(global.serializeBuffer, x_*5);
+    write_ushort(global.serializeBuffer, y_*5);
+    write_ubyte(global.serializeBuffer, movementState);
 }
 </argument>
       </arguments>

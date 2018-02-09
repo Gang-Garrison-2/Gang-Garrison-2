@@ -13,41 +13,11 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">charSetSolids();
-// Handle dropdown platforms
-if(!(keyState &amp; $02))
+        <argument kind="STRING">charSetSolidsWithDropdowns();
+
+// Climbing down stairs if we aren't falling this frame
+if(vspeed == 0)
 {
-    with(DropdownPlatform)
-    {
-        if(!place_meeting(x, y, other)) continue;
-        if((other.bottom_bound_offset + other.yprevious - 1) &gt;= (bbox_top - (y - yprevious))) continue;
-
-        // Move with the platform if we're standing on one.
-        if (object_index == MovingPlatform)
-        {
-            if (trigger == 1 || (trigger == 2 &amp;&amp; other.intel))
-            {
-                alarm[0] = 3;
-                moving = true;
-            }
-            
-            if (moving || trigger == 0)
-            {
-                other.x += hspeed * global.delta_factor;
-                other.y += vspeed * global.delta_factor;
-            }
-        }
-    
-        while(place_meeting(x, y, other))
-            other.y -= 0.1;
-        other.vspeed = 0;
-    }
-}
-
-// Climbing down stairs
-// if we aren't falling this frame, and we're not on a dropdown platform
-if(vspeed == 0 and (!place_meeting(x, y+1, DropdownPlatform) or place_meeting(x, y, DropdownPlatform)))
-{ 
     if(place_free(x,y+6))
         if(!place_free(x,y+7))
             y += 6;

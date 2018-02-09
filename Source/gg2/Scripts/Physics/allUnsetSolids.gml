@@ -10,4 +10,5 @@ with(PlayerWall)
     solid = false;
 with(BulletWall)
     solid = false;
-
+with(DropdownPlatform)
+    solid = false;

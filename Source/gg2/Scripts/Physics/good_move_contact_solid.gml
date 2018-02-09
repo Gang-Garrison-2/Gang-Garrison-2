@@ -14,26 +14,32 @@ maxDistance = argument1; // max distance alotted
 hvec = cos(degtorad(argument0))*maxDistance;  // h vector of direction
 vvec = -sin(degtorad(argument0))*maxDistance; // v '''
 sfac = max(abs(hvec), abs(vvec)); // Used to get pixel chunks from the movement vector
-
-moveX = hvec/sfac*i/MAX_I;
-moveY = vvec/sfac*i/MAX_I;
 totalMoved = 0;
+global.lastCollisionHappened = false;
 
 while ( totalMoved < maxDistance and i > 0 )
 {
+    var newx, newy;
     moveX = hvec/sfac * i/MAX_I * min(1, maxDistance - totalMoved);
     moveY = vvec/sfac * i/MAX_I * min(1, maxDistance - totalMoved);
-   
-    if (place_free(x + moveX*i/MAX_I, y + moveY*i/MAX_I))
+
+    newx = x + moveX*i/MAX_I;
+    newy = y + moveY*i/MAX_I;
+    if (place_free(newx, newy))
     {
-        x += moveX*i/MAX_I;
-        y += moveY*i/MAX_I;
-        totalMoved += point_distance(0, 0, moveX*i/MAX_I, moveY*i/MAX_I);
+        totalMoved += point_distance(x, y, newx, newy);
+        x = newx;
+        y = newy;
         if(i < MAX_I) // Finished crawling backwards out of whatever we hit
             break;
     }
     else
+    {
+        global.lastCollisionHappened = true;
+        global.lastCollisionX = newx;
+        global.lastCollisionY = newy;
         i -= 1; // Crawl backwards by subpixels if we hit something
+    }
 }
 
 return totalMoved;
