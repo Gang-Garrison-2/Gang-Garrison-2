@@ -24,7 +24,12 @@
             reflector = other.ownerPlayer;
         }
     }
-    alarm[0] -= 60;
+    if (alarm[0] &gt; 10) {
+        alarm[0] = alarm[0] div 2;
+    }
+    else {
+        instance_destroy();
+    }
 }
 </argument>
       </arguments>

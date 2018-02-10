@@ -19,7 +19,13 @@
 if (other.team != team and !other.ubered and other.hp &gt; 0)
 {
     damageCharacter(ownerPlayer, other.id, hitDamage);
-    alarm[0]-=70;
+	
+    if (alarm[0] &gt; 10) {
+        alarm[0] = alarm[0] div 2;
+    }
+    else {
+        instance_destroy();
+    }
     
     if (other.lastDamageDealer != ownerPlayer &amp;&amp; other.lastDamageDealer != other.player)
     {
