@@ -14,15 +14,14 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">{
+    var newx, newy;
+    newx = x+lengthdir_x(25,owner.aimDirection);
+    newy = y+lengthdir_y(25,owner.aimDirection) + owner.equipmentOffset;
     // prevent sputtering
     if (ammoCount &lt; 1.8)
         ammoCount -= 1.8;
     if (readyToShoot and ammoCount &gt;= 1.8
-        and !collision_line(x,y,x+lengthdir_x(25,owner.aimDirection),y+lengthdir_y(25,owner.aimDirection),Obstacle,1,0)
-        and !collision_line(x,y,x+lengthdir_x(25,owner.aimDirection),y+lengthdir_y(25,owner.aimDirection),BulletWall,1,0)
-        and !collision_line(x,y,x+lengthdir_x(25,owner.aimDirection),y+lengthdir_y(25,owner.aimDirection),IntelGate,1,0)
-        and (!collision_line(x,y,x+lengthdir_x(25,owner.aimDirection),y+lengthdir_y(25,owner.aimDirection),TeamGate,1,0)
-         or global.mapchanging))
+        and !collision_line_bulletblocking(x,y,newx,newy))
     {
         if(alarm[3] &lt;= 0)
             loopsoundstart(x,y,FlamethrowerSnd);
@@ -34,7 +33,7 @@
         randomize();
         calculatedspread = sign(random(2)-1)*power(random(3), 1.8);
         calculatedspread *= 1 - hspeed/owner.basemaxspeed;
-        shot = createShot(x+lengthdir_x(25,owner.aimDirection)+owner.equipmentOffset,y+lengthdir_y(25,owner.aimDirection),Flame, DAMAGE_SOURCE_FLAMETHROWER, owner.aimDirection+calculatedspread,6.5+random(3.5));
+        shot = createShot(newx, newy, Flame, DAMAGE_SOURCE_FLAMETHROWER, owner.aimDirection+calculatedspread,6.5+random(3.5));
         with(shot)
             motion_add(owner.direction, owner.speed);
         

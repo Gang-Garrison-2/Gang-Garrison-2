@@ -59,28 +59,18 @@ while(!nearestTarget &amp;&amp; !ds_priority_empty(targetQueue)) {
     if((targetAngle &lt;= 45 || targetAngle &gt;= 315 || (targetAngle &gt;= 135 &amp;&amp; targetAngle &lt;= 225) || place_meeting(x,y,playercheck)) 
         &amp;&amp; playercheck.team != team 
         &amp;&amp; playercheck.hp &gt; 0
-        &amp;&amp; collision_line(x,y,playercheck.x,playercheck.y,Obstacle,true,true)&lt;0
-        &amp;&amp; collision_line(x,y,playercheck.x,playercheck.y,TeamGate,true,true)&lt;0
-        &amp;&amp; collision_line(x,y,playercheck.x,playercheck.y,IntelGate,true,true)&lt;0
-        &amp;&amp; collision_line(x,y,playercheck.x,playercheck.y,BulletWall,true,true)&lt;0) {
-            var setupGateCheck, blockedBySetupGate;
-            setupGateCheck = collision_line(x,y,playercheck.x,playercheck.y,ControlPointSetupGate,true,true);
-            blockedBySetupGate = true;
-            if (setupGateCheck&lt;0) { blockedBySetupGate = false; }
-            else if (setupGateCheck.solid == false) { blockedBySetupGate = false; }
-            if (!blockedBySetupGate) {
-                // Target looks valid, but it might be obscured by a sentry.
-                // That has to be tested individually because we have to exclude both this sentry and the target
-                // from the collision check
-                obscured = false;
-                with(Sentry) {
-                    if(!obscured &amp;&amp; id != other.ownerPlayer.sentry &amp;&amp; id != playercheck &amp;&amp; collision_line(other.x,other.y,playercheck.x,playercheck.y,id,false,false)&gt;=0) {
-                        obscured = true;
-                    }
+        &amp;&amp; !collision_line_bulletblocking(x, y, playercheck.x, playercheck.y)) {
+            // Target looks valid, but it might be obscured by a sentry.
+            // That has to be tested individually because we have to exclude both this sentry and the target
+            // from the collision check
+            obscured = false;
+            with(Sentry) {
+                if(!obscured &amp;&amp; id != other.ownerPlayer.sentry &amp;&amp; id != playercheck &amp;&amp; collision_line(other.x,other.y,playercheck.x,playercheck.y,id,false,false)&gt;=0) {
+                    obscured = true;
                 }
-                if(!obscured) {
-                    nearestTarget = playercheck;
-                }
+            }
+            if(!obscured) {
+                nearestTarget = playercheck;
             }
         }
 }

@@ -9,11 +9,15 @@ dir = argument4;
 projectileSpeed = argument5;
 
 shot = instance_create(_x,_y,projectile);
-shot.direction=dir;
-shot.image_angle = shot.direction;
-shot.speed=projectileSpeed;
-shot.owner=owner;
-shot.ownerPlayer=ownerPlayer;
-shot.team=owner.team;
-shot.weapon=damageSource;
+with(shot)
+{
+    direction = dir;
+    image_angle = dir;
+    speed = projectileSpeed;
+    owner = other.owner;
+    ownerPlayer = other.ownerPlayer;
+    team = owner.team;
+    weapon = damageSource;
+}
+
 return shot;

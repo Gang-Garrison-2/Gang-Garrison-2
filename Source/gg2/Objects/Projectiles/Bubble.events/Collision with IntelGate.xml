@@ -1,22 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<event category="STEP" id="0">
+<event category="COLLISION" with="IntelGate">
   <actions>
-    <action id="603" library="1">
-      <!--action name: Code-->
-      <kind>CODE</kind>
+    <action id="203" library="1">
+      <!--action name: Kill_Object-->
+      <kind>NORMAL</kind>
       <allowRelative>false</allowRelative>
       <question>false</question>
       <canApplyTo>true</canApplyTo>
-      <actionType>CODE</actionType>
-      <functionName/>
+      <actionType>FUNCTION</actionType>
+      <functionName>action_kill_object</functionName>
       <relative>false</relative>
       <not>false</not>
       <appliesTo>.self</appliesTo>
-      <arguments>
-        <argument kind="STRING">event_user(0);
-
-</argument>
-      </arguments>
+      <arguments/>
     </action>
   </actions>
 </event>

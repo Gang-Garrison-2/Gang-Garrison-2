@@ -130,7 +130,7 @@
     
     global.currentMapArea=1;
     global.totalMapAreas=1;
-    global.setupTimer=1800;
+    global.setupTimer=0;
     global.joinedServerName="";
     global.serverPluginsInUse=false;
     // Create plugin packet maps

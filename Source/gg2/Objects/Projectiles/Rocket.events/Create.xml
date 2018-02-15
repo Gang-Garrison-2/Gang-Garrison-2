@@ -21,6 +21,7 @@
     exploded = false;
     knockback = 8;
     bubbled = false;
+    explodeImmediately = false;
     
     fade = false;
     distanceToTravel = 800;

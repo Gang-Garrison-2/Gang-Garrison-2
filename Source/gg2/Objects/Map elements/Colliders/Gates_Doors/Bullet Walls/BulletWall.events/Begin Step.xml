@@ -20,6 +20,11 @@ if (triggerDistance &gt;= 0)
     if (distance_to_object(Character) &lt;= triggerDistance)
         open = true;
 }
+
+if(open)
+    mask_index = emptyMaskS;
+else
+    mask_index = -1;
 </argument>
       </arguments>
     </action>

@@ -1,6 +1,3 @@
-move_all_bullets();
-move_all_gore();
-
 // receive and interpret the server's message(s)
 var i, playerObject, playerID, player, otherPlayerID, otherPlayer, sameVersion, buffer, usePlugins;
 

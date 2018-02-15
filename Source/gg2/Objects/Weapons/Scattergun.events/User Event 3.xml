@@ -23,7 +23,10 @@ repeat(6) {
     shot.hspeed += owner.hspeed;
     shot.speed += random(4)-2;
     shot.direction += random(15)-7.5;
-    
+    // Move shot forward one 30fps step to avoid immediate collision with a wall behind the character
+    // delta_factor is left out intentionally!
+    shot.x += lengthdir_x(shot.speed, shot.direction);
+    shot.y += lengthdir_y(shot.speed, shot.direction);
     shot.alarm[0] = 35 * ((min(1, abs(cos(degtorad(owner.aimDirection)))*13
                           /abs(cos(degtorad(owner.aimDirection))*13+owner.hspeed))-1)/2+1)
                     / global.delta_factor;

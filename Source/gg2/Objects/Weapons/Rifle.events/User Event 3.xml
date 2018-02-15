@@ -58,9 +58,11 @@ ds_list_add(bulletStoppingObjects, Obstacle);
 ds_list_add(bulletStoppingObjects, Generator);
 ds_list_add(bulletStoppingObjects, Character);
 ds_list_add(bulletStoppingObjects, Sentry);
-ds_list_add(bulletStoppingObjects, TeamGate);
+if(!global.mapchanging)
+    ds_list_add(bulletStoppingObjects, TeamGate);
 ds_list_add(bulletStoppingObjects, IntelGate);
-ds_list_add(bulletStoppingObjects, ControlPointSetupGate);
+if(areSetupGatesClosed())
+    ds_list_add(bulletStoppingObjects, ControlPointSetupGate);
 ds_list_add(bulletStoppingObjects, BulletWall);
 
 // Set the collision mask of all instances which should not collide to an empty one
@@ -81,20 +83,6 @@ with(Sentry) {
 with(owner) {
     ds_map_add(originalMask, id, mask_index);
     mask_index = emptyMaskS;
-}
-
-with(ControlPointSetupGate) {
-    if(!solid) {
-        ds_map_add(originalMask, id, mask_index);
-        mask_index = emptyMaskS;
-    }
-}
-
-with(BulletWall) {
-    if(!solid) {
-        ds_map_add(originalMask, id, mask_index);
-        mask_index = emptyMaskS;
-    }
 }
 
 // Find the first instance the ray collides with

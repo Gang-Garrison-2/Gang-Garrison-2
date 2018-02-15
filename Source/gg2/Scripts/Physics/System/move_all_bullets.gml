@@ -1,3 +1,4 @@
+var imp, colliding, dx, dy, ddx, ddy, mdone, mdist, motion, mdir;
 gunSetSolids();
 with(Shot)
 {
@@ -13,26 +14,26 @@ with(Shot)
     }
     image_angle = direction;
     
-    if(!firststep and global.delta_factor != 1)
-    {
-        x += hspeed * global.delta_factor;
-        y += vspeed * global.delta_factor;
-    }
+    colliding = false;
+    if(firststep)
+        colliding |= !place_free(x, y);
     
-    if (!place_free(x, y))
+    x += hspeed * global.delta_factor;
+    y += vspeed * global.delta_factor;
+    
+    colliding |= !place_free(x, y);
+        
+    if (colliding)
     {
         imp = instance_create(x,y,Impact);
         imp.image_angle=direction;
         instance_destroy();
     }
     
-    if(!firststep and global.delta_factor != 1)
-    {
-        x -= hspeed;
-        y -= vspeed;
-    }
-    else
-        firststep = false;
+    x -= hspeed;
+    y -= vspeed;
+    
+    firststep = false;
 }
 with(Rocket)
 {
@@ -52,7 +53,7 @@ with(Rocket)
         alarm[3] = 8 / global.delta_factor;
     }
     
-    // It might seem like a good idea to remove this. But it's not.
+    // It might seem like a good idea to remove the acceleration function, but it's needed for consistent airblasting.
     speed += 1 * global.delta_factor;
     speed *= delta_mult(0.92);
     image_angle = direction;
@@ -94,13 +95,21 @@ with(Rocket)
         else
             instance_destroy();
     }
-    if(!firststep and global.delta_factor != 1)
+
+    colliding = explodeImmediately;
+    if(firststep)
+        colliding |= !place_free(x, y);
+    
+    if(!colliding)
     {
+        // Only move forward if we don't collide, to ensure that
+        // the rocket will explode at the place of its collision
         x += hspeed * global.delta_factor;
         y += vspeed * global.delta_factor;
+        colliding |= !place_free(x, y);
     }
     
-    if (!place_free(x, y))
+    if (colliding)
     {
         characterHit = -1;
         if (!fade)
@@ -109,13 +118,8 @@ with(Rocket)
             instance_destroy();
     }
     
-    if(!firststep and global.delta_factor != 1)
-    {
-        x -= hspeed;
-        y -= vspeed;
-    }
-    else
-        firststep = false;
+    x -= hspeed;
+    y -= vspeed;
     
     firststep = false;
 }
@@ -123,27 +127,25 @@ with(BladeB)
 {
     if(!variable_local_exists("firststep"))
         firststep = true;
+
+    colliding = false;
+    if(firststep)
+        colliding |= !place_free(x, y);
+
+    x += hspeed * global.delta_factor;
+    y += vspeed * global.delta_factor;
     
-    if(!firststep and global.delta_factor != 1)
-    {
-        x += hspeed * global.delta_factor;
-        y += vspeed * global.delta_factor;
-    }
+    colliding |= !place_free(x, y);
     
-    if (!place_free(x, y))
+    if (colliding)
     {
         imp = instance_create(x,y,Impact);
         imp.image_angle=direction;
         instance_destroy();
     }
     
-    if(!firststep and global.delta_factor != 1)
-    {
-        x -= hspeed;
-        y -= vspeed;
-    }
-    else
-        firststep = false;
+    x -= hspeed;
+    y -= vspeed;
     
     firststep = false;
 }
@@ -179,22 +181,44 @@ with(BurningProjectile)
             part_particles_create(global.flameParticleSystem,x,y,global.flameParticleType,1);
     }
     
-    if(!firststep and global.delta_factor != 1)
-    {
-        x += hspeed * global.delta_factor;
-        y += vspeed * global.delta_factor;
-    }
+    dx = hspeed * global.delta_factor;
+    dy = vspeed * global.delta_factor;
     
-    if (!place_free(x, y))
+    mdone = false;
+    colliding = false;
+    if(firststep)
+        colliding = !place_free(x, y);
+
+    while(not mdone and not colliding)
+    {
+        dist = point_distance(0, 0, dx, dy);
+        if(dist > 6)
+        {
+            motion = 6;
+            mdone = false;
+        }
+        else
+        {
+            motion = dist;
+            mdone = true;
+        }
+        mdir = point_direction(0, 0, dx, dy);
+        ddx = lengthdir_x(motion, mdir);
+        ddy = lengthdir_y(motion, mdir);
+        
+        x += ddx;
+        y += ddy;
+        dx -= ddx;
+        dy -= ddy;
+        
+        colliding |= !place_free(x, y);
+    }
+
+    if (colliding)
         instance_destroy();
-    
-    if(!firststep and global.delta_factor != 1)
-    {
-        x -= hspeed;
-        y -= vspeed;
-    }
-    else
-        firststep = false;
+
+    x -= hspeed;
+    y -= vspeed;
     
     firststep = false;
 }
@@ -222,25 +246,60 @@ with(Mine)
         }
     }
     
-    if(!firststep and global.delta_factor != 1)
+    if(speed != 0)
     {
-        x += hspeed * global.delta_factor;
-        y += vspeed * global.delta_factor;
-    }
+        dx = hspeed * global.delta_factor;
+        dy = vspeed * global.delta_factor;
+        
+        mdone = false;
+        colliding = false;
+        if(firststep)
+            colliding = !place_free(x, y);
     
-    if (instance_exists(ControlPointSetupGate))
-    {
-        if (place_meeting(x, y, ControlPointSetupGate) and ControlPointSetupGate.solid)
-            instance_destroy();
-    }
+        while(not mdone and not colliding)
+        {
+            dist = point_distance(0, 0, dx, dy);
+            if(dist > 6)
+            {
+                motion = 6;
+                mdone = false;
+            }
+            else
+            {
+                motion = dist;
+                mdone = true;
+            }
+            mdir = point_direction(0, 0, dx, dy);
+            ddx = lengthdir_x(motion, mdir);
+            ddy = lengthdir_y(motion, mdir);
+            
+            x += ddx;
+            y += ddy;
+            dx -= ddx;
+            dy -= ddy;
+            
+            colliding |= !place_free(x, y);
+        }
     
-    if(!firststep and global.delta_factor != 1)
-    {
+        if (colliding)
+        {
+            if(place_meeting(x, y, Obstacle))
+            {
+                gunUnsetSolids();
+                wallSetSolid();
+                move_outside_solid(direction+180, speed);
+                speed = 0;
+                stickied = true;
+                wallUnsetSolid();
+                gunSetSolids();
+            }
+            if (!place_free(x, y))
+                instance_destroy();
+        }
+    
         x -= hspeed;
         y -= vspeed;
     }
-    else
-        firststep = false;
     
     firststep = false;
 }
@@ -255,26 +314,24 @@ with(Needle)
     
     image_angle = direction;
     
-    if(!firststep and global.delta_factor != 1)
-    {
-        x += hspeed * global.delta_factor;
-        y += vspeed * global.delta_factor;
-    }
+    colliding = false;
+    if(firststep)
+        colliding |= !place_free(x, y);
+        
+    x += hspeed * global.delta_factor;
+    y += vspeed * global.delta_factor;
     
-    if (!place_free(x, y))
+    colliding |= !place_free(x, y);
+    
+    if (colliding)
     {
         imp = instance_create(x,y,Impact);
         imp.image_angle=direction;
         instance_destroy();
     }
     
-    if(!firststep and global.delta_factor != 1)
-    {
-        x -= hspeed;
-        y -= vspeed;
-    }
-    else
-        firststep = false;
+    x -= hspeed;
+    y -= vspeed;
     
     firststep = false;
 }

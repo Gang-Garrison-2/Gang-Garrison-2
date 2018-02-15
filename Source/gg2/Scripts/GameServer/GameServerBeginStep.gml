@@ -1,6 +1,3 @@
-move_all_bullets();
-move_all_gore();
-
 if(serverbalance != 0)
     balancecounter += 1;
 

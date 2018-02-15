@@ -18,16 +18,9 @@
     {
         ammoCount -= 1;
         playsound(x,y,MedichaingunSnd);
-            var shot;
-        shot = instance_create(x,y + yoffset + 1,Needle);
-        shot.direction=owner.aimDirection;
-        shot.image_angle = shot.direction;
-        shot.speed=7+random(3);
-        shot.owner=owner;
-        shot.ownerPlayer=ownerPlayer;
-        shot.team=owner.team;
+        var shot;
+        shot = createShot(x, y + yoffset + 1, Needle, DAMAGE_SOURCE_NEEDLEGUN, owner.aimDirection, 7+random(3));
         shot.hitDamage = 4;
-        shot.weapon = DAMAGE_SOURCE_NEEDLEGUN;
         justShot=true;
         with(shot)
             hspeed+=owner.hspeed;

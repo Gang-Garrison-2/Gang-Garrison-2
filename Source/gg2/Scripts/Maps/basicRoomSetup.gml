@@ -34,6 +34,7 @@ with(Player) {
     humiliated = 0;
 }
 
+global.setupTimer = 0;
 if(instance_exists(IntelligenceBase) or instance_exists(Intelligence))
 {
     if (instance_exists(ControlPointSetupGate))

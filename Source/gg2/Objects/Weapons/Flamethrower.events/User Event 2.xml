@@ -37,10 +37,12 @@
         //Flare
         if (owner.keyState &amp; $10 and ammoCount &gt;= 75 and readyToFlare)
         {
-            if !collision_line(x,y,x+lengthdir_x(28,owner.aimDirection),y+lengthdir_y(28,owner.aimDirection),Obstacle,1,0)
-                and !place_meeting(x+lengthdir_x(25,owner.aimDirection),y+lengthdir_y(25,owner.aimDirection),TeamGate)
+            var newx, newy;
+            newx = x+lengthdir_x(25,owner.aimDirection);
+            newy = y+lengthdir_y(25,owner.aimDirection);
+            if !collision_line_bulletblocking(x, y, newx, newy)
             {
-                shot = createShot(x+lengthdir_x(25,owner.aimDirection),y+lengthdir_y(25,owner.aimDirection),Flare, DAMAGE_SOURCE_FLARE, owner.aimDirection, 15);                
+                shot = createShot(newx,newy,Flare, DAMAGE_SOURCE_FLARE, owner.aimDirection, 15);                
                 justShot=true;
                 readyToFlare=false;
                 ammoCount -= 35;

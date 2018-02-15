@@ -5,10 +5,10 @@
     <separate>false</separate>
     <shape>RECTANGLE</shape>
     <bounds alphaTolerance="0" mode="MANUAL">
-      <left>7</left>
-      <right>9</right>
-      <top>9</top>
-      <bottom>11</bottom>
+      <left>9</left>
+      <right>11</right>
+      <top>8</top>
+      <bottom>10</bottom>
     </bounds>
   </mask>
   <preload>true</preload>

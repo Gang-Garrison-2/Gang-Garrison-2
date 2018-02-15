@@ -2,10 +2,16 @@ with(Obstacle)
     solid = true;
 with(IntelGate)
     solid = true;
-with(TeamGate)
-    solid = true;
-with(ControlPointSetupGate)
-    event_user(0);
+if(not global.mapchanging)
+{
+    with(TeamGate)
+        solid = true;
+}
+if(areSetupGatesClosed())
+{
+    with(ControlPointSetupGate)
+        solid = true;
+}
 with(BulletWall)
-    solid = !open;
+    solid = true;
 

@@ -24,12 +24,21 @@
         randomize();
         
         shotx = x+lengthdir_x(20,owner.aimDirection);
-        shoty = y+12+lengthdir_y(20,owner.aimDirection)
-        shot = createShot(shotx, shoty, Shot, DAMAGE_SOURCE_MINIGUN, owner.aimDirection+(random(14)-7), 12+random(1))
-        if(golden)
-            shot.sprite_index = ShotGoldS;
-        shot.hspeed += owner.hspeed;
-        shot.alarm[0] = 30 / global.delta_factor;
+        shoty = y+12+lengthdir_y(20,owner.aimDirection);
+        if(!collision_line_bulletblocking(x, y, shotx, shoty))
+        {
+            shot = createShot(shotx, shoty, Shot, DAMAGE_SOURCE_MINIGUN, owner.aimDirection+(random(14)-7), 12+random(1));
+            if(golden)
+                shot.sprite_index = ShotGoldS;
+            shot.hspeed += owner.hspeed;
+            shot.alarm[0] = 30 / global.delta_factor;
+        }
+        else
+        {
+            var imp;
+            imp = instance_create(shotx, shoty, Impact);
+            imp.image_angle = owner.aimDirection;
+        }
         
         justShot=true;
         readyToShoot=false;

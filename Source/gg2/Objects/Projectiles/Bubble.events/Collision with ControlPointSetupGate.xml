@@ -13,7 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if (global.setupTimer &gt; 0)
+        <argument kind="STRING">if (areSetupGatesClosed())
     instance_destroy();
 </argument>
       </arguments>

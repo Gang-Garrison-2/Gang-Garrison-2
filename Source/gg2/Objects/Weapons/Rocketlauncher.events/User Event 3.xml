@@ -16,26 +16,20 @@
         <argument kind="STRING">ammoCount = max(0, ammoCount-1);    
 playsound(x,y,RocketSnd);
 var oid, newx, newy;
-oid = createShot(x+lengthdir_x(20,owner.aimDirection),y+lengthdir_y(20,owner.aimDirection), Rocket, DAMAGE_SOURCE_ROCKETLAUNCHER, owner.aimDirection, 13);
+newx = x+lengthdir_x(20,owner.aimDirection);
+newy = y+lengthdir_y(20,owner.aimDirection);
+oid = createShot(newx, newy, Rocket, DAMAGE_SOURCE_ROCKETLAUNCHER, owner.aimDirection, 13);
 oid.gun=id;
-if (collision_line(x,y,x+lengthdir_x(20,owner.aimDirection),y+lengthdir_y(20,owner.aimDirection),Obstacle,1,0) or
-     collision_line(x,y,x+lengthdir_x(20,owner.aimDirection),y+lengthdir_y(20,owner.aimDirection),TeamGate,1,0) or
-     collision_line(x,y,x+lengthdir_x(20,owner.aimDirection),y+lengthdir_y(20,owner.aimDirection),IntelGate,1,0) or
-     collision_line(x,y,x+lengthdir_x(20,owner.aimDirection),y+lengthdir_y(20,owner.aimDirection),BulletWall,1,0))
+with (oid)
 {
-    oid.characterHit = -1;
-    with (oid)
-        event_user(5);
+    if (collision_line_bulletblocking(other.x, other.y, newx, newy))
+    {
+        // Delay explosion to make same-frame rocketjumping work reliably
+        explodeImmediately = true;
+    }
 }
 oid.lastknownx = owner.x;
 oid.lastknowny = owner.y;
-with (oid)
-{
-    gunSetSolids();
-    if (!place_free(x,y))
-        speed = 0;
-    gunUnsetSolids();
-}
 justShot=true;
 readyToShoot = false;
 alarm[0] = refireTime / global.delta_factor;

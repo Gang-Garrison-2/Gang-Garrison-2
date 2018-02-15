@@ -93,8 +93,8 @@
                     if(ubering == false &amp;&amp; uberCharge&lt;2000){
                         var setup;
                         setup = false;
-                        if instance_exists(ControlPointSetupGate) {
-                            if (ControlPointSetupGate.solid)
+                        if(instance_exists(ControlPointSetupGate)) {
+                            if (areSetupGatesClosed())
                                 setup = true;
                         }
                         if(healTarget.object.hp &lt; healTarget.object.maxHp or setup)

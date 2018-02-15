@@ -1,15 +1,21 @@
 with(Obstacle)
     solid = true;
-with(IntelGate)
-    solid =  (team != other.team and other.intel and !global.mapchanging);
-with(TeamGate)
-    solid = ((team != other.team or other.intel) and !global.mapchanging);
-with(ControlPointSetupGate)
+    
+if(!global.mapchanging)
 {
-    solid = (global.setupTimer > 0);
-    if(instance_exists(FauxCPHUD))
-        solid = (FauxCPHUD.cpUnlock > 0);
+    with(IntelGate)
+        solid = (team != other.team and other.intel);
+
+    with(TeamGate)
+        solid = (team != other.team or other.intel);
 }
+
+if(areSetupGatesClosed())
+{
+    with(ControlPointSetupGate)
+        solid = true;
+}
+
 with(PlayerWall)
     solid = true;
 
