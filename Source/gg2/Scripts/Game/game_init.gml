@@ -204,40 +204,29 @@
     rooms_fix_views();
     global.changed_resolution = false;
     
-    //screw the 0 index we will start with 1
-    //map_truefort 
-    maps[1] = ini_read_real("Maps", "ctf_truefort", 1);
-    //map_2dfort 
-    maps[2] = ini_read_real("Maps", "ctf_2dfort", 2);
-    //map_conflict 
-    maps[3] = ini_read_real("Maps", "ctf_conflict", 3);
-    //map_classicwell 
-    maps[4] = ini_read_real("Maps", "ctf_classicwell", 4);
-    //map_waterway 
-    maps[5] = ini_read_real("Maps", "ctf_waterway", 5);
-    //map_orange 
-    maps[6] = ini_read_real("Maps", "ctf_orange", 6);
-    //map_dirtbowl
-    maps[7] = ini_read_real("Maps", "cp_dirtbowl", 7);
-    //map_egypt
-    maps[8] = ini_read_real("Maps", "cp_egypt", 8);
-    //arena_montane
-    maps[9] = ini_read_real("Maps", "arena_montane", 9);
-    //arena_lumberyard
-    maps[10] = ini_read_real("Maps", "arena_lumberyard", 10);
-    //gen_destroy
-    maps[11] = ini_read_real("Maps", "gen_destroy", 11);
-    //koth_valley
-    maps[12] = ini_read_real("Maps", "koth_valley", 12);
-    //koth_corinth
-    maps[13] = ini_read_real("Maps", "koth_corinth", 13);
-    //koth_harvest
-    maps[14] = ini_read_real("Maps", "koth_harvest", 14);
-    //dkoth_atalia
-    maps[15] = ini_read_real("Maps", "dkoth_atalia", 15);
-    //dkoth_sixties
-    maps[16] = ini_read_real("Maps", "dkoth_sixties", 16);
+    var iniMapRotation, mapsInDefaultOrderStr, mapsInDefaultOrder, mapIndex, mapName, mapDefaultPriority, mapPriority;
+    mapsInDefaultOrderStr = "ctf_truefort,ctf_2dfort,ctf_conflict,ctf_classicwell,ctf_waterway,ctf_orange,cp_dirtbowl,cp_egypt,arena_montane,arena_lumberyard,gen_destroy,koth_valley,koth_corinth,koth_harvest,dkoth_atalia,dkoth_sixties";
+    mapsInDefaultOrder = split(mapsInDefaultOrderStr, ",");
+    iniMapRotation = ds_priority_create();
+
+    for(mapIndex = 0; mapIndex < ds_list_size(mapsInDefaultOrder); mapIndex += 1)
+    {
+        mapName = ds_list_find_value(mapsInDefaultOrder, mapIndex);
+        mapDefaultPriority = mapIndex + 1;
+        mapPriority = ini_read_real("Maps", mapName, mapDefaultPriority);
+        ini_write_real("Maps", mapName, mapPriority);
+        if(mapPriority != 0)
+            ds_priority_add(iniMapRotation, mapName, mapPriority);
+    }
+
+    ds_list_destroy(mapsInDefaultOrder);
+    ini_close();
     
+    while(!ds_priority_empty(iniMapRotation))
+        ds_list_add(global.map_rotation, ds_priority_delete_min(iniMapRotation));
+        
+    ds_priority_destroy(iniMapRotation);
+
     //Server respawn time calculator. Converts each second to a frame. (read: multiply by 30 :hehe:)
     if (global.Server_RespawntimeSec == 0)
     {
@@ -250,25 +239,6 @@
     
     // I have to include this, or the client'll complain about an unknown variable.
     global.mapchanging = false;
-    
-    ini_write_real("Maps", "ctf_truefort", maps[1]);
-    ini_write_real("Maps", "ctf_2dfort", maps[2]);
-    ini_write_real("Maps", "ctf_conflict", maps[3]);
-    ini_write_real("Maps", "ctf_classicwell", maps[4]);
-    ini_write_real("Maps", "ctf_waterway", maps[5]);
-    ini_write_real("Maps", "ctf_orange", maps[6]);
-    ini_write_real("Maps", "cp_dirtbowl", maps[7]);
-    ini_write_real("Maps", "cp_egypt", maps[8]);
-    ini_write_real("Maps", "arena_montane", maps[9]);
-    ini_write_real("Maps", "arena_lumberyard", maps[10]);
-    ini_write_real("Maps", "gen_destroy", maps[11]);
-    ini_write_real("Maps", "koth_valley", maps[12]);
-    ini_write_real("Maps", "koth_corinth", maps[13]);
-    ini_write_real("Maps", "koth_harvest", maps[14]);
-    ini_write_real("Maps", "dkoth_atalia", maps[15]);
-    ini_write_real("Maps", "dkoth_sixties", maps[16]);
-
-    ini_close();
     
     // parse the protocol version UUID for later use
     global.protocolUuid = buffer_create();
@@ -333,97 +303,25 @@ global.launchMap = "";
         instance_create(0,0,Client);
     }   
     
-    global.customMapdesginated = 0;    
-    
-    // if the user defined a valid map rotation file, then load from there
-
-    if(customMapRotationFile != "" && file_exists(customMapRotationFile) && global.launchMap == "") {
-        global.customMapdesginated = 1;
+    // if the user defined a valid map rotation file, then override the gg2.ini map rotation and load from there
+    if ((global.launchMap != "") and (global.dedicatedMode == 1))
+    {
+        ds_list_clear(global.map_rotation);
+        ds_list_add(global.map_rotation, global.launchMap);
+    }
+    else if ((customMapRotationFile != "") and file_exists(customMapRotationFile))
+    {
+        ds_list_clear(global.map_rotation);
         var fileHandle, i, mapname;
         fileHandle = file_text_open_read(customMapRotationFile);
         for(i = 1; !file_text_eof(fileHandle); i += 1) {
-            mapname = file_text_read_string(fileHandle);
-            // remove leading whitespace from the string
-            while(string_char_at(mapname, 0) == " " || string_char_at(mapname, 0) == chr(9)) { // while it starts with a space or tab
-              mapname = string_delete(mapname, 0, 1); // delete that space or tab
-            }
-            if(mapname != "" && string_char_at(mapname, 0) != "#") { // if it's not blank and it's not a comment (starting with #)
+            mapname = trim(file_text_read_string(fileHandle));
+            if(mapname != "" and string_char_at(mapname, 0) != "#") { // if it's not blank and it's not a comment (starting with #)
                 ds_list_add(global.map_rotation, mapname);
             }
             file_text_readln(fileHandle);
         }
         file_text_close(fileHandle);
-    }
-    
-     else if (global.launchMap != "") && (global.dedicatedMode == 1)
-        {  
-        ds_list_add(global.map_rotation, global.launchMap);
-        }
-    
-     else { // else load from the ini file Maps section
-        //Set up the map rotation stuff
-        var i, sort_list;
-        sort_list = ds_list_create();
-        for(i=1; i <= 16; i += 1) {
-            if(maps[i] != 0) ds_list_add(sort_list, ((100*maps[i])+i));
-        }
-        ds_list_sort(sort_list, 1);
-        
-        // translate the numbers back into the names they represent
-        for(i=0; i < ds_list_size(sort_list); i += 1) {
-            switch(ds_list_find_value(sort_list, i) mod 100) {
-                case 1:
-                    ds_list_add(global.map_rotation, "ctf_truefort");
-                break;
-                case 2:
-                    ds_list_add(global.map_rotation, "ctf_2dfort");
-                break;
-                case 3:
-                    ds_list_add(global.map_rotation, "ctf_conflict");
-                break;
-                case 4:
-                    ds_list_add(global.map_rotation, "ctf_classicwell");
-                break;
-                case 5:
-                    ds_list_add(global.map_rotation, "ctf_waterway");
-                break;
-                case 6:
-                    ds_list_add(global.map_rotation, "ctf_orange");
-                break;
-                case 7:
-                    ds_list_add(global.map_rotation, "cp_dirtbowl");
-                break;
-                case 8:
-                    ds_list_add(global.map_rotation, "cp_egypt");
-                break;
-                case 9:
-                    ds_list_add(global.map_rotation, "arena_montane");
-                break;
-                case 10:
-                    ds_list_add(global.map_rotation, "arena_lumberyard");
-                break;
-                case 11:
-                    ds_list_add(global.map_rotation, "gen_destroy");
-                break;
-                case 12:
-                    ds_list_add(global.map_rotation, "koth_valley");
-                break;
-                case 13:
-                    ds_list_add(global.map_rotation, "koth_corinth");
-                break;
-                case 14:
-                    ds_list_add(global.map_rotation, "koth_harvest");
-                break;
-                case 15:
-                    ds_list_add(global.map_rotation, "dkoth_atalia");
-                break;
-                case 16:
-                    ds_list_add(global.map_rotation, "dkoth_sixties");
-                break;
-                    
-            }
-        }
-        ds_list_destroy(sort_list);
     }
     
     window_set_fullscreen(global.fullscreen);
