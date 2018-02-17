@@ -65,7 +65,7 @@
     with Player {
         canSpawn = 1;
         if object != -1 with object instance_destroy();
-        alarm[5] = 1;
+        alarm[5] = 1 / global.delta_factor;
     }
     
     sendEventArenaRestart();
