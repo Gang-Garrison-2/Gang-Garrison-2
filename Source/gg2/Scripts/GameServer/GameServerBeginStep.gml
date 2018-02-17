@@ -120,7 +120,7 @@ if(impendingMapChange == 0)
             team = TEAM_SPECTATOR;
         }
         timesChangedCapLimit = 0;
-        alarm[5] = 1;
+        alarm[5] = 1; // Will spawn in the same step (between Begin Step and Step)
     }
     // message lobby to update map name
     sendLobbyRegistration();

@@ -7,9 +7,9 @@ with (Player)
             with (object)
                 instance_destroy();
         object = -1;
-        alarm[5] = 1;
+        alarm[5] = 1; // Respawn asap
     }
-    alarm[0]=2;
+    alarm[0] = 2; // Disable spawning after round start (and after everyone has spawned)
 
     roundStats[KILLS] = 0;
     roundStats[DEATHS] = 0;

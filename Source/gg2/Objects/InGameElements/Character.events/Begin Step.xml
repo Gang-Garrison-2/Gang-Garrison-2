@@ -63,7 +63,7 @@ if (burnDuration &gt; 0)
         if (lastDamageDealer != burnedBy and lastDamageDealer != player)
         {
             secondToLastDamageDealer = lastDamageDealer;
-            alarm[4] = alarm[3] / global.delta_factor;
+            alarm[4] = alarm[3];
         }
         alarm[3] = ASSIST_TIME / global.delta_factor;
         lastDamageDealer = burnedBy;

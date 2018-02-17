@@ -67,7 +67,7 @@ with (Gib) {
 }
 with(Bubble) {
     if (distance_to_object(other) &lt; other.blastRadius){
-        alarm[0]-=200;
+        instance_destroy();
     }    
 }
 </argument>

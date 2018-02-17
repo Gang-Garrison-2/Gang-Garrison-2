@@ -10,7 +10,7 @@ with(Shot)
     {
         //We don't want it to be almost invisible if it's still "active", so
         //we have it as if 0.3 is its lower limit
-        image_alpha = (alarm[0]/lifetime)/2+0.5;
+        image_alpha = (alarm[0]/(lifetime/global.delta_factor))/2+0.5;
     }
     image_angle = direction;
     
@@ -310,7 +310,7 @@ with(Needle)
     
     vspeed += 0.2 * global.delta_factor;
     if(global.particles != PARTICLES_OFF)
-        image_alpha = (alarm[0]/lifetime)/2+0.5;
+        image_alpha = (alarm[0]/(lifetime/global.delta_factor))/2+0.5;
     
     image_angle = direction;
     

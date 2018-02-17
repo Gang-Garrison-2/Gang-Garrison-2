@@ -105,7 +105,7 @@ while(commandLimitRemaining > 0) {
                     }
                 }
                 else if(player.alarm[5]<=0)
-                    player.alarm[5] = 1;
+                    player.alarm[5] = 1; // Will spawn in the same step (between Begin Step and Step)
                 class = checkClasslimits(player, player.team, class);
                 player.class = class;
                 ServerPlayerChangeclass(playerId, player.class, global.sendBuffer);
@@ -175,7 +175,7 @@ while(commandLimitRemaining > 0) {
                         player.alarm[5] = global.Server_Respawntime / global.delta_factor;
                     }
                     else if(player.alarm[5]<=0)
-                        player.alarm[5] = 1;                    
+                        player.alarm[5] = 1; // Will spawn in the same step (between Begin Step and Step)
                     var newClass;
                     newClass = checkClasslimits(player, newTeam, player.class);
                     if newClass != player.class

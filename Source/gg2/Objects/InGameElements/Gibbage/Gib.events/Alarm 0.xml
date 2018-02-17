@@ -13,8 +13,8 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">fadeout=true;
-alarm[1]=20;
+        <argument kind="STRING">fadeout = true;
+alarm[1] = 20 / global.delta_factor;
 </argument>
       </arguments>
     </action>
