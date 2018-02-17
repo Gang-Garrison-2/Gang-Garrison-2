@@ -31,7 +31,7 @@
         }
         poof.owner = owner;
         with(poof)
-            motion_add(owner.direction, owner.speed);
+            motion_add(owner.direction, owner.speed * global.delta_factor);
         
         var shot;
         //Flare
