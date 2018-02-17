@@ -327,6 +327,23 @@ by Ozoh
 A close quarters industrial map. Use the twists and turns to your advantage to eliminate the enemy
 team and seize their control point.
 
+17. tdm_mantic
+by Wareya
+This place is broken, but not by human hands. Kill and kill to appease the gods. If you kill
+enough, they might just let you down.
+
+18. ctf_avanti
+by Teeferbone and Wareya
+Your financers want intelligence on a backwater town. They say the church practiced black magic.
+BLU already raided the area, but landslides blocked the road and killed half the convoy.
+Can RED recover intelligence from BLU before the roads are cleared?
+
+19. koth_gallery
+by Heenok
+
+20. ctf_eiger
+by kildau
+
 B. Using Custom Maps:
 
 To run a server using custom maps, make a folder called "Maps" in the same 
@@ -452,7 +469,7 @@ mrfredman, MedO, Synnah
 Programmers:
 MedO, Cube7 aka Chris P. Bacon, Andrew "cspotcode" Bradley, Vaati, Taimat, Findude, Juicebox360, Jebus_Chris,
 Leiche, Xeyk, pach, Austin "Psychopath" Benz, L, technoviking, AJF, Alexander "Wareya" Nadeau, Vindicator,
-NAGN, Orpheon, JaxOf7, Arctic and RebelINS
+NAGN, Orpheon, JaxOf7, Arctic, RebelINS and PrOF
 
 Artists:
 mrfredman, Fishmatt, BassieEnAdriaan, Timohtep, Elkondo, Waterfall, Skeledude, ZaSpai, Deuce, and Wareya
@@ -461,12 +478,13 @@ Sound & Music:
 Synnah, Scoot, and Elkondo
 
 Map Creators: 
-fishmatt, vaati, king metroid, Taters, agh, Faust, Tarzan, BassieEnAdriaan, McGenio, Wherewolf, Wareya, Ozoh and Shawnachu
+fishmatt, vaati, king metroid, Taters, agh, Faust, Tarzan, BassieEnAdriaan, McGenio, Wherewolf, Wareya, Ozoh,
+Shawnachu, Teeferbone, Heenok and kildau
 
 With additional art and inspiration provided by the incredible Gang Garrison community!
 
 License:
-Copyright (C) 2008-2015 Faucet Software
+Copyright (C) 2008-2018 Faucet Software
 http://www.ganggarrison.com
 
 This game is open source under the terms of the Mozilla Public License, v. 2.0. If the source code has not been included along with the game, you can download it at http://www.ganggarrison.com.

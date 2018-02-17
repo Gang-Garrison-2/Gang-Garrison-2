@@ -205,7 +205,7 @@
     global.changed_resolution = false;
     
     var iniMapRotation, mapsInDefaultOrderStr, mapsInDefaultOrder, mapIndex, mapName, mapDefaultPriority, mapPriority;
-    mapsInDefaultOrderStr = "ctf_truefort,ctf_2dfort,ctf_conflict,ctf_classicwell,ctf_waterway,ctf_orange,cp_dirtbowl,cp_egypt,arena_montane,arena_lumberyard,gen_destroy,koth_valley,koth_corinth,koth_harvest,dkoth_atalia,dkoth_sixties,tdm_mantic,ctf_avanti";
+    mapsInDefaultOrderStr = "ctf_truefort,ctf_2dfort,ctf_conflict,ctf_classicwell,ctf_waterway,ctf_orange,cp_dirtbowl,cp_egypt,arena_montane,arena_lumberyard,gen_destroy,koth_valley,koth_corinth,koth_harvest,dkoth_atalia,dkoth_sixties,tdm_mantic,ctf_avanti,koth_gallery,ctf_eiger";
     mapsInDefaultOrder = split(mapsInDefaultOrderStr, ",");
     iniMapRotation = ds_priority_create();
 

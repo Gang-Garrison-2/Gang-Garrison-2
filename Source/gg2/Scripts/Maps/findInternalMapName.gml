@@ -47,6 +47,10 @@ case "ctf_oldfort":
     return "ctf_oldfort.png";
 case "gg_debug":
     return "gg_debug.png";
+case "koth_gallery":
+    return "koth_gallery.png";
+case "ctf_eiger":
+    return "ctf_eiger.png";
 default:
     return "";
 }

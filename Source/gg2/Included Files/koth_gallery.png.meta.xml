@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<include>
+  <filename>koth_gallery.png</filename>
+  <filepath>C:\Users\simmax\Desktop\Development\Gang Garrison 2\Gang Garrison 2\Source\Maps\koth_gallery.png</filepath>
+  <original>true</original>
+  <originalSize>8802</originalSize>
+  <hasContent>true</hasContent>
+  <exportTo>NO_AUTO_EXPORT</exportTo>
+  <otherExportDirectory/>
+  <overwriteExisting>false</overwriteExisting>
+  <freeMemAfterExport>true</freeMemAfterExport>
+  <removeAtGameEnd>true</removeAtGameEnd>
+</include>
