@@ -343,6 +343,9 @@ by Heenok
 
 20. ctf_eiger
 by kildau
+Located in the cold and harsh Alps, this map emphasizes on teamwork and good co-operation.
+Taking control of the central area will make your team's chances of winning several times higher.
+Beware of scouts, spies and explosive classes using alternate routes and hard-to-reach places.
 
 B. Using Custom Maps:
 
