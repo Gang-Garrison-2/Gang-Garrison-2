@@ -7,7 +7,7 @@
         with (KillLog) {
             map = ds_map_create();
 			
-			if (!argument1 || argument1 == argument0) {
+            if (!argument1 || argument1 == argument0) {
                 ds_map_add(map, "name1", "");
                 ds_map_add(map, "team1", 0);
             }
