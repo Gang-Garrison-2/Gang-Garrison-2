@@ -23,7 +23,11 @@ if(instance_exists(killer) and killer != owner) {
     killer.stats[POINTS] += 1;
     killer.roundStats[POINTS] += 1;
     recordDestructionInLog(owner, killer, healer, damageSource);
-    setChatBubble(owner, 60)
+    setChatBubble(owner, 60);
+}
+else if (argument3 == DAMAGE_SOURCE_GENERATOR_EXPLOSION) {
+    recordDestructionInLog(owner, noone, noone, damageSource);
+    setChatBubble(owner, 60);
 }
 //*************************************
 //*         Scrapped

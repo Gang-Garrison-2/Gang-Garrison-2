@@ -6,12 +6,19 @@
       
         with (KillLog) {
             map = ds_map_create();
-            var killer;
-            killer = string_copy(argument1.name, 1, 20);
-            if (instance_exists(argument2))
-                killer += " + " + string_copy(argument2.name, 1, 20);
-            ds_map_add(map, "name1", killer);
-            ds_map_add(map, "team1", argument1.team);
+			
+            if (!argument1 || argument1 == argument0) {
+                ds_map_add(map, "name1", "");
+                ds_map_add(map, "team1", 0);
+            }
+            else {
+                var killer;
+                killer = string_copy(argument1.name, 1, 20);
+                if (instance_exists(argument2))
+                    killer += " + " + string_copy(argument2.name, 1, 20);
+                ds_map_add(map, "name1", killer);
+                ds_map_add(map, "team1", argument1.team);
+			}
             
             if(argument3 == DAMAGE_SOURCE_BID_FAREWELL)
             {
