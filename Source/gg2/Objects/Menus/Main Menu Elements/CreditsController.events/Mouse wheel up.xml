@@ -14,8 +14,8 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">if (y != -1125) {
-    if (y + 30 * global.delta_factor &lt;= 550) {
-        y += 30 * global.delta_factor;
+    if (y + 30 &lt;= 550) {
+        y += 30;
     }
     else {
         y = 550;
