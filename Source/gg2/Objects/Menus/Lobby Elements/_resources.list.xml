@@ -3,4 +3,6 @@
   <resource name="LobbySideController" type="RESOURCE"/>
   <resource name="LobbyNameController" type="RESOURCE"/>
   <resource name="LobbyController" type="RESOURCE"/>
+  <resource name="ScrollUpO" type="RESOURCE"/>
+  <resource name="ScrollDownO" type="RESOURCE"/>
 </resources>
