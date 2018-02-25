@@ -2,8 +2,6 @@
 <resources>
   <resource name="Server" type="RESOURCE"/>
   <resource name="Update" type="RESOURCE"/>
-  <resource name="ScrollUpO" type="RESOURCE"/>
-  <resource name="ScrollDownO" type="RESOURCE"/>
   <resource name="SSControl" type="RESOURCE"/>
   <resource name="AudioControl" type="RESOURCE"/>
 </resources>
