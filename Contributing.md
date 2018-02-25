@@ -1,8 +1,19 @@
-Git Setup
-=========
+Reporting Issues
+================
 
-`core.autocrlf`
----------------
+When you find a problem with the game, it is understandable that you want to tell us about the problem as quickly as possible.
+However, please make sure that you actually include enough information for us to understand the problem and to figure out what
+exactly went wrong:
+
+- Describe what happened in detail. For example, "The game crashed" doesn't tell us much. "The game froze and Windows showed an "application not responding" screen" gives us a much better idea of what happened and can help us narrow down the possible causes. Likewise, "someone was shooting through walls" is a lot less helpful than "A blue pyro was shooting flares through the red spawn doors on the first stage of cp_dirtbowl".
+- Please copypaste the text of all error messages that you encounter
+- Screenshots or GIFs of the issue are often invaluable
+
+Contributing code
+=================
+
+Git Setup
+---------
 
 This repository requires you to have `core.autocrlf` set to `false`, so make sure you do this when you first clone it:
 
@@ -16,12 +27,12 @@ GmkSplitter
 The source code as committed to git is in the `Source/gg2` directory. It is stored in "split" form. To reassemble the source code into a .gmk file, you'll need MedO's [GmkSplitter](https://github.com/Medo42/Gmk-Splitter), and to run `gmksplit gg2 gg2.gmk`, or `gmksplit gg2 gg2.gmk` to split the .gmk file into the format stored in git. If you have gmksplit.exe in your PATH or your `Source` directory, there are handy `gg2GmkToGit` and `gg2GitToGmk` convenience scripts that will delete the output file if it already exists and do the splitting/reassembling for you.
 
 Readme
-======
+------
 
 If you add to the settings or change the gameplay, it is a good idea to update `Readme.txt`.
 
 Coding Style
-============
+------------
 
 GG2 follows the following coding style:
 
