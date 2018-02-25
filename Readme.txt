@@ -340,6 +340,10 @@ Can RED recover intelligence from BLU before the roads are cleared?
 
 19. koth_gallery
 by Heenok
+This famous art gallery will open its doors for a new exhibition tomorrow. The center piece?
+A statue of pure canadium. Go in and grab it tonight! Deal with any other team of mercenaries
+who may want it, too. However, I still want to enjoy the exhibition, so try not to smash too
+many priceless pieces, will you?
 
 20. ctf_eiger
 by kildau
@@ -490,7 +494,8 @@ License:
 Copyright (C) 2008-2018 Faucet Software
 http://www.ganggarrison.com
 
-This game is open source under the terms of the Mozilla Public License, v. 2.0. If the source code has not been included along with the game, you can download it at http://www.ganggarrison.com.
+This game is open source under the terms of the Mozilla Public License, v. 2.0.
+If the source code has not been included along with the game, you can download it at http://www.ganggarrison.com.
 
 This is a demake of Team Fortress 2 by Valve Software. All likenesses and similarities 
 are intended as a respectful homage.
