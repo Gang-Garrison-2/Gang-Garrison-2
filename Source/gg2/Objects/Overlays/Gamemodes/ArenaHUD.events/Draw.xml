@@ -39,7 +39,7 @@ if (ArenaControlPoint.capping != 0)
     draw_sprite_ext(ControlPointStatusS, teamoffset+floor(ArenaControlPoint.capping/ArenaControlPoint.capTime*30),
                     xoffset+xsize/2, yoffset+ysize-40, 3, 3, 0, c_white, 1);
 else if (ArenaControlPoint.capping == 0)
-    draw_sprite_ext(ControlPointStatusS, teamoffset, xoffset+xsize/2, yoffset+ysize-40, 3, 3	 0, c_white, 1);
+    draw_sprite_ext(ControlPointStatusS, teamoffset, xoffset+xsize/2, yoffset+ysize-40, 3, 3, 0, c_white, 1);
 if (ArenaControlPoint.locked)
 {
     draw_set_halign(fa_center);
@@ -59,7 +59,7 @@ draw_roundtimer(xoffset, yoffset, xsize, ysize, timer);
 draw_set_halign(fa_center); 
 if (roundStart &gt; 0)
 {
-    draw_text(xoffset+xsize/2, yoffset+ysize/2, "Game will start in "+string(ceil(roundStart/30))+" seconds");
+    draw_text(xoffset+xsize/2, yoffset+ysize/2 - 100, "Game will start in "+string(ceil(roundStart/30))+" seconds");
 }
 
 if (global.myself != -1)
@@ -67,7 +67,7 @@ if (global.myself != -1)
     if (global.myself.object == -1 and !roundStart and winners == TEAM_SPECTATOR
         and global.winners == -1 and endCount == 0 and !instance_exists(DeathCam)
         and global.myself.team != TEAM_SPECTATOR)
-        draw_text(xoffset+xsize/2, yoffset+ysize/2, "You can spawn when the next round starts");
+        draw_text(xoffset+xsize/2, yoffset+ysize/2 - 100, "You will spawn when the next round starts");
     
     //Alive players remaining 
     draw_set_color(c_black);
