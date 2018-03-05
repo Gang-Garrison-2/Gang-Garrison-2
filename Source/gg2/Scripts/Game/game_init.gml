@@ -25,9 +25,9 @@
     initializeDamageSources();
     
     //import wav files for music
-    global.MenuMusic=sound_add(choose("Music/menumusic1.wav","Music/menumusic2.wav","Music/menumusic3.wav","Music/menumusic4.wav","Music/menumusic5.wav","Music/menumusic6.wav"), 1, true);
-    global.IngameMusic=sound_add("Music/ingamemusic.wav", 1, true);
-    global.FaucetMusic=sound_add("Music/faucetmusic.wav", 1, true);
+    global.MenuMusic = sound_add(choose("Music/menumusic1.wav","Music/menumusic2.wav","Music/menumusic3.wav","Music/menumusic4.wav","Music/menumusic5.wav","Music/menumusic6.wav"), 1, true);
+    global.IngameMusic = sound_add("Music/ingamemusic.wav", 1, true);
+    global.FaucetMusic = sound_add("Music/faucetmusic.wav", 1, true);
     if(global.MenuMusic != -1)
         sound_volume(global.MenuMusic, 0.8);
     if(global.IngameMusic != -1)
@@ -41,6 +41,8 @@
     global.map_rotation = ds_list_create();
     
     global.CustomMapCollisionSprite = -1;
+	
+    global.defaultBackground = choose(MenuBackground1, MenuBackground2);
     
     window_set_region_scale(-1, false);
     
@@ -67,9 +69,9 @@
     global.serverPluginsPrompt = ini_read_real("Settings", "ServerPluginsPrompt", 1);
     global.restartPrompt = ini_read_real("Settings", "RestartPrompt", 1);
     //user HUD settings
-    global.timerPos=ini_read_real("Settings","Timer Position", 0)
-    global.killLogPos=ini_read_real("Settings","Kill Log Position", 0)
-    global.kothHudPos=ini_read_real("Settings","KoTH HUD Position", 0)
+    global.timerPos = ini_read_real("Settings","Timer Position", 0);
+    global.killLogPos = ini_read_real("Settings","Kill Log Position", 0);
+    global.kothHudPos = ini_read_real("Settings","KoTH HUD Position", 0);
     global.fadeScoreboard = ini_read_real("Settings", "Fade Scoreboard", 1);
     global.clientPassword = "";
     // for admin menu
@@ -128,11 +130,11 @@
             show_message("Warning: Player Limit cannot exceed 48. It has been set to 48");
     }
     
-    global.currentMapArea=1;
-    global.totalMapAreas=1;
-    global.setupTimer=0;
-    global.joinedServerName="";
-    global.serverPluginsInUse=false;
+    global.currentMapArea = 1;
+    global.totalMapAreas = 1;
+    global.setupTimer = 0;
+    global.joinedServerName = "";
+    global.serverPluginsInUse = false;
     // Create plugin packet maps
     global.pluginPacketBuffers = ds_map_create();
     global.pluginPacketPlayers = ds_map_create();
@@ -251,7 +253,7 @@
     initRewards()
     
 var a, IPRaw, portRaw;
-doubleCheck=0;
+doubleCheck = 0;
 global.launchMap = "";
 
     for(a = 1; a <= parameter_count(); a += 1) 
@@ -326,9 +328,9 @@ global.launchMap = "";
     
     window_set_fullscreen(global.fullscreen);
     
-    global.gg2Font = font_add_sprite(gg2FontS,ord("!"),false,0);
-    global.countFont = font_add_sprite(countFontS, ord("0"),false,2);
-    global.timerFont = font_add_sprite(timerFontS, ord("0"),true,5);
+    global.gg2Font = font_add_sprite(gg2FontS, ord("!"), false, 0);
+    global.countFont = font_add_sprite(countFontS, ord("0"), false, 2);
+    global.timerFont = font_add_sprite(timerFontS, ord("0"), true, 5);
     draw_set_font(global.gg2Font);
     cursor_sprite = CrosshairS;
     global.dealDamageFunction = ""; // executed after dealDamage, with same args
@@ -341,9 +343,9 @@ global.launchMap = "";
     // custom dialog box graphics
     message_background(popupBackgroundB);
     message_button(popupButtonS);
-    message_text_font("Century",9,c_white,1);
-    message_button_font("Century",9,c_white,1);
-    message_input_font("Century",9,c_white,0);
+    message_text_font("Century", 9, c_white, 1);
+    message_button_font("Century", 9, c_white, 1);
+    message_input_font("Century", 9, c_white, 0);
     
     //Key Mapping
     ini_open("controls.gg2");
