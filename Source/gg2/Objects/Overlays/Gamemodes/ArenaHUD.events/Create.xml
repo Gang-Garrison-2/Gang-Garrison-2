@@ -13,9 +13,9 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">timeLimit=global.timeLimitMins*30*60;
-timer=timeLimit;
-teamoffset=0;
+        <argument kind="STRING">timeLimit = global.timeLimitMins*30*60;
+timer = timeLimit;
+teamoffset = 0;
 winners = TEAM_SPECTATOR;
 redWins = 0;
 blueWins = 0;

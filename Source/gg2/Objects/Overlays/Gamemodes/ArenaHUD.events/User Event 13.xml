@@ -13,13 +13,13 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">receiveCompleteMessage(global.serverSocket,8,global.deserializeBuffer);
+        <argument kind="STRING">receiveCompleteMessage(global.serverSocket, 8, global.deserializeBuffer);
 global.timeLimitMins = read_ubyte(global.deserializeBuffer);
-timeLimit=global.timeLimitMins*30*60;
-timer=read_uint(global.deserializeBuffer);
-cpUnlock=read_ushort(global.deserializeBuffer);
+timeLimit = global.timeLimitMins*30*60;
+timer = read_uint(global.deserializeBuffer);
+cpUnlock = read_ushort(global.deserializeBuffer);
 roundStart = read_ubyte(global.deserializeBuffer)*2;
-with ArenaControlPoint event_user(13);
+with (ArenaControlPoint) event_user(13);
 </argument>
       </arguments>
     </action>
