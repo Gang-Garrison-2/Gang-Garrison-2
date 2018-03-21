@@ -12,6 +12,11 @@ exactly went wrong:
 Contributing code
 =================
 
+Game Maker
+----------
+
+Gang Garrison 2 is built with Game Maker 8.0 Pro, so you will need that for most development tasks. Newer versions of Game Maker will unfortunately not work at this time, since they introduced incompatible changes. The "lite" / free version of Game Maker 8 is also not sufficient.
+
 Git Setup
 ---------
 
