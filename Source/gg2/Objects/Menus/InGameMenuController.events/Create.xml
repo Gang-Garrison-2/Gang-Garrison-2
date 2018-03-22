@@ -55,7 +55,9 @@
         }
     ');
     menu_addlink("Quit Game", '
-        game_end();
+        if (show_question("Do you really want to quit?")) {
+            game_end();
+        }
     ');
 }
 </argument>
