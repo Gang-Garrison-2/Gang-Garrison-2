@@ -13,7 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if (mouse_x &lt; owner.x)
+        <argument kind="STRING">if (hspeed &lt; 0)
     image_xscale = -1;
 else
     image_xscale = 1;
