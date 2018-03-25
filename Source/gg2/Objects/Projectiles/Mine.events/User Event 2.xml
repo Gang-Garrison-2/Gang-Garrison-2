@@ -19,7 +19,9 @@
     } else {
         exploded = true;
     }
-    instance_create(x,y,Explosion);
+    var explosion;
+    explosion = instance_create(x,y,Explosion);
+    explosion.sprite_index = ExplosionSmallS;
     playsound(x,y,ExplosionSnd);
     
     with (Character) {

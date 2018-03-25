@@ -47,7 +47,9 @@ with(ownerPlayer.object)
 }
 
 ownerPlayer.sentry = noone;
-instance_create(x,y,Explosion);
+var explosion;
+explosion = instance_create(x,y,Explosion);
+explosion.sprite_index = ExplosionSmallS;
 playsound(x,y,ExplosionSnd);
 sentrygibs=instance_create(x,y,SentryGibs);
 sentrygibs.image_speed = 0;

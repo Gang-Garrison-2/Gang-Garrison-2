@@ -30,8 +30,8 @@ image_speed = global.delta_factor;
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="EXPRESSION">2.2</argument>
-        <argument kind="EXPRESSION">2.2</argument>
+        <argument kind="EXPRESSION">2</argument>
+        <argument kind="EXPRESSION">2</argument>
         <argument kind="EXPRESSION">0</argument>
         <argument kind="MENU">0</argument>
       </arguments>

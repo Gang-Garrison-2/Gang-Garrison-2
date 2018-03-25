@@ -14,6 +14,7 @@
   <resource name="SentryGibsS" type="RESOURCE"/>
   <resource name="TurretRotateS" type="RESOURCE"/>
   <resource name="ExplosionS" type="RESOURCE"/>
+  <resource name="ExplosionSmallS" type="RESOURCE"/>
   <resource name="IntelTimerS" type="RESOURCE"/>
   <resource name="SheetFalling1" type="RESOURCE"/>
   <resource name="SheetFalling2" type="RESOURCE"/>
