@@ -40,18 +40,20 @@
     ');
     menu_addlink("Disconnect", '
         // Force dedicated mode to off so you can go to main menu instead of just restarting server
-        if (global.serverPluginsInUse)
-        {
-            pluginscleanup(true);
-        }
-        else
-        {
-            global.dedicatedMode = 0;
-            with(Client)
-                instance_destroy();
-                
-            with(GameServer)
-                instance_destroy();
+        if (show_question("Do you really want to leave this match?")) {
+            if (global.serverPluginsInUse)
+            {
+                pluginscleanup(true);
+            }
+            else
+            {
+                global.dedicatedMode = 0;
+                with(Client)
+                    instance_destroy();
+                    
+                with(GameServer)
+                    instance_destroy();
+            }
         }
     ');
     menu_addlink("Quit Game", '
