@@ -46,7 +46,7 @@ if (owner.zoomed &amp;&amp; owner == global.myself.object)
     }
     else
         draw_sprite_ext(FullChargeS, 0, mouse_x + 65*-image_xscale, mouse_y, 1, 1, 0, c_white, image_alpha);
-        draw_sprite_part_ext(ChargeS, 1, 0, 0, ceil((hitDamage)*40/maxDamage), 20, mouse_x + 15*-image_xscale, mouse_y - 10, -image_xscale, 1, c_white, image_alpha);
+        draw_sprite_part_ext(ChargeS, 1, 0, 0, ceil((hitDamage-baseDamage)*40/(maxDamage-baseDamage)), 20, mouse_x + 15*-image_xscale, mouse_y - 10, -image_xscale, 1, c_white, image_alpha);
 }
 
 </argument>
