@@ -15,7 +15,16 @@
       <arguments>
         <argument kind="STRING">if(other.id != ownerPlayer.object and other.team != team  and other.hp &gt; 0 and !other.ubered)
 {
-    if(!collision_line_bulletblocking(x, y-12, other.x, other.y))
+    var connecting, otherId;
+    connecting = false;
+    otherId = other.id;
+    if(ownerPlayer.object != -1)
+    {
+        with(ownerPlayer.object)
+            connecting |= place_meeting(x, y, otherId);
+    }
+    connecting |= !collision_line_bulletblocking(x, y-12, other.x, other.y);
+    if(connecting)
     {
         damageCharacter(ownerPlayer, other.id, hitDamage);
         if (other.lastDamageDealer != ownerPlayer &amp;&amp; other.lastDamageDealer != other.player)
