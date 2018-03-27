@@ -65,19 +65,15 @@ colldx = round(x_) - round(x);
 
 if(colldx != 0 or colldy != 0 or (movementState == 0 and trigger &gt; 0))
 {
-    var charColBottom;
     with(Character)
     {
         if(keyState &amp; $02) continue; // Cannot collide or move along if they hold "down"
-        
-        charColBottom = bottom_bound_offset + y;
-        if(frac(charColBottom) == 0.5)
-            charColBottom = floor(charColBottom);
-        else
-            charColBottom = round(charColBottom);
-        // Cannot collide or move along if they are below the collision horizon
-        if(charColBottom &gt;= round(other.y)) continue;
-
+        // This condition should allow people to be picked up by the platform as long as they don't move
+        // upwards, or move upward less quickly than the platform. Note that you *need* the two part condition - just
+        // checking for upward motion would let an up-moving platform pass right through someone moving up less quickly,
+        // and just comparing vspeeds would prevent people from standing on the platform and being moved down by it.
+        if((vspeed &lt; 0) and ((vspeed * global.delta_factor) &lt; dy)) continue; // Don't pick up characters who are just "passing through"
+        if(place_meeting(x, y, other)) continue;
         if(place_meeting(x, y+1, other))
         {
             // Character is standing on this dropdown, move them accordingly unless they would get stuck
@@ -86,6 +82,7 @@ if(colldx != 0 or colldy != 0 or (movementState == 0 and trigger &gt; 0))
             {
                 x += colldx;
                 y += colldy;
+                vspeed = 0;
             }
             charUnsetSolids();
             
@@ -94,20 +91,34 @@ if(colldx != 0 or colldy != 0 or (movementState == 0 and trigger &gt; 0))
                 other.movementState = 1;
             }
         }
-        else if(charColBottom &gt;= round(other.y_)) // Do we move up enough to potentially collide with them?
+        else if(place_meeting(x-colldx, y-colldy, other.id))
         {
-            // Not standing on the platform, but a candidate for being picked up on the way
-            if(place_meeting(x-colldx, y-colldy, other.id))
+            // Not standing on the platform, but the platform runs into this character.
+            // However, does it do so from the bottom?
+            var oldCharX, oldCharY, charMoved;
+            oldCharX = x;
+            oldCharY = y;
+            charMoved = false;
+            other.solid = true;
+            good_move_contact_solid(point_direction(x, y, x-colldx, y-colldy), point_distance(x, y, x-colldx, y-colldy));
+            other.solid = false;
+            if(place_meeting(x, y+1, other))
             {
-                // I'm tired of this, so let's just move the character up in this case and be done
-                var requireddy;
-                requireddy = round(other.y_) - charColBottom - 1;
+                // Yes, the platform runs into the character from the bottom
                 charSetSolids();
-                if(place_free(x, y+requireddy))
+                if(place_free(x + colldx, y + colldy))
                 {
-                    y += requireddy;
+                    x += colldx;
+                    y += colldy;
+                    vspeed = 0;
+                    charMoved = true;
                 }
                 charUnsetSolids();
+            }
+            if(not charMoved)
+            {
+                x = oldCharX;
+                y = oldCharY;
             }
         }
     }

@@ -30,10 +30,5 @@ if (!is_string(argument2))
     if (argument1)
         return background_add(name, 0, 0);
     else
-    {
-        var result;
-        result = sprite_add(name, 1, 1, 0, 0, 0); 
-        sprite_collision_mask(result, false, 1, 0, 0, 0, 0, 1, 0);
-        return result;
-    }
+        return sprite_add(name, 1, 1, 0, 0, 0); 
 }

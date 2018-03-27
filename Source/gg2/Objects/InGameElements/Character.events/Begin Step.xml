@@ -18,24 +18,22 @@ charSetSolids();
 stuckInWall = !place_free(x,y);
 obstacleBelow = !place_free(x,y+1);
 charUnsetSolids();
-if(obstacleBelow and vspeed &gt;= 0)
+onground = false;
+onNonSurfingGround = false;
+if(vspeed &gt;= 0)
 {
-    onground = true;
-    onNonSurfingGround = true;
-}
-else
-{
-    onground = false;
-    onNonSurfingGround = false;
-    
+    if(obstacleBelow)
+    {
+        onground = true;
+        onNonSurfingGround = true;
+    }
     // Check whether we're potentially standing on any platform before checking each one
-    if(!(keyState &amp; $02))
+    else if(!(keyState &amp; $02))
     {
         if(place_meeting(x, y+1, DropdownPlatform))
         {
             with(DropdownPlatform)
             {
-                if(vspeed &gt; other.vspeed) continue;         // We can't stand on a dropdown if we move up faster than it does itself (MovingPlatform)
                 if(!place_meeting(x, y-1, other)) continue; // We can only stand on platforms immediately below us
                 if(place_meeting(x, y, other)) continue;    // We can't stand on platforms we already collide with
                 other.onground = true;

@@ -13,11 +13,13 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">charSetSolidsWithDropdowns();
+        <argument kind="STRING">charSetSolids();
 
-// Climbing down stairs if we aren't falling this frame
-if(vspeed == 0)
-{
+
+// Climbing down stairs
+// if we aren't falling this frame, and we're not on a dropdown platform
+if(vspeed == 0 and ((keyState &amp; $02) or !place_meeting(x, y+1, DropdownPlatform) or place_meeting(x, y, DropdownPlatform)))
+{ 
     if(place_free(x,y+6))
         if(!place_free(x,y+7))
             y += 6;

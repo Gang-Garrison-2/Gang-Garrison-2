@@ -13,7 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">charSetSolidsWithDropdowns();
+        <argument kind="STRING">charSetSolids();
 
 // Limit speed to prevent obstacle penetration
 // (each dimension separately to avoid one vector affecting the other)
@@ -86,6 +86,24 @@ if(place_free(x, y+1))
 if(vspeed &gt; 10)
     vspeed = 10;
 applied_gravity = 0;
+
+// Handle dropdown platforms
+if(!(keyState &amp; $02))
+{
+    with(DropdownPlatform)
+    {
+        if(other.y &lt; other.y_previous) continue;
+        if(!place_meeting(x, y, other)) continue;
+        if(place_meeting(x, y + (other.y - other.y_previous), other)) continue;
+    
+        with(other)
+        {
+            while(place_meeting(x, y, other) and place_free(x, y - 0.1))
+                y -= 0.1;
+            vspeed = 0;
+        }
+    }
+}
 
 x -= hspeed;
 y -= vspeed;

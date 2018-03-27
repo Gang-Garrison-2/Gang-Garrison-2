@@ -6,5 +6,4 @@ with(ControlPointSetupGate)
     solid = false;
 with(PlayerWall)
     solid = false;
-with(DropdownPlatform)
-    solid = false;
+
