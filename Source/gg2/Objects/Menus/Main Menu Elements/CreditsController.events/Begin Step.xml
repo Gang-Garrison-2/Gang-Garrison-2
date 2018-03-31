@@ -13,7 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if (y &lt;= -1125)
+        <argument kind="STRING">if (y &lt;= bottom)
     done = true;
 if (!done)
     y -= 2 * global.delta_factor;

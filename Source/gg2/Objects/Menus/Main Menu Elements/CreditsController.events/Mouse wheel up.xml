@@ -13,7 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if (y != -1125) {
+        <argument kind="STRING">if (y != bottom) {
     if (y + 30 &lt;= 550) {
         y += 30;
     }

@@ -15,6 +15,7 @@
       <arguments>
         <argument kind="STRING">done = false;
 alpha = 1;
+bottom = -1250;
 
 </argument>
       </arguments>
