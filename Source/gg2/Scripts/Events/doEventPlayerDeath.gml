@@ -62,6 +62,17 @@ if(killer)
             killer.roundStats[POINTS] += 1;
             recordEventInLog(4, killer.team, killer.name, global.myself == killer);
         }
+        
+        if (killtable_get(victim.killTable, killer) > 3)
+        {
+            recordDominationInLog(victim, killer, 1);
+        }
+        else if (killtable_get(killer.killTable, victim) == 3)
+        {
+            recordDominationInLog(victim, killer, 0);
+        }
+        killtable_increase(killer.killTable, victim);
+        killtable_delete(victim.killTable, killer);
     }
 }
 
@@ -71,6 +82,18 @@ if (assistant)
     assistant.roundStats[ASSISTS] += 1;
     assistant.stats[POINTS] += .5;
     assistant.roundStats[POINTS] += .5;
+    
+    if (killtable_get(victim.killTable, assistant) > 3)
+    {
+        recordDominationInLog(victim, assistant, 1);
+    }
+    else if (killtable_get(killer.killTable,victim) == 3)
+    {
+        recordDominationInLog(victim, assistant,0);
+    }
+    killtable_increase(assistant.killTable, victim);
+    killtable_delete(victim.killTable, assistant);
+
 }
 
 //SPEC

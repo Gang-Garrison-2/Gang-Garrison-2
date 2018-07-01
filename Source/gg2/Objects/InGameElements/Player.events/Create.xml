@@ -56,10 +56,10 @@
     
     timesChangedCapLimit = 0;
     
-    lastKnownx=0;
-    lastKnowny=0;
+    lastKnownx = 0;
+    lastKnowny = 0;
     
-    humiliated=0;
+    humiliated = 0;
     
     deathmatch_respawn_bypass = 0;
     
@@ -76,6 +76,9 @@
     rewards = ds_map_create();
     badges = ds_list_create();
     ghost = noone;
+    
+    //Domination Kill Table
+    killTable = killtable_create();
     
     corpse = noone;
 }

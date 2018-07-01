@@ -254,6 +254,10 @@ if (burnDuration &gt; 0 or burnIntensity &gt; 0)
     }  
 }
 
+//Domination Indicator
+if (killtable_get(player.killTable,global.myself) &gt; 3)
+    draw_sprite_ext(DominationS, player.team, xr, yr-35, 1, 1, 0, c_white, cloakAlpha);
+
 if (distance_to_point(mouse_x, mouse_y) &lt; 25)
 {
     if (cloak and team != global.myself.team)

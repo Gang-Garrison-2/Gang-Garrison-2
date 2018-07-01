@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="killtable_clear" type="RESOURCE"/>
+  <resource name="killtable_create" type="RESOURCE"/>
+  <resource name="killtable_add" type="RESOURCE"/>
+  <resource name="killtable_delete" type="RESOURCE"/>
+  <resource name="killtable_set" type="RESOURCE"/>
+  <resource name="killtable_get" type="RESOURCE"/>
+  <resource name="killtable_increase" type="RESOURCE"/>
+  <resource name="killtable_getDomCount" type="RESOURCE"/>
+  <resource name="killtable_length" type="RESOURCE"/>
+  <resource name="clearPlayerDominations" type="RESOURCE"/>
+</resources>
