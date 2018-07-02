@@ -71,12 +71,12 @@
         draw_text_transformed(xcenter-(400-412),yoffset,ArenaHUD.blueWins,4,4,0);
     }
     
-    draw_set_color(c_red);   
     for(i=0; ds_priority_size(redteam) &gt; 0; i += 1) {
         player = ds_priority_delete_max(redteam);
         
-        if (i&lt;12)
+        if (i &lt; 12)
         {
+            draw_set_color(c_red);
             if (showadmin and player != global.myself)
             {
                 var _x, _y;
@@ -112,7 +112,7 @@
             if (domCount &gt; 0) {
                 draw_sprite_ext(MedalS, 0, xoffset+xsize/2 + 18, yoffset+70+20*(i+1), 1, 1, 0, c_white, alpha);
                 draw_set_color(make_color_rgb(227, 226, 225));
-                draw_text_transformed(xoffset+xsize/2 + 17, yoffset+70+20*(i+1), string(domCount), 0.8, 0.8, 0);
+                draw_text_transformed(xoffset+xsize/2 + 17, yoffset+70+20*(i+1), string(domCount), 1, 1, 0);
             }
             if (killtable_get(global.myself.killTable, player) &gt; 3)
                 draw_sprite_ext(MedalS, 3, xoffset+xsize/2 + 18, yoffset+70+20*(i+1), 1, 1, 0, c_white, alpha);
@@ -122,11 +122,11 @@
         }          
     }
     
-    draw_set_color(c_blue);
     for(i=0; ds_priority_size(blueteam) &gt; 0; i+=1) {
         player = ds_priority_delete_max(blueteam);
 
-        if i&lt;12{
+        if (i &lt; 12){
+            draw_set_color(c_blue);
             if (showadmin &amp;&amp; player != global.myself) {
                 var _x, _y;
                 _x = xoffset+xsize/2+44;
@@ -158,7 +158,7 @@
             if (domCount &gt; 0) {
                 draw_sprite_ext(MedalS, 0, xoffset+xsize/2 + 18, yoffset+70+20*(i+1), 1, 1, 0, c_white, alpha);
                 draw_set_color(make_color_rgb(227, 226, 225));
-                draw_text_transformed(xoffset+xsize/2 + 17, yoffset+70+20*(i+1), string(domCount), 0.8, 0.8, 0);
+                draw_text_transformed(xoffset+xsize/2 + 17, yoffset+70+20*(i+1), string(domCount), 1, 1, 0);
             }
             if (killtable_get(global.myself.killTable, player) &gt; 3)
                 draw_sprite_ext(MedalS, 3, xoffset+xsize/2 + 18, yoffset+70+20*(i+1), 1, 1, 0, c_white, alpha);
