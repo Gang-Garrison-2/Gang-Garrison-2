@@ -114,7 +114,7 @@
                 draw_set_color(make_color_rgb(227, 226, 225));
                 draw_text_transformed(xoffset+xsize/2 + 17, yoffset+70+20*(i+1), string(domCount), 1, 1, 0);
             }
-            if (killtable_get(global.myself.killTable, player) &gt; 3 || keyboard_check(vk_backspace))
+            if (killtable_get(global.myself.killTable, player) &gt; 3)
                 draw_sprite_ext(MedalS, 3, xoffset+xsize/2 + 18, yoffset+70+20*(i+1), 1, 1, 0, c_white, alpha);
             
             if(player.object==-1)
@@ -160,7 +160,7 @@
                 draw_set_color(make_color_rgb(227, 226, 225));
                 draw_text_transformed(xoffset+xsize + 52, yoffset+70+20*(i+1), string(domCount), 1, 1, 0);
             }
-            if (killtable_get(global.myself.killTable, player) &gt; 3 || keyboard_check(vk_backspace))
+            if (killtable_get(global.myself.killTable, player) &gt; 3)
                 draw_sprite_ext(MedalS, 3, xoffset+xsize + 53, yoffset+70+20*(i+1), 1, 1, 0, c_white, alpha);
             
             if (player.object==-1)
