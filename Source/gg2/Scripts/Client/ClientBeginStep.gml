@@ -278,6 +278,7 @@ do {
                 player.object = -1;
             }
             player.team = read_ubyte(global.tempBuffer);
+			clearPlayerDominations(player);
             break;
              
         case PLAYER_CHANGECLASS:
