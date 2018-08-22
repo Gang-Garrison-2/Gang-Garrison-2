@@ -188,6 +188,7 @@ while(commandLimitRemaining > 0) {
                     ServerBalanceTeams();
                 }
             }
+            clearPlayerDominations(player);
             break;                   
             
         case CHAT_BUBBLE:
