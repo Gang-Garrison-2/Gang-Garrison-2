@@ -112,6 +112,10 @@ if(view_hview[0] &lt; 600)
         
         switch (item_type[i])
         {
+        case "scriptlabel":
+            val = menu_get_var(i);
+            break;
+            
         case "script":
             val = "";
             break;

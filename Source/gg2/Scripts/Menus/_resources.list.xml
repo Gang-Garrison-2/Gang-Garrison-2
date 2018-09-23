@@ -3,6 +3,7 @@
   <resource name="menu_create" type="RESOURCE"/>
   <resource name="menu_addlink" type="RESOURCE"/>
   <resource name="menu_addtablink" type="RESOURCE"/>
+  <resource name="menu_addlink_label" type="RESOURCE"/>
   <resource name="menu_addback" type="RESOURCE"/>
   <resource name="menu_background" type="RESOURCE"/>
   <resource name="menu_addedit_num" type="RESOURCE"/>

@@ -80,6 +80,7 @@ if(editing != -1) {
             mouse_clear(mb_left);
             if(virtualitem &lt; itemcount) {
                 switch (item_type[virtualitem]) {
+                    case "scriptlabel":
                     case "script":
                         execute_string(item_script[virtualitem]);
                         break;
