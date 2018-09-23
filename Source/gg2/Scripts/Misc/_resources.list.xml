@@ -11,4 +11,5 @@
   <resource name="initCharacterSpritePrefixes" type="RESOURCE"/>
   <resource name="getCharacterSpriteId" type="RESOURCE"/>
   <resource name="format_timer_value" type="RESOURCE"/>
+  <resource name="getRelativePath" type="RESOURCE"/>
 </resources>
