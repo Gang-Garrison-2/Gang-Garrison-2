@@ -13,17 +13,43 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">menu_create(48, 172, 500, 260, 32, 40, 112, 128);
+        <argument kind="STRING">ini_open("gg2.ini");
+global.mapRotationFile = ini_read_string("Server", "MapRotation", "");
+ini_close();
+
+menu_create(48, 172, 500, 260, 32, 40, 112, 128);
 menumode = true;
 
 menu_background(512, 24, 8, 12, 4);
 bgtabs = true;
 
+var apos; // dumb workaround
+apos = "'";
+
 menu_addedit_num("Hosting Port:", "global.hostingPort", '
     gg2_write_ini("Settings", "HostingPort", argument0);
 ', 65535);
-var apos; // dumb workaround
-apos = "'";
+
+if (global.mapRotationFile == "") showMapRot = "Default";
+else showMapRot = string_replace(filename_name(global.mapRotationFile), ".txt", "");
+menu_addlink_label("Map Rotation:", "showMapRot", '
+
+    var absPath;
+
+    absPath = get_open_filename("Map Rotation|*.txt", "");
+
+    if (absPath == "") {
+        showMapRot = "Default";
+        gg2_write_ini("Server", "MapRotation", "");
+        exit;
+    }
+    
+    showMapRot = filename_name(absPath);
+        
+    gg2_write_ini("Server", "MapRotation", getRelativePath(program_directory, absPath));
+    showMapRot = string_replace(showMapRot, ".txt", "");
+');
+
 menu_addedit_select("Shuffle map rotation:", "global.shuffleRotation", '
     gg2_write_ini("Server", "ShuffleRotation", argument0);
 ');
@@ -44,13 +70,7 @@ menu_addedit_boolean("Attempt UPnP Forwarding:", "global.attemptPortForward", '
 ');
 
 menu_addlink("Start Game", '
-    //Server respawn time calculator. Converts each second to a frame. (read: multiply by 30 :hehe:)
-    if (global.Server_RespawntimeSec == 0)
-        global.Server_Respawntime = 1;
-    else
-        global.Server_Respawntime = global.Server_RespawntimeSec * 30;
-    
-    global.gameServer = instance_create(0,0,GameServer);
+    event_user(0);
 ');
 
 menu_addtablink("Main", '
