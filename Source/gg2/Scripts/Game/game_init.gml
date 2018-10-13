@@ -41,7 +41,7 @@
     global.map_rotation = ds_list_create();
     
     global.CustomMapCollisionSprite = -1;
-	
+
     global.defaultBackground = choose(MenuBackground1, MenuBackground2);
     
     window_set_region_scale(-1, false);
@@ -384,6 +384,10 @@ global.launchMap = "";
      ***/
     registry_set_root(1); // HKLM
     global.NTKernelVersion = real(registry_read_string_ext("\SOFTWARE\Microsoft\Windows NT\CurrentVersion\", "CurrentVersion")); // SIC
+    if(!registry_exists_ext("\SOFTWARE\Microsoft\Windows NT\CurrentVersion\", "CurrentMajorVersionNumber"))
+        global.CurrentMajorVersionNumber = -1;
+    else
+        global.CurrentMajorVersionNumber = registry_read_real_ext("\SOFTWARE\Microsoft\Windows NT\CurrentVersion\", "CurrentMajorVersionNumber");
     
     globalvar previous_window_x, previous_window_y, previous_window_w;
     previous_window_x = window_get_x();
