@@ -43,8 +43,10 @@ y_ += dy;
 var totalDist;
 // Distance of the platform from (startX, startY) in the "topwards" direction
 totalDist = point_distance(0, 0, left, -top);
-if (totalDist <= 0) {
+if (totalDist &lt;= 0) {
     movementState = 0;
+    x_ = startX;
+    y_ = startY;
 }
 else {
     var dist;
