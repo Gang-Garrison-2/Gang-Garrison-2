@@ -140,9 +140,9 @@ if (endCount &gt; 0 and global.winners == -1 and !instance_exists(ScoreTableCont
     }
     draw_set_color(make_color_rgb(227, 226, 225));
     draw_set_halign(fa_right);
-    draw_text_transformed(xoffset+xsize/2+50, yoffset+ysize/2-90, redWins, 4, 4, 0);
+    draw_text_transformed(xoffset+xsize/2-50, yoffset+ysize/2-90, redWins, 4, 4, 0);
     draw_set_halign(fa_left);
-    draw_text_transformed(xoffset+xsize/2-50, yoffset+ysize/2-90, blueWins, 4, 4, 0);
+    draw_text_transformed(xoffset+xsize/2+50, yoffset+ysize/2-90, blueWins, 4, 4, 0);
 
 }
  
