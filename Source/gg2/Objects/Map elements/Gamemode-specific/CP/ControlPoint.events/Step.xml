@@ -125,7 +125,7 @@ if(object_index == ArenaControlPoint)
         }
     }
     var maxCappingPower;
-    maxCappingPower = 100;
+    maxCappingPower = 4;
     cappingPower[TEAM_BLUE] = max(1,reds)/((1-1/maxCappingPower)*livereds + (1/maxCappingPower)*max(1,reds));
     cappingPower[TEAM_RED] = max(1,blues)/((1-1/maxCappingPower)*liveblues + (1/maxCappingPower)*max(1,blues));
 }
