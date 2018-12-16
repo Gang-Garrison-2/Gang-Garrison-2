@@ -58,15 +58,20 @@ else if (ArenaControlPoint.cappers &gt; 0 and !ArenaControlPoint.locked)
 draw_roundtimer(xoffset, yoffset, xsize, ysize, timer);
 
 draw_set_halign(fa_center); 
-if (roundStart &gt; 0)
+if (state == ARENA_STATE_ROUND_SETUP)
 {
     draw_text(xoffset+xsize/2, yoffset+ysize/2 + 100, "Game will start in "+string(ceil(roundStart/30))+" seconds");
 }
 
+if (state == ARENA_STATE_WAITING)
+{
+    draw_text(xoffset+xsize/2, yoffset+ysize/2 + 100, "Waiting for players...");
+}
+
 if (global.myself != -1)
 {
-    if (global.myself.object == -1 and !roundStart and winners == TEAM_SPECTATOR
-        and global.winners == -1 and endCount == 0 and !instance_exists(DeathCam)
+    if (global.myself.object == -1 and state == ARENA_STATE_ROUND_PROPER
+        and !overtime and global.winners == -1 and !instance_exists(DeathCam)
         and global.myself.team != TEAM_SPECTATOR)
         draw_text(xoffset+xsize/2, yoffset+ysize/2 + 100, "You will spawn when the next round starts");
     
@@ -79,66 +84,64 @@ if (global.myself != -1)
 }
  
 //MVPs
-if (endCount &gt; 0 and global.winners == -1 and !instance_exists(ScoreTableController))
+if (state == ARENA_STATE_ROUND_END and global.winners == -1 and !instance_exists(ScoreTableController))
 {
-    if instance_exists(DeathCam)
-        with (DeathCam) instance_destroy();
+    with (DeathCam) instance_destroy();
     
-    draw_set_alpha(1);    
+    draw_set_alpha(1);
     draw_set_halign(fa_left);
     draw_set_color(c_white);
 
-    offset = 15;
+    // Note: There is always a winner on round end. If that changes, this code needs to adapt
+    var mvpSubimg, mvpTeam;
     if (winners == TEAM_RED)
     {
-        if (endCount &lt; 150)
+        if (endCount &gt; 150)
         {
-            draw_sprite_ext(MVPBannerS, 0, xoffset+xsize/2, yoffset+ysize/2, 2, 2, 0, c_white, 0.8);
-            for (i=0; i&lt;redMVPs; i+=1)
-            {
-                draw_text(xoffset+xsize/2-250, yoffset+ysize/2+76+offset*i, redMVPName[i]);
-                draw_text(xoffset+xsize/2-30, yoffset+ysize/2+76+offset*i, redMVPKills[i]);
-                draw_text(xoffset+xsize/2+122, yoffset+ysize/2+76+offset*i, redMVPHealed[i]);
-                draw_text(xoffset+xsize/2+248, yoffset+ysize/2+76+offset*i, redMVPPoints[i]);
-            }
+            mvpSubimg = 0;
+            mvpTeam = TEAM_RED;
         }
-        else if (endCount &gt;= 150)
+        else
         {
-            draw_sprite_ext(MVPBannerS, 1, xoffset+xsize/2, yoffset+ysize/2, 2, 2, 0, c_white, 0.8);
-            for (i=0; i&lt;blueMVPs; i+=1)
-            {
-                draw_text(xoffset+xsize/2-250, yoffset+ysize/2+76+offset*i, blueMVPName[i]);
-                draw_text(xoffset+xsize/2-30, yoffset+ysize/2+76+offset*i, blueMVPKills[i]);
-                draw_text(xoffset+xsize/2+122, yoffset+ysize/2+76+offset*i, blueMVPHealed[i]);
-                draw_text(xoffset+xsize/2+248, yoffset+ysize/2+76+offset*i, blueMVPPoints[i]);
-            }
+            mvpSubimg = 1;
+            mvpTeam = TEAM_BLUE;        
         }
     }
-    else if (winners == TEAM_BLUE)
+    else
     {
-        if (endCount &lt; 150)
+        if (endCount &gt; 150)
         {
-            draw_sprite_ext(MVPBannerS, 2, xoffset+xsize/2, yoffset+ysize/2, 2, 2, 0, c_white, 0.8);
-            for (i=0; i&lt;blueMVPs; i+=1)
-            {
-                draw_text(xoffset+xsize/2-250, yoffset+ysize/2+76+offset*i, blueMVPName[i]);
-                draw_text(xoffset+xsize/2-30, yoffset+ysize/2+76+offset*i, blueMVPKills[i]);
-                draw_text(xoffset+xsize/2+122, yoffset+ysize/2+76+offset*i, blueMVPHealed[i]);
-                draw_text(xoffset+xsize/2+248, yoffset+ysize/2+76+offset*i, blueMVPPoints[i]);
-            }
+            mvpSubimg = 2;
+            mvpTeam = TEAM_BLUE;
         }
-        else if (endCount &gt;= 150)
+        else
         {
-            draw_sprite_ext(MVPBannerS, 3, xoffset+xsize/2, yoffset+ysize/2, 2, 2, 0, c_white, 0.8);
-            for (i=0; i&lt;redMVPs; i+=1)
-            {
-                draw_text(xoffset+xsize/2-250, yoffset+ysize/2+76+offset*i, redMVPName[i]);
-                draw_text(xoffset+xsize/2-30, yoffset+ysize/2+76+offset*i, redMVPKills[i]);
-                draw_text(xoffset+xsize/2+122, yoffset+ysize/2+76+offset*i, redMVPHealed[i]);
-                draw_text(xoffset+xsize/2+248, yoffset+ysize/2+76+offset*i, redMVPPoints[i]);
-            }
+            mvpSubimg = 3;
+            mvpTeam = TEAM_RED;
         }
     }
+
+    draw_sprite_ext(MVPBannerS, mvpSubimg, xoffset+xsize/2, yoffset+ysize/2, 2, 2, 0, c_white, 0.8);
+    
+    if(variable_local_exists("mvps"))
+    {
+        // The mvps don't exist for players who join during round end, since syncing them in the FULL_UPDATE
+        // would make things more complicated, and it should happen rarely enough that seeing an empty
+        // MVP board won't be too annoying.
+        
+        var mvpXOffset, i;
+        mvpXOffset = xoffset+xsize/2;
+        for (i=0; i &lt; mvps[mvpTeam]; i+=1)
+        {
+            var mvpYOffset;
+            mvpYOffset = yoffset+ysize/2+76 + 15*i;
+            draw_text(mvpXOffset-250, mvpYOffset, mvpName  [mvpTeam,i]);
+            draw_text(mvpXOffset- 30, mvpYOffset, mvpKills [mvpTeam,i]);
+            draw_text(mvpXOffset+122, mvpYOffset, mvpHealed[mvpTeam,i]);
+            draw_text(mvpXOffset+248, mvpYOffset, mvpPoints[mvpTeam,i]);
+        }
+    }
+    
     draw_set_color(make_color_rgb(227, 226, 225));
     draw_set_halign(fa_right);
     draw_text_transformed(xoffset+xsize/2-50, yoffset+ysize/2-90, redWins, 4, 4, 0);

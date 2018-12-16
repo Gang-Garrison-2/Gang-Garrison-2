@@ -3,4 +3,8 @@
   <resource name="clientArenaEndRound" type="RESOURCE"/>
   <resource name="serverArenaEndRound" type="RESOURCE"/>
   <resource name="serverArenaRestart" type="RESOURCE"/>
+  <resource name="destroyGameplayObjects" type="RESOURCE"/>
+  <resource name="resetRoundStats" type="RESOURCE"/>
+  <resource name="respawnEveryone" type="RESOURCE"/>
+  <resource name="spawningAllowed" type="RESOURCE"/>
 </resources>

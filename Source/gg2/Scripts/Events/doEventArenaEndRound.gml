@@ -1,24 +1,32 @@
-for(i=0; i < redMVPs; i+=1) {
-    redMVPName[i] = redMVP[i].name;
-    redMVPKills[i] = redMVP[i].roundStats[KILLS];
-    redMVPHealed[i] = redMVP[i].roundStats[HEALING];
-    redMVPPoints[i] = redMVP[i].roundStats[POINTS];
+var win;
+win = argument0;
+
+for(i=0; i < mvps[TEAM_RED]; i+=1) {
+    mvpName[TEAM_RED,i] = redMVP[i].name;
+    mvpKills[TEAM_RED,i] = redMVP[i].roundStats[KILLS];
+    mvpHealed[TEAM_RED,i] = redMVP[i].roundStats[HEALING];
+    mvpPoints[TEAM_RED,i] = redMVP[i].roundStats[POINTS];
 }
 
-for(i=0; i < blueMVPs; i+=1) {
-    blueMVPName[i] = blueMVP[i].name;
-    blueMVPKills[i] = blueMVP[i].roundStats[KILLS];
-    blueMVPHealed[i] = blueMVP[i].roundStats[HEALING];
-    blueMVPPoints[i] = blueMVP[i].roundStats[POINTS];
+for(i=0; i < mvps[TEAM_BLUE]; i+=1) {
+    mvpName[TEAM_BLUE,i] = blueMVP[i].name;
+    mvpKills[TEAM_BLUE,i] = blueMVP[i].roundStats[KILLS];
+    mvpHealed[TEAM_BLUE,i] = blueMVP[i].roundStats[HEALING];
+    mvpPoints[TEAM_BLUE,i] = blueMVP[i].roundStats[POINTS];
 }
-endCount = 1;
-with Player if team != ArenaHUD.winners humiliated = 1;
-with Sentry if team != ArenaHUD.winners event_user(1);
 
-if global.myself.team == ArenaHUD.winners 
+with(ArenaHUD)
+{
+    winners = win;
+    endCount = 300;
+    roundStart = 0;
+    state = ARENA_STATE_ROUND_END;
+}
+
+with Player if team != win humiliated = 1;
+with Sentry if team != win event_user(1);
+
+if global.myself.team == win 
 || global.myself.team == TEAM_SPECTATOR sound = VictorySnd;
 else sound = FailureSnd;
 AudioControlPlaySong(sound, false);
-
-if ArenaHUD.redWins = global.caplimit { global.winners = TEAM_RED; }
-if ArenaHUD.blueWins = global.caplimit { global.winners = TEAM_BLUE; }

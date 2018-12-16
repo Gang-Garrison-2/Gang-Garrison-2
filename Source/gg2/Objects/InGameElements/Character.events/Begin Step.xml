@@ -407,7 +407,7 @@ if ubered {
 var arenaRoundEnd;
 arenaRoundEnd = false;
 if (instance_exists(ArenaHUD)) { 
-    arenaRoundEnd = (ArenaHUD.endCount!=0);
+    arenaRoundEnd = (ArenaHUD.state == ArenaHUD.ARENA_STATE_ROUND_END);
 }
 
 if ((arenaRoundEnd or global.mapchanging) and !player.humiliated) {

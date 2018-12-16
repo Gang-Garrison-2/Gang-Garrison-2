@@ -13,10 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">//start game if there are 2 or more players and
-//check for last player on a team then restart arena
-
-redteam = 0;
+        <argument kind="STRING">redteam = 0;
 blueteam = 0;
 redteamCharacters = 0;
 blueteamCharacters = 0;
@@ -40,112 +37,89 @@ for(i = 0; i &lt; ds_list_size(global.players); i += 1)
 
 if (global.run_virtual_ticks)
 {
-    if (global.isHost)
+    if(state != ARENA_STATE_ROUND_SETUP and cpUnlock &gt; 0)
     {
-        if (ArenaControlPoint.team != -1)
-            winners = ArenaControlPoint.team;
-        if (cpUnlock &lt;= 0)
-        {
-            sendEventUnlockCP();
-            doEventUnlockCP();
-        }
-        else if (cpUnlock == 150)
-            GameServer.syncTimer = 1;
+        cpUnlock -= 1;
         
-        if ((blueteamCharacters == 0 or redteamCharacters == 0) and roundStart == 0)
+        if (global.isHost)
         {
-            if ((redteam &gt;= 1 or blueteam &gt;= 1) and winners == TEAM_SPECTATOR)
+            if (cpUnlock &lt;= 0)
             {
-                if (blueteamCharacters == 0 and gameStarted == 1)
-                    winners = TEAM_RED;
-                else if (redteamCharacters == 0 and gameStarted == 1)
-                    winners = TEAM_BLUE;
-                else
-                {
-                    winners = TEAM_SPECTATOR;
-                    if (redteam &gt;= 1 and blueteam &gt;=1 and gameStarted == 0)
-                    {
-                        serverArenaRestart();
-                        gameStarted = 1;
-                    }
-                }
+                sendEventUnlockCP();
+                doEventUnlockCP();
             }
-        }
-        if (winners != TEAM_SPECTATOR)
-        {
-            endCount += 1;
-            if (endCount == 300 and overtime == 0 and timer != 0)
-            {
-                endCount = 0;
-                if (redteam == 0 or blueteam == 0)
-                {
-                    gameStarted = 0;
-                    winners = TEAM_SPECTATOR;
-                    with (Player)
-                    {
-                        if (object != -1)
-                        {
-                            if (id == global.myself and !instance_exists(Spectator))
-                            {
-                                instance_create(object.x,object.y,Spectator);
-                                with object instance_destroy();
-                            }
-                        }
-                    }
-                    with (Sentry)
-                        instance_destroy();
-                    with (SentryGibs)
-                        instance_destroy();
-                }
-                else serverArenaRestart();
-            }
-            else if (endCount == 1)
-            {
-                serverArenaEndRound();
-            }
+            else if (cpUnlock == 150)
+                GameServer.syncTimer = 1;
         }
     }
-    //else if client, increase endcount once server sends the EndRound message
-    else
-    {
-        if (endCount &gt; 0)
-            endCount += 1;
-        if (endCount == 300)
-            endCount = 0;
-        //also check number of red/blue players to set winners as spec
-        if (winners != TEAM_SPECTATOR and endCount == 0
-            and (redteam == 0 or blueteam == 0))
-            winners = TEAM_SPECTATOR;
-    }
-}
-
-if (roundStart == 0)
-    cpUnlock -= 1 * global.delta_factor;
-
-//when roundStart reaches 0 players can no longer change team/class
-//and respawn
-else if (roundStart &gt; 0)
-    roundStart -= 1 * global.delta_factor;
-if (roundStart == 1)
-{
+    
+    if(state == ARENA_STATE_ROUND_SETUP and roundStart &gt; 0)
+        roundStart -= 1;
+    
+    if(state == ARENA_STATE_ROUND_END and endCount &gt; 0)
+        endCount -= 1;
+        
+    if (timer &gt; 0)
+        timer -= 1;
+    
+    if ((state == ARENA_STATE_ROUND_SETUP or state == ARENA_STATE_ROUND_PROPER) and timer &lt;= 0)
+        overtime = 1;
+    
     if (global.isHost)
     {
-        sendEventArenaStartRound();
-        doEventArenaStartRound();
-        GameServer.syncTimer = 1;
+        if(global.winners != -1)
+        {
+            // Essentially an extra "end of map" state
+        }
+        if(state == ARENA_STATE_WAITING)
+        {
+            if(timer &lt;= 0)
+                global.winners = TEAM_SPECTATOR;
+            else if(redteam &gt;= 1 and blueteam &gt;= 1)
+                serverArenaRestart();
+        }
+        else if (state == ARENA_STATE_ROUND_SETUP)
+        {
+            if (roundStart &lt;= 0)
+            {
+                sendEventArenaStartRound();
+                doEventArenaStartRound();
+            }
+        }
+        else if (state == ARENA_STATE_ROUND_PROPER)
+        {
+            var win;
+            win = -1;
+            if (ArenaControlPoint.team != -1)
+                win = ArenaControlPoint.team;
+            else if (blueteamCharacters == 0)
+                win = TEAM_RED;
+            else if (redteamCharacters == 0)
+                win = TEAM_BLUE;
+                
+            if(win != -1)
+                serverArenaEndRound(win);
+        }
+        else if (state == ARENA_STATE_ROUND_END)
+        {
+            if (endCount &lt;= 0)
+            {
+                if (redWins &gt;= global.caplimit)
+                    global.winners = TEAM_RED;
+                else if (blueWins &gt;= global.caplimit)
+                    global.winners = TEAM_BLUE;
+                else if (timer &lt;= 0)
+                    global.winners = TEAM_SPECTATOR;
+                else if (redteam == 0 or blueteam == 0)
+                {
+                    sendEventArenaWaitForPlayers();
+                    doEventArenaWaitForPlayers();
+                }
+                else
+                    serverArenaRestart();
+            }
+        }
     }
-}
-    
-//timer
-if (timer &gt; 0)
-    timer -= 1 * global.delta_factor;
-
-if (timer == 0)
-{
-    if (redteamCharacters &gt; 0 and blueteamCharacters &gt; 0 and redteam &gt; 0 and blueteam &gt; 0 and winners == TEAM_SPECTATOR)
-        overtime = 1;
-    else if endCount == 300 or gameStarted == 0
-        global.winners = TEAM_SPECTATOR;
 }
 </argument>
       </arguments>

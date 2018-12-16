@@ -23,7 +23,7 @@ if(alpha &gt;= 1) {
 var arenaRoundEnd;
 arenaRoundEnd = false;
 if(mode == 2) {
-    if(ArenaHUD.endCount!=0) arenaRoundEnd=true;
+    if(ArenaHUD.state == ArenaHUD.ARENA_STATE_ROUND_END) arenaRoundEnd=true;
 } else if (mode == 4) {  
     if (DKothHUD.cpUnlock&gt;0) 
         locked = true; 
