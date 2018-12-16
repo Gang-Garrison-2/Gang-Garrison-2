@@ -25,8 +25,9 @@ if instance_exists(WinBanner) with WinBanner instance_destroy();
 draw_set_color(c_white);
 draw_set_valign(fa_center);
 draw_set_alpha(1);
-        
+
 //CP
+var teamoffset;
 if (ArenaControlPoint.team == TEAM_RED)
     teamoffset = 60;
 else if (ArenaControlPoint.team == TEAM_BLUE)

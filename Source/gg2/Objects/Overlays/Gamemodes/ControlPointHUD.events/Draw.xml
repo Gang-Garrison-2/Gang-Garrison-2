@@ -26,6 +26,7 @@ draw_set_alpha(1);
 
 for (i=1; i&lt;= global.totalControlPoints; i+=1)
 {
+    var teamoffset;
     if (global.cp[i].team == TEAM_RED)
         teamoffset = 60;
     else if (global.cp[i].team == TEAM_BLUE)

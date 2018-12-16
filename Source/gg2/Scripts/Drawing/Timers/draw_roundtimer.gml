@@ -1,4 +1,4 @@
-var xoffset, yoffset, xsize, ysize, xshift, yshift;
+var xoffset, yoffset, xsize, ysize, xshift, yshift, teamoffset;
 xoffset = argument0;
 yoffset = argument1;
 xsize = argument2;

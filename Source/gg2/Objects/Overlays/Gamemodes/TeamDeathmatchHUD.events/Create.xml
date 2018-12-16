@@ -15,7 +15,6 @@
       <arguments>
         <argument kind="STRING">timeLimit=global.timeLimitMins*30*60;
 timer=timeLimit;
-teamoffset=0;
 killLimit = global.killLimit;
 overtime = false;
 
