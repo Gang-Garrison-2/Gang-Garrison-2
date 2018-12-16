@@ -6,4 +6,5 @@
   <resource name="draw_name_badges" type="RESOURCE"/>
   <resource name="drawHealth" type="RESOURCE"/>
   <resource name="drawProgressBar" type="RESOURCE"/>
+  <resource name="drawControlPointStatus" type="RESOURCE"/>
 </resources>

@@ -17,6 +17,11 @@
 yoffset = view_yview[0];
 xsize = view_wview[0];
 ysize = view_hview[0];
+
+global.totalControlPoints = 1;
+global.cp[0] = KothControlPoint.id;
+drawControlPointStatus(cpUnlock);
+
 if (global.kothHudPos)
 {
     coffset = 0;
@@ -28,42 +33,6 @@ else
     coffset = 43*1.15;
     xshift = -290*global.timerPos;
     yshift = 0;
-}
-
-draw_set_color(c_white);
-draw_set_valign(fa_center);
-draw_set_alpha(1);
-        
-//CP
-var teamoffset;
-if (KothControlPoint.team == TEAM_RED)
-    teamoffset = 60;
-else if (KothControlPoint.team == TEAM_BLUE)
-    teamoffset = 90;
-if (KothControlPoint.cappingTeam == TEAM_RED and KothControlPoint.team == -1)
-    teamoffset = 30;
-else if (KothControlPoint.cappingTeam != TEAM_RED &amp;&amp; KothControlPoint.team == -1)
-    teamoffset = 0;
-
-if (KothControlPoint.capping != 0)
-    draw_sprite_ext(ControlPointStatusS, teamoffset+floor(KothControlPoint.capping/KothControlPoint.capTime*30),
-                    xoffset+xsize/2, yoffset+ysize-40, 3, 3, 0, c_white, 1);
-else if (KothControlPoint.capping == 0)
-    draw_sprite_ext(ControlPointStatusS, teamoffset, xoffset+xsize/2, yoffset+ysize-40, 3, 3, 0, c_white, 1);
-if (KothControlPoint.locked)
-{
-    draw_set_halign(fa_center);
-    if (cpUnlock &gt;= 150)
-        draw_sprite_ext(ControlPointLockS, 0, xoffset+xsize/2, yoffset+ysize-40, 3, 3, 0, c_white, 1);
-    else if (cpUnlock &gt;= 30)
-        draw_text_transformed(xoffset+xsize/2+2, yoffset+ysize-38, ceil(cpUnlock/30), 3,3, 0);
-}
-else if (KothControlPoint.cappers &gt; 0 and !KothControlPoint.locked)
-{
-    draw_sprite_ext(ControlPointCappersS, 0, xoffset+xsize/2, yoffset+ysize-40, 3, 3, 0, c_white, 1);
-    draw_set_halign(fa_center);
-    draw_set_color(c_black);
-    draw_text_transformed(xoffset+xsize/2+13, yoffset+ysize-37, string(KothControlPoint.cappers),1.5,1.5,0);
 }
 
 draw_kothtimer();
