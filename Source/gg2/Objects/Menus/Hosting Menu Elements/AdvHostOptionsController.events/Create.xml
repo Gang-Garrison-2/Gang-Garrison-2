@@ -30,8 +30,9 @@ menu_addedit_num("Hosting Port:", "global.hostingPort", '
     gg2_write_ini("Settings", "HostingPort", argument0);
 ', 65535);
 
-if (global.mapRotationFile == "") showMapRot = "Default";
-else showMapRot = string_replace(filename_name(global.mapRotationFile), ".txt", "");
+if (global.mapRotationFile == "")
+    showMapRot = "Default";
+
 menu_addlink_label("Map Rotation:", "showMapRot", '
 
     var absPath;
