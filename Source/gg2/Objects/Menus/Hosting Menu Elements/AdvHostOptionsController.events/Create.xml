@@ -71,7 +71,7 @@ menu_addedit_boolean("Attempt UPnP Forwarding:", "global.attemptPortForward", '
 ');
 
 menu_addlink("Start Game", '
-    event_user(0);
+    start_server();
 ');
 
 menu_addtablink("Main", '
