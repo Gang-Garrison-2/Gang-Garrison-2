@@ -30,10 +30,14 @@ menu_addedit_num("Hosting Port:", "global.hostingPort", '
     gg2_write_ini("Settings", "HostingPort", argument0);
 ', 65535);
 
+var showMapRot;
+
 if (global.mapRotationFile == "")
     showMapRot = "Default";
+else
+    showMapRot = filename_name(global.mapRotationFile);
 
-menu_addlink_label("Map Rotation:", "showMapRot", '
+menu_addedit_script("Map Rotation:", showMapRot, '
 
     var absPath;
 
@@ -46,9 +50,12 @@ menu_addlink_label("Map Rotation:", "showMapRot", '
     }
     
     showMapRot = filename_name(absPath);
+    if (global.mapRotationFile == "")
+        showMapRot = "Default";
         
     gg2_write_ini("Server", "MapRotation", getRelativePath(program_directory, absPath));
-    showMapRot = string_replace(showMapRot, ".txt", "");
+    
+    return showMapRot;
 ');
 
 menu_addedit_select("Shuffle map rotation:", "global.shuffleRotation", '
