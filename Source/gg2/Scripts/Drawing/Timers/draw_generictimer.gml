@@ -1,4 +1,4 @@
-var xoffset, yoffset, xsize, ysize, countdown, mode;
+var xoffset, yoffset, xsize, ysize, countdown, teamoffset, mode;
 xoffset = argument0;
 yoffset = argument1;
 xsize = argument2;

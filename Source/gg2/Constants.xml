@@ -48,20 +48,21 @@
   <constant name="CP_CAPTURED" value="30"/>
   <constant name="PLAYER_CHANGENAME" value="31"/>
   <constant name="GENERATOR_DESTROY" value="32"/>
-  <constant name="ARENA_ENDROUND" value="33"/>
-  <constant name="ARENA_RESTART" value="34"/>
-  <constant name="UNLOCKCP" value="35"/>
-  <constant name="SERVER_KICK" value="36"/>
-  <constant name="KICK" value="37"/>
-  <constant name="KICK_NAME" value="38"/>
-  <constant name="ARENA_STARTROUND" value="39"/>
-  <constant name="TOGGLE_ZOOM" value="40"/>
-  <constant name="RETURN_INTEL" value="41"/>
-  <constant name="INCOMPATIBLE_PROTOCOL" value="42"/>
-  <constant name="JOIN_UPDATE" value="43"/>
-  <constant name="DOWNLOAD_MAP" value="44"/>
-  <constant name="SENTRY_POSITION" value="45"/>
-  <constant name="REWARD_UPDATE" value="49"/>
+  <constant name="ARENA_WAIT_FOR_PLAYERS" value="33"/>
+  <constant name="ARENA_ENDROUND" value="34"/>
+  <constant name="ARENA_RESTART" value="35"/>
+  <constant name="UNLOCKCP" value="36"/>
+  <constant name="SERVER_KICK" value="37"/>
+  <constant name="KICK" value="38"/>
+  <constant name="KICK_NAME" value="39"/>
+  <constant name="ARENA_STARTROUND" value="40"/>
+  <constant name="TOGGLE_ZOOM" value="41"/>
+  <constant name="RETURN_INTEL" value="42"/>
+  <constant name="INCOMPATIBLE_PROTOCOL" value="43"/>
+  <constant name="JOIN_UPDATE" value="44"/>
+  <constant name="DOWNLOAD_MAP" value="45"/>
+  <constant name="SENTRY_POSITION" value="46"/>
+  <constant name="REWARD_UPDATE" value="47"/>
   <constant name="REWARD_REQUEST" value="50"/>
   <constant name="REWARD_CHALLENGE_CODE" value="51"/>
   <constant name="REWARD_CHALLENGE_RESPONSE" value="52"/>

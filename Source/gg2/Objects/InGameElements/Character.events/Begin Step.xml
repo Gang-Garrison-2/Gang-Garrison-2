@@ -405,14 +405,12 @@ if ubered {
 
 //give max ammo for players on the winning team
 var arenaRoundEnd;
-arenaRoundEnd = true;
-if instance_exists(ArenaHUD) { 
-    if(ArenaHUD.endCount!=0) 
-        arenaRoundEnd=true;
-    else arenaRoundEnd=false;
+arenaRoundEnd = false;
+if (instance_exists(ArenaHUD)) { 
+    arenaRoundEnd = (ArenaHUD.state == ArenaHUD.ARENA_STATE_ROUND_END);
 }
 
-if (arenaRoundEnd and global.mapchanging and !player.humiliated) {
+if ((arenaRoundEnd or global.mapchanging) and !player.humiliated) {
     if instance_exists(currentWeapon) {
         with(currentWeapon){
             if(variable_local_exists("maxAmmo")) {
