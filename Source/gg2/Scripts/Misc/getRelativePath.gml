@@ -1,5 +1,5 @@
 //Returns a relative path from the first to the second absolute ones
-//Starting absolute path, typically program_directory - argument0
+//Starting absolute path to directory INCLUDING THE LAST SLASH (usually working_directory + "\") - argument0
 //Ending absolute path - argument1
 //Uses forward slash as file delimiter
 var startPath, endPath, returnPath, goBack, fromLastSlash;
@@ -11,11 +11,11 @@ fromLastSlash = "";
 //Compare first chars and delete them if they're the same
 while(string_char_at(startPath, 1) == string_char_at(endPath, 1)) {
 
-    if (string_char_at(startPath, 1) == "/")
-        fromLastSlash = string_delete(startPath, 1, 1);
-
     startPath = string_delete(startPath, 1, 1);
     endPath = string_delete(endPath, 1, 1);
+    
+    if (string_char_at(endPath, 1) == "/")
+        fromLastSlash = string_delete(endPath, 1, 1);
 }
 
 goBack = string_count("/", startPath);
