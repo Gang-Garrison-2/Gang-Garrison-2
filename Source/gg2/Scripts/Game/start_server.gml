@@ -4,29 +4,6 @@ ini_open("gg2.ini");
 customMapRotationFile = ini_read_string("Server", "MapRotation", "");
 global.mapRotationFile = customMapRotationFile;
 
-var iniMapRotation, mapsInDefaultOrderStr, mapsInDefaultOrder, mapIndex, mapName, mapDefaultPriority, mapPriority;
-mapsInDefaultOrderStr = "ctf_truefort,ctf_2dfort,ctf_conflict,ctf_classicwell,ctf_waterway,ctf_orange,cp_dirtbowl,cp_egypt,arena_montane,arena_lumberyard,gen_destroy,koth_valley,koth_corinth,koth_harvest,dkoth_atalia,dkoth_sixties,tdm_mantic,ctf_avanti,koth_gallery,ctf_eiger";
-mapsInDefaultOrder = split(mapsInDefaultOrderStr, ",");
-iniMapRotation = ds_priority_create();
-
-for(mapIndex = 0; mapIndex < ds_list_size(mapsInDefaultOrder); mapIndex += 1)
-{
-    mapName = ds_list_find_value(mapsInDefaultOrder, mapIndex);
-    mapDefaultPriority = mapIndex + 1;
-    mapPriority = ini_read_real("Maps", mapName, mapDefaultPriority);
-    ini_write_real("Maps", mapName, mapPriority);
-    if(mapPriority != 0)
-        ds_priority_add(iniMapRotation, mapName, mapPriority);
-}
-
-ds_list_destroy(mapsInDefaultOrder);
-ini_close();
-
-while(!ds_priority_empty(iniMapRotation))
-    ds_list_add(global.map_rotation, ds_priority_delete_min(iniMapRotation));
-    
-ds_priority_destroy(iniMapRotation);
-
 // if the user defined a valid map rotation file, then override the gg2.ini map rotation and load from there
 if ((customMapRotationFile != "") and file_exists(customMapRotationFile))
 {
