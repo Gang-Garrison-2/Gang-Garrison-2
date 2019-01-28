@@ -40,23 +40,31 @@ dy = -sin(degtorad(direction_)) * speed_ * global.delta_factor;
 x_ += dx;
 y_ += dy;
 
-var totalDist, dist;
+var totalDist;
 // Distance of the platform from (startX, startY) in the "topwards" direction
-// (which is the vector (left, -top))
 totalDist = point_distance(0, 0, left, -top);
-dist = ((x_-startX)*left + (y_-startY)*(-top)) / totalDist;
-if((movementState == 2) and (dist &lt;= 0))
-{
+if (totalDist &lt;= 0) {
+    movementState = 0;
     x_ = startX;
     y_ = startY;
-    if(trigger == 0)
-        movementState = 1;
-    else
-        movementState = 0;
 }
-else if((movementState == 1) and (dist &gt;= totalDist))
-{
-    movementState = 2;
+else {
+    var dist;
+    // (which is the vector (left, -top))
+    dist = ((x_-startX)*left + (y_-startY)*(-top)) / totalDist;
+    if((movementState == 2) and (dist &lt;= 0))
+    {
+        x_ = startX;
+        y_ = startY;
+        if(trigger == 0)
+            movementState = 1;
+        else
+            movementState = 0;
+    }
+    else if((movementState == 1) and (dist &gt;= totalDist))
+    {
+        movementState = 2;
+    }
 }
 
 var colldx, colldy;

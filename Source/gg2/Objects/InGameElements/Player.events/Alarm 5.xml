@@ -13,22 +13,8 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if(global.isHost &amp;&amp; !global.mapchanging &amp;&amp; team != TEAM_SPECTATOR &amp;&amp; canSpawn == 1) {
-    var group, spawnpointID, numSpawnPoints;
-    group = selectSpawnGroup(team);
-    if (group==-1) {
-        show_message("This map does not contain valid spawn points");
-        game_end();
-    }
-    if(team == TEAM_RED) {
-        numSpawnPoints = ds_list_size(global.spawnPointsRed[0,group]);
-    } else {
-        numSpawnPoints = ds_list_size(global.spawnPointsBlue[0,group]);
-    }
-    spawnpointID = floor(random(numSpawnPoints));
-    sendEventSpawn(id, spawnpointID, group);
-    doEventSpawn(id, spawnpointID, group);
-}
+        <argument kind="STRING">if (spawningAllowed())
+    PlayerSpawn();
 </argument>
       </arguments>
     </action>

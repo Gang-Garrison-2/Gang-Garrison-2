@@ -3,4 +3,5 @@
   <resource name="selectSpawnGroup" type="RESOURCE"/>
   <resource name="getCharacterObject" type="RESOURCE"/>
   <resource name="offloadSpawnPoints" type="RESOURCE"/>
+  <resource name="PlayerSpawn" type="RESOURCE"/>
 </resources>

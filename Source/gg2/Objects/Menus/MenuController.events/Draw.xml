@@ -116,6 +116,7 @@ if(view_hview[0] &lt; 600)
             val = "";
             break;
         
+        case "editscript":
         case "edittext2":
         case "edittext":
         case "editnum":

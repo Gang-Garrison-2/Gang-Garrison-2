@@ -63,12 +63,6 @@
     
     deathmatch_respawn_bypass = 0;
     
-    //Arena mode - used by server to check if the player can spawn
-    canSpawn = 1;
-    if instance_exists(ArenaHUD) {
-        if ArenaHUD.roundStart == 0 canSpawn = 0;
-    }
-    
     //Sentries for Engies
     sentry = noone;
     

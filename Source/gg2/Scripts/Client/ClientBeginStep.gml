@@ -450,7 +450,11 @@ do {
             show_message("You have been kicked from the server. "+kickReason+".");
             instance_destroy();
             exit;
-              
+           
+        case ARENA_WAIT_FOR_PLAYERS:
+            doEventArenaWaitForPlayers();
+            break;
+               
         case ARENA_STARTROUND:
             doEventArenaStartRound();
             break;
