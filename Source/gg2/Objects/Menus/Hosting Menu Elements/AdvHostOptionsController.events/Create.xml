@@ -13,45 +13,31 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">ini_open("gg2.ini");
-global.mapRotationFile = ini_read_string("Server", "MapRotation", "");
-ini_close();
-
-menu_create(48, 172, 500, 260, 32, 40, 112, 128);
+        <argument kind="STRING">menu_create(48, 172, 500, 260, 32, 40, 112, 128);
 menumode = true;
 
 menu_background(512, 24, 8, 12, 4);
 bgtabs = true;
 
-var apos; // dumb workaround
-apos = "'";
-
 menu_addedit_num("Hosting Port:", "global.hostingPort", '
     gg2_write_ini("Settings", "HostingPort", argument0);
 ', 65535);
 
-if (global.mapRotationFile == "")
-    global.showMapRot = "Default";
-else
-    global.showMapRot = global.mapRotationFile;
-
-menu_addedit_script("Map Rotation:", global.showMapRot, '
-
+menu_addedit_script("Map Rotation:", menu_format_maprotation_filepath(global.mapRotationFile), '
     var absPath;
 
     absPath = get_open_filename("Map Rotation|*.txt", "");
 
     if (absPath == "") {
-        global.showMapRot = "Default";
-        gg2_write_ini("Server", "MapRotation", "");
-        return global.showMapRot;
+        global.mapRotationFile = absPath;
+    } else {
+        global.mapRotationFile = getRelativePathIfDescendand(working_directory + "\", absPath);
     }
-
-    global.showMapRot = getRelativePath(working_directory + "\", absPath);
-        
-    gg2_write_ini("Server", "MapRotation", global.showMapRot);
     
-    return global.showMapRot;
+    gg2_write_ini("Server", "MapRotation", global.mapRotationFile);
+    
+    load_map_rotation();
+    return menu_format_maprotation_filepath(global.mapRotationFile);
 ');
 
 menu_addedit_select("Shuffle map rotation:", "global.shuffleRotation", '
