@@ -111,9 +111,10 @@ afktimer -= 1 * global.delta_factor;
 
 if((afktimer&lt;=0) and global.isHost==false)
 {
-    show_message("You have been disconnected from the server. Reason: AFK");
     with(Client)
         instance_destroy();
+
+    show_message("You have been disconnected from the server. Reason: AFK");
 }
 </argument>
       </arguments>
