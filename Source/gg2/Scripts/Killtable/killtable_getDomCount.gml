@@ -1,5 +1,6 @@
 //Returns the number of values >3
 //Arg0: Player
+var killtable, value_list, count;
 killtable = argument0.killTable;
 value_list = ds_list_find_value(killtable, 1);
 count = 0;

@@ -1,3 +1,4 @@
+var player, length, player_list, value_list;
 write_ubyte(argument1, PLAYER_DOMINATION_UPDATE);
 write_ubyte(argument1, argument0);
 player = ds_list_find_value(global.players, argument0);

@@ -14,7 +14,7 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">{
-    var xoffset, yoffset, xsize, ysize, i, player, redteam, blueteam, spec;
+    var xoffset, yoffset, xsize, ysize, i, player, redteam, blueteam, spec, domCount;
     
     xoffset = view_xview[0]+view_wview[0]/2-280;
     yoffset = view_yview[0]+view_hview[0]/2-190;

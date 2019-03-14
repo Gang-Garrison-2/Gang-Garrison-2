@@ -303,15 +303,16 @@ do {
             break;
 
         case PLAYER_DOMINATION_UPDATE:
+            var killtable, length, kills;
             receiveCompleteMessage(global.serverSocket, 2, global.tempBuffer);
             killtable = ds_list_find_value(global.players, read_ubyte(global.tempBuffer)).killTable;
             length = read_ubyte(global.tempBuffer);
             receiveCompleteMessage(global.serverSocket, length * 2, global.tempBuffer);
             for (i = 0; i < length; i += 1) {
                 player = ds_list_find_value(global.players, read_ubyte(global.tempBuffer));
-                value = read_ubyte(global.tempBuffer);
+                kills = read_ubyte(global.tempBuffer);
                 killtable_add(killtable, player);
-                killtable_set(killtable, player, value);
+                killtable_set(killtable, player, kills);
             }
             break;
                  
