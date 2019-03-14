@@ -98,7 +98,7 @@
                         }
                     }
                 } else {
-                    if hp > 0 and id==other.ownerPlayer.object and other.team == team and ubered{ //just in case
+                    if hp &gt; 0 and id==other.ownerPlayer.object and other.team == team and ubered{ //just in case
                         moveStatus = 1;
                         speed*=1.055; //slight nerf to compensate for uber
                     }
