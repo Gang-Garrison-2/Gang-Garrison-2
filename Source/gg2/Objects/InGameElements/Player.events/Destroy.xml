@@ -20,6 +20,9 @@
         instance_destroy();
     socket_destroy(socket);
     
+    clearPlayerDominations(id);
+    killtable_destroy(killTable);
+    
     with(Rocket) if(ownerPlayer == other.id) instance_destroy();
     with(BurningProjectile) if(ownerPlayer == other.id) instance_destroy();
     with(Shot) if(ownerPlayer == other.id) instance_destroy();

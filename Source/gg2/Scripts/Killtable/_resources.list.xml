@@ -8,4 +8,5 @@
   <resource name="killtable_increase" type="RESOURCE"/>
   <resource name="killtable_getDomCount" type="RESOURCE"/>
   <resource name="clearPlayerDominations" type="RESOURCE"/>
+  <resource name="killtable_destroy" type="RESOURCE"/>
 </resources>
