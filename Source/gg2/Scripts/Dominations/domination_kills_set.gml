@@ -1,5 +1,5 @@
-//Sets the player's corresponding value
-//Arg0: Killtable
+//Sets the player's corresponding number of kills
+//Arg0: domination_kills table
 //Arg1: Player
 //Arg2: Value
 if (ds_map_exists(argument0, argument1))

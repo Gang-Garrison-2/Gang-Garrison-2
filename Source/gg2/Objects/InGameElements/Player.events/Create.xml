@@ -72,7 +72,7 @@
     ghost = noone;
     
     //Domination Kill Table
-    killTable = killtable_create();
+    dominationKills = domination_kills_create();
     
     corpse = noone;
 }

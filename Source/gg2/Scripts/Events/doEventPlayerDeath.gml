@@ -83,16 +83,16 @@ for (i = 0; i < ds_list_size(killersForDomination); i += 1)
 {
     killerForDomination = ds_list_find_value(killersForDomination, i);
     
-    if (killtable_get(victim.killTable, killerForDomination) > 3)
+    if (domination_kills_get(victim.dominationKills, killerForDomination) > 3)
     {
         recordDominationInLog(victim, killerForDomination, 1);
     }
-    else if (killtable_get(killerForDomination.killTable, victim) == 3)
+    else if (domination_kills_get(killerForDomination.dominationKills, victim) == 3)
     {
         recordDominationInLog(victim, killerForDomination, 0);
     }
-    killtable_increase(killerForDomination.killTable, victim);
-    killtable_delete(victim.killTable, killerForDomination);
+    domination_kills_increase(killerForDomination.dominationKills, victim);
+    domination_kills_delete(victim.dominationKills, killerForDomination);
 }
 
 ds_list_destroy(killersForDomination);

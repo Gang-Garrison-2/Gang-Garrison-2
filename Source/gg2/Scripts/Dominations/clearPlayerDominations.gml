@@ -3,6 +3,6 @@
 var player;
 for (i = 0; i < ds_list_size(global.players); i += 1) {
     player = ds_list_find_value(global.players, i);
-    killtable_delete(player.killTable, argument0);
+    domination_kills_delete(player.dominationKills, argument0);
 }
-killtable_clear(argument0.killTable);
+domination_kills_clear(argument0.dominationKills);

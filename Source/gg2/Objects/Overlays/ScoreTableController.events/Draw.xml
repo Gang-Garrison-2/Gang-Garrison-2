@@ -108,17 +108,17 @@
             draw_text(xoffset+xsize/2-15, yoffset+70+20*(i+1), string(floor(player.stats[POINTS])));
             
             //Domination Medals
-            domCount = killtable_getDomCount(player);
+            domCount = domination_kills_getDomCount(player);
             if (domCount &gt; 0) {
                 draw_sprite_ext(MedalS, 0, xoffset+xsize/2-5, yoffset+70+20*(i+1), 1, 1, 0, c_white, alpha);
                 draw_set_color(make_color_rgb(227, 226, 225));
                 draw_text_transformed(xoffset+xsize/2 + 12, yoffset+70+20*(i+1), string(domCount), 1, 1, 0);
             }
             //Dominated player
-            if (killtable_get(global.myself.killTable, player) &gt; 3)
+            if (domination_kills_get(global.myself.dominationKills, player) &gt; 3)
                 draw_sprite_ext(MedalS, 3, xoffset+xsize/2 + 15, yoffset+70+20*(i+1), 1, 1, 0, c_white, alpha);
             //Nemesis
-            else if (killtable_get(player.killTable, global.myself) &gt; 3)
+            else if (domination_kills_get(player.dominationKills, global.myself) &gt; 3)
                 draw_sprite_ext(MedalS, 5, xoffset+xsize + 55, yoffset+70+20*(i+1), 1, 1, 0, c_white, alpha);
             
             if(player.object == -1)
@@ -158,17 +158,17 @@
             draw_text(xoffset+xsize+25, yoffset+70+20*(i+1), string(floor(player.stats[POINTS])));
             
             //Domination Medals
-            domCount = killtable_getDomCount(player);
+            domCount = domination_kills_getDomCount(player);
             if (domCount &gt; 0) {
                 draw_sprite_ext(MedalS, 0, xoffset+xsize + 35, yoffset+70+20*(i+1), 1, 1, 0, c_white, alpha);
                 draw_set_color(make_color_rgb(227, 226, 225));
                 draw_text_transformed(xoffset+xsize + 52, yoffset+70+20*(i+1), string(domCount), 1, 1, 0);
             }
             //Dominated player
-            if (killtable_get(global.myself.killTable, player) &gt; 3)
+            if (domination_kills_get(global.myself.dominationKills, player) &gt; 3)
                 draw_sprite_ext(MedalS, 3, xoffset+xsize + 55, yoffset+70+20*(i+1), 1, 1, 0, c_white, alpha);
             //Nemesis
-            else if (killtable_get(player.killTable, global.myself) &gt; 3)
+            else if (domination_kills_get(player.dominationKills, global.myself) &gt; 3)
                 draw_sprite_ext(MedalS, 6, xoffset+xsize + 55, yoffset+70+20*(i+1), 1, 1, 0, c_white, alpha);
                      
             if (player.object == -1)

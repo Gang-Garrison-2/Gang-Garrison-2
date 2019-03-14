@@ -21,7 +21,7 @@
     socket_destroy(socket);
     
     clearPlayerDominations(id);
-    killtable_destroy(killTable);
+    domination_kills_destroy(dominationKills);
     
     with(Rocket) if(ownerPlayer == other.id) instance_destroy();
     with(BurningProjectile) if(ownerPlayer == other.id) instance_destroy();

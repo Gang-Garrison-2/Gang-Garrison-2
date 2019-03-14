@@ -37,7 +37,7 @@
         {
             victim = ds_list_find_value(global.players, i);
             if (victim != id)
-                killtable_set(killTable, victim, read_ubyte(global.deserializeBuffer));
+                domination_kills_set(dominationKills, victim, read_ubyte(global.deserializeBuffer));
         }
     }
  
