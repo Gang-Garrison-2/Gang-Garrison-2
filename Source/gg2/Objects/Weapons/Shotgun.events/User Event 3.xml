@@ -25,10 +25,9 @@ repeat(5) {
     shot.hspeed += owner.hspeed;
     shot.speed += random(4)-2;
     shot.direction += random(11)-5.5;
-    // Move shot forward one 30fps step to avoid immediate collision with a wall behind the character
-    // delta_factor is left out intentionally!
-    shot.x += lengthdir_x(shot.speed, shot.direction);
-    shot.y += lengthdir_y(shot.speed, shot.direction);
+    // Move shot forward to avoid immediate collision with a wall behind the character
+    shot.x += lengthdir_x(15, shot.direction);
+    shot.y += lengthdir_y(15, shot.direction);
 }
 justShot=true;
 readyToShoot=false;
