@@ -14,10 +14,5 @@
         ServerPlayerChangeteam(i, player.team, argument0);
     }
     
-    for(i = 0; i < ds_list_size(global.players); i += 1) {
-        player = ds_list_find_value(global.players, i);
-        ServerPlayerDominationUpdate(i, argument0);
-    }
-    
     serializeState(FULL_UPDATE, argument0);
 }

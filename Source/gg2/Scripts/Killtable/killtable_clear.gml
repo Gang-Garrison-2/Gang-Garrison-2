@@ -1,2 +1,2 @@
-//Clears the given killtable
-argument0 = killtable_create();
+// Clears the given killtable
+ds_map_clear(argument0);

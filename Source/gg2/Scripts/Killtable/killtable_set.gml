@@ -2,8 +2,7 @@
 //Arg0: Killtable
 //Arg1: Player
 //Arg2: Value
-var player_list, value_list, player_index;
-player_list = ds_list_find_value(argument0, 0);
-value_list = ds_list_find_value(argument0, 1);
-player_index = ds_list_find_index(player_list, argument1);
-ds_list_replace(value_list, player_index, argument2);
+if (ds_map_exists(argument0, argument1))
+    ds_map_replace(argument0, argument1, argument2);
+else
+    ds_map_add(argument0, argument1, argument2);

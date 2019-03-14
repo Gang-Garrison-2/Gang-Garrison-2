@@ -74,7 +74,6 @@
   <constant name="CLIENT_SETTINGS" value="58"/>
   <constant name="KICK_MULTI_CLIENT" value="59"/>
   <constant name="RESERVE_SLOT" value="60"/>
-  <constant name="PLAYER_DOMINATION_UPDATE" value="61"/>
   <constant name="TEAM_RED" value="0"/>
   <constant name="TEAM_BLUE" value="1"/>
   <constant name="TEAM_SPECTATOR" value="2"/>
