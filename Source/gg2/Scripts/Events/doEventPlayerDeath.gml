@@ -7,11 +7,12 @@
  * argument2: The player who assisted the kill (or noone for no assist)
  * argument3: The source of the fatal damage
  */
-var victim, killer, assistant, damageSource;
+var victim, killer, assistant, damageSource, killersForDomination;
 victim = argument0;
 killer = argument1;
 assistant = argument2;
 damageSource = argument3;
+killersForDomination = ds_list_create();
 
 if(!instance_exists(killer))
     killer = noone;
@@ -63,16 +64,7 @@ if(killer)
             recordEventInLog(4, killer.team, killer.name, global.myself == killer);
         }
         
-        if (killtable_get(victim.killTable, killer) > 3)
-        {
-            recordDominationInLog(victim, killer, 1);
-        }
-        else if (killtable_get(killer.killTable, victim) == 3)
-        {
-            recordDominationInLog(victim, killer, 0);
-        }
-        killtable_increase(killer.killTable, victim);
-        killtable_delete(victim.killTable, killer);
+        ds_list_add(killersForDomination, killer);
     }
 }
 
@@ -83,18 +75,27 @@ if (assistant)
     assistant.stats[POINTS] += .5;
     assistant.roundStats[POINTS] += .5;
     
-    if (killtable_get(victim.killTable, assistant) > 3)
-    {
-        recordDominationInLog(victim, assistant, 1);
-    }
-    else if (killtable_get(killer.killTable,victim) == 3)
-    {
-        recordDominationInLog(victim, assistant,0);
-    }
-    killtable_increase(assistant.killTable, victim);
-    killtable_delete(victim.killTable, assistant);
-
+    ds_list_add(killersForDomination, assistant);
 }
+
+var i, killerForDomination;
+for (i = 0; i < ds_list_size(killersForDomination); i += 1)
+{
+    killerForDomination = ds_list_find_value(killersForDomination, i);
+    
+    if (killtable_get(victim.killTable, killerForDomination) > 3)
+    {
+        recordDominationInLog(victim, killerForDomination, 1);
+    }
+    else if (killtable_get(killerForDomination.killTable, victim) == 3)
+    {
+        recordDominationInLog(victim, killerForDomination, 0);
+    }
+    killtable_increase(killerForDomination.killTable, victim);
+    killtable_delete(victim.killTable, killerForDomination);
+}
+
+ds_list_destroy(killersForDomination);
 
 //SPEC
 if (victim == global.myself)
