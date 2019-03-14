@@ -16,7 +16,6 @@
         <argument kind="STRING">    if((not done) and (global.myself.team != team))
     {
         ClientPlayerChangeteam(team, global.serverSocket);
-        clearPlayerDominations(global.myself);
         socket_send(global.serverSocket);
     }
     done = true;
