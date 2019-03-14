@@ -185,10 +185,10 @@ while(commandLimitRemaining > 0) {
                     }
                     player.team = newTeam;
                     ServerPlayerChangeteam(playerId, player.team, global.sendBuffer);
+                    clearPlayerDominations(player);
                     ServerBalanceTeams();
                 }
             }
-            clearPlayerDominations(player);
             break;                   
             
         case CHAT_BUBBLE:
