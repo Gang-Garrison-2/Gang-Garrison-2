@@ -71,10 +71,13 @@
                 }
                 if (id==other.ownerPlayer.object)
                     moveStatus = 1;
-                else if (other.team == team)
-                    moveStatus = 2;
                 else
                     moveStatus = 4;
+            }
+            else if (hp &gt; 0 and id==other.ownerPlayer.object and ubered)
+            {
+                // Special case allowing you to minejump even when ubered
+                moveStatus = 1;
             }
             dealFlicker(id);
         }
