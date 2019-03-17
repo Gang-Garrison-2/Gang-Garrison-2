@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="domination_kills_clear" type="RESOURCE"/>
+  <resource name="domination_kills_create" type="RESOURCE"/>
+  <resource name="domination_kills_delete" type="RESOURCE"/>
+  <resource name="domination_kills_destroy" type="RESOURCE"/>
+  <resource name="domination_kills_set" type="RESOURCE"/>
+  <resource name="domination_kills_get" type="RESOURCE"/>
+  <resource name="domination_kills_increase" type="RESOURCE"/>
+  <resource name="domination_kills_getDomCount" type="RESOURCE"/>
+  <resource name="clearPlayerDominations" type="RESOURCE"/>
+</resources>

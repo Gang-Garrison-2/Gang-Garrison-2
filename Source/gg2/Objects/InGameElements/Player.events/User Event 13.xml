@@ -29,6 +29,16 @@
         queueJump = read_ubyte(global.deserializeBuffer);
         parseRewards(receivestring(global.serverSocket, 2), rewards);
         parseBadges(rewards, badges);
+        
+        // Deserialize the domination kill table (number of kills for each player except self)
+        receiveCompleteMessage(global.serverSocket, ds_list_size(global.players)-1, global.deserializeBuffer);
+        var i, victim;
+        for (i = 0; i &lt; ds_list_size(global.players); i += 1)
+        {
+            victim = ds_list_find_value(global.players, i);
+            if (victim != id)
+                domination_kills_set(dominationKills, victim, read_ubyte(global.deserializeBuffer));
+        }
     }
  
     var charObj, subobjects;

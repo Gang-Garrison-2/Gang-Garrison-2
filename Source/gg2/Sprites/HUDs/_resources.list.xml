@@ -13,7 +13,8 @@
   <resource name="Builder" type="GROUP"/>
   <resource name="CharacterHUD" type="RESOURCE"/>
   <resource name="GameNoticeS" type="RESOURCE"/>
+  <resource name="DominationS" type="RESOURCE"/>
   <resource name="NemesisS" type="RESOURCE"/>
-  <resource name="FullChargeS" type="RESOURCE"/>
   <resource name="MedalS" type="RESOURCE"/>
+  <resource name="FullChargeS" type="RESOURCE"/>
 </resources>

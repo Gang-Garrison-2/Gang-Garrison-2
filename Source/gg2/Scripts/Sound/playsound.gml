@@ -1,3 +1,4 @@
+//Origin (x, y) of the sound, Sound to play
 {
     var vol, isWindows8DotX;
     vol = calculateVolume(argument0, argument1);

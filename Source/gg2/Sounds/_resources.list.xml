@@ -43,4 +43,6 @@
   <resource name="SentryBuildSnd" type="RESOURCE"/>
   <resource name="PickupSnd" type="RESOURCE"/>
   <resource name="ImpactSnd" type="RESOURCE"/>
+  <resource name="DominationSnd" type="RESOURCE"/>
+  <resource name="RevengeSnd" type="RESOURCE"/>
 </resources>

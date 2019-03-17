@@ -6,8 +6,9 @@
         with (KillLog) {
             map = ds_map_create(); 
             var killer, victim, inthis;
-            killer = string_copy(argument0.name, 1, 20);
-            victim = string_copy(argument1.name, 1, 20);
+            victim = string_copy(argument0.name, 1, 20);
+            killer = string_copy(argument1.name, 1, 20);
+            inthis = false;
             if (argument0 == global.myself) || (argument1 == global.myself) {
                 inthis = true;
                 if (!argument2)

@@ -32,6 +32,16 @@
         unparsed = unparseRewards(rewards);
         write_ushort(global.serializeBuffer, string_length(unparsed));
         write_string(global.serializeBuffer, unparsed);
+        
+        // Serialize the domination kill table by sending the number of kills for each
+        // player except self
+        var i, victim;
+        for (i = 0; i &lt; ds_list_size(global.players); i += 1)
+        {
+            victim = ds_list_find_value(global.players, i);
+            if (victim != id)
+                write_ubyte(global.serializeBuffer, domination_kills_get(dominationKills, victim));
+        }
     } 
     
     subobjects=0;

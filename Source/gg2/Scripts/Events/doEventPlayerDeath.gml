@@ -7,11 +7,12 @@
  * argument2: The player who assisted the kill (or noone for no assist)
  * argument3: The source of the fatal damage
  */
-var victim, killer, assistant, damageSource;
+var victim, killer, assistant, damageSource, killersForDomination;
 victim = argument0;
 killer = argument1;
 assistant = argument2;
 damageSource = argument3;
+killersForDomination = ds_list_create();
 
 if(!instance_exists(killer))
     killer = noone;
@@ -62,6 +63,8 @@ if(killer)
             killer.roundStats[POINTS] += 1;
             recordEventInLog(4, killer.team, killer.name, global.myself == killer);
         }
+        
+        ds_list_add(killersForDomination, killer);
     }
 }
 
@@ -71,7 +74,28 @@ if (assistant)
     assistant.roundStats[ASSISTS] += 1;
     assistant.stats[POINTS] += .5;
     assistant.roundStats[POINTS] += .5;
+    
+    ds_list_add(killersForDomination, assistant);
 }
+
+var i, killerForDomination;
+for (i = 0; i < ds_list_size(killersForDomination); i += 1)
+{
+    killerForDomination = ds_list_find_value(killersForDomination, i);
+    
+    if (domination_kills_get(victim.dominationKills, killerForDomination) > 3)
+    {
+        recordDominationInLog(victim, killerForDomination, 1);
+    }
+    else if (domination_kills_get(killerForDomination.dominationKills, victim) == 3)
+    {
+        recordDominationInLog(victim, killerForDomination, 0);
+    }
+    domination_kills_increase(killerForDomination.dominationKills, victim);
+    domination_kills_delete(victim.dominationKills, killerForDomination);
+}
+
+ds_list_destroy(killersForDomination);
 
 //SPEC
 if (victim == global.myself)

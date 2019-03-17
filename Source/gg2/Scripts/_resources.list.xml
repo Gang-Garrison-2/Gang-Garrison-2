@@ -31,4 +31,5 @@
   <resource name="Faucet HTTP" type="GROUP"/>
   <resource name="Misc" type="GROUP"/>
   <resource name="ggon" type="GROUP"/>
+  <resource name="Dominations" type="GROUP"/>
 </resources>

@@ -14,7 +14,7 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">{
-    var xoffset, yoffset, xsize, ysize, i, player, redteam, blueteam, spec;
+    var xoffset, yoffset, xsize, ysize, i, player, redteam, blueteam, spec, domCount;
     
     xoffset = view_xview[0]+view_wview[0]/2-280;
     yoffset = view_yview[0]+view_hview[0]/2-190;
@@ -71,12 +71,12 @@
         draw_text_transformed(xcenter-(400-412),yoffset,ArenaHUD.blueWins,4,4,0);
     }
     
-    draw_set_color(c_red);   
     for(i=0; ds_priority_size(redteam) &gt; 0; i += 1) {
         player = ds_priority_delete_max(redteam);
         
-        if (i&lt;12)
+        if (i &lt; 12)
         {
+            draw_set_color(c_red);
             if (showadmin and player != global.myself)
             {
                 var _x, _y;
@@ -107,16 +107,30 @@
             draw_set_halign(fa_right);
             draw_text(xoffset+xsize/2-15, yoffset+70+20*(i+1), string(floor(player.stats[POINTS])));
             
-            if(player.object==-1)
-                draw_sprite_ext(DeadS,0,xoffset+195,yoffset+75+20*(i+1),1,1,0,c_white,alpha);
+            //Domination Medals
+            domCount = domination_kills_getDomCount(player);
+            if (domCount &gt; 0) {
+                draw_sprite_ext(MedalS, 0, xoffset+xsize/2-5, yoffset+70+20*(i+1), 1, 1, 0, c_white, alpha);
+                draw_set_color(make_color_rgb(227, 226, 225));
+                draw_text_transformed(xoffset+xsize/2 + 12, yoffset+70+20*(i+1), string(domCount), 1, 1, 0);
+            }
+            //Dominated player
+            if (domination_kills_get(global.myself.dominationKills, player) &gt; 3)
+                draw_sprite_ext(MedalS, 3, xoffset+xsize/2 + 15, yoffset+70+20*(i+1), 1, 1, 0, c_white, alpha);
+            //Nemesis
+            else if (domination_kills_get(player.dominationKills, global.myself) &gt; 3)
+                draw_sprite_ext(MedalS, 5, xoffset+xsize + 55, yoffset+70+20*(i+1), 1, 1, 0, c_white, alpha);
+            
+            if(player.object == -1)
+                draw_sprite_ext(DeadS, 0, xoffset+195, yoffset+75+20*(i+1), 1, 1, 0, c_white, alpha);
         }          
     }
     
-    draw_set_color(c_blue);
     for(i=0; ds_priority_size(blueteam) &gt; 0; i+=1) {
         player = ds_priority_delete_max(blueteam);
 
-        if i&lt;12{
+        if (i &lt; 12){
+            draw_set_color(c_blue);
             if (showadmin &amp;&amp; player != global.myself) {
                 var _x, _y;
                 _x = xoffset+xsize/2+44;
@@ -143,8 +157,22 @@
             draw_set_halign(fa_right);
             draw_text(xoffset+xsize+25, yoffset+70+20*(i+1), string(floor(player.stats[POINTS])));
             
-            if (player.object==-1)
-                draw_sprite_ext(DeadS,0,xoffset+472,yoffset+75+20*(i+1),1,1,0,c_white,alpha);
+            //Domination Medals
+            domCount = domination_kills_getDomCount(player);
+            if (domCount &gt; 0) {
+                draw_sprite_ext(MedalS, 0, xoffset+xsize + 35, yoffset+70+20*(i+1), 1, 1, 0, c_white, alpha);
+                draw_set_color(make_color_rgb(227, 226, 225));
+                draw_text_transformed(xoffset+xsize + 52, yoffset+70+20*(i+1), string(domCount), 1, 1, 0);
+            }
+            //Dominated player
+            if (domination_kills_get(global.myself.dominationKills, player) &gt; 3)
+                draw_sprite_ext(MedalS, 3, xoffset+xsize + 55, yoffset+70+20*(i+1), 1, 1, 0, c_white, alpha);
+            //Nemesis
+            else if (domination_kills_get(player.dominationKills, global.myself) &gt; 3)
+                draw_sprite_ext(MedalS, 6, xoffset+xsize + 55, yoffset+70+20*(i+1), 1, 1, 0, c_white, alpha);
+                     
+            if (player.object == -1)
+                draw_sprite_ext(DeadS, 0, xoffset+472, yoffset+75+20*(i+1), 1, 1, 0, c_white, alpha);
         
         }
     }
