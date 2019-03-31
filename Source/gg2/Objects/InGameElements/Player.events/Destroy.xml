@@ -19,7 +19,7 @@
     with (ghost)
         instance_destroy();
     socket_destroy(socket);
-    
+
     clearPlayerDominations(id);
     domination_kills_destroy(dominationKills);
     
