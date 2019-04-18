@@ -17,7 +17,10 @@
 blueTimer = 180*30;
 cpUnlock = 900;
 hostTimer = global.timeLimitMins*30*60;
+timer = hostTimer;
 global.totalControlPoints = 2;
+global.setupTimer = 300;
+overtime = false;
 
 KothRedControlPoint.team = TEAM_RED;
 KothBlueControlPoint.team = TEAM_BLUE;

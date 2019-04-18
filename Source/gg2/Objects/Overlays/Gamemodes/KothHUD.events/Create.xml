@@ -17,6 +17,11 @@
 blueTimer = 180*30;
 cpUnlock = 900;
 hostTimer = global.timeLimitMins*30*60;
+//Setup code
+timeLimit = hostTimer;
+timer = timeLimit;
+overtime = false;
+global.setupTimer = 300;
 </argument>
       </arguments>
     </action>

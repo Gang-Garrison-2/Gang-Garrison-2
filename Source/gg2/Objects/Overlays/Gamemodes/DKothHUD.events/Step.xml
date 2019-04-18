@@ -33,7 +33,8 @@ if (global.isHost and hostTimer &gt; 0) { // What we're doing makes sense
     if (KothRedControlPoint.locked or KothBlueControlPoint.locked)
         hostTimer = global.timeLimitMins*30*60;
 }
-    
+
+doCheckSetupTimer(); 
 
 //both teams' countdown timers
 if (!KothRedControlPoint.locked or !KothBlueControlPoint.locked)

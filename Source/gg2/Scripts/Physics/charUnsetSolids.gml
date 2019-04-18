@@ -6,4 +6,5 @@ with(ControlPointSetupGate)
     solid = false;
 with(PlayerWall)
     solid = false;
-
+with(TeamGate)
+    solid = false;

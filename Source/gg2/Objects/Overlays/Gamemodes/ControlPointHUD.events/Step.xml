@@ -16,22 +16,7 @@
         <argument kind="STRING">if (timer &gt; 0)
     timer -= 1 * global.delta_factor;
 
-if (mode == 1 and global.run_virtual_ticks)
-{
-    if (global.setupTimer &gt; 0)
-        global.setupTimer -= 1;
-    if (global.setupTimer == 90 or global.setupTimer == 120
-        or global.setupTimer == 150 or global.setupTimer == 180)
-        sound_play(CountDown1Snd);
-    else if (global.setupTimer == 60)
-        sound_play(CountDown2Snd);
-    else if (global.setupTimer == 30)
-    {
-        timer = timeLimit;
-        sound_play(SirenSnd);
-    }
-}
-
+if (mode == 1) doCheckSetupTimer();
 
 //overtime?
 overtime = 0;

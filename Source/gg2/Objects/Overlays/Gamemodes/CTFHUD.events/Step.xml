@@ -13,7 +13,9 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">var redIsCapping, blueIsCapping;
+        <argument kind="STRING">doCheckSetupTimer();
+
+var redIsCapping, blueIsCapping;
 
 redIsCapping = !instance_exists(IntelligenceBlue);
 blueIsCapping = !instance_exists(IntelligenceRed);

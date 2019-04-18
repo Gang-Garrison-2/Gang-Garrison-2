@@ -22,7 +22,9 @@ if (mode == 0)
     {
         draw_sprite_ext(TimerHudS,teamoffset,xoffset+xsize/2,yoffset+30,3,3,0,c_white,1);
         var isControlPointSetup, ticks, ticklimit, timeYOff;
-        isControlPointSetup = global.setupTimer > 0 and instance_exists(ControlPointSetupGate);
+        
+        isControlPointSetup = shouldSetup();
+        
         if(isControlPointSetup)
         {
             ticks = global.setupTimer;

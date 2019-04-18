@@ -13,8 +13,8 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">timeLimit=global.timeLimitMins*30*60;
-timer=timeLimit;
+        <argument kind="STRING">timeLimit = global.timeLimitMins*30*60;
+timer = timeLimit;
 killLimit = global.killLimit;
 overtime = false;
 
