@@ -13,11 +13,11 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">receiveCompleteMessage(global.serverSocket,8,global.deserializeBuffer);
-cpUnlock=read_ushort(global.deserializeBuffer);
-redTimer=read_ushort(global.deserializeBuffer);
-blueTimer=read_ushort(global.deserializeBuffer);
-global.setupTimer=read_ushort(global.deserializeBuffer);
+        <argument kind="STRING">receiveCompleteMessage(global.serverSocket, 8, global.deserializeBuffer);
+cpUnlock = read_ushort(global.deserializeBuffer);
+redTimer = read_ushort(global.deserializeBuffer);
+blueTimer = read_ushort(global.deserializeBuffer);
+global.setupTimer = read_ushort(global.deserializeBuffer);
 with KothRedControlPoint event_user(13);
 with KothBlueControlPoint event_user(13);
 </argument>
