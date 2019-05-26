@@ -16,10 +16,10 @@
         CustomMapInit("Maps/ggb2_tmp_map.png");
         loadMetadata(Builder.metadata, true);
     }
-}
-</creationCode>
+}</creationCode>
   <backgroundColor>C0C0C0</backgroundColor>
   <drawBackgroundColor>true</drawBackgroundColor>
+  <clearViewBackground>true</clearViewBackground>
   <backgrounds>
     <backgroundDef>
       <visibleOnRoomStart>false</visibleOnRoomStart>

@@ -8,7 +8,7 @@ s = "";
 
 file = file_bin_open(argument0, 0);
 while(file_bin_position(file) < file_bin_size(file)) {
-  s += chr(file_bin_read_byte(file));
+  s += ansi_char(file_bin_read_byte(file));
 }
 file_bin_close(file);
 

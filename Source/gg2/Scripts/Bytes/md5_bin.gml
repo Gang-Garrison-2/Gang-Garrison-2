@@ -41,17 +41,17 @@
     h[1] = $EFCDAB89;
     h[2] = $98BADCFE;
     h[3] = $10325476;
-    len = 8 * string_length(str);
-    str += chr(128);
-    while ((string_length(str) mod 64) != 56) str += chr(0);
-    for (i=0; i<64; i+=8) str += chr(len >> i);
+    len = 8 * string_byte_length(str);
+    str += ansi_char(128);
+    while ((string_byte_length(str) mod 64) != 56) str += ansi_char(0);
+    for (i=0; i<64; i+=8) str += ansi_char(len >> i);
     pos = 0;
-    for (j=0; j<string_length(str); j+=64) {
+    for (j=0; j<string_byte_length(str); j+=64) {
         for (i=0; i<16; i+=1) {
-            w[i] = ord(string_char_at(str,pos+4));
-            w[i] = ord(string_char_at(str,pos+3)) | (w[i] << 8);
-            w[i] = ord(string_char_at(str,pos+2)) | (w[i] << 8);
-            w[i] = ord(string_char_at(str,pos+1)) | (w[i] << 8);
+            w[i] = string_byte_at(str,pos+4);
+            w[i] = string_byte_at(str,pos+3) | (w[i] << 8);
+            w[i] = string_byte_at(str,pos+2) | (w[i] << 8);
+            w[i] = string_byte_at(str,pos+1) | (w[i] << 8);
             pos += 4;
         }
         a = h[0];
@@ -78,7 +78,7 @@
     digest = "";
     for (j=0; j<4; j+=1) {
         for (i=0; i<32; i+=8) {
-            digest += chr($FF & h[j] >> i);
+            digest += ansi_char($FF & h[j] >> i);
         }
     }
     return digest;

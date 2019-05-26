@@ -8,7 +8,18 @@
   </grid>
   <speed>30</speed>
   <persistent>false</persistent>
-  <creationCode>if(!game_init())
+  <creationCode>// this test is necessary to prevent compilation by old GM 8.1 builds
+if not gmProUnsafe81141()
+{
+    show_error("Not a GameMaker 8.1.141 Standard, or Secure Mode enabled.", true);
+    exit;
+}
+
+// this workaround fixes a shitload of bugs in the video subsystem of GM 8.1.141
+// http://gmc.yoyogames.com/index.php?showtopic=567383
+surface_free(surface_create(0, 0));
+
+if(!game_init())
 {
     game_end();
     exit;
@@ -41,11 +52,10 @@ else // boot behaviour is normal or unknown
     {
         AudioControlPlaySong(global.FaucetMusic);
     }
-}
-
-</creationCode>
+}</creationCode>
   <backgroundColor>000000</backgroundColor>
   <drawBackgroundColor>true</drawBackgroundColor>
+  <clearViewBackground>true</clearViewBackground>
   <backgrounds>
     <backgroundDef>
       <visibleOnRoomStart>true</visibleOnRoomStart>
