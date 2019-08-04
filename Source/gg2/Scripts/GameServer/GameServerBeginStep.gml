@@ -1,9 +1,12 @@
 if(serverbalance != 0)
     balancecounter += 1;
 
-// Register with Lobby Server every 30 seconds
-if((frame mod 900) == 0 and global.run_virtual_ticks)
+// Things to do every 30 seconds
+if((frame mod 900) == 0 and global.run_virtual_ticks) {
+    // Register with Lobby Server
     sendLobbyRegistration();
+    calculateAprilFools();
+}
     
 if(global.run_virtual_ticks)
     frame += 1;

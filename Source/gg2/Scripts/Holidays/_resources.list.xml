@@ -2,4 +2,5 @@
 <resources>
   <resource name="xmasTime" type="RESOURCE"/>
   <resource name="calculateMonthAndDay" type="RESOURCE"/>
+  <resource name="calculateAprilFools" type="RESOURCE"/>
 </resources>

@@ -196,7 +196,7 @@ while(commandLimitRemaining > 0) {
             bubbleImage = read_ubyte(socket);
             if(global.aFirst and bubbleImage != 45)
             {
-                bubbleImage = 0;
+                bubbleImage = 61;
             }
             write_ubyte(global.sendBuffer, CHAT_BUBBLE);
             write_ubyte(global.sendBuffer, playerId);
