@@ -52,7 +52,7 @@ addButton("Save & test", '
     else if (Builder.mapBG == "") show_message("Select a background first");
     else if (validateMap(log2(gamemode))) {    
         var leveldata;
-        leveldata = compressEntities() + chr(10) + Builder.wmString;
+        leveldata = compressEntities() + ansi_char(10) + Builder.wmString;
         GG2DLL_embed_PNG_leveldata(Builder.mapBG, leveldata);
         
         // Place a copy in the maps folder
@@ -82,7 +82,7 @@ addButton("Test w/o save", '
         file_copy(Builder.mapBG, "Maps\ggb2_tmp_map.png");
         
         var leveldata;
-        leveldata = compressEntities() + chr(10) + Builder.wmString;
+        leveldata = compressEntities() + ansi_char(10) + Builder.wmString;
         GG2DLL_embed_PNG_leveldata("Maps/ggb2_tmp_map.png", leveldata);               
         
         switch(show_message_ext("Where do you want to playtest?", "Test separately", "Test here", "Cancel")) {

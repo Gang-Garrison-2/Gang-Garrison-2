@@ -37,6 +37,7 @@
     <writeToLog>true</writeToLog>
     <abortOnError>false</abortOnError>
     <treatUninitializedAsZero>false</treatUninitializedAsZero>
+    <checkScriptArgumentCount>false</checkScriptArgumentCount>
   </errors>
   <gameInfo>
     <gameId>907152</gameId>
@@ -49,7 +50,7 @@
     <versionBuild>0</versionBuild>
     <company>Faucet Software</company>
     <product>Gang Garrison 2</product>
-    <copyright>Copyright © 2008-2017 Faucet Software</copyright>
+    <copyright>Copyright © 2008-2019 Faucet Software</copyright>
     <description/>
     <directPlayGuid>62130cf64e5cf4be1f2e1c44c2427da6</directPlayGuid>
   </gameInfo>

@@ -10,7 +10,7 @@
     var ENTITYTAG, ENDENTITYTAG, DIVIDER;
     ENTITYTAG = "{ENTITIES}";
     ENDENTITYTAG = "{END ENTITIES}";
-    DIVIDER = chr(10);
+    DIVIDER = ansi_char(10);
     
     // Load the walkmask into a sprite
     if (room == BuilderRoom) {

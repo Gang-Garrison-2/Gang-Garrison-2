@@ -124,7 +124,7 @@ do {
                 {
                     if (!loadserverplugins(plugins))
                     {
-                        show_message("Error ocurred loading server-sent plugins.");
+                        show_message("Error occurred loading server-sent plugins.");
                         instance_destroy();
                         exit;
                     }

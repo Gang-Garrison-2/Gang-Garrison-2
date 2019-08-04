@@ -29,7 +29,7 @@ Otherwise, you'll screw up the line endings.
 GmkSplitter
 -----------
 
-The source code as committed to git is in the `Source/gg2` directory. It is stored in "split" form. To reassemble the source code into a .gmk file, you'll need MedO's [GmkSplitter](https://github.com/Medo42/Gmk-Splitter), and to run `gmksplit gg2 gg2.gmk`, or `gmksplit gg2 gg2.gmk` to split the .gmk file into the format stored in git. If you have gmksplit.exe in your PATH or your `Source` directory, there are handy `gg2GmkToGit` and `gg2GitToGmk` convenience scripts that will delete the output file if it already exists and do the splitting/reassembling for you.
+The source code as committed to git is in the `Source/gg2` directory. It is stored in "split" form. To reassemble the source code into a .gm81 file, you'll need MedO's [GmkSplitter](https://github.com/Medo42/Gmk-Splitter), and to run `gmksplit gg2 gg2.gm81`, or `gmksplit gg2 gg2.gm81` to split the .gm81 file into the format stored in git. If you have gmksplit.exe in your PATH or your `Source` directory, there are handy `gg2GmkToGit` and `gg2GitToGmk` convenience scripts that will delete the output file if it already exists and do the splitting/reassembling for you.
 
 Readme
 ------
