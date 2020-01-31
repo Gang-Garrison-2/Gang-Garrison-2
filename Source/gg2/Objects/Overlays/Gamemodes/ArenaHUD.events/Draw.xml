@@ -48,11 +48,10 @@ if (global.myself != -1)
         draw_text(xoffset+xsize/2, yoffset+ysize/2 + 100, "You will spawn when the next round starts");
     
     //Alive players remaining 
-    draw_set_color(c_black);
+    draw_set_color(c_white);
     draw_sprite_ext(ArenaPlayerCountS, 0, xoffset+xsize/2, yoffset+71, 2, 2, 0, c_white, 1);
-    draw_text(xoffset+xsize/2+15, yoffset+73, redteamCharacters);
-    draw_sprite_ext(ArenaPlayerCountS, 1, xoffset+xsize/2, yoffset+104, 2, 2, 0, c_white, 1);
-    draw_text(xoffset+xsize/2+15, yoffset+106, blueteamCharacters);
+    draw_text(xoffset+xsize/2-22, yoffset+73, redteamCharacters);
+    draw_text(xoffset+xsize/2+22, yoffset+73, blueteamCharacters);
 }
  
 //MVPs
