@@ -20,11 +20,14 @@ Gang Garrison 2 is built with Game Maker 8.0 Pro, so you will need that for most
 Git Setup
 ---------
 
-This repository requires you to have `core.autocrlf` set to `false`, so make sure you do this when you first clone it:
+This repository now contains a `.gitattributes` file that tells git not to mess
+with line endings, but this is a recent addition. You may want to set the
+`core.autocrlf` configuration key to `false` if you're going to check out
+previous versions of the repository (including forks/mods of old versions):
 
     git config --local core.autocrlf false
 
-Otherwise, you'll screw up the line endings.
+Otherwise, git may fight you over line endings, which is never fun.
 
 GmkSplitter
 -----------
