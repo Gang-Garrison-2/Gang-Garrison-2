@@ -21,8 +21,8 @@ GGON has three primitives:
       * camelCase
       * things-with-dashes
       * -12.2e75
-      * -
-      * +
+      * `-`
+      * `+`
       * .2
       * object.style
       * domain.com
