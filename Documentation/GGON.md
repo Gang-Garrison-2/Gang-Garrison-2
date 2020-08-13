@@ -15,17 +15,17 @@ GGON has three primitives:
     
       This means all of the following are valid unquoted strings:
     
-      * 12.5
-      * true
-      * under_scores
-      * camelCase
-      * things-with-dashes
-      * -12.2e75
+      * `12.5`
+      * `true`
+      * `under_scores`
+      * `camelCase`
+      * `things-with-dashes`
+      * `-12.2e75`
       * `-`
       * `+`
-      * .2
-      * object.style
-      * domain.com
+      * `.2`
+      * `object.style`
+      * `domain.com`
     * Quoted:
     
             'foo bar'
