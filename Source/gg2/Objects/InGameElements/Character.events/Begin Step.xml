@@ -266,7 +266,12 @@ repeat(global.frameskip)
         if(keyByte &amp; $20 and hspeed &lt;= basemaxspeed)
         {
             hspeed += runPower*controlFactor * global.skip_delta_factor;
-            controlling = !controlling; // cancel out 'controlling' if both buttons are pressed
+            controlling = true;
+        }
+        // cancel out 'controlling' if both buttons are pressed
+        if((keyByte &amp; $60)) == $60)
+        {
+            controlling = false;
         }
     }
     // divide friction as normal if going way too fast
