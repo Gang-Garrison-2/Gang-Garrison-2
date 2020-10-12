@@ -20,8 +20,8 @@ side-scrolling style.
 2. [Meet The Classes](#meet-the-classes)
 3. [Meet The Gameplay Guide](#meet-the-gameplay-guide)
 4. [Meet The Maps](#meet-the-maps)
-5. [Meet The Menu](#meet-the-menu)
-6. [Meet the Tips](#meet-the-tips)
+5. [Meet The Menu](#meet-the-options-menu)
+6. [Meet the Tips](#meet-the-gameplay-tips)
 7. [Meet The Credits and Information](#meet-the-credits-and-information)
 
 ----------------------------------------------------------
