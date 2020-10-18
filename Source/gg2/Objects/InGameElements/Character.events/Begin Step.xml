@@ -13,14 +13,14 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">var stuckInWall, standingOnObstacle, onNonSurfingGround, keyByte;
+        <argument kind="STRING">var stuckInWall, standingOnObstacle, onNonSurfingGround, downOrPressedKeys;
 charSetSolids();
 stuckInWall = !place_free(x,y);
 obstacleBelow = !place_free(x,y+1);
 charUnsetSolids();
 onground = false;
 onNonSurfingGround = false;
-keyByte = keyState | pressedKeys;
+downOrPressedKeys = keyState | pressedKeys;
 if(vspeed &gt;= 0)
 {
     if(obstacleBelow)
@@ -94,7 +94,7 @@ if(player.queueJump)
 
 if(!taunting and !omnomnomnom)
 {
-    if(!player.humiliated and keyByte &amp; $10)
+    if(!player.humiliated and downOrPressedKeys &amp; $10)
     {
         with(currentWeapon) event_user(1);
         deathmatch_invulnerable = 0;
@@ -133,7 +133,7 @@ if(!taunting and !omnomnomnom)
 }
 
 // Right click
-if (!player.humiliated and (keyByte &amp; $08)
+if (!player.humiliated and (downOrPressedKeys &amp; $08)
     and (!taunting or player.class == CLASS_DEMOMAN) and !omnomnomnom)
 {
     deathmatch_invulnerable = 0;
@@ -258,25 +258,25 @@ repeat(global.frameskip)
     // Do movement
     if(!taunting &amp;&amp; !omnomnomnom)
     {
-        if(keyByte &amp; $40 and hspeed &gt;= -basemaxspeed)
+        if(downOrPressedKeys &amp; $40 and hspeed &gt;= -basemaxspeed)
         {
             hspeed -= runPower*controlFactor * global.skip_delta_factor;
             controlling = true;
         }
-        if(keyByte &amp; $20 and hspeed &lt;= basemaxspeed)
+        if(downOrPressedKeys &amp; $20 and hspeed &lt;= basemaxspeed)
         {
             hspeed += runPower*controlFactor * global.skip_delta_factor;
             controlling = true;
         }
         // cancel out 'controlling' if both buttons are pressed
-        if((keyByte &amp; $60)) == $60)
+        if((downOrPressedKeys &amp; $60)) == $60)
         {
             controlling = false;
         }
     }
     // divide friction as normal if going way too fast
     if(abs(hspeed) &gt; basemaxspeed * 2 or
-       (keyByte &amp; $60 and abs(hspeed) &lt; basemaxspeed))
+       (downOrPressedKeys &amp; $60 and abs(hspeed) &lt; basemaxspeed))
         hspeed /= delta_mult_skip(baseFriction);
     else //otherwise divide by the moveStatus's friction
         hspeed /= delta_mult_skip(frictionFactor);
