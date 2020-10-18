@@ -31,7 +31,7 @@ menu_addedit_script("Map Rotation:", menu_format_maprotation_filepath(global.map
     if (absPath == "") {
         global.mapRotationFile = absPath;
     } else {
-        global.mapRotationFile = getRelativePathIfDescendand(working_directory + "\", absPath);
+        global.mapRotationFile = getRelativePathIfDescendant(working_directory + "\", absPath);
     }
     
     gg2_write_ini("Server", "MapRotation", global.mapRotationFile);

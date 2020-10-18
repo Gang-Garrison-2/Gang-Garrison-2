@@ -1,4 +1,4 @@
-// getRelativePathIfDescendand(startPath, endPath)
+// getRelativePathIfDescendant(startPath, endPath)
 // Determines a relative path for endPath that is relative to startPath, if endPath is inside of startPath or a subdirectory of startPath.
 // Otherwise returns endPath as an absolute path.
 // startPath and endPath must be absolute paths.
