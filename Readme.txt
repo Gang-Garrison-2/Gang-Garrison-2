@@ -501,7 +501,7 @@ This is a demake of Team Fortress 2 by Valve Software. All likenesses and simila
 are intended as a respectful homage.
 
 This game uses the Faucet Networking extension by MedO, which is available under the terms of the ISC license.
-You can find more information on Faucet Networking at http://gmc.yoyogames.com/index.php?showtopic=498062.
+You can find more information on Faucet Networking at https://github.com/Medo42/Faucet-Networking-Extension.
 
 This game uses the Faucet HTTP extension by ajf, which is available under the terms of the ISC license.
 You can find more information on Faucet HTTP at https://github.com/TazeTSchnitzel/Faucet-HTTP-Extension
