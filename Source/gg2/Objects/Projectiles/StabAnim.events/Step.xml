@@ -33,7 +33,7 @@ else
         sprite_index = SpyBlueBackstabTorsoS;
 }
     
-if (image_index == 32)
+if (image_index &gt;= 32)
 {
     done = 1;
     image_speed = 0;

@@ -13,13 +13,14 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">var stuckInWall, standingOnObstacle, onNonSurfingGround;
+        <argument kind="STRING">var stuckInWall, standingOnObstacle, onNonSurfingGround, keyByte;
 charSetSolids();
 stuckInWall = !place_free(x,y);
 obstacleBelow = !place_free(x,y+1);
 charUnsetSolids();
 onground = false;
 onNonSurfingGround = false;
+keyByte = keyState | pressedKeys;
 if(vspeed &gt;= 0)
 {
     if(obstacleBelow)
@@ -70,7 +71,7 @@ if (global.run_virtual_ticks)
             lastDamageSource = afterburnSource;
             dealDamage(lastDamageDealer, id, burnIntensity / 30);
         }
-        burnDuration -= durationDecay * global.delta_factor;
+        burnDuration -= durationDecay;
         timeUnscathed = 0;
     }
     if (alarm[0] == -1 &amp;&amp; burnIntensity &gt; 0) burnIntensity -= intensityDecay;
@@ -93,7 +94,7 @@ if(player.queueJump)
 
 if(!taunting and !omnomnomnom)
 {
-    if(!player.humiliated and (keyState | pressedKeys) &amp; $10)
+    if(!player.humiliated and keyByte &amp; $10)
     {
         with(currentWeapon) event_user(1);
         deathmatch_invulnerable = 0;
@@ -132,7 +133,7 @@ if(!taunting and !omnomnomnom)
 }
 
 // Right click
-if (!player.humiliated and ((keyState | pressedKeys) &amp; $08)
+if (!player.humiliated and (keyByte &amp; $08)
     and (!taunting or player.class == CLASS_DEMOMAN) and !omnomnomnom)
 {
     deathmatch_invulnerable = 0;
@@ -257,20 +258,25 @@ repeat(global.frameskip)
     // Do movement
     if(!taunting &amp;&amp; !omnomnomnom)
     {
-        if((keyState|pressedKeys) &amp; $40 and hspeed &gt;= -basemaxspeed)
+        if(keyByte &amp; $40 and hspeed &gt;= -basemaxspeed)
         {
             hspeed -= runPower*controlFactor * global.skip_delta_factor;
             controlling = true;
         }
-        if((keyState|pressedKeys) &amp; $20 and hspeed &lt;= basemaxspeed)
+        if(keyByte &amp; $20 and hspeed &lt;= basemaxspeed)
         {
             hspeed += runPower*controlFactor * global.skip_delta_factor;
-            controlling = !controlling; // cancel out 'controlling' if both buttons are pressed
+            controlling = true;
+        }
+        // cancel out 'controlling' if both buttons are pressed
+        if((keyByte &amp; $60)) == $60)
+        {
+            controlling = false;
         }
     }
     // divide friction as normal if going way too fast
     if(abs(hspeed) &gt; basemaxspeed * 2 or
-       ((keyState|pressedKeys) &amp; $60 and abs(hspeed) &lt; basemaxspeed))
+       (keyByte &amp; $60 and abs(hspeed) &lt; basemaxspeed))
         hspeed /= delta_mult_skip(baseFriction);
     else //otherwise divide by the moveStatus's friction
         hspeed /= delta_mult_skip(frictionFactor);
