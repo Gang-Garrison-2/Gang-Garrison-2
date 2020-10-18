@@ -269,7 +269,7 @@ repeat(global.frameskip)
             controlling = true;
         }
         // cancel out 'controlling' if both buttons are pressed
-        if((downOrPressedKeys &amp; $60)) == $60)
+        if((downOrPressedKeys &amp; $60) == $60)
         {
             controlling = false;
         }
