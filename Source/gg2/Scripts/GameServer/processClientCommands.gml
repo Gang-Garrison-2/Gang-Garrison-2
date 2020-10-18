@@ -198,6 +198,10 @@ while(commandLimitRemaining > 0) {
             {
                 bubbleImage = 61;
             }
+            else if (bubbleImage == 61 and !global.aFirst) {
+            	// Player sent an april fools bubble on another day
+            	break;
+            }
             write_ubyte(global.sendBuffer, CHAT_BUBBLE);
             write_ubyte(global.sendBuffer, playerId);
             write_ubyte(global.sendBuffer, bubbleImage);
