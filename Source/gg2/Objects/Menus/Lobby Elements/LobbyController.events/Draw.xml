@@ -72,6 +72,9 @@ for(i=offset; i&lt;ds_list_size(servers) and i&lt;offset+items; i+=1)
         if (server.ping &lt; 135) {
             docol = c_green;
         }
+        if (server.ping &lt; 75) {
+            docol = c_aqua;
+        }
         if (server.ping == -1) {
             docol = c_gray;
             showping = "TIMEOUT";
