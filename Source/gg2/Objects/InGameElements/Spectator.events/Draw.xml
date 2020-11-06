@@ -30,7 +30,7 @@ if (tracking)
 {
     draw_name_badges(xoffset+50, yoffset+ysize-16, player, 1);
     if (player.object == -1)
-        break;
+        exit;
     if (global.myself.team == TEAM_SPECTATOR and player.object.maxHp != 0)
     {
         sprite_xpos = -2;

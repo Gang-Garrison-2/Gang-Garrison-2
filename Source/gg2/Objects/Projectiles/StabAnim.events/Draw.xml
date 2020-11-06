@@ -14,7 +14,7 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">if(owner.invisible)
-    break;
+    exit;
 
 x = owner.x;
 y = owner.y;
