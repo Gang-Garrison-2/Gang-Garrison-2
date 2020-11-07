@@ -1,6 +1,6 @@
 var ent_filename, ent_file, temp, entityString;
 ent_filename = get_open_filename("Entity file|*.ent","");
-if(ent_filename == "") break;
+if(ent_filename == "") exit;
 with(LevelEntity) instance_destroy();
 ent_file = file_text_open_read(ent_filename);
 entityString = "";

@@ -272,7 +272,7 @@ if (canClick &amp;&amp; !holdHeader[0] &amp;&amp; !holdHeader[1]) {
                 var resource;
                 resource = get_open_filename("Resource (PNG, GIF)|*.png;*.gif;","");
                 if (resource == "")
-                    break;
+                    exit;
                 if (layerIndex == 8) {
                     ds_map_delete(Builder.metadata, "bg_foreground");
                     ds_map_add(Builder.metadata, "bg_foreground", resourceToString(resource));
