@@ -13,11 +13,24 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">    alpha=0.01;
-    done = false;
-    x=-30;
-    offset=0;
-    index=0;
+        <argument kind="STRING">
+alpha = 0.01;
+done = false;
+x = -30;
+offset = 0;
+index = 0;
+image_speed = 0
+
+CTF_INDEX = 0
+CP_INDEX  = 1
+GEN_INDEX = 2
+
+if instance_exists(CTFHUD)
+    image_index = CTF_INDEX;
+else if instance_exists(GeneratorHUD)
+    image_index = GEN_INDEX;
+else
+    image_index = CP_INDEX;
 </argument>
       </arguments>
     </action>
