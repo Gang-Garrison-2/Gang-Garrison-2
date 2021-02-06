@@ -25,9 +25,7 @@ if (distance_to_point(mouse_x, mouse_y) &lt; 25)
     else
         draw_set_color(c_white);
     draw_text(round(x), round(y) - 35, 'Ghost of ' + sanitiseNewlines(owner.name));
-}  
-
-
+}
 </argument>
       </arguments>
     </action>

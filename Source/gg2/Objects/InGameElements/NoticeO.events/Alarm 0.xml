@@ -13,7 +13,8 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">done=true;</argument>
+        <argument kind="STRING">done=true;
+</argument>
       </arguments>
     </action>
   </actions>

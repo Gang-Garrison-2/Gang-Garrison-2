@@ -61,7 +61,6 @@ if  !instance_exists(HealthHud) instance_create(0,0,HealthHud);
 
 // Healed HUD
 if !instance_exists(HealedHud) &amp;&amp; global.showHealer = 1 instance_create(0,0,HealedHud);
-    
 </argument>
       </arguments>
     </action>

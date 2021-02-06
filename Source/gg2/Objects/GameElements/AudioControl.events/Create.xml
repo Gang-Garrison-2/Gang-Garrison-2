@@ -22,7 +22,8 @@
     currentSongLoop = false;
     currentSongPlayed = true;
     allAudioMuted = false;
-}</argument>
+}
+</argument>
       </arguments>
     </action>
   </actions>
