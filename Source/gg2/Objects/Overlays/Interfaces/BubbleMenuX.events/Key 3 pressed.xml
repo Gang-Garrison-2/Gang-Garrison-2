@@ -13,8 +13,9 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if sprite_index == BubbleMenuXS bubbleImage=29;
+        <argument kind="STRING">if sprite_index == BubbleMenuXS bubbleImage = objective_bubble;
 else bubbleImage = 2 + offset;
+
 event_user(0);
 </argument>
       </arguments>
