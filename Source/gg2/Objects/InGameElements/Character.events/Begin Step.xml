@@ -195,7 +195,7 @@ if(rocketJumping)
             jumpFlameParticleType = part_type_create();
             part_type_sprite(jumpFlameParticleType,FlameS,true,false,true);
             part_type_alpha2(jumpFlameParticleType,1,0.3);
-            part_type_life(jumpFlameParticleType,2,5);
+            part_type_life(jumpFlameParticleType,2/global.delta_factor,5/global.delta_factor);
             part_type_scale(jumpFlameParticleType,0.7,-0.65);
         }
         
@@ -230,7 +230,7 @@ if(spinjumping)
         jumpDustParticleType = part_type_create();
         part_type_sprite(jumpDustParticleType,SpeedBoostS,false,false,true);
         part_type_alpha3(jumpDustParticleType,0.7,0.5,0);
-        part_type_life(jumpDustParticleType,15,30);
+        part_type_life(jumpDustParticleType,15/global.delta_factor,30/global.delta_factor);
         part_type_scale(jumpDustParticleType,1,1);
         part_type_orientation(jumpDustParticleType, -90, -90, 0, 0, 0);
     }
