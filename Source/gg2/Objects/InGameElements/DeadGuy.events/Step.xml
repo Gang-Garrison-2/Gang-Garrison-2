@@ -28,7 +28,7 @@ if(place_free(x,y+1))
     {
         vspeed=10;
     }
-    hitground = true;
+    hitground = false;
 }
 else
 {
