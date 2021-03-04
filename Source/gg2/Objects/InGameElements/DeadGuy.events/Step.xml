@@ -28,12 +28,14 @@ if(place_free(x,y+1))
     {
         vspeed=10;
     }
+    hitground = true;
 }
 else
 {
     if (!hitground)
     {
-        playsound(x,y,ImpactSnd);
+        if (vspeed >= 1.2)
+           playsound(x,y,ImpactSnd);
         hitground = true;
     }
     vspeed = 0;
