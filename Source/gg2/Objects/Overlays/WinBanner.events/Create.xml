@@ -35,6 +35,13 @@ with (Player) {
         humiliated = 1;
     }
 }
+          
+//Round end audio from spectator's perspective
+if (global.myself.team == TEAM_SPECTATOR)
+    if (global.winners == TEAM_SPECTATOR)
+        sound = FailureSnd; //Stalemate (Everybody loses)
+    else
+        sound = VictorySnd; //RED/BLU Victory
 
 if(!instance_exists(ArenaHUD)) {
     AudioControlPlaySong(sound, false);
