@@ -19,7 +19,8 @@
     if(image_alpha &lt;= 0) {
         instance_destroy();
     }
-}</argument>
+}
+</argument>
       </arguments>
     </action>
   </actions>

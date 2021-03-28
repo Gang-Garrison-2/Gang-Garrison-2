@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="STEP" id="2">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if (string_length(keyboard_string) &gt; 1) {
+    var textbgn, textend;
+    textbgn = string_copy(text, 0, seek);
+    if (ovr) {
+        textend = string_copy(text, seek+2, string_length(text) - seek - 1);
+    } else {
+        textend = string_copy(text, seek+1, string_length(text) - seek);
+    }
+    text = textbgn + string_copy(keyboard_string, 2, string_length(keyboard_string) - 1) + textend;
+    _ConsoleDoSeek(seek + string_length(keyboard_string) - 1);
+} else if (string_length(keyboard_string) &lt; 1 &amp;&amp; seek &gt; 0) {
+    var textbgn, textend;
+    textbgn = string_copy(text, 0, seek - 1);
+    textend = string_copy(text, seek + 1, string_length(text) - seek);
+    text = textbgn + textend;
+    _ConsoleDoSeek(seek - 1);
+}
+if (string_length(keyboard_string) != 1) {
+    keyboard_string = "_";
+    draw_cursor = true;
+    cursorflash = 0;
+}
+if (rheldtime &gt; 0 &amp;&amp; seek &lt; string_length(text)) {
+    rheldtime += 1;
+    if (rheldtime &gt; 15) {
+        _ConsoleDoSeek(seek + 1);
+        draw_cursor = true;
+        cursorflash = 0;
+    }
+}
+if (lheldtime &gt; 0 &amp;&amp; seek &gt; 0) {
+    lheldtime += 1;
+    if (lheldtime &gt; 15) {
+        _ConsoleDoSeek(seek - 1);
+        draw_cursor = true;
+        cursorflash = 0;
+    }
+}
+if (dheldtime &gt; 0) {
+    dheldtime += 1;
+    if (dheldtime &gt; 15) {
+        var textbgn, textend;
+        textbgn = string_copy(text, 0, seek);
+        textend = string_copy(text, seek + 2, string_length(text) - seek - 1);
+        text = textbgn + textend;
+        draw_cursor = true;
+        cursorflash = 0;
+    }
+}
+cursorflash += 1;
+if (cursorflash == 16) {
+    cursorflash = 0;
+    draw_cursor = !draw_cursor;
+}
+
+// dragging
+if (dragging) {
+    global.ConsoleWindowX = dragstart_winx + (mouse_x - dragstart_mousex);
+    global.ConsoleWindowY = dragstart_winy + (mouse_y - dragstart_mousey);
+// resizing from left
+} else if (resizing_x1) {
+    if (resizestart_width + (resizestart_x - global.ConsoleWindowX) &gt; 0) {
+        global.ConsoleWindowX = resizestart_x + (mouse_x - resizestart_mousex);
+        global.ConsoleWidth = resizestart_width + (resizestart_x - global.ConsoleWindowX);
+    } else {
+        global.ConsoleWidth = 1;
+    }
+// resizing from right
+} else if (resizing_x2) {
+    if (resizestart_width + (mouse_x - resizestart_mousex) &gt; 0) {
+        global.ConsoleWidth = resizestart_width + (mouse_x - resizestart_mousex);
+    } else {
+        global.ConsoleWidth = 1;
+    }
+}
+
+
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

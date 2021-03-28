@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <resource name="create_sample" type="RESOURCE"/>
+  <resource name="audio_init" type="RESOURCE"/>
+  <resource name="sample_init" type="RESOURCE"/>
+</resources>

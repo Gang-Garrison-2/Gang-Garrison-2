@@ -25,6 +25,8 @@ hp=0;
 maxHp=0;
 if instance_exists(NoticeO) with NoticeO instance_destroy();
 if instance_exists(Balancer) with Balancer instance_destroy();
+
+DeathCamSnd = faudio_new_generator(DeathCamSndS);
 </argument>
       </arguments>
     </action>

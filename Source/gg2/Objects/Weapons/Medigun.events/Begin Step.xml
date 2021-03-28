@@ -18,7 +18,7 @@
     if(alarm[4] &lt;= 0)
         loopsoundstart(x,y,UberIdleSnd);
     else
-        loopsoundmaintain(x,y,UberIdleSnd);
+        loopsoundmaintainext(x,y, 0.5, UberIdleSnd);
     
     alarm[4] = 2 / global.delta_factor;
 }

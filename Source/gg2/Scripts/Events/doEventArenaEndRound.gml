@@ -26,7 +26,12 @@ with(ArenaHUD)
 with Player if team != win humiliated = 1;
 with Sentry if team != win event_user(1);
 
-if global.myself.team == win 
-|| global.myself.team == TEAM_SPECTATOR sound = VictorySnd;
-else sound = FailureSnd;
+if (global.myself.team == win or global.myself.team == TEAM_SPECTATOR)
+{
+    sound = global.VictoryMusic;
+}
+else
+{
+    sound = global.FailureMusic;
+}
 AudioControlPlaySong(sound, false);

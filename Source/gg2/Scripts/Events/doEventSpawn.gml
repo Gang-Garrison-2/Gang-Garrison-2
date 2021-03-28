@@ -44,4 +44,6 @@ if (instance_exists(RespawnTimer)) {
     }
 }
 
+RespawnSnd = faudio_new_generator(RespawnSndS);
 playsound(spawnX, spawnY, RespawnSnd);
+faudio_kill_generator(RespawnSnd);

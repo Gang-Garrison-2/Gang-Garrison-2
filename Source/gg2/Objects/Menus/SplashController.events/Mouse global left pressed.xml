@@ -14,6 +14,8 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">{
+    //we probably won't need this again through out the whole game, let's just get rid of it now
+    faudio_kill_sample(global.FaucetMusicS);
     room_goto_fix(Menu);
 }
 </argument>

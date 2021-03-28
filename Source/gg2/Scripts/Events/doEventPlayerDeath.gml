@@ -63,7 +63,7 @@ if(killer)
             killer.roundStats[POINTS] += 1;
             recordEventInLog(4, killer.team, killer.name, global.myself == killer);
         }
-        
+
         ds_list_add(killersForDomination, killer);
     }
 }
@@ -74,7 +74,7 @@ if (assistant)
     assistant.roundStats[ASSISTS] += 1;
     assistant.stats[POINTS] += .5;
     assistant.roundStats[POINTS] += .5;
-    
+
     ds_list_add(killersForDomination, assistant);
 }
 
@@ -82,7 +82,7 @@ var i, killerForDomination;
 for (i = 0; i < ds_list_size(killersForDomination); i += 1)
 {
     killerForDomination = ds_list_find_value(killersForDomination, i);
-    
+
     if (domination_kills_get(victim.dominationKills, killerForDomination) > 3)
     {
         recordDominationInLog(victim, killerForDomination, 1);
@@ -124,7 +124,7 @@ with(victim.object) {
         or damageSource == DAMAGE_SOURCE_GENERATOR_EXPLOSION;
     gibsWhenExploded = (player.class != CLASS_QUOTE) and (global.gibLevel>1);
     isCloseBy = distance_to_point(xoffset+xsize/2,yoffset+ysize/2) < 900;
-    
+
     if(diedOfExplosion and gibsWhenExploded)
     {
         playsound(x,y,Gibbing);
@@ -159,7 +159,7 @@ with(victim.object) {
                     break;
                 }
             }
-    
+
             repeat(global.gibLevel * 14)
             {
                 var blood;
@@ -171,13 +171,13 @@ with(victim.object) {
                     blood.sprite_index = PumpkinJuiceS;
                 }
             }
-            
+
             if (!hasReward(victim, 'PumpkinGibs'))
             {
                 //All Classes gib head, hands, and feet
                 if(global.gibLevel > 2 || choose(0,1) == 1)
                     createGib(x,y,Headgib,0,0,random(105)-52, player.class, false);
-                    
+
                 repeat(global.gibLevel -1)
                 {
                     //Medic has specially colored hands
@@ -195,7 +195,7 @@ with(victim.object) {
                     createGib(x,y,Feet,random(5)-2,random(3),random(13)-6 , player.class, true);
                 }
             }
-    
+
             //Class specific gibs
             switch(player.class) {
             case CLASS_PYRO :
@@ -232,7 +232,7 @@ with(victim.object) {
         var deadbody;
         if (player.class != CLASS_QUOTE)
             playsound(x,y,choose(DeathSnd1, DeathSnd2));
-            
+
         deadbody = instance_create(x,y-30,DeadGuy);
         // 'GS' reward - *G*olden *S*tatue
         if(hasReward(player, 'GS'))
@@ -255,7 +255,7 @@ with(victim.object) {
             deadbody.hasMoney = true;
         player.corpse = deadbody;
     }
-    
+
     if(hasTombstone)
     {
         global.paramCharacter = id;

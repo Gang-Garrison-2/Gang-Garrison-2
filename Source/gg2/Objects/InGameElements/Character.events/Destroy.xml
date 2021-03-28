@@ -59,14 +59,14 @@
         player.alarm[5] = global.Server_Respawntime / global.delta_factor;
         player.deathmatch_respawn_bypass = 0;
     }
-    
+
     //part type destroy
     if(variable_local_exists("jumpFlameParticleType"))
         part_type_destroy(jumpFlameParticleType);
     
     if(variable_local_exists("jumpDustParticleSystem"))
         part_type_destroy(jumpDustParticleSystem);
-        
+
     // destroy overlay lists
     ds_list_destroy(stillOverlays);
     ds_list_destroy(leanROverlays);
@@ -78,6 +78,20 @@
     ds_list_destroy(tauntOverlays);
     ds_list_destroy(omnomnomnomOverlays);
     ds_list_destroy(gearList);
+
+    loopsoundstop(BurningSnd);
+    // deallocate generators
+    faudio_kill_generator(DeathSnd1);
+    faudio_kill_generator(DeathSnd2);
+    faudio_kill_generator(JumpSnd);
+    faudio_kill_generator(CbntHealSnd);
+    faudio_kill_generator(PickupSnd);
+    faudio_kill_generator(Gibbing);
+    faudio_kill_generator(UberEndSnd);
+    faudio_kill_generator(ExplosionSnd);
+    faudio_kill_generator(CPCapturedSnd);
+    faudio_kill_generator(BurningSnd);
+    faudio_kill_generator(ShotgunShotImpactSnd);
 }
 </argument>
       </arguments>

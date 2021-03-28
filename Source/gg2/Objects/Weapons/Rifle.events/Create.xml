@@ -29,7 +29,6 @@
     ammoCount = maxAmmo;
     shot=false;
     t=0;
-    
     if(golden)
     {
         normalSprite = RifleGoldS;
@@ -53,6 +52,11 @@
     reloadImageSpeed = reloadAnimLength/(longRecoilTime);
     
     tracerAlpha = 0;
+    
+    SniperSnd = faudio_new_generator(SniperSndS);
+    ImpactWorldSnd = faudio_new_generator(RifleWorldSndS);
+    ImpactMetalSnd = faudio_new_generator(RifleMetalSndS);
+    PowerShotSnd = faudio_new_generator(PowerShotSndS);
 }
 </argument>
       </arguments>

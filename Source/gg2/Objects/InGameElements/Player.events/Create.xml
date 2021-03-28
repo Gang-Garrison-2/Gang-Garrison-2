@@ -70,11 +70,12 @@
     rewards = ds_map_create();
     badges = ds_list_create();
     ghost = noone;
-    
+
     //Domination Kill Table
     dominationKills = domination_kills_create();
-    
+
     corpse = noone;
+    RespawnSnd = faudio_new_generator(RespawnSndS);
 }
 </argument>
       </arguments>

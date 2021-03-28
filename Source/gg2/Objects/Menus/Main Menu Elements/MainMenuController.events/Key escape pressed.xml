@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<event category="KEYPRESS" id="27">
+  <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">if(stepHasRun and !instance_exists(Console)) {
+    execute_string(menu_script_back);
+}else if (instance_exists(Console)){
+    with (Console) {
+        instance_destroy();
+    }
+}
+    
+
+</argument>
+      </arguments>
+    </action>
+  </actions>
+</event>

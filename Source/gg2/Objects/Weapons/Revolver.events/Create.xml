@@ -47,9 +47,11 @@
     recoilTime = refireTime;
     recoilAnimLength = sprite_get_number(recoilSprite)/2;
     recoilImageSpeed = recoilAnimLength/recoilTime;
-    
+
     reloadAnimLength = sprite_get_number(reloadSprite)/2;
     reloadImageSpeed = reloadAnimLength/reloadTime;
+    RevolverSnd = faudio_new_generator(RevolverSndS);
+
 }
 </argument>
       </arguments>

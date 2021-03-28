@@ -31,6 +31,7 @@ my_gravity = 0.7 * global.delta_factor;
 bloodiness = 50;
 maxBloodiness = bloodiness;
 
+Splat = faudio_new_generator(SplatS);
 </argument>
       </arguments>
     </action>

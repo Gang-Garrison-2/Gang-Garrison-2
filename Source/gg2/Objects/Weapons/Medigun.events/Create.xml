@@ -57,9 +57,15 @@
     recoilTime = refireTime+1;
     recoilAnimLength = sprite_get_number(recoilSprite)/2;
     recoilImageSpeed = recoilAnimLength/recoilTime;
-    
+
     reloadAnimLength = sprite_get_number(reloadSprite)/2;
     reloadImageSpeed = reloadAnimLength/reloadTime;
+
+    MedigunSnd = faudio_new_generator(MedigunSndS);
+    MedichaingunSnd = faudio_new_generator(MedichaingunSndS);
+    UberStartSnd = faudio_new_generator(UberStartSndS);
+    UberIdleSnd = faudio_new_generator(UberIdleSndS);
+    UberChargedSnd = faudio_new_generator(UberChargedSndS);
 }
 </argument>
       </arguments>

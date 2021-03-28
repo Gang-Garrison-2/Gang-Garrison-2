@@ -24,7 +24,9 @@ smokeCount = 0;
 image_speed = 0.3 * global.delta_factor;
 blastRadius = 400;
 shieldIndex = 0;
-
+ExplosionSnd = faudio_new_generator(ExplosionSndS);
+RevolverSnd = faudio_new_generator(RevolverSndS);
+CPBeginCapSnd = faudio_new_generator(CPBeginCapSndS);
 </argument>
       </arguments>
     </action>

@@ -13,8 +13,8 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">ammoCount = max(0, ammoCount-1);    
-playsound(x,y,RocketSnd);
+        <argument kind="STRING">playsound(x,y,RocketFireSnd);
+ammoCount = max(0, ammoCount-1);    
 var oid, newx, newy;
 newx = x+lengthdir_x(20,owner.aimDirection);
 newy = y+lengthdir_y(20,owner.aimDirection);

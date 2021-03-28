@@ -15,6 +15,7 @@
   <resource name="Classlimits" type="GROUP"/>
   <resource name="Menus" type="GROUP"/>
   <resource name="Holidays" type="GROUP"/>
+  <resource name="Console" type="GROUP"/>
   <resource name="Bytes" type="GROUP"/>
   <resource name="Rewards" type="GROUP"/>
   <resource name="Plugins" type="GROUP"/>

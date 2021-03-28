@@ -17,10 +17,11 @@
 playsound(x,y,RevolverSnd);
 var shot;
 
-shot = createShot(x,y + yoffset + 1,Shot, DAMAGE_SOURCE_REVOLVER, owner.aimDirection, 21);
+shot = createShot(x,y + yoffset + 1,RevolverShot, DAMAGE_SOURCE_REVOLVER, owner.aimDirection, 21);
 shot.hitDamage = 28;
 if(golden)
     shot.sprite_index = ShotGoldS;
+
 with(shot)
     speed += owner.hspeed*hspeed/15;
 
@@ -28,7 +29,7 @@ with(shot)
 // delta_factor is left out intentionally!
 shot.x += lengthdir_x(shot.speed, shot.direction);
 shot.y += lengthdir_y(shot.speed, shot.direction);
-    
+
 justShot=true;
 readyToShoot=false;
 alarm[0] = refireTime / global.delta_factor;

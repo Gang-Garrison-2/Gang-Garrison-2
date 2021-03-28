@@ -14,10 +14,12 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">ammoCount = max(0, ammoCount-1);
+//if generator currently playing, cut out and play muzzle sound again
+faudio_stop_generator(ShotgunSnd);
 playsound(x,y,ShotgunSnd);
 var shot;
 repeat(5) {
-    shot = createShot(x, y, Shot, DAMAGE_SOURCE_SHOTGUN, owner.aimDirection, 13);
+    shot = createShot(x, y, ShotgunShot, DAMAGE_SOURCE_SHOTGUN, owner.aimDirection, 13);
     shot.hitDamage = 7;
     if(golden)
         shot.sprite_index = ShotGoldS;

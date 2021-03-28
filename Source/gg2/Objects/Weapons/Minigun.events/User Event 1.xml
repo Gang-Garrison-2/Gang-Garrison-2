@@ -27,7 +27,7 @@
         shoty = y+12+lengthdir_y(20,owner.aimDirection);
         if(!collision_line_bulletblocking(x, y, shotx, shoty))
         {
-            shot = createShot(shotx, shoty, Shot, DAMAGE_SOURCE_MINIGUN, owner.aimDirection+(random(14)-7), 12+random(1));
+            shot = createShot(shotx, shoty, MinigunShot, DAMAGE_SOURCE_MINIGUN, owner.aimDirection+(random(14)-7), 12+random(1));
             if(golden)
                 shot.sprite_index = ShotGoldS;
             shot.hspeed += owner.hspeed;
@@ -54,7 +54,7 @@
         
         alarm[0] = refireTime / global.delta_factor;
         alarm[5] = reloadBuffer*reloadBufferFactor / global.delta_factor;
-        
+
         if (global.particles == PARTICLES_NORMAL)
         {
             var shell;

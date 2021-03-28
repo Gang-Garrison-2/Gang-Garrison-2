@@ -47,6 +47,8 @@
     //Overlays for the overheat
     overlaySprite = MinigunOverlayS;
     overlayFiringSprite = MinigunOverlayFS;
+    
+    ChaingunSnd = faudio_new_generator(ChaingunSndS);
 }
 </argument>
       </arguments>

@@ -17,6 +17,7 @@
 alarm[0] = 300/global.delta_factor;
 hitground = false;
 hasMoney = false;
+ImpactSnd = faudio_new_generator(ImpactSndS);
 </argument>
       </arguments>
     </action>

@@ -15,7 +15,10 @@
       <arguments>
         <argument kind="STRING">alpha=0.1;
 done=false;
-playsound(view_xview[0]+400,view_yview[0]+300,NoticeSnd);</argument>
+NoticeSnd = faudio_new_generator(NoticeSndS);
+playsound(view_xview[0]+400,view_yview[0]+300,NoticeSnd);
+faudio_kill_generator(NoticeSnd);
+</argument>
       </arguments>
     </action>
     <action id="301" library="1">

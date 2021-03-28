@@ -24,7 +24,7 @@ moved = false;
 stopTracking = false;
 
 //moving view - mapped keys
-if(!instance_exists(MenuController))
+if(!instance_exists(MenuController) and !instance_exists(Console))
 {
     if keyboard_check(global.left) || keyboard_check(global.left2)
     {
@@ -38,7 +38,6 @@ if(!instance_exists(MenuController))
             x += 20 * global.delta_factor;
         moved = true;
     }
-    
     if keyboard_check(global.jump) || keyboard_check(global.jump2)
     {
         if (y &gt; view_hview/2)

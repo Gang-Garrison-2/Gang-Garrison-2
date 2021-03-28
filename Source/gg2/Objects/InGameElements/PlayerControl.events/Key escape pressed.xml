@@ -13,7 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if(!instance_exists(MenuController))
+        <argument kind="STRING">if(!instance_exists(MenuController) and !instance_exists(Console))
     instance_create(x,y,InGameMenuController);
 
 </argument>

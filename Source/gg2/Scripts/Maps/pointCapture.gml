@@ -2,7 +2,7 @@
 
 var soundPlayed;
 soundPlayed=false;
-
+IntelPutSnd = faudio_new_generator(IntelPutSndS);
 point = global.cp[argument0];
 capList = ds_list_create();
 
@@ -39,15 +39,17 @@ for(i=0; i<ds_list_size(capList); i+=1) {
     }
 }    
     
+faudio_fire_generator(IntelPutSnd);
 recordEventInLog(1, point.cappingTeam, capperList, imInvolved);
 ds_list_destroy(capList);
-        
+
 with point {
     team = cappingTeam;
     capping = 0;
 }
-
+CPCapturedSnd = faudio_new_generator(CPCapturedSndS);
 if(not soundPlayed) {
     playsound(x,y,CPCapturedSnd);
 }
-sound_play(IntelPutSnd);
+faudio_kill_generator(IntelPutSnd);
+faudio_kill_generator(CPCapturedSnd);

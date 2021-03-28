@@ -25,6 +25,8 @@ if(!owner.zoomed)
     hitDamage = unscopedDamage;
 else
     hitDamage = baseDamage + floor(sqrt(t/chargeTime)*(maxDamage-baseDamage));
+    
+recalculateSoundExt(x,y,0.8,SniperSnd);
 </argument>
       </arguments>
     </action>

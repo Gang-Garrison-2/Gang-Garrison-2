@@ -12,9 +12,9 @@
             if (argument0 == global.myself) || (argument1 == global.myself) {
                 inthis = true;
                 if (!argument2)
-                    sound_play(DominationSnd);
+                    faudio_fire_generator(DominationSnd);
                 else
-                    sound_play(RevengeSnd);
+                    faudio_fire_generator(RevengeSnd);
             }
             ds_map_add(map, "name1", killer);
             ds_map_add(map, "team1", argument1.team);

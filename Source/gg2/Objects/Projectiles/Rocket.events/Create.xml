@@ -22,13 +22,16 @@
     knockback = 8;
     bubbled = false;
     explodeImmediately = false;
-    
+
     fade = false;
     distanceToTravel = 800;
     playersPassed = ds_list_create();
-    
+
     alarm[1] = 20 / global.delta_factor;
     alarm[2] = 30 / global.delta_factor;
+    ExplosionSnd = faudio_new_generator(ExplosionSndS);
+    RocketTravelSnd = faudio_new_generator(RocketTravelSndS);
+    loopsoundstart(x,y, RocketTravelSnd);
 }
 </argument>
       </arguments>

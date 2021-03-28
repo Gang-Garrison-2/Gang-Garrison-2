@@ -50,7 +50,7 @@ if(vspeed &gt;= 0)
 
 if(onNonSurfingGround)
     moveStatus = 0;
-    
+
 if(onground)
     doublejumpUsed = 0;
 
@@ -71,12 +71,18 @@ if (global.run_virtual_ticks)
             lastDamageSource = afterburnSource;
             dealDamage(lastDamageDealer, id, burnIntensity / 30);
         }
+        if (!faudio_get_generator_playing(BurningSnd)){
+            loopsoundstart(x,y,BurningSnd);
+        }else{
+            loopsoundmaintainext(x,y, max(0.5, (burnDuration/210)),BurningSnd);
+        }
         burnDuration -= durationDecay;
         timeUnscathed = 0;
     }
     if (alarm[0] == -1 &amp;&amp; burnIntensity &gt; 0) burnIntensity -= intensityDecay;
     if (burnDuration &lt;= 0 || burnIntensity &lt;= 0)
     {
+        loopsoundstop(BurningSnd);
         burnDuration = 0;
         burnIntensity = 0;
         burnedBy = -1;
@@ -198,13 +204,13 @@ if(rocketJumping)
             part_type_life(jumpFlameParticleType,2/global.delta_factor,5/global.delta_factor);
             part_type_scale(jumpFlameParticleType,0.7,-0.65);
         }
-        
+
         if !variable_global_exists("jumpFlameParticleSystem")
         {
             global.jumpFlameParticleSystem = part_system_create();
             part_system_depth(global.jumpFlameParticleSystem, 10);
         }
-        
+
         if(global.particles == PARTICLES_NORMAL)
         {
             if(random(1) &gt; (controlFactor+frictionFactor)/2)
@@ -312,7 +318,7 @@ if(!onground and !stuckInWall)
     if(rocketJumping)
         applied_gravity += 0.54;
     else
-        applied_gravity += 0.6;        
+        applied_gravity += 0.6;
 }
 
 if (intel)
@@ -412,7 +418,7 @@ if ubered {
 //give max ammo for players on the winning team
 var arenaRoundEnd;
 arenaRoundEnd = false;
-if (instance_exists(ArenaHUD)) { 
+if (instance_exists(ArenaHUD)) {
     arenaRoundEnd = (ArenaHUD.state == ArenaHUD.ARENA_STATE_ROUND_END);
 }
 
@@ -453,6 +459,11 @@ if(zone &gt;= 0 and !cloak and cloakAlpha == 1)
 else
     cappingPoint = noone;
 
+
+//Reset shotguned timer if the sound effect is no longer playing
+if (!faudio_get_generator_playing(ShotgunShotImpactSnd) and beingShotGunned) {
+    beingShotGunned = false;
+    }
 </argument>
       </arguments>
     </action>

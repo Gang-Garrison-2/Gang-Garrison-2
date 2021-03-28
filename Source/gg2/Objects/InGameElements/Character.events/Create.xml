@@ -16,12 +16,12 @@
         <argument kind="STRING">{
     player = global.paramPlayer;
     team = player.team;
-    
+
     left_bound_offset = sprite_get_bbox_left(sprite_index)-sprite_get_xoffset(sprite_index);
     right_bound_offset = sprite_get_bbox_right(sprite_index)-sprite_get_xoffset(sprite_index);
     top_bound_offset = sprite_get_bbox_top(sprite_index)-sprite_get_yoffset(sprite_index);
     bottom_bound_offset = sprite_get_bbox_bottom(sprite_index)-sprite_get_yoffset(sprite_index);
-    
+
     // Default properties of Characters (those where defaults make sense)
     canDoublejump = 0;
     canCloak = 0;
@@ -32,8 +32,8 @@
     
     // for true framerate-independent jumping arcs
     applied_gravity = 0;
-    
-    // 
+
+    //
     hp = maxHp;
     flamecount = 0;
     invisible = false;
@@ -193,12 +193,12 @@
     demonFrame = 0;
 
     gearList = ds_list_create();
-    
+
     // Let's spawn our weapon
     global.paramOwner = id;
     currentWeapon = instance_create(x,y,weapons[0]);
     global.paramOwner = noone;
-    
+
     // Gear that drops with gibs
     has_partyhat     = false;
     has_crown        = false;
@@ -218,9 +218,9 @@
         deathmatch_invulnerable = 0;
         deathmatch_invuln_decay = 0;
     }
-    
+
     // THIS IS A TRUCK LOAD OF GARBAGE CODE THAT SHOULD BE REPLACED ASAP
-    
+
     if(hasClassReward(player, 'Grey_Accessories_') and player.class != CLASS_QUOTE)
     {
         ds_list_add(stillOverlays, global.SilverAttireOverlay[player.class]);
@@ -257,13 +257,13 @@
     // 'BH' reward - *B*obble *H*ead - not available for quote
     if(hasClassReward(player, 'BH') and player.class != CLASS_QUOTE)
     {
-        // hats use the same sprite for most animations 
+        // hats use the same sprite for most animations
         ds_list_add(stillOverlays, global.HatBobbleClassOverlay[player.class]);
         ds_list_add(leanROverlays, global.HatBobbleClassOverlay[player.class]);
         ds_list_add(leanLOverlays, global.HatBobbleClassOverlay[player.class]);
         ds_list_add(jumpOverlays, global.HatBobbleClassOverlay[player.class]);
         ds_list_add(runOverlays, global.HatBobbleClassOverlay[player.class]);
-            
+
         if (player.class == CLASS_HEAVY)
         {
             ds_list_add(walkOverlays, global.HatBobbleClassOverlay[player.class]);
@@ -271,14 +271,14 @@
         }
         if (player.class == CLASS_SNIPER)
             ds_list_add(crouchOverlays, global.HatBobbleClassOverlay[player.class]);
-            
+
         if (player.class == CLASS_SPY and player.team == TEAM_BLUE)
         {
             ds_list_add(tauntOverlays, HatBobbleSpyBlueTauntS);
         }
         else
         {
-            ds_list_add(tauntOverlays, global.HatBobbleClassTaunt[player.class]);        
+            ds_list_add(tauntOverlays, global.HatBobbleClassTaunt[player.class]);
         }
     }
     else if(hasClassReward(player, 'TopHatMonocle_'))
@@ -288,7 +288,7 @@
         ds_list_add(leanLOverlays, global.TopHatMonocleOverlay[player.class]);
         ds_list_add(jumpOverlays, global.TopHatMonocleOverlay[player.class]);
         ds_list_add(runOverlays, global.TopHatMonocleOverlay[player.class]);
-            
+
         if (player.class == CLASS_HEAVY)
         {
             ds_list_add(walkOverlays, global.TopHatMonocleOverlay[player.class]);
@@ -296,14 +296,14 @@
         }
         if (player.class == CLASS_SNIPER)
             ds_list_add(crouchOverlays, global.TopHatMonocleOverlay[player.class]);
-            
+
         if (player.class == CLASS_QUOTE and player.team == TEAM_BLUE)
         {
             ds_list_add(tauntOverlays, QuerlyBlueMonocleHatTauntS);
         }
         else
         {
-            ds_list_add(tauntOverlays, global.TopHatMonocleTaunt[player.class]);        
+            ds_list_add(tauntOverlays, global.TopHatMonocleTaunt[player.class]);
         }
     }
     else if(hasClassReward(player, 'TopHat_'))
@@ -313,7 +313,7 @@
         ds_list_add(leanLOverlays, global.TopHatOverlay[player.class]);
         ds_list_add(jumpOverlays, global.TopHatOverlay[player.class]);
         ds_list_add(runOverlays, global.TopHatOverlay[player.class]);
-            
+
         if (player.class == CLASS_HEAVY)
         {
             ds_list_add(walkOverlays, global.TopHatOverlay[player.class]);
@@ -321,14 +321,14 @@
         }
         if (player.class == CLASS_SNIPER)
             ds_list_add(crouchOverlays, global.TopHatOverlay[player.class]);
-            
+
         if (player.class == CLASS_QUOTE and player.team == TEAM_BLUE)
         {
             ds_list_add(tauntOverlays, QuerlyBlueTopHatTauntS);
         }
         else
         {
-            ds_list_add(tauntOverlays, global.TopHatTaunt[player.class]);        
+            ds_list_add(tauntOverlays, global.TopHatTaunt[player.class]);
         }
     }
     else if (hasReward(player, 'Crown'))
@@ -374,12 +374,29 @@
                 ds_list_insert(tauntOverlays, 0, getCharacterSpriteId(player.class, player.team, "GoldWeaponTaunt"));
                 break;
         }
-        
+
         if(player.class == CLASS_HEAVY)
         {
             ds_list_insert(omnomnomnomOverlays, 0, getCharacterSpriteId(global.paramPlayer.class, global.paramPlayer.team, "OmnomnomnomGoldWeapon"));
         }
     }
+
+    //This prevents the shotgun sound effects from stacking on top of eachother
+    beingShotGunned = false
+
+    //create generators
+    DeathSnd1 = faudio_new_generator(DeathSnd1S);
+    DeathSnd2 = faudio_new_generator(DeathSnd2S);
+    JumpSnd = faudio_new_generator(JumpSndS);
+    CbntHealSnd = faudio_new_generator(CbntHealSndS);
+    PickupSnd = faudio_new_generator(PickupSndS);
+    Gibbing = faudio_new_generator(GibbingS);
+    UberEndSnd = faudio_new_generator(UberEndSndS);
+    UberIdleSnd = faudio_new_generator(UberIdleSndS);
+    ExplosionSnd = faudio_new_generator(ExplosionSndS);
+    CPCapturedSnd = faudio_new_generator(CPCapturedSndS);
+    BurningSnd = faudio_new_generator(BurningSndS);
+    ShotgunShotImpactSnd = faudio_new_generator(ShotgunShotImpactSndS);
 }
 </argument>
       </arguments>

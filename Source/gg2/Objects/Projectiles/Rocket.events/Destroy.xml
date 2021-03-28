@@ -18,6 +18,10 @@
 }
 ds_list_destroy(playersPassed);
 
+loopsoundstop(RocketTravelSnd);
+
+faudio_kill_generator(ExplosionSnd);
+faudio_kill_generator(RocketTravelSnd);
 </argument>
       </arguments>
     </action>

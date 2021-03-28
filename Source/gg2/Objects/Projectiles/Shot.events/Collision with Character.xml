@@ -46,6 +46,7 @@
             motion_add(other.direction, other.speed*0.03);
         }
         instance_destroy();
+        
     }
 
 </argument>

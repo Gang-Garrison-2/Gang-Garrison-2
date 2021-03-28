@@ -24,17 +24,6 @@
 
     initializeDamageSources();
     
-    //import wav files for music
-    global.MenuMusic = sound_add(choose("Music/menumusic1.wav","Music/menumusic2.wav","Music/menumusic3.wav","Music/menumusic4.wav","Music/menumusic5.wav","Music/menumusic6.wav"), 1, true);
-    global.IngameMusic = sound_add("Music/ingamemusic.wav", 1, true);
-    global.FaucetMusic = sound_add("Music/faucetmusic.wav", 1, true);
-    if(global.MenuMusic != -1)
-        sound_volume(global.MenuMusic, 0.8);
-    if(global.IngameMusic != -1)
-        sound_volume(global.IngameMusic, 0.8);
-    if(global.FaucetMusic != -1)
-        sound_volume(global.FaucetMusic, 0.8);
-    
     global.sendBuffer = buffer_create();
     global.tempBuffer = buffer_create();
     global.HudCheck = false;
@@ -74,6 +63,7 @@
     global.killLogPos = ini_read_real("Settings","Kill Log Position", 0);
     global.kothHudPos = ini_read_real("Settings","KoTH HUD Position", 0);
     global.fadeScoreboard = ini_read_real("Settings", "Fade Scoreboard", 1);
+    global.consoleMode = ini_read_real("Settings", "Console Mode", CONSOLE_DISABLED);
     global.clientPassword = "";
     // for admin menu
     global.mapRotationFile = ini_read_string("Server", "MapRotation", "");
@@ -160,6 +150,7 @@
     ini_write_real("Settings", "Kill Log Position", global.killLogPos);
     ini_write_real("Settings", "KoTH HUD Position", global.kothHudPos);
     ini_write_real("Settings", "Fade Scoreboard", global.fadeScoreboard);
+    ini_write_real("Settings", "Console Mode", global.consoleMode);
     ini_write_real("Settings", "ServerPluginsPrompt", global.serverPluginsPrompt);
     ini_write_real("Settings", "RestartPrompt", global.restartPrompt);
     ini_write_string("Server", "MapRotation", global.mapRotationFile);
@@ -353,26 +344,38 @@ global.launchMap = "";
     global.changeTeam = ini_read_real("Controls", "changeTeam", ord("N"));
     global.changeClass = ini_read_real("Controls", "changeClass", ord("M"));
     global.showScores = ini_read_real("Controls", "showScores", vk_shift);
+    global.openConsole = ini_read_real("Controls", "openConsole", ord("P"));
     ini_close();
     
     calculateMonthAndDay();
-    
+
+    _ConsoleInit();
+    //import wav files for music
+    audio_init()
+    global.MenuMusicS=ds_list_create();
+    ds_list_add(global.MenuMusicS, faudio_new_sample("Music/Elkondo - A Little Heart To Heart.ogg"));
+    ds_list_add(global.MenuMusicS, faudio_new_sample("Music/Elkondo - Intruder Alert.ogg"));
+    ds_list_add(global.MenuMusicS, faudio_new_sample("Music/Elkondo - MEDIC!.ogg"));
+    ds_list_add(global.MenuMusicS, faudio_new_sample("Music/Elkondo - Petite Chou-Fleur.ogg"));
+    ds_list_add(global.MenuMusicS, faudio_new_sample("Music/Elkondo - Right Behind You.ogg"));
+    ds_list_add(global.MenuMusicS, faudio_new_sample("Music/Father of Syn - Gang Garrison II.ogg"));
+    ds_list_add(global.MenuMusicS, faudio_new_sample("Music/Scoot - Rocket Jump Waltz.ogg"));
+
+    global.IngameMusicS=faudio_new_sample("Music/ingamemusic.ogg");
+
+    global.FaucetMusicS=faudio_new_sample("Music/faucetmusic.ogg");
+    global.FaucetMusic=faudio_new_generator(global.FaucetMusicS);
+    global.VictoryMusic = faudio_new_sample("Music/Victory.ogg");
+    global.FailureMusic = faudio_new_sample("Music/Failure.ogg");
+    if(global.FaucetMusic != -1)
+        faudio_volume_generator(global.FaucetMusic, 0.8);
+
     builder_init();
 
     character_init();
     
     if(!directory_exists(working_directory + "\Plugins")) directory_create(working_directory + "\Plugins");
     loadplugins();
-    
-    /* Windows 8 is known to crash GM when more than three (?) sounds play at once
-     * We'll store the kernel version (Win8 is 6.2, Win7 is 6.1) and check it there.
-     ***/
-    registry_set_root(1); // HKLM
-    global.NTKernelVersion = real(registry_read_string_ext("\SOFTWARE\Microsoft\Windows NT\CurrentVersion\", "CurrentVersion")); // SIC
-    if(!registry_exists_ext("\SOFTWARE\Microsoft\Windows NT\CurrentVersion\", "CurrentMajorVersionNumber"))
-        global.CurrentMajorVersionNumber = -1;
-    else
-        global.CurrentMajorVersionNumber = registry_read_real_ext("\SOFTWARE\Microsoft\Windows NT\CurrentVersion\", "CurrentMajorVersionNumber");
     
     globalvar previous_window_x, previous_window_y, previous_window_w;
     previous_window_x = window_get_x();

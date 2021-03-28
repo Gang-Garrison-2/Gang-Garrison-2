@@ -6,9 +6,7 @@
 
 var player, preconditionsError;
 player = argument0;
-
-sound_play(IntelDropSnd);
-
+playsoundglobal(global.IntelDropSndS);
 with(player.object)
 {
     // Modify the character state appropriately

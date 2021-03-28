@@ -13,13 +13,13 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">playsound(x,y,SniperSnd);
-shot=true;
+        <argument kind="STRING">shot=true;
 justShot=true;
 readyToShoot = false;
 alarm[0] = (reloadTime + 20*owner.zoomed) / global.delta_factor;
 alarm[7] = (reloadTime/4 + 10*owner.zoomed) / global.delta_factor;  // Eject a shell during the animation
 
+playsoundext(x,y,0.8,SniperSnd);
 // for drawing:
 tracerAlpha = 0.8;
 shotx = x;
@@ -41,10 +41,10 @@ alarm[6] = alarm[0];
 //
 // Unfortunately, collision_line can only check for collision against either *all* instances, or instances of one
 // object, or just a single instance. What we need however is to check against *some* instances of *some* objects.
-// 
+//
 // We could make a list of all instances that should stop the bullet and check each of them individually, but that
 // could be slow.
-// 
+//
 // So here is how we do this instead: We do several collision_line checks, but only on an object basis.
 // Those instances which are instances of those objects, but should not stop the bullets are set to an empty
 // collision mask, and that is reverted after we are done.
@@ -137,6 +137,7 @@ with(hitInstance) {
                 blood = instance_create(x, y, Blood);
                 blood.direction = other.owner.aimDirection - 180;
             }
+            playsound(object.x, object.y, other.PowerShotSnd);
             if (!other.owner.zoomed) {
                 lastDamageSource = DAMAGE_SOURCE_RIFLE;
             } else {
@@ -145,6 +146,7 @@ with(hitInstance) {
         }
     } else if(object_index == Sentry or object_is_ancestor(object_index, Sentry)) {
         damageSentry(other.ownerPlayer, id, other.hitDamage);
+        playsound(x, y, other.ImpactMetalSnd);
         lastDamageDealer = other.ownerPlayer;
         if (!other.owner.zoomed)
             lastDamageSource = DAMAGE_SOURCE_RIFLE;
@@ -152,6 +154,10 @@ with(hitInstance) {
             lastDamageSource = DAMAGE_SOURCE_RIFLE_CHARGED;
     } else if(object_index == Generator or object_is_ancestor(object_index, Generator)) {
         damageGenerator(other.ownerPlayer, id, other.hitDamage);
+        playsound(x, y, other.ImpactMetalSnd);
+    } else {
+        //if we made it this far, then we hit the world
+        playsound(x2, y2, ImpactWorldSnd)
     }
 }
 

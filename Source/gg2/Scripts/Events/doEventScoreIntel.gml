@@ -1,8 +1,7 @@
 /**
  * The player given in argument0 has just recovered the intel for his team.
  */
-
-sound_play(IntelPutSnd);
+playsoundglobal(global.IntelPutSndS);
 var isMe;
 isMe = (argument0 == global.myself);
 //recordEventInLog(3, argument0.team, argument0.name);

@@ -61,6 +61,11 @@
             game_end();
         }
     ');
+
+    // if displaying console in in-game menu
+    if (global.consoleMode == CONSOLE_INMENU &amp;&amp; !instance_exists(Console)) {
+        instance_create(0, 0, Console);
+    }
 }
 </argument>
       </arguments>

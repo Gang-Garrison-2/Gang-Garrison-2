@@ -13,7 +13,14 @@ with Player humiliated = 0;
 destroyGameplayObjects();
 respawnEveryone();
 
-if((global.music == MUSIC_BOTH or global.music == MUSIC_INGAME_ONLY)
-    and (AudioControl.currentSong != global.IngameMusic)) {
-    AudioControlPlaySong(global.IngameMusic, true);
+faudio_kill_all_generators(); //kill all generators
+global.IngameMusic = faudio_new_generator(global.IngameMusicS);
+if(global.music == MUSIC_BOTH || global.music == MUSIC_INGAME_ONLY)
+{
+
+    if(global.IngameMusic != -1)
+    {
+        faudio_volume_generator(global.IngameMusic, 0.8);
+        AudioControlPlaySong(global.IngameMusic, true);
+    }
 }

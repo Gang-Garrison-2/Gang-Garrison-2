@@ -1,15 +1,15 @@
-//Origin (x, y) of the sound, Sound to play
+//Origin (x, y) of the sound, Generator to play
 {
-    var vol, isWindows8DotX;
+    //generator bugs out if it is already playing the same sound effect
+    if (faudio_get_generator_playing(argument2) == 1){
+        faudio_stop_generator(argument2);
+    }
+
+    var vol;
     vol = calculateVolume(argument0, argument1);
     if(vol==0) exit;
-    
-    // Prevent crashes on Win8 (NT Kernel 6.2)
-    isWindows8DotX = (global.NTKernelVersion == 6.2 or global.NTKernelVersion == 6.3) and global.CurrentMajorVersionNumber == -1;
-    if (isWindows8DotX or global.forceAudioFix)
-        sound_stop(argument2);
-        
-    sound_volume(argument2, vol);
-    sound_pan(argument2, calculatePan(argument0));
-    sound_play(argument2);
+    faudio_volume_generator(argument2, vol);
+    pan = calculatePan(argument0);
+    faudio_pan_generator (argument2, pan);
+    faudio_fire_generator(argument2);
 }
