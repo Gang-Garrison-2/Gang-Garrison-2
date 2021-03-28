@@ -2,7 +2,7 @@
     // argument0: The killed player  
     // argument1: The Dominating player
     // argument2: 0 for DOMINATION, 1 for REVENGE
-        
+
         with (KillLog) {
             map = ds_map_create(); 
             var killer, victim, inthis;

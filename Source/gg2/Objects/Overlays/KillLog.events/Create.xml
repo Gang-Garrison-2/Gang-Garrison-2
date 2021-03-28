@@ -14,6 +14,8 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">kills = ds_list_create();
+DominationSnd = faudio_new_generator(DominationSndS);
+RevengeSnd = faudio_new_generator(RevengeSndS);
 </argument>
       </arguments>
     </action>

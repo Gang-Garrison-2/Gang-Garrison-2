@@ -13,7 +13,10 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">ds_list_destroy(kills);</argument>
+        <argument kind="STRING">ds_list_destroy(kills);
+faudio_kill_generator(DominationSnd);
+faudio_kill_generator(RevengeSnd);
+</argument>
       </arguments>
     </action>
   </actions>
