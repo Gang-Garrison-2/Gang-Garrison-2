@@ -22,6 +22,9 @@ if (global.isHost and hostTimer &gt; 0 // What we're doing makes sense
     if (hostTimer == 0)
         global.winners = TEAM_SPECTATOR;
 }
+
+doCheckSetupTimer();
+
 //both teams' countdown timers
 if (!KothControlPoint.locked)
 {

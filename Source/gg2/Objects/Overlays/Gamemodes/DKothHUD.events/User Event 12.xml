@@ -16,6 +16,7 @@
         <argument kind="STRING">write_ushort(global.serializeBuffer, cpUnlock);
 write_ushort(global.serializeBuffer, redTimer);
 write_ushort(global.serializeBuffer, blueTimer);
+write_ushort(global.serializeBuffer, global.setupTimer);
 with KothRedControlPoint event_user(12);
 with KothBlueControlPoint event_user(12);
 </argument>
