@@ -17,7 +17,6 @@
 
 var downloadHandle, url, tmpfile, window_oldshowborder, window_oldfullscreen;
 timeLeft = 0;
-counter = 0;
 AudioControlPlaySong(-1, false);
 window_oldshowborder = window_get_showborder();
 window_oldfullscreen = window_get_fullscreen();
@@ -35,7 +34,7 @@ downloadHandle = http_new_get(url);
 
 while(!http_step(downloadHandle)) 
 { // while download isn't finished
-    sleep(floor(1000/30)); // sleep for the equivalent of one frame
+    sleep(floor(1000/30) / global.delta_factor); // sleep for the equivalent of one frame
     io_handle(); // this prevents GameMaker from appearing locked-up
     
     // check if the user cancelled the download with the esc key
@@ -47,17 +46,11 @@ while(!http_step(downloadHandle))
         room_goto_fix(Menu);
         exit;
     }
-     
-    if(counter == 0 || counter mod 60 == 0)
-        timer = random(359)+1;
+    
     draw_sprite(UpdaterBackgroundS,0,0,0);
     draw_set_color(c_white);
     draw_set_halign(fa_left);
     draw_set_valign(fa_center);
-    minutes=floor(timer/60);
-    seconds=floor(timer-minutes*60);
-    draw_text(x,y-20,string(minutes) + " minutes " + string(seconds) + " seconds Remaining...");
-    counter+=1;
     var progress, size;
     progress = http_response_body_progress(downloadHandle);
     size = http_response_body_size(downloadHandle);
@@ -65,12 +58,13 @@ while(!http_step(downloadHandle))
     // Also, Faucet HTTP reports an unknown size as -1
     if (size &gt; 0)
     {
-        progressBar = floor((progress/size) * 20);
-        offset = 3;
+        progressBar = floor((progress/size) * 21);
+        offset = 5;
         for(i=0;i&lt;progressBar;i+=1){
             draw_sprite(UpdaterProgressS,0,x+offset,y);
             offset+=12;
         }
+        draw_text(x,y-20,string(floor(progress/power(2,20))) + "MB / " + string(floor(size/power(2,20))) + "MB  -  " + string(floor((progress/size)*100))+'% complete...');
     }
     screen_refresh();
 }
