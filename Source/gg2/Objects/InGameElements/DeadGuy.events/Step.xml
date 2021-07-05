@@ -34,7 +34,7 @@ else
 {
     if (!hitground)
     {
-        if (vspeed >= 1.2)
+        if (vspeed &gt;= 1.2)
            playsound(x,y,ImpactSnd);
         hitground = true;
     }
