@@ -1,3 +1,3 @@
 // Find the value of the tied variable for an item
 // argument0: item number
-return execute_string("return "+item_var[argument0]);
+return asset_get_index(item_var[argument0]);
