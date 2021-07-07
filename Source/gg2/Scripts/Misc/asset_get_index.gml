@@ -7,7 +7,7 @@
 var checkstr;
 checkstr = string_replace_all(argument0, "_", "");
 if (checkstr != string_lettersdigits(argument0)) {
-    show_error("Invalid variable name [" + argument0 + "] for asset_get_index", false);
+    show_error("Invalid asset name [" + argument0 + "] for asset_get_index", false);
     exit;
 }
 
