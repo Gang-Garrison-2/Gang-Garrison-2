@@ -10,7 +10,7 @@ if (string_length(argument0) < 1)
 }
 
 validChars = "0123456789abcdefghijklmnopqrstuvwxyz_";
-for (i = 0; i < string_length(argument0); i+=1)
+for (i = 1; i <= string_length(argument0); i+=1)
 {
     // if the current character isn't valid
     if (string_pos(string_char_at(argument0, i), validChars) == 0)
