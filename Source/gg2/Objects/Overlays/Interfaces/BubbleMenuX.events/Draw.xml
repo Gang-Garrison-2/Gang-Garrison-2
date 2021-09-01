@@ -20,7 +20,7 @@ yoffset = view_yview[0];
 xsize = view_wview[0];
 ysize = view_hview[0];
 
-draw_sprite_ext(sprite_index, image_index, xoffset+x, yoffset+ysize/2, 1, 1, 0, c_white, alpha);
+draw_sprite_ext(sprite_index, image_index+index, xoffset+x, yoffset+ysize/2, 1, 1, 0, c_white, alpha);
 </argument>
       </arguments>
     </action>
