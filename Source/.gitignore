@@ -1,3 +1,6 @@
+/build*.zip
+/Gang*Garrison*2.gmk
+/Gang*Garrison*2.exe
 /gg2.gmk
 /gg2.gb1
 /gg2.exe
@@ -7,6 +10,7 @@
 /gg2updater.gmk
 /gg2updater.gb1
 /gg2b
+/gm8x_fix.exe
 /gmksplit.exe
 /gmksplit.jar
 /game_errors.log
