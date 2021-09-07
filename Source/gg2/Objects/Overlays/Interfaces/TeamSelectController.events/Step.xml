@@ -93,7 +93,7 @@ else
 }
 
 var teamFull;
-teamFull = (newteam==TEAM_RED or newteam==TEAM_RED) and balance == newteam;
+teamFull = (newteam==TEAM_RED or newteam==TEAM_BLUE) and balance == newteam;
 
 if(mouse_check_button(mb_left) and not teamFull)
 {
