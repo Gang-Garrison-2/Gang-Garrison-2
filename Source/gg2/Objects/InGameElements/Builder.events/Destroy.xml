@@ -13,7 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if (metatadata != -1) ds_map_destroy(metadata);
+        <argument kind="STRING">if (metadata != -1) ds_map_destroy(metadata);
 ds_map_destroy(newProperties);
 </argument>
       </arguments>
