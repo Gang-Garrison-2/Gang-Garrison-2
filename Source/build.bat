@@ -18,10 +18,12 @@ setlocal
 rem CHECK PREREQUISITES
 if not exist "gmksplit.exe" (
     call :SUB_fail "GmkSplitter is required: https://github.com/Medo42/Gmk-Splitter"
+    pause
     exit 1
 )
 if not exist "gm8x_fix.exe" (
     call :SUB_fail "gm8x_fix is required: https://github.com/skyfloogle/gm8x_fix"
+    pause
     exit 1
 )
 
@@ -86,6 +88,7 @@ rem --- SUBROUTINES ---
 :SUB_assert_exists
     if not exist "%~1" (
         call :SUB_fail "%~1 not found, aborting"
+        pause
         exit 1
     )
     rem else found
@@ -95,6 +98,7 @@ rem --- SUBROUTINES ---
 :SUB_assert_errorlevel_0
     if errorlevel 1 (
         call :SUB_fail "%~1"
+        pause
         exit 1
     )
     exit /B
