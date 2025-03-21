@@ -2,5 +2,5 @@
 var result;
 result = "";
 repeat(16)
-    result += chr(irandom_range(0,255));
+    result += ansi_char(irandom_range(0,255));
 return result;

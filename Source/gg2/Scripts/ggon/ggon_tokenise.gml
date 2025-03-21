@@ -30,9 +30,9 @@ while (i <= len)
             continue;
         // skip whitespace (space, tab, new line or carriage return)
         case ' ':
-        case chr(9):
-        case chr(10):
-        case chr(13):
+        case ansi_char(9):
+        case ansi_char(10):
+        case ansi_char(13):
             i += 1;
             continue;
     }
@@ -73,16 +73,16 @@ while (i <= len)
                     str += char;
                 // new line escape
                 else if (char == 'n')
-                    str += chr(10);
+                    str += ansi_char(10);
                 // carriage return escape
                 else if (char == 'r')
-                    str += chr(13);
+                    str += ansi_char(13);
                 // tab escape
                 else if (char == 't')
-                    str += chr(9);
+                    str += ansi_char(9);
                 // null byte escape
                 else if (char == '0')
-                    str += chr(0);
+                    str += ansi_char(0);
                 else
                     show_error('Error when tokenising GGON: unknown escape sequence "\' + char + '"', true);
             }

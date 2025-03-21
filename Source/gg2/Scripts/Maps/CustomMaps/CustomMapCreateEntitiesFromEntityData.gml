@@ -115,7 +115,7 @@ else
 
     // Read entities that are compiled in the old format.    
     var currentPos, entityType, entityX, entityY, wordLength, DIVIDER, DIVREPLACEMENT;
-    DIVIDER = chr(10);
+    DIVIDER = ansi_char(10);
     DIVREPLACEMENT = " ";
     
     argument0+=DIVIDER;
