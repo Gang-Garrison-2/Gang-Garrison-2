@@ -46,7 +46,7 @@
                 {
                     if (other.team != team) or (id==other.ownerPlayer.object)
                     {
-                        projectileCollision( other.ownerPlayer, id, other.explosionDamage*(1-(fake_distance/other.blastRadius)), other, 3, true);
+                        projectileCollision( other.ownerPlayer, id, other.explosionDamage*(1-(fake_distance/other.blastRadius)), other, 3);
                     }
                     if id==other.ownerPlayer.object and other.team == team {
                         moveStatus = 1;
