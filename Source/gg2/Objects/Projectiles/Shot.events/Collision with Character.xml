@@ -24,23 +24,7 @@
 
     if(other.id != ownerPlayer.object and other.team != team  &amp;&amp; other.hp &gt; 0 &amp;&amp; other.ubered == 0)
     {
-        damageCharacter(ownerPlayer, other.id, hitDamage);
-        if (other.lastDamageDealer != ownerPlayer and other.lastDamageDealer != other.player)
-        {
-            other.secondToLastDamageDealer = other.lastDamageDealer;
-            other.alarm[4] = other.alarm[3]
-        }
-        other.alarm[3] = ASSIST_TIME / global.delta_factor;
-        other.lastDamageDealer = ownerPlayer;
-        other.lastDamageSource = weapon;
-        
-        var blood;
-        if(global.gibLevel &gt; 0)
-        {
-            blood = instance_create(x,y,Blood);
-            blood.direction = direction-180;
-        }
-        dealFlicker(other.id);
+         projectileCollision(ownerPlayer, other, hitDamage, object_index, 1);
         with(other)
         {
             motion_add(other.direction, other.speed*0.03);
