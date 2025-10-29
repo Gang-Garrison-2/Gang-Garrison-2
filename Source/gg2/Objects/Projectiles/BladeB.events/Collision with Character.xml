@@ -18,7 +18,7 @@
     {
         if(!other.ubered)
         { 
-            projectileCollision(ownerPlayer, other, hitDamage, object_index, 25);
+            projectileCollision(ownerPlayer, other, hitDamage, id, 25);
             other.timeUnscathed = 0;
         }
         with(other)

@@ -124,7 +124,7 @@ if(!nearestTarget) {
         ownerPlayer.sentry.alarm[5] = 30 / global.delta_factor;
         
         if(nearestTarget.ubered == 0) {
-            damageAuto(ownerPlayer, nearestTarget, hitDamage, id, 1, DAMAGE_SOURCE_SENTRYTURRET);
+            damageAuto(ownerPlayer, nearestTarget, hitDamage, id, 1);
             // need to keep this incase its not a player
             nearestTarget.lastDamageDealer = ownerPlayer;
             nearestTarget.lastDamageSource = DAMAGE_SOURCE_SENTRYTURRET;

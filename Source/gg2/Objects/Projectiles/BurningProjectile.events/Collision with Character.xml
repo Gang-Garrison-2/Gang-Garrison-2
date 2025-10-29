@@ -18,7 +18,7 @@
     if (ds_list_find_index(enemiesHit,other.id) != -1)
         exit;
         
-    projectileCollision(ownerPlayer, other, hitDamage, object_index, 0);
+    projectileCollision(ownerPlayer, other, hitDamage, id, 0);
     
     // afterburn stuff
     {

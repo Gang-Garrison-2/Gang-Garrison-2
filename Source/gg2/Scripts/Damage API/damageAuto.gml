@@ -3,7 +3,7 @@ var object;
 object = argument1.object_index;
 
 if(object_is_ancestor(object, Character) or object == Character )
-    projectileCollision( argument0, argument1, argument2, argument3);
+    projectileCollision( argument0, argument1, argument2, argument3, argument4);
 else if(object_is_ancestor(object, Sentry) or object == Sentry )
     damageSentry( argument0, argument1, argument2 );
 else if(object_is_ancestor(object, Generator) or object == Generator )

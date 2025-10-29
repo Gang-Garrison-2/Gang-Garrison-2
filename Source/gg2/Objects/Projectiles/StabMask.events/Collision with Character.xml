@@ -26,7 +26,7 @@
     connecting |= !collision_line_bulletblocking(x, y-12, other.x, other.y);
     if(connecting)
     {
-        projectileCollision(ownerPlayer, other, hitDamage, object_index, 70);
+        projectileCollision(ownerPlayer, other, hitDamage, id, 70);
         
         numKills += 1;
         if (numKills &gt;= maxKills)

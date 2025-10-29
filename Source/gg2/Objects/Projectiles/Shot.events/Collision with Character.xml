@@ -24,7 +24,7 @@
 
     if(other.id != ownerPlayer.object and other.team != team  &amp;&amp; other.hp &gt; 0 &amp;&amp; other.ubered == 0)
     {
-         projectileCollision(ownerPlayer, other, hitDamage, object_index, 1);
+        projectileCollision(ownerPlayer, other, hitDamage, id, 1);
         with(other)
         {
             motion_add(other.direction, other.speed*0.03);
