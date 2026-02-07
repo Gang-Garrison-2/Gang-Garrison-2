@@ -252,9 +252,9 @@
     // Create abbreviations array for rewards use
     initRewards()
     
-var a, IPRaw, portRaw;
-doubleCheck = 0;
-global.launchMap = "";
+    var a, doubleCheck, IPRaw, portRaw;
+    doubleCheck = 0;
+    global.launchMap = "";
 
     for(a = 1; a <= parameter_count(); a += 1) 
     {

@@ -20,6 +20,20 @@ for(i=0; i < ds_list_size(global.players); i+=1)
     
     if(socket_has_error(player.socket) or player.kicked)
     {
+        if (global.isHost and player == global.myself)
+        {
+            var EOLN;
+            EOLN = chr($0D)+chr($0A);  // CR+LF
+            show_error(
+                "Loopback connection of the local player was lost: " + EOLN + socket_error(player.socket) + EOLN + EOLN +
+                "This should never happen. Please make sure you are not using some unreliable packet filtering " +
+                "software, such as a system-wide proxy or VPN, a network debugger or firewall, a global DPI bypass or " +
+                "something based on WinDivert driver, etc.",
+                true
+            );
+            exit;
+        }
+        
         var noOfOccupiedSlots, player;
         noOfOccupiedSlots = getNumberOfOccupiedSlots();
         
