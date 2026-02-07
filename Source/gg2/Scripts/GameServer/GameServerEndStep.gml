@@ -1,5 +1,9 @@
 with(Player)
 {
+    // server's local player doesn't possess an accompanying Client instance and therefore
+    // doesn't perform deserializeState() to read and process it from global.serverSocket
+    if (id == global.myself) continue;
+    
     write_buffer(socket, global.sendBuffer);
     socket_send(socket);
 }
