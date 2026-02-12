@@ -23,16 +23,7 @@
         if(characterHit != -1) {
             if(characterHit.team != team || characterHit.id == ownerPlayer.object and !characterHit.ubered )
             {
-                damageAuto( ownerPlayer, characterHit, hitDamage );
-                if object_is_ancestor(characterHit.object_index, Character)
-                {
-                    if (characterHit.lastDamageDealer != ownerPlayer and characterHit.lastDamageDealer != characterHit.player)
-                    {
-                        characterHit.secondToLastDamageDealer = characterHit.lastDamageDealer;
-                        characterHit.alarm[4] = characterHit.alarm[3]
-                    }
-                    characterHit.alarm[3] = ASSIST_TIME / global.delta_factor;
-                }
+                damageAuto( ownerPlayer, characterHit, hitDamage, id, 1);
                 characterHit.lastDamageDealer = ownerPlayer;
                 characterHit.lastDamageSource = weapon;
             }
@@ -55,22 +46,7 @@
                 {
                     if (other.team != team) or (id==other.ownerPlayer.object)
                     {
-                        damageCharacter( other.ownerPlayer, id, other.explosionDamage*(1-(fake_distance/other.blastRadius)) );
-                        
-                        if(id == other.ownerPlayer.object and instance_exists(lastDamageDealer) and lastDamageDealer != other.ownerPlayer)
-                            lastDamageSource = DAMAGE_SOURCE_FINISHED_OFF_GIB;
-                        else 
-                        {
-                            if (lastDamageDealer != other.ownerPlayer &amp;&amp; lastDamageDealer != player){
-                                secondToLastDamageDealer = lastDamageDealer;
-                                alarm[4] = alarm[3]
-                            }
-                            if (other.ownerPlayer != id)
-                                alarm[3] = ASSIST_TIME / global.delta_factor;
-                            lastDamageDealer = other.ownerPlayer;
-                            lastDamageSource = other.weapon;
-                        }
-                        dealFlicker(id);
+                        projectileCollision( other.ownerPlayer, id, other.explosionDamage*(1-(fake_distance/other.blastRadius)), other, 3);
                     }
                     if id==other.ownerPlayer.object and other.team == team {
                         moveStatus = 1;
@@ -86,15 +62,6 @@
                         if point_direction(x,y+5,other.x,other.y-5)&gt;210 and point_direction(x,y,other.x,other.y)&lt;330 {
                             vspeed-=4*(1-(fake_distance/other.blastRadius));
                             speed*=1.3;
-                        }
-                    }
-                    if(global.gibLevel &gt; 0) {
-                        if (id==other.ownerPlayer.object) or (other.team!=team) {
-                            repeat(3) {
-                                var blood;
-                                blood = instance_create(x,y,Blood);
-                                blood.direction = point_direction(other.x,other.y,x,y)-180;
-                            }
                         }
                     }
                 } else {

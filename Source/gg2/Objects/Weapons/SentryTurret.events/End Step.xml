@@ -124,22 +124,10 @@ if(!nearestTarget) {
         ownerPlayer.sentry.alarm[5] = 30 / global.delta_factor;
         
         if(nearestTarget.ubered == 0) {
-            damageAuto(ownerPlayer, nearestTarget, hitDamage);
-            if (nearestTarget.lastDamageDealer != ownerPlayer &amp;&amp; object_is_ancestor(nearestTarget.object_index, Character)) {
-                if (nearestTarget.lastDamageDealer != nearestTarget.player){
-                    nearestTarget.secondToLastDamageDealer = nearestTarget.lastDamageDealer;
-                    nearestTarget.alarm[4] = nearestTarget.alarm[3];
-                }
-            }
-            nearestTarget.alarm[3] = ASSIST_TIME / global.delta_factor;
+            damageAuto(ownerPlayer, nearestTarget, hitDamage, id, 1);
+            // need to keep this incase its not a player
             nearestTarget.lastDamageDealer = ownerPlayer;
             nearestTarget.lastDamageSource = DAMAGE_SOURCE_SENTRYTURRET;
-            if(global.gibLevel &gt; 0 and object_is_ancestor(nearestTarget.object_index, Character))
-            {
-                blood = instance_create(nearestTarget.x,nearestTarget.y,Blood);
-                blood.direction = direction-180;
-                dealFlicker(nearestTarget);
-            }
         }
         shooting=true;
         readyToShoot=false;

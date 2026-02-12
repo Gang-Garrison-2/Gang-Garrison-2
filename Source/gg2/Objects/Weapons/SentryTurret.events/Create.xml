@@ -23,6 +23,7 @@ shooting=false;
 rotating=false;
 nearestTarget = noone;
 alarm[0] = refireTime / global.delta_factor;
+weapon = DAMAGE_SOURCE_SENTRYTURRET;
 </argument>
       </arguments>
     </action>
