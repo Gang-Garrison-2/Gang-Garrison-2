@@ -25,7 +25,7 @@ wm_collision_dummy = instance_create(0,0,CollisionDummy);
 wm_collision_dummy.sprite_index = wm_sprite;
 
 //Scan the image, creating a condensed string as we go.
-ret = "{WALKMASK}"+chr(10)+string(width)+chr(10)+string(height)+chr(10);
+ret = "{WALKMASK}"+ansi_char(10)+string(width)+ansi_char(10)+string(height)+ansi_char(10);
 var char_fill, num_value;
 char_fill = 0;
 num_value = 0;
@@ -41,7 +41,7 @@ for(a = 0; a < height; a += 1){
         char_fill+=1;
         //If we have maxed out with 6 bits in this num_value, save this character to the result.
         if(char_fill == 6){
-            ret+=chr(num_value+32);
+            ret+=ansi_char(num_value+32);
             //Reset to the beginning of the next character.
             num_value = 0;
             char_fill = 0;
@@ -52,9 +52,9 @@ for(a = 0; a < height; a += 1){
 if(char_fill > 0){
     for(char_fill = char_fill; char_fill < 6; char_fill += 1)
     num_value = num_value<<1;
-    ret+=chr(num_value+32);
+    ret+=ansi_char(num_value+32);
 }
 
 with(wm_collision_dummy) instance_destroy();
 sprite_delete(wm_sprite);
-return ret + chr(10) + "{END WALKMASK}";
+return ret + ansi_char(10) + "{END WALKMASK}";

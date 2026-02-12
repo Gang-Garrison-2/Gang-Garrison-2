@@ -1,6 +1,6 @@
 //If we've reached this stage, then we are good to go. Let's start the entity creation!
 var ret;
-ret = "{ENTITIES}" + chr(10);
+ret = "{ENTITIES}" + ansi_char(10);
 
 // Compress using GGON
 var map, submap, list, key;
@@ -26,7 +26,7 @@ with(LevelEntity) {
 }
 
 map = ggon_list_to_map(list);
-ret += ggon_encode(map) + chr(10);
+ret += ggon_encode(map) + ansi_char(10);
 ggon_destroy_map(map)
 ds_list_destroy(list);
 
