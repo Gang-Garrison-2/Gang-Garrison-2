@@ -231,84 +231,84 @@ will play in numerical order from least to greatest. Place a zero next to a map 
 This classic layout emphasizes good flagrunning and being able to evade a 
 strong defense! The colorful rural scenery hides two industrial strongholds.
 
-3. **ctf_2dfort** *by Vaati*  
+2. **ctf_2dfort** *by Vaati*  
 A simple layout designed for fast games and tactical decisions. Don't neglect the 
 lower route!
 
-4. **ctf_conflict** *by agh*  
+3. **ctf_conflict** *by agh*  
 This battleground is filled with varied terrain and odd angles! Watch out, there are 
 many places to hide and swipe the intelligence when no one will notice.
 
-5. **ctf_classicwell** *by fishmatt*  
+4. **ctf_classicwell** *by fishmatt*  
 A nostalgic scenario with an industrial flavor, there are multiple routes around these
 imposing complexes but only a few ways in and out. Keep an eye on the upper route!
 
-6. **ctf_waterway** *by Taters*  
+5. **ctf_waterway** *by Taters*  
 This trainyard sits atop a canal. The adjacent buildings house two warring factions. 
 Keep your cool and watch for snipers, it's a long clear shot back to your base.
 
-7. **ctf_orange** *by king metroid*  
+6. **ctf_orange** *by king metroid*  
 Looming under the shadow of a large central tower, two groups plot each other's
 demise. Climb the tower to drop down on unsuspecting opponents!
 
-8. **cp_dirtbowl** *by Vaati*  
+7. **cp_dirtbowl** *by Vaati*  
 Somewhere in the middle of nowhere, BLU is ready to launch it's secret weapon at
 RED's base within Mt. Dirtbowl. RED must push forward while BLU must hold them off
 on three map fronts in this control point attack style map.
 
-9. **cp_egypt** *by Tarzan*  
+8. **cp_egypt** *by Tarzan*  
 Under the blazing desert sun, RED and BLU battle to control an antiquated city.
 Fight to maintain a hold on all five control points in this majestic CP map.
 
-10. **arena_lumberyard** *by Faust*  
+9. **arena_lumberyard** *by Faust*  
 Somewhere in the Rocky Mountains, BLU has made an attack on an important RED 
 lumberyard. You can shoot through some of the floors!
 
-11. **arena_montane** *by Taters and agh*  
+10. **arena_montane** *by Taters and agh*  
 Somewhere in the forests, RED and BLU fight for supremacy over an important propaganda 
 radio transmitter. Sticking with the team is best!
 
-12. **gen_destroy** *by agh*  
+11. **gen_destroy** *by agh*  
 In the first ever generator map for Gang Garrison, RED and BLU must destroy the others'
 power generator while keeping their own running!
 
-13. **koth_valley** *by agh*  
+12. **koth_valley** *by agh*  
 An abandoned spytech base conveniently concealed within a mountain range becomes a hotspot for 
 waging battle. RED and BLU butt heads to take control over the technology left behind.
 
-14. **koth_corinth** *by BassieEnAdrian and McGenio*  
+13. **koth_corinth** *by BassieEnAdrian and McGenio*  
 An arms carrier is leaving a major port, but both RED and BLU have plans to seize the weapons.
 Duke it out on the shipyard to discover who will obtain the goods.
 
-15. **koth_harvest** *by Wherewolf*  
+14. **koth_harvest** *by Wherewolf*  
 A community-made arena map gone official! RED and BLU fight for control of an abandoned farmyard. 
 It is unknown what significance this location holds to both factions, but fear keeps invesigators 
 from delving any further.
 
-16. **dkoth_atalia** *by Wareya*  
+15. **dkoth_atalia** *by Wareya*  
 A community-made Generator map that was converted for DKotH. It's advised to take over the central
 complex to gain the advantage for when making an assault on the enemy control point.
 
-17. **dkoth_sixties** *by Ozoh*  
+16. **dkoth_sixties** *by Ozoh*  
 A close quarters industrial map. Use the twists and turns to your advantage to eliminate the enemy
 team and seize their control point.
 
-18. **tdm_mantic** *by Wareya*  
+17. **tdm_mantic** *by Wareya*  
 This place is broken, but not by human hands. Kill and kill to appease the gods. If you kill
 enough, they might just let you down.
 
-19. **ctf_avanti** *by Teeferbone and Wareya*  
+18. **ctf_avanti** *by Teeferbone and Wareya*  
 Your financers want intelligence on a backwater town. They say the church practiced black magic.
 BLU already raided the area, but landslides blocked the road and killed half the convoy.
 Can RED recover intelligence from BLU before the roads are cleared?
 
-20. **koth_gallery** *by Heenok*  
+19. **koth_gallery** *by Heenok*  
 This famous art gallery will open its doors for a new exhibition tomorrow. The center piece?
 A statue of pure canadium. Go in and grab it tonight! Deal with any other team of mercenaries
 who may want it, too. However, I still want to enjoy the exhibition, so try not to smash too
 many priceless pieces, will you?
 
-21. **ctf_eiger** *by kildau*  
+20. **ctf_eiger** *by kildau*  
 Located in the cold and harsh Alps, this map emphasizes on teamwork and good co-operation.
 Taking control of the central area will make your team's chances of winning several times higher.
 Beware of scouts, spies and explosive classes using alternate routes and hard-to-reach places.
