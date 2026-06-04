@@ -240,9 +240,9 @@ IV. The Maps
 
 A. The Official Maps:
 
-To run a server using only these maps, open gg2.ini and make sure no custom
-map list is specified ("MapRotation=" under [Server] should be left blank). To change
-the order the maps are played, change the numbers next to the map names; the maps
+To run a server using only these maps make sure no custom
+map list is specified in "Host Game" -> "Advanced" -> "Map Rotation". To change
+the order the maps are played, change the numbers next to the map names in the gg2.ini file; the maps
 will play in numerical order from least to greatest. Place a zero next to a map to ignore it.
 
 1. ctf_truefort
@@ -355,10 +355,10 @@ B. Using Custom Maps:
 
 To run a server using custom maps, make a folder called "Maps" in the same 
 path as Gang Garrison 2.exe and place the compiled map file (it will have 
-a ".png" extension) inside. Create a text file with any name, like "maplist.txt", and 
-open gg2.ini. Next to "MapRotation=" under [Server], type the name of this file.
-
-Open your maplist file and type the name of each map you want to play in order:
+a ".png" extension) inside.
+Create a text file with any name, like "maplist.txt", and type the name of 
+each map you want to play in order.
+After saving the file, select it from "Host Game" -> "Advanced" -> "Map Rotation".
 For instance:
 
 ctf_2dfort
