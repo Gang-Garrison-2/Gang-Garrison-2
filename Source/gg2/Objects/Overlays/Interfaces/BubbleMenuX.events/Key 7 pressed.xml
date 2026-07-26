@@ -13,7 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if sprite_index == BubbleMenuXS bubbleImage=33;
+        <argument kind="STRING">if sprite_index == BubbleMenuXS bubbleImage=46;
 else bubbleImage = 6 + offset;
 event_user(0);
 </argument>
