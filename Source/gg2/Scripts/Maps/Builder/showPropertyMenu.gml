@@ -7,14 +7,14 @@
 if (ds_map_size(argument0) == 0)
     return false;
 
-var key, menu, res, keys, i, new, old, exists, _x, _y, newPropIdx, fullName;
+var key, menu, res, keys, i, newPropValue, oldPropValue, exists, _x, _y, newPropIdx, fullName;
 _x = window_mouse_get_x() + window_get_x();
 _y = window_mouse_get_y() + window_get_y();
 newPropIdx = -1;
 
 do
 {
-    new = "";
+    newPropValue = "";
     menu = "";
     i = 0;
     for(key=ds_map_find_first(argument0); is_string(key); key=ds_map_find_next(argument0, key))
@@ -62,31 +62,31 @@ do
                 }
                 else
                 {
-                    new = get_string("Value for " + prop + ":", "")
-                    ds_map_add(argument0, prop, new);
+                    newPropValue = get_string("Value for " + prop + ":", "")
+                    ds_map_add(argument0, prop, newPropValue);
                 }
             }            
         }
         else
         {
             prop = keys[res];
-            old = ds_map_find_value(argument1, prop);
+            oldPropValue = ds_map_find_value(argument1, prop);
             exists = true;
-            if (!is_string(old))
+            if (!is_string(oldPropValue))
             {
-                old = ds_map_find_value(argument0, prop);
+                oldPropValue = ds_map_find_value(argument0, prop);
                 exists = false;
             }
             
             // Toggle boolean values
-            if (old == "true")
+            if (oldPropValue == "true")
             {
                 if (exists)
                     ds_map_replace(argument1, prop, "false");
                 else
                     ds_map_add(argument1, prop, "false");
             }
-            else if (old == "false")
+            else if (oldPropValue == "false")
             {
                 if (exists)
                     ds_map_replace(argument1, prop, "true");
@@ -95,19 +95,20 @@ do
             }
             else
             {
-                new = get_string("New value for " + prop + ":", old);                    
+                newPropValue = get_string("New value for " + prop + ":", oldPropValue);                    
                 if (exists)
-                    ds_map_replace(argument1, prop, new);
+                    ds_map_replace(argument1, prop, newPropValue);
                 else
-                    ds_map_add(argument1, prop, new);
+                    ds_map_add(argument1, prop, newPropValue);
             }
         }
     }
-    else
-        new = " ";
-    
+    else {
+        newPropValue = " ";
+    }
+
     // Destroy de property if the contents are empty
-    if (argument2 > 0 && new == "")
+    if (argument2 > 0 && newPropValue == "")
     {
         ds_map_delete(argument1, prop);
         i -= 1;
