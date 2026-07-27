@@ -8,11 +8,10 @@
   </grid>
   <speed>30</speed>
   <persistent>false</persistent>
-  <creationCode>window_set_position(previous_window_x+previous_window_w/2-window_get_width()/2, previous_window_y);
-
-</creationCode>
+  <creationCode>window_set_position(previous_window_x+previous_window_w/2-window_get_width()/2, previous_window_y);</creationCode>
   <backgroundColor>C0C0C0</backgroundColor>
   <drawBackgroundColor>true</drawBackgroundColor>
+  <clearViewBackground>true</clearViewBackground>
   <backgrounds>
     <backgroundDef>
       <visibleOnRoomStart>true</visibleOnRoomStart>

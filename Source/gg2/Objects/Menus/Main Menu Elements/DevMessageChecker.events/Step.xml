@@ -30,7 +30,7 @@ if (http_step(handle)) {
     global.devMessagesChecked = true;
 
     // split into lines by LF
-    data = split(data, chr(10));
+    data = split(data, ansi_char(10));
     
     var c;
     for(c = 0; c &lt; ds_list_size(data); c += 2)

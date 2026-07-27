@@ -13,7 +13,7 @@ for(i=1; i<=strlen; i+=2)
 {
     byte = (string_pos(string_char_at(argument0, i), "0123456789abcdef")-1)<<4;
     byte += (string_pos(string_char_at(argument0, i+1), "0123456789abcdef")-1);
-    result += chr(byte);
+    result += ansi_char(byte);
 }
 
 return result;

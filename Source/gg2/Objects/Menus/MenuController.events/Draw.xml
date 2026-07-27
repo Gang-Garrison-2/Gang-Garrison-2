@@ -181,11 +181,11 @@ if(view_hview[0] &lt; 600)
                 gotVar = menu_get_var(i);
                 //Numpad number buttons
                 if (gotVar &gt;= 96 &amp;&amp; gotVar &lt;=  105){
-                    val = "NUMPAD " + chr(gotVar - 48);
+                    val = "NUMPAD " + ansi_char(gotVar - 48);
                 }
                 //Numpad other buttons
                 else if (gotVar &gt;= 106 &amp;&amp; gotVar &lt;=  111){
-                    val = "NUMPAD " + chr(gotVar - 64);
+                    val = "NUMPAD " + ansi_char(gotVar - 64);
                 }
                 //Function buttons
                 else if (gotVar &gt;= 112 &amp;&amp; gotVar &lt;= 123) {
@@ -193,9 +193,9 @@ if(view_hview[0] &lt; 600)
                 }
                 //Comma, dot, minus
                 else if (gotVar &gt;= 188 &amp;&amp; gotVar &lt;= 190) {
-                    val = chr(gotVar - 144);
+                    val = ansi_char(gotVar - 144);
                 }
-                else val = chr(menu_get_var(i));
+                else val = ansi_char(menu_get_var(i));
                 break;
             }
             break;
