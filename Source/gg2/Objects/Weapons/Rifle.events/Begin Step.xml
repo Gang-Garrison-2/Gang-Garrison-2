@@ -18,9 +18,12 @@
     t += 1 * global.delta_factor;
     if (t &gt; chargeTime)
         t = chargeTime;
+    weapon = DAMAGE_SOURCE_RIFLE_CHARGED;
 }
-else
+else {
     t = 0;
+    weapon = DAMAGE_SOURCE_RIFLE;
+}
 if(!owner.zoomed)
     hitDamage = unscopedDamage;
 else

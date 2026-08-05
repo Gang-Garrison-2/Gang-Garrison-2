@@ -29,6 +29,7 @@
     ammoCount = maxAmmo;
     shot=false;
     t=0;
+    weapon = DAMAGE_SOURCE_RIFLE;
     
     if(golden)
     {

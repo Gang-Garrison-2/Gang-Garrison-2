@@ -6,4 +6,5 @@
   <resource name="damageAuto" type="RESOURCE"/>
   <resource name="damageGenerator" type="RESOURCE"/>
   <resource name="dealFlicker" type="RESOURCE"/>
+  <resource name="Collision Detection" type="GROUP"/>
 </resources>
