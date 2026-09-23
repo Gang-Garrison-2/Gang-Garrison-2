@@ -2,7 +2,8 @@
 # Build GG2 with ENIGMA: prebuild rewrite -> GmkSplitter -> emake.
 # Usage: build.sh [--codegen-only] [--headless]
 # Env:
-#   GMKSPLIT     path to gmksplit.jar (https://github.com/Medo42/Gmk-Splitter), required
+#   GMKSPLIT     path to gmksplit.jar (default: downloaded into build-tools/)
+#   FAUCET_SRC   Faucet-Networking-Extension checkout, modern-boost branch
 #   ENIGMA_ROOT  ENIGMA checkout with emake built (default /opt/enigma-dev-git)
 #   WORK         build dir (default ./build under this directory)
 set -euo pipefail
@@ -11,7 +12,13 @@ HERE="$(cd "$(dirname "$0")" && pwd)"
 SRC="$HERE/../gg2"
 WORK="${WORK:-$HERE/build}"
 ENIGMA_ROOT="${ENIGMA_ROOT:-/opt/enigma-dev-git}"
-: "${GMKSPLIT:?set GMKSPLIT to the path of gmksplit.jar}"
+GMKSPLIT="${GMKSPLIT:-$HERE/build-tools/GmkSplitter.v0.18/gmksplit.jar}"
+if [[ ! -f "$GMKSPLIT" ]]; then
+  mkdir -p "$HERE/build-tools"
+  curl -sSL -o "$HERE/build-tools/gmksplit.zip" \
+    https://github.com/Medo42/Gmk-Splitter/releases/download/V0.18/GmkSplitter.v0.18.zip
+  unzip -qo "$HERE/build-tools/gmksplit.zip" -d "$HERE/build-tools"
+fi
 
 mode=(-j"$(nproc)")
 FAUCET_SRC="${FAUCET_SRC:-$HOME/github/Faucet-Networking-Extension}" # modern-boost branch
