@@ -66,6 +66,7 @@ GG2DLL_SRC="$HERE/../../Extensions/GG2DLL/GG2DLL"
 cc -O2 -fPIC -c "$GG2DLL_SRC/md5.c" -o "$TOOLCHAIN_LIB/md5.o"
 "$REAL_GXX" -std=c++17 -O2 -fPIC -shared -o "$WORK/libgg2dll.so" \
   "$GG2DLL_SRC/GG2DLL.cpp" "$TOOLCHAIN_LIB/md5.o" -lpng -lz
+(cd "$HERE" && python3 test_prebuild.py >/dev/null && rm -rf __pycache__)
 python3 "$HERE/prebuild.py" "$SRC" "$WORK/src/gg2" "${prebuild_flags[@]}"
 rm -f "$WORK/gg2.gmk" # gmksplit won't overwrite
 (cd "$WORK/src" && java -jar "$GMKSPLIT" gg2 "$WORK/gg2.gmk" >/dev/null)
