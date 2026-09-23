@@ -27,18 +27,21 @@ for(team = 0; team < 2; team += 1)
         animation = ds_list_find_value(basicAnimations, j);
         spriteId = getCharacterSpriteId(className, team, animation);
         
-        // TODO(enigma): if/else instead of switch; ENIGMA can't switch on strings. Restore switch when fixed
-        if (animation == "Run")
+        switch(animation)
         {
+        case "Run":
             setHeadPose(spriteId, 0, dxBase, dyBase-bobAmount, 0, 1);
             setHeadPose(spriteId, 1, dxBase, dyBase, 0, 1);
             setHeadPose(spriteId, 2, dxBase, dyBase-bobAmount, 0, 1);
             setHeadPose(spriteId, 3, dxBase, dyBase, 0, 1);
-        }
-        else if (animation == "Taunt")
+            break;
+        case "Taunt":
             setHeadPosesFromString(spriteId, dxBase, dyBase, tauntPoseString);
-        else
+            break;
+        default:
             setHeadPose(spriteId, 0, dxBase, dyBase, 0, 1);
+            break;
+        }
     }
 }
 

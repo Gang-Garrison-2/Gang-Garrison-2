@@ -28,7 +28,7 @@ if(global.updaterBetaChannel)
 else
     url = UPDATE_SOURCE;
 
-tmpfile = temp_directory + "/gg2update.zip";
+tmpfile = temp_directory + "\gg2update.zip";
     
 downloadHandle = http_new_get(url);
 

@@ -38,10 +38,7 @@ with(Character) {
             (bubbleImage == 45 || bubbleImage == 49) &amp;&amp;
             (x &gt; xOffset + width || x &lt; xOffset || y &gt; yOffset+height || y &lt; yOffset)) {
         draw_set_alpha(bubbleAlpha);
-        // TODO(enigma): temp var avoids ENIGMA nested built-in dot bug (a.b.x); inline when fixed
-        var myObject;
-        myObject = global.myself.object;
-        theta = point_direction(myObject.x, myObject.y, x, y)*pi/180;
+        theta = point_direction(global.myself.object.x, global.myself.object.y, x, y)*pi/180;
         if(theta &lt;= cornerDegree || theta &gt; 2*pi - cornerDegree){
             unknown = (width/2 - 38*cos(theta))*tan(theta);
             draw_sprite_ext(MedRadarArrow, floor(hp/maxHp * 19), xOffset + width - cos(theta)*38, yOffset+ height/2 -unknown, 1,1,theta*180/pi, c_white, bubbleAlpha);

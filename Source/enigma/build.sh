@@ -43,21 +43,35 @@ mkdir -p "$WORK"
 export REAL_GXX="$(command -v g++)"
 export TOOLCHAIN_LIB="$WORK/toolchain"
 mkdir -p "$TOOLCHAIN_LIB"
+# ENIGMA engine bugs are patched in a build-local copy of the ENIGMA tree
+# (toolchain/patch_engine.py); $ENIGMA_ROOT stays untouched.
+ENGINE="$HERE/build-tools/enigma-engine"
+mkdir -p "$ENGINE"
+python3 "$HERE/toolchain/patch_engine.py" --files | sed 's|^|/|' >"$TOOLCHAIN_LIB/engine-patched.txt"
+rsync -a --delete --exclude /.git --exclude-from="$TOOLCHAIN_LIB/engine-patched.txt" \
+  "$ENIGMA_ROOT/" "$ENGINE/"
+python3 "$HERE/toolchain/patch_engine.py" "$ENIGMA_ROOT" "$ENGINE"
 ar rc "$TOOLCHAIN_LIB/libprocps.a" # xlib widgets link -lprocps; the shim is header-only
 if [[ -n "${headless:-}" ]]; then
   export HEADLESS_STUBS_O="$TOOLCHAIN_LIB/headless_stubs.o"
-  "$REAL_GXX" -std=c++17 -fPIC -I"$ENIGMA_ROOT/ENIGMAsystem/SHELL" \
+  "$REAL_GXX" -std=c++17 -fPIC -I"$ENGINE/ENIGMAsystem/SHELL" \
     -c "$HERE/toolchain/headless_stubs.cpp" -o "$HEADLESS_STUBS_O"
 fi
+export CODEGEN_DIR="$WORK/codegen"
 export PATH="$HERE/toolchain:$PATH"
 
 # Faucet Networking as a shared library next to the game.
 [[ -d "$FAUCET_SRC/faucet" ]] || { echo "set FAUCET_SRC to a Faucet-Networking-Extension checkout" >&2; exit 2; }
 mkdir -p "$TOOLCHAIN_LIB/faucet"
+FAUCET_ACCEPTOR="$TOOLCHAIN_LIB/CombinedTcpAcceptor.cpp"
+python3 "$HERE/toolchain/patch_faucet.py" \
+  "$FAUCET_SRC/faucet/tcp/CombinedTcpAcceptor.cpp" "$FAUCET_ACCEPTOR"
 for f in $(find "$FAUCET_SRC/faucet" -name '*.cpp'); do
   o="$TOOLCHAIN_LIB/faucet/$(echo "${f#"$FAUCET_SRC/"}" | tr / _).o"
-  [[ "$o" -nt "$f" ]] || "$REAL_GXX" -std=c++17 -O2 -fPIC -I"$FAUCET_SRC" \
-    '-D__declspec(x)=__attribute__((visibility("default")))' -c "$f" -o "$o"
+  source="$f"
+  [[ "$f" != "$FAUCET_SRC/faucet/tcp/CombinedTcpAcceptor.cpp" ]] || source="$FAUCET_ACCEPTOR"
+  [[ "$o" -nt "$source" ]] || "$REAL_GXX" -std=c++17 -O2 -fPIC -I"$FAUCET_SRC" -I"$FAUCET_SRC/faucet/tcp" \
+    '-D__declspec(x)=__attribute__((visibility("default")))' -c "$source" -o "$o"
 done
 "$REAL_GXX" -shared -o "$WORK/libfaucetnet.so" "$TOOLCHAIN_LIB"/faucet/*.o -lboost_thread -lpthread
 
@@ -67,16 +81,29 @@ cc -O2 -fPIC -c "$GG2DLL_SRC/md5.c" -o "$TOOLCHAIN_LIB/md5.o"
 "$REAL_GXX" -std=c++17 -O2 -fPIC -shared -o "$WORK/libgg2dll.so" \
   "$GG2DLL_SRC/GG2DLL.cpp" "$TOOLCHAIN_LIB/md5.o" -lpng -lz
 (cd "$HERE" && python3 test_prebuild.py >/dev/null && rm -rf __pycache__)
-python3 "$HERE/prebuild.py" "$SRC" "$WORK/src/gg2" "${prebuild_flags[@]}"
-rm -f "$WORK/gg2.gmk" # gmksplit won't overwrite
-(cd "$WORK/src" && java -jar "$GMKSPLIT" gg2 "$WORK/gg2.gmk" >/dev/null)
+make_gmk() {
+  python3 "$HERE/prebuild.py" "$SRC" "$WORK/src/gg2" "${prebuild_flags[@]}" "$@"
+  rm -f "$WORK/gg2.gmk" # gmksplit won't overwrite
+  (cd "$WORK/src" && java -jar "$GMKSPLIT" gg2 "$WORK/gg2.gmk" >/dev/null)
+}
+run_emake() { # <codegen dir> <log> [emake args...]
+  local codegen="$1" log="$2"
+  shift 2
+  (cd "$ENGINE" && ./emake "$WORK/gg2.gmk" -o "$WORK/gg2" -d "$WORK/obj/" -k "$codegen/" \
+    "${systems[@]}" -c Precise \
+    -e Alarms,Paths,libpng,DataStructures,Timelines,ParticleSystems,IniFilesystem,ExternalFuncs,DateTime,RegistrySpoof \
+    "$@" >"$log" 2>&1)
+}
 
-cd "$ENIGMA_ROOT"
+# Pass 1 (codegen only): ENIGMA's own list of each object's locals, which
+# prebuild needs to scope bare names inside with() (ENIGMA bug #9).
+make_gmk
+run_emake "$WORK/members-codegen" "$WORK/emake-members.log" --codegen-only ||
+  { echo "codegen pass failed, see $WORK/emake-members.log" >&2; exit 1; }
+make_gmk --members "$WORK/members-codegen"
+
 set +e
-./emake "$WORK/gg2.gmk" -o "$WORK/gg2" -d "$WORK/obj/" -k "$WORK/codegen/" \
-  "${systems[@]}" -c Precise \
-  -e Alarms,Paths,libpng,DataStructures,Timelines,ParticleSystems,IniFilesystem,ExternalFuncs,DateTime,RegistrySpoof \
-  "${mode[@]}" >"$WORK/emake.log" 2>&1
+run_emake "$WORK/codegen" "$WORK/emake.log" "${mode[@]}"
 status=$?
 set -e
 
@@ -88,6 +115,8 @@ if grep -qE 'Transfer error|have zero size|vary in dimensions' "$WORK/emake.log"
 fi
 # GM8 embeds Included Files; ENIGMA builds ship them next to the binary.
 find "$SRC/Included Files" -maxdepth 1 -type f ! -name '*.xml' -exec cp -t "$WORK" {} +
+# game_init loads music from disk at startup.
+if [[ -z "${headless:-}" ]]; then cp -a "$HERE/../../Music" "$WORK/"; fi
 
 errors=$(grep -c ' error: \|Syntax error\|Semantic error' "$WORK/emake.log" || true)
 echo "emake exit $status, $errors errors, log: $WORK/emake.log"

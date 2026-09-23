@@ -13,8 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">golden = false; // set by the creating Revolver
-alpha = 0.01;
+        <argument kind="STRING">alpha = 0.01;
 done = false;
 hitDamage = 0;
 image_speed = 0;

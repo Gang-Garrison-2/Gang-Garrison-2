@@ -89,8 +89,7 @@
     
     instance_create(0,0,PlayerControl);
 
-    // i is declared above; ENIGMA rejects redeclaring a var in the same scope
-    var map;
+    var map, i;
     if (global.shuffleRotation) {
         ds_list_shuffle(global.map_rotation);
         map = ds_list_find_value(global.map_rotation, 0);
@@ -124,40 +123,37 @@
     
     GameServerDefineCommands();
     
-    // PLUGINS(disabled): no runtime GML execution in ENIGMA; revisit
-    // // load server-sent plugins, if any
-    // if (string_length(global.serverPluginList))
-    // {
-    //     // Get hashes of latest versions for plugin list
-    //     pluginList = getpluginhashes(global.serverPluginList);
-    //     if (pluginList == 'failure')
-    //     {
-    //         show_message("Error occurred getting server-sent plugin hashes.");
-    //         game_end();
-    //         exit;
-    //     }
-    //     if (string_length(pluginList) > 65535)
-    //     {
-    //         show_message("Error: you are requiring too many server-sent plugins.");
-    //         game_end();
-    //         exit;
-    //     }
-    //
-    //     // Load plugins
-    //     if (!loadserverplugins(pluginList))
-    //     {
-    //         show_message("Error occurred loading server-sent plugins.");
-    //         game_end();
-    //         exit;
-    //     }
-    //     global.serverPluginsInUse = true;
-    // }
-    // else
-    // {
-    //     pluginList = '';
-    // }
-    // Server-sent plugins aren't supported; the handshake still sends an empty list.
-    pluginList = '';
+    // load server-sent plugins, if any
+    if (string_length(global.serverPluginList))
+    {
+        // Get hashes of latest versions for plugin list
+        pluginList = getpluginhashes(global.serverPluginList);
+        if (pluginList == 'failure')
+        {
+            show_message("Error occurred getting server-sent plugin hashes.");
+            game_end();
+            exit;
+        }
+        if (string_length(pluginList) > 65535)
+        {
+            show_message("Error: you are requiring too many server-sent plugins.");
+            game_end();
+            exit;
+        }
+
+        // Load plugins
+        if (!loadserverplugins(pluginList))
+        {
+            show_message("Error occurred loading server-sent plugins.");
+            game_end();
+            exit;
+        }
+        global.serverPluginsInUse = true;
+    }
+    else
+    {
+        pluginList = '';
+    }
     
     // Disable vsync to minimize framerate drops which would be noticed as lag issues by all players.
     // "vsync makes the server desync" --Arctic

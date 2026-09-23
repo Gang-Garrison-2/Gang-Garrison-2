@@ -61,13 +61,11 @@
     }
     
     //part type destroy
-    if(jumpFlameParticleType != -1)
+    if(variable_local_exists("jumpFlameParticleType"))
         part_type_destroy(jumpFlameParticleType);
     
-    // Was a check for jumpDustParticleSystem, which never existed locally, so
-    // the dust particle type leaked.
-    if(jumpDustParticleType != -1)
-        part_type_destroy(jumpDustParticleType);
+    if(variable_local_exists("jumpDustParticleSystem"))
+        part_type_destroy(jumpDustParticleSystem);
         
     // destroy overlay lists
     ds_list_destroy(stillOverlays);

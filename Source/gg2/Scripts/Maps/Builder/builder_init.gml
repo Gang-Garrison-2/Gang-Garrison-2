@@ -5,41 +5,257 @@ global.gamemodes = ds_list_create();
 global.buttons = ds_list_create();
 global.resources = ds_map_create();
 
-// PLUGINS(disabled): no runtime GML execution in ENIGMA; revisit
-// global.placeEntityFunction = "";
-// global.metadataFunction = "";
+global.placeEntityFunction = "";
+global.metadataFunction = "";
 
 // Add buttons
-addButton("Load map", builder_button_load_map);
-addButton("Load BG", builder_button_load_bg); 
-addButton("Load WM", builder_button_load_wm); 
-addButton("Show BG", builder_button_show_bg, 1, 1); 
-addButton("Show WM", builder_button_show_wm, 1); 
-addButton("Show grid", builder_button_show_grid, 1);
-addButton("Show FG",builder_button_show_fg, 1, 1); 
-addButton("Save & test", builder_button_save_test); 
-addButton("Test w/o save", builder_button_test_w_o_save);
-addButton("Symmetry mode", builder_button_symmetry_mode, 1); 
-addButton("Scale mode", builder_button_scale_mode, 1, 1);
-addButton("Fast scrolling",builder_button_fast_scrolling, 1);
-addButton("Edit metadata", builder_button_edit_metadata);
-addButton("Add resource", builder_button_add_resource);
+addButton("Load map", '
+    var map;
+    map = get_open_filename("PNG|*.png","");
+    if (map == "") break;
+    
+    with(LevelEntity) instance_destroy();
+    unloadResources();
+    ds_map_clear(Builder.metadata);
+    ds_map_add(Builder.metadata, "type", "meta");
+    ds_map_add(Builder.metadata, "background", "ffffff");
+    
+    CustomMapInit(map)
+    Builder.mapBG = map;  
+    Builder.mapWM = " ";
+    Builder.wmString = compressWalkmask();
+    loadMetadata(Builder.metadata, true);
+');
+addButton("Load BG", '
+    var bg;
+    bg = get_open_filename("PNG|*.png","");
+    if(bg == "") break;
+    Builder.mapBG = bg;
+    background_replace(BuilderBGB, bg, false, false);
+    background_xscale[7] = 6;
+    background_yscale[7] = 6;
+'); 
+addButton("Load WM", '
+    var wm;
+    wm = get_open_filename("Walkmask Image (PNG or BMP)|*.png; *.bmp","");
+    if(wm == "") break;
+    Builder.mapWM = wm;
+    background_replace(BuilderWMB, wm, true, false);
+    Builder.wmString = compressWalkmask();
+'); 
+addButton("Show BG", 'background_visible[7] = argument0;', 1, 1); 
+addButton("Show WM", 'Builder.showWM = argument0;', 1); 
+addButton("Show grid", 'Builder.showGrid = argument0;', 1);
+addButton("Show FG",'ParallaxController.visible = argument0;', 1, 1); 
+addButton("Save & test", '
+    if (Builder.mapWM == "") show_message("Select a walkmask first.");
+    else if (Builder.mapBG == "") show_message("Select a background first");
+    else if (validateMap(log2(gamemode))) {    
+        var leveldata;
+        leveldata = compressEntities() + chr(10) + Builder.wmString;
+        GG2DLL_embed_PNG_leveldata(Builder.mapBG, leveldata);
+        
+        // Place a copy in the maps folder
+        if (file_exists("Maps\ggb2_tmp_map.png")) file_delete("Maps\ggb2_tmp_map.png");
+        file_copy(Builder.mapBG, "Maps\ggb2_tmp_map.png");
+        
+        switch(show_message_ext("Compilation completed. The map is saved to " + string(Builder.mapBG) + ".", "Ok", "Test separately", "Test here")) {
+            case 2:             
+                startGG2("-map ggb2_tmp_map");
+            break;       
+            case 3:
+                Builder.selected = -1;
+                Builder.visible = false;
+                global.launchMap = "ggb2_tmp_map";
+                global.isHost = true;
+                global.gameServer = instance_create(0,0,GameServer); 
+            break; 
+        }
+    }
+'); 
+addButton("Test w/o save", '
+    if (Builder.mapWM == "") show_message("Select a walkmask first.");
+    else if (Builder.mapBG == "") show_message("Select a background first");
+    else if (validateMap(log2(gamemode))) {
+        // Save to a temporary file
+        if (file_exists("Maps\ggb2_tmp_map.png")) file_delete("Maps\ggb2_tmp_map.png");
+        file_copy(Builder.mapBG, "Maps\ggb2_tmp_map.png");
+        
+        var leveldata;
+        leveldata = compressEntities() + chr(10) + Builder.wmString;
+        GG2DLL_embed_PNG_leveldata("Maps/ggb2_tmp_map.png", leveldata);               
+        
+        switch(show_message_ext("Where do you want to playtest?", "Test separately", "Test here", "Cancel")) {
+            case 1:             
+                startGG2("-map ggb2_tmp_map");
+            break;       
+            case 2:
+                Builder.selected = -1;
+                Builder.visible = false;
+                global.launchMap = "ggb2_tmp_map";
+                global.isHost = true;
+                global.gameServer = instance_create(0,0,GameServer); 
+            break; 
+        }          
+    }
+');
+addButton("Symmetry mode", '
+    Builder.symmetry = argument0;
+    return argument0;
+', 1); 
+addButton("Scale mode", '
+    Builder.scale = argument0;
+    return argument0;
+', 1, 1);
+addButton("Fast scrolling",'
+    Builder.moveSpeed = 32 + 32*argument0;
+    return argument0;
+', 1);
+addButton("Edit metadata", '
+    showPropertyMenu(Builder.metadata, Builder.metadata, true);
+    loadMetadata(Builder.metadata, true);   // Reload
+');
+addButton("Add resource", '
+    var prop;
+    prop = get_string("Resource name:", "");
+    if (prop != "")
+    {
+        resource = get_open_filename("Resource (PNG, GIF)|*.png;*.gif;","");
+        if (resource == "")
+            break;
+        ds_map_add(Builder.metadata, prop, resourceToString(resource));
+        loadMetadata(Builder.metadata, true);
+    }
+');
 
-addButton("Get resources", builder_button_get_resources);
-addButton("Load entities", builder_button_load_entities); 
-addButton("Save entities", builder_button_save_entities);
-addButton("Clear entities", builder_button_clear_entities); 
+addButton("Get resources", '
+    if (Builder.mapBG == "")
+        show_message("Load a map first");
+    else
+    {
+        if (!directory_exists(working_directory + "/Maps/Decompiled"))
+            directory_create(working_directory + "/Maps/Decompiled");
+        
+        // Walkmask
+        if (file_exists(temp_directory+"\custommap_walkmask.png"))
+            file_copy(temp_directory+"\custommap_walkmask.png", working_directory + "/Maps/Decompiled/walkmask.png");    
+       
+        // External sprites     
+        var resource;
+        for(resource=ds_map_find_first(Builder.metadata); is_string(resource); resource = ds_map_find_next(Builder.metadata, resource))
+        {   
+            var bg;
+            if (string_copy(resource,1, 3) == "bg_")
+                bg = true;
+            else
+                bg = false;
+                
+            stringToResource(ds_map_find_value(Builder.metadata, resource), bg, working_directory + "/Maps/Decompiled/" + resource);
+        }  
+        show_message("The map has been decompiled to " + working_directory + "/Maps/Decompiled/ .");
+    }
+');
+addButton("Load entities", '
+    unloadResources();
+    ds_map_clear(Builder.metadata);
+    loadEntities();
+'); 
+addButton("Save entities", 'saveEntities();');
+addButton("Clear entities", '
+    if (show_question("Are you sure you want to scrap your entities?")) {
+        unloadResources();
+        ds_map_clear(Builder.metadata);
+        ds_map_add(Builder.metadata, "type", "meta");
+        ds_map_add(Builder.metadata, "background", "ffffff");
+        ds_map_add(Builder.metadata, "void", "000000");
+        with (LevelEntity) instance_destroy();
+    }
+'); 
 
 // Add gamemodes
 var ctf, cp, adcp, koth, dkoth, arena, gen;
-addGamemode("Free mode", -1);
-ctf = addGamemode("Capture the flag (ctf)", builder_gamemode_capture_the_flag_ctf, "Ctf or invasion mode needs 1 red and 1 blue intelligence.");
-cp = addGamemode("Control points (cp)", builder_gamemode_control_points_cp, "CP needs 1-5 control points and capturezones.");
-adcp = addGamemode("A/D control points (adcp)", builder_gamemode_a_d_control_points_adcp, "A/D CP needs 1-5 control points, capturezones and setup gates.");
-koth = addGamemode("King of the hill (koth)", builder_gamemode_king_of_the_hill_koth, "KOTH needs 1 control point and capturezones.");
-dkoth = addGamemode("Dual king of the hill (dkoth)" ,builder_gamemode_dual_king_of_the_hill_dkoth, "DKOTH needs 1 red control point, 1 blue control point and capturezones.");
-arena = addGamemode("Arena (arena)", builder_gamemode_arena_arena, "Arena needs 1 control point and capturezones.");
-gen = addGamemode("Generator (gen)", builder_gamemode_generator_gen, "Gen needs 1 red and 1 blue generator.");
+addGamemode("Free mode");
+ctf = addGamemode("Capture the flag (ctf)", '
+    var redCount, blueCount;
+    redCount = 0;
+    blueCount = 0;
+    with(LevelEntity) {
+        if (type == "redintel") redCount += 1;
+        else if (type == "blueintel") blueCount += 1;
+    }
+    if (redCount != 1 || blueCount != 1) return false;
+    return true;
+', "Ctf or invasion mode needs 1 red and 1 blue intelligence.");
+cp = addGamemode("Control points (cp)", '
+    var controlpoints, zones;
+    controlpoints = 0;
+    zones = 0;
+    with(LevelEntity) {
+        if (type == "controlPoint1" || type == "controlPoint2" || type == "controlPoint3" || type == "controlPoint4" || type == "controlPoint5") controlpoints += 1;
+        else if (type == "CapturePoint") zones += 1;
+    }
+    if (controlpoints == 0 || controlpoints > 5 || zones == 0) return false;
+    return true;
+', "CP needs 1-5 control points and capturezones.");
+adcp = addGamemode("A/D control points (adcp)", '
+    var controlpoints, zones, gates;
+    controlpoints = 0;
+    zones = 0;
+    gates = 0;
+    with(LevelEntity) {
+        if (type == "controlPoint1" || type == "controlPoint2" || type == "controlPoint3" || type == "controlPoint4" || type == "controlPoint5") controlpoints += 1;
+        else if (type == "CapturePoint") zones += 1;
+        else if (type == "SetupGate") gates += 1;
+    }
+    if (controlpoints == 0 || controlpoints >= 5 || zones == 0 || gates == 0) return false;
+    return true;
+', "A/D CP needs 1-5 control points, capturezones and setup gates.");
+koth = addGamemode("King of the hill (koth)", '
+    var controlpoints, zones;
+    controlpoints = 0;
+    zones = 0;
+    with(LevelEntity) {
+        if (type == "KothControlPoint") controlpoints += 1;
+        else if (type == "CapturePoint") zones += 1;
+    }
+    if (controlpoints != 1 || zones == 0) return false;
+    return true;
+', "KOTH needs 1 control point and capturezones.");
+dkoth = addGamemode("Dual king of the hill (dkoth)" ,'
+    var redcontrolpoints, bluecontrolpoints, zones;
+    redcontrolpoints = 0;
+    bluecontrolpoints = 0;
+    zones = 0;
+    with(LevelEntity) {
+        if (type == "KothRedControlPoint") redcontrolpoints += 1;
+        else if (type == "KothBlueControlPoint") bluecontrolpoints += 1;
+        else if (type == "CapturePoint") zones += 1;
+    }
+    if (redcontrolpoints != 1 || bluecontrolpoints != 1 || zones == 0) return false;
+    return true;
+', "DKOTH needs 1 red control point, 1 blue control point and capturezones.");
+arena = addGamemode("Arena (arena)", '
+    var controlpoints, zones;
+    controlpoints = 0;
+    zones = 0;
+    with(LevelEntity) {
+        if (type == "ArenaControlPoint") controlpoints += 1;
+        else if (type == "CapturePoint") zones += 1;
+    }
+    if (controlpoints != 1 || zones == 0) return false;
+    return true;
+', "Arena needs 1 control point and capturezones.");
+gen = addGamemode("Generator (gen)", '
+    var redgen, bluegen;
+    redgen = 0;
+    bluegen = 0;
+    with(LevelEntity) {
+        if (type == "GeneratorRed") redgen += 1;
+        else if (type == "GeneratorBlue") bluegen += 1;
+    }
+    if (redgen != 1 || bluegen != 1) return false;
+    return true;
+', "Gen needs 1 red and 1 blue generator.");
 
 // Add entities
 addEntity("spawnroom", -1, "{xscale:1,yscale:1}", SpawnRoom, sprite64, 1, entityButtonS, 74, "Players can instantly respawn in this area.");

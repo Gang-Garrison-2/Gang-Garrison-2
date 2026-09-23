@@ -1,5 +1,5 @@
 var i;
-if(global.spawnPointsCreated) {
+if(variable_global_exists("spawnPointsRed")) {
     for (i=0;i<=4; i+=1){
         ds_list_clear(global.spawnPointsRed[0,i]);
         ds_list_clear(global.spawnPointsRed[1,i]);
@@ -12,7 +12,7 @@ if(global.spawnPointsCreated) {
     }
 }
 
-if(global.spawnPointsCreated) {
+if(variable_global_exists("spawnPointsBlue")) {
     for (i=0;i<=4;i+=1){
         ds_list_clear(global.spawnPointsBlue[0,i]);
         ds_list_clear(global.spawnPointsBlue[1,i]);
@@ -24,7 +24,6 @@ if(global.spawnPointsCreated) {
         global.spawnPointsBlue[1,i] = ds_list_create();
     }
 }
-global.spawnPointsCreated = true;
 with (SpawnPointRed) {
     ds_list_add(global.spawnPointsRed[0,group],x);
     ds_list_add(global.spawnPointsRed[1,group],y);

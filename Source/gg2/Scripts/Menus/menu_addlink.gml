@@ -1,5 +1,5 @@
 // argument0 - name
-// argument1 - script to run (-1 for none)
+// argument1 - GML code to execute
 
 item_name[items] = argument0;
 item_type[items] = "script";

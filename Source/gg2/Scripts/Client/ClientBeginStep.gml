@@ -57,89 +57,81 @@ do {
             break;
 
         case RESERVE_SLOT:
-            // PLUGINS(disabled): no runtime GML execution in ENIGMA; revisit
-            // if (!noReloadPlugins && string_length(plugins))
-            // {
-            //     usePlugins = pluginsRequired || !global.serverPluginsPrompt;
-            //     if (global.serverPluginsPrompt)
-            //     {
-            //         // Split up plugin list
-            //         var pluginList;
-            //         pluginList = split(plugins, ',');
-            //
-            //         // Iterate over list and make displayable list without hashes
-            //         var displayList, i;
-            //         displayList = '';
-            //         for (i = 0; i < ds_list_size(pluginList); i += 1)
-            //         {
-            //             var pluginParts;
-            //             pluginParts = split(ds_list_find_value(pluginList, i), '@');
-            //             displayList += '- ' + ds_list_find_value(pluginParts, 0) + '#';
-            //             ds_list_destroy(pluginParts);
-            //         }
-            //
-            //         // Destroy list
-            //         ds_list_destroy(pluginList);
-            //
-            //         var prompt;
-            //         if (pluginsRequired)
-            //         {
-            //             prompt = show_message_ext(
-            //                 'You need these plugins to play on this server: #'
-            //                 + displayList
-            //                 + PLUGIN_SOURCE_NOTICE
-            //                 + '#Do you want to download them and join the server?',
-            //                 'Download and join',
-            //                 '',
-            //                 'Disconnect'
-            //             );
-            //             if (prompt != 1)
-            //             {
-            //                 instance_destroy();
-            //                 exit;
-            //             }
-            //         }
-            //         else
-            //         {
-            //             prompt = show_message_ext(
-            //                 'These optional plugins are suggested for this server: #'
-            //                 + displayList
-            //                 + PLUGIN_SOURCE_NOTICE
-            //                 + '#Do you want to download them?',
-            //                 'Download',
-            //                 '',
-            //                 'Skip'
-            //             );
-            //             if (prompt == 1)
-            //             {
-            //                 usePlugins = true;
-            //             }
-            //             else
-            //             {
-            //                 // We set this so that we won't prompt for plugins again if we re-connect to download a map
-            //                 skippedPlugins = true;
-            //             }
-            //         }
-            //     }
-            //     if (usePlugins)
-            //     {
-            //         if (!loadserverplugins(plugins))
-            //         {
-            //             show_message("Error occurred loading server-sent plugins.");
-            //             instance_destroy();
-            //             exit;
-            //         }
-            //         global.serverPluginsInUse = true;
-            //     }
-            // }
-            // noReloadPlugins = false;
-            // Plugins aren't supported; optional ones are skipped.
-            if (pluginsRequired and string_length(plugins))
+            if (!noReloadPlugins && string_length(plugins))
             {
-                show_message("This server requires plugins, which this version of Gang Garrison 2 doesn't support.");
-                instance_destroy();
-                exit;
+                usePlugins = pluginsRequired || !global.serverPluginsPrompt;
+                if (global.serverPluginsPrompt)
+                {
+                    // Split up plugin list
+                    var pluginList;
+                    pluginList = split(plugins, ',');
+
+                    // Iterate over list and make displayable list without hashes
+                    var displayList, i;
+                    displayList = '';
+                    for (i = 0; i < ds_list_size(pluginList); i += 1)
+                    {
+                        var pluginParts;
+                        pluginParts = split(ds_list_find_value(pluginList, i), '@');
+                        displayList += '- ' + ds_list_find_value(pluginParts, 0) + '#';
+                        ds_list_destroy(pluginParts);
+                    }
+
+                    // Destroy list
+                    ds_list_destroy(pluginList);
+                    
+                    var prompt;
+                    if (pluginsRequired)
+                    {
+                        prompt = show_message_ext(
+                            'You need these plugins to play on this server: #'
+                            + displayList
+                            + PLUGIN_SOURCE_NOTICE
+                            + '#Do you want to download them and join the server?',
+                            'Download and join',
+                            '',
+                            'Disconnect'
+                        );
+                        if (prompt != 1)
+                        {
+                            instance_destroy();
+                            exit;
+                        }
+                    }
+                    else
+                    {
+                        prompt = show_message_ext(
+                            'These optional plugins are suggested for this server: #'
+                            + displayList
+                            + PLUGIN_SOURCE_NOTICE
+                            + '#Do you want to download them?',
+                            'Download',
+                            '',
+                            'Skip'
+                        );
+                        if (prompt == 1)
+                        {
+                            usePlugins = true;
+                        }
+                        else
+                        {
+                            // We set this so that we won't prompt for plugins again if we re-connect to download a map
+                            skippedPlugins = true;
+                        }
+                    }
+                }
+                if (usePlugins)
+                {
+                    if (!loadserverplugins(plugins))
+                    {
+                        show_message("Error occurred loading server-sent plugins.");
+                        instance_destroy();
+                        exit;
+                    }
+                    global.serverPluginsInUse = true;
+                }
             }
+            noReloadPlugins = false;
             
             if(advertisedMapMd5 != "")
             {
@@ -502,18 +494,16 @@ do {
                     var oldReturnRoom;
                     oldReturnRoom = returnRoom;
                     returnRoom = DownloadRoom;
-                    // PLUGINS(disabled): no runtime GML execution in ENIGMA; revisit
-                    // // Normally, GG2 is restarted when we disconnect, if plugins are in use
-                    // // As we're only disconnecting to download a map, we won't restart
-                    // if (global.serverPluginsInUse)
-                    //     noUnloadPlugins = true;
+                    // Normally, GG2 is restarted when we disconnect, if plugins are in use
+                    // As we're only disconnecting to download a map, we won't restart
+                    if (global.serverPluginsInUse)
+                        noUnloadPlugins = true;
                     event_perform(ev_destroy,0);
                     ClientCreate();
-                    // PLUGINS(disabled): no runtime GML execution in ENIGMA; revisit
-                    // // Normally, GG2 will prompt to load plugins when connecting to a server
-                    // // If they're already loaded, or the user skipped them, we won't prompt again
-                    // if (global.serverPluginsInUse or skippedPlugins)
-                    //     noReloadPlugins = true;
+                    // Normally, GG2 will prompt to load plugins when connecting to a server
+                    // If they're already loaded, or the user skipped them, we won't prompt again
+                    if (global.serverPluginsInUse or skippedPlugins)
+                        noReloadPlugins = true;
                     returnRoom = oldReturnRoom;
                     usePreviousPwd = true;
                     exit;
@@ -593,14 +583,11 @@ do {
             player = ds_list_find_value(global.players, read_ubyte(global.tempBuffer));
             if(player.sentry)
             {
-                // TODO(enigma): temp var avoids ENIGMA nested built-in dot bug (a.b.x); inline when fixed
-                var playerSentry;
-                playerSentry = player.sentry;
-                playerSentry.x = read_ushort(global.tempBuffer) / 5;
-                playerSentry.y = read_ushort(global.tempBuffer) / 5;
-                playerSentry.xprevious = playerSentry.x;
-                playerSentry.yprevious = playerSentry.y;
-                playerSentry.vspeed = 0;
+                player.sentry.x = read_ushort(global.tempBuffer) / 5;
+                player.sentry.y = read_ushort(global.tempBuffer) / 5;
+                player.sentry.xprevious = player.sentry.x;
+                player.sentry.yprevious = player.sentry.y;
+                player.sentry.vspeed = 0;
             }
             break;
           
@@ -632,25 +619,23 @@ do {
             packetLen = read_ushort(global.tempBuffer);
             receiveCompleteMessage(global.serverSocket, packetLen, global.tempBuffer);
 
-            // PLUGINS(disabled): no runtime GML execution in ENIGMA; revisit
-            // packetID = read_ubyte(global.tempBuffer);
-            //
-            // // get packet data
-            // buf = buffer_create();
-            // write_buffer_part(buf, global.tempBuffer, packetLen - 1);
-            //
-            // // try to enqueue
-            // // give "noone" value for client since received from server
-            // success = _PluginPacketPush(packetID, buf, noone);
-            //
-            // // if it returned false, packetID was invalid
-            // if (!success)
-            // {
-            //     // clear up buffer
-            //     buffer_destroy(buf);
-            //     show_error("ERROR when reading plugin packet: no such plugin packet ID " + string(packetID), true);
-            // }
-            // Plugins aren't supported; the packet was read above and is discarded.
+            packetID = read_ubyte(global.tempBuffer);
+
+            // get packet data
+            buf = buffer_create();
+            write_buffer_part(buf, global.tempBuffer, packetLen - 1);
+
+            // try to enqueue
+            // give "noone" value for client since received from server
+            success = _PluginPacketPush(packetID, buf, noone);
+            
+            // if it returned false, packetID was invalid
+            if (!success)
+            {
+                // clear up buffer
+                buffer_destroy(buf);
+                show_error("ERROR when reading plugin packet: no such plugin packet ID " + string(packetID), true);
+            }
             break;
         
         case CLIENT_SETTINGS:

@@ -8,10 +8,7 @@ var uberer;
 uberer = argument0;
  
 if(uberer.object != -1) {
-    // TODO(enigma): temp var avoids ENIGMA nested built-in dot bug (a.b.x); inline when fixed
-    var ubererObject;
-    ubererObject = uberer.object;
-    playsound(ubererObject.x,ubererObject.y,UberChargedSnd);
+    playsound(uberer.object.x,uberer.object.y,UberChargedSnd);
     setChatBubble(uberer, 46);
     with(Medigun) {
         if(ownerPlayer == uberer) {

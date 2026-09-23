@@ -1,0 +1,2912 @@
+refactor(menus): replace execute_string actions with scripts
+
+diff --git a/Source/gg2/Objects/InGameElements/Builder.events/Step.xml b/Source/gg2/Objects/InGameElements/Builder.events/Step.xml
+index 291ace45..79cda605 100644
+--- a/Source/gg2/Objects/InGameElements/Builder.events/Step.xml
++++ b/Source/gg2/Objects/InGameElements/Builder.events/Step.xml
+@@ -112,9 +112,9 @@ if (expanded) {
+                 if (mouse_check_button_pressed(mb_left)) {
+                     button = items - 1 - floor((yOffset-mouse_y)/height*items) + scrollIndex;
+                     if (!buttons[button, TOGGLE]) {
+-                        execute_string(ds_map_find_value(ds_list_find_value(global.buttons, button), "code"), true);
++                        run_action(ds_map_find_value(ds_list_find_value(global.buttons, button), "code"), true);
+                     } else {
+-                        buttons[button, TOGGLED] = execute_string(ds_map_find_value(ds_list_find_value(global.buttons, button), "code"), !buttons[button, TOGGLED]);
++                        buttons[button, TOGGLED] = run_action(ds_map_find_value(ds_list_find_value(global.buttons, button), "code"), !buttons[button, TOGGLED]);
+                     }
+                 }
+             }
+diff --git a/Source/gg2/Objects/Menus/BuilderMenuController.events/Create.xml b/Source/gg2/Objects/Menus/BuilderMenuController.events/Create.xml
+index a7749a45..9ce056ea 100644
+--- a/Source/gg2/Objects/Menus/BuilderMenuController.events/Create.xml
++++ b/Source/gg2/Objects/Menus/BuilderMenuController.events/Create.xml
+@@ -21,36 +21,14 @@
+     if (room == BuilderRoom) menu_setdimmed();
+     
+     for(i=0;i&lt;ds_list_size(global.gamemodes); i+=1) {
+-        menu_addlink(ds_map_find_value(ds_list_find_value(global.gamemodes, i), "name"), '            
+-            var builder;
+-            if (!instance_exists(Builder)) builder = instance_create(0,0, Builder);
+-            else builder = Builder.id;
+-            
+-            builder.gamemode = power(2, virtualitem);
+-            builder.name = item_name[virtualitem];
+-
+-            if (room != BuilderRoom) room_goto_fix(BuilderRoom);
+-            else {
+-                with(Builder) event_user(0);
+-                instance_destroy();
+-            }
+-        ');
++        menu_addlink(ds_map_find_value(ds_list_find_value(global.gamemodes, i), "name"), menu_builder_menu_select_gamemode);
+     }
+     
+     if (room == BuilderRoom) {
+-        menu_addlink("Main menu", '
+-            room_goto_fix(Menu);
+-            with(Builder) instance_destroy();
+-        ');
+-        menu_addback("Back", '
+-            // Wait 1 frame or the Builder will reopen the menu in the same step.
+-            alarm[0] = 1;
+-        ');
++        menu_addlink("Main menu", menu_builder_menu_main_menu);
++        menu_addback("Back", menu_builder_menu_back);
+     } else {
+-        menu_addback("Back", '
+-            room_goto_fix(Menu);
+-            with(Builder) instance_destroy();
+-        ');
++        menu_addback("Back", menu_builder_menu_back_2);
+     }
+ }
+ </argument>
+diff --git a/Source/gg2/Objects/Menus/Hosting Menu Elements/AdvHostOptionsController.events/Create.xml b/Source/gg2/Objects/Menus/Hosting Menu Elements/AdvHostOptionsController.events/Create.xml
+index 48ba8cc8..f4045452 100644
+--- a/Source/gg2/Objects/Menus/Hosting Menu Elements/AdvHostOptionsController.events/Create.xml	
++++ b/Source/gg2/Objects/Menus/Hosting Menu Elements/AdvHostOptionsController.events/Create.xml	
+@@ -19,30 +19,11 @@ menumode = true;
+ menu_background(512, 24, 8, 12, 4);
+ bgtabs = true;
+ 
+-menu_addedit_num("Hosting Port:", "global.hostingPort", '
+-    gg2_write_ini("Settings", "HostingPort", argument0);
+-', 65535);
++menu_addedit_num("Hosting Port:", "global.hostingPort", menu_adv_host_options_hosting_port, 65535);
+ 
+-menu_addedit_script("Map Rotation:", menu_format_maprotation_filepath(global.mapRotationFile), '
+-    var absPath;
++menu_addedit_script("Map Rotation:", menu_format_maprotation_filepath(global.mapRotationFile), menu_adv_host_options_map_rotation);
+ 
+-    absPath = get_open_filename("Map Rotation|*.txt", "");
+-
+-    if (absPath == "") {
+-        global.mapRotationFile = absPath;
+-    } else {
+-        global.mapRotationFile = getRelativePathIfDescendant(working_directory + "\", absPath);
+-    }
+-    
+-    gg2_write_ini("Server", "MapRotation", global.mapRotationFile);
+-    
+-    load_map_rotation();
+-    return menu_format_maprotation_filepath(global.mapRotationFile);
+-');
+-
+-menu_addedit_select("Shuffle map rotation:", "global.shuffleRotation", '
+-    gg2_write_ini("Server", "ShuffleRotation", argument0);
+-');
++menu_addedit_select("Shuffle map rotation:", "global.shuffleRotation", menu_adv_host_options_shuffle_map_rotation);
+ menu_add_option(0, "Don't shuffle");
+ menu_add_option(1, "Shuffle (no arena initial map)");
+ menu_add_option(2, "Shuffle without bias");
+@@ -52,39 +33,17 @@ menu_add_option(2, "Shuffle without bias");
+ //     gg2_write_ini("Server", "ServerPluginList", argument0);
+ // ');
+ 
+-menu_addedit_boolean("Auto Balance:", "global.autobalance", '
+-    gg2_write_ini("Server", "AutoBalance", argument0);
+-');
+-menu_addedit_boolean("Announce to Lobby:", "global.useLobbyServer", '
+-    gg2_write_ini("Settings", "UseLobby", argument0);
+-');
+-menu_addedit_boolean("Attempt UPnP Forwarding:", "global.attemptPortForward", '
+-    if (argument0 == 1)
+-        show_message("Warning: UPNP support is currently experimental and enabling it may cause freezing while starting a server, but should cause no freezing ingame")
+-    gg2_write_ini("Server", "Attempt UPnP Forwarding", argument0);
+-');
++menu_addedit_boolean("Auto Balance:", "global.autobalance", menu_adv_host_options_auto_balance);
++menu_addedit_boolean("Announce to Lobby:", "global.useLobbyServer", menu_adv_host_options_announce_to_lobby);
++menu_addedit_boolean("Attempt UPnP Forwarding:", "global.attemptPortForward", menu_adv_host_options_attempt_upnp_forwarding);
+ 
+-menu_addlink("Start Game", '
+-    start_server();
+-');
++menu_addlink("Start Game", menu_host_start_game);
+ 
+-menu_addtablink("Main", '
+-    instance_create(x,y,HostOptionsController);
+-    instance_destroy();
+-');
+-menu_addtablink("Advanced", '
+-    instance_create(x,y,AdvHostOptionsController);
+-    instance_destroy();
+-');
+-menu_addtablink("Classlimits", '
+-    instance_create(x,y,ClasslimitsMenuController);
+-    instance_destroy();
+-');
++menu_addtablink("Main", menu_host_tab_main);
++menu_addtablink("Advanced", menu_host_tab_advanced);
++menu_addtablink("Classlimits", menu_host_tab_classlimits);
+ 
+-menu_addback("Back", '
+-    instance_create(x,y,MainMenuController);
+-    instance_destroy();
+-');
++menu_addback("Back", menu_host_back);
+ </argument>
+       </arguments>
+     </action>
+diff --git a/Source/gg2/Objects/Menus/Hosting Menu Elements/ClasslimitsMenuController.events/Create.xml b/Source/gg2/Objects/Menus/Hosting Menu Elements/ClasslimitsMenuController.events/Create.xml
+index 7b69aec5..e2d3acc1 100644
+--- a/Source/gg2/Objects/Menus/Hosting Menu Elements/ClasslimitsMenuController.events/Create.xml	
++++ b/Source/gg2/Objects/Menus/Hosting Menu Elements/ClasslimitsMenuController.events/Create.xml	
+@@ -19,54 +19,22 @@ menumode = true;
+ menu_background(512, 24, 8, 12, 4);
+ bgtabs = true;
+ 
+-menu_addedit_num("Scout:", "global.classlimits[CLASS_SCOUT]", '
+-    gg2_write_ini("Classlimits", "Scout", argument0);
+-', 255);
+-menu_addedit_num("Pyro:", "global.classlimits[CLASS_PYRO]", '
+-    gg2_write_ini("Classlimits", "Pyro", argument0);
+-', 255);
+-menu_addedit_num("Soldier:", "global.classlimits[CLASS_SOLDIER]", '
+-    gg2_write_ini("Classlimits", "Soldier", argument0);
+-', 255);
+-menu_addedit_num("Heavy:", "global.classlimits[CLASS_HEAVY]", '
+-    gg2_write_ini("Classlimits", "Heavy", argument0);
+-', 255);
+-menu_addedit_num("Demoman:", "global.classlimits[CLASS_DEMOMAN]", '
+-    gg2_write_ini("Classlimits", "Demoman", argument0);
+-', 255);
+-menu_addedit_num("Medic:", "global.classlimits[CLASS_MEDIC]", '
+-    gg2_write_ini("Classlimits", "Medic", argument0);
+-', 255);
+-menu_addedit_num("Engineer:", "global.classlimits[CLASS_ENGINEER]", '
+-    gg2_write_ini("Classlimits", "Engineer", argument0);
+-', 255);
+-menu_addedit_num("Spy:", "global.classlimits[CLASS_SPY]", '
+-    gg2_write_ini("Classlimits", "Spy", argument0);
+-', 255);
+-menu_addedit_num("Sniper:", "global.classlimits[CLASS_SNIPER]", '
+-    gg2_write_ini("Classlimits", "Sniper", argument0);
+-', 255);
+-menu_addedit_num("Quote:", "global.classlimits[CLASS_QUOTE]", '
+-    gg2_write_ini("Classlimits", "Quote", argument0);
+-', 255);
++menu_addedit_num("Scout:", "global.classlimits[CLASS_SCOUT]", menu_classlimits_menu_scout, 255);
++menu_addedit_num("Pyro:", "global.classlimits[CLASS_PYRO]", menu_classlimits_menu_pyro, 255);
++menu_addedit_num("Soldier:", "global.classlimits[CLASS_SOLDIER]", menu_classlimits_menu_soldier, 255);
++menu_addedit_num("Heavy:", "global.classlimits[CLASS_HEAVY]", menu_classlimits_menu_heavy, 255);
++menu_addedit_num("Demoman:", "global.classlimits[CLASS_DEMOMAN]", menu_classlimits_menu_demoman, 255);
++menu_addedit_num("Medic:", "global.classlimits[CLASS_MEDIC]", menu_classlimits_menu_medic, 255);
++menu_addedit_num("Engineer:", "global.classlimits[CLASS_ENGINEER]", menu_classlimits_menu_engineer, 255);
++menu_addedit_num("Spy:", "global.classlimits[CLASS_SPY]", menu_classlimits_menu_spy, 255);
++menu_addedit_num("Sniper:", "global.classlimits[CLASS_SNIPER]", menu_classlimits_menu_sniper, 255);
++menu_addedit_num("Quote:", "global.classlimits[CLASS_QUOTE]", menu_classlimits_menu_quote, 255);
+ 
+-menu_addtablink("Main", '
+-    instance_create(x,y,HostOptionsController);
+-    instance_destroy();
+-');
+-menu_addtablink("Advanced", '
+-    instance_create(x,y,AdvHostOptionsController);
+-    instance_destroy();
+-');
+-menu_addtablink("Classlimits", '
+-    instance_create(x,y,ClasslimitsMenuController);
+-    instance_destroy();
+-');
++menu_addtablink("Main", menu_host_tab_main);
++menu_addtablink("Advanced", menu_host_tab_advanced);
++menu_addtablink("Classlimits", menu_host_tab_classlimits);
+ 
+-menu_addback("Back", '
+-    instance_create(x,y,MainMenuController);
+-    instance_destroy();
+-');
++menu_addback("Back", menu_host_back);
+ </argument>
+       </arguments>
+     </action>
+diff --git a/Source/gg2/Objects/Menus/Hosting Menu Elements/HostOptionsController.events/Create.xml b/Source/gg2/Objects/Menus/Hosting Menu Elements/HostOptionsController.events/Create.xml
+index 8880dcf9..3875c13a 100644
+--- a/Source/gg2/Objects/Menus/Hosting Menu Elements/HostOptionsController.events/Create.xml	
++++ b/Source/gg2/Objects/Menus/Hosting Menu Elements/HostOptionsController.events/Create.xml	
+@@ -32,62 +32,24 @@ menumode = true;
+ menu_background(512, 24, 8, 12, 4);
+ bgtabs = true;
+ 
+-menu_addedit_text2("Server Name:", "global.serverName", '
+-    var newName;
+-    newName = string_copy(argument0, 0, 25);
+-    gg2_write_ini("Server", "ServerName", newName);
+-    return newName;
+-');
+-menu_addedit_text2("Welcome message:", "global.welcomeMessage", '
+-    var newMessage;
+-    newMessage = string_copy(argument0, 0, 255);
+-    gg2_write_ini("Server", "WelcomeMessage", newMessage);
+-    return newMessage;
+-');
++menu_addedit_text2("Server Name:", "global.serverName", menu_host_options_server_name);
++menu_addedit_text2("Welcome message:", "global.welcomeMessage", menu_host_options_welcome_message);
+ 
+-menu_addedit_text("Password:", "global.serverPassword", '
+-    gg2_write_ini("Server", "Password", argument0);
+-');
+-menu_addedit_num("Player Limit:", "global.playerLimit", '
+-    gg2_write_ini("Settings", "PlayerLimit", argument0);
+-', 48);
+-menu_addedit_num("Time Limit (mins):", "global.timeLimitMins", '
+-    gg2_write_ini("Server", "Time Limit", argument0);
+-');
+-menu_addedit_num("Capture Limit:", "global.caplimit", '
+-    gg2_write_ini("Server", "CapLimit", argument0);
+-');
+-menu_addedit_num("Deathmatch Kill Limit:", "global.killLimit", '
+-    gg2_write_ini("Server", "Deathmatch Kill Limit", argument0);
+-');
+-menu_addedit_num("TDM Invulnerability (secs):", "global.tdmInvulnerabilitySeconds", '
+-    gg2_write_ini("Server", "Team Deathmatch Invulnerability Seconds", argument0);
+-');
+-menu_addedit_num("Respawn Time (secs):", "global.Server_RespawntimeSec", '
+-    gg2_write_ini("Server", "Respawn Time", argument0);
+-');
++menu_addedit_text("Password:", "global.serverPassword", menu_host_options_password);
++menu_addedit_num("Player Limit:", "global.playerLimit", menu_host_options_player_limit, 48);
++menu_addedit_num("Time Limit (mins):", "global.timeLimitMins", menu_host_options_time_limit_mins);
++menu_addedit_num("Capture Limit:", "global.caplimit", menu_host_options_capture_limit);
++menu_addedit_num("Deathmatch Kill Limit:", "global.killLimit", menu_host_options_deathmatch_kill_limit);
++menu_addedit_num("TDM Invulnerability (secs):", "global.tdmInvulnerabilitySeconds", menu_host_options_tdm_invulnerability_secs);
++menu_addedit_num("Respawn Time (secs):", "global.Server_RespawntimeSec", menu_host_options_respawn_time_secs);
+     
+     
+-menu_addtablink("Main", '
+-    instance_create(x,y,HostOptionsController);
+-    instance_destroy();
+-');
+-menu_addtablink("Advanced", '
+-    instance_create(x,y,AdvHostOptionsController);
+-    instance_destroy();
+-');
+-menu_addtablink("Classlimits", '
+-    instance_create(x,y,ClasslimitsMenuController);
+-    instance_destroy();
+-');
++menu_addtablink("Main", menu_host_tab_main);
++menu_addtablink("Advanced", menu_host_tab_advanced);
++menu_addtablink("Classlimits", menu_host_tab_classlimits);
+ 
+-menu_addlink("Start Game", '
+-    start_server();
+-');
+-menu_addback("Back", '
+-    instance_create(x,y,MainMenuController);
+-    instance_destroy();
+-');
++menu_addlink("Start Game", menu_host_start_game);
++menu_addback("Back", menu_host_back);
+ </argument>
+       </arguments>
+     </action>
+diff --git a/Source/gg2/Objects/Menus/Hosting Menu Elements/HostWarningsController.events/Create.xml b/Source/gg2/Objects/Menus/Hosting Menu Elements/HostWarningsController.events/Create.xml
+index dc69a769..f7ec9c7d 100644
+--- a/Source/gg2/Objects/Menus/Hosting Menu Elements/HostWarningsController.events/Create.xml	
++++ b/Source/gg2/Objects/Menus/Hosting Menu Elements/HostWarningsController.events/Create.xml	
+@@ -18,10 +18,10 @@ menu_background(352, 32, 8, 16, 4);
+ bgbezel = false;
+ getsHighlight = false;
+ 
+-menu_addlink("", '');
+-menu_addlink("", '');
+-menu_addlink("", '');
+-menu_addlink("", '');
++menu_addlink("", -1);
++menu_addlink("", -1);
++menu_addlink("", -1);
++menu_addlink("", -1);
+ items = 0;
+ 
+ </argument>
+diff --git a/Source/gg2/Objects/Menus/InGameMenuController.events/Create.xml b/Source/gg2/Objects/Menus/InGameMenuController.events/Create.xml
+index 1ad3a5a5..58b1d8d6 100644
+--- a/Source/gg2/Objects/Menus/InGameMenuController.events/Create.xml
++++ b/Source/gg2/Objects/Menus/InGameMenuController.events/Create.xml
+@@ -21,48 +21,14 @@
+     menu_background(212, 24, 8, 12, 4);
+     menu_setdimmed();
+     
+-    menu_addlink("Return to Game", '
+-        instance_destroy();
+-    ');
+-    menu_addback("", '
+-        instance_destroy();
+-    ');
++    menu_addlink("Return to Game", menu_in_game_menu_return_to_game);
++    menu_addback("", menu_in_game_menu_back);
+     if (global.isHost) {
+-        menu_addlink("Kick players", '
+-            if(!instance_exists(ScoreTableController)) instance_create(0,0,ScoreTableController);
+-            ScoreTableController.showadmin = true;
+-            instance_destroy();
+-        ');
++        menu_addlink("Kick players", menu_in_game_menu_kick_players);
+     }
+-    menu_addlink("Options", '
+-        instance_destroy();
+-        instance_create(0,0,OptionsController);
+-    ');
+-    menu_addlink("Disconnect", '
+-        // Force dedicated mode to off so you can go to main menu instead of just restarting server
+-        if (show_question("Do you really want to leave this match?")) {
+-            // PLUGINS(disabled): no runtime GML execution in ENIGMA; revisit
+-            // if (global.serverPluginsInUse)
+-            // {
+-            //     pluginscleanup(true);
+-            // }
+-            // else
+-            // {
+-            {
+-                global.dedicatedMode = 0;
+-                with(Client)
+-                    instance_destroy();
+-                    
+-                with(GameServer)
+-                    instance_destroy();
+-            }
+-        }
+-    ');
+-    menu_addlink("Quit Game", '
+-        if (show_question("Do you really want to quit?")) {
+-            game_end();
+-        }
+-    ');
++    menu_addlink("Options", menu_in_game_menu_options);
++    menu_addlink("Disconnect", menu_in_game_menu_disconnect);
++    menu_addlink("Quit Game", menu_in_game_menu_quit_game);
+ }
+ </argument>
+       </arguments>
+diff --git a/Source/gg2/Objects/Menus/Lobby Elements/LobbyNameController.events/Create.xml b/Source/gg2/Objects/Menus/Lobby Elements/LobbyNameController.events/Create.xml
+index 8df2a52b..6d4a1b82 100644
+--- a/Source/gg2/Objects/Menus/Lobby Elements/LobbyNameController.events/Create.xml	
++++ b/Source/gg2/Objects/Menus/Lobby Elements/LobbyNameController.events/Create.xml	
+@@ -17,13 +17,7 @@
+ 
+ menu_background(272, 24, 8, 12, 4);
+ 
+-menu_addedit_text2("Player name:", "global.playerName", '
+-    var newName;
+-    newName = string_copy(argument0, 0, min(string_length(argument0), MAX_PLAYERNAME_LENGTH));
+-    gg2_write_ini("Settings", "PlayerName", newName);
+-    oldPlayerName = newName;
+-    return newName;
+-');
++menu_addedit_text2("Player name:", "global.playerName", menu_lobby_name_player_name);
+ </argument>
+       </arguments>
+     </action>
+diff --git a/Source/gg2/Objects/Menus/Lobby Elements/LobbySideController.events/Create.xml b/Source/gg2/Objects/Menus/Lobby Elements/LobbySideController.events/Create.xml
+index 0678efc7..8644b67e 100644
+--- a/Source/gg2/Objects/Menus/Lobby Elements/LobbySideController.events/Create.xml	
++++ b/Source/gg2/Objects/Menus/Lobby Elements/LobbySideController.events/Create.xml	
+@@ -17,12 +17,8 @@
+ 
+ menu_background(80, 24, 8, 12, 4);
+ 
+-menu_addlink("Refresh", '
+-    event_user(0);
+-');
+-menu_addback("Back", '
+-    room_goto_fix(Menu);
+-');
++menu_addlink("Refresh", menu_lobby_side_refresh);
++menu_addback("Back", menu_lobby_side_back);
+ 
+ cooleddown = false;
+ alarm[1] = 90;
+diff --git a/Source/gg2/Objects/Menus/Main Menu Elements/MainMenuController.events/Create.xml b/Source/gg2/Objects/Menus/Main Menu Elements/MainMenuController.events/Create.xml
+index 2bf6f5d5..1bd8408f 100644
+--- a/Source/gg2/Objects/Menus/Main Menu Elements/MainMenuController.events/Create.xml	
++++ b/Source/gg2/Objects/Menus/Main Menu Elements/MainMenuController.events/Create.xml	
+@@ -19,40 +19,18 @@
+     
+     menu_background(208, 24, 8, 12, 4);
+     
+-    menu_addlink("Host Game", 'event_user(0);');
+-    menu_addlink("Join (lobby)", '
+-        room_goto_fix(Lobby);
+-    ');
+-    menu_addlink("Join (manual)", '
+-        global.isHost = false;
+-        global.serverIP = get_string("Please enter the IP address or hostname of the server you want to join", "127.0.0.1");
+-        global.serverPort = get_integer("Please enter the port of the server you want to join", 8190);
+-        instance_create(0,0,Client);
+-        Client.returnRoom = Menu;
+-    ');
+-    menu_addlink("Garrison Builder", '
+-        room_goto_fix(BuilderOptions);
+-    ');
+-    menu_addlink("Options", '
+-        room_goto_fix(Options);
+-    ');
++    menu_addlink("Host Game", menu_main_menu_host_game);
++    menu_addlink("Join (lobby)", menu_main_menu_join_lobby);
++    menu_addlink("Join (manual)", menu_main_menu_join_manual);
++    menu_addlink("Garrison Builder", menu_main_menu_garrison_builder);
++    menu_addlink("Options", menu_main_menu_options);
+     if (global.rewardId != '')
+     {
+-        menu_addlink("Manage Haxxy Rewards", '
+-            splash_set_main(false);
+-            splash_set_interrupt(false);
+-            splash_show_web("http://www.ganggarrison.com/forums/rewards/frame.php?gg2_login=yes&amp;reward_id=" + global.rewardId + "&amp;reward_key=" + hex(global.rewardKey), 0);
+-        ');
++        menu_addlink("Manage Haxxy Rewards", menu_main_menu_manage_haxxy_rewards);
+     }
+-    menu_addlink("Credits", '
+-        room_goto_fix(Credits);
+-    ');
+-    menu_addlink("Visit The Forums",'
+-        action_splash_web("http://www.ganggarrison.com/forums/index.php", 1)
+-    ');
+-    menu_addback("Quit", '
+-        game_end();
+-    ');
++    menu_addlink("Credits", menu_main_menu_credits);
++    menu_addlink("Visit The Forums",menu_main_menu_visit_the_forums);
++    menu_addback("Quit", menu_main_menu_back);
+ 
+     // Music setting set to "Menu Only" or "Menu and In-Game"
+     if (!sound_isplaying(global.MenuMusic)
+diff --git a/Source/gg2/Objects/Menus/MenuController.events/Key enter pressed.xml b/Source/gg2/Objects/Menus/MenuController.events/Key enter pressed.xml
+index 37be179f..dffdade8 100644
+--- a/Source/gg2/Objects/Menus/MenuController.events/Key enter pressed.xml	
++++ b/Source/gg2/Objects/Menus/MenuController.events/Key enter pressed.xml	
+@@ -19,10 +19,10 @@
+     editingType = item_type[editing];
+     if (editingType == "edittext") {
+         menu_set_var(editing, item_value[editing]);
+-        execute_string(item_script[editing], item_value[editing]);
++        run_action(item_script[editing], item_value[editing]);
+     }
+     else if (editingType == "edittext2") {
+-        item_value[editing] = execute_string(item_script[editing], item_value[editing]);
++        item_value[editing] = run_action(item_script[editing], item_value[editing]);
+         menu_set_var(editing, item_value[editing]);
+     }
+     else if (editingType == "editnum") {
+@@ -31,7 +31,7 @@
+         if(item_limit[editing]&gt;0)
+             newval = min(newval, item_limit[editing]);
+         menu_set_var(editing, newval);
+-        execute_string(item_script[editing], menu_get_var(editing));
++        run_action(item_script[editing], menu_get_var(editing));
+         item_value[editing] = string(menu_get_var(editing));
+     }
+     editing = -1;
+diff --git a/Source/gg2/Objects/Menus/MenuController.events/Key escape pressed.xml b/Source/gg2/Objects/Menus/MenuController.events/Key escape pressed.xml
+index eacf2dd6..051d4118 100644
+--- a/Source/gg2/Objects/Menus/MenuController.events/Key escape pressed.xml	
++++ b/Source/gg2/Objects/Menus/MenuController.events/Key escape pressed.xml	
+@@ -14,7 +14,7 @@
+       <appliesTo>.self</appliesTo>
+       <arguments>
+         <argument kind="STRING">if(stepHasRun)
+-    execute_string(menu_script_back);
++    run_action(menu_script_back, 0);
+ 
+ </argument>
+       </arguments>
+diff --git a/Source/gg2/Objects/Menus/MenuController.events/Step.xml b/Source/gg2/Objects/Menus/MenuController.events/Step.xml
+index 72bde3e5..513216cf 100644
+--- a/Source/gg2/Objects/Menus/MenuController.events/Step.xml
++++ b/Source/gg2/Objects/Menus/MenuController.events/Step.xml
+@@ -55,13 +55,13 @@ if(editing != -1) {
+         if (editingType == "editkeyormouse") {
+             if mouse_check_button(mb_left) {
+                 menu_set_var(editing, MOUSE_LEFT);
+-                execute_string(item_script[editing], MOUSE_LEFT);
++                run_action(item_script[editing], MOUSE_LEFT);
+                 editing = -1;
+                 exit;
+             }
+             else if mouse_check_button(mb_right) {
+                 menu_set_var(editing, MOUSE_RIGHT);
+-                execute_string(item_script[editing], MOUSE_RIGHT);
++                run_action(item_script[editing], MOUSE_RIGHT);
+                 editing = -1;
+                 exit;
+             }
+@@ -69,7 +69,7 @@ if(editing != -1) {
+         if keyboard_check_direct(vk_tab) keyboard_lastkey = vk_tab;
+         if keyboard_lastkey != 0 {
+             menu_set_var(editing, keyboard_lastkey);
+-            execute_string(item_script[editing], menu_get_var(editing));
++            run_action(item_script[editing], menu_get_var(editing));
+             editing = -1;
+             exit;
+         }
+@@ -85,9 +85,9 @@ if(editing != -1) {
+                 var clickedType;
+                 clickedType = item_type[virtualitem];
+                 if (clickedType == "script")
+-                    execute_string(item_script[virtualitem]);
++                    run_action(item_script[virtualitem], 0);
+                 else if (clickedType == "editscript")
+-                    item_value[virtualitem] = execute_string(item_script[virtualitem]);
++                    item_value[virtualitem] = run_action(item_script[virtualitem], 0);
+                 else if (clickedType == "editkey" or clickedType == "editkeyormouse") {
+                     io_clear();
+                     editing = virtualitem;
+@@ -99,7 +99,7 @@ if(editing != -1) {
+                 else if (clickedType == "editselect") {
+                     item_value[virtualitem] = (item_value[virtualitem]+1) mod item_options[virtualitem];
+                     menu_set_var(virtualitem, item_option_value[virtualitem, item_value[virtualitem]]);
+-                    execute_string(item_script[virtualitem], menu_get_var(virtualitem));
++                    run_action(item_script[virtualitem], menu_get_var(virtualitem));
+                 }
+             }
+         }
+@@ -113,7 +113,7 @@ if(editing != -1) {
+             mouse_clear(mb_left);
+             if(-2-virtualitem &lt; tabs)
+             {
+-                execute_string(tab_script[-2-virtualitem]);
++                run_action(tab_script[-2-virtualitem], 0);
+             }
+         }
+     } else {
+diff --git a/Source/gg2/Objects/Menus/Options Menus/AdvControlsController.events/Create.xml b/Source/gg2/Objects/Menus/Options Menus/AdvControlsController.events/Create.xml
+index 61d165a8..a418994b 100644
+--- a/Source/gg2/Objects/Menus/Options Menus/AdvControlsController.events/Create.xml	
++++ b/Source/gg2/Objects/Menus/Options Menus/AdvControlsController.events/Create.xml	
+@@ -23,42 +23,21 @@
+     menu_background(512, 24, 8, 12, 4);
+     bgtabs = true;
+     
+-    menu_addedit_keyormouse("Primary Fire:", "global.attack");
+-    menu_addedit_keyormouse("Secondary Ability:", "global.special");
+-    menu_addedit_key("Emoticon Menu:", "global.chat1");
+-    menu_addedit_key("Gameplay Emote Menu:", "global.chat2");
+-    menu_addedit_key("Direction Emote Menu:", "global.chat3");
+-    menu_addedit_key("Change Team:", "global.changeTeam");
+-    menu_addedit_key("Change Class:", "global.changeClass");
++    menu_addedit_keyormouse("Primary Fire:", "global.attack", -1);
++    menu_addedit_keyormouse("Secondary Ability:", "global.special", -1);
++    menu_addedit_key("Emoticon Menu:", "global.chat1", -1);
++    menu_addedit_key("Gameplay Emote Menu:", "global.chat2", -1);
++    menu_addedit_key("Direction Emote Menu:", "global.chat3", -1);
++    menu_addedit_key("Change Team:", "global.changeTeam", -1);
++    menu_addedit_key("Change Class:", "global.changeClass", -1);
+     
+-    menu_addtablink("Ingame", '
+-        instance_destroy();
+-        instance_create(x,y,OptionsController);
+-    ');
+-    menu_addtablink("Engine", '
+-        instance_destroy();
+-        instance_create(x,y,EngineOptionsController);
+-    ');
+-    menu_addtablink("Controls 1", '
+-        instance_destroy();
+-        instance_create(x,y,ControlsController);
+-    ');
+-    menu_addtablink("Controls 2", '
+-        instance_destroy();
+-        instance_create(x,y,AdvControlsController);
+-    ');
+-    menu_addtablink("HUD", '
+-        instance_destroy();
+-        instance_create(x,y,HUDOptionsController);
+-    ');
++    menu_addtablink("Ingame", menu_options_tab_ingame);
++    menu_addtablink("Engine", menu_options_tab_engine);
++    menu_addtablink("Controls 1", menu_options_tab_controls_1);
++    menu_addtablink("Controls 2", menu_options_tab_controls_2);
++    menu_addtablink("HUD", menu_options_tab_hud);
+     
+-    menu_addback("Back", '
+-        instance_destroy();
+-        if(room == Options)
+-            room_goto_fix(Menu);
+-        else
+-            instance_create(0,0,InGameMenuController);
+-    ');
++    menu_addback("Back", menu_options_back);
+ }
+ </argument>
+       </arguments>
+diff --git a/Source/gg2/Objects/Menus/Options Menus/ControlsController.events/Create.xml b/Source/gg2/Objects/Menus/Options Menus/ControlsController.events/Create.xml
+index 4a9e9ef4..1f54a80e 100644
+--- a/Source/gg2/Objects/Menus/Options Menus/ControlsController.events/Create.xml	
++++ b/Source/gg2/Objects/Menus/Options Menus/ControlsController.events/Create.xml	
+@@ -23,47 +23,26 @@
+     menu_background(512, 24, 8, 12, 4);
+     bgtabs = true;
+     
+-    menu_addedit_key("Jump/up:", "global.jump");
+-    menu_addedit_key("Down:", "global.down");
+-    menu_addedit_key("Left:", "global.left");
+-    menu_addedit_key("Right:", "global.right");
+-    menu_addedit_key("Jump/up (Alternate):", "global.jump2");
+-    menu_addedit_key("Down (Alternate):", "global.down2");
+-    menu_addedit_key("Left (Alternate):", "global.left2");
+-    menu_addedit_key("Right (Alternate):", "global.right2");
+-    menu_addedit_key("Taunt:", "global.taunt");
+-    menu_addedit_key("Call for Healer:", "global.medic");
+-    menu_addedit_key("Drop Case:", "global.drop");
+-    menu_addedit_key("Show Scores:", "global.showScores");
++    menu_addedit_key("Jump/up:", "global.jump", -1);
++    menu_addedit_key("Down:", "global.down", -1);
++    menu_addedit_key("Left:", "global.left", -1);
++    menu_addedit_key("Right:", "global.right", -1);
++    menu_addedit_key("Jump/up (Alternate):", "global.jump2", -1);
++    menu_addedit_key("Down (Alternate):", "global.down2", -1);
++    menu_addedit_key("Left (Alternate):", "global.left2", -1);
++    menu_addedit_key("Right (Alternate):", "global.right2", -1);
++    menu_addedit_key("Taunt:", "global.taunt", -1);
++    menu_addedit_key("Call for Healer:", "global.medic", -1);
++    menu_addedit_key("Drop Case:", "global.drop", -1);
++    menu_addedit_key("Show Scores:", "global.showScores", -1);
+     
+-    menu_addtablink("Ingame", '
+-        instance_destroy();
+-        instance_create(x,y,OptionsController);
+-    ');
+-    menu_addtablink("Engine", '
+-        instance_destroy();
+-        instance_create(x,y,EngineOptionsController);
+-    ');
+-    menu_addtablink("Controls 1", '
+-        instance_destroy();
+-        instance_create(x,y,ControlsController);
+-    ');
+-    menu_addtablink("Controls 2", '
+-        instance_destroy();
+-        instance_create(x,y,AdvControlsController);
+-    ');
+-    menu_addtablink("HUD", '
+-        instance_destroy();
+-        instance_create(x,y,HUDOptionsController);
+-    ');
++    menu_addtablink("Ingame", menu_options_tab_ingame);
++    menu_addtablink("Engine", menu_options_tab_engine);
++    menu_addtablink("Controls 1", menu_options_tab_controls_1);
++    menu_addtablink("Controls 2", menu_options_tab_controls_2);
++    menu_addtablink("HUD", menu_options_tab_hud);
+     
+-    menu_addback("Back", '
+-        instance_destroy();
+-        if(room == Options)
+-            room_goto_fix(Menu);
+-        else
+-            instance_create(0,0,InGameMenuController);
+-    ');
++    menu_addback("Back", menu_options_back);
+ }
+ </argument>
+       </arguments>
+diff --git a/Source/gg2/Objects/Menus/Options Menus/EngineOptionsController.events/Create.xml b/Source/gg2/Objects/Menus/Options Menus/EngineOptionsController.events/Create.xml
+index 1f059fd3..a8a1ce4f 100644
+--- a/Source/gg2/Objects/Menus/Options Menus/EngineOptionsController.events/Create.xml	
++++ b/Source/gg2/Objects/Menus/Options Menus/EngineOptionsController.events/Create.xml	
+@@ -24,84 +24,38 @@
+     menu_background(512, 24, 8, 12, 4);
+     bgtabs = true;
+     
+-    menu_addedit_boolean("Fullscreen:", "global.fullscreen", '
+-        gg2_write_ini("Settings", "Fullscreen", argument0);
+-        window_set_fullscreen(argument0);
+-    ');
+-    menu_addedit_select("Music:", "global.music", '
+-        gg2_write_ini("Settings", "Music", argument0);
+-        if(room != Options)
+-        {
+-            if (argument0 == MUSIC_BOTH || argument0 == MUSIC_INGAME_ONLY)
+-            {
+-                AudioControlPlaySong(global.IngameMusic, true);
+-            }
+-            else
+-            {
+-                AudioControlPlaySong(-1, false);
+-            }
+-        }
+-        else
+-        {
+-            if(argument0 == MUSIC_BOTH || argument0 == MUSIC_MENU_ONLY)
+-            {
+-                AudioControlPlaySong(global.MenuMusic, true);
+-            }
+-            else
+-            {
+-                AudioControlPlaySong(-1, false);
+-            }
+-        }
+-    ');
++    menu_addedit_boolean("Fullscreen:", "global.fullscreen", menu_engine_options_fullscreen);
++    menu_addedit_select("Music:", "global.music", menu_engine_options_music);
+     menu_add_option(MUSIC_NONE, "None");
+     menu_add_option(MUSIC_MENU_ONLY, "Menu Only");
+     menu_add_option(MUSIC_INGAME_ONLY, "In-Game Only");
+     menu_add_option(MUSIC_BOTH, "Menu and In-Game");
+     
+-    menu_addedit_select("Particles:", "global.particles", '
+-        gg2_write_ini("Settings", "Particles", argument0);
+-    ');
++    menu_addedit_select("Particles:", "global.particles", menu_engine_options_particles);
+     menu_add_option(PARTICLES_NORMAL, "Normal");
+     menu_add_option(PARTICLES_OFF, "Disabled");
+     menu_add_option(PARTICLES_ALTERNATIVE, "Alternative (faster)");
+     
+-    menu_addedit_select("Gibs:", "global.gibLevel", '
+-        gg2_write_ini("Settings", "Gib Level", argument0);
+-    ');
++    menu_addedit_select("Gibs:", "global.gibLevel", menu_engine_options_gibs);
+     menu_add_option(0, "Disabled");
+     menu_add_option(1, "Blood only");
+     menu_add_option(2, "Blood and medium gibs");
+     menu_add_option(3, "Full blood and gibs");
+ 
+-    menu_addedit_boolean("Hide Infiltrator 'Ghosts':", "global.hideSpyGhosts", '
+-        gg2_write_ini("Settings", "Hide Spy Ghosts", argument0);
+-    ');
++    menu_addedit_boolean("Hide Infiltrator 'Ghosts':", "global.hideSpyGhosts", menu_engine_options_hide_infiltrator_ghosts);
+     
+-    menu_addedit_select("Ingame Aspect Ratio:", "global.resolutionkind", '
+-        gg2_write_ini("Settings", "Resolution", argument0);
+-        if(room != Options)
+-            warnoptioneffect = !global.isHost;
+-        global.changed_resolution = true;
+-    ');
++    menu_addedit_select("Ingame Aspect Ratio:", "global.resolutionkind", menu_engine_options_ingame_aspect_ratio);
+     menu_add_option(0, "5:4");
+     menu_add_option(1, "4:3");
+     menu_add_option(2, "16:10");
+     menu_add_option(3, "16:9");
+     menu_add_option(4, "2:1");
+     
+-    menu_addedit_select("Framerate:", "global.frameratekind", '
+-        gg2_write_ini("Settings", "Framerate", argument0);
+-        if(room != Options)
+-            warnoptioneffect = !global.isHost;
+-    ');
++    menu_addedit_select("Framerate:", "global.frameratekind", menu_engine_options_framerate);
+     menu_add_option(0, "30");
+     menu_add_option(1, "60");
+     
+-    menu_addedit_select("V Sync:", "global.monitorSync", '
+-        gg2_write_ini("Settings", "Monitor Sync", argument0);
+-        if (!instance_exists(GameServer))
+-            set_synchronization(argument0);
+-    ');
++    menu_addedit_select("V Sync:", "global.monitorSync", menu_engine_options_v_sync);
+     menu_add_option(0, "Off");
+     menu_add_option(1, "On unless hosting");
+     // PLUGINS(disabled): no runtime GML execution in ENIGMA; revisit
+@@ -110,40 +64,15 @@
+     //         show_message("Please note that plugins can be dangerous, so you should only disable the prompt if you trust all plugins hosted at the source:#" + PLUGIN_SOURCE + "#" + PLUGIN_SOURCE_NOTICE)
+     //     gg2_write_ini("Settings", "ServerPluginsPrompt", argument0);
+     // ');
+-    menu_addedit_boolean("Prompt for restart:", "global.restartPrompt", '
+-        gg2_write_ini("Settings", "RestartPrompt", argument0);
+-    ');
++    menu_addedit_boolean("Prompt for restart:", "global.restartPrompt", menu_engine_options_prompt_for_restart);
+     
+-    menu_addtablink("Ingame", '
+-        instance_destroy();
+-        instance_create(x,y,OptionsController);
+-    ');
+-    menu_addtablink("Engine", '
+-        instance_destroy();
+-        instance_create(x,y,EngineOptionsController);
+-    ');
+-    menu_addtablink("Controls 1", '
+-        instance_destroy();
+-        instance_create(x,y,ControlsController);
+-    ');
+-    menu_addtablink("Controls 2", '
+-        instance_destroy();
+-        instance_create(x,y,AdvControlsController);
+-    ');
+-    menu_addtablink("HUD", '
+-        instance_destroy();
+-        instance_create(x,y,HUDOptionsController);
+-    ');
++    menu_addtablink("Ingame", menu_options_tab_ingame);
++    menu_addtablink("Engine", menu_options_tab_engine);
++    menu_addtablink("Controls 1", menu_options_tab_controls_1);
++    menu_addtablink("Controls 2", menu_options_tab_controls_2);
++    menu_addtablink("HUD", menu_options_tab_hud);
+     
+-    menu_addback("Back", '
+-        if(warnoptioneffect)
+-            show_message("An option you changed only takes effect on map change or server join.");
+-        instance_destroy();
+-        if(room == Options)
+-            room_goto_fix(Menu);
+-        else
+-            instance_create(0,0,InGameMenuController);
+-    ');
++    menu_addback("Back", menu_engine_options_back);
+ }
+ </argument>
+       </arguments>
+diff --git a/Source/gg2/Objects/Menus/Options Menus/HUDOptionsController.events/Create.xml b/Source/gg2/Objects/Menus/Options Menus/HUDOptionsController.events/Create.xml
+index fdfb4336..cc67b716 100644
+--- a/Source/gg2/Objects/Menus/Options Menus/HUDOptionsController.events/Create.xml	
++++ b/Source/gg2/Objects/Menus/Options Menus/HUDOptionsController.events/Create.xml	
+@@ -23,57 +23,28 @@
+     menu_background(512, 24, 8, 12, 4);
+     bgtabs = true;
+     
+-    menu_addedit_select("Timer Position", "global.timerPos", '
+-        gg2_write_ini("Settings", "Timer Position", argument0);
+-    ');
++    menu_addedit_select("Timer Position", "global.timerPos", menu_hudoptions_timer_position);
+     menu_add_option(0, "Center");
+     menu_add_option(1, "Left");
+     
+-    menu_addedit_select("Kill Log Position", "global.killLogPos", '
+-        gg2_write_ini("Settings", "Kill Log Position", argument0);
+-    ');
++    menu_addedit_select("Kill Log Position", "global.killLogPos", menu_hudoptions_kill_log_position);
+     menu_add_option(0, "Default");
+     menu_add_option(1, "Just Below Timers");
+     
+-    menu_addedit_select("KOTH Timer Orientation", "global.kothHudPos", '
+-        gg2_write_ini("Settings","KoTH HUD Position", argument0);
+-    ');
++    menu_addedit_select("KOTH Timer Orientation", "global.kothHudPos", menu_hudoptions_koth_timer_orientation);
+     menu_add_option(0, "Default");
+     menu_add_option(1, "Stacked");
+     
+-    menu_addedit_boolean("Fade Scoreboard:", "global.fadeScoreboard", '
+-        gg2_write_ini("Settings", "Fade Scoreboard", argument0);
+-    ');
++    menu_addedit_boolean("Fade Scoreboard:", "global.fadeScoreboard", menu_hudoptions_fade_scoreboard);
+     
+-    menu_addtablink("Ingame", '
+-        instance_destroy();
+-        instance_create(x,y,OptionsController);
+-    ');
+-    menu_addtablink("Engine", '
+-        instance_destroy();
+-        instance_create(x,y,EngineOptionsController);
+-    ');
+-    menu_addtablink("Controls 1", '
+-        instance_destroy();
+-        instance_create(x,y,ControlsController);
+-    ');
+-    menu_addtablink("Controls 2", '
+-        instance_destroy();
+-        instance_create(x,y,AdvControlsController);
+-    ');
++    menu_addtablink("Ingame", menu_options_tab_ingame);
++    menu_addtablink("Engine", menu_options_tab_engine);
++    menu_addtablink("Controls 1", menu_options_tab_controls_1);
++    menu_addtablink("Controls 2", menu_options_tab_controls_2);
+ 
+-    menu_addtablink("HUD", '
+-        instance_destroy();
+-        instance_create(x,y,HUDOptionsController);
+-    ');
++    menu_addtablink("HUD", menu_options_tab_hud);
+     
+-    menu_addback("Back", '
+-        instance_destroy();
+-        if(room == Options)
+-            room_goto_fix(Menu);
+-        else
+-            instance_create(0,0,InGameMenuController);
+-    ');
++    menu_addback("Back", menu_options_back);
+ }
+ </argument>
+       </arguments>
+diff --git a/Source/gg2/Objects/Menus/Options Menus/OptionsController.events/Create.xml b/Source/gg2/Objects/Menus/Options Menus/OptionsController.events/Create.xml
+index 4b776607..7f816d14 100644
+--- a/Source/gg2/Objects/Menus/Options Menus/OptionsController.events/Create.xml	
++++ b/Source/gg2/Objects/Menus/Options Menus/OptionsController.events/Create.xml	
+@@ -24,70 +24,22 @@
+     bgtabs = true;
+     
+     oldPlayerName = global.playerName;
+-    menu_addedit_text2("Player name:", "global.playerName", '
+-        var newName;
+-        newName = string_copy(argument0, 0, min(string_length(argument0), MAX_PLAYERNAME_LENGTH));
+-        gg2_write_ini("Settings", "PlayerName", newName);
+-        if(room != Options and newName != oldPlayerName)
+-        {
+-            write_ubyte(global.serverSocket, PLAYER_CHANGENAME);
+-            write_ubyte(global.serverSocket, string_length(newName));
+-            write_string(global.serverSocket, newName);
+-            socket_send(global.serverSocket);
+-        }
+-        oldPlayerName = newName;
+-        return newName;
+-    '); 
+-    menu_addedit_boolean("Healer Radar:", "global.medicRadar", '
+-        gg2_write_ini("Settings", "Healer Radar", argument0);
+-    ');
+-    menu_addedit_boolean("Show Healer:", "global.showHealer", '
+-        gg2_write_ini("Settings", "Show Healer", argument0);
+-    ');
+-    menu_addedit_boolean("Show Healing:", "global.showHealing", '
+-        gg2_write_ini("Settings", "Show Healing", argument0);
+-    ');
+-    menu_addedit_boolean("Additional Healthbar:", "global.showHealthBar", '
+-        gg2_write_ini("Settings", "Show Healthbar", argument0);
+-    ');
+-    menu_addedit_boolean("Additional Teammate Stats:", "global.showTeammateStats", '
+-        gg2_write_ini("Settings", "Show Extra Teammate Stats", argument0);
+-    ');
+-    menu_addedit_boolean("Kill Cam:", "global.killCam", '
+-        gg2_write_ini("Settings", "Kill Cam", argument0);
+-    ');
+-    menu_addedit_boolean("Queued Jumping (Bunnyhopping):", "global.queueJumping", '
+-        gg2_write_ini("Settings", "Queued Jumping", argument0);
+-    ');
++    menu_addedit_text2("Player name:", "global.playerName", menu_options_player_name); 
++    menu_addedit_boolean("Healer Radar:", "global.medicRadar", menu_options_healer_radar);
++    menu_addedit_boolean("Show Healer:", "global.showHealer", menu_options_show_healer);
++    menu_addedit_boolean("Show Healing:", "global.showHealing", menu_options_show_healing);
++    menu_addedit_boolean("Additional Healthbar:", "global.showHealthBar", menu_options_additional_healthbar);
++    menu_addedit_boolean("Additional Teammate Stats:", "global.showTeammateStats", menu_options_additional_teammate_stats);
++    menu_addedit_boolean("Kill Cam:", "global.killCam", menu_options_kill_cam);
++    menu_addedit_boolean("Queued Jumping (Bunnyhopping):", "global.queueJumping", menu_options_queued_jumping_bunnyhopping);
+     
+-    menu_addtablink("Ingame", '
+-        instance_destroy();
+-        instance_create(x,y,OptionsController);
+-    ');
+-    menu_addtablink("Engine", '
+-        instance_destroy();
+-        instance_create(x,y,EngineOptionsController);
+-    ');
+-    menu_addtablink("Controls 1", '
+-        instance_destroy();
+-        instance_create(x,y,ControlsController);
+-    ');
+-    menu_addtablink("Controls 2", '
+-        instance_destroy();
+-        instance_create(x,y,AdvControlsController);
+-    ');
+-    menu_addtablink("HUD", '
+-        instance_destroy();
+-        instance_create(x,y,HUDOptionsController);
+-    ');
++    menu_addtablink("Ingame", menu_options_tab_ingame);
++    menu_addtablink("Engine", menu_options_tab_engine);
++    menu_addtablink("Controls 1", menu_options_tab_controls_1);
++    menu_addtablink("Controls 2", menu_options_tab_controls_2);
++    menu_addtablink("HUD", menu_options_tab_hud);
+     
+-    menu_addback("Back", '
+-        instance_destroy();
+-        if(room == Options)
+-            room_goto_fix(Menu);
+-        else
+-            instance_create(0,0,InGameMenuController);
+-    ');
++    menu_addback("Back", menu_options_back);
+ }
+ </argument>
+       </arguments>
+diff --git a/Source/gg2/Scripts/Maps/Builder/Actions/_resources.list.xml b/Source/gg2/Scripts/Maps/Builder/Actions/_resources.list.xml
+new file mode 100644
+index 00000000..043039c8
+--- /dev/null
++++ b/Source/gg2/Scripts/Maps/Builder/Actions/_resources.list.xml
+@@ -0,0 +1,28 @@
++<?xml version="1.0" encoding="UTF-8" standalone="no"?>
++<resources>
++  <resource name="builder_button_add_resource" type="RESOURCE"/>
++  <resource name="builder_button_clear_entities" type="RESOURCE"/>
++  <resource name="builder_button_edit_metadata" type="RESOURCE"/>
++  <resource name="builder_button_fast_scrolling" type="RESOURCE"/>
++  <resource name="builder_button_get_resources" type="RESOURCE"/>
++  <resource name="builder_button_load_bg" type="RESOURCE"/>
++  <resource name="builder_button_load_entities" type="RESOURCE"/>
++  <resource name="builder_button_load_map" type="RESOURCE"/>
++  <resource name="builder_button_load_wm" type="RESOURCE"/>
++  <resource name="builder_button_save_entities" type="RESOURCE"/>
++  <resource name="builder_button_save_test" type="RESOURCE"/>
++  <resource name="builder_button_scale_mode" type="RESOURCE"/>
++  <resource name="builder_button_show_bg" type="RESOURCE"/>
++  <resource name="builder_button_show_fg" type="RESOURCE"/>
++  <resource name="builder_button_show_grid" type="RESOURCE"/>
++  <resource name="builder_button_show_wm" type="RESOURCE"/>
++  <resource name="builder_button_symmetry_mode" type="RESOURCE"/>
++  <resource name="builder_button_test_w_o_save" type="RESOURCE"/>
++  <resource name="builder_gamemode_a_d_control_points_adcp" type="RESOURCE"/>
++  <resource name="builder_gamemode_arena_arena" type="RESOURCE"/>
++  <resource name="builder_gamemode_capture_the_flag_ctf" type="RESOURCE"/>
++  <resource name="builder_gamemode_control_points_cp" type="RESOURCE"/>
++  <resource name="builder_gamemode_dual_king_of_the_hill_dkoth" type="RESOURCE"/>
++  <resource name="builder_gamemode_generator_gen" type="RESOURCE"/>
++  <resource name="builder_gamemode_king_of_the_hill_koth" type="RESOURCE"/>
++</resources>
+diff --git a/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_add_resource.gml b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_add_resource.gml
+new file mode 100644
+index 00000000..71b839c5
+--- /dev/null
++++ b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_add_resource.gml
+@@ -0,0 +1,11 @@
++// builder_init: addButton("Add resource")
++var prop;
++prop = get_string("Resource name:", "");
++if (prop != "")
++{
++    resource = get_open_filename("Resource (PNG, GIF)|*.png;*.gif;","");
++    if (resource == "")
++        break;
++    ds_map_add(Builder.metadata, prop, resourceToString(resource));
++    loadMetadata(Builder.metadata, true);
++}
+diff --git a/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_clear_entities.gml b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_clear_entities.gml
+new file mode 100644
+index 00000000..3688a98a
+--- /dev/null
++++ b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_clear_entities.gml
+@@ -0,0 +1,9 @@
++// builder_init: addButton("Clear entities")
++if (show_question("Are you sure you want to scrap your entities?")) {
++    unloadResources();
++    ds_map_clear(Builder.metadata);
++    ds_map_add(Builder.metadata, "type", "meta");
++    ds_map_add(Builder.metadata, "background", "ffffff");
++    ds_map_add(Builder.metadata, "void", "000000");
++    with (LevelEntity) instance_destroy();
++}
+diff --git a/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_edit_metadata.gml b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_edit_metadata.gml
+new file mode 100644
+index 00000000..c42ca06f
+--- /dev/null
++++ b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_edit_metadata.gml
+@@ -0,0 +1,3 @@
++// builder_init: addButton("Edit metadata")
++showPropertyMenu(Builder.metadata, Builder.metadata, true);
++loadMetadata(Builder.metadata, true);   // Reload
+diff --git a/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_fast_scrolling.gml b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_fast_scrolling.gml
+new file mode 100644
+index 00000000..f5ac8a62
+--- /dev/null
++++ b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_fast_scrolling.gml
+@@ -0,0 +1,3 @@
++// builder_init: addButton("Fast scrolling")
++Builder.moveSpeed = 32 + 32*argument0;
++return argument0;
+diff --git a/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_get_resources.gml b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_get_resources.gml
+new file mode 100644
+index 00000000..012d1a19
+--- /dev/null
++++ b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_get_resources.gml
+@@ -0,0 +1,26 @@
++// builder_init: addButton("Get resources")
++if (Builder.mapBG == "")
++    show_message("Load a map first");
++else
++{
++    if (!directory_exists(working_directory + "/Maps/Decompiled"))
++        directory_create(working_directory + "/Maps/Decompiled");
++
++    // Walkmask
++    if (file_exists(temp_directory+"\custommap_walkmask.png"))
++        file_copy(temp_directory+"\custommap_walkmask.png", working_directory + "/Maps/Decompiled/walkmask.png");    
++
++    // External sprites     
++    var resource;
++    for(resource=ds_map_find_first(Builder.metadata); is_string(resource); resource = ds_map_find_next(Builder.metadata, resource))
++    {   
++        var bg;
++        if (string_copy(resource,1, 3) == "bg_")
++            bg = true;
++        else
++            bg = false;
++
++        stringToResource(ds_map_find_value(Builder.metadata, resource), bg, working_directory + "/Maps/Decompiled/" + resource);
++    }  
++    show_message("The map has been decompiled to " + working_directory + "/Maps/Decompiled/ .");
++}
+diff --git a/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_load_bg.gml b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_load_bg.gml
+new file mode 100644
+index 00000000..7d585bc8
+--- /dev/null
++++ b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_load_bg.gml
+@@ -0,0 +1,8 @@
++// builder_init: addButton("Load BG")
++var bg;
++bg = get_open_filename("PNG|*.png","");
++if(bg == "") break;
++Builder.mapBG = bg;
++background_replace(BuilderBGB, bg, false, false);
++background_xscale[7] = 6;
++background_yscale[7] = 6;
+diff --git a/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_load_entities.gml b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_load_entities.gml
+new file mode 100644
+index 00000000..65449e80
+--- /dev/null
++++ b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_load_entities.gml
+@@ -0,0 +1,4 @@
++// builder_init: addButton("Load entities")
++unloadResources();
++ds_map_clear(Builder.metadata);
++loadEntities();
+diff --git a/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_load_map.gml b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_load_map.gml
+new file mode 100644
+index 00000000..f28e7aeb
+--- /dev/null
++++ b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_load_map.gml
+@@ -0,0 +1,16 @@
++// builder_init: addButton("Load map")
++var map;
++map = get_open_filename("PNG|*.png","");
++if (map == "") break;
++
++with(LevelEntity) instance_destroy();
++unloadResources();
++ds_map_clear(Builder.metadata);
++ds_map_add(Builder.metadata, "type", "meta");
++ds_map_add(Builder.metadata, "background", "ffffff");
++
++CustomMapInit(map)
++Builder.mapBG = map;  
++Builder.mapWM = " ";
++Builder.wmString = compressWalkmask();
++loadMetadata(Builder.metadata, true);
+diff --git a/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_load_wm.gml b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_load_wm.gml
+new file mode 100644
+index 00000000..9dd453a8
+--- /dev/null
++++ b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_load_wm.gml
+@@ -0,0 +1,7 @@
++// builder_init: addButton("Load WM")
++var wm;
++wm = get_open_filename("Walkmask Image (PNG or BMP)|*.png; *.bmp","");
++if(wm == "") break;
++Builder.mapWM = wm;
++background_replace(BuilderWMB, wm, true, false);
++Builder.wmString = compressWalkmask();
+diff --git a/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_save_entities.gml b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_save_entities.gml
+new file mode 100644
+index 00000000..1537f1bb
+--- /dev/null
++++ b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_save_entities.gml
+@@ -0,0 +1,2 @@
++// builder_init: addButton("Save entities")
++saveEntities();
+diff --git a/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_save_test.gml b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_save_test.gml
+new file mode 100644
+index 00000000..71955ca7
+--- /dev/null
++++ b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_save_test.gml
+@@ -0,0 +1,25 @@
++// builder_init: addButton("Save & test")
++if (Builder.mapWM == "") show_message("Select a walkmask first.");
++else if (Builder.mapBG == "") show_message("Select a background first");
++else if (validateMap(log2(gamemode))) {    
++    var leveldata;
++    leveldata = compressEntities() + chr(10) + Builder.wmString;
++    GG2DLL_embed_PNG_leveldata(Builder.mapBG, leveldata);
++
++    // Place a copy in the maps folder
++    if (file_exists("Maps\ggb2_tmp_map.png")) file_delete("Maps\ggb2_tmp_map.png");
++    file_copy(Builder.mapBG, "Maps\ggb2_tmp_map.png");
++
++    switch(show_message_ext("Compilation completed. The map is saved to " + string(Builder.mapBG) + ".", "Ok", "Test separately", "Test here")) {
++        case 2:             
++            startGG2("-map ggb2_tmp_map");
++        break;       
++        case 3:
++            Builder.selected = -1;
++            Builder.visible = false;
++            global.launchMap = "ggb2_tmp_map";
++            global.isHost = true;
++            global.gameServer = instance_create(0,0,GameServer); 
++        break; 
++    }
++}
+diff --git a/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_scale_mode.gml b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_scale_mode.gml
+new file mode 100644
+index 00000000..a793a801
+--- /dev/null
++++ b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_scale_mode.gml
+@@ -0,0 +1,3 @@
++// builder_init: addButton("Scale mode")
++Builder.scale = argument0;
++return argument0;
+diff --git a/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_show_bg.gml b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_show_bg.gml
+new file mode 100644
+index 00000000..782ab0e9
+--- /dev/null
++++ b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_show_bg.gml
+@@ -0,0 +1,2 @@
++// builder_init: addButton("Show BG")
++background_visible[7] = argument0;
+diff --git a/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_show_fg.gml b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_show_fg.gml
+new file mode 100644
+index 00000000..13b5c3b1
+--- /dev/null
++++ b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_show_fg.gml
+@@ -0,0 +1,2 @@
++// builder_init: addButton("Show FG")
++ParallaxController.visible = argument0;
+diff --git a/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_show_grid.gml b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_show_grid.gml
+new file mode 100644
+index 00000000..0eb0a4ef
+--- /dev/null
++++ b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_show_grid.gml
+@@ -0,0 +1,2 @@
++// builder_init: addButton("Show grid")
++Builder.showGrid = argument0;
+diff --git a/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_show_wm.gml b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_show_wm.gml
+new file mode 100644
+index 00000000..9ad9ed7b
+--- /dev/null
++++ b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_show_wm.gml
+@@ -0,0 +1,2 @@
++// builder_init: addButton("Show WM")
++Builder.showWM = argument0;
+diff --git a/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_symmetry_mode.gml b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_symmetry_mode.gml
+new file mode 100644
+index 00000000..2483faa4
+--- /dev/null
++++ b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_symmetry_mode.gml
+@@ -0,0 +1,3 @@
++// builder_init: addButton("Symmetry mode")
++Builder.symmetry = argument0;
++return argument0;
+diff --git a/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_test_w_o_save.gml b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_test_w_o_save.gml
+new file mode 100644
+index 00000000..3fc15f53
+--- /dev/null
++++ b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_test_w_o_save.gml
+@@ -0,0 +1,25 @@
++// builder_init: addButton("Test w/o save")
++if (Builder.mapWM == "") show_message("Select a walkmask first.");
++else if (Builder.mapBG == "") show_message("Select a background first");
++else if (validateMap(log2(gamemode))) {
++    // Save to a temporary file
++    if (file_exists("Maps\ggb2_tmp_map.png")) file_delete("Maps\ggb2_tmp_map.png");
++    file_copy(Builder.mapBG, "Maps\ggb2_tmp_map.png");
++
++    var leveldata;
++    leveldata = compressEntities() + chr(10) + Builder.wmString;
++    GG2DLL_embed_PNG_leveldata("Maps/ggb2_tmp_map.png", leveldata);               
++
++    switch(show_message_ext("Where do you want to playtest?", "Test separately", "Test here", "Cancel")) {
++        case 1:             
++            startGG2("-map ggb2_tmp_map");
++        break;       
++        case 2:
++            Builder.selected = -1;
++            Builder.visible = false;
++            global.launchMap = "ggb2_tmp_map";
++            global.isHost = true;
++            global.gameServer = instance_create(0,0,GameServer); 
++        break; 
++    }          
++}
+diff --git a/Source/gg2/Scripts/Maps/Builder/Actions/builder_gamemode_a_d_control_points_adcp.gml b/Source/gg2/Scripts/Maps/Builder/Actions/builder_gamemode_a_d_control_points_adcp.gml
+new file mode 100644
+index 00000000..8595dd4e
+--- /dev/null
++++ b/Source/gg2/Scripts/Maps/Builder/Actions/builder_gamemode_a_d_control_points_adcp.gml
+@@ -0,0 +1,12 @@
++// builder_init: addGamemode("A/D control points (adcp)")
++var controlpoints, zones, gates;
++controlpoints = 0;
++zones = 0;
++gates = 0;
++with(LevelEntity) {
++    if (type == "controlPoint1" || type == "controlPoint2" || type == "controlPoint3" || type == "controlPoint4" || type == "controlPoint5") controlpoints += 1;
++    else if (type == "CapturePoint") zones += 1;
++    else if (type == "SetupGate") gates += 1;
++}
++if (controlpoints == 0 || controlpoints >= 5 || zones == 0 || gates == 0) return false;
++return true;
+diff --git a/Source/gg2/Scripts/Maps/Builder/Actions/builder_gamemode_arena_arena.gml b/Source/gg2/Scripts/Maps/Builder/Actions/builder_gamemode_arena_arena.gml
+new file mode 100644
+index 00000000..36bba01e
+--- /dev/null
++++ b/Source/gg2/Scripts/Maps/Builder/Actions/builder_gamemode_arena_arena.gml
+@@ -0,0 +1,10 @@
++// builder_init: addGamemode("Arena (arena)")
++var controlpoints, zones;
++controlpoints = 0;
++zones = 0;
++with(LevelEntity) {
++    if (type == "ArenaControlPoint") controlpoints += 1;
++    else if (type == "CapturePoint") zones += 1;
++}
++if (controlpoints != 1 || zones == 0) return false;
++return true;
+diff --git a/Source/gg2/Scripts/Maps/Builder/Actions/builder_gamemode_capture_the_flag_ctf.gml b/Source/gg2/Scripts/Maps/Builder/Actions/builder_gamemode_capture_the_flag_ctf.gml
+new file mode 100644
+index 00000000..580ffcc4
+--- /dev/null
++++ b/Source/gg2/Scripts/Maps/Builder/Actions/builder_gamemode_capture_the_flag_ctf.gml
+@@ -0,0 +1,10 @@
++// builder_init: addGamemode("Capture the flag (ctf)")
++var redCount, blueCount;
++redCount = 0;
++blueCount = 0;
++with(LevelEntity) {
++    if (type == "redintel") redCount += 1;
++    else if (type == "blueintel") blueCount += 1;
++}
++if (redCount != 1 || blueCount != 1) return false;
++return true;
+diff --git a/Source/gg2/Scripts/Maps/Builder/Actions/builder_gamemode_control_points_cp.gml b/Source/gg2/Scripts/Maps/Builder/Actions/builder_gamemode_control_points_cp.gml
+new file mode 100644
+index 00000000..4ae44928
+--- /dev/null
++++ b/Source/gg2/Scripts/Maps/Builder/Actions/builder_gamemode_control_points_cp.gml
+@@ -0,0 +1,10 @@
++// builder_init: addGamemode("Control points (cp)")
++var controlpoints, zones;
++controlpoints = 0;
++zones = 0;
++with(LevelEntity) {
++    if (type == "controlPoint1" || type == "controlPoint2" || type == "controlPoint3" || type == "controlPoint4" || type == "controlPoint5") controlpoints += 1;
++    else if (type == "CapturePoint") zones += 1;
++}
++if (controlpoints == 0 || controlpoints > 5 || zones == 0) return false;
++return true;
+diff --git a/Source/gg2/Scripts/Maps/Builder/Actions/builder_gamemode_dual_king_of_the_hill_dkoth.gml b/Source/gg2/Scripts/Maps/Builder/Actions/builder_gamemode_dual_king_of_the_hill_dkoth.gml
+new file mode 100644
+index 00000000..b6a262f7
+--- /dev/null
++++ b/Source/gg2/Scripts/Maps/Builder/Actions/builder_gamemode_dual_king_of_the_hill_dkoth.gml
+@@ -0,0 +1,12 @@
++// builder_init: addGamemode("Dual king of the hill (dkoth)")
++var redcontrolpoints, bluecontrolpoints, zones;
++redcontrolpoints = 0;
++bluecontrolpoints = 0;
++zones = 0;
++with(LevelEntity) {
++    if (type == "KothRedControlPoint") redcontrolpoints += 1;
++    else if (type == "KothBlueControlPoint") bluecontrolpoints += 1;
++    else if (type == "CapturePoint") zones += 1;
++}
++if (redcontrolpoints != 1 || bluecontrolpoints != 1 || zones == 0) return false;
++return true;
+diff --git a/Source/gg2/Scripts/Maps/Builder/Actions/builder_gamemode_generator_gen.gml b/Source/gg2/Scripts/Maps/Builder/Actions/builder_gamemode_generator_gen.gml
+new file mode 100644
+index 00000000..d0c6c6c7
+--- /dev/null
++++ b/Source/gg2/Scripts/Maps/Builder/Actions/builder_gamemode_generator_gen.gml
+@@ -0,0 +1,10 @@
++// builder_init: addGamemode("Generator (gen)")
++var redgen, bluegen;
++redgen = 0;
++bluegen = 0;
++with(LevelEntity) {
++    if (type == "GeneratorRed") redgen += 1;
++    else if (type == "GeneratorBlue") bluegen += 1;
++}
++if (redgen != 1 || bluegen != 1) return false;
++return true;
+diff --git a/Source/gg2/Scripts/Maps/Builder/Actions/builder_gamemode_king_of_the_hill_koth.gml b/Source/gg2/Scripts/Maps/Builder/Actions/builder_gamemode_king_of_the_hill_koth.gml
+new file mode 100644
+index 00000000..74fd6be6
+--- /dev/null
++++ b/Source/gg2/Scripts/Maps/Builder/Actions/builder_gamemode_king_of_the_hill_koth.gml
+@@ -0,0 +1,10 @@
++// builder_init: addGamemode("King of the hill (koth)")
++var controlpoints, zones;
++controlpoints = 0;
++zones = 0;
++with(LevelEntity) {
++    if (type == "KothControlPoint") controlpoints += 1;
++    else if (type == "CapturePoint") zones += 1;
++}
++if (controlpoints != 1 || zones == 0) return false;
++return true;
+diff --git a/Source/gg2/Scripts/Maps/Builder/_resources.list.xml b/Source/gg2/Scripts/Maps/Builder/_resources.list.xml
+index 89a805c4..a55487a1 100644
+--- a/Source/gg2/Scripts/Maps/Builder/_resources.list.xml
++++ b/Source/gg2/Scripts/Maps/Builder/_resources.list.xml
+@@ -1,5 +1,6 @@
+ <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+ <resources>
++  <resource name="Actions" type="GROUP"/>
+   <resource name="builder_init" type="RESOURCE"/>
+   <resource name="addGamemode" type="RESOURCE"/>
+   <resource name="addEntity" type="RESOURCE"/>
+diff --git a/Source/gg2/Scripts/Maps/Builder/addButton.gml b/Source/gg2/Scripts/Maps/Builder/addButton.gml
+index 4622a8bc..e93275e2 100644
+--- a/Source/gg2/Scripts/Maps/Builder/addButton.gml
++++ b/Source/gg2/Scripts/Maps/Builder/addButton.gml
+@@ -1,7 +1,7 @@
+ /**
+  * Adds a button to the GUI
+  * Argument0: Button text
+- * Argument1: The code that gets executed when the button is clicked, executes twice for toggles with argument0 as the toggle value
++ * Argument1: The script that gets run when the button is clicked, executes twice for toggles with argument0 as the toggle value
+  * [Argument2]: Make the button a toggle
+  * [Argument3]: Button is active by default (if it's a toggle)
+ */
+diff --git a/Source/gg2/Scripts/Maps/Builder/addGamemode.gml b/Source/gg2/Scripts/Maps/Builder/addGamemode.gml
+index 45e9f3dc..1c659023 100644
+--- a/Source/gg2/Scripts/Maps/Builder/addGamemode.gml
++++ b/Source/gg2/Scripts/Maps/Builder/addGamemode.gml
+@@ -1,7 +1,7 @@
+ /**
+  * Adds a gamemode to garrison builder
+  * Argument0: The name
+- * [Argument1]: A string that returns true when the gamemode has the correct entities.
++ * Argument1: A script that returns true when the gamemode has the correct entities (-1 for none).
+  * [Argument2]: An error message in case the string above returned false.
+  * Returns: An identifier for that gamemode
+ */
+diff --git a/Source/gg2/Scripts/Maps/Builder/builder_init.gml b/Source/gg2/Scripts/Maps/Builder/builder_init.gml
+index f02efb94..8ecaba86 100644
+--- a/Source/gg2/Scripts/Maps/Builder/builder_init.gml
++++ b/Source/gg2/Scripts/Maps/Builder/builder_init.gml
+@@ -10,253 +10,36 @@ global.resources = ds_map_create();
+ // global.metadataFunction = "";
+ 
+ // Add buttons
+-addButton("Load map", '
+-    var map;
+-    map = get_open_filename("PNG|*.png","");
+-    if (map == "") break;
+-    
+-    with(LevelEntity) instance_destroy();
+-    unloadResources();
+-    ds_map_clear(Builder.metadata);
+-    ds_map_add(Builder.metadata, "type", "meta");
+-    ds_map_add(Builder.metadata, "background", "ffffff");
+-    
+-    CustomMapInit(map)
+-    Builder.mapBG = map;  
+-    Builder.mapWM = " ";
+-    Builder.wmString = compressWalkmask();
+-    loadMetadata(Builder.metadata, true);
+-');
+-addButton("Load BG", '
+-    var bg;
+-    bg = get_open_filename("PNG|*.png","");
+-    if(bg == "") break;
+-    Builder.mapBG = bg;
+-    background_replace(BuilderBGB, bg, false, false);
+-    background_xscale[7] = 6;
+-    background_yscale[7] = 6;
+-'); 
+-addButton("Load WM", '
+-    var wm;
+-    wm = get_open_filename("Walkmask Image (PNG or BMP)|*.png; *.bmp","");
+-    if(wm == "") break;
+-    Builder.mapWM = wm;
+-    background_replace(BuilderWMB, wm, true, false);
+-    Builder.wmString = compressWalkmask();
+-'); 
+-addButton("Show BG", 'background_visible[7] = argument0;', 1, 1); 
+-addButton("Show WM", 'Builder.showWM = argument0;', 1); 
+-addButton("Show grid", 'Builder.showGrid = argument0;', 1);
+-addButton("Show FG",'ParallaxController.visible = argument0;', 1, 1); 
+-addButton("Save & test", '
+-    if (Builder.mapWM == "") show_message("Select a walkmask first.");
+-    else if (Builder.mapBG == "") show_message("Select a background first");
+-    else if (validateMap(log2(gamemode))) {    
+-        var leveldata;
+-        leveldata = compressEntities() + chr(10) + Builder.wmString;
+-        GG2DLL_embed_PNG_leveldata(Builder.mapBG, leveldata);
+-        
+-        // Place a copy in the maps folder
+-        if (file_exists("Maps\ggb2_tmp_map.png")) file_delete("Maps\ggb2_tmp_map.png");
+-        file_copy(Builder.mapBG, "Maps\ggb2_tmp_map.png");
+-        
+-        switch(show_message_ext("Compilation completed. The map is saved to " + string(Builder.mapBG) + ".", "Ok", "Test separately", "Test here")) {
+-            case 2:             
+-                startGG2("-map ggb2_tmp_map");
+-            break;       
+-            case 3:
+-                Builder.selected = -1;
+-                Builder.visible = false;
+-                global.launchMap = "ggb2_tmp_map";
+-                global.isHost = true;
+-                global.gameServer = instance_create(0,0,GameServer); 
+-            break; 
+-        }
+-    }
+-'); 
+-addButton("Test w/o save", '
+-    if (Builder.mapWM == "") show_message("Select a walkmask first.");
+-    else if (Builder.mapBG == "") show_message("Select a background first");
+-    else if (validateMap(log2(gamemode))) {
+-        // Save to a temporary file
+-        if (file_exists("Maps\ggb2_tmp_map.png")) file_delete("Maps\ggb2_tmp_map.png");
+-        file_copy(Builder.mapBG, "Maps\ggb2_tmp_map.png");
+-        
+-        var leveldata;
+-        leveldata = compressEntities() + chr(10) + Builder.wmString;
+-        GG2DLL_embed_PNG_leveldata("Maps/ggb2_tmp_map.png", leveldata);               
+-        
+-        switch(show_message_ext("Where do you want to playtest?", "Test separately", "Test here", "Cancel")) {
+-            case 1:             
+-                startGG2("-map ggb2_tmp_map");
+-            break;       
+-            case 2:
+-                Builder.selected = -1;
+-                Builder.visible = false;
+-                global.launchMap = "ggb2_tmp_map";
+-                global.isHost = true;
+-                global.gameServer = instance_create(0,0,GameServer); 
+-            break; 
+-        }          
+-    }
+-');
+-addButton("Symmetry mode", '
+-    Builder.symmetry = argument0;
+-    return argument0;
+-', 1); 
+-addButton("Scale mode", '
+-    Builder.scale = argument0;
+-    return argument0;
+-', 1, 1);
+-addButton("Fast scrolling",'
+-    Builder.moveSpeed = 32 + 32*argument0;
+-    return argument0;
+-', 1);
+-addButton("Edit metadata", '
+-    showPropertyMenu(Builder.metadata, Builder.metadata, true);
+-    loadMetadata(Builder.metadata, true);   // Reload
+-');
+-addButton("Add resource", '
+-    var prop;
+-    prop = get_string("Resource name:", "");
+-    if (prop != "")
+-    {
+-        resource = get_open_filename("Resource (PNG, GIF)|*.png;*.gif;","");
+-        if (resource == "")
+-            break;
+-        ds_map_add(Builder.metadata, prop, resourceToString(resource));
+-        loadMetadata(Builder.metadata, true);
+-    }
+-');
++addButton("Load map", builder_button_load_map);
++addButton("Load BG", builder_button_load_bg); 
++addButton("Load WM", builder_button_load_wm); 
++addButton("Show BG", builder_button_show_bg, 1, 1); 
++addButton("Show WM", builder_button_show_wm, 1); 
++addButton("Show grid", builder_button_show_grid, 1);
++addButton("Show FG",builder_button_show_fg, 1, 1); 
++addButton("Save & test", builder_button_save_test); 
++addButton("Test w/o save", builder_button_test_w_o_save);
++addButton("Symmetry mode", builder_button_symmetry_mode, 1); 
++addButton("Scale mode", builder_button_scale_mode, 1, 1);
++addButton("Fast scrolling",builder_button_fast_scrolling, 1);
++addButton("Edit metadata", builder_button_edit_metadata);
++addButton("Add resource", builder_button_add_resource);
+ 
+-addButton("Get resources", '
+-    if (Builder.mapBG == "")
+-        show_message("Load a map first");
+-    else
+-    {
+-        if (!directory_exists(working_directory + "/Maps/Decompiled"))
+-            directory_create(working_directory + "/Maps/Decompiled");
+-        
+-        // Walkmask
+-        if (file_exists(temp_directory+"\custommap_walkmask.png"))
+-            file_copy(temp_directory+"\custommap_walkmask.png", working_directory + "/Maps/Decompiled/walkmask.png");    
+-       
+-        // External sprites     
+-        var resource;
+-        for(resource=ds_map_find_first(Builder.metadata); is_string(resource); resource = ds_map_find_next(Builder.metadata, resource))
+-        {   
+-            var bg;
+-            if (string_copy(resource,1, 3) == "bg_")
+-                bg = true;
+-            else
+-                bg = false;
+-                
+-            stringToResource(ds_map_find_value(Builder.metadata, resource), bg, working_directory + "/Maps/Decompiled/" + resource);
+-        }  
+-        show_message("The map has been decompiled to " + working_directory + "/Maps/Decompiled/ .");
+-    }
+-');
+-addButton("Load entities", '
+-    unloadResources();
+-    ds_map_clear(Builder.metadata);
+-    loadEntities();
+-'); 
+-addButton("Save entities", 'saveEntities();');
+-addButton("Clear entities", '
+-    if (show_question("Are you sure you want to scrap your entities?")) {
+-        unloadResources();
+-        ds_map_clear(Builder.metadata);
+-        ds_map_add(Builder.metadata, "type", "meta");
+-        ds_map_add(Builder.metadata, "background", "ffffff");
+-        ds_map_add(Builder.metadata, "void", "000000");
+-        with (LevelEntity) instance_destroy();
+-    }
+-'); 
++addButton("Get resources", builder_button_get_resources);
++addButton("Load entities", builder_button_load_entities); 
++addButton("Save entities", builder_button_save_entities);
++addButton("Clear entities", builder_button_clear_entities); 
+ 
+ // Add gamemodes
+ var ctf, cp, adcp, koth, dkoth, arena, gen;
+-addGamemode("Free mode");
+-ctf = addGamemode("Capture the flag (ctf)", '
+-    var redCount, blueCount;
+-    redCount = 0;
+-    blueCount = 0;
+-    with(LevelEntity) {
+-        if (type == "redintel") redCount += 1;
+-        else if (type == "blueintel") blueCount += 1;
+-    }
+-    if (redCount != 1 || blueCount != 1) return false;
+-    return true;
+-', "Ctf or invasion mode needs 1 red and 1 blue intelligence.");
+-cp = addGamemode("Control points (cp)", '
+-    var controlpoints, zones;
+-    controlpoints = 0;
+-    zones = 0;
+-    with(LevelEntity) {
+-        if (type == "controlPoint1" || type == "controlPoint2" || type == "controlPoint3" || type == "controlPoint4" || type == "controlPoint5") controlpoints += 1;
+-        else if (type == "CapturePoint") zones += 1;
+-    }
+-    if (controlpoints == 0 || controlpoints > 5 || zones == 0) return false;
+-    return true;
+-', "CP needs 1-5 control points and capturezones.");
+-adcp = addGamemode("A/D control points (adcp)", '
+-    var controlpoints, zones, gates;
+-    controlpoints = 0;
+-    zones = 0;
+-    gates = 0;
+-    with(LevelEntity) {
+-        if (type == "controlPoint1" || type == "controlPoint2" || type == "controlPoint3" || type == "controlPoint4" || type == "controlPoint5") controlpoints += 1;
+-        else if (type == "CapturePoint") zones += 1;
+-        else if (type == "SetupGate") gates += 1;
+-    }
+-    if (controlpoints == 0 || controlpoints >= 5 || zones == 0 || gates == 0) return false;
+-    return true;
+-', "A/D CP needs 1-5 control points, capturezones and setup gates.");
+-koth = addGamemode("King of the hill (koth)", '
+-    var controlpoints, zones;
+-    controlpoints = 0;
+-    zones = 0;
+-    with(LevelEntity) {
+-        if (type == "KothControlPoint") controlpoints += 1;
+-        else if (type == "CapturePoint") zones += 1;
+-    }
+-    if (controlpoints != 1 || zones == 0) return false;
+-    return true;
+-', "KOTH needs 1 control point and capturezones.");
+-dkoth = addGamemode("Dual king of the hill (dkoth)" ,'
+-    var redcontrolpoints, bluecontrolpoints, zones;
+-    redcontrolpoints = 0;
+-    bluecontrolpoints = 0;
+-    zones = 0;
+-    with(LevelEntity) {
+-        if (type == "KothRedControlPoint") redcontrolpoints += 1;
+-        else if (type == "KothBlueControlPoint") bluecontrolpoints += 1;
+-        else if (type == "CapturePoint") zones += 1;
+-    }
+-    if (redcontrolpoints != 1 || bluecontrolpoints != 1 || zones == 0) return false;
+-    return true;
+-', "DKOTH needs 1 red control point, 1 blue control point and capturezones.");
+-arena = addGamemode("Arena (arena)", '
+-    var controlpoints, zones;
+-    controlpoints = 0;
+-    zones = 0;
+-    with(LevelEntity) {
+-        if (type == "ArenaControlPoint") controlpoints += 1;
+-        else if (type == "CapturePoint") zones += 1;
+-    }
+-    if (controlpoints != 1 || zones == 0) return false;
+-    return true;
+-', "Arena needs 1 control point and capturezones.");
+-gen = addGamemode("Generator (gen)", '
+-    var redgen, bluegen;
+-    redgen = 0;
+-    bluegen = 0;
+-    with(LevelEntity) {
+-        if (type == "GeneratorRed") redgen += 1;
+-        else if (type == "GeneratorBlue") bluegen += 1;
+-    }
+-    if (redgen != 1 || bluegen != 1) return false;
+-    return true;
+-', "Gen needs 1 red and 1 blue generator.");
++addGamemode("Free mode", -1);
++ctf = addGamemode("Capture the flag (ctf)", builder_gamemode_capture_the_flag_ctf, "Ctf or invasion mode needs 1 red and 1 blue intelligence.");
++cp = addGamemode("Control points (cp)", builder_gamemode_control_points_cp, "CP needs 1-5 control points and capturezones.");
++adcp = addGamemode("A/D control points (adcp)", builder_gamemode_a_d_control_points_adcp, "A/D CP needs 1-5 control points, capturezones and setup gates.");
++koth = addGamemode("King of the hill (koth)", builder_gamemode_king_of_the_hill_koth, "KOTH needs 1 control point and capturezones.");
++dkoth = addGamemode("Dual king of the hill (dkoth)" ,builder_gamemode_dual_king_of_the_hill_dkoth, "DKOTH needs 1 red control point, 1 blue control point and capturezones.");
++arena = addGamemode("Arena (arena)", builder_gamemode_arena_arena, "Arena needs 1 control point and capturezones.");
++gen = addGamemode("Generator (gen)", builder_gamemode_generator_gen, "Gen needs 1 red and 1 blue generator.");
+ 
+ // Add entities
+ addEntity("spawnroom", -1, "{xscale:1,yscale:1}", SpawnRoom, sprite64, 1, entityButtonS, 74, "Players can instantly respawn in this area.");
+diff --git a/Source/gg2/Scripts/Maps/Builder/resetToggles.gml b/Source/gg2/Scripts/Maps/Builder/resetToggles.gml
+index fcb24f11..163d57e0 100644
+--- a/Source/gg2/Scripts/Maps/Builder/resetToggles.gml
++++ b/Source/gg2/Scripts/Maps/Builder/resetToggles.gml
+@@ -7,7 +7,7 @@ with(Builder) {
+     for(i=0; i<ds_list_size(global.buttons); i+=1) {
+         button = ds_list_find_value(global.buttons, i);
+         if (ds_map_find_value(button, "toggle")) {
+-            buttons[i, TOGGLED] = execute_string(ds_map_find_value(button, "code"), buttons[i, TOGGLED]);
++            buttons[i, TOGGLED] = run_action(ds_map_find_value(button, "code"), buttons[i, TOGGLED]);
+         }
+     }
+ }
+diff --git a/Source/gg2/Scripts/Maps/Builder/validateMap.gml b/Source/gg2/Scripts/Maps/Builder/validateMap.gml
+index f88ef1f5..390cb6ca 100644
+--- a/Source/gg2/Scripts/Maps/Builder/validateMap.gml
++++ b/Source/gg2/Scripts/Maps/Builder/validateMap.gml
+@@ -22,12 +22,12 @@ if (redCount == 0 ||blueCount == 0) {
+ 
+ if (gmMap != -1) {
+     code = ds_map_find_value(gmMap, "code");
+-    if (is_string(code)) {
++    if (code >= 0) {
+         error = ds_map_find_value(gmMap, "error");
+         if (!is_string(error)) error = "Your setup is not valid.";
+         else error = "Your setup is not valid:#" + error;
+         
+-        if (!execute_string(ds_map_find_value(gmMap, "code"))) {
++        if (!run_action(code, 0)) {
+             if (show_message_ext(error, "Continue", "Cancel", "") != 1) return false;
+         }
+     }
+diff --git a/Source/gg2/Scripts/Menus/Actions/_resources.list.xml b/Source/gg2/Scripts/Menus/Actions/_resources.list.xml
+new file mode 100644
+index 00000000..6a4a16a5
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/_resources.list.xml
+@@ -0,0 +1,83 @@
++<?xml version="1.0" encoding="UTF-8" standalone="no"?>
++<resources>
++  <resource name="menu_adv_host_options_announce_to_lobby" type="RESOURCE"/>
++  <resource name="menu_adv_host_options_attempt_upnp_forwarding" type="RESOURCE"/>
++  <resource name="menu_adv_host_options_auto_balance" type="RESOURCE"/>
++  <resource name="menu_adv_host_options_hosting_port" type="RESOURCE"/>
++  <resource name="menu_adv_host_options_map_rotation" type="RESOURCE"/>
++  <resource name="menu_adv_host_options_shuffle_map_rotation" type="RESOURCE"/>
++  <resource name="menu_builder_menu_back" type="RESOURCE"/>
++  <resource name="menu_builder_menu_back_2" type="RESOURCE"/>
++  <resource name="menu_builder_menu_main_menu" type="RESOURCE"/>
++  <resource name="menu_builder_menu_select_gamemode" type="RESOURCE"/>
++  <resource name="menu_classlimits_menu_demoman" type="RESOURCE"/>
++  <resource name="menu_classlimits_menu_engineer" type="RESOURCE"/>
++  <resource name="menu_classlimits_menu_heavy" type="RESOURCE"/>
++  <resource name="menu_classlimits_menu_medic" type="RESOURCE"/>
++  <resource name="menu_classlimits_menu_pyro" type="RESOURCE"/>
++  <resource name="menu_classlimits_menu_quote" type="RESOURCE"/>
++  <resource name="menu_classlimits_menu_scout" type="RESOURCE"/>
++  <resource name="menu_classlimits_menu_sniper" type="RESOURCE"/>
++  <resource name="menu_classlimits_menu_soldier" type="RESOURCE"/>
++  <resource name="menu_classlimits_menu_spy" type="RESOURCE"/>
++  <resource name="menu_engine_options_back" type="RESOURCE"/>
++  <resource name="menu_engine_options_framerate" type="RESOURCE"/>
++  <resource name="menu_engine_options_fullscreen" type="RESOURCE"/>
++  <resource name="menu_engine_options_gibs" type="RESOURCE"/>
++  <resource name="menu_engine_options_hide_infiltrator_ghosts" type="RESOURCE"/>
++  <resource name="menu_engine_options_ingame_aspect_ratio" type="RESOURCE"/>
++  <resource name="menu_engine_options_music" type="RESOURCE"/>
++  <resource name="menu_engine_options_particles" type="RESOURCE"/>
++  <resource name="menu_engine_options_prompt_for_restart" type="RESOURCE"/>
++  <resource name="menu_engine_options_v_sync" type="RESOURCE"/>
++  <resource name="menu_host_back" type="RESOURCE"/>
++  <resource name="menu_host_options_capture_limit" type="RESOURCE"/>
++  <resource name="menu_host_options_deathmatch_kill_limit" type="RESOURCE"/>
++  <resource name="menu_host_options_password" type="RESOURCE"/>
++  <resource name="menu_host_options_player_limit" type="RESOURCE"/>
++  <resource name="menu_host_options_respawn_time_secs" type="RESOURCE"/>
++  <resource name="menu_host_options_server_name" type="RESOURCE"/>
++  <resource name="menu_host_options_tdm_invulnerability_secs" type="RESOURCE"/>
++  <resource name="menu_host_options_time_limit_mins" type="RESOURCE"/>
++  <resource name="menu_host_options_welcome_message" type="RESOURCE"/>
++  <resource name="menu_host_start_game" type="RESOURCE"/>
++  <resource name="menu_host_tab_advanced" type="RESOURCE"/>
++  <resource name="menu_host_tab_classlimits" type="RESOURCE"/>
++  <resource name="menu_host_tab_main" type="RESOURCE"/>
++  <resource name="menu_hudoptions_fade_scoreboard" type="RESOURCE"/>
++  <resource name="menu_hudoptions_kill_log_position" type="RESOURCE"/>
++  <resource name="menu_hudoptions_koth_timer_orientation" type="RESOURCE"/>
++  <resource name="menu_hudoptions_timer_position" type="RESOURCE"/>
++  <resource name="menu_in_game_menu_back" type="RESOURCE"/>
++  <resource name="menu_in_game_menu_disconnect" type="RESOURCE"/>
++  <resource name="menu_in_game_menu_kick_players" type="RESOURCE"/>
++  <resource name="menu_in_game_menu_options" type="RESOURCE"/>
++  <resource name="menu_in_game_menu_quit_game" type="RESOURCE"/>
++  <resource name="menu_in_game_menu_return_to_game" type="RESOURCE"/>
++  <resource name="menu_lobby_name_player_name" type="RESOURCE"/>
++  <resource name="menu_lobby_side_back" type="RESOURCE"/>
++  <resource name="menu_lobby_side_refresh" type="RESOURCE"/>
++  <resource name="menu_main_menu_back" type="RESOURCE"/>
++  <resource name="menu_main_menu_credits" type="RESOURCE"/>
++  <resource name="menu_main_menu_garrison_builder" type="RESOURCE"/>
++  <resource name="menu_main_menu_host_game" type="RESOURCE"/>
++  <resource name="menu_main_menu_join_lobby" type="RESOURCE"/>
++  <resource name="menu_main_menu_join_manual" type="RESOURCE"/>
++  <resource name="menu_main_menu_manage_haxxy_rewards" type="RESOURCE"/>
++  <resource name="menu_main_menu_options" type="RESOURCE"/>
++  <resource name="menu_main_menu_visit_the_forums" type="RESOURCE"/>
++  <resource name="menu_options_additional_healthbar" type="RESOURCE"/>
++  <resource name="menu_options_additional_teammate_stats" type="RESOURCE"/>
++  <resource name="menu_options_back" type="RESOURCE"/>
++  <resource name="menu_options_healer_radar" type="RESOURCE"/>
++  <resource name="menu_options_kill_cam" type="RESOURCE"/>
++  <resource name="menu_options_player_name" type="RESOURCE"/>
++  <resource name="menu_options_queued_jumping_bunnyhopping" type="RESOURCE"/>
++  <resource name="menu_options_show_healer" type="RESOURCE"/>
++  <resource name="menu_options_show_healing" type="RESOURCE"/>
++  <resource name="menu_options_tab_controls_1" type="RESOURCE"/>
++  <resource name="menu_options_tab_controls_2" type="RESOURCE"/>
++  <resource name="menu_options_tab_engine" type="RESOURCE"/>
++  <resource name="menu_options_tab_hud" type="RESOURCE"/>
++  <resource name="menu_options_tab_ingame" type="RESOURCE"/>
++</resources>
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_adv_host_options_announce_to_lobby.gml b/Source/gg2/Scripts/Menus/Actions/menu_adv_host_options_announce_to_lobby.gml
+new file mode 100644
+index 00000000..ca3a9ebd
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_adv_host_options_announce_to_lobby.gml
+@@ -0,0 +1,2 @@
++// AdvHostOptionsController: menu_addedit_boolean("Announce to Lobby:")
++gg2_write_ini("Settings", "UseLobby", argument0);
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_adv_host_options_attempt_upnp_forwarding.gml b/Source/gg2/Scripts/Menus/Actions/menu_adv_host_options_attempt_upnp_forwarding.gml
+new file mode 100644
+index 00000000..cac08f27
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_adv_host_options_attempt_upnp_forwarding.gml
+@@ -0,0 +1,4 @@
++// AdvHostOptionsController: menu_addedit_boolean("Attempt UPnP Forwarding:")
++if (argument0 == 1)
++    show_message("Warning: UPNP support is currently experimental and enabling it may cause freezing while starting a server, but should cause no freezing ingame")
++gg2_write_ini("Server", "Attempt UPnP Forwarding", argument0);
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_adv_host_options_auto_balance.gml b/Source/gg2/Scripts/Menus/Actions/menu_adv_host_options_auto_balance.gml
+new file mode 100644
+index 00000000..88fcd6e9
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_adv_host_options_auto_balance.gml
+@@ -0,0 +1,2 @@
++// AdvHostOptionsController: menu_addedit_boolean("Auto Balance:")
++gg2_write_ini("Server", "AutoBalance", argument0);
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_adv_host_options_hosting_port.gml b/Source/gg2/Scripts/Menus/Actions/menu_adv_host_options_hosting_port.gml
+new file mode 100644
+index 00000000..8973acd3
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_adv_host_options_hosting_port.gml
+@@ -0,0 +1,2 @@
++// AdvHostOptionsController: menu_addedit_num("Hosting Port:")
++gg2_write_ini("Settings", "HostingPort", argument0);
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_adv_host_options_map_rotation.gml b/Source/gg2/Scripts/Menus/Actions/menu_adv_host_options_map_rotation.gml
+new file mode 100644
+index 00000000..cf3e995f
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_adv_host_options_map_rotation.gml
+@@ -0,0 +1,15 @@
++// AdvHostOptionsController: menu_addedit_script("Map Rotation:")
++var absPath;
++
++absPath = get_open_filename("Map Rotation|*.txt", "");
++
++if (absPath == "") {
++    global.mapRotationFile = absPath;
++} else {
++    global.mapRotationFile = getRelativePathIfDescendant(working_directory + "\", absPath);
++}
++
++gg2_write_ini("Server", "MapRotation", global.mapRotationFile);
++
++load_map_rotation();
++return menu_format_maprotation_filepath(global.mapRotationFile);
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_adv_host_options_shuffle_map_rotation.gml b/Source/gg2/Scripts/Menus/Actions/menu_adv_host_options_shuffle_map_rotation.gml
+new file mode 100644
+index 00000000..e900e4ab
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_adv_host_options_shuffle_map_rotation.gml
+@@ -0,0 +1,2 @@
++// AdvHostOptionsController: menu_addedit_select("Shuffle map rotation:")
++gg2_write_ini("Server", "ShuffleRotation", argument0);
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_builder_menu_back.gml b/Source/gg2/Scripts/Menus/Actions/menu_builder_menu_back.gml
+new file mode 100644
+index 00000000..129af6ef
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_builder_menu_back.gml
+@@ -0,0 +1,3 @@
++// BuilderMenuController: menu_addback("Back")
++// Wait 1 frame or the Builder will reopen the menu in the same step.
++alarm[0] = 1;
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_builder_menu_back_2.gml b/Source/gg2/Scripts/Menus/Actions/menu_builder_menu_back_2.gml
+new file mode 100644
+index 00000000..4815443f
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_builder_menu_back_2.gml
+@@ -0,0 +1,3 @@
++// BuilderMenuController: menu_addback("Back")
++room_goto_fix(Menu);
++with(Builder) instance_destroy();
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_builder_menu_main_menu.gml b/Source/gg2/Scripts/Menus/Actions/menu_builder_menu_main_menu.gml
+new file mode 100644
+index 00000000..18c3da14
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_builder_menu_main_menu.gml
+@@ -0,0 +1,3 @@
++// BuilderMenuController: menu_addlink("Main menu")
++room_goto_fix(Menu);
++with(Builder) instance_destroy();
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_builder_menu_select_gamemode.gml b/Source/gg2/Scripts/Menus/Actions/menu_builder_menu_select_gamemode.gml
+new file mode 100644
+index 00000000..e0c88f3e
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_builder_menu_select_gamemode.gml
+@@ -0,0 +1,13 @@
++// BuilderMenuController: menu_addlink
++var builder;
++if (!instance_exists(Builder)) builder = instance_create(0,0, Builder);
++else builder = Builder.id;
++
++builder.gamemode = power(2, virtualitem);
++builder.name = item_name[virtualitem];
++
++if (room != BuilderRoom) room_goto_fix(BuilderRoom);
++else {
++    with(Builder) event_user(0);
++    instance_destroy();
++}
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_classlimits_menu_demoman.gml b/Source/gg2/Scripts/Menus/Actions/menu_classlimits_menu_demoman.gml
+new file mode 100644
+index 00000000..e4b4ae97
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_classlimits_menu_demoman.gml
+@@ -0,0 +1,2 @@
++// ClasslimitsMenuController: menu_addedit_num("Demoman:")
++gg2_write_ini("Classlimits", "Demoman", argument0);
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_classlimits_menu_engineer.gml b/Source/gg2/Scripts/Menus/Actions/menu_classlimits_menu_engineer.gml
+new file mode 100644
+index 00000000..408d86b4
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_classlimits_menu_engineer.gml
+@@ -0,0 +1,2 @@
++// ClasslimitsMenuController: menu_addedit_num("Engineer:")
++gg2_write_ini("Classlimits", "Engineer", argument0);
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_classlimits_menu_heavy.gml b/Source/gg2/Scripts/Menus/Actions/menu_classlimits_menu_heavy.gml
+new file mode 100644
+index 00000000..f50940e7
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_classlimits_menu_heavy.gml
+@@ -0,0 +1,2 @@
++// ClasslimitsMenuController: menu_addedit_num("Heavy:")
++gg2_write_ini("Classlimits", "Heavy", argument0);
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_classlimits_menu_medic.gml b/Source/gg2/Scripts/Menus/Actions/menu_classlimits_menu_medic.gml
+new file mode 100644
+index 00000000..021bdc5a
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_classlimits_menu_medic.gml
+@@ -0,0 +1,2 @@
++// ClasslimitsMenuController: menu_addedit_num("Medic:")
++gg2_write_ini("Classlimits", "Medic", argument0);
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_classlimits_menu_pyro.gml b/Source/gg2/Scripts/Menus/Actions/menu_classlimits_menu_pyro.gml
+new file mode 100644
+index 00000000..32c2e518
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_classlimits_menu_pyro.gml
+@@ -0,0 +1,2 @@
++// ClasslimitsMenuController: menu_addedit_num("Pyro:")
++gg2_write_ini("Classlimits", "Pyro", argument0);
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_classlimits_menu_quote.gml b/Source/gg2/Scripts/Menus/Actions/menu_classlimits_menu_quote.gml
+new file mode 100644
+index 00000000..8fc6f1b6
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_classlimits_menu_quote.gml
+@@ -0,0 +1,2 @@
++// ClasslimitsMenuController: menu_addedit_num("Quote:")
++gg2_write_ini("Classlimits", "Quote", argument0);
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_classlimits_menu_scout.gml b/Source/gg2/Scripts/Menus/Actions/menu_classlimits_menu_scout.gml
+new file mode 100644
+index 00000000..d2031ce7
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_classlimits_menu_scout.gml
+@@ -0,0 +1,2 @@
++// ClasslimitsMenuController: menu_addedit_num("Scout:")
++gg2_write_ini("Classlimits", "Scout", argument0);
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_classlimits_menu_sniper.gml b/Source/gg2/Scripts/Menus/Actions/menu_classlimits_menu_sniper.gml
+new file mode 100644
+index 00000000..81d37662
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_classlimits_menu_sniper.gml
+@@ -0,0 +1,2 @@
++// ClasslimitsMenuController: menu_addedit_num("Sniper:")
++gg2_write_ini("Classlimits", "Sniper", argument0);
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_classlimits_menu_soldier.gml b/Source/gg2/Scripts/Menus/Actions/menu_classlimits_menu_soldier.gml
+new file mode 100644
+index 00000000..87b0ad22
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_classlimits_menu_soldier.gml
+@@ -0,0 +1,2 @@
++// ClasslimitsMenuController: menu_addedit_num("Soldier:")
++gg2_write_ini("Classlimits", "Soldier", argument0);
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_classlimits_menu_spy.gml b/Source/gg2/Scripts/Menus/Actions/menu_classlimits_menu_spy.gml
+new file mode 100644
+index 00000000..c49a131b
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_classlimits_menu_spy.gml
+@@ -0,0 +1,2 @@
++// ClasslimitsMenuController: menu_addedit_num("Spy:")
++gg2_write_ini("Classlimits", "Spy", argument0);
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_engine_options_back.gml b/Source/gg2/Scripts/Menus/Actions/menu_engine_options_back.gml
+new file mode 100644
+index 00000000..6dc761ba
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_engine_options_back.gml
+@@ -0,0 +1,8 @@
++// EngineOptionsController: menu_addback("Back")
++if(warnoptioneffect)
++    show_message("An option you changed only takes effect on map change or server join.");
++instance_destroy();
++if(room == Options)
++    room_goto_fix(Menu);
++else
++    instance_create(0,0,InGameMenuController);
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_engine_options_framerate.gml b/Source/gg2/Scripts/Menus/Actions/menu_engine_options_framerate.gml
+new file mode 100644
+index 00000000..4d02c9e1
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_engine_options_framerate.gml
+@@ -0,0 +1,4 @@
++// EngineOptionsController: menu_addedit_select("Framerate:")
++gg2_write_ini("Settings", "Framerate", argument0);
++if(room != Options)
++    warnoptioneffect = !global.isHost;
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_engine_options_fullscreen.gml b/Source/gg2/Scripts/Menus/Actions/menu_engine_options_fullscreen.gml
+new file mode 100644
+index 00000000..a13beed6
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_engine_options_fullscreen.gml
+@@ -0,0 +1,3 @@
++// EngineOptionsController: menu_addedit_boolean("Fullscreen:")
++gg2_write_ini("Settings", "Fullscreen", argument0);
++window_set_fullscreen(argument0);
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_engine_options_gibs.gml b/Source/gg2/Scripts/Menus/Actions/menu_engine_options_gibs.gml
+new file mode 100644
+index 00000000..1538a52d
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_engine_options_gibs.gml
+@@ -0,0 +1,2 @@
++// EngineOptionsController: menu_addedit_select("Gibs:")
++gg2_write_ini("Settings", "Gib Level", argument0);
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_engine_options_hide_infiltrator_ghosts.gml b/Source/gg2/Scripts/Menus/Actions/menu_engine_options_hide_infiltrator_ghosts.gml
+new file mode 100644
+index 00000000..20e82b81
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_engine_options_hide_infiltrator_ghosts.gml
+@@ -0,0 +1,2 @@
++// EngineOptionsController: menu_addedit_boolean("Hide Infiltrator 'Ghosts':")
++gg2_write_ini("Settings", "Hide Spy Ghosts", argument0);
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_engine_options_ingame_aspect_ratio.gml b/Source/gg2/Scripts/Menus/Actions/menu_engine_options_ingame_aspect_ratio.gml
+new file mode 100644
+index 00000000..79c5e8d7
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_engine_options_ingame_aspect_ratio.gml
+@@ -0,0 +1,5 @@
++// EngineOptionsController: menu_addedit_select("Ingame Aspect Ratio:")
++gg2_write_ini("Settings", "Resolution", argument0);
++if(room != Options)
++    warnoptioneffect = !global.isHost;
++global.changed_resolution = true;
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_engine_options_music.gml b/Source/gg2/Scripts/Menus/Actions/menu_engine_options_music.gml
+new file mode 100644
+index 00000000..8b19a60c
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_engine_options_music.gml
+@@ -0,0 +1,24 @@
++// EngineOptionsController: menu_addedit_select("Music:")
++gg2_write_ini("Settings", "Music", argument0);
++if(room != Options)
++{
++    if (argument0 == MUSIC_BOTH || argument0 == MUSIC_INGAME_ONLY)
++    {
++        AudioControlPlaySong(global.IngameMusic, true);
++    }
++    else
++    {
++        AudioControlPlaySong(-1, false);
++    }
++}
++else
++{
++    if(argument0 == MUSIC_BOTH || argument0 == MUSIC_MENU_ONLY)
++    {
++        AudioControlPlaySong(global.MenuMusic, true);
++    }
++    else
++    {
++        AudioControlPlaySong(-1, false);
++    }
++}
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_engine_options_particles.gml b/Source/gg2/Scripts/Menus/Actions/menu_engine_options_particles.gml
+new file mode 100644
+index 00000000..499c9e68
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_engine_options_particles.gml
+@@ -0,0 +1,2 @@
++// EngineOptionsController: menu_addedit_select("Particles:")
++gg2_write_ini("Settings", "Particles", argument0);
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_engine_options_prompt_for_restart.gml b/Source/gg2/Scripts/Menus/Actions/menu_engine_options_prompt_for_restart.gml
+new file mode 100644
+index 00000000..694b221d
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_engine_options_prompt_for_restart.gml
+@@ -0,0 +1,2 @@
++// EngineOptionsController: menu_addedit_boolean("Prompt for restart:")
++gg2_write_ini("Settings", "RestartPrompt", argument0);
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_engine_options_v_sync.gml b/Source/gg2/Scripts/Menus/Actions/menu_engine_options_v_sync.gml
+new file mode 100644
+index 00000000..5561bea2
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_engine_options_v_sync.gml
+@@ -0,0 +1,4 @@
++// EngineOptionsController: menu_addedit_select("V Sync:")
++gg2_write_ini("Settings", "Monitor Sync", argument0);
++if (!instance_exists(GameServer))
++    set_synchronization(argument0);
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_host_back.gml b/Source/gg2/Scripts/Menus/Actions/menu_host_back.gml
+new file mode 100644
+index 00000000..0684a5da
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_host_back.gml
+@@ -0,0 +1,3 @@
++// Host menus (HostOptions, AdvHostOptions, ClasslimitsMenu): menu_addback("Back")
++instance_create(x,y,MainMenuController);
++instance_destroy();
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_host_options_capture_limit.gml b/Source/gg2/Scripts/Menus/Actions/menu_host_options_capture_limit.gml
+new file mode 100644
+index 00000000..1a3d6563
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_host_options_capture_limit.gml
+@@ -0,0 +1,2 @@
++// HostOptionsController: menu_addedit_num("Capture Limit:")
++gg2_write_ini("Server", "CapLimit", argument0);
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_host_options_deathmatch_kill_limit.gml b/Source/gg2/Scripts/Menus/Actions/menu_host_options_deathmatch_kill_limit.gml
+new file mode 100644
+index 00000000..ca58b9fa
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_host_options_deathmatch_kill_limit.gml
+@@ -0,0 +1,2 @@
++// HostOptionsController: menu_addedit_num("Deathmatch Kill Limit:")
++gg2_write_ini("Server", "Deathmatch Kill Limit", argument0);
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_host_options_password.gml b/Source/gg2/Scripts/Menus/Actions/menu_host_options_password.gml
+new file mode 100644
+index 00000000..5030b0ca
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_host_options_password.gml
+@@ -0,0 +1,2 @@
++// HostOptionsController: menu_addedit_text("Password:")
++gg2_write_ini("Server", "Password", argument0);
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_host_options_player_limit.gml b/Source/gg2/Scripts/Menus/Actions/menu_host_options_player_limit.gml
+new file mode 100644
+index 00000000..e118e6df
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_host_options_player_limit.gml
+@@ -0,0 +1,2 @@
++// HostOptionsController: menu_addedit_num("Player Limit:")
++gg2_write_ini("Settings", "PlayerLimit", argument0);
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_host_options_respawn_time_secs.gml b/Source/gg2/Scripts/Menus/Actions/menu_host_options_respawn_time_secs.gml
+new file mode 100644
+index 00000000..75bf0d03
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_host_options_respawn_time_secs.gml
+@@ -0,0 +1,2 @@
++// HostOptionsController: menu_addedit_num("Respawn Time (secs):")
++gg2_write_ini("Server", "Respawn Time", argument0);
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_host_options_server_name.gml b/Source/gg2/Scripts/Menus/Actions/menu_host_options_server_name.gml
+new file mode 100644
+index 00000000..99186db2
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_host_options_server_name.gml
+@@ -0,0 +1,5 @@
++// HostOptionsController: menu_addedit_text2("Server Name:")
++var newName;
++newName = string_copy(argument0, 0, 25);
++gg2_write_ini("Server", "ServerName", newName);
++return newName;
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_host_options_tdm_invulnerability_secs.gml b/Source/gg2/Scripts/Menus/Actions/menu_host_options_tdm_invulnerability_secs.gml
+new file mode 100644
+index 00000000..8d6620d1
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_host_options_tdm_invulnerability_secs.gml
+@@ -0,0 +1,2 @@
++// HostOptionsController: menu_addedit_num("TDM Invulnerability (secs):")
++gg2_write_ini("Server", "Team Deathmatch Invulnerability Seconds", argument0);
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_host_options_time_limit_mins.gml b/Source/gg2/Scripts/Menus/Actions/menu_host_options_time_limit_mins.gml
+new file mode 100644
+index 00000000..fd9f0a20
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_host_options_time_limit_mins.gml
+@@ -0,0 +1,2 @@
++// HostOptionsController: menu_addedit_num("Time Limit (mins):")
++gg2_write_ini("Server", "Time Limit", argument0);
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_host_options_welcome_message.gml b/Source/gg2/Scripts/Menus/Actions/menu_host_options_welcome_message.gml
+new file mode 100644
+index 00000000..dd939680
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_host_options_welcome_message.gml
+@@ -0,0 +1,5 @@
++// HostOptionsController: menu_addedit_text2("Welcome message:")
++var newMessage;
++newMessage = string_copy(argument0, 0, 255);
++gg2_write_ini("Server", "WelcomeMessage", newMessage);
++return newMessage;
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_host_start_game.gml b/Source/gg2/Scripts/Menus/Actions/menu_host_start_game.gml
+new file mode 100644
+index 00000000..5d0121af
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_host_start_game.gml
+@@ -0,0 +1,2 @@
++// Host menus (HostOptions, AdvHostOptions): menu_addlink("Start Game")
++start_server();
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_host_tab_advanced.gml b/Source/gg2/Scripts/Menus/Actions/menu_host_tab_advanced.gml
+new file mode 100644
+index 00000000..a3e69192
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_host_tab_advanced.gml
+@@ -0,0 +1,3 @@
++// Host menus (HostOptions, AdvHostOptions, ClasslimitsMenu): menu_addtablink("Advanced")
++instance_create(x,y,AdvHostOptionsController);
++instance_destroy();
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_host_tab_classlimits.gml b/Source/gg2/Scripts/Menus/Actions/menu_host_tab_classlimits.gml
+new file mode 100644
+index 00000000..4a1b5525
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_host_tab_classlimits.gml
+@@ -0,0 +1,3 @@
++// Host menus (HostOptions, AdvHostOptions, ClasslimitsMenu): menu_addtablink("Classlimits")
++instance_create(x,y,ClasslimitsMenuController);
++instance_destroy();
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_host_tab_main.gml b/Source/gg2/Scripts/Menus/Actions/menu_host_tab_main.gml
+new file mode 100644
+index 00000000..9221124c
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_host_tab_main.gml
+@@ -0,0 +1,3 @@
++// Host menus (HostOptions, AdvHostOptions, ClasslimitsMenu): menu_addtablink("Main")
++instance_create(x,y,HostOptionsController);
++instance_destroy();
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_hudoptions_fade_scoreboard.gml b/Source/gg2/Scripts/Menus/Actions/menu_hudoptions_fade_scoreboard.gml
+new file mode 100644
+index 00000000..75c50d9b
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_hudoptions_fade_scoreboard.gml
+@@ -0,0 +1,2 @@
++// HUDOptionsController: menu_addedit_boolean("Fade Scoreboard:")
++gg2_write_ini("Settings", "Fade Scoreboard", argument0);
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_hudoptions_kill_log_position.gml b/Source/gg2/Scripts/Menus/Actions/menu_hudoptions_kill_log_position.gml
+new file mode 100644
+index 00000000..e9985a8c
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_hudoptions_kill_log_position.gml
+@@ -0,0 +1,2 @@
++// HUDOptionsController: menu_addedit_select("Kill Log Position")
++gg2_write_ini("Settings", "Kill Log Position", argument0);
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_hudoptions_koth_timer_orientation.gml b/Source/gg2/Scripts/Menus/Actions/menu_hudoptions_koth_timer_orientation.gml
+new file mode 100644
+index 00000000..1173702f
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_hudoptions_koth_timer_orientation.gml
+@@ -0,0 +1,2 @@
++// HUDOptionsController: menu_addedit_select("KOTH Timer Orientation")
++gg2_write_ini("Settings","KoTH HUD Position", argument0);
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_hudoptions_timer_position.gml b/Source/gg2/Scripts/Menus/Actions/menu_hudoptions_timer_position.gml
+new file mode 100644
+index 00000000..528321b1
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_hudoptions_timer_position.gml
+@@ -0,0 +1,2 @@
++// HUDOptionsController: menu_addedit_select("Timer Position")
++gg2_write_ini("Settings", "Timer Position", argument0);
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_in_game_menu_back.gml b/Source/gg2/Scripts/Menus/Actions/menu_in_game_menu_back.gml
+new file mode 100644
+index 00000000..28154534
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_in_game_menu_back.gml
+@@ -0,0 +1,2 @@
++// InGameMenuController: menu_addback
++instance_destroy();
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_in_game_menu_disconnect.gml b/Source/gg2/Scripts/Menus/Actions/menu_in_game_menu_disconnect.gml
+new file mode 100644
+index 00000000..31d11c17
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_in_game_menu_disconnect.gml
+@@ -0,0 +1,19 @@
++// InGameMenuController: menu_addlink("Disconnect")
++// Force dedicated mode to off so you can go to main menu instead of just restarting server
++if (show_question("Do you really want to leave this match?")) {
++    // PLUGINS(disabled): no runtime GML execution in ENIGMA; revisit
++    // if (global.serverPluginsInUse)
++    // {
++    //     pluginscleanup(true);
++    // }
++    // else
++    // {
++    {
++        global.dedicatedMode = 0;
++        with(Client)
++            instance_destroy();
++
++        with(GameServer)
++            instance_destroy();
++    }
++}
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_in_game_menu_kick_players.gml b/Source/gg2/Scripts/Menus/Actions/menu_in_game_menu_kick_players.gml
+new file mode 100644
+index 00000000..5ea23687
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_in_game_menu_kick_players.gml
+@@ -0,0 +1,4 @@
++// InGameMenuController: menu_addlink("Kick players")
++if(!instance_exists(ScoreTableController)) instance_create(0,0,ScoreTableController);
++ScoreTableController.showadmin = true;
++instance_destroy();
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_in_game_menu_options.gml b/Source/gg2/Scripts/Menus/Actions/menu_in_game_menu_options.gml
+new file mode 100644
+index 00000000..65cb105c
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_in_game_menu_options.gml
+@@ -0,0 +1,3 @@
++// InGameMenuController: menu_addlink("Options")
++instance_destroy();
++instance_create(0,0,OptionsController);
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_in_game_menu_quit_game.gml b/Source/gg2/Scripts/Menus/Actions/menu_in_game_menu_quit_game.gml
+new file mode 100644
+index 00000000..984d07cf
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_in_game_menu_quit_game.gml
+@@ -0,0 +1,4 @@
++// InGameMenuController: menu_addlink("Quit Game")
++if (show_question("Do you really want to quit?")) {
++    game_end();
++}
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_in_game_menu_return_to_game.gml b/Source/gg2/Scripts/Menus/Actions/menu_in_game_menu_return_to_game.gml
+new file mode 100644
+index 00000000..71250e24
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_in_game_menu_return_to_game.gml
+@@ -0,0 +1,2 @@
++// InGameMenuController: menu_addlink("Return to Game")
++instance_destroy();
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_lobby_name_player_name.gml b/Source/gg2/Scripts/Menus/Actions/menu_lobby_name_player_name.gml
+new file mode 100644
+index 00000000..ff8c71a7
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_lobby_name_player_name.gml
+@@ -0,0 +1,6 @@
++// LobbyNameController: menu_addedit_text2("Player name:")
++var newName;
++newName = string_copy(argument0, 0, min(string_length(argument0), MAX_PLAYERNAME_LENGTH));
++gg2_write_ini("Settings", "PlayerName", newName);
++oldPlayerName = newName;
++return newName;
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_lobby_side_back.gml b/Source/gg2/Scripts/Menus/Actions/menu_lobby_side_back.gml
+new file mode 100644
+index 00000000..4af6d49d
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_lobby_side_back.gml
+@@ -0,0 +1,2 @@
++// LobbySideController: menu_addback("Back")
++room_goto_fix(Menu);
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_lobby_side_refresh.gml b/Source/gg2/Scripts/Menus/Actions/menu_lobby_side_refresh.gml
+new file mode 100644
+index 00000000..e8784d77
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_lobby_side_refresh.gml
+@@ -0,0 +1,2 @@
++// LobbySideController: menu_addlink("Refresh")
++event_user(0);
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_main_menu_back.gml b/Source/gg2/Scripts/Menus/Actions/menu_main_menu_back.gml
+new file mode 100644
+index 00000000..59093820
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_main_menu_back.gml
+@@ -0,0 +1,2 @@
++// MainMenuController: menu_addback("Quit")
++game_end();
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_main_menu_credits.gml b/Source/gg2/Scripts/Menus/Actions/menu_main_menu_credits.gml
+new file mode 100644
+index 00000000..3ef3a2d6
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_main_menu_credits.gml
+@@ -0,0 +1,2 @@
++// MainMenuController: menu_addlink("Credits")
++room_goto_fix(Credits);
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_main_menu_garrison_builder.gml b/Source/gg2/Scripts/Menus/Actions/menu_main_menu_garrison_builder.gml
+new file mode 100644
+index 00000000..a725dc67
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_main_menu_garrison_builder.gml
+@@ -0,0 +1,2 @@
++// MainMenuController: menu_addlink("Garrison Builder")
++room_goto_fix(BuilderOptions);
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_main_menu_host_game.gml b/Source/gg2/Scripts/Menus/Actions/menu_main_menu_host_game.gml
+new file mode 100644
+index 00000000..f268ec99
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_main_menu_host_game.gml
+@@ -0,0 +1,2 @@
++// MainMenuController: menu_addlink("Host Game")
++event_user(0);
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_main_menu_join_lobby.gml b/Source/gg2/Scripts/Menus/Actions/menu_main_menu_join_lobby.gml
+new file mode 100644
+index 00000000..d3b3df10
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_main_menu_join_lobby.gml
+@@ -0,0 +1,2 @@
++// MainMenuController: menu_addlink("Join (lobby)")
++room_goto_fix(Lobby);
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_main_menu_join_manual.gml b/Source/gg2/Scripts/Menus/Actions/menu_main_menu_join_manual.gml
+new file mode 100644
+index 00000000..a5c06645
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_main_menu_join_manual.gml
+@@ -0,0 +1,6 @@
++// MainMenuController: menu_addlink("Join (manual)")
++global.isHost = false;
++global.serverIP = get_string("Please enter the IP address or hostname of the server you want to join", "127.0.0.1");
++global.serverPort = get_integer("Please enter the port of the server you want to join", 8190);
++instance_create(0,0,Client);
++Client.returnRoom = Menu;
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_main_menu_manage_haxxy_rewards.gml b/Source/gg2/Scripts/Menus/Actions/menu_main_menu_manage_haxxy_rewards.gml
+new file mode 100644
+index 00000000..3f9c402a
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_main_menu_manage_haxxy_rewards.gml
+@@ -0,0 +1,4 @@
++// MainMenuController: menu_addlink("Manage Haxxy Rewards")
++splash_set_main(false);
++splash_set_interrupt(false);
++splash_show_web("http://www.ganggarrison.com/forums/rewards/frame.php?gg2_login=yes&reward_id=" + global.rewardId + "&reward_key=" + hex(global.rewardKey), 0);
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_main_menu_options.gml b/Source/gg2/Scripts/Menus/Actions/menu_main_menu_options.gml
+new file mode 100644
+index 00000000..1a983a42
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_main_menu_options.gml
+@@ -0,0 +1,2 @@
++// MainMenuController: menu_addlink("Options")
++room_goto_fix(Options);
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_main_menu_visit_the_forums.gml b/Source/gg2/Scripts/Menus/Actions/menu_main_menu_visit_the_forums.gml
+new file mode 100644
+index 00000000..45bda2de
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_main_menu_visit_the_forums.gml
+@@ -0,0 +1,2 @@
++// MainMenuController: menu_addlink("Visit The Forums")
++action_splash_web("http://www.ganggarrison.com/forums/index.php", 1)
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_options_additional_healthbar.gml b/Source/gg2/Scripts/Menus/Actions/menu_options_additional_healthbar.gml
+new file mode 100644
+index 00000000..7ffd1a32
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_options_additional_healthbar.gml
+@@ -0,0 +1,2 @@
++// OptionsController: menu_addedit_boolean("Additional Healthbar:")
++gg2_write_ini("Settings", "Show Healthbar", argument0);
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_options_additional_teammate_stats.gml b/Source/gg2/Scripts/Menus/Actions/menu_options_additional_teammate_stats.gml
+new file mode 100644
+index 00000000..67a2a995
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_options_additional_teammate_stats.gml
+@@ -0,0 +1,2 @@
++// OptionsController: menu_addedit_boolean("Additional Teammate Stats:")
++gg2_write_ini("Settings", "Show Extra Teammate Stats", argument0);
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_options_back.gml b/Source/gg2/Scripts/Menus/Actions/menu_options_back.gml
+new file mode 100644
+index 00000000..73dc8d9e
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_options_back.gml
+@@ -0,0 +1,6 @@
++// Options menus (Options, Controls, AdvControls, EngineOptions, HUDOptions): menu_addback("Back")
++instance_destroy();
++if(room == Options)
++    room_goto_fix(Menu);
++else
++    instance_create(0,0,InGameMenuController);
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_options_healer_radar.gml b/Source/gg2/Scripts/Menus/Actions/menu_options_healer_radar.gml
+new file mode 100644
+index 00000000..fe237fea
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_options_healer_radar.gml
+@@ -0,0 +1,2 @@
++// OptionsController: menu_addedit_boolean("Healer Radar:")
++gg2_write_ini("Settings", "Healer Radar", argument0);
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_options_kill_cam.gml b/Source/gg2/Scripts/Menus/Actions/menu_options_kill_cam.gml
+new file mode 100644
+index 00000000..072e336e
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_options_kill_cam.gml
+@@ -0,0 +1,2 @@
++// OptionsController: menu_addedit_boolean("Kill Cam:")
++gg2_write_ini("Settings", "Kill Cam", argument0);
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_options_player_name.gml b/Source/gg2/Scripts/Menus/Actions/menu_options_player_name.gml
+new file mode 100644
+index 00000000..cb9a72c2
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_options_player_name.gml
+@@ -0,0 +1,13 @@
++// OptionsController: menu_addedit_text2("Player name:")
++var newName;
++newName = string_copy(argument0, 0, min(string_length(argument0), MAX_PLAYERNAME_LENGTH));
++gg2_write_ini("Settings", "PlayerName", newName);
++if(room != Options and newName != oldPlayerName)
++{
++    write_ubyte(global.serverSocket, PLAYER_CHANGENAME);
++    write_ubyte(global.serverSocket, string_length(newName));
++    write_string(global.serverSocket, newName);
++    socket_send(global.serverSocket);
++}
++oldPlayerName = newName;
++return newName;
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_options_queued_jumping_bunnyhopping.gml b/Source/gg2/Scripts/Menus/Actions/menu_options_queued_jumping_bunnyhopping.gml
+new file mode 100644
+index 00000000..a38deac5
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_options_queued_jumping_bunnyhopping.gml
+@@ -0,0 +1,2 @@
++// OptionsController: menu_addedit_boolean("Queued Jumping (Bunnyhopping):")
++gg2_write_ini("Settings", "Queued Jumping", argument0);
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_options_show_healer.gml b/Source/gg2/Scripts/Menus/Actions/menu_options_show_healer.gml
+new file mode 100644
+index 00000000..ab3b1c9b
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_options_show_healer.gml
+@@ -0,0 +1,2 @@
++// OptionsController: menu_addedit_boolean("Show Healer:")
++gg2_write_ini("Settings", "Show Healer", argument0);
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_options_show_healing.gml b/Source/gg2/Scripts/Menus/Actions/menu_options_show_healing.gml
+new file mode 100644
+index 00000000..2c6d3d6c
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_options_show_healing.gml
+@@ -0,0 +1,2 @@
++// OptionsController: menu_addedit_boolean("Show Healing:")
++gg2_write_ini("Settings", "Show Healing", argument0);
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_options_tab_controls_1.gml b/Source/gg2/Scripts/Menus/Actions/menu_options_tab_controls_1.gml
+new file mode 100644
+index 00000000..f8ce711d
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_options_tab_controls_1.gml
+@@ -0,0 +1,3 @@
++// Options menus (Options, Controls, AdvControls, EngineOptions, HUDOptions): menu_addtablink("Controls 1")
++instance_destroy();
++instance_create(x,y,ControlsController);
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_options_tab_controls_2.gml b/Source/gg2/Scripts/Menus/Actions/menu_options_tab_controls_2.gml
+new file mode 100644
+index 00000000..b11e1237
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_options_tab_controls_2.gml
+@@ -0,0 +1,3 @@
++// Options menus (Options, Controls, AdvControls, EngineOptions, HUDOptions): menu_addtablink("Controls 2")
++instance_destroy();
++instance_create(x,y,AdvControlsController);
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_options_tab_engine.gml b/Source/gg2/Scripts/Menus/Actions/menu_options_tab_engine.gml
+new file mode 100644
+index 00000000..9c0899c2
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_options_tab_engine.gml
+@@ -0,0 +1,3 @@
++// Options menus (Options, Controls, AdvControls, EngineOptions, HUDOptions): menu_addtablink("Engine")
++instance_destroy();
++instance_create(x,y,EngineOptionsController);
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_options_tab_hud.gml b/Source/gg2/Scripts/Menus/Actions/menu_options_tab_hud.gml
+new file mode 100644
+index 00000000..f085f28d
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_options_tab_hud.gml
+@@ -0,0 +1,3 @@
++// Options menus (Options, Controls, AdvControls, EngineOptions, HUDOptions): menu_addtablink("HUD")
++instance_destroy();
++instance_create(x,y,HUDOptionsController);
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_options_tab_ingame.gml b/Source/gg2/Scripts/Menus/Actions/menu_options_tab_ingame.gml
+new file mode 100644
+index 00000000..8d17052a
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/Actions/menu_options_tab_ingame.gml
+@@ -0,0 +1,3 @@
++// Options menus (Options, Controls, AdvControls, EngineOptions, HUDOptions): menu_addtablink("Ingame")
++instance_destroy();
++instance_create(x,y,OptionsController);
+diff --git a/Source/gg2/Scripts/Menus/_resources.list.xml b/Source/gg2/Scripts/Menus/_resources.list.xml
+index 6ceec0e9..36f9ac6c 100644
+--- a/Source/gg2/Scripts/Menus/_resources.list.xml
++++ b/Source/gg2/Scripts/Menus/_resources.list.xml
+@@ -1,5 +1,6 @@
+ <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+ <resources>
++  <resource name="Actions" type="GROUP"/>
+   <resource name="menu_create" type="RESOURCE"/>
+   <resource name="menu_addlink" type="RESOURCE"/>
+   <resource name="menu_addtablink" type="RESOURCE"/>
+@@ -16,6 +17,7 @@
+   <resource name="menu_addedit_script" type="RESOURCE"/>
+   <resource name="menu_setdimmed" type="RESOURCE"/>
+   <resource name="menu_get_var" type="RESOURCE"/>
++  <resource name="menu_binding" type="RESOURCE"/>
+   <resource name="menu_set_var" type="RESOURCE"/>
+   <resource name="gg2_write_ini" type="RESOURCE"/>
+   <resource name="menu_get_itemcount" type="RESOURCE"/>
+diff --git a/Source/gg2/Scripts/Menus/menu_addback.gml b/Source/gg2/Scripts/Menus/menu_addback.gml
+index beb91b46..a8793355 100644
+--- a/Source/gg2/Scripts/Menus/menu_addback.gml
++++ b/Source/gg2/Scripts/Menus/menu_addback.gml
+@@ -2,7 +2,7 @@
+ // Only one "back" action per menu is allowed. It will be drawn as
+ // the last item in the menu.
+ // argument0 - name. Passing an empty string means the button won't be drawn, but the escape action will still be set.
+-// argument1 - GML code to execute on escape or when the button is pushed
++// argument1 - script to run on escape or when the button is pushed (-1 for none)
+ 
+ menu_text_back = argument0;
+ menu_script_back = argument1;
+diff --git a/Source/gg2/Scripts/Menus/menu_addedit_boolean.gml b/Source/gg2/Scripts/Menus/menu_addedit_boolean.gml
+index 50aabbb4..470c11d1 100644
+--- a/Source/gg2/Scripts/Menus/menu_addedit_boolean.gml
++++ b/Source/gg2/Scripts/Menus/menu_addedit_boolean.gml
+@@ -1,6 +1,6 @@
+ // argument0 - name
+ // argument1 - name of the variable this setting is bound to
+-// argument2 - GML code to run upon change (argument0 is new value)
++// argument2 - script to run upon change, gets the new value as argument0 (-1 for none)
+ 
+ menu_addedit_select(argument0, argument1, argument2);
+ 
+diff --git a/Source/gg2/Scripts/Menus/menu_addedit_key.gml b/Source/gg2/Scripts/Menus/menu_addedit_key.gml
+index 624d266a..53ae383a 100644
+--- a/Source/gg2/Scripts/Menus/menu_addedit_key.gml
++++ b/Source/gg2/Scripts/Menus/menu_addedit_key.gml
+@@ -1,6 +1,6 @@
+ // argument0 - name
+ // argument1 - name of the variable this setting is bound to
+-// argument2 - GML code to run upon change (argument0 is new value)
++// argument2 - script to run upon change, gets the new value as argument0 (-1 for none)
+ 
+ item_name[items] = argument0;
+ item_type[items] = "editkey";
+diff --git a/Source/gg2/Scripts/Menus/menu_addedit_keyormouse.gml b/Source/gg2/Scripts/Menus/menu_addedit_keyormouse.gml
+index c387179c..1ff9ce0c 100644
+--- a/Source/gg2/Scripts/Menus/menu_addedit_keyormouse.gml
++++ b/Source/gg2/Scripts/Menus/menu_addedit_keyormouse.gml
+@@ -1,6 +1,6 @@
+ // argument0 - name
+ // argument1 - name of the variable this setting is bound to
+-// argument2 - GML code to run upon change (argument0 is new value)
++// argument2 - script to run upon change, gets the new value as argument0 (-1 for none)
+ 
+ item_name[items] = argument0;
+ item_type[items] = "editkeyormouse";
+diff --git a/Source/gg2/Scripts/Menus/menu_addedit_num.gml b/Source/gg2/Scripts/Menus/menu_addedit_num.gml
+index 2da68823..e7427647 100644
+--- a/Source/gg2/Scripts/Menus/menu_addedit_num.gml
++++ b/Source/gg2/Scripts/Menus/menu_addedit_num.gml
+@@ -1,6 +1,6 @@
+ // argument0 - name
+ // argument1 - name of the variable this setting is bound to
+-// argument2 - GML code to run upon change (argument0 is new value)
++// argument2 - script to run upon change, gets the new value as argument0 (-1 for none)
+ // argument3 - limit. If this is not 0, the value will be limited to this.
+ item_name[items] = argument0;
+ item_type[items] = "editnum";
+diff --git a/Source/gg2/Scripts/Menus/menu_addedit_script.gml b/Source/gg2/Scripts/Menus/menu_addedit_script.gml
+index 248e05c4..260785f3 100644
+--- a/Source/gg2/Scripts/Menus/menu_addedit_script.gml
++++ b/Source/gg2/Scripts/Menus/menu_addedit_script.gml
+@@ -4,7 +4,7 @@
+ // Useful for things like file dialogs.
+ // argument0 - name
+ // argument1 - Initial display value
+-// argument2 - GML code to execute. Return value is set as new display value.
++// argument2 - script to run. Its return value is set as the new display value.
+ 
+ item_name[items] = argument0;
+ item_type[items] = "editscript";
+diff --git a/Source/gg2/Scripts/Menus/menu_addedit_select.gml b/Source/gg2/Scripts/Menus/menu_addedit_select.gml
+index 8261b5a3..7852f186 100644
+--- a/Source/gg2/Scripts/Menus/menu_addedit_select.gml
++++ b/Source/gg2/Scripts/Menus/menu_addedit_select.gml
+@@ -1,6 +1,6 @@
+ // argument0 - name
+ // argument1 - name of the variable this setting is bound to
+-// argument2 - GML code to run upon change (argument0 is new value)
++// argument2 - script to run upon change, gets the new value as argument0 (-1 for none)
+ // Call menu_add_option right after this function to add options for the select.
+ // You need to add at least one option or the menu will error out.
+ 
+diff --git a/Source/gg2/Scripts/Menus/menu_addedit_text.gml b/Source/gg2/Scripts/Menus/menu_addedit_text.gml
+index 0bac5d08..1969a3a8 100644
+--- a/Source/gg2/Scripts/Menus/menu_addedit_text.gml
++++ b/Source/gg2/Scripts/Menus/menu_addedit_text.gml
+@@ -1,6 +1,6 @@
+ // argument0 - name
+ // argument1 - name of the variable this setting is bound to
+-// argument2 - GML code to run upon change (argument0 is new value)
++// argument2 - script to run upon change, gets the new value as argument0 (-1 for none)
+ 
+ item_name[items] = argument0;
+ item_type[items] = "edittext";
+diff --git a/Source/gg2/Scripts/Menus/menu_addedit_text2.gml b/Source/gg2/Scripts/Menus/menu_addedit_text2.gml
+index 6085a6e9..9062e361 100644
+--- a/Source/gg2/Scripts/Menus/menu_addedit_text2.gml
++++ b/Source/gg2/Scripts/Menus/menu_addedit_text2.gml
+@@ -1,6 +1,6 @@
+ // argument0 - name
+ // argument1 - name of the variable this setting is bound to
+-// argument2 - GML code to run upon change - argument0 is new value, return value is assigned to bound variable
++// argument2 - script to run upon change - argument0 is new value, return value is assigned to bound variable
+ // Note that the bound variable is only updated *after* the script in argument2 returns!
+ 
+ item_name[items] = argument0;
+diff --git a/Source/gg2/Scripts/Menus/menu_addlink.gml b/Source/gg2/Scripts/Menus/menu_addlink.gml
+index f0a07a9f..aac88356 100644
+--- a/Source/gg2/Scripts/Menus/menu_addlink.gml
++++ b/Source/gg2/Scripts/Menus/menu_addlink.gml
+@@ -1,5 +1,5 @@
+ // argument0 - name
+-// argument1 - GML code to execute
++// argument1 - script to run (-1 for none)
+ 
+ item_name[items] = argument0;
+ item_type[items] = "script";
+diff --git a/Source/gg2/Scripts/Menus/menu_addtablink.gml b/Source/gg2/Scripts/Menus/menu_addtablink.gml
+index ed21696a..5cbc5fd6 100644
+--- a/Source/gg2/Scripts/Menus/menu_addtablink.gml
++++ b/Source/gg2/Scripts/Menus/menu_addtablink.gml
+@@ -1,5 +1,5 @@
+ // argument0 - name
+-// argument1 - GML code to execute
++// argument1 - script to run (-1 for none)
+ 
+ tab_name[tabs] = argument0;
+ tab_script[tabs] = argument1;
+diff --git a/Source/gg2/Scripts/Menus/menu_binding.gml b/Source/gg2/Scripts/Menus/menu_binding.gml
+new file mode 100644
+index 00000000..ac88233e
+--- /dev/null
++++ b/Source/gg2/Scripts/Menus/menu_binding.gml
+@@ -0,0 +1,75 @@
++// Reads or writes a menu-bound variable by the name passed to menu_addedit_*.
++// Replaces evaluating that name with execute_string, which ENIGMA can't run.
++// New menu bindings need a line here.
++// argument0: binding name, e.g. "global.fullscreen"
++// argument1: true to assign argument2 first
++// argument2: new value
++// Returns the variable's value.
++var name;
++name = argument0;
++if (name == "global.attack") { if (argument1) global.attack = argument2; return global.attack; }
++if (name == "global.attemptPortForward") { if (argument1) global.attemptPortForward = argument2; return global.attemptPortForward; }
++if (name == "global.autobalance") { if (argument1) global.autobalance = argument2; return global.autobalance; }
++if (name == "global.caplimit") { if (argument1) global.caplimit = argument2; return global.caplimit; }
++if (name == "global.changeClass") { if (argument1) global.changeClass = argument2; return global.changeClass; }
++if (name == "global.changeTeam") { if (argument1) global.changeTeam = argument2; return global.changeTeam; }
++if (name == "global.chat1") { if (argument1) global.chat1 = argument2; return global.chat1; }
++if (name == "global.chat2") { if (argument1) global.chat2 = argument2; return global.chat2; }
++if (name == "global.chat3") { if (argument1) global.chat3 = argument2; return global.chat3; }
++if (name == "global.classlimits[CLASS_DEMOMAN]") { if (argument1) global.classlimits[CLASS_DEMOMAN] = argument2; return global.classlimits[CLASS_DEMOMAN]; }
++if (name == "global.classlimits[CLASS_ENGINEER]") { if (argument1) global.classlimits[CLASS_ENGINEER] = argument2; return global.classlimits[CLASS_ENGINEER]; }
++if (name == "global.classlimits[CLASS_HEAVY]") { if (argument1) global.classlimits[CLASS_HEAVY] = argument2; return global.classlimits[CLASS_HEAVY]; }
++if (name == "global.classlimits[CLASS_MEDIC]") { if (argument1) global.classlimits[CLASS_MEDIC] = argument2; return global.classlimits[CLASS_MEDIC]; }
++if (name == "global.classlimits[CLASS_PYRO]") { if (argument1) global.classlimits[CLASS_PYRO] = argument2; return global.classlimits[CLASS_PYRO]; }
++if (name == "global.classlimits[CLASS_QUOTE]") { if (argument1) global.classlimits[CLASS_QUOTE] = argument2; return global.classlimits[CLASS_QUOTE]; }
++if (name == "global.classlimits[CLASS_SCOUT]") { if (argument1) global.classlimits[CLASS_SCOUT] = argument2; return global.classlimits[CLASS_SCOUT]; }
++if (name == "global.classlimits[CLASS_SNIPER]") { if (argument1) global.classlimits[CLASS_SNIPER] = argument2; return global.classlimits[CLASS_SNIPER]; }
++if (name == "global.classlimits[CLASS_SOLDIER]") { if (argument1) global.classlimits[CLASS_SOLDIER] = argument2; return global.classlimits[CLASS_SOLDIER]; }
++if (name == "global.classlimits[CLASS_SPY]") { if (argument1) global.classlimits[CLASS_SPY] = argument2; return global.classlimits[CLASS_SPY]; }
++if (name == "global.down") { if (argument1) global.down = argument2; return global.down; }
++if (name == "global.down2") { if (argument1) global.down2 = argument2; return global.down2; }
++if (name == "global.drop") { if (argument1) global.drop = argument2; return global.drop; }
++if (name == "global.fadeScoreboard") { if (argument1) global.fadeScoreboard = argument2; return global.fadeScoreboard; }
++if (name == "global.frameratekind") { if (argument1) global.frameratekind = argument2; return global.frameratekind; }
++if (name == "global.fullscreen") { if (argument1) global.fullscreen = argument2; return global.fullscreen; }
++if (name == "global.gibLevel") { if (argument1) global.gibLevel = argument2; return global.gibLevel; }
++if (name == "global.hideSpyGhosts") { if (argument1) global.hideSpyGhosts = argument2; return global.hideSpyGhosts; }
++if (name == "global.hostingPort") { if (argument1) global.hostingPort = argument2; return global.hostingPort; }
++if (name == "global.jump") { if (argument1) global.jump = argument2; return global.jump; }
++if (name == "global.jump2") { if (argument1) global.jump2 = argument2; return global.jump2; }
++if (name == "global.killCam") { if (argument1) global.killCam = argument2; return global.killCam; }
++if (name == "global.killLimit") { if (argument1) global.killLimit = argument2; return global.killLimit; }
++if (name == "global.killLogPos") { if (argument1) global.killLogPos = argument2; return global.killLogPos; }
++if (name == "global.kothHudPos") { if (argument1) global.kothHudPos = argument2; return global.kothHudPos; }
++if (name == "global.left") { if (argument1) global.left = argument2; return global.left; }
++if (name == "global.left2") { if (argument1) global.left2 = argument2; return global.left2; }
++if (name == "global.medic") { if (argument1) global.medic = argument2; return global.medic; }
++if (name == "global.medicRadar") { if (argument1) global.medicRadar = argument2; return global.medicRadar; }
++if (name == "global.monitorSync") { if (argument1) global.monitorSync = argument2; return global.monitorSync; }
++if (name == "global.music") { if (argument1) global.music = argument2; return global.music; }
++if (name == "global.particles") { if (argument1) global.particles = argument2; return global.particles; }
++if (name == "global.playerLimit") { if (argument1) global.playerLimit = argument2; return global.playerLimit; }
++if (name == "global.playerName") { if (argument1) global.playerName = argument2; return global.playerName; }
++if (name == "global.queueJumping") { if (argument1) global.queueJumping = argument2; return global.queueJumping; }
++if (name == "global.resolutionkind") { if (argument1) global.resolutionkind = argument2; return global.resolutionkind; }
++if (name == "global.restartPrompt") { if (argument1) global.restartPrompt = argument2; return global.restartPrompt; }
++if (name == "global.right") { if (argument1) global.right = argument2; return global.right; }
++if (name == "global.right2") { if (argument1) global.right2 = argument2; return global.right2; }
++if (name == "global.Server_RespawntimeSec") { if (argument1) global.Server_RespawntimeSec = argument2; return global.Server_RespawntimeSec; }
++if (name == "global.serverName") { if (argument1) global.serverName = argument2; return global.serverName; }
++if (name == "global.serverPassword") { if (argument1) global.serverPassword = argument2; return global.serverPassword; }
++if (name == "global.showHealer") { if (argument1) global.showHealer = argument2; return global.showHealer; }
++if (name == "global.showHealing") { if (argument1) global.showHealing = argument2; return global.showHealing; }
++if (name == "global.showHealthBar") { if (argument1) global.showHealthBar = argument2; return global.showHealthBar; }
++if (name == "global.showScores") { if (argument1) global.showScores = argument2; return global.showScores; }
++if (name == "global.showTeammateStats") { if (argument1) global.showTeammateStats = argument2; return global.showTeammateStats; }
++if (name == "global.shuffleRotation") { if (argument1) global.shuffleRotation = argument2; return global.shuffleRotation; }
++if (name == "global.special") { if (argument1) global.special = argument2; return global.special; }
++if (name == "global.taunt") { if (argument1) global.taunt = argument2; return global.taunt; }
++if (name == "global.tdmInvulnerabilitySeconds") { if (argument1) global.tdmInvulnerabilitySeconds = argument2; return global.tdmInvulnerabilitySeconds; }
++if (name == "global.timeLimitMins") { if (argument1) global.timeLimitMins = argument2; return global.timeLimitMins; }
++if (name == "global.timerPos") { if (argument1) global.timerPos = argument2; return global.timerPos; }
++if (name == "global.useLobbyServer") { if (argument1) global.useLobbyServer = argument2; return global.useLobbyServer; }
++if (name == "global.welcomeMessage") { if (argument1) global.welcomeMessage = argument2; return global.welcomeMessage; }
++show_error("Unknown menu binding: " + name, true);
++return 0;
+diff --git a/Source/gg2/Scripts/Menus/menu_create.gml b/Source/gg2/Scripts/Menus/menu_create.gml
+index afc322d0..2d21ceed 100644
+--- a/Source/gg2/Scripts/Menus/menu_create.gml
++++ b/Source/gg2/Scripts/Menus/menu_create.gml
+@@ -32,5 +32,5 @@ mouse_samples = -1;
+ 
+ // Hack: The back button should usually appear last in the menu, even if plugins
+ // add new items later, so we treat it separately.
+-menu_script_back = "";
++menu_script_back = -1;
+ menu_text_back = "";
+diff --git a/Source/gg2/Scripts/Menus/menu_get_var.gml b/Source/gg2/Scripts/Menus/menu_get_var.gml
+index 4a8da921..3afe51e0 100644
+--- a/Source/gg2/Scripts/Menus/menu_get_var.gml
++++ b/Source/gg2/Scripts/Menus/menu_get_var.gml
+@@ -1,3 +1,3 @@
+ // Find the value of the tied variable for an item
+ // argument0: item number
+-return execute_string("return " + item_var[argument0]);
++return menu_binding(item_var[argument0], false, 0);
+diff --git a/Source/gg2/Scripts/Menus/menu_set_var.gml b/Source/gg2/Scripts/Menus/menu_set_var.gml
+index 0e08d0f0..ebbcd303 100644
+--- a/Source/gg2/Scripts/Menus/menu_set_var.gml
++++ b/Source/gg2/Scripts/Menus/menu_set_var.gml
+@@ -1,4 +1,4 @@
+ // Set the value of the tied variable for an item
+ // argument0: item number
+ // argument1: value
+-execute_string(item_var[argument0] + " = argument0", argument1);
++menu_binding(item_var[argument0], true, argument1);
+diff --git a/Source/gg2/Scripts/Misc/_resources.list.xml b/Source/gg2/Scripts/Misc/_resources.list.xml
+index 89ba0abc..453a0097 100644
+--- a/Source/gg2/Scripts/Misc/_resources.list.xml
++++ b/Source/gg2/Scripts/Misc/_resources.list.xml
+@@ -13,4 +13,5 @@
+   <resource name="format_timer_value" type="RESOURCE"/>
+   <resource name="getRelativePathIfDescendant" type="RESOURCE"/>
+   <resource name="sprite_find_by_name" type="RESOURCE"/>
++  <resource name="run_action" type="RESOURCE"/>
+ </resources>
+diff --git a/Source/gg2/Scripts/Misc/run_action.gml b/Source/gg2/Scripts/Misc/run_action.gml
+new file mode 100644
+index 00000000..fe247621
+--- /dev/null
++++ b/Source/gg2/Scripts/Misc/run_action.gml
+@@ -0,0 +1,7 @@
++// Runs an action script (menu item, Builder button, ...) with one argument.
++// argument0: script to run, or -1 for none
++// argument1: passed to the script as argument0
++// Returns the script's result, or 0 if there is no script.
++if (argument0 < 0)
++    return 0;
++return script_execute(argument0, argument1);

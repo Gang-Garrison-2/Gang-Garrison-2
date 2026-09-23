@@ -32,24 +32,62 @@ menumode = true;
 menu_background(512, 24, 8, 12, 4);
 bgtabs = true;
 
-menu_addedit_text2("Server Name:", "global.serverName", menu_host_options_server_name);
-menu_addedit_text2("Welcome message:", "global.welcomeMessage", menu_host_options_welcome_message);
+menu_addedit_text2("Server Name:", "global.serverName", '
+    var newName;
+    newName = string_copy(argument0, 0, 25);
+    gg2_write_ini("Server", "ServerName", newName);
+    return newName;
+');
+menu_addedit_text2("Welcome message:", "global.welcomeMessage", '
+    var newMessage;
+    newMessage = string_copy(argument0, 0, 255);
+    gg2_write_ini("Server", "WelcomeMessage", newMessage);
+    return newMessage;
+');
 
-menu_addedit_text("Password:", "global.serverPassword", menu_host_options_password);
-menu_addedit_num("Player Limit:", "global.playerLimit", menu_host_options_player_limit, 48);
-menu_addedit_num("Time Limit (mins):", "global.timeLimitMins", menu_host_options_time_limit_mins);
-menu_addedit_num("Capture Limit:", "global.caplimit", menu_host_options_capture_limit);
-menu_addedit_num("Deathmatch Kill Limit:", "global.killLimit", menu_host_options_deathmatch_kill_limit);
-menu_addedit_num("TDM Invulnerability (secs):", "global.tdmInvulnerabilitySeconds", menu_host_options_tdm_invulnerability_secs);
-menu_addedit_num("Respawn Time (secs):", "global.Server_RespawntimeSec", menu_host_options_respawn_time_secs);
+menu_addedit_text("Password:", "global.serverPassword", '
+    gg2_write_ini("Server", "Password", argument0);
+');
+menu_addedit_num("Player Limit:", "global.playerLimit", '
+    gg2_write_ini("Settings", "PlayerLimit", argument0);
+', 48);
+menu_addedit_num("Time Limit (mins):", "global.timeLimitMins", '
+    gg2_write_ini("Server", "Time Limit", argument0);
+');
+menu_addedit_num("Capture Limit:", "global.caplimit", '
+    gg2_write_ini("Server", "CapLimit", argument0);
+');
+menu_addedit_num("Deathmatch Kill Limit:", "global.killLimit", '
+    gg2_write_ini("Server", "Deathmatch Kill Limit", argument0);
+');
+menu_addedit_num("TDM Invulnerability (secs):", "global.tdmInvulnerabilitySeconds", '
+    gg2_write_ini("Server", "Team Deathmatch Invulnerability Seconds", argument0);
+');
+menu_addedit_num("Respawn Time (secs):", "global.Server_RespawntimeSec", '
+    gg2_write_ini("Server", "Respawn Time", argument0);
+');
     
     
-menu_addtablink("Main", menu_host_tab_main);
-menu_addtablink("Advanced", menu_host_tab_advanced);
-menu_addtablink("Classlimits", menu_host_tab_classlimits);
+menu_addtablink("Main", '
+    instance_create(x,y,HostOptionsController);
+    instance_destroy();
+');
+menu_addtablink("Advanced", '
+    instance_create(x,y,AdvHostOptionsController);
+    instance_destroy();
+');
+menu_addtablink("Classlimits", '
+    instance_create(x,y,ClasslimitsMenuController);
+    instance_destroy();
+');
 
-menu_addlink("Start Game", menu_host_start_game);
-menu_addback("Back", menu_host_back);
+menu_addlink("Start Game", '
+    start_server();
+');
+menu_addback("Back", '
+    instance_create(x,y,MainMenuController);
+    instance_destroy();
+');
 </argument>
       </arguments>
     </action>

@@ -8,10 +8,7 @@ var uberer;
 uberer = argument0;
                     
 if(uberer.object != -1) {
-    // TODO(enigma): temp var avoids ENIGMA nested built-in dot bug (a.b.x); inline when fixed
-    var ubererObject;
-    ubererObject = uberer.object;
-    playsound(ubererObject.x,ubererObject.y,UberStartSnd);
+    playsound(uberer.object.x,uberer.object.y,UberStartSnd);
     with(uberer.object.currentWeapon) {
         ubering = true;
         uberReady = false;

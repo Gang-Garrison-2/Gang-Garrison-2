@@ -36,16 +36,21 @@
             
             ds_map_add(map, "weapon", findDamageSourceIcon(argument3));
             
-            // TODO(enigma): if/else instead of switch; ENIGMA needs compile-time case labels and
-            // DAMAGE_SOURCE_* are assigned at runtime. Restore switch when fixed
-            if (argument3 == DAMAGE_SOURCE_PITFALL)
-                ds_map_add(map, "string", string_copy(argument0.name, 1, 20) + " fell to a clumsy, painful death.");
-            else if (argument3 == DAMAGE_SOURCE_FINISHED_OFF or argument3 == DAMAGE_SOURCE_FINISHED_OFF_GIB)
-                ds_map_add(map, "string", "finished off ");
-            else if (argument3 == DAMAGE_SOURCE_BID_FAREWELL)
-                ds_map_add(map, "string", string_copy(argument0.name, 1, 20) + " bid farewell, cruel world!");
-            else
-                ds_map_add(map, "string", "");
+            switch(argument3) {
+                case DAMAGE_SOURCE_PITFALL:
+                    ds_map_add(map, "string", string_copy(argument0.name, 1, 20) + " fell to a clumsy, painful death.");
+                    break;
+                case DAMAGE_SOURCE_FINISHED_OFF:
+                case DAMAGE_SOURCE_FINISHED_OFF_GIB:
+                    ds_map_add(map, "string", "finished off ");
+                    break;
+                case DAMAGE_SOURCE_BID_FAREWELL:
+                    ds_map_add(map, "string", string_copy(argument0.name, 1, 20) + " bid farewell, cruel world!");
+                    break;
+                default:
+                    ds_map_add(map, "string", "");
+                    break;
+            }
             
             ds_list_add(kills, map);
             

@@ -137,14 +137,4 @@
   <constant name="GEAR_NAVIGATORHAT" value="&quot;NavigatorHat&quot;"/>
   <constant name="GEAR_RAYBANN_CAPE" value="&quot;RaybannCape&quot;"/>
   <constant name="GEAR_HAXXY_CAPE" value="&quot;HaxxyCape&quot;"/>
-  <constant name="commandBytesInvalidCommand" value="-1"/>
-  <constant name="commandBytesPrefixLength1" value="-2"/>
-  <constant name="commandBytesPrefixLength2" value="-3"/>
-  <constant name="STATE_EXPECT_HELLO" value="1"/>
-  <constant name="STATE_EXPECT_MESSAGELEN" value="2"/>
-  <constant name="STATE_EXPECT_NAME" value="3"/>
-  <constant name="STATE_EXPECT_PASSWORD" value="4"/>
-  <constant name="STATE_CLIENT_AUTHENTICATED" value="5"/>
-  <constant name="STATE_EXPECT_COMMAND" value="6"/>
-  <constant name="STATE_CLIENT_DOWNLOADING" value="7"/>
 </constants>

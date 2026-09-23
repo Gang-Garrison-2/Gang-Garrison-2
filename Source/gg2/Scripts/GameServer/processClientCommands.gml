@@ -6,7 +6,16 @@ playerId = argument1;
 // To prevent players from flooding the server, limit the number of commands to process per step and player.
 commandLimitRemaining = 10;
 
-// Command receive state (commandReceiveState etc.) is initialized in Player Create.
+with(player) {
+    if(!variable_local_exists("commandReceiveState")) {
+        // 0: waiting for command byte.
+        // 1: waiting for command data length (1 byte)
+        // 2: waiting for command data.
+        commandReceiveState = 0;
+        commandReceiveExpectedBytes = 1;
+        commandReceiveCommand = 0;
+    }
+}
 
 while(commandLimitRemaining > 0) {
     var socket;
@@ -203,22 +212,19 @@ while(commandLimitRemaining > 0) {
         case BUILD_SENTRY:
             if(player.object != -1)
             {
-                // TODO(enigma): temp var avoids ENIGMA nested built-in dot bug (a.b.x); inline when fixed
-                var playerObject;
-                playerObject = player.object;
                 if(player.class == CLASS_ENGINEER
-                        and collision_circle(playerObject.x, playerObject.y, 50, Sentry, false, true) < 0
-                        and playerObject.nutsNBolts == 100
-                        and (collision_point(playerObject.x,playerObject.y,SpawnRoom,0,0) < 0)
+                        and collision_circle(player.object.x, player.object.y, 50, Sentry, false, true) < 0
+                        and player.object.nutsNBolts == 100
+                        and (collision_point(player.object.x,player.object.y,SpawnRoom,0,0) < 0)
                         and !player.sentry
-                        and !playerObject.onCabinet)
+                        and !player.object.onCabinet)
                 {
                     write_ubyte(global.sendBuffer, BUILD_SENTRY);
                     write_ubyte(global.sendBuffer, playerId);
-                    write_ushort(global.serializeBuffer, round(playerObject.x*5));
-                    write_ushort(global.serializeBuffer, round(playerObject.y*5));
-                    write_byte(global.serializeBuffer, playerObject.image_xscale);
-                    buildSentry(player, playerObject.x, playerObject.y, playerObject.image_xscale);
+                    write_ushort(global.serializeBuffer, round(player.object.x*5));
+                    write_ushort(global.serializeBuffer, round(player.object.y*5));
+                    write_byte(global.serializeBuffer, player.object.image_xscale);
+                    buildSentry(player, player.object.x, player.object.y, player.object.image_xscale);
                 }
             }
             break;                                       
@@ -284,7 +290,7 @@ while(commandLimitRemaining > 0) {
             {
                 with(player)
                 {
-                    if(lastNamechange != -1)
+                    if(variable_local_exists("lastNamechange")) 
                         if(current_time - lastNamechange < 1000)
                             break;
                     lastNamechange = current_time;
@@ -324,42 +330,35 @@ while(commandLimitRemaining > 0) {
             answer = read_binstring(socket, 16);
             
             with(player)
-                if(challenge != "") // challenge and rewardId are set together
+                if(variable_local_exists("challenge") and variable_local_exists("rewardId"))
                     rewardAuthStart(player, answer, challenge, true, rewardId);
            
             break;
 
         case PLUGIN_PACKET:
-            // PLUGINS(disabled): no runtime GML execution in ENIGMA; revisit
-            // var packetID, buf, success;
-            //
-            // packetID = read_ubyte(socket);
-            //
-            // // get packet data
-            // buf = buffer_create();
-            // write_buffer_part(buf, socket, socket_receivebuffer_size(socket));
-            //
-            // // try to enqueue
-            // success = _PluginPacketPush(packetID, buf, player);
-            //
-            // // if it returned false, packetID was invalid
-            // if (!success)
-            // {
-            //     // clear up buffer
-            //     buffer_destroy(buf);
-            //
-            //     // kick player
-            //     write_ubyte(player.socket, KICK);
-            //     write_ubyte(player.socket, KICK_BAD_PLUGIN_PACKET);
-            //     socket_destroy(player.socket);
-            //     player.socket = -1;
-            // }
-            // No plugins are loaded, so every plugin packet ID is invalid (same as a
-            // server without plugins).
-            write_ubyte(player.socket, KICK);
-            write_ubyte(player.socket, KICK_BAD_PLUGIN_PACKET);
-            socket_destroy(player.socket);
-            player.socket = -1;
+            var packetID, buf, success;
+
+            packetID = read_ubyte(socket);
+            
+            // get packet data
+            buf = buffer_create();
+            write_buffer_part(buf, socket, socket_receivebuffer_size(socket));
+
+            // try to enqueue
+            success = _PluginPacketPush(packetID, buf, player);
+            
+            // if it returned false, packetID was invalid
+            if (!success)
+            {
+                // clear up buffer
+                buffer_destroy(buf);
+
+                // kick player
+                write_ubyte(player.socket, KICK);
+                write_ubyte(player.socket, KICK_BAD_PLUGIN_PACKET);
+                socket_destroy(player.socket);
+                player.socket = -1;
+            }
             break;
             
         case CLIENT_SETTINGS:

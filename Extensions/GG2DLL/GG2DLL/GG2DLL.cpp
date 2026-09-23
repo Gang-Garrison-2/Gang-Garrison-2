@@ -14,11 +14,17 @@
 #include <cstdint>
 #include <cstdlib>
 #include <cstring>
+#include <iostream>
 #ifndef _WIN32
 #include <unistd.h>
 #endif
 
 const char GG2_TEXT_CHUNK_KEYWORD[] = "Gang Garrison 2 Level Data";
+
+GM_EXPORT GG2DLL_API GM_REAL log_message(GM_STRING message) {
+	std::cout << message << std::endl;
+	return 0;
+}
 
 std::string temp_filename_return_filename;
 GG2DLL_API GM_STRING get_temp_filename(GM_STRING directory, GM_STRING prefix) {

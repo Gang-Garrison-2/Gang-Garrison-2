@@ -13,11 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">// MVP counts per team; set at round end, 0 until then.
-mvps[TEAM_RED] = 0;
-mvps[TEAM_BLUE] = 0;
-
-/*
+        <argument kind="STRING">/*
 The Arena game mode consists of multiple rounds. Each round starts with a fixed-time setup period where
 players can spawn and change their team and class. This is followed by the round proper, which is won
 by the first team to either eliminate the enemy team or gain control of the ArenaCP, which unlocks a

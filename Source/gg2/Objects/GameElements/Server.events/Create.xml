@@ -18,7 +18,9 @@ pingRunning = false;
 pingFinished = false;
 infos = ds_map_create();
 
-// global.runningPingCount is initialized in game_init
+if(!variable_global_exists("runningPingCount")) {
+    global.runningPingCount = 0;
+}
 </argument>
       </arguments>
     </action>

@@ -72,11 +72,8 @@
     
     if(instance_exists(healTarget)) {
         if(healTarget.object != -1) {
-            // TODO(enigma): temp var avoids ENIGMA nested built-in dot bug (a.b.x); inline when fixed
-            var targetObject;
-            targetObject = healTarget.object;
-            if(point_distance(x,y,targetObject.x, targetObject.y)&lt;=maxHealDistance) {
-                if(collision_line(x,y, targetObject.x, targetObject.y, Obstacle, true, true)&lt;0) {
+            if(point_distance(x,y,healTarget.object.x, healTarget.object.y)&lt;=maxHealDistance) {
+                if(collision_line(x,y, healTarget.object.x, healTarget.object.y, Obstacle, true, true)&lt;0) {
                     healedThisStep = true;
                     
                     if (healTarget.object.healer == -1)
@@ -116,8 +113,7 @@
                     } else if(ubering == true){
                         if healTarget.object.ubered == 0 playsound(x,y,UberStartSnd);
                         healTarget.object.ubered = 1;
-                        // TODO(enigma): targetObject avoids ENIGMA nested built-in dot bug (a.b.x); inline when fixed
-                        targetObject.alarm[2] = 3 / global.delta_factor;
+                        healTarget.object.alarm[2] = 3 / global.delta_factor; 
                     }
                                                                
                     if hphealed &gt;= HP_PER_POINT {

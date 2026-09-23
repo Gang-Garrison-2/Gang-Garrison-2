@@ -1,13 +1,19 @@
 #!/usr/bin/env python3
 """Prepare a copy of the GG2 source tree for ENIGMA.
 
-Stopgap for ENIGMA bugs that can be fixed with a text rewrite. The repo source
-stays valid GM8; the rewritten copy is only for ENIGMA builds. Each workaround
-names the ENIGMA bug it covers; delete it once that bug is fixed upstream.
+Stopgap for ENIGMA bugs, so the repo source stays the untouched GM8 game.
+Every change happens on a copy, in this order:
 
-Bugs that need a structural rewrite (nested built-in dot access, string
-switch) are fixed in the source, marked TODO(enigma). This script lints for
-them so they don't come back.
+1. patches/*.patch: hand-written fixes (nested built-in dot access, string
+   switch, menu actions without execute_string, plugins disabled, ...),
+   marked TODO(enigma) or PLUGINS(disabled) in the patched code.
+2. lint: fails on patterns only a hand-written patch can fix, so upstream
+   GM8 changes that reintroduce them are caught.
+3. rewrites: mechanical fixes (constants, var hoisting, renames, ...).
+4. PATCHES: small edits that match rewritten text.
+
+Each workaround names the ENIGMA bug it covers; delete it once that bug is
+fixed upstream.
 
 Usage: prebuild.py <Source/gg2> <out dir> [--stub-extensions] [--headless]
                    [--faucet-src <Faucet checkout>]
@@ -18,6 +24,7 @@ import html
 import re
 import shutil
 import struct
+import subprocess
 import sys
 import zlib
 from pathlib import Path
@@ -69,6 +76,7 @@ GG2DLL_FUNCS = {  # GML name: (C symbol, return type, argument types)
         "ty_string",
         ["ty_string", "ty_string"],
     ),
+    "GG2DLL_log_message": ("log_message", "ty_real", ["ty_string"]),
 }
 
 
@@ -150,6 +158,13 @@ SCRIPT_RENAMES = {"serialize": "gg2_serialize", "deserialize": "gg2_deserialize"
 # ENIGMA bug: string_char_at returns a C++ char, not a string, so comparing it
 # to "x" compares pointers. Route calls through a GML helper.
 HELPERS = {
+    # GM8 returns quietly for a sprite that doesn't exist; ENIGMA raises an
+    # asset error (GG2's kill log sizes a generator entry by sprite -1).
+    "sprite_get_width": (
+        "gml_sprite_get_width",
+        "if (!sprite_exists(argument0)) return 0;\n"
+        "return sprite_get_width(argument0);\n",
+    ),
     "string_char_at": (
         "gml_string_char_at",
         "if (argument1 < 1 or argument1 > string_length(argument0))\n"
@@ -246,7 +261,58 @@ HEADLESS_HELPERS = {
 
 # Platform differences for ENIGMA (Linux) builds, applied to the build copy:
 # (file, old text, new text). Each must match exactly once.
+PATCH_DIR = Path(__file__).resolve().parent / "patches"
+
+# Edits applied after the rewrites, so they match rewritten names (fct_, gml_value).
 PATCHES = [
+    (
+        "Scripts/Client/ClientBeginStep.gml",
+        "packetType = fct_read_ubyte(global.serverSocket);",
+        'packetType = fct_read_ubyte(global.serverSocket); '
+        'GG2DLL_log_message("Received server packet " + '
+        'string(gml_value(packetType)));',
+    ),
+    (
+        "Scripts/Serialization/deserializeState.gml",
+        "    with(MovingPlatform)\n        event_user(11);\n}",
+        "    with(MovingPlatform)\n        event_user(11);\n}\n"
+        'if(argument0 == 8) GG2DLL_log_message("FULL after players");',
+    ),
+    (
+        "Scripts/Serialization/deserializeState.gml",
+        "    gg2_deserialize(IntelligenceBlue);",
+        "    gg2_deserialize(IntelligenceBlue);\n"
+        '    GG2DLL_log_message("FULL after intel");',
+    ),
+    (
+        "Scripts/Serialization/deserializeState.gml",
+        "    with (HUD)\n        event_user(13);\n    \n    // read in",
+        "    with (HUD)\n        event_user(13);\n"
+        '    GG2DLL_log_message("FULL after HUD");\n'
+        "    \n    // read in",
+    ),
+    (
+        "Scripts/Serialization/deserializeState.gml",
+        "        global.classlimits[a] = fct_read_ubyte(global.tempBuffer);",
+        "        global.classlimits[a] = fct_read_ubyte(global.tempBuffer);\n"
+        '    GG2DLL_log_message("FULL complete");',
+    ),
+    (
+        "Scripts/Client/ClientBeginStep.gml",
+        'promptRestartOrQuit("The Server sent unexpected data (packet " + '
+        'string(gml_value(packetType)) + ").");',
+        'GG2DLL_log_message("Unexpected server packet " + '
+        'string(gml_value(packetType))); '
+        'promptRestartOrQuit("The Server sent unexpected data (packet " + '
+        'string(gml_value(packetType)) + ").");',
+    ),
+    # ENIGMA draws runtime # literally. GM8's escape inserts a backslash,
+    # and ENIGMA also rewrites # inside string literals to a newline.
+    (
+        "Scripts/Misc/Strings/sanitiseNewlines.gml",
+        r'text = string_replace_all(text, "#", "\#");',
+        "// ENIGMA draws runtime chr(35) literally.",
+    ),
     # The updater downloads the Windows release zip and unpacks it with 7za.exe;
     # send Linux players to the releases page instead.
     (
@@ -267,12 +333,45 @@ CODE_TAG_RE = re.compile(
     r"|(<creationCode>)(.*?)(</creationCode>)",
     re.S,
 )
+ACTION_RE = re.compile(r"<action\b[^>]*>.*?</action>", re.S)
 # a.b.x, or f().x: the lhs of the built-in's dot is itself not a plain name.
 NESTED_DOT_RE = re.compile(
     r"(?:(?<![\w.])[A-Za-z_]\w*(?:\[[^\]\n]*\])?(?:\.[A-Za-z_]\w*(?:\[[^\]\n]*\])?)+"
     r"|\))\s*\.(?:%s)\b" % "|".join(BUILTINS)
 )
 STRING_CASE_RE = re.compile(r"\bcase\s*[\"']")
+# A statement, cut at ; { } and at control keywords (repeat(n) if (...) is two).
+STATEMENT_RE = re.compile(
+    r"(?:\b(?:if|while|repeat|with|for|else|do|until)\b)?"
+    r"(?:(?!\b(?:if|while|repeat|with|for|else|do|until)\b)[^;{}])+"
+)
+BIT_OPS = {"&", "|", "^"}
+CMP_OPS = {"==", "!=", "<=", ">=", "<", ">"}
+PREC_TOKEN_RE = re.compile(
+    r"&&|\|\||\^\^|<<|>>|[=!<>]=|[-+*/|&^]=|[&|^<>()\[\],;{}=]"
+    r"|\b(?:and|or|xor|if|while|until|return|then|else|do|repeat|with|for|switch|case)\b"
+)
+READ_CALL_RE = re.compile(r"\b(?:read_\w+|receivestring)\s*\(")
+
+
+def matching_brace(s, i):
+    """Index of the '}' closing the '{' at s[i], or len(s) if unbalanced."""
+    depth = 0
+    for j in range(i, len(s)):
+        depth += {"{": 1, "}": -1}.get(s[j], 0)
+        if depth == 0:
+            return j
+    return len(s)
+
+
+def matching_paren(s, i):
+    """Index of the ')' closing the '(' at s[i], or len(s) if unbalanced."""
+    depth = 0
+    for j in range(i, len(s)):
+        depth += {"(": 1, ")": -1}.get(s[j], 0)
+        if depth == 0:
+            return j
+    return len(s)
 
 
 def load_constants(path):
@@ -289,8 +388,22 @@ def word_re(words):
     )
 
 
+# ENIGMA bug: GM8 binds & | ^ tighter than comparisons, C++ looser, and ENIGMA
+# emits the expression as is: `a & $01 != 0` becomes `a & (1 != 0)`. Group
+# simple operands; lint() flags anything this doesn't cover.
+BIT_CMP_RE = re.compile(
+    r"((?:^|[(,]|&&|\|\||\b(?:and|or|xor|if|return|while|until)\b|[^=!<>]=)\s*)"
+    r"([\w.$]+\s*[&|^](?![&|^=])\s*[\w.$]+)"
+    r"(\s*(?:==|!=|<=|>=|<(?![<=])|>(?![>=])))"
+)
+
+
+def group_bitwise(text):
+    return BIT_CMP_RE.sub(lambda m: f"{m.group(1)}({m.group(2)}){m.group(3)}", text)
+
+
 class Rewriter:
-    def __init__(self, constants, renames):
+    def __init__(self, constants, renames, globalvars=()):
         self.constants = constants
         self.renames = renames
         self.const_re = word_re(constants)
@@ -299,6 +412,17 @@ class Rewriter:
             # ENIGMA bug: GMK constants are dropped. Inline their (literal) values.
             (self.const_re, lambda m: self.constants[m.group(1)]),
             (self.rename_re, lambda m: self.renames[m.group(1)]),
+        ]
+        if globalvars:
+            # ENIGMA bug: a globalvar declared in a script isn't known to
+            # objects, which declare the name as their own (zeroed) member.
+            names = "|".join(sorted(map(re.escape, globalvars), key=len, reverse=True))
+            self.rewrites.append((
+                re.compile(r"(\bglobalvar\b[^;]*;?)|(?<![.\w])(%s)\b" % names),
+                lambda m: m.group(1) or "global." + m.group(2),
+            ))
+        self.rewrites += [
+            (BIT_CMP_RE, lambda m: f"{m.group(1)}({m.group(2)}){m.group(3)}"),
             # ENIGMA bug: `if(not x)` is emitted as `if(notx)`.
             (re.compile(r"\bnot\b\s*"), lambda m: "!"),
             # ENIGMA bug: `if (c) exit; else` fails to pair the else.
@@ -362,7 +486,8 @@ def wrap_script_locals(body, local_names):
     """ENIGMA bug: in scripts, a `var` local that stands alone in some positions
     is compiled as a read of the instance variable of that name: `(x)`, `-x`,
     `!x`, `if (x)`, `return x`, ... Binary operands, assignments and call
-    arguments compile correctly, so route the bad positions through a call."""
+    arguments compile correctly except `string(local)`; route the bad
+    positions through a call."""
     out, last = [], 0
     for m in SKIP_RE.finditer(body):
         out += [_wrap_segment(body[last : m.start()], local_names), m.group(0)]
@@ -387,7 +512,8 @@ def _wrap_segment(seg, local_names):
             continue
         prev, prev2 = at(i - 1), at(i - 2)
         if (
-            (prev == "(" and at(i + 1) == ")" and operand_start(prev2))
+            (prev == "(" and at(i + 1) == ")" and
+             (operand_start(prev2) or prev2 == "string"))
             or prev in ("!", "~")
             or (prev in ("-", "+") and operand_start(prev2))
             or prev in CONTROL_KW
@@ -434,6 +560,38 @@ def lint(name, code, problems):
         if STRING_CASE_RE.search(code[body_start:i]):
             line = bare.count("\n", 0, m.start()) + 1
             problems.append(f"{name}:{line}: switch on strings (use if/else)")
+    # ENIGMA emits GML calls and operators as C++, whose operand order is
+    # unspecified (g++ goes right-to-left), so two sibling reads of one stream
+    # in a statement come back swapped. Nested reads are fine.
+    # Bitwise and comparison in one operand run (between logical operators,
+    # parens, commas, statements) that group_bitwise didn't parenthesize.
+    grouped = group_bitwise(bare)
+    depth_ops = [set()]
+    for m in PREC_TOKEN_RE.finditer(grouped):
+        tok = m.group(0)
+        if tok == "(":
+            depth_ops.append(set())
+            continue
+        if tok in BIT_OPS or tok in CMP_OPS:
+            depth_ops[-1].add(tok)
+            continue
+        ops = depth_ops[-1]
+        if ops & BIT_OPS and ops & CMP_OPS:
+            line = grouped.count("\n", 0, m.start()) + 1
+            problems.append(f"{name}:{line}: bitwise and comparison mixed; add parens (GM8 binds bitwise tighter)")
+        depth_ops[-1] = set()
+        if tok == ")" and len(depth_ops) > 1:
+            depth_ops.pop()
+    for stmt in STATEMENT_RE.finditer(bare):
+        reads = []
+        for m in READ_CALL_RE.finditer(stmt.group(0)):
+            end = matching_paren(stmt.group(0), m.end() - 1)
+            buf = stmt.group(0)[m.end() : end].split(",")[0].strip()
+            if any(b == buf and e < m.start() for _, e, b in reads):
+                line = bare.count("\n", 0, stmt.start() + m.start()) + 1
+                problems.append(f"{name}:{line}: two reads of `{buf}` in one statement (one read per statement)")
+                break
+            reads.append((m.start(), end, buf))
 
 
 def placeholder_png():
@@ -485,13 +643,151 @@ def fill_empty_sprites(out):
         )
 
 
-def apply_patches(out):
-    for rel, old, new in PATCHES:
+def apply_source_patches(out):
+    # The repo source stays identical to the GM8 game; every hand-written
+    # ENIGMA fix lives in patches/, applied in order to the build copy.
+    for patch in sorted(PATCH_DIR.glob("*.patch")):
+        with patch.open("rb") as f:
+            result = subprocess.run(
+                ["patch", "-s", "-p3", "--binary", "--forward",
+                 "--no-backup-if-mismatch", "-r", "-", "-d", str(out)],
+                stdin=f,
+            )
+        if result.returncode:
+            sys.exit(f"prebuild: {patch.name} does not apply; refresh it against Source/gg2")
+
+
+def apply_patches(out, patches):
+    for rel, old, new in patches:
         path = out / rel
         text = path.read_text(encoding="utf-8")
         if text.count(old) != 1:
             sys.exit(f"prebuild: patch for {rel} matched {text.count(old)} times")
         path.write_text(text.replace(old, new), encoding="utf-8")
+
+
+# Assignment targets: bare names assigned at statement start.
+ASSIGN_RE = re.compile(
+    r"(?:^|[;{}\n)])\s*([A-Za-z_]\w*)\s*(?:\[[^\]\n]*\])?\s*(?:[-+*/|&^]?=)(?!=)", re.M
+)
+
+
+def collect_globalvars(src):
+    names = set()
+
+    def scan(code):
+        for m in re.finditer(r"\bglobalvar\s+([^;]*);", strip_comments_and_strings(code)):
+            names.update(n.strip() for n in m.group(1).split(",") if n.strip())
+
+    for f in src.rglob("*.gml"):
+        scan(f.read_text(encoding="utf-8"))
+    for f in src.rglob("*.xml"):
+        for m in CODE_TAG_RE.finditer(f.read_text(encoding="utf-8")):
+            scan(html.unescape(m.group(2) if m.group(1) else m.group(5)))
+    return names
+
+
+def declared_members(codegen):
+    """Per object: the locals ENIGMA declared for it and its ancestors, from a
+    codegen-only pass (every bare or dot-accessed name the object uses)."""
+    decl = (Path(codegen) / "Preprocessor_Environment_Editable/IDE_EDIT_objectdeclarations.h").read_text()
+    parent, local = {}, {}
+    for m in re.finditer(r"struct OBJ_(\w+): (?:OBJ_(\w+)|object_locals)\s*\{\s*// Local variables\n(.*?)\n\s*\n", decl, re.S):
+        parent[m.group(1)] = m.group(2) or ""
+        local[m.group(1)] = set(re.findall(r"^\s*var (\w+);", m.group(3), re.M))
+    members = {}
+    for o in local:
+        names, a = set(BUILTINS) | {"id"}, o
+        while a in local:
+            names |= local[a]
+            a = parent[a]
+        members[o] = names
+    return members
+
+
+def object_members(src):
+    """Per object: bare names its events (and its parents') assign, plus
+    built-in instance variables: what ENIGMA declares as C++ members."""
+    parent, assigned = {}, {}
+    for x in src.glob("Objects/**/*.xml"):
+        if x.parent.name.endswith(".events") or x.name.startswith("_"):
+            continue
+        m = re.search(r"<parent>(.*?)</parent>", x.read_text(encoding="utf-8"))
+        parent[x.stem] = m.group(1) if m else ""
+        names = set()
+        for e in x.with_suffix(".events").glob("*.xml"):
+            for c in CODE_TAG_RE.finditer(e.read_text(encoding="utf-8")):
+                code = html.unescape(c.group(2) if c.group(1) else c.group(5))
+                names |= set(ASSIGN_RE.findall(strip_comments_and_strings(code)))
+        assigned[x.stem] = names
+    members = {}
+    for o in parent:
+        names, a = set(BUILTINS) | {"id"}, o
+        while a in parent:
+            names |= assigned[a]
+            a = parent[a]
+        members[o] = names
+    return members
+
+
+def qualify_with_bodies(code, members):
+    """ENIGMA bug: inside with() in an object event, a bare name the enclosing
+    object also has (own/inherited variable or built-in) binds to the
+    enclosing instance, not the with target. GML means the target: self.name."""
+    bare = strip_comments_and_strings(code)
+    local = {n.strip() for m in VAR_RE.finditer(bare) for n in m.group(1).split(",")}
+    spans = []
+    for m in re.finditer(r"\bwith\s*\(", bare):
+        i = matching_paren(bare, m.end() - 1) + 1
+        while i < len(bare) and bare[i] in " \t\r\n":
+            i += 1
+        # Body: a block, or one statement up to ; / newline (a block it opens,
+        # as in `with (a) if (b) {...}`, is included).
+        j, depth = i, 0
+        while j < len(bare):
+            ch = bare[j]
+            if ch == "{":
+                j = matching_brace(bare, j)
+                if depth == 0:
+                    break
+            depth += {"(": 1, ")": -1}.get(ch, 0)
+            if depth == 0 and ch in ";\n" and j > i:
+                break
+            j += 1
+        spans.append((i, j))
+    hits = set()
+    for i, j in spans:
+        for t in re.finditer(r"(?<![.\w])([A-Za-z_]\w*)\b(?!\s*\()", bare[i:j]):
+            if t.group(1) in members and t.group(1) not in local:
+                hits.add(i + t.start())
+    for pos in sorted(hits, reverse=True):
+        code = code[:pos] + "self." + code[pos:]
+    return code
+
+
+def convert_inherited_actions(text):
+    # ENIGMA only binds the parent event when event_inherited() occurs in GML.
+    # GmkSplitter stores GM8's Inherited D&D action as a normal function call.
+    actions = ACTION_RE.findall(text)
+    for i, action in enumerate(actions):
+        if "<functionName>action_inherited</functionName>" not in action:
+            continue
+        if i and "<kind>CODE</kind>" in actions[i - 1]:
+            neighbor = actions[i - 1]
+            converted = neighbor.replace(
+                "</argument>", "\nevent_inherited();</argument>", 1
+            )
+        elif i + 1 < len(actions) and "<kind>CODE</kind>" in actions[i + 1]:
+            neighbor = actions[i + 1]
+            converted = neighbor.replace(
+                '<argument kind="STRING">',
+                '<argument kind="STRING">event_inherited();\n',
+                1,
+            )
+        else:
+            raise ValueError("Inherited action has no adjacent Code action")
+        return text.replace(neighbor, converted, 1).replace(action, "", 1)
+    return text
 
 
 def rename_rooms(out):
@@ -550,6 +846,11 @@ def main():
     )
     ap.add_argument("--headless", action="store_true", help="build for widgets None")
     ap.add_argument(
+        "--members",
+        type=Path,
+        help="codegen dir of a codegen-only emake pass: ENIGMA's per-object locals",
+    )
+    ap.add_argument(
         "--faucet-src",
         type=Path,
         help="Faucet-Networking-Extension checkout; bind libfaucetnet.so",
@@ -560,12 +861,14 @@ def main():
     if args.out.exists():
         shutil.rmtree(args.out)
     shutil.copytree(args.src, args.out)
+    apply_source_patches(args.out)
 
     renames = dict(RENAMES)
     renames.update(SCRIPT_RENAMES)
     renames.update({name: helper for name, (helper, _) in helpers.items()})
     renames.update({f: "fct_" + f for f in FAUCET})
-    rw = Rewriter(load_constants(args.out / "Constants.xml"), renames)
+    globalvars = collect_globalvars(args.out)
+    rw = Rewriter(load_constants(args.out / "Constants.xml"), renames, globalvars)
 
     problems = []
     for f in sorted(args.out.rglob("*.gml")):
@@ -573,19 +876,29 @@ def main():
         lint(str(f.relative_to(args.out)), code, problems)
         f.write_text(rw.code(code, is_script=True), encoding="utf-8")
 
+    members = object_members(args.out)
+    if args.members:
+        for o, names in declared_members(args.members).items():
+            members[o] = members.get(o, set()) | names
+    members = {o: names - globalvars for o, names in members.items()}
+
     def fix_tag(name, m):
         open_tag, body, close_tag = m.group(1, 2, 3) if m.group(1) else m.group(4, 5, 6)
         code = html.unescape(body)
         lint(name, code, problems)
+        obj = Path(name).parent
+        if obj.suffix == ".events":
+            code = qualify_with_bodies(code, members.get(obj.stem, set()))
         return open_tag + html.escape(rw.code(code), quote=False) + close_tag
 
     for f in sorted(args.out.rglob("*.xml")):
         if f.name == "Constants.xml":
             continue
-        text = f.read_text(encoding="utf-8")
+        original = f.read_text(encoding="utf-8")
+        text = convert_inherited_actions(original)
         name = str(f.relative_to(args.out))
         new = CODE_TAG_RE.sub(lambda m, name=name: fix_tag(name, m), text)
-        if new != text:
+        if new != original:
             f.write_text(new, encoding="utf-8")
 
     if problems:
@@ -593,7 +906,7 @@ def main():
         print("\n".join("  " + p for p in problems), file=sys.stderr)
         sys.exit(1)
 
-    apply_patches(args.out)
+    apply_patches(args.out, PATCHES)
     fill_empty_backgrounds(args.out)
     fill_empty_sprites(args.out)
     rename_rooms(args.out)

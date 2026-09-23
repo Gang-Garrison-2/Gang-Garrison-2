@@ -1,0 +1,287 @@
+fix(enigma): get client linking and headless server running
+
+diff --git a/Source/gg2/Objects/GameElements/SSControl.events/Create.xml b/Source/gg2/Objects/GameElements/SSControl.events/Create.xml
+index f4d0b325..7c359fa8 100644
+--- a/Source/gg2/Objects/GameElements/SSControl.events/Create.xml
++++ b/Source/gg2/Objects/GameElements/SSControl.events/Create.xml
+@@ -17,7 +17,7 @@
+     if(instance_number(SSControl)) &gt; 1 {
+         instance_destroy();
+     }
+-    if(!directory_exists(working_directory + "\Screenshots")) directory_create(working_directory + "\Screenshots");
++    if(!directory_exists(working_directory + "/Screenshots")) directory_create(working_directory + "/Screenshots");
+ }
+ </argument>
+       </arguments>
+diff --git a/Source/gg2/Objects/Menus/Main Menu Elements/BackgroundDownloader.events/Create.xml b/Source/gg2/Objects/Menus/Main Menu Elements/BackgroundDownloader.events/Create.xml
+index 52d519ed..c8fb35dd 100644
+--- a/Source/gg2/Objects/Menus/Main Menu Elements/BackgroundDownloader.events/Create.xml	
++++ b/Source/gg2/Objects/Menus/Main Menu Elements/BackgroundDownloader.events/Create.xml	
+@@ -18,7 +18,7 @@ title = "";
+ url = "";
+ showVersion = true;
+ 
+-tmpfile = temp_directory + "\background.png.tmp";
++tmpfile = temp_directory + "/background.png.tmp";
+ 
+ handle = http_new_get(BACKGROUND_SOURCE);
+ </argument>
+diff --git a/Source/gg2/Objects/Updater.events/Create.xml b/Source/gg2/Objects/Updater.events/Create.xml
+index 5b77493f..4df05873 100644
+--- a/Source/gg2/Objects/Updater.events/Create.xml
++++ b/Source/gg2/Objects/Updater.events/Create.xml
+@@ -28,7 +28,7 @@ if(global.updaterBetaChannel)
+ else
+     url = UPDATE_SOURCE;
+ 
+-tmpfile = temp_directory + "\gg2update.zip";
++tmpfile = temp_directory + "/gg2update.zip";
+     
+ downloadHandle = http_new_get(url);
+ 
+diff --git a/Source/gg2/Rooms/CustomMapRoom.xml b/Source/gg2/Rooms/CustomMapRoom.xml
+index 7d2b73e6..f7b7a1b9 100644
+--- a/Source/gg2/Rooms/CustomMapRoom.xml
++++ b/Source/gg2/Rooms/CustomMapRoom.xml
+@@ -15,7 +15,7 @@ if (global.currentMapMD5 == "")
+ {
+     var filename;
+     filename = findInternalMapName(global.currentMap);
+-    path = temp_directory + "\" + filename;
++    path = temp_directory + "/" + filename;
+     // file not already in temp directory, export it
+     if (!file_exists(path))
+         export_include_file_location(filename, path);
+diff --git a/Source/gg2/Scripts/Game/game_init.gml b/Source/gg2/Scripts/Game/game_init.gml
+index ca57e12f..19773a57 100644
+--- a/Source/gg2/Scripts/Game/game_init.gml
++++ b/Source/gg2/Scripts/Game/game_init.gml
+@@ -32,7 +32,10 @@
+     backupFilename = file_find_first("gg2-old.delete.me.*", 0);
+     while(backupFilename != "")
+     {
+-        file_delete(backupFilename);
++        // TODO(enigma): ENIGMA's file_find ignores the mask on Linux and returns
++        // every file, so check the name before deleting anything.
++        if (string_pos("gg2-old.delete.me.", backupFilename) == 1)
++            file_delete(backupFilename);
+         backupFilename = file_find_next();
+     }
+     file_find_close();
+@@ -344,7 +347,7 @@
+     // PLUGINS(disabled): no runtime GML execution in ENIGMA; revisit
+     // global.dealDamageFunction = ""; // executed after dealDamage, with same args
+     
+-    if(!directory_exists(working_directory + "\Maps")) directory_create(working_directory + "\Maps");
++    if(!directory_exists(working_directory + "/Maps")) directory_create(working_directory + "/Maps");
+     
+     instance_create(0, 0, AudioControl);
+     instance_create(0, 0, SSControl);
+@@ -386,7 +389,7 @@
+     character_init();
+     
+     // PLUGINS(disabled): no runtime GML execution in ENIGMA; revisit
+-    // if(!directory_exists(working_directory + "\Plugins")) directory_create(working_directory + "\Plugins");
++    // if(!directory_exists(working_directory + "/Plugins")) directory_create(working_directory + "/Plugins");
+     // loadplugins();
+     
+     /* Windows 8 is known to crash GM when more than three (?) sounds play at once
+diff --git a/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_get_resources.gml b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_get_resources.gml
+index 012d1a19..d150ea55 100644
+--- a/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_get_resources.gml
++++ b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_get_resources.gml
+@@ -7,8 +7,8 @@ else
+         directory_create(working_directory + "/Maps/Decompiled");
+ 
+     // Walkmask
+-    if (file_exists(temp_directory+"\custommap_walkmask.png"))
+-        file_copy(temp_directory+"\custommap_walkmask.png", working_directory + "/Maps/Decompiled/walkmask.png");    
++    if (file_exists(temp_directory+"/custommap_walkmask.png"))
++        file_copy(temp_directory+"/custommap_walkmask.png", working_directory + "/Maps/Decompiled/walkmask.png");    
+ 
+     // External sprites     
+     var resource;
+diff --git a/Source/gg2/Scripts/Maps/Builder/stringToResource.gml b/Source/gg2/Scripts/Maps/Builder/stringToResource.gml
+index d4c31e1f..11a7d4ed 100644
+--- a/Source/gg2/Scripts/Maps/Builder/stringToResource.gml
++++ b/Source/gg2/Scripts/Maps/Builder/stringToResource.gml
+@@ -18,7 +18,7 @@ if (ext != "GIF")
+ if (is_string(argument2))
+     name = argument2 + "." + ext;
+ else
+-    name = temp_directory + "\TmpResource." + ext;
++    name = temp_directory + "/TmpResource." + ext;
+ 
+ file = file_bin_open(name, 2);
+ while(file_bin_position(file) < string_length(argument0))
+diff --git a/Source/gg2/Scripts/Maps/CustomMaps/CustomMapInit.gml b/Source/gg2/Scripts/Maps/CustomMaps/CustomMapInit.gml
+index e4f9ce06..685dc8be 100644
+--- a/Source/gg2/Scripts/Maps/CustomMaps/CustomMapInit.gml
++++ b/Source/gg2/Scripts/Maps/CustomMaps/CustomMapInit.gml
+@@ -5,7 +5,7 @@
+ {
+   // get the leveldata
+   var leveldata, tempfile;
+-  tempfile = temp_directory+"\custommap_walkmask.png";
++  tempfile = temp_directory+"/custommap_walkmask.png";
+   leveldata = GG2DLL_extract_PNG_leveldata(argument0, tempfile);
+ 
+   if(leveldata == "") {
+diff --git a/Source/gg2/Scripts/Menus/Actions/menu_adv_host_options_map_rotation.gml b/Source/gg2/Scripts/Menus/Actions/menu_adv_host_options_map_rotation.gml
+index cf3e995f..a6283a97 100644
+--- a/Source/gg2/Scripts/Menus/Actions/menu_adv_host_options_map_rotation.gml
++++ b/Source/gg2/Scripts/Menus/Actions/menu_adv_host_options_map_rotation.gml
+@@ -6,7 +6,7 @@ absPath = get_open_filename("Map Rotation|*.txt", "");
+ if (absPath == "") {
+     global.mapRotationFile = absPath;
+ } else {
+-    global.mapRotationFile = getRelativePathIfDescendant(working_directory + "\", absPath);
++    global.mapRotationFile = getRelativePathIfDescendant(working_directory + "/", absPath);
+ }
+ 
+ gg2_write_ini("Server", "MapRotation", global.mapRotationFile);
+diff --git a/Source/gg2/Scripts/Misc/getRelativePathIfDescendant.gml b/Source/gg2/Scripts/Misc/getRelativePathIfDescendant.gml
+index 8daa116e..c6c027bc 100644
+--- a/Source/gg2/Scripts/Misc/getRelativePathIfDescendant.gml
++++ b/Source/gg2/Scripts/Misc/getRelativePathIfDescendant.gml
+@@ -2,7 +2,7 @@
+ // Determines a relative path for endPath that is relative to startPath, if endPath is inside of startPath or a subdirectory of startPath.
+ // Otherwise returns endPath as an absolute path.
+ // startPath and endPath must be absolute paths.
+-// startPath must be a directory and must include a trailing slash e.g. working_directory + "\".
++// startPath must be a directory and must include a trailing slash e.g. working_directory + "/".
+ // Path segment delimiters are converted to forward slashes.
+ 
+ var startPath, endPath;
+diff --git a/Source/gg2/Scripts/Plugins/extractzip.gml b/Source/gg2/Scripts/Plugins/extractzip.gml
+index a5322b32..aff8aa6c 100644
+--- a/Source/gg2/Scripts/Plugins/extractzip.gml
++++ b/Source/gg2/Scripts/Plugins/extractzip.gml
+@@ -2,4 +2,4 @@
+ // argument0 - Zip filename
+ // argument1 - Destination
+ 
+-execute_program(temp_directory + "\7za.exe", 'x "'+argument0+'" -o"'+argument1+'" -aoa', true);
++execute_program(temp_directory + "/7za.exe", 'x "'+argument0+'" -o"'+argument1+'" -aoa', true);
+diff --git a/Source/gg2/Scripts/Plugins/getpluginhashes.gml b/Source/gg2/Scripts/Plugins/getpluginhashes.gml
+index bfb92211..4916eaa8 100644
+--- a/Source/gg2/Scripts/Plugins/getpluginhashes.gml
++++ b/Source/gg2/Scripts/Plugins/getpluginhashes.gml
+@@ -41,10 +41,10 @@
+ //     pluginname = ds_list_find_value(list, i);
+ //
+ //     // check if we have a debug version
+-//     if (file_exists(working_directory + "\ServerPluginsDebug\" + pluginname + ".zip"))
++//     if (file_exists(working_directory + "/ServerPluginsDebug\" + pluginname + ".zip"))
+ //     {
+ //         // get its hash instead
+-//         pluginhash = GG2DLL_compute_MD5(working_directory + "\ServerPluginsDebug\" + pluginname + ".zip");
++//         pluginhash = GG2DLL_compute_MD5(working_directory + "/ServerPluginsDebug\" + pluginname + ".zip");
+ //     }
+ //     else
+ //     {   
+diff --git a/Source/gg2/Scripts/Plugins/loadplugins.gml b/Source/gg2/Scripts/Plugins/loadplugins.gml
+index 3b3186cb..b3592fa8 100644
+--- a/Source/gg2/Scripts/Plugins/loadplugins.gml
++++ b/Source/gg2/Scripts/Plugins/loadplugins.gml
+@@ -4,7 +4,7 @@
+ // var file, pattern, prefix, list, fp, i, env;
+ //
+ // // Prefix since results from file_find_* don't include path
+-// prefix = working_directory + "\Plugins\";
++// prefix = working_directory + "/Plugins\";
+ // pattern = prefix + "*.gml";
+ //
+ // list = ds_list_create();
+@@ -20,7 +20,7 @@
+ // {
+ //     file = ds_list_find_value(list, i);
+ //     // Debugging facility, so we know *which* plugin caused compile/execute error
+-//     fp = file_text_open_write(working_directory + "\last_plugin.log");
++//     fp = file_text_open_write(working_directory + "/last_plugin.log");
+ //     file_text_write_string(fp, prefix + file);
+ //     file_text_close(fp);
+ //     // Create persistent environment for plugin (so its variables won't collide)
+@@ -36,5 +36,5 @@
+ // }
+ //
+ // // Clear up
+-// file_delete(working_directory + "\last_plugin.log");
++// file_delete(working_directory + "/last_plugin.log");
+ // ds_list_destroy(list);
+diff --git a/Source/gg2/Scripts/Plugins/loadserverplugins.gml b/Source/gg2/Scripts/Plugins/loadserverplugins.gml
+index 801c0bdf..fb4808d2 100644
+--- a/Source/gg2/Scripts/Plugins/loadserverplugins.gml
++++ b/Source/gg2/Scripts/Plugins/loadserverplugins.gml
+@@ -48,15 +48,15 @@
+ // {
+ //     pluginname = ds_list_find_value(list, i);
+ //     pluginhash = ds_list_find_value(hashList, i);
+-//     isDebug = file_exists(working_directory + "\ServerPluginsDebug\" + pluginname + ".zip");
+-//     isCached = file_exists(working_directory + "\ServerPluginsCache\" + pluginname + "@" + pluginhash);
+-//     tempfile = temp_directory + "\" + pluginname + ".zip.tmp";
+-//     tempdir = temp_directory + "\" + pluginname + ".tmp";
++//     isDebug = file_exists(working_directory + "/ServerPluginsDebug\" + pluginname + ".zip");
++//     isCached = file_exists(working_directory + "/ServerPluginsCache\" + pluginname + "@" + pluginhash);
++//     tempfile = temp_directory + "/" + pluginname + ".zip.tmp";
++//     tempdir = temp_directory + "/" + pluginname + ".tmp";
+ //
+ //     // check to see if we have a local copy for debugging
+ //     if (isDebug)
+ //     {
+-//         file_copy(working_directory + "\ServerPluginsDebug\" + pluginname + ".zip", tempfile);
++//         file_copy(working_directory + "/ServerPluginsDebug\" + pluginname + ".zip", tempfile);
+ //         // show warning
+ //         if (global.isHost)
+ //         {
+@@ -78,7 +78,7 @@
+ //     // otherwise, check if we have it cached
+ //     else if (isCached)
+ //     {
+-//         file_copy(working_directory + "\ServerPluginsCache\" + pluginname + "@" + pluginhash, tempfile);
++//         file_copy(working_directory + "/ServerPluginsCache\" + pluginname + "@" + pluginhash, tempfile);
+ //     }
+ //     // otherwise, download as usual
+ //     else
+@@ -155,15 +155,15 @@
+ //     if (!isDebug)
+ //     {
+ //         // add to cache if we don't already have it
+-//         if (!file_exists(working_directory + "\ServerPluginsCache\" + pluginname + "@" + pluginhash))
++//         if (!file_exists(working_directory + "/ServerPluginsCache\" + pluginname + "@" + pluginhash))
+ //         {
+ //             // make sure directory exists
+-//             if (!directory_exists(working_directory + "\ServerPluginsCache"))
++//             if (!directory_exists(working_directory + "/ServerPluginsCache"))
+ //             {
+-//                 directory_create(working_directory + "\ServerPluginsCache");
++//                 directory_create(working_directory + "/ServerPluginsCache");
+ //             }
+ //             // store in cache
+-//             file_copy(tempfile, working_directory + "\ServerPluginsCache\" + pluginname + "@" + pluginhash);
++//             file_copy(tempfile, working_directory + "/ServerPluginsCache\" + pluginname + "@" + pluginhash);
+ //         }
+ //     }
+ //
+@@ -185,10 +185,10 @@
+ //     for (i = 0; i < ds_list_size(list); i += 1)
+ //     {
+ //         pluginname = ds_list_find_value(list, i);
+-//         tempdir = temp_directory + "\" + pluginname + ".tmp";
++//         tempdir = temp_directory + "/" + pluginname + ".tmp";
+ //
+ //         // Debugging facility, so we know *which* plugin caused compile/execute error
+-//         fp = file_text_open_write(working_directory + "\last_plugin.log");
++//         fp = file_text_open_write(working_directory + "/last_plugin.log");
+ //         file_text_write_string(fp, pluginname);
+ //         file_text_close(fp);
+ //
+@@ -220,7 +220,7 @@
+ // }
+ //
+ // // Delete last plugin log
+-// file_delete(working_directory + "\last_plugin.log");
++// file_delete(working_directory + "/last_plugin.log");
+ //
+ // // Get rid of plugin list
+ // ds_list_destroy(list);

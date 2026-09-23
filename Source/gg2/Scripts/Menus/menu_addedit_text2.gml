@@ -1,6 +1,6 @@
 // argument0 - name
 // argument1 - name of the variable this setting is bound to
-// argument2 - script to run upon change - argument0 is new value, return value is assigned to bound variable
+// argument2 - GML code to run upon change - argument0 is new value, return value is assigned to bound variable
 // Note that the bound variable is only updated *after* the script in argument2 returns!
 
 item_name[items] = argument0;

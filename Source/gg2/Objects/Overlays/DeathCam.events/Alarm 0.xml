@@ -21,24 +21,18 @@
 
 if(lastDamageSource == DAMAGE_SOURCE_SENTRYTURRET and killedby.sentry)
 {
-    // TODO(enigma): temp var avoids ENIGMA nested built-in dot bug (a.b.x); inline when fixed
-    var killerSentry;
-    killerSentry = killedby.sentry;
-    view_xview=killerSentry.x-400;
-    view_yview=killerSentry.y-300;
-    hp=killerSentry.hp;
-    maxHp=killerSentry.maxHp;
+    view_xview=killedby.sentry.x-400;
+    view_yview=killedby.sentry.y-300;
+    hp=killedby.sentry.hp;
+    maxHp=killedby.sentry.maxHp;
     killmessage = "You were killed by the autogun of";
 }
 else if(killedby.object != -1)
 {
-    // TODO(enigma): temp var avoids ENIGMA nested built-in dot bug (a.b.x); inline when fixed
-    var killerObject;
-    killerObject = killedby.object;
-    view_xview=killerObject.x-400;
-    view_yview=killerObject.y-300;
-    hp=killerObject.hp;
-    maxHp=killerObject.maxHp;
+    view_xview=killedby.object.x-400;
+    view_yview=killedby.object.y-300;
+    hp=killedby.object.hp;
+    maxHp=killedby.object.maxHp;
     killmessage = "You were killed by";
 }
 else

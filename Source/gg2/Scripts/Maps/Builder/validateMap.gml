@@ -22,12 +22,12 @@ if (redCount == 0 ||blueCount == 0) {
 
 if (gmMap != -1) {
     code = ds_map_find_value(gmMap, "code");
-    if (code >= 0) {
+    if (is_string(code)) {
         error = ds_map_find_value(gmMap, "error");
         if (!is_string(error)) error = "Your setup is not valid.";
         else error = "Your setup is not valid:#" + error;
         
-        if (!run_action(code, 0)) {
+        if (!execute_string(ds_map_find_value(gmMap, "code"))) {
             if (show_message_ext(error, "Continue", "Cancel", "") != 1) return false;
         }
     }

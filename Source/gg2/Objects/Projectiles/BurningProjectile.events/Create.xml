@@ -13,9 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">// move_all_bullets clears this after the first step
-firststep = true;
-// Child objects will need to define:
+        <argument kind="STRING">// Child objects will need to define:
 // hitDamage, flameLife, burnIncrease, durationIncrease, afterburnFalloff (bool), penetrateCap
 // Then they need to call the inherited event (i.e. this code)
 alarm[0] = flameLife / global.delta_factor;

@@ -35,17 +35,14 @@ if (http_step(handle)) {
     var c;
     for(c = 0; c &lt; ds_list_size(data); c += 2)
     {
-        // TODO(enigma): if/else instead of switch; ENIGMA can't switch on strings. Restore switch when fixed
-        var messageType;
-        messageType = ds_list_find_value(data, c);
-        if (messageType == "ShowMessage")
+        switch(ds_list_find_value(data, c))
         {
+        case "ShowMessage":
             var popup;
             popup = instance_create(250, 471, DevMessagePopup);
             popup.msg = ds_list_find_value(data, c + 1);
-        }
-        else if (messageType == "Version")
-        {
+            break;
+        case "Version":
             versioncheck = ds_list_find_value(data, c + 1);
             versionend = string_pos("!",versioncheck);
             version = string_copy(versioncheck,1,versionend-1);
@@ -58,9 +55,8 @@ if (http_step(handle)) {
                 popup.msg = "Updates have been made to Gang Garrison 2!##"+changes;
                 popup.updating = true;
             }
-        }
-        else if (messageType == "Background")
-        {
+            break;
+        case "Background":
             var text, list, hash, title, url, showVersion;
             text = ds_list_find_value(data, c + 1);
             list = ds_list_create();
@@ -135,6 +131,7 @@ if (http_step(handle)) {
                 ini_write_real("Background", "BackgroundShowVersion", global.backgroundShowVersion);
                 ini_close();
             }
+            break;
         }
     }
 

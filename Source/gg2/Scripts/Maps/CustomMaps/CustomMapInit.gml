@@ -5,7 +5,7 @@
 {
   // get the leveldata
   var leveldata, tempfile;
-  tempfile = temp_directory+"/custommap_walkmask.png";
+  tempfile = temp_directory+"\custommap_walkmask.png";
   leveldata = GG2DLL_extract_PNG_leveldata(argument0, tempfile);
 
   if(leveldata == "") {

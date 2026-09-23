@@ -22,7 +22,6 @@ draw_set_alpha(1);
 
 if global.myself.object != -1 {
     if instance_exists(global.myself.object.currentWeapon) {
-        // TODO(enigma): read alarm[] via weapon, not global.myself.object.currentWeapon.alarm[] (ENIGMA nested built-in dot bug)
         var weapon;
         weapon = global.myself.object.currentWeapon;
         barcolor = make_color_rgb(217,217,183);
@@ -36,36 +35,36 @@ if global.myself.object != -1 {
         if global.myself.class==CLASS_SOLDIER {
             if global.myself.team == TEAM_BLUE toffset = 5;
             else toffset = 0;
-            reloadscalar = 100-weapon.alarm[5]*global.delta_factor/weapon.reloadTime*100;
+            reloadscalar = 100-global.myself.object.currentWeapon.alarm[5]*global.delta_factor/global.myself.object.currentWeapon.reloadTime*100;
             draw_sprite_ext(Rocketclip,global.myself.object.currentWeapon.ammoCount+toffset,xoffset+728,yoffset+ysize/1.26+86,2.4,2.4,0,c_white,100);
             draw_healthbar(xoffset+689,yoffset+ysize/1.26+90,xoffset+723,yoffset+ysize/1.26+98,reloadscalar,c_black,barcolor,barcolor,0,true,false);
         }
         else if global.myself.class==CLASS_DEMOMAN{        
-            reloadscalar = 100-weapon.alarm[5]*global.delta_factor/weapon.reloadTime*100;
+            reloadscalar = 100-global.myself.object.currentWeapon.alarm[5]*global.delta_factor/global.myself.object.currentWeapon.reloadTime*100;
             draw_sprite_ext(MinegunAmmoS,toffset,xoffset+728,yoffset+ysize/1.26+86,2.4,2.4,0,c_white,100);
             draw_text(xoffset+765,yoffset+ysize/1.26+95,global.myself.object.currentWeapon.ammoCount);
             draw_healthbar(xoffset+700,yoffset+ysize/1.26+90,xoffset+750,yoffset+ysize/1.26+98,reloadscalar,c_black,barcolor,barcolor,0,true,false);
         }
         else if global.myself.class==CLASS_SCOUT {
-            reloadscalar = 100-weapon.alarm[5]*global.delta_factor/weapon.reloadTime*100;
+            reloadscalar = 100-global.myself.object.currentWeapon.alarm[5]*global.delta_factor/global.myself.object.currentWeapon.reloadTime*100;
             draw_sprite_ext(ScattergunAmmoS,toffset,xoffset+728,yoffset+ysize/1.26+86,2.4,2.4,0,c_white,100);
             draw_text(xoffset+765,yoffset+ysize/1.26+95,global.myself.object.currentWeapon.ammoCount);
             draw_healthbar(xoffset+700,yoffset+ysize/1.26+90,xoffset+750,yoffset+ysize/1.26+98,reloadscalar,c_black,barcolor,barcolor,0,true,false);
         }
         else if global.myself.class==CLASS_ENGINEER {
-            reloadscalar = 100-weapon.alarm[5]*global.delta_factor/weapon.reloadTime*100;
+            reloadscalar = 100-global.myself.object.currentWeapon.alarm[5]*global.delta_factor/global.myself.object.currentWeapon.reloadTime*100;
             draw_sprite_ext(ShotgunAmmoS,toffset,xoffset+728,yoffset+ysize/1.26+86,2.4,2.4,0,c_white,100);
             draw_text(xoffset+765,yoffset+ysize/1.26+95,global.myself.object.currentWeapon.ammoCount);
             draw_healthbar(xoffset+700,yoffset+ysize/1.26+90,xoffset+750,yoffset+ysize/1.26+98,reloadscalar,c_black,barcolor,barcolor,0,true,false);
         }
         else if global.myself.class == CLASS_SPY {
-            reloadscalar = 100-weapon.alarm[5]*global.delta_factor/weapon.reloadTime*100;
+            reloadscalar = 100-global.myself.object.currentWeapon.alarm[5]*global.delta_factor/global.myself.object.currentWeapon.reloadTime*100;
             draw_sprite_ext(RevolverAmmoS,toffset,xoffset+728,yoffset+ysize/1.26+86,2.4,2.4,0,c_white,100);
             draw_text(xoffset+765,yoffset+ysize/1.26+95,global.myself.object.currentWeapon.ammoCount);
             draw_healthbar(xoffset+700,yoffset+ysize/1.26+90,xoffset+750,yoffset+ysize/1.26+98,reloadscalar,c_black,barcolor,barcolor,0,true,false);
         }
         else if global.myself.class == CLASS_MEDIC {
-            reloadscalar = 100-weapon.alarm[5]*global.delta_factor/weapon.reloadTime*100;
+            reloadscalar = 100-global.myself.object.currentWeapon.alarm[5]*global.delta_factor/global.myself.object.currentWeapon.reloadTime*100;
             draw_sprite_ext(NeedleAmmoS,toffset,xoffset+728,yoffset+ysize/1.26+86,2.4,2.4,0,c_white,100);
             draw_text(xoffset+765,yoffset+ysize/1.26+95,global.myself.object.currentWeapon.ammoCount);
             draw_healthbar(xoffset+700,yoffset+ysize/1.26+90,xoffset+750,yoffset+ysize/1.26+98,reloadscalar,c_black,barcolor,barcolor,0,true,false);
@@ -79,8 +78,7 @@ if global.myself.object != -1 {
             {
                 var offset, flarecolor;
                 
-                // TODO(enigma): self. needed inside with(); ENIGMA resolves bare names against the outer object
-                if(self.readyToFlare)
+                if(readyToFlare)
                     flarecolor = c_white;
                 else
                     flarecolor = c_gray;

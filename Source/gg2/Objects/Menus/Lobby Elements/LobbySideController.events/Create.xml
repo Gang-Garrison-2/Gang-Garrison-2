@@ -17,8 +17,12 @@
 
 menu_background(80, 24, 8, 12, 4);
 
-menu_addlink("Refresh", menu_lobby_side_refresh);
-menu_addback("Back", menu_lobby_side_back);
+menu_addlink("Refresh", '
+    event_user(0);
+');
+menu_addback("Back", '
+    room_goto_fix(Menu);
+');
 
 cooleddown = false;
 alarm[1] = 90;

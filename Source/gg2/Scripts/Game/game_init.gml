@@ -1,22 +1,5 @@
 // Returns true if the game is successfully initialized, false if there was an error and we should quit.
 {
-    // Lazily-created globals start at a sentinel instead of being checked with
-    // variable_global_exists, which ENIGMA doesn't have (variables are compiled in).
-    global.runningPingCount = 0;
-    global.devMessagesChecked = false;
-    global.downloadedBackground = -1;
-    global.md5TablesReady = false;
-    global.gearOverlayInfo = -1;
-    global.headPoseInfo = -1;
-    global.spawnPointsCreated = false;
-    global.jumpFlameParticleSystem = -1;
-    global.jumpDustParticleSystem = -1;
-    global.rocketblurParticleSystem = -1;
-    global.flameParticleType = -1;
-    global.flameParticleSystem = -1;
-    global.__HttpClient = -1;
-    global.spritesByName = -1;
-
     initCharacterSpritePrefixes();
     initAllHeadPoses();
     initGear();
@@ -24,18 +7,14 @@
     instance_create(0,0,RoomChangeObserver);
     set_little_endian_global(true);
     if file_exists("game_errors.log") file_delete("game_errors.log");
-    // PLUGINS(disabled): no runtime GML execution in ENIGMA; revisit
-    // if file_exists("last_plugin.log") file_delete("last_plugin.log");
+    if file_exists("last_plugin.log") file_delete("last_plugin.log");
     
     // Delete old left-over files created by the updater
     var backupFilename;
     backupFilename = file_find_first("gg2-old.delete.me.*", 0);
     while(backupFilename != "")
     {
-        // TODO(enigma): ENIGMA's file_find ignores the mask on Linux and returns
-        // every file, so check the name before deleting anything.
-        if (string_pos("gg2-old.delete.me.", backupFilename) == 1)
-            file_delete(backupFilename);
+        file_delete(backupFilename);
         backupFilename = file_find_next();
     }
     file_find_close();
@@ -88,8 +67,7 @@
     global.showHealing = ini_read_real("Settings", "Show Healing", 1);
     global.showHealthBar = ini_read_real("Settings", "Show Healthbar", 0);
     global.showTeammateStats = ini_read_real("Settings", "Show Extra Teammate Stats", 0);
-    // PLUGINS(disabled): no runtime GML execution in ENIGMA; revisit
-    // global.serverPluginsPrompt = ini_read_real("Settings", "ServerPluginsPrompt", 1);
+    global.serverPluginsPrompt = ini_read_real("Settings", "ServerPluginsPrompt", 1);
     global.restartPrompt = ini_read_real("Settings", "RestartPrompt", 1);
     //user HUD settings
     global.timerPos = ini_read_real("Settings","Timer Position", 0);
@@ -116,13 +94,12 @@
     global.mapdownloadLimitBps = ini_read_real("Server", "Total bandwidth limit for map downloads in bytes per second", 50000);
     global.updaterBetaChannel = ini_read_real("General", "UpdaterBetaChannel", isBetaVersion());
     global.attemptPortForward = ini_read_real("Server", "Attempt UPnP Forwarding", 0); 
-    // PLUGINS(disabled): no runtime GML execution in ENIGMA; revisit
-    // global.serverPluginList = ini_read_string("Server", "ServerPluginList", "");
-    // global.serverPluginsRequired = ini_read_real("Server", "ServerPluginsRequired", 0);
-    // if (string_length(global.serverPluginList) > 254) {
-    //     show_message("Error: Server plugin list cannot exceed 254 characters");
-    //     return false;
-    // }
+    global.serverPluginList = ini_read_string("Server", "ServerPluginList", "");
+    global.serverPluginsRequired = ini_read_real("Server", "ServerPluginsRequired", 0);
+    if (string_length(global.serverPluginList) > 254) {
+        show_message("Error: Server plugin list cannot exceed 254 characters");
+        return false;
+    }
     var CrosshairFilename, CrosshairRemoveBG;
     CrosshairFilename = ini_read_string("Settings", "CrosshairFilename", "");
     CrosshairRemoveBG = ini_read_real("Settings", "CrosshairRemoveBG", 1);
@@ -157,11 +134,10 @@
     global.totalMapAreas = 1;
     global.setupTimer = 0;
     global.joinedServerName = "";
-    // PLUGINS(disabled): no runtime GML execution in ENIGMA; revisit
-    // global.serverPluginsInUse = false;
-    // // Create plugin packet maps
-    // global.pluginPacketBuffers = ds_map_create();
-    // global.pluginPacketPlayers = ds_map_create();
+    global.serverPluginsInUse = false;
+    // Create plugin packet maps
+    global.pluginPacketBuffers = ds_map_create();
+    global.pluginPacketPlayers = ds_map_create();
         
     ini_write_string("Settings", "PlayerName", global.playerName);
     ini_write_real("Settings", "Fullscreen", global.fullscreen);
@@ -184,8 +160,7 @@
     ini_write_real("Settings", "Kill Log Position", global.killLogPos);
     ini_write_real("Settings", "KoTH HUD Position", global.kothHudPos);
     ini_write_real("Settings", "Fade Scoreboard", global.fadeScoreboard);
-    // PLUGINS(disabled): no runtime GML execution in ENIGMA; revisit
-    // ini_write_real("Settings", "ServerPluginsPrompt", global.serverPluginsPrompt);
+    ini_write_real("Settings", "ServerPluginsPrompt", global.serverPluginsPrompt);
     ini_write_real("Settings", "RestartPrompt", global.restartPrompt);
     ini_write_string("Server", "MapRotation", global.mapRotationFile);
     ini_write_real("Server", "ShuffleRotation", global.shuffleRotation);
@@ -202,9 +177,8 @@
     ini_write_string("Server", "Password", global.serverPassword);
     ini_write_real("General", "UpdaterBetaChannel", global.updaterBetaChannel);
     ini_write_real("Server", "Attempt UPnP Forwarding", global.attemptPortForward); 
-    // PLUGINS(disabled): no runtime GML execution in ENIGMA; revisit
-    // ini_write_string("Server", "ServerPluginList", global.serverPluginList); 
-    // ini_write_real("Server", "ServerPluginsRequired", global.serverPluginsRequired); 
+    ini_write_string("Server", "ServerPluginList", global.serverPluginList); 
+    ini_write_real("Server", "ServerPluginsRequired", global.serverPluginsRequired); 
     ini_write_string("Settings", "CrosshairFilename", CrosshairFilename);
     ini_write_real("Settings", "CrosshairRemoveBG", CrosshairRemoveBG);
     ini_write_real("Settings", "Queued Jumping", global.queueJumping);
@@ -344,10 +318,9 @@
     global.timerFont = font_add_sprite(timerFontS, ord("0"), true, 5);
     draw_set_font(global.gg2Font);
     cursor_sprite = CrosshairS;
-    // PLUGINS(disabled): no runtime GML execution in ENIGMA; revisit
-    // global.dealDamageFunction = ""; // executed after dealDamage, with same args
+    global.dealDamageFunction = ""; // executed after dealDamage, with same args
     
-    if(!directory_exists(working_directory + "/Maps")) directory_create(working_directory + "/Maps");
+    if(!directory_exists(working_directory + "\Maps")) directory_create(working_directory + "\Maps");
     
     instance_create(0, 0, AudioControl);
     instance_create(0, 0, SSControl);
@@ -388,9 +361,8 @@
 
     character_init();
     
-    // PLUGINS(disabled): no runtime GML execution in ENIGMA; revisit
-    // if(!directory_exists(working_directory + "/Plugins")) directory_create(working_directory + "/Plugins");
-    // loadplugins();
+    if(!directory_exists(working_directory + "\Plugins")) directory_create(working_directory + "\Plugins");
+    loadplugins();
     
     /* Windows 8 is known to crash GM when more than three (?) sounds play at once
      * We'll store the kernel version (Win8 is 6.2, Win7 is 6.1) and check it there.

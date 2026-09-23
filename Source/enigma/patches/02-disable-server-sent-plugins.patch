@@ -1,0 +1,1964 @@
+refactor(plugins): disable server-sent plugins
+
+diff --git a/Source/gg2/Objects/Menus/Hosting Menu Elements/AdvHostOptionsController.events/Create.xml b/Source/gg2/Objects/Menus/Hosting Menu Elements/AdvHostOptionsController.events/Create.xml
+index 720f15ce..48ba8cc8 100644
+--- a/Source/gg2/Objects/Menus/Hosting Menu Elements/AdvHostOptionsController.events/Create.xml	
++++ b/Source/gg2/Objects/Menus/Hosting Menu Elements/AdvHostOptionsController.events/Create.xml	
+@@ -47,9 +47,10 @@ menu_add_option(0, "Don't shuffle");
+ menu_add_option(1, "Shuffle (no arena initial map)");
+ menu_add_option(2, "Shuffle without bias");
+ 
+-menu_addedit_text("Server Sent Plugins:", "global.serverPluginList", '
+-    gg2_write_ini("Server", "ServerPluginList", argument0);
+-');
++// PLUGINS(disabled): no runtime GML execution in ENIGMA; revisit
++// menu_addedit_text("Server Sent Plugins:", "global.serverPluginList", '
++//     gg2_write_ini("Server", "ServerPluginList", argument0);
++// ');
+ 
+ menu_addedit_boolean("Auto Balance:", "global.autobalance", '
+     gg2_write_ini("Server", "AutoBalance", argument0);
+diff --git a/Source/gg2/Objects/Menus/InGameMenuController.events/Create.xml b/Source/gg2/Objects/Menus/InGameMenuController.events/Create.xml
+index e0f0581f..1ad3a5a5 100644
+--- a/Source/gg2/Objects/Menus/InGameMenuController.events/Create.xml
++++ b/Source/gg2/Objects/Menus/InGameMenuController.events/Create.xml
+@@ -41,11 +41,13 @@
+     menu_addlink("Disconnect", '
+         // Force dedicated mode to off so you can go to main menu instead of just restarting server
+         if (show_question("Do you really want to leave this match?")) {
+-            if (global.serverPluginsInUse)
+-            {
+-                pluginscleanup(true);
+-            }
+-            else
++            // PLUGINS(disabled): no runtime GML execution in ENIGMA; revisit
++            // if (global.serverPluginsInUse)
++            // {
++            //     pluginscleanup(true);
++            // }
++            // else
++            // {
+             {
+                 global.dedicatedMode = 0;
+                 with(Client)
+diff --git a/Source/gg2/Objects/Menus/Options Menus/EngineOptionsController.events/Create.xml b/Source/gg2/Objects/Menus/Options Menus/EngineOptionsController.events/Create.xml
+index e6579ab2..1f059fd3 100644
+--- a/Source/gg2/Objects/Menus/Options Menus/EngineOptionsController.events/Create.xml	
++++ b/Source/gg2/Objects/Menus/Options Menus/EngineOptionsController.events/Create.xml	
+@@ -104,11 +104,12 @@
+     ');
+     menu_add_option(0, "Off");
+     menu_add_option(1, "On unless hosting");
+-    menu_addedit_boolean("Prompt for server-sent plugins:", "global.serverPluginsPrompt", '
+-        if (argument0 == false)
+-            show_message("Please note that plugins can be dangerous, so you should only disable the prompt if you trust all plugins hosted at the source:#" + PLUGIN_SOURCE + "#" + PLUGIN_SOURCE_NOTICE)
+-        gg2_write_ini("Settings", "ServerPluginsPrompt", argument0);
+-    ');
++    // PLUGINS(disabled): no runtime GML execution in ENIGMA; revisit
++    // menu_addedit_boolean("Prompt for server-sent plugins:", "global.serverPluginsPrompt", '
++    //     if (argument0 == false)
++    //         show_message("Please note that plugins can be dangerous, so you should only disable the prompt if you trust all plugins hosted at the source:#" + PLUGIN_SOURCE + "#" + PLUGIN_SOURCE_NOTICE)
++    //     gg2_write_ini("Settings", "ServerPluginsPrompt", argument0);
++    // ');
+     menu_addedit_boolean("Prompt for restart:", "global.restartPrompt", '
+         gg2_write_ini("Settings", "RestartPrompt", argument0);
+     ');
+diff --git a/Source/gg2/Objects/Networking/Client.events/Destroy.xml b/Source/gg2/Objects/Networking/Client.events/Destroy.xml
+index a3ce06df..4f22c495 100644
+--- a/Source/gg2/Objects/Networking/Client.events/Destroy.xml
++++ b/Source/gg2/Objects/Networking/Client.events/Destroy.xml
+@@ -26,8 +26,9 @@
+         instance_destroy();
+ 
+     room_goto_fix(returnRoom);
+-    if (global.serverPluginsInUse &amp;&amp; !noUnloadPlugins)
+-        pluginscleanup();
++    // PLUGINS(disabled): no runtime GML execution in ENIGMA; revisit
++    // if (global.serverPluginsInUse &amp;&amp; !noUnloadPlugins)
++    //     pluginscleanup();
+ }
+ 
+ </argument>
+diff --git a/Source/gg2/Objects/Networking/GameServer.events/Destroy.xml b/Source/gg2/Objects/Networking/GameServer.events/Destroy.xml
+index 2e77a415..37fca8b2 100644
+--- a/Source/gg2/Objects/Networking/GameServer.events/Destroy.xml
++++ b/Source/gg2/Objects/Networking/GameServer.events/Destroy.xml
+@@ -39,8 +39,9 @@ if (instance_exists(Builder))
+ else
+     room_goto_fix(Menu);
+ 
+-if (global.serverPluginsInUse)
+-    pluginscleanup();
++// PLUGINS(disabled): no runtime GML execution in ENIGMA; revisit
++// if (global.serverPluginsInUse)
++//     pluginscleanup();
+     
+ set_synchronization(global.monitorSync);
+ </argument>
+diff --git a/Source/gg2/Scripts/Client/ClientBeginStep.gml b/Source/gg2/Scripts/Client/ClientBeginStep.gml
+index 6cf98171..b8396bc2 100644
+--- a/Source/gg2/Scripts/Client/ClientBeginStep.gml
++++ b/Source/gg2/Scripts/Client/ClientBeginStep.gml
+@@ -57,81 +57,89 @@ do {
+             break;
+ 
+         case RESERVE_SLOT:
+-            if (!noReloadPlugins && string_length(plugins))
++            // PLUGINS(disabled): no runtime GML execution in ENIGMA; revisit
++            // if (!noReloadPlugins && string_length(plugins))
++            // {
++            //     usePlugins = pluginsRequired || !global.serverPluginsPrompt;
++            //     if (global.serverPluginsPrompt)
++            //     {
++            //         // Split up plugin list
++            //         var pluginList;
++            //         pluginList = split(plugins, ',');
++            //
++            //         // Iterate over list and make displayable list without hashes
++            //         var displayList, i;
++            //         displayList = '';
++            //         for (i = 0; i < ds_list_size(pluginList); i += 1)
++            //         {
++            //             var pluginParts;
++            //             pluginParts = split(ds_list_find_value(pluginList, i), '@');
++            //             displayList += '- ' + ds_list_find_value(pluginParts, 0) + '#';
++            //             ds_list_destroy(pluginParts);
++            //         }
++            //
++            //         // Destroy list
++            //         ds_list_destroy(pluginList);
++            //
++            //         var prompt;
++            //         if (pluginsRequired)
++            //         {
++            //             prompt = show_message_ext(
++            //                 'You need these plugins to play on this server: #'
++            //                 + displayList
++            //                 + PLUGIN_SOURCE_NOTICE
++            //                 + '#Do you want to download them and join the server?',
++            //                 'Download and join',
++            //                 '',
++            //                 'Disconnect'
++            //             );
++            //             if (prompt != 1)
++            //             {
++            //                 instance_destroy();
++            //                 exit;
++            //             }
++            //         }
++            //         else
++            //         {
++            //             prompt = show_message_ext(
++            //                 'These optional plugins are suggested for this server: #'
++            //                 + displayList
++            //                 + PLUGIN_SOURCE_NOTICE
++            //                 + '#Do you want to download them?',
++            //                 'Download',
++            //                 '',
++            //                 'Skip'
++            //             );
++            //             if (prompt == 1)
++            //             {
++            //                 usePlugins = true;
++            //             }
++            //             else
++            //             {
++            //                 // We set this so that we won't prompt for plugins again if we re-connect to download a map
++            //                 skippedPlugins = true;
++            //             }
++            //         }
++            //     }
++            //     if (usePlugins)
++            //     {
++            //         if (!loadserverplugins(plugins))
++            //         {
++            //             show_message("Error occurred loading server-sent plugins.");
++            //             instance_destroy();
++            //             exit;
++            //         }
++            //         global.serverPluginsInUse = true;
++            //     }
++            // }
++            // noReloadPlugins = false;
++            // Plugins aren't supported; optional ones are skipped.
++            if (pluginsRequired and string_length(plugins))
+             {
+-                usePlugins = pluginsRequired || !global.serverPluginsPrompt;
+-                if (global.serverPluginsPrompt)
+-                {
+-                    // Split up plugin list
+-                    var pluginList;
+-                    pluginList = split(plugins, ',');
+-
+-                    // Iterate over list and make displayable list without hashes
+-                    var displayList, i;
+-                    displayList = '';
+-                    for (i = 0; i < ds_list_size(pluginList); i += 1)
+-                    {
+-                        var pluginParts;
+-                        pluginParts = split(ds_list_find_value(pluginList, i), '@');
+-                        displayList += '- ' + ds_list_find_value(pluginParts, 0) + '#';
+-                        ds_list_destroy(pluginParts);
+-                    }
+-
+-                    // Destroy list
+-                    ds_list_destroy(pluginList);
+-                    
+-                    var prompt;
+-                    if (pluginsRequired)
+-                    {
+-                        prompt = show_message_ext(
+-                            'You need these plugins to play on this server: #'
+-                            + displayList
+-                            + PLUGIN_SOURCE_NOTICE
+-                            + '#Do you want to download them and join the server?',
+-                            'Download and join',
+-                            '',
+-                            'Disconnect'
+-                        );
+-                        if (prompt != 1)
+-                        {
+-                            instance_destroy();
+-                            exit;
+-                        }
+-                    }
+-                    else
+-                    {
+-                        prompt = show_message_ext(
+-                            'These optional plugins are suggested for this server: #'
+-                            + displayList
+-                            + PLUGIN_SOURCE_NOTICE
+-                            + '#Do you want to download them?',
+-                            'Download',
+-                            '',
+-                            'Skip'
+-                        );
+-                        if (prompt == 1)
+-                        {
+-                            usePlugins = true;
+-                        }
+-                        else
+-                        {
+-                            // We set this so that we won't prompt for plugins again if we re-connect to download a map
+-                            skippedPlugins = true;
+-                        }
+-                    }
+-                }
+-                if (usePlugins)
+-                {
+-                    if (!loadserverplugins(plugins))
+-                    {
+-                        show_message("Error occurred loading server-sent plugins.");
+-                        instance_destroy();
+-                        exit;
+-                    }
+-                    global.serverPluginsInUse = true;
+-                }
++                show_message("This server requires plugins, which this version of Gang Garrison 2 doesn't support.");
++                instance_destroy();
++                exit;
+             }
+-            noReloadPlugins = false;
+             
+             if(advertisedMapMd5 != "")
+             {
+@@ -494,16 +502,18 @@ do {
+                     var oldReturnRoom;
+                     oldReturnRoom = returnRoom;
+                     returnRoom = DownloadRoom;
+-                    // Normally, GG2 is restarted when we disconnect, if plugins are in use
+-                    // As we're only disconnecting to download a map, we won't restart
+-                    if (global.serverPluginsInUse)
+-                        noUnloadPlugins = true;
++                    // PLUGINS(disabled): no runtime GML execution in ENIGMA; revisit
++                    // // Normally, GG2 is restarted when we disconnect, if plugins are in use
++                    // // As we're only disconnecting to download a map, we won't restart
++                    // if (global.serverPluginsInUse)
++                    //     noUnloadPlugins = true;
+                     event_perform(ev_destroy,0);
+                     ClientCreate();
+-                    // Normally, GG2 will prompt to load plugins when connecting to a server
+-                    // If they're already loaded, or the user skipped them, we won't prompt again
+-                    if (global.serverPluginsInUse or skippedPlugins)
+-                        noReloadPlugins = true;
++                    // PLUGINS(disabled): no runtime GML execution in ENIGMA; revisit
++                    // // Normally, GG2 will prompt to load plugins when connecting to a server
++                    // // If they're already loaded, or the user skipped them, we won't prompt again
++                    // if (global.serverPluginsInUse or skippedPlugins)
++                    //     noReloadPlugins = true;
+                     returnRoom = oldReturnRoom;
+                     usePreviousPwd = true;
+                     exit;
+@@ -622,23 +632,25 @@ do {
+             packetLen = read_ushort(global.tempBuffer);
+             receiveCompleteMessage(global.serverSocket, packetLen, global.tempBuffer);
+ 
+-            packetID = read_ubyte(global.tempBuffer);
+-
+-            // get packet data
+-            buf = buffer_create();
+-            write_buffer_part(buf, global.tempBuffer, packetLen - 1);
+-
+-            // try to enqueue
+-            // give "noone" value for client since received from server
+-            success = _PluginPacketPush(packetID, buf, noone);
+-            
+-            // if it returned false, packetID was invalid
+-            if (!success)
+-            {
+-                // clear up buffer
+-                buffer_destroy(buf);
+-                show_error("ERROR when reading plugin packet: no such plugin packet ID " + string(packetID), true);
+-            }
++            // PLUGINS(disabled): no runtime GML execution in ENIGMA; revisit
++            // packetID = read_ubyte(global.tempBuffer);
++            //
++            // // get packet data
++            // buf = buffer_create();
++            // write_buffer_part(buf, global.tempBuffer, packetLen - 1);
++            //
++            // // try to enqueue
++            // // give "noone" value for client since received from server
++            // success = _PluginPacketPush(packetID, buf, noone);
++            //
++            // // if it returned false, packetID was invalid
++            // if (!success)
++            // {
++            //     // clear up buffer
++            //     buffer_destroy(buf);
++            //     show_error("ERROR when reading plugin packet: no such plugin packet ID " + string(packetID), true);
++            // }
++            // Plugins aren't supported; the packet was read above and is discarded.
+             break;
+         
+         case CLIENT_SETTINGS:
+diff --git a/Source/gg2/Scripts/Client/ClientCreate.gml b/Source/gg2/Scripts/Client/ClientCreate.gml
+index 01a3fae4..1915870e 100644
+--- a/Source/gg2/Scripts/Client/ClientCreate.gml
++++ b/Source/gg2/Scripts/Client/ClientCreate.gml
+@@ -7,11 +7,12 @@
+     }
+     nocreate=false;
+     usePreviousPwd = false;
+-    // Prevent overwriting
+-    if (!variable_local_exists('skippedPlugins'))
+-        skippedPlugins = false;
+-    noUnloadPlugins = false;
+-    noReloadPlugins = false;
++    // PLUGINS(disabled): no runtime GML execution in ENIGMA; revisit
++    // // Prevent overwriting
++    // if (!variable_local_exists('skippedPlugins'))
++    //     skippedPlugins = false;
++    // noUnloadPlugins = false;
++    // noReloadPlugins = false;
+     
+     global.players = ds_list_create();
+     global.deserializeBuffer = buffer_create();
+diff --git a/Source/gg2/Scripts/Damage API/dealDamage.gml b/Source/gg2/Scripts/Damage API/dealDamage.gml
+index bddc559a..424adeba 100644
+--- a/Source/gg2/Scripts/Damage API/dealDamage.gml	
++++ b/Source/gg2/Scripts/Damage API/dealDamage.gml	
+@@ -10,5 +10,6 @@ with(argument1)
+ 
+ argument1.hp -= argument2;
+ 
+-execute_string( global.dealDamageFunction, argument0, argument1, argument2 );
++// PLUGINS(disabled): no runtime GML execution in ENIGMA; revisit
++// execute_string( global.dealDamageFunction, argument0, argument1, argument2 );
+ 
+diff --git a/Source/gg2/Scripts/Game/game_init.gml b/Source/gg2/Scripts/Game/game_init.gml
+index 323495db..8572cdc1 100644
+--- a/Source/gg2/Scripts/Game/game_init.gml
++++ b/Source/gg2/Scripts/Game/game_init.gml
+@@ -7,7 +7,8 @@
+     instance_create(0,0,RoomChangeObserver);
+     set_little_endian_global(true);
+     if file_exists("game_errors.log") file_delete("game_errors.log");
+-    if file_exists("last_plugin.log") file_delete("last_plugin.log");
++    // PLUGINS(disabled): no runtime GML execution in ENIGMA; revisit
++    // if file_exists("last_plugin.log") file_delete("last_plugin.log");
+     
+     // Delete old left-over files created by the updater
+     var backupFilename;
+@@ -67,7 +68,8 @@
+     global.showHealing = ini_read_real("Settings", "Show Healing", 1);
+     global.showHealthBar = ini_read_real("Settings", "Show Healthbar", 0);
+     global.showTeammateStats = ini_read_real("Settings", "Show Extra Teammate Stats", 0);
+-    global.serverPluginsPrompt = ini_read_real("Settings", "ServerPluginsPrompt", 1);
++    // PLUGINS(disabled): no runtime GML execution in ENIGMA; revisit
++    // global.serverPluginsPrompt = ini_read_real("Settings", "ServerPluginsPrompt", 1);
+     global.restartPrompt = ini_read_real("Settings", "RestartPrompt", 1);
+     //user HUD settings
+     global.timerPos = ini_read_real("Settings","Timer Position", 0);
+@@ -94,12 +96,13 @@
+     global.mapdownloadLimitBps = ini_read_real("Server", "Total bandwidth limit for map downloads in bytes per second", 50000);
+     global.updaterBetaChannel = ini_read_real("General", "UpdaterBetaChannel", isBetaVersion());
+     global.attemptPortForward = ini_read_real("Server", "Attempt UPnP Forwarding", 0); 
+-    global.serverPluginList = ini_read_string("Server", "ServerPluginList", "");
+-    global.serverPluginsRequired = ini_read_real("Server", "ServerPluginsRequired", 0);
+-    if (string_length(global.serverPluginList) > 254) {
+-        show_message("Error: Server plugin list cannot exceed 254 characters");
+-        return false;
+-    }
++    // PLUGINS(disabled): no runtime GML execution in ENIGMA; revisit
++    // global.serverPluginList = ini_read_string("Server", "ServerPluginList", "");
++    // global.serverPluginsRequired = ini_read_real("Server", "ServerPluginsRequired", 0);
++    // if (string_length(global.serverPluginList) > 254) {
++    //     show_message("Error: Server plugin list cannot exceed 254 characters");
++    //     return false;
++    // }
+     var CrosshairFilename, CrosshairRemoveBG;
+     CrosshairFilename = ini_read_string("Settings", "CrosshairFilename", "");
+     CrosshairRemoveBG = ini_read_real("Settings", "CrosshairRemoveBG", 1);
+@@ -134,10 +137,11 @@
+     global.totalMapAreas = 1;
+     global.setupTimer = 0;
+     global.joinedServerName = "";
+-    global.serverPluginsInUse = false;
+-    // Create plugin packet maps
+-    global.pluginPacketBuffers = ds_map_create();
+-    global.pluginPacketPlayers = ds_map_create();
++    // PLUGINS(disabled): no runtime GML execution in ENIGMA; revisit
++    // global.serverPluginsInUse = false;
++    // // Create plugin packet maps
++    // global.pluginPacketBuffers = ds_map_create();
++    // global.pluginPacketPlayers = ds_map_create();
+         
+     ini_write_string("Settings", "PlayerName", global.playerName);
+     ini_write_real("Settings", "Fullscreen", global.fullscreen);
+@@ -160,7 +164,8 @@
+     ini_write_real("Settings", "Kill Log Position", global.killLogPos);
+     ini_write_real("Settings", "KoTH HUD Position", global.kothHudPos);
+     ini_write_real("Settings", "Fade Scoreboard", global.fadeScoreboard);
+-    ini_write_real("Settings", "ServerPluginsPrompt", global.serverPluginsPrompt);
++    // PLUGINS(disabled): no runtime GML execution in ENIGMA; revisit
++    // ini_write_real("Settings", "ServerPluginsPrompt", global.serverPluginsPrompt);
+     ini_write_real("Settings", "RestartPrompt", global.restartPrompt);
+     ini_write_string("Server", "MapRotation", global.mapRotationFile);
+     ini_write_real("Server", "ShuffleRotation", global.shuffleRotation);
+@@ -177,8 +182,9 @@
+     ini_write_string("Server", "Password", global.serverPassword);
+     ini_write_real("General", "UpdaterBetaChannel", global.updaterBetaChannel);
+     ini_write_real("Server", "Attempt UPnP Forwarding", global.attemptPortForward); 
+-    ini_write_string("Server", "ServerPluginList", global.serverPluginList); 
+-    ini_write_real("Server", "ServerPluginsRequired", global.serverPluginsRequired); 
++    // PLUGINS(disabled): no runtime GML execution in ENIGMA; revisit
++    // ini_write_string("Server", "ServerPluginList", global.serverPluginList); 
++    // ini_write_real("Server", "ServerPluginsRequired", global.serverPluginsRequired); 
+     ini_write_string("Settings", "CrosshairFilename", CrosshairFilename);
+     ini_write_real("Settings", "CrosshairRemoveBG", CrosshairRemoveBG);
+     ini_write_real("Settings", "Queued Jumping", global.queueJumping);
+@@ -318,7 +324,8 @@
+     global.timerFont = font_add_sprite(timerFontS, ord("0"), true, 5);
+     draw_set_font(global.gg2Font);
+     cursor_sprite = CrosshairS;
+-    global.dealDamageFunction = ""; // executed after dealDamage, with same args
++    // PLUGINS(disabled): no runtime GML execution in ENIGMA; revisit
++    // global.dealDamageFunction = ""; // executed after dealDamage, with same args
+     
+     if(!directory_exists(working_directory + "\Maps")) directory_create(working_directory + "\Maps");
+     
+@@ -361,8 +368,9 @@
+ 
+     character_init();
+     
+-    if(!directory_exists(working_directory + "\Plugins")) directory_create(working_directory + "\Plugins");
+-    loadplugins();
++    // PLUGINS(disabled): no runtime GML execution in ENIGMA; revisit
++    // if(!directory_exists(working_directory + "\Plugins")) directory_create(working_directory + "\Plugins");
++    // loadplugins();
+     
+     /* Windows 8 is known to crash GM when more than three (?) sounds play at once
+      * We'll store the kernel version (Win8 is 6.2, Win7 is 6.1) and check it there.
+diff --git a/Source/gg2/Scripts/GameServer/GameServerCreate.gml b/Source/gg2/Scripts/GameServer/GameServerCreate.gml
+index 269795c8..01fcd05a 100644
+--- a/Source/gg2/Scripts/GameServer/GameServerCreate.gml
++++ b/Source/gg2/Scripts/GameServer/GameServerCreate.gml
+@@ -124,37 +124,40 @@
+     
+     GameServerDefineCommands();
+     
+-    // load server-sent plugins, if any
+-    if (string_length(global.serverPluginList))
+-    {
+-        // Get hashes of latest versions for plugin list
+-        pluginList = getpluginhashes(global.serverPluginList);
+-        if (pluginList == 'failure')
+-        {
+-            show_message("Error occurred getting server-sent plugin hashes.");
+-            game_end();
+-            exit;
+-        }
+-        if (string_length(pluginList) > 65535)
+-        {
+-            show_message("Error: you are requiring too many server-sent plugins.");
+-            game_end();
+-            exit;
+-        }
+-
+-        // Load plugins
+-        if (!loadserverplugins(pluginList))
+-        {
+-            show_message("Error occurred loading server-sent plugins.");
+-            game_end();
+-            exit;
+-        }
+-        global.serverPluginsInUse = true;
+-    }
+-    else
+-    {
+-        pluginList = '';
+-    }
++    // PLUGINS(disabled): no runtime GML execution in ENIGMA; revisit
++    // // load server-sent plugins, if any
++    // if (string_length(global.serverPluginList))
++    // {
++    //     // Get hashes of latest versions for plugin list
++    //     pluginList = getpluginhashes(global.serverPluginList);
++    //     if (pluginList == 'failure')
++    //     {
++    //         show_message("Error occurred getting server-sent plugin hashes.");
++    //         game_end();
++    //         exit;
++    //     }
++    //     if (string_length(pluginList) > 65535)
++    //     {
++    //         show_message("Error: you are requiring too many server-sent plugins.");
++    //         game_end();
++    //         exit;
++    //     }
++    //
++    //     // Load plugins
++    //     if (!loadserverplugins(pluginList))
++    //     {
++    //         show_message("Error occurred loading server-sent plugins.");
++    //         game_end();
++    //         exit;
++    //     }
++    //     global.serverPluginsInUse = true;
++    // }
++    // else
++    // {
++    //     pluginList = '';
++    // }
++    // Server-sent plugins aren't supported; the handshake still sends an empty list.
++    pluginList = '';
+     
+     // Disable vsync to minimize framerate drops which would be noticed as lag issues by all players.
+     // "vsync makes the server desync" --Arctic
+diff --git a/Source/gg2/Scripts/GameServer/processClientCommands.gml b/Source/gg2/Scripts/GameServer/processClientCommands.gml
+index 919134f1..018e1372 100644
+--- a/Source/gg2/Scripts/GameServer/processClientCommands.gml
++++ b/Source/gg2/Scripts/GameServer/processClientCommands.gml
+@@ -339,29 +339,36 @@ while(commandLimitRemaining > 0) {
+             break;
+ 
+         case PLUGIN_PACKET:
+-            var packetID, buf, success;
+-
+-            packetID = read_ubyte(socket);
+-            
+-            // get packet data
+-            buf = buffer_create();
+-            write_buffer_part(buf, socket, socket_receivebuffer_size(socket));
+-
+-            // try to enqueue
+-            success = _PluginPacketPush(packetID, buf, player);
+-            
+-            // if it returned false, packetID was invalid
+-            if (!success)
+-            {
+-                // clear up buffer
+-                buffer_destroy(buf);
+-
+-                // kick player
+-                write_ubyte(player.socket, KICK);
+-                write_ubyte(player.socket, KICK_BAD_PLUGIN_PACKET);
+-                socket_destroy(player.socket);
+-                player.socket = -1;
+-            }
++            // PLUGINS(disabled): no runtime GML execution in ENIGMA; revisit
++            // var packetID, buf, success;
++            //
++            // packetID = read_ubyte(socket);
++            //
++            // // get packet data
++            // buf = buffer_create();
++            // write_buffer_part(buf, socket, socket_receivebuffer_size(socket));
++            //
++            // // try to enqueue
++            // success = _PluginPacketPush(packetID, buf, player);
++            //
++            // // if it returned false, packetID was invalid
++            // if (!success)
++            // {
++            //     // clear up buffer
++            //     buffer_destroy(buf);
++            //
++            //     // kick player
++            //     write_ubyte(player.socket, KICK);
++            //     write_ubyte(player.socket, KICK_BAD_PLUGIN_PACKET);
++            //     socket_destroy(player.socket);
++            //     player.socket = -1;
++            // }
++            // No plugins are loaded, so every plugin packet ID is invalid (same as a
++            // server without plugins).
++            write_ubyte(player.socket, KICK);
++            write_ubyte(player.socket, KICK_BAD_PLUGIN_PACKET);
++            socket_destroy(player.socket);
++            player.socket = -1;
+             break;
+             
+         case CLIENT_SETTINGS:
+diff --git a/Source/gg2/Scripts/GameServer/serviceJoiningPlayer.gml b/Source/gg2/Scripts/GameServer/serviceJoiningPlayer.gml
+index 67690285..a0398e0c 100644
+--- a/Source/gg2/Scripts/GameServer/serviceJoiningPlayer.gml
++++ b/Source/gg2/Scripts/GameServer/serviceJoiningPlayer.gml
+@@ -86,9 +86,13 @@ case STATE_CLIENT_AUTHENTICATED:
+     write_ubyte(socket, string_length(global.currentMapMD5));
+     write_string(socket, global.currentMapMD5);
+     
+-    write_ubyte(socket, global.serverPluginsRequired);
+-    write_ushort(socket, string_length(GameServer.pluginList));
+-    write_string(socket, GameServer.pluginList);
++    // PLUGINS(disabled): no runtime GML execution in ENIGMA; revisit
++    // write_ubyte(socket, global.serverPluginsRequired);
++    // write_ushort(socket, string_length(GameServer.pluginList));
++    // write_string(socket, GameServer.pluginList);
++    // No server-sent plugins: not required, empty list.
++    write_ubyte(socket, 0);
++    write_ushort(socket, 0);
+     
+     advertisedMap = global.currentMap;
+     advertisedMapMd5 = global.currentMapMD5;
+diff --git a/Source/gg2/Scripts/Maps/Builder/builder_init.gml b/Source/gg2/Scripts/Maps/Builder/builder_init.gml
+index 92b58bb1..f02efb94 100644
+--- a/Source/gg2/Scripts/Maps/Builder/builder_init.gml
++++ b/Source/gg2/Scripts/Maps/Builder/builder_init.gml
+@@ -5,8 +5,9 @@ global.gamemodes = ds_list_create();
+ global.buttons = ds_list_create();
+ global.resources = ds_map_create();
+ 
+-global.placeEntityFunction = "";
+-global.metadataFunction = "";
++// PLUGINS(disabled): no runtime GML execution in ENIGMA; revisit
++// global.placeEntityFunction = "";
++// global.metadataFunction = "";
+ 
+ // Add buttons
+ addButton("Load map", '
+diff --git a/Source/gg2/Scripts/Maps/Builder/loadMetadata.gml b/Source/gg2/Scripts/Maps/Builder/loadMetadata.gml
+index c1486106..f19ace88 100644
+--- a/Source/gg2/Scripts/Maps/Builder/loadMetadata.gml
++++ b/Source/gg2/Scripts/Maps/Builder/loadMetadata.gml
+@@ -81,4 +81,5 @@ else if (controller != noone) {
+     controller.foreground = -1;
+ }
+ 
+-execute_string(global.metadataFunction, argument0, argument1);
++// PLUGINS(disabled): no runtime GML execution in ENIGMA; revisit
++// execute_string(global.metadataFunction, argument0, argument1);
+diff --git a/Source/gg2/Scripts/Maps/Builder/placeEntity.gml b/Source/gg2/Scripts/Maps/Builder/placeEntity.gml
+index 258a645e..7258de7b 100644
+--- a/Source/gg2/Scripts/Maps/Builder/placeEntity.gml
++++ b/Source/gg2/Scripts/Maps/Builder/placeEntity.gml
+@@ -42,6 +42,7 @@ with(Builder)
+         }
+     }
+     
+-    // Custom script that which plugins can use
+-    execute_string(global.placeEntityFunction, entity);
++    // PLUGINS(disabled): no runtime GML execution in ENIGMA; revisit
++    // // Custom script that which plugins can use
++    // execute_string(global.placeEntityFunction, entity);
+ }
+diff --git a/Source/gg2/Scripts/Plugins/API/PluginPacketGetBuffer.gml b/Source/gg2/Scripts/Plugins/API/PluginPacketGetBuffer.gml
+index fdb7e32f..0ea07dcb 100644
+--- a/Source/gg2/Scripts/Plugins/API/PluginPacketGetBuffer.gml
++++ b/Source/gg2/Scripts/Plugins/API/PluginPacketGetBuffer.gml
+@@ -1,23 +1,24 @@
+-// Returns the buffer of the earliest received packet for a server-sent plugin
+-// Buffer returned should not be modified or destroyed.
+-// If there is no packet buffer to return, returns -1
+-// argument0 - plugin packet ID, passed as argument1 to server-sent plugin upon execution
+-
+-var packetID, packetBufferQueue;
+-
+-packetID = argument0;
+-
+-// check to make sure the packet ID is valid
+-if (!ds_map_exists(global.pluginPacketBuffers, packetID))
+-{
+-    show_error("ERROR when fetching plugin packet buffer: no such plugin packet ID " + string(packetID), true);
+-    return -1;
+-}
+-
+-packetBufferQueue = ds_map_find_value(global.pluginPacketBuffers, packetID);
+-
+-// check we have any buffer to return
+-if (ds_queue_empty(packetBufferQueue))
+-    return -1;
+-
+-return ds_queue_head(packetBufferQueue);
++// PLUGINS(disabled): no runtime GML execution in ENIGMA; revisit
++// // Returns the buffer of the earliest received packet for a server-sent plugin
++// // Buffer returned should not be modified or destroyed.
++// // If there is no packet buffer to return, returns -1
++// // argument0 - plugin packet ID, passed as argument1 to server-sent plugin upon execution
++//
++// var packetID, packetBufferQueue;
++//
++// packetID = argument0;
++//
++// // check to make sure the packet ID is valid
++// if (!ds_map_exists(global.pluginPacketBuffers, packetID))
++// {
++//     show_error("ERROR when fetching plugin packet buffer: no such plugin packet ID " + string(packetID), true);
++//     return -1;
++// }
++//
++// packetBufferQueue = ds_map_find_value(global.pluginPacketBuffers, packetID);
++//
++// // check we have any buffer to return
++// if (ds_queue_empty(packetBufferQueue))
++//     return -1;
++//
++// return ds_queue_head(packetBufferQueue);
+diff --git a/Source/gg2/Scripts/Plugins/API/PluginPacketGetPlayer.gml b/Source/gg2/Scripts/Plugins/API/PluginPacketGetPlayer.gml
+index 05571c86..fa6728d0 100644
+--- a/Source/gg2/Scripts/Plugins/API/PluginPacketGetPlayer.gml
++++ b/Source/gg2/Scripts/Plugins/API/PluginPacketGetPlayer.gml
+@@ -1,23 +1,24 @@
+-// Returns the Player of the earliest received packet for a server-sent plugin
+-// If this packet was received from the server, noone is returned instead
+-// If there is no packet Player to return, returns -1
+-// argument0 - plugin packet ID, passed as argument1 to server-sent plugin upon execution
+-
+-var packetID, packetPlayerQueue;
+-
+-packetID = argument0;
+-
+-// check to make sure the packet ID is valid
+-if (!ds_map_exists(global.pluginPacketPlayers, packetID))
+-{
+-    show_error("ERROR when fetching plugin packet Player: no such plugin packet ID " + string(packetID), true);
+-    return noone;
+-}
+-
+-packetPlayerQueue = ds_map_find_value(global.pluginPacketPlayers, packetID);
+-
+-// check we have any Player to return
+-if (ds_queue_empty(packetPlayerQueue))
+-    return -1;
+-
+-return ds_queue_head(packetPlayerQueue);
++// PLUGINS(disabled): no runtime GML execution in ENIGMA; revisit
++// // Returns the Player of the earliest received packet for a server-sent plugin
++// // If this packet was received from the server, noone is returned instead
++// // If there is no packet Player to return, returns -1
++// // argument0 - plugin packet ID, passed as argument1 to server-sent plugin upon execution
++//
++// var packetID, packetPlayerQueue;
++//
++// packetID = argument0;
++//
++// // check to make sure the packet ID is valid
++// if (!ds_map_exists(global.pluginPacketPlayers, packetID))
++// {
++//     show_error("ERROR when fetching plugin packet Player: no such plugin packet ID " + string(packetID), true);
++//     return noone;
++// }
++//
++// packetPlayerQueue = ds_map_find_value(global.pluginPacketPlayers, packetID);
++//
++// // check we have any Player to return
++// if (ds_queue_empty(packetPlayerQueue))
++//     return -1;
++//
++// return ds_queue_head(packetPlayerQueue);
+diff --git a/Source/gg2/Scripts/Plugins/API/PluginPacketPop.gml b/Source/gg2/Scripts/Plugins/API/PluginPacketPop.gml
+index e1c7c1fb..40281675 100644
+--- a/Source/gg2/Scripts/Plugins/API/PluginPacketPop.gml
++++ b/Source/gg2/Scripts/Plugins/API/PluginPacketPop.gml
+@@ -1,29 +1,30 @@
+-// Removes the earliest received packet for a server-sent plugin
+-// This will destroy the buffer.
+-// If there is packet to remove, returns false, otherwise true
+-// argument1 - plugin packet ID, passed as argument0 to server-sent plugin upon execution
+-
+-var packetID, packetBufferQueue, packetPlayerQueue;
+-
+-packetID = argument0;
+-
+-// check to make sure the packet ID is valid
+-if (!ds_map_exists(global.pluginPacketBuffers, packetID))
+-{
+-    show_error("ERROR when popping plugin packet buffer: no such plugin packet ID " + string(packetID), true);
+-    return false;
+-}
+-
+-packetBufferQueue = ds_map_find_value(global.pluginPacketBuffers, packetID);
+-packetPlayerQueue = ds_map_find_value(global.pluginPacketPlayers, packetID);
+-
+-// check we have any packet to pop
+-if (ds_queue_empty(packetBufferQueue))
+-    return false;
+-
+-// dequeue from both queues
+-// (the queues are synchronised, two are used because GML has no tuples)
+-buffer_destroy(ds_queue_dequeue(packetBufferQueue));
+-ds_queue_dequeue(packetPlayerQueue);
+-return true;
+-
++// PLUGINS(disabled): no runtime GML execution in ENIGMA; revisit
++// // Removes the earliest received packet for a server-sent plugin
++// // This will destroy the buffer.
++// // If there is packet to remove, returns false, otherwise true
++// // argument1 - plugin packet ID, passed as argument0 to server-sent plugin upon execution
++//
++// var packetID, packetBufferQueue, packetPlayerQueue;
++//
++// packetID = argument0;
++//
++// // check to make sure the packet ID is valid
++// if (!ds_map_exists(global.pluginPacketBuffers, packetID))
++// {
++//     show_error("ERROR when popping plugin packet buffer: no such plugin packet ID " + string(packetID), true);
++//     return false;
++// }
++//
++// packetBufferQueue = ds_map_find_value(global.pluginPacketBuffers, packetID);
++// packetPlayerQueue = ds_map_find_value(global.pluginPacketPlayers, packetID);
++//
++// // check we have any packet to pop
++// if (ds_queue_empty(packetBufferQueue))
++//     return false;
++//
++// // dequeue from both queues
++// // (the queues are synchronised, two are used because GML has no tuples)
++// buffer_destroy(ds_queue_dequeue(packetBufferQueue));
++// ds_queue_dequeue(packetPlayerQueue);
++// return true;
++//
+diff --git a/Source/gg2/Scripts/Plugins/API/PluginPacketSend.gml b/Source/gg2/Scripts/Plugins/API/PluginPacketSend.gml
+index 2ea65f75..c4ae1fe2 100644
+--- a/Source/gg2/Scripts/Plugins/API/PluginPacketSend.gml
++++ b/Source/gg2/Scripts/Plugins/API/PluginPacketSend.gml
+@@ -1,56 +1,57 @@
+-// Sends a packet for a server-sent plugin to all clients
+-// Returns true if successful, false if not
+-// argument0 - plugin packet ID, passed as argument1 to server-sent plugin upon execution
+-// argument1 - data buffer to send (maximum size 65535 bytes)
+-// argument2 (optional, default false) - boolean, if true will send packet to server as well
+-
+-var packetID, dataBuffer, loopback, packetBuffer;
+-
+-packetID = argument0;
+-dataBuffer = argument1;
+-loopback = argument2;
+-
+-// check to make sure the packet ID is valid
+-if (!ds_map_exists(global.pluginPacketBuffers, packetID))
+-{
+-    show_error("ERROR when sending plugin packet: no such plugin packet ID " + string(packetID), true);
+-    return false;
+-}
+-
+-// check size of buffer (limited because ushort used for length of packet)
+-if (buffer_size(dataBuffer) > 65534)
+-    return false;
+-
+-// Short-cicuit when sending to self
+-if (loopback)
+-{
+-    packetBuffer = buffer_create();
+-    write_buffer(packetBuffer, dataBuffer);
+-    _PluginPacketPush(packetID, packetBuffer, global.myself);
+-}
+-
+-// send packet to every client (if server), or to server (if client)
+-packetBuffer = buffer_create();
+-
+-// ID of plugin packet container packet
+-write_ubyte(packetBuffer, PLUGIN_PACKET);
+-
+-// packet remainder length
+-write_ushort(packetBuffer, buffer_size(dataBuffer) + 1);
+-
+-// plugin packet ID
+-write_ubyte(packetBuffer, packetID);
+-
+-// plugin packet data buffer
+-write_buffer(packetBuffer, dataBuffer);
+-
+-// write to appropriate buffer and call send if needed
+-if (global.isHost) {
+-    write_buffer(global.sendBuffer, packetBuffer);
+-} else {
+-    write_buffer(global.serverSocket, packetBuffer);
+-    socket_send(global.serverSocket);
+-}
+-
+-buffer_destroy(packetBuffer);
+-return true;
++// PLUGINS(disabled): no runtime GML execution in ENIGMA; revisit
++// // Sends a packet for a server-sent plugin to all clients
++// // Returns true if successful, false if not
++// // argument0 - plugin packet ID, passed as argument1 to server-sent plugin upon execution
++// // argument1 - data buffer to send (maximum size 65535 bytes)
++// // argument2 (optional, default false) - boolean, if true will send packet to server as well
++//
++// var packetID, dataBuffer, loopback, packetBuffer;
++//
++// packetID = argument0;
++// dataBuffer = argument1;
++// loopback = argument2;
++//
++// // check to make sure the packet ID is valid
++// if (!ds_map_exists(global.pluginPacketBuffers, packetID))
++// {
++//     show_error("ERROR when sending plugin packet: no such plugin packet ID " + string(packetID), true);
++//     return false;
++// }
++//
++// // check size of buffer (limited because ushort used for length of packet)
++// if (buffer_size(dataBuffer) > 65534)
++//     return false;
++//
++// // Short-cicuit when sending to self
++// if (loopback)
++// {
++//     packetBuffer = buffer_create();
++//     write_buffer(packetBuffer, dataBuffer);
++//     _PluginPacketPush(packetID, packetBuffer, global.myself);
++// }
++//
++// // send packet to every client (if server), or to server (if client)
++// packetBuffer = buffer_create();
++//
++// // ID of plugin packet container packet
++// write_ubyte(packetBuffer, PLUGIN_PACKET);
++//
++// // packet remainder length
++// write_ushort(packetBuffer, buffer_size(dataBuffer) + 1);
++//
++// // plugin packet ID
++// write_ubyte(packetBuffer, packetID);
++//
++// // plugin packet data buffer
++// write_buffer(packetBuffer, dataBuffer);
++//
++// // write to appropriate buffer and call send if needed
++// if (global.isHost) {
++//     write_buffer(global.sendBuffer, packetBuffer);
++// } else {
++//     write_buffer(global.serverSocket, packetBuffer);
++//     socket_send(global.serverSocket);
++// }
++//
++// buffer_destroy(packetBuffer);
++// return true;
+diff --git a/Source/gg2/Scripts/Plugins/API/PluginPacketSendTo.gml b/Source/gg2/Scripts/Plugins/API/PluginPacketSendTo.gml
+index 4dcef123..8a6e31ed 100644
+--- a/Source/gg2/Scripts/Plugins/API/PluginPacketSendTo.gml
++++ b/Source/gg2/Scripts/Plugins/API/PluginPacketSendTo.gml
+@@ -1,61 +1,62 @@
+-// Sends a packet for a server-sent plugin to a specific client
+-// Returns true if successful, false if not
+-// argument0 - plugin packet ID, passed as argument1 to server-sent plugin upon execution
+-// argument1 - data buffer to send (maximum size 65535 bytes)
+-// argument2 - Player object for client to send to
+-
+-var packetID, databuffer, player, packetBuffer;
+-
+-packetID = argument0;
+-dataBuffer = argument1;
+-player = argument2;
+-
+-// error out if we're not the host
+-// (this function can't be used by clients, obviously)
+-if (!global.isHost)
+-{
+-    show_error("ERROR when sending plugin packet: cannot use PluginPacketSendTo as client", true);
+-    return false;
+-}
+-
+-// check to make sure the packet ID is valid
+-if (!ds_map_exists(global.pluginPacketBuffers, packetID))
+-{
+-    show_error("ERROR when sending plugin packet: no such plugin packet ID " + string(packetID), true);
+-    return false;
+-}
+-
+-// check size of buffer (limited because ushort used for length of packet)
+-if (buffer_size(dataBuffer) > 65534)
+-    return false;
+-
+-// Short-cicuit when sending to self
+-if (player == global.myself)
+-{
+-    packetBuffer = buffer_create();
+-    write_buffer(packetBuffer, dataBuffer);
+-    _PluginPacketPush(packetID, packetBuffer, global.myself);
+-    return true;
+-}
+-
+-// send packet to specified client
+-packetBuffer = buffer_create();
+-
+-// ID of plugin packet container packet
+-write_ubyte(packetBuffer, PLUGIN_PACKET);
+-
+-// packet remainder length
+-write_ushort(packetBuffer, buffer_size(dataBuffer) + 1);
+-
+-// plugin packet ID
+-write_ubyte(packetBuffer, packetID);
+-
+-// plugin packet data buffer
+-write_buffer(packetBuffer, dataBuffer);
+-
+-// write to appropriate buffer and call send if needed
+-write_buffer(player.socket, packetBuffer);
+-socket_send(player.socket);
+-
+-buffer_destroy(packetBuffer);
+-return true;
++// PLUGINS(disabled): no runtime GML execution in ENIGMA; revisit
++// // Sends a packet for a server-sent plugin to a specific client
++// // Returns true if successful, false if not
++// // argument0 - plugin packet ID, passed as argument1 to server-sent plugin upon execution
++// // argument1 - data buffer to send (maximum size 65535 bytes)
++// // argument2 - Player object for client to send to
++//
++// var packetID, databuffer, player, packetBuffer;
++//
++// packetID = argument0;
++// dataBuffer = argument1;
++// player = argument2;
++//
++// // error out if we're not the host
++// // (this function can't be used by clients, obviously)
++// if (!global.isHost)
++// {
++//     show_error("ERROR when sending plugin packet: cannot use PluginPacketSendTo as client", true);
++//     return false;
++// }
++//
++// // check to make sure the packet ID is valid
++// if (!ds_map_exists(global.pluginPacketBuffers, packetID))
++// {
++//     show_error("ERROR when sending plugin packet: no such plugin packet ID " + string(packetID), true);
++//     return false;
++// }
++//
++// // check size of buffer (limited because ushort used for length of packet)
++// if (buffer_size(dataBuffer) > 65534)
++//     return false;
++//
++// // Short-cicuit when sending to self
++// if (player == global.myself)
++// {
++//     packetBuffer = buffer_create();
++//     write_buffer(packetBuffer, dataBuffer);
++//     _PluginPacketPush(packetID, packetBuffer, global.myself);
++//     return true;
++// }
++//
++// // send packet to specified client
++// packetBuffer = buffer_create();
++//
++// // ID of plugin packet container packet
++// write_ubyte(packetBuffer, PLUGIN_PACKET);
++//
++// // packet remainder length
++// write_ushort(packetBuffer, buffer_size(dataBuffer) + 1);
++//
++// // plugin packet ID
++// write_ubyte(packetBuffer, packetID);
++//
++// // plugin packet data buffer
++// write_buffer(packetBuffer, dataBuffer);
++//
++// // write to appropriate buffer and call send if needed
++// write_buffer(player.socket, packetBuffer);
++// socket_send(player.socket);
++//
++// buffer_destroy(packetBuffer);
++// return true;
+diff --git a/Source/gg2/Scripts/Plugins/API/_PluginPacketPush.gml b/Source/gg2/Scripts/Plugins/API/_PluginPacketPush.gml
+index 36c8fab5..ca37350b 100644
+--- a/Source/gg2/Scripts/Plugins/API/_PluginPacketPush.gml
++++ b/Source/gg2/Scripts/Plugins/API/_PluginPacketPush.gml
+@@ -1,22 +1,23 @@
+-// Internal function to enque Player value and buffer for packet
+-// returns false if no such packetID, else true
+-// argument0 - packetID
+-// argument1 - buffer (on success, ownership passes to the buffer queue)
+-// argument2 - Player
+-
+-var packetID, buffer, player, packetBufferQueue, packetPlayerQueue;
+-packetID = argument0;
+-buffer = argument1;
+-player = argument2;
+-
+-// check this is a recognised plugin ID
+-if (!ds_map_exists(global.pluginPacketBuffers, packetID))
+-    return false;
+-
+-// enque buffer and Player in queue
+-packetBufferQueue = ds_map_find_value(global.pluginPacketBuffers, packetID);
+-packetPlayerQueue = ds_map_find_value(global.pluginPacketPlayers, packetID);
+-ds_queue_enqueue(packetBufferQueue, buffer);
+-ds_queue_enqueue(packetPlayerQueue, player);
+-
+-return true;
++// PLUGINS(disabled): no runtime GML execution in ENIGMA; revisit
++// // Internal function to enque Player value and buffer for packet
++// // returns false if no such packetID, else true
++// // argument0 - packetID
++// // argument1 - buffer (on success, ownership passes to the buffer queue)
++// // argument2 - Player
++//
++// var packetID, buffer, player, packetBufferQueue, packetPlayerQueue;
++// packetID = argument0;
++// buffer = argument1;
++// player = argument2;
++//
++// // check this is a recognised plugin ID
++// if (!ds_map_exists(global.pluginPacketBuffers, packetID))
++//     return false;
++//
++// // enque buffer and Player in queue
++// packetBufferQueue = ds_map_find_value(global.pluginPacketBuffers, packetID);
++// packetPlayerQueue = ds_map_find_value(global.pluginPacketPlayers, packetID);
++// ds_queue_enqueue(packetBufferQueue, buffer);
++// ds_queue_enqueue(packetPlayerQueue, player);
++//
++// return true;
+diff --git a/Source/gg2/Scripts/Plugins/checkpluginname.gml b/Source/gg2/Scripts/Plugins/checkpluginname.gml
+index 9a12fa8d..0d1b93a2 100644
+--- a/Source/gg2/Scripts/Plugins/checkpluginname.gml
++++ b/Source/gg2/Scripts/Plugins/checkpluginname.gml
+@@ -1,22 +1,23 @@
+-// checks the name of a plugin to see if it conforms to /[a-z0-9_]+/
+-// returns true is it conforms, false if otherwise
+-// argument0 - plugin name
+-
+-var i, validChars;
+-
+-if (string_length(argument0) < 1)
+-{
+-    return false;
+-}
+-
+-validChars = "0123456789abcdefghijklmnopqrstuvwxyz_";
+-for (i = 1; i <= string_length(argument0); i+=1)
+-{
+-    // if the current character isn't valid
+-    if (string_pos(string_char_at(argument0, i), validChars) == 0)
+-    {
+-        return false;
+-    }
+-}
+-
+-return true;
++// PLUGINS(disabled): no runtime GML execution in ENIGMA; revisit
++// // checks the name of a plugin to see if it conforms to /[a-z0-9_]+/
++// // returns true is it conforms, false if otherwise
++// // argument0 - plugin name
++//
++// var i, validChars;
++//
++// if (string_length(argument0) < 1)
++// {
++//     return false;
++// }
++//
++// validChars = "0123456789abcdefghijklmnopqrstuvwxyz_";
++// for (i = 1; i <= string_length(argument0); i+=1)
++// {
++//     // if the current character isn't valid
++//     if (string_pos(string_char_at(argument0, i), validChars) == 0)
++//     {
++//         return false;
++//     }
++// }
++//
++// return true;
+diff --git a/Source/gg2/Scripts/Plugins/getpluginhashes.gml b/Source/gg2/Scripts/Plugins/getpluginhashes.gml
+index 0b9fc7a4..bfb92211 100644
+--- a/Source/gg2/Scripts/Plugins/getpluginhashes.gml
++++ b/Source/gg2/Scripts/Plugins/getpluginhashes.gml
+@@ -1,96 +1,97 @@
+-// gets MD5 hashes for plugins from ganggarrison.com
+-// argument0 - comma separated plugin list 
+-// returns comma-separated plugin list with hashes
+-// or else the string 'failure'
+-var list, i, pluginname, pluginhash, url, handle, filesize, failed, fp, hashedList;
+-
+-failed = false;
+-hashedList = '';
+-
+-// split plugin list string
+-list = split(argument0, ',');
+-
+-for (i = 0; i < ds_list_size(list); i += 1)
+-{
+-    ds_list_replace(list, i, trim(ds_list_find_value(list, i)));
+-}
+-
+-// Check plugin names and check for duplicates
+-for (i = 0; i < ds_list_size(list); i += 1)
+-{
+-    pluginname = ds_list_find_value(list, i);
+-    
+-    // invalid plugin name
+-    if (!checkpluginname(pluginname))
+-    {
+-        show_message('Error loading server-sent plugins - invalid plugin name:#"' + pluginname + '"');
+-        return 'failure';
+-    }
+-    // is duplicate
+-    else if (ds_list_find_index(list, pluginname) != i)
+-    {
+-        show_message('Error loading server-sent plugins - duplicate plugin:#"' + pluginname + '"');
+-        return 'failure';
+-    }
+-}
+-
+-// Download plugin hashes
+-for (i = 0; i < ds_list_size(list); i += 1)
+-{
+-    pluginname = ds_list_find_value(list, i);
+-
+-    // check if we have a debug version
+-    if (file_exists(working_directory + "\ServerPluginsDebug\" + pluginname + ".zip"))
+-    {
+-        // get its hash instead
+-        pluginhash = GG2DLL_compute_MD5(working_directory + "\ServerPluginsDebug\" + pluginname + ".zip");
+-    }
+-    else
+-    {   
+-        // construct the URL
+-        // (http://www.ganggarrison.com/plugins/$PLUGINNAME$.md5)
+-        url = PLUGIN_SOURCE + pluginname + ".md5";
+-    
+-        // let's make the request handle
+-        handle = http_new_get(url);
+-
+-        while (!http_step(handle))
+-        {
+-            // should be quick, no need to show progress
+-        }
+-
+-        // request failed
+-        if (http_status_code(handle) != 200)
+-        {
+-            if (http_status_code(handle) == 404)
+-                show_message('Error loading server-sent plugins - getting hash failed for "' + pluginname + '":#404 Not Found - This most likely means there is no plugin with that name. Are you sure you spelled it correctly? Please note that plugin names are always lowercase, and you cannot have spaces between the commas in ServerPluginList.');
+-            else
+-                show_message('Error loading server-sent plugins - getting hash failed for "' + pluginname + '":#' + string(http_status_code(handle)) + ' ' + http_reason_phrase(handle));
+-            failed = true;
+-            break;
+-        }
+-
+-        pluginhash = read_string(http_response_body(handle), 32);
+-        http_destroy(handle);
+-    }
+-
+-    // append name + hash to list
+-    // (used by client to check if cache is valid)
+-    if (i != 0)
+-    {
+-        hashedList += ',';
+-    }
+-    hashedList += pluginname + '@' + pluginhash;
+-}
+-
+-// Get rid of plugin list
+-ds_list_destroy(list);
+-
+-if (failed)
+-{
+-    return 'failure';
+-}
+-else
+-{
+-    return hashedList;
+-}
++// PLUGINS(disabled): no runtime GML execution in ENIGMA; revisit
++// // gets MD5 hashes for plugins from ganggarrison.com
++// // argument0 - comma separated plugin list 
++// // returns comma-separated plugin list with hashes
++// // or else the string 'failure'
++// var list, i, pluginname, pluginhash, url, handle, filesize, failed, fp, hashedList;
++//
++// failed = false;
++// hashedList = '';
++//
++// // split plugin list string
++// list = split(argument0, ',');
++//
++// for (i = 0; i < ds_list_size(list); i += 1)
++// {
++//     ds_list_replace(list, i, trim(ds_list_find_value(list, i)));
++// }
++//
++// // Check plugin names and check for duplicates
++// for (i = 0; i < ds_list_size(list); i += 1)
++// {
++//     pluginname = ds_list_find_value(list, i);
++//
++//     // invalid plugin name
++//     if (!checkpluginname(pluginname))
++//     {
++//         show_message('Error loading server-sent plugins - invalid plugin name:#"' + pluginname + '"');
++//         return 'failure';
++//     }
++//     // is duplicate
++//     else if (ds_list_find_index(list, pluginname) != i)
++//     {
++//         show_message('Error loading server-sent plugins - duplicate plugin:#"' + pluginname + '"');
++//         return 'failure';
++//     }
++// }
++//
++// // Download plugin hashes
++// for (i = 0; i < ds_list_size(list); i += 1)
++// {
++//     pluginname = ds_list_find_value(list, i);
++//
++//     // check if we have a debug version
++//     if (file_exists(working_directory + "\ServerPluginsDebug\" + pluginname + ".zip"))
++//     {
++//         // get its hash instead
++//         pluginhash = GG2DLL_compute_MD5(working_directory + "\ServerPluginsDebug\" + pluginname + ".zip");
++//     }
++//     else
++//     {   
++//         // construct the URL
++//         // (http://www.ganggarrison.com/plugins/$PLUGINNAME$.md5)
++//         url = PLUGIN_SOURCE + pluginname + ".md5";
++//
++//         // let's make the request handle
++//         handle = http_new_get(url);
++//
++//         while (!http_step(handle))
++//         {
++//             // should be quick, no need to show progress
++//         }
++//
++//         // request failed
++//         if (http_status_code(handle) != 200)
++//         {
++//             if (http_status_code(handle) == 404)
++//                 show_message('Error loading server-sent plugins - getting hash failed for "' + pluginname + '":#404 Not Found - This most likely means there is no plugin with that name. Are you sure you spelled it correctly? Please note that plugin names are always lowercase, and you cannot have spaces between the commas in ServerPluginList.');
++//             else
++//                 show_message('Error loading server-sent plugins - getting hash failed for "' + pluginname + '":#' + string(http_status_code(handle)) + ' ' + http_reason_phrase(handle));
++//             failed = true;
++//             break;
++//         }
++//
++//         pluginhash = read_string(http_response_body(handle), 32);
++//         http_destroy(handle);
++//     }
++//
++//     // append name + hash to list
++//     // (used by client to check if cache is valid)
++//     if (i != 0)
++//     {
++//         hashedList += ',';
++//     }
++//     hashedList += pluginname + '@' + pluginhash;
++// }
++//
++// // Get rid of plugin list
++// ds_list_destroy(list);
++//
++// if (failed)
++// {
++//     return 'failure';
++// }
++// else
++// {
++//     return hashedList;
++// }
+diff --git a/Source/gg2/Scripts/Plugins/loadplugins.gml b/Source/gg2/Scripts/Plugins/loadplugins.gml
+index 5c4b1318..3b3186cb 100644
+--- a/Source/gg2/Scripts/Plugins/loadplugins.gml
++++ b/Source/gg2/Scripts/Plugins/loadplugins.gml
+@@ -1,39 +1,40 @@
+-// self-explanatory
+-// borrowed file-search code from Port
+-var file, pattern, prefix, list, fp, i, env;
+-
+-// Prefix since results from file_find_* don't include path
+-prefix = working_directory + "\Plugins\";
+-pattern = prefix + "*.gml";
+-
+-list = ds_list_create();
+-
+-// Find files and put in list
+-for (file = file_find_first(pattern, 0); file != ""; file = file_find_next())
+-{
+-    ds_list_add(list, file);
+-}
+-
+-// Execute plugins
+-for (i = 0; i < ds_list_size(list); i += 1)
+-{
+-    file = ds_list_find_value(list, i);
+-    // Debugging facility, so we know *which* plugin caused compile/execute error
+-    fp = file_text_open_write(working_directory + "\last_plugin.log");
+-    file_text_write_string(fp, prefix + file);
+-    file_text_close(fp);
+-    // Create persistent environment for plugin (so its variables won't collide)
+-    env = instance_create(0, 0, PluginEnvironment);
+-    // Allows plugins to detect which mode they're running in
+-    env.isServerSentPlugin = false;
+-    env.isLocalPlugin = true;
+-    // So the plugin can locate its resources
+-    env.directory = prefix;
+-    // Execute
+-    with (env)
+-        execute_file(prefix + file);
+-}
+-
+-// Clear up
+-file_delete(working_directory + "\last_plugin.log");
+-ds_list_destroy(list);
++// PLUGINS(disabled): no runtime GML execution in ENIGMA; revisit
++// // self-explanatory
++// // borrowed file-search code from Port
++// var file, pattern, prefix, list, fp, i, env;
++//
++// // Prefix since results from file_find_* don't include path
++// prefix = working_directory + "\Plugins\";
++// pattern = prefix + "*.gml";
++//
++// list = ds_list_create();
++//
++// // Find files and put in list
++// for (file = file_find_first(pattern, 0); file != ""; file = file_find_next())
++// {
++//     ds_list_add(list, file);
++// }
++//
++// // Execute plugins
++// for (i = 0; i < ds_list_size(list); i += 1)
++// {
++//     file = ds_list_find_value(list, i);
++//     // Debugging facility, so we know *which* plugin caused compile/execute error
++//     fp = file_text_open_write(working_directory + "\last_plugin.log");
++//     file_text_write_string(fp, prefix + file);
++//     file_text_close(fp);
++//     // Create persistent environment for plugin (so its variables won't collide)
++//     env = instance_create(0, 0, PluginEnvironment);
++//     // Allows plugins to detect which mode they're running in
++//     env.isServerSentPlugin = false;
++//     env.isLocalPlugin = true;
++//     // So the plugin can locate its resources
++//     env.directory = prefix;
++//     // Execute
++//     with (env)
++//         execute_file(prefix + file);
++// }
++//
++// // Clear up
++// file_delete(working_directory + "\last_plugin.log");
++// ds_list_destroy(list);
+diff --git a/Source/gg2/Scripts/Plugins/loadserverplugins.gml b/Source/gg2/Scripts/Plugins/loadserverplugins.gml
+index 65acca11..801c0bdf 100644
+--- a/Source/gg2/Scripts/Plugins/loadserverplugins.gml
++++ b/Source/gg2/Scripts/Plugins/loadserverplugins.gml
+@@ -1,230 +1,231 @@
+-// loads plugins from ganggarrison.com asked for by server
+-// argument0 - comma separated plugin list (pluginname@md5hash)
+-// returns true on success, false on failure
+-var list, hashList, text, i, pluginname, pluginhash, realhash, url, handle, filesize, progress, tempfile, tempdir, failed, lastContact, isCached, env;
+-
+-failed = false;
+-list = ds_list_create();
+-lastContact = 0;
+-isCached = false;
+-isDebug = false;
+-hashList = ds_list_create();
+-
+-// split plugin list string
+-list = split(argument0, ',');
+-
+-// Split hashes from plugin names
+-for (i = 0; i < ds_list_size(list); i += 1)
+-{
+-    text = ds_list_find_value(list, i);
+-    pluginname = string_copy(text, 0, string_pos("@", text) - 1);
+-    pluginhash = string_copy(text, string_pos("@", text) + 1, string_length(text) - string_pos("@", text));
+-    ds_list_replace(list, i, pluginname);
+-    ds_list_add(hashList, pluginhash);
+-}
+-
+-// Check plugin names and check for duplicates
+-for (i = 0; i < ds_list_size(list); i += 1)
+-{
+-    pluginname = ds_list_find_value(list, i);
+-    
+-    // invalid plugin name
+-    if (!checkpluginname(pluginname))
+-    {
+-        show_message('Error loading server-sent plugins - invalid plugin name:#"' + pluginname + '"');
+-        return false;
+-    }
+-    // is duplicate
+-    else if (ds_list_find_index(list, pluginname) != i)
+-    {
+-        show_message('Error loading server-sent plugins - duplicate plugin:#"' + pluginname + '"');
+-        return false;
+-    }
+-}
+-
+-// Download plugins
+-for (i = 0; i < ds_list_size(list); i += 1)
+-{
+-    pluginname = ds_list_find_value(list, i);
+-    pluginhash = ds_list_find_value(hashList, i);
+-    isDebug = file_exists(working_directory + "\ServerPluginsDebug\" + pluginname + ".zip");
+-    isCached = file_exists(working_directory + "\ServerPluginsCache\" + pluginname + "@" + pluginhash);
+-    tempfile = temp_directory + "\" + pluginname + ".zip.tmp";
+-    tempdir = temp_directory + "\" + pluginname + ".tmp";
+-
+-    // check to see if we have a local copy for debugging
+-    if (isDebug)
+-    {
+-        file_copy(working_directory + "\ServerPluginsDebug\" + pluginname + ".zip", tempfile);
+-        // show warning
+-        if (global.isHost)
+-        {
+-            show_message(
+-                "Warning: server-sent plugin '"
+-                + pluginname
+-                + "' is being loaded from ServerPluginsDebug. Make sure clients have the same version, else they may be unable to connect."
+-            );
+-        }
+-        else
+-        {
+-            show_message(
+-                "Warning: server-sent plugin '"
+-                + pluginname
+-                + "' is being loaded from ServerPluginsDebug. Make sure the server has the same version, else you may be unable to connect."
+-            );
+-        }
+-    }
+-    // otherwise, check if we have it cached
+-    else if (isCached)
+-    {
+-        file_copy(working_directory + "\ServerPluginsCache\" + pluginname + "@" + pluginhash, tempfile);
+-    }
+-    // otherwise, download as usual
+-    else
+-    {
+-        // construct the URL
+-        // http://www.ganggarrison.com/plugins/$PLUGINNAME$@$PLUGINHASH$.zip)
+-        url = PLUGIN_SOURCE + pluginname + "@" + pluginhash + ".zip";
+-        
+-        // let's make the download handle
+-        handle = http_new_get(url);
+-        
+-        // download it
+-        while (!http_step(handle)) {
+-            // prevent game locking up
+-            io_handle();
+-            
+-            if (!global.isHost) {
+-                // send ping if we haven't contacted server in 20 seconds
+-                // we need to do this to keep the connection open
+-                if (current_time-lastContact > 20000) {
+-                    write_byte(global.serverSocket, PING);
+-                    socket_send(global.serverSocket);
+-                    lastContact = current_time;
+-                }
+-            }
+-
+-            // draw progress bar since they may be waiting a while
+-            filesize = http_response_body_size(handle);
+-            progress = http_response_body_progress(handle);
+-            draw_background_ext(background_index[0], 0, 0, background_xscale[0], background_yscale[0], 0, c_white, 1);
+-            draw_set_color(c_white);
+-            draw_set_alpha(1);
+-            draw_set_halign(fa_left);
+-            draw_rectangle(50, 550, 300, 560, 2);
+-            draw_text(50, 530, "Downloading server-sent plugin " + string(i + 1) + "/" + string(ds_list_size(list)) + ' - "' + pluginname + '"');
+-            // If the URL we fetch is a redirect with no body, size might briefly be 0
+-            // Also, Faucet HTTP reports an unknown size as -1
+-            if (filesize > 0)
+-                draw_rectangle(50, 550, 50 + progress / filesize * 250, 560, 0);
+-            screen_refresh();
+-        }
+-
+-        // request failed
+-        if (http_status_code(handle) != 200)
+-        {
+-            show_message('Error loading server-sent plugins - download failed for "' + pluginname + '":#' + string(http_status_code(handle)) + ' ' + http_reason_phrase(handle));
+-            failed = true;
+-            break;
+-        }
+-        else
+-        {
+-            write_buffer_to_file(http_response_body(handle), tempfile);
+-            if (!file_exists(tempfile))
+-            {
+-                show_message('Error loading server-sent plugins - download failed for "' + pluginname + '":# No such file?');
+-                failed = true;
+-                break;
+-            }
+-        }
+-
+-        http_destroy(handle);
+-    }
+-
+-    // check file integrity
+-    realhash = GG2DLL_compute_MD5(tempfile);
+-    if (realhash != pluginhash)
+-    {
+-        show_message('Error loading server-sent plugins - integrity check failed (MD5 hash mismatch) for:#"' + pluginname + '"');
+-        failed = true;
+-        break;
+-    }
+-    
+-    // don't try to cache debug plugins
+-    if (!isDebug)
+-    {
+-        // add to cache if we don't already have it
+-        if (!file_exists(working_directory + "\ServerPluginsCache\" + pluginname + "@" + pluginhash))
+-        {
+-            // make sure directory exists
+-            if (!directory_exists(working_directory + "\ServerPluginsCache"))
+-            {
+-                directory_create(working_directory + "\ServerPluginsCache");
+-            }
+-            // store in cache
+-            file_copy(tempfile, working_directory + "\ServerPluginsCache\" + pluginname + "@" + pluginhash);
+-        }
+-    }
+-
+-    // let's get 7-zip to extract the files
+-    extractzip(tempfile, tempdir);
+-    
+-    // if the directory doesn't exist, extracting presumably failed
+-    if (!directory_exists(tempdir))
+-    {
+-        show_message('Error loading server-sent plugins - extracting zip failed for:#"' + pluginname + '"');
+-        failed = true;
+-        break;
+-    }
+-}
+-
+-if (!failed)
+-{
+-    // Execute plugins
+-    for (i = 0; i < ds_list_size(list); i += 1)
+-    {
+-        pluginname = ds_list_find_value(list, i);
+-        tempdir = temp_directory + "\" + pluginname + ".tmp";
+-        
+-        // Debugging facility, so we know *which* plugin caused compile/execute error
+-        fp = file_text_open_write(working_directory + "\last_plugin.log");
+-        file_text_write_string(fp, pluginname);
+-        file_text_close(fp);
+-
+-        // packetID is (i), so make queues for it
+-        ds_map_add(global.pluginPacketBuffers, i, ds_queue_create());
+-        ds_map_add(global.pluginPacketPlayers, i, ds_queue_create());
+-
+-        // Create persistent environment for plugin (so its variables won't collide)
+-        env = instance_create(0, 0, PluginEnvironment);
+-        // Allows plugins to detect which mode they're running in
+-        env.isServerSentPlugin = true;
+-        env.isLocalPlugin = false;
+-        // So the plugin can locate its resources
+-        env.directory = tempdir;
+-        // The packet ID needed for the PluginPacket* functions
+-        env.packetID = i;
+-
+-        // Execute plugin
+-        with (env)
+-            execute_file(
+-                // the plugin's main gml file must be in the root of the zip
+-                // it is called plugin.gml
+-                tempdir + "\plugin.gml",
+-                // For backwards-compatibility, we continue to pass these as arguments
+-                tempdir,
+-                i
+-            );
+-    }
+-}
+-
+-// Delete last plugin log
+-file_delete(working_directory + "\last_plugin.log");
+-
+-// Get rid of plugin list
+-ds_list_destroy(list);
+-
+-// Get rid of plugin hash list
+-ds_list_destroy(hashList);
+-
+-return !failed;
++// PLUGINS(disabled): no runtime GML execution in ENIGMA; revisit
++// // loads plugins from ganggarrison.com asked for by server
++// // argument0 - comma separated plugin list (pluginname@md5hash)
++// // returns true on success, false on failure
++// var list, hashList, text, i, pluginname, pluginhash, realhash, url, handle, filesize, progress, tempfile, tempdir, failed, lastContact, isCached, env;
++//
++// failed = false;
++// list = ds_list_create();
++// lastContact = 0;
++// isCached = false;
++// isDebug = false;
++// hashList = ds_list_create();
++//
++// // split plugin list string
++// list = split(argument0, ',');
++//
++// // Split hashes from plugin names
++// for (i = 0; i < ds_list_size(list); i += 1)
++// {
++//     text = ds_list_find_value(list, i);
++//     pluginname = string_copy(text, 0, string_pos("@", text) - 1);
++//     pluginhash = string_copy(text, string_pos("@", text) + 1, string_length(text) - string_pos("@", text));
++//     ds_list_replace(list, i, pluginname);
++//     ds_list_add(hashList, pluginhash);
++// }
++//
++// // Check plugin names and check for duplicates
++// for (i = 0; i < ds_list_size(list); i += 1)
++// {
++//     pluginname = ds_list_find_value(list, i);
++//
++//     // invalid plugin name
++//     if (!checkpluginname(pluginname))
++//     {
++//         show_message('Error loading server-sent plugins - invalid plugin name:#"' + pluginname + '"');
++//         return false;
++//     }
++//     // is duplicate
++//     else if (ds_list_find_index(list, pluginname) != i)
++//     {
++//         show_message('Error loading server-sent plugins - duplicate plugin:#"' + pluginname + '"');
++//         return false;
++//     }
++// }
++//
++// // Download plugins
++// for (i = 0; i < ds_list_size(list); i += 1)
++// {
++//     pluginname = ds_list_find_value(list, i);
++//     pluginhash = ds_list_find_value(hashList, i);
++//     isDebug = file_exists(working_directory + "\ServerPluginsDebug\" + pluginname + ".zip");
++//     isCached = file_exists(working_directory + "\ServerPluginsCache\" + pluginname + "@" + pluginhash);
++//     tempfile = temp_directory + "\" + pluginname + ".zip.tmp";
++//     tempdir = temp_directory + "\" + pluginname + ".tmp";
++//
++//     // check to see if we have a local copy for debugging
++//     if (isDebug)
++//     {
++//         file_copy(working_directory + "\ServerPluginsDebug\" + pluginname + ".zip", tempfile);
++//         // show warning
++//         if (global.isHost)
++//         {
++//             show_message(
++//                 "Warning: server-sent plugin '"
++//                 + pluginname
++//                 + "' is being loaded from ServerPluginsDebug. Make sure clients have the same version, else they may be unable to connect."
++//             );
++//         }
++//         else
++//         {
++//             show_message(
++//                 "Warning: server-sent plugin '"
++//                 + pluginname
++//                 + "' is being loaded from ServerPluginsDebug. Make sure the server has the same version, else you may be unable to connect."
++//             );
++//         }
++//     }
++//     // otherwise, check if we have it cached
++//     else if (isCached)
++//     {
++//         file_copy(working_directory + "\ServerPluginsCache\" + pluginname + "@" + pluginhash, tempfile);
++//     }
++//     // otherwise, download as usual
++//     else
++//     {
++//         // construct the URL
++//         // http://www.ganggarrison.com/plugins/$PLUGINNAME$@$PLUGINHASH$.zip)
++//         url = PLUGIN_SOURCE + pluginname + "@" + pluginhash + ".zip";
++//
++//         // let's make the download handle
++//         handle = http_new_get(url);
++//
++//         // download it
++//         while (!http_step(handle)) {
++//             // prevent game locking up
++//             io_handle();
++//
++//             if (!global.isHost) {
++//                 // send ping if we haven't contacted server in 20 seconds
++//                 // we need to do this to keep the connection open
++//                 if (current_time-lastContact > 20000) {
++//                     write_byte(global.serverSocket, PING);
++//                     socket_send(global.serverSocket);
++//                     lastContact = current_time;
++//                 }
++//             }
++//
++//             // draw progress bar since they may be waiting a while
++//             filesize = http_response_body_size(handle);
++//             progress = http_response_body_progress(handle);
++//             draw_background_ext(background_index[0], 0, 0, background_xscale[0], background_yscale[0], 0, c_white, 1);
++//             draw_set_color(c_white);
++//             draw_set_alpha(1);
++//             draw_set_halign(fa_left);
++//             draw_rectangle(50, 550, 300, 560, 2);
++//             draw_text(50, 530, "Downloading server-sent plugin " + string(i + 1) + "/" + string(ds_list_size(list)) + ' - "' + pluginname + '"');
++//             // If the URL we fetch is a redirect with no body, size might briefly be 0
++//             // Also, Faucet HTTP reports an unknown size as -1
++//             if (filesize > 0)
++//                 draw_rectangle(50, 550, 50 + progress / filesize * 250, 560, 0);
++//             screen_refresh();
++//         }
++//
++//         // request failed
++//         if (http_status_code(handle) != 200)
++//         {
++//             show_message('Error loading server-sent plugins - download failed for "' + pluginname + '":#' + string(http_status_code(handle)) + ' ' + http_reason_phrase(handle));
++//             failed = true;
++//             break;
++//         }
++//         else
++//         {
++//             write_buffer_to_file(http_response_body(handle), tempfile);
++//             if (!file_exists(tempfile))
++//             {
++//                 show_message('Error loading server-sent plugins - download failed for "' + pluginname + '":# No such file?');
++//                 failed = true;
++//                 break;
++//             }
++//         }
++//
++//         http_destroy(handle);
++//     }
++//
++//     // check file integrity
++//     realhash = GG2DLL_compute_MD5(tempfile);
++//     if (realhash != pluginhash)
++//     {
++//         show_message('Error loading server-sent plugins - integrity check failed (MD5 hash mismatch) for:#"' + pluginname + '"');
++//         failed = true;
++//         break;
++//     }
++//
++//     // don't try to cache debug plugins
++//     if (!isDebug)
++//     {
++//         // add to cache if we don't already have it
++//         if (!file_exists(working_directory + "\ServerPluginsCache\" + pluginname + "@" + pluginhash))
++//         {
++//             // make sure directory exists
++//             if (!directory_exists(working_directory + "\ServerPluginsCache"))
++//             {
++//                 directory_create(working_directory + "\ServerPluginsCache");
++//             }
++//             // store in cache
++//             file_copy(tempfile, working_directory + "\ServerPluginsCache\" + pluginname + "@" + pluginhash);
++//         }
++//     }
++//
++//     // let's get 7-zip to extract the files
++//     extractzip(tempfile, tempdir);
++//
++//     // if the directory doesn't exist, extracting presumably failed
++//     if (!directory_exists(tempdir))
++//     {
++//         show_message('Error loading server-sent plugins - extracting zip failed for:#"' + pluginname + '"');
++//         failed = true;
++//         break;
++//     }
++// }
++//
++// if (!failed)
++// {
++//     // Execute plugins
++//     for (i = 0; i < ds_list_size(list); i += 1)
++//     {
++//         pluginname = ds_list_find_value(list, i);
++//         tempdir = temp_directory + "\" + pluginname + ".tmp";
++//
++//         // Debugging facility, so we know *which* plugin caused compile/execute error
++//         fp = file_text_open_write(working_directory + "\last_plugin.log");
++//         file_text_write_string(fp, pluginname);
++//         file_text_close(fp);
++//
++//         // packetID is (i), so make queues for it
++//         ds_map_add(global.pluginPacketBuffers, i, ds_queue_create());
++//         ds_map_add(global.pluginPacketPlayers, i, ds_queue_create());
++//
++//         // Create persistent environment for plugin (so its variables won't collide)
++//         env = instance_create(0, 0, PluginEnvironment);
++//         // Allows plugins to detect which mode they're running in
++//         env.isServerSentPlugin = true;
++//         env.isLocalPlugin = false;
++//         // So the plugin can locate its resources
++//         env.directory = tempdir;
++//         // The packet ID needed for the PluginPacket* functions
++//         env.packetID = i;
++//
++//         // Execute plugin
++//         with (env)
++//             execute_file(
++//                 // the plugin's main gml file must be in the root of the zip
++//                 // it is called plugin.gml
++//                 tempdir + "\plugin.gml",
++//                 // For backwards-compatibility, we continue to pass these as arguments
++//                 tempdir,
++//                 i
++//             );
++//     }
++// }
++//
++// // Delete last plugin log
++// file_delete(working_directory + "\last_plugin.log");
++//
++// // Get rid of plugin list
++// ds_list_destroy(list);
++//
++// // Get rid of plugin hash list
++// ds_list_destroy(hashList);
++//
++// return !failed;
+diff --git a/Source/gg2/Scripts/Plugins/pluginscleanup.gml b/Source/gg2/Scripts/Plugins/pluginscleanup.gml
+index a927a769..b8decc34 100644
+--- a/Source/gg2/Scripts/Plugins/pluginscleanup.gml
++++ b/Source/gg2/Scripts/Plugins/pluginscleanup.gml
+@@ -1,11 +1,12 @@
+-// cleans up server-sent plugins
+-// Restart or quit GG2 so that plugins aren't kept in memory
+-// argument0: (optional) show cancel button (for disconnecting via ingamemenu)
+-
+-var msg;
+-msg = "Because you used this server's plugins, you will have to restart GG2 to play on another server."
+-
+-if (global.restartPrompt == 1)
+-    promptRestartOrQuit(msg,argument0);
+-else
+-    restartGG2();
++// PLUGINS(disabled): no runtime GML execution in ENIGMA; revisit
++// // cleans up server-sent plugins
++// // Restart or quit GG2 so that plugins aren't kept in memory
++// // argument0: (optional) show cancel button (for disconnecting via ingamemenu)
++//
++// var msg;
++// msg = "Because you used this server's plugins, you will have to restart GG2 to play on another server."
++//
++// if (global.restartPrompt == 1)
++//     promptRestartOrQuit(msg,argument0);
++// else
++//     restartGG2();

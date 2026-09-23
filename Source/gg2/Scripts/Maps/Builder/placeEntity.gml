@@ -42,7 +42,6 @@ with(Builder)
         }
     }
     
-    // PLUGINS(disabled): no runtime GML execution in ENIGMA; revisit
-    // // Custom script that which plugins can use
-    // execute_string(global.placeEntityFunction, entity);
+    // Custom script that which plugins can use
+    execute_string(global.placeEntityFunction, entity);
 }

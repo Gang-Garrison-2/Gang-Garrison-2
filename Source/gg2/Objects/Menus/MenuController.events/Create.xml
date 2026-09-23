@@ -13,12 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">// TODO(enigma): never runs (children override Create and call menu_create), but
-// ENIGMA needs these assigned in MenuController's own events to declare them
-// for its Draw event.
-dimmed = false;
-bgtabs = false;
-show_error("The Create event needs to be overridden in all child objects.", true);
+        <argument kind="STRING">show_error("The Create event needs to be overridden in all child objects.", true);
 </argument>
       </arguments>
     </action>

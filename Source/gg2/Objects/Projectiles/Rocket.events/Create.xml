@@ -13,11 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">// move_all_bullets clears this after the first step
-firststep = true;
-// Created on first use in move_all_bullets; -1 until then.
-rocketblurParticleType = -1;
-{
+        <argument kind="STRING">{
     hitDamage = 25;
     explosionDamage = 30;
     blastRadius = 65;

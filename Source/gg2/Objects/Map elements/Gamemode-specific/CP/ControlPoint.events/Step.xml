@@ -79,8 +79,7 @@ if(not arenaRoundEnd) {
             }
             
             if(player.team == TEAM_RED) {
-                // TODO(enigma): self. needed inside with(); ENIGMA resolves bare names against the outer object
-                if(self.ubered) {
+                if(ubered) {
                     other.redPresence = max(1, other.redPresence);
                 } else {
                     other.redPresence = max(2, other.redPresence);
@@ -88,8 +87,7 @@ if(not arenaRoundEnd) {
                 }
                 randomRedCapper = id;
             } else {
-                // TODO(enigma): self. needed inside with(); ENIGMA resolves bare names against the outer object
-                if(self.ubered) {
+                if(ubered) {
                     other.bluePresence = max(1, other.bluePresence);
                 } else {
                     other.bluePresence = max(2, other.bluePresence);
@@ -144,11 +142,8 @@ else
 
 // If the player stands on the point all the point sounds should be centered for him.
 if(myselfOnPoint) {
-    // TODO(enigma): temp var avoids ENIGMA nested built-in dot bug (a.b.x); inline when fixed
-    var myObject;
-    myObject = global.myself.object;
-    soundx = myObject.x;
-    soundy = myObject.y;
+    soundx = global.myself.object.x;
+    soundy = global.myself.object.y;
 } else {
     soundx = x;
     soundy = y;

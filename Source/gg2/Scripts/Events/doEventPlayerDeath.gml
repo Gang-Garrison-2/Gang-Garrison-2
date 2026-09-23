@@ -14,10 +14,6 @@ assistant = argument2;
 damageSource = argument3;
 killersForDomination = ds_list_create();
 
-// TODO(enigma): victimObject avoids ENIGMA nested built-in dot bug (victim.object.x); inline when fixed
-var victimObject;
-victimObject = victim.object;
-
 if(!instance_exists(killer))
     killer = noone;
 
@@ -42,10 +38,7 @@ if(killer)
         killer.roundStats[POINTS] +=1;
     }
     
-    // TODO(enigma): temp var avoids ENIGMA nested built-in dot bug (a.b.x); inline when fixed
-    var victimWeapon;
-    victimWeapon = victimObject.currentWeapon;
-    if (victimWeapon.object_index == Medigun)
+    if (victim.object.currentWeapon.object_index == Medigun)
     {
         if (victim.object.currentWeapon.uberReady)
         {
@@ -106,7 +99,7 @@ ds_list_destroy(killersForDomination);
 
 //SPEC
 if (victim == global.myself)
-    instance_create(victimObject.x, victimObject.y, Spectator);
+    instance_create(victim.object.x, victim.object.y, Spectator);
 
 //*************************************
 //*         Gibbing
@@ -271,30 +264,27 @@ with(victim.object) {
 }
 
 if (victim.object.has_crown) {
-    myHat = instance_create(victimObject.x,victimObject.y,CrownGib);
+    myHat = instance_create(victim.object.x,victim.object.y,CrownGib);
     myHat.image_index = victim.team;
 }
 if (victim.object.has_navigatorhat) {
-    myHat = instance_create(victimObject.x,victimObject.y,NavigatorHatGib);
+    myHat = instance_create(victim.object.x,victim.object.y,NavigatorHatGib);
     myHat.image_index = victim.team;
 }
 if (victim.object.has_partyhat){
-    myHat = instance_create(victimObject.x,victimObject.y,PartyHat);
+    myHat = instance_create(victim.object.x,victim.object.y,PartyHat);
     myHat.image_index = victim.team;
 }
 if (global.xmas){
-    myHat = instance_create(victimObject.x,victimObject.y,XmasHat);
+    myHat = instance_create(victim.object.x,victim.object.y,XmasHat);
     myHat.image_index = victim.team;
 }
 
 if (hasReward(victim, 'Ghost') and victim.ghost == noone) {
-    // TODO(enigma): temp var avoids ENIGMA nested built-in dot bug (a.b.x); inline when fixed
-    var newGhost;
-    newGhost = instance_create(victimObject.x, victimObject.y, Ghost);
-    victim.ghost = newGhost;
-    newGhost.owner = victim;
-    newGhost.hspeed = hspeed;
-    newGhost.vspeed = vspeed;
+    victim.ghost = instance_create(victim.object.x, victim.object.y, Ghost);
+    victim.ghost.owner = victim;
+    victim.ghost.hspeed = hspeed;
+    victim.ghost.vspeed = vspeed;
 }
 
 with(victim.object) {       

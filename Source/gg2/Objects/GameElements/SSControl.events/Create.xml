@@ -17,7 +17,7 @@
     if(instance_number(SSControl)) &gt; 1 {
         instance_destroy();
     }
-    if(!directory_exists(working_directory + "/Screenshots")) directory_create(working_directory + "/Screenshots");
+    if(!directory_exists(working_directory + "\Screenshots")) directory_create(working_directory + "\Screenshots");
 }
 </argument>
       </arguments>

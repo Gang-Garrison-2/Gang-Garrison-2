@@ -7,12 +7,11 @@
     }
     nocreate=false;
     usePreviousPwd = false;
-    // PLUGINS(disabled): no runtime GML execution in ENIGMA; revisit
-    // // Prevent overwriting
-    // if (!variable_local_exists('skippedPlugins'))
-    //     skippedPlugins = false;
-    // noUnloadPlugins = false;
-    // noReloadPlugins = false;
+    // Prevent overwriting
+    if (!variable_local_exists('skippedPlugins'))
+        skippedPlugins = false;
+    noUnloadPlugins = false;
+    noReloadPlugins = false;
     
     global.players = ds_list_create();
     global.deserializeBuffer = buffer_create();

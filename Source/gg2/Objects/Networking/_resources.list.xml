@@ -3,5 +3,4 @@
   <resource name="GameServer" type="RESOURCE"/>
   <resource name="Client" type="RESOURCE"/>
   <resource name="RewardAuthChecker" type="RESOURCE"/>
-  <resource name="HttpClient" type="RESOURCE"/>
 </resources>

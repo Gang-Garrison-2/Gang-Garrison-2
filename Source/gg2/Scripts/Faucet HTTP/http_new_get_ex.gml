@@ -32,7 +32,7 @@ var url, headers, client;
 url = argument0;
 headers = argument1;
 
-if (global.__HttpClient == -1)
+if (!variable_global_exists('__HttpClient'))
     __http_init();
 
 client = instance_create(0, 0, global.__HttpClient);

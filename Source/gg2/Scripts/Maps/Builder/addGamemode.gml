@@ -1,7 +1,7 @@
 /**
  * Adds a gamemode to garrison builder
  * Argument0: The name
- * Argument1: A script that returns true when the gamemode has the correct entities (-1 for none).
+ * [Argument1]: A string that returns true when the gamemode has the correct entities.
  * [Argument2]: An error message in case the string above returned false.
  * Returns: An identifier for that gamemode
 */

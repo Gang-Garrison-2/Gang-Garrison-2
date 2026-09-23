@@ -20,4 +20,4 @@ if(!is_string(team))
         show_error("Attempted to get a sprite for unknown team ID: " + string(team), true);
 }
 
-return sprite_find_by_name(class + team + animation + "S");
+return asset_get_index(class + team + animation + "S");

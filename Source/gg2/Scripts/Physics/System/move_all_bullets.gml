@@ -2,6 +2,8 @@ var imp, colliding, dx, dy, ddx, ddy, mdone, mdist, motion, mdir;
 gunSetSolids();
 with(Shot)
 {
+    if(!variable_local_exists("firststep"))
+        firststep = true;
     
     vspeed += 0.15 * global.delta_factor;
     if(global.particles != PARTICLES_OFF)
@@ -35,6 +37,8 @@ with(Shot)
 }
 with(Rocket)
 {
+    if(!variable_local_exists("firststep"))
+        firststep = true;
     
     if(instance_exists(owner))
     {
@@ -64,7 +68,7 @@ with(Rocket)
                 effect_create_below(ef_smoke,x-hspeed*1.3,y-vspeed*1.3,0,c_gray);
             else if(global.particles == PARTICLES_ALTERNATIVE)
             {
-                if (rocketblurParticleType == -1)
+                if (!variable_local_exists("rocketblurParticleType"))
                 {
                     rocketblurParticleType = part_type_create();
                     if team == TEAM_RED rocketParticleSprite = RedRocketS;
@@ -77,7 +81,7 @@ with(Rocket)
                     part_type_life(rocketblurParticleType, rocketpartlife, rocketpartlife);
                 }
                 
-                if (global.rocketblurParticleSystem == -1)
+                if (!variable_global_exists("rocketblurParticleSystem"))
                 {
                     global.rocketblurParticleSystem = part_system_create();
                     part_system_depth(global.rocketblurParticleSystem, 10);
@@ -121,6 +125,8 @@ with(Rocket)
 }
 with(BladeB)
 {
+    if(!variable_local_exists("firststep"))
+        firststep = true;
 
     colliding = false;
     if(firststep)
@@ -146,13 +152,13 @@ with(BladeB)
 
 if(global.particles == PARTICLES_ALTERNATIVE)
 {
-    if(global.flameParticleType == -1)
+    if(not variable_global_exists("flameParticleType"))
     {
         global.flameParticleType = part_type_create();
         part_type_sprite(global.flameParticleType, FlameS, true, false, true);
         part_type_alpha2(global.flameParticleType, 1, 0.3);
     }
-    if(global.flameParticleSystem == -1)
+    if(not variable_global_exists("flameParticleSystem"))
     {
         global.flameParticleSystem = part_system_create();
         part_system_depth(global.flameParticleSystem, 10);
@@ -161,6 +167,8 @@ if(global.particles == PARTICLES_ALTERNATIVE)
 }
 with(BurningProjectile)
 {
+    if(!variable_local_exists("firststep"))
+        firststep = true;
     
     if(object_index == Flame)
         vspeed += 0.15 * global.delta_factor;
@@ -219,6 +227,8 @@ with(BurningProjectile)
 }
 with(Mine)
 {
+    if(!variable_local_exists("firststep"))
+        firststep = true;
     
     if(stickied)
     {
@@ -298,6 +308,8 @@ with(Mine)
 }
 with(Needle)
 {
+    if(!variable_local_exists("firststep"))
+        firststep = true;
     
     vspeed += 0.2 * global.delta_factor;
     if(global.particles != PARTICLES_OFF)

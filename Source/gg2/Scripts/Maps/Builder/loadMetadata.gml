@@ -81,5 +81,4 @@ else if (controller != noone) {
     controller.foreground = -1;
 }
 
-// PLUGINS(disabled): no runtime GML execution in ENIGMA; revisit
-// execute_string(global.metadataFunction, argument0, argument1);
+execute_string(global.metadataFunction, argument0, argument1);

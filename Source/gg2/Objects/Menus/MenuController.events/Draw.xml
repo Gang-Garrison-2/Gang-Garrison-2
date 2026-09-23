@@ -13,7 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if(mouse_samples == -1) // This needs to be duplicated because of code execution order issues
+        <argument kind="STRING">if(!variable_local_exists("baseybegin")) // This needs to be duplicated because of code execution order issues
 {
     baseybegin = ybegin;
     mouse_samples = ds_list_create();
@@ -110,21 +110,35 @@ if(view_hview[0] &lt; 600)
 
         draw_text(view_xview[0]+xbegin,view_yview[0]+ybegin+i*spacing,item_name[i]);
         
-        // TODO(enigma): if/else instead of switch; ENIGMA can't switch on strings. Restore switch when fixed
-        var itemType;
-        itemType = item_type[i];
-        if (itemType == "script")
-            val = "";
-        else if (itemType == "editscript" or itemType == "edittext2" or itemType == "edittext" or itemType == "editnum")
-            val = item_value[i];
-        else if (itemType == "editselect")
-            val = item_option_label[i, item_value[i]];
-        else if (itemType == "editkey" and editing == i)
-            val = "Please press a key";
-        else if ((itemType == "editkey" or itemType == "editkeyormouse") and editing == i)
-            val = "Please press a key or mouse button";
-        else if (itemType == "editkey" or itemType == "editkeyormouse")
+        switch (item_type[i])
         {
+        case "script":
+            val = "";
+            break;
+        
+        case "editscript":
+        case "edittext2":
+        case "edittext":
+        case "editnum":
+            val = item_value[i];
+            break;
+        
+        case "editselect":
+            val = item_option_label[i, item_value[i]];
+            break;
+        
+        case "editkey":
+            if (editing == i)
+            {
+                val = "Please press a key";
+                break;
+            }
+        case "editkeyormouse":
+            if (editing == i)
+            {
+                val = "Please press a key or mouse button";
+                break;
+            }
             switch (menu_get_var(i))
             {
             case vk_alt:
@@ -184,6 +198,7 @@ if(view_hview[0] &lt; 600)
                 else val = chr(menu_get_var(i));
                 break;
             }
+            break;
         }
         draw_text(view_xview[0]+xbegin+valueoffset,view_yview[0]+ybegin+i*spacing,sanitiseNewlines(val));
     }

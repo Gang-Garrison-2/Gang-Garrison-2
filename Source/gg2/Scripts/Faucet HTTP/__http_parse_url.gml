@@ -59,8 +59,7 @@ while (string_char_at(url, 1) == '/')
     url = string_copy(url, 2, string_length(url) - 1);
 
 // before hostname
-// colonPos is declared above; ENIGMA rejects redeclaring a var in the same scope
-var slashPos;
+var slashPos, colonPos;
 // Find slash for beginning of path
 slashPos = string_pos('/', url);
 // No slash ahead - http://host format with no ending slash

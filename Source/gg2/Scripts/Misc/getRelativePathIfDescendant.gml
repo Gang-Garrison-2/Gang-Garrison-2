@@ -2,7 +2,7 @@
 // Determines a relative path for endPath that is relative to startPath, if endPath is inside of startPath or a subdirectory of startPath.
 // Otherwise returns endPath as an absolute path.
 // startPath and endPath must be absolute paths.
-// startPath must be a directory and must include a trailing slash e.g. working_directory + "/".
+// startPath must be a directory and must include a trailing slash e.g. working_directory + "\".
 // Path segment delimiters are converted to forward slashes.
 
 var startPath, endPath;

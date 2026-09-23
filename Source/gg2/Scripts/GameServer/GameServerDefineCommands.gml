@@ -1,9 +1,8 @@
 var i;
 
-// commandBytes* sentinels are constants (Constants.xml): ENIGMA needs compile-time case labels.
-// commandBytesInvalidCommand: no such command
-// commandBytesPrefixLength1: the length of the command is indicated by the first byte
-// commandBytesPrefixLength2: the length of the command is indicated by the first two bytes
+commandBytesInvalidCommand = -1; // No such command
+commandBytesPrefixLength1 = -2;  // The length of the command is indicated by the first byte
+commandBytesPrefixLength2 = -3;  // The length of the command is indicated by the first two bytes
 
 for(i=0; i<256; i+=1) {
     // -1 indicates an invalid command byte

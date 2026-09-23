@@ -15,7 +15,7 @@ xscale = argument8;
 subimageSelectionScript = argument9;
 zindex = argument10;
 
-if(global.gearOverlayInfo == -1)
+if(!variable_global_exists("gearOverlayInfo"))
     global.gearOverlayInfo = ds_map_create();
     
 var spriteMap;

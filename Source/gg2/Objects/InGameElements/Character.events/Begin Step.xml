@@ -38,8 +38,7 @@ if(vspeed &gt;= 0)
                 if(!place_meeting(x, y-1, other)) continue; // We can only stand on platforms immediately below us
                 if(place_meeting(x, y, other)) continue;    // We can't stand on platforms we already collide with
                 other.onground = true;
-                // TODO(enigma): self. needed inside with(); ENIGMA resolves bare names against the outer object
-                if(self.resetMoveStatus)
+                if(resetMoveStatus)
                     onNonSurfingGround = true;
                 // If we didn't find a nonsurfing dropdown yet, we have to keep looking
                 // because there may still be one overlapping the surfing dropdown we found
@@ -191,7 +190,7 @@ if(rocketJumping)
 {
     if(global.run_virtual_ticks)
     {
-        if (jumpFlameParticleType == -1)
+        if !variable_local_exists("jumpFlameParticleType")
         {
             jumpFlameParticleType = part_type_create();
             part_type_sprite(jumpFlameParticleType,FlameS,true,false,true);
@@ -200,7 +199,7 @@ if(rocketJumping)
             part_type_scale(jumpFlameParticleType,0.7,-0.65);
         }
         
-        if (global.jumpFlameParticleSystem == -1)
+        if !variable_global_exists("jumpFlameParticleSystem")
         {
             global.jumpFlameParticleSystem = part_system_create();
             part_system_depth(global.jumpFlameParticleSystem, 10);
@@ -226,7 +225,7 @@ if(rocketJumping)
 if(spinjumping)
 {
     
-    if (jumpDustParticleType == -1)
+    if !variable_local_exists("jumpDustParticleType")
     {
         jumpDustParticleType = part_type_create();
         part_type_sprite(jumpDustParticleType,SpeedBoostS,false,false,true);
@@ -235,7 +234,7 @@ if(spinjumping)
         part_type_scale(jumpDustParticleType,1,1);
         part_type_orientation(jumpDustParticleType, -90, -90, 0, 0, 0);
     }
-    if (global.jumpDustParticleSystem == -1)
+    if !variable_global_exists("jumpDustParticleSystem")
     {
         global.jumpDustParticleSystem = part_system_create();
         part_system_depth(global.jumpDustParticleSystem, 10);
@@ -397,7 +396,7 @@ if ubered {
     }
     if instance_exists(currentWeapon) {
         with(currentWeapon) {
-            if(maxAmmo != -1) {
+            if(variable_local_exists("maxAmmo")) {
                 ammoCount = maxAmmo;
             }
             if (alarm[5] &gt; 0)
@@ -420,7 +419,7 @@ if (instance_exists(ArenaHUD)) {
 if ((arenaRoundEnd or global.mapchanging) and !player.humiliated) {
     if instance_exists(currentWeapon) {
         with(currentWeapon){
-            if(maxAmmo != -1) {
+            if(variable_local_exists("maxAmmo")) {
                 ammoCount = maxAmmo;
             }
             if (alarm[5] &gt; 0)

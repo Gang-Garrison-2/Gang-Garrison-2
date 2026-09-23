@@ -16,9 +16,11 @@
         <argument kind="STRING">handleCreated = false;
 
 // We only want to check for messages once per run
-if(global.devMessagesChecked) {
-    instance_destroy();
-    exit;
+if(variable_global_exists("devMessagesChecked")) {
+    if(global.devMessagesChecked) {
+        instance_destroy();
+        exit;
+    }
 }
 
 // downloads a text file off the internet, and parses it for instructions

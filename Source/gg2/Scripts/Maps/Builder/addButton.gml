@@ -1,7 +1,7 @@
 /**
  * Adds a button to the GUI
  * Argument0: Button text
- * Argument1: The script that gets run when the button is clicked, executes twice for toggles with argument0 as the toggle value
+ * Argument1: The code that gets executed when the button is clicked, executes twice for toggles with argument0 as the toggle value
  * [Argument2]: Make the button a toggle
  * [Argument3]: Button is active by default (if it's a toggle)
 */
