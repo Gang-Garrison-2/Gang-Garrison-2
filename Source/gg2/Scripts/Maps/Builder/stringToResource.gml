@@ -18,7 +18,7 @@ if (ext != "GIF")
 if (is_string(argument2))
     name = argument2 + "." + ext;
 else
-    name = temp_directory + "\TmpResource." + ext;
+    name = temp_directory + "/TmpResource." + ext;
 
 file = file_bin_open(name, 2);
 while(file_bin_position(file) < string_length(argument0))

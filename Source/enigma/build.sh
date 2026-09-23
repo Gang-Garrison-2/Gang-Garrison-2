@@ -15,19 +15,33 @@ ENIGMA_ROOT="${ENIGMA_ROOT:-/opt/enigma-dev-git}"
 
 mode=(-j"$(nproc)")
 prebuild_flags=(--stub-extensions) # until Faucet/GG2DLL are built as native libraries
-systems=(-p xlib -g OpenGL1 -a OpenAL -w xlib) # xlib widgets: zenity/kdialog dialogs
+systems=(-p xlib -g OpenGL1 -a OpenAL -w xlib) # dialogs via zenity/kdialog
 for arg in "$@"; do
   case "$arg" in
     --codegen-only) mode=(--codegen-only) ;;
     --headless)
       systems=(-p None -g None -a None -w None)
       prebuild_flags+=(--headless)
+      headless=1
       ;;
     *) echo "unknown option: $arg" >&2; exit 2 ;;
   esac
 done
 
 mkdir -p "$WORK"
+
+# Compat g++ wrapper (toolchain/g++): libprocps shim for xlib widgets, and
+# graphics/audio stubs for headless links.
+export REAL_GXX="$(command -v g++)"
+export TOOLCHAIN_LIB="$WORK/toolchain"
+mkdir -p "$TOOLCHAIN_LIB"
+ar rc "$TOOLCHAIN_LIB/libprocps.a" # xlib widgets link -lprocps; the shim is header-only
+if [[ -n "${headless:-}" ]]; then
+  export HEADLESS_STUBS_O="$TOOLCHAIN_LIB/headless_stubs.o"
+  "$REAL_GXX" -std=c++17 -fPIC -I"$ENIGMA_ROOT/ENIGMAsystem/SHELL" \
+    -c "$HERE/toolchain/headless_stubs.cpp" -o "$HEADLESS_STUBS_O"
+fi
+export PATH="$HERE/toolchain:$PATH"
 python3 "$HERE/prebuild.py" "$SRC" "$WORK/src/gg2" "${prebuild_flags[@]}"
 rm -f "$WORK/gg2.gmk" # gmksplit won't overwrite
 (cd "$WORK/src" && java -jar "$GMKSPLIT" gg2 "$WORK/gg2.gmk" >/dev/null)
@@ -42,8 +56,9 @@ status=$?
 set -e
 
 # emake exits 0 even when resource transfer fails and drops resources.
-if grep -q 'Transfer error' "$WORK/emake.log"; then
-  echo "resource transfer failed, see $WORK/emake.log" >&2
+# Same when writing resources into the game module fails.
+if grep -qE 'Transfer error|have zero size|vary in dimensions' "$WORK/emake.log"; then
+  echo "resource transfer/write failed, see $WORK/emake.log" >&2
   exit 1
 fi
 # GM8 embeds Included Files; ENIGMA builds ship them next to the binary.

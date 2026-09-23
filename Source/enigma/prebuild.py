@@ -129,6 +129,8 @@ COMPAT = {
     ),
     # GM8 splash windows: open the page in the browser instead.
     "action_splash_web": "url_open(argument0);\n",
+    # Pass-through for wrap_script_locals (not a GM8 function).
+    "gml_value": "return argument0;\n",
     "splash_show_web": "url_open(argument0);\n",
     "splash_set_main": "// no-op: no splash window\n",
     "splash_set_interrupt": "// no-op: no splash window\n",
@@ -143,8 +145,11 @@ STUB_OVERRIDES = {
     ' build.";\n',
 }
 
-# Headless builds (widgets None) have no file dialogs; ask on the console.
+# Headless builds: no file dialogs (ask on the console), and no sprite pixel
+# data under graphics None, so fonts can't be built from sprites (crashes in
+# ENIGMA's font_pack). Nothing is drawn anyway.
 HEADLESS_HELPERS = {
+    "font_add_sprite": ("gml_font_add_sprite", "return -1;\n"),
     "get_open_filename": (
         "gml_get_open_filename",
         'return get_string("File to open:", "");\n',
@@ -208,7 +213,7 @@ class Rewriter:
             ),
         ]
 
-    def code(self, text):
+    def code(self, text, is_script=False):
         # ENIGMA bug: `var` is block-scoped (C++), but function-scoped in GML, so
         # a var declared in one branch and used in another is undeclared. Hoist
         # every declaration to the top of the script/event.
@@ -236,9 +241,11 @@ class Rewriter:
             last = m.end()
         out.append(VAR_RE.sub(hoist, self.plain(text[last:])))
         body = "".join(out)
-        if names:
-            body = "var " + ", ".join(dict.fromkeys(names)) + "; " + body
-        return body
+        if not names:
+            return body
+        if is_script:
+            body = wrap_script_locals(body, set(names))
+        return "var " + ", ".join(dict.fromkeys(names)) + "; " + body
 
     def plain(self, text):
         for rx, rep in self.rewrites:
@@ -247,6 +254,53 @@ class Rewriter:
 
 
 PLUS_ONLY_RE = re.compile(r"\s*\+\s*")
+TOKEN_RE = re.compile(r"[A-Za-z_]\w*|\d+(?:\.\d+)?|\$[0-9A-Fa-f]+|\S")
+# Keywords after which ( or a bare name is not a function call or operand.
+CONTROL_KW = {"return", "if", "while", "until", "repeat", "with", "switch"}
+OPERATOR_KW = CONTROL_KW | {"and", "or", "xor", "not", "div", "mod", "case"}
+OPERATOR_TOKENS = set("=(,[!+-*/%<>&|^~?:{};")
+
+
+def wrap_script_locals(body, local_names):
+    """ENIGMA bug: in scripts, a `var` local that stands alone in some positions
+    is compiled as a read of the instance variable of that name: `(x)`, `-x`,
+    `!x`, `if (x)`, `return x`, ... Binary operands, assignments and call
+    arguments compile correctly, so route the bad positions through a call."""
+    out, last = [], 0
+    for m in SKIP_RE.finditer(body):
+        out += [_wrap_segment(body[last : m.start()], local_names), m.group(0)]
+        last = m.end()
+    out.append(_wrap_segment(body[last:], local_names))
+    return "".join(out)
+
+
+def _wrap_segment(seg, local_names):
+    toks = list(TOKEN_RE.finditer(seg))
+    text = [t.group(0) for t in toks]
+
+    def at(i):
+        return text[i] if 0 <= i < len(text) else None
+
+    def operand_start(tok):  # nothing to the left binds as a binary operand
+        return tok is None or tok in OPERATOR_TOKENS or tok in OPERATOR_KW
+
+    spans = []
+    for i, name in enumerate(text):
+        if name not in local_names or at(i + 1) in ("[", "(", "."):
+            continue
+        prev, prev2 = at(i - 1), at(i - 2)
+        if (
+            (prev == "(" and at(i + 1) == ")" and operand_start(prev2))
+            or prev in ("!", "~")
+            or (prev in ("-", "+") and operand_start(prev2))
+            or prev in CONTROL_KW
+        ):
+            spans.append(toks[i].span())
+    for a, b in reversed(spans):
+        seg = f"{seg[:a]}gml_value({seg[a:b]}){seg[b:]}"
+    return seg
+
+
 # GM8 var statements have no initializers; the ; is optional.
 VAR_RE = re.compile(r"\bvar\s+(\w+(?:\s*,\s*\w+)*)\s*;?")
 
@@ -312,6 +366,26 @@ def fill_empty_backgrounds(out):
         png = xml.with_suffix(".png")
         if not png.exists():
             png.write_bytes(placeholder_png())
+
+
+def fill_empty_sprites(out):
+    # ENIGMA bug: a sprite with no subimages stops the resource writer, and the
+    # game ships without any resources (emake still reports success). GM8 uses
+    # such sprites as never-colliding masks; a fully transparent 1x1 image with
+    # a precise mask keeps that behavior.
+    for xml in (out / "Sprites").rglob("*.xml"):
+        if xml.name == "_resources.list.xml":
+            continue
+        images = xml.with_suffix(".images")
+        if images.is_dir() and any(images.glob("image *.png")):
+            continue
+        images.mkdir(exist_ok=True)
+        (images / "image 0.png").write_bytes(placeholder_png())
+        text = xml.read_text(encoding="utf-8")
+        xml.write_text(
+            re.sub(r"<shape>\w+</shape>", "<shape>PRECISE</shape>", text),
+            encoding="utf-8",
+        )
 
 
 def rename_rooms(out):
@@ -386,7 +460,7 @@ def main():
     for f in sorted(args.out.rglob("*.gml")):
         code = f.read_text(encoding="utf-8")
         lint(str(f.relative_to(args.out)), code, problems)
-        f.write_text(rw.code(code), encoding="utf-8")
+        f.write_text(rw.code(code, is_script=True), encoding="utf-8")
 
     def fix_tag(name, m):
         open_tag, body, close_tag = m.group(1, 2, 3) if m.group(1) else m.group(4, 5, 6)
@@ -409,6 +483,7 @@ def main():
         sys.exit(1)
 
     fill_empty_backgrounds(args.out)
+    fill_empty_sprites(args.out)
     rename_rooms(args.out)
     rename_scripts(args.out, SCRIPT_RENAMES)
     add_script_group(args.out, "EnigmaHelpers", dict(helpers.values()) | COMPAT)

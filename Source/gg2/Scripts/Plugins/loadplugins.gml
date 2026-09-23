@@ -4,7 +4,7 @@
 // var file, pattern, prefix, list, fp, i, env;
 //
 // // Prefix since results from file_find_* don't include path
-// prefix = working_directory + "\Plugins\";
+// prefix = working_directory + "/Plugins\";
 // pattern = prefix + "*.gml";
 //
 // list = ds_list_create();
@@ -20,7 +20,7 @@
 // {
 //     file = ds_list_find_value(list, i);
 //     // Debugging facility, so we know *which* plugin caused compile/execute error
-//     fp = file_text_open_write(working_directory + "\last_plugin.log");
+//     fp = file_text_open_write(working_directory + "/last_plugin.log");
 //     file_text_write_string(fp, prefix + file);
 //     file_text_close(fp);
 //     // Create persistent environment for plugin (so its variables won't collide)
@@ -36,5 +36,5 @@
 // }
 //
 // // Clear up
-// file_delete(working_directory + "\last_plugin.log");
+// file_delete(working_directory + "/last_plugin.log");
 // ds_list_destroy(list);

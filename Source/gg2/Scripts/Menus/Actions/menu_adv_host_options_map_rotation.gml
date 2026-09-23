@@ -6,7 +6,7 @@ absPath = get_open_filename("Map Rotation|*.txt", "");
 if (absPath == "") {
     global.mapRotationFile = absPath;
 } else {
-    global.mapRotationFile = getRelativePathIfDescendant(working_directory + "\", absPath);
+    global.mapRotationFile = getRelativePathIfDescendant(working_directory + "/", absPath);
 }
 
 gg2_write_ini("Server", "MapRotation", global.mapRotationFile);

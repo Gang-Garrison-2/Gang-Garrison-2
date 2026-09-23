@@ -41,10 +41,10 @@
 //     pluginname = ds_list_find_value(list, i);
 //
 //     // check if we have a debug version
-//     if (file_exists(working_directory + "\ServerPluginsDebug\" + pluginname + ".zip"))
+//     if (file_exists(working_directory + "/ServerPluginsDebug\" + pluginname + ".zip"))
 //     {
 //         // get its hash instead
-//         pluginhash = GG2DLL_compute_MD5(working_directory + "\ServerPluginsDebug\" + pluginname + ".zip");
+//         pluginhash = GG2DLL_compute_MD5(working_directory + "/ServerPluginsDebug\" + pluginname + ".zip");
 //     }
 //     else
 //     {   

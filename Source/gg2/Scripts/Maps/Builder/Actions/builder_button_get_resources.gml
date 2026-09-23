@@ -7,8 +7,8 @@ else
         directory_create(working_directory + "/Maps/Decompiled");
 
     // Walkmask
-    if (file_exists(temp_directory+"\custommap_walkmask.png"))
-        file_copy(temp_directory+"\custommap_walkmask.png", working_directory + "/Maps/Decompiled/walkmask.png");    
+    if (file_exists(temp_directory+"/custommap_walkmask.png"))
+        file_copy(temp_directory+"/custommap_walkmask.png", working_directory + "/Maps/Decompiled/walkmask.png");    
 
     // External sprites     
     var resource;

@@ -32,7 +32,10 @@
     backupFilename = file_find_first("gg2-old.delete.me.*", 0);
     while(backupFilename != "")
     {
-        file_delete(backupFilename);
+        // TODO(enigma): ENIGMA's file_find ignores the mask on Linux and returns
+        // every file, so check the name before deleting anything.
+        if (string_pos("gg2-old.delete.me.", backupFilename) == 1)
+            file_delete(backupFilename);
         backupFilename = file_find_next();
     }
     file_find_close();
@@ -344,7 +347,7 @@
     // PLUGINS(disabled): no runtime GML execution in ENIGMA; revisit
     // global.dealDamageFunction = ""; // executed after dealDamage, with same args
     
-    if(!directory_exists(working_directory + "\Maps")) directory_create(working_directory + "\Maps");
+    if(!directory_exists(working_directory + "/Maps")) directory_create(working_directory + "/Maps");
     
     instance_create(0, 0, AudioControl);
     instance_create(0, 0, SSControl);
@@ -386,7 +389,7 @@
     character_init();
     
     // PLUGINS(disabled): no runtime GML execution in ENIGMA; revisit
-    // if(!directory_exists(working_directory + "\Plugins")) directory_create(working_directory + "\Plugins");
+    // if(!directory_exists(working_directory + "/Plugins")) directory_create(working_directory + "/Plugins");
     // loadplugins();
     
     /* Windows 8 is known to crash GM when more than three (?) sounds play at once

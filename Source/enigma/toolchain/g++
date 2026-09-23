@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# g++ wrapper for ENIGMA builds (build.sh puts this directory first on PATH):
+# - compiles see include/proc/readproc.h, a libprocps 3 shim for ENIGMA's xlib
+#   widgets (Arch ships libproc2), and links against an empty libprocps.a
+# - headless links also get headless_stubs.o, the graphics/audio functions
+#   ENIGMA's None backends leave undefined
+# ponytail: toolchain wrapper; drop pieces as ENIGMA fixes them upstream.
+set -euo pipefail
+HERE="$(cd "$(dirname "$0")" && pwd)"
+compat=(-I"$HERE/include")
+for arg in "$@"; do
+  case "$arg" in
+    -c | -E | -M | -MM | -S) exec "$REAL_GXX" "${compat[@]}" "$@" ;;
+  esac
+done
+# Link: append our libs after the caller's objects and libraries.
+exec "$REAL_GXX" -L"$TOOLCHAIN_LIB" "$@" ${HEADLESS_STUBS_O:+"$HEADLESS_STUBS_O"}

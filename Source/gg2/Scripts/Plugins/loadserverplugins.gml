@@ -48,15 +48,15 @@
 // {
 //     pluginname = ds_list_find_value(list, i);
 //     pluginhash = ds_list_find_value(hashList, i);
-//     isDebug = file_exists(working_directory + "\ServerPluginsDebug\" + pluginname + ".zip");
-//     isCached = file_exists(working_directory + "\ServerPluginsCache\" + pluginname + "@" + pluginhash);
-//     tempfile = temp_directory + "\" + pluginname + ".zip.tmp";
-//     tempdir = temp_directory + "\" + pluginname + ".tmp";
+//     isDebug = file_exists(working_directory + "/ServerPluginsDebug\" + pluginname + ".zip");
+//     isCached = file_exists(working_directory + "/ServerPluginsCache\" + pluginname + "@" + pluginhash);
+//     tempfile = temp_directory + "/" + pluginname + ".zip.tmp";
+//     tempdir = temp_directory + "/" + pluginname + ".tmp";
 //
 //     // check to see if we have a local copy for debugging
 //     if (isDebug)
 //     {
-//         file_copy(working_directory + "\ServerPluginsDebug\" + pluginname + ".zip", tempfile);
+//         file_copy(working_directory + "/ServerPluginsDebug\" + pluginname + ".zip", tempfile);
 //         // show warning
 //         if (global.isHost)
 //         {
@@ -78,7 +78,7 @@
 //     // otherwise, check if we have it cached
 //     else if (isCached)
 //     {
-//         file_copy(working_directory + "\ServerPluginsCache\" + pluginname + "@" + pluginhash, tempfile);
+//         file_copy(working_directory + "/ServerPluginsCache\" + pluginname + "@" + pluginhash, tempfile);
 //     }
 //     // otherwise, download as usual
 //     else
@@ -155,15 +155,15 @@
 //     if (!isDebug)
 //     {
 //         // add to cache if we don't already have it
-//         if (!file_exists(working_directory + "\ServerPluginsCache\" + pluginname + "@" + pluginhash))
+//         if (!file_exists(working_directory + "/ServerPluginsCache\" + pluginname + "@" + pluginhash))
 //         {
 //             // make sure directory exists
-//             if (!directory_exists(working_directory + "\ServerPluginsCache"))
+//             if (!directory_exists(working_directory + "/ServerPluginsCache"))
 //             {
-//                 directory_create(working_directory + "\ServerPluginsCache");
+//                 directory_create(working_directory + "/ServerPluginsCache");
 //             }
 //             // store in cache
-//             file_copy(tempfile, working_directory + "\ServerPluginsCache\" + pluginname + "@" + pluginhash);
+//             file_copy(tempfile, working_directory + "/ServerPluginsCache\" + pluginname + "@" + pluginhash);
 //         }
 //     }
 //
@@ -185,10 +185,10 @@
 //     for (i = 0; i < ds_list_size(list); i += 1)
 //     {
 //         pluginname = ds_list_find_value(list, i);
-//         tempdir = temp_directory + "\" + pluginname + ".tmp";
+//         tempdir = temp_directory + "/" + pluginname + ".tmp";
 //
 //         // Debugging facility, so we know *which* plugin caused compile/execute error
-//         fp = file_text_open_write(working_directory + "\last_plugin.log");
+//         fp = file_text_open_write(working_directory + "/last_plugin.log");
 //         file_text_write_string(fp, pluginname);
 //         file_text_close(fp);
 //
@@ -220,7 +220,7 @@
 // }
 //
 // // Delete last plugin log
-// file_delete(working_directory + "\last_plugin.log");
+// file_delete(working_directory + "/last_plugin.log");
 //
 // // Get rid of plugin list
 // ds_list_destroy(list);
