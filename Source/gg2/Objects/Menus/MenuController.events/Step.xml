@@ -13,7 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if(!variable_local_exists("baseybegin"))
+        <argument kind="STRING">if(mouse_samples == -1)
 {
     baseybegin = ybegin;
     mouse_samples = ds_list_create();

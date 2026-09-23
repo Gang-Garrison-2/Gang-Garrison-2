@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <event category="CREATE" id="0">
   <actions>
+    <action id="603" library="1">
+      <!--action name: Code-->
+      <kind>CODE</kind>
+      <allowRelative>false</allowRelative>
+      <question>false</question>
+      <canApplyTo>true</canApplyTo>
+      <actionType>CODE</actionType>
+      <functionName/>
+      <relative>false</relative>
+      <not>false</not>
+      <appliesTo>.self</appliesTo>
+      <arguments>
+        <argument kind="STRING">// TODO(enigma): ENIGMA only sees instance variables assigned in the object's own
+// events, not in scripts it calls. These are set by ClientCreate/ClientBeginStep.
+nocreate = false;
+downloadingMap = false;
+</argument>
+      </arguments>
+    </action>
     <action id="601" library="1">
       <!--action name: Execute_Script-->
       <kind>NORMAL</kind>

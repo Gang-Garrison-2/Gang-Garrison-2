@@ -74,6 +74,31 @@ HELPERS = {
     ),
 }
 
+# GM8 functions ENIGMA doesn't have, added as scripts of the same name.
+COMPAT = {
+    # Message box styling: cosmetic, ENIGMA uses native dialogs.
+    **dict.fromkeys(
+        [
+            "message_background",
+            "message_button",
+            "message_text_font",
+            "message_button_font",
+            "message_input_font",
+        ],
+        "// no-op: ENIGMA uses native dialogs\n",
+    ),
+    "action_splash_web": "url_open(argument0);\n",
+    # Included files are shipped next to the binary instead of embedded.
+    "export_include_file_location": "return file_copy(program_directory + "
+    '"/" + argument0, argument1);\n',
+}
+
+# Extension stubs that need a non-zero result to fail cleanly.
+STUB_OVERRIDES = {
+    "upnp_error_string": 'return "UPnP port forwarding is not supported in this'
+    ' build.";\n',
+}
+
 # Resource names must be valid C++ identifiers in ENIGMA.
 ROOM_RENAMES = {"Gang Garrison 2": "InitRoom"}
 
@@ -128,9 +153,18 @@ class Rewriter:
         ]
 
     def code(self, text):
+        # ENIGMA bug: `var` is block-scoped (C++), but function-scoped in GML, so
+        # a var declared in one branch and used in another is undeclared. Hoist
+        # every declaration to the top of the script/event.
+        names = []
+
+        def hoist(m):
+            names.extend(re.split(r"\s*,\s*", m.group(1)))
+            return "\n" * m.group(0).count("\n")  # keep line numbers
+
         out, last = [], 0
         for m in SKIP_RE.finditer(text):
-            plain = self.plain(text[last : m.start()])
+            plain = VAR_RE.sub(hoist, self.plain(text[last : m.start()]))
             token = m.group(0)
             # ENIGMA bug: "a" + "b" becomes C++ const char* + const char*.
             if (
@@ -144,8 +178,11 @@ class Rewriter:
             else:
                 out += [plain, token]
             last = m.end()
-        out.append(self.plain(text[last:]))
-        return "".join(out)
+        out.append(VAR_RE.sub(hoist, self.plain(text[last:])))
+        body = "".join(out)
+        if names:
+            body = "var " + ", ".join(dict.fromkeys(names)) + "; " + body
+        return body
 
     def plain(self, text):
         for rx, rep in self.rewrites:
@@ -154,6 +191,8 @@ class Rewriter:
 
 
 PLUS_ONLY_RE = re.compile(r"\s*\+\s*")
+# GM8 var statements have no initializers; the ; is optional.
+VAR_RE = re.compile(r"\bvar\s+(\w+(?:\s*,\s*\w+)*)\s*;?")
 
 
 def merge_literals(a, b):
@@ -314,11 +353,12 @@ def main():
     fill_empty_backgrounds(args.out)
     rename_rooms(args.out)
     rename_scripts(args.out, SCRIPT_RENAMES)
-    add_script_group(args.out, "EnigmaHelpers", dict(HELPERS.values()))
+    add_script_group(args.out, "EnigmaHelpers", dict(HELPERS.values()) | COMPAT)
     if args.stub_extensions:
         stub = "// stub: native extension not built yet\nreturn 0;\n"
         names = ["fct_" + f for f in FAUCET] + OTHER_EXTENSIONS
-        add_script_group(args.out, "ExtensionStubs", dict.fromkeys(names, stub))
+        stubs = dict.fromkeys(names, stub) | STUB_OVERRIDES
+        add_script_group(args.out, "ExtensionStubs", stubs)
 
 
 if __name__ == "__main__":

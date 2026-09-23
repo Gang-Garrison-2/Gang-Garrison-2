@@ -19,8 +19,9 @@
 {
     var str,uint,grp,rol,i,j,h,len,pos,w,a,b,c,d,e,f,temp,digest;
     str = argument0;
-    if (!variable_global_exists("MD5k")) {
+    if (!global.md5TablesReady) {
         globalvar MD5k,MD5g,MD5r,MD5s;
+        global.md5TablesReady = true;
         grp  = "00010203040506070809101112131415";
         grp += "01061100051015040914030813020712";
         grp += "05081114010407101300030609121502";

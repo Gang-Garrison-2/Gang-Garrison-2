@@ -15,6 +15,8 @@
       <arguments>
         <argument kind="STRING">// change preview image etc when a new entity is selected.
 
+// button was an unintended instance variable; local like in Step/Draw.
+var button;
 button = ds_list_find_value(global.entityData, entityButtons[selected, INDEX]);
 selectedSprite = ds_map_find_value(button, "entity_sprite");
 selectedImage = ds_map_find_value(button, "entity_image");

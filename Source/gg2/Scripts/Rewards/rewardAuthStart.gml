@@ -7,7 +7,7 @@ rewardId = argument4;
 
 // Prevent one player from requesting auth several times
 with(player)
-    if(variable_local_exists("rewardAuthAlreadyStarted")) exit;
+    if(rewardAuthAlreadyStarted) exit;
 player.rewardAuthAlreadyStarted = true;
 
 if(!instance_exists(RewardAuthChecker))

@@ -33,7 +33,7 @@ cd "$ENIGMA_ROOT"
 set +e
 ./emake "$WORK/gg2.gmk" -o "$WORK/gg2" -d "$WORK/obj/" -k "$WORK/codegen/" \
   "${systems[@]}" -c Precise \
-  -e Alarms,Paths,libpng,DataStructures,Timelines,ParticleSystems,IniFilesystem,ExternalFuncs,DateTime \
+  -e Alarms,Paths,libpng,DataStructures,Timelines,ParticleSystems,IniFilesystem,ExternalFuncs,DateTime,RegistrySpoof \
   "${mode[@]}" >"$WORK/emake.log" 2>&1
 status=$?
 set -e
@@ -43,6 +43,9 @@ if grep -q 'Transfer error' "$WORK/emake.log"; then
   echo "resource transfer failed, see $WORK/emake.log" >&2
   exit 1
 fi
+# GM8 embeds Included Files; ENIGMA builds ship them next to the binary.
+find "$SRC/Included Files" -maxdepth 1 -type f ! -name '*.xml' -exec cp -t "$WORK" {} +
+
 errors=$(grep -c ' error: \|Syntax error\|Semantic error' "$WORK/emake.log" || true)
 echo "emake exit $status, $errors errors, log: $WORK/emake.log"
 exit "$status"

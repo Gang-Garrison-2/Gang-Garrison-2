@@ -13,7 +13,9 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">{
+        <argument kind="STRING">// move_all_bullets clears this after the first step
+firststep = true;
+{
     explosionDamage = 45;
     animationState = 1;
     alarm[1] = 29 / global.delta_factor;

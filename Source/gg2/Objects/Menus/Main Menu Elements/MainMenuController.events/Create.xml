@@ -70,7 +70,7 @@
         validBackground = false;
 
         // already loaded background in a previous instance
-        if (variable_global_exists("downloadedBackground"))
+        if (global.downloadedBackground != -1)
         {
             menuimage = global.downloadedBackground;
             validBackground = true;

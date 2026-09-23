@@ -30,7 +30,7 @@ var url, client;
 
 url = argument0;
 
-if (!variable_global_exists('__HttpClient'))
+if (global.__HttpClient == -1)
     __http_init();
 
 client = instance_create(0, 0, global.__HttpClient);

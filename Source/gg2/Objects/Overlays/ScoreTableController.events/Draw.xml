@@ -47,7 +47,8 @@
     
     with(JoiningPlayer)
     {
-        if(occupiesSlot)
+        // TODO(enigma): self. needed inside with(); ENIGMA resolves bare names against the outer object
+        if(self.occupiesSlot)
             ds_priority_add(spec, id, 0);
     }
     

@@ -9,9 +9,10 @@
   <speed>30</speed>
   <persistent>false</persistent>
   <creationCode>with(Builder) {
-    if (visible) event_user(0);
+    // TODO(enigma): self. needed inside with(); ENIGMA resolves bare names against the outer object
+    if (self.visible) event_user(0);
     else {
-        visible = true;
+        self.visible = true;
         resetToggles();
         CustomMapInit("Maps/ggb2_tmp_map.png");
         loadMetadata(Builder.metadata, true);

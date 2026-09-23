@@ -16,6 +16,9 @@
         <argument kind="STRING">{
     player = global.paramPlayer;
     team = player.team;
+    // Created on first use in Begin Step; -1 until then.
+    jumpFlameParticleType = -1;
+    jumpDustParticleType = -1;
     
     left_bound_offset = sprite_get_bbox_left(sprite_index)-sprite_get_xoffset(sprite_index);
     right_bound_offset = sprite_get_bbox_right(sprite_index)-sprite_get_xoffset(sprite_index);

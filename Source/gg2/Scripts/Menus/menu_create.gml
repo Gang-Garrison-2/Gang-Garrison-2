@@ -26,6 +26,9 @@ getsHighlight = true;
 bgtabs = false;
 menumode = false;
 screenheight = 600;
+// baseybegin and mouse_samples are set on the first Step/Draw, after the
+// menu's Create has settled ybegin. -1 until then.
+mouse_samples = -1;
 
 // Hack: The back button should usually appear last in the menu, even if plugins
 // add new items later, so we treat it separately.

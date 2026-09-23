@@ -79,7 +79,8 @@ if global.myself.object != -1 {
             {
                 var offset, flarecolor;
                 
-                if(readyToFlare)
+                // TODO(enigma): self. needed inside with(); ENIGMA resolves bare names against the outer object
+                if(self.readyToFlare)
                     flarecolor = c_white;
                 else
                     flarecolor = c_gray;

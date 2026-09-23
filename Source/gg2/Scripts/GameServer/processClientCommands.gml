@@ -6,16 +6,7 @@ playerId = argument1;
 // To prevent players from flooding the server, limit the number of commands to process per step and player.
 commandLimitRemaining = 10;
 
-with(player) {
-    if(!variable_local_exists("commandReceiveState")) {
-        // 0: waiting for command byte.
-        // 1: waiting for command data length (1 byte)
-        // 2: waiting for command data.
-        commandReceiveState = 0;
-        commandReceiveExpectedBytes = 1;
-        commandReceiveCommand = 0;
-    }
-}
+// Command receive state (commandReceiveState etc.) is initialized in Player Create.
 
 while(commandLimitRemaining > 0) {
     var socket;
@@ -293,7 +284,7 @@ while(commandLimitRemaining > 0) {
             {
                 with(player)
                 {
-                    if(variable_local_exists("lastNamechange")) 
+                    if(lastNamechange != -1)
                         if(current_time - lastNamechange < 1000)
                             break;
                     lastNamechange = current_time;
@@ -333,7 +324,7 @@ while(commandLimitRemaining > 0) {
             answer = read_binstring(socket, 16);
             
             with(player)
-                if(variable_local_exists("challenge") and variable_local_exists("rewardId"))
+                if(challenge != "") // challenge and rewardId are set together
                     rewardAuthStart(player, answer, challenge, true, rewardId);
            
             break;

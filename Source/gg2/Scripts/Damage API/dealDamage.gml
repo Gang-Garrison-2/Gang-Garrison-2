@@ -1,7 +1,8 @@
 // dealDamage( sourcePlayer, damagedObject, damageDealt )
 with(argument1)
 {
-    if(variable_local_exists("deathmatch_invulnerable"))
+    // Only characters have deathmatch_invulnerable (always set in Character Create).
+    if(object_index == Character or object_is_ancestor(object_index, Character))
     {
         if(argument1.deathmatch_invulnerable != 0)
             return 0;

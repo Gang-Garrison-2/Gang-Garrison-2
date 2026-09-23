@@ -16,6 +16,18 @@
         <argument kind="STRING">{
     object = -1;
     team = TEAM_SPECTATOR;
+
+    // Server-side command/auth state, used by processClientCommands and rewardAuthStart.
+    // 0: waiting for command byte.
+    // 1: waiting for command data length (1 byte)
+    // 2: waiting for command data.
+    commandReceiveState = 0;
+    commandReceiveExpectedBytes = 1;
+    commandReceiveCommand = 0;
+    lastNamechange = -1; // current_time of the last name change, -1 if none
+    challenge = "";      // reward auth challenge, "" until requested
+    rewardId = "";
+    rewardAuthAlreadyStarted = false;
     class = CLASS_SCOUT;
     socket = -1;
     name = "";

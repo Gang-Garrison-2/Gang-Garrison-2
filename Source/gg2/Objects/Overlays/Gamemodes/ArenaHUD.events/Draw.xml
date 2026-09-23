@@ -94,7 +94,7 @@ if (state == ARENA_STATE_ROUND_END and global.winners == -1 and !instance_exists
 
     draw_sprite_ext(MVPBannerS, mvpSubimg, xoffset+xsize/2, yoffset+ysize/2, 2, 2, 0, c_white, 0.8);
     
-    if(variable_local_exists("mvps"))
+    if(mvps[mvpTeam] > 0)
     {
         // The mvps don't exist for players who join during round end, since syncing them in the FULL_UPDATE
         // would make things more complicated, and it should happen rarely enough that seeing an empty

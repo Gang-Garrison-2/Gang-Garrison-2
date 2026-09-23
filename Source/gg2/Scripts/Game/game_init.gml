@@ -1,5 +1,22 @@
 // Returns true if the game is successfully initialized, false if there was an error and we should quit.
 {
+    // Lazily-created globals start at a sentinel instead of being checked with
+    // variable_global_exists, which ENIGMA doesn't have (variables are compiled in).
+    global.runningPingCount = 0;
+    global.devMessagesChecked = false;
+    global.downloadedBackground = -1;
+    global.md5TablesReady = false;
+    global.gearOverlayInfo = -1;
+    global.headPoseInfo = -1;
+    global.spawnPointsCreated = false;
+    global.jumpFlameParticleSystem = -1;
+    global.jumpDustParticleSystem = -1;
+    global.rocketblurParticleSystem = -1;
+    global.flameParticleType = -1;
+    global.flameParticleSystem = -1;
+    global.__HttpClient = -1;
+    global.spritesByName = -1;
+
     initCharacterSpritePrefixes();
     initAllHeadPoses();
     initGear();

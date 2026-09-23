@@ -36,7 +36,7 @@ body = argument1;
 mimeType = argument2;
 headers = argument3;
 
-if (!variable_global_exists('__HttpClient'))
+if (global.__HttpClient == -1)
     __http_init();
 
 client = instance_create(0, 0, global.__HttpClient);

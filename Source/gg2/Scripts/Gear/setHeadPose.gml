@@ -17,7 +17,7 @@ dy = argument3;
 angle = argument4;
 xscale = argument5;
 
-if(!variable_global_exists("headPoseInfo"))
+if(global.headPoseInfo == -1)
     global.headPoseInfo = ds_map_create();
 
 var subimageMap;

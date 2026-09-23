@@ -79,7 +79,8 @@ if(not arenaRoundEnd) {
             }
             
             if(player.team == TEAM_RED) {
-                if(ubered) {
+                // TODO(enigma): self. needed inside with(); ENIGMA resolves bare names against the outer object
+                if(self.ubered) {
                     other.redPresence = max(1, other.redPresence);
                 } else {
                     other.redPresence = max(2, other.redPresence);
@@ -87,7 +88,8 @@ if(not arenaRoundEnd) {
                 }
                 randomRedCapper = id;
             } else {
-                if(ubered) {
+                // TODO(enigma): self. needed inside with(); ENIGMA resolves bare names against the outer object
+                if(self.ubered) {
                     other.bluePresence = max(1, other.bluePresence);
                 } else {
                     other.bluePresence = max(2, other.bluePresence);

@@ -122,7 +122,8 @@ ds_list_destroy(bulletStoppingObjects);
 // Apply dramatic effect
 with(hitInstance) {
     if(object_index == Character or object_is_ancestor(object_index, Character)) {
-        if(!ubered and team != other.owner.team) {
+        // TODO(enigma): self. needed inside with(); ENIGMA resolves bare names against the outer object
+        if(!self.ubered and team != other.owner.team) {
             damageCharacter(other.ownerPlayer, id, other.hitDamage);
             if (lastDamageDealer != other.ownerPlayer and lastDamageDealer != player)
             {

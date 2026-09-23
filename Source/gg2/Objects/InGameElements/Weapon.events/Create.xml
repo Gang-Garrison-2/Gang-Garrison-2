@@ -13,7 +13,9 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">xoffset += sprite_xoffset;
+        <argument kind="STRING">// Weapons with ammo set this after event_inherited; -1 means none.
+maxAmmo = -1;
+xoffset += sprite_xoffset;
 yoffset += sprite_yoffset;
 readyToShoot = false;
 justShot = false;

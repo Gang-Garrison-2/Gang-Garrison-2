@@ -13,7 +13,7 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">if(variable_local_exists("rocketblurParticleType")) {
+        <argument kind="STRING">if(rocketblurParticleType != -1) {
     part_type_destroy(rocketblurParticleType);
 }
 ds_list_destroy(playersPassed);

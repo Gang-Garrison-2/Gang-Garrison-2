@@ -13,7 +13,8 @@
       <not>false</not>
       <appliesTo>.self</appliesTo>
       <arguments>
-        <argument kind="STRING">var targetQueue, testDist, playercheck, targetAngle, obscured, rotateoffset;
+        <argument kind="STRING">// rotateoffset is an instance variable (User Event 0), not a local here.
+var targetQueue, testDist, playercheck, targetAngle, obscured;
 
 if(ownerPlayer.sentry)
 {
@@ -43,7 +44,8 @@ targetQueue = ds_priority_create();
 // Build a queue of potential targets
 with(Character) {
     testDist = distance_to_object(other);
-    if(!cloak &amp;&amp; testDist&lt;=375) {
+    // TODO(enigma): self. needed inside with(); ENIGMA resolves bare names against the outer object
+    if(!self.cloak &amp;&amp; testDist&lt;=375) {
         ds_priority_add(targetQueue, id, testDist);
     }
 }

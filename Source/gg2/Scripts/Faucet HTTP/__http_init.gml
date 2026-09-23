@@ -20,5 +20,6 @@
 // Creates global.__HttpClient
 // real __http_init()
 
-global.__HttpClient = object_add();
-object_set_persistent(global.__HttpClient, true);
+// HttpClient is a persistent object with no events. GG2: was object_add(),
+// which ENIGMA can't do (objects are compiled in).
+global.__HttpClient = HttpClient;
