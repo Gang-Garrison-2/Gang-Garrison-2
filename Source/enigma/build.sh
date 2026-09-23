@@ -14,7 +14,8 @@ ENIGMA_ROOT="${ENIGMA_ROOT:-/opt/enigma-dev-git}"
 : "${GMKSPLIT:?set GMKSPLIT to the path of gmksplit.jar}"
 
 mode=(-j"$(nproc)")
-prebuild_flags=(--stub-extensions) # until Faucet/GG2DLL are built as native libraries
+FAUCET_SRC="${FAUCET_SRC:-$HOME/github/Faucet-Networking-Extension}" # modern-boost branch
+prebuild_flags=(--stub-extensions --faucet-src "$FAUCET_SRC") # stubs: UPnP only
 systems=(-p xlib -g OpenGL1 -a OpenAL -w xlib) # dialogs via zenity/kdialog
 for arg in "$@"; do
   case "$arg" in
@@ -42,6 +43,16 @@ if [[ -n "${headless:-}" ]]; then
     -c "$HERE/toolchain/headless_stubs.cpp" -o "$HEADLESS_STUBS_O"
 fi
 export PATH="$HERE/toolchain:$PATH"
+
+# Faucet Networking as a shared library next to the game.
+[[ -d "$FAUCET_SRC/faucet" ]] || { echo "set FAUCET_SRC to a Faucet-Networking-Extension checkout" >&2; exit 2; }
+mkdir -p "$TOOLCHAIN_LIB/faucet"
+for f in $(find "$FAUCET_SRC/faucet" -name '*.cpp'); do
+  o="$TOOLCHAIN_LIB/faucet/$(echo "${f#"$FAUCET_SRC/"}" | tr / _).o"
+  [[ "$o" -nt "$f" ]] || "$REAL_GXX" -std=c++17 -O2 -fPIC -I"$FAUCET_SRC" \
+    '-D__declspec(x)=__attribute__((visibility("default")))' -c "$f" -o "$o"
+done
+"$REAL_GXX" -shared -o "$WORK/libfaucetnet.so" "$TOOLCHAIN_LIB"/faucet/*.o -lboost_thread -lpthread
 
 # GG2DLL as a shared library next to the game (loaded with external_define).
 GG2DLL_SRC="$HERE/../../Extensions/GG2DLL/GG2DLL"
