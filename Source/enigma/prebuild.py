@@ -10,6 +10,7 @@ switch) are fixed in the source, marked TODO(enigma). This script lints for
 them so they don't come back.
 
 Usage: prebuild.py <Source/gg2> <out dir> [--stub-extensions] [--headless]
+                   [--faucet-src <Faucet checkout>]
 """
 
 import argparse
@@ -243,6 +244,19 @@ HEADLESS_HELPERS = {
     ),
 }
 
+# Platform differences for ENIGMA (Linux) builds, applied to the build copy:
+# (file, old text, new text). Each must match exactly once.
+PATCHES = [
+    # The updater downloads the Windows release zip and unpacks it with 7za.exe;
+    # send Linux players to the releases page instead.
+    (
+        "Objects/Menus/Main Menu Elements/DevMessagePopup.events/"
+        "Mouse global left pressed.xml",
+        "room_goto(UpdaterRoom);",
+        'url_open("https://github.com/Gang-Garrison-2/Gang-Garrison-2/releases");',
+    ),
+]
+
 # Resource names must be valid C++ identifiers in ENIGMA.
 ROOM_RENAMES = {"Gang Garrison 2": "InitRoom"}
 
@@ -471,6 +485,15 @@ def fill_empty_sprites(out):
         )
 
 
+def apply_patches(out):
+    for rel, old, new in PATCHES:
+        path = out / rel
+        text = path.read_text(encoding="utf-8")
+        if text.count(old) != 1:
+            sys.exit(f"prebuild: patch for {rel} matched {text.count(old)} times")
+        path.write_text(text.replace(old, new), encoding="utf-8")
+
+
 def rename_rooms(out):
     rooms = out / "Rooms"
     listing = rooms / "_resources.list.xml"
@@ -570,6 +593,7 @@ def main():
         print("\n".join("  " + p for p in problems), file=sys.stderr)
         sys.exit(1)
 
+    apply_patches(args.out)
     fill_empty_backgrounds(args.out)
     fill_empty_sprites(args.out)
     rename_rooms(args.out)
