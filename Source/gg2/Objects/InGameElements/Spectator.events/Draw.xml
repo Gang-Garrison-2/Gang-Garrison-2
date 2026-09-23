@@ -42,20 +42,26 @@ if (tracking)
         draw_sprite_part_ext(SpectatorHealthFill,0,0,(17-hppixels)+10,43,hppixels+1,xoffset+icon_xpos, yoffset+icon_ypos+(17-hppixels)*2,2,2,c_red,1);
         draw_sprite_part_ext(SpectatorHealthFill,0,0,(17-hppixels)+10,43,hppixels+1,xoffset+icon_xpos, yoffset+icon_ypos+(17-hppixels)*2,2,2,c_green,player.object.hp/player.object.maxHp);
     }
+    // TODO(enigma): temp var avoids ENIGMA nested built-in dot bug (a.b.x); inline when fixed
+    var playerObject;
+    playerObject = player.object;
     draw_sprite(SpectatorCrosshairS, player.team,
-                round(player.object.x) + cos(degtorad(player.object.aimDirection))*player.object.aimDistance,
-                round(player.object.y) - sin(degtorad(player.object.aimDirection))*player.object.aimDistance);
+                round(playerObject.x) + cos(degtorad(playerObject.aimDirection))*playerObject.aimDistance,
+                round(playerObject.y) - sin(degtorad(playerObject.aimDirection))*playerObject.aimDistance);
     
 }
 
 if (global.myself != -1)
 {
-    if ((global.myself.alarm[5] &gt; 0) and (global.myself.team != TEAM_SPECTATOR))
+    // TODO(enigma): temp var avoids ENIGMA nested built-in dot bug (a.b.x); inline when fixed
+    var myPlayer;
+    myPlayer = global.myself;
+    if ((myPlayer.alarm[5] &gt; 0) and (myPlayer.team != TEAM_SPECTATOR))
     {
         draw_set_valign(fa_center);
         draw_set_halign(fa_left);
         if (!instance_exists(ArenaHUD))
-            draw_text(xoffset+10, yoffset+10,'Respawn in ' +string(ceil(global.myself.alarm[5]/30*global.delta_factor))+ ' second(s).')
+            draw_text(xoffset+10, yoffset+10,'Respawn in ' +string(ceil(myPlayer.alarm[5]/30*global.delta_factor))+ ' second(s).')
         else
             draw_text(xoffset+10, yoffset+10,'No Respawning in Arena');
     }

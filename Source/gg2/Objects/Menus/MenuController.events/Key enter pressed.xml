@@ -14,24 +14,25 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">if(editing != -1) { 
-    switch (item_type[editing]) {
-        case "edittext":
-            menu_set_var(editing, item_value[editing]);
-            execute_string(item_script[editing], item_value[editing]);
-            break;
-        case "edittext2":
-            item_value[editing] = execute_string(item_script[editing], item_value[editing]);
-            menu_set_var(editing, item_value[editing]);
-            break;
-        case "editnum":
-            var newval;
-            newval = real(string_digits(item_value[editing]));
-            if(item_limit[editing]&gt;0)
-                newval = min(newval, item_limit[editing]);
-            menu_set_var(editing, newval);
-            execute_string(item_script[editing], menu_get_var(editing));
-            item_value[editing] = string(menu_get_var(editing));
-            break;
+    // TODO(enigma): if/else instead of switch; ENIGMA can't switch on strings. Restore switch when fixed
+    var editingType;
+    editingType = item_type[editing];
+    if (editingType == "edittext") {
+        menu_set_var(editing, item_value[editing]);
+        execute_string(item_script[editing], item_value[editing]);
+    }
+    else if (editingType == "edittext2") {
+        item_value[editing] = execute_string(item_script[editing], item_value[editing]);
+        menu_set_var(editing, item_value[editing]);
+    }
+    else if (editingType == "editnum") {
+        var newval;
+        newval = real(string_digits(item_value[editing]));
+        if(item_limit[editing]&gt;0)
+            newval = min(newval, item_limit[editing]);
+        menu_set_var(editing, newval);
+        execute_string(item_script[editing], menu_get_var(editing));
+        item_value[editing] = string(menu_get_var(editing));
     }
     editing = -1;
 }

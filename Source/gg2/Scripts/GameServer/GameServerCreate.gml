@@ -89,7 +89,8 @@
     
     instance_create(0,0,PlayerControl);
 
-    var map, i;
+    // i is declared above; ENIGMA rejects redeclaring a var in the same scope
+    var map;
     if (global.shuffleRotation) {
         ds_list_shuffle(global.map_rotation);
         map = ds_list_find_value(global.map_rotation, 0);

@@ -13,10 +13,16 @@ if(!player.sentry)
 }
 else
 {
-    player.sentry.x = xPos;
-    player.sentry.y = yPos;
+    // TODO(enigma): temp var avoids ENIGMA nested built-in dot bug (a.b.x); inline when fixed
+    var playerSentry;
+    playerSentry = player.sentry;
+    playerSentry.x = xPos;
+    playerSentry.y = yPos;
 }
 
-player.sentry.startDirection = startDirection;
-player.sentry.image_xscale = startDirection;
+// TODO(enigma): temp var avoids ENIGMA nested built-in dot bug (a.b.x); inline when fixed
+var sentryInst;
+sentryInst = player.sentry;
+sentryInst.startDirection = startDirection;
+sentryInst.image_xscale = startDirection;
 player.object.nutsNBolts -= 100;

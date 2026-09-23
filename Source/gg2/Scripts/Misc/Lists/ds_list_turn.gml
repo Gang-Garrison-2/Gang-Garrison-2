@@ -1,6 +1,6 @@
 // Reads the first value in a list, then moves it to the back of the list
 if(ds_list_size(argument0) < 0)
-    return NAN;
+    return 0; // unreachable; was NAN, which neither GM8 nor ENIGMA defines
 
 var n;
 n = ds_list_find_value(argument0, 0);

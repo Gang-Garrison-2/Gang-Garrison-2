@@ -212,19 +212,22 @@ while(commandLimitRemaining > 0) {
         case BUILD_SENTRY:
             if(player.object != -1)
             {
+                // TODO(enigma): temp var avoids ENIGMA nested built-in dot bug (a.b.x); inline when fixed
+                var playerObject;
+                playerObject = player.object;
                 if(player.class == CLASS_ENGINEER
-                        and collision_circle(player.object.x, player.object.y, 50, Sentry, false, true) < 0
-                        and player.object.nutsNBolts == 100
-                        and (collision_point(player.object.x,player.object.y,SpawnRoom,0,0) < 0)
+                        and collision_circle(playerObject.x, playerObject.y, 50, Sentry, false, true) < 0
+                        and playerObject.nutsNBolts == 100
+                        and (collision_point(playerObject.x,playerObject.y,SpawnRoom,0,0) < 0)
                         and !player.sentry
-                        and !player.object.onCabinet)
+                        and !playerObject.onCabinet)
                 {
                     write_ubyte(global.sendBuffer, BUILD_SENTRY);
                     write_ubyte(global.sendBuffer, playerId);
-                    write_ushort(global.serializeBuffer, round(player.object.x*5));
-                    write_ushort(global.serializeBuffer, round(player.object.y*5));
-                    write_byte(global.serializeBuffer, player.object.image_xscale);
-                    buildSentry(player, player.object.x, player.object.y, player.object.image_xscale);
+                    write_ushort(global.serializeBuffer, round(playerObject.x*5));
+                    write_ushort(global.serializeBuffer, round(playerObject.y*5));
+                    write_byte(global.serializeBuffer, playerObject.image_xscale);
+                    buildSentry(player, playerObject.x, playerObject.y, playerObject.image_xscale);
                 }
             }
             break;                                       

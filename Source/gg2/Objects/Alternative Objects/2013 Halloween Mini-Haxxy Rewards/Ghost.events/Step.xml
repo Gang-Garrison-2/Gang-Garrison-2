@@ -18,7 +18,10 @@
 // Die and fly towards owner
 if (owner.object != -1) {
     sprite_index = GhostDeath;
-    move_towards_point(owner.object.x, owner.object.y, 10);
+    // TODO(enigma): temp var avoids ENIGMA nested built-in dot bug (a.b.x); inline when fixed
+    var ownerObject;
+    ownerObject = owner.object;
+    move_towards_point(ownerObject.x, ownerObject.y, 10);
 // Chase other players but don't stray far from corpse's position
 } else {
     var hitBoundary;

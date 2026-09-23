@@ -10,7 +10,10 @@ if global.totalMapAreas > 1 {
     global.area[1] = 0;
     
     for(i=2;i<=global.totalMapAreas;i+=1) {
-        global.area[i] = instance_find(NextAreaO,i-2).y;
+        // TODO(enigma): temp var avoids ENIGMA dot-after-call bug (f().y); inline when fixed
+        var nextArea;
+        nextArea = instance_find(NextAreaO,i-2);
+        global.area[i] = nextArea.y;
     }
 
     if (global.currentMapArea == 1)

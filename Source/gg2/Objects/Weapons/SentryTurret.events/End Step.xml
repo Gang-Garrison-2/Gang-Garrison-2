@@ -17,8 +17,11 @@
 
 if(ownerPlayer.sentry)
 {
-    x = ownerPlayer.sentry.x;
-    y = ownerPlayer.sentry.y;
+    // TODO(enigma): temp var avoids ENIGMA nested built-in dot bug (a.b.x); inline when fixed
+    var ownerSentry;
+    ownerSentry = ownerPlayer.sentry;
+    x = ownerSentry.x;
+    y = ownerSentry.y;
 }
 else
 {
@@ -89,7 +92,11 @@ if(!nearestTarget) {
 } else {
     // set cloaked spy as target if they're in the way
     with(Spy) {
-        if(team != other.team &amp;&amp; collision_line(other.x,other.y,other.nearestTarget.x,other.nearestTarget.y,id,true,false)&gt;=0) {
+        // TODO(enigma): temp var avoids ENIGMA nested built-in dot bug (a.b.x); inline when fixed
+        // Re-read each iteration: an earlier spy may have become the target.
+        var turretTarget;
+        turretTarget = other.nearestTarget;
+        if(team != other.team &amp;&amp; collision_line(other.x,other.y,turretTarget.x,turretTarget.y,id,true,false)&gt;=0) {
             other.nearestTarget = id;
         }
     }
@@ -121,7 +128,10 @@ if(!nearestTarget) {
         
         playsound(x,y,ShotgunSnd);
         ownerPlayer.sentry.idleTimer = false;
-        ownerPlayer.sentry.alarm[5] = 30 / global.delta_factor;
+        // TODO(enigma): temp var avoids ENIGMA nested built-in dot bug (a.b.x); inline when fixed
+        var ownerSentry;
+        ownerSentry = ownerPlayer.sentry;
+        ownerSentry.alarm[5] = 30 / global.delta_factor;
         
         if(nearestTarget.ubered == 0) {
             damageAuto(ownerPlayer, nearestTarget, hitDamage);

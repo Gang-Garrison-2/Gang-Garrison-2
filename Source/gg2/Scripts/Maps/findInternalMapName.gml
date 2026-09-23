@@ -1,56 +1,51 @@
 // returns the filename of an internal map by name, or else (if it's not a valid internal map), ""
 
-switch(argument0)
-{
-case "ctf_truefort":
+// TODO(enigma): if chain instead of switch; ENIGMA can't switch on strings. Restore switch when fixed
+var name;
+name = argument0;
+
+if (name == "ctf_truefort")
     return "ctf_truefort.png";
-case "ctf_2dfort":
-case "ctf_2dfort2":
-case "ctf_2dfortremix":
+if (name == "ctf_2dfort" or name == "ctf_2dfort2" or name == "ctf_2dfortremix")
     return "ctf_2dfort.png";
-case "ctf_conflict":
+if (name == "ctf_conflict")
     return "ctf_conflict.png";
-case "ctf_classicwell":
+if (name == "ctf_classicwell")
     return "ctf_classicwell.png";
-case "ctf_waterway":
+if (name == "ctf_waterway")
     return "ctf_waterway.png";
-case "ctf_orange":
+if (name == "ctf_orange")
     return "ctf_orange.png";
-case "ctf_avanti":
+if (name == "ctf_avanti")
     return "ctf_avanti.png";
-case "cp_dirtbowl":
+if (name == "cp_dirtbowl")
     return "cp_dirtbowl.png";
-case "cp_egypt":
+if (name == "cp_egypt")
     return "cp_egypt.png";
-case "arena_montane":
+if (name == "arena_montane")
     return "arena_montane.png";
-case "arena_lumberyard":
+if (name == "arena_lumberyard")
     return "arena_lumberyard.png";
-case "gen_destroy":
+if (name == "gen_destroy")
     return "gen_destroy.png";
-case "koth_harvest":
+if (name == "koth_harvest")
     return "koth_harvest.png";
-case "koth_valley":
+if (name == "koth_valley")
     return "koth_valley.png";
-case "koth_corinth":
+if (name == "koth_corinth")
     return "koth_corinth.png";
-case "dkoth_atalia":
+if (name == "dkoth_atalia")
     return "dkoth_atalia.png";
-case "dkoth_sixties":
-case "dkoth_60s":
+if (name == "dkoth_sixties" or name == "dkoth_60s")
     return "dkoth_sixties.png";
-case "tdm_mantic":
+if (name == "tdm_mantic")
     return "tdm_mantic.png";
-case "ctf_2dfort[0]":
-case "ctf_2dfort1":
-case "ctf_oldfort":
+if (name == "ctf_2dfort[0]" or name == "ctf_2dfort1" or name == "ctf_oldfort")
     return "ctf_oldfort.png";
-case "gg_debug":
+if (name == "gg_debug")
     return "gg_debug.png";
-case "koth_gallery":
+if (name == "koth_gallery")
     return "koth_gallery.png";
-case "ctf_eiger":
+if (name == "ctf_eiger")
     return "ctf_eiger.png";
-default:
-    return "";
-}
+return "";

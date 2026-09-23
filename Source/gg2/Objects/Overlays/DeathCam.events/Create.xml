@@ -15,7 +15,10 @@
       <arguments>
         <argument kind="STRING">cursor_sprite = -1;
 alarm[0] = 60 / global.delta_factor;
-alarm[2] = max(1, min(150/global.delta_factor, global.myself.alarm[5]));
+// TODO(enigma): temp var avoids ENIGMA nested built-in dot bug (a.b.x); inline when fixed
+var myPlayer;
+myPlayer = global.myself;
+alarm[2] = max(1, min(150/global.delta_factor, myPlayer.alarm[5]));
 
 zoom=1;
 zooming=false;

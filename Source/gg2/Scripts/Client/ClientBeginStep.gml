@@ -583,11 +583,14 @@ do {
             player = ds_list_find_value(global.players, read_ubyte(global.tempBuffer));
             if(player.sentry)
             {
-                player.sentry.x = read_ushort(global.tempBuffer) / 5;
-                player.sentry.y = read_ushort(global.tempBuffer) / 5;
-                player.sentry.xprevious = player.sentry.x;
-                player.sentry.yprevious = player.sentry.y;
-                player.sentry.vspeed = 0;
+                // TODO(enigma): temp var avoids ENIGMA nested built-in dot bug (a.b.x); inline when fixed
+                var playerSentry;
+                playerSentry = player.sentry;
+                playerSentry.x = read_ushort(global.tempBuffer) / 5;
+                playerSentry.y = read_ushort(global.tempBuffer) / 5;
+                playerSentry.xprevious = playerSentry.x;
+                playerSentry.yprevious = playerSentry.y;
+                playerSentry.vspeed = 0;
             }
             break;
           

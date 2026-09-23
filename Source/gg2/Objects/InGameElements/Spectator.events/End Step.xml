@@ -68,8 +68,11 @@ else if(tracking)
             {
                 if(!(player.object.cloak &amp;&amp; player.team != myTeam))
                 {
-                    x = round(player.object.x);
-                    y = round(player.object.y);
+                    // TODO(enigma): temp var avoids ENIGMA nested built-in dot bug (a.b.x); inline when fixed
+                    var playerObject;
+                    playerObject = player.object;
+                    x = round(playerObject.x);
+                    y = round(playerObject.y);
                 }
                 else
                     stopTracking = true;
@@ -79,8 +82,11 @@ else if(tracking)
             stopTracking = true;
         if (instance_exists(player.corpse) and !player.object and tracking)
         {
-            x = round(player.corpse.x);
-            y = round(player.corpse.y);
+            // TODO(enigma): temp var avoids ENIGMA nested built-in dot bug (a.b.x); inline when fixed
+            var playerCorpse;
+            playerCorpse = player.corpse;
+            x = round(playerCorpse.x);
+            y = round(playerCorpse.y);
         }
     }
     else
