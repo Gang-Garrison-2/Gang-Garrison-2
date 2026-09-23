@@ -19,10 +19,10 @@
     editingType = item_type[editing];
     if (editingType == "edittext") {
         menu_set_var(editing, item_value[editing]);
-        execute_string(item_script[editing], item_value[editing]);
+        run_action(item_script[editing], item_value[editing]);
     }
     else if (editingType == "edittext2") {
-        item_value[editing] = execute_string(item_script[editing], item_value[editing]);
+        item_value[editing] = run_action(item_script[editing], item_value[editing]);
         menu_set_var(editing, item_value[editing]);
     }
     else if (editingType == "editnum") {
@@ -31,7 +31,7 @@
         if(item_limit[editing]&gt;0)
             newval = min(newval, item_limit[editing]);
         menu_set_var(editing, newval);
-        execute_string(item_script[editing], menu_get_var(editing));
+        run_action(item_script[editing], menu_get_var(editing));
         item_value[editing] = string(menu_get_var(editing));
     }
     editing = -1;

@@ -14,18 +14,21 @@ ENIGMA_ROOT="${ENIGMA_ROOT:-/opt/enigma-dev-git}"
 : "${GMKSPLIT:?set GMKSPLIT to the path of gmksplit.jar}"
 
 mode=(-j"$(nproc)")
-systems=(-p xlib -g OpenGL1 -a OpenAL -w None)
+prebuild_flags=(--stub-extensions) # until Faucet/GG2DLL are built as native libraries
+systems=(-p xlib -g OpenGL1 -a OpenAL -w xlib) # xlib widgets: zenity/kdialog dialogs
 for arg in "$@"; do
   case "$arg" in
     --codegen-only) mode=(--codegen-only) ;;
-    --headless) systems=(-p None -g None -a None -w None) ;;
+    --headless)
+      systems=(-p None -g None -a None -w None)
+      prebuild_flags+=(--headless)
+      ;;
     *) echo "unknown option: $arg" >&2; exit 2 ;;
   esac
 done
 
 mkdir -p "$WORK"
-# --stub-extensions until Faucet/GG2DLL are built as native libraries.
-python3 "$HERE/prebuild.py" "$SRC" "$WORK/src/gg2" --stub-extensions
+python3 "$HERE/prebuild.py" "$SRC" "$WORK/src/gg2" "${prebuild_flags[@]}"
 rm -f "$WORK/gg2.gmk" # gmksplit won't overwrite
 (cd "$WORK/src" && java -jar "$GMKSPLIT" gg2 "$WORK/gg2.gmk" >/dev/null)
 

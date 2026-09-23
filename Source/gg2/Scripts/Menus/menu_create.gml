@@ -32,5 +32,5 @@ mouse_samples = -1;
 
 // Hack: The back button should usually appear last in the menu, even if plugins
 // add new items later, so we treat it separately.
-menu_script_back = "";
+menu_script_back = -1;
 menu_text_back = "";

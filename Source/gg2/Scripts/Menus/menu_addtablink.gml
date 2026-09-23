@@ -1,5 +1,5 @@
 // argument0 - name
-// argument1 - GML code to execute
+// argument1 - script to run (-1 for none)
 
 tab_name[tabs] = argument0;
 tab_script[tabs] = argument1;

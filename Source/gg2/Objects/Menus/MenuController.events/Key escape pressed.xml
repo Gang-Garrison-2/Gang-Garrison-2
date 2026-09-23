@@ -14,7 +14,7 @@
       <appliesTo>.self</appliesTo>
       <arguments>
         <argument kind="STRING">if(stepHasRun)
-    execute_string(menu_script_back);
+    run_action(menu_script_back, 0);
 
 </argument>
       </arguments>

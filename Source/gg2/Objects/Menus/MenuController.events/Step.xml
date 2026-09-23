@@ -55,13 +55,13 @@ if(editing != -1) {
         if (editingType == "editkeyormouse") {
             if mouse_check_button(mb_left) {
                 menu_set_var(editing, MOUSE_LEFT);
-                execute_string(item_script[editing], MOUSE_LEFT);
+                run_action(item_script[editing], MOUSE_LEFT);
                 editing = -1;
                 exit;
             }
             else if mouse_check_button(mb_right) {
                 menu_set_var(editing, MOUSE_RIGHT);
-                execute_string(item_script[editing], MOUSE_RIGHT);
+                run_action(item_script[editing], MOUSE_RIGHT);
                 editing = -1;
                 exit;
             }
@@ -69,7 +69,7 @@ if(editing != -1) {
         if keyboard_check_direct(vk_tab) keyboard_lastkey = vk_tab;
         if keyboard_lastkey != 0 {
             menu_set_var(editing, keyboard_lastkey);
-            execute_string(item_script[editing], menu_get_var(editing));
+            run_action(item_script[editing], menu_get_var(editing));
             editing = -1;
             exit;
         }
@@ -85,9 +85,9 @@ if(editing != -1) {
                 var clickedType;
                 clickedType = item_type[virtualitem];
                 if (clickedType == "script")
-                    execute_string(item_script[virtualitem]);
+                    run_action(item_script[virtualitem], 0);
                 else if (clickedType == "editscript")
-                    item_value[virtualitem] = execute_string(item_script[virtualitem]);
+                    item_value[virtualitem] = run_action(item_script[virtualitem], 0);
                 else if (clickedType == "editkey" or clickedType == "editkeyormouse") {
                     io_clear();
                     editing = virtualitem;
@@ -99,7 +99,7 @@ if(editing != -1) {
                 else if (clickedType == "editselect") {
                     item_value[virtualitem] = (item_value[virtualitem]+1) mod item_options[virtualitem];
                     menu_set_var(virtualitem, item_option_value[virtualitem, item_value[virtualitem]]);
-                    execute_string(item_script[virtualitem], menu_get_var(virtualitem));
+                    run_action(item_script[virtualitem], menu_get_var(virtualitem));
                 }
             }
         }
@@ -113,7 +113,7 @@ if(editing != -1) {
             mouse_clear(mb_left);
             if(-2-virtualitem &lt; tabs)
             {
-                execute_string(tab_script[-2-virtualitem]);
+                run_action(tab_script[-2-virtualitem], 0);
             }
         }
     } else {

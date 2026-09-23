@@ -9,7 +9,7 @@ Bugs that need a structural rewrite (nested built-in dot access, string
 switch) are fixed in the source, marked TODO(enigma). This script lints for
 them so they don't come back.
 
-Usage: prebuild.py <Source/gg2> <out dir> [--stub-extensions]
+Usage: prebuild.py <Source/gg2> <out dir> [--stub-extensions] [--headless]
 """
 
 import argparse
@@ -72,6 +72,46 @@ HELPERS = {
         '    return "";\n'
         "return string_copy(argument0, argument1, 1);\n",
     ),
+    # ENIGMA declares these but no widget system implements them.
+    # ponytail: approximated with question/number prompts; proper fix is a
+    # zenity --list/--question implementation in ENIGMA's xlib widgets.
+    "show_message_ext": (
+        "gml_show_message_ext",
+        "var n, choice, text;\n"
+        "n = 0;\n"
+        'text = argument0 + "##";\n'
+        'if (argument1 != "") { n += 1; choice[n] = 1;'
+        ' text += string(n) + ": " + argument1 + "#"; }\n'
+        'if (argument2 != "") { n += 1; choice[n] = 2;'
+        ' text += string(n) + ": " + argument2 + "#"; }\n'
+        'if (argument3 != "") { n += 1; choice[n] = 3;'
+        ' text += string(n) + ": " + argument3 + "#"; }\n'
+        "if (n == 0) { show_message(argument0); return 0; }\n"
+        "if (n == 1) { show_message(argument0); return choice[1]; }\n"
+        "if (n == 2) {\n"
+        '    if (show_question(argument0 + "##Yes: " + argument1 + "#No: "'
+        " + argument3)) return choice[1];\n"
+        "    return choice[2];\n"
+        "}\n"
+        "n = get_integer(text, 1);\n"
+        "if (n < 1 or n > 3) return 0;\n"
+        "return choice[n];\n",
+    ),
+    "show_menu_pos": (
+        "gml_show_menu_pos",
+        "var rest, text, n, p;\n"
+        'rest = argument2; text = "Choose:#"; n = 0;\n'
+        'while (rest != "") {\n'
+        '    p = string_pos("|", rest);\n'
+        "    if (p == 0) p = string_length(rest) + 1;\n"
+        "    n += 1;\n"
+        '    text += string(n) + ": " + string_copy(rest, 1, p - 1) + "#";\n'
+        "    rest = string_delete(rest, 1, p);\n"
+        "}\n"
+        "p = get_integer(text, 0);\n"
+        "if (p < 1 or p > n) return argument3;\n"
+        "return p - 1;\n",
+    ),
 }
 
 # GM8 functions ENIGMA doesn't have, added as scripts of the same name.
@@ -87,7 +127,11 @@ COMPAT = {
         ],
         "// no-op: ENIGMA uses native dialogs\n",
     ),
+    # GM8 splash windows: open the page in the browser instead.
     "action_splash_web": "url_open(argument0);\n",
+    "splash_show_web": "url_open(argument0);\n",
+    "splash_set_main": "// no-op: no splash window\n",
+    "splash_set_interrupt": "// no-op: no splash window\n",
     # Included files are shipped next to the binary instead of embedded.
     "export_include_file_location": "return file_copy(program_directory + "
     '"/" + argument0, argument1);\n',
@@ -97,6 +141,18 @@ COMPAT = {
 STUB_OVERRIDES = {
     "upnp_error_string": 'return "UPnP port forwarding is not supported in this'
     ' build.";\n',
+}
+
+# Headless builds (widgets None) have no file dialogs; ask on the console.
+HEADLESS_HELPERS = {
+    "get_open_filename": (
+        "gml_get_open_filename",
+        'return get_string("File to open:", "");\n',
+    ),
+    "get_save_filename": (
+        "gml_get_save_filename",
+        'return get_string("File to save:", argument1);\n',
+    ),
 }
 
 # Resource names must be valid C++ identifiers in ENIGMA.
@@ -312,7 +368,9 @@ def main():
         action="store_true",
         help="add return-0 scripts for native extensions",
     )
+    ap.add_argument("--headless", action="store_true", help="build for widgets None")
     args = ap.parse_args()
+    helpers = HELPERS | (HEADLESS_HELPERS if args.headless else {})
 
     if args.out.exists():
         shutil.rmtree(args.out)
@@ -320,7 +378,7 @@ def main():
 
     renames = dict(RENAMES)
     renames.update(SCRIPT_RENAMES)
-    renames.update({name: helper for name, (helper, _) in HELPERS.items()})
+    renames.update({name: helper for name, (helper, _) in helpers.items()})
     renames.update({f: "fct_" + f for f in FAUCET})
     rw = Rewriter(load_constants(args.out / "Constants.xml"), renames)
 
@@ -353,7 +411,7 @@ def main():
     fill_empty_backgrounds(args.out)
     rename_rooms(args.out)
     rename_scripts(args.out, SCRIPT_RENAMES)
-    add_script_group(args.out, "EnigmaHelpers", dict(HELPERS.values()) | COMPAT)
+    add_script_group(args.out, "EnigmaHelpers", dict(helpers.values()) | COMPAT)
     if args.stub_extensions:
         stub = "// stub: native extension not built yet\nreturn 0;\n"
         names = ["fct_" + f for f in FAUCET] + OTHER_EXTENSIONS

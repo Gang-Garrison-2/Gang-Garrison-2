@@ -13,4 +13,5 @@
   <resource name="format_timer_value" type="RESOURCE"/>
   <resource name="getRelativePathIfDescendant" type="RESOURCE"/>
   <resource name="sprite_find_by_name" type="RESOURCE"/>
+  <resource name="run_action" type="RESOURCE"/>
 </resources>

@@ -1,6 +1,6 @@
 // argument0 - name
 // argument1 - name of the variable this setting is bound to
-// argument2 - GML code to run upon change (argument0 is new value)
+// argument2 - script to run upon change, gets the new value as argument0 (-1 for none)
 // Call menu_add_option right after this function to add options for the select.
 // You need to add at least one option or the menu will error out.
 

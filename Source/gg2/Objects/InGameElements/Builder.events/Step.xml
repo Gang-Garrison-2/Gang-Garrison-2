@@ -112,9 +112,9 @@ if (expanded) {
                 if (mouse_check_button_pressed(mb_left)) {
                     button = items - 1 - floor((yOffset-mouse_y)/height*items) + scrollIndex;
                     if (!buttons[button, TOGGLE]) {
-                        execute_string(ds_map_find_value(ds_list_find_value(global.buttons, button), "code"), true);
+                        run_action(ds_map_find_value(ds_list_find_value(global.buttons, button), "code"), true);
                     } else {
-                        buttons[button, TOGGLED] = execute_string(ds_map_find_value(ds_list_find_value(global.buttons, button), "code"), !buttons[button, TOGGLED]);
+                        buttons[button, TOGGLED] = run_action(ds_map_find_value(ds_list_find_value(global.buttons, button), "code"), !buttons[button, TOGGLED]);
                     }
                 }
             }

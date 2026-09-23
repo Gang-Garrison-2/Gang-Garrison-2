@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
+  <resource name="Actions" type="GROUP"/>
   <resource name="builder_init" type="RESOURCE"/>
   <resource name="addGamemode" type="RESOURCE"/>
   <resource name="addEntity" type="RESOURCE"/>
