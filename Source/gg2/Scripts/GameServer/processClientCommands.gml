@@ -339,29 +339,36 @@ while(commandLimitRemaining > 0) {
             break;
 
         case PLUGIN_PACKET:
-            var packetID, buf, success;
-
-            packetID = read_ubyte(socket);
-            
-            // get packet data
-            buf = buffer_create();
-            write_buffer_part(buf, socket, socket_receivebuffer_size(socket));
-
-            // try to enqueue
-            success = _PluginPacketPush(packetID, buf, player);
-            
-            // if it returned false, packetID was invalid
-            if (!success)
-            {
-                // clear up buffer
-                buffer_destroy(buf);
-
-                // kick player
-                write_ubyte(player.socket, KICK);
-                write_ubyte(player.socket, KICK_BAD_PLUGIN_PACKET);
-                socket_destroy(player.socket);
-                player.socket = -1;
-            }
+            // PLUGINS(disabled): no runtime GML execution in ENIGMA; revisit
+            // var packetID, buf, success;
+            //
+            // packetID = read_ubyte(socket);
+            //
+            // // get packet data
+            // buf = buffer_create();
+            // write_buffer_part(buf, socket, socket_receivebuffer_size(socket));
+            //
+            // // try to enqueue
+            // success = _PluginPacketPush(packetID, buf, player);
+            //
+            // // if it returned false, packetID was invalid
+            // if (!success)
+            // {
+            //     // clear up buffer
+            //     buffer_destroy(buf);
+            //
+            //     // kick player
+            //     write_ubyte(player.socket, KICK);
+            //     write_ubyte(player.socket, KICK_BAD_PLUGIN_PACKET);
+            //     socket_destroy(player.socket);
+            //     player.socket = -1;
+            // }
+            // No plugins are loaded, so every plugin packet ID is invalid (same as a
+            // server without plugins).
+            write_ubyte(player.socket, KICK);
+            write_ubyte(player.socket, KICK_BAD_PLUGIN_PACKET);
+            socket_destroy(player.socket);
+            player.socket = -1;
             break;
             
         case CLIENT_SETTINGS:

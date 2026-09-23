@@ -10,5 +10,6 @@ with(argument1)
 
 argument1.hp -= argument2;
 
-execute_string( global.dealDamageFunction, argument0, argument1, argument2 );
+// PLUGINS(disabled): no runtime GML execution in ENIGMA; revisit
+// execute_string( global.dealDamageFunction, argument0, argument1, argument2 );
 

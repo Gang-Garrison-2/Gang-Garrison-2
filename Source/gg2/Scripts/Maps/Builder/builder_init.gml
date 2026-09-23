@@ -5,8 +5,9 @@ global.gamemodes = ds_list_create();
 global.buttons = ds_list_create();
 global.resources = ds_map_create();
 
-global.placeEntityFunction = "";
-global.metadataFunction = "";
+// PLUGINS(disabled): no runtime GML execution in ENIGMA; revisit
+// global.placeEntityFunction = "";
+// global.metadataFunction = "";
 
 // Add buttons
 addButton("Load map", '

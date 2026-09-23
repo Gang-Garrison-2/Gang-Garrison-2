@@ -86,9 +86,13 @@ case STATE_CLIENT_AUTHENTICATED:
     write_ubyte(socket, string_length(global.currentMapMD5));
     write_string(socket, global.currentMapMD5);
     
-    write_ubyte(socket, global.serverPluginsRequired);
-    write_ushort(socket, string_length(GameServer.pluginList));
-    write_string(socket, GameServer.pluginList);
+    // PLUGINS(disabled): no runtime GML execution in ENIGMA; revisit
+    // write_ubyte(socket, global.serverPluginsRequired);
+    // write_ushort(socket, string_length(GameServer.pluginList));
+    // write_string(socket, GameServer.pluginList);
+    // No server-sent plugins: not required, empty list.
+    write_ubyte(socket, 0);
+    write_ushort(socket, 0);
     
     advertisedMap = global.currentMap;
     advertisedMapMd5 = global.currentMapMD5;

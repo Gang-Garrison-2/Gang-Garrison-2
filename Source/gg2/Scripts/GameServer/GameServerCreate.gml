@@ -124,37 +124,40 @@
     
     GameServerDefineCommands();
     
-    // load server-sent plugins, if any
-    if (string_length(global.serverPluginList))
-    {
-        // Get hashes of latest versions for plugin list
-        pluginList = getpluginhashes(global.serverPluginList);
-        if (pluginList == 'failure')
-        {
-            show_message("Error occurred getting server-sent plugin hashes.");
-            game_end();
-            exit;
-        }
-        if (string_length(pluginList) > 65535)
-        {
-            show_message("Error: you are requiring too many server-sent plugins.");
-            game_end();
-            exit;
-        }
-
-        // Load plugins
-        if (!loadserverplugins(pluginList))
-        {
-            show_message("Error occurred loading server-sent plugins.");
-            game_end();
-            exit;
-        }
-        global.serverPluginsInUse = true;
-    }
-    else
-    {
-        pluginList = '';
-    }
+    // PLUGINS(disabled): no runtime GML execution in ENIGMA; revisit
+    // // load server-sent plugins, if any
+    // if (string_length(global.serverPluginList))
+    // {
+    //     // Get hashes of latest versions for plugin list
+    //     pluginList = getpluginhashes(global.serverPluginList);
+    //     if (pluginList == 'failure')
+    //     {
+    //         show_message("Error occurred getting server-sent plugin hashes.");
+    //         game_end();
+    //         exit;
+    //     }
+    //     if (string_length(pluginList) > 65535)
+    //     {
+    //         show_message("Error: you are requiring too many server-sent plugins.");
+    //         game_end();
+    //         exit;
+    //     }
+    //
+    //     // Load plugins
+    //     if (!loadserverplugins(pluginList))
+    //     {
+    //         show_message("Error occurred loading server-sent plugins.");
+    //         game_end();
+    //         exit;
+    //     }
+    //     global.serverPluginsInUse = true;
+    // }
+    // else
+    // {
+    //     pluginList = '';
+    // }
+    // Server-sent plugins aren't supported; the handshake still sends an empty list.
+    pluginList = '';
     
     // Disable vsync to minimize framerate drops which would be noticed as lag issues by all players.
     // "vsync makes the server desync" --Arctic

@@ -39,8 +39,9 @@ if (instance_exists(Builder))
 else
     room_goto_fix(Menu);
 
-if (global.serverPluginsInUse)
-    pluginscleanup();
+// PLUGINS(disabled): no runtime GML execution in ENIGMA; revisit
+// if (global.serverPluginsInUse)
+//     pluginscleanup();
     
 set_synchronization(global.monitorSync);
 </argument>
