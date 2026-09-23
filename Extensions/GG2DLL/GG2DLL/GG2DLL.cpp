@@ -11,12 +11,18 @@
 #include "stdafx.h"
 #include "GG2DLL.h"
 #include "raii.hpp"
+#include <cstdint>
 #include <cstdlib>
+#include <cstring>
+#ifndef _WIN32
+#include <unistd.h>
+#endif
 
 const char GG2_TEXT_CHUNK_KEYWORD[] = "Gang Garrison 2 Level Data";
 
 std::string temp_filename_return_filename;
 GG2DLL_API GM_STRING get_temp_filename(GM_STRING directory, GM_STRING prefix) {
+#ifdef _WIN32
 	char buffer[MAX_PATH];
 	if(GetTempFileNameA(directory, prefix, 0, buffer) == 0)
 	{
@@ -24,6 +30,16 @@ GG2DLL_API GM_STRING get_temp_filename(GM_STRING directory, GM_STRING prefix) {
 		temp_filename_return_filename = "ERROR";
 	}
 	temp_filename_return_filename = buffer;
+#else
+	std::string pattern = std::string(directory) + "/" + prefix + "XXXXXX";
+	int fd = mkstemp(&pattern[0]);
+	if(fd == -1)
+		temp_filename_return_filename = "ERROR";
+	else {
+		close(fd);
+		temp_filename_return_filename = pattern;
+	}
+#endif
 	return temp_filename_return_filename.c_str();
 }
 
@@ -60,7 +76,10 @@ int save_png_file(const char* filename, png_structp & png_ptr, png_infop & info_
     png_init_io(png_ptr, file.fp);
 	png_write_png(png_ptr, info_ptr, PNG_TRANSFORM_IDENTITY, NULL);
 
-	if(fclose(file.fp)) {
+	// Close here to report errors; clear fp so raii_file doesn't close it again.
+	FILE *fp = file.fp;
+	file.fp = NULL;
+	if(fclose(fp)) {
 	    return -1;
 	}
 

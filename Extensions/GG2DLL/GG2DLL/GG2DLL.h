@@ -13,7 +13,10 @@
 // that uses this DLL. This way any other project whose source files include this file see
 // GG2DLL_API functions as being imported from a DLL, whereas this DLL sees symbols
 // defined with this macro as being exported.
-#ifdef GG2DLL_EXPORTS
+#ifndef _WIN32
+// Shared library (ENIGMA builds, loaded with external_define).
+#define GG2DLL_API __attribute__((visibility("default")))
+#elif defined(GG2DLL_EXPORTS)
 #define GG2DLL_API __declspec(dllexport)
 #else
 #define GG2DLL_API __declspec(dllimport)
