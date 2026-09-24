@@ -11,6 +11,7 @@ weapon's refire alarm, so no gun could shoot).
 #35: self.<built-in> (hspeed, image_index, visible, ...) references an
 accessor that isn't generated; use the glaccess form other.<built-in> gets.
 #39: window settings from Global Game Settings (the GMK reader drops them).
+#42: only the main loop's redraw swaps buffers.
 Idempotent.
 """
 
@@ -128,3 +129,17 @@ if settings_xml := os.environ.get("GAME_SETTINGS"):
             sys.exit(f"fix_codegen: {name} not found in IDE_EDIT_globals.h")
     if glob != glob_path.read_text():
         glob_path.write_text(glob)
+
+# #42: screen_redraw() from game code must not swap buffers, or a following
+# screen_save* reads an undefined back buffer. The patched engine swaps only
+# when this flag is set, around the main loop's own redraw.
+ev_path = gen / "IDE_EDIT_events.h"
+ev = ev_path.read_text()
+if "redraw_refresh" not in ev:
+    call = "if (automatic_redraw) screen_redraw();"
+    head = "namespace enigma\n{\n"
+    if ev.count(call) != 1 or not ev.startswith(head, ev.find(head)):
+        sys.exit("fix_codegen: main-loop screen_redraw() call not found")
+    ev = ev.replace(call, "if (automatic_redraw) { redraw_refresh = true; screen_redraw(); redraw_refresh = false; }")
+    ev = ev.replace(head, head + "  bool redraw_refresh = false;\n", 1)
+    ev_path.write_text(ev)

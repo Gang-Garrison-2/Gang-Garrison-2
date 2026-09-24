@@ -165,6 +165,13 @@ HELPERS = {
         "if (!sprite_exists(argument0)) return 0;\n"
         "return sprite_get_width(argument0);\n",
     ),
+    # ENIGMA's xlib keyboard_check_direct maps vk_shift/control/alt to the
+    # right-hand key only (and XQueryKeymap is unreliable under XWayland), so
+    # GG2's hold-Shift scoreboard never opened. The tracked state sees both.
+    "keyboard_check_direct": (
+        "gml_keyboard_check_direct",
+        "return keyboard_check(argument0);\n",
+    ),
     "string_char_at": (
         "gml_string_char_at",
         "if (argument1 < 1 or argument1 > string_length(argument0))\n"

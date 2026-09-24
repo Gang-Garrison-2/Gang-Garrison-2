@@ -80,6 +80,23 @@ PATCHES = {
     "ENIGMAsystem/SHELL/Graphics_Systems/General/GSscreen.cpp": [
         # (#37) GUI units are the first room's size (screen_init), so map the
         # window mouse into them rather than assuming 1:1.
+        # #44: only the view viewports are cleared, and a resize clears one
+        # buffer once, so letterbox bars show stale frames that flicker as the
+        # buffers swap. GM8 fills the window with "colour outside the room".
+        ("void screen_redraw()\n{\n  enigma::scene_begin();\n",
+         "void screen_redraw()\n{\n  enigma::scene_begin();\n"
+         "  graphics_set_viewport(0, 0, window_get_width(), window_get_height());\n"
+         "  draw_clear(window_get_color());\n"
+         # #45: GM8 stores view_x/yview/wview/hview as integers; ENIGMA keeps
+         # fractions, so HUD drawn at view_xview + offset (GG2 kill log icons)
+         # rounds differently each frame and wiggles.
+         "  for (int i = 0; i < 8; i++) {\n"
+         "    view_xview[i] = nearbyint((double) view_xview[i]); view_yview[i] = nearbyint((double) view_yview[i]);\n"
+         "    view_wview[i] = nearbyint((double) view_wview[i]); view_hview[i] = nearbyint((double) view_hview[i]);\n"
+         "  }\n", 1),
+        ("using namespace std;\n",
+         "using namespace std;\nnamespace enigma { extern bool redraw_refresh; }  // #42, defined by fix_codegen\n", 1),
+        ("  screen_refresh();\n}", "  if (enigma::redraw_refresh) screen_refresh();\n}", 1),
         ("    draw_sprite(cursor_sprite, 0, mouse_x, mouse_y);",
          "    draw_sprite(cursor_sprite, 0,\n"
          "      (window_mouse_get_x() - (window_get_width() - window_get_region_width_scaled()) / 2.0)\n"
@@ -94,6 +111,60 @@ PATCHES = {
         ("  gs_scalar ulcx = x + xscale * cos(M_PI+rot) + yscale * cos(M_PI/2+rot),\n"
          "            ulcy = y - yscale * sin(M_PI+rot) - yscale * sin(M_PI/2+rot);",
          "  gs_scalar ulcx = x, ulcy = y;", 2),
+    ],
+    # #41: precise collision maps a pixel to the mask with (int)(pixel - x)
+    # and (int)(d/scale + origin). GM8 rounds the instance position first and
+    # floors the mask index; with a fractional position the mask lands one
+    # pixel off (GG2 corpses, mines).
+    "ENIGMAsystem/SHELL/Collision_Systems/Precise/PRECimpl.cpp": [
+        *[(f"const int b{a}{n} = ({p} - {a}{n});", f"const int b{a}{n} = ({p} - (int)nearbyint({a}{n}));", c)
+          for a, n, p, c in [("x", 1, "colindex", 3), ("y", 1, "rowindex", 3), ("x", 1, "gx", 2),
+                             ("y", 1, "gy", 2), ("x", 2, "colindex", 1), ("y", 2, "rowindex", 1)]],
+        *[(f"const int p{a}{n} = (int)((", f"const int p{a}{n} = (int)floor((", c)
+          for a, n, c in [("x", 1, 5), ("y", 1, 5), ("x", 2, 1), ("y", 2, 1)]],
+    ],
+    # #42: screen_redraw() ends with a buffer swap, so a screen_save* after it
+    # reads the undefined back buffer; the read also keeps the framebuffer's
+    # alpha (mostly 0), and takes region coordinates as raw window pixels
+    # (wrong area once the window is scaled/letterboxed). GG2's killcam
+    # snapshot was black, then misaligned in fullscreen. Only the main loop's
+    # redraw swaps (flag set by fix_codegen); captures map region coordinates
+    # onto the window and come back at region resolution, opaque.
+    "ENIGMAsystem/SHELL/Graphics_Systems/OpenGL-Desktop/screen.cpp": [
+        ("  const int topY = enigma_user::window_get_region_height_scaled()-height-y;\n"
+         "  unsigned char* pxdata = new unsigned char[width*height*bpp];\n",
+         "  using namespace enigma_user;\n"
+         "  const double sx = double(window_get_region_width_scaled()) / window_get_region_width(),\n"
+         "               sy = double(window_get_region_height_scaled()) / window_get_region_height();\n"
+         "  const int ox = (window_get_width() - window_get_region_width_scaled()) / 2,\n"
+         "            oy = (window_get_height() - window_get_region_height_scaled()) / 2;\n"
+         "  const int rw = width*sx < 1 ? 1 : int(width*sx + .5), rh = height*sy < 1 ? 1 : int(height*sy + .5);\n"
+         "  const int rx = ox + int(x*sx + .5), ry = window_get_height() - (oy + int(y*sy + .5)) - rh;\n"
+         "  unsigned char* raw = new unsigned char[rw*rh*bpp];\n"
+         "  unsigned char* pxdata = new unsigned char[width*height*bpp];\n", 1),
+        ("  glReadPixels(x,topY,width,height,GL_BGRA,GL_UNSIGNED_BYTE,pxdata);",
+         "  glReadPixels(rx,ry,rw,rh,GL_BGRA,GL_UNSIGNED_BYTE,raw);\n"
+         "  for (int j = 0; j < height; j++)  // nearest neighbour; rows stay bottom-up\n"
+         "    for (int i = 0; i < width; i++) {\n"
+         "      const int si = int(i*sx) < rw ? int(i*sx) : rw - 1, sj = int(j*sy) < rh ? int(j*sy) : rh - 1;\n"
+         "      for (int c = 0; c < bpp; c++) pxdata[(j*width + i)*bpp + c] = raw[(sj*rw + si)*bpp + c];\n"
+         "    }\n"
+         "  delete[] raw;\n"
+         "  for (int i = 3; i < width*height*bpp; i += bpp) pxdata[i] = 255;", 1),
+    ],
+    "ENIGMAsystem/SHELL/Graphics_Systems/OpenGL-Common/screen.cpp": [
+        ("  const int fw = enigma_user::window_get_region_width_scaled(),\n"
+         "            fh = enigma_user::window_get_region_height_scaled();",
+         "  const int fw = enigma_user::window_get_region_width(),\n"
+         "            fh = enigma_user::window_get_region_height();", 1),
+    ],
+    # #46: io_clear() leaves keyboard_lastkey/keyboard_key set; GM8 clears
+    # them. GG2's key-binding menu calls io_clear() then binds the first
+    # keyboard_lastkey, so it grabbed the previously pressed key at once.
+    "ENIGMAsystem/SHELL/Platforms/General/PFwindow.cpp": [
+        ("  for (int i = 0; i < 3; i++) enigma::mousestatus[i] = enigma::last_mousestatus[i] = 0;\n}",
+         "  for (int i = 0; i < 3; i++) enigma::mousestatus[i] = enigma::last_mousestatus[i] = 0;\n"
+         "  keyboard_lastkey = keyboard_key = 0;\n}", 1),
     ],
     # #40: a filled draw_rectangle covers pixels x1..x2-1; GM8 covers x1..x2
     # inclusive, so GG2's stacked menu rectangles left a 1px gap and its
