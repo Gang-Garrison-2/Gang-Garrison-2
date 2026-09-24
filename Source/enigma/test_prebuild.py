@@ -67,6 +67,12 @@ p.lint("t", "if (s & $01 != 0 and x | y + 1 == 2) z = 1; if (k & $40 and h >= 0)
 p.lint("t", "if (!c | d <= e) z = 1;", problems)
 assert len(problems) == 2 and all("bitwise" in q for q in problems), problems
 
+# lint: && and || mixed at one paren level (GM8: equal precedence)
+problems = []
+p.lint("t", "if (a || b and c) x = 1; if ((a || b) && c) x = 2; f(a && b, c or d); x = a or b; y = c and d;", problems)
+p.lint("t", "if a == 1 or b != 2 and c < 3 z = 1;", problems)
+assert len(problems) == 2 and all("mixed" in q for q in problems), problems
+
 # with() bodies in object events: names the enclosing object owns get self.
 got = p.qualify_with_bodies(
     "var d; with (Character) { if (dist(other) < other.r) hp -= 999; d = x; foo(team); }\n"

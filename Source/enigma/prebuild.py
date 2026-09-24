@@ -347,6 +347,7 @@ STATEMENT_RE = re.compile(
 )
 BIT_OPS = {"&", "|", "^"}
 CMP_OPS = {"==", "!=", "<=", ">=", "<", ">"}
+LOGIC_OPS = {"&&": "and", "and": "and", "||": "or", "or": "or", "^^": "xor", "xor": "xor"}
 PREC_TOKEN_RE = re.compile(
     r"&&|\|\||\^\^|<<|>>|[=!<>]=|[-+*/|&^]=|[&|^<>()\[\],;{}=]"
     r"|\b(?:and|or|xor|if|while|until|return|then|else|do|repeat|with|for|switch|case)\b"
@@ -582,6 +583,23 @@ def lint(name, code, problems):
         depth_ops[-1] = set()
         if tok == ")" and len(depth_ops) > 1:
             depth_ops.pop()
+    # GM8 gives && || ^^ one precedence, left to right (OpenGMK
+    # gml-parser/src/ast.rs get_op_precedence); C++ binds && tighter.
+    depth_ops = [set()]
+    for m in PREC_TOKEN_RE.finditer(bare):
+        tok = m.group(0)
+        if tok in LOGIC_OPS:
+            depth_ops[-1].add(LOGIC_OPS[tok])
+            if len(depth_ops[-1]) > 1:
+                line = bare.count("\n", 0, m.start()) + 1
+                problems.append(f"{name}:{line}: && and || mixed; add parens (GM8 evaluates them left to right)")
+                depth_ops[-1] = {LOGIC_OPS[tok]}
+        elif tok == "(":
+            depth_ops.append(set())
+        elif tok not in BIT_OPS and tok not in CMP_OPS:
+            depth_ops[-1] = set()
+            if tok == ")" and len(depth_ops) > 1:
+                depth_ops.pop()
     for stmt in STATEMENT_RE.finditer(bare):
         reads = []
         for m in READ_CALL_RE.finditer(stmt.group(0)):

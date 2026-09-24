@@ -1,0 +1,28 @@
+fix(enigma): group mixed && and || left to right like GM8
+
+diff --git a/Source/gg2/Objects/Projectiles/Rocket.events/User Event 5.xml b/Source/gg2/Objects/Projectiles/Rocket.events/User Event 5.xml
+index f2356fa8..40d23cf9 100644
+--- a/Source/gg2/Objects/Projectiles/Rocket.events/User Event 5.xml	
++++ b/Source/gg2/Objects/Projectiles/Rocket.events/User Event 5.xml	
+@@ -21,7 +21,7 @@
+         else
+             exploded = true;
+         if(characterHit != -1) {
+-            if(characterHit.team != team || characterHit.id == ownerPlayer.object and !characterHit.ubered )
++            if((characterHit.team != team || characterHit.id == ownerPlayer.object) and !characterHit.ubered )
+             {
+                 damageAuto( ownerPlayer, characterHit, hitDamage );
+                 if object_is_ancestor(characterHit.object_index, Character)
+diff --git a/Source/gg2/Scripts/GameServer/GameServerBeginStep.gml b/Source/gg2/Scripts/GameServer/GameServerBeginStep.gml
+index 7cf19d05..5c47a44d 100644
+--- a/Source/gg2/Scripts/GameServer/GameServerBeginStep.gml
++++ b/Source/gg2/Scripts/GameServer/GameServerBeginStep.gml
+@@ -52,7 +52,7 @@ for(i=0; i < ds_list_size(global.players); i+=1)
+         processClientCommands(player, i);
+ }
+ 
+-if(syncTimer == 1 || ((frame mod 3600)==0) || global.setupTimer == 180 and global.run_virtual_ticks)
++if((syncTimer == 1 || ((frame mod 3600)==0) || global.setupTimer == 180) and global.run_virtual_ticks)
+ {
+     serializeState(CAPS_UPDATE, global.sendBuffer);
+     syncTimer = 0;

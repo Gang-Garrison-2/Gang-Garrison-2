@@ -8,12 +8,16 @@ Usage: fix_codegen.py <codegen dir>
 ENIGMA generates a dispatcher override listing only the object's own
 sub-events, so the ones inherited from the parent never fire (GG2: every
 weapon's refire alarm, so no gun could shoot).
-#35: self.<built-in> (hspeed, image_index, visible, ...) references an\naccessor that isn't generated; use the glaccess form other.<built-in> gets.
+#35: self.<built-in> (hspeed, image_index, visible, ...) references an
+accessor that isn't generated; use the glaccess form other.<built-in> gets.
+#39: window settings from Global Game Settings (the GMK reader drops them).
 Idempotent.
 """
 
+import os
 import re
 import sys
+import xml.etree.ElementTree as ET
 from pathlib import Path
 
 gen = Path(sys.argv[1]) / "Preprocessor_Environment_Editable"
@@ -98,3 +102,29 @@ while MOTION_RE and (m := MOTION_RE.search(func, pos)):
 func = "".join(out) + func[pos:]
 if func != func_path.read_text():
     func_path.write_text(func)
+
+# #39: emake's GMK reader drops Global Game Settings, so every window setting
+# is generated as 0 (no border, not resizable, stretched). Take them from
+# GmkSplitter's settings XML (env GAME_SETTINGS).
+if settings_xml := os.environ.get("GAME_SETTINGS"):
+    s = {e.tag: (e.text or "").strip() for e in ET.parse(settings_xml).iter()}
+    rgb = int(s["colorOutsideRoom"], 16)
+    values = {
+        "interpolate_textures": s["interpolateColors"] == "true",
+        "isSizeable": s["allowWindowResize"] == "true",
+        "showBorder": s["dontDrawBorder"] != "true",
+        "showIcons": s["dontShowButtons"] != "true",
+        "freezeOnLoseFocus": s["freezeOnLoseFocus"] == "true",
+        "treatCloseAsEscape": s["treatCloseAsEscape"] == "true",
+        "isFullScreen": s["startFullscreen"] == "true",
+        "viewScale": int(s["scalingPercent"]),
+        "windowColor": (rgb & 0xFF) << 16 | (rgb & 0xFF00) | rgb >> 16,  # RGB -> GM BGR
+    }
+    glob_path = gen / "IDE_EDIT_globals.h"
+    glob = glob_path.read_text()
+    for name, v in values.items():
+        glob, n = re.subn(rf"(\n  (?:bool|int) {name} = )[^;]*;", rf"\g<1>{int(v)};", glob)
+        if n != 1:
+            sys.exit(f"fix_codegen: {name} not found in IDE_EDIT_globals.h")
+    if glob != glob_path.read_text():
+        glob_path.write_text(glob)

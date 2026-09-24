@@ -58,6 +58,7 @@ if [[ -n "${headless:-}" ]]; then
     -c "$HERE/toolchain/headless_stubs.cpp" -o "$HEADLESS_STUBS_O"
 fi
 export CODEGEN_DIR="$WORK/codegen"
+export GAME_SETTINGS="$SRC/Global Game Settings.xml"
 export PATH="$HERE/toolchain:$PATH"
 
 # Faucet Networking as a shared library next to the game.
