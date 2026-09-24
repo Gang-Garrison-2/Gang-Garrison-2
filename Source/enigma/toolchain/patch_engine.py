@@ -13,6 +13,9 @@ import sys
 from pathlib import Path
 
 U = "ENIGMAsystem/SHELL/Universal_System/"
+# Grow the far edge by one pixel (keeps each corner's colour).
+GM8_RECT = ("    if (x2 >= x1) x2 += 1; else x1 += 1;\n"
+            "    if (y2 >= y1) y2 += 1; else y1 += 1;\n")
 PATCHES = {
     # #26: variant bitwise ops bit-cast the double's IEEE bits (1.0 & 1 == 0);
     # master converts the value.
@@ -91,6 +94,15 @@ PATCHES = {
         ("  gs_scalar ulcx = x + xscale * cos(M_PI+rot) + yscale * cos(M_PI/2+rot),\n"
          "            ulcy = y - yscale * sin(M_PI+rot) - yscale * sin(M_PI/2+rot);",
          "  gs_scalar ulcx = x, ulcy = y;", 2),
+    ],
+    # #40: a filled draw_rectangle covers pixels x1..x2-1; GM8 covers x1..x2
+    # inclusive, so GG2's stacked menu rectangles left a 1px gap and its
+    # 1px bezel rectangles drew nothing.
+    "ENIGMAsystem/SHELL/Graphics_Systems/General/GSstdraw.cpp": [
+        ("  } else {\n    draw_primitive_begin(pr_trianglestrip);\n    draw_vertex(x1, y1);\n    draw_vertex(x2, y1);",
+         "  } else {\n" + GM8_RECT + "    draw_primitive_begin(pr_trianglestrip);\n    draw_vertex(x1, y1);\n    draw_vertex(x2, y1);", 1),
+        ("  } else {\n    draw_primitive_begin(pr_trianglestrip);\n    draw_vertex_color(x2, y1, c2, alpha);",
+         "  } else {\n" + GM8_RECT + "    draw_primitive_begin(pr_trianglestrip);\n    draw_vertex_color(x2, y1, c2, alpha);", 1),
     ],
 }
 
