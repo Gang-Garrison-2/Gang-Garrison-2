@@ -48,8 +48,8 @@ write_binary_string""".split()
 OTHER_EXTENSIONS = """upnp_set_description upnp_discover upnp_error_string
 upnp_forward_port upnp_release_port""".split()
 
-# GG2DLL: GM8 gets these from the .gex; ENIGMA builds load libgg2dll.so (built
-# by build.sh next to the game) with external_define on first use.
+# GG2DLL: GM8 gets these from the .gex; ENIGMA builds load libgg2dll.<lib-ext>
+# (built by build.sh next to the game) with external_define on first use.
 GG2DLL_FUNCS = {  # GML name: (C symbol, return type, argument types)
     "GG2DLL_compute_MD5": ("compute_MD5", "ty_string", ["ty_string"]),
     "GG2DLL_embed_PNG_leveldata": (
@@ -72,8 +72,8 @@ FAUCET_EXPORT_RE = re.compile(
 )
 
 
-def faucet_scripts(faucet_src):
-    """fct_* bindings to libfaucetnet.so (built by build.sh), from the exported
+def faucet_scripts(faucet_src, lib_ext):
+    """fct_* bindings to libfaucetnet.<lib_ext> (built by build.sh), from the exported
     C signatures in Faucet's source. Faucet functions that were GML scripts in
     the .gex (not used by GG2) raise an error instead."""
     exports = {}
@@ -84,7 +84,7 @@ def faucet_scripts(faucet_src):
                 "ty_string" if "char" in m.group(1) else "ty_real",
                 ["ty_string" if "char" in a else "ty_real" for a in args],
             )
-    init = ["var dll;", 'dll = program_directory + "/libfaucetnet.so";']
+    init = ["var dll;", f'dll = program_directory + "/libfaucetnet{lib_ext}";']
     scripts = {}
     for name in FAUCET:
         gml = "fct_" + name
@@ -114,8 +114,8 @@ def faucet_scripts(faucet_src):
     return scripts
 
 
-def gg2dll_scripts():
-    init = ["var dll;", 'dll = program_directory + "/libgg2dll.so";']
+def gg2dll_scripts(lib_ext):
+    init = ["var dll;", f'dll = program_directory + "/libgg2dll{lib_ext}";']
     scripts = {}
     for gml, (sym, ret, args) in GG2DLL_FUNCS.items():
         handle = f"global.{gml.lower()}_fn"
@@ -334,8 +334,9 @@ def main():
     ap.add_argument(
         "--faucet-src",
         type=Path,
-        help="Faucet-Networking-Extension checkout; bind libfaucetnet.so",
+        help="Faucet-Networking-Extension checkout; bind libfaucetnet.<lib-ext>",
     )
+    ap.add_argument("--lib-ext", default=".so", help="native library suffix (.dll on Windows)")
     args = ap.parse_args()
     helpers = HEADLESS_HELPERS if args.headless else {}
 
@@ -366,9 +367,9 @@ def main():
     apply_patches(args.out, PATCHES)
     drop_scripts(args.out, DROP_SCRIPTS)
     add_script_group(args.out, "EnigmaHelpers", dict(helpers.values()) | COMPAT)
-    bindings = gg2dll_scripts()
+    bindings = gg2dll_scripts(args.lib_ext)
     if args.faucet_src:
-        bindings |= faucet_scripts(args.faucet_src)
+        bindings |= faucet_scripts(args.faucet_src, args.lib_ext)
     add_script_group(args.out, "NativeBindings", bindings)
     if args.stub_extensions:
         stub = "// stub: native extension not built yet\nreturn 0;\n"

@@ -25,6 +25,23 @@ mode=(-j"$(nproc)")
 FAUCET_SRC="${FAUCET_SRC:-$HOME/github/Faucet-Networking-Extension}" # modern-boost branch
 prebuild_flags=(--stub-extensions --faucet-src "$FAUCET_SRC") # stubs: UPnP only
 systems=(-p xlib -g OpenGL1 -a OpenAL -w xlib) # dialogs via zenity/kdialog
+# Native libs: .so on Linux; .dll under MSYS2 MINGW64 on Windows.
+lib_ext=.so
+faucet_flags=('-D__declspec(x)=__attribute__((visibility("default")))')
+faucet_libs=(-lboost_thread -lpthread)
+gg2dll_flags=()
+extensions=Alarms,Paths,libpng,DataStructures,Timelines,ParticleSystems,IniFilesystem,ExternalFuncs,DateTime,RegistrySpoof
+case "$(uname -s)" in
+  MINGW*)
+    lib_ext=.dll
+    systems=(-p Win32 -g OpenGL1 -a OpenAL -w Win32)
+    faucet_flags=(-D_WIN32_WINNT=0x0601)
+    faucet_libs=(-lboost_thread-mt -lws2_32 -lmswsock -liphlpapi)
+    gg2dll_flags=(-DGG2DLL_EXPORTS)
+    extensions=${extensions%,RegistrySpoof} # Win32 has the real registry
+    ;;
+esac
+prebuild_flags+=(--lib-ext "$lib_ext")
 for arg in "$@"; do
   case "$arg" in
     --codegen-only) mode=(--codegen-only) ;;
@@ -58,14 +75,14 @@ for f in $(find "$FAUCET_SRC/faucet" -name '*.cpp'); do
   source="$f"
   [[ "$f" != "$FAUCET_SRC/faucet/tcp/CombinedTcpAcceptor.cpp" ]] || source="$FAUCET_ACCEPTOR"
   [[ "$o" -nt "$source" ]] || "$REAL_GXX" -std=c++17 -O2 -fPIC -I"$FAUCET_SRC" -I"$FAUCET_SRC/faucet/tcp" \
-    '-D__declspec(x)=__attribute__((visibility("default")))' -c "$source" -o "$o"
+    "${faucet_flags[@]}" -c "$source" -o "$o"
 done
-"$REAL_GXX" -shared -o "$WORK/libfaucetnet.so" "$TOOLCHAIN_LIB"/faucet/*.o -lboost_thread -lpthread
+"$REAL_GXX" -shared -o "$WORK/libfaucetnet$lib_ext" "$TOOLCHAIN_LIB"/faucet/*.o "${faucet_libs[@]}"
 
 # GG2DLL as a shared library next to the game (loaded with external_define).
 GG2DLL_SRC="$HERE/../../Extensions/GG2DLL/GG2DLL"
 cc -O2 -fPIC -c "$GG2DLL_SRC/md5.c" -o "$TOOLCHAIN_LIB/md5.o"
-"$REAL_GXX" -std=c++17 -O2 -fPIC -shared -o "$WORK/libgg2dll.so" \
+"$REAL_GXX" -std=c++17 -O2 -fPIC -shared "${gg2dll_flags[@]}" -o "$WORK/libgg2dll$lib_ext" \
   "$GG2DLL_SRC/GG2DLL.cpp" "$TOOLCHAIN_LIB/md5.o" -lpng -lz
 (cd "$HERE" && python3 test_prebuild.py >/dev/null && rm -rf __pycache__)
 python3 "$HERE/prebuild.py" "$SRC" "$WORK/src/gg2" "${prebuild_flags[@]}"
@@ -75,7 +92,7 @@ rm -f "$WORK/gg2.gmk" # gmksplit won't overwrite
 set +e
 (cd "$ENGINE" && ./emake "$WORK/gg2.gmk" -o "$WORK/gg2" -d "$WORK/obj/" -k "$WORK/codegen/" \
   "${systems[@]}" -c Precise \
-  -e Alarms,Paths,libpng,DataStructures,Timelines,ParticleSystems,IniFilesystem,ExternalFuncs,DateTime,RegistrySpoof \
+  -e "$extensions" \
   "${mode[@]}") 2>&1 | tee "$WORK/emake.log"
 status=${PIPESTATUS[0]}
 set -e
@@ -83,6 +100,10 @@ set -e
 find "$SRC/Included Files" -maxdepth 1 -type f ! -name '*.xml' -exec cp -t "$WORK" {} +
 # game_init loads music from disk at startup.
 if [[ -z "${headless:-}" ]]; then cp -a "$HERE/../../Music" "$WORK/"; fi
+# Windows has no system copies of the MinGW runtime; ship the ones we link.
+if [[ "$lib_ext" == .dll && -f "$WORK/gg2.exe" ]]; then
+  ldd "$WORK/gg2.exe" "$WORK"/lib*.dll | awk '$3 ~ "^/mingw64/" {print $3}' | sort -u | xargs -r cp -t "$WORK"
+fi
 
 errors=$(grep -c ' error: \|Syntax error\|Semantic error' "$WORK/emake.log" || true)
 echo "emake exit $status, $errors errors, log: $WORK/emake.log"
