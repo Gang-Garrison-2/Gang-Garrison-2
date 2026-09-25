@@ -76,8 +76,8 @@ set +e
 (cd "$ENGINE" && ./emake "$WORK/gg2.gmk" -o "$WORK/gg2" -d "$WORK/obj/" -k "$WORK/codegen/" \
   "${systems[@]}" -c Precise \
   -e Alarms,Paths,libpng,DataStructures,Timelines,ParticleSystems,IniFilesystem,ExternalFuncs,DateTime,RegistrySpoof \
-  "${mode[@]}" >"$WORK/emake.log" 2>&1)
-status=$?
+  "${mode[@]}") 2>&1 | tee "$WORK/emake.log"
+status=${PIPESTATUS[0]}
 set -e
 # GM8 embeds Included Files; ENIGMA builds ship them next to the binary.
 find "$SRC/Included Files" -maxdepth 1 -type f ! -name '*.xml' -exec cp -t "$WORK" {} +
