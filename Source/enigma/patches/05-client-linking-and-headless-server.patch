@@ -1,7 +1,6 @@
 fix(enigma): get client linking and headless server running
-
 diff --git a/Source/gg2/Objects/GameElements/SSControl.events/Create.xml b/Source/gg2/Objects/GameElements/SSControl.events/Create.xml
-index f4d0b325..7c359fa8 100644
+index f4d0b32..7c359fa 100644
 --- a/Source/gg2/Objects/GameElements/SSControl.events/Create.xml
 +++ b/Source/gg2/Objects/GameElements/SSControl.events/Create.xml
 @@ -17,7 +17,7 @@
@@ -14,7 +13,7 @@ index f4d0b325..7c359fa8 100644
  </argument>
        </arguments>
 diff --git a/Source/gg2/Objects/Menus/Main Menu Elements/BackgroundDownloader.events/Create.xml b/Source/gg2/Objects/Menus/Main Menu Elements/BackgroundDownloader.events/Create.xml
-index 52d519ed..c8fb35dd 100644
+index 52d519e..c8fb35d 100644
 --- a/Source/gg2/Objects/Menus/Main Menu Elements/BackgroundDownloader.events/Create.xml	
 +++ b/Source/gg2/Objects/Menus/Main Menu Elements/BackgroundDownloader.events/Create.xml	
 @@ -18,7 +18,7 @@ title = "";
@@ -27,7 +26,7 @@ index 52d519ed..c8fb35dd 100644
  handle = http_new_get(BACKGROUND_SOURCE);
  </argument>
 diff --git a/Source/gg2/Objects/Updater.events/Create.xml b/Source/gg2/Objects/Updater.events/Create.xml
-index 5b77493f..4df05873 100644
+index 5b77493..4df0587 100644
 --- a/Source/gg2/Objects/Updater.events/Create.xml
 +++ b/Source/gg2/Objects/Updater.events/Create.xml
 @@ -28,7 +28,7 @@ if(global.updaterBetaChannel)
@@ -40,7 +39,7 @@ index 5b77493f..4df05873 100644
  downloadHandle = http_new_get(url);
  
 diff --git a/Source/gg2/Rooms/CustomMapRoom.xml b/Source/gg2/Rooms/CustomMapRoom.xml
-index 7d2b73e6..f7b7a1b9 100644
+index 7d2b73e..f7b7a1b 100644
 --- a/Source/gg2/Rooms/CustomMapRoom.xml
 +++ b/Source/gg2/Rooms/CustomMapRoom.xml
 @@ -15,7 +15,7 @@ if (global.currentMapMD5 == "")
@@ -53,22 +52,10 @@ index 7d2b73e6..f7b7a1b9 100644
      if (!file_exists(path))
          export_include_file_location(filename, path);
 diff --git a/Source/gg2/Scripts/Game/game_init.gml b/Source/gg2/Scripts/Game/game_init.gml
-index ca57e12f..19773a57 100644
+index 8572cdc..ae6904a 100644
 --- a/Source/gg2/Scripts/Game/game_init.gml
 +++ b/Source/gg2/Scripts/Game/game_init.gml
-@@ -32,7 +32,10 @@
-     backupFilename = file_find_first("gg2-old.delete.me.*", 0);
-     while(backupFilename != "")
-     {
--        file_delete(backupFilename);
-+        // TODO(enigma): ENIGMA's file_find ignores the mask on Linux and returns
-+        // every file, so check the name before deleting anything.
-+        if (string_pos("gg2-old.delete.me.", backupFilename) == 1)
-+            file_delete(backupFilename);
-         backupFilename = file_find_next();
-     }
-     file_find_close();
-@@ -344,7 +347,7 @@
+@@ -327,7 +327,7 @@
      // PLUGINS(disabled): no runtime GML execution in ENIGMA; revisit
      // global.dealDamageFunction = ""; // executed after dealDamage, with same args
      
@@ -77,7 +64,7 @@ index ca57e12f..19773a57 100644
      
      instance_create(0, 0, AudioControl);
      instance_create(0, 0, SSControl);
-@@ -386,7 +389,7 @@
+@@ -369,7 +369,7 @@
      character_init();
      
      // PLUGINS(disabled): no runtime GML execution in ENIGMA; revisit
@@ -87,7 +74,7 @@ index ca57e12f..19773a57 100644
      
      /* Windows 8 is known to crash GM when more than three (?) sounds play at once
 diff --git a/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_get_resources.gml b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_get_resources.gml
-index 012d1a19..d150ea55 100644
+index 012d1a1..d150ea5 100644
 --- a/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_get_resources.gml
 +++ b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_get_resources.gml
 @@ -7,8 +7,8 @@ else
@@ -102,7 +89,7 @@ index 012d1a19..d150ea55 100644
      // External sprites     
      var resource;
 diff --git a/Source/gg2/Scripts/Maps/Builder/stringToResource.gml b/Source/gg2/Scripts/Maps/Builder/stringToResource.gml
-index d4c31e1f..11a7d4ed 100644
+index d4c31e1..11a7d4e 100644
 --- a/Source/gg2/Scripts/Maps/Builder/stringToResource.gml
 +++ b/Source/gg2/Scripts/Maps/Builder/stringToResource.gml
 @@ -18,7 +18,7 @@ if (ext != "GIF")
@@ -115,7 +102,7 @@ index d4c31e1f..11a7d4ed 100644
  file = file_bin_open(name, 2);
  while(file_bin_position(file) < string_length(argument0))
 diff --git a/Source/gg2/Scripts/Maps/CustomMaps/CustomMapInit.gml b/Source/gg2/Scripts/Maps/CustomMaps/CustomMapInit.gml
-index e4f9ce06..685dc8be 100644
+index e4f9ce0..685dc8b 100644
 --- a/Source/gg2/Scripts/Maps/CustomMaps/CustomMapInit.gml
 +++ b/Source/gg2/Scripts/Maps/CustomMaps/CustomMapInit.gml
 @@ -5,7 +5,7 @@
@@ -128,7 +115,7 @@ index e4f9ce06..685dc8be 100644
  
    if(leveldata == "") {
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_adv_host_options_map_rotation.gml b/Source/gg2/Scripts/Menus/Actions/menu_adv_host_options_map_rotation.gml
-index cf3e995f..a6283a97 100644
+index cf3e995..a6283a9 100644
 --- a/Source/gg2/Scripts/Menus/Actions/menu_adv_host_options_map_rotation.gml
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_adv_host_options_map_rotation.gml
 @@ -6,7 +6,7 @@ absPath = get_open_filename("Map Rotation|*.txt", "");
@@ -141,7 +128,7 @@ index cf3e995f..a6283a97 100644
  
  gg2_write_ini("Server", "MapRotation", global.mapRotationFile);
 diff --git a/Source/gg2/Scripts/Misc/getRelativePathIfDescendant.gml b/Source/gg2/Scripts/Misc/getRelativePathIfDescendant.gml
-index 8daa116e..c6c027bc 100644
+index 8daa116..c6c027b 100644
 --- a/Source/gg2/Scripts/Misc/getRelativePathIfDescendant.gml
 +++ b/Source/gg2/Scripts/Misc/getRelativePathIfDescendant.gml
 @@ -2,7 +2,7 @@
@@ -154,7 +141,7 @@ index 8daa116e..c6c027bc 100644
  
  var startPath, endPath;
 diff --git a/Source/gg2/Scripts/Plugins/extractzip.gml b/Source/gg2/Scripts/Plugins/extractzip.gml
-index a5322b32..aff8aa6c 100644
+index a5322b3..aff8aa6 100644
 --- a/Source/gg2/Scripts/Plugins/extractzip.gml
 +++ b/Source/gg2/Scripts/Plugins/extractzip.gml
 @@ -2,4 +2,4 @@
@@ -164,7 +151,7 @@ index a5322b32..aff8aa6c 100644
 -execute_program(temp_directory + "\7za.exe", 'x "'+argument0+'" -o"'+argument1+'" -aoa', true);
 +execute_program(temp_directory + "/7za.exe", 'x "'+argument0+'" -o"'+argument1+'" -aoa', true);
 diff --git a/Source/gg2/Scripts/Plugins/getpluginhashes.gml b/Source/gg2/Scripts/Plugins/getpluginhashes.gml
-index bfb92211..4916eaa8 100644
+index bfb9221..4916eaa 100644
 --- a/Source/gg2/Scripts/Plugins/getpluginhashes.gml
 +++ b/Source/gg2/Scripts/Plugins/getpluginhashes.gml
 @@ -41,10 +41,10 @@
@@ -181,7 +168,7 @@ index bfb92211..4916eaa8 100644
  //     else
  //     {   
 diff --git a/Source/gg2/Scripts/Plugins/loadplugins.gml b/Source/gg2/Scripts/Plugins/loadplugins.gml
-index 3b3186cb..b3592fa8 100644
+index 3b3186c..b3592fa 100644
 --- a/Source/gg2/Scripts/Plugins/loadplugins.gml
 +++ b/Source/gg2/Scripts/Plugins/loadplugins.gml
 @@ -4,7 +4,7 @@
@@ -210,7 +197,7 @@ index 3b3186cb..b3592fa8 100644
 +// file_delete(working_directory + "/last_plugin.log");
  // ds_list_destroy(list);
 diff --git a/Source/gg2/Scripts/Plugins/loadserverplugins.gml b/Source/gg2/Scripts/Plugins/loadserverplugins.gml
-index 801c0bdf..fb4808d2 100644
+index 801c0bd..fb4808d 100644
 --- a/Source/gg2/Scripts/Plugins/loadserverplugins.gml
 +++ b/Source/gg2/Scripts/Plugins/loadserverplugins.gml
 @@ -48,15 +48,15 @@

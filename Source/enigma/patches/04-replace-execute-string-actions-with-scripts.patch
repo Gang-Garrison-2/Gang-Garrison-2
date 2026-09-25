@@ -1,7 +1,6 @@
 refactor(menus): replace execute_string actions with scripts
-
 diff --git a/Source/gg2/Objects/InGameElements/Builder.events/Step.xml b/Source/gg2/Objects/InGameElements/Builder.events/Step.xml
-index 291ace45..79cda605 100644
+index 291ace4..79cda60 100644
 --- a/Source/gg2/Objects/InGameElements/Builder.events/Step.xml
 +++ b/Source/gg2/Objects/InGameElements/Builder.events/Step.xml
 @@ -112,9 +112,9 @@ if (expanded) {
@@ -17,7 +16,7 @@ index 291ace45..79cda605 100644
                  }
              }
 diff --git a/Source/gg2/Objects/Menus/BuilderMenuController.events/Create.xml b/Source/gg2/Objects/Menus/BuilderMenuController.events/Create.xml
-index a7749a45..9ce056ea 100644
+index a7749a4..9ce056e 100644
 --- a/Source/gg2/Objects/Menus/BuilderMenuController.events/Create.xml
 +++ b/Source/gg2/Objects/Menus/BuilderMenuController.events/Create.xml
 @@ -21,36 +21,14 @@
@@ -62,7 +61,7 @@ index a7749a45..9ce056ea 100644
  }
  </argument>
 diff --git a/Source/gg2/Objects/Menus/Hosting Menu Elements/AdvHostOptionsController.events/Create.xml b/Source/gg2/Objects/Menus/Hosting Menu Elements/AdvHostOptionsController.events/Create.xml
-index 48ba8cc8..f4045452 100644
+index 48ba8cc..f404545 100644
 --- a/Source/gg2/Objects/Menus/Hosting Menu Elements/AdvHostOptionsController.events/Create.xml	
 +++ b/Source/gg2/Objects/Menus/Hosting Menu Elements/AdvHostOptionsController.events/Create.xml	
 @@ -19,30 +19,11 @@ menumode = true;
@@ -148,7 +147,7 @@ index 48ba8cc8..f4045452 100644
        </arguments>
      </action>
 diff --git a/Source/gg2/Objects/Menus/Hosting Menu Elements/ClasslimitsMenuController.events/Create.xml b/Source/gg2/Objects/Menus/Hosting Menu Elements/ClasslimitsMenuController.events/Create.xml
-index 7b69aec5..e2d3acc1 100644
+index 7b69aec..e2d3acc 100644
 --- a/Source/gg2/Objects/Menus/Hosting Menu Elements/ClasslimitsMenuController.events/Create.xml	
 +++ b/Source/gg2/Objects/Menus/Hosting Menu Elements/ClasslimitsMenuController.events/Create.xml	
 @@ -19,54 +19,22 @@ menumode = true;
@@ -221,7 +220,7 @@ index 7b69aec5..e2d3acc1 100644
        </arguments>
      </action>
 diff --git a/Source/gg2/Objects/Menus/Hosting Menu Elements/HostOptionsController.events/Create.xml b/Source/gg2/Objects/Menus/Hosting Menu Elements/HostOptionsController.events/Create.xml
-index 8880dcf9..3875c13a 100644
+index 8880dcf..3875c13 100644
 --- a/Source/gg2/Objects/Menus/Hosting Menu Elements/HostOptionsController.events/Create.xml	
 +++ b/Source/gg2/Objects/Menus/Hosting Menu Elements/HostOptionsController.events/Create.xml	
 @@ -32,62 +32,24 @@ menumode = true;
@@ -302,7 +301,7 @@ index 8880dcf9..3875c13a 100644
        </arguments>
      </action>
 diff --git a/Source/gg2/Objects/Menus/Hosting Menu Elements/HostWarningsController.events/Create.xml b/Source/gg2/Objects/Menus/Hosting Menu Elements/HostWarningsController.events/Create.xml
-index dc69a769..f7ec9c7d 100644
+index dc69a76..f7ec9c7 100644
 --- a/Source/gg2/Objects/Menus/Hosting Menu Elements/HostWarningsController.events/Create.xml	
 +++ b/Source/gg2/Objects/Menus/Hosting Menu Elements/HostWarningsController.events/Create.xml	
 @@ -18,10 +18,10 @@ menu_background(352, 32, 8, 16, 4);
@@ -321,7 +320,7 @@ index dc69a769..f7ec9c7d 100644
  
  </argument>
 diff --git a/Source/gg2/Objects/Menus/InGameMenuController.events/Create.xml b/Source/gg2/Objects/Menus/InGameMenuController.events/Create.xml
-index 1ad3a5a5..58b1d8d6 100644
+index 1ad3a5a..58b1d8d 100644
 --- a/Source/gg2/Objects/Menus/InGameMenuController.events/Create.xml
 +++ b/Source/gg2/Objects/Menus/InGameMenuController.events/Create.xml
 @@ -21,48 +21,14 @@
@@ -380,7 +379,7 @@ index 1ad3a5a5..58b1d8d6 100644
  </argument>
        </arguments>
 diff --git a/Source/gg2/Objects/Menus/Lobby Elements/LobbyNameController.events/Create.xml b/Source/gg2/Objects/Menus/Lobby Elements/LobbyNameController.events/Create.xml
-index 8df2a52b..6d4a1b82 100644
+index 8df2a52..6d4a1b8 100644
 --- a/Source/gg2/Objects/Menus/Lobby Elements/LobbyNameController.events/Create.xml	
 +++ b/Source/gg2/Objects/Menus/Lobby Elements/LobbyNameController.events/Create.xml	
 @@ -17,13 +17,7 @@
@@ -399,7 +398,7 @@ index 8df2a52b..6d4a1b82 100644
        </arguments>
      </action>
 diff --git a/Source/gg2/Objects/Menus/Lobby Elements/LobbySideController.events/Create.xml b/Source/gg2/Objects/Menus/Lobby Elements/LobbySideController.events/Create.xml
-index 0678efc7..8644b67e 100644
+index 0678efc..8644b67 100644
 --- a/Source/gg2/Objects/Menus/Lobby Elements/LobbySideController.events/Create.xml	
 +++ b/Source/gg2/Objects/Menus/Lobby Elements/LobbySideController.events/Create.xml	
 @@ -17,12 +17,8 @@
@@ -418,7 +417,7 @@ index 0678efc7..8644b67e 100644
  cooleddown = false;
  alarm[1] = 90;
 diff --git a/Source/gg2/Objects/Menus/Main Menu Elements/MainMenuController.events/Create.xml b/Source/gg2/Objects/Menus/Main Menu Elements/MainMenuController.events/Create.xml
-index 2bf6f5d5..1bd8408f 100644
+index 3747ade..f16115b 100644
 --- a/Source/gg2/Objects/Menus/Main Menu Elements/MainMenuController.events/Create.xml	
 +++ b/Source/gg2/Objects/Menus/Main Menu Elements/MainMenuController.events/Create.xml	
 @@ -19,40 +19,18 @@
@@ -472,33 +471,33 @@ index 2bf6f5d5..1bd8408f 100644
      // Music setting set to "Menu Only" or "Menu and In-Game"
      if (!sound_isplaying(global.MenuMusic)
 diff --git a/Source/gg2/Objects/Menus/MenuController.events/Key enter pressed.xml b/Source/gg2/Objects/Menus/MenuController.events/Key enter pressed.xml
-index 37be179f..dffdade8 100644
+index 7f53d13..e96bce6 100644
 --- a/Source/gg2/Objects/Menus/MenuController.events/Key enter pressed.xml	
 +++ b/Source/gg2/Objects/Menus/MenuController.events/Key enter pressed.xml	
-@@ -19,10 +19,10 @@
-     editingType = item_type[editing];
-     if (editingType == "edittext") {
-         menu_set_var(editing, item_value[editing]);
--        execute_string(item_script[editing], item_value[editing]);
-+        run_action(item_script[editing], item_value[editing]);
+@@ -17,10 +17,10 @@
+     switch (item_type[editing]) {
+         case "edittext":
+             menu_set_var(editing, item_value[editing]);
+-            execute_string(item_script[editing], item_value[editing]);
++            run_action(item_script[editing], item_value[editing]);
+             break;
+         case "edittext2":
+-            item_value[editing] = execute_string(item_script[editing], item_value[editing]);
++            item_value[editing] = run_action(item_script[editing], item_value[editing]);
+             menu_set_var(editing, item_value[editing]);
+             break;
+         case "editnum":
+@@ -29,7 +29,7 @@
+             if(item_limit[editing]&gt;0)
+                 newval = min(newval, item_limit[editing]);
+             menu_set_var(editing, newval);
+-            execute_string(item_script[editing], menu_get_var(editing));
++            run_action(item_script[editing], menu_get_var(editing));
+             item_value[editing] = string(menu_get_var(editing));
+             break;
      }
-     else if (editingType == "edittext2") {
--        item_value[editing] = execute_string(item_script[editing], item_value[editing]);
-+        item_value[editing] = run_action(item_script[editing], item_value[editing]);
-         menu_set_var(editing, item_value[editing]);
-     }
-     else if (editingType == "editnum") {
-@@ -31,7 +31,7 @@
-         if(item_limit[editing]&gt;0)
-             newval = min(newval, item_limit[editing]);
-         menu_set_var(editing, newval);
--        execute_string(item_script[editing], menu_get_var(editing));
-+        run_action(item_script[editing], menu_get_var(editing));
-         item_value[editing] = string(menu_get_var(editing));
-     }
-     editing = -1;
 diff --git a/Source/gg2/Objects/Menus/MenuController.events/Key escape pressed.xml b/Source/gg2/Objects/Menus/MenuController.events/Key escape pressed.xml
-index eacf2dd6..051d4118 100644
+index eacf2dd..051d411 100644
 --- a/Source/gg2/Objects/Menus/MenuController.events/Key escape pressed.xml	
 +++ b/Source/gg2/Objects/Menus/MenuController.events/Key escape pressed.xml	
 @@ -14,7 +14,7 @@
@@ -511,11 +510,11 @@ index eacf2dd6..051d4118 100644
  </argument>
        </arguments>
 diff --git a/Source/gg2/Objects/Menus/MenuController.events/Step.xml b/Source/gg2/Objects/Menus/MenuController.events/Step.xml
-index 72bde3e5..513216cf 100644
+index a9a6f9a..9297cc9 100644
 --- a/Source/gg2/Objects/Menus/MenuController.events/Step.xml
 +++ b/Source/gg2/Objects/Menus/MenuController.events/Step.xml
-@@ -55,13 +55,13 @@ if(editing != -1) {
-         if (editingType == "editkeyormouse") {
+@@ -53,13 +53,13 @@ if(editing != -1) {
+         case "editkeyormouse":
              if mouse_check_button(mb_left) {
                  menu_set_var(editing, MOUSE_LEFT);
 -                execute_string(item_script[editing], MOUSE_LEFT);
@@ -530,37 +529,38 @@ index 72bde3e5..513216cf 100644
                  editing = -1;
                  exit;
              }
-@@ -69,7 +69,7 @@ if(editing != -1) {
-         if keyboard_check_direct(vk_tab) keyboard_lastkey = vk_tab;
-         if keyboard_lastkey != 0 {
-             menu_set_var(editing, keyboard_lastkey);
--            execute_string(item_script[editing], menu_get_var(editing));
-+            run_action(item_script[editing], menu_get_var(editing));
-             editing = -1;
-             exit;
-         }
-@@ -85,9 +85,9 @@ if(editing != -1) {
-                 var clickedType;
-                 clickedType = item_type[virtualitem];
-                 if (clickedType == "script")
--                    execute_string(item_script[virtualitem]);
-+                    run_action(item_script[virtualitem], 0);
-                 else if (clickedType == "editscript")
--                    item_value[virtualitem] = execute_string(item_script[virtualitem]);
-+                    item_value[virtualitem] = run_action(item_script[virtualitem], 0);
-                 else if (clickedType == "editkey" or clickedType == "editkeyormouse") {
-                     io_clear();
-                     editing = virtualitem;
-@@ -99,7 +99,7 @@ if(editing != -1) {
-                 else if (clickedType == "editselect") {
-                     item_value[virtualitem] = (item_value[virtualitem]+1) mod item_options[virtualitem];
-                     menu_set_var(virtualitem, item_option_value[virtualitem, item_value[virtualitem]]);
--                    execute_string(item_script[virtualitem], menu_get_var(virtualitem));
-+                    run_action(item_script[virtualitem], menu_get_var(virtualitem));
+@@ -67,7 +67,7 @@ if(editing != -1) {
+             if keyboard_check_direct(vk_tab) keyboard_lastkey = vk_tab;
+             if keyboard_lastkey != 0 {
+                 menu_set_var(editing, keyboard_lastkey);
+-                execute_string(item_script[editing], menu_get_var(editing));
++                run_action(item_script[editing], menu_get_var(editing));
+                 editing = -1;
+                 exit;
+             }
+@@ -81,10 +81,10 @@ if(editing != -1) {
+             if(virtualitem &lt; itemcount) {
+                 switch (item_type[virtualitem]) {
+                     case "script":
+-                        execute_string(item_script[virtualitem]);
++                        run_action(item_script[virtualitem], 0);
+                         break;
+                     case "editscript":
+-                        item_value[virtualitem] = execute_string(item_script[virtualitem]);
++                        item_value[virtualitem] = run_action(item_script[virtualitem], 0);
+                         break;
+                     case "editkey":
+                     case "editkeyormouse":
+@@ -100,7 +100,7 @@ if(editing != -1) {
+                     case "editselect":
+                         item_value[virtualitem] = (item_value[virtualitem]+1) mod item_options[virtualitem];
+                         menu_set_var(virtualitem, item_option_value[virtualitem, item_value[virtualitem]]);
+-                        execute_string(item_script[virtualitem], menu_get_var(virtualitem));
++                        run_action(item_script[virtualitem], menu_get_var(virtualitem));
+                         break;
                  }
              }
-         }
-@@ -113,7 +113,7 @@ if(editing != -1) {
+@@ -115,7 +115,7 @@ if(editing != -1) {
              mouse_clear(mb_left);
              if(-2-virtualitem &lt; tabs)
              {
@@ -570,7 +570,7 @@ index 72bde3e5..513216cf 100644
          }
      } else {
 diff --git a/Source/gg2/Objects/Menus/Options Menus/AdvControlsController.events/Create.xml b/Source/gg2/Objects/Menus/Options Menus/AdvControlsController.events/Create.xml
-index 61d165a8..a418994b 100644
+index 61d165a..a418994 100644
 --- a/Source/gg2/Objects/Menus/Options Menus/AdvControlsController.events/Create.xml	
 +++ b/Source/gg2/Objects/Menus/Options Menus/AdvControlsController.events/Create.xml	
 @@ -23,42 +23,21 @@
@@ -630,7 +630,7 @@ index 61d165a8..a418994b 100644
  </argument>
        </arguments>
 diff --git a/Source/gg2/Objects/Menus/Options Menus/ControlsController.events/Create.xml b/Source/gg2/Objects/Menus/Options Menus/ControlsController.events/Create.xml
-index 4a9e9ef4..1f54a80e 100644
+index 4a9e9ef..1f54a80 100644
 --- a/Source/gg2/Objects/Menus/Options Menus/ControlsController.events/Create.xml	
 +++ b/Source/gg2/Objects/Menus/Options Menus/ControlsController.events/Create.xml	
 @@ -23,47 +23,26 @@
@@ -700,7 +700,7 @@ index 4a9e9ef4..1f54a80e 100644
  </argument>
        </arguments>
 diff --git a/Source/gg2/Objects/Menus/Options Menus/EngineOptionsController.events/Create.xml b/Source/gg2/Objects/Menus/Options Menus/EngineOptionsController.events/Create.xml
-index 1f059fd3..a8a1ce4f 100644
+index 1f059fd..a8a1ce4 100644
 --- a/Source/gg2/Objects/Menus/Options Menus/EngineOptionsController.events/Create.xml	
 +++ b/Source/gg2/Objects/Menus/Options Menus/EngineOptionsController.events/Create.xml	
 @@ -24,84 +24,38 @@
@@ -845,7 +845,7 @@ index 1f059fd3..a8a1ce4f 100644
  </argument>
        </arguments>
 diff --git a/Source/gg2/Objects/Menus/Options Menus/HUDOptionsController.events/Create.xml b/Source/gg2/Objects/Menus/Options Menus/HUDOptionsController.events/Create.xml
-index fdfb4336..cc67b716 100644
+index fdfb433..cc67b71 100644
 --- a/Source/gg2/Objects/Menus/Options Menus/HUDOptionsController.events/Create.xml	
 +++ b/Source/gg2/Objects/Menus/Options Menus/HUDOptionsController.events/Create.xml	
 @@ -23,57 +23,28 @@
@@ -917,7 +917,7 @@ index fdfb4336..cc67b716 100644
  </argument>
        </arguments>
 diff --git a/Source/gg2/Objects/Menus/Options Menus/OptionsController.events/Create.xml b/Source/gg2/Objects/Menus/Options Menus/OptionsController.events/Create.xml
-index 4b776607..7f816d14 100644
+index 4b77660..7f816d1 100644
 --- a/Source/gg2/Objects/Menus/Options Menus/OptionsController.events/Create.xml	
 +++ b/Source/gg2/Objects/Menus/Options Menus/OptionsController.events/Create.xml	
 @@ -24,70 +24,22 @@
@@ -1007,7 +1007,7 @@ index 4b776607..7f816d14 100644
        </arguments>
 diff --git a/Source/gg2/Scripts/Maps/Builder/Actions/_resources.list.xml b/Source/gg2/Scripts/Maps/Builder/Actions/_resources.list.xml
 new file mode 100644
-index 00000000..043039c8
+index 0000000..043039c
 --- /dev/null
 +++ b/Source/gg2/Scripts/Maps/Builder/Actions/_resources.list.xml
 @@ -0,0 +1,28 @@
@@ -1041,7 +1041,7 @@ index 00000000..043039c8
 +</resources>
 diff --git a/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_add_resource.gml b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_add_resource.gml
 new file mode 100644
-index 00000000..71b839c5
+index 0000000..71b839c
 --- /dev/null
 +++ b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_add_resource.gml
 @@ -0,0 +1,11 @@
@@ -1058,7 +1058,7 @@ index 00000000..71b839c5
 +}
 diff --git a/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_clear_entities.gml b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_clear_entities.gml
 new file mode 100644
-index 00000000..3688a98a
+index 0000000..3688a98
 --- /dev/null
 +++ b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_clear_entities.gml
 @@ -0,0 +1,9 @@
@@ -1073,7 +1073,7 @@ index 00000000..3688a98a
 +}
 diff --git a/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_edit_metadata.gml b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_edit_metadata.gml
 new file mode 100644
-index 00000000..c42ca06f
+index 0000000..c42ca06
 --- /dev/null
 +++ b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_edit_metadata.gml
 @@ -0,0 +1,3 @@
@@ -1082,7 +1082,7 @@ index 00000000..c42ca06f
 +loadMetadata(Builder.metadata, true);   // Reload
 diff --git a/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_fast_scrolling.gml b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_fast_scrolling.gml
 new file mode 100644
-index 00000000..f5ac8a62
+index 0000000..f5ac8a6
 --- /dev/null
 +++ b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_fast_scrolling.gml
 @@ -0,0 +1,3 @@
@@ -1091,7 +1091,7 @@ index 00000000..f5ac8a62
 +return argument0;
 diff --git a/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_get_resources.gml b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_get_resources.gml
 new file mode 100644
-index 00000000..012d1a19
+index 0000000..012d1a1
 --- /dev/null
 +++ b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_get_resources.gml
 @@ -0,0 +1,26 @@
@@ -1123,7 +1123,7 @@ index 00000000..012d1a19
 +}
 diff --git a/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_load_bg.gml b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_load_bg.gml
 new file mode 100644
-index 00000000..7d585bc8
+index 0000000..7d585bc
 --- /dev/null
 +++ b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_load_bg.gml
 @@ -0,0 +1,8 @@
@@ -1137,7 +1137,7 @@ index 00000000..7d585bc8
 +background_yscale[7] = 6;
 diff --git a/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_load_entities.gml b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_load_entities.gml
 new file mode 100644
-index 00000000..65449e80
+index 0000000..65449e8
 --- /dev/null
 +++ b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_load_entities.gml
 @@ -0,0 +1,4 @@
@@ -1147,7 +1147,7 @@ index 00000000..65449e80
 +loadEntities();
 diff --git a/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_load_map.gml b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_load_map.gml
 new file mode 100644
-index 00000000..f28e7aeb
+index 0000000..f28e7ae
 --- /dev/null
 +++ b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_load_map.gml
 @@ -0,0 +1,16 @@
@@ -1169,7 +1169,7 @@ index 00000000..f28e7aeb
 +loadMetadata(Builder.metadata, true);
 diff --git a/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_load_wm.gml b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_load_wm.gml
 new file mode 100644
-index 00000000..9dd453a8
+index 0000000..9dd453a
 --- /dev/null
 +++ b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_load_wm.gml
 @@ -0,0 +1,7 @@
@@ -1182,7 +1182,7 @@ index 00000000..9dd453a8
 +Builder.wmString = compressWalkmask();
 diff --git a/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_save_entities.gml b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_save_entities.gml
 new file mode 100644
-index 00000000..1537f1bb
+index 0000000..1537f1b
 --- /dev/null
 +++ b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_save_entities.gml
 @@ -0,0 +1,2 @@
@@ -1190,7 +1190,7 @@ index 00000000..1537f1bb
 +saveEntities();
 diff --git a/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_save_test.gml b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_save_test.gml
 new file mode 100644
-index 00000000..71955ca7
+index 0000000..71955ca
 --- /dev/null
 +++ b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_save_test.gml
 @@ -0,0 +1,25 @@
@@ -1221,7 +1221,7 @@ index 00000000..71955ca7
 +}
 diff --git a/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_scale_mode.gml b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_scale_mode.gml
 new file mode 100644
-index 00000000..a793a801
+index 0000000..a793a80
 --- /dev/null
 +++ b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_scale_mode.gml
 @@ -0,0 +1,3 @@
@@ -1230,7 +1230,7 @@ index 00000000..a793a801
 +return argument0;
 diff --git a/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_show_bg.gml b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_show_bg.gml
 new file mode 100644
-index 00000000..782ab0e9
+index 0000000..782ab0e
 --- /dev/null
 +++ b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_show_bg.gml
 @@ -0,0 +1,2 @@
@@ -1238,7 +1238,7 @@ index 00000000..782ab0e9
 +background_visible[7] = argument0;
 diff --git a/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_show_fg.gml b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_show_fg.gml
 new file mode 100644
-index 00000000..13b5c3b1
+index 0000000..13b5c3b
 --- /dev/null
 +++ b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_show_fg.gml
 @@ -0,0 +1,2 @@
@@ -1246,7 +1246,7 @@ index 00000000..13b5c3b1
 +ParallaxController.visible = argument0;
 diff --git a/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_show_grid.gml b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_show_grid.gml
 new file mode 100644
-index 00000000..0eb0a4ef
+index 0000000..0eb0a4e
 --- /dev/null
 +++ b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_show_grid.gml
 @@ -0,0 +1,2 @@
@@ -1254,7 +1254,7 @@ index 00000000..0eb0a4ef
 +Builder.showGrid = argument0;
 diff --git a/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_show_wm.gml b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_show_wm.gml
 new file mode 100644
-index 00000000..9ad9ed7b
+index 0000000..9ad9ed7
 --- /dev/null
 +++ b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_show_wm.gml
 @@ -0,0 +1,2 @@
@@ -1262,7 +1262,7 @@ index 00000000..9ad9ed7b
 +Builder.showWM = argument0;
 diff --git a/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_symmetry_mode.gml b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_symmetry_mode.gml
 new file mode 100644
-index 00000000..2483faa4
+index 0000000..2483faa
 --- /dev/null
 +++ b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_symmetry_mode.gml
 @@ -0,0 +1,3 @@
@@ -1271,7 +1271,7 @@ index 00000000..2483faa4
 +return argument0;
 diff --git a/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_test_w_o_save.gml b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_test_w_o_save.gml
 new file mode 100644
-index 00000000..3fc15f53
+index 0000000..3fc15f5
 --- /dev/null
 +++ b/Source/gg2/Scripts/Maps/Builder/Actions/builder_button_test_w_o_save.gml
 @@ -0,0 +1,25 @@
@@ -1302,7 +1302,7 @@ index 00000000..3fc15f53
 +}
 diff --git a/Source/gg2/Scripts/Maps/Builder/Actions/builder_gamemode_a_d_control_points_adcp.gml b/Source/gg2/Scripts/Maps/Builder/Actions/builder_gamemode_a_d_control_points_adcp.gml
 new file mode 100644
-index 00000000..8595dd4e
+index 0000000..8595dd4
 --- /dev/null
 +++ b/Source/gg2/Scripts/Maps/Builder/Actions/builder_gamemode_a_d_control_points_adcp.gml
 @@ -0,0 +1,12 @@
@@ -1320,7 +1320,7 @@ index 00000000..8595dd4e
 +return true;
 diff --git a/Source/gg2/Scripts/Maps/Builder/Actions/builder_gamemode_arena_arena.gml b/Source/gg2/Scripts/Maps/Builder/Actions/builder_gamemode_arena_arena.gml
 new file mode 100644
-index 00000000..36bba01e
+index 0000000..36bba01
 --- /dev/null
 +++ b/Source/gg2/Scripts/Maps/Builder/Actions/builder_gamemode_arena_arena.gml
 @@ -0,0 +1,10 @@
@@ -1336,7 +1336,7 @@ index 00000000..36bba01e
 +return true;
 diff --git a/Source/gg2/Scripts/Maps/Builder/Actions/builder_gamemode_capture_the_flag_ctf.gml b/Source/gg2/Scripts/Maps/Builder/Actions/builder_gamemode_capture_the_flag_ctf.gml
 new file mode 100644
-index 00000000..580ffcc4
+index 0000000..580ffcc
 --- /dev/null
 +++ b/Source/gg2/Scripts/Maps/Builder/Actions/builder_gamemode_capture_the_flag_ctf.gml
 @@ -0,0 +1,10 @@
@@ -1352,7 +1352,7 @@ index 00000000..580ffcc4
 +return true;
 diff --git a/Source/gg2/Scripts/Maps/Builder/Actions/builder_gamemode_control_points_cp.gml b/Source/gg2/Scripts/Maps/Builder/Actions/builder_gamemode_control_points_cp.gml
 new file mode 100644
-index 00000000..4ae44928
+index 0000000..4ae4492
 --- /dev/null
 +++ b/Source/gg2/Scripts/Maps/Builder/Actions/builder_gamemode_control_points_cp.gml
 @@ -0,0 +1,10 @@
@@ -1368,7 +1368,7 @@ index 00000000..4ae44928
 +return true;
 diff --git a/Source/gg2/Scripts/Maps/Builder/Actions/builder_gamemode_dual_king_of_the_hill_dkoth.gml b/Source/gg2/Scripts/Maps/Builder/Actions/builder_gamemode_dual_king_of_the_hill_dkoth.gml
 new file mode 100644
-index 00000000..b6a262f7
+index 0000000..b6a262f
 --- /dev/null
 +++ b/Source/gg2/Scripts/Maps/Builder/Actions/builder_gamemode_dual_king_of_the_hill_dkoth.gml
 @@ -0,0 +1,12 @@
@@ -1386,7 +1386,7 @@ index 00000000..b6a262f7
 +return true;
 diff --git a/Source/gg2/Scripts/Maps/Builder/Actions/builder_gamemode_generator_gen.gml b/Source/gg2/Scripts/Maps/Builder/Actions/builder_gamemode_generator_gen.gml
 new file mode 100644
-index 00000000..d0c6c6c7
+index 0000000..d0c6c6c
 --- /dev/null
 +++ b/Source/gg2/Scripts/Maps/Builder/Actions/builder_gamemode_generator_gen.gml
 @@ -0,0 +1,10 @@
@@ -1402,7 +1402,7 @@ index 00000000..d0c6c6c7
 +return true;
 diff --git a/Source/gg2/Scripts/Maps/Builder/Actions/builder_gamemode_king_of_the_hill_koth.gml b/Source/gg2/Scripts/Maps/Builder/Actions/builder_gamemode_king_of_the_hill_koth.gml
 new file mode 100644
-index 00000000..74fd6be6
+index 0000000..74fd6be
 --- /dev/null
 +++ b/Source/gg2/Scripts/Maps/Builder/Actions/builder_gamemode_king_of_the_hill_koth.gml
 @@ -0,0 +1,10 @@
@@ -1417,7 +1417,7 @@ index 00000000..74fd6be6
 +if (controlpoints != 1 || zones == 0) return false;
 +return true;
 diff --git a/Source/gg2/Scripts/Maps/Builder/_resources.list.xml b/Source/gg2/Scripts/Maps/Builder/_resources.list.xml
-index 89a805c4..a55487a1 100644
+index 89a805c..a55487a 100644
 --- a/Source/gg2/Scripts/Maps/Builder/_resources.list.xml
 +++ b/Source/gg2/Scripts/Maps/Builder/_resources.list.xml
 @@ -1,5 +1,6 @@
@@ -1428,7 +1428,7 @@ index 89a805c4..a55487a1 100644
    <resource name="addGamemode" type="RESOURCE"/>
    <resource name="addEntity" type="RESOURCE"/>
 diff --git a/Source/gg2/Scripts/Maps/Builder/addButton.gml b/Source/gg2/Scripts/Maps/Builder/addButton.gml
-index 4622a8bc..e93275e2 100644
+index 4622a8b..e93275e 100644
 --- a/Source/gg2/Scripts/Maps/Builder/addButton.gml
 +++ b/Source/gg2/Scripts/Maps/Builder/addButton.gml
 @@ -1,7 +1,7 @@
@@ -1441,7 +1441,7 @@ index 4622a8bc..e93275e2 100644
   * [Argument3]: Button is active by default (if it's a toggle)
  */
 diff --git a/Source/gg2/Scripts/Maps/Builder/addGamemode.gml b/Source/gg2/Scripts/Maps/Builder/addGamemode.gml
-index 45e9f3dc..1c659023 100644
+index 45e9f3d..1c65902 100644
 --- a/Source/gg2/Scripts/Maps/Builder/addGamemode.gml
 +++ b/Source/gg2/Scripts/Maps/Builder/addGamemode.gml
 @@ -1,7 +1,7 @@
@@ -1454,7 +1454,7 @@ index 45e9f3dc..1c659023 100644
   * Returns: An identifier for that gamemode
  */
 diff --git a/Source/gg2/Scripts/Maps/Builder/builder_init.gml b/Source/gg2/Scripts/Maps/Builder/builder_init.gml
-index f02efb94..8ecaba86 100644
+index f02efb9..8ecaba8 100644
 --- a/Source/gg2/Scripts/Maps/Builder/builder_init.gml
 +++ b/Source/gg2/Scripts/Maps/Builder/builder_init.gml
 @@ -10,253 +10,36 @@ global.resources = ds_map_create();
@@ -1738,7 +1738,7 @@ index f02efb94..8ecaba86 100644
  // Add entities
  addEntity("spawnroom", -1, "{xscale:1,yscale:1}", SpawnRoom, sprite64, 1, entityButtonS, 74, "Players can instantly respawn in this area.");
 diff --git a/Source/gg2/Scripts/Maps/Builder/resetToggles.gml b/Source/gg2/Scripts/Maps/Builder/resetToggles.gml
-index fcb24f11..163d57e0 100644
+index fcb24f1..163d57e 100644
 --- a/Source/gg2/Scripts/Maps/Builder/resetToggles.gml
 +++ b/Source/gg2/Scripts/Maps/Builder/resetToggles.gml
 @@ -7,7 +7,7 @@ with(Builder) {
@@ -1751,7 +1751,7 @@ index fcb24f11..163d57e0 100644
      }
  }
 diff --git a/Source/gg2/Scripts/Maps/Builder/validateMap.gml b/Source/gg2/Scripts/Maps/Builder/validateMap.gml
-index f88ef1f5..390cb6ca 100644
+index f88ef1f..390cb6c 100644
 --- a/Source/gg2/Scripts/Maps/Builder/validateMap.gml
 +++ b/Source/gg2/Scripts/Maps/Builder/validateMap.gml
 @@ -22,12 +22,12 @@ if (redCount == 0 ||blueCount == 0) {
@@ -1771,7 +1771,7 @@ index f88ef1f5..390cb6ca 100644
      }
 diff --git a/Source/gg2/Scripts/Menus/Actions/_resources.list.xml b/Source/gg2/Scripts/Menus/Actions/_resources.list.xml
 new file mode 100644
-index 00000000..6a4a16a5
+index 0000000..6a4a16a
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/_resources.list.xml
 @@ -0,0 +1,83 @@
@@ -1860,7 +1860,7 @@ index 00000000..6a4a16a5
 +</resources>
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_adv_host_options_announce_to_lobby.gml b/Source/gg2/Scripts/Menus/Actions/menu_adv_host_options_announce_to_lobby.gml
 new file mode 100644
-index 00000000..ca3a9ebd
+index 0000000..ca3a9eb
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_adv_host_options_announce_to_lobby.gml
 @@ -0,0 +1,2 @@
@@ -1868,7 +1868,7 @@ index 00000000..ca3a9ebd
 +gg2_write_ini("Settings", "UseLobby", argument0);
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_adv_host_options_attempt_upnp_forwarding.gml b/Source/gg2/Scripts/Menus/Actions/menu_adv_host_options_attempt_upnp_forwarding.gml
 new file mode 100644
-index 00000000..cac08f27
+index 0000000..cac08f2
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_adv_host_options_attempt_upnp_forwarding.gml
 @@ -0,0 +1,4 @@
@@ -1878,7 +1878,7 @@ index 00000000..cac08f27
 +gg2_write_ini("Server", "Attempt UPnP Forwarding", argument0);
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_adv_host_options_auto_balance.gml b/Source/gg2/Scripts/Menus/Actions/menu_adv_host_options_auto_balance.gml
 new file mode 100644
-index 00000000..88fcd6e9
+index 0000000..88fcd6e
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_adv_host_options_auto_balance.gml
 @@ -0,0 +1,2 @@
@@ -1886,7 +1886,7 @@ index 00000000..88fcd6e9
 +gg2_write_ini("Server", "AutoBalance", argument0);
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_adv_host_options_hosting_port.gml b/Source/gg2/Scripts/Menus/Actions/menu_adv_host_options_hosting_port.gml
 new file mode 100644
-index 00000000..8973acd3
+index 0000000..8973acd
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_adv_host_options_hosting_port.gml
 @@ -0,0 +1,2 @@
@@ -1894,7 +1894,7 @@ index 00000000..8973acd3
 +gg2_write_ini("Settings", "HostingPort", argument0);
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_adv_host_options_map_rotation.gml b/Source/gg2/Scripts/Menus/Actions/menu_adv_host_options_map_rotation.gml
 new file mode 100644
-index 00000000..cf3e995f
+index 0000000..cf3e995
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_adv_host_options_map_rotation.gml
 @@ -0,0 +1,15 @@
@@ -1915,7 +1915,7 @@ index 00000000..cf3e995f
 +return menu_format_maprotation_filepath(global.mapRotationFile);
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_adv_host_options_shuffle_map_rotation.gml b/Source/gg2/Scripts/Menus/Actions/menu_adv_host_options_shuffle_map_rotation.gml
 new file mode 100644
-index 00000000..e900e4ab
+index 0000000..e900e4a
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_adv_host_options_shuffle_map_rotation.gml
 @@ -0,0 +1,2 @@
@@ -1923,7 +1923,7 @@ index 00000000..e900e4ab
 +gg2_write_ini("Server", "ShuffleRotation", argument0);
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_builder_menu_back.gml b/Source/gg2/Scripts/Menus/Actions/menu_builder_menu_back.gml
 new file mode 100644
-index 00000000..129af6ef
+index 0000000..129af6e
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_builder_menu_back.gml
 @@ -0,0 +1,3 @@
@@ -1932,7 +1932,7 @@ index 00000000..129af6ef
 +alarm[0] = 1;
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_builder_menu_back_2.gml b/Source/gg2/Scripts/Menus/Actions/menu_builder_menu_back_2.gml
 new file mode 100644
-index 00000000..4815443f
+index 0000000..4815443
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_builder_menu_back_2.gml
 @@ -0,0 +1,3 @@
@@ -1941,7 +1941,7 @@ index 00000000..4815443f
 +with(Builder) instance_destroy();
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_builder_menu_main_menu.gml b/Source/gg2/Scripts/Menus/Actions/menu_builder_menu_main_menu.gml
 new file mode 100644
-index 00000000..18c3da14
+index 0000000..18c3da1
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_builder_menu_main_menu.gml
 @@ -0,0 +1,3 @@
@@ -1950,7 +1950,7 @@ index 00000000..18c3da14
 +with(Builder) instance_destroy();
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_builder_menu_select_gamemode.gml b/Source/gg2/Scripts/Menus/Actions/menu_builder_menu_select_gamemode.gml
 new file mode 100644
-index 00000000..e0c88f3e
+index 0000000..e0c88f3
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_builder_menu_select_gamemode.gml
 @@ -0,0 +1,13 @@
@@ -1969,7 +1969,7 @@ index 00000000..e0c88f3e
 +}
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_classlimits_menu_demoman.gml b/Source/gg2/Scripts/Menus/Actions/menu_classlimits_menu_demoman.gml
 new file mode 100644
-index 00000000..e4b4ae97
+index 0000000..e4b4ae9
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_classlimits_menu_demoman.gml
 @@ -0,0 +1,2 @@
@@ -1977,7 +1977,7 @@ index 00000000..e4b4ae97
 +gg2_write_ini("Classlimits", "Demoman", argument0);
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_classlimits_menu_engineer.gml b/Source/gg2/Scripts/Menus/Actions/menu_classlimits_menu_engineer.gml
 new file mode 100644
-index 00000000..408d86b4
+index 0000000..408d86b
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_classlimits_menu_engineer.gml
 @@ -0,0 +1,2 @@
@@ -1985,7 +1985,7 @@ index 00000000..408d86b4
 +gg2_write_ini("Classlimits", "Engineer", argument0);
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_classlimits_menu_heavy.gml b/Source/gg2/Scripts/Menus/Actions/menu_classlimits_menu_heavy.gml
 new file mode 100644
-index 00000000..f50940e7
+index 0000000..f50940e
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_classlimits_menu_heavy.gml
 @@ -0,0 +1,2 @@
@@ -1993,7 +1993,7 @@ index 00000000..f50940e7
 +gg2_write_ini("Classlimits", "Heavy", argument0);
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_classlimits_menu_medic.gml b/Source/gg2/Scripts/Menus/Actions/menu_classlimits_menu_medic.gml
 new file mode 100644
-index 00000000..021bdc5a
+index 0000000..021bdc5
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_classlimits_menu_medic.gml
 @@ -0,0 +1,2 @@
@@ -2001,7 +2001,7 @@ index 00000000..021bdc5a
 +gg2_write_ini("Classlimits", "Medic", argument0);
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_classlimits_menu_pyro.gml b/Source/gg2/Scripts/Menus/Actions/menu_classlimits_menu_pyro.gml
 new file mode 100644
-index 00000000..32c2e518
+index 0000000..32c2e51
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_classlimits_menu_pyro.gml
 @@ -0,0 +1,2 @@
@@ -2009,7 +2009,7 @@ index 00000000..32c2e518
 +gg2_write_ini("Classlimits", "Pyro", argument0);
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_classlimits_menu_quote.gml b/Source/gg2/Scripts/Menus/Actions/menu_classlimits_menu_quote.gml
 new file mode 100644
-index 00000000..8fc6f1b6
+index 0000000..8fc6f1b
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_classlimits_menu_quote.gml
 @@ -0,0 +1,2 @@
@@ -2017,7 +2017,7 @@ index 00000000..8fc6f1b6
 +gg2_write_ini("Classlimits", "Quote", argument0);
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_classlimits_menu_scout.gml b/Source/gg2/Scripts/Menus/Actions/menu_classlimits_menu_scout.gml
 new file mode 100644
-index 00000000..d2031ce7
+index 0000000..d2031ce
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_classlimits_menu_scout.gml
 @@ -0,0 +1,2 @@
@@ -2025,7 +2025,7 @@ index 00000000..d2031ce7
 +gg2_write_ini("Classlimits", "Scout", argument0);
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_classlimits_menu_sniper.gml b/Source/gg2/Scripts/Menus/Actions/menu_classlimits_menu_sniper.gml
 new file mode 100644
-index 00000000..81d37662
+index 0000000..81d3766
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_classlimits_menu_sniper.gml
 @@ -0,0 +1,2 @@
@@ -2033,7 +2033,7 @@ index 00000000..81d37662
 +gg2_write_ini("Classlimits", "Sniper", argument0);
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_classlimits_menu_soldier.gml b/Source/gg2/Scripts/Menus/Actions/menu_classlimits_menu_soldier.gml
 new file mode 100644
-index 00000000..87b0ad22
+index 0000000..87b0ad2
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_classlimits_menu_soldier.gml
 @@ -0,0 +1,2 @@
@@ -2041,7 +2041,7 @@ index 00000000..87b0ad22
 +gg2_write_ini("Classlimits", "Soldier", argument0);
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_classlimits_menu_spy.gml b/Source/gg2/Scripts/Menus/Actions/menu_classlimits_menu_spy.gml
 new file mode 100644
-index 00000000..c49a131b
+index 0000000..c49a131
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_classlimits_menu_spy.gml
 @@ -0,0 +1,2 @@
@@ -2049,7 +2049,7 @@ index 00000000..c49a131b
 +gg2_write_ini("Classlimits", "Spy", argument0);
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_engine_options_back.gml b/Source/gg2/Scripts/Menus/Actions/menu_engine_options_back.gml
 new file mode 100644
-index 00000000..6dc761ba
+index 0000000..6dc761b
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_engine_options_back.gml
 @@ -0,0 +1,8 @@
@@ -2063,7 +2063,7 @@ index 00000000..6dc761ba
 +    instance_create(0,0,InGameMenuController);
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_engine_options_framerate.gml b/Source/gg2/Scripts/Menus/Actions/menu_engine_options_framerate.gml
 new file mode 100644
-index 00000000..4d02c9e1
+index 0000000..4d02c9e
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_engine_options_framerate.gml
 @@ -0,0 +1,4 @@
@@ -2073,7 +2073,7 @@ index 00000000..4d02c9e1
 +    warnoptioneffect = !global.isHost;
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_engine_options_fullscreen.gml b/Source/gg2/Scripts/Menus/Actions/menu_engine_options_fullscreen.gml
 new file mode 100644
-index 00000000..a13beed6
+index 0000000..a13beed
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_engine_options_fullscreen.gml
 @@ -0,0 +1,3 @@
@@ -2082,7 +2082,7 @@ index 00000000..a13beed6
 +window_set_fullscreen(argument0);
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_engine_options_gibs.gml b/Source/gg2/Scripts/Menus/Actions/menu_engine_options_gibs.gml
 new file mode 100644
-index 00000000..1538a52d
+index 0000000..1538a52
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_engine_options_gibs.gml
 @@ -0,0 +1,2 @@
@@ -2090,7 +2090,7 @@ index 00000000..1538a52d
 +gg2_write_ini("Settings", "Gib Level", argument0);
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_engine_options_hide_infiltrator_ghosts.gml b/Source/gg2/Scripts/Menus/Actions/menu_engine_options_hide_infiltrator_ghosts.gml
 new file mode 100644
-index 00000000..20e82b81
+index 0000000..20e82b8
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_engine_options_hide_infiltrator_ghosts.gml
 @@ -0,0 +1,2 @@
@@ -2098,7 +2098,7 @@ index 00000000..20e82b81
 +gg2_write_ini("Settings", "Hide Spy Ghosts", argument0);
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_engine_options_ingame_aspect_ratio.gml b/Source/gg2/Scripts/Menus/Actions/menu_engine_options_ingame_aspect_ratio.gml
 new file mode 100644
-index 00000000..79c5e8d7
+index 0000000..79c5e8d
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_engine_options_ingame_aspect_ratio.gml
 @@ -0,0 +1,5 @@
@@ -2109,7 +2109,7 @@ index 00000000..79c5e8d7
 +global.changed_resolution = true;
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_engine_options_music.gml b/Source/gg2/Scripts/Menus/Actions/menu_engine_options_music.gml
 new file mode 100644
-index 00000000..8b19a60c
+index 0000000..8b19a60
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_engine_options_music.gml
 @@ -0,0 +1,24 @@
@@ -2139,7 +2139,7 @@ index 00000000..8b19a60c
 +}
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_engine_options_particles.gml b/Source/gg2/Scripts/Menus/Actions/menu_engine_options_particles.gml
 new file mode 100644
-index 00000000..499c9e68
+index 0000000..499c9e6
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_engine_options_particles.gml
 @@ -0,0 +1,2 @@
@@ -2147,7 +2147,7 @@ index 00000000..499c9e68
 +gg2_write_ini("Settings", "Particles", argument0);
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_engine_options_prompt_for_restart.gml b/Source/gg2/Scripts/Menus/Actions/menu_engine_options_prompt_for_restart.gml
 new file mode 100644
-index 00000000..694b221d
+index 0000000..694b221
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_engine_options_prompt_for_restart.gml
 @@ -0,0 +1,2 @@
@@ -2155,7 +2155,7 @@ index 00000000..694b221d
 +gg2_write_ini("Settings", "RestartPrompt", argument0);
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_engine_options_v_sync.gml b/Source/gg2/Scripts/Menus/Actions/menu_engine_options_v_sync.gml
 new file mode 100644
-index 00000000..5561bea2
+index 0000000..5561bea
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_engine_options_v_sync.gml
 @@ -0,0 +1,4 @@
@@ -2165,7 +2165,7 @@ index 00000000..5561bea2
 +    set_synchronization(argument0);
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_host_back.gml b/Source/gg2/Scripts/Menus/Actions/menu_host_back.gml
 new file mode 100644
-index 00000000..0684a5da
+index 0000000..0684a5d
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_host_back.gml
 @@ -0,0 +1,3 @@
@@ -2174,7 +2174,7 @@ index 00000000..0684a5da
 +instance_destroy();
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_host_options_capture_limit.gml b/Source/gg2/Scripts/Menus/Actions/menu_host_options_capture_limit.gml
 new file mode 100644
-index 00000000..1a3d6563
+index 0000000..1a3d656
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_host_options_capture_limit.gml
 @@ -0,0 +1,2 @@
@@ -2182,7 +2182,7 @@ index 00000000..1a3d6563
 +gg2_write_ini("Server", "CapLimit", argument0);
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_host_options_deathmatch_kill_limit.gml b/Source/gg2/Scripts/Menus/Actions/menu_host_options_deathmatch_kill_limit.gml
 new file mode 100644
-index 00000000..ca58b9fa
+index 0000000..ca58b9f
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_host_options_deathmatch_kill_limit.gml
 @@ -0,0 +1,2 @@
@@ -2190,7 +2190,7 @@ index 00000000..ca58b9fa
 +gg2_write_ini("Server", "Deathmatch Kill Limit", argument0);
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_host_options_password.gml b/Source/gg2/Scripts/Menus/Actions/menu_host_options_password.gml
 new file mode 100644
-index 00000000..5030b0ca
+index 0000000..5030b0c
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_host_options_password.gml
 @@ -0,0 +1,2 @@
@@ -2198,7 +2198,7 @@ index 00000000..5030b0ca
 +gg2_write_ini("Server", "Password", argument0);
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_host_options_player_limit.gml b/Source/gg2/Scripts/Menus/Actions/menu_host_options_player_limit.gml
 new file mode 100644
-index 00000000..e118e6df
+index 0000000..e118e6d
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_host_options_player_limit.gml
 @@ -0,0 +1,2 @@
@@ -2206,7 +2206,7 @@ index 00000000..e118e6df
 +gg2_write_ini("Settings", "PlayerLimit", argument0);
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_host_options_respawn_time_secs.gml b/Source/gg2/Scripts/Menus/Actions/menu_host_options_respawn_time_secs.gml
 new file mode 100644
-index 00000000..75bf0d03
+index 0000000..75bf0d0
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_host_options_respawn_time_secs.gml
 @@ -0,0 +1,2 @@
@@ -2214,7 +2214,7 @@ index 00000000..75bf0d03
 +gg2_write_ini("Server", "Respawn Time", argument0);
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_host_options_server_name.gml b/Source/gg2/Scripts/Menus/Actions/menu_host_options_server_name.gml
 new file mode 100644
-index 00000000..99186db2
+index 0000000..99186db
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_host_options_server_name.gml
 @@ -0,0 +1,5 @@
@@ -2225,7 +2225,7 @@ index 00000000..99186db2
 +return newName;
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_host_options_tdm_invulnerability_secs.gml b/Source/gg2/Scripts/Menus/Actions/menu_host_options_tdm_invulnerability_secs.gml
 new file mode 100644
-index 00000000..8d6620d1
+index 0000000..8d6620d
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_host_options_tdm_invulnerability_secs.gml
 @@ -0,0 +1,2 @@
@@ -2233,7 +2233,7 @@ index 00000000..8d6620d1
 +gg2_write_ini("Server", "Team Deathmatch Invulnerability Seconds", argument0);
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_host_options_time_limit_mins.gml b/Source/gg2/Scripts/Menus/Actions/menu_host_options_time_limit_mins.gml
 new file mode 100644
-index 00000000..fd9f0a20
+index 0000000..fd9f0a2
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_host_options_time_limit_mins.gml
 @@ -0,0 +1,2 @@
@@ -2241,7 +2241,7 @@ index 00000000..fd9f0a20
 +gg2_write_ini("Server", "Time Limit", argument0);
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_host_options_welcome_message.gml b/Source/gg2/Scripts/Menus/Actions/menu_host_options_welcome_message.gml
 new file mode 100644
-index 00000000..dd939680
+index 0000000..dd93968
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_host_options_welcome_message.gml
 @@ -0,0 +1,5 @@
@@ -2252,7 +2252,7 @@ index 00000000..dd939680
 +return newMessage;
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_host_start_game.gml b/Source/gg2/Scripts/Menus/Actions/menu_host_start_game.gml
 new file mode 100644
-index 00000000..5d0121af
+index 0000000..5d0121a
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_host_start_game.gml
 @@ -0,0 +1,2 @@
@@ -2260,7 +2260,7 @@ index 00000000..5d0121af
 +start_server();
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_host_tab_advanced.gml b/Source/gg2/Scripts/Menus/Actions/menu_host_tab_advanced.gml
 new file mode 100644
-index 00000000..a3e69192
+index 0000000..a3e6919
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_host_tab_advanced.gml
 @@ -0,0 +1,3 @@
@@ -2269,7 +2269,7 @@ index 00000000..a3e69192
 +instance_destroy();
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_host_tab_classlimits.gml b/Source/gg2/Scripts/Menus/Actions/menu_host_tab_classlimits.gml
 new file mode 100644
-index 00000000..4a1b5525
+index 0000000..4a1b552
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_host_tab_classlimits.gml
 @@ -0,0 +1,3 @@
@@ -2278,7 +2278,7 @@ index 00000000..4a1b5525
 +instance_destroy();
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_host_tab_main.gml b/Source/gg2/Scripts/Menus/Actions/menu_host_tab_main.gml
 new file mode 100644
-index 00000000..9221124c
+index 0000000..9221124
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_host_tab_main.gml
 @@ -0,0 +1,3 @@
@@ -2287,7 +2287,7 @@ index 00000000..9221124c
 +instance_destroy();
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_hudoptions_fade_scoreboard.gml b/Source/gg2/Scripts/Menus/Actions/menu_hudoptions_fade_scoreboard.gml
 new file mode 100644
-index 00000000..75c50d9b
+index 0000000..75c50d9
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_hudoptions_fade_scoreboard.gml
 @@ -0,0 +1,2 @@
@@ -2295,7 +2295,7 @@ index 00000000..75c50d9b
 +gg2_write_ini("Settings", "Fade Scoreboard", argument0);
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_hudoptions_kill_log_position.gml b/Source/gg2/Scripts/Menus/Actions/menu_hudoptions_kill_log_position.gml
 new file mode 100644
-index 00000000..e9985a8c
+index 0000000..e9985a8
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_hudoptions_kill_log_position.gml
 @@ -0,0 +1,2 @@
@@ -2303,7 +2303,7 @@ index 00000000..e9985a8c
 +gg2_write_ini("Settings", "Kill Log Position", argument0);
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_hudoptions_koth_timer_orientation.gml b/Source/gg2/Scripts/Menus/Actions/menu_hudoptions_koth_timer_orientation.gml
 new file mode 100644
-index 00000000..1173702f
+index 0000000..1173702
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_hudoptions_koth_timer_orientation.gml
 @@ -0,0 +1,2 @@
@@ -2311,7 +2311,7 @@ index 00000000..1173702f
 +gg2_write_ini("Settings","KoTH HUD Position", argument0);
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_hudoptions_timer_position.gml b/Source/gg2/Scripts/Menus/Actions/menu_hudoptions_timer_position.gml
 new file mode 100644
-index 00000000..528321b1
+index 0000000..528321b
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_hudoptions_timer_position.gml
 @@ -0,0 +1,2 @@
@@ -2319,7 +2319,7 @@ index 00000000..528321b1
 +gg2_write_ini("Settings", "Timer Position", argument0);
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_in_game_menu_back.gml b/Source/gg2/Scripts/Menus/Actions/menu_in_game_menu_back.gml
 new file mode 100644
-index 00000000..28154534
+index 0000000..2815453
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_in_game_menu_back.gml
 @@ -0,0 +1,2 @@
@@ -2327,7 +2327,7 @@ index 00000000..28154534
 +instance_destroy();
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_in_game_menu_disconnect.gml b/Source/gg2/Scripts/Menus/Actions/menu_in_game_menu_disconnect.gml
 new file mode 100644
-index 00000000..31d11c17
+index 0000000..31d11c1
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_in_game_menu_disconnect.gml
 @@ -0,0 +1,19 @@
@@ -2352,7 +2352,7 @@ index 00000000..31d11c17
 +}
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_in_game_menu_kick_players.gml b/Source/gg2/Scripts/Menus/Actions/menu_in_game_menu_kick_players.gml
 new file mode 100644
-index 00000000..5ea23687
+index 0000000..5ea2368
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_in_game_menu_kick_players.gml
 @@ -0,0 +1,4 @@
@@ -2362,7 +2362,7 @@ index 00000000..5ea23687
 +instance_destroy();
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_in_game_menu_options.gml b/Source/gg2/Scripts/Menus/Actions/menu_in_game_menu_options.gml
 new file mode 100644
-index 00000000..65cb105c
+index 0000000..65cb105
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_in_game_menu_options.gml
 @@ -0,0 +1,3 @@
@@ -2371,7 +2371,7 @@ index 00000000..65cb105c
 +instance_create(0,0,OptionsController);
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_in_game_menu_quit_game.gml b/Source/gg2/Scripts/Menus/Actions/menu_in_game_menu_quit_game.gml
 new file mode 100644
-index 00000000..984d07cf
+index 0000000..984d07c
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_in_game_menu_quit_game.gml
 @@ -0,0 +1,4 @@
@@ -2381,7 +2381,7 @@ index 00000000..984d07cf
 +}
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_in_game_menu_return_to_game.gml b/Source/gg2/Scripts/Menus/Actions/menu_in_game_menu_return_to_game.gml
 new file mode 100644
-index 00000000..71250e24
+index 0000000..71250e2
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_in_game_menu_return_to_game.gml
 @@ -0,0 +1,2 @@
@@ -2389,7 +2389,7 @@ index 00000000..71250e24
 +instance_destroy();
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_lobby_name_player_name.gml b/Source/gg2/Scripts/Menus/Actions/menu_lobby_name_player_name.gml
 new file mode 100644
-index 00000000..ff8c71a7
+index 0000000..ff8c71a
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_lobby_name_player_name.gml
 @@ -0,0 +1,6 @@
@@ -2401,7 +2401,7 @@ index 00000000..ff8c71a7
 +return newName;
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_lobby_side_back.gml b/Source/gg2/Scripts/Menus/Actions/menu_lobby_side_back.gml
 new file mode 100644
-index 00000000..4af6d49d
+index 0000000..4af6d49
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_lobby_side_back.gml
 @@ -0,0 +1,2 @@
@@ -2409,7 +2409,7 @@ index 00000000..4af6d49d
 +room_goto_fix(Menu);
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_lobby_side_refresh.gml b/Source/gg2/Scripts/Menus/Actions/menu_lobby_side_refresh.gml
 new file mode 100644
-index 00000000..e8784d77
+index 0000000..e8784d7
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_lobby_side_refresh.gml
 @@ -0,0 +1,2 @@
@@ -2417,7 +2417,7 @@ index 00000000..e8784d77
 +event_user(0);
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_main_menu_back.gml b/Source/gg2/Scripts/Menus/Actions/menu_main_menu_back.gml
 new file mode 100644
-index 00000000..59093820
+index 0000000..5909382
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_main_menu_back.gml
 @@ -0,0 +1,2 @@
@@ -2425,7 +2425,7 @@ index 00000000..59093820
 +game_end();
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_main_menu_credits.gml b/Source/gg2/Scripts/Menus/Actions/menu_main_menu_credits.gml
 new file mode 100644
-index 00000000..3ef3a2d6
+index 0000000..3ef3a2d
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_main_menu_credits.gml
 @@ -0,0 +1,2 @@
@@ -2433,7 +2433,7 @@ index 00000000..3ef3a2d6
 +room_goto_fix(Credits);
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_main_menu_garrison_builder.gml b/Source/gg2/Scripts/Menus/Actions/menu_main_menu_garrison_builder.gml
 new file mode 100644
-index 00000000..a725dc67
+index 0000000..a725dc6
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_main_menu_garrison_builder.gml
 @@ -0,0 +1,2 @@
@@ -2441,7 +2441,7 @@ index 00000000..a725dc67
 +room_goto_fix(BuilderOptions);
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_main_menu_host_game.gml b/Source/gg2/Scripts/Menus/Actions/menu_main_menu_host_game.gml
 new file mode 100644
-index 00000000..f268ec99
+index 0000000..f268ec9
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_main_menu_host_game.gml
 @@ -0,0 +1,2 @@
@@ -2449,7 +2449,7 @@ index 00000000..f268ec99
 +event_user(0);
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_main_menu_join_lobby.gml b/Source/gg2/Scripts/Menus/Actions/menu_main_menu_join_lobby.gml
 new file mode 100644
-index 00000000..d3b3df10
+index 0000000..d3b3df1
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_main_menu_join_lobby.gml
 @@ -0,0 +1,2 @@
@@ -2457,7 +2457,7 @@ index 00000000..d3b3df10
 +room_goto_fix(Lobby);
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_main_menu_join_manual.gml b/Source/gg2/Scripts/Menus/Actions/menu_main_menu_join_manual.gml
 new file mode 100644
-index 00000000..a5c06645
+index 0000000..a5c0664
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_main_menu_join_manual.gml
 @@ -0,0 +1,6 @@
@@ -2469,7 +2469,7 @@ index 00000000..a5c06645
 +Client.returnRoom = Menu;
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_main_menu_manage_haxxy_rewards.gml b/Source/gg2/Scripts/Menus/Actions/menu_main_menu_manage_haxxy_rewards.gml
 new file mode 100644
-index 00000000..3f9c402a
+index 0000000..3f9c402
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_main_menu_manage_haxxy_rewards.gml
 @@ -0,0 +1,4 @@
@@ -2479,7 +2479,7 @@ index 00000000..3f9c402a
 +splash_show_web("http://www.ganggarrison.com/forums/rewards/frame.php?gg2_login=yes&reward_id=" + global.rewardId + "&reward_key=" + hex(global.rewardKey), 0);
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_main_menu_options.gml b/Source/gg2/Scripts/Menus/Actions/menu_main_menu_options.gml
 new file mode 100644
-index 00000000..1a983a42
+index 0000000..1a983a4
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_main_menu_options.gml
 @@ -0,0 +1,2 @@
@@ -2487,7 +2487,7 @@ index 00000000..1a983a42
 +room_goto_fix(Options);
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_main_menu_visit_the_forums.gml b/Source/gg2/Scripts/Menus/Actions/menu_main_menu_visit_the_forums.gml
 new file mode 100644
-index 00000000..45bda2de
+index 0000000..45bda2d
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_main_menu_visit_the_forums.gml
 @@ -0,0 +1,2 @@
@@ -2495,7 +2495,7 @@ index 00000000..45bda2de
 +action_splash_web("http://www.ganggarrison.com/forums/index.php", 1)
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_options_additional_healthbar.gml b/Source/gg2/Scripts/Menus/Actions/menu_options_additional_healthbar.gml
 new file mode 100644
-index 00000000..7ffd1a32
+index 0000000..7ffd1a3
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_options_additional_healthbar.gml
 @@ -0,0 +1,2 @@
@@ -2503,7 +2503,7 @@ index 00000000..7ffd1a32
 +gg2_write_ini("Settings", "Show Healthbar", argument0);
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_options_additional_teammate_stats.gml b/Source/gg2/Scripts/Menus/Actions/menu_options_additional_teammate_stats.gml
 new file mode 100644
-index 00000000..67a2a995
+index 0000000..67a2a99
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_options_additional_teammate_stats.gml
 @@ -0,0 +1,2 @@
@@ -2511,7 +2511,7 @@ index 00000000..67a2a995
 +gg2_write_ini("Settings", "Show Extra Teammate Stats", argument0);
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_options_back.gml b/Source/gg2/Scripts/Menus/Actions/menu_options_back.gml
 new file mode 100644
-index 00000000..73dc8d9e
+index 0000000..73dc8d9
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_options_back.gml
 @@ -0,0 +1,6 @@
@@ -2523,7 +2523,7 @@ index 00000000..73dc8d9e
 +    instance_create(0,0,InGameMenuController);
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_options_healer_radar.gml b/Source/gg2/Scripts/Menus/Actions/menu_options_healer_radar.gml
 new file mode 100644
-index 00000000..fe237fea
+index 0000000..fe237fe
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_options_healer_radar.gml
 @@ -0,0 +1,2 @@
@@ -2531,7 +2531,7 @@ index 00000000..fe237fea
 +gg2_write_ini("Settings", "Healer Radar", argument0);
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_options_kill_cam.gml b/Source/gg2/Scripts/Menus/Actions/menu_options_kill_cam.gml
 new file mode 100644
-index 00000000..072e336e
+index 0000000..072e336
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_options_kill_cam.gml
 @@ -0,0 +1,2 @@
@@ -2539,7 +2539,7 @@ index 00000000..072e336e
 +gg2_write_ini("Settings", "Kill Cam", argument0);
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_options_player_name.gml b/Source/gg2/Scripts/Menus/Actions/menu_options_player_name.gml
 new file mode 100644
-index 00000000..cb9a72c2
+index 0000000..cb9a72c
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_options_player_name.gml
 @@ -0,0 +1,13 @@
@@ -2558,7 +2558,7 @@ index 00000000..cb9a72c2
 +return newName;
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_options_queued_jumping_bunnyhopping.gml b/Source/gg2/Scripts/Menus/Actions/menu_options_queued_jumping_bunnyhopping.gml
 new file mode 100644
-index 00000000..a38deac5
+index 0000000..a38deac
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_options_queued_jumping_bunnyhopping.gml
 @@ -0,0 +1,2 @@
@@ -2566,7 +2566,7 @@ index 00000000..a38deac5
 +gg2_write_ini("Settings", "Queued Jumping", argument0);
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_options_show_healer.gml b/Source/gg2/Scripts/Menus/Actions/menu_options_show_healer.gml
 new file mode 100644
-index 00000000..ab3b1c9b
+index 0000000..ab3b1c9
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_options_show_healer.gml
 @@ -0,0 +1,2 @@
@@ -2574,7 +2574,7 @@ index 00000000..ab3b1c9b
 +gg2_write_ini("Settings", "Show Healer", argument0);
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_options_show_healing.gml b/Source/gg2/Scripts/Menus/Actions/menu_options_show_healing.gml
 new file mode 100644
-index 00000000..2c6d3d6c
+index 0000000..2c6d3d6
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_options_show_healing.gml
 @@ -0,0 +1,2 @@
@@ -2582,7 +2582,7 @@ index 00000000..2c6d3d6c
 +gg2_write_ini("Settings", "Show Healing", argument0);
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_options_tab_controls_1.gml b/Source/gg2/Scripts/Menus/Actions/menu_options_tab_controls_1.gml
 new file mode 100644
-index 00000000..f8ce711d
+index 0000000..f8ce711
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_options_tab_controls_1.gml
 @@ -0,0 +1,3 @@
@@ -2591,7 +2591,7 @@ index 00000000..f8ce711d
 +instance_create(x,y,ControlsController);
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_options_tab_controls_2.gml b/Source/gg2/Scripts/Menus/Actions/menu_options_tab_controls_2.gml
 new file mode 100644
-index 00000000..b11e1237
+index 0000000..b11e123
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_options_tab_controls_2.gml
 @@ -0,0 +1,3 @@
@@ -2600,7 +2600,7 @@ index 00000000..b11e1237
 +instance_create(x,y,AdvControlsController);
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_options_tab_engine.gml b/Source/gg2/Scripts/Menus/Actions/menu_options_tab_engine.gml
 new file mode 100644
-index 00000000..9c0899c2
+index 0000000..9c0899c
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_options_tab_engine.gml
 @@ -0,0 +1,3 @@
@@ -2609,7 +2609,7 @@ index 00000000..9c0899c2
 +instance_create(x,y,EngineOptionsController);
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_options_tab_hud.gml b/Source/gg2/Scripts/Menus/Actions/menu_options_tab_hud.gml
 new file mode 100644
-index 00000000..f085f28d
+index 0000000..f085f28
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_options_tab_hud.gml
 @@ -0,0 +1,3 @@
@@ -2618,7 +2618,7 @@ index 00000000..f085f28d
 +instance_create(x,y,HUDOptionsController);
 diff --git a/Source/gg2/Scripts/Menus/Actions/menu_options_tab_ingame.gml b/Source/gg2/Scripts/Menus/Actions/menu_options_tab_ingame.gml
 new file mode 100644
-index 00000000..8d17052a
+index 0000000..8d17052
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/Actions/menu_options_tab_ingame.gml
 @@ -0,0 +1,3 @@
@@ -2626,7 +2626,7 @@ index 00000000..8d17052a
 +instance_destroy();
 +instance_create(x,y,OptionsController);
 diff --git a/Source/gg2/Scripts/Menus/_resources.list.xml b/Source/gg2/Scripts/Menus/_resources.list.xml
-index 6ceec0e9..36f9ac6c 100644
+index 6ceec0e..36f9ac6 100644
 --- a/Source/gg2/Scripts/Menus/_resources.list.xml
 +++ b/Source/gg2/Scripts/Menus/_resources.list.xml
 @@ -1,5 +1,6 @@
@@ -2645,7 +2645,7 @@ index 6ceec0e9..36f9ac6c 100644
    <resource name="gg2_write_ini" type="RESOURCE"/>
    <resource name="menu_get_itemcount" type="RESOURCE"/>
 diff --git a/Source/gg2/Scripts/Menus/menu_addback.gml b/Source/gg2/Scripts/Menus/menu_addback.gml
-index beb91b46..a8793355 100644
+index beb91b4..a879335 100644
 --- a/Source/gg2/Scripts/Menus/menu_addback.gml
 +++ b/Source/gg2/Scripts/Menus/menu_addback.gml
 @@ -2,7 +2,7 @@
@@ -2658,7 +2658,7 @@ index beb91b46..a8793355 100644
  menu_text_back = argument0;
  menu_script_back = argument1;
 diff --git a/Source/gg2/Scripts/Menus/menu_addedit_boolean.gml b/Source/gg2/Scripts/Menus/menu_addedit_boolean.gml
-index 50aabbb4..470c11d1 100644
+index 50aabbb..470c11d 100644
 --- a/Source/gg2/Scripts/Menus/menu_addedit_boolean.gml
 +++ b/Source/gg2/Scripts/Menus/menu_addedit_boolean.gml
 @@ -1,6 +1,6 @@
@@ -2670,7 +2670,7 @@ index 50aabbb4..470c11d1 100644
  menu_addedit_select(argument0, argument1, argument2);
  
 diff --git a/Source/gg2/Scripts/Menus/menu_addedit_key.gml b/Source/gg2/Scripts/Menus/menu_addedit_key.gml
-index 624d266a..53ae383a 100644
+index 624d266..53ae383 100644
 --- a/Source/gg2/Scripts/Menus/menu_addedit_key.gml
 +++ b/Source/gg2/Scripts/Menus/menu_addedit_key.gml
 @@ -1,6 +1,6 @@
@@ -2682,7 +2682,7 @@ index 624d266a..53ae383a 100644
  item_name[items] = argument0;
  item_type[items] = "editkey";
 diff --git a/Source/gg2/Scripts/Menus/menu_addedit_keyormouse.gml b/Source/gg2/Scripts/Menus/menu_addedit_keyormouse.gml
-index c387179c..1ff9ce0c 100644
+index c387179..1ff9ce0 100644
 --- a/Source/gg2/Scripts/Menus/menu_addedit_keyormouse.gml
 +++ b/Source/gg2/Scripts/Menus/menu_addedit_keyormouse.gml
 @@ -1,6 +1,6 @@
@@ -2694,7 +2694,7 @@ index c387179c..1ff9ce0c 100644
  item_name[items] = argument0;
  item_type[items] = "editkeyormouse";
 diff --git a/Source/gg2/Scripts/Menus/menu_addedit_num.gml b/Source/gg2/Scripts/Menus/menu_addedit_num.gml
-index 2da68823..e7427647 100644
+index 2da6882..e742764 100644
 --- a/Source/gg2/Scripts/Menus/menu_addedit_num.gml
 +++ b/Source/gg2/Scripts/Menus/menu_addedit_num.gml
 @@ -1,6 +1,6 @@
@@ -2706,7 +2706,7 @@ index 2da68823..e7427647 100644
  item_name[items] = argument0;
  item_type[items] = "editnum";
 diff --git a/Source/gg2/Scripts/Menus/menu_addedit_script.gml b/Source/gg2/Scripts/Menus/menu_addedit_script.gml
-index 248e05c4..260785f3 100644
+index 248e05c..260785f 100644
 --- a/Source/gg2/Scripts/Menus/menu_addedit_script.gml
 +++ b/Source/gg2/Scripts/Menus/menu_addedit_script.gml
 @@ -4,7 +4,7 @@
@@ -2719,7 +2719,7 @@ index 248e05c4..260785f3 100644
  item_name[items] = argument0;
  item_type[items] = "editscript";
 diff --git a/Source/gg2/Scripts/Menus/menu_addedit_select.gml b/Source/gg2/Scripts/Menus/menu_addedit_select.gml
-index 8261b5a3..7852f186 100644
+index 8261b5a..7852f18 100644
 --- a/Source/gg2/Scripts/Menus/menu_addedit_select.gml
 +++ b/Source/gg2/Scripts/Menus/menu_addedit_select.gml
 @@ -1,6 +1,6 @@
@@ -2731,7 +2731,7 @@ index 8261b5a3..7852f186 100644
  // You need to add at least one option or the menu will error out.
  
 diff --git a/Source/gg2/Scripts/Menus/menu_addedit_text.gml b/Source/gg2/Scripts/Menus/menu_addedit_text.gml
-index 0bac5d08..1969a3a8 100644
+index 0bac5d0..1969a3a 100644
 --- a/Source/gg2/Scripts/Menus/menu_addedit_text.gml
 +++ b/Source/gg2/Scripts/Menus/menu_addedit_text.gml
 @@ -1,6 +1,6 @@
@@ -2743,7 +2743,7 @@ index 0bac5d08..1969a3a8 100644
  item_name[items] = argument0;
  item_type[items] = "edittext";
 diff --git a/Source/gg2/Scripts/Menus/menu_addedit_text2.gml b/Source/gg2/Scripts/Menus/menu_addedit_text2.gml
-index 6085a6e9..9062e361 100644
+index 6085a6e..9062e36 100644
 --- a/Source/gg2/Scripts/Menus/menu_addedit_text2.gml
 +++ b/Source/gg2/Scripts/Menus/menu_addedit_text2.gml
 @@ -1,6 +1,6 @@
@@ -2755,7 +2755,7 @@ index 6085a6e9..9062e361 100644
  
  item_name[items] = argument0;
 diff --git a/Source/gg2/Scripts/Menus/menu_addlink.gml b/Source/gg2/Scripts/Menus/menu_addlink.gml
-index f0a07a9f..aac88356 100644
+index f0a07a9..aac8835 100644
 --- a/Source/gg2/Scripts/Menus/menu_addlink.gml
 +++ b/Source/gg2/Scripts/Menus/menu_addlink.gml
 @@ -1,5 +1,5 @@
@@ -2766,7 +2766,7 @@ index f0a07a9f..aac88356 100644
  item_name[items] = argument0;
  item_type[items] = "script";
 diff --git a/Source/gg2/Scripts/Menus/menu_addtablink.gml b/Source/gg2/Scripts/Menus/menu_addtablink.gml
-index ed21696a..5cbc5fd6 100644
+index ed21696..5cbc5fd 100644
 --- a/Source/gg2/Scripts/Menus/menu_addtablink.gml
 +++ b/Source/gg2/Scripts/Menus/menu_addtablink.gml
 @@ -1,5 +1,5 @@
@@ -2778,7 +2778,7 @@ index ed21696a..5cbc5fd6 100644
  tab_script[tabs] = argument1;
 diff --git a/Source/gg2/Scripts/Menus/menu_binding.gml b/Source/gg2/Scripts/Menus/menu_binding.gml
 new file mode 100644
-index 00000000..ac88233e
+index 0000000..ac88233
 --- /dev/null
 +++ b/Source/gg2/Scripts/Menus/menu_binding.gml
 @@ -0,0 +1,75 @@
@@ -2858,10 +2858,10 @@ index 00000000..ac88233e
 +show_error("Unknown menu binding: " + name, true);
 +return 0;
 diff --git a/Source/gg2/Scripts/Menus/menu_create.gml b/Source/gg2/Scripts/Menus/menu_create.gml
-index afc322d0..2d21ceed 100644
+index 640bb62..056a7ca 100644
 --- a/Source/gg2/Scripts/Menus/menu_create.gml
 +++ b/Source/gg2/Scripts/Menus/menu_create.gml
-@@ -32,5 +32,5 @@ mouse_samples = -1;
+@@ -29,5 +29,5 @@ screenheight = 600;
  
  // Hack: The back button should usually appear last in the menu, even if plugins
  // add new items later, so we treat it separately.
@@ -2869,7 +2869,7 @@ index afc322d0..2d21ceed 100644
 +menu_script_back = -1;
  menu_text_back = "";
 diff --git a/Source/gg2/Scripts/Menus/menu_get_var.gml b/Source/gg2/Scripts/Menus/menu_get_var.gml
-index 4a8da921..3afe51e0 100644
+index 4a8da92..3afe51e 100644
 --- a/Source/gg2/Scripts/Menus/menu_get_var.gml
 +++ b/Source/gg2/Scripts/Menus/menu_get_var.gml
 @@ -1,3 +1,3 @@
@@ -2878,7 +2878,7 @@ index 4a8da921..3afe51e0 100644
 -return execute_string("return " + item_var[argument0]);
 +return menu_binding(item_var[argument0], false, 0);
 diff --git a/Source/gg2/Scripts/Menus/menu_set_var.gml b/Source/gg2/Scripts/Menus/menu_set_var.gml
-index 0e08d0f0..ebbcd303 100644
+index 0e08d0f..ebbcd30 100644
 --- a/Source/gg2/Scripts/Menus/menu_set_var.gml
 +++ b/Source/gg2/Scripts/Menus/menu_set_var.gml
 @@ -1,4 +1,4 @@
@@ -2888,18 +2888,18 @@ index 0e08d0f0..ebbcd303 100644
 -execute_string(item_var[argument0] + " = argument0", argument1);
 +menu_binding(item_var[argument0], true, argument1);
 diff --git a/Source/gg2/Scripts/Misc/_resources.list.xml b/Source/gg2/Scripts/Misc/_resources.list.xml
-index 89ba0abc..453a0097 100644
+index 1209530..305ed70 100644
 --- a/Source/gg2/Scripts/Misc/_resources.list.xml
 +++ b/Source/gg2/Scripts/Misc/_resources.list.xml
 @@ -13,4 +13,5 @@
    <resource name="format_timer_value" type="RESOURCE"/>
    <resource name="getRelativePathIfDescendant" type="RESOURCE"/>
-   <resource name="sprite_find_by_name" type="RESOURCE"/>
+   <resource name="asset_get_index" type="RESOURCE"/>
 +  <resource name="run_action" type="RESOURCE"/>
  </resources>
 diff --git a/Source/gg2/Scripts/Misc/run_action.gml b/Source/gg2/Scripts/Misc/run_action.gml
 new file mode 100644
-index 00000000..fe247621
+index 0000000..fe24762
 --- /dev/null
 +++ b/Source/gg2/Scripts/Misc/run_action.gml
 @@ -0,0 +1,7 @@

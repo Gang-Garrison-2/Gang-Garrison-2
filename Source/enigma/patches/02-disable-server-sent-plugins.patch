@@ -1,5 +1,4 @@
 refactor(plugins): disable server-sent plugins
-
 diff --git a/Source/gg2/Objects/Menus/Hosting Menu Elements/AdvHostOptionsController.events/Create.xml b/Source/gg2/Objects/Menus/Hosting Menu Elements/AdvHostOptionsController.events/Create.xml
 index 720f15c..48ba8cc 100644
 --- a/Source/gg2/Objects/Menus/Hosting Menu Elements/AdvHostOptionsController.events/Create.xml	
@@ -96,7 +95,7 @@ index 2e77a41..37fca8b 100644
  set_synchronization(global.monitorSync);
  </argument>
 diff --git a/Source/gg2/Scripts/Client/ClientBeginStep.gml b/Source/gg2/Scripts/Client/ClientBeginStep.gml
-index 6cf9817..cdaa019 100644
+index a98211c..62d865c 100644
 --- a/Source/gg2/Scripts/Client/ClientBeginStep.gml
 +++ b/Source/gg2/Scripts/Client/ClientBeginStep.gml
 @@ -57,81 +57,84 @@ do {
@@ -286,7 +285,7 @@ index 6cf9817..cdaa019 100644
                      returnRoom = oldReturnRoom;
                      usePreviousPwd = true;
                      exit;
-@@ -622,23 +627,25 @@ do {
+@@ -619,23 +624,25 @@ do {
              packetLen = read_ushort(global.tempBuffer);
              receiveCompleteMessage(global.serverSocket, packetLen, global.tempBuffer);
  
@@ -468,10 +467,10 @@ index 323495d..8572cdc 100644
      /* Windows 8 is known to crash GM when more than three (?) sounds play at once
       * We'll store the kernel version (Win8 is 6.2, Win7 is 6.1) and check it there.
 diff --git a/Source/gg2/Scripts/GameServer/GameServerCreate.gml b/Source/gg2/Scripts/GameServer/GameServerCreate.gml
-index 269795c..01fcd05 100644
+index 89b3024..28dd0b4 100644
 --- a/Source/gg2/Scripts/GameServer/GameServerCreate.gml
 +++ b/Source/gg2/Scripts/GameServer/GameServerCreate.gml
-@@ -124,37 +124,40 @@
+@@ -123,37 +123,40 @@
      
      GameServerDefineCommands();
      
@@ -544,10 +543,10 @@ index 269795c..01fcd05 100644
      // Disable vsync to minimize framerate drops which would be noticed as lag issues by all players.
      // "vsync makes the server desync" --Arctic
 diff --git a/Source/gg2/Scripts/GameServer/processClientCommands.gml b/Source/gg2/Scripts/GameServer/processClientCommands.gml
-index 919134f..018e137 100644
+index 5f2b5b1..daae2cf 100644
 --- a/Source/gg2/Scripts/GameServer/processClientCommands.gml
 +++ b/Source/gg2/Scripts/GameServer/processClientCommands.gml
-@@ -339,29 +339,36 @@ while(commandLimitRemaining > 0) {
+@@ -336,29 +336,36 @@ while(commandLimitRemaining > 0) {
              break;
  
          case PLUGIN_PACKET:

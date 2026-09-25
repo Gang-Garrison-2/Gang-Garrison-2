@@ -4,7 +4,8 @@
 # Env:
 #   GMKSPLIT     path to gmksplit.jar (default: downloaded into build-tools/)
 #   FAUCET_SRC   Faucet-Networking-Extension checkout, modern-boost branch
-#   ENIGMA_ROOT  ENIGMA checkout with emake built (default /opt/enigma-dev-git)
+#   ENIGMA_ROOT  ENIGMA with emake built, from the jaasonw/enigma-dev gg2-fixes
+#                branch (default /opt/enigma-dev-git)
 #   WORK         build dir (default ./build under this directory)
 set -euo pipefail
 
@@ -38,28 +39,13 @@ done
 
 mkdir -p "$WORK"
 
-# Compat g++ wrapper (toolchain/g++): libprocps shim for xlib widgets, and
-# graphics/audio stubs for headless links.
-export REAL_GXX="$(command -v g++)"
-export TOOLCHAIN_LIB="$WORK/toolchain"
+REAL_GXX="$(command -v g++)"
+TOOLCHAIN_LIB="$WORK/toolchain"
 mkdir -p "$TOOLCHAIN_LIB"
-# ENIGMA engine bugs are patched in a build-local copy of the ENIGMA tree
-# (toolchain/patch_engine.py); $ENIGMA_ROOT stays untouched.
+# emake writes into the tree it runs from; build from a copy of $ENIGMA_ROOT.
 ENGINE="$HERE/build-tools/enigma-engine"
 mkdir -p "$ENGINE"
-python3 "$HERE/toolchain/patch_engine.py" --files | sed 's|^|/|' >"$TOOLCHAIN_LIB/engine-patched.txt"
-rsync -a --delete --exclude /.git --exclude-from="$TOOLCHAIN_LIB/engine-patched.txt" \
-  "$ENIGMA_ROOT/" "$ENGINE/"
-python3 "$HERE/toolchain/patch_engine.py" "$ENIGMA_ROOT" "$ENGINE"
-ar rc "$TOOLCHAIN_LIB/libprocps.a" # xlib widgets link -lprocps; the shim is header-only
-if [[ -n "${headless:-}" ]]; then
-  export HEADLESS_STUBS_O="$TOOLCHAIN_LIB/headless_stubs.o"
-  "$REAL_GXX" -std=c++17 -fPIC -I"$ENGINE/ENIGMAsystem/SHELL" \
-    -c "$HERE/toolchain/headless_stubs.cpp" -o "$HEADLESS_STUBS_O"
-fi
-export CODEGEN_DIR="$WORK/codegen"
-export GAME_SETTINGS="$SRC/Global Game Settings.xml"
-export PATH="$HERE/toolchain:$PATH"
+rsync -a --delete --exclude /.git "$ENIGMA_ROOT/" "$ENGINE/"
 
 # Faucet Networking as a shared library next to the game.
 [[ -d "$FAUCET_SRC/faucet" ]] || { echo "set FAUCET_SRC to a Faucet-Networking-Extension checkout" >&2; exit 2; }
@@ -82,38 +68,17 @@ cc -O2 -fPIC -c "$GG2DLL_SRC/md5.c" -o "$TOOLCHAIN_LIB/md5.o"
 "$REAL_GXX" -std=c++17 -O2 -fPIC -shared -o "$WORK/libgg2dll.so" \
   "$GG2DLL_SRC/GG2DLL.cpp" "$TOOLCHAIN_LIB/md5.o" -lpng -lz
 (cd "$HERE" && python3 test_prebuild.py >/dev/null && rm -rf __pycache__)
-make_gmk() {
-  python3 "$HERE/prebuild.py" "$SRC" "$WORK/src/gg2" "${prebuild_flags[@]}" "$@"
-  rm -f "$WORK/gg2.gmk" # gmksplit won't overwrite
-  (cd "$WORK/src" && java -jar "$GMKSPLIT" gg2 "$WORK/gg2.gmk" >/dev/null)
-}
-run_emake() { # <codegen dir> <log> [emake args...]
-  local codegen="$1" log="$2"
-  shift 2
-  (cd "$ENGINE" && ./emake "$WORK/gg2.gmk" -o "$WORK/gg2" -d "$WORK/obj/" -k "$codegen/" \
-    "${systems[@]}" -c Precise \
-    -e Alarms,Paths,libpng,DataStructures,Timelines,ParticleSystems,IniFilesystem,ExternalFuncs,DateTime,RegistrySpoof \
-    "$@" >"$log" 2>&1)
-}
-
-# Pass 1 (codegen only): ENIGMA's own list of each object's locals, which
-# prebuild needs to scope bare names inside with() (ENIGMA bug #9).
-make_gmk
-run_emake "$WORK/members-codegen" "$WORK/emake-members.log" --codegen-only ||
-  { echo "codegen pass failed, see $WORK/emake-members.log" >&2; exit 1; }
-make_gmk --members "$WORK/members-codegen"
+python3 "$HERE/prebuild.py" "$SRC" "$WORK/src/gg2" "${prebuild_flags[@]}"
+rm -f "$WORK/gg2.gmk" # gmksplit won't overwrite
+(cd "$WORK/src" && java -jar "$GMKSPLIT" gg2 "$WORK/gg2.gmk" >/dev/null)
 
 set +e
-run_emake "$WORK/codegen" "$WORK/emake.log" "${mode[@]}"
+(cd "$ENGINE" && ./emake "$WORK/gg2.gmk" -o "$WORK/gg2" -d "$WORK/obj/" -k "$WORK/codegen/" \
+  "${systems[@]}" -c Precise \
+  -e Alarms,Paths,libpng,DataStructures,Timelines,ParticleSystems,IniFilesystem,ExternalFuncs,DateTime,RegistrySpoof \
+  "${mode[@]}" >"$WORK/emake.log" 2>&1)
 status=$?
 set -e
-
-# emake exits 0 even when resource transfer fails and drops resources.
-# Same when writing resources into the game module fails.
-if grep -qE 'Transfer error|have zero size|vary in dimensions' "$WORK/emake.log"; then
-  echo "resource transfer/write failed, see $WORK/emake.log" >&2
-  exit 1
-fi
 # GM8 embeds Included Files; ENIGMA builds ship them next to the binary.
 find "$SRC/Included Files" -maxdepth 1 -type f ! -name '*.xml' -exec cp -t "$WORK" {} +
 # game_init loads music from disk at startup.
