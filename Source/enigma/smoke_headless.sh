@@ -68,3 +68,25 @@ PY
 
 kill -0 "$pid" 2>/dev/null || { echo "server exited early:"; cat server.log; exit 1; }
 echo "server still running after handshake: OK"
+
+# gen_destroy: a red Scout must stand on the walkmask surface (ground row at
+# y=696, Scout bbox bottom = y+23), not inside it (ENIGMA #43 sank it 6px).
+[[ "$MAP" == gen_destroy ]] || exit 0
+python3 - "$PORT" <<'PY'
+import socket, struct, sys, time, uuid
+s = socket.create_connection(("127.0.0.1", int(sys.argv[1])), timeout=5)
+s.sendall(b"\x00" + uuid.UUID("b31c2209-4256-9a19-d0ef-c71c5373bd75").bytes)
+time.sleep(1); s.sendall(bytes([60, 3]) + b"bot" + bytes([1]))  # RESERVE_SLOT, PLAYER_JOIN
+time.sleep(1); s.sendall(bytes([3, 0])); time.sleep(0.3); s.sendall(bytes([4, 0]))  # red, scout
+s.settimeout(0.1); buf = b""; end = time.time() + 8
+while time.time() < end:
+    try:
+        buf += s.recv(65536)
+    except socket.timeout:
+        pass
+i = buf.rfind(b"\x09\x02\x00\x01")  # QUICK_UPDATE for player 1 (0 is the dedicated host)
+assert i != -1 and i + 12 <= len(buf), "no QUICK_UPDATE for the bot"
+x, y = (v / 5 for v in struct.unpack_from("<HH", buf, i + 8))
+assert round(y) + 23 == 695, f"Scout at ({x}, {y}): bbox bottom {round(y) + 23}, ground is at 696"
+print(f"walkmask OK: Scout stands at ({x}, {y})")
+PY
