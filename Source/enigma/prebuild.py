@@ -134,9 +134,6 @@ def gg2dll_scripts():
     return scripts
 
 
-# char is a C++ type in EDL, so it can't be a GML variable name.
-RENAMES = {"char": "char_"}
-
 # GG2 scripts ENIGMA provides natively (GG2's versions use execute_string).
 DROP_SCRIPTS = ["asset_get_index"]
 
@@ -347,8 +344,7 @@ def main():
     shutil.copytree(args.src, args.out)
     apply_source_patches(args.out)
 
-    renames = dict(RENAMES)
-    renames.update({name: helper for name, (helper, _) in helpers.items()})
+    renames = {name: helper for name, (helper, _) in helpers.items()}
     renames.update({f: "fct_" + f for f in FAUCET})
     rw = Rewriter(renames)
 

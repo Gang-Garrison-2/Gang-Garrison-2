@@ -3,7 +3,7 @@
 
 import prebuild as p
 
-rw = p.Rewriter({"char": "char_", "read_ubyte": "fct_read_ubyte"})
+rw = p.Rewriter({"read_ubyte": "fct_read_ubyte"})
 
 
 def check(src, expected):
@@ -12,7 +12,7 @@ def check(src, expected):
 
 
 # renames outside strings and comments only
-check('char = 1; s = "char"; // char', 'char_ = 1; s = "char"; // char')
+check('read_ubyte(b); s = "read_ubyte"; // read_ubyte', 'fct_read_ubyte(b); s = "read_ubyte"; // read_ubyte')
 check("x = read_ubyte(b); y = my_read_ubyte;", "x = fct_read_ubyte(b); y = my_read_ubyte;")
 
 print("prebuild self-check OK")
