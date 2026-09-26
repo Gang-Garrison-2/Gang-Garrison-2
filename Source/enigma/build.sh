@@ -63,6 +63,8 @@ mkdir -p "$TOOLCHAIN_LIB"
 ENGINE="$HERE/build-tools/enigma-engine"
 mkdir -p "$ENGINE"
 rsync -a --delete --exclude /.git "$ENIGMA_ROOT/" "$ENGINE/"
+# GM8 compliance: draws without alpha use 1, like GM8 (4 = COMPL_GM8).
+echo "  compliance_mode: 4" >> "$ENGINE/emake-defaults.yaml"
 
 # Faucet Networking as a shared library next to the game.
 [[ -d "$FAUCET_SRC/faucet" ]] || { echo "set FAUCET_SRC to a Faucet-Networking-Extension checkout" >&2; exit 2; }
