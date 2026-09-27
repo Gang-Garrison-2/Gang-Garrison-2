@@ -50,6 +50,7 @@
     ini_open("gg2.ini");
     global.playerName = ini_read_string("Settings", "PlayerName", "Player");
     global.playerName = string_copy(global.playerName, 0, min(string_length(global.playerName), MAX_PLAYERNAME_LENGTH));
+    global.namePromptShown = false; // Set once a player still named "Player" answers the name prompt, so it is not asked again this session
     global.fullscreen = ini_read_real("Settings", "Fullscreen", 0);
     global.useLobbyServer = ini_read_real("Settings", "UseLobby", 1);
     global.hostingPort = ini_read_real("Settings", "HostingPort", 8190);
