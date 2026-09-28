@@ -5,7 +5,7 @@
 set -euo pipefail
 HERE="$(cd "$(dirname "$0")" && pwd)"
 BUILD="${1:-$HERE/build-headless}"
-PORT=8190
+PORT=8191 # 8190 is the default a real server uses
 MAP="${2:-}"
 RUN="$(mktemp -d)"
 cleanup() {
@@ -27,6 +27,7 @@ trap cleanup EXIT
 # The game writes gg2.ini, Maps/ etc. next to itself: run from a copy.
 cp "$BUILD"/gg2 "$BUILD"/*.so "$BUILD"/*.png "$RUN"/
 cd "$RUN"
+printf '[Settings]\r\nHostingPort=%s\r\n' "$PORT" > gg2.ini
 args=(-dedicated)
 [[ -z "$MAP" ]] || args+=(-map "$MAP")
 env -u DISPLAY -u WAYLAND_DISPLAY ./gg2 "${args[@]}" >server.log 2>&1 &
@@ -69,8 +70,9 @@ PY
 kill -0 "$pid" 2>/dev/null || { echo "server exited early:"; cat server.log; exit 1; }
 echo "server still running after handshake: OK"
 
-# gen_destroy: a red Scout must stand on the walkmask surface (ground row at
-# y=696, Scout bbox bottom = y+23), not inside it (ENIGMA #43 sank it 6px).
+# gen_destroy: a red Scout must stand on the walkmask surface, not inside it
+# (ENIGMA #43 sank it 6px). Red spawns rest on the floor (ground row 696) or a
+# ledge (606); Scout bbox bottom = y+23.
 [[ "$MAP" == gen_destroy ]] || exit 0
 python3 - "$PORT" <<'PY'
 import socket, struct, sys, time, uuid
@@ -87,6 +89,6 @@ while time.time() < end:
 i = buf.rfind(b"\x09\x02\x00\x01")  # QUICK_UPDATE for player 1 (0 is the dedicated host)
 assert i != -1 and i + 12 <= len(buf), "no QUICK_UPDATE for the bot"
 x, y = (v / 5 for v in struct.unpack_from("<HH", buf, i + 8))
-assert round(y) + 23 == 695, f"Scout at ({x}, {y}): bbox bottom {round(y) + 23}, ground is at 696"
+assert round(y) + 23 in (605, 695), f"Scout at ({x}, {y}): bbox bottom {round(y) + 23}, ground is at 606 or 696"
 print(f"walkmask OK: Scout stands at ({x}, {y})")
 PY
