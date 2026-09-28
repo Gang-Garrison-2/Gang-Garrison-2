@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Build GG2 with ENIGMA: prebuild rewrite -> GmkSplitter -> emake.
-# Usage: build.sh [--codegen-only] [--headless]
+# Usage: build.sh [--codegen-only] [--headless] [--debug]
+#   --debug      unoptimized, with ENIGMA's debug checks (default: optimized)
 # Env:
 #   GMKSPLIT     path to gmksplit.jar (default: downloaded into build-tools/)
 #   FAUCET_SRC   Faucet-Networking-Extension checkout, modern-boost branch
@@ -22,6 +23,7 @@ if [[ ! -f "$GMKSPLIT" ]]; then
 fi
 
 mode=(-j"$(nproc)")
+game_mode=Compile # emake's default is Debug: -g, no -O, DEBUG_MODE checks
 FAUCET_SRC="${FAUCET_SRC:-$HOME/github/Faucet-Networking-Extension}" # modern-boost branch
 prebuild_flags=(--stub-extensions --faucet-src "$FAUCET_SRC") # stubs: UPnP only
 systems=(-p xlib -g OpenGL1 -a OpenAL -w xlib) # dialogs via zenity/kdialog
@@ -45,6 +47,7 @@ prebuild_flags+=(--lib-ext "$lib_ext")
 for arg in "$@"; do
   case "$arg" in
     --codegen-only) mode=(--codegen-only) ;;
+    --debug) game_mode=Debug ;;
     --headless)
       systems=(-p None -g None -a None -w None)
       prebuild_flags+=(--headless)
@@ -93,7 +96,7 @@ rm -f "$WORK/gg2.gmk" # gmksplit won't overwrite
 
 set +e
 (cd "$ENGINE" && ./emake "$WORK/gg2.gmk" -o "$WORK/gg2" -d "$WORK/obj/" -k "$WORK/codegen/" \
-  "${systems[@]}" -c Precise \
+  "${systems[@]}" -c Precise -m "$game_mode" \
   -e "$extensions" \
   "${mode[@]}") 2>&1 | tee "$WORK/emake.log"
 status=${PIPESTATUS[0]}
