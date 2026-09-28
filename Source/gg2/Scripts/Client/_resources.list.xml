@@ -2,4 +2,5 @@
 <resources>
   <resource name="ClientCreate" type="RESOURCE"/>
   <resource name="ClientBeginStep" type="RESOURCE"/>
+  <resource name="joinServer" type="RESOURCE"/>
 </resources>
