@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Build GG2 with ENIGMA: prebuild rewrite -> GmkSplitter -> emake.
-# Usage: build.sh [--codegen-only] [--headless] [--debug]
+# Usage: build.sh [--codegen-only] [--headless] [--debug] [--bench]
+#   --bench      add the gib benchmark (bench/); run with -dedicated -map <map>
 #   --debug      unoptimized, with ENIGMA's debug checks (default: optimized)
 # Env:
 #   GMKSPLIT     path to gmksplit.jar (default: downloaded into build-tools/)
@@ -48,6 +49,7 @@ for arg in "$@"; do
   case "$arg" in
     --codegen-only) mode=(--codegen-only) ;;
     --debug) game_mode=Debug ;;
+    --bench) prebuild_flags+=(--bench) ;; # gib benchmark: run with -dedicated -map <map>
     --headless)
       systems=(-p None -g None -a None -w None)
       prebuild_flags+=(--headless)

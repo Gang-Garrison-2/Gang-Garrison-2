@@ -319,6 +319,16 @@ def add_script_group(out, group_name, scripts):
     )
 
 
+def add_bench(out):
+    # Gib benchmark: bench/*.gml, driven from GameServer's Begin and End Step.
+    bench = Path(__file__).parent / "bench"
+    add_script_group(out, "Bench", {f.stem: f.read_text(encoding="utf-8") for f in sorted(bench.glob("*.gml"))})
+    for name, first, last in [("GameServerBeginStep", "bench_begin();\n", ""),
+                              ("GameServerEndStep", "", "\nbench_end();\n")]:
+        (path,) = (out / "Scripts").rglob(f"{name}.gml")
+        path.write_text(first + path.read_text(encoding="utf-8") + last, encoding="utf-8")
+
+
 def main():
     ap = argparse.ArgumentParser(
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
@@ -337,6 +347,7 @@ def main():
         help="Faucet-Networking-Extension checkout; bind libfaucetnet.<lib-ext>",
     )
     ap.add_argument("--lib-ext", default=".so", help="native library suffix (.dll on Windows)")
+    ap.add_argument("--bench", action="store_true", help="add the gib benchmark (bench/*.gml)")
     args = ap.parse_args()
     helpers = HEADLESS_HELPERS if args.headless else {}
 
@@ -371,6 +382,8 @@ def main():
     if args.faucet_src:
         bindings |= faucet_scripts(args.faucet_src, args.lib_ext)
     add_script_group(args.out, "NativeBindings", bindings)
+    if args.bench:
+        add_bench(args.out)
     if args.stub_extensions:
         stub = "// stub: native extension not built yet\nreturn 0;\n"
         names = [n for n in ["fct_" + f for f in FAUCET] if n not in bindings]
