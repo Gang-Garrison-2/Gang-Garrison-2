@@ -42,10 +42,10 @@ else // boot behaviour is normal or unknown
         AudioControlPlaySong(global.FaucetMusic);
     }
 }
-
 </creationCode>
   <backgroundColor>000000</backgroundColor>
   <drawBackgroundColor>true</drawBackgroundColor>
+  <clearViewBackground>true</clearViewBackground>
   <backgrounds>
     <backgroundDef>
       <visibleOnRoomStart>true</visibleOnRoomStart>

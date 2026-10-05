@@ -10,7 +10,7 @@ test_assert_equals(
 
 test_assert_equals(
     ggon_decode("'foobar\n\r\t\0blah'"),
-    "foobar" + chr(10) + chr(13) + chr(9) + chr(0) + "blah"
+    "foobar" + ansi_char(10) + ansi_char(13) + ansi_char(9) + ansi_char(0) + "blah"
 );
 
 var map;

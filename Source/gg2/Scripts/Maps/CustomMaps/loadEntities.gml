@@ -23,7 +23,7 @@ while(!file_text_eof(ent_file))
     if(temp == "{END ENTITIES}") 
         break;
     else
-        entityString += temp + chr(10);
+        entityString += temp + ansi_char(10);
 }
 
 file_text_close(ent_file);

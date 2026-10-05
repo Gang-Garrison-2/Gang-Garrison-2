@@ -49,8 +49,8 @@ if (!ds_map_exists(parsed, 'abs_path'))
 with (client)
 {
     destroyed = false;
-    CR = chr(13);
-    LF = chr(10);
+    CR = ansi_char(13);
+    LF = ansi_char(10);
     CRLF = CR + LF;
     socket = tcp_connect(ds_map_find_value(parsed, 'host'), ds_map_find_value(parsed, 'port'));
     state = 0;

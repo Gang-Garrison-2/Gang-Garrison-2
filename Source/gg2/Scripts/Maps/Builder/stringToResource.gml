@@ -21,8 +21,8 @@ else
     name = temp_directory + "\TmpResource." + ext;
 
 file = file_bin_open(name, 2);
-while(file_bin_position(file) < string_length(argument0))
-    file_bin_write_byte(file, ord(string_char_at(argument0, file_bin_position(file)+1)));
+while(file_bin_position(file) < string_byte_length(argument0))
+    file_bin_write_byte(file, string_byte_at(argument0, file_bin_position(file)+1));
 file_bin_close(file);
 
 if (!is_string(argument2))

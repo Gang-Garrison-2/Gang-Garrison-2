@@ -11,6 +11,7 @@
   <creationCode/>
   <backgroundColor>C0C0C0</backgroundColor>
   <drawBackgroundColor>true</drawBackgroundColor>
+  <clearViewBackground>true</clearViewBackground>
   <backgrounds>
     <backgroundDef>
       <visibleOnRoomStart>true</visibleOnRoomStart>

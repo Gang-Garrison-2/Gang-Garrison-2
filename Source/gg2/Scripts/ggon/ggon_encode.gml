@@ -44,13 +44,13 @@ if (is_string(value))
         if (char == "'" or char == "\")
             out += '\' + char;
         // newlines, carriage returns, tabs and null bytes are escaped specially
-        else if (char == chr(10))
+        else if (char == ansi_char(10))
             out += '\n';
-        else if (char == chr(13))
+        else if (char == ansi_char(13))
             out += '\r';
-        else if (char == chr(9))
+        else if (char == ansi_char(9))
             out += '\t';
-        else if (char == chr(0))
+        else if (char == ansi_char(0))
             out += '\0';
         // Otherwise we can just output verbatim
         else
