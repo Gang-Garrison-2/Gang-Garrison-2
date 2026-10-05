@@ -39,36 +39,8 @@
                 dmg = other.explosionDamage*(1-(distance_to_object(other)/other.blastRadius));
                 if id == other.ownerPlayer.object// self damage resistance
                     dmg *= 5/9;
-                damageCharacter(other.ownerPlayer, id, dmg);
+                projectileCollision( other.ownerPlayer, id, dmg, other, 3);
                 timeUnscathed = 0;
-                if (id == other.ownerPlayer.object and instance_exists(lastDamageDealer) and lastDamageDealer != other.ownerPlayer and !instance_exists(other.reflector))
-                    lastDamageSource = DAMAGE_SOURCE_FINISHED_OFF_GIB;
-                else 
-                {
-                    if (lastDamageDealer != other.ownerPlayer and lastDamageDealer != player and other.reflector != lastDamageDealer)
-                    {
-                        secondToLastDamageDealer = lastDamageDealer;
-                        alarm[4] = alarm[3]
-                    }
-                    if (other.ownerPlayer != id or (instance_exists(other.reflector) and other.ownerPlayer == id))
-                        alarm[3] = ASSIST_TIME / global.delta_factor;
-                    lastDamageDealer = other.ownerPlayer;
-                    lastDamageSource = other.weapon;
-                    if (id==other.ownerPlayer.object and instance_exists(other.reflector))
-                    {
-                        lastDamageDealer = other.reflector;
-                        lastDamageSource = DAMAGE_SOURCE_REFLECTED_STICKY;
-                    }
-                }
-                if(global.gibLevel &gt; 0)
-                {
-                    repeat(3)
-                    {
-                        var blood;
-                        blood = instance_create(x,y,Blood);
-                        blood.direction = point_direction(other.x,other.y,x,y)-180;
-                    }
-                }
                 if (id==other.ownerPlayer.object)
                     moveStatus = 1;
                 else
