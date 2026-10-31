@@ -41,6 +41,8 @@ call :SUB_info "Opening Game Maker 8..."
 call :SUB_info "Waiting for gg2.exe creation..."
 start /W build\gg2.gmk
 call :SUB_assert_exists "build\gg2.exe"
+rem GM8 leaves a backup (gg2.gb1, ...) next to the gmk if the project was saved
+del /Q build\gg2.gb? 2> nul
 
 rem RENAME SOURCE AND EXECUTABLE
 call :SUB_info "Renaming source and executable..."
