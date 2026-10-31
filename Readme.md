@@ -471,7 +471,7 @@ miniupnp is availible under the BSD license: see miniupnp.license for full licen
 You can find more about Faucet Forwarding at its GitHub Page:
 [https://github.com/nagn/Faucet-Forwarding](https://github.com/nagn/Faucet-Forwarding)
 
-This game uses the 7-zip command line version, available under the LGPL, see 7zip.license for full license.
+This game uses the 7-Zip command line version (7za.exe), available under the GNU LGPL with some parts under BSD licenses, see 7zip.license.txt for the full license.
 You can find more information on it here: [http://www.7-zip.org/](http://www.7-zip.org/)
 
     Readme Changelog
